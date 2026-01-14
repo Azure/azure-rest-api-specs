@@ -1,14 +1,21 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res7687",
     "accountName": "sto9699",
     "blobInventoryPolicyName": "default",
     "api-version": "2025-06-01",
+=======
+    "accountName": "sto9699",
+    "api-version": "2025-06-01",
+    "blobInventoryPolicyName": "default",
+>>>>>>> upstream/main
     "monitor": "true",
     "properties": {
       "properties": {
         "policy": {
+<<<<<<< HEAD
           "enabled": true,
           "type": "Inventory",
           "rules": [
@@ -17,20 +24,33 @@
               "name": "inventoryPolicyRule1",
               "destination": "container1",
               "definition": {
+=======
+          "type": "Inventory",
+          "enabled": true,
+          "rules": [
+            {
+              "name": "inventoryPolicyRule1",
+              "definition": {
+                "format": "Csv",
+>>>>>>> upstream/main
                 "filters": {
                   "blobTypes": [
                     "blockBlob",
                     "appendBlob",
                     "pageBlob"
                   ],
+<<<<<<< HEAD
                   "prefixMatch": [
                     "inventoryprefix1",
                     "inventoryprefix2"
                   ],
+=======
+>>>>>>> upstream/main
                   "excludePrefix": [
                     "excludeprefix1",
                     "excludeprefix2"
                   ],
+<<<<<<< HEAD
                   "includeSnapshots": true,
                   "includeBlobVersions": true,
                   "includeDeleted": true
@@ -38,6 +58,18 @@
                 "format": "Csv",
                 "schedule": "Daily",
                 "objectType": "Blob",
+=======
+                  "includeBlobVersions": true,
+                  "includeDeleted": true,
+                  "includeSnapshots": true,
+                  "prefixMatch": [
+                    "inventoryprefix1",
+                    "inventoryprefix2"
+                  ]
+                },
+                "objectType": "Blob",
+                "schedule": "Daily",
+>>>>>>> upstream/main
                 "schemaFields": [
                   "Name",
                   "Creation-Time",
@@ -61,6 +93,7 @@
                   "DeletedTime",
                   "RemainingRetentionDays"
                 ]
+<<<<<<< HEAD
               }
             },
             {
@@ -70,6 +103,18 @@
                 "format": "Parquet",
                 "schedule": "Weekly",
                 "objectType": "Container",
+=======
+              },
+              "destination": "container1",
+              "enabled": true
+            },
+            {
+              "name": "inventoryPolicyRule2",
+              "definition": {
+                "format": "Parquet",
+                "objectType": "Container",
+                "schedule": "Weekly",
+>>>>>>> upstream/main
                 "schemaFields": [
                   "Name",
                   "Last-Modified",
@@ -90,16 +135,28 @@
                   "RemainingRetentionDays"
                 ]
               },
+<<<<<<< HEAD
               "destination": "container2"
+=======
+              "destination": "container2",
+              "enabled": true
+>>>>>>> upstream/main
             }
           ]
         }
       }
+<<<<<<< HEAD
     }
+=======
+    },
+    "resourceGroupName": "res7687",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/sto9699/inventoryPolicies/default",
         "name": "DefaultInventoryPolicy",
         "type": "Microsoft.Storage/storageAccounts/inventoryPolicies",
@@ -113,20 +170,38 @@
                 "name": "inventoryPolicyRule1",
                 "destination": "container1",
                 "definition": {
+=======
+        "name": "DefaultInventoryPolicy",
+        "type": "Microsoft.Storage/storageAccounts/inventoryPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/sto9699/inventoryPolicies/default",
+        "properties": {
+          "policy": {
+            "type": "Inventory",
+            "enabled": true,
+            "rules": [
+              {
+                "name": "inventoryPolicyRule1",
+                "definition": {
+                  "format": "Csv",
+>>>>>>> upstream/main
                   "filters": {
                     "blobTypes": [
                       "blockBlob",
                       "appendBlob",
                       "pageBlob"
                     ],
+<<<<<<< HEAD
                     "prefixMatch": [
                       "inventoryprefix1",
                       "inventoryprefix2"
                     ],
+=======
+>>>>>>> upstream/main
                     "excludePrefix": [
                       "excludeprefix1",
                       "excludeprefix2"
                     ],
+<<<<<<< HEAD
                     "includeSnapshots": true,
                     "includeBlobVersions": true,
                     "includeDeleted": true
@@ -134,6 +209,18 @@
                   "format": "Csv",
                   "schedule": "Daily",
                   "objectType": "Blob",
+=======
+                    "includeBlobVersions": true,
+                    "includeDeleted": true,
+                    "includeSnapshots": true,
+                    "prefixMatch": [
+                      "inventoryprefix1",
+                      "inventoryprefix2"
+                    ]
+                  },
+                  "objectType": "Blob",
+                  "schedule": "Daily",
+>>>>>>> upstream/main
                   "schemaFields": [
                     "Name",
                     "Creation-Time",
@@ -157,6 +244,7 @@
                     "DeletedTime",
                     "RemainingRetentionDays"
                   ]
+<<<<<<< HEAD
                 }
               },
               {
@@ -166,6 +254,18 @@
                   "format": "Parquet",
                   "schedule": "Weekly",
                   "objectType": "Container",
+=======
+                },
+                "destination": "container1",
+                "enabled": true
+              },
+              {
+                "name": "inventoryPolicyRule2",
+                "definition": {
+                  "format": "Parquet",
+                  "objectType": "Container",
+                  "schedule": "Weekly",
+>>>>>>> upstream/main
                   "schemaFields": [
                     "Name",
                     "Last-Modified",
@@ -186,12 +286,23 @@
                     "RemainingRetentionDays"
                   ]
                 },
+<<<<<<< HEAD
                 "destination": "container2"
+=======
+                "destination": "container2",
+                "enabled": true
+>>>>>>> upstream/main
               }
             ]
           }
         }
       }
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "BlobInventoryPolicies_CreateOrUpdate",
+  "title": "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount"
+>>>>>>> upstream/main
 }

@@ -1,6 +1,7 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+<<<<<<< HEAD
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "ScreenSharingTest-peer",
     "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ScreenSharingTest-peer",
@@ -9,12 +10,18 @@
       "timeframe": "TheLastMonth",
       "dataset": {
         "granularity": "Daily",
+=======
+    "parameters": {
+      "type": "Usage",
+      "dataset": {
+>>>>>>> upstream/main
         "aggregation": {
           "totalCost": {
             "name": "PreTaxCost",
             "function": "Sum"
           }
         },
+<<<<<<< HEAD
         "grouping": [
           {
             "type": "Dimension",
@@ -23,15 +30,37 @@
         ]
       }
     }
+=======
+        "granularity": "Daily",
+        "grouping": [
+          {
+            "name": "ResourceType",
+            "type": "Dimension"
+          }
+        ]
+      },
+      "timeframe": "TheLastMonth"
+    },
+    "resourceGroupName": "ScreenSharingTest-peer",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ScreenSharingTest-peer",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
         "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
         "type": "microsoft.costmanagement/Query",
         "properties": {
           "nextLink": null,
+=======
+        "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
+        "type": "microsoft.costmanagement/Query",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
+        "properties": {
+>>>>>>> upstream/main
           "columns": [
             {
               "name": "PreTaxCost",
@@ -50,6 +79,10 @@
               "type": "String"
             }
           ],
+<<<<<<< HEAD
+=======
+          "nextLink": null,
+>>>>>>> upstream/main
           "rows": [
             [
               2.10333307059661,
@@ -68,5 +101,11 @@
       }
     },
     "204": {}
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "Query_Usage",
+  "title": "ResourceGroupQueryGrouping-Legacy"
+>>>>>>> upstream/main
 }

@@ -1,84 +1,86 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "monitorName": "myMonitor",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
             "name": "default",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/NewRelic.Observability/monitors/myMonitor/monitoredSubscriptions/default",
             "type": "NewRelic.Observability/monitors/monitoredSubscriptions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/NewRelic.Observability/monitors/myMonitor/monitoredSubscriptions/default",
             "properties": {
               "monitoredSubscriptionList": [
                 {
-                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
                   "status": "Active",
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
                   "tagRules": {
-                    "provisioningState": "Accepted",
                     "logRules": {
-                      "sendAadLogs": "Enabled",
-                      "sendSubscriptionLogs": "Enabled",
-                      "sendActivityLogs": "Enabled",
                       "filteringTags": [
                         {
                           "name": "saokgpjvdlorciqbjmjxazpee",
-                          "value": "sarxrqsxouhdjwsrqqicbeirdb",
-                          "action": "Include"
+                          "action": "Include",
+                          "value": "sarxrqsxouhdjwsrqqicbeirdb"
                         }
-                      ]
+                      ],
+                      "sendAadLogs": "Enabled",
+                      "sendActivityLogs": "Enabled",
+                      "sendSubscriptionLogs": "Enabled"
                     },
                     "metricRules": {
-                      "userEmail": "test@testing.com",
                       "filteringTags": [
                         {
                           "name": "saokgpjvdlorciqbjmjxazpee",
-                          "value": "sarxrqsxouhdjwsrqqicbeirdb",
-                          "action": "Include"
+                          "action": "Include",
+                          "value": "sarxrqsxouhdjwsrqqicbeirdb"
                         }
-                      ]
-                    }
+                      ],
+                      "userEmail": "test@testing.com"
+                    },
+                    "provisioningState": "Accepted"
                   }
                 },
                 {
-                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
                   "status": "Failed",
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
                   "tagRules": {
-                    "provisioningState": "Accepted",
                     "logRules": {
-                      "sendAadLogs": "Enabled",
-                      "sendSubscriptionLogs": "Enabled",
-                      "sendActivityLogs": "Enabled",
                       "filteringTags": [
                         {
                           "name": "saokgpjvdlorciqbjmjxazpee",
-                          "value": "sarxrqsxouhdjwsrqqicbeirdb",
-                          "action": "Include"
+                          "action": "Include",
+                          "value": "sarxrqsxouhdjwsrqqicbeirdb"
                         }
-                      ]
+                      ],
+                      "sendAadLogs": "Enabled",
+                      "sendActivityLogs": "Enabled",
+                      "sendSubscriptionLogs": "Enabled"
                     },
                     "metricRules": {
-                      "userEmail": "test@testing.com",
                       "filteringTags": [
                         {
                           "name": "saokgpjvdlorciqbjmjxazpee",
-                          "value": "sarxrqsxouhdjwsrqqicbeirdb",
-                          "action": "Include"
+                          "action": "Include",
+                          "value": "sarxrqsxouhdjwsrqqicbeirdb"
                         }
-                      ]
-                    }
+                      ],
+                      "userEmail": "test@testing.com"
+                    },
+                    "provisioningState": "Accepted"
                   }
                 }
               ]
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "MonitoredSubscriptions_List",
+  "title": "Monitors_GetMonitoredSubscriptions"
 }

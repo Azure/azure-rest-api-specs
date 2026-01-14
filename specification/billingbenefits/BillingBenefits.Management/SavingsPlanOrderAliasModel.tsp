@@ -13,14 +13,9 @@ namespace Microsoft.BillingBenefits;
 /**
  * Savings plan order alias
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(
-  SavingsPlanOrderAliasProperties
-)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @tenantResource
-model SavingsPlanOrderAliasModel extends Foundations.ProxyResource {
+model SavingsPlanOrderAliasModel
+  is Azure.ResourceManager.ProxyResource<SavingsPlanOrderAliasProperties> {
   ...ResourceNameParameter<
     Resource = SavingsPlanOrderAliasModel,
     KeyName = "savingsPlanOrderAliasName",
@@ -39,11 +34,6 @@ model SavingsPlanOrderAliasModel extends Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  properties?: SavingsPlanOrderAliasProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

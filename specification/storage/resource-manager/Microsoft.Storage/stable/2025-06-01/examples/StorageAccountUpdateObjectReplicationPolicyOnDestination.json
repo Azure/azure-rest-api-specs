@@ -1,5 +1,6 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res7687",
     "accountName": "dst112",
@@ -14,12 +15,30 @@
           {
             "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
             "sourceContainer": "scont139",
+=======
+    "accountName": "dst112",
+    "api-version": "2025-06-01",
+    "monitor": "true",
+    "objectReplicationPolicyId": "2a20bb73-5717-4635-985a-5d4cf777438f",
+    "properties": {
+      "properties": {
+        "destinationAccount": "dst112",
+        "metrics": {
+          "enabled": true
+        },
+        "priorityReplication": {
+          "enabled": true
+        },
+        "rules": [
+          {
+>>>>>>> upstream/main
             "destinationContainer": "dcont139",
             "filters": {
               "prefixMatch": [
                 "blobA",
                 "blobB"
               ]
+<<<<<<< HEAD
             }
           },
           {
@@ -35,10 +54,27 @@
         }
       }
     }
+=======
+            },
+            "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
+            "sourceContainer": "scont139"
+          },
+          {
+            "destinationContainer": "dcont179",
+            "sourceContainer": "scont179"
+          }
+        ],
+        "sourceAccount": "src1122"
+      }
+    },
+    "resourceGroupName": "res7687",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/dst112/objectReplicationPolicies/2a20bb73-5717-4635-985a-5d4cf777438f",
         "name": "2a20bb73-5717-4635-985a-5d4cf777438f",
         "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
@@ -50,12 +86,29 @@
             {
               "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
               "sourceContainer": "sourceContainer1",
+=======
+        "name": "2a20bb73-5717-4635-985a-5d4cf777438f",
+        "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/dst112/objectReplicationPolicies/2a20bb73-5717-4635-985a-5d4cf777438f",
+        "properties": {
+          "destinationAccount": "dst112",
+          "metrics": {
+            "enabled": true
+          },
+          "priorityReplication": {
+            "enabled": true
+          },
+          "policyId": "2a20bb73-5717-4635-985a-5d4cf777438f",
+          "rules": [
+            {
+>>>>>>> upstream/main
               "destinationContainer": "destContainer1",
               "filters": {
                 "prefixMatch": [
                   "blobA",
                   "blobB"
                 ]
+<<<<<<< HEAD
               }
             },
             {
@@ -74,4 +127,23 @@
       }
     }
   }
+=======
+              },
+              "ruleId": "d5d18a48-8801-4554-aeaa-74faf65f5ef9",
+              "sourceContainer": "sourceContainer1"
+            },
+            {
+              "destinationContainer": "dcont179",
+              "ruleId": "cfbb4bc2-8b60-429f-b05a-d1e0942b33b2",
+              "sourceContainer": "scont179"
+            }
+          ],
+          "sourceAccount": "src1122"
+        }
+      }
+    }
+  },
+  "operationId": "ObjectReplicationPolicies_CreateOrUpdate",
+  "title": "StorageAccountUpdateObjectReplicationPolicyOnDestination"
+>>>>>>> upstream/main
 }

@@ -1,93 +1,95 @@
 {
   "parameters": {
-    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
-    "resourceGroupName": "myResourceGroup",
-    "configStoreName": "contoso",
     "api-version": "2025-02-01-preview",
+    "configStoreName": "contoso",
     "configStoreUpdateParameters": {
-      "sku": {
-        "name": "Standard"
-      },
       "properties": {
         "disableLocalAuth": true
+      },
+      "sku": {
+        "name": "Standard"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "contoso",
         "type": "Microsoft.AppConfiguration/configurationStores",
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
+        "location": "westus",
         "properties": {
-          "provisioningState": "Succeeded",
           "creationDate": "2018-04-24T16:30:55+00:00",
-          "endpoint": "https://contoso.azconfig.io",
-          "encryption": {
-            "keyVaultProperties": {
-              "keyIdentifier": null,
-              "identityClientId": null
-            }
-          },
-          "disableLocalAuth": true,
-          "privateEndpointConnections": [],
           "dataPlaneProxy": {
             "authenticationMode": "Pass-through",
             "privateLinkDelegation": "Disabled"
           },
-          "softDeleteRetentionInDays": 30,
           "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
+          "disableLocalAuth": true,
           "enablePurgeProtection": false,
-          "publicNetworkAccess": "Disabled"
-        },
-        "systemData": {
-          "createdBy": "foo@contoso.com",
-          "createdByType": "User",
-          "createdAt": "2018-04-24T16:30:55+00:00",
-          "lastModifiedBy": "foo@contoso.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+          "encryption": {
+            "keyVaultProperties": {
+              "identityClientId": null,
+              "keyIdentifier": null
+            }
+          },
+          "endpoint": "https://contoso.azconfig.io",
+          "privateEndpointConnections": [],
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled",
+          "softDeleteRetentionInDays": 30
         },
         "sku": {
           "name": "Standard"
         },
-        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
-        "name": "contoso",
-        "location": "westus",
+        "systemData": {
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {}
       }
     },
     "201": {
       "body": {
+        "name": "contoso",
         "type": "Microsoft.AppConfiguration/configurationStores",
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
+        "location": "westus",
         "properties": {
-          "provisioningState": "Updating",
           "creationDate": "2018-04-24T16:30:55+00:00",
-          "endpoint": "https://contoso.azconfig.io",
+          "disableLocalAuth": true,
           "encryption": {
             "keyVaultProperties": {
-              "keyIdentifier": null,
-              "identityClientId": null
+              "identityClientId": null,
+              "keyIdentifier": null
             }
           },
-          "disableLocalAuth": true,
+          "endpoint": "https://contoso.azconfig.io",
           "privateEndpointConnections": [],
+          "provisioningState": "Updating",
           "publicNetworkAccess": "Disabled"
-        },
-        "systemData": {
-          "createdBy": "foo@contoso.com",
-          "createdByType": "User",
-          "createdAt": "2018-04-24T16:30:55+00:00",
-          "lastModifiedBy": "foo@contoso.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
         },
         "sku": {
           "name": "Standard"
         },
-        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
-        "name": "contoso",
-        "location": "westus",
+        "systemData": {
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User"
+        },
         "tags": {}
       }
     }
-  }
+  },
+  "operationId": "ConfigurationStores_Update",
+  "title": "ConfigurationStores_Update_Disable_Local_Auth"
 }

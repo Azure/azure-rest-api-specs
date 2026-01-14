@@ -1,5 +1,6 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res9101",
     "accountName": "sto4445",
@@ -49,15 +50,71 @@
           "keySource": "Microsoft.Storage"
         }
       },
+=======
+    "accountName": "sto4445",
+    "api-version": "2025-06-01",
+    "parameters": {
+      "extendedLocation": {
+        "name": "losangeles001",
+        "type": "EdgeZone"
+      },
+      "kind": "Storage",
+      "location": "eastus",
+      "properties": {
+        "allowBlobPublicAccess": false,
+        "allowSharedKeyAccess": true,
+        "defaultToOAuthAuthentication": false,
+        "dnsEndpointType": "AzureDnsZone",
+        "encryption": {
+          "keySource": "Microsoft.Storage",
+          "requireInfrastructureEncryption": false,
+          "services": {
+            "blob": {
+              "enabled": true,
+              "keyType": "Account"
+            },
+            "file": {
+              "enabled": true,
+              "keyType": "Account"
+            }
+          }
+        },
+        "isHnsEnabled": true,
+        "isSftpEnabled": true,
+        "keyPolicy": {
+          "keyExpirationPeriodInDays": 20
+        },
+        "minimumTlsVersion": "TLS1_2",
+        "routingPreference": {
+          "publishInternetEndpoints": true,
+          "publishMicrosoftEndpoints": true,
+          "routingChoice": "MicrosoftRouting"
+        },
+        "sasPolicy": {
+          "expirationAction": "Log",
+          "sasExpirationPeriod": "1.15:59:59"
+        }
+      },
+      "sku": {
+        "name": "Standard_GRS"
+      },
+>>>>>>> upstream/main
       "tags": {
         "key1": "value1",
         "key2": "value2"
       }
+<<<<<<< HEAD
     }
+=======
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
         "kind": "Storage",
         "location": "eastus",
@@ -74,10 +131,45 @@
             "sasExpirationPeriod": "1.15:59:59",
             "expirationAction": "Log"
           },
+=======
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
+        "extendedLocation": {
+          "name": "losangeles001",
+          "type": "EdgeZone"
+        },
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "kind": "Storage",
+        "location": "eastus",
+        "properties": {
+          "allowBlobPublicAccess": false,
+          "allowSharedKeyAccess": true,
+          "creationTime": "2017-05-24T13:25:33.4863236Z",
+          "dnsEndpointType": "AzureDnsZone",
+          "encryption": {
+            "keySource": "Microsoft.Storage",
+            "requireInfrastructureEncryption": false,
+            "services": {
+              "blob": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "file": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            }
+          },
+          "isHnsEnabled": true,
+          "isSftpEnabled": true,
+>>>>>>> upstream/main
           "keyCreationTime": {
             "key1": "2021-03-18T04:42:22.4322836Z",
             "key2": "2021-03-18T04:42:22.4322836Z"
           },
+<<<<<<< HEAD
           "dnsEndpointType": "AzureDnsZone",
           "isHnsEnabled": true,
           "isSftpEnabled": true,
@@ -106,10 +198,38 @@
               "blob": "https://sto4445-internetrouting.z24.blob.storage.azure.net/",
               "file": "https://sto4445-internetrouting.z24.file.storage.azure.net/"
             }
+=======
+          "keyPolicy": {
+            "keyExpirationPeriodInDays": 20
+          },
+          "minimumTlsVersion": "TLS1_2",
+          "primaryEndpoints": {
+            "blob": "https://sto4445.z24.blob.storage.azure.net/",
+            "dfs": "https://sto4445.z24.dfs.storage.azure.net/",
+            "file": "https://sto4445.z24.file.storage.azure.net/",
+            "internetEndpoints": {
+              "blob": "https://sto4445-internetrouting.z24.blob.storage.azure.net/",
+              "dfs": "https://sto4445-internetrouting.z24.dfs.storage.azure.net/",
+              "file": "https://sto4445-internetrouting.z24.file.storage.azure.net/",
+              "web": "https://sto4445-internetrouting.z24.web.storage.azure.net/"
+            },
+            "microsoftEndpoints": {
+              "blob": "https://sto4445-microsoftrouting.z24.blob.storage.azure.net/",
+              "dfs": "https://sto4445-microsoftrouting.z24.dfs.storage.azure.net/",
+              "file": "https://sto4445-microsoftrouting.z24.file.storage.azure.net/",
+              "queue": "https://sto4445-microsoftrouting.z24.queue.storage.azure.net/",
+              "table": "https://sto4445-microsoftrouting.z24.table.storage.azure.net/",
+              "web": "https://sto4445-microsoftrouting.z24.web.storage.azure.net/"
+            },
+            "queue": "https://sto4445.z24.queue.storage.azure.net/",
+            "table": "https://sto4445.z24.table.storage.azure.net/",
+            "web": "https://sto4445.z24.web.storage.azure.net/"
+>>>>>>> upstream/main
           },
           "primaryLocation": "eastus2euap",
           "provisioningState": "Succeeded",
           "routingPreference": {
+<<<<<<< HEAD
             "routingChoice": "MicrosoftRouting",
             "publishMicrosoftEndpoints": true,
             "publishInternetEndpoints": true
@@ -129,6 +249,15 @@
             },
             "requireInfrastructureEncryption": false,
             "keySource": "Microsoft.Storage"
+=======
+            "publishInternetEndpoints": true,
+            "publishMicrosoftEndpoints": true,
+            "routingChoice": "MicrosoftRouting"
+          },
+          "sasPolicy": {
+            "expirationAction": "Log",
+            "sasExpirationPeriod": "1.15:59:59"
+>>>>>>> upstream/main
           },
           "secondaryLocation": "centraluseuap",
           "statusOfPrimary": "available",
@@ -142,10 +271,20 @@
         "tags": {
           "key1": "value1",
           "key2": "value2"
+<<<<<<< HEAD
         },
         "type": "Microsoft.Storage/storageAccounts"
       }
     },
     "202": {}
   }
+=======
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreateDnsEndpointTypeToAzureDnsZone"
+>>>>>>> upstream/main
 }

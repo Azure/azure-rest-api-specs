@@ -1,15 +1,25 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res6977",
     "accountName": "sto2527",
     "managementPolicyName": "default",
     "api-version": "2025-06-01",
     "monitor": "true"
+=======
+    "accountName": "sto2527",
+    "api-version": "2025-06-01",
+    "managementPolicyName": "default",
+    "monitor": "true",
+    "resourceGroupName": "res6977",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
         "name": "DefaultManagementPolicy",
         "type": "Microsoft.Storage/storageAccounts/managementPolicies",
@@ -33,12 +43,34 @@
                     "baseBlob": {
                       "tierToCool": {
                         "daysAfterModificationGreaterThan": 30
+=======
+        "name": "DefaultManagementPolicy",
+        "type": "Microsoft.Storage/storageAccounts/managementPolicies",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
+        "properties": {
+          "lastModifiedTime": "2018-06-08T03:01:55.7168089Z",
+          "policy": {
+            "rules": [
+              {
+                "name": "olcmtest",
+                "type": "Lifecycle",
+                "definition": {
+                  "actions": {
+                    "baseBlob": {
+                      "delete": {
+                        "daysAfterModificationGreaterThan": 1000
+>>>>>>> upstream/main
                       },
                       "tierToArchive": {
                         "daysAfterModificationGreaterThan": 90
                       },
+<<<<<<< HEAD
                       "delete": {
                         "daysAfterModificationGreaterThan": 1000
+=======
+                      "tierToCool": {
+                        "daysAfterModificationGreaterThan": 30
+>>>>>>> upstream/main
                       }
                     },
                     "snapshot": {
@@ -46,6 +78,7 @@
                         "daysAfterCreationGreaterThan": 30
                       }
                     }
+<<<<<<< HEAD
                   }
                 }
               }
@@ -56,4 +89,26 @@
       }
     }
   }
+=======
+                  },
+                  "filters": {
+                    "blobTypes": [
+                      "blockBlob"
+                    ],
+                    "prefixMatch": [
+                      "olcmtestcontainer"
+                    ]
+                  }
+                },
+                "enabled": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ManagementPolicies_Get",
+  "title": "StorageAccountGetManagementPolicies"
+>>>>>>> upstream/main
 }

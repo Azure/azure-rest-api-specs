@@ -1,16 +1,25 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "api-version": "2025-03-01",
     "billingAccountId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01",
     "customerId": "000000-1111-2222-3333-444444444444",
     "scope": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/customers/000000-1111-2222-3333-444444444444",
     "$filter": "properties/category eq 'ReservationUtilization'"
+=======
+    "$filter": "properties/category eq 'ReservationUtilization'",
+    "api-version": "2025-03-01",
+    "billingAccountId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01",
+    "customerId": "000000-1111-2222-3333-444444444444",
+    "scope": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/customers/000000-1111-2222-3333-444444444444"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+<<<<<<< HEAD
             "id": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/customers/000000-1111-2222-3333-444444444444/providers/Microsoft.CostManagement/budgets/TestRUAlert1",
             "name": "TestRUAlert1",
             "type": "Microsoft.CostManagement/budgets",
@@ -35,10 +44,37 @@
                     "janesmith@contoso.com"
                   ]
                 }
+=======
+            "name": "TestRUAlert1",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "id": "/providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/customers/000000-1111-2222-3333-444444444444/providers/Microsoft.CostManagement/budgets/TestRUAlert1",
+            "properties": {
+              "category": "ReservationUtilization",
+              "filter": {},
+              "notifications": {
+                "Actual_LessThan_99_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "enabled": true,
+                  "frequency": "Daily",
+                  "locale": "en-us",
+                  "operator": "LessThan",
+                  "threshold": 99
+                }
+              },
+              "timeGrain": "Last30Days",
+              "timePeriod": {
+                "endDate": "2025-04-01T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+>>>>>>> upstream/main
               }
             }
           },
           {
+<<<<<<< HEAD
             "id": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/customers/000000-1111-2222-3333-444444444444/providers/Microsoft.CostManagement/budgets/TestRUAlert2",
             "name": "TestRUAlert2",
             "type": "Microsoft.CostManagement/budgets",
@@ -50,6 +86,14 @@
                 "startDate": "2023-04-01T00:00:00Z",
                 "endDate": "2025-04-01T00:00:00Z"
               },
+=======
+            "name": "TestRUAlert2",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "id": "/providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/customers/000000-1111-2222-3333-444444444444/providers/Microsoft.CostManagement/budgets/TestRUAlert2",
+            "properties": {
+              "category": "ReservationUtilization",
+>>>>>>> upstream/main
               "filter": {
                 "dimensions": {
                   "name": "ReservationId",
@@ -63,6 +107,7 @@
               },
               "notifications": {
                 "Actual_LessThan_99_Percent": {
+<<<<<<< HEAD
                   "enabled": true,
                   "operator": "LessThan",
                   "threshold": 80,
@@ -73,11 +118,34 @@
                     "janesmith@contoso.com"
                   ]
                 }
+=======
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "enabled": true,
+                  "frequency": "Daily",
+                  "locale": "en-us",
+                  "operator": "LessThan",
+                  "threshold": 80
+                }
+              },
+              "timeGrain": "Last7Days",
+              "timePeriod": {
+                "endDate": "2025-04-01T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+>>>>>>> upstream/main
               }
             }
           }
         ]
       }
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "Budgets_List",
+  "title": "CustomerBudgetsList-MCA-CSP-CategoryTypeFilter"
+>>>>>>> upstream/main
 }

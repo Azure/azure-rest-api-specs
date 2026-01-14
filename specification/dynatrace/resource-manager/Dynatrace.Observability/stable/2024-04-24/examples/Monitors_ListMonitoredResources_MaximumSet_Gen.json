@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2024-04-24",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
     "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "request": {
       "monitoredResourceIds": [
         "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor/listMonitoredResources"
@@ -13,17 +13,19 @@
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Dynatrace.Observability/monitors?api-version=2024-04-24&$skiptoken=abc123",
         "value": [
           {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor/listMonitoredResources",
-            "sendingMetrics": "Enabled",
+            "reasonForLogsStatus": "CapturedByRules",
             "reasonForMetricsStatus": "CapturedByRules",
             "sendingLogs": "Enabled",
-            "reasonForLogsStatus": "CapturedByRules"
+            "sendingMetrics": "Enabled"
           }
-        ],
-        "nextLink": "null"
+        ]
       }
     }
-  }
+  },
+  "operationId": "Monitors_ListMonitoredResources",
+  "title": "Monitors_ListMonitoredResources_MaximumSet_Gen"
 }

@@ -28,7 +28,11 @@ model Appliance is Azure.ResourceManager.TrackedResource<ApplianceProperties> {
   identity?: Identity;
 }
 
+<<<<<<< HEAD
 @armResourceOperations
+=======
+@armResourceOperations(#{ allowStaticRoutes: true })
+>>>>>>> upstream/main
 interface Appliances {
   /**
    * Gets the details of an Appliance with a specified resource group and name.
@@ -115,7 +119,12 @@ interface Appliances {
    */
   @get
   @summary("Gets an Appliance upgrade graph.")
+<<<<<<< HEAD
   getUpgradeGraph is ArmResourceRead<
+=======
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs/{upgradeGraph}")
+  getUpgradeGraph is ApplianceOps.ActionSync<
+>>>>>>> upstream/main
     Appliance,
     Parameters = {
       /**
@@ -126,10 +135,41 @@ interface Appliances {
       @segment("upgradeGraphs")
       upgradeGraph: string;
     },
+<<<<<<< HEAD
+=======
+    Request = void,
+>>>>>>> upstream/main
     Response = ArmResponse<UpgradeGraph>
   >;
 }
 
+<<<<<<< HEAD
+=======
+// This is needed to define the route for getUpgradeGraph operation since it does not follow standard ARM patterns.
+alias ApplianceOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /**
+     * Appliances name.
+     */
+    @path
+    @segment("appliances")
+    @key
+    @minLength(1)
+    @maxLength(63)
+    @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
+    resourceName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}",
+  }
+>;
+
+>>>>>>> upstream/main
 @@maxLength(Appliance.name, 63);
 @@minLength(Appliance.name, 1);
 @@doc(Appliance.name, "Appliances name.");
@@ -140,5 +180,9 @@ interface Appliances {
 @@doc(Appliances.update::parameters.properties,
   "The updatable fields of an existing Appliance."
 );
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Appliances.update::parameters.properties
 );

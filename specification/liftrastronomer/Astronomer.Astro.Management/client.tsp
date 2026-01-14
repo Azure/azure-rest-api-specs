@@ -3,4 +3,4 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Astronomer.Astro, "AstroMgmt", "python");
+@@clientName(Astronomer.Astro, "AstroMgmtClient", "python");

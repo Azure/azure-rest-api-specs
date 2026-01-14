@@ -4,12 +4,16 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
+<<<<<<< HEAD
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+=======
+using Azure.ResourceManager;
+>>>>>>> upstream/main
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -84,6 +88,7 @@ enum ResourceIdentityType {
 }
 
 /**
+<<<<<<< HEAD
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.
  */
 model ProxyResource {
@@ -150,6 +155,8 @@ model SystemData {
 }
 
 /**
+=======
+>>>>>>> upstream/main
  * Managed identity for the resource.
  */
 model IdentityProperties {
@@ -353,6 +360,7 @@ model OperationListResult {
 }
 
 /**
+<<<<<<< HEAD
  * An Azure resource.
  */
 model Resource {
@@ -394,6 +402,8 @@ model Resource {
 }
 
 /**
+=======
+>>>>>>> upstream/main
  * The Active Directory Object that will be used for authenticating the token of a container registry.
  */
 model ActiveDirectoryObject {

@@ -2,18 +2,25 @@
   "parameters": {
     "api-version": "2025-03-01",
     "managementGroupId": "MyMgId",
+<<<<<<< HEAD
     "scope": "providers/Microsoft.Management/managementGroups/MyMgId",
     "parameters": {
       "type": "Usage",
       "timeframe": "TheLastMonth",
       "dataset": {
         "granularity": "None",
+=======
+    "parameters": {
+      "type": "Usage",
+      "dataset": {
+>>>>>>> upstream/main
         "aggregation": {
           "totalCost": {
             "name": "PreTaxCost",
             "function": "Sum"
           }
         },
+<<<<<<< HEAD
         "grouping": [
           {
             "type": "Dimension",
@@ -22,15 +29,35 @@
         ]
       }
     }
+=======
+        "granularity": "None",
+        "grouping": [
+          {
+            "name": "ResourceGroup",
+            "type": "Dimension"
+          }
+        ]
+      },
+      "timeframe": "TheLastMonth"
+    },
+    "scope": "providers/Microsoft.Management/managementGroups/MyMgId"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
         "type": "microsoft.costmanagement/Query",
         "properties": {
           "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query?api-version=2021-10-01&$skiptoken=AQAAAA%3D%3D",
+=======
+        "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+        "type": "microsoft.costmanagement/Query",
+        "id": "/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+        "properties": {
+>>>>>>> upstream/main
           "columns": [
             {
               "name": "PreTaxCost",
@@ -49,9 +76,16 @@
               "type": "String"
             }
           ],
+<<<<<<< HEAD
           "rows": [
             [
               20.359416562625452,
+=======
+          "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query?api-version=2021-10-01&$skiptoken=AQAAAA%3D%3D",
+          "rows": [
+            [
+              20.35941656262545,
+>>>>>>> upstream/main
               "VSTSHOL-1595322048000",
               20180331,
               "USD"
@@ -73,5 +107,11 @@
       }
     },
     "204": {}
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "Query_Usage",
+  "title": "ManagementGroupQueryGrouping-Legacy"
+>>>>>>> upstream/main
 }

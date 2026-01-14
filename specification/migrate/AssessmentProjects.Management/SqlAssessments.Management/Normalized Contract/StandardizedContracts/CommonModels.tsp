@@ -5,12 +5,7 @@ import "../Enums/Enums.tsp";
 import "./CommonAssessmentPropertiesEnums.tsp";
 import "../Enums/Enums.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -19,17 +14,17 @@ namespace Microsoft.Migrate;
 model SharedResourcesDto {
   @doc("Gets the list of shared data disks.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sharedDataDisks?: AzureManagedDiskSkuDto[];
 
   @doc("Gets the list of shared log disks.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sharedLogDisks?: AzureManagedDiskSkuDto[];
 
   @doc("Gets the list of shared Temporary database disks.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sharedTempDbDisks?: AzureManagedDiskSkuDto[];
 
   @doc("Gets number of mounts of shared disks.")
@@ -121,6 +116,7 @@ model AzureVirtualMachineSkuDto {
 
 @doc("Migration Guideline Context.")
 model MigrationGuidelineContext {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Gets the reasoning context key.")
   contextKey?: string;
 
@@ -212,7 +208,6 @@ model AssessedNetworkAdaptersV3 {
 
   @doc("Gets the ip addresses.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
   ipAddresses?: string[];
 
   @doc("Gets the megabytes per second received.")
@@ -230,7 +225,7 @@ model CostDetailsCommon {
 
   @doc("The sku cost details per azure offer type.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   costDetail?: NameValuePair<CostType, float32>[];
 }
 
@@ -242,7 +237,7 @@ model SavingsDetailsCommon {
 
   @doc("The sku cost details per azure offer type.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   savingsDetail?: NameValuePair<SavingsType, float32>[];
 }
 

@@ -1,28 +1,30 @@
 {
   "parameters": {
     "api-version": "2024-04-24",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "monitorName": "myMonitor",
     "resourceGroupName": "myResourceGroup",
-    "monitorName": "myMonitor"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Dynatrace.Observability/monitors?api-version=2024-04-24&$skiptoken=abc123",
         "value": [
           {
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtual1",
-            "version": "1.2.0",
-            "monitoringType": "CLOUD_INFRASTRUCTURE",
             "autoUpdateSetting": "ENABLED",
-            "updateStatus": "INCOMPATIBLE",
             "availabilityState": "CRASHED",
-            "logModule": "ENABLED",
             "hostGroup": "myGroup",
-            "hostName": "myName"
+            "hostName": "myName",
+            "logModule": "ENABLED",
+            "monitoringType": "CLOUD_INFRASTRUCTURE",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtual1",
+            "updateStatus": "INCOMPATIBLE",
+            "version": "1.2.0"
           }
-        ],
-        "nextLink": "null"
+        ]
       }
     }
-  }
+  },
+  "operationId": "Monitors_ListHosts",
+  "title": "Monitors_ListHosts_MaximumSet_Gen"
 }

@@ -3,7 +3,6 @@ namespace Microsoft.AVS;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
@@ -45,15 +44,15 @@ model ResourceSku {
   locations: azureLocation[];
 
   @doc("A list of locations and availability zones in those locations where the SKU is available")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locationInfo: ResourceSkuLocationInfo[];
 
   @doc("Name value pairs to describe the capability.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities?: ResourceSkuCapabilities[];
 
   @doc("The restrictions of the SKU.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restrictions: ResourceSkuRestrictions[];
 }
 
@@ -66,7 +65,7 @@ model ResourceSkuLocationInfo {
   zones: string[];
 
   @doc("Gets details of capabilities available to a SKU in specific zones.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   zoneDetails: ResourceSkuZoneDetails[];
 }
 
@@ -76,7 +75,7 @@ model ResourceSkuZoneDetails {
   name: string[];
 
   @doc("A list of capabilities that are available for the SKU in the specified list of zones.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities: ResourceSkuCapabilities[];
 }
 

@@ -4,14 +4,22 @@ parameters:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+<<<<<<< HEAD
 output-dir: "{project-root}/preview/2025-09-01-preview"
+=======
+>>>>>>> upstream/main
 emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
+<<<<<<< HEAD
     emitter-output-dir: "{output-dir}"
     output-file: "openapi.json"
+=======
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/openapi.json"
+>>>>>>> upstream/main
     azure-resource-provider-folder: "resource-manager"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
@@ -32,7 +40,10 @@ options:
   "@azure-tools/typespec-ts":
     service-dir: sdk/edgeactions
     emitter-output-dir: "{output-dir}/{service-dir}/arm-edgeactions"
+<<<<<<< HEAD
     is-modular-library: true
+=======
+>>>>>>> upstream/main
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -47,6 +58,7 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+<<<<<<< HEAD
   "@azure-tools/typespec-csharp":
     service-dir: "sdk/edgeactions"
     emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.EdgeActions"
@@ -55,3 +67,8 @@ options:
     clear-output-folder: true
     generate-sample-project: true
     generate-test-project: true
+=======
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.EdgeActions"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+>>>>>>> upstream/main

@@ -17,6 +17,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
+<<<<<<< HEAD
     "hostTemplate": "https://{region}.{serviceBaseUrl}",
     "useSchemePrefix": false,
     "parameters": [
@@ -34,6 +35,19 @@
         "required": true,
         "type": "string",
         "default": "quantum.azure.com"
+=======
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint of the Azure Quantum service. For example, https://{region}.quantum.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+>>>>>>> upstream/main
       }
     ]
   },
@@ -416,7 +430,11 @@
       },
       "delete": {
         "operationId": "Jobs_Cancel",
+<<<<<<< HEAD
         "description": "Request the cancellation of an existing job.",
+=======
+        "description": "Delete a job by its id. Use for cancellation in versions before 2025-12-01-preview.",
+>>>>>>> upstream/main
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"

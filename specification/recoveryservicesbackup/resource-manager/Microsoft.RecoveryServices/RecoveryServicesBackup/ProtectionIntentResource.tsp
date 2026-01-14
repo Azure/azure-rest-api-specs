@@ -11,6 +11,10 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup ProtectionIntent.
  */
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+>>>>>>> upstream/main
 @parentResource(BackupFabricResource)
 model ProtectionIntentResource
   is TrackedResourceWithOptionalLocation<ProtectionIntent> {

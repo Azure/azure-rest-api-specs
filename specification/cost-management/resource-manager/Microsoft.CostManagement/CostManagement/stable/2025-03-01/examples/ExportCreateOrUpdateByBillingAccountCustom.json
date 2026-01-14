@@ -2,7 +2,10 @@
   "parameters": {
     "api-version": "2025-03-01",
     "billingAccountId": "123456",
+<<<<<<< HEAD
     "scope": "providers/Microsoft.Billing/billingAccounts/123456",
+=======
+>>>>>>> upstream/main
     "exportName": "TestExport",
     "parameters": {
       "identity": {
@@ -10,6 +13,7 @@
       },
       "location": "centralus",
       "properties": {
+<<<<<<< HEAD
         "schedule": {
           "status": "Inactive"
         },
@@ -25,10 +29,24 @@
         "definition": {
           "type": "ActualCost",
           "timeframe": "Custom",
+=======
+        "format": "Csv",
+        "compressionMode": "gzip",
+        "dataOverwriteBehavior": "OverwritePreviousReport",
+        "definition": {
+          "type": "ActualCost",
+          "dataSet": {
+            "configuration": {
+              "dataVersion": "2023-05-01"
+            },
+            "granularity": "Daily"
+          },
+>>>>>>> upstream/main
           "timePeriod": {
             "from": "2025-04-03T00:00:00.000Z",
             "to": "2025-04-03T00:00:00.000Z"
           },
+<<<<<<< HEAD
           "dataSet": {
             "granularity": "Daily",
             "configuration": {
@@ -96,6 +114,34 @@
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
         "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+=======
+          "timeframe": "Custom"
+        },
+        "deliveryInfo": {
+          "destination": {
+            "type": "AzureBlob",
+            "container": "exports",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+            "rootFolderPath": "ad-hoc"
+          }
+        },
+        "exportDescription": "This is a test export.",
+        "partitionData": true,
+        "schedule": {
+          "status": "Inactive"
+        }
+      }
+    },
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
+>>>>>>> upstream/main
         "identity": {
           "type": "SystemAssigned",
           "principalId": "00000000-0000-0000-0000-000000000000",
@@ -103,6 +149,7 @@
         },
         "location": "centralus",
         "properties": {
+<<<<<<< HEAD
           "schedule": {
             "status": "Inactive",
             "recurrence": "None"
@@ -118,10 +165,24 @@
           "definition": {
             "type": "ActualCost",
             "timeframe": "Custom",
+=======
+          "format": "Csv",
+          "compressionMode": "gzip",
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "definition": {
+            "type": "ActualCost",
+            "dataSet": {
+              "configuration": {
+                "dataVersion": "2023-05-01"
+              },
+              "granularity": "Daily"
+            },
+>>>>>>> upstream/main
             "timePeriod": {
               "from": "2025-04-03T00:00:00Z",
               "to": "2025-04-03T00:00:00Z"
             },
+<<<<<<< HEAD
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
@@ -137,4 +198,73 @@
       }
     }
   }
+=======
+            "timeframe": "Custom"
+          },
+          "deliveryInfo": {
+            "destination": {
+              "container": "exports",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "exportDescription": "This is a test export.",
+          "partitionData": true,
+          "schedule": {
+            "recurrence": "None",
+            "status": "Inactive"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "centralus",
+        "properties": {
+          "format": "Csv",
+          "compressionMode": "gzip",
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "definition": {
+            "type": "ActualCost",
+            "dataSet": {
+              "configuration": {
+                "dataVersion": "2023-05-01"
+              },
+              "granularity": "Daily"
+            },
+            "timePeriod": {
+              "from": "2025-04-03T00:00:00Z",
+              "to": "2025-04-03T00:00:00Z"
+            },
+            "timeframe": "Custom"
+          },
+          "deliveryInfo": {
+            "destination": {
+              "container": "exports",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "exportDescription": "This is a test export.",
+          "partitionData": true,
+          "schedule": {
+            "recurrence": "None",
+            "status": "Inactive"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Exports_CreateOrUpdate",
+  "title": "ExportCreateOrUpdateByBillingAccountCustom"
+>>>>>>> upstream/main
 }

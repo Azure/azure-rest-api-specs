@@ -1,17 +1,30 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+<<<<<<< HEAD
     "managementGroupId": "TestMG",
     "scope": "providers/Microsoft.Management/managementGroups/TestMG",
     "exportName": "TestExport"
+=======
+    "exportName": "TestExport",
+    "managementGroupId": "TestMG",
+    "scope": "providers/Microsoft.Management/managementGroups/TestMG"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
         "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+=======
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport",
+>>>>>>> upstream/main
         "identity": {
           "type": "SystemAssigned",
           "principalId": "00000000-0000-0000-0000-000000000000",
@@ -20,6 +33,7 @@
         "location": "centralus",
         "properties": {
           "format": "Csv",
+<<<<<<< HEAD
           "deliveryInfo": {
             "destination": {
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
@@ -30,10 +44,23 @@
           "definition": {
             "type": "ActualCost",
             "timeframe": "Custom",
+=======
+          "compressionMode": "gzip",
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "definition": {
+            "type": "ActualCost",
+            "dataSet": {
+              "configuration": {
+                "dataVersion": "2023-05-01"
+              },
+              "granularity": "Daily"
+            },
+>>>>>>> upstream/main
             "timePeriod": {
               "from": "2019-09-01T00:00:00Z",
               "to": "2020-09-30T00:00:00Z"
             },
+<<<<<<< HEAD
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
@@ -49,4 +76,23 @@
       }
     }
   }
+=======
+            "timeframe": "Custom"
+          },
+          "deliveryInfo": {
+            "destination": {
+              "container": "exports",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "exportDescription": "This is a test export.",
+          "partitionData": true
+        }
+      }
+    }
+  },
+  "operationId": "Exports_Get",
+  "title": "ExportGetByManagementGroup"
+>>>>>>> upstream/main
 }

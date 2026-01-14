@@ -49,7 +49,8 @@ interface Images {
    */
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Image,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Image> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -61,7 +62,7 @@ interface Images {
     ImageUpdate,
     Response = ArmResponse<Image> | ArmResourceCreatedResponse<
       Image,
-      LroHeaders = ArmLroLocationHeader &
+      LroHeaders = ArmLroLocationHeader<FinalResult = Image> &
         Azure.Core.Foundations.RetryAfterHeader
     >
   >;

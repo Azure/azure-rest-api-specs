@@ -1,16 +1,25 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res4410",
     "accountName": "sto8607",
     "api-version": "2025-06-01",
     "monitor": "true"
+=======
+    "accountName": "sto8607",
+    "api-version": "2025-06-01",
+    "monitor": "true",
+    "resourceGroupName": "res4410",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+<<<<<<< HEAD
             "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/blobServices/default",
             "name": "default",
             "type": "Microsoft.Storage/storageAccounts/blobServices",
@@ -21,6 +30,23 @@
                     "allowedOrigins": [
                       "http://www.contoso.com",
                       "http://www.fabrikam.com"
+=======
+            "name": "default",
+            "type": "Microsoft.Storage/storageAccounts/blobServices",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/blobServices/default",
+            "properties": {
+              "changeFeed": {
+                "enabled": true,
+                "retentionInDays": 7
+              },
+              "cors": {
+                "corsRules": [
+                  {
+                    "allowedHeaders": [
+                      "x-ms-meta-abc",
+                      "x-ms-meta-data*",
+                      "x-ms-meta-target*"
+>>>>>>> upstream/main
                     ],
                     "allowedMethods": [
                       "GET",
@@ -30,6 +56,7 @@
                       "MERGE",
                       "PUT"
                     ],
+<<<<<<< HEAD
                     "maxAgeInSeconds": 100,
                     "exposedHeaders": [
                       "x-ms-meta-*"
@@ -42,11 +69,25 @@
                   },
                   {
                     "allowedOrigins": [
+=======
+                    "allowedOrigins": [
+                      "http://www.contoso.com",
+                      "http://www.fabrikam.com"
+                    ],
+                    "exposedHeaders": [
+                      "x-ms-meta-*"
+                    ],
+                    "maxAgeInSeconds": 100
+                  },
+                  {
+                    "allowedHeaders": [
+>>>>>>> upstream/main
                       "*"
                     ],
                     "allowedMethods": [
                       "GET"
                     ],
+<<<<<<< HEAD
                     "maxAgeInSeconds": 2,
                     "exposedHeaders": [
                       "*"
@@ -59,25 +100,50 @@
                     "allowedOrigins": [
                       "http://www.abc23.com",
                       "https://www.fabrikam.com/*"
+=======
+                    "allowedOrigins": [
+                      "*"
+                    ],
+                    "exposedHeaders": [
+                      "*"
+                    ],
+                    "maxAgeInSeconds": 2
+                  },
+                  {
+                    "allowedHeaders": [
+                      "x-ms-meta-12345675754564*"
+>>>>>>> upstream/main
                     ],
                     "allowedMethods": [
                       "GET",
                       "PUT"
                     ],
+<<<<<<< HEAD
                     "maxAgeInSeconds": 2000,
+=======
+                    "allowedOrigins": [
+                      "http://www.abc23.com",
+                      "https://www.fabrikam.com/*"
+                    ],
+>>>>>>> upstream/main
                     "exposedHeaders": [
                       "x-ms-meta-abc",
                       "x-ms-meta-data*",
                       "x -ms-meta-target*"
                     ],
+<<<<<<< HEAD
                     "allowedHeaders": [
                       "x-ms-meta-12345675754564*"
                     ]
+=======
+                    "maxAgeInSeconds": 2000
+>>>>>>> upstream/main
                   }
                 ]
               },
               "defaultServiceVersion": "2017-07-29",
               "deleteRetentionPolicy": {
+<<<<<<< HEAD
                 "enabled": true,
                 "days": 300
               },
@@ -86,6 +152,12 @@
                 "enabled": true,
                 "retentionInDays": 7
               }
+=======
+                "days": 300,
+                "enabled": true
+              },
+              "isVersioningEnabled": true
+>>>>>>> upstream/main
             },
             "sku": {
               "name": "Standard_GRS",
@@ -95,5 +167,11 @@
         ]
       }
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "BlobServices_List",
+  "title": "ListBlobServices"
+>>>>>>> upstream/main
 }

@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-03'
 input-file:
+<<<<<<< HEAD
   - stable/2025-03-01/common-types.json
   - stable/2025-03-01/costallocation.json
   - stable/2025-03-01/costmanagement.benefits.json
@@ -50,6 +51,9 @@ input-file:
   - stable/2025-03-01/costmanagement.pricesheets.json
   - stable/2025-03-01/scheduledActions.json
   - stable/2025-03-01/settings.json
+=======
+  - stable/2025-03-01/openapi.json
+>>>>>>> upstream/main
 ```
 
 ### Tag: package-preview-2024-10-01-preview
@@ -577,6 +581,7 @@ input-file:
 - preview/2018-12-01-preview/costmanagement.json
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
@@ -586,6 +591,8 @@ input-file:
 - stable/2019-01-01/costmanagement.json
 ```
 
+=======
+>>>>>>> upstream/main
 ---
 
 # Code Generation

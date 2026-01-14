@@ -1,9 +1,16 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "api-version": "2025-03-01",
     "billingAccountId": "12345:6789",
     "$expand": "properties/data",
     "$top": 5,
+=======
+    "$expand": "properties/data",
+    "$top": 5,
+    "api-version": "2025-03-01",
+    "billingAccountId": "12345:6789",
+>>>>>>> upstream/main
     "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789"
   },
   "responses": {
@@ -11,10 +18,19 @@
       "body": {
         "value": [
           {
+<<<<<<< HEAD
             "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/providers/microsoft.CostManagement/dimensions_ResourceGroup_2019-10-01_2019-10-31",
             "name": "dimensions_ResourceGroup_2019-10-01_2019-10-31",
             "type": "microsoft.CostManagement/dimensions",
             "properties": {
+=======
+            "name": "dimensions_ResourceGroup_2019-10-01_2019-10-31",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345:6789/providers/microsoft.CostManagement/dimensions_ResourceGroup_2019-10-01_2019-10-31",
+            "properties": {
+              "description": "Resource group",
+              "category": "ResourceGroup",
+>>>>>>> upstream/main
               "data": [
                 "thoroetrg01",
                 "default-notificationhubs-westus",
@@ -22,6 +38,7 @@
                 "contosocodeflow8d4a",
                 "noobaa"
               ],
+<<<<<<< HEAD
               "total": 377,
               "category": "ResourceGroup",
               "usageStart": "2019-10-01T00:00:00-07:00",
@@ -36,6 +53,22 @@
             "name": "dimensions_ResourceType_2019-10-01_2019-10-31",
             "type": "microsoft.CostManagement/dimensions",
             "properties": {
+=======
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 377,
+              "usageEnd": "2019-10-31T00:00:00-07:00",
+              "usageStart": "2019-10-01T00:00:00-07:00"
+            }
+          },
+          {
+            "name": "dimensions_ResourceType_2019-10-01_2019-10-31",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345:6789/providers/microsoft.CostManagement/dimensions_ResourceType_2019-10-01_2019-10-31",
+            "properties": {
+              "description": "Resource type",
+              "category": "ResourceType",
+>>>>>>> upstream/main
               "data": [
                 "microsoft.automation/automationaccounts",
                 "microsoft.databricks/workspaces",
@@ -43,6 +76,7 @@
                 "microsoft.containerregistry/registries",
                 "microsoft.search/searchservices"
               ],
+<<<<<<< HEAD
               "total": 37,
               "category": "ResourceType",
               "usageStart": "2019-10-01T00:00:00-07:00",
@@ -50,11 +84,24 @@
               "description": "Resource type",
               "filterEnabled": true,
               "groupingEnabled": true
+=======
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 37,
+              "usageEnd": "2019-10-31T00:00:00-07:00",
+              "usageStart": "2019-10-01T00:00:00-07:00"
+>>>>>>> upstream/main
             }
           }
         ]
       }
     },
     "204": {}
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "Dimensions_List",
+  "title": "BillingAccountDimensionsListExpandAndTop-MCA"
+>>>>>>> upstream/main
 }

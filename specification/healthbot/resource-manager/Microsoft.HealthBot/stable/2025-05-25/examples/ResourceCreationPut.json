@@ -1,77 +1,79 @@
 {
   "parameters": {
-    "resourceGroupName": "healthbotClient",
     "api-version": "2025-05-25",
-    "subscriptionId": "subid",
     "botName": "samplebotname",
     "parameters": {
-      "location": "East US",
-      "sku": {
-        "name": "F0"
-      },
       "identity": {
+        "type": "SystemAssigned, UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi": {},
           "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi2": {}
-        },
-        "type": "SystemAssigned, UserAssigned"
+        }
+      },
+      "location": "East US",
+      "sku": {
+        "name": "F0"
       }
-    }
+    },
+    "resourceGroupName": "healthbotClient",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
-        "location": "East US",
         "name": "samplebotname",
         "type": "Microsoft.HealthBot/healthBots",
         "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.HealthBot/healthBots/samplebotname",
-        "sku": {
-          "name": "F0"
-        },
         "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "principalId",
+          "tenantId": "tenantId",
           "userAssignedIdentities": {
             "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi": {},
             "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi2": {}
-          },
-          "principalId": "principalId",
-          "tenantId": "tenantId",
-          "type": "SystemAssigned, UserAssigned"
+          }
         },
+        "location": "East US",
         "properties": {
           "botManagementPortalLink": "https://us.healthbot.microsoft.com/account/contoso"
         },
+        "sku": {
+          "name": "F0"
+        },
         "systemData": {
+          "createdAt": "2020-05-05T17:18:19.1234567Z",
           "createdBy": "jack@outlook.com",
           "createdByType": "User",
-          "createdAt": "2020-05-05T17:18:19.1234567Z",
+          "lastModifiedAt": "2020-05-06T17:18:19.1234567Z",
           "lastModifiedBy": "ryan@outlook.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-05-06T17:18:19.1234567Z"
+          "lastModifiedByType": "User"
         }
       }
     },
     "201": {
       "body": {
-        "location": "East US",
         "name": "samplebotname",
         "type": "Microsoft.HealthBot/healthBots",
         "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.HealthBot/healthBots/samplebotname",
-        "sku": {
-          "name": "F0"
-        },
+        "location": "East US",
         "properties": {
           "botManagementPortalLink": "https://us.healthbot.microsoft.com/account/contoso",
           "provisioningState": "Provisioning"
         },
+        "sku": {
+          "name": "F0"
+        },
         "systemData": {
+          "createdAt": "2020-05-05T17:18:19.1234567Z",
           "createdBy": "jack@outlook.com",
           "createdByType": "User",
-          "createdAt": "2020-05-05T17:18:19.1234567Z",
+          "lastModifiedAt": "2020-05-06T17:18:19.1234567Z",
           "lastModifiedBy": "ryan@outlook.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-05-06T17:18:19.1234567Z"
+          "lastModifiedByType": "User"
         }
       }
     }
-  }
+  },
+  "operationId": "Bots_Create",
+  "title": "BotCreate"
 }

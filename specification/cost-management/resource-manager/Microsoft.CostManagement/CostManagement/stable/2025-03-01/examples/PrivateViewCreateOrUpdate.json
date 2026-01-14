@@ -1,6 +1,7 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+<<<<<<< HEAD
     "viewName": "swaggerExample",
     "parameters": {
       "eTag": "\"1d4ff9fe66f1d10\"",
@@ -11,12 +12,51 @@
           "timeframe": "MonthToDate",
           "dataSet": {
             "granularity": "Daily",
+=======
+    "parameters": {
+      "eTag": "\"1d4ff9fe66f1d10\"",
+      "properties": {
+        "accumulated": "true",
+        "chart": "Table",
+        "displayName": "swagger Example",
+        "kpis": [
+          {
+            "type": "Forecast",
+            "enabled": true,
+            "id": null
+          },
+          {
+            "type": "Budget",
+            "enabled": true,
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/swaggerDemo"
+          }
+        ],
+        "metric": "ActualCost",
+        "pivots": [
+          {
+            "name": "ServiceName",
+            "type": "Dimension"
+          },
+          {
+            "name": "MeterCategory",
+            "type": "Dimension"
+          },
+          {
+            "name": "swaggerTagKey",
+            "type": "TagKey"
+          }
+        ],
+        "query": {
+          "type": "Usage",
+          "dataSet": {
+>>>>>>> upstream/main
             "aggregation": {
               "totalCost": {
                 "name": "PreTaxCost",
                 "function": "Sum"
               }
             },
+<<<<<<< HEAD
             "grouping": [],
             "sorting": [
               {
@@ -134,12 +174,71 @@
             "timeframe": "MonthToDate",
             "dataSet": {
               "granularity": "Daily",
+=======
+            "granularity": "Daily",
+            "grouping": [],
+            "sorting": [
+              {
+                "name": "UsageDate",
+                "direction": "Ascending"
+              }
+            ]
+          },
+          "timeframe": "MonthToDate"
+        }
+      }
+    },
+    "viewName": "swaggerExample"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "swaggerExample",
+        "type": "Microsoft.CostManagement/Views",
+        "eTag": "\"1d4ffa5a9c2430c\"",
+        "id": "/providers/Microsoft.CostManagement/views/swaggerExample",
+        "properties": {
+          "accumulated": "true",
+          "chart": "Table",
+          "displayName": "swagger Example",
+          "kpis": [
+            {
+              "type": "Forecast",
+              "enabled": true,
+              "id": null
+            },
+            {
+              "type": "Budget",
+              "enabled": true,
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/swaggerDemo"
+            }
+          ],
+          "metric": "ActualCost",
+          "pivots": [
+            {
+              "name": "ServiceName",
+              "type": "Dimension"
+            },
+            {
+              "name": "MeterCategory",
+              "type": "Dimension"
+            },
+            {
+              "name": "swaggerTagKey",
+              "type": "TagKey"
+            }
+          ],
+          "query": {
+            "type": "Usage",
+            "dataSet": {
+>>>>>>> upstream/main
               "aggregation": {
                 "totalCost": {
                   "name": "PreTaxCost",
                   "function": "Sum"
                 }
               },
+<<<<<<< HEAD
               "grouping": [],
               "sorting": [
                 {
@@ -182,4 +281,85 @@
       }
     }
   }
+=======
+              "granularity": "Daily",
+              "grouping": [],
+              "sorting": [
+                {
+                  "name": "UsageDate",
+                  "direction": "Ascending"
+                }
+              ]
+            },
+            "timeframe": "MonthToDate"
+          },
+          "scope": ""
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "swaggerExample",
+        "type": "Microsoft.CostManagement/Views",
+        "eTag": "\"1d4ffa5a9c2430c\"",
+        "id": "/providers/Microsoft.CostManagement/views/swaggerExample",
+        "properties": {
+          "accumulated": "true",
+          "chart": "Table",
+          "displayName": "swagger Example",
+          "kpis": [
+            {
+              "type": "Forecast",
+              "enabled": true,
+              "id": null
+            },
+            {
+              "type": "Budget",
+              "enabled": true,
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/swaggerDemo"
+            }
+          ],
+          "metric": "ActualCost",
+          "pivots": [
+            {
+              "name": "ServiceName",
+              "type": "Dimension"
+            },
+            {
+              "name": "MeterCategory",
+              "type": "Dimension"
+            },
+            {
+              "name": "swaggerTagKey",
+              "type": "TagKey"
+            }
+          ],
+          "query": {
+            "type": "Usage",
+            "dataSet": {
+              "aggregation": {
+                "totalCost": {
+                  "name": "PreTaxCost",
+                  "function": "Sum"
+                }
+              },
+              "granularity": "Daily",
+              "grouping": [],
+              "sorting": [
+                {
+                  "name": "UsageDate",
+                  "direction": "Ascending"
+                }
+              ]
+            },
+            "timeframe": "MonthToDate"
+          },
+          "scope": ""
+        }
+      }
+    }
+  },
+  "operationId": "Views_CreateOrUpdate",
+  "title": "CreateOrUpdatePrivateView"
+>>>>>>> upstream/main
 }

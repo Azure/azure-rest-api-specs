@@ -1,10 +1,16 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res6977",
     "accountName": "sto2527",
     "username": "user1",
     "api-version": "2025-06-01",
+=======
+    "accountName": "sto2527",
+    "api-version": "2025-06-01",
+    "monitor": "true",
+>>>>>>> upstream/main
     "properties": {
       "properties": {
         "extendedGroups": [
@@ -15,11 +21,18 @@
         "isNFSv3Enabled": true
       }
     },
+<<<<<<< HEAD
     "monitor": "true"
+=======
+    "resourceGroupName": "res6977",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "username": "user1"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/loalUsers/user1",
         "name": "user1",
         "type": "Microsoft.Storage/storageAccounts/localUsers",
@@ -46,15 +59,53 @@
           "sid": "S-1-2-0-125132-153423-36235-1000",
           "userId": 1000,
           "groupId": 2000,
+=======
+        "name": "user1",
+        "type": "Microsoft.Storage/storageAccounts/localUsers",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.Storage/storageAccounts/sto2527/loalUsers/user1",
+        "properties": {
+>>>>>>> upstream/main
           "allowAclAuthorization": true,
           "extendedGroups": [
             1001,
             1005,
             2005
           ],
+<<<<<<< HEAD
           "isNFSv3Enabled": true
         }
       }
     }
   }
+=======
+          "groupId": 2000,
+          "homeDirectory": "homedirectory",
+          "isNFSv3Enabled": true,
+          "permissionScopes": [
+            {
+              "permissions": "rwd",
+              "resourceName": "share1",
+              "service": "file"
+            },
+            {
+              "permissions": "rw",
+              "resourceName": "share2",
+              "service": "file"
+            }
+          ],
+          "sid": "S-1-2-0-125132-153423-36235-1000",
+          "sshAuthorizedKeys": [
+            {
+              "description": "key name",
+              "key": "ssh-rsa keykeykeykeykey="
+            }
+          ],
+          "userId": 1000
+        }
+      }
+    }
+  },
+  "operationId": "LocalUsers_CreateOrUpdate",
+  "title": "CreateNFSv3EnabledLocalUser"
+>>>>>>> upstream/main
 }

@@ -52,9 +52,12 @@ import "./PipelineRun.tsp";
 // Webhook feature
 import "./Webhook.tsp";
 
+<<<<<<< HEAD
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
+=======
+>>>>>>> upstream/main
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -83,6 +86,7 @@ enum Versions {
   vLatestPreview: "2025-06-01-preview",
 }
 
+<<<<<<< HEAD
 interface Operations {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -101,3 +105,7 @@ interface Operations {
     provider: "Microsoft.ThisWillBeReplaced",
   ): ArmResponse<OperationListResult> | ErrorResponse;
 }
+=======
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<Response = ArmResponse<OperationListResult>> {}
+>>>>>>> upstream/main

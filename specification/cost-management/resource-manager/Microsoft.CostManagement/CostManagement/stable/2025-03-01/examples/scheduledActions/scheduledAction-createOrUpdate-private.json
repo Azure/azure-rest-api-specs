@@ -1,13 +1,20 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "api-version": "2025-03-01",
     "name": "monthlyCostByResource",
     "If-Match": "",
+=======
+    "name": "monthlyCostByResource",
+    "If-Match": "",
+    "api-version": "2025-03-01",
+>>>>>>> upstream/main
     "scheduledAction": {
       "kind": "Email",
       "properties": {
         "displayName": "Monthly Cost By Resource",
         "notification": {
+<<<<<<< HEAD
           "to": [
             "user@gmail.com",
             "team@gmail.com"
@@ -26,6 +33,26 @@
           "hourOfDay": 10,
           "startDate": "2020-06-19T22:21:51.1287144Z",
           "endDate": "2021-06-19T22:21:51.1287144Z"
+=======
+          "subject": "Cost by resource this month",
+          "to": [
+            "user@gmail.com",
+            "team@gmail.com"
+          ]
+        },
+        "schedule": {
+          "daysOfWeek": [
+            "Monday"
+          ],
+          "endDate": "2021-06-19T22:21:51.1287144Z",
+          "frequency": "Monthly",
+          "hourOfDay": 10,
+          "startDate": "2020-06-19T22:21:51.1287144Z",
+          "weeksOfMonth": [
+            "First",
+            "Third"
+          ]
+>>>>>>> upstream/main
         },
         "status": "Enabled",
         "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample"
@@ -33,6 +60,7 @@
     }
   },
   "responses": {
+<<<<<<< HEAD
     "201": {
       "body": {
         "id": "providers/Microsoft.CostManagement/scheduledActions/monthlyCostByResource",
@@ -53,10 +81,25 @@
           "notification": {
             "language": "fr",
             "regionalFormat": "fr",
+=======
+    "200": {
+      "body": {
+        "name": "monthlyCostByResource",
+        "type": "Microsoft.CostManagement/ScheduledActions",
+        "eTag": "\"1d4ff9fe66f1d10\"",
+        "id": "/providers/Microsoft.CostManagement/scheduledActions/monthlyCostByResource",
+        "kind": "Email",
+        "properties": {
+          "displayName": "Monthly Cost By Resource",
+          "notification": {
+            "regionalFormat": "fr",
+            "subject": "Cost by resource this month",
+>>>>>>> upstream/main
             "to": [
               "user@gmail.com",
               "team@gmail.com"
             ],
+<<<<<<< HEAD
             "subject": "Cost by resource this month"
           },
           "schedule": {
@@ -71,10 +114,27 @@
             "hourOfDay": 10,
             "startDate": "2020-06-19T22:21:51.1287144Z",
             "endDate": "2021-06-19T22:21:51.1287144Z"
+=======
+            "language": "fr"
+          },
+          "schedule": {
+            "daysOfWeek": [
+              "Monday"
+            ],
+            "endDate": "2021-06-19T22:21:51.1287144Z",
+            "frequency": "Monthly",
+            "hourOfDay": 10,
+            "startDate": "2020-06-19T22:21:51.1287144Z",
+            "weeksOfMonth": [
+              "First",
+              "Third"
+            ]
+>>>>>>> upstream/main
           },
           "scope": "",
           "status": "Enabled",
           "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample"
+<<<<<<< HEAD
         }
       }
     },
@@ -98,10 +158,36 @@
           "notification": {
             "language": "fr",
             "regionalFormat": "fr",
+=======
+        },
+        "systemData": {
+          "createdAt": "2020-06-18T22:21:51.1287144Z",
+          "createdBy": "testuser",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-19T22:21:51.1287144Z",
+          "lastModifiedBy": "testuser",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "monthlyCostByResource",
+        "type": "Microsoft.CostManagement/ScheduledActions",
+        "eTag": "\"1d4ff9fe66f1d10\"",
+        "id": "/providers/Microsoft.CostManagement/scheduledActions/monthlyCostByResource",
+        "kind": "Email",
+        "properties": {
+          "displayName": "Monthly Cost By Resource",
+          "notification": {
+            "regionalFormat": "fr",
+            "subject": "Cost by resource this month",
+>>>>>>> upstream/main
             "to": [
               "user@gmail.com",
               "team@gmail.com"
             ],
+<<<<<<< HEAD
             "subject": "Cost by resource this month"
           },
           "scope": "",
@@ -124,4 +210,38 @@
       }
     }
   }
+=======
+            "language": "fr"
+          },
+          "schedule": {
+            "daysOfWeek": [
+              "Monday"
+            ],
+            "endDate": "2021-06-19T22:21:51.1287144Z",
+            "frequency": "Monthly",
+            "hourOfDay": 10,
+            "startDate": "2020-06-19T22:21:51.1287144Z",
+            "weeksOfMonth": [
+              "First",
+              "Third"
+            ]
+          },
+          "scope": "",
+          "status": "Enabled",
+          "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample"
+        },
+        "systemData": {
+          "createdAt": "2020-06-18T22:21:51.1287144Z",
+          "createdBy": "testuser",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-18T22:21:51.1287144Z",
+          "lastModifiedBy": "testuser",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ScheduledActions_CreateOrUpdate",
+  "title": "CreateOrUpdatePrivateScheduledAction"
+>>>>>>> upstream/main
 }

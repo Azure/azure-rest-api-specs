@@ -10,6 +10,10 @@ using Azure.ResourceManager.Legacy;
 namespace Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+>>>>>>> upstream/main
 @doc("")
 @parentResource(VaultResource)
 model ResourceGuardProxyBaseResource

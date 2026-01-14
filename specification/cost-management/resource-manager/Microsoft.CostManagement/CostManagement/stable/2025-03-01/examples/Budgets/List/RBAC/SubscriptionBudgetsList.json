@@ -1,14 +1,20 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+<<<<<<< HEAD
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+=======
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+<<<<<<< HEAD
             "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/budgets/TestBudget",
             "name": "TestBudget",
             "type": "Microsoft.CostManagement/budgets",
@@ -22,32 +28,67 @@
                 "endDate": "2024-10-31T00:00:00Z"
               },
               "filter": {},
+=======
+            "name": "TestBudget",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/budgets/TestBudget",
+            "properties": {
+              "amount": 600.65,
+              "category": "Cost",
+>>>>>>> upstream/main
               "currentSpend": {
                 "amount": 120.89,
                 "unit": "USD"
               },
+<<<<<<< HEAD
               "notifications": {
                 "Actual_GreaterThanOrEqualTo_60_Percent": {
                   "enabled": true,
                   "operator": "GreaterThanOrEqualTo",
                   "threshold": 60,
+=======
+              "filter": {},
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_60_Percent": {
+>>>>>>> upstream/main
                   "contactEmails": [
                     "johndoe@contoso.com",
                     "janesmith@contoso.com"
                   ],
+<<<<<<< HEAD
+=======
+                  "contactGroups": [
+                    "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
+                  ],
+>>>>>>> upstream/main
                   "contactRoles": [
                     "Contributor",
                     "Reader"
                   ],
+<<<<<<< HEAD
                   "contactGroups": [
                     "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
                   ],
                   "thresholdType": "Actual"
                 }
+=======
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 60,
+                  "thresholdType": "Actual"
+                }
+              },
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "endDate": "2024-10-31T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+>>>>>>> upstream/main
               }
             }
           },
           {
+<<<<<<< HEAD
             "id": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.CostManagement/budgets/TestBudget",
             "name": "TestBudget",
             "type": "Microsoft.CostManagement/budgets",
@@ -59,6 +100,18 @@
               "timePeriod": {
                 "startDate": "2023-04-01T00:00:00Z",
                 "endDate": "2024-10-31T00:00:00Z"
+=======
+            "name": "TestBudget",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.CostManagement/budgets/TestBudget",
+            "properties": {
+              "amount": 100.65,
+              "category": "Cost",
+              "currentSpend": {
+                "amount": 80.89,
+                "unit": "USD"
+>>>>>>> upstream/main
               },
               "filter": {
                 "and": [
@@ -94,6 +147,7 @@
                   }
                 ]
               },
+<<<<<<< HEAD
               "currentSpend": {
                 "amount": 80.89,
                 "unit": "USD"
@@ -116,10 +170,15 @@
                   "enabled": true,
                   "operator": "GreaterThanOrEqualTo",
                   "threshold": 90,
+=======
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_90_Percent": {
+>>>>>>> upstream/main
                   "contactEmails": [
                     "johndoe@contoso.com",
                     "janesmith@contoso.com"
                   ],
+<<<<<<< HEAD
                   "contactRoles": [
                     "Contributor",
                     "Reader"
@@ -129,10 +188,43 @@
                   ],
                   "thresholdType": "Actual"
                 }
+=======
+                  "contactGroups": [
+                    "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 90,
+                  "thresholdType": "Actual"
+                },
+                "Actual_GreaterThan_80_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThan",
+                  "threshold": 80
+                }
+              },
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "endDate": "2024-10-31T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+>>>>>>> upstream/main
               }
             }
           },
           {
+<<<<<<< HEAD
             "id": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.CostManagement/budgets/TestBudget1",
             "name": "TestBudget1",
             "type": "Microsoft.CostManagement/budgets",
@@ -146,10 +238,20 @@
                 "endDate": "2024-10-31T00:00:00Z"
               },
               "filter": {},
+=======
+            "name": "TestBudget1",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.CostManagement/budgets/TestBudget1",
+            "properties": {
+              "amount": 200.65,
+              "category": "Cost",
+>>>>>>> upstream/main
               "currentSpend": {
                 "amount": 120.89,
                 "unit": "USD"
               },
+<<<<<<< HEAD
               "notifications": {
                 "Actual_GreaterThan_40_Percent": {
                   "enabled": true,
@@ -168,10 +270,16 @@
                   "enabled": true,
                   "operator": "GreaterThanOrEqualTo",
                   "threshold": 60,
+=======
+              "filter": {},
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_60_Percent": {
+>>>>>>> upstream/main
                   "contactEmails": [
                     "johndoe@contoso.com",
                     "janesmith@contoso.com"
                   ],
+<<<<<<< HEAD
                   "contactRoles": [
                     "Contributor",
                     "Reader"
@@ -181,11 +289,49 @@
                   ],
                   "thresholdType": "Actual"
                 }
+=======
+                  "contactGroups": [
+                    "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 60,
+                  "thresholdType": "Actual"
+                },
+                "Actual_GreaterThan_40_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThan",
+                  "threshold": 40
+                }
+              },
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "endDate": "2024-10-31T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+>>>>>>> upstream/main
               }
             }
           }
         ]
       }
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "Budgets_List",
+  "title": "SubscriptionBudgetsList"
+>>>>>>> upstream/main
 }

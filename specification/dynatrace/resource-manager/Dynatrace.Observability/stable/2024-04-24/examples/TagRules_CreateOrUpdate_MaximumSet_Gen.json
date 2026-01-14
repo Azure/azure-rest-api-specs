@@ -1,136 +1,138 @@
 {
   "parameters": {
     "api-version": "2024-04-24",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
     "monitorName": "myMonitor",
-    "ruleSetName": "default",
     "resource": {
       "properties": {
         "logRules": {
-          "sendAadLogs": "Enabled",
-          "sendSubscriptionLogs": "Enabled",
-          "sendActivityLogs": "Enabled",
           "filteringTags": [
             {
               "name": "Environment",
-              "value": "Prod",
-              "action": "Include"
+              "action": "Include",
+              "value": "Prod"
             },
             {
               "name": "Environment",
-              "value": "Dev",
-              "action": "Exclude"
+              "action": "Exclude",
+              "value": "Dev"
             }
-          ]
+          ],
+          "sendAadLogs": "Enabled",
+          "sendActivityLogs": "Enabled",
+          "sendSubscriptionLogs": "Enabled"
         },
         "metricRules": {
-          "sendingMetrics": "Enabled",
           "filteringTags": [
             {
               "name": "Environment",
-              "value": "Prod",
-              "action": "Include"
+              "action": "Include",
+              "value": "Prod"
             }
-          ]
+          ],
+          "sendingMetrics": "Enabled"
         },
         "provisioningState": "Accepted"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "ruleSetName": "default",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "default",
+        "type": "Dynatrace.Observability/monitors/tagRules",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/tagRules/default",
         "properties": {
           "logRules": {
-            "sendAadLogs": "Enabled",
-            "sendSubscriptionLogs": "Enabled",
-            "sendActivityLogs": "Enabled",
             "filteringTags": [
               {
                 "name": "Environment",
-                "value": "Prod",
-                "action": "Include"
+                "action": "Include",
+                "value": "Prod"
               },
               {
                 "name": "Environment",
-                "value": "Dev",
-                "action": "Exclude"
+                "action": "Exclude",
+                "value": "Dev"
               }
-            ]
+            ],
+            "sendAadLogs": "Enabled",
+            "sendActivityLogs": "Enabled",
+            "sendSubscriptionLogs": "Enabled"
           },
           "metricRules": {
-            "sendingMetrics": "Enabled",
             "filteringTags": [
               {
                 "name": "Environment",
-                "value": "Prod",
-                "action": "Include"
+                "action": "Include",
+                "value": "Prod"
               }
-            ]
+            ],
+            "sendingMetrics": "Enabled"
           },
           "provisioningState": "Accepted"
         },
         "systemData": {
+          "createdAt": "2021-07-16T04:25:21.040Z",
           "createdBy": "alice@microsoft.com",
           "createdByType": "User",
-          "createdAt": "2021-07-16T04:25:21.040Z",
+          "lastModifiedAt": "2021-07-16T04:25:21.040Z",
           "lastModifiedBy": "alice@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-07-16T04:25:21.040Z"
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/tagRules/default",
-        "name": "default",
-        "type": "Dynatrace.Observability/monitors/tagRules"
+          "lastModifiedByType": "User"
+        }
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://foo.com/operationstatus"
-      },
       "body": {
+        "name": "default",
+        "type": "Dynatrace.Observability/monitors/tagRules",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/tagRules/default",
         "properties": {
           "logRules": {
-            "sendAadLogs": "Enabled",
-            "sendSubscriptionLogs": "Enabled",
-            "sendActivityLogs": "Enabled",
             "filteringTags": [
               {
                 "name": "Environment",
-                "value": "Prod",
-                "action": "Include"
+                "action": "Include",
+                "value": "Prod"
               },
               {
                 "name": "Environment",
-                "value": "Dev",
-                "action": "Exclude"
+                "action": "Exclude",
+                "value": "Dev"
               }
-            ]
+            ],
+            "sendAadLogs": "Enabled",
+            "sendActivityLogs": "Enabled",
+            "sendSubscriptionLogs": "Enabled"
           },
           "metricRules": {
-            "sendingMetrics": "Enabled",
             "filteringTags": [
               {
                 "name": "Environment",
-                "value": "Prod",
-                "action": "Include"
+                "action": "Include",
+                "value": "Prod"
               }
-            ]
+            ],
+            "sendingMetrics": "Enabled"
           },
           "provisioningState": "Accepted"
         },
         "systemData": {
+          "createdAt": "2021-07-16T04:25:21.040Z",
           "createdBy": "alice@microsoft.com",
           "createdByType": "User",
-          "createdAt": "2021-07-16T04:25:21.040Z",
+          "lastModifiedAt": "2021-07-16T04:25:21.040Z",
           "lastModifiedBy": "alice@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-07-16T04:25:21.040Z"
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/tagRules/default",
-        "name": "default",
-        "type": "Dynatrace.Observability/monitors/tagRules"
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
       }
     }
-  }
+  },
+  "operationId": "TagRules_CreateOrUpdate",
+  "title": "TagRules_CreateOrUpdate_MaximumSet_Gen"
 }

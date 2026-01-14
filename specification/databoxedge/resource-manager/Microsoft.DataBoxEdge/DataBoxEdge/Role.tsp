@@ -15,6 +15,10 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Compute role.
  */
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy DiscriminatedProxyResource for back compatibility"
+>>>>>>> upstream/main
 @discriminator("kind")
 @parentResource(DataBoxEdgeDevice)
 model Role

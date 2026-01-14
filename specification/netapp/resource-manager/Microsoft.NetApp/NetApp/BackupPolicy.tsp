@@ -22,6 +22,10 @@ model BackupPolicy
     SegmentName = "backupPolicies",
     NamePattern = ""
   >;
+<<<<<<< HEAD
+=======
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
+>>>>>>> upstream/main
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 

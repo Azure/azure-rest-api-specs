@@ -4,54 +4,107 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DataBoxEdge;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EdgeProfileSubscription.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DataBoxEdgeDevicePatch.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceCapacityRequestInfo.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DataBoxEdgeDeviceExtendedInfo.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Node.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DCAccessCode.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Node.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DCAccessCode.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SecuritySettings.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TriggerSupportPackageRequest.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(UploadCertificateRequest.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArcAddon.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArcAddon.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudEdgeManagementRole.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FileEventTrigger.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IoTAddon.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -64,6 +117,25 @@ using Microsoft.DataBoxEdge;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MECRole.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IoTAddon.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IoTRole.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(KubernetesRole.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MECRole.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PeriodicTimerEventTrigger.properties
 );
 
@@ -105,26 +177,46 @@ using Microsoft.DataBoxEdge;
 @@clientName(DataBoxEdgeDevices.triggerSupportPackage::parameters.body,
   "triggerSupportPackageRequest"
 );
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DataBoxEdgeDevice.properties
 );
 
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DataBoxEdgeDevice.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Alert.properties);
 
 @@clientName(BandwidthSchedules.createOrUpdate::parameters.resource,
   "parameters"
 );
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(BandwidthSchedule.properties
 );
 
 @@clientLocation(DeviceCapacityInfos.getDeviceCapacityInfo,
   "DeviceCapacityInfo"
 );
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceCapacityInfo.properties
 );
 
 @@clientName(DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings::parameters.resource,
   "proactiveLogCollectionSettings"
 );
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticProactiveLogCollectionSettings.properties
 );
 
@@ -137,12 +229,25 @@ using Microsoft.DataBoxEdge;
 @@clientName(DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings::parameters.resource,
   "diagnosticRemoteSupportSettings"
 );
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticRemoteSupportSettings.properties
 );
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Job.properties);
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkSettings.properties);
 
 @@clientName(Orders.createOrUpdate::parameters.resource, "order");
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticRemoteSupportSettings.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Job.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkSettings.properties);
+
+@@clientName(Orders.createOrUpdate::parameters.resource, "order");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Order.properties);
 
 @@clientName(Roles.createOrUpdate::parameters.resource, "role");
@@ -158,15 +263,27 @@ using Microsoft.DataBoxEdge;
 );
 @@clientLocation(MonitoringMetricConfigurations.delete, "MonitoringConfig");
 @@clientLocation(MonitoringMetricConfigurations.list, "MonitoringConfig");
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MonitoringMetricConfiguration.properties
 );
 
 @@clientName(Shares.createOrUpdate::parameters.resource, "share");
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Share.properties);
 
 @@clientName(StorageAccountCredentials.createOrUpdate::parameters.resource,
   "storageAccountCredential"
 );
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageAccountCredential.properties
 );
 
@@ -174,16 +291,32 @@ using Microsoft.DataBoxEdge;
   "storageAccount"
 );
 
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageAccount.properties);
 @@clientName(Containers.createOrUpdate::parameters.resource, "container");
 
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageAccount.properties);
+@@clientName(Containers.createOrUpdate::parameters.resource, "container");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Container.properties);
 @@clientName(Triggers.createOrUpdate::parameters.resource, "trigger");
 
 @@clientLocation(UpdateSummaries.getUpdateSummary, Devices);
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(UpdateSummary.properties);
 
 @@clientName(Users.createOrUpdate::parameters.resource, "user");
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UpdateSummary.properties);
+
+@@clientName(Users.createOrUpdate::parameters.resource, "user");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(User.properties);
 
 @@clientLocation(AvailableSkusOperationGroup.list, "AvailableSkus");

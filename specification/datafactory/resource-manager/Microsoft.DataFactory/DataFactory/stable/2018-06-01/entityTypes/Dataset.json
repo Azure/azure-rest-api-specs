@@ -3094,7 +3094,27 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/JiraTableDatasetTypeProperties"
+        }
+      }
+    },
+    "JiraTableDatasetTypeProperties": {
+      "description": "Jira dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "This property is only supported in Jira V1 Dataset, please consider upgrading to V2 dataset."
+        },
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The schema name of the Jira, applies only for Jira V2 dataset. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The table name of the Jira, applies only for Jira V2 dataset. Type: string (or Expression with resultType string)."
         }
       }
     },

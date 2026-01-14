@@ -4,6 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ContainerRegistry;
 
 // Flatten properties for backward compatibility
+<<<<<<< HEAD
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties,
   "autorest"
 );
@@ -11,6 +12,19 @@ using Microsoft.ContainerRegistry;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Task.properties,
   "autorest"
 );
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties,
+  "autorest"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Run.properties, "autorest");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Task.properties,
+  "autorest"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TaskRun.properties,
   "autorest"
 );

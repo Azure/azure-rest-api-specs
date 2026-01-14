@@ -1,13 +1,20 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "clusterName": "cache1",
     "resourceGroupName": "rg1",
     "api-version": "2025-08-01-preview",
+=======
+    "api-version": "2025-08-01-preview",
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+>>>>>>> upstream/main
     "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
         "location": "West US",
         "kind": "v1",
@@ -29,6 +36,32 @@
           "resourceState": "Running",
           "redisVersion": "6",
           "minimumTlsVersion": "1.2",
+=======
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "kind": "v1",
+        "location": "West US",
+        "properties": {
+          "hostName": "cache1.westus.something.azure.com",
+          "minimumTlsVersion": "1.2",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/privateEndpointConnections/cachePec",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/cachePe"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "Please approve my connection",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+>>>>>>> upstream/main
           "publicNetworkAccess": "Disabled",
           "maintenanceConfiguration": {
             "maintenanceWindows": [
@@ -58,6 +91,7 @@
               }
             ]
           },
+<<<<<<< HEAD
           "privateEndpointConnections": [
             {
               "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/privateEndpointConnections/cachePec",
@@ -77,4 +111,24 @@
       }
     }
   }
+=======
+          "redisVersion": "6",
+          "resourceState": "Running"
+        },
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "tags": {},
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    }
+  },
+  "operationId": "RedisEnterprise_Get",
+  "title": "RedisEnterpriseGet"
+>>>>>>> upstream/main
 }

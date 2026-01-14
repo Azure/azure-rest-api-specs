@@ -1,18 +1,30 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res9407",
+=======
+>>>>>>> upstream/main
     "accountName": "sto8596",
     "api-version": "2025-06-01",
     "monitor": "true",
     "parameters": {
       "properties": {
+<<<<<<< HEAD
         "networkAcls": {
+=======
+        "dualStackEndpointPreference": {
+          "publishIpv6Endpoint": true
+        },
+        "networkAcls": {
+          "defaultAction": "Deny",
+>>>>>>> upstream/main
           "ipv6Rules": [
             {
               "action": "Allow",
               "value": "2001:0db8:85a3::/64"
             }
+<<<<<<< HEAD
           ],
           "defaultAction": "Deny"
         },
@@ -21,27 +33,56 @@
         }
       }
     }
+=======
+          ]
+        }
+      }
+    },
+    "resourceGroupName": "res9407",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/sto8596",
         "kind": "Storage",
         "location": "eastus2(stage)",
         "name": "sto8596",
         "properties": {
+=======
+        "name": "sto8596",
+        "type": "Microsoft.Storage/storageAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/sto8596",
+        "kind": "Storage",
+        "location": "eastus2(stage)",
+        "properties": {
+          "creationTime": "2017-06-01T02:42:41.7633306Z",
+          "dualStackEndpointPreference": {
+            "publishIpv6Endpoint": true
+          },
+>>>>>>> upstream/main
           "keyCreationTime": {
             "key1": "2021-03-18T04:42:22.4322836Z",
             "key2": "2021-03-18T04:42:22.4322836Z"
           },
+<<<<<<< HEAD
           "creationTime": "2017-06-01T02:42:41.7633306Z",
           "networkAcls": {
+=======
+          "networkAcls": {
+            "bypass": "AzureServices",
+            "defaultAction": "Deny",
+            "ipRules": [],
+>>>>>>> upstream/main
             "ipv6Rules": [
               {
                 "action": "Allow",
                 "value": "2001:0db8:85a3::/64"
               }
             ],
+<<<<<<< HEAD
             "bypass": "AzureServices",
             "defaultAction": "Deny",
             "ipRules": [],
@@ -65,6 +106,25 @@
               "queue": "https://sto8596-ipv6.queue.core.windows.net/",
               "table": "https://sto8596-ipv6.table.core.windows.net/"
             }
+=======
+            "virtualNetworkRules": []
+          },
+          "primaryEndpoints": {
+            "blob": "https://sto8596.blob.core.windows.net/",
+            "dfs": "https://sto8596.dfs.core.windows.net/",
+            "file": "https://sto8596.file.core.windows.net/",
+            "ipv6Endpoints": {
+              "blob": "https://sto8596-ipv6.blob.core.windows.net/",
+              "dfs": "https://sto8596-ipv6.dfs.core.windows.net/",
+              "file": "https://sto8596-ipv6.file.core.windows.net/",
+              "queue": "https://sto8596-ipv6.queue.core.windows.net/",
+              "table": "https://sto8596-ipv6.table.core.windows.net/",
+              "web": "https://sto8596-ipv6.web.core.windows.net/"
+            },
+            "queue": "https://sto8596.queue.core.windows.net/",
+            "table": "https://sto8596.table.core.windows.net/",
+            "web": "https://sto8596.web.core.windows.net/"
+>>>>>>> upstream/main
           },
           "primaryLocation": "eastus2(stage)",
           "provisioningState": "Succeeded",
@@ -77,9 +137,18 @@
         "tags": {
           "key1": "value1",
           "key2": "value2"
+<<<<<<< HEAD
         },
         "type": "Microsoft.Storage/storageAccounts"
       }
     }
   }
+=======
+        }
+      }
+    }
+  },
+  "operationId": "StorageAccounts_Update",
+  "title": "StorageAccountUpdateEnableIpv6Features"
+>>>>>>> upstream/main
 }

@@ -1,6 +1,7 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+<<<<<<< HEAD
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
     "parameters": {
@@ -12,6 +13,11 @@
       },
       "dataset": {
         "granularity": "Daily",
+=======
+    "parameters": {
+      "type": "Usage",
+      "dataset": {
+>>>>>>> upstream/main
         "aggregation": {
           "totalCost": {
             "name": "Cost",
@@ -54,20 +60,43 @@
               }
             }
           ]
+<<<<<<< HEAD
         }
       },
       "includeActualCost": false,
       "includeFreshPartialCost": false
     }
+=======
+        },
+        "granularity": "Daily"
+      },
+      "includeActualCost": false,
+      "includeFreshPartialCost": false,
+      "timePeriod": {
+        "from": "2022-08-01T00:00:00+00:00",
+        "to": "2022-08-31T23:59:59+00:00"
+      },
+      "timeframe": "Custom"
+    },
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/query/00000000-0000-0000-0000-000000000000",
         "name": "55312978-ba1b-415c-9304-cfd9c43c0481",
         "type": "Microsoft.CostManagement/query",
         "properties": {
           "nextLink": null,
+=======
+        "name": "55312978-ba1b-415c-9304-cfd9c43c0481",
+        "type": "Microsoft.CostManagement/query",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/query/00000000-0000-0000-0000-000000000000",
+        "properties": {
+>>>>>>> upstream/main
           "columns": [
             {
               "name": "PreTaxCost",
@@ -86,6 +115,10 @@
               "type": "String"
             }
           ],
+<<<<<<< HEAD
+=======
+          "nextLink": null,
+>>>>>>> upstream/main
           "rows": [
             [
               2.10333307059661,
@@ -116,5 +149,11 @@
       }
     },
     "204": {}
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "Forecast_Usage",
+  "title": "SubscriptionForecast"
+>>>>>>> upstream/main
 }

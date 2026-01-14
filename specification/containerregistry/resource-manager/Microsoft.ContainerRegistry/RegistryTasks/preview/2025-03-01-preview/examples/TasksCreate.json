@@ -1,157 +1,157 @@
 {
   "parameters": {
-    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
-    "resourceGroupName": "myResourceGroup",
-    "registryName": "myRegistry",
     "api-version": "2025-03-01-preview",
-    "taskName": "mytTask",
+    "registryName": "myRegistry",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
     "taskCreateParameters": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "eastus",
       "properties": {
-        "status": "Enabled",
-        "platform": {
-          "os": "Linux",
-          "architecture": "amd64"
-        },
         "agentConfiguration": {
           "cpu": 2
         },
+        "isSystemTask": false,
+        "logTemplate": "acr/tasks:{{.Run.OS}}",
+        "platform": {
+          "architecture": "amd64",
+          "os": "Linux"
+        },
+        "status": "Enabled",
         "step": {
           "type": "Docker",
-          "imageNames": [
-            "azurerest:testtag"
-          ],
-          "dockerFilePath": "src/DockerFile",
-          "contextPath": "src",
-          "isPushEnabled": true,
-          "noCache": false,
           "arguments": [
             {
               "name": "mytestargument",
-              "value": "mytestvalue",
-              "isSecret": false
+              "isSecret": false,
+              "value": "mytestvalue"
             },
             {
               "name": "mysecrettestargument",
-              "value": "mysecrettestvalue",
-              "isSecret": true
-            }
-          ]
-        },
-        "trigger": {
-          "timerTriggers": [
-            {
-              "name": "myTimerTrigger",
-              "schedule": "30 9 * * 1-5"
+              "isSecret": true,
+              "value": "mysecrettestvalue"
             }
           ],
+          "contextPath": "src",
+          "dockerFilePath": "src/DockerFile",
+          "imageNames": [
+            "azurerest:testtag"
+          ],
+          "isPushEnabled": true,
+          "noCache": false
+        },
+        "trigger": {
+          "baseImageTrigger": {
+            "name": "myBaseImageTrigger",
+            "baseImageTriggerType": "Runtime",
+            "updateTriggerEndpoint": "https://user:pass@mycicd.webhook.com?token=foo",
+            "updateTriggerPayloadType": "Token"
+          },
           "sourceTriggers": [
             {
               "name": "mySourceTrigger",
               "sourceRepository": {
-                "sourceControlType": "Github",
-                "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
                 "branch": "master",
+                "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
                 "sourceControlAuthProperties": {
-                  "tokenType": "PAT",
-                  "token": "xxxxx"
-                }
+                  "token": "xxxxx",
+                  "tokenType": "PAT"
+                },
+                "sourceControlType": "Github"
               },
               "sourceTriggerEvents": [
                 "commit"
               ]
             }
           ],
-          "baseImageTrigger": {
-            "name": "myBaseImageTrigger",
-            "baseImageTriggerType": "Runtime",
-            "updateTriggerEndpoint": "https://user:pass@mycicd.webhook.com?token=foo",
-            "updateTriggerPayloadType": "Token"
-          }
-        },
-        "isSystemTask": false,
-        "logTemplate": "acr/tasks:{{.Run.OS}}"
-      },
-      "location": "eastus",
-      "identity": {
-        "type": "SystemAssigned"
+          "timerTriggers": [
+            {
+              "name": "myTimerTrigger",
+              "schedule": "30 9 * * 1-5"
+            }
+          ]
+        }
       },
       "tags": {
         "testkey": "value"
       }
-    }
+    },
+    "taskName": "mytTask"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "myTask",
+        "type": "Microsoft.ContainerRegistry/registries/tasks",
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "fa153151-b9fd-46f4-9088-5e6600f2689v",
+          "tenantId": "f686d426-8d16-42db-81b7-abu4gm510ccd"
+        },
+        "location": "eastus",
         "properties": {
-          "provisioningState": "Succeeded",
-          "creationDate": "2018-01-25T06:54:23.536Z",
-          "status": "Enabled",
-          "platform": {
-            "os": "Linux",
-            "architecture": "amd64"
-          },
           "agentConfiguration": {
             "cpu": 2
           },
+          "creationDate": "2018-01-25T06:54:23.536Z",
+          "isSystemTask": false,
+          "logTemplate": "acr/tasks:{{.Run.OS}}",
+          "platform": {
+            "architecture": "amd64",
+            "os": "Linux"
+          },
+          "provisioningState": "Succeeded",
+          "status": "Enabled",
           "step": {
             "type": "Docker",
-            "imageNames": [
-              "azurerest:testtag"
-            ],
-            "dockerFilePath": "src/DockerFile",
-            "contextPath": "src",
-            "isPushEnabled": true,
-            "noCache": false,
             "arguments": [
               {
                 "name": "mytestargument",
-                "value": "mytestvalue",
-                "isSecret": false
-              }
-            ]
-          },
-          "trigger": {
-            "timerTriggers": [
-              {
-                "name": "myTimerTrigger",
-                "status": "Enabled",
-                "schedule": "30 9 * * 1-5"
+                "isSecret": false,
+                "value": "mytestvalue"
               }
             ],
+            "contextPath": "src",
+            "dockerFilePath": "src/DockerFile",
+            "imageNames": [
+              "azurerest:testtag"
+            ],
+            "isPushEnabled": true,
+            "noCache": false
+          },
+          "trigger": {
+            "baseImageTrigger": {
+              "name": "myBaseImageTrigger",
+              "baseImageTriggerType": "Runtime",
+              "status": "Enabled",
+              "updateTriggerEndpoint": null,
+              "updateTriggerPayloadType": "Token"
+            },
             "sourceTriggers": [
               {
                 "name": "mySourceTrigger",
-                "status": "Enabled",
                 "sourceRepository": {
-                  "sourceControlType": "Github",
+                  "branch": "master",
                   "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
-                  "branch": "master"
+                  "sourceControlType": "Github"
                 },
                 "sourceTriggerEvents": [
                   "commit"
-                ]
+                ],
+                "status": "Enabled"
               }
             ],
-            "baseImageTrigger": {
-              "name": "myBaseImageTrigger",
-              "status": "Enabled",
-              "baseImageTriggerType": "Runtime",
-              "updateTriggerEndpoint": null,
-              "updateTriggerPayloadType": "Token"
-            }
-          },
-          "isSystemTask": false,
-          "logTemplate": "acr/tasks:{{.Run.OS}}"
-        },
-        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
-        "name": "myTask",
-        "type": "Microsoft.ContainerRegistry/registries/tasks",
-        "location": "eastus",
-        "identity": {
-          "principalId": "fa153151-b9fd-46f4-9088-5e6600f2689v",
-          "tenantId": "f686d426-8d16-42db-81b7-abu4gm510ccd",
-          "type": "SystemAssigned"
+            "timerTriggers": [
+              {
+                "name": "myTimerTrigger",
+                "schedule": "30 9 * * 1-5",
+                "status": "Enabled"
+              }
+            ]
+          }
         },
         "tags": {
           "testkey": "value"
@@ -160,80 +160,82 @@
     },
     "201": {
       "body": {
+        "name": "myTask",
+        "type": "Microsoft.ContainerRegistry/registries/tasks",
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "fa153151-b9fd-46f4-9088-5e6600f2689v",
+          "tenantId": "f686d426-8d16-42db-81b7-abu4gm510ccd"
+        },
+        "location": "eastus",
         "properties": {
-          "provisioningState": "Creating",
-          "creationDate": "2018-01-25T06:54:23.536Z",
-          "status": "Enabled",
-          "platform": {
-            "os": "Linux",
-            "architecture": "amd64"
-          },
           "agentConfiguration": {
             "cpu": 2
           },
+          "creationDate": "2018-01-25T06:54:23.536Z",
+          "isSystemTask": false,
+          "logTemplate": "acr/tasks:{{.Run.OS}}",
+          "platform": {
+            "architecture": "amd64",
+            "os": "Linux"
+          },
+          "provisioningState": "Creating",
+          "status": "Enabled",
           "step": {
             "type": "Docker",
-            "imageNames": [
-              "azurerest:testtag"
-            ],
-            "dockerFilePath": "src/DockerFile",
-            "contextPath": "src",
-            "isPushEnabled": true,
-            "noCache": false,
             "arguments": [
               {
                 "name": "mytestargument",
-                "value": "mytestvalue",
-                "isSecret": false
-              }
-            ]
-          },
-          "trigger": {
-            "timerTriggers": [
-              {
-                "name": "myTimerTrigger",
-                "status": "Enabled",
-                "schedule": "30 9 * * 1-5"
+                "isSecret": false,
+                "value": "mytestvalue"
               }
             ],
+            "contextPath": "src",
+            "dockerFilePath": "src/DockerFile",
+            "imageNames": [
+              "azurerest:testtag"
+            ],
+            "isPushEnabled": true,
+            "noCache": false
+          },
+          "trigger": {
+            "baseImageTrigger": {
+              "name": "myBaseImageTrigger",
+              "baseImageTriggerType": "Runtime",
+              "status": "Enabled",
+              "updateTriggerEndpoint": null,
+              "updateTriggerPayloadType": "Token"
+            },
             "sourceTriggers": [
               {
                 "name": "mySourceTrigger",
-                "status": "Enabled",
                 "sourceRepository": {
-                  "sourceControlType": "Github",
+                  "branch": "master",
                   "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
-                  "branch": "master"
+                  "sourceControlType": "Github"
                 },
                 "sourceTriggerEvents": [
                   "commit"
-                ]
+                ],
+                "status": "Enabled"
               }
             ],
-            "baseImageTrigger": {
-              "name": "myBaseImageTrigger",
-              "status": "Enabled",
-              "baseImageTriggerType": "Runtime",
-              "updateTriggerEndpoint": null,
-              "updateTriggerPayloadType": "Token"
-            }
-          },
-          "isSystemTask": false,
-          "logTemplate": "acr/tasks:{{.Run.OS}}"
-        },
-        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
-        "name": "myTask",
-        "type": "Microsoft.ContainerRegistry/registries/tasks",
-        "location": "eastus",
-        "identity": {
-          "principalId": "fa153151-b9fd-46f4-9088-5e6600f2689v",
-          "tenantId": "f686d426-8d16-42db-81b7-abu4gm510ccd",
-          "type": "SystemAssigned"
+            "timerTriggers": [
+              {
+                "name": "myTimerTrigger",
+                "schedule": "30 9 * * 1-5",
+                "status": "Enabled"
+              }
+            ]
+          }
         },
         "tags": {
           "testkey": "value"
         }
       }
     }
-  }
+  },
+  "operationId": "Tasks_Create",
+  "title": "Tasks_Create"
 }

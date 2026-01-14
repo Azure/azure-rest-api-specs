@@ -4,10 +4,18 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ResourceConnector;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplianceOperation.display);
 
 @@clientName(Appliances.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Appliances.update::parameters.properties, "parameters");
+<<<<<<< HEAD
+=======
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Appliance.properties);
 
 @@clientLocation(AppliancesOperationGroup.getTelemetryConfig, Appliances);

@@ -1,5 +1,6 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res9101",
     "accountName": "sto4445",
@@ -14,10 +15,22 @@
         "type": "EdgeZone",
         "name": "losangeles001"
       },
+=======
+    "accountName": "sto4445",
+    "api-version": "2025-06-01",
+    "parameters": {
+      "extendedLocation": {
+        "name": "losangeles001",
+        "type": "EdgeZone"
+      },
+      "kind": "Storage",
+      "location": "eastus",
+>>>>>>> upstream/main
       "placement": {
         "zonePlacementPolicy": "Any"
       },
       "properties": {
+<<<<<<< HEAD
         "keyPolicy": {
           "keyExpirationPeriodInDays": 20
         },
@@ -51,15 +64,60 @@
           "keySource": "Microsoft.Storage"
         }
       },
+=======
+        "allowBlobPublicAccess": false,
+        "allowSharedKeyAccess": true,
+        "defaultToOAuthAuthentication": false,
+        "encryption": {
+          "keySource": "Microsoft.Storage",
+          "requireInfrastructureEncryption": false,
+          "services": {
+            "blob": {
+              "enabled": true,
+              "keyType": "Account"
+            },
+            "file": {
+              "enabled": true,
+              "keyType": "Account"
+            }
+          }
+        },
+        "isHnsEnabled": true,
+        "isSftpEnabled": true,
+        "keyPolicy": {
+          "keyExpirationPeriodInDays": 20
+        },
+        "minimumTlsVersion": "TLS1_2",
+        "routingPreference": {
+          "publishInternetEndpoints": true,
+          "publishMicrosoftEndpoints": true,
+          "routingChoice": "MicrosoftRouting"
+        },
+        "sasPolicy": {
+          "expirationAction": "Log",
+          "sasExpirationPeriod": "1.15:59:59"
+        }
+      },
+      "sku": {
+        "name": "Standard_GRS"
+      },
+>>>>>>> upstream/main
       "tags": {
         "key1": "value1",
         "key2": "value2"
       }
+<<<<<<< HEAD
     }
+=======
+    },
+    "resourceGroupName": "res9101",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
         "kind": "Storage",
         "location": "eastus",
@@ -71,10 +129,22 @@
         "zones": [
           "1"
         ],
+=======
+        "name": "sto4445",
+        "type": "Microsoft.Storage/storageAccounts",
+        "extendedLocation": {
+          "name": "losangeles001",
+          "type": "EdgeZone"
+        },
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
+        "kind": "Storage",
+        "location": "eastus",
+>>>>>>> upstream/main
         "placement": {
           "zonePlacementPolicy": "Any"
         },
         "properties": {
+<<<<<<< HEAD
           "keyPolicy": {
             "keyExpirationPeriodInDays": 20
           },
@@ -82,10 +152,34 @@
             "sasExpirationPeriod": "1.15:59:59",
             "expirationAction": "Log"
           },
+=======
+          "allowBlobPublicAccess": false,
+          "allowSharedKeyAccess": true,
+          "creationTime": "2017-05-24T13:25:33.4863236Z",
+          "encryption": {
+            "keySource": "Microsoft.Storage",
+            "requireInfrastructureEncryption": false,
+            "services": {
+              "blob": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "file": {
+                "enabled": true,
+                "keyType": "Account",
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            }
+          },
+          "isHnsEnabled": true,
+          "isSftpEnabled": true,
+>>>>>>> upstream/main
           "keyCreationTime": {
             "key1": "2021-03-18T04:42:22.4322836Z",
             "key2": "2021-03-18T04:42:22.4322836Z"
           },
+<<<<<<< HEAD
           "isHnsEnabled": true,
           "isSftpEnabled": true,
           "allowBlobPublicAccess": false,
@@ -113,10 +207,38 @@
               "blob": "https://sto4445-internetrouting.blob.core.windows.net/",
               "file": "https://sto4445-internetrouting.file.core.windows.net/"
             }
+=======
+          "keyPolicy": {
+            "keyExpirationPeriodInDays": 20
+          },
+          "minimumTlsVersion": "TLS1_2",
+          "primaryEndpoints": {
+            "blob": "https://sto4445.blob.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
+            "file": "https://sto4445.file.core.windows.net/",
+            "internetEndpoints": {
+              "blob": "https://sto4445-internetrouting.blob.core.windows.net/",
+              "dfs": "https://sto4445-internetrouting.dfs.core.windows.net/",
+              "file": "https://sto4445-internetrouting.file.core.windows.net/",
+              "web": "https://sto4445-internetrouting.web.core.windows.net/"
+            },
+            "microsoftEndpoints": {
+              "blob": "https://sto4445-microsoftrouting.blob.core.windows.net/",
+              "dfs": "https://sto4445-microsoftrouting.dfs.core.windows.net/",
+              "file": "https://sto4445-microsoftrouting.file.core.windows.net/",
+              "queue": "https://sto4445-microsoftrouting.queue.core.windows.net/",
+              "table": "https://sto4445-microsoftrouting.table.core.windows.net/",
+              "web": "https://sto4445-microsoftrouting.web.core.windows.net/"
+            },
+            "queue": "https://sto4445.queue.core.windows.net/",
+            "table": "https://sto4445.table.core.windows.net/",
+            "web": "https://sto4445.web.core.windows.net/"
+>>>>>>> upstream/main
           },
           "primaryLocation": "eastus2euap",
           "provisioningState": "Succeeded",
           "routingPreference": {
+<<<<<<< HEAD
             "routingChoice": "MicrosoftRouting",
             "publishMicrosoftEndpoints": true,
             "publishInternetEndpoints": true
@@ -136,6 +258,15 @@
             },
             "requireInfrastructureEncryption": false,
             "keySource": "Microsoft.Storage"
+=======
+            "publishInternetEndpoints": true,
+            "publishMicrosoftEndpoints": true,
+            "routingChoice": "MicrosoftRouting"
+          },
+          "sasPolicy": {
+            "expirationAction": "Log",
+            "sasExpirationPeriod": "1.15:59:59"
+>>>>>>> upstream/main
           },
           "secondaryLocation": "centraluseuap",
           "statusOfPrimary": "available",
@@ -150,9 +281,21 @@
           "key1": "value1",
           "key2": "value2"
         },
+<<<<<<< HEAD
         "type": "Microsoft.Storage/storageAccounts"
       }
     },
     "202": {}
   }
+=======
+        "zones": [
+          "1"
+        ]
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreate_placement"
+>>>>>>> upstream/main
 }

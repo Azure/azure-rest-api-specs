@@ -1,17 +1,27 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "res4410",
     "accountName": "sto8607",
     "FileServicesName": "default",
     "api-version": "2025-06-01",
     "monitor": "true"
+=======
+    "FileServicesName": "default",
+    "accountName": "sto8607",
+    "api-version": "2025-06-01",
+    "monitor": "true",
+    "resourceGroupName": "res4410",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+<<<<<<< HEAD
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/fileServices/default/usages/default",
             "name": "default",
             "type": "Microsoft.Storage/storageAccounts/fileServices/usages",
@@ -36,11 +46,18 @@
                 "baseBandwidthMiBPerSec": 125,
                 "bandwidthScalar": 0.1
               },
+=======
+            "name": "default",
+            "type": "Microsoft.Storage/storageAccounts/fileServices/usages",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/fileServices/default/usages/default",
+            "properties": {
+>>>>>>> upstream/main
               "burstingConstants": {
                 "burstFloorIOPS": 10000,
                 "burstIOScalar": 3,
                 "burstTimeframeSeconds": 3600
               },
+<<<<<<< HEAD
               "storageAccountUsage": {
                 "liveShares": {
                   "fileShareCount": 2,
@@ -53,6 +70,40 @@
                   "provisionedStorageGiB": 100,
                   "provisionedIOPS": 3000,
                   "provisionedBandwidthMiBPerSec": 125
+=======
+              "fileShareLimits": {
+                "maxProvisionedBandwidthMiBPerSec": 10340,
+                "maxProvisionedIOPS": 102400,
+                "maxProvisionedStorageGiB": 262144,
+                "minProvisionedBandwidthMiBPerSec": 125,
+                "minProvisionedIOPS": 3000,
+                "minProvisionedStorageGiB": 32
+              },
+              "fileShareRecommendations": {
+                "bandwidthScalar": 0.1,
+                "baseBandwidthMiBPerSec": 125,
+                "baseIOPS": 3000,
+                "ioScalar": 1
+              },
+              "storageAccountLimits": {
+                "maxFileShares": 50,
+                "maxProvisionedBandwidthMiBPerSec": 10340,
+                "maxProvisionedIOPS": 102400,
+                "maxProvisionedStorageGiB": 262144
+              },
+              "storageAccountUsage": {
+                "liveShares": {
+                  "fileShareCount": 2,
+                  "provisionedBandwidthMiBPerSec": 258,
+                  "provisionedIOPS": 6064,
+                  "provisionedStorageGiB": 64
+                },
+                "softDeletedShares": {
+                  "fileShareCount": 1,
+                  "provisionedBandwidthMiBPerSec": 125,
+                  "provisionedIOPS": 3000,
+                  "provisionedStorageGiB": 100
+>>>>>>> upstream/main
                 }
               }
             }
@@ -60,5 +111,11 @@
         ]
       }
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "FileServices_ListServiceUsages",
+  "title": "ListFileServiceUsages"
+>>>>>>> upstream/main
 }

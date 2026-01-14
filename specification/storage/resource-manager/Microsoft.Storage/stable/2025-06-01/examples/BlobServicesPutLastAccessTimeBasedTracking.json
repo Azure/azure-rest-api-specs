@@ -1,14 +1,20 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res4410",
     "accountName": "sto8607",
     "BlobServicesName": "default",
+=======
+    "BlobServicesName": "default",
+    "accountName": "sto8607",
+>>>>>>> upstream/main
     "api-version": "2025-06-01",
     "monitor": "true",
     "parameters": {
       "properties": {
         "lastAccessTimeTrackingPolicy": {
+<<<<<<< HEAD
           "enable": true,
           "name": "AccessTimeTracking",
           "trackingGranularityInDays": 1,
@@ -18,10 +24,24 @@
         }
       }
     }
+=======
+          "name": "AccessTimeTracking",
+          "blobType": [
+            "blockBlob"
+          ],
+          "enable": true,
+          "trackingGranularityInDays": 1
+        }
+      }
+    },
+    "resourceGroupName": "res4410",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
         "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/blobServices/default",
         "name": "default",
         "type": "Microsoft.Storage/storageAccounts/blobServices",
@@ -33,9 +53,28 @@
             "blobType": [
               "blockBlob"
             ]
+=======
+        "name": "default",
+        "type": "Microsoft.Storage/storageAccounts/blobServices",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/blobServices/default",
+        "properties": {
+          "lastAccessTimeTrackingPolicy": {
+            "name": "AccessTimeTracking",
+            "blobType": [
+              "blockBlob"
+            ],
+            "enable": true,
+            "trackingGranularityInDays": 1
+>>>>>>> upstream/main
           }
         }
       }
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  "operationId": "BlobServices_SetServiceProperties",
+  "title": "BlobServicesPutLastAccessTimeBasedTracking"
+>>>>>>> upstream/main
 }

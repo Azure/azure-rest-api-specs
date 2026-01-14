@@ -1,14 +1,21 @@
 {
   "parameters": {
+<<<<<<< HEAD
     "api-version": "2025-03-01",
     "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
     "name": "dailyAnomalyByResource",
     "If-Match": "",
+=======
+    "name": "dailyAnomalyByResource",
+    "If-Match": "",
+    "api-version": "2025-03-01",
+>>>>>>> upstream/main
     "scheduledAction": {
       "kind": "InsightAlert",
       "properties": {
         "displayName": "Daily anomaly by resource",
         "notification": {
+<<<<<<< HEAD
           "to": [
             "user@gmail.com",
             "team@gmail.com"
@@ -19,10 +26,23 @@
           "frequency": "Daily",
           "startDate": "2020-06-19T22:21:51.1287144Z",
           "endDate": "2021-06-19T22:21:51.1287144Z"
+=======
+          "subject": "Cost anomaly detected in the resource",
+          "to": [
+            "user@gmail.com",
+            "team@gmail.com"
+          ]
+        },
+        "schedule": {
+          "endDate": "2021-06-19T22:21:51.1287144Z",
+          "frequency": "Daily",
+          "startDate": "2020-06-19T22:21:51.1287144Z"
+>>>>>>> upstream/main
         },
         "status": "Enabled",
         "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample"
       }
+<<<<<<< HEAD
     }
   },
   "responses": {
@@ -41,12 +61,26 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2020-06-18T22:21:51.1287144Z"
         },
+=======
+    },
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "dailyAnomalyByResource",
+        "type": "Microsoft.CostManagement/ScheduledActions",
+        "eTag": "\"1d4ff9fe66f1d10\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/scheduledActions/dailyAnomalyByResource",
+        "kind": "InsightAlert",
+>>>>>>> upstream/main
         "properties": {
           "displayName": "Daily anomaly by resource",
           "fileDestination": {
             "fileFormats": []
           },
           "notification": {
+<<<<<<< HEAD
             "to": [
               "user@gmail.com",
               "team@gmail.com"
@@ -57,10 +91,23 @@
             "frequency": "Daily",
             "startDate": "2020-06-19T22:21:51.1287144Z",
             "endDate": "2021-06-19T22:21:51.1287144Z"
+=======
+            "subject": "Cost anomaly detected in the resource",
+            "to": [
+              "user@gmail.com",
+              "team@gmail.com"
+            ]
+          },
+          "schedule": {
+            "endDate": "2021-06-19T22:21:51.1287144Z",
+            "frequency": "Daily",
+            "startDate": "2020-06-19T22:21:51.1287144Z"
+>>>>>>> upstream/main
           },
           "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
           "status": "Enabled",
           "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample"
+<<<<<<< HEAD
         }
       }
     },
@@ -79,12 +126,33 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2020-06-19T22:21:51.1287144Z"
         },
+=======
+        },
+        "systemData": {
+          "createdAt": "2020-06-18T22:21:51.1287144Z",
+          "createdBy": "testuser",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-19T22:21:51.1287144Z",
+          "lastModifiedBy": "testuser",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "dailyAnomalyByResource",
+        "type": "Microsoft.CostManagement/ScheduledActions",
+        "eTag": "\"1d4ff9fe66f1d10\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/scheduledActions/dailyAnomalyByResource",
+        "kind": "InsightAlert",
+>>>>>>> upstream/main
         "properties": {
           "displayName": "Daily anomaly by resource",
           "fileDestination": {
             "fileFormats": []
           },
           "notification": {
+<<<<<<< HEAD
             "to": [
               "user@gmail.com",
               "team@gmail.com"
@@ -103,4 +171,34 @@
       }
     }
   }
+=======
+            "subject": "Cost anomaly detected in the resource",
+            "to": [
+              "user@gmail.com",
+              "team@gmail.com"
+            ]
+          },
+          "schedule": {
+            "endDate": "2021-06-19T22:21:51.1287144Z",
+            "frequency": "Daily",
+            "startDate": "2020-06-19T22:21:51.1287144Z"
+          },
+          "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+          "status": "Enabled",
+          "viewId": "/providers/Microsoft.CostManagement/views/swaggerExample"
+        },
+        "systemData": {
+          "createdAt": "2020-06-18T22:21:51.1287144Z",
+          "createdBy": "testuser",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-18T22:21:51.1287144Z",
+          "lastModifiedBy": "testuser",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ScheduledActions_CreateOrUpdateByScope",
+  "title": "CreateOrUpdateInsightAlertScheduledActionByScope"
+>>>>>>> upstream/main
 }

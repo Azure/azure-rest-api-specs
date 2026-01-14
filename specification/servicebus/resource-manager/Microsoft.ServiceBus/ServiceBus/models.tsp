@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.ServiceBus;
 
 model MigrationConfigListResult
@@ -630,7 +632,7 @@ model GeoDataReplicationProperties {
   /**
    * A list of regions where replicas of the namespace are maintained.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locations?: NamespaceReplicaLocation[];
 }
 
@@ -849,6 +851,7 @@ model FailOver {
   properties?: FailOverProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailoverProperties, see if they can be combined"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailOverProperties {
   /**
@@ -925,7 +928,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * List of Provisioning Issues if any
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   provisioningIssues?: ProvisioningIssue[];
 
   /**
@@ -1230,6 +1233,7 @@ model ArmDisasterRecoveryProperties {
 /**
  * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
  */
+#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailOverProperties, see if they can be combined"
 model FailoverProperties {
   /**
    * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
@@ -1404,12 +1408,14 @@ model AccessKeys {
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 
