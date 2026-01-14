@@ -102,15 +102,9 @@ using Microsoft.ResourceConnector;
 @@clientName(Status.UpgradingKVAIO, "UpgradingKvaio", "csharp");
 @@clientName(Status.ValidatingETCDHealth, "ValidatingEtcdHealth ", "csharp");
 @@clientName(Status.WaitingForKVAIO, "WaitingForKvaio", "csharp");
-@@clientName(Status.NetworkDNSUpdateComplete,
-  "NetworkDnsUpdateComplete",
-  "csharp"
-);
+@@clientName(Status.NetworkDNSUpdateComplete, "NetworkDnsUpdateComplete", "csharp");
 @@clientName(Status.NetworkDNSUpdateFailed, "NetworkDnsUpdateFailed", "csharp");
-@@clientName(Status.NetworkDNSUpdatePreparing,
-  "NetworkDnsUpdatePreparing",
-  "csharp"
-);
+@@clientName(Status.NetworkDNSUpdatePreparing, "NetworkDnsUpdatePreparing", "csharp");
 @@clientName(Status.NetworkDNSUpdating, "NetworkDnsUpdating", "csharp");
 @@clientName(Distro, "ResourceConnectorDistro", "csharp");
 @@clientName(Event, "ResourceConnectorEvent", "csharp");
