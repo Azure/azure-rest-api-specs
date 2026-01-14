@@ -147,7 +147,8 @@ interface Servers {
   /**
    * Stops a server.
    */
-  @Azure.Core.useFinalStateVia("azure-async-operation")
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   stop is ArmResourceActionAsyncBase<
     Server,
     void,
