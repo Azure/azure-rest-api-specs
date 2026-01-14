@@ -3326,6 +3326,7 @@ model FreeServicesProperties {
   @visibility(Lifecycle.Read)
   billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {
+      scopes: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts";
     }
   ]>;
@@ -3333,8 +3334,10 @@ model FreeServicesProperties {
   /**
    * Billing profile resource id where the free services are scoped to.
    */
+  @visibility(Lifecycle.Read)
   billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
     {
+      scopes: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts/billingProfiles";
     }
   ]>;
@@ -3342,8 +3345,10 @@ model FreeServicesProperties {
   /**
    * Customer resource id where the free services are scoped to.
    */
+  @visibility(Lifecycle.Read)
   customerResourceId?: Azure.Core.armResourceIdentifier<[
     {
+      scopes: ["Tenant"];
       type: "Microsoft.Billing/billingAccounts/customers";
     }
   ]>;
