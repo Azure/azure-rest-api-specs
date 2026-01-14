@@ -1486,14 +1486,14 @@
           {
             "name": "x-ms-structured-body",
             "in": "header",
-            "description": "Optional. When specified, it indicates the request body is encoded in the structured body format. Currently, the header value must be set to \"XSM/1.0; properties=crc64\".",
+            "description": "Optional. When specified, it indicates the request body is encoded in the structured body format. Currently, the header value must be set to \"XSM/1.0; properties=crc64\". Use of this header requires a REST API version of 2025-01-05 or higher.",
             "required": false,
             "type": "string"
           },
           {
             "name": "x-ms-structured-content-length",
             "in": "header",
-            "description": "Required if \"x-ms-structured-body\" is specified. This header specifies the length of the unencoded request content in bytes. The value of this header will always be less than the value of the Content-Length header.",
+            "description": "Required if \"x-ms-structured-body\" is specified. This header specifies the length of the unencoded request content in bytes. The value of this header will always be less than the value of the Content-Length header. Use of this header requires a REST API version of 2025-01-05 or higher.",
             "required": false,
             "type": "integer"
           }
