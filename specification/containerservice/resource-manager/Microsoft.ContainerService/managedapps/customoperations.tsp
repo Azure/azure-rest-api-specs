@@ -36,7 +36,7 @@ model RenderResponse {
 @armResourceAction(TResource)
 @post
 @action("render")
-op RenderRevision<
+op RenderManifests<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   RenderResponse,
   TBaseParameters = BaseParameters<TResource>

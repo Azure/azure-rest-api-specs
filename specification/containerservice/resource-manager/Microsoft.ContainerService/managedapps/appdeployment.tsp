@@ -77,11 +77,11 @@ model AppDeploymentProperties {
 
   /** An array of permissions for k8s resources in the same namespace associated with the app. This is an override only. Any value here will overwrite permissions inherited from the app */
   @identifiers(#["apiGroups", "resources", "verbs"])
-  permissionsInSameNamespace?: Permissions[];
+  namespacedPermissions?: Permissions[];
 
   /** An array of permissions for k8s resources, cluster wide, associated with the app. This is an override only. Any value here will overwrite permissions inherited from the app */
   @identifiers(#["apiGroups", "resources", "verbs"])
-  permissionsClusterWide?: Permissions[];
+  clusterWidePermissions?: Permissions[];
 
   /** An array of health checks for the app. This is an override only. Any value here will overwrite health checks inherited from the app */
   @identifiers(#["type"])
@@ -210,10 +210,10 @@ union AutoscalingTriggerType {
   string,
 }
 
-/** Used to program a traffic split between 2 deployments in the same managed namespace */
+/** Used to program traffic rules. Matches a domain name to a set of app deployments. Supports traffic splitting by weight */
 @parentResource(ManagedApp)
-model TrafficSplit is ProxyResource<TrafficSplitProperties> {
-  ...ResourceNameParameter<TrafficSplit>;
+model TrafficRule is ProxyResource<TrafficRuleProperties> {
+  ...ResourceNameParameter<TrafficRule>;
 }
 
 scalar AppDeploymentId
@@ -223,22 +223,25 @@ scalar AppDeploymentId
     }
   ]>;
 
-/** Properties of the Traffic Split */
-model TrafficSplitProperties {
+/** Properties of the Traffic Rule */
+model TrafficRuleProperties {
+  /** The hostname that will receive traffic. i.e. example.com */
+  hostName: string;
+
   /** An array of deployment references with traffic percentages. The sum of traffic percentages should be 100 */
   @identifiers(#["deploymentId"])
-  deployments: TrafficSplitDeploymentReference[];
+  deployments: TrafficRuleDeploymentReference[];
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-/** Deployment reference for a traffic split with traffic percentage */
-model TrafficSplitDeploymentReference {
+/** Deployment reference for a traffic rule with traffic percentage */
+model TrafficRuleDeploymentReference {
   /** The deployment id */
   deploymentId: AppDeploymentId;
 
-  /** The traffic percentage assigned to this deployment */
-  trafficPercentage: int32;
+  /** The traffic percentage assigned to this deployment. Optional, default is 100 */
+  trafficPercentage?: int32;
 }

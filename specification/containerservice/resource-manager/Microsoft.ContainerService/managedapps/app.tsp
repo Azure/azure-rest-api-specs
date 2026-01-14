@@ -27,23 +27,23 @@ model AppProperties {
   /** Image Base of App. This represents the container registry and image name. i.e. myregistry.azurecr.io/myapp */
   imageBase: string;
 
-  /** An array of permissions for k8s resources in the same namespace associated with the app */
+  /** Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace */
   @identifiers(#["apiGroups", "resources", "verbs"])
-  permissionsInSameNamespace?: Permissions[];
+  namespacedPermissions?: Permissions[];
 
-  /** An array of permissions for k8s resources, cluster wide, associated with the app */
+  /** Represents the permissions for k8s resources that this app has, cluster wide. Do not set this field if the app is not supposed to read resources outside of the namespace it is deployed in. This will create kubernetes ClusterRoles and ClusterRoleBindings for the app when it is deployed into a managed namespace */
   @identifiers(#["apiGroups", "resources", "verbs"])
-  permissionsClusterWide?: Permissions[];
+  clusterWidePermissions?: Permissions[];
 
-  /** An array of health checks for the app */
+  /** An array of health checks for the app. If not specified, the default is an http request to /healthz */
   @identifiers(#["type"])
-  healthChecks: HealthCheck[];
+  healthChecks?: HealthCheck[];
 
   /** Observability properties for the app */
   observability?: ObservabilityProperties;
 
-  /** Scaling type for the app */
-  scaling: ScalingType;
+  /** Scaling type for the app. Default is manual scaling */
+  scaling?: ScalingType;
 
   /** Ingress configuration for the app */
   ingressConfiguration?: IngressProperties;
@@ -66,6 +66,13 @@ model DeploymentTemplate {
 
   /** Arguments to the command */
   arguments?: string[];
+
+  /** The primary port your application listens on, where it receives traffic. Required if ingress configuration is set */
+  primaryPort?: ContainerPort;
+
+  /** Additional ports your application listens on */
+  @identifiers(#["port", "name"])
+  additionalPorts?: ContainerPort[];
 
   /** Labels for the app */
   @identifiers(#["key"])
@@ -90,6 +97,18 @@ model DeploymentTemplate {
   /** Volumes for the app */
   @identifiers(#["name"])
   volumes?: Volume[];
+}
+
+/** Represents an exposed port on a container */
+model ContainerPort {
+  /** Name of the port */
+  name: string;
+
+  /** Port number */
+  port: int32;
+
+  /** Protocol for the port. Defaults to TCP */
+  protocol?: string;
 }
 
 /** Key Value Pair for labels/annotations */
@@ -166,16 +185,24 @@ union IngressVisibility {
   string,
 }
 
+/** Ingress state enum */
+union IngressState {
+  /** Ingress is enabled */
+  Enabled: "enabled",
+
+  /** Ingress is disabled */
+  Disabled: "disabled",
+
+  string,
+}
+
 /** Ingress properties */
 model IngressProperties {
   /** Ingress state, enabled or disabled */
-  state: string;
+  state: IngressState;
 
   /** Ingress type needed. I.e. http, grpc, */
   ingressType: IngressType;
-
-  /** Visibility of the ingress, either public or private */
-  visibility: IngressVisibility;
 }
 
 /** Scaling type for the app */
@@ -331,9 +358,6 @@ interface AppRevisions {
   /** Deletes an app revision. This will also delete all deployments that reference this revision. WARNING: This operation is destructive */
   delete is ArmResourceDeleteWithoutOkAsync<AppRevision>;
   revisionDeployments is ListDeployments<AppRevision>;
-
-  /** Renders the app revision kubernetes manifests */
-  render is RenderRevision<AppRevision, RenderResponse>;
 }
 
 @armResourceOperations
@@ -348,16 +372,19 @@ interface AppDeployments {
   delete is ArmResourceDeleteWithoutOkAsync<AppDeployment>;
   /** Rollback the app deployment to the previous revision */
   rollback is RollbackDeployment<AppDeployment, AppDeployment>;
+
+  /** Renders the app deployment kubernetes manifests */
+  render is RenderManifests<AppDeployment, RenderResponse>;
 }
 
-// @armResourceOperations
-// interface TrafficSplits {
-//   // Traffic Split Operations
-//   list is ArmResourceListByParent<TrafficSplit>;
-//   get is ArmResourceRead<TrafficSplit>;
-//   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-//     TrafficSplit,
-//     Azure.ResourceManager.Foundations.BaseParameters<TrafficSplit>
-//   >;
-//   delete is ArmResourceDeleteWithoutOkAsync<TrafficSplit>;
-// }
+@armResourceOperations
+interface TrafficRules {
+  // Traffic Rule Operations
+  list is ArmResourceListByParent<TrafficRule>;
+  get is ArmResourceRead<TrafficRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    TrafficRule,
+    Azure.ResourceManager.Foundations.BaseParameters<TrafficRule>
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<TrafficRule>;
+}
