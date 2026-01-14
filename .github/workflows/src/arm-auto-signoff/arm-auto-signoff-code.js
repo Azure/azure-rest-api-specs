@@ -28,7 +28,6 @@ export async function armAutoSignoffCode(args) {
   // Run trivial changes check
   core.startGroup("Checking for trivial changes");
   const trivialChangesResult = await checkTrivialChanges(core);
-  core.info(`Trivial changes result: ${JSON.stringify(trivialChangesResult)}`);
   core.endGroup();
 
   const isTrivial = trivialChangesResult.isTrivial();
