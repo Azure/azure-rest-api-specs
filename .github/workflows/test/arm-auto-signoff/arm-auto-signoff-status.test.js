@@ -175,6 +175,24 @@ describe("getLabelActionImpl", () => {
     ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
   });
 
+  it("removes ARMAutoSignedOff-Trivial-Test if analysis no longer trivial", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: false });
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: managedLabels.autoSignedOffTrivialTest }],
+    });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
+  });
+
   it("removes label if analysis artifacts missing (fail closed)", async () => {
     const github = createMockGithub({ incrementalTypeSpec: true });
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
