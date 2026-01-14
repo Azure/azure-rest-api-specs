@@ -57,6 +57,4 @@ namespace Customizations;
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
 
-@@access(Storage.Blob.Blob.startCopyFromUrl, Access.internal);
-@@access(Storage.Blob.Blob.abortCopyFromUrl, Access.internal);
 @@access(Storage.Blob.Service.getUserDelegationKey, Access.internal);
