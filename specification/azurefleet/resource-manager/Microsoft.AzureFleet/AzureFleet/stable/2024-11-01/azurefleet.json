@@ -58,9 +58,6 @@
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -80,7 +77,7 @@
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List.json"
-          }
+          },
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -536,6 +533,10 @@
           "description": "The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS.\nManaged disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
         },
         "hibernationEnabled": {
+          "type": "boolean",
+          "description": "The flag that enables or disables hibernation capability on the VM."
+        },
+        "test": {
           "type": "boolean",
           "description": "The flag that enables or disables hibernation capability on the VM."
         }
