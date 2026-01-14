@@ -14,7 +14,9 @@ import "./routes-knowledgebase.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@doc("Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.")
+/**
+ * Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.
+ */
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {
@@ -28,8 +30,8 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 namespace Search;
 
-@doc("The available API versions.")
+/** The available API versions. */
 enum Versions {
-  @doc("The 2025-11-01-preview API version.")
+  /** The 2025-11-01-preview API version. */
   v2025_11_01_preview: "2025-11-01-preview",
 }
