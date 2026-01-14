@@ -119,6 +119,7 @@ interface Service {
 
   /** Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  @access(Access.internal)
   @post
   @route("?restype=service&comp=userdelegationkey")
   getUserDelegationKey is StorageOperation<
@@ -1173,6 +1174,7 @@ interface Blob {
   /** The Start Copy From URL operation copies a blob or an internet resource to a new blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  @access(Access.internal)
   @put
   @sharedRoute
   startCopyFromUrl is StorageOperation<
@@ -1272,6 +1274,7 @@ interface Blob {
 
   /** The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  @access(Access.internal)
   @put
   @sharedRoute
   @route("?comp=copy&copyid")
