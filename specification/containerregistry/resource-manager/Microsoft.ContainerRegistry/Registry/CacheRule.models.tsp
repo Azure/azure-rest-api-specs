@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
 using Versioning;
 
 namespace Microsoft.ContainerRegistry;
@@ -52,7 +53,7 @@ model CacheRuleUpdateParameters {
   /**
    * The identity of the cache rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Unable to use `added` decorator on spread property. Use `...ManagedServiceIdentityProperty` instead when feature has been GA'd."
   @added(Versions.vLatestPreview)
   identity?: IdentityProperties;
 }
