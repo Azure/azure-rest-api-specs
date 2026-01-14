@@ -1402,7 +1402,6 @@ model ImportClusterParameters {
   /**
    * SAS URIs for the target blobs to import from
    */
-  @secret
   sasUris: SecretUri[];
 }
 
