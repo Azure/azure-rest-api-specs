@@ -1710,6 +1710,18 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "ChangeSafetyReferenceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The resource Id scalar type for ChangeSafety reference.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ChangeSafety.ChangeRecordVerifyChangeValidityRequest.changeSafetyReferenceId"
+          }
+        ]
+      }
+    },
     "ErrorDefinition": {
       "type": "object",
       "description": "The error definition.",
@@ -1894,7 +1906,7 @@
           "readOnly": true
         },
         "changeSafetyReferenceId": {
-          "type": "string",
+          "$ref": "#/definitions/ChangeSafetyReferenceId",
           "description": "The resource Id of the ChangeState/StageProgression resource that this operation is associated with. This will give users the capability to query all the validations that were for a particular change record."
         }
       },
@@ -1936,7 +1948,7 @@
           "readOnly": true
         },
         "changeSafetyReferenceId": {
-          "type": "string",
+          "$ref": "#/definitions/ChangeSafetyReferenceId",
           "description": "The resource Id of the ChangeState/StageProgression resource that this operation is associated with. This will give users the capability to query all the validations that were for a particular change record."
         },
         "validationOutput": {
@@ -1992,7 +2004,7 @@
           "description": "The parameters used for validation. This property will be checked against the validationParameterSchema in the validator resource."
         },
         "changeSafetyReferenceId": {
-          "type": "string",
+          "$ref": "#/definitions/ChangeSafetyReferenceId",
           "description": "The resource Id of the ChangeState/StageProgression resource that this operation is associated with. This will give users the capability to query all the validations that were for a particular change record."
         },
         "validationOutput": {

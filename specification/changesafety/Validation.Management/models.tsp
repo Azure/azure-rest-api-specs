@@ -8,6 +8,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.ChangeSafety;
 
 @doc("The resource Id scalar type for ChangeSafety reference.")
+@added(Versions.v2026_01_01_preview)
 scalar ChangeSafetyReferenceId
   extends Azure.Core.armResourceIdentifier<[
     {
