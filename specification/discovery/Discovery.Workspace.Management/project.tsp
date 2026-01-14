@@ -61,11 +61,6 @@ model ProjectProperties {
   @doc("Allowed DataContainers (Control plane resource references).")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataContainerIds: DataContainerId[];
-
-  @doc("Settings for the project.")
-  @added(Microsoft.Discovery.Versions.v2025_12_01_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  settings?: ProjectSettings;
 }
 
 @armResourceOperations
