@@ -6717,7 +6717,8 @@
                       },
                       "user": {
                         "type": "string",
-                        "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers)."
+                        "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).",
+                        "deprecated": true
                       },
                       "safety_identifier": {
                         "type": "string",
@@ -13721,7 +13722,8 @@
             "container_file_citation": "#/components/schemas/OpenAI.ContainerFileCitationBody",
             "file_path": "#/components/schemas/OpenAI.FilePath"
           }
-        }
+        },
+        "description": "An annotation that applies to a span of output text."
       },
       "OpenAI.AnnotationType": {
         "anyOf": [
@@ -14428,7 +14430,8 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 10485760
+            "maxLength": 10485760,
+            "description": "The encrypted content of the compaction summary."
           }
         },
         "allOf": [
@@ -15401,7 +15404,8 @@
             "nullable": true
           },
           "created_by": {
-            "type": "string"
+            "type": "string",
+            "description": "The identifier of the actor that created the item."
           }
         },
         "allOf": [
@@ -15409,7 +15413,7 @@
             "$ref": "#/components/schemas/OpenAI.ConversationItem"
           }
         ],
-        "description": "The output of a shell tool call.",
+        "description": "The output of a shell tool call that was emitted.",
         "title": "Shell call output"
       },
       "OpenAI.ConversationItemFunctionToolCallOutputResource": {
@@ -16146,10 +16150,10 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "The unique ID of the conversation."
+            "description": "The unique ID of the conversation that this response was associated with."
           }
         },
-        "description": "The conversation that this response belongs to. Input items and output items from this response are automatically added to this conversation.",
+        "description": "The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.",
         "title": "Conversation"
       },
       "OpenAI.ConversationResource": {
@@ -16729,6 +16733,7 @@
         },
         "description": "Deprecated in favor of LogsDataSourceConfig.",
         "title": "StoredCompletionsDataSourceConfig",
+        "deprecated": true,
         "x-oaiMeta": {
           "name": "The stored completions data source object for evals",
           "group": "evals",
@@ -16770,7 +16775,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateFineTuningJobRequestHyperparameters"
               }
             ],
-            "description": "The hyperparameters used for the fine-tuning job.\n  This value is now deprecated in favor of `method`, and should be passed in under the `method` parameter."
+            "description": "The hyperparameters used for the fine-tuning job.\n  This value is now deprecated in favor of `method`, and should be passed in under the `method` parameter.",
+            "deprecated": true
           },
           "suffix": {
             "type": "string",
@@ -16951,7 +16957,8 @@
           },
           "user": {
             "type": "string",
-            "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers)."
+            "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).",
+            "deprecated": true
           },
           "safety_identifier": {
             "type": "string",
@@ -19799,10 +19806,12 @@
         ],
         "properties": {
           "stdout": {
-            "type": "string"
+            "type": "string",
+            "description": "The standard output that was captured."
           },
           "stderr": {
-            "type": "string"
+            "type": "string",
+            "description": "The standard error output that was captured."
           },
           "outcome": {
             "allOf": [
@@ -19813,10 +19822,11 @@
             "description": "Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call output chunk."
           },
           "created_by": {
-            "type": "string"
+            "type": "string",
+            "description": "The identifier of the actor that created the item."
           }
         },
-        "description": "The content of a shell call output.",
+        "description": "The content of a shell tool call output that was emitted.",
         "title": "Shell call output content"
       },
       "OpenAI.FunctionShellCallOutputContentParam": {
@@ -22466,7 +22476,8 @@
             "nullable": true
           },
           "created_by": {
-            "type": "string"
+            "type": "string",
+            "description": "The identifier of the actor that created the item."
           }
         },
         "allOf": [
@@ -22474,7 +22485,7 @@
             "$ref": "#/components/schemas/OpenAI.ItemResource"
           }
         ],
-        "description": "The output of a shell tool call.",
+        "description": "The output of a shell tool call that was emitted.",
         "title": "Shell call output"
       },
       "OpenAI.ItemResourceFunctionToolCallOutputResource": {
@@ -24011,10 +24022,12 @@
             "description": "The unique ID of the compaction item."
           },
           "encrypted_content": {
-            "type": "string"
+            "type": "string",
+            "description": "The encrypted content that was produced by compaction."
           },
           "created_by": {
-            "type": "string"
+            "type": "string",
+            "description": "The identifier of the actor that created the item."
           }
         },
         "allOf": [
@@ -24277,7 +24290,8 @@
             "nullable": true
           },
           "created_by": {
-            "type": "string"
+            "type": "string",
+            "description": "The identifier of the actor that created the item."
           }
         },
         "allOf": [
@@ -24285,7 +24299,7 @@
             "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ],
-        "description": "The output of a shell tool call.",
+        "description": "The output of a shell tool call that was emitted.",
         "title": "Shell call output"
       },
       "OpenAI.OutputItemFunctionToolCall": {
@@ -25128,7 +25142,8 @@
           },
           "user": {
             "type": "string",
-            "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers)."
+            "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).",
+            "deprecated": true
           },
           "safety_identifier": {
             "type": "string",
@@ -25242,6 +25257,11 @@
             "type": "integer",
             "format": "unixtime",
             "description": "Unix timestamp (in seconds) of when this Response was created."
+          },
+          "completed_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "nullable": true
           },
           "error": {
             "type": "object",
@@ -25727,7 +25747,7 @@
         "x-oaiMeta": {
           "name": "response.completed",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.completed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"completed\",\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"input\": [],\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [\n      {\n        \"id\": \"msg_123\",\n        \"type\": \"message\",\n        \"role\": \"assistant\",\n        \"content\": [\n          {\n            \"type\": \"output_text\",\n            \"text\": \"In a shimmering forest under a sky full of stars, a lonely unicorn named Lila discovered a hidden pond that glowed with moonlight. Every night, she would leave sparkling, magical flowers by the water's edge, hoping to share her beauty with others. One enchanting evening, she woke to find a group of friendly animals gathered around, eager to be friends and share in her magic.\",\n            \"annotations\": []\n          }\n        ]\n      }\n    ],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": {\n      \"input_tokens\": 0,\n      \"output_tokens\": 0,\n      \"output_tokens_details\": {\n        \"reasoning_tokens\": 0\n      },\n      \"total_tokens\": 0\n    },\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.completed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"completed\",\n    \"completed_at\": 1740855870,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"input\": [],\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [\n      {\n        \"id\": \"msg_123\",\n        \"type\": \"message\",\n        \"role\": \"assistant\",\n        \"content\": [\n          {\n            \"type\": \"output_text\",\n            \"text\": \"In a shimmering forest under a sky full of stars, a lonely unicorn named Lila discovered a hidden pond that glowed with moonlight. Every night, she would leave sparkling, magical flowers by the water's edge, hoping to share her beauty with others. One enchanting evening, she woke to find a group of friendly animals gathered around, eager to be friends and share in her magic.\",\n            \"annotations\": []\n          }\n        ]\n      }\n    ],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": {\n      \"input_tokens\": 0,\n      \"output_tokens\": 0,\n      \"output_tokens_details\": {\n        \"reasoning_tokens\": 0\n      },\n      \"total_tokens\": 0\n    },\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseContentPartAddedEvent": {
@@ -25893,7 +25913,7 @@
         "x-oaiMeta": {
           "name": "response.created",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.created\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.created\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseCustomToolCallInputDeltaEvent": {
@@ -26122,7 +26142,7 @@
         "x-oaiMeta": {
           "name": "response.failed",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.failed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"failed\",\n    \"error\": {\n      \"code\": \"server_error\",\n      \"message\": \"The model failed to generate a response.\"\n    },\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  }\n}\n"
+          "example": "{\n  \"type\": \"response.failed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"failed\",\n    \"completed_at\": null,\n    \"error\": {\n      \"code\": \"server_error\",\n      \"message\": \"The model failed to generate a response.\"\n    },\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  }\n}\n"
         }
       },
       "OpenAI.ResponseFileSearchCallCompletedEvent": {
@@ -26695,7 +26715,7 @@
         "x-oaiMeta": {
           "name": "response.in_progress",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.in_progress\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.in_progress\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseIncompleteDetails": {
@@ -26747,7 +26767,7 @@
         "x-oaiMeta": {
           "name": "response.incomplete",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.incomplete\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"incomplete\",\n    \"error\": null,\n    \"incomplete_details\": {\n      \"reason\": \"max_tokens\"\n    },\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.incomplete\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"incomplete\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": {\n      \"reason\": \"max_tokens\"\n    },\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseLogProb": {
@@ -29200,7 +29220,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "find"
+              "find_in_page"
             ],
             "description": "The action type.",
             "x-stainless-const": true
@@ -29259,7 +29279,16 @@
           },
           "query": {
             "type": "string",
-            "description": "The search query."
+            "description": "[DEPRECATED] The search query.",
+            "deprecated": true
+          },
+          "queries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The search queries.",
+            "title": "Search queries"
           },
           "sources": {
             "type": "array",

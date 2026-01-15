@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "../Foundry/src/common/service.tsp";
+import "../Foundry/src/common/custom_types.tsp";
 
 import "../Foundry/src/agents/routes.tsp";
 import "../Foundry/src/memory_stores/routes.tsp";

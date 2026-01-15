@@ -22,16 +22,7 @@ import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 
 import "./src/common/service.tsp";
-
-namespace OpenAI {
-  scalar integer extends TypeSpec.int64;
-  scalar numeric extends TypeSpec.float64;
-}
-
-namespace Azure.AI.Projects {
-  scalar integer extends OpenAI.integer;
-  scalar numeric extends OpenAI.numeric;
-}
+import "./src/common/custom_types.tsp";
 
 @@minValue(OpenAI.CreateChatCompletionRequest.seed, -9223372036854775808);
 @@maxValue(OpenAI.CreateChatCompletionRequest.seed, 9223372036854775807);
