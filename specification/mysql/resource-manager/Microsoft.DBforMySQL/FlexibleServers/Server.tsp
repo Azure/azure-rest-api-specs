@@ -96,8 +96,6 @@ interface Servers {
   /**
    * Manual failover a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("original-uri")
   failover is ArmResourceActionAsyncBase<
     Server,
     void,
@@ -118,8 +116,6 @@ interface Servers {
   /**
    * Restarts a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("original-uri")
   restart is ArmResourceActionAsyncBase<
     Server,
     ServerRestartParameter,
@@ -131,8 +127,6 @@ interface Servers {
   /**
    * Starts a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("original-uri")
   start is ArmResourceActionAsyncBase<
     Server,
     void,
@@ -144,8 +138,6 @@ interface Servers {
   /**
    * Stops a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("original-uri")
   stop is ArmResourceActionAsyncBase<
     Server,
     void,
