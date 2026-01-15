@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -119,6 +120,7 @@ interface SessionHosts {
    * Operation to list the scoped RegistrationTokens associated with the SessionHost.
    */
   @added(Versions.v2026_01_01_preview)
+  @operationId("SessionHost_ListSingleSessionHostRegistrationTokens")
   listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
     SessionHost,
     ScopedRegistrationTokenProperties,
