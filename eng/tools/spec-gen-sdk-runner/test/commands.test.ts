@@ -602,7 +602,7 @@ describe("generateSdkForBatchSpecs", () => {
 
     expect(result).toBe(1);
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
-    expect(logSpy).toHaveBeenCalledTimes(11);
+    expect(logSpy).toHaveBeenCalledTimes(12);
     const markdownFilePath = path.normalize(
       path.join(mockInput.workingFolder, "out/logs/generation-summary.md"),
     );
