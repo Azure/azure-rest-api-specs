@@ -98,8 +98,7 @@ interface Credentials {
     >
   >;
   listByResourceGroup is ArmResourceListByParent<Credential>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"
-  synchronize is ArmResourceActionNoContentAsync<Credential, void>;
+  synchronize is ArmResourceActionNoResponseContentAsync<Credential, void>;
 
   @added(Versions.v2026_03_01_preview)
   revokeByResource is ArmResourceActionAsync<
