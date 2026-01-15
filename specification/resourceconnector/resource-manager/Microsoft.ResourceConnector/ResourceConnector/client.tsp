@@ -85,17 +85,16 @@ op AppliancesUpdateCustomized(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-
 @@clientName(Microsoft.ResourceConnector.ApplianceGetTelemetryConfigResult,
   "ApplianceTelemetryConfigResult",
   "csharp"
 );
 @@clientName(Microsoft.ResourceConnector.ApplianceListCredentialResults,
-  "ApplianceClusterUserCredentialResult",
+  "ApplianceListCredentialResult",
   "csharp"
 );
 @@clientName(Microsoft.ResourceConnector.ApplianceListKeysResults,
-  "ApplianceClusterUserKeysResult",
+  "ApplianceListKeysResult",
   "csharp"
 );
 @@clientName(Microsoft.ResourceConnector.ArtifactProfile,
@@ -135,7 +134,7 @@ op AppliancesUpdateCustomized(
   "csharp"
 );
 @@clientName(Appliance, "ResourceConnectorAppliance", "csharp");
-@@clientName(Status, "ResourceConnectorStatus", "csharp");
+@@clientName(Status, "ApplianceStatus", "csharp");
 @@clientName(Status.ETCDSnapshotFailed, "EtcdSnapshotFailed", "csharp");
 @@clientName(Status.UpdatingCAPI, "UpdatingCapi", "csharp");
 @@clientName(Status.UpgradingKVAIO, "UpgradingKvaio", "csharp");
@@ -151,12 +150,12 @@ op AppliancesUpdateCustomized(
   "csharp"
 );
 @@clientName(Status.NetworkDNSUpdating, "NetworkDnsUpdating", "csharp");
-@@clientName(Distro, "ResourceConnectorDistro", "csharp");
-@@clientName(Event, "ResourceConnectorEvent", "csharp");
-@@clientName(NetworkProfile, "ResourceConnectorNetworkProfile", "csharp");
+@@clientName(Distro, "ApplianceDistro", "csharp");
+@@clientName(Event, "ApplianceEvent", "csharp");
+@@clientName(NetworkProfile, "ApplianceNetworkProfile", "csharp");
 @@clientName(PatchableAppliance, "ResourceConnectorAppliancePatch", "csharp");
 @@clientName(AppliancesOperationGroup.getTelemetryConfig,
-  "GetTelemetryConfigAppliance",
+  "GetApplianceTelemetryConfig",
   "csharp"
 );
 @@clientName(Provider.SCVMM, "Scvmm", "csharp");
