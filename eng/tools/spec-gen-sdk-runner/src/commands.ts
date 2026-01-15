@@ -1,6 +1,7 @@
 import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
+import { inspect } from "node:util";
 import {
   generateArtifact,
   getBreakingChangeInfo,
@@ -36,7 +37,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     await runSpecGenSdkCommand(specGenSdkCommand);
     logMessage("Runner command executed successfully");
   } catch (error) {
-    logMessage(`Runner: error executing command:${String(error)}`, LogLevel.Error);
+    logMessage(`Runner: error executing command:${inspect(error)}`, LogLevel.Error);
     statusCode = 1;
   }
 
@@ -47,7 +48,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     const executionResult = executionReport.executionResult;
     logMessage(`Runner command execution result:${executionResult}`);
   } catch (error) {
-    logMessage(`Runner: error reading execution-report.json:${String(error)}`, LogLevel.Error);
+    logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
     statusCode = 1;
   }
 
@@ -75,7 +76,9 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   );
 
   logMessage("ending group logging", LogLevel.EndGroup);
-  logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPathText);
+  if (executionReport?.vsoLogPath) {
+    logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
+  }
 
   return statusCode;
 }
@@ -143,7 +146,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       await runSpecGenSdkCommand(specGenSdkCommand);
       logMessage("Runner command executed successfully");
     } catch (error) {
-      logMessage(`Runner: error executing command:${String(error)}`, LogLevel.Error);
+      logMessage(`Runner: error executing command:${inspect(error)}`, LogLevel.Error);
       statusCode = 1;
     }
     // Pop the spec config path from specGenSdkCommand
@@ -178,12 +181,14 @@ export async function generateSdkForSpecPr(): Promise<number> {
       overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
       logMessage(`Runner command execution result:${currentExecutionResult}`);
     } catch (error) {
-      logMessage(`Runner: error reading execution-report.json:${String(error)}`, LogLevel.Error);
+      logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
       statusCode = 1;
       overallExecutionResult = "failed";
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
+    if (executionReport?.vsoLogPath) {
+      logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
+    }
   }
   // Process the spec-gen-sdk artifacts
   statusCode =
@@ -268,7 +273,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       await runSpecGenSdkCommand(specGenSdkCommand);
       logMessage("Runner command executed successfully");
     } catch (error) {
-      logMessage(`Runner: error executing command:${String(error)}`, LogLevel.Error);
+      logMessage(`Runner: error executing command:${inspect(error)}`, LogLevel.Error);
       statusCode = 1;
     }
 
@@ -303,14 +308,16 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
         duplicatedConfigCount++;
       }
     } catch (error) {
-      logMessage(`Runner: error reading execution-report.json:${String(error)}`, LogLevel.Error);
+      logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
     if (specConfigs.tspconfigPath && specConfigs.readmePath) {
       specConfigPath = serviceFolderPath;
     }
-    logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPath);
+    if (executionReport?.vsoLogPath) {
+      logIssuesToPipeline(executionReport.vsoLogPath, specConfigPath);
+    }
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -344,7 +351,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
     logMessage(`Runner: markdown file written to ${markdownFilePath}`);
     vsoAddAttachment("Generation Summary", markdownFilePath);
   } catch (error) {
-    vsoLogIssue(`Runner: error writing markdown file ${markdownFilePath}:${String(error)}`);
+    vsoLogIssue(`Runner: error writing markdown file ${markdownFilePath}:${inspect(error)}`);
     statusCode = 1;
   }
   // Set the pipeline variables for artifacts location

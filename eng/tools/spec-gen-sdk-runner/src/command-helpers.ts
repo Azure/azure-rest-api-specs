@@ -232,13 +232,7 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
  * @param logPath - The vso log file path.
  * @param specConfigDisplayText - The display text for the spec configuration.
  */
-export function logIssuesToPipeline(
-  logPath: string | undefined,
-  specConfigDisplayText: string,
-): void {
-  if (!logPath) {
-    return;
-  }
+export function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): void {
   let vsoLogs: VsoLogs;
   try {
     const logContent = JSON.parse(fs.readFileSync(logPath, "utf8")) as Record<

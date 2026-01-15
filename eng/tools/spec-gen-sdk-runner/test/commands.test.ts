@@ -131,7 +131,7 @@ describe("generateSdkForSingleSpec", () => {
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalled();
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledWith(["mock-command"]);
     expect(log.logMessage).toHaveBeenCalledWith(
-      `Runner: error executing command:Error: Command failed`,
+      expect.stringContaining("Runner: error executing command:Error: Command failed"),
       LogLevel.Error,
     );
     expect(commandHelpers.setPipelineVariables).toHaveBeenCalled();
@@ -170,7 +170,9 @@ describe("generateSdkForSingleSpec", () => {
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
-      "Runner: error reading execution-report.json:Error: Failed to read execution report",
+      expect.stringContaining(
+        "Runner: error reading execution-report.json:Error: Failed to read execution report",
+      ),
       LogLevel.Error,
     );
   });
@@ -380,7 +382,7 @@ describe("generateSdkForSpecPr", () => {
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
-      "Runner: error executing command:Error: Command failed",
+      expect.stringContaining("Runner: error executing command:Error: Command failed"),
       LogLevel.Error,
     );
   });
@@ -425,7 +427,9 @@ describe("generateSdkForSpecPr", () => {
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
-      "Runner: error reading execution-report.json:Error: Failed to read execution report",
+      expect.stringContaining(
+        "Runner: error reading execution-report.json:Error: Failed to read execution report",
+      ),
       LogLevel.Error,
     );
   });
@@ -609,7 +613,7 @@ describe("generateSdkForBatchSpecs", () => {
     );
     expect(logSpy).toHaveBeenNthCalledWith(
       3,
-      "Runner: error executing command:Error: Command failed",
+      expect.stringContaining("Runner: error executing command:Error: Command failed"),
       LogLevel.Error,
     );
     expect(logSpy).toHaveBeenNthCalledWith(5, "ending group logging", "endgroup");
