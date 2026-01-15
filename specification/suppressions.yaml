@@ -210,18 +210,6 @@
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
   paths:
-    - azurestackhci/AzureStackHCI.StackHCIVM.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.*
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-  paths:
     - azurestackhci/Operations.Management/tspconfig.yaml
 
 - tool: TypeSpecValidation
@@ -324,34 +312,6 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.*
-  paths:
-    # Casing "Confidentialledger" is not a typo.  This needs to match until the folder name is corrected in the repo.
-    - confidentialledger/Confidentialledger.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.experimental-extensible-enums
-    - options.@azure-tools/typespec-ts.package-details.name
-  paths:
-    - connectedcache/ConnectedCache.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-python.*
-  paths:
-    - containerservice/resource-manager/Microsoft.ContainerService/fleet/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
     - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
@@ -359,14 +319,6 @@
     - parameters.service-dir.default
   paths:
     - containerstorage/resource-manager/Microsoft.ContainerStorage/ContainerStorage/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.namespace
-  paths:
-    - dell/Dell.Storage.Management/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -392,18 +344,9 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-java.service-name
-  paths:
-    - edge/Microsoft.Edge.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
     - options.@azure-tools/typespec-csharp.*
     - options.@azure-tools/typespec-ts.*
   paths:
-    - edge/Microsoft.Edge.ConfigurationManager.Management/tspconfig.yaml
     - edge/Microsoft.Edge.Configurations.Management/tspconfig.yaml
 
 - tool: TypeSpecValidation
@@ -415,16 +358,8 @@
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
-    - eventgrid/Azure.Messaging.EventGrid/tspconfig.yaml
-    - eventgrid/Azure.Messaging.EventGrid.SystemEvents/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.service-name
-  paths:
-    - fabric/resource-manager/Microsoft.Fabric/Fabric/tspconfig.yaml
+    - eventgrid/data-plane/EventGridNamespace/tspconfig.yaml
+    - eventgrid/data-plane/EventGridSystemEvents/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -549,14 +484,6 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths:
-    - liftrqumulo/Qumulo.Storage.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
     - options.@azure-tools/typespec-java.namespace
   paths:
     - loadtestservice/LoadTestService/tspconfig.yaml
@@ -594,29 +521,12 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
   paths:
     - manufacturingplatform/Manufacturingplatform.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-python.namespace
-  paths:
-    - migrate/AssessmentProjects.Management/AKSAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/AvsAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/BusinessCases.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/Collectors.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/SqlAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/WebAppAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/WebAppCompoundAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/HeterogeneousAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/MachineAssessments.Management/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -757,14 +667,6 @@
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-java.namespace
-  paths:
-    - resources/resource-manager/Microsoft.Resources/bicep/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.namespace
     - options.@azure-tools/typespec-python.*
   paths:
     - riskiq/Easm/tspconfig.yaml
@@ -784,7 +686,6 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.*
   paths:
     - scvmm/ScVmm.Management/tspconfig.yaml

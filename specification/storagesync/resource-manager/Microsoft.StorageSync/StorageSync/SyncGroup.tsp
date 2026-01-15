@@ -48,8 +48,8 @@ interface SyncGroups {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  create is ArmCreateOperation<
-    ResourceInstanceParameters<SyncGroup, DefaultBaseParameters<SyncGroup>>,
+  create is Legacy.CreateOrReplaceAsync<
+    SyncGroup,
     SyncGroupCreateParameters,
     Response = ArmResourceUpdatedResponse<SyncGroup> & {
       @header("x-ms-correlation-request-id")
@@ -60,7 +60,7 @@ interface SyncGroups {
       @doc("request id.")
       requestId?: string;
     },
-    ErrorResponse = StorageSyncError
+    Error = StorageSyncError
   >;
 
   /**
