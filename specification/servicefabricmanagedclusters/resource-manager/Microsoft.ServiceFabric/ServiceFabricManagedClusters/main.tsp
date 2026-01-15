@@ -55,9 +55,6 @@ interface Operations {
  * The available API versions.
  */
 enum Versions {
-  /**
-   * The 2024-11-01-preview API version.
-   */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2024_11_01_preview: "2024-11-01-preview",
 
@@ -69,4 +66,7 @@ enum Versions {
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_10_01_preview: "2025-10-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_02_01: "2026-02-01",
 }

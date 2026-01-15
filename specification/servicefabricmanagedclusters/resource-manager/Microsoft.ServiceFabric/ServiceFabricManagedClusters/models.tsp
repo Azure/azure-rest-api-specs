@@ -2,6 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceFabric;
 
@@ -65,6 +68,7 @@ union ManagedResourceProvisioningState {
 /**
  * Sfmc operation status.
  */
+@removed(Versions.v2026_02_01)
 union SfmcOperationStatus {
   string,
 
@@ -311,6 +315,7 @@ model IpTag {
 /**
  * Parameters for Fault Simulation id.
  */
+@removed(Versions.v2026_02_01)
 model FaultSimulationIdContent {
   /**
    * unique identifier for the fault simulation.
@@ -321,6 +326,7 @@ model FaultSimulationIdContent {
 /**
  * Fault simulation object with status.
  */
+@removed(Versions.v2026_02_01)
 model FaultSimulation {
   /**
    * unique identifier for the fault simulation.
@@ -351,6 +357,7 @@ model FaultSimulation {
 /**
  * The kind of fault simulation.
  */
+@removed(Versions.v2026_02_01)
 union FaultKind {
   string,
 
@@ -363,6 +370,7 @@ union FaultKind {
 /**
  * Details for Fault Simulation.
  */
+@removed(Versions.v2026_02_01)
 model FaultSimulationDetails {
   /**
    * unique identifier for the cluster resource.
@@ -389,6 +397,7 @@ model FaultSimulationDetails {
 /**
  * Node type fault simulation object with status.
  */
+@removed(Versions.v2026_02_01)
 model NodeTypeFaultSimulation {
   /**
    * Node type name.
@@ -414,6 +423,7 @@ model NodeTypeFaultSimulation {
 /**
  * Fault Simulation Request for Start action.
  */
+@removed(Versions.v2026_02_01)
 model FaultSimulationContentWrapper {
   /**
    * Parameters for Fault Simulation start action.
@@ -425,6 +435,7 @@ model FaultSimulationContentWrapper {
  * Parameters for Fault Simulation action.
  */
 @discriminator("faultKind")
+@removed(Versions.v2026_02_01)
 model FaultSimulationContent {
   /**
    * The kind of fault to be simulated.
@@ -445,6 +456,7 @@ model FaultSimulationContent {
 /**
  * Constraints for Fault Simulation action.
  */
+@removed(Versions.v2026_02_01)
 model FaultSimulationConstraints {
   /**
    * The absolute expiration timestamp (UTC) after which this fault simulation should be stopped if it's still active.
@@ -475,6 +487,7 @@ model ZoneFaultSimulationContent extends FaultSimulationContent {
 /**
  * Fault simulation status.
  */
+@removed(Versions.v2026_02_01)
 union FaultSimulationStatus {
   string,
 
