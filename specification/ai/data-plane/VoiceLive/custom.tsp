@@ -465,17 +465,10 @@ model TurnDetection {
 
 union TurnDetectionType {
   string,
-  none: "none",
   server_vad: "server_vad",
   azure_semantic_vad: "azure_semantic_vad",
   azure_semantic_vad_en: "azure_semantic_vad_en",
   azure_semantic_vad_multilingual: "azure_semantic_vad_multilingual",
-}
-
-/** No turn detection - client manages turn taking. */
-@usage(DualUsage)
-model NoTurnDetection extends TurnDetection {
-  type: TurnDetectionType.none;
 }
 
 /** Base model for VAD-based turn detection. */
