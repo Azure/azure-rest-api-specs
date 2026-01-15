@@ -23,13 +23,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/dataCollectionRuleConfigurationMetadata/fetchSummary": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadataSummary": {
       "post": {
         "tags": [
           "DataCollectionRuleConfigurationMetadata"
         ],
         "summary": "Fetches summary configuration metadata for all supported data sources.",
-        "operationId": "DataCollectionRuleConfigurationMetadata_FetchSummary",
+        "operationId": "FetchDataCollectionRuleConfigurationMetadataSummary",
         "consumes": [
           "application/json"
         ],
@@ -76,13 +76,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/dataCollectionRuleConfigurationMetadata/fetchDetails": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadataDetails": {
       "post": {
         "tags": [
           "DataCollectionRuleConfigurationMetadata"
         ],
         "summary": "Fetches detailed configuration metadata for a specific resource type.",
-        "operationId": "DataCollectionRuleConfigurationMetadata_FetchDetails",
+        "operationId": "FetchDataCollectionRuleConfigurationMetadataDetails",
         "consumes": [
           "application/json"
         ],
@@ -330,5 +330,23 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
