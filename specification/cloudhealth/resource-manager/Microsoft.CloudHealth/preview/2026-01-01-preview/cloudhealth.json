@@ -2396,7 +2396,7 @@
           "$ref": "#/definitions/entityName",
           "description": "Name of the entity"
         },
-        "transitions": {
+        "history": {
           "type": "array",
           "description": "List of health state transitions",
           "items": {
@@ -2409,7 +2409,7 @@
       },
       "required": [
         "entityName",
-        "transitions"
+        "history"
       ]
     },
     "EntityListResult": {
@@ -3508,6 +3508,30 @@
         }
       }
     },
+    "SignalHistoryDataPoint": {
+      "type": "object",
+      "description": "A data point in the signal time series",
+      "properties": {
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the data point"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Signal value at this point in time"
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state at this point in time"
+        }
+      },
+      "required": [
+        "occurredAt",
+        "healthState"
+      ]
+    },
     "SignalHistoryRequest": {
       "type": "object",
       "description": "Request body for getting signal history",
@@ -3533,17 +3557,17 @@
     },
     "SignalHistoryResponse": {
       "type": "object",
-      "description": "Response containing signal history time series",
+      "description": "Response containing signal history",
       "properties": {
         "signalName": {
           "$ref": "#/definitions/signalName",
           "description": "Name of the signal"
         },
-        "timeSeries": {
+        "history": {
           "type": "array",
-          "description": "Time series data points",
+          "description": "Signal history data points",
           "items": {
-            "$ref": "#/definitions/SignalTimeSeriesPoint"
+            "$ref": "#/definitions/SignalHistoryDataPoint"
           },
           "x-ms-identifiers": [
             "occurredAt"
@@ -3552,7 +3576,7 @@
       },
       "required": [
         "signalName",
-        "timeSeries"
+        "history"
       ]
     },
     "SignalInstanceProperties": {
@@ -3685,30 +3709,6 @@
           "readOnly": true
         }
       }
-    },
-    "SignalTimeSeriesPoint": {
-      "type": "object",
-      "description": "A data point in the signal time series",
-      "properties": {
-        "occurredAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the data point"
-        },
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "Signal value at this point in time"
-        },
-        "healthState": {
-          "$ref": "#/definitions/HealthState",
-          "description": "Health state at this point in time"
-        }
-      },
-      "required": [
-        "occurredAt",
-        "healthState"
-      ]
     },
     "ThresholdRuleV2": {
       "type": "object",
