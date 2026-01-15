@@ -8082,8 +8082,8 @@ model WorkspaceProperties {
    * The flag to indicate whether we will do role assignment for the workspace MSI on resource group level.
    * Preview-only property.
    */
-  @removed(Versions.v2025_12_01)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8093,11 +8093,12 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   associatedWorkspaces?: string[];
+
   /**
    * Preview-only property.
    */
-  @removed(Versions.v2025_12_01)
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
   containerRegistries?: string[];
 
   /**
@@ -8137,11 +8138,12 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   encryption?: EncryptionProperty;
+
   /**
    * Preview-only property.
    */
-  @removed(Versions.v2025_12_01)
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
   existingWorkspaces?: string[];
 
   /**
@@ -8182,10 +8184,11 @@ model WorkspaceProperties {
   /**
    * Preview-only property.
    */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2025_12_01)
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keyVaults?: string[];
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedNetwork?: ManagedNetworkSettings;
@@ -8280,8 +8283,8 @@ model WorkspaceProperties {
   /**
    * Preview-only property.
    */
-  @removed(Versions.v2025_12_01)
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
   storageAccounts?: string[];
 
   /**
