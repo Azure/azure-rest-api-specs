@@ -1,72 +1,20 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+
 using Azure.ClientGenerator.Core;
 using Microsoft.Advisor;
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigData.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PredictionRequest.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PredictionResponse.properties
-);
 
 @@clientName(ResourceRecommendationBases.patch::parameters.properties,
   "trackedProperties"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceRecommendationBase.properties
-);
-
 @@clientName(SuppressionContracts.create::parameters.resource,
   "suppressionContract"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SuppressionContract.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MetadataEntity.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdvisorScoreEntity.properties
-);
-
 @@clientName(AssessmentResults.put::parameters.resource, "assessmentContract");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AssessmentResult.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResiliencyReview.properties
-);
-
 @@clientName(TriageRecommendations.rejectTriageRecommendation::parameters.body,
   "recommendationRejectBody"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TriageRecommendation.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TriageResource.properties);
-
-@@scope(ResourceRecommendationBases.list, "!csharp");
-
+@@clientName(AdvisorScoreEntity, "ScoreEntityForAdvisor", "go");
 @@clientName(Microsoft.Advisor, "AdvisorManagementClient", "javascript,python");
 @@clientName(Microsoft.Advisor.CpuThreshold.`5`,
   "Five",
@@ -89,16 +37,27 @@ using Microsoft.Advisor;
 @@clientName(Microsoft.Advisor.CpuThreshold.`15`, "FIFTEEN", "python");
 @@clientName(Microsoft.Advisor.CpuThreshold.`20`, "TWENTY", "python");
 
+@@scope(ResourceRecommendationBases.list, "!csharp");
+@@scope(Operations.list, "!csharp");
 @@clientName(PredictionResponse, "AdvisorPredictionResult", "csharp");
-@@clientName(TriageResource, "AdvisorTriageResourceData", "csharp");
-@@clientName(TriageResourceCollection,
-  "AdvisorTriageResourceDataList",
+@@clientName(PredictionResponseProperties,
+  "AdvisorPredictionResultProperties",
   "csharp"
 );
+@@clientName(TriageResource, "AdvisorTriageResourceData", "csharp");
+@@clientName(TriageResourceCollection, "AdvisorTriageListResult", "csharp");
 @@clientName(AssessmentResult, "AdvisorAssessment", "csharp");
+@@clientName(AssessmentResultProperties,
+  "AdvisorAssessmentProperties",
+  "csharp"
+);
 @@clientName(ResiliencyReview, "AdvisorResiliencyReview", "csharp");
+@@clientName(ResiliencyReviewProperties,
+  "AdvisorResiliencyReviewProperties",
+  "csharp"
+);
 @@clientName(ResiliencyReviewCollection,
-  "AdvisorResiliencyReviewList",
+  "AdvisorResiliencyReviewListResult",
   "csharp"
 );
 @@clientName(Control, "RecommendationControlType", "csharp");
@@ -119,38 +78,28 @@ using Microsoft.Advisor;
   "csharp"
 );
 @@clientName(RecommendationPropertiesReview, "RecommendationReview", "csharp");
-@@clientName(RecommendationProperties.tracked, "IsTracked", "csharp");
 @@clientName(Aggregated, "ScoreAggregationLevel", "csharp");
 @@clientName(ReviewStatus, "ResiliencyReviewStatus", "csharp");
 @@clientName(ScoreEntity, "AdvisorScoreEntityContent", "csharp");
 @@clientName(State, "RecommendationState", "csharp");
 @@clientName(WorkloadResult, "AdvisorWorkload", "csharp");
 @@clientName(AssessmentTypeResult, "AdvisorAssessmentType", "csharp");
-@@clientName(ConfigData, "AdvisorConfigData", "csharp");
 @@clientName(TimeSeriesEntity, "AdvisorTimeSeriesEntity", "csharp");
 @@clientName(PredictionType, "AdvisorPredictionType", "csharp");
 @@clientName(ReasonForRejectionName, "AdvisorReasonForRejectionName", "csharp");
 @@clientName(PredictionRequest, "AdvisorPredictionContent", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
-@@clientName(ConfigurationsOperationGroup.listBySubscription,
-  "GetAdvisorConfigurations",
+@@clientName(PredictionRequestProperties,
+  "AdvisorPredictionContentProperties",
   "csharp"
 );
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
-@@clientName(ConfigurationsOperationGroup.listByResourceGroup,
-  "GetAdvisorConfigurations",
+@@clientName(TriageResourceProperties.resourceType,
+  "TriageResourceType",
   "csharp"
 );
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
-@@clientName(ConfigurationsOperationGroup.createInSubscription,
-  "CreateAdvisorConfiguration",
-  "csharp"
-);
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
-@@clientName(ConfigurationsOperationGroup.createInResourceGroup,
-  "CreateAdvisorConfiguration",
-  "csharp"
-);
+@@clientName(ResiliencyReviewProperties.publishedAt, "PublishedOn", "csharp");
+@@clientName(ResiliencyReviewProperties.updatedAt, "UpdatedOn", "csharp");
+@@alternateType(ResiliencyReviewProperties.publishedAt, utcDateTime, "csharp");
+@@alternateType(ResiliencyReviewProperties.updatedAt, utcDateTime, "csharp");
 @@clientName(ConfigurationsOperationGroup, "Configurations", "csharp");
 @@clientName(RecommendationsOperationGroup.generate,
   "GenerateRecommendation",
@@ -170,5 +119,89 @@ using Microsoft.Advisor;
   Azure.Core.uuid,
   "csharp"
 );
-@@usage(ResourceRecommendationBase, Usage.input, "csharp");
-@@scope(Operations.list, "!csharp");
+@@clientName(TriageResource, "AdvisorTriage", "csharp");
+@@clientName(TriageResourceProperties, "AdvisorTriageProperties", "csharp");
+@@clientName(MetadataEntity, "AdvisorMetadataEntity", "csharp");
+@@clientName(MetadataEntityProperties,
+  "AdvisorMetadataEntityProperties",
+  "csharp"
+);
+@@clientName(ResourceRecommendationBase, "AdvisorRecommendation", "csharp");
+@@clientName(RecommendationProperties,
+  "AdvisorRecommendationProperties",
+  "csharp"
+);
+@@clientName(RecommendationProperties.tracked, "IsTracked", "csharp");
+@@clientName(RecommendationProperties.lastUpdated, "LastUpdatedOn", "csharp");
+@@clientName(SuppressionContract, "AdvisorSuppressionContract", "csharp");
+@@clientName(SuppressionProperties, "AdvisorSuppressionProperties", "csharp");
+@@clientName(SuppressionProperties.expirationTimeStamp, "ExpireOn", "csharp");
+@@clientName(TriageRecommendation, "AdvisorTriageRecommendation", "csharp");
+@@clientName(TriageRecommendationProperties,
+  "AdvisorTriageRecommendationProperties",
+  "csharp"
+);
+@@clientName(TriageRecommendationProperties.updatedAt, "UpdatedOn", "csharp");
+@@alternateType(TriageRecommendationProperties.updatedAt,
+  utcDateTime,
+  "csharp"
+);
+@@clientName(TrackedRecommendationPropertiesPayload,
+  "AdvisorRecommendationPatch",
+  "csharp"
+);
+@@clientName(TrackedRecommendationPropertiesPayloadProperties,
+  "AdvisorRecommendationPatchProperties",
+  "csharp"
+);
+@@clientName(AdvisorScoreResponse, "AdvisorScoreResult", "csharp");
+@@clientName(ConfigData, "AdvisorConfigurationData", "csharp");
+@@clientName(ConfigDataProperties, "AdvisorConfigurationProperties", "csharp");
+@@clientName(ConfigDataProperties.exclude, "IsExcluded", "csharp");
+@@clientName(ConfigurationListResult,
+  "AdvisorConfigurationListResult",
+  "csharp"
+);
+@@clientName(DigestConfig, "AdvisorDigestConfiguration", "csharp");
+@@clientName(CpuThreshold, "AdvisorCpuThreshold", "csharp");
+@@clientName(DigestConfigState, "AdvisorDigestConfigurationState", "csharp");
+@@clientName(RecommendationRejectBody, "RecommendationRejectContent", "csharp");
+@@clientName(ReasonForRejectionName, "RejectingRecommendationReason", "csharp");
+@@clientName(ResourceMetadata, "RecommendationResourceMetadata", "csharp");
+@@alternateType(ResourceMetadata.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Risk, "RecommendationRisk", "csharp");
+@@clientName(Scenario, "MetadataScenarioType", "csharp");
+@@clientName(ShortDescription, "RecommendationShortDescription", "csharp");
+@@clientName(TrackedRecommendationProperties.postponedTime,
+  "PostponedUntil",
+  "csharp"
+);
+@@clientName(TriageRecommendationCollection,
+  "AdvisorTriageRecommendationListResult",
+  "csharp"
+);
+@@clientName(ConfigurationName, "AdvisorConfigurationName", "csharp");
+
+@@clientName(ConfigurationsOperationGroup.listBySubscription,
+  "GetAdvisorConfigurationsBySubscription",
+  "csharp"
+);
+@@clientName(ConfigurationsOperationGroup.listByResourceGroup,
+  "GetAdvisorConfigurationsByResourceGroup",
+  "csharp"
+);
+@@clientName(ConfigurationsOperationGroup.createInSubscription,
+  "CreateAdvisorConfigurationInSubscription",
+  "csharp"
+);
+@@clientName(ConfigurationsOperationGroup.createInResourceGroup,
+  "CreateAdvisorConfigurationInResourceGroup",
+  "csharp"
+);
+@@clientName(SuppressionsOperationGroup.list,
+  "GetAdvisorSuppressionContracts",
+  "csharp"
+);
