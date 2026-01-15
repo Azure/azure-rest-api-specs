@@ -132,5 +132,12 @@ using Microsoft.Mission;
   "EnclaveDefaultSettingsPatch",
   "csharp"
 );
+@@clientName(ApprovalActionRequest, "ApprovalActionContent", "csharp");
+@@clientName(CheckAddressSpaceAvailabilityRequest,
+  "CheckAddressSpaceAvailabilityContent",
+  "csharp"
+);
+@@clientName(ServiceIdentifier.PrivateDNSZones, "PrivateDnsZones", "csharp");
+@@clientName(ActionPerformed, "ApproverActionPerformed", "csharp");
 
 @@clientName(Microsoft.Mission, "VirtualEnclavesMgmtClient", "python");
