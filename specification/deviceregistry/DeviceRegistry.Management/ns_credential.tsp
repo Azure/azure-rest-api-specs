@@ -73,7 +73,7 @@ model CredentialsRevokeByResourceRevocationResult {
   @doc("Indicates whether revocation succeeded or failed.")
   result: string;
 
-  @doc("Error.")
+  @doc("Error details.")
   error?: Error;
 
 }
