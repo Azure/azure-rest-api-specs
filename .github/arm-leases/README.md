@@ -20,12 +20,13 @@ This directory is protected by CODEOWNERS to ensure proper governance:
 
 Each lease must be placed in the following directory structure:
 ```
-.github/arm-leases/<servicename>/<namespace>/lease.yaml
+.github/arm-leases/<servicename>/<namespace>/[<servicegroup> (optional)]/lease.yaml
 ```
 
 ### Path Requirements:
 - `<servicename>`: lowercase alphanumeric only (e.g., testservice, widgetservice)
 - `<namespace>`: alphanumeric with dots, case-sensitive (e.g., Microsoft.TestRP, Azure.Widget)
+- `<servicegroup>`: (optional) logical grouping within an RP (e.g., DiskRP, ComputeRP). Must not start with "stable" or "preview"
 
 ### Lease File Format
 

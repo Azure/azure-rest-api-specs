@@ -17,6 +17,7 @@ const ALLOWED_FILE_PATTERNS = [
 ];
 
 const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
+const LEASE_FILE_WITH_GROUP_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^\/]+)\/lease\.yaml$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 // ============================================
@@ -38,7 +39,7 @@ function isFileAllowed(file) {
  * @returns {string[]} Array of invalid files
  */
 function validateFolderStructure(files) {
-  return files.filter(file => !LEASE_FILE_PATTERN.test(file));
+  return files.filter(file => !LEASE_FILE_PATTERN.test(file) && !LEASE_FILE_WITH_GROUP_PATTERN.test(file));
 }
 
 /**
@@ -84,7 +85,8 @@ function validateLeaseContent(leaseFile, today, relativePath) {
   const errors = [];
   const pathForExtraction = relativePath || leaseFile;
   // Extract namespace from .github/arm-leases/<servicename>/<namespace>/lease.yaml
-  const folderRP = pathForExtraction.split('/')[3];
+  // or .github/arm-leases/<servicename>/<namespace>/<servicegroup>/lease.yaml
+  const folderRP = pathForExtraction.split('/')[3]; // namespace is always at index 3
   
   if (!existsSync(leaseFile)) {
     return { file: leaseFile, errors: ['File does not exist'] };
@@ -224,19 +226,23 @@ async function main() {
   if (invalidStructure.length > 0) {
     console.log(`${invalidStructure.length} file(s) with invalid folder structure:`);
     invalidStructure.forEach(file => console.log(`  ${file}`));
-    console.log('Expected format: .github/arm-leases/<servicename>/<namespace>/lease.yaml');
+    console.log('Expected format: .github/arm-leases/<servicename>/<namespace>/[<servicegroup> (optional)]/lease.yaml');
     console.log('Requirements:');
     console.log('  - <servicename>: lowercase alphanumeric only (e.g., testservice, widgetservice)');
     console.log('  - <namespace>: alphanumeric with dots and case-sensitive (e.g., Test.Rp, Widget.Manager)');
+    console.log('  - <servicegroup>: (optional) logical grouping within an RP (e.g., DiskRP, ComputeRP). Must not start with "stable" or "preview"');
     console.log('  - Only lease.yaml files are allowed in arm-leases folder');
     console.log('Examples:');
     console.log('  - .github/arm-leases/testservice/Test.Rp/lease.yaml');
-    console.log('  - .github/arm-leases/widgetservice/Widget.Manager/lease.yaml\n');
+    console.log('  - .github/arm-leases/widgetservice/Widget.Manager/lease.yaml');
+    console.log('  - .github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml\n');
     exitCode = 1;
   }
 
   // Step 6: Validate lease file contents
-  const validLeaseFiles = armLeaseFiles.filter(file => LEASE_FILE_PATTERN.test(file));
+  const validLeaseFiles = armLeaseFiles.filter(file => 
+    LEASE_FILE_PATTERN.test(file) || LEASE_FILE_WITH_GROUP_PATTERN.test(file)
+  );
   
   if (validLeaseFiles.length === 0) {
     printSummary(exitCode);

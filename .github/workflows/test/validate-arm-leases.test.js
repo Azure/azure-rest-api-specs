@@ -57,6 +57,36 @@ describe('ARM Leases Validation Tests', () => {
       });
     });
 
+    it('should accept valid lease file pattern with service group', () => {
+      const validPaths = [
+        '.github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml',
+        '.github/arm-leases/compute/Microsoft.Compute/ComputeRP/lease.yaml',
+        '.github/arm-leases/storage/Azure.Storage/BlobRP/lease.yaml'
+      ];
+
+      const LEASE_FILE_WITH_GROUP_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^\/]+)\/lease\.yaml$/;
+      
+      validPaths.forEach(path => {
+        assert.ok(LEASE_FILE_WITH_GROUP_PATTERN.test(path), `${path} should be valid`);
+      });
+    });
+
+    it('should reject lease files with stable or preview as service group', () => {
+      const invalidPaths = [
+        '.github/arm-leases/compute/Microsoft.Compute/stable/lease.yaml',
+        '.github/arm-leases/compute/Microsoft.Compute/preview/lease.yaml',
+        '.github/arm-leases/compute/Microsoft.Compute/stable-2024-01-01/lease.yaml',
+        '.github/arm-leases/compute/Microsoft.Compute/preview-2025-10-11/lease.yaml',
+        '.github/arm-leases/compute/Microsoft.Compute/preview-internal/lease.yaml'
+      ];
+
+      const LEASE_FILE_WITH_GROUP_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^\/]+)\/lease\.yaml$/;
+      
+      invalidPaths.forEach(path => {
+        assert.ok(!LEASE_FILE_WITH_GROUP_PATTERN.test(path), `${path} should be invalid`);
+      });
+    });
+
     it('should reject invalid lease file patterns', () => {
       const invalidPaths = [
         '.github/arm-leases/TestService/Microsoft.Test/lease.yaml', // uppercase service name
