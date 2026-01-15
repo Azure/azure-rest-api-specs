@@ -1,7 +1,7 @@
 import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { promisify } from "node:util";
+import { inspect, promisify } from "node:util";
 import { LogLevel, logMessage } from "./log.js";
 
 type Dirent = fs.Dirent;
@@ -24,7 +24,7 @@ export async function resetGitRepo(repoPath: string): Promise<void> {
       logMessage(`Successfully reset git repo at ${repoPath}`, LogLevel.Info);
     }
   } catch (error) {
-    throw new Error(`Failed to reset git repo at ${repoPath}: ${String(error)}`);
+    throw new Error(`Failed to reset git repo at ${repoPath}: ${inspect(error)}`);
   }
 }
 
@@ -115,7 +115,7 @@ export function getAllTypeSpecPaths(specRepoPath: string): string[] {
     specConfigPaths.pop();
     return specConfigPaths;
   } catch (error) {
-    logMessage(`Error parsing PowerShell output:${String(error)}`, LogLevel.Error);
+    logMessage(`Error parsing PowerShell output:${inspect(error)}`, LogLevel.Error);
     return [];
   }
 }
@@ -220,7 +220,7 @@ export function findParentWithFile(
         return currentPath;
       }
     } catch (error) {
-      logMessage(`Error reading directory: ${currentPath} with ${String(error)}`, LogLevel.Warn);
+      logMessage(`Error reading directory: ${currentPath} with ${inspect(error)}`, LogLevel.Warn);
       return undefined;
     }
     currentPath = path.dirname(currentPath);

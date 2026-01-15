@@ -7,6 +7,7 @@ import {
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { inspect } from "node:util";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import { groupSpecConfigPaths } from "./spec-helpers.js";
 import {
@@ -241,7 +242,7 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
     >;
     vsoLogs = objectToMap(logContent);
   } catch (error) {
-    throw new Error(`Runner: error reading log at ${logPath}:${String(error)}`);
+    throw new Error(`Runner: error reading log at ${logPath}:${inspect(error)}`);
   }
 
   if (vsoLogs) {
@@ -345,7 +346,7 @@ export function generateArtifact(
     setVsoVariable("HasAPIViewArtifact", apiViewRequestData.length > 0 ? "true" : "false");
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
-    vsoLogIssue(`Runner: errors writing breaking change label artifacts:${String(error)}`);
+    vsoLogIssue(`Runner: errors writing breaking change label artifacts:${inspect(error)}`);
     logMessage("ending group logging", LogLevel.EndGroup);
     return 1;
   }
