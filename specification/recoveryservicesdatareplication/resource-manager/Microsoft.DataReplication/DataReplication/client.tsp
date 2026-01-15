@@ -259,6 +259,7 @@ using Microsoft.DataReplication;
   "csharp"
 );
 @@clientName(DeploymentPreflightModel, "DeploymentPreflight", "csharp");
+@@clientName(DeploymentPreflight, "DeploymentPreflightOperations", "csharp");
 @@clientName(HyperVToAzStackHCIPolicyModelCustomProperties,
   "HyperVToAzStackHciPolicyCustomProperties",
   "csharp"
@@ -384,3 +385,7 @@ using Microsoft.DataReplication;
   "python"
 );
 @@clientName(Microsoft.DataReplication, "DataReplicationMgmtClient", "java");
+@@alternateType(VaultModelUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
