@@ -63,7 +63,6 @@ union RequestImageContentPartDetail {
   high: "high",
 }
 
-
 /** Output text content part. */
 @usage(ResponseUsage)
 model OutputTextContentPart extends MessageContentPart {
