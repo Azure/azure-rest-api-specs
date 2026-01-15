@@ -167,9 +167,11 @@ interface Policies {
   >;
   @sharedRoute
   listByResourceGroup is ArmResourceListByParent<Policy>;
-  revokeIssuer is ArmResourceActionNoResponseContentAsync<Policy, void>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"
+  revokeIssuer is ArmResourceActionNoContentAsync<Policy, void>;
   @doc("Activates or renews a Bring Your Own Root policy by accepting a customer-provided signed certificate. This is a long-running operation that returns no content upon completion.")
-  activateBringYourOwnRoot is ArmResourceActionNoResponseContentAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"
+  activateBringYourOwnRoot is ArmResourceActionNoContentAsync<
     Policy,
     ActivateBringYourOwnRootRequest
   >;
