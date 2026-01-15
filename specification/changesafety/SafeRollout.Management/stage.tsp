@@ -63,7 +63,7 @@ model StageProperties {
 @added(Versions.v2026_01_01_preview)
 model Action {
   @doc("The name of the action")
-  name: string;
+  name: ActionName;
 
   @doc("Action status.")
   status: Status;
