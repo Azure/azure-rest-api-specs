@@ -121,7 +121,7 @@ interface ComputeResources {
     ComputeResource,
     CustomService[],
     Response = {
-      @body body: void;
+      @body body: string;
     }
   >;
 
@@ -152,7 +152,7 @@ interface ComputeResources {
     ComputeResource,
     ComputeInstanceDataMount[],
     Response = {
-      @body body: void;
+      @body body: string;
     }
   >;
 
@@ -193,7 +193,7 @@ interface ComputeResources {
     ComputeResource,
     IdleShutdownSetting,
     Response = {
-      @body body: void;
+      @body body: string;
     }
   >;
 
