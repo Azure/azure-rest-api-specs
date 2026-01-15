@@ -1029,6 +1029,13 @@
             "type": "string",
             "minLength": 1,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "deleteInstances",
+            "in": "query",
+            "description": "When true, deletes all virtual machines created by this BulkAction Operation.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -1346,7 +1353,7 @@
           {
             "name": "Prioritized",
             "value": "Prioritized",
-            "description": "VM sizes distribution will be determined to optimize for the 'priority' as specified for each vm size."
+            "description": "VM sizes distribution will be determined to optimize for the 'rank' specified for each vm size."
           }
         ]
       }
@@ -1626,8 +1633,7 @@
         }
       },
       "required": [
-        "virtualMachineProfile",
-        "extensions"
+        "virtualMachineProfile"
       ]
     },
     "CpuManufacturer": {
@@ -2640,6 +2646,13 @@
             "type": "string"
           }
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
@@ -2725,7 +2738,6 @@
       "required": [
         "capacity",
         "priorityProfile",
-        "vmSizesProfile",
         "computeProfile"
       ]
     },
@@ -2907,6 +2919,13 @@
           "type": "array",
           "description": "Zones in which the LaunchBulkInstancesOperation is available",
           "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
             "type": "string"
           }
         },
@@ -3613,7 +3632,7 @@
         },
         "allocationStrategy": {
           "$ref": "#/definitions/AllocationStrategy",
-          "description": "Allocation strategy to follow when determining the VM sizes distribution for Spot VMs."
+          "description": "Allocation strategy to follow when determining the VM sizes distribution."
         }
       }
     },
@@ -3645,40 +3664,40 @@
       "type": "string",
       "description": "The status of the LaunchBulkInstancesOperation.",
       "enum": [
+        "Creating",
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Creating",
-        "Deleting"
+        "Deleting",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
             "name": "Creating",
             "value": "Creating",
             "description": "Initial creation in progress."
           },
           {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deletion in progress."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled."
           }
         ]
       },
@@ -4795,13 +4814,13 @@
         "min": {
           "type": "number",
           "format": "double",
-          "description": "Minimum value. default 0. Double.MinValue()",
+          "description": "Minimum value. If not specified, no minimum filter is applied.",
           "minimum": 0
         },
         "max": {
           "type": "number",
           "format": "double",
-          "description": "Maximum value. Double.MaxValue(1.7976931348623157E+308)",
+          "description": "Maximum value. Must be greater than zero. Double.MaxValue(1.7976931348623157E+308).",
           "minimum": 0
         }
       }
@@ -4961,14 +4980,14 @@
         },
         "allowedVMSizes": {
           "type": "array",
-          "description": "Specifies which VMSizes should be allowed for filtering on attributes. Optional parameter.",
+          "description": "Specifies which VMSizes should be allowed while filtering on VMAttributes. Cannot be specified together with excludedVMSizes. Maximum of 10 VM sizes allowed. Optional parameter.",
           "items": {
             "type": "string"
           }
         },
         "excludedVMSizes": {
           "type": "array",
-          "description": "Specifies which VMSizes should be excluded for filtering on attributes. Optional parameter.",
+          "description": "Specifies which VMSizes should be excluded while filtering on VMAttributes. Cannot be specified together with allowedVMSizes. Maximum of 10 VM sizes allowed. Optional parameter.",
           "items": {
             "type": "string"
           }
@@ -5090,7 +5109,9 @@
         "Canceled",
         "CancelFailedStatusUnknown",
         "Failed",
-        "Succeeded"
+        "Succeeded",
+        "Deleting",
+        "Cancelling"
       ],
       "x-ms-enum": {
         "name": "VMOperationStatus",
@@ -5120,6 +5141,16 @@
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "Indicates that the virtual machine operation completed successfully."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Indicates that the virtual machine is being deleted."
+          },
+          {
+            "name": "Cancelling",
+            "value": "Cancelling",
+            "description": "Indicates that the virtual machine operation is being cancelled."
           }
         ]
       },
@@ -5618,7 +5649,7 @@
     },
     "VirtualMachineType": {
       "type": "string",
-      "description": "Allocation strategy types for LaunchBulkInstancesOperation",
+      "description": "Specifies the priority type of virtual machines to launch.",
       "enum": [
         "Regular",
         "Spot"
