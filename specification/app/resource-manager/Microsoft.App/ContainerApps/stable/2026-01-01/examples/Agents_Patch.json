@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentName": "testAgent",
+    "api-version": "2026-01-01",
+    "agentEnvelope": {
+      "tags": {
+        "environment": "staging",
+        "version": "v2.1"
+      },
+      "properties": {
+        "upgradeChannel": "Preview",
+        "adminUsers": [
+          {
+            "objectId": "99999999-8888-7777-6666-555555555555",
+            "clientId": "88888888-7777-6666-5555-444444444444"
+          },
+          {
+            "objectId": "77777777-6666-5555-4444-333333333333",
+            "clientId": "66666666-5555-4444-3333-222222222222"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent",
+        "name": "testAgent",
+        "type": "Microsoft.App/agents",
+        "location": "East US",
+        "tags": {
+          "environment": "staging",
+          "version": "v2.1"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "agentEndpoint": "https://testAgent.eastus.agents.azurecontainerapps.io",
+          "runningState": "Running",
+          "powerState": "Running",
+          "agentSpaceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
+          "adminUsers": [
+            {
+              "objectId": "99999999-8888-7777-6666-555555555555",
+              "clientId": "88888888-7777-6666-5555-444444444444"
+            },
+            {
+              "objectId": "77777777-6666-5555-4444-333333333333",
+              "clientId": "66666666-5555-4444-3333-222222222222"
+            }
+          ],
+          "upgradeChannel": "Preview"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/abcdef12-3456-7890-abcd-ef1234567890",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/abcdef12-3456-7890-abcd-ef1234567890"
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSpaceName": "testAgentSpace",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/shared-sql-connector",
+            "name": "shared-sql-connector",
+            "type": "Microsoft.App/agentSpaces/connectors",
+            "properties": {
+              "dataConnectorType": "SqlServer",
+              "keyVaultUri": "https://testkv.vault.azure.net/secrets/shared-sql-connection-string",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedSqlIdentity"
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/shared-storage-connector",
+            "name": "shared-storage-connector",
+            "type": "Microsoft.App/agentSpaces/connectors",
+            "properties": {
+              "dataConnectorType": "AzureStorage",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedStorageIdentity"
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/shared-cosmos-connector",
+            "name": "shared-cosmos-connector",
+            "type": "Microsoft.App/agentSpaces/connectors",
+            "properties": {
+              "dataConnectorType": "CosmosDB",
+              "keyVaultUri": "https://testkv.vault.azure.net/secrets/shared-cosmos-connection-string",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedCosmosIdentity"
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/shared-keyvault-connector",
+            "name": "shared-keyvault-connector",
+            "type": "Microsoft.App/agentSpaces/connectors",
+            "properties": {
+              "dataConnectorType": "KeyVault",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedKvIdentity"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
