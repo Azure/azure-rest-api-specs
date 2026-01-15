@@ -57,7 +57,7 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(IngressGatewayResource, "IngressGatewayAsset", "csharp");
 @@clientName(EndpointAccessResource, "TargetResourceEndpointAccess", "csharp");
 @@clientName(EndpointProperties,
-  "HybridConnectivityEndpointProperties",
+  "MyHybridConnectivityEndpointProperties",
   "csharp"
 );
 @@clientName(ManagedProxyResource, "ManagedProxyAsset", "csharp");
