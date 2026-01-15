@@ -22,7 +22,7 @@ import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 
 import "./src/common/service.tsp";
-import "./src/common/namespaces.tsp";
+import "./src/common/custom_types.tsp";
 
 @@minValue(OpenAI.CreateChatCompletionRequest.seed, -9223372036854775808);
 @@maxValue(OpenAI.CreateChatCompletionRequest.seed, 9223372036854775807);
