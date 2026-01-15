@@ -1,0 +1,45 @@
+{
+  "title": "VolumeGroups_Get_MaximumSet",
+  "operationId": "VolumeGroups_Get",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "6AEE134C-447C-45BD-B62A-40D8ADD6A1ED",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "volumeGroupName": "volumegroup-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storagePoolInternalId": "sp-internal-12345",
+          "volumeGroupInternalId": "vg-internal-67890",
+          "performanceParameters": {
+            "bandwidthLimitMbPerSec": 1000,
+            "iopsLimit": 50000
+          },
+          "protectionParameters": {
+            "retention": "7d",
+            "frequency": "1h"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/6AEE134C-447C-45BD-B62A-40D8ADD6A1ED/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01",
+        "name": "volumegroup-01",
+        "type": "PureStorage.Block/storagePools/volumeGroups",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-15T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-15T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

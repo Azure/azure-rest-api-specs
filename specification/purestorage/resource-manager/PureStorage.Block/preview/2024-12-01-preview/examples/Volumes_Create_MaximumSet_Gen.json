@@ -1,0 +1,77 @@
+{
+  "title": "Volumes_Create_MaximumSet",
+  "operationId": "Volumes_Create",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "6AEE134C-447C-45BD-B62A-40D8ADD6A1ED",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "volumeGroupName": "volumegroup-01",
+    "volumeName": "volume-01",
+    "resource": {
+      "properties": {
+        "provisionedSize": 1099511627776,
+        "sourceVolumeResourceId": "/subscriptions/6AEE134C-447C-45BD-B62A-40D8ADD6A1ED/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01/volumes/source-volume"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "space": {
+            "totalUsed": 536870912000,
+            "unique": 268435456000,
+            "snapshots": 134217728000,
+            "shared": 134217728000
+          },
+          "provisionedSize": 1099511627776,
+          "serialNumber": "PURE-VOL-001-ABC123",
+          "createdAt": "2026-01-15T10:00:00.000Z",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/6AEE134C-447C-45BD-B62A-40D8ADD6A1ED/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01/volumes/volume-01",
+        "name": "volume-01",
+        "type": "PureStorage.Block/storagePools/volumeGroups/volumes",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-15T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-15T10:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/6AEE134C-447C-45BD-B62A-40D8ADD6A1ED/providers/PureStorage.Block/locations/eastus/operationStatuses/create-volume-01"
+      },
+      "body": {
+        "properties": {
+          "space": {
+            "totalUsed": 536870912000,
+            "unique": 268435456000,
+            "snapshots": 134217728000,
+            "shared": 134217728000
+          },
+          "provisionedSize": 1099511627776,
+          "serialNumber": "PURE-VOL-001-ABC123",
+          "createdAt": "2026-01-15T10:00:00.000Z",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/6AEE134C-447C-45BD-B62A-40D8ADD6A1ED/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01/volumes/volume-01",
+        "name": "volume-01",
+        "type": "PureStorage.Block/storagePools/volumeGroups/volumes",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-15T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-15T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}
