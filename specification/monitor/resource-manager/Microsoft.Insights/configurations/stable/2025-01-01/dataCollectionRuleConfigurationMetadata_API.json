@@ -1,0 +1,334 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Data Collection Rule Configuration Metadata API",
+    "description": "Provides operations for fetching configuration metadata for data collection rules, including supported data sources, destinations, and stream specifications.",
+    "contact": {
+      "name": "Azure Monitor Control Service Team",
+      "email": "amcsdev@microsoft.com"
+    },
+    "version": "2024-03-11",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/dataCollectionRuleConfigurationMetadata/fetchSummary": {
+      "post": {
+        "tags": [
+          "DataCollectionRuleConfigurationMetadata"
+        ],
+        "summary": "Fetches summary configuration metadata for all supported data sources.",
+        "operationId": "DataCollectionRuleConfigurationMetadata_FetchSummary",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body containing optional resource type filter",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fetch summary configuration metadata": {
+            "$ref": "./examples/DataCollectionRuleConfigurationMetadataFetchSummary.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/dataCollectionRuleConfigurationMetadata/fetchDetails": {
+      "post": {
+        "tags": [
+          "DataCollectionRuleConfigurationMetadata"
+        ],
+        "summary": "Fetches detailed configuration metadata for a specific resource type.",
+        "operationId": "DataCollectionRuleConfigurationMetadata_FetchDetails",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body containing resource type filter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fetch detailed configuration metadata": {
+            "$ref": "./examples/DataCollectionRuleConfigurationMetadataFetchDetails.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataCollectionRuleConfigurationMetadataRequest": {
+      "description": "Request body for fetching configuration metadata.",
+      "type": "object",
+      "properties": {
+        "dcrKind": {
+          "description": "DCR Kind for which metadata is being requested (e.g., PlatformTelemetry).",
+          "type": "string",
+          "example": "PlatformTelemetry"
+        },
+        "resourceType": {
+          "description": "Optional resource type filter (e.g., Microsoft.Compute/virtualMachines). If specified, returns detailed configuration metadata for that resource type.",
+          "type": "string",
+          "example": "Microsoft.Cache/Redis"
+        }
+      }
+    },
+    "DataCollectionRuleConfigurationMetadataResponse": {
+      "description": "Response containing configuration metadata for data collection rules.",
+      "type": "object",
+      "properties": {
+        "configurationMetadata": {
+          "description": "The configuration metadata for platform telemetry.",
+          "$ref": "#/definitions/ConfigurationMetadata"
+        }
+      }
+    },
+    "ConfigurationMetadata": {
+      "description": "Configuration metadata for data collection.",
+      "type": "object",
+      "properties": {
+        "platformTelemetry": {
+          "description": "Platform telemetry configuration metadata.",
+          "$ref": "#/definitions/PlatformTelemetryMetadata"
+        }
+      }
+    },
+    "PlatformTelemetryMetadata": {
+      "description": "Metadata for platform telemetry (logs and metrics).",
+      "type": "object",
+      "properties": {
+        "platformLogs": {
+          "description": "Configuration metadata for platform logs.",
+          "$ref": "#/definitions/TelemetryTypeMetadata"
+        },
+        "platformMetrics": {
+          "description": "Configuration metadata for platform metrics.",
+          "$ref": "#/definitions/TelemetryTypeMetadata"
+        }
+      }
+    },
+    "TelemetryTypeMetadata": {
+      "description": "Metadata for a specific telemetry type (logs or metrics).",
+      "type": "object",
+      "properties": {
+        "supportedDestinations": {
+          "description": "List of supported destination resource types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "Microsoft.OperationalInsights/workspaces",
+            "Microsoft.EventHub/namespaces",
+            "Microsoft.Storage/storageAccounts"
+          ]
+        },
+        "supportedResourceTypes": {
+          "description": "List of supported source resource types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "Microsoft.Cache/Redis",
+            "Microsoft.Storage/storageAccounts"
+          ]
+        },
+        "supportedStreams": {
+          "description": "Detailed stream information per resource type (only in fetchDetails response).",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/StreamMetadata"
+            }
+          }
+        }
+      }
+    },
+    "StreamMetadata": {
+      "description": "Metadata for a specific data stream.",
+      "type": "object",
+      "properties": {
+        "streamId": {
+          "description": "The unique identifier for the stream.",
+          "type": "string",
+          "example": "Microsoft-StorageRead"
+        },
+        "metadata": {
+          "description": "Additional metadata about the stream.",
+          "$ref": "#/definitions/StreamDetailMetadata"
+        }
+      }
+    },
+    "StreamDetailMetadata": {
+      "description": "Detailed metadata for a stream (logs or metrics specification).",
+      "type": "object",
+      "properties": {
+        "logsSpecification": {
+          "description": "Specification for logs stream.",
+          "$ref": "#/definitions/LogsSpecification"
+        },
+        "metricsSpecification": {
+          "description": "Specification for metrics stream.",
+          "$ref": "#/definitions/MetricsSpecification"
+        }
+      }
+    },
+    "LogsSpecification": {
+      "description": "Specification for a logs stream.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the logs stream.",
+          "type": "string",
+          "example": "StorageRead"
+        },
+        "displayName": {
+          "description": "The display name of the logs stream.",
+          "type": "string",
+          "example": "Storage Read Operations"
+        },
+        "groups": {
+          "description": "Categorization groups for the logs stream.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "audit",
+            "read"
+          ]
+        }
+      }
+    },
+    "MetricsSpecification": {
+      "description": "Specification for a metrics stream.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the metric.",
+          "type": "string",
+          "example": "transactions"
+        },
+        "displayName": {
+          "description": "The display name of the metric.",
+          "type": "string",
+          "example": "Transactions"
+        },
+        "description": {
+          "description": "Description of the metric.",
+          "type": "string",
+          "example": "Number of requests made to storage service"
+        },
+        "unit": {
+          "description": "The unit of measurement for the metric.",
+          "type": "string",
+          "example": "Count"
+        },
+        "aggregationType": {
+          "description": "The aggregation type for the metric.",
+          "type": "string",
+          "example": "Total"
+        },
+        "groups": {
+          "description": "Categorization groups for the metric.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "capacity"
+          ]
+        }
+      }
+    },
+    "ErrorResponseCommonV2": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
