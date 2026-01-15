@@ -83,6 +83,16 @@ input-file:
   - stable/2025-04-01/resources.json
 ```
 
+### Tag: package-resources-2025-08-preview
+
+These settings apply only when `--tag=package-resources-2025-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2025-08-preview'
+input-file:
+- stable/2025-04-01/resources.json
+- preview/2025-08-01-preview/batch.json
+```
+
 ### Tag: package-resources-2022-09
 
 These settings apply only when `--tag=package-resources-2022-09` is specified on the command line.
