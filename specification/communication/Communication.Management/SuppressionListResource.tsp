@@ -30,21 +30,25 @@ interface SuppressionLists {
   /**
    * Get a SuppressionList resource.
    */
+  @summary("Get")
   get is ArmResourceRead<SuppressionListResource>;
 
   /**
    * Add a new SuppressionList resource under the parent Domains resource or update an existing SuppressionList resource.
    */
+  @summary("Create Or Update")
   createOrUpdate is ArmResourceCreateOrReplaceSync<SuppressionListResource>;
 
   /**
    * Delete a SuppressionList.
    */
+  @summary("Delete")
   delete is ArmResourceDeleteSync<SuppressionListResource>;
 
   /**
    * List all suppression lists for a domains resource.
    */
+  @summary("List")
   listByDomain is ArmResourceListByParent<
     SuppressionListResource,
     Response = ArmResponse<SuppressionListResourceCollection>

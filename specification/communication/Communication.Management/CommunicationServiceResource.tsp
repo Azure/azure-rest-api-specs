@@ -29,16 +29,19 @@ interface CommunicationServices {
   /**
    * Get the CommunicationService and its properties.
    */
+  @summary("Get")
   get is ArmResourceRead<CommunicationServiceResource>;
 
   /**
    * Create a new CommunicationService or update an existing CommunicationService.
    */
+  @summary("Create Or Update")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CommunicationServiceResource>;
 
   /**
    * Operation to update an existing CommunicationService.
    */
+  @summary("Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CommunicationServiceResource,
@@ -49,6 +52,7 @@ interface CommunicationServices {
    * Operation to delete a CommunicationService.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     CommunicationServiceResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -57,6 +61,7 @@ interface CommunicationServices {
   /**
    * Handles requests to list all resources in a resource group.
    */
+  @summary("List By Resource Group")
   listByResourceGroup is ArmResourceListByParent<
     CommunicationServiceResource,
     Response = ArmResponse<CommunicationServiceResourceList>
@@ -74,6 +79,7 @@ interface CommunicationServices {
   /**
    * Links an Azure Notification Hub to this communication service.
    */
+  @summary("Link Notification Hub")
   linkNotificationHub is ArmResourceActionSync<
     CommunicationServiceResource,
     LinkNotificationHubParameters,
@@ -84,6 +90,7 @@ interface CommunicationServices {
   /**
    * Get the access keys of the CommunicationService resource.
    */
+  @summary("List Keys")
   listKeys is ArmResourceActionSync<
     CommunicationServiceResource,
     void,
@@ -93,6 +100,7 @@ interface CommunicationServices {
   /**
    * Regenerate CommunicationService access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
    */
+  @summary("Regenerate Key")
   regenerateKey is ArmResourceActionSync<
     CommunicationServiceResource,
     RegenerateKeyParameters,

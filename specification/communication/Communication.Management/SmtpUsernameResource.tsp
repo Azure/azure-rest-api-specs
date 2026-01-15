@@ -30,21 +30,25 @@ interface SmtpUsernames {
   /**
    * Get a SmtpUsernameResource.
    */
+  @summary("Get")
   get is ArmResourceRead<SmtpUsernameResource>;
 
   /**
    * Create or update an SmtpUsernameResource.
    */
+  @summary("Create Or Update")
   createOrUpdate is ArmResourceCreateOrReplaceSync<SmtpUsernameResource>;
 
   /**
    * Operation to delete a single SmtpUsername resource.
    */
+  @summary("Delete")
   delete is ArmResourceDeleteSync<SmtpUsernameResource>;
 
   /**
-   * Get all SmtpUsernames for a Communication resource.
+   * Get all SmtpUsernameResources for a Communication resource.
    */
+  @summary("Get")
   list is ArmResourceListByParent<
     SmtpUsernameResource,
     Response = ArmResponse<SmtpUsernameResourceCollection>

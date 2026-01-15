@@ -30,21 +30,25 @@ interface SuppressionListAddresses {
   /**
    * Get a SuppressionListAddress.
    */
+  @summary("Get")
   get is ArmResourceRead<SuppressionListAddressResource>;
 
   /**
    * Create or update a SuppressionListAddress.
    */
+  @summary("Create Or Update")
   createOrUpdate is ArmResourceCreateOrReplaceSync<SuppressionListAddressResource>;
 
   /**
    * Operation to delete a single address from a suppression list.
    */
+  @summary("Delete")
   delete is ArmResourceDeleteSync<SuppressionListAddressResource>;
 
   /**
    * Get all the addresses in a suppression list.
    */
+  @summary("Get")
   list is ArmResourceListByParent<
     SuppressionListAddressResource,
     Response = ArmResponse<SuppressionListAddressResourceCollection>

@@ -28,16 +28,19 @@ interface EmailServices {
   /**
    * Get the EmailService and its properties.
    */
+  @summary("Get")
   get is ArmResourceRead<EmailServiceResource>;
 
   /**
    * Create a new EmailService or update an existing EmailService.
    */
+  @summary("Create Or Update")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EmailServiceResource>;
 
   /**
    * Operation to update an existing EmailService.
    */
+  @summary("Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     EmailServiceResource,
@@ -53,6 +56,7 @@ interface EmailServices {
    * Operation to delete a EmailService.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     EmailServiceResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -61,6 +65,7 @@ interface EmailServices {
   /**
    * Handles requests to list all resources in a resource group.
    */
+  @summary("List By Resource Group")
   listByResourceGroup is ArmResourceListByParent<
     EmailServiceResource,
     Response = ArmResponse<EmailServiceResourceList>
@@ -69,6 +74,7 @@ interface EmailServices {
   /**
    * Handles requests to list all resources in a subscription.
    */
+  @summary("List By Subscription")
   listBySubscription is ArmListBySubscription<
     EmailServiceResource,
     Response = ArmResponse<EmailServiceResourceList>
