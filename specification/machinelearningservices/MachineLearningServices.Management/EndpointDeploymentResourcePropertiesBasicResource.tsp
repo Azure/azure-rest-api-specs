@@ -74,12 +74,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   createOrUpdateDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -92,12 +87,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   deleteDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
@@ -108,12 +98,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   listDeployments is EndpointDeploymentResourcePropertiesBasicResourceOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>
   >;
@@ -177,12 +162,7 @@ interface EndpointDeployment {
   delete is EndpointDeploymentOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
