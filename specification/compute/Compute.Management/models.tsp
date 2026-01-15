@@ -5257,6 +5257,44 @@ model StorageProfile {
 }
 
 /**
+ * Defines configuration settings for Basic Data Protection. When isEnabled is set to true, the platform periodically creates restore points every 24 hours and retains them for 5 days. This object is designed to be extensible, and additional configuration fields will be introduced as the capability evolves.
+ */
+@added(Versions.v2025_11_01)
+model PeriodicRestorePoints {
+  /**
+   * Indicates if periodic restore points for the VM are enabled.
+   */
+  isEnabled?: boolean;
+}
+
+/**
+ * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage. By default isEnabled is set to false.
+ */
+@added(Versions.v2025_11_01)
+model ZoneMovement {
+  /**
+   * Indicates if zone movement is enabled.
+   */
+  isEnabled?: boolean;
+}
+
+/**
+ * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.
+ */
+@added(Versions.v2025_11_01)
+model ResiliencyProfile {
+  /**
+   * Zone movement configuration.
+   */
+  zoneMovement?: ZoneMovement;
+
+  /**
+   * Periodic restore points configuration.
+   */
+  periodicRestorePoints?: PeriodicRestorePoints;
+}
+
+/**
  * Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
  */
 model OSDisk {
@@ -6267,6 +6305,12 @@ model VirtualMachineProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Resiliency profile for the virtual machine.
+   */
+  @added(Versions.v2025_11_01)
+  resiliencyProfile?: ResiliencyProfile;
 }
 
 /**

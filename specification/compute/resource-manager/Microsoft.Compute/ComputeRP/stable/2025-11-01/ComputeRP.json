@@ -10020,6 +10020,9 @@
           "Create a VM with network interface configuration with public ip address dns settings": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithNetworkInterfaceConfigurationDnsSettings.json"
           },
+          "Create a VM with resiliency profile and Periodic Restore Points enabled.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPeriodicRestorePointsEnabled.json"
+          },
           "Create a VM with securityType ConfidentialVM with Customer Managed Keys": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSecurityTypeConfidentialVMWithCustomerManagedKeys.json"
           },
@@ -10118,6 +10121,9 @@
           },
           "Create a vm with premium storage.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPremiumStorage.json"
+          },
+          "Create a vm with resiliency profile and zone movement enabled.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithZoneMovementEnabled.json"
           },
           "Create a vm with ssh authentication.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSshAuthentication.json"
@@ -15912,6 +15918,16 @@
         }
       }
     },
+    "PeriodicRestorePoints": {
+      "type": "object",
+      "description": "Defines configuration settings for Basic Data Protection. When isEnabled is set to true, the platform periodically creates restore points every 24 hours and retains them for 5 days. This object is designed to be extensible, and additional configuration fields will be introduced as the capability evolves.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if periodic restore points for the VM are enabled."
+        }
+      }
+    },
     "Placement": {
       "type": "object",
       "description": "Describes the user-defined constraints for resource hardware placement.",
@@ -16390,6 +16406,20 @@
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
           "description": "The configuration parameters used while performing zone allocation."
+        }
+      }
+    },
+    "ResiliencyProfile": {
+      "type": "object",
+      "description": "Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.",
+      "properties": {
+        "zoneMovement": {
+          "$ref": "#/definitions/ZoneMovement",
+          "description": "Zone movement configuration."
+        },
+        "periodicRestorePoints": {
+          "$ref": "#/definitions/PeriodicRestorePoints",
+          "description": "Periodic restore points configuration."
         }
       }
     },
@@ -19820,6 +19850,10 @@
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.",
           "readOnly": true
+        },
+        "resiliencyProfile": {
+          "$ref": "#/definitions/ResiliencyProfile",
+          "description": "Resiliency profile for the virtual machine."
         }
       }
     },
@@ -23514,6 +23548,16 @@
         "maxInstancePercentPerZonePolicy": {
           "$ref": "#/definitions/MaxInstancePercentPerZonePolicy",
           "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set."
+        }
+      }
+    },
+    "ZoneMovement": {
+      "type": "object",
+      "description": "Describes zone movement configuration. This allows VM to be moved across availability zones during an outage. By default isEnabled is set to false.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if zone movement is enabled."
         }
       }
     },
