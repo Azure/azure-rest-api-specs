@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "$skip": "skip_string",
+    "api-version": "2025-12-01",
+    "endpointType": "Azure.OpenAI",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/my-aml-workspace/onlineEndpoints?api-version=2025-07-01-preview&$skip=2",
+        "value": [
+          {
+            "name": "Azure.OpenAI",
+            "type": "Microsoft.MachineLearningServices/workspaces/endpoints",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/endpoints/Azure.OpenAI",
+            "properties": {
+              "name": "Azure.OpenAI",
+              "associatedResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveService/account/account-1",
+              "endpointType": "Azure.OpenAI",
+              "endpointUri": "https://www.contoso.com/",
+              "failureReason": "some_string",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T00:00:00Z",
+              "createdBy": "some_string",
+              "createdByType": "ManagedIdentity",
+              "lastModifiedAt": "2020-01-01T00:00:00Z",
+              "lastModifiedBy": "some_string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Endpoint_List",
+  "title": "List Endpoint"
+}

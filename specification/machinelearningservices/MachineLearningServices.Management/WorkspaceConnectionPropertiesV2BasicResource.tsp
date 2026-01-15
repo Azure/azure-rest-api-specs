@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
@@ -103,7 +105,9 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
 
   /**
    * Test machine learning workspaces connections under the specified workspace.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Test machine learning workspaces connections under the specified workspace.")
   @action("testconnection")
   testConnection is ArmResourceActionAsyncBase<
@@ -116,7 +120,9 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
 
   /**
    * Get available models under the Azure OpenAI connection.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Get available models under the Azure OpenAI connection.")
   @list
   @get
