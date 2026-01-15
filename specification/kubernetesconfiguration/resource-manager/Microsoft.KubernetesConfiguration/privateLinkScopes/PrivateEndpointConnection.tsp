@@ -14,6 +14,7 @@ namespace Microsoft.KubernetesConfiguration;
 /**
  * The Private Endpoint Connection resource.
  */
+@parentResource(KubernetesConfigurationPrivateLinkScope)
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
 alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
@@ -51,11 +52,8 @@ interface PrivateEndpointConnections {
   /**
    * Gets all private endpoint connections on a private link scope.
    */
-  listByPrivateLinkScope is PrivateEndpointOperations.ListByParent<
-    KubernetesConfigurationPrivateLinkScope,
-    PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
-  >;
+  @action("privateEndpointConnections")
+  listByPrivateLinkScope is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<PrivateEndpointConnection>;
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");

@@ -35,10 +35,7 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
    */
-  listByPrivateLinkScope is ArmResourceListByParent<
-    PrivateLinkResource,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>
-  >;
+  listByPrivateLinkScope is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<PrivateLinkResource>;
 }
 
 @@doc(PrivateLinkResource.name, "The name of the private link resource.");
