@@ -25,14 +25,6 @@ model Project is TrackedResource<ProjectProperties> {
   ...ResourceNameParameter<Project>;
 }
 
-@doc("Settings schema for the project")
-@added(Microsoft.Discovery.Versions.v2025_12_01_preview)
-model ProjectSettings {
-  @maxLength(5000)
-  @doc("Default preferences to guide AI behaviors in this project.")
-  behaviorPreferences?: string;
-}
-
 @doc("Project properties")
 model ProjectProperties {
   @doc("The status of the last operation.")
