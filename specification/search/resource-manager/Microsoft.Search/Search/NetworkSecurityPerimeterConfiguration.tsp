@@ -58,11 +58,6 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a network security perimeter configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Legacy.renamePathParameter(
-    "networkSecurityPerimeterConfigurationName",
-    "nspConfigName"
-  )
   get is NetworkSecurityPerimeterConfigurationOperations.Read<
     SearchService,
     Error = CloudError
@@ -79,12 +74,11 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Reconcile network security perimeter configuration for the Azure AI Search resource provider. This triggers a manual resync with network security perimeter configurations by ensuring the search service carries the latest configuration.
    */
-  reconcile is NetworkSecurityPerimeterConfigurationsOps.ActionAsync<
-    CommonTypes.NetworkSecurityPerimeterConfiguration,
+  reconcile is NetworkSecurityPerimeterConfigurationOperations.Action<
+    SearchService,
     void,
-    Result = void,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
-    OverrideErrorType = CloudError
+    Error = CloudError
   >;
 }
 
