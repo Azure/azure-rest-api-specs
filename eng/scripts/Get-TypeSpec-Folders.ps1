@@ -32,9 +32,17 @@ else {
   }
 }
 
+$orgFolders = @()
 $typespecFolders = @()
-$skippedTypespecFolders = @()
+$skippedFolders = @()
 foreach ($file in $changedFiles) {
+  # Extract specification/{org} pattern
+  if ($file -match 'specification\/([^\/]+)\/') {
+    $orgFolder = "specification/$($matches[1])"
+    $orgFolders += $orgFolder
+  }
+  
+  # Extract folders under specification/{org}/ for TypeSpec checking
   if ($file -match 'specification(\/[^\/]+\/)+') {
     $path = "$repoPath/$($matches[0])"
     if (Test-Path $path) {
@@ -44,16 +52,20 @@ foreach ($file in $changedFiles) {
         $typespecFolders += $typespecFolder.Directory.FullName
       }
     } else {
-      $skippedTypespecFolders += $path
+      $skippedFolders += $path
     } 
   }
 }
-foreach ($skippedTypespecFolder in $skippedTypespecFolders | Select-Object -Unique) {
-  Write-Host "Cannot find directory $skippedTypespecFolder"
+foreach ($skippedFolder in $skippedFolders | Select-Object -Unique) {
+  Write-Host "Cannot find directory $skippedFolder"
+}
+
+if ($orgFolders.Length) {
+  $orgFolders = $orgFolders | Sort-Object -Unique
 }
 
 if ($typespecFolders.Length) {
   $typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
 }
 
-return @($typespecFolders, $checkedAll)
+return @($orgFolders, $typespecFolders, $checkedAll)

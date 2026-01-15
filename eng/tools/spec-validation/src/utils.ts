@@ -42,7 +42,7 @@ export async function readTspConfig(folder: string) {
 }
 
 export async function getSuppressions(path: string): Promise<Suppression[]> {
-  return getSuppressionsImpl("TypeSpecValidation", path, context);
+  return getSuppressionsImpl("SpecValidation", path, context);
 }
 
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {

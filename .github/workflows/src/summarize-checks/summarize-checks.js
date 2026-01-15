@@ -165,7 +165,7 @@ const CHECK_METADATA = [
   },
   {
     precedence: 0,
-    name: "TypeSpec Validation",
+    name: "Spec Validation",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
   },
