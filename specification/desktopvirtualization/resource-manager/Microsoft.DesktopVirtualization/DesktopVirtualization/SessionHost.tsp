@@ -119,9 +119,7 @@ interface SessionHosts {
   /**
    * Operation to list the scoped RegistrationTokens associated with the SessionHost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Override to use singular SessionHost noun and avoid repeating noun in verb"
   @added(Versions.v2026_01_01_preview)
-  @operationId("SessionHost_ListRegistrationTokens")
   listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
     SessionHost,
     ScopedRegistrationTokenProperties,
