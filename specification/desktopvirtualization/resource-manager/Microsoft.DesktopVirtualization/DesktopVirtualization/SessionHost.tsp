@@ -107,6 +107,7 @@ interface SessionHosts {
   /**
    * create or update a sessionHost.
    */
+  @added(Versions.v2026_01_01_preview)
   create is ArmResourceCreateOrReplaceSync<SessionHost>;
 
   /**
