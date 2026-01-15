@@ -63,8 +63,7 @@ model RequestMetadata {
 @doc("Approver Metadata for approvals request.")
 model Approver {
   @doc("Entra ObjectID of the approver")
-  @typeChangedFrom(Microsoft.Mission.Versions.v2026_01_01_preview, string)
-  approverEntraId: uuid;
+  approverEntraId: string;
 
   @doc("Action Performed by approver")
   actionPerformed?: ActionPerformed;
@@ -75,7 +74,7 @@ model Approver {
   @added(Microsoft.Mission.Versions.v2026_01_01_preview)
   @doc("Indicates if this approver is part of a mandatory approver group with list of Entra IDs")
   @visibility(Lifecycle.Read)
-  mandatoryApprovalGroupMembershipIds?: uuid[];
+  mandatoryApprovalGroupMembershipIds?: string[];
 }
 
 @doc("Approval Base model.")
@@ -135,7 +134,7 @@ model ApprovalBaseModel {
   @added(Microsoft.Mission.Versions.v2026_01_01_preview)
   @doc("Array of Entra IDs of approvers who have approved the approval request")
   @visibility(Lifecycle.Read)
-  approvedByEntraIds?: uuid[];
+  approvedByEntraIds?: string[];
 }
 
 model ApprovalProperties is ApprovalBaseModel {

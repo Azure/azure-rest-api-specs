@@ -4366,7 +4366,7 @@
           "type": "array",
           "description": "Array of Entra IDs of approvers who have approved the approval request",
           "items": {
-            "$ref": "#/definitions/Azure.Core.uuid"
+            "type": "string"
           },
           "readOnly": true
         },
@@ -4556,7 +4556,7 @@
       "description": "Approver Metadata for approvals request.",
       "properties": {
         "approverEntraId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Entra ObjectID of the approver"
         },
         "actionPerformed": {
@@ -4572,7 +4572,7 @@
           "type": "array",
           "description": "Indicates if this approver is part of a mandatory approver group with list of Entra IDs",
           "items": {
-            "$ref": "#/definitions/Azure.Core.uuid"
+            "type": "string"
           },
           "readOnly": true
         }
@@ -4581,11 +4581,6 @@
         "approverEntraId",
         "lastUpdatedAt"
       ]
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -6214,7 +6209,7 @@
       "description": "Approver Metadata for approvals request.",
       "properties": {
         "approverEntraId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "EntraId of the approver"
         }
       },
@@ -6270,40 +6265,13 @@
         "destinationType"
       ]
     },
-    "MonitoringDestinationUpdate": {
+    "MonitoringDestinationPatchModel": {
       "type": "object",
-      "description": "Monitoring destination configuration with multiple workspaces",
+      "description": "Monitoring Destination Patch Model",
       "properties": {
         "destinationType": {
-          "type": "string",
-          "description": "The type of monitoring workspace destination",
-          "default": "EnclaveWorkspace",
-          "enum": [
-            "CommunityWorkspace",
-            "EnclaveWorkspace",
-            "CustomWorkspace"
-          ],
-          "x-ms-enum": {
-            "name": "MonitoringDestinationType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "CommunityWorkspace",
-                "value": "CommunityWorkspace",
-                "description": "MonitoringDestinationType Type CommunityWorkspace"
-              },
-              {
-                "name": "EnclaveWorkspace",
-                "value": "EnclaveWorkspace",
-                "description": "MonitoringDestinationType Type EnclaveWorkspace"
-              },
-              {
-                "name": "CustomWorkspace",
-                "value": "CustomWorkspace",
-                "description": "MonitoringDestinationType Type CustomWorkspace"
-              }
-            ]
-          }
+          "$ref": "#/definitions/MonitoringDestinationType",
+          "description": "The type of monitoring workspace destination"
         },
         "customWorkspaceResourceId": {
           "$ref": "#/definitions/LogAnalyticsResourceId",
@@ -6313,6 +6281,57 @@
           "type": "string",
           "description": "Custom name for diagnostic settings"
         }
+      },
+      "required": [
+        "destinationType"
+      ]
+    },
+    "MonitoringDestinationPatchModelUpdate": {
+      "type": "object",
+      "description": "Monitoring Destination Patch Model",
+      "properties": {
+        "destinationType": {
+          "$ref": "#/definitions/MonitoringDestinationType",
+          "description": "The type of monitoring workspace destination"
+        },
+        "customWorkspaceResourceId": {
+          "$ref": "#/definitions/LogAnalyticsResourceId",
+          "description": "Log analytics workspace resource ID for custom workspace"
+        },
+        "diagnosticSettingsName": {
+          "type": "string",
+          "description": "Custom name for diagnostic settings"
+        }
+      }
+    },
+    "MonitoringDestinationType": {
+      "type": "string",
+      "description": "List of destination types for monitoring logs",
+      "enum": [
+        "CommunityWorkspace",
+        "EnclaveWorkspace",
+        "CustomWorkspace"
+      ],
+      "x-ms-enum": {
+        "name": "MonitoringDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CommunityWorkspace",
+            "value": "CommunityWorkspace",
+            "description": "MonitoringDestinationType Type CommunityWorkspace"
+          },
+          {
+            "name": "EnclaveWorkspace",
+            "value": "EnclaveWorkspace",
+            "description": "MonitoringDestinationType Type EnclaveWorkspace"
+          },
+          {
+            "name": "CustomWorkspace",
+            "value": "CustomWorkspace",
+            "description": "MonitoringDestinationType Type CustomWorkspace"
+          }
+        ]
       }
     },
     "MonitoringSettingsModel": {
@@ -6341,12 +6360,12 @@
           "type": "array",
           "description": "Log Analytics workspace destinations where diagnostic logs will be stored.",
           "items": {
-            "$ref": "#/definitions/MonitoringDestination"
+            "$ref": "#/definitions/MonitoringDestinationPatchModel"
           },
           "x-ms-identifiers": []
         },
         "flowLogDestination": {
-          "$ref": "#/definitions/MonitoringDestinationUpdate",
+          "$ref": "#/definitions/MonitoringDestinationPatchModelUpdate",
           "description": "Log Analytics workspace destination where virtual network flow logs will be stored."
         }
       }

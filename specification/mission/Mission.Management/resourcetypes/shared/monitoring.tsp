@@ -17,6 +17,10 @@ union MonitoringDestinationType {
   CustomWorkspace: "CustomWorkspace",
 }
 
+@doc("Monitoring Destination Patch Model")
+model MonitoringDestinationPatchModel
+  is UpdateableProperties<OmitDefaults<MonitoringDestination>>;
+
 @doc("Monitoring destination configuration with multiple workspaces")
 model MonitoringDestination {
   @doc("The type of monitoring workspace destination")
@@ -30,8 +34,14 @@ model MonitoringDestination {
 }
 
 @doc("Monitoring Settings Patch Model")
-model MonitoringSettingsPatchModel
-  is UpdateableProperties<OmitDefaults<MonitoringSettingsModel>>;
+model MonitoringSettingsPatchModel {
+  @doc("Log Analytics workspace destinations where diagnostic logs will be stored.")
+  @identifiers(#[])
+  diagnosticDestinations?: MonitoringDestinationPatchModel[];
+
+  @doc("Log Analytics workspace destination where virtual network flow logs will be stored.")
+  flowLogDestination?: MonitoringDestinationPatchModel;
+}
 
 @doc("Monitoring Settings")
 model MonitoringSettingsModel {

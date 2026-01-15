@@ -55,8 +55,7 @@ union ApprovalPolicy {
 @doc("Approver Metadata for approvals request.")
 model MandatoryApprover {
   @doc("EntraId of the approver")
-  @typeChangedFrom(Microsoft.Mission.Versions.v2026_01_01_preview, string)
-  approverEntraId: uuid;
+  approverEntraId: string;
 }
 
 @added(Microsoft.Mission.Versions.v2025_11_01_preview)
