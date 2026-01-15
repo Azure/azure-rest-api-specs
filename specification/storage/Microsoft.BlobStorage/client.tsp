@@ -43,6 +43,12 @@ namespace Customizations;
 );
 @@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
+@@alternateType(BlobName,
+  {
+    identity: "crate::models::BlobName",
+  },
+  "rust"
+);
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
 @@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
 @@alternateType(StructuredContentLengthParameter.structuredContentLength,
