@@ -7,6 +7,7 @@ import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ChangeSafety;
@@ -58,6 +59,16 @@ model SafeRolloutProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The error of the safe rollout.")
   error?: Error;
+
+  @visibility(Lifecycle.Read)
+  @doc("The start time of the safe rollout.")
+  @added(Versions.v2026_01_01_preview)
+  startTime?: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("The end time of the safe rollout.")
+  @added(Versions.v2026_01_01_preview)
+  endTime?: utcDateTime;
 }
 
 @armResourceOperations(SafeRollout)
@@ -68,6 +79,35 @@ interface SafeRollouts {
   delete is ArmResourceDeleteSync<SafeRollout>;
   listByResourceGroup is ArmResourceListByParent<SafeRollout>;
   listBySubscription is ArmListBySubscription<SafeRollout>;
+
   @doc("Cancel the SafeRollout.")
-  cancel is ArmResourceActionNoContentSync<SafeRollout, SafeRollout>;
+  @sharedRoute
+  @removed(Versions.v2026_01_01_preview)
+  @renamedFrom(Versions.v2026_01_01_preview, "cancel")
+  cancelv1 is ArmResourceActionNoContentSync<SafeRollout, SafeRollout>;
+
+  @doc("Cancel the SafeRollout.")
+  @sharedRoute
+  @added(Versions.v2026_01_01_preview)
+  cancel is ArmResourceActionNoContentSync<
+    SafeRollout,
+    SafeRollout,
+    OptionalRequestBody = true
+  >;
+
+  @doc("Pause the SafeRollout.")
+  @added(Versions.v2026_01_01_preview)
+  pause is ArmResourceActionNoContentSync<
+    SafeRollout,
+    SafeRollout,
+    OptionalRequestBody = true
+  >;
+
+  @doc("Resume the SafeRollout.")
+  @added(Versions.v2026_01_01_preview)
+  resume is ArmResourceActionNoContentSync<
+    SafeRollout,
+    SafeRollout,
+    OptionalRequestBody = true
+  >;
 }
