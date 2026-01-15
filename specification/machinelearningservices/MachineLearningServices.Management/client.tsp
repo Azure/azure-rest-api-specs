@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.MachineLearningServices;
 
-@@apiVersion(ProxyApiVersion.`proxy-api-version`, false, "python");
+@@apiVersion(ProxyApiVersion.`proxy-api-version`, false, "python, javascript");
 
 // Java casing fixes for SAS-related types and operations
 @@clientName(GetBlobReferenceSASRequestDto,
