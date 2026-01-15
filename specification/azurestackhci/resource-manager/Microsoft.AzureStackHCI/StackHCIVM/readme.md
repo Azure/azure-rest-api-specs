@@ -29,7 +29,7 @@ title: Microsoft.AzureStackHCI
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2026-02-01-preview
+tag: package-preview-2026-04-01-preview
 ```
 
 ## Suppression
@@ -83,6 +83,15 @@ suppressions:
     reason: 2024-05-01-preview is for internal testing only and recommended by API spec review office hours.
     from:
       - stackhcivm.json
+```
+
+### Tag: package-preview-2026-04-01-preview
+
+These settings apply only when `--tag=package-preview-2026-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04-01-preview'
+input-file:
+  - preview/2026-04-01-preview/stackhcivm.json
 ```
 
 ### Tag: package-preview-2026-02-01-preview
