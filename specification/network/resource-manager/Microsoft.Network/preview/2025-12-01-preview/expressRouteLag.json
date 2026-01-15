@@ -1,0 +1,1501 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2025-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra ID OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}": {
+      "delete": {
+        "tags": [
+          "ExpressRouteLags"
+        ],
+        "operationId": "ExpressRouteLags_Delete",
+        "description": "Deletes the specified ExpressRouteLag resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLag resource."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagDelete": {
+            "$ref": "./examples/ExpressRouteLagDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ExpressRouteLags"
+        ],
+        "operationId": "ExpressRouteLags_Get",
+        "description": "Retrieves the requested ExpressRouteLag resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of ExpressRouteLag."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the requested ExpressRouteLag resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLag"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagGet": {
+            "$ref": "./examples/ExpressRouteLagGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExpressRouteLags"
+        ],
+        "operationId": "ExpressRouteLags_CreateOrUpdate",
+        "description": "Creates or updates the specified ExpressRouteLag resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLag resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLag"
+            },
+            "description": "Parameters supplied to the create ExpressRouteLag operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ExpressRouteLag resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLag"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting ExpressRouteLag resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLag"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagCreate": {
+            "$ref": "./examples/ExpressRouteLagCreate.json"
+          },
+          "ExpressRouteLagUpdateLink": {
+            "$ref": "./examples/ExpressRouteLagUpdateLink.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ExpressRouteLags"
+        ],
+        "operationId": "ExpressRouteLags_UpdateTags",
+        "description": "Update ExpressRouteLag tags or identity.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLag resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagPatch"
+            },
+            "description": "Parameters supplied to update ExpressRouteLag resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ExpressRouteLag resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLag"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagPatch": {
+            "$ref": "./examples/ExpressRouteLagPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags": {
+      "get": {
+        "tags": [
+          "ExpressRouteLags"
+        ],
+        "operationId": "ExpressRouteLags_ListByResourceGroup",
+        "description": "List all the ExpressRouteLag resources in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ExpressRouteLag resources. If there are no ExpressRouteLag resources then an empty list is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagListByResourceGroup": {
+            "$ref": "./examples/ExpressRouteLagListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteLags": {
+      "get": {
+        "tags": [
+          "ExpressRouteLags"
+        ],
+        "operationId": "ExpressRouteLags_List",
+        "description": "List all the ExpressRouteLag resources in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ExpressRouteLag resources. If there are no ExpressRouteLag resources then an empty list is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagList": {
+            "$ref": "./examples/ExpressRouteLagList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}": {
+      "get": {
+        "tags": [
+          "ExpressRouteLagLinks"
+        ],
+        "operationId": "ExpressRouteLagLinks_Get",
+        "description": "Retrieves the specified ExpressRouteLagLink resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLag resource."
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLagLink resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the requested ExpressRouteLagLink resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagLink"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagLinkGet": {
+            "$ref": "./examples/ExpressRouteLagLinkGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links": {
+      "get": {
+        "tags": [
+          "ExpressRouteLagLinks"
+        ],
+        "operationId": "ExpressRouteLagLinks_List",
+        "description": "Retrieve the ExpressRouteLagLink sub-resources of the specified ExpressRouteLag resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLag resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ExpressRouteLagLink resources. If there are no ExpressRouteLagLink resources then an empty list is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagLinkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagLinkList": {
+            "$ref": "./examples/ExpressRouteLagLinkList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}/members/{memberName}": {
+      "get": {
+        "tags": [
+          "ExpressRouteLagMembers"
+        ],
+        "operationId": "ExpressRouteLagMembers_Get",
+        "description": "Retrieves the specified ExpressRouteLagMember resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLag resource."
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLagLink resource."
+          },
+          {
+            "name": "memberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLagMember resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the requested ExpressRouteLagMember resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagMember"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagMemberGet": {
+            "$ref": "./examples/ExpressRouteLagMemberGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/links/{linkName}/members": {
+      "get": {
+        "tags": [
+          "ExpressRouteLagMembers"
+        ],
+        "operationId": "ExpressRouteLagMembers_List",
+        "description": "Retrieve the ExpressRouteLagMember sub-resources of the specified ExpressRouteLagLink resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLag resource."
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the ExpressRouteLagLink resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ExpressRouteLagMember resources. If there are no ExpressRouteLagMember resources then an empty list is returned.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagMemberListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExpressRouteLagMemberList": {
+            "$ref": "./examples/ExpressRouteLagMemberList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/generateLoa": {
+      "post": {
+        "tags": [
+          "ExpressRouteLags"
+        ],
+        "operationId": "ExpressRouteLags_GenerateLOA",
+        "description": "Generate a letter of authorization for the requested ExpressRouteLag resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of ExpressRouteLag."
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateExpressRouteLagsLOARequest"
+            },
+            "description": "Request parameters supplied to generate a letter of authorization."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the content as a base64 encoded string.",
+            "schema": {
+              "$ref": "#/definitions/GenerateExpressRouteLagsLOAResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateExpressRouteLagLOA": {
+            "$ref": "./examples/GenerateExpressRouteLagsLOA.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations/{authorizationName}": {
+      "delete": {
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "operationId": "ExpressRouteLagAuthorizations_Delete",
+        "description": "Deletes the specified authorization from the specified express route lag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the express route lag."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the authorization."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "operationId": "ExpressRouteLagAuthorizations_Get",
+        "description": "Gets the specified authorization from the specified express route lag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the express route lag."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the authorization."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the ExpressRouteLagAuthorization resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorization"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "operationId": "ExpressRouteLagAuthorizations_CreateOrUpdate",
+        "description": "Creates or updates an authorization in the specified express route lag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the express route lag."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the authorization."
+          },
+          {
+            "name": "authorizationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorization"
+            },
+            "description": "Parameters supplied to the create or update express route lag authorization operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting ExpressRouteLagAuthorization resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorization"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting ExpressRouteLagAuthorization resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorization"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations": {
+      "get": {
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "operationId": "ExpressRouteLagAuthorizations_List",
+        "description": "Gets all authorizations in an express route lag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the express route lag."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ExpressRouteLagAuthorization resources.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorizationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations/{authorizationName}/listKeys": {
+      "post": {
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "operationId": "ExpressRouteLagAuthorizations_ListKeys",
+        "description": "Gets the specified authorization with key from the specified express route lag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the express route lag."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the authorization."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the ExpressRouteLagAuthorization resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorizationKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationKey.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExpressRouteLagMemberPropertiesFormat": {
+      "title": "ExpressRouteLagMember Resource Properties",
+      "description": "Properties specific to ExpressRouteLagMember resources.",
+      "type": "object",
+      "properties": {
+        "interfaceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of Azure router interface."
+        },
+        "patchPanelId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Mapping between physical port to patch panel port."
+        },
+        "rackId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Mapping of physical patch panel to rack."
+        },
+        "coloLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Cololocation for ExpressRoute Hybrid Direct."
+        },
+        "connectorType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Physical fiber port type.",
+          "enum": [
+            "LC",
+            "SC"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLinkConnectorType",
+            "modelAsString": true
+          }
+        },
+        "adminState": {
+          "type": "string",
+          "description": "Administrative state of the physical port.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLinkAdminState",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the express route lag member resource."
+        }
+      }
+    },
+    "ExpressRouteLagMember": {
+      "title": "ExpressRouteLagMember",
+      "description": "ExpressRouteLagMember child resource definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteLagMemberPropertiesFormat",
+          "description": "ExpressRouteLagMember properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "ExpressRouteLagMemberListResult": {
+      "title": "ExpressRouteLagMember List Result",
+      "description": "Response for ListExpressRouteLagMembers API service call.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagMember"
+          },
+          "description": "The list of ExpressRouteLagMember sub-resources."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "ExpressRouteLinkMacSecConfig": {
+      "description": "ExpressRouteLagLink Mac Security Configuration.",
+      "title": "Definition of ExpressRouteLagLink Mac Security configuration.",
+      "type": "object",
+      "properties": {
+        "cknSecretIdentifier": {
+          "type": "string",
+          "description": "Keyvault Secret Identifier URL containing Mac security CKN key."
+        },
+        "cakSecretIdentifier": {
+          "type": "string",
+          "description": "Keyvault Secret Identifier URL containing Mac security CAK key."
+        },
+        "cipher": {
+          "type": "string",
+          "description": "Mac security cipher.",
+          "enum": [
+            "GcmAes256",
+            "GcmAes128",
+            "GcmAesXpn128",
+            "GcmAesXpn256"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLinkMacSecCipher",
+            "modelAsString": true
+          }
+        },
+        "sciState": {
+          "type": "string",
+          "description": "Sci mode enabled/disabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLinkMacSecSciState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExpressRouteLagLinkPropertiesFormat": {
+      "title": "ExpressRouteLagLink Resource Properties",
+      "description": "Properties specific to ExpressRouteLagLink resources.",
+      "type": "object",
+      "properties": {
+        "routerName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of Azure router associated with physical port."
+        },
+        "interfaceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of Azure router interface."
+        },
+        "adminState": {
+          "type": "string",
+          "description": "Administrative state of the physical port.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLinkAdminState",
+            "modelAsString": true
+          }
+        },
+        "members": {
+          "title": "ExpressRouteLagMember Child-Resources",
+          "description": "The set of physical members of the ExpressRouteLag resource.",
+          "readOnly": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagMember"
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the express route link resource."
+        },
+        "macSecConfig": {
+          "$ref": "#/definitions/ExpressRouteLinkMacSecConfig",
+          "description": "MacSec configuration."
+        }
+      }
+    },
+    "ExpressRouteLagLink": {
+      "title": "ExpressRouteLagLink",
+      "description": "ExpressRouteLagLink child resource definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteLagLinkPropertiesFormat",
+          "description": "ExpressRouteLagLink properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "ExpressRouteLagLinkListResult": {
+      "title": "ExpressRouteLagLink List Result",
+      "description": "Response for ListExpressRouteLagLinks API service call.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagLink"
+          },
+          "description": "The list of ExpressRouteLagLink sub-resources."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "ExpressRouteLagPropertiesFormat": {
+      "title": "ExpressRouteLag Properties",
+      "description": "Properties specific to ExpressRouteLag resources.",
+      "type": "object",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "The name of the peering location that the ExpressRouteLag is mapped to physically."
+        },
+        "bandwidthInGbps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bandwidth of procured ports in Gbps."
+        },
+        "provisionedBandwidthInGbps": {
+          "readOnly": true,
+          "type": "number",
+          "description": "Aggregate Gbps of associated circuit bandwidths."
+        },
+        "mtu": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Maximum transmission unit of the physical port pair(s)."
+        },
+        "encapsulation": {
+          "type": "string",
+          "description": "Encapsulation method on physical ports.",
+          "enum": [
+            "Dot1Q",
+            "QinQ"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRoutePortsEncapsulation",
+            "modelAsString": true
+          }
+        },
+        "etherType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Ether type of the physical port."
+        },
+        "allocationDate": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Date of the physical port allocation to be used in Letter of Authorization."
+        },
+        "numberOfPorts": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of physical member ports under LAG"
+        },
+        "minimumActivePortsRequired": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum number of physical member ports that must be up for LAG to stay operational."
+        },
+        "lacpTimer": {
+          "type": "string",
+          "description": "LACP timer.",
+          "enum": [
+            "Fast",
+            "Slow"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLagLacpTimer",
+            "modelAsString": true
+          }
+        },
+        "links": {
+          "title": "ExpressRouteLagLink Child-Resources",
+          "description": "The set of links of the ExpressRouteLag resource.",
+          "readOnly": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagLink"
+          }
+        },
+        "circuits": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Reference the ExpressRoute circuit(s) that are provisioned on this ExpressRouteLag resource."
+        },
+        "authorizations": {
+          "title": "ExpressRouteLagAuthorizations Child-Resources",
+          "description": "The set of authorizations of the ExpressRouteLag resource.",
+          "readOnly": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagAuthorization"
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the express route lag resource."
+        },
+        "resourceGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource GUID property of the express route lag resource."
+        },
+        "billingType": {
+          "type": "string",
+          "description": "The billing type of the ExpressRouteLag resource.",
+          "enum": [
+            "MeteredData",
+            "UnlimitedData"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLagsBillingType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExpressRouteLag": {
+      "title": "ExpressRoute Lag",
+      "description": "ExpressRouteLag resource definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteLagPropertiesFormat",
+          "description": "ExpressRouteLag properties."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of ExpressRouteLag, if configured."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ExpressRouteLagListResult": {
+      "title": "ExpressRoute Lag List Result",
+      "description": "Response for ListExpressRouteLags API service call.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLag"
+          },
+          "description": "A list of ExpressRouteLag resources."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "GenerateExpressRouteLagsLOARequest": {
+      "description": "The customer name to be printed on a letter of authorization.",
+      "type": "object",
+      "properties": {
+        "customerName": {
+          "type": "string",
+          "description": "The customer name."
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Physical member list"
+        }
+      },
+      "required": [
+        "customerName",
+        "members"
+      ]
+    },
+    "GenerateExpressRouteLagsLOAResult": {
+      "description": "Response for GenerateExpressRouteLagsLOA API service call.",
+      "type": "object",
+      "properties": {
+        "encodedContent": {
+          "type": "string",
+          "description": "The content as a base64 encoded string."
+        }
+      }
+    },
+    "ExpressRouteLagPatch": {
+      "type": "object",
+      "title": "ExpressRoute Lag Patch Properties",
+      "description": "Parameters supplied to patch ExpressRouteLag resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of ExpressRouteLag, if configured."
+        }
+      }
+    },
+    "ExpressRouteLagAuthorizationPropertiesFormat": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization Properties",
+      "description": "Properties of ExpressRouteLag Authorization.",
+      "properties": {
+        "authorizationUseStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The authorization use status.",
+          "enum": [
+            "Available",
+            "InUse"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLagAuthorizationUseStatus",
+            "modelAsString": true
+          }
+        },
+        "circuitResourceUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reference to the ExpressRoute circuit resource using the authorization."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the authorization resource."
+        }
+      }
+    },
+    "ExpressRouteLagAuthorization": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization",
+      "description": "ExpressRouteLag Authorization resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteLagAuthorizationPropertiesFormat",
+          "description": "ExpressRouteLag properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "ExpressRouteLagAuthorizationListResult": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization List Result",
+      "description": "Response for ListExpressRouteLagAuthorizations API service call.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagAuthorization"
+          },
+          "description": "The authorizations in an ExpressRoute Lag."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "ExpressRouteLagAuthorizationKeys": {
+      "type": "object",
+      "description": "Response for listKeys action on ExpressRoute LAG authorization.",
+      "properties": {
+        "authorizationKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The authorization key.",
+          "x-ms-secret": true
+        }
+      }
+    }
+  }
+}
