@@ -166,11 +166,11 @@ model EvaluationRule {
   @doc("Configure to use ML-based dynamic thresholds. When used, degradedRule and unhealthyRule must not be set.")
   dynamicDetectionRule?: DynamicDetectionRule;
 
-  @doc("Degraded rule with static threshold. When used, dynamicDetectionRule must not be set.")
+  @doc("Degraded rule with static threshold.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   degradedRule?: ThresholdRuleV2;
 
-  @doc("Unhealthy rule with static threshold. When used, dynamicDetectionRule must not be set.")
+  @doc("Unhealthy rule with static threshold.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   @madeRequired(Versions.v2026_01_01_preview)
   unhealthyRule: ThresholdRuleV2;
