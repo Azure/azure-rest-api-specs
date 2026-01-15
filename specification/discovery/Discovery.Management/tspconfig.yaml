@@ -42,6 +42,14 @@ options:
     head-as-boolean: true
     inject-spans: true
 
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/discovery/Discovery.Shared/"
+      - "specification/discovery/Discovery.Management.Shared/"
+      - "specification/discovery/Discovery.Bookshelf.Management/"
+      - "specification/discovery/Discovery.Catalog.Management/"
+      - "specification/discovery/Discovery.Supercomputer.Management/"
+      - "specification/discovery/Discovery.Workspace.Management/"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
