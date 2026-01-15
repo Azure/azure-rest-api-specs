@@ -172,7 +172,8 @@ model EvaluationRule {
 
   @doc("Unhealthy rule with static threshold. When used, dynamicDetectionRule must not be set.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
-  unhealthyRule?: ThresholdRuleV2;
+  @madeRequired(Versions.v2026_01_01_preview)
+  unhealthyRule: ThresholdRuleV2;
 }
 
 @removed(Versions.v2026_01_01_preview)
