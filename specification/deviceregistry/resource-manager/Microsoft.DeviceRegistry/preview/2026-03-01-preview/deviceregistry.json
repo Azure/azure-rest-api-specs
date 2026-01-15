@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.DeviceRegistry management service",
-    "version": "2025-11-01-preview",
+    "version": "2026-03-01-preview",
     "description": "Microsoft.DeviceRegistry Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -2085,7 +2085,7 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "The name of the Policy tracked resource.",
+            "description": "The name of the Policy proxy resource.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2142,7 +2142,7 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "The name of the Policy tracked resource.",
+            "description": "The name of the Policy proxy resource.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2229,7 +2229,7 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "The name of the Policy tracked resource.",
+            "description": "The name of the Policy proxy resource.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2313,7 +2313,7 @@
           {
             "name": "policyName",
             "in": "path",
-            "description": "The name of the Policy tracked resource.",
+            "description": "The name of the Policy proxy resource.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2349,6 +2349,240 @@
         "x-ms-examples": {
           "Delete_Policies": {
             "$ref": "./examples/Delete_Policies.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials/default/policies/{policyName}/activateBringYourOwnRoot": {
+      "post": {
+        "operationId": "Policies_ActivateBringYourOwnRoot",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Activates or renews a Bring Your Own Root policy by accepting a customer-provided signed certificate. This is a long-running operation that returns no content upon completion.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the Policy proxy resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActivateBringYourOwnRootRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_ActivateBringYourOwnRoot": {
+            "$ref": "./examples/Policies_ActivateBringYourOwnRoot.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials/default/policies/{policyName}/revokeIssuer": {
+      "post": {
+        "operationId": "Policies_RevokeIssuer",
+        "tags": [
+          "Policies"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the Policy proxy resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_RevokeIssuer": {
+            "$ref": "./examples/Policies_RevokeIssuer.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials/default/revokeByResource": {
+      "post": {
+        "operationId": "Credentials_RevokeByResource",
+        "tags": [
+          "Credentials"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CredentialsRevokeByResourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CredentialsRevokeByResourceResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Credentials_RevokeByResource": {
+            "$ref": "./examples/Credentials_RevokeByResource.json"
+          },
+          "Credentials_RevokeByResourceFailure": {
+            "$ref": "./examples/Credentials_RevokeByResourceFailure.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4428,6 +4662,19 @@
     }
   },
   "definitions": {
+    "ActivateBringYourOwnRootRequest": {
+      "type": "object",
+      "description": "Request payload for activating a Bring Your Own Root policy with a customer-provided signed certificate.",
+      "properties": {
+        "certificateChain": {
+          "type": "string",
+          "description": "Certificate chain in PEM format, including the signed certificate. The first certificate must be the signed certificate (matching the CSR generated by the service), followed by any intermediate CAs, and optionally the root CA. Certificates must be ordered from leaf to root and concatenated in PEM format."
+        }
+      },
+      "required": [
+        "certificateChain"
+      ]
+    },
     "Asset": {
       "type": "object",
       "description": "Asset definition.",
@@ -5152,6 +5399,72 @@
         }
       }
     },
+    "BringYourOwnRoot": {
+      "type": "object",
+      "description": "Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether Bring Your Own Root is enabled. This can only be set at creation time and cannot be changed afterward.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "certificateSigningRequest": {
+          "type": "string",
+          "description": "Certificate Signing Request (CSR) in PEM format, generated by the service. Sign this CSR with your Certificate Authority and activate via the activateBringYourOwnRoot action. A new CSR is generated at policy creation and when certificates near expiration.",
+          "readOnly": true
+        },
+        "issuingCertificateThumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the issuing certificate.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/BringYourOwnRootStatus",
+          "description": "The status of the Bring Your Own Root configuration, indicating the current state of the certificate lifecycle.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "BringYourOwnRootStatus": {
+      "type": "string",
+      "description": "Status of the Bring Your Own Root configuration.",
+      "enum": [
+        "PendingActivation",
+        "Active",
+        "ActiveButPendingRenewal"
+      ],
+      "x-ms-enum": {
+        "name": "BringYourOwnRootStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingActivation",
+            "value": "PendingActivation",
+            "description": "The CSR has been generated and is waiting for the customer to provide the signed certificate."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The signed certificate has been successfully uploaded and validated, and the CA is active."
+          },
+          {
+            "name": "ActiveButPendingRenewal",
+            "value": "ActiveButPendingRenewal",
+            "description": "The certificate is nearing expiration (within renewal window) or has expired. A new CSR has been generated and is waiting for the customer to provide a new signed certificate."
+          }
+        ]
+      }
+    },
+    "BringYourOwnRootUpdate": {
+      "type": "object",
+      "description": "Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA."
+    },
     "BrokerStateStoreDestinationConfiguration": {
       "type": "object",
       "description": "The configuration for a MQTT broker state store destination.",
@@ -5193,6 +5506,10 @@
           "format": "date-time",
           "description": "Certificate is valid not after this date. Format ISO8601. Generated based on validity period.",
           "readOnly": true
+        },
+        "bringYourOwnRoot": {
+          "$ref": "#/definitions/BringYourOwnRoot",
+          "description": "Configuration for Bring Your Own Root."
         }
       },
       "required": [
@@ -5201,7 +5518,13 @@
     },
     "CertificateAuthorityConfigurationUpdate": {
       "type": "object",
-      "description": "The configuration to set up an ICA."
+      "description": "The configuration to set up an ICA.",
+      "properties": {
+        "bringYourOwnRoot": {
+          "$ref": "#/definitions/BringYourOwnRootUpdate",
+          "description": "Configuration for Bring Your Own Root."
+        }
+      }
     },
     "CertificateConfiguration": {
       "type": "object",
@@ -5295,6 +5618,94 @@
           }
         }
       }
+    },
+    "CredentialsRevokeByResourceRequest": {
+      "type": "object",
+      "description": "Request payload for revoking device credentials.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "List of resource ids whose credentials should be revoked.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.DeviceRegistry/namespaces/devices"
+                },
+                {
+                  "type": "Microsoft.DeviceRegistry/namespaces/assets"
+                }
+              ]
+            }
+          }
+        },
+        "disable": {
+          "type": "boolean",
+          "description": "Indicates whether to disable the device(s) after revoking credentials. Prevents new credentials to be issued."
+        }
+      },
+      "required": [
+        "resourceIds"
+      ]
+    },
+    "CredentialsRevokeByResourceResponse": {
+      "type": "object",
+      "description": "Request payload for revoking device credentials.",
+      "properties": {
+        "revocationResults": {
+          "type": "array",
+          "description": "Results for revocation action.",
+          "items": {
+            "$ref": "#/definitions/CredentialsRevokeByResourceRevocationResult"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "revocationResults"
+      ]
+    },
+    "CredentialsRevokeByResourceRevocationResult": {
+      "type": "object",
+      "description": "Represents revocation of resource result.",
+      "properties": {
+        "resourceId": {
+          "type": "array",
+          "description": "Resource id.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.DeviceRegistry/namespaces/devices"
+                },
+                {
+                  "type": "Microsoft.DeviceRegistry/namespaces/assets"
+                }
+              ]
+            }
+          }
+        },
+        "result": {
+          "type": "string",
+          "description": "Indicates whether revocation succeeded or failed."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error details."
+        }
+      },
+      "required": [
+        "resourceId",
+        "result"
+      ]
     },
     "DataPoint": {
       "type": "object",
@@ -8478,12 +8889,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PolicyProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8527,13 +8939,6 @@
       "type": "object",
       "description": "The type used for update operations of the Policy.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/PolicyUpdateProperties",
           "description": "The resource-specific properties for this resource.",
