@@ -62,7 +62,6 @@ interface Servers {
   /**
    * Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("original-uri")
   update is ArmCustomPatchAsync<Server, PatchModel = ServerForUpdate>;

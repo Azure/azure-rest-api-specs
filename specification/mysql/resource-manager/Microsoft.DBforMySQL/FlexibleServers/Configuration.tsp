@@ -47,7 +47,6 @@ interface Configurations {
   /**
    * Updates a configuration of a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("original-uri")
   update is ArmCustomPatchAsync<Configuration, PatchModel = Configuration>;
