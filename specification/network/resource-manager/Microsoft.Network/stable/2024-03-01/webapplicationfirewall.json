@@ -327,7 +327,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallCustomRule"
-          }
+          },
+          "x-ms-identifiers": ["name"]
         },
         "applicationGateways": {
           "readOnly": true,
@@ -691,8 +692,7 @@
       "description": "Define match conditions.",
       "required": [
         "matchVariables",
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "matchVariables": {

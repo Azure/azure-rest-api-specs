@@ -536,16 +536,7 @@
     "OutputDataSource": {
       "type": "object",
       "description": "Describes the data source that output will be written to.",
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Indicates the type of data source output will be written to. Required on PUT (CreateOrReplace) requests."
-        }
-      },
-      "required": [
-        "type"
-      ]
+      "additionalProperties": true
     },
     "BlobOutputDataSource": {
       "type": "object",

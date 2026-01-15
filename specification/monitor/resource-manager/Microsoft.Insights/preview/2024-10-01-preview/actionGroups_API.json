@@ -426,7 +426,10 @@
           },
           "409": {
             "description": "The receiver is already enabled in the action group.",
-            "x-ms-error-response": true
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           },
           "default": {
             "description": "An error occurred and the receiver could not be enabled, e.g.: 404: The action group was not found or no matching receiver was found in the action group.",
