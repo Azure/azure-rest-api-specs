@@ -28,6 +28,17 @@ union FirewallSKU {
   Premium: "Premium",
 }
 
+@doc("Policy Override")
+union PolicyOverride {
+  string,
+
+  @doc("PolicyOverride Enclave.")
+  Enclave: "Enclave",
+
+  @doc("PolicyOverride None.")
+  None: "None",
+}
+
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @doc("Approval Policy.")
 union ApprovalPolicy {
@@ -209,7 +220,7 @@ model CommunityBaseModel {
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
-  policyOverride?: "Enclave" | "None" | string;
+  policyOverride?: PolicyOverride;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
