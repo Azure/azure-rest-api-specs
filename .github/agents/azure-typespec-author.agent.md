@@ -1,5 +1,5 @@
 ---
-name: azure-typespec-authoring
+name: azure-typespec-author
 description: 'Author and update Azure TypeSpec (.tsp) safely by retrieving authoritative solution with azsdk_typespec_retrieve_solution, then applying minimal changes and validating.'
 tools: ['read', 'edit', 'azure-sdk-mcp/azsdk_typespec_retrieve_solution']
 ---
