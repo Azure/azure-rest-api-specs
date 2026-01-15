@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "createSupportTicketParameters": {
+      "properties": {
+        "description": "my description",
+        "advancedDiagnosticConsent": "Yes",
+        "contactDetails": {
+          "country": "usa",
+          "firstName": "abc",
+          "lastName": "xyz",
+          "preferredContactMethod": "email",
+          "preferredSupportLanguage": "en-US",
+          "preferredTimeZone": "Pacific Standard Time",
+          "primaryEmailAddress": "abc@contoso.com"
+        },
+        "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/batch_problemClassification_guid",
+        "quotaTicketDetails": {
+          "quotaChangeRequestSubType": "Account",
+          "quotaChangeRequestVersion": "1.0",
+          "quotaChangeRequests": [
+            {
+              "payload": "{\"AccountName\":\"test\",\"NewLimit\":200,\"Type\":\"LowPriority\"}",
+              "region": "EastUS"
+            }
+          ]
+        },
+        "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
+        "severity": "moderate",
+        "supportPlanId": "U291cmNlOlNDTSxDbGFyaWZ5SW5zdGFsbGF0aW9uU2l0ZUlkOjcsTGluZUl0ZW1JZDo5ODY1NzIyOSxDb250cmFjdElkOjk4NjU5MTk0LFN1YnNjcmlwdGlvbklkOjc2Y2I3N2ZhLThiMTctNGVhYi05NDkzLWI2NWRhY2U5OTgxMyw=",
+        "title": "my title"
+      }
+    },
+    "subscriptionId": "132d901f-189d-4381-9214-fe68e27e05a1",
+    "supportTicketName": "testticket"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testticket",
+        "type": "Microsoft.Support/supportTickets",
+        "id": "/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/supportTickets/testticket",
+        "properties": {
+          "description": "my description",
+          "advancedDiagnosticConsent": "Yes",
+          "contactDetails": {
+            "country": "usa",
+            "firstName": "abc",
+            "lastName": "xyz",
+            "preferredContactMethod": "email",
+            "preferredSupportLanguage": "en-US",
+            "preferredTimeZone": "Pacific Standard Time",
+            "primaryEmailAddress": "abc@contoso.com"
+          },
+          "createdDate": "2020-03-20T21:36:18Z",
+          "fileWorkspaceName": "testticket",
+          "modifiedDate": "2020-03-20T21:36:23Z",
+          "problemClassificationDisplayName": "Batch",
+          "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/batch_problemClassification_guid",
+          "quotaTicketDetails": {
+            "quotaChangeRequestSubType": "Account",
+            "quotaChangeRequestVersion": "1.0",
+            "quotaChangeRequests": [
+              {
+                "payload": "{\"AccountName\":\"test\",\"NewLimit\":200,\"Type\":\"LowPriority\"}",
+                "region": "EastUS"
+              }
+            ]
+          },
+          "require24X7Response": false,
+          "serviceDisplayName": "Service and subscription limits (quotas)",
+          "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
+          "serviceLevelAgreement": {
+            "expirationTime": "2020-03-21T17:36:18Z",
+            "slaMinutes": 240,
+            "startTime": "2020-03-20T21:36:18Z"
+          },
+          "severity": "moderate",
+          "status": "Open",
+          "supportEngineer": {
+            "emailAddress": null
+          },
+          "supportPlanDisplayName": "Premier",
+          "supportPlanId": "U291cmNlOlNDTSxDbGFyaWZ5SW5zdGFsbGF0aW9uU2l0ZUlkOjcsTGluZUl0ZW1JZDo5ODY1NzIyOSxDb250cmFjdElkOjk4NjU5MTk0LFN1YnNjcmlwdGlvbklkOjc2Y2I3N2ZhLThiMTctNGVhYi05NDkzLWI2NWRhY2U5OTgxMyw=",
+          "supportPlanType": "Premier",
+          "supportTicketId": "119120321001170",
+          "title": "my title"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/operationsStatus/operationid?api-version=2025-06-01-preview",
+        "location": "https://management.azure.com/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/operationResults/operationid?api-version=2025-06-01-preview"
+      }
+    }
+  },
+  "operationId": "SupportTickets_Create",
+  "title": "Create a ticket to request Quota increase for Low-priority cores for a Batch account"
+}

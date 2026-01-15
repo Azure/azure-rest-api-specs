@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/apicenter"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -7,6 +10,11 @@ options:
     emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/apicenter.json"
     use-read-only-status-schema: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-apicenter"
+    namespace: "com.azure.resourcemanager.apicenter"
+    service-name: "Api Center"
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
