@@ -2112,6 +2112,54 @@
         ]
       }
     },
+    "ReasoningEffort": {
+      "type": "string",
+      "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.",
+      "enum": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "x-ms-enum": {
+        "name": "ReasoningEffort",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "No reasoning effort."
+          },
+          {
+            "name": "minimal",
+            "value": "minimal",
+            "description": "Minimal reasoning effort."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Low reasoning effort - faster responses with less reasoning."
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Medium reasoning effort - balanced between speed and reasoning depth."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "High reasoning effort - more thorough reasoning, may take longer."
+          },
+          {
+            "name": "xhigh",
+            "value": "xhigh",
+            "description": "Extra high reasoning effort - maximum reasoning depth."
+          }
+        ]
+      }
+    },
     "RequestAudioContentPart": {
       "type": "object",
       "description": "An audio content part for a request.",
@@ -2327,6 +2375,10 @@
         },
         "max_response_output_tokens": {
           "description": "Maximum number of tokens to generate in the response. Default is unlimited."
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
         }
       }
     },
@@ -2447,6 +2499,13 @@
         },
         "max_output_tokens": {
           "description": "Maximum number of output tokens for a single assistant response,\ninclusive of tool calls, that was used in this response."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of up to 16 key-value pairs that can be attached to an object.\nThis can be useful for storing additional information about the object in a structured format.\nKeys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2598,6 +2657,17 @@
         "pre_generated_assistant_message": {
           "$ref": "#/definitions/AssistantMessageItem",
           "description": "Create the response with pre-generated assistant message. The message item would be\nadded into the conversation history and returned with synthesized audio output in the created response."
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of up to 16 key-value pairs that can be attached to an object.\nThis can be useful for storing additional information about the object in a structured format.\nKeys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3053,6 +3123,10 @@
         },
         "max_response_output_tokens": {
           "description": "Maximum number of tokens to generate in the response. Default is unlimited."
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
         },
         "agent": {
           "$ref": "#/definitions/AgentConfig",
