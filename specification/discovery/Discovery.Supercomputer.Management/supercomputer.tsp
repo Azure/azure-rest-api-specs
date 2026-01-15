@@ -20,6 +20,21 @@ model Supercomputer is TrackedResource<SupercomputerProperties> {
   ...ResourceNameParameter<Supercomputer>;
 }
 
+@added(Versions.v2025_12_01_preview)
+@doc("Supported System SKU Sizes.")
+union SystemSku {
+  @doc("Standard_D4s_v6 SKU")
+  Standard_D4s_v6: "Standard_D4s_v6 basic compute VM (default)",
+
+  @doc("Standard_D4s_v5 SKU")
+  Standard_D4s_v5: "Standard_D4s_v5",
+
+  @doc("Standard_D4s_v4 SKU")
+  Standard_D4s_v4: "Standard_D4s_v4",
+
+  string,
+}
+
 @doc("Supercomputer properties")
 model SupercomputerProperties {
   @doc("The status of the last operation.")
@@ -32,6 +47,11 @@ model SupercomputerProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId: Microsoft.Discovery.Shared.SubnetId;
+
+  @doc("The SKU to use for the system nodepool.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_12_01_preview)
+  systemSku?: SystemSku;
 
   /**
     Dictionary of identity properties for the Supercomputer.
