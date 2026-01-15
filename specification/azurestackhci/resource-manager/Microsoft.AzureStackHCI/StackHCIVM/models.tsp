@@ -2818,3 +2818,10 @@ model GuestCredential {
   @secret
   password?: string;
 }
+
+@added(Versions.v2026_04_01_preview)
+@doc("The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.")
+model PowerOffVirtualMachineOptions {
+  @doc("The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified.")
+  skipShutdown?: boolean = false;
+}

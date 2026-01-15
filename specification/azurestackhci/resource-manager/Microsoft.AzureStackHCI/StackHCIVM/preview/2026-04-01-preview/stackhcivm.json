@@ -709,6 +709,63 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/powerOff": {
+      "post": {
+        "operationId": "VirtualMachineInstances_PowerOff",
+        "tags": [
+          "VirtualMachineInstances"
+        ],
+        "description": "The operation to power off a virtual machine instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PowerOffVirtualMachineOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PowerOffVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_PowerOff.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/restart": {
       "post": {
         "operationId": "VirtualMachineInstances_Restart",
@@ -8642,6 +8699,17 @@
         "provisionVMConfigAgent": {
           "type": "boolean",
           "description": "Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process."
+        }
+      }
+    },
+    "PowerOffVirtualMachineOptions": {
+      "type": "object",
+      "description": "The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.",
+      "properties": {
+        "skipShutdown": {
+          "type": "boolean",
+          "description": "The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified.",
+          "default": false
         }
       }
     },
