@@ -86,7 +86,7 @@ interface VirtualMachineInstances {
 
   @added(Versions.v2026_04_01_preview)
   @doc("The operation to power off a virtual machine instance.")
-  powerOff is ArmResourceActionNoContentAsync<
+  powerOff is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     {
       @doc("The content of the action request")
