@@ -5218,7 +5218,7 @@ model StorageProfile {
 }
 
 /**
- * Describes periodic restore points configuration for a VM. When isEnabled = true, daily restore points are created and up to 10 restore points are retained.
+ * Defines configuration settings for Basic Data Protection. When isEnabled is set to true, the platform periodically creates restore points every 24 hours and retains them for 5 days. This object is designed to be extensible, and additional configuration fields will be introduced as the capability evolves.
  */
 @added(Versions.v2025_11_01)
 model PeriodicRestorePoints {
@@ -5229,7 +5229,7 @@ model PeriodicRestorePoints {
 }
 
 /**
- * Describes zone movement configuration for a VM.
+ * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage. By default isEnabled is set to false.
  */
 @added(Versions.v2025_11_01)
 model ZoneMovement {
@@ -5240,7 +5240,7 @@ model ZoneMovement {
 }
 
 /**
- * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions..
+ * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.
  */
 @added(Versions.v2025_11_01)
 model ResiliencyProfile {
