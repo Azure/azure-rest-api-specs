@@ -79,4 +79,12 @@ model StorageDiscoveryWorkspace
   @minLength(4)
   @maxLength(64)
   name: string;
+
+  /**
+   * The managed service identity of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("The identity of the Storage Discovery Workspace.")
+  @added(ApiVersion.v2026_07_01_preview)
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
