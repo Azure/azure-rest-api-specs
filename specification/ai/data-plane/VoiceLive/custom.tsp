@@ -694,7 +694,7 @@ model FillerResponseConfigBase {
 
   /** Latency threshold in milliseconds before triggering filler response. Default is 2000ms. */
   @minValue(0)
-  latency_threshold_ms?: int32 = 2000;
+  latency_threshold_ms?: int32;
 }
 
 /** Filler response configuration types. */
