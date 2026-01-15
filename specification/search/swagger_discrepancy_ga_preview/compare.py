@@ -13,6 +13,7 @@ The comparison is strict on behavioral contract while ignoring doc-only differen
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from ref_resolver import RefResolver, normalize_schema
 from severity import classify_severity
 
 
@@ -44,6 +45,10 @@ class SwaggerComparator:
         self.ga_name = ga_name
         self.preview_name = preview_name
         self.differences: List[Difference] = []
+        self.ga_swagger: Optional[Dict[str, Any]] = None
+        self.preview_swagger: Optional[Dict[str, Any]] = None
+        self.ga_resolver: Optional[RefResolver] = None
+        self.preview_resolver: Optional[RefResolver] = None
 
     def compare(
         self, ga_swagger: Dict[str, Any], preview_swagger: Dict[str, Any]
@@ -57,6 +62,12 @@ class SwaggerComparator:
         3. Schemas / definitions
         """
         self.differences = []
+
+        # Store swagger documents for ref resolution
+        self.ga_swagger = ga_swagger
+        self.preview_swagger = preview_swagger
+        self.ga_resolver = RefResolver(ga_swagger)
+        self.preview_resolver = RefResolver(preview_swagger)
 
         # 1. Compare paths and methods
         self._compare_paths_and_methods(ga_swagger, preview_swagger)
@@ -403,23 +414,44 @@ class SwaggerComparator:
         ga_is_ref = ga_ref is not None and ga_type is None
 
         if ga_is_inline and preview_is_ref:
-            # Inline schema converted to reference
-            self.differences.append(
-                Difference(
-                    type="schema_inline_to_ref",
-                    message=f"Schema changed from inline {ga_type} to reference {preview_ref}",
-                    context=context,
-                )
+            # Inline schema converted to reference - resolve and compare
+            resolved_ga = self._resolve_and_normalize(ga_schema, self.ga_swagger)
+            resolved_preview = self._resolve_and_normalize(
+                preview_schema, self.preview_swagger
             )
+
+            if self._normalized_schemas_equal(resolved_ga, resolved_preview):
+                # Schemas are equivalent - this is just a refactoring, skip or mark as non-breaking
+                # We'll skip reporting this as it's not a real discrepancy
+                pass
+            else:
+                # Schemas are different after resolution
+                self.differences.append(
+                    Difference(
+                        type="schema_inline_to_ref",
+                        message=f"Schema changed from inline {ga_type} to reference {preview_ref} (shapes differ)",
+                        context=context,
+                    )
+                )
         elif ga_is_ref and preview_is_inline:
-            # Reference converted to inline schema
-            self.differences.append(
-                Difference(
-                    type="schema_ref_to_inline",
-                    message=f"Schema changed from reference {ga_ref} to inline {preview_type}",
-                    context=context,
-                )
+            # Reference converted to inline schema - resolve and compare
+            resolved_ga = self._resolve_and_normalize(ga_schema, self.ga_swagger)
+            resolved_preview = self._resolve_and_normalize(
+                preview_schema, self.preview_swagger
             )
+
+            if self._normalized_schemas_equal(resolved_ga, resolved_preview):
+                # Schemas are equivalent - this is just a refactoring, skip
+                pass
+            else:
+                # Schemas are different after resolution
+                self.differences.append(
+                    Difference(
+                        type="schema_ref_to_inline",
+                        message=f"Schema changed from reference {ga_ref} to inline {preview_type} (shapes differ)",
+                        context=context,
+                    )
+                )
         else:
             # Report type and $ref changes separately only if not an inline<->ref conversion
             if ga_type != preview_type:
@@ -569,6 +601,106 @@ class SwaggerComparator:
             self._compare_schemas(
                 ga_defs[def_name], preview_defs[def_name], f"definition:{def_name}"
             )
+
+    def _resolve_and_normalize(
+        self, schema: Optional[Dict[str, Any]], swagger_doc: Dict[str, Any]
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Resolve $ref and normalize a schema for comparison.
+
+        Args:
+            schema: Schema that may contain $ref
+            swagger_doc: Full swagger document for resolution
+
+        Returns:
+            Resolved and normalized schema
+        """
+        if schema is None:
+            return None
+
+        # Determine which resolver to use
+        resolver = (
+            self.ga_resolver
+            if swagger_doc is self.ga_swagger
+            else self.preview_resolver
+        )
+
+        # Resolve $ref
+        resolved = resolver.resolve_ref(schema)
+
+        # Normalize for comparison
+        normalized = normalize_schema(resolved)
+
+        return normalized
+
+    def _normalized_schemas_equal(
+        self, schema1: Optional[Dict[str, Any]], schema2: Optional[Dict[str, Any]]
+    ) -> bool:
+        """
+        Compare two normalized schemas for structural equality.
+
+        Compares the shape: type, format, properties, required, additionalProperties, items, enum.
+        Ignores fields like description, readOnly, x-ms-* extensions.
+
+        Args:
+            schema1: First normalized schema
+            schema2: Second normalized schema
+
+        Returns:
+            True if schemas have the same shape, False otherwise
+        """
+        if schema1 is None and schema2 is None:
+            return True
+        if schema1 is None or schema2 is None:
+            return False
+
+        # Compare key structural fields
+        structural_fields = [
+            "type",
+            "format",
+            "items",
+            "properties",
+            "required",
+            "additionalProperties",
+            "enum",
+            "allOf",
+            "oneOf",
+            "anyOf",
+            "minLength",
+            "maxLength",
+            "minimum",
+            "maximum",
+            "pattern",
+        ]
+
+        for field in structural_fields:
+            val1 = schema1.get(field)
+            val2 = schema2.get(field)
+
+            # Handle nested schemas/dicts recursively
+            if isinstance(val1, dict) and isinstance(val2, dict):
+                if not self._normalized_schemas_equal(val1, val2):
+                    return False
+            # Handle lists (like required, enum)
+            elif isinstance(val1, list) and isinstance(val2, list):
+                if sorted(str(v) for v in val1) != sorted(str(v) for v in val2):
+                    return False
+            # Direct comparison
+            elif val1 != val2:
+                return False
+
+        # For properties, recursively compare each property
+        props1 = schema1.get("properties", {})
+        props2 = schema2.get("properties", {})
+
+        if set(props1.keys()) != set(props2.keys()):
+            return False
+
+        for prop_name in props1.keys():
+            if not self._normalized_schemas_equal(props1[prop_name], props2[prop_name]):
+                return False
+
+        return True
 
 
 def compare_swagger_files(

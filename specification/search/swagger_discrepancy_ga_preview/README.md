@@ -27,7 +27,7 @@ Compares both searchindex.json and searchservice.json and generates a single Exc
 python compare_ga_preview.py
 ```
 
-This creates **`ga_preview_discrepancy.xlsx`** with:
+This creates **`ga_preview_discrepancy_YYYYMMDD_HHMMSS.xlsx`** with:
 - **searchindex** sheet - Discrepancies in searchindex.json
 - **searchservice** sheet - Discrepancies in searchservice.json
 
@@ -68,17 +68,37 @@ python compare_ga_preview.py --verbose --output-dir ./reports
 
 ### Excel File Structure
 
-The tool generates **`ga_preview_discrepancy.xlsx`** with these columns:
+The tool generates **`ga_preview_discrepancy_YYYYMMDD_HHMMSS.xlsx`** with these columns:
 
 | Column | Description | Example |
 |--------|-------------|---------|
 | **Category** | Type of difference | operation, parameter, schema, response, other |
-| **Identifier** | Detailed location | `/docs [get] param:queryLanguage`<br/>`definition:SearchRequest property:hybridSearch` |
-| **GA Value** | Value in GA swagger | `object`, `true`, `(not present)` |
-| **Preview Value** | Value in Preview swagger | `None`, `false`, `(not present)` |
+| **Identifier** | Detailed location | `/docs [get] param:queryLanguage`<br/>`SearchRequest property:hybridSearch` |
+| **2025-09-01 GA Value** | Value in GA swagger | `object`, `true`, `(not present)` |
+| **2025-11-01-preview Value** | Value in Preview swagger | `None`, `false`, `(not present)` |
 | **Difference Summary** | Human-readable description | Schema type changed: object -> None |
 | **Severity** | Impact classification | breaking, non-breaking, unknown |
+| **2026-04-01 TSP Action** | Auto-filled action category | Fix in TSP, GA exclude (preview-only), etc. |
 | **Notes** | Empty for reviewer comments | (blank) |
+
+### 2026-04-01 TSP Action Column
+
+The **2026-04-01 TSP Action** column is auto-populated based on deterministic rules to guide TypeSpec migration and 2026-04-01 GA decisions:
+
+| Disposition | Criteria | Action Required |
+|-------------|----------|-----------------|
+| **Tooling false positive** | Type changed object↔none with $ref, inline↔reference schema changes | No action - refactor only |
+| **Fix in TSP** | Breaking changes: required fields added/changed/removed, type changes, properties removed | Fix in TypeSpec before 2026-04-01 GA |
+| **GA exclude (preview-only)** | Preview-only operations, definitions, or paths not present in GA | Do not include in 2026-04-01 GA |
+| **GA include candidate** | Non-breaking additions to existing GA models (new properties, optional parameters) | Consider including in 2026-04-01 GA |
+| **Needs PM decision** | Other differences requiring manual review | Review with PM/architect |
+
+**Rule Logic:**
+1. Detects refactor-only changes (inline object ↔ $ref conversions)
+2. Flags breaking changes requiring TypeSpec fixes
+3. Identifies preview-only features not in GA
+4. Highlights safe additions to existing GA models
+5. Defaults to "Needs PM decision" for edge cases
 
 ### Identifier Format
 
@@ -144,7 +164,7 @@ Console output:
 ```
 Comparing searchindex.json...
 Comparing searchservice.json...
-[OK] Excel report saved to: output\ga_preview_discrepancy.xlsx
+[OK] Excel report saved to: output\ga_preview_discrepancy_20260115_143022.xlsx
 
 ============================================================
 === GA vs Preview Comparison Report ===
@@ -179,7 +199,7 @@ Shows each difference in console plus generates Excel report.
 
 ### Example 3: Review Excel Output
 
-Open `output/ga_preview_discrepancy.xlsx` in Excel:
+Open the generated Excel file (e.g., `output/ga_preview_discrepancy_20260115_143022.xlsx`) in Excel:
 
 - **Breaking changes** highlighted in light red
 - **Non-breaking changes** highlighted in light green

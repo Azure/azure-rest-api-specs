@@ -16,6 +16,7 @@ Key comparison aspects (mirroring semantic_equiv):
 import argparse
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
@@ -44,11 +45,15 @@ def load_swagger_file(file_path: str) -> Dict[str, Any]:
 
 
 def categorize_difference(diff: Dict[str, Any]) -> str:
-    """Categorize a difference into operation/parameter/schema/model/other."""
+    """Categorize a difference into operation/parameter/response/definition/schema/other."""
     diff_type = diff["type"]
     context = diff.get("context", "")
 
-    if any(x in diff_type for x in ["path", "method", "operation"]):
+    # Check context first for definition
+    if "definition:" in context and not ("[" in context and "]" in context):
+        # This is a definition-level change (not within an operation)
+        return "definition"
+    elif any(x in diff_type for x in ["path", "method", "operation"]):
         return "operation"
     elif "parameter" in diff_type:
         return "parameter"
@@ -117,7 +122,8 @@ def extract_identifier(diff: Dict[str, Any]) -> str:
         # Split by spaces to get definition name
         def_parts = def_info.split()
         if def_parts:
-            identifier_parts.append(f"definition:{def_parts[0]}")
+            # Just use the definition name without the "definition:" prefix
+            identifier_parts.append(def_parts[0])
 
             # Check for property, items, etc.
             if "property:" in def_info:
@@ -162,10 +168,25 @@ def extract_values(diff: Dict[str, Any]) -> Tuple[str, str]:
     # Pattern 3: "extra in Preview: value"
     if "extra" in message.lower() and "preview" in message.lower():
         # Absent in GA, present in Preview
+        # For parameters: "Extra parameter in Preview: paramName (in: query, required: False)"
+        # We want to extract just "paramName"
+        if "Extra parameter in Preview:" in message:
+            # Split by the first colon to get the part after "Preview:"
+            parts = message.split("Extra parameter in Preview:", 1)
+            if len(parts) == 2:
+                param_info = parts[1].strip()
+                # Extract just the parameter name before the parenthesis
+                if "(" in param_info:
+                    value = param_info.split("(")[0].strip()
+                else:
+                    value = param_info
+                return "(not present)", value
+
+        # For other "extra" messages
         value = message.split(":")[-1].strip() if ":" in message else ""
-        # Clean up the value - extract parameter details if present
-        if "(in:" in value:
-            # Extract parameter name and details
+        # Clean up the value - extract details if present
+        if "(in:" in value or "(" in value:
+            # Extract the part before parenthesis
             value = value.split("(")[0].strip()
         return "(not present)", value
 
@@ -197,12 +218,110 @@ def extract_values(diff: Dict[str, Any]) -> Tuple[str, str]:
     return "", message
 
 
+def determine_disposition(diff: Dict[str, Any]) -> str:
+    """
+    Determine the disposition action for a discrepancy.
+
+    Returns one of:
+    - "Tooling false positive"
+    - "Fix in TSP"
+    - "GA exclude (preview-only)"
+    - "GA include candidate"
+    - "Needs PM decision"
+
+    Args:
+        diff: Difference dictionary with keys: category, message, severity, context, type
+
+    Returns:
+        Disposition string
+    """
+    category = categorize_difference(diff)
+    message = diff.get("message", "").lower()
+    summary = diff.get("message", "")
+    severity = diff.get("severity", "")
+    diff_type = diff.get("type", "")
+    identifier = extract_identifier(diff)
+    ga_val, preview_val = extract_values(diff)
+
+    # Rule 1: Tooling false positive
+    # Detect refactor-only changes like inline <-> $ref conversions
+    if any(
+        x in message
+        for x in [
+            "type changed: object -> none",
+            "$ref",
+            "schema changed from inline",
+            "schema changed from reference",
+        ]
+    ):
+        return "Tooling false positive"
+
+    # Rule 2: Fix in TSP
+    # Breaking changes that need to be fixed
+    if severity == "breaking":
+        if any(
+            x in message
+            for x in [
+                "required fields added",
+                "required fields changed",
+                "required fields removed",
+                "type changed",
+                "properties removed",
+            ]
+        ):
+            return "Fix in TSP"
+
+    # Rule 3: GA exclude (preview-only)
+    # Preview-only operations or definitions
+    if category == "operation":
+        if ga_val == "(not present)" or "extra path in preview" in message:
+            return "GA exclude (preview-only)"
+
+    if category in ("definition", "schema"):
+        if "extra definition in preview" in message:
+            return "GA exclude (preview-only)"
+
+    # Rule 4: GA include candidate
+    # Non-breaking additions to existing GA models
+    if severity == "non-breaking" and "properties added" in message:
+        # Check if this is extending an existing GA model
+        # Heuristic: GA Value is present (not "(not present)")
+        if ga_val and ga_val != "(not present)":
+            return "GA include candidate"
+
+        # Check if identifier references a core GA type
+        core_ga_types = [
+            "SearchIndex",
+            "SearchField",
+            "SearchIndexer",
+            "SearchIndexerDataSource",
+            "SearchIndexerSkillset",
+            "ServiceLimits",
+            "ServiceStatistics",
+            "SynonymMap",
+            "DocumentDebugInfo",
+            "FacetResult",
+            "SearchRequest",
+            "SearchResult",
+            "SearchDocumentsResult",
+            "VectorQuery",
+        ]
+
+        if any(core_type in identifier for core_type in core_ga_types):
+            return "GA include candidate"
+
+    # Rule 5: Default fallback
+    return "Needs PM decision"
+
+
 def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> None:
     """Save comparison results as Excel file with separate sheets."""
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
 
-    report_file = output_path / "ga_preview_discrepancy.xlsx"
+    # Add timestamp to filename to avoid overwriting
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    report_file = output_path / f"ga_preview_discrepancy_{timestamp}.xlsx"
 
     # Create workbook
     wb = Workbook()
@@ -218,6 +337,7 @@ def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> 
         "2025-11-01-preview Value",
         "Difference Summary",
         "Severity",
+        "2026-04-01 TSP Action",
         "Notes",
     ]
 
@@ -262,6 +382,7 @@ def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> 
             ga_val, preview_val = extract_values(diff)
             summary = diff["message"]
             severity = diff["severity"]
+            disposition = determine_disposition(diff)
 
             # Write row data
             ws.cell(row=row_num, column=1, value=category)
@@ -270,7 +391,8 @@ def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> 
             ws.cell(row=row_num, column=4, value=preview_val)
             ws.cell(row=row_num, column=5, value=summary)
             ws.cell(row=row_num, column=6, value=severity)
-            ws.cell(row=row_num, column=7, value="")  # Notes column for reviewer
+            ws.cell(row=row_num, column=7, value=disposition)
+            ws.cell(row=row_num, column=8, value="")  # Notes column for reviewer
 
             # Apply severity color to entire row
             if severity in severity_colors:
@@ -279,11 +401,11 @@ def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> 
                     end_color=severity_colors[severity],
                     fill_type="solid",
                 )
-                for col_num in range(1, 8):
+                for col_num in range(1, 9):
                     ws.cell(row=row_num, column=col_num).fill = fill
 
         # Auto-adjust column widths
-        for col_num in range(1, 8):
+        for col_num in range(1, 9):
             column_letter = get_column_letter(col_num)
             max_length = 0
             for row in ws[column_letter]:
