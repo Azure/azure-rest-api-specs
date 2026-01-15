@@ -4,6 +4,7 @@ import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
@@ -38,6 +39,8 @@ interface ResourceRecommendationBases {
    * Update the tracked properties of a Recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_05_01_preview)
+  @removed(Versions.v2026_02_01)
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     ResourceRecommendationBase,

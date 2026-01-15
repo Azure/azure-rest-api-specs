@@ -49,6 +49,9 @@
       "name": "ResourceRecommendationBases"
     },
     {
+      "name": "RecommendationsPatch"
+    },
+    {
       "name": "SuppressionContracts"
     },
     {
@@ -156,56 +159,6 @@
         "x-ms-examples": {
           "GetRecommendationDetailSubscriptionResourceUri": {
             "$ref": "./examples/GetRecommendationDetailSubscriptionResourceUri.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Recommendations_Patch",
-        "tags": [
-          "ResourceRecommendationBases"
-        ],
-        "description": "Update the tracked properties of a Recommendation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "The recommendation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trackedProperties",
-            "in": "body",
-            "description": "The properties to update on the recommendation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TrackedRecommendationPropertiesPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceRecommendationBase"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateTrackedRecommendation": {
-            "$ref": "./examples/UpdateTrackedRecommendation.json"
           }
         }
       }
@@ -574,38 +527,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/assessmentTypes": {
-      "get": {
-        "operationId": "AssessmentTypes_List",
-        "summary": "Get assessment types list.",
-        "description": "Get list of Azure Advisor assessment types.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AssessmentTypeListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations": {
       "get": {
         "operationId": "Configurations_ListBySubscription",
@@ -900,6 +821,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
+      "patch": {
+        "operationId": "RecommendationsPatch_Patch",
+        "tags": [
+          "RecommendationsPatch"
+        ],
+        "description": "Update the state properties of a Recommendation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The name of the RecommendationsPatchResponse",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendationStatePropertiesPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RecommendationsPatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/suppressions": {
       "get": {
         "operationId": "Suppressions_List",
@@ -1181,53 +1149,6 @@
         "error": {
           "$ref": "#/definitions/ARMErrorResponseBody",
           "description": "ARM error response body."
-        }
-      }
-    },
-    "AssessmentTypeListResult": {
-      "type": "object",
-      "description": "The Advisor assessment type list result data structure.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AssessmentTypeResult items on this page",
-          "items": {
-            "$ref": "#/definitions/AssessmentTypeResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AssessmentTypeResult": {
-      "type": "object",
-      "description": "The Advisor assessment type result data structure.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Assessment Type Id"
-        },
-        "title": {
-          "type": "string",
-          "description": "Assessment Type Title"
-        },
-        "description": {
-          "type": "string",
-          "description": "Assessment Type Description"
-        },
-        "locale": {
-          "type": "string",
-          "description": "Assessment Type Locale"
-        },
-        "version": {
-          "type": "string",
-          "description": "Assessment Type Version"
         }
       }
     },
@@ -1859,6 +1780,97 @@
         ]
       }
     },
+    "RecommendationPatchProperties": {
+      "type": "object",
+      "description": "Properties for patch Recommendation API.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/Category",
+          "description": "The category of the recommendation."
+        },
+        "control": {
+          "$ref": "#/definitions/Control",
+          "description": "The sub-category of the recommendation."
+        },
+        "impact": {
+          "$ref": "#/definitions/Impact",
+          "description": "The business impact of the recommendation."
+        },
+        "impactedField": {
+          "type": "string",
+          "description": "The resource type identified by Advisor."
+        },
+        "impactedValue": {
+          "type": "string",
+          "description": "The resource identified by Advisor."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent time that Advisor checked the validity of the recommendation."
+        },
+        "recommendationTypeId": {
+          "type": "string",
+          "description": "The recommendation-type GUID."
+        },
+        "resourceMetadata": {
+          "$ref": "#/definitions/ResourceMetadata",
+          "description": "Metadata of resource that was assessed"
+        },
+        "actions": {
+          "type": "array",
+          "description": "The list of recommended actions to implement recommendation.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "x-ms-identifiers": []
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "Extended properties",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "The state of the Recommendation"
+        },
+        "reason": {
+          "$ref": "#/definitions/Reason",
+          "description": "The reason the state of the Recommendation was changed."
+        },
+        "postponedUntilDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the Recommendation was postponed until."
+        },
+        "suppressionIds": {
+          "type": "array",
+          "description": "The list of snoozed and dismissed rules for the recommendation.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.uuid"
+          }
+        },
+        "review": {
+          "$ref": "#/definitions/RecommendationPropertiesReview",
+          "description": "The Review that this Recommendation belongs to."
+        },
+        "resourceWorkload": {
+          "$ref": "#/definitions/RecommendationPropertiesResourceWorkload",
+          "description": "The Workload that this Resource belongs to."
+        },
+        "sourceSystem": {
+          "type": "string",
+          "description": "The Source System that this Recommendation originated from."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes for the Recommendation"
+        }
+      }
+    },
     "RecommendationProperties": {
       "type": "object",
       "description": "The properties of the recommendation.",
@@ -1891,14 +1903,10 @@
           "$ref": "#/definitions/Reason",
           "description": "The reason the state of the Recommendation was changed."
         },
-        "postponedTime": {
+        "postponedUntilDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "The time the Recommendation was postponed until."
-        },
-        "priority": {
-          "$ref": "#/definitions/Priority",
-          "description": "The Priority of the Recommendation."
         },
         "lastUpdated": {
           "type": "string",
@@ -1975,9 +1983,9 @@
           "description": "The recommendation metadata properties exposed to customer to provide additional information.",
           "additionalProperties": {}
         },
-        "tracked": {
-          "type": "boolean",
-          "description": "If the Recommendation has Tracking enabled."
+        "trackedProperties": {
+          "$ref": "#/definitions/TrackedRecommendationProperties",
+          "description": "The properties of a tracked recommendation."
         },
         "review": {
           "$ref": "#/definitions/RecommendationPropertiesReview",
@@ -2024,6 +2032,40 @@
           "description": "The Name of the Review"
         }
       }
+    },
+    "RecommendationStatePropertiesPayload": {
+      "type": "object",
+      "description": "Properties for recommendation state patch payload.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "The state of the recommendation."
+        },
+        "reason": {
+          "$ref": "#/definitions/Reason",
+          "description": "The reason the state of the Recommendation was changed."
+        },
+        "postponedUntilDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the Recommendation was postponed until."
+        }
+      }
+    },
+    "RecommendationsPatchResponse": {
+      "type": "object",
+      "description": "Advisor Recommendation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendationPatchProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ResourceMetadata": {
       "type": "object",
@@ -2299,39 +2341,9 @@
       "type": "object",
       "description": "The tracked properties of a Recommendation",
       "properties": {
-        "state": {
-          "$ref": "#/definitions/State",
-          "description": "The state of the Recommendation"
-        },
-        "postponedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the Recommendation was postponed until."
-        },
-        "reason": {
-          "$ref": "#/definitions/Reason",
-          "description": "The reason the state of the Recommendation was changed."
-        },
         "priority": {
           "$ref": "#/definitions/Priority",
           "description": "The Priority of the Recommendation."
-        }
-      }
-    },
-    "TrackedRecommendationPropertiesPayload": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TrackedRecommendationPropertiesPayloadProperties"
-        }
-      }
-    },
-    "TrackedRecommendationPropertiesPayloadProperties": {
-      "type": "object",
-      "properties": {
-        "trackedProperties": {
-          "$ref": "#/definitions/TrackedRecommendationProperties",
-          "description": "The tracked properties of a Recommendation"
         }
       }
     },

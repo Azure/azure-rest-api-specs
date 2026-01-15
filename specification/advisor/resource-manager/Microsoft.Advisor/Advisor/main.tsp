@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./MetadataEntity.tsp";
 import "./ResourceRecommendationBase.tsp";
+import "./RecommendationPatch.tsp";
 import "./SuppressionContract.tsp";
 import "./AdvisorScoreEntity.tsp";
 import "./AssessmentResult.tsp";

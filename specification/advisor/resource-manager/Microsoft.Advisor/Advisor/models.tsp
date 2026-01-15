@@ -533,7 +533,7 @@ model RecommendationProperties {
    /**
    * The reason the state of the Recommendation was changed.
    */
-     @added(Versions.v2026_02_01)
+  @added(Versions.v2026_02_01)
   reason?: Reason;
 
    /**
@@ -541,13 +541,7 @@ model RecommendationProperties {
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
     @added(Versions.v2026_02_01)
-  postponedTime?: utcDateTime;
-
-    /**
-   * The Priority of the Recommendation.
-   */
-   @added(Versions.v2026_02_01)
-  priority?: Priority;
+  postponedUntilDateTime?: utcDateTime; 
 
   /**
    * The most recent time that Advisor checked the validity of the recommendation.
@@ -633,12 +627,12 @@ model RecommendationProperties {
   /**
    * If the Recommendation has Tracking enabled.
    */
+  @removed(Versions.v2026_02_01)
   tracked?: boolean;
 
   /**
    * The properties of a tracked recommendation.
    */
-   @removed(Versions.v2026_02_01)
   trackedProperties?: TrackedRecommendationProperties;
 
   /**
@@ -660,6 +654,129 @@ model RecommendationProperties {
    * Additional notes for the Recommendation
    */
   notes?: string;
+}
+
+/**
+ * Properties for patch Recommendation API.
+ */
+ #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model RecommendationPatchProperties {
+  /**
+   * The category of the recommendation.
+   */
+  category?: Category;
+
+  /**
+   * The sub-category of the recommendation.
+   */
+  control?: Control;
+
+  /**
+   * The business impact of the recommendation.
+   */
+  impact?: Impact;
+
+  /**
+   * The resource type identified by Advisor.
+   */
+  impactedField?: string;
+
+  /**
+   * The resource identified by Advisor.
+   */
+  impactedValue?: string;
+
+   /**
+   * The most recent time that Advisor checked the validity of the recommendation.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdated?: utcDateTime;
+
+  /**
+  * The recommendation-type GUID.
+  */
+  recommendationTypeId?: string;
+
+  /**
+   * Metadata of resource that was assessed
+   */
+  resourceMetadata?: ResourceMetadata;
+
+   /**
+   * The list of recommended actions to implement recommendation.
+   */
+  @identifiers(#[])
+  actions?: Record<unknown>[];
+
+    /**
+   * Extended properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  extendedProperties?: Record<string>;
+
+  /**
+   * The state of the Recommendation
+   */
+  state?: State;
+
+  /**
+   * The reason the state of the Recommendation was changed.
+   */
+  @added(Versions.v2026_02_01)
+  reason?: Reason;
+
+   /**
+   * The time the Recommendation was postponed until.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+    @added(Versions.v2026_02_01)
+  postponedUntilDateTime?: utcDateTime; 
+
+  /**
+   * The list of snoozed and dismissed rules for the recommendation.
+   */
+  suppressionIds?: Azure.Core.uuid[];
+
+   /**
+   * The Review that this Recommendation belongs to.
+   */
+  review?: RecommendationPropertiesReview;
+
+  /**
+   * The Workload that this Resource belongs to.
+   */
+  resourceWorkload?: RecommendationPropertiesResourceWorkload;
+
+   /**
+   * The Source System that this Recommendation originated from.
+   */
+  sourceSystem?: string;
+
+  /**
+   * Additional notes for the Recommendation
+   */
+  notes?: string;
+
+}
+
+/**
+ * Properties for recommendation state patch payload.
+ */
+model RecommendationStatePropertiesPayload {
+  /**
+   * The state of the recommendation.
+   */
+  state?: State;
+
+  /**
+   * The reason the state of the Recommendation was changed.
+   */
+  reason?: Reason;
+
+  /**
+   * The time the Recommendation was postponed until.
+   */
+  postponedUntilDateTime?: utcDateTime;
 }
 
 /**
@@ -715,17 +832,20 @@ model TrackedRecommendationProperties {
   /**
    * The state of the Recommendation
    */
+   @removed(Versions.v2026_02_01)
   state?: State;
 
   /**
    * The time the Recommendation was postponed until.
    */
+   @removed(Versions.v2026_02_01)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   postponedTime?: utcDateTime;
 
   /**
    * The reason the state of the Recommendation was changed.
    */
+   @removed(Versions.v2026_02_01)
   reason?: Reason;
 
   /**
