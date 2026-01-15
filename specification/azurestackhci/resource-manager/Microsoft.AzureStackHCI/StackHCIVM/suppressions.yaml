@@ -33,9 +33,3 @@
 - tool: TypeSpecRequirement
   path: ./stable/2024-01-01/*.json
   reason: Part of brownfield service group
-
-# Suppress PostResponseCodes for 2026-04-01-preview - follows same pattern as existing operations (start, stop, restart, pause, save)
-- tool: Spectral
-  path: ./preview/2026-04-01-preview/stackhcivm.json
-  code: PostResponseCodes
-  reason: Long-running POST operations follow existing pattern from 2026-02-01-preview. These operations (start, stop, restart, pause, save, powerOff) return 202 for async acceptance, consistent with the service implementation.
