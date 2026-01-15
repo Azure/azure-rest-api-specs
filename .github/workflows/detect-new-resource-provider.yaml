@@ -1,0 +1,85 @@
+name: Detect New Resource Provider
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - "specification/**/resource-manager/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  ENABLE_NEW_RP_DETECTION: false
+
+jobs:
+  detect-new-rp:
+    name: Detect New Resource Provider
+    runs-on: ubuntu-24.04
+    if: env.ENABLE_NEW_RP_DETECTION == 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Fetch base branch
+        run: git fetch origin ${{ github.event.pull_request.base.ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: .github
+
+      - name: Detect new resource providers
+        id: detect
+        run: node workflows/src/detect-new-resource-provider.js ${{ github.event.pull_request.base.ref }}
+        working-directory: .github
+        continue-on-error: true
+
+      - name: Comment on PR
+        if: steps.detect.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const outputFile = '.github/new-rp-output.json';
+            
+            if (fs.existsSync(outputFile)) {
+              const data = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
+              const rpList = data.newResourceProviders.map(rp => `- \`${rp}\``).join('\n');
+              
+              const body = `## 🆕 New Resource Provider Detected
+
+The following new resource provider namespace(s) were detected in this PR:
+
+${rpList}
+
+### ⚠️ Action Required
+
+New resource provider namespaces require attending **ARM API Modeling Office Hours** before merging.
+
+📅 **Please schedule here:** https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true
+
+During the office hours, the ARM team will review:
+- Resource provider namespace naming conventions
+- API design patterns and best practices
+- Registration requirements for Azure environments`;
+
+              github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+            }
