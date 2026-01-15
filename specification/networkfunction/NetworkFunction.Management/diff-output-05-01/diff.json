@@ -1,0 +1,558 @@
+{
+  "info": {
+    "license__deleted": {
+      "name": "Microsoft"
+    }
+  },
+  "paths": {
+    "/providers/microsoft.NetworkFunction/operations": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "operationId": {
+          "__old": "NetworkFunction_ListOperations",
+          "__new": "Operations_List"
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/OperationListResult",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.NetworkFunction/azureTrafficCollectors": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "List of Traffic Collectors by Subscription": {
+            "$ref": "./examples/AzureTrafficCollectorsBySubscriptionList.json"
+          }
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "List of Traffic Collectors by ResourceGroup": {
+            "$ref": "./examples/AzureTrafficCollectorsByResourceGroupList.json"
+          }
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "Get Traffic Collector": {
+            "$ref": "./examples/AzureTrafficCollectorGet.json"
+          }
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples__deleted": {
+          "Create a traffic collector": {
+            "$ref": "./examples/AzureTrafficCollectorCreate.json"
+          }
+        },
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/AzureTrafficCollector"
+        }
+      },
+      "patch": {
+        "x-ms-examples__deleted": {
+          "Update Traffic Collector tags": {
+            "$ref": "./examples/AzureTrafficCollectorUpdateTags.json"
+          }
+        },
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "azureTrafficCollectorName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "azureTrafficCollectorName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples__deleted": {
+          "Delete Traffic Collector": {
+            "$ref": "./examples/AzureTrafficCollectorDelete.json"
+          }
+        },
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "List of Collection Policies": {
+            "$ref": "./examples/CollectorPoliciesList.json"
+          }
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}": {
+      "patch__added": {
+        "operationId": "CollectorPolicies_UpdateTags",
+        "parameters": [
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectorPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "x-ms-examples__deleted": {
+          "Get Collection Policy": {
+            "$ref": "./examples/CollectorPolicyGet.json"
+          }
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples__deleted": {
+          "Create a collection policy": {
+            "$ref": "./examples/CollectorPolicyCreate.json"
+          }
+        },
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/CollectorPolicy"
+        }
+      },
+      "delete": {
+        "x-ms-examples__deleted": {
+          "Delete Collection Policy": {
+            "$ref": "./examples/CollectorPolicyDelete.json"
+          }
+        },
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError__deleted": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody__deleted": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      },
+      "x-ms-external": true
+    },
+    "Operation__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "default": false
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft NetworkFunction."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed etc."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          }
+        },
+        "origin": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ProxyResource__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SystemData__deleted": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string"
+        },
+        "createdByType": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "CreatedByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "CreatedByType",
+            "modelAsString": true
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "TrackedResource__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "AzureTrafficCollector": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/TrackedResource",
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureTrafficCollectorListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "AzureTrafficCollectorPropertiesFormat": {
+      "properties": {
+        "collectorPolicies": {
+          "readOnly__added": true,
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/CollectorPolicy",
+              "__new": "#/definitions/ResourceReference"
+            }
+          }
+        }
+      }
+    },
+    "CollectorPolicy": {
+      "properties": {
+        "systemData__deleted": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ProxyResource",
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "CollectorPolicyListResult": {
+      "required__added": [
+        "value"
+      ]
+    }
+  }
+}
