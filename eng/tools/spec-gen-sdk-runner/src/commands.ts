@@ -346,27 +346,31 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
   markdownContent += `## Total Specs Count\n ${specConfigsArray.length}\n\n`;
 
-  // Emit structured result for Kusto ingestion
-  const telemetry = {
-    eventType: "SdkBatchGenerationSummary",
-    timestamp: new Date().toISOString(),
-    batchType: batchType,
-    sdkRepoName: commandInput.sdkRepoName,
-    language: commandInput.sdkRepoName.replace("azure-sdk-for-", ""),
-    totalSpecs: specConfigsArray.length,
-    succeededCount: succeededCount,
-    failedCount: failedCount,
-    notEnabledCount: notEnabledCount,
-    duplicatedConfigCount: duplicatedConfigCount,
-    successRate:
-      succeededCount + failedCount > 0
-        ? Math.round((succeededCount / (succeededCount + failedCount)) * 100)
-        : 0,
-    buildId: process.env.BUILD_BUILDID ?? "",
-    pipelineUrl: `${process.env.SYSTEM_COLLECTIONURI ?? ""}${process.env.SYSTEM_TEAMPROJECT ?? ""}/_build/results?buildId=${process.env.BUILD_BUILDID ?? ""}`,
-    failedSpecs: failedSpecs,
-  };
-  logMessage(`##[SdkBatchGenerationSummary]${JSON.stringify(telemetry)}`);
+  // Emit structured telemetry for Kusto ingestion (only for mgmtplane/dataplane batch types)
+  if (batchType === "all-mgmtplane-typespecs" || batchType === "all-dataplane-typespecs") {
+    const specType = batchType === "all-mgmtplane-typespecs" ? "management-plane" : "data-plane";
+    const telemetry = {
+      eventType: "SdkBatchGenerationSummary",
+      timestamp: new Date().toISOString(),
+      batchType: batchType,
+      specType: specType,
+      sdkRepoName: commandInput.sdkRepoName,
+      language: commandInput.sdkRepoName.replace("azure-sdk-for-", ""),
+      totalSpecs: succeededCount + failedCount,
+      succeededCount: succeededCount,
+      failedCount: failedCount,
+      notEnabledCount: notEnabledCount,
+      duplicatedConfigCount: duplicatedConfigCount,
+      successRate:
+        succeededCount + failedCount > 0
+          ? Math.round((succeededCount / (succeededCount + failedCount)) * 100)
+          : 0,
+      buildId: process.env.BUILD_BUILDID ?? "",
+      pipelineUrl: `${process.env.SYSTEM_COLLECTIONURI ?? ""}${process.env.SYSTEM_TEAMPROJECT ?? ""}/_build/results?buildId=${process.env.BUILD_BUILDID ?? ""}`,
+      failedSpecs: failedSpecs,
+    };
+    logMessage(`##[SdkBatchGenerationSummary]${JSON.stringify(telemetry)}`);
+  }
 
   // Write the markdown content to a file
   const markdownFilePath = path.join(commandInput.workingFolder, "out/logs/generation-summary.md");
