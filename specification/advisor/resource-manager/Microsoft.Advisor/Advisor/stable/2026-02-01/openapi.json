@@ -865,6 +865,11 @@
               "$ref": "#/definitions/ArmErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PatchRecommendationStateProperties": {
+            "$ref": "./examples/PatchRecommendationStateProperties.json"
+          }
         }
       }
     },
@@ -1738,44 +1743,49 @@
         ]
       }
     },
-    "Reason": {
+    "RecommendationDismissReason": {
       "type": "string",
-      "description": "The reason the state of the Recommendation was changed.",
+      "description": "The reason for dismissing the Recommendation.",
       "enum": [
-        "ExcessiveInvestment",
-        "TooComplex",
-        "AlternativeSolution",
-        "Incompatible",
-        "Unclear",
-        "RiskAccepted"
+        "ExcessiveCostInvestmentRequired",
+        "TooComplexOrImpracticalToImplement",
+        "AnAlternativeSolutionIsAlreadyInPlace",
+        "IncompatibleWithTheCurrentConfiguration",
+        "ImplementationStepsAreUnclear",
+        "RiskIsAcceptable",
+        "Other"
       ],
       "x-ms-enum": {
-        "name": "Reason",
+        "name": "RecommendationDismissReason",
         "modelAsString": true,
         "values": [
           {
-            "name": "ExcessiveInvestment",
-            "value": "ExcessiveInvestment"
+            "name": "ExcessiveCostInvestmentRequired",
+            "value": "ExcessiveCostInvestmentRequired"
           },
           {
-            "name": "TooComplex",
-            "value": "TooComplex"
+            "name": "TooComplexOrImpracticalToImplement",
+            "value": "TooComplexOrImpracticalToImplement"
           },
           {
-            "name": "AlternativeSolution",
-            "value": "AlternativeSolution"
+            "name": "AnAlternativeSolutionIsAlreadyInPlace",
+            "value": "AnAlternativeSolutionIsAlreadyInPlace"
           },
           {
-            "name": "Incompatible",
-            "value": "Incompatible"
+            "name": "IncompatibleWithTheCurrentConfiguration",
+            "value": "IncompatibleWithTheCurrentConfiguration"
           },
           {
-            "name": "Unclear",
-            "value": "Unclear"
+            "name": "ImplementationStepsAreUnclear",
+            "value": "ImplementationStepsAreUnclear"
           },
           {
-            "name": "RiskAccepted",
-            "value": "RiskAccepted"
+            "name": "RiskIsAcceptable",
+            "value": "RiskIsAcceptable"
+          },
+          {
+            "name": "Other",
+            "value": "Other"
           }
         ]
       }
@@ -1837,8 +1847,8 @@
           "$ref": "#/definitions/State",
           "description": "The state of the Recommendation"
         },
-        "reason": {
-          "$ref": "#/definitions/Reason",
+        "recommendationDismissReason": {
+          "$ref": "#/definitions/RecommendationDismissReason",
           "description": "The reason the state of the Recommendation was changed."
         },
         "postponedUntilDateTime": {
@@ -1899,8 +1909,8 @@
           "$ref": "#/definitions/State",
           "description": "The state of the Recommendation"
         },
-        "reason": {
-          "$ref": "#/definitions/Reason",
+        "recommendationDismissReason": {
+          "$ref": "#/definitions/RecommendationDismissReason",
           "description": "The reason the state of the Recommendation was changed."
         },
         "postponedUntilDateTime": {
@@ -2041,8 +2051,8 @@
           "$ref": "#/definitions/State",
           "description": "The state of the recommendation."
         },
-        "reason": {
-          "$ref": "#/definitions/Reason",
+        "recommendationDismissReason": {
+          "$ref": "#/definitions/RecommendationDismissReason",
           "description": "The reason the state of the Recommendation was changed."
         },
         "postponedUntilDateTime": {

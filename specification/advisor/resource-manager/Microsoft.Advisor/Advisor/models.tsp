@@ -177,6 +177,28 @@ union Reason {
 }
 
 /**
+ * The reason for dismissing the Recommendation.
+ */
+ @added(Versions.v2026_02_01)
+union RecommendationDismissReason {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ExcessiveCostInvestmentRequired: "ExcessiveCostInvestmentRequired",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  TooComplexOrImpracticalToImplement: "TooComplexOrImpracticalToImplement",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  AnAlternativeSolutionIsAlreadyInPlace: "AnAlternativeSolutionIsAlreadyInPlace",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  IncompatibleWithTheCurrentConfiguration: "IncompatibleWithTheCurrentConfiguration",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ImplementationStepsAreUnclear: "ImplementationStepsAreUnclear",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  RiskIsAcceptable: "RiskIsAcceptable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Other: "Other",
+}
+
+/**
  * The Priority of the Recommendation.
  */
 union Priority {
@@ -534,7 +556,7 @@ model RecommendationProperties {
    * The reason the state of the Recommendation was changed.
    */
   @added(Versions.v2026_02_01)
-  reason?: Reason;
+  recommendationDismissReason?: RecommendationDismissReason;
 
    /**
    * The time the Recommendation was postponed until.
@@ -723,7 +745,7 @@ model RecommendationPatchProperties {
    * The reason the state of the Recommendation was changed.
    */
   @added(Versions.v2026_02_01)
-  reason?: Reason;
+  recommendationDismissReason?: RecommendationDismissReason;
 
    /**
    * The time the Recommendation was postponed until.
@@ -762,6 +784,7 @@ model RecommendationPatchProperties {
 /**
  * Properties for recommendation state patch payload.
  */
+ @added(Versions.v2026_02_01)
 model RecommendationStatePropertiesPayload {
   /**
    * The state of the recommendation.
@@ -771,7 +794,7 @@ model RecommendationStatePropertiesPayload {
   /**
    * The reason the state of the Recommendation was changed.
    */
-  reason?: Reason;
+  recommendationDismissReason?: RecommendationDismissReason;
 
   /**
    * The time the Recommendation was postponed until.
