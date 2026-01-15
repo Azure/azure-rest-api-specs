@@ -24,10 +24,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * PrivateLinkScopes Client
+ * Azure Arc K8s Clusters API reference for Private Link's Scopes management.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
-@service(#{ title: "PrivateLinkScopesClient" })
+@service(#{ title: "MicrosoftKubernetesConfigurationClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.KubernetesConfiguration;
