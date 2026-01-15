@@ -15,20 +15,20 @@ import { resolve } from "node:path";
 import { isWindows } from "./test-util.js";
 
 describe("getAffectedServices", () => {
-  test.skipIf(isWindows())("returns single service with multiple files", () => {
+  test.skipIf(isWindows())("returns single service with multiple files", async () => {
     const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
-    const affectedServices = getAffectedServices(changedFiles);
+    const affectedServices = await getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(new Set<string>(["specification/service1"]));
   });
 
-  test.skipIf(isWindows())("returns multiple services", () => {
+  test.skipIf(isWindows())("returns multiple services", async () => {
     const changedFiles = [
       "specification/service1/file1.json",
       "specification/service1/file2.json",
       "specification/service2/file1.json",
     ];
-    const affectedServices = getAffectedServices(changedFiles);
+    const affectedServices = await getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(
       new Set<string>(["specification/service1", "specification/service2"]),
@@ -65,6 +65,51 @@ function createMockReadme(path: string, defaultTag: string, existingTags: string
   return mockReadme;
 }
 
+declare module "vitest" {
+  interface Assertion<T = any> {
+    toBeReadmeWith(expected: Readme): Promise<void>;
+  }
+}
+
+expect.extend({
+  async toBeReadmeWith(received: Readme, expected: Readme) {
+    const passMessages: string[] = [];
+    const failMessages: string[] = [];
+
+    try {
+      expect(received.path).toBe(resolve(expected.path));
+      passMessages.push(`path is ${expected.path}`);
+    } catch (e) {
+      failMessages.push(String(e));
+    }
+    try {
+      const expectedDefaultTag = (await expected.getGlobalConfig()).tag;
+      await expect(received.getGlobalConfig()).resolves.toEqual({ tag: expectedDefaultTag });
+      passMessages.push(`default tag is ${expectedDefaultTag}`);
+    } catch (e) {
+      failMessages.push(String(e));
+    }
+
+    try {
+      const expectedTags = [...(await expected.getTags()).keys()];
+      const actualTags = [...(await received.getTags()).keys()];
+      expect(actualTags).toEqual(expect.arrayContaining(expectedTags));
+      passMessages.push(`tags are ${expectedTags.join(", ")}`);
+    } catch (e) {
+      failMessages.push(String(e));
+    }
+
+    const pass = failMessages.length === 0;
+    return {
+      pass,
+      message: () =>
+        pass
+          ? `Readme matches expected values\nChecks: ${passMessages.join("; ")}`
+          : `Readme object checks failed:\n- ${failMessages.join("\n- ")}`,
+    };
+  },
+});
+
 describe("reconcileChangedFilesAndTags", () => {
   // These tests assume that an existing readme.md at specification/1/readme.md
   // has 3 tags:
@@ -72,6 +117,199 @@ describe("reconcileChangedFilesAndTags", () => {
   // tag2
   // tag3
   const beforeTags = ["tag1", "tag2", "tag3"];
+
+  function createReadmeTags(
+    tags: string[],
+    defaultTag: string = "tag1",
+    readmePath: string = "specification/1/readme.md",
+  ): Map<string, ReadmeAffectedTags> {
+    return new Map<string, ReadmeAffectedTags>([
+      [
+        readmePath,
+        {
+          readme: createMockReadme(readmePath, defaultTag, beforeTags),
+          changedTags: new Set<string>(tags),
+        },
+      ],
+    ]);
+  }
+
+  test.each([
+    [
+      "1. add a tag to an existing readme",
+      createReadmeTags([]),
+      createReadmeTags(["tag4"]),
+      createReadmeTags([""]),
+      createReadmeTags(["tag4"]),
+    ],
+    [
+      "2. add a new tag and make it default",
+      createReadmeTags([]),
+      createReadmeTags(["tag4"], "tag4"),
+      createReadmeTags([""]),
+      createReadmeTags(["tag4"], "tag4"),
+    ],
+    [
+      "3. add multiple tags",
+      createReadmeTags([]),
+      createReadmeTags(["tag4", "tag5"]),
+      createReadmeTags([""]),
+      createReadmeTags(["tag4", "tag5"]),
+    ],
+    [
+      "4. add multiple tags and update default",
+      createReadmeTags([]),
+      createReadmeTags(["tag4", "tag5"], "tag5"),
+      createReadmeTags([""]),
+      createReadmeTags(["tag4", "tag5"], "tag5"),
+    ],
+    [
+      "5. update an existing tag",
+      createReadmeTags(["tag2"]),
+      createReadmeTags(["tag2"]),
+      createReadmeTags(["tag2"]),
+      createReadmeTags(["tag2"]),
+    ],
+    [
+      "6. update default tag",
+      createReadmeTags(["tag1"]),
+      createReadmeTags(["tag1"]),
+      createReadmeTags(["tag1"]),
+      createReadmeTags(["tag1"]),
+    ],
+    [
+      "7. add and edit multiple new tags but don't affect default tag",
+      createReadmeTags(["tag2", "tag3"]),
+      createReadmeTags(["tag2", "tag3", "tag4", "tag5"]),
+      createReadmeTags(["tag2", "tag3", ""]),
+      createReadmeTags(["tag2", "tag3", "tag4", "tag5"]),
+    ],
+    [
+      "8. add a new file to an existing tag",
+      // TODO: Document why this happens
+      createReadmeTags([]),
+      createReadmeTags(["tag2"]),
+      createReadmeTags(["tag2"]),
+      createReadmeTags(["tag2"]),
+    ],
+    [
+      "9. remove a tag",
+      createReadmeTags(["tag2"]),
+      createReadmeTags([]),
+      createReadmeTags([]),
+      createReadmeTags([]),
+    ],
+    [
+      "10. remove a tag and edit a tag",
+      createReadmeTags(["tag2", "tag3"]),
+      createReadmeTags(["tag3"]),
+      createReadmeTags(["tag3"]),
+      createReadmeTags(["tag3"]),
+    ],
+    [
+      "11. remove a tag add a new tag",
+      createReadmeTags(["tag2"]),
+      createReadmeTags(["tag4"]),
+      createReadmeTags([""]),
+      createReadmeTags(["tag4"]),
+    ],
+    [
+      "12. delete default tag set new default",
+      createReadmeTags(["tag1"]),
+      createReadmeTags(["tag2"], "tag2"),
+      // Ensure this is correct
+      createReadmeTags(["tag2"]),
+      createReadmeTags(["tag2"], "tag2"),
+    ],
+    [
+      "13. update muiltiple tags including default tag",
+      createReadmeTags(["tag1", "tag2"]),
+      createReadmeTags(["tag1", "tag2"]),
+      createReadmeTags(["tag1", "tag2"]),
+      createReadmeTags(["tag1", "tag2"]),
+    ],
+    [
+      "14. update mulitple tags including default tag and add a new tag",
+      createReadmeTags(["tag1", "tag2"]),
+      createReadmeTags(["tag1", "tag2", "tag4", "tag5"]),
+      createReadmeTags(["tag1", "tag2"]),
+      createReadmeTags(["tag1", "tag2", "tag4", "tag5"]),
+    ],
+    [
+      "15. delete a readme",
+      createReadmeTags([]),
+      new Map<string, ReadmeAffectedTags>([]),
+      createReadmeTags([]),
+      new Map<string, ReadmeAffectedTags>([]),
+    ],
+    [
+      "15.1 delete a readme",
+      createReadmeTags(["tag1", "tag2", "tag3"]),
+      new Map<string, ReadmeAffectedTags>([]),
+      createReadmeTags(["tag1", "tag2", "tag3"]),
+      new Map<string, ReadmeAffectedTags>([]),
+    ],
+    [
+      "16. delete a readme and swagger files",
+      createReadmeTags(["tag1", "tag2", "tag3"]),
+      new Map<string, ReadmeAffectedTags>([]),
+      createReadmeTags(["tag1", "tag2", "tag3"]),
+      new Map<string, ReadmeAffectedTags>([]),
+    ],
+    [
+      "17. add a new readme",
+      new Map<string, ReadmeAffectedTags>([]),
+      createReadmeTags(["tag1", "tag2"], "tag1", "specification/2/readme.md"),
+      new Map<string, ReadmeAffectedTags>([]),
+      createReadmeTags(["tag1", "tag2"], "tag1", "specification/2/readme.md"),
+    ],
+    [
+      "18. only change readme.md file",
+      createReadmeTags([]),
+      createReadmeTags([]),
+      createReadmeTags([]),
+      createReadmeTags([]),
+    ],
+    [
+      "19. only change readme.md file updating default tag",
+      createReadmeTags([]),
+      createReadmeTags([], "tag2"),
+      createReadmeTags([]),
+      createReadmeTags([], "tag2"),
+    ],
+    [
+      "20. add a file to the default tag",
+      createReadmeTags([]),
+      createReadmeTags(["tag1"]),
+      createReadmeTags(["tag1"]),
+      createReadmeTags(["tag1"]),
+    ],
+  ])(
+    "reconcileChangedFilesAndTags - %s",
+    async (_, before, after, expectedBeforeFinal, expectedAfterFinal) => {
+      const [beforeFinal, afterFinal] = await reconcileChangedFilesAndTags(before, after);
+
+      expect([...beforeFinal.keys()]).toEqual(
+        expect.arrayContaining([...expectedBeforeFinal.keys()]),
+      );
+      expect([...afterFinal.keys()]).toEqual(
+        expect.arrayContaining([...expectedAfterFinal.keys()]),
+      );
+
+      for (const [key, expectedValue] of expectedBeforeFinal) {
+        const actual = beforeFinal.get(key)!;
+        expect(actual.changedTags).toEqual(expectedValue.changedTags);
+        await expect(actual.readme).toBeReadmeWith(expectedValue.readme);
+      }
+
+      for (const [key, expectedValue] of expectedAfterFinal) {
+        const actual = afterFinal.get(key)!;
+        expect(actual.changedTags).toEqual(expectedValue.changedTags);
+        await expect(actual.readme).toBeReadmeWith(expectedValue.readme);
+      }
+    },
+  );
+
   test("1. add a tag to an existing readme", async () => {
     const before = new Map<string, ReadmeAffectedTags>([
       [
@@ -702,66 +940,66 @@ describe("reconcileChangedFilesAndTags", () => {
   ///////////////////
   // BEGIN OLD STUFF
   ///////////////////
-  test("if a tag is deleted in after and exists in before, remove the tag from before", () => {
-    const before = new Map<string, ReadmeAffectedTags>([
-      [
-        "specification/1/readme.md",
-        {
-          readme: new Readme("specification/1/readme.md"),
-          changedTags: new Set<string>(["tag1", "tag2"]),
-        },
-      ],
-    ]);
-    const after = new Map<string, ReadmeAffectedTags>([
-      [
-        "specification/1/readme.md",
-        {
-          readme: new Readme("specification/1/readme.md"),
-          changedTags: new Set<string>(["tag1"]),
-        },
-      ],
-    ]);
+  // test("if a tag is deleted in after and exists in before, remove the tag from before", async () => {
+  //   const before = new Map<string, ReadmeAffectedTags>([
+  //     [
+  //       "specification/1/readme.md",
+  //       {
+  //         readme: new Readme("specification/1/readme.md"),
+  //         changedTags: new Set<string>(["tag1", "tag2"]),
+  //       },
+  //     ],
+  //   ]);
+  //   const after = new Map<string, ReadmeAffectedTags>([
+  //     [
+  //       "specification/1/readme.md",
+  //       {
+  //         readme: new Readme("specification/1/readme.md"),
+  //         changedTags: new Set<string>(["tag1"]),
+  //       },
+  //     ],
+  //   ]);
 
-    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
-    expect(beforeFinal).toEqual(
-      new Map<string, string[]>([
-        [
-          "specification/1/readme.md",
-          expect.objectContaining({
-            changedTags: new Set<string>(["tag1"]),
-          }),
-        ],
-      ]),
-    );
-    expect(afterFinal).toEqual(after);
-  });
+  //   const [beforeFinal, afterFinal] = await reconcileChangedFilesAndTags(before, after);
+  //   expect(beforeFinal).toEqual(
+  //     new Map<string, string[]>([
+  //       [
+  //         "specification/1/readme.md",
+  //         expect.objectContaining({
+  //           changedTags: new Set<string>(["tag1"]),
+  //         }),
+  //       ],
+  //     ]),
+  //   );
+  //   expect(afterFinal).toEqual(after);
+  // });
 
-  test("does not change if there is no change", () => {
-    const before = new Map<string, ReadmeAffectedTags>([
-      [
-        "specification/1/readme.md",
-        {
-          readme: new Readme("specification/1/readme.md"),
-          changedTags: new Set<string>(["tag1", "tag2"]),
-        },
-      ],
-    ]);
-    const after = new Map<string, ReadmeAffectedTags>([
-      [
-        "specification/1/readme.md",
-        {
-          readme: new Readme("specification/1/readme.md"),
-          changedTags: new Set<string>(["tag1", "tag2"]),
-        },
-      ],
-    ]);
+  // test("does not change if there is no change", async () => {
+  //   const before = new Map<string, ReadmeAffectedTags>([
+  //     [
+  //       "specification/1/readme.md",
+  //       {
+  //         readme: new Readme("specification/1/readme.md"),
+  //         changedTags: new Set<string>(["tag1", "tag2"]),
+  //       },
+  //     ],
+  //   ]);
+  //   const after = new Map<string, ReadmeAffectedTags>([
+  //     [
+  //       "specification/1/readme.md",
+  //       {
+  //         readme: new Readme("specification/1/readme.md"),
+  //         changedTags: new Set<string>(["tag1", "tag2"]),
+  //       },
+  //     ],
+  //   ]);
 
-    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
-    expect(beforeFinal).toEqual(before);
-    expect(afterFinal).toEqual(after);
-  });
+  //   const [beforeFinal, afterFinal] = await reconcileChangedFilesAndTags(before, after);
+  //   expect(beforeFinal).toEqual(before);
+  //   expect(afterFinal).toEqual(after);
+  // });
 
-  test("keeps a specification in before if it is deleted in after", () => {
+  test("keeps a specification in before if it is deleted in after", async () => {
     const before = new Map<string, ReadmeAffectedTags>([
       [
         "specification/1/readme.md",
@@ -773,7 +1011,7 @@ describe("reconcileChangedFilesAndTags", () => {
     ]);
     const after = new Map<string, ReadmeAffectedTags>();
 
-    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
+    const [beforeFinal, afterFinal] = await reconcileChangedFilesAndTags(before, after);
     expect(beforeFinal).toEqual(before);
     expect(afterFinal).toEqual(after);
   });
@@ -870,7 +1108,7 @@ describe("buildState", () => {
         [
           "specification/edit-in-place/readme.md",
           {
-            changedTags: new Set<string>(),
+            changedTags: new Set<string>([""]),
             readme: expect.any(Readme) as unknown,
           },
         ],
@@ -895,6 +1133,27 @@ describe("buildState", () => {
   test.skipIf(isWindows())("does not include readme files that has no input-file:", async () => {
     const actual = await buildState(
       ["specification/no-input-file/readme.md"],
+      "test/fixtures/buildState/",
+    );
+
+    expect(actual).toEqual([new Map<string, ReadmeAffectedTags>(), []]);
+  });
+
+  test("handles deleted (i.e. nonexistant) readme.md file", async () => {
+    const actual = await buildState(
+      ["specification/deleted-readme/readme.md"],
+      "test/fixtures/buildState/",
+    );
+
+    expect(actual).toEqual([new Map<string, ReadmeAffectedTags>(), []]);
+  });
+
+  test("handles deleted (i.e. nonexistant) readme.md file and swagger JSON", async () => {
+    const actual = await buildState(
+      [
+        "specification/deleted-readme/readme.md",
+        "specification/deleted-readme/data-plane/swagger.json",
+      ],
       "test/fixtures/buildState/",
     );
 

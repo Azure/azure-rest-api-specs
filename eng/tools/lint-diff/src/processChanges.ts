@@ -7,7 +7,7 @@ import { ReadmeAffectedTags } from "./lintdiff-types.js";
 import { pathExists } from "./util.js";
 
 import $RefParser from "@apidevtools/json-schema-ref-parser";
-import { deduplicateTags } from "./markdown-utils.js";
+import { deduplicateTags, getDefaultTag } from "./markdown-utils.js";
 
 export async function getRunList(
   beforePath: string,
@@ -36,7 +36,7 @@ export async function getRunList(
   const [beforeState] = await buildState(changedSpecFiles, beforePath);
   const [afterState, afterSwaggers] = await buildState(changedSpecFiles, afterPath);
   const affectedSwaggerCandidates = new Set<string>(afterSwaggers);
-  const [beforeTagMap, afterTagMap] = reconcileChangedFilesAndTags(beforeState, afterState);
+  const [beforeTagMap, afterTagMap] = await reconcileChangedFilesAndTags(beforeState, afterState);
 
   const affectedSwaggers = await getChangedSwaggers(
     beforePath,
@@ -82,7 +82,7 @@ export async function buildState(
 
   // Get affected services from changed files
   // e.g. specification/service1/readme.md -> specification/service1
-  const affectedServiceDirectories = getAffectedServices(existingChangedFiles);
+  const affectedServiceDirectories = await getAffectedServices(existingChangedFiles);
 
   // Build service models of affected services
   const specModels = new Map<string, SpecModel>();
@@ -148,7 +148,7 @@ export async function buildState(
     if (!changedFileAndTagsMap.has(changedReadme)) {
       changedFileAndTagsMap.set(changedReadme, {
         readme: readmeObject,
-        changedTags: new Set<string>(),
+        changedTags: new Set<string>([""]),
       });
     }
   }
@@ -175,10 +175,10 @@ export async function buildState(
  * @param after after the change
  * @returns maps of readme files and tags to scan
  */
-export function reconcileChangedFilesAndTags(
+export async function reconcileChangedFilesAndTags(
   before: Map<string, ReadmeAffectedTags>,
   after: Map<string, ReadmeAffectedTags>,
-): Map<string, ReadmeAffectedTags>[] {
+): Promise<Map<string, ReadmeAffectedTags>[]> {
   const beforeFinal = new Map<string, ReadmeAffectedTags>();
   const afterFinal = new Map<string, ReadmeAffectedTags>();
 
@@ -190,10 +190,8 @@ export function reconcileChangedFilesAndTags(
     afterFinal.set(readme, tags);
   }
 
-  // If a tag is deleted in after and exists in before, do NOT scan the tag
+  // If a tag is deleted in after and exists in before, do NOT lint the tag
   for (const [readme, tags] of beforeFinal.entries()) {
-    // TODO: A deleted readme might also be cause to remove from scanning,
-    // which this currently does not do.
     if (!afterFinal.has(readme)) {
       continue;
     }
@@ -203,6 +201,37 @@ export function reconcileChangedFilesAndTags(
       readme: tags.readme,
       changedTags: new Set([...tags.changedTags].filter((t) => afterTags.has(t))),
     });
+  }
+
+  // If a tag is edited in after and also exists in before (e.g. add a new file
+  // to a tag in the readme.md), make sure to lint the tag in before as well
+  for (const [readme, afterTags] of afterFinal.entries()) {
+    if (!beforeFinal.has(readme)) {
+      continue;
+    }
+
+    const beforeTagSet = await beforeFinal.get(readme)!.readme.getTags();
+    const beforeTags = beforeFinal.get(readme)!.changedTags;
+    for (const tag of afterTags.changedTags) {
+      if (!beforeTagSet.has(tag)) {
+        continue;
+      }
+
+      beforeTags.add(tag);
+      break;
+    }
+
+  // If a tag exists in after but not in before, make sure that the the default
+  // tag from before is included in linting
+    const beforeDefaultTag = await getDefaultTag(beforeFinal.get(readme)!.readme);
+    for (const tag of afterTags.changedTags) {
+      // Only add "" if the default tag is not already in beforeTags (prevent
+      // duplicate)
+      if (!beforeTags.has(tag) && !beforeTags.has(beforeDefaultTag)) {
+        beforeTags.add("");
+        break;
+      }
+    }
   }
 
   return [beforeFinal, afterFinal];
@@ -233,10 +262,10 @@ export async function readFileList(changedFilesPath: string): Promise<string[]> 
  * @param changedFiles a list of changed files
  * @returns A list of "services" that are affected by the changed files
  */
-export function getAffectedServices(changedFiles: string[]) {
+export async function getAffectedServices(changedFiles: string[]) {
   const affectedServices = new Set<string>();
   for (const file of changedFiles) {
-    const service = getService(file);
+    const service = await getService(file);
     if (service) {
       affectedServices.add(service);
     }
