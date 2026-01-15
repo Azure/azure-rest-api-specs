@@ -17,5 +17,5 @@ using Microsoft.MachineLearningServices;
 @@clientName(NotebookAccessTokenResult.hostName, "hostname", "java");
 @@clientName(UserAccountCredentials.adminUserName, "adminUsername", "java");
 @@clientName(ComputeInstanceSshSettings.adminUserName, "adminUsername", "java");
-@@clientName(ExternalFQDNResponseInner, "ExternalFqdnResponseInner", "java");
+
 @@clientName(ExternalFQDNResponse, "ExternalFqdnResponse", "java");
