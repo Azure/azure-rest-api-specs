@@ -22,3 +22,8 @@ using Microsoft.MachineLearningServices;
   "java"
 );
 @@clientName(Registries.getBlobReferenceSAS, "getBlobReferenceSas", "java");
+@@clientName(NotebookAccessTokenResult.hostName, "hostname", "java");
+@@clientName(UserAccountCredentials.adminUserName, "adminUsername", "java");
+@@clientName(ComputeInstanceSshSettings.adminUserName, "adminUsername", "java");
+
+@@clientName(ExternalFQDNResponse, "ExternalFqdnResponse", "java");
