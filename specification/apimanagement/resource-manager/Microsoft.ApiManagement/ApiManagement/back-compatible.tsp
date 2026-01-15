@@ -1560,11 +1560,11 @@ using Microsoft.ApiManagement;
   "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked"
 );
 @@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location, "Location header");
-@@clientName(BackendSessionIdSource, "Backend-sessionId-source");
+@@clientName(BackendSessionIdSource, "Backend-sessionId-source", "!python");
 @@clientName(HttpHeader, "HTTPHeader", "!java");
 @@clientName(GlobalSchemaContractProperties.schemaType, "SchemaType");
-@@clientName(LlmDiagnosticSettings, "Llm-diagnostic-settings");
-@@clientName(LlmMessageLogTypes, "Llm-message-log-types");
+@@clientName(LlmDiagnosticSettings, "Llm-diagnostic-settings", "!python");
+@@clientName(LlmMessageLogTypes, "Llm-message-log-types", "!python");
 @@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "parameters"
 );
