@@ -19,9 +19,9 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Default Comparison (Both File Pairs)
+### Default Comparison (All Files)
 
-Compares both searchindex.json and searchservice.json and generates a single Excel file with two sheets:
+Compares searchindex.json, searchservice.json, and knowledgebase.json and generates a single Excel file with three sheets:
 
 ```bash
 python compare_ga_preview.py
@@ -30,15 +30,19 @@ python compare_ga_preview.py
 This creates **`ga_preview_discrepancy_YYYYMMDD_HHMMSS.xlsx`** with:
 - **searchindex** sheet - Discrepancies in searchindex.json
 - **searchservice** sheet - Discrepancies in searchservice.json
+- **knowledgebase** sheet - Discrepancies in knowledgebase.json (preview-only, no GA version)
 
 ### Compare Specific File Pair
 
 ```bash
-# Compare searchindex.json only (still creates Excel with one sheet)
+# Compare searchindex.json only
 python compare_ga_preview.py --file searchindex
 
-# Compare searchservice.json only (still creates Excel with one sheet)
+# Compare searchservice.json only
 python compare_ga_preview.py --file searchservice
+
+# Compare knowledgebase.json only (preview-only file)
+python compare_ga_preview.py --file knowledgebase
 ```
 
 ### Custom File Paths
@@ -48,8 +52,11 @@ python compare_ga_preview.py \
   --ga-index /path/to/ga/searchindex.json \
   --preview-index /path/to/preview/searchindex.json \
   --ga-service /path/to/ga/searchservice.json \
-  --preview-service /path/to/preview/searchservice.json
+  --preview-service /path/to/preview/searchservice.json \
+  --preview-knowledgebase /path/to/preview/knowledgebase.json
 ```
+
+**Note**: `--ga-knowledgebase` is optional since no GA version exists yet. The tool compares against an empty baseline.
 
 ### Output Options
 
@@ -78,27 +85,8 @@ The tool generates **`ga_preview_discrepancy_YYYYMMDD_HHMMSS.xlsx`** with these 
 | **2025-11-01-preview Value** | Value in Preview swagger | `None`, `false`, `(not present)` |
 | **Difference Summary** | Human-readable description | Schema type changed: object -> None |
 | **Severity** | Impact classification | breaking, non-breaking, unknown |
-| **2026-04-01 TSP Action** | Auto-filled action category | Fix in TSP, GA exclude (preview-only), etc. |
-| **Notes** | Empty for reviewer comments | (blank) |
-
-### 2026-04-01 TSP Action Column
-
-The **2026-04-01 TSP Action** column is auto-populated based on deterministic rules to guide TypeSpec migration and 2026-04-01 GA decisions:
-
-| Disposition | Criteria | Action Required |
-|-------------|----------|-----------------|
-| **Tooling false positive** | Type changed object↔none with $ref, inline↔reference schema changes | No action - refactor only |
-| **Fix in TSP** | Breaking changes: required fields added/changed/removed, type changes, properties removed | Fix in TypeSpec before 2026-04-01 GA |
-| **GA exclude (preview-only)** | Preview-only operations, definitions, or paths not present in GA | Do not include in 2026-04-01 GA |
-| **GA include candidate** | Non-breaking additions to existing GA models (new properties, optional parameters) | Consider including in 2026-04-01 GA |
-| **Needs PM decision** | Other differences requiring manual review | Review with PM/architect |
-
-**Rule Logic:**
-1. Detects refactor-only changes (inline object ↔ $ref conversions)
-2. Flags breaking changes requiring TypeSpec fixes
-3. Identifies preview-only features not in GA
-4. Highlights safe additions to existing GA models
-5. Defaults to "Needs PM decision" for edge cases
+| **2026-04-01 Decision** | Manual review field for decisions | (blank) |
+| **TSP Action** | Manual review field for TypeSpec actions | (blank) |
 
 ### Identifier Format
 
@@ -228,10 +216,12 @@ The tool compares these file pairs by default:
 **GA (Stable):**
 - `specification/search/data-plane/Search/stable/2025-09-01/searchindex.json`
 - `specification/search/data-plane/Search/stable/2025-09-01/searchservice.json`
+- *(knowledgebase.json - no GA version exists)*
 
 **Preview:**
 - `specification/search/data-plane/Search/preview/2025-11-01-preview_unmigrated/searchindex.json`
 - `specification/search/data-plane/Search/preview/2025-11-01-preview_unmigrated/searchservice.json`
+- `specification/search/data-plane/Search/preview/2025-11-01-preview_unmigrated/knowledgebase.json`
 
 ## Notes
 

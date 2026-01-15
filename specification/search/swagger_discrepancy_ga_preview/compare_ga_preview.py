@@ -218,102 +218,6 @@ def extract_values(diff: Dict[str, Any]) -> Tuple[str, str]:
     return "", message
 
 
-def determine_disposition(diff: Dict[str, Any]) -> str:
-    """
-    Determine the disposition action for a discrepancy.
-
-    Returns one of:
-    - "Tooling false positive"
-    - "Fix in TSP"
-    - "GA exclude (preview-only)"
-    - "GA include candidate"
-    - "Needs PM decision"
-
-    Args:
-        diff: Difference dictionary with keys: category, message, severity, context, type
-
-    Returns:
-        Disposition string
-    """
-    category = categorize_difference(diff)
-    message = diff.get("message", "").lower()
-    summary = diff.get("message", "")
-    severity = diff.get("severity", "")
-    diff_type = diff.get("type", "")
-    identifier = extract_identifier(diff)
-    ga_val, preview_val = extract_values(diff)
-
-    # Rule 1: Tooling false positive
-    # Detect refactor-only changes like inline <-> $ref conversions
-    if any(
-        x in message
-        for x in [
-            "type changed: object -> none",
-            "$ref",
-            "schema changed from inline",
-            "schema changed from reference",
-        ]
-    ):
-        return "Tooling false positive"
-
-    # Rule 2: Fix in TSP
-    # Breaking changes that need to be fixed
-    if severity == "breaking":
-        if any(
-            x in message
-            for x in [
-                "required fields added",
-                "required fields changed",
-                "required fields removed",
-                "type changed",
-                "properties removed",
-            ]
-        ):
-            return "Fix in TSP"
-
-    # Rule 3: GA exclude (preview-only)
-    # Preview-only operations or definitions
-    if category == "operation":
-        if ga_val == "(not present)" or "extra path in preview" in message:
-            return "GA exclude (preview-only)"
-
-    if category in ("definition", "schema"):
-        if "extra definition in preview" in message:
-            return "GA exclude (preview-only)"
-
-    # Rule 4: GA include candidate
-    # Non-breaking additions to existing GA models
-    if severity == "non-breaking" and "properties added" in message:
-        # Check if this is extending an existing GA model
-        # Heuristic: GA Value is present (not "(not present)")
-        if ga_val and ga_val != "(not present)":
-            return "GA include candidate"
-
-        # Check if identifier references a core GA type
-        core_ga_types = [
-            "SearchIndex",
-            "SearchField",
-            "SearchIndexer",
-            "SearchIndexerDataSource",
-            "SearchIndexerSkillset",
-            "ServiceLimits",
-            "ServiceStatistics",
-            "SynonymMap",
-            "DocumentDebugInfo",
-            "FacetResult",
-            "SearchRequest",
-            "SearchResult",
-            "SearchDocumentsResult",
-            "VectorQuery",
-        ]
-
-        if any(core_type in identifier for core_type in core_ga_types):
-            return "GA include candidate"
-
-    # Rule 5: Default fallback
-    return "Needs PM decision"
-
-
 def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> None:
     """Save comparison results as Excel file with separate sheets."""
     output_path = Path(output_dir)
@@ -337,14 +241,13 @@ def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> 
         "2025-11-01-preview Value",
         "Difference Summary",
         "Severity",
-        "2026-04-01 TSP Action",
-        "Notes",
+        "2026-04-01 Decision",
+        "TSP Action",
     ]
 
     # Severity colors
     severity_colors = {
         "breaking": "FFCCCC",  # Light red
-        "non-breaking": "CCFFCC",  # Light green
         "unknown": "FFFFCC",  # Light yellow
     }
 
@@ -382,7 +285,6 @@ def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> 
             ga_val, preview_val = extract_values(diff)
             summary = diff["message"]
             severity = diff["severity"]
-            disposition = determine_disposition(diff)
 
             # Write row data
             ws.cell(row=row_num, column=1, value=category)
@@ -391,8 +293,10 @@ def save_excel_report(results: Dict[str, ComparisonResult], output_dir: str) -> 
             ws.cell(row=row_num, column=4, value=preview_val)
             ws.cell(row=row_num, column=5, value=summary)
             ws.cell(row=row_num, column=6, value=severity)
-            ws.cell(row=row_num, column=7, value=disposition)
-            ws.cell(row=row_num, column=8, value="")  # Notes column for reviewer
+            ws.cell(
+                row=row_num, column=7, value=""
+            )  # 2026-04-01 Decision - for manual review
+            ws.cell(row=row_num, column=8, value="")  # TSP Action - for manual review
 
             # Apply severity color to entire row
             if severity in severity_colors:
@@ -506,9 +410,9 @@ def main():
     # File selection
     parser.add_argument(
         "--file",
-        choices=["searchindex", "searchservice", "both"],
-        default="both",
-        help="Which file pair to compare (default: both)",
+        choices=["searchindex", "searchservice", "knowledgebase", "all"],
+        default="all",
+        help="Which file pair to compare (default: all)",
     )
 
     # Custom paths for searchindex
@@ -545,6 +449,21 @@ def main():
         help="Path to Preview searchservice.json",
     )
 
+    # Custom paths for knowledgebase
+    parser.add_argument(
+        "--ga-knowledgebase",
+        default=None,  # No GA version exists yet
+        help="Path to GA knowledgebase.json (optional, defaults to empty for preview-only comparison)",
+    )
+    parser.add_argument(
+        "--preview-knowledgebase",
+        default=str(
+            spec_root
+            / "search/data-plane/Search/preview/2025-11-01-preview_unmigrated/knowledgebase.json"
+        ),
+        help="Path to Preview knowledgebase.json",
+    )
+
     # Output options
     parser.add_argument(
         "--output-dir",
@@ -561,7 +480,7 @@ def main():
 
     # Determine which files to compare
     file_pairs = []
-    if args.file in ["searchindex", "both"]:
+    if args.file in ["searchindex", "all"]:
         file_pairs.append(
             {
                 "name": "searchindex.json",
@@ -569,12 +488,20 @@ def main():
                 "preview_path": args.preview_index,
             }
         )
-    if args.file in ["searchservice", "both"]:
+    if args.file in ["searchservice", "all"]:
         file_pairs.append(
             {
                 "name": "searchservice.json",
                 "ga_path": args.ga_service,
                 "preview_path": args.preview_service,
+            }
+        )
+    if args.file in ["knowledgebase", "all"]:
+        file_pairs.append(
+            {
+                "name": "knowledgebase.json",
+                "ga_path": args.ga_knowledgebase,
+                "preview_path": args.preview_knowledgebase,
             }
         )
 
@@ -586,8 +513,19 @@ def main():
             print(f"  GA: {pair['ga_path']}")
             print(f"  Preview: {pair['preview_path']}")
 
-            # Load files
-            ga_swagger = load_swagger_file(pair["ga_path"])
+            # Load files - handle case where GA file doesn't exist (preview-only)
+            if pair["ga_path"] and Path(pair["ga_path"]).exists():
+                ga_swagger = load_swagger_file(pair["ga_path"])
+            else:
+                # Create empty swagger document for preview-only files
+                print(f"  Note: No GA version exists, comparing against empty baseline")
+                ga_swagger = {
+                    "swagger": "2.0",
+                    "info": {"version": "0.0.0", "title": "Empty"},
+                    "paths": {},
+                    "definitions": {},
+                }
+
             preview_swagger = load_swagger_file(pair["preview_path"])
 
             # Canonicalize both
