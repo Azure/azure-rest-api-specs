@@ -10,6 +10,7 @@ az:
     package-name: azure-mgmt-apimanagement
 az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/apim
 python-sdk-output-folder: $(az-output-folder)/vendored_sdks/apimanagement
+#test
 cli:
     cli-directive:
         - where:

@@ -3,6 +3,7 @@
   "info": {
     "title": "Microsoft.AzureFleet",
     "version": "2024-11-01",
+    "description": "API specification for Microsoft Azure Fleet service.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -50,7 +51,8 @@
       "get": {
         "operationId": "Operations_List",
         "tags": [
-          "Operations"
+          "Operations",
+          "Fleets"
         ],
         "description": "List the operations for the provider",
         "parameters": [
@@ -73,7 +75,7 @@
           }
         },
         "x-ms-examples": {
-          "Operations_List": {
+          "Operations_List_test_akhila": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -531,6 +533,10 @@
           "description": "The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS.\nManaged disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
         },
         "hibernationEnabled": {
+          "type": "boolean",
+          "description": "The flag that enables or disables hibernation capability on the VM."
+        },
+        "test": {
           "type": "boolean",
           "description": "The flag that enables or disables hibernation capability on the VM."
         }
