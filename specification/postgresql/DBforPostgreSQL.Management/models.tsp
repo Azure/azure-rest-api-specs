@@ -3527,6 +3527,70 @@ model CustomErrorResponse {
 scalar secretString extends string;
 
 model OperationList is Azure.Core.Page<Operation>;
+
+/**
+ * The state of the network migration operation.
+ */
+union NetworkMigrationState {
+  string,
+
+  /**
+   * The network migration is pending.
+   */
+  Pending: "Pending",
+
+  /**
+   * The network migration is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The network migration succeeded.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The network migration failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * The network migration cancellation is in progress.
+   */
+  CancelInProgress: "CancelInProgress",
+
+  /**
+   * The network migration was cancelled.
+   */
+  Cancelled: "Cancelled",
+}
+
+/**
+ * The status of a network migration operation.
+ */
+model MigrateNetworkStatus {
+  /**
+   * The ID of the subscription.
+   */
+  subscriptionId?: string;
+
+  /**
+   * The name of the resource group.
+   */
+  resourceGroupName?: string;
+
+  /**
+   * The name of the server.
+   */
+  serverName?: string;
+
+  /**
+   * The state of the network migration operation.
+   */
+  @visibility(Lifecycle.Read)
+  state?: NetworkMigrationState;
+}
+
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);
 @@visibility(CapabilityList.value, Lifecycle.Read);
 @@visibility(MigrationList.value, Lifecycle.Read);

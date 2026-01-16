@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "administratorLogin": "exampleadministratorlogin",
+        "administratorLoginPassword": "examplepassword",
+        "availabilityZone": "1",
+        "backup": {
+          "backupRetentionDays": 7,
+          "geoRedundantBackup": "Enabled"
+        },
+        "createMode": "Create",
+        "highAvailability": {
+          "mode": "SameZone"
+        },
+        "network": {
+          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.private.postgres.database"
+        },
+        "storage": {
+          "autoGrow": "Disabled",
+          "storageSizeGB": 512,
+          "tier": "P20"
+        },
+        "version": "17"
+      },
+      "sku": {
+        "name": "Standard_D4ds_v5",
+        "tier": "GeneralPurpose"
+      },
+      "tags": {
+        "InCustomerVnet": "true",
+        "InMicrosoftVnet": "false"
+      }
+    },
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/azureAsyncOperation/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa?api-version=2025-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2025-06-01-preview"
+      }
+    }
+  },
+  "operationId": "Servers_CreateOrUpdate",
+  "title": "Create a new server in your own virtual network with same zone high availability."
+}
