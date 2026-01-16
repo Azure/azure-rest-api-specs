@@ -28,10 +28,6 @@ using Microsoft.MachineLearningServices;
 
 // Java casing fixes for FQDN-related types
 @@clientName(ExternalFQDNResponse, "ExternalFqdnResponse", "java");
-@@clientName(FqdnEndpointsPropertyBag, "FqdnEndpointsPropertyBag", "java");
-@@clientName(FqdnEndpoints, "FqdnEndpoints", "java");
-@@clientName(FqdnEndpoint, "FqdnEndpoint", "java");
-@@clientName(FqdnEndpointDetail, "FqdnEndpointDetail", "java");
 
 // Java casing fixes for AAD-related types
 @@clientName(AADAuthTypeWorkspaceConnectionProperties, "AadAuthTypeWorkspaceConnectionProperties", "java");
@@ -43,6 +39,10 @@ using Microsoft.MachineLearningServices;
 @@clientName(AksNetworkingConfiguration, "AKSNetworkingConfiguration", "java");
 @@clientName(AksComputeSecrets, "AKSComputeSecrets", "java");
 @@clientName(AksComputeSecretsProperties, "AKSComputeSecretsProperties", "java");
+
+// Java casing fixes for PAT/PTU-related types and members
+@@clientName(PTUDeploymentUsage, "PtuDeploymentUsage", "java");
+@@clientName(PATAuthTypeWorkspaceConnectionProperties, "PatAuthTypeWorkspaceConnectionProperties", "java");
 
 @@clientName(Microsoft.MachineLearningServices,
   "MachineLearningServicesMgmtClient",
