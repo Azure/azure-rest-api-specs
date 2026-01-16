@@ -25,6 +25,58 @@ model Datastore
   >;
 }
 
+alias DatastoresCreateOrUpdateParameters = {
+  /**
+   * Flag to skip validation.
+   */
+  @query("skipValidation")
+  skipValidation?: boolean = false;
+};
+
+alias DatastoresListParameters = {
+  /**
+   * Continuation token for pagination.
+   */
+  @query("$skip")
+  $skip?: string;
+
+  /**
+   * Maximum number of results to return.
+   */
+  @query("count")
+  count?: int32 = 30;
+
+  /**
+   * Filter down to the workspace default datastore.
+   */
+  @query("isDefault")
+  isDefault?: boolean;
+
+  /**
+   * Names of datastores to return.
+   */
+  @query("names")
+  names?: string[];
+
+  /**
+   * Text to search for in the datastore names.
+   */
+  @query("searchText")
+  searchText?: string;
+
+  /**
+   * Order by property (createdtime | modifiedtime | name).
+   */
+  @query("orderBy")
+  orderBy?: string;
+
+  /**
+   * Order by property in ascending order.
+   */
+  @query("orderByAsc")
+  orderByAsc?: boolean = false;
+};
+
 @armResourceOperations
 interface Datastores {
   /**
@@ -39,13 +91,7 @@ interface Datastores {
   @summary("Create or update datastore.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Datastore,
-    Parameters = {
-      /**
-       * Flag to skip validation.
-       */
-      @query("skipValidation")
-      skipValidation?: boolean = false;
-    }
+    Parameters = DatastoresCreateOrUpdateParameters
   >;
 
   /**
@@ -60,49 +106,7 @@ interface Datastores {
   @summary("List datastores.")
   list is ArmResourceListByParent<
     Datastore,
-    Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
-
-      /**
-       * Maximum number of results to return.
-       */
-      @query("count")
-      count?: int32 = 30;
-
-      /**
-       * Filter down to the workspace default datastore.
-       */
-      @query("isDefault")
-      isDefault?: boolean;
-
-      /**
-       * Names of datastores to return.
-       */
-      @query("names")
-      names?: string[];
-
-      /**
-       * Text to search for in the datastore names.
-       */
-      @query("searchText")
-      searchText?: string;
-
-      /**
-       * Order by property (createdtime | modifiedtime | name).
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * Order by property in ascending order.
-       */
-      @query("orderByAsc")
-      orderByAsc?: boolean = false;
-    },
+    Parameters = DatastoresListParameters,
     Response = ArmResponse<DatastoreResourceArmPaginatedResult>
   >;
 

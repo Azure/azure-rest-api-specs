@@ -15,6 +15,18 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.MachineLearningServices;
 
 /**
+ * Alias for proxy api version parameter
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+alias ProxyApiVersion = {
+  /**
+   * Api version used by proxy call
+   */
+  @query("proxy-api-version")
+  `proxy-api-version`?: string;
+};
+
+/**
  * An enum describing the unit of usage measurement.
  */
 union UsageUnit {

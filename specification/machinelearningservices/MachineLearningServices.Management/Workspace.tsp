@@ -35,6 +35,14 @@ model Workspace
   tags?: Record<string>;
 }
 
+alias WorkspacesDeleteParameters = {
+  /**
+   * Flag to indicate delete is a purge request.
+   */
+  @query("forceToPurge")
+  forceToPurge?: boolean = false;
+};
+
 @armResourceOperations
 interface Workspaces {
   /**
@@ -71,13 +79,7 @@ interface Workspaces {
   @summary("Deletes a machine learning workspace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
-    Parameters = {
-      /**
-       * Flag to indicate delete is a purge request.
-       */
-      @query("forceToPurge")
-      forceToPurge?: boolean = false;
-    },
+    Parameters = WorkspacesDeleteParameters,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
