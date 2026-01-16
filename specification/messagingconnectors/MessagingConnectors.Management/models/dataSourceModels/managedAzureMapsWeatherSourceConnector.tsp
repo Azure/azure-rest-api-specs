@@ -23,6 +23,9 @@ model ManagedAzureMapsWeatherSourceConnectorProperties
   @doc("Type of ManagedAzureMapsWeatherSource")
   connectorType: Models.Connector.ConnectorType.ManagedAzureMapsWeatherSource;
 
+  @doc("Name of the location")
+  locationName?: string;
+
   @doc("Longitude of the location.")
   longitude: float64;
 
@@ -40,7 +43,4 @@ model ManagedAzureMapsWeatherSourceConnectorProperties
 
   @doc("The polling interval in minutes.")
   pollIntervalInMinutes?: int32;
-
-  @doc("Name of the location.")
-  locationName?: string;
 }

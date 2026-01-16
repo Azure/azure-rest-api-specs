@@ -89,4 +89,7 @@ model OracleSourceConnectorProperties extends DataSourceProperties {
 
   @doc("A Boolean value that specifies whether the connector records schema structures from all tables in a schema or database, or only from tables that are designated for capture.")
   isStoreOnlyCapturedTablesDdl?: boolean;
+
+  @doc("A Boolean value that specifies whether the connector should publish changes in the database schema to a Kafka topic with the same name as the database server ID.")
+  includeSchemaChanges?: boolean;
 }
