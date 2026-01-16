@@ -1,5 +1,4 @@
 import "@typespec/http";
-import "@typespec/openapi3";
 import "@typespec/streams";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -353,23 +352,23 @@ interface Agents {
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:logstream")
   @tag("Agents")
   @doc("""
-  Container log entry streamed from the container as text chunks.
-  Each chunk is a UTF-8 string that may be either a plain text log line
-  or a JSON-formatted log entry, depending on the type of container log being streamed.
-  Clients should treat each chunk as opaque text and, if needed, attempt
-  to parse it as JSON based on their logging requirements.
-  
-  For system logs, the format is JSON with the following structure:
-  {"TimeStamp":"2025-12-15T16:51:33Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Connecting to the events collector...","Reason":"StartingGettingEvents","EventSource":"ContainerAppController","Count":1}
-  {"TimeStamp":"2025-12-15T16:51:34Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Successfully connected to events server","Reason":"ConnectedToEventsServer","EventSource":"ContainerAppController","Count":1}
-  
-  For console logs, the format is plain text as emitted by the container's stdout/stderr.
-  2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...
-  2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']
-  2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - "GET /readiness HTTP/1.1" 200 OK
-  2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
-  2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
-  """)
+    Container log entry streamed from the container as text chunks.
+    Each chunk is a UTF-8 string that may be either a plain text log line
+    or a JSON-formatted log entry, depending on the type of container log being streamed.
+    Clients should treat each chunk as opaque text and, if needed, attempt
+    to parse it as JSON based on their logging requirements.
+    
+    For system logs, the format is JSON with the following structure:
+    {"TimeStamp":"2025-12-15T16:51:33Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Connecting to the events collector...","Reason":"StartingGettingEvents","EventSource":"ContainerAppController","Count":1}
+    {"TimeStamp":"2025-12-15T16:51:34Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Successfully connected to events server","Reason":"ConnectedToEventsServer","EventSource":"ContainerAppController","Count":1}
+    
+    For console logs, the format is plain text as emitted by the container's stdout/stderr.
+    2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...
+    2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']
+    2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - "GET /readiness HTTP/1.1" 200 OK
+    2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
+    2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
+    """)
   streamAgentContainerLogs is AgentOperation<
     {
       /** The name of the agent. */
@@ -380,15 +379,18 @@ interface Agents {
 
       /** The type of logs to stream. */
       @doc("console returns container stdout/stderr, system returns container app event stream. defaults to console")
-      @query kind?: ContainerLogKind;
+      @query
+      kind?: ContainerLogKind;
 
       /** The name of the replica to stream logs from. */
       @doc("When omitted, the server chooses the first replica for console logs. Required to target a specific replica.")
-      @query replica_name?: string;
+      @query
+      replica_name?: string;
 
       /** The number of lines from the end of the logs to show. */
       @doc("Number of trailing lines returned. Enforced to 1-300. Defaults to 20")
-      @query tail?: int32;
+      @query
+      tail?: int32;
     },
     Stream<{
       @header("content-type") contentType: "text/plain; charset=utf-8";
