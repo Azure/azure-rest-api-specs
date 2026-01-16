@@ -119,11 +119,7 @@ model FabricDataAgentToolParameters {
 /**
  * The input definition information for a Microsoft Fabric tool as used to configure an agent.
  */
-<<<<<<< HEAD
-model MicrosoftFabricAgentTool extends OpenAI.Tool {
-=======
 model MicrosoftFabricPreviewTool extends OpenAI.Tool {
->>>>>>> 121a055c5e (Add 'Preview' to names of Azure tools in preview)
   /**
    * The object type, which is always 'fabric_dataagent_preview'.
    */
@@ -150,11 +146,7 @@ model SharepointGroundingToolParameters {
 /**
  * The input definition information for a sharepoint tool as used to configure an agent.
  */
-<<<<<<< HEAD
-model SharepointAgentTool extends OpenAI.Tool {
-=======
 model SharepointPreviewTool extends OpenAI.Tool {
->>>>>>> 121a055c5e (Add 'Preview' to names of Azure tools in preview)
   /**
    * The object type, which is always 'sharepoint_grounding_preview'.
    */
@@ -273,11 +265,7 @@ model OpenApiTool extends OpenAI.Tool {
 /**
  * The input definition information for a Bing custom search tool as used to configure an agent.
  */
-<<<<<<< HEAD
-model BingCustomSearchAgentTool extends OpenAI.Tool {
-=======
 model BingCustomSearchPreviewTool extends OpenAI.Tool {
->>>>>>> 121a055c5e (Add 'Preview' to names of Azure tools in preview)
   /**
    * The object type, which is always 'bing_custom_search_preview'.
    */
@@ -292,11 +280,7 @@ model BingCustomSearchPreviewTool extends OpenAI.Tool {
 /**
  * The input definition information for a Browser Automation Tool, as used to configure an Agent.
  */
-<<<<<<< HEAD
-model BrowserAutomationAgentTool extends OpenAI.Tool {
-=======
 model BrowserAutomationPreviewTool extends OpenAI.Tool {
->>>>>>> 121a055c5e (Add 'Preview' to names of Azure tools in preview)
   /**
    * The object type, which is always 'browser_automation_preview'.
    */
