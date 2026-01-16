@@ -1066,7 +1066,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[State](#state)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup' and State eq 'New'. Please note that State is available as a filter from API Version 2026-02-01.",
             "required": false,
             "type": "string"
           },
@@ -3107,10 +3107,7 @@
       "type": "string",
       "description": "The state of the Recommendation",
       "enum": [
-        "Approved",
-        "Rejected",
-        "Pending",
-        "InProgress",
+        "New",
         "Postponed",
         "Dismissed",
         "Completed"
@@ -3120,20 +3117,8 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Approved",
-            "value": "Approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected"
-          },
-          {
-            "name": "Pending",
-            "value": "Pending"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress"
+            "name": "New",
+            "value": "New"
           },
           {
             "name": "Postponed",

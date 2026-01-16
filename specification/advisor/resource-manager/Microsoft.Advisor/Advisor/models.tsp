@@ -152,9 +152,7 @@ union State {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Dismissed: "Dismissed",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  CompletedSysVerified: "Completed(System Verified)",
+  Completed: "Completed"
 }
 
 /**
@@ -553,7 +551,7 @@ model RecommendationProperties {
   state?: State;
 
    /**
-   * The reason the state of the Recommendation was changed.
+   * The reason the Recommendation was dismissed.
    */
   @added(Versions.v2026_02_01)
   recommendationDismissReason?: RecommendationDismissReason;
@@ -569,6 +567,11 @@ model RecommendationProperties {
    * The most recent time that Advisor checked the validity of the recommendation.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastRefreshed?: utcDateTime;
+
+  /**
+   * The most recent time that Advisor recommendation was updated.
+   */
   lastUpdated?: utcDateTime;
 
   /**
@@ -595,7 +598,14 @@ model RecommendationProperties {
   /**
    * The list of snoozed and dismissed rules for the recommendation.
    */
+   @removed(Versions.v2026_02_01)
   suppressionIds?: Azure.Core.uuid[];
+
+  /**
+   * The single snoozed or dismissed rule for the recommendation.
+   */
+   @added(Versions.v2026_02_01)
+  suppressionId?: string;
 
   /**
    * Extended properties
@@ -682,32 +692,8 @@ model RecommendationProperties {
  * Properties for patch Recommendation API.
  */
  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+ @added(Versions.v2026_02_01)
 model RecommendationPatchProperties {
-  /**
-   * The category of the recommendation.
-   */
-  category?: Category;
-
-  /**
-   * The sub-category of the recommendation.
-   */
-  control?: Control;
-
-  /**
-   * The business impact of the recommendation.
-   */
-  impact?: Impact;
-
-  /**
-   * The resource type identified by Advisor.
-   */
-  impactedField?: string;
-
-  /**
-   * The resource identified by Advisor.
-   */
-  impactedValue?: string;
-
    /**
    * The most recent time that Advisor checked the validity of the recommendation.
    */
@@ -720,23 +706,6 @@ model RecommendationPatchProperties {
   recommendationTypeId?: string;
 
   /**
-   * Metadata of resource that was assessed
-   */
-  resourceMetadata?: ResourceMetadata;
-
-   /**
-   * The list of recommended actions to implement recommendation.
-   */
-  @identifiers(#[])
-  actions?: Record<unknown>[];
-
-    /**
-   * Extended properties
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedProperties?: Record<string>;
-
-  /**
    * The state of the Recommendation
    */
   state?: State;
@@ -744,41 +713,13 @@ model RecommendationPatchProperties {
   /**
    * The reason the state of the Recommendation was changed.
    */
-  @added(Versions.v2026_02_01)
   recommendationDismissReason?: RecommendationDismissReason;
 
    /**
    * The time the Recommendation was postponed until.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-    @added(Versions.v2026_02_01)
   postponedUntilDateTime?: utcDateTime; 
-
-  /**
-   * The list of snoozed and dismissed rules for the recommendation.
-   */
-  suppressionIds?: Azure.Core.uuid[];
-
-   /**
-   * The Review that this Recommendation belongs to.
-   */
-  review?: RecommendationPropertiesReview;
-
-  /**
-   * The Workload that this Resource belongs to.
-   */
-  resourceWorkload?: RecommendationPropertiesResourceWorkload;
-
-   /**
-   * The Source System that this Recommendation originated from.
-   */
-  sourceSystem?: string;
-
-  /**
-   * Additional notes for the Recommendation
-   */
-  notes?: string;
-
 }
 
 /**

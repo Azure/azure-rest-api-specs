@@ -777,7 +777,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[State](#state)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup' and State eq 'New'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[State](#state)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup' and State eq 'New'. Please note that State is available as a filter from API Version 2026-02-01.",
             "required": false,
             "type": "string"
           },
@@ -1156,11 +1156,6 @@
           "description": "ARM error response body."
         }
       }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "Category": {
       "type": "string",
@@ -1794,26 +1789,6 @@
       "type": "object",
       "description": "Properties for patch Recommendation API.",
       "properties": {
-        "category": {
-          "$ref": "#/definitions/Category",
-          "description": "The category of the recommendation."
-        },
-        "control": {
-          "$ref": "#/definitions/Control",
-          "description": "The sub-category of the recommendation."
-        },
-        "impact": {
-          "$ref": "#/definitions/Impact",
-          "description": "The business impact of the recommendation."
-        },
-        "impactedField": {
-          "type": "string",
-          "description": "The resource type identified by Advisor."
-        },
-        "impactedValue": {
-          "type": "string",
-          "description": "The resource identified by Advisor."
-        },
         "lastUpdated": {
           "type": "string",
           "format": "date-time",
@@ -1822,26 +1797,6 @@
         "recommendationTypeId": {
           "type": "string",
           "description": "The recommendation-type GUID."
-        },
-        "resourceMetadata": {
-          "$ref": "#/definitions/ResourceMetadata",
-          "description": "Metadata of resource that was assessed"
-        },
-        "actions": {
-          "type": "array",
-          "description": "The list of recommended actions to implement recommendation.",
-          "items": {
-            "type": "object",
-            "additionalProperties": {}
-          },
-          "x-ms-identifiers": []
-        },
-        "extendedProperties": {
-          "type": "object",
-          "description": "Extended properties",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "state": {
           "$ref": "#/definitions/State",
@@ -1855,29 +1810,6 @@
           "type": "string",
           "format": "date-time",
           "description": "The time the Recommendation was postponed until."
-        },
-        "suppressionIds": {
-          "type": "array",
-          "description": "The list of snoozed and dismissed rules for the recommendation.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.uuid"
-          }
-        },
-        "review": {
-          "$ref": "#/definitions/RecommendationPropertiesReview",
-          "description": "The Review that this Recommendation belongs to."
-        },
-        "resourceWorkload": {
-          "$ref": "#/definitions/RecommendationPropertiesResourceWorkload",
-          "description": "The Workload that this Resource belongs to."
-        },
-        "sourceSystem": {
-          "type": "string",
-          "description": "The Source System that this Recommendation originated from."
-        },
-        "notes": {
-          "type": "string",
-          "description": "Additional notes for the Recommendation"
         }
       }
     },
@@ -1911,7 +1843,7 @@
         },
         "recommendationDismissReason": {
           "$ref": "#/definitions/RecommendationDismissReason",
-          "description": "The reason the state of the Recommendation was changed."
+          "description": "The reason the Recommendation was dismissed."
         },
         "postponedUntilDateTime": {
           "type": "string",
@@ -1940,12 +1872,9 @@
           "$ref": "#/definitions/ShortDescription",
           "description": "A summary of the recommendation."
         },
-        "suppressionIds": {
-          "type": "array",
-          "description": "The list of snoozed and dismissed rules for the recommendation.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.uuid"
-          }
+        "suppressionId": {
+          "type": "string",
+          "description": "The single snoozed or dismissed rule for the recommendation."
         },
         "extendedProperties": {
           "type": "object",
@@ -2242,8 +2171,7 @@
         "New",
         "Postponed",
         "Dismissed",
-        "Completed",
-        "Completed(System Verified)"
+        "Completed"
       ],
       "x-ms-enum": {
         "name": "State",
@@ -2264,10 +2192,6 @@
           {
             "name": "Completed",
             "value": "Completed"
-          },
-          {
-            "name": "CompletedSysVerified",
-            "value": "Completed(System Verified)"
           }
         ]
       }
