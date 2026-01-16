@@ -13928,8 +13928,8 @@
           "default": "\\W+"
         },
         "flags": {
-          "$ref": "#/definitions/RegexFlags",
-          "description": "Regular expression flags."
+          "type": "string",
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
         },
         "stopwords": {
           "type": "array",
@@ -14031,8 +14031,8 @@
           "default": "\\W+"
         },
         "flags": {
-          "$ref": "#/definitions/RegexFlags",
-          "description": "Regular expression flags."
+          "type": "string",
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
         },
         "group": {
           "type": "integer",
@@ -15069,7 +15069,7 @@
     },
     "RegexFlags": {
       "type": "string",
-      "description": "Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer.",
+      "description": "Defines a regular expression flag that can be used in the pattern analyzer and pattern tokenizer.",
       "enum": [
         "CANON_EQ",
         "CASE_INSENSITIVE",
