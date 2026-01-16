@@ -233,6 +233,10 @@ using Microsoft.DataReplication;
   "csharp"
 );
 @@alternateType(PrivateLinkServiceProxy.id, armResourceIdentifier, "csharp");
+@@alternateType(RemotePrivateEndpointConnection.id,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(PrivateLinkServiceConnectionState,
   "DataReplicationPrivateLinkServiceConnectionState",
   "csharp"
