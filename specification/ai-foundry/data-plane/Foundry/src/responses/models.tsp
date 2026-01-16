@@ -1,16 +1,26 @@
-import "../.external-readonly/azure.openai.v1.typespec/models/responses.tsp";
-import "../conversations/models.tsp";
-import "../tools/models.tsp";
 import "@azure-tools/typespec-azure-core/experimental";
-
 import "@typespec/http";
 import "@typespec/openapi";
 
+import "../conversations/models.tsp";
+import "../tools/models.tsp";
+
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core.Experimental;
 
 namespace Azure.AI.Projects;
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(OpenAI.CreateResponse.`model`, string);
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(OpenAI.Response.`model`, string);
+
+@@doc(OpenAI.CreateResponse.`model`,
+  "The model deployment to use for the creation of this response."
+);
+@@doc(OpenAI.Response.`model`,
+  "The model deployment to use for the creation of this response."
+);
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.CreateResponse,

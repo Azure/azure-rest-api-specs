@@ -6729,12 +6729,7 @@
                         "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching)."
                       },
                       "service_tier": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ServiceTier"
-                          }
-                        ],
-                        "description": "Note: service_tier is not applicable to Azure OpenAI."
+                        "$ref": "#/components/schemas/OpenAI.ServiceTier"
                       },
                       "prompt_cache_retention": {
                         "type": "string",
@@ -6787,8 +6782,7 @@
                         "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
                       },
                       "tools": {
-                        "$ref": "#/components/schemas/OpenAI.ToolsArray",
-                        "description": "An array of tools the model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter.\n\nThe two categories of tools you can provide the model are:\n\n- **Built-in tools**: Tools that are provided by OpenAI that extend the\n  model's capabilities, like file search.\n- **Function calls (custom tools)**: Functions that are defined by you,\n  enabling the model to call your own code."
+                        "$ref": "#/components/schemas/OpenAI.ToolsArray"
                       },
                       "tool_choice": {
                         "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
@@ -16974,12 +16968,7 @@
             "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching)."
           },
           "service_tier": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ServiceTier"
-              }
-            ],
-            "description": "Note: service_tier is not applicable to Azure OpenAI."
+            "$ref": "#/components/schemas/OpenAI.ServiceTier"
           },
           "prompt_cache_retention": {
             "type": "string",
@@ -17032,8 +17021,7 @@
             "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
           },
           "tools": {
-            "$ref": "#/components/schemas/OpenAI.ToolsArray",
-            "description": "An array of tools the model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter.\n\nThe two categories of tools you can provide the model are:\n\n- **Built-in tools**: Tools that are provided by OpenAI that extend the\n  model's capabilities, like file search.\n- **Function calls (custom tools)**: Functions that are defined by you,\n  enabling the model to call your own code."
+            "$ref": "#/components/schemas/OpenAI.ToolsArray"
           },
           "tool_choice": {
             "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
@@ -21225,6 +21213,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemParam",
             "message": "#/components/schemas/OpenAI.InputMessage",
             "computer_call_output": "#/components/schemas/OpenAI.ComputerCallOutputItemParam",
             "function_call_output": "#/components/schemas/OpenAI.FunctionCallOutputItemParam",
@@ -21248,8 +21237,7 @@
             "mcp_approval_request": "#/components/schemas/OpenAI.ItemMcpApprovalRequest",
             "mcp_call": "#/components/schemas/OpenAI.ItemMcpToolCall",
             "custom_tool_call_output": "#/components/schemas/OpenAI.ItemCustomToolCallOutput",
-            "custom_tool_call": "#/components/schemas/OpenAI.ItemCustomToolCall",
-            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemParam"
+            "custom_tool_call": "#/components/schemas/OpenAI.ItemCustomToolCall"
           }
         },
         "description": "Content item used to generate a response."
@@ -22022,6 +22010,7 @@
             "structured_outputs": "#/components/schemas/StructuredOutputsItemResource",
             "workflow_action": "#/components/schemas/WorkflowActionOutputItemResource",
             "oauth_consent_request": "#/components/schemas/OAuthConsentRequestItemResource",
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
             "message": "#/components/schemas/OpenAI.InputMessageResource",
             "output_message": "#/components/schemas/OpenAI.ItemResourceOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.ItemResourceFileSearchToolCall",
@@ -22041,8 +22030,7 @@
             "mcp_list_tools": "#/components/schemas/OpenAI.ItemResourceMcpListTools",
             "mcp_approval_request": "#/components/schemas/OpenAI.ItemResourceMcpApprovalRequest",
             "mcp_approval_response": "#/components/schemas/OpenAI.ItemResourceMcpApprovalResponseResource",
-            "mcp_call": "#/components/schemas/OpenAI.ItemResourceMcpToolCall",
-            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource"
+            "mcp_call": "#/components/schemas/OpenAI.ItemResourceMcpToolCall"
           }
         },
         "description": "Content item used to generate a response."
@@ -25163,12 +25151,7 @@
             "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching)."
           },
           "service_tier": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ServiceTier"
-              }
-            ],
-            "description": "Note: service_tier is not applicable to Azure OpenAI."
+            "$ref": "#/components/schemas/OpenAI.ServiceTier"
           },
           "prompt_cache_retention": {
             "type": "string",
@@ -28672,6 +28655,17 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "bing_grounding": "#/components/schemas/BingGroundingAgentTool",
+            "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricAgentTool",
+            "sharepoint_grounding_preview": "#/components/schemas/SharepointAgentTool",
+            "azure_ai_search": "#/components/schemas/AzureAISearchAgentTool",
+            "openapi": "#/components/schemas/OpenApiAgentTool",
+            "bing_custom_search_preview": "#/components/schemas/BingCustomSearchAgentTool",
+            "browser_automation_preview": "#/components/schemas/BrowserAutomationAgentTool",
+            "azure_function": "#/components/schemas/AzureFunctionAgentTool",
+            "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
+            "a2a_preview": "#/components/schemas/A2ATool",
+            "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
@@ -28683,18 +28677,7 @@
             "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
             "custom": "#/components/schemas/OpenAI.CustomToolParam",
             "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
-            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam",
-            "bing_grounding": "#/components/schemas/BingGroundingAgentTool",
-            "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricAgentTool",
-            "sharepoint_grounding_preview": "#/components/schemas/SharepointAgentTool",
-            "azure_ai_search": "#/components/schemas/AzureAISearchAgentTool",
-            "openapi": "#/components/schemas/OpenApiAgentTool",
-            "bing_custom_search_preview": "#/components/schemas/BingCustomSearchAgentTool",
-            "browser_automation_preview": "#/components/schemas/BrowserAutomationAgentTool",
-            "azure_function": "#/components/schemas/AzureFunctionAgentTool",
-            "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
-            "a2a_preview": "#/components/schemas/A2ATool",
-            "memory_search": "#/components/schemas/MemorySearchTool"
+            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam"
           }
         },
         "description": "A tool that can be used to generate a response."
