@@ -34,15 +34,24 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpointDetail, "FqdnEndpointDetail", "java");
 
 // Java casing fixes for AAD-related types
-@@clientName(AADAuthTypeWorkspaceConnectionProperties, "AadAuthTypeWorkspaceConnectionProperties", "java");
+@@clientName(AADAuthTypeWorkspaceConnectionProperties,
+  "AadAuthTypeWorkspaceConnectionProperties",
+  "java"
+);
 
 // Java casing fixes for CMK-related members
-@@clientName(WorkspaceProperties.enableServiceSideCMKEncryption, "enableServiceSideCmkEncryption", "java");
+@@clientName(WorkspaceProperties.enableServiceSideCMKEncryption,
+  "enableServiceSideCmkEncryption",
+  "java"
+);
 
 // Java casing fixes for AKS-related types
 @@clientName(AksNetworkingConfiguration, "AKSNetworkingConfiguration", "java");
 @@clientName(AksComputeSecrets, "AKSComputeSecrets", "java");
-@@clientName(AksComputeSecretsProperties, "AKSComputeSecretsProperties", "java");
+@@clientName(AksComputeSecretsProperties,
+  "AKSComputeSecretsProperties",
+  "java"
+);
 
 @@clientName(Microsoft.MachineLearningServices,
   "MachineLearningServicesMgmtClient",
