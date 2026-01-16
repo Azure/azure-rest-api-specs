@@ -28,5 +28,3 @@ using Microsoft.Cdn;
   "content",
   "csharp"
 );
-
-@@clientName(EdgeActions, "EdgeActionsMgmtClient", "python");
