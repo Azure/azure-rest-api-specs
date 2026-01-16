@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "body": {
+      "addDeltaModels": [
+        "string"
+      ],
+      "removeDeltaModels": [
+        "string"
+      ],
+      "targetBaseModel": "azureml://registries/test-registry/models/modelabc/versions/1"
+    },
+    "groupName": "string",
+    "poolName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/...pathToOperationStatus.."
+      }
+    }
+  },
+  "operationId": "InferenceGroups_ModifyDeltaModelsAsync",
+  "title": "ModifyDeltaModelsAsync Inference Group."
+}

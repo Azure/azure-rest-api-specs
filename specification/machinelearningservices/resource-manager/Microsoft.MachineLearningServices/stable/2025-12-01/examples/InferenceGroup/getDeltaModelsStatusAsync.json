@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "body": {
+      "deltaModels": [
+        "string"
+      ],
+      "targetBaseModel": "azureml://registries/test-registry/models/modelabc/versions/1"
+    },
+    "groupName": "string",
+    "poolName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "actualInstanceCount": 0,
+        "deltaModels": {
+          "string": [
+            {
+              "count": 0,
+              "sampleInstanceID": "string",
+              "status": "string"
+            }
+          ]
+        },
+        "expectedInstanceCount": 0,
+        "revisionId": "string",
+        "targetBaseModel": "azureml://registries/test-registry/models/modelabc/versions/1"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "InferenceGroups_GetDeltaModelsStatusAsync",
+  "title": "GetDeltaModelsStatusAsync Inference Group."
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "managedNetworkName": "default",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.MachineLearningServices/workspaces/managedNetworks",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/managedNetworks/default",
+        "properties": {
+          "managedNetwork": {
+            "firewallPublicIpAddress": "22.22.131.49",
+            "firewallSku": "Standard",
+            "isolationMode": "AllowOnlyApprovedOutbound",
+            "networkId": "00000000-1111-2222-3333-444444444444",
+            "outboundRules": {
+              "rule_name_1": {
+                "type": "FQDN",
+                "category": "UserDefined",
+                "destination": "destination_endpoint",
+                "errorInformation": null,
+                "status": "Active"
+              }
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ManagedNetworkSettings_Get",
+  "title": "Get ManagedNetworkSettings"
+}

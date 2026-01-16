@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "body": {
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "kind": "string",
+      "location": "string",
+      "properties": {
+        "description": "string",
+        "authMode": "AAD",
+        "groupName": "string",
+        "properties": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ],
+        "requestConfiguration": {
+          "maxConcurrentRequestsPerInstance": 1,
+          "requestTimeout": "PT5M"
+        }
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Standard"
+      },
+      "tags": {}
+    },
+    "endpointName": "testEndpointName",
+    "poolName": "string",
+    "resourceGroupName": "test-rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "authMode": "AAD",
+          "endpointUri": "https://www.contoso.com/example",
+          "groupName": "string",
+          "properties": [
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ],
+          "provisioningState": "Canceled"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:19",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:19",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "None",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "authMode": "AAD",
+          "endpointUri": "https://www.contoso.com/example",
+          "groupName": "string",
+          "properties": [
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Basic"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:19",
+          "createdBy": "string",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:19",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "InferenceEndpoints_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Inference Endpoint."
+}
