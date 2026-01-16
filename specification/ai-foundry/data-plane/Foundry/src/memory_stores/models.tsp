@@ -137,7 +137,7 @@ model MemoryStoreUpdateResponse {
     The status of the memory update operation. One of "queued", "in_progress", "completed", "failed", or "superseded".
     """)
   @Azure.Core.lroStatus
-    @removed(Versions.v1)
+  @removed(Versions.v1)
   status: MemoryStoreUpdateStatus;
 
   @doc("The update_id the operation was superseded by when status is \"superseded\".")
@@ -145,7 +145,7 @@ model MemoryStoreUpdateResponse {
 
   @doc("The result of memory store update operation when status is \"completed\".")
   @Azure.Core.lroResult
-    @removed(Versions.v1)
+  @removed(Versions.v1)
   result?: MemoryStoreUpdateCompletedResult;
 
   @doc("Error object that describes the error when status is \"failed\".")

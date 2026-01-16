@@ -82,7 +82,7 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
 
   /** Data schema scenario. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-    scenario: "red_team" | "responses" | "traces";
+  scenario: "red_team" | "responses" | "traces";
 }
 
 /** Adding Azure AI Source type to data source for foundry extension. */
