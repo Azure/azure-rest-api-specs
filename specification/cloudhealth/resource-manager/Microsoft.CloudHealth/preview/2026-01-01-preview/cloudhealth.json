@@ -589,6 +589,17 @@
             "description": "Resource 'AuthenticationSetting' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/AuthenticationSetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -602,7 +613,11 @@
           "AuthenticationSettings_CreateOrUpdate": {
             "$ref": "./examples/AuthenticationSettings_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "AuthenticationSettings_Delete",
@@ -638,8 +653,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -655,7 +681,11 @@
           "AuthenticationSettings_Delete": {
             "$ref": "./examples/AuthenticationSettings_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/discoveryrules": {
@@ -823,6 +853,17 @@
             "description": "Resource 'DiscoveryRule' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/DiscoveryRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -836,7 +877,11 @@
           "DiscoveryRules_CreateOrUpdate": {
             "$ref": "./examples/DiscoveryRules_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DiscoveryRules_Delete",
@@ -872,8 +917,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -889,7 +945,11 @@
           "DiscoveryRules_Delete": {
             "$ref": "./examples/DiscoveryRules_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities": {
@@ -1057,6 +1117,17 @@
             "description": "Resource 'Entity' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Entity"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1070,7 +1141,11 @@
           "Entities_CreateOrUpdate": {
             "$ref": "./examples/Entities_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Entities_Delete",
@@ -1106,8 +1181,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1123,7 +1209,11 @@
           "Entities_Delete": {
             "$ref": "./examples/Entities_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getHistory": {
@@ -1480,6 +1570,17 @@
             "description": "Resource 'Relationship' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Relationship"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1493,7 +1594,11 @@
           "Relationships_CreateOrUpdate": {
             "$ref": "./examples/Relationships_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Relationships_Delete",
@@ -1529,8 +1634,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1546,7 +1662,11 @@
           "Relationships_Delete": {
             "$ref": "./examples/Relationships_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/signaldefinitions": {
@@ -1714,6 +1834,17 @@
             "description": "Resource 'SignalDefinition' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/SignalDefinition"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1727,7 +1858,11 @@
           "SignalDefinitions_CreateOrUpdate": {
             "$ref": "./examples/SignalDefinitions_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SignalDefinitions_Delete",
@@ -1763,8 +1898,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1780,7 +1926,11 @@
           "SignalDefinitions_Delete": {
             "$ref": "./examples/SignalDefinitions_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
