@@ -1864,6 +1864,33 @@
         ]
       }
     },
+    "ApplicationInsightsTopologyDiscoveryRuleProperties": {
+      "type": "object",
+      "description": "Discovery rule properties for an Application Insights topology query",
+      "properties": {
+        "applicationInsightsResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Application Insights resource ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/components"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "applicationInsightsResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscoveryRulePropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplicationInsightsTopology"
+    },
     "AuthenticationKind": {
       "type": "string",
       "description": "Supported kinds of authentication settings as discriminator",
@@ -2175,12 +2202,34 @@
         "aggregationType"
       ]
     },
+    "DiscoveryError": {
+      "type": "object",
+      "description": "Error details for a failed discovery operation",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error message",
+          "readOnly": true
+        },
+        "context": {
+          "type": "array",
+          "description": "Additional context information, like resource IDs or query details",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
     "DiscoveryRule": {
       "type": "object",
       "description": "A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiscoveryRuleProperties",
+          "$ref": "#/definitions/DiscoveryRulePropertiesV2",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -2189,6 +2238,28 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "DiscoveryRuleKind": {
+      "type": "string",
+      "description": "Discovery rule kind discriminator",
+      "enum": [
+        "ResourceGraphQuery",
+        "ApplicationInsightsTopology"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryRuleKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceGraphQuery",
+            "value": "ResourceGraphQuery"
+          },
+          {
+            "name": "ApplicationInsightsTopology",
+            "value": "ApplicationInsightsTopology"
+          }
+        ]
+      }
     },
     "DiscoveryRuleListResult": {
       "type": "object",
@@ -2211,7 +2282,7 @@
         "value"
       ]
     },
-    "DiscoveryRuleProperties": {
+    "DiscoveryRulePropertiesV2": {
       "type": "object",
       "description": "Discovery rule properties",
       "properties": {
@@ -2226,11 +2297,9 @@
           "minLength": 1,
           "maxLength": 260
         },
-        "resourceGraphQuery": {
-          "type": "string",
-          "description": "Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.",
-          "minLength": 1,
-          "maxLength": 5000
+        "discoveryRuleKind": {
+          "$ref": "#/definitions/DiscoveryRuleKind",
+          "description": "Kind of the discovery rule"
         },
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
@@ -2250,15 +2319,9 @@
           "description": "Date when the discovery rule was (soft-)deleted.",
           "readOnly": true
         },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message if the last discovery operation failed.",
-          "readOnly": true
-        },
-        "numberOfDiscoveredEntities": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of discovered entities in the last discovery operation.",
+        "error": {
+          "$ref": "#/definitions/DiscoveryError",
+          "description": "Error details if the last discovery operation failed.",
           "readOnly": true
         },
         "entityName": {
@@ -2267,8 +2330,9 @@
           "readOnly": true
         }
       },
+      "discriminator": "discoveryRuleKind",
       "required": [
-        "resourceGraphQuery",
+        "discoveryRuleKind",
         "authenticationSetting",
         "discoverRelationships",
         "addRecommendedSignals",
@@ -3299,6 +3363,27 @@
         "parentEntityName",
         "childEntityName"
       ]
+    },
+    "ResourceGraphQueryDiscoveryRuleProperties": {
+      "type": "object",
+      "description": "Discovery rule properties for an Azure Resource Graph query",
+      "properties": {
+        "resourceGraphQuery": {
+          "type": "string",
+          "description": "Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.",
+          "minLength": 1,
+          "maxLength": 5000
+        }
+      },
+      "required": [
+        "resourceGraphQuery"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscoveryRulePropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGraphQuery"
     },
     "ResourceMetricSignalDefinitionProperties": {
       "type": "object",
