@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContainerRegistryManagementClient",
-    "version": "2025-11-01",
+    "version": "2025-12-01-preview",
     "description": "The Microsoft Azure Container Registry management API provides create, read, update, and delete functionality for Azure Container Registry resources including registries, replications, webhooks, tasks, runs, and other registry components.",
     "x-typespec-generated": [
       {
@@ -46,6 +46,12 @@
       "name": "Registries"
     },
     {
+      "name": "Archives"
+    },
+    {
+      "name": "ArchiveVersions"
+    },
+    {
       "name": "CacheRules"
     },
     {
@@ -68,6 +74,15 @@
     },
     {
       "name": "Tokens"
+    },
+    {
+      "name": "ExportPipelines"
+    },
+    {
+      "name": "ImportPipelines"
+    },
+    {
+      "name": "PipelineRuns"
     },
     {
       "name": "Webhooks"
@@ -360,6 +375,9 @@
           },
           "RegistryCreateAbac": {
             "$ref": "./examples/RegistryCreateAbac.json"
+          },
+          "RegistryCreateDomainNameLabelScope": {
+            "$ref": "./examples/RegistryCreateDomainNameLabelScope.json"
           },
           "RegistryCreateZoneRedundant": {
             "$ref": "./examples/RegistryCreateZoneRedundant.json"
@@ -1676,6 +1694,280 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines": {
+      "get": {
+        "operationId": "ExportPipelines_List",
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Lists all export pipelines for the specified container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExportPipelineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineList": {
+            "$ref": "./examples/ExportPipelineList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}": {
+      "get": {
+        "operationId": "ExportPipelines_Get",
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Gets the properties of the export pipeline.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "exportPipelineName",
+            "in": "path",
+            "description": "The name of the export pipeline.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExportPipeline"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineGet": {
+            "$ref": "./examples/ExportPipelineGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExportPipelines_Create",
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Creates an export pipeline for a container registry with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "exportPipelineName",
+            "in": "path",
+            "description": "The name of the export pipeline.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "exportPipelineCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating an export pipeline.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportPipeline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExportPipeline' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExportPipeline"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExportPipeline' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExportPipeline"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineCreate": {
+            "$ref": "./examples/ExportPipelineCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExportPipeline"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExportPipelines_Delete",
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Deletes an export pipeline from a container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "exportPipelineName",
+            "in": "path",
+            "description": "The name of the export pipeline.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineDelete": {
+            "$ref": "./examples/ExportPipelineDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/generateCredentials": {
       "post": {
         "operationId": "Registries_GenerateCredentials",
@@ -1832,6 +2124,280 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines": {
+      "get": {
+        "operationId": "ImportPipelines_List",
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Lists all import pipelines for the specified container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImportPipelineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineList": {
+            "$ref": "./examples/ImportPipelineList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}": {
+      "get": {
+        "operationId": "ImportPipelines_Get",
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Gets the properties of the import pipeline.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "importPipelineName",
+            "in": "path",
+            "description": "The name of the import pipeline.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImportPipeline"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineGet": {
+            "$ref": "./examples/ImportPipelineGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ImportPipelines_Create",
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Creates an import pipeline for a container registry with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "importPipelineName",
+            "in": "path",
+            "description": "The name of the import pipeline.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "importPipelineCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating an import pipeline.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportPipeline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ImportPipeline' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ImportPipeline"
+            }
+          },
+          "201": {
+            "description": "Resource 'ImportPipeline' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ImportPipeline"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineCreate": {
+            "$ref": "./examples/ImportPipelineCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ImportPipeline"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ImportPipelines_Delete",
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Deletes an import pipeline from a container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "importPipelineName",
+            "in": "path",
+            "description": "The name of the import pipeline.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineDelete": {
+            "$ref": "./examples/ImportPipelineDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listCredentials": {
       "post": {
         "operationId": "Registries_ListCredentials",
@@ -1928,6 +2494,1012 @@
             "$ref": "./examples/RegistryListUsages.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives": {
+      "get": {
+        "operationId": "Archives_List",
+        "tags": [
+          "Archives"
+        ],
+        "description": "Lists all archives for the specified container registry and package type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArchiveListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveList": {
+            "$ref": "./examples/ArchiveList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives/{archiveName}": {
+      "get": {
+        "operationId": "Archives_Get",
+        "tags": [
+          "Archives"
+        ],
+        "description": "Gets the properties of the archive.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The name of the archive resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveGet": {
+            "$ref": "./examples/ArchiveGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Archives_Create",
+        "tags": [
+          "Archives"
+        ],
+        "description": "Creates a archive for a container registry with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The name of the archive resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "archiveCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a archive.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Archive' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            }
+          },
+          "201": {
+            "description": "Resource 'Archive' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveCreate": {
+            "$ref": "./examples/ArchiveCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Archive"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Archives_Update",
+        "tags": [
+          "Archives"
+        ],
+        "description": "Updates a archive for a container registry with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The name of the archive resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "archiveUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a archive.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArchiveUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveUpdate": {
+            "$ref": "./examples/ArchiveUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Archives_Delete",
+        "tags": [
+          "Archives"
+        ],
+        "description": "Deletes a archive from a container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The name of the archive resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveDelete": {
+            "$ref": "./examples/ArchiveDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives/{archiveName}/versions": {
+      "get": {
+        "operationId": "ArchiveVersions_List",
+        "tags": [
+          "ArchiveVersions"
+        ],
+        "description": "Lists all archive versions for the specified container registry, repository type and archive name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The name of the archive resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArchiveVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveVersionList": {
+            "$ref": "./examples/ArchiveVersionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives/{archiveName}/versions/{archiveVersionName}": {
+      "get": {
+        "operationId": "ArchiveVersions_Get",
+        "tags": [
+          "ArchiveVersions"
+        ],
+        "description": "Gets the properties of the archive version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The name of the archive resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "archiveVersionName",
+            "in": "path",
+            "description": "The name of the archive version resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArchiveVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveVersionGet": {
+            "$ref": "./examples/ArchiveVersionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ArchiveVersions_Create",
+        "tags": [
+          "ArchiveVersions"
+        ],
+        "description": "Creates a archive version for a container registry with the specified parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The name of the archive resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "archiveVersionName",
+            "in": "path",
+            "description": "The name of the archive version resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ArchiveVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ArchiveVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'ArchiveVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ArchiveVersion"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveVersionCreate": {
+            "$ref": "./examples/ArchiveVersionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ArchiveVersion"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ArchiveVersions_Delete",
+        "tags": [
+          "ArchiveVersions"
+        ],
+        "description": "Deletes a archive version from a container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The package type.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The name of the archive resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "archiveVersionName",
+            "in": "path",
+            "description": "The name of the archive version resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveVersionDelete": {
+            "$ref": "./examples/ArchiveVersionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns": {
+      "get": {
+        "operationId": "PipelineRuns_List",
+        "tags": [
+          "PipelineRuns"
+        ],
+        "description": "Lists all the pipeline runs for the specified container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRunList": {
+            "$ref": "./examples/PipelineRunList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns/{pipelineRunName}": {
+      "get": {
+        "operationId": "PipelineRuns_Get",
+        "tags": [
+          "PipelineRuns"
+        ],
+        "description": "Gets the detailed information for a given pipeline run.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRunGet": {
+            "$ref": "./examples/PipelineRunGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PipelineRuns_Create",
+        "tags": [
+          "PipelineRuns"
+        ],
+        "description": "Creates a pipeline run for a container registry with the specified parameters",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "pipelineRunCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a pipeline run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PipelineRun' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "201": {
+            "description": "Resource 'PipelineRun' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRunCreate_Export": {
+            "$ref": "./examples/PipelineRunCreate_Export.json"
+          },
+          "PipelineRunCreate_Import": {
+            "$ref": "./examples/PipelineRunCreate_Import.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/PipelineRun"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PipelineRuns_Delete",
+        "tags": [
+          "PipelineRuns"
+        ],
+        "description": "Deletes a pipeline run from a container registry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the container registry.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The name of the pipeline run.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRunDelete": {
+            "$ref": "./examples/PipelineRunDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections": {
@@ -4059,6 +5631,148 @@
         }
       }
     },
+    "Archive": {
+      "type": "object",
+      "description": "An object that represents a archive for a container registry.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArchiveProperties",
+          "description": "The properties of the archive.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ArchiveListResult": {
+      "type": "object",
+      "description": "The result of a request to list archives for a container registry.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of archives. Since this list may be incomplete, the nextLink field should be used to request the next list of archives.",
+          "items": {
+            "$ref": "#/definitions/Archive"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next list of archives."
+        }
+      }
+    },
+    "ArchivePackageSourceProperties": {
+      "type": "object",
+      "description": "The properties of the archive package source.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PackageSourceType",
+          "description": "The type of package source for a archive."
+        },
+        "url": {
+          "type": "string",
+          "description": "The external repository url."
+        }
+      }
+    },
+    "ArchiveProperties": {
+      "type": "object",
+      "description": "The properties of a archive.",
+      "properties": {
+        "packageSource": {
+          "$ref": "#/definitions/ArchivePackageSourceProperties",
+          "description": "The package source of the archive."
+        },
+        "publishedVersion": {
+          "type": "string",
+          "description": "The published version of the archive."
+        },
+        "repositoryEndpointPrefix": {
+          "type": "string"
+        },
+        "repositoryEndpoint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the archive at the time the operation was called.",
+          "readOnly": true
+        }
+      }
+    },
+    "ArchiveUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for updating a archive.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArchiveUpdateProperties",
+          "description": "The properties of the connected registry update parameters.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArchiveUpdateProperties": {
+      "type": "object",
+      "description": "The properties of a archive.",
+      "properties": {
+        "publishedVersion": {
+          "type": "string",
+          "description": "The published version of the archive."
+        }
+      }
+    },
+    "ArchiveVersion": {
+      "type": "object",
+      "description": "An object that represents an export pipeline for a container registry.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArchiveVersionProperties",
+          "description": "The properties of the archive.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ArchiveVersionListResult": {
+      "type": "object",
+      "description": "The result of a request to list archive versions for a container registry.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of archive versions. Since this list may be incomplete, the nextLink field should be used to request the next list of archive versions.",
+          "items": {
+            "$ref": "#/definitions/ArchiveVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next list of archive versions."
+        }
+      }
+    },
+    "ArchiveVersionProperties": {
+      "type": "object",
+      "description": "The properties of an archive version.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the archive at the time the operation was called.",
+          "readOnly": true
+        },
+        "archiveVersionErrorMessage": {
+          "type": "string",
+          "description": "The detailed error message for the archive version in the case of failure."
+        }
+      }
+    },
     "AuthCredential": {
       "type": "object",
       "description": "Authentication credential stored for an upstream.",
@@ -4651,6 +6365,36 @@
         }
       }
     },
+    "DebianArchivePackageSourceProperties": {
+      "type": "object",
+      "description": "The properties of the archive package source.",
+      "properties": {
+        "distributionName": {
+          "type": "string",
+          "description": "Upstream Debian distribution Name."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArchivePackageSourceProperties"
+        }
+      ]
+    },
+    "DebianArchiveProperties": {
+      "type": "object",
+      "description": "The properties of the Debian package Archive.",
+      "properties": {
+        "distributionName": {
+          "type": "string",
+          "description": "Debian distribution Name."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArchiveProperties"
+        }
+      ]
+    },
     "EncryptionProperty": {
       "type": "object",
       "properties": {
@@ -4822,6 +6566,115 @@
         "version": {
           "type": "string",
           "description": "The HTTP message version."
+        }
+      }
+    },
+    "ExportPipeline": {
+      "type": "object",
+      "description": "An object that represents an export pipeline for a container registry.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExportPipelineProperties",
+          "description": "The properties of the export pipeline.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the export pipeline."
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the export pipeline."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExportPipelineListResult": {
+      "type": "object",
+      "description": "The result of a request to list export pipelines for a container registry.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of export pipelines.",
+          "items": {
+            "$ref": "#/definitions/ExportPipeline"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next list of export pipelines."
+        }
+      }
+    },
+    "ExportPipelineProperties": {
+      "type": "object",
+      "description": "The properties of an export pipeline.",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/ExportPipelineTargetProperties",
+          "description": "The target properties of the export pipeline."
+        },
+        "options": {
+          "type": "array",
+          "description": "The list of all options configured for the pipeline.",
+          "items": {
+            "$ref": "#/definitions/PipelineOptions"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the pipeline at the time the operation was called.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "target"
+      ]
+    },
+    "ExportPipelineTargetProperties": {
+      "type": "object",
+      "description": "The properties of the export pipeline target.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of target for the export pipeline."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The target uri of the export pipeline.\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\""
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "They key vault secret uri to obtain the target storage SAS token."
+        },
+        "storageAccessMode": {
+          "type": "string",
+          "description": "The storage access mode used for the customer storage account.",
+          "default": "SasToken",
+          "enum": [
+            "ManagedIdentity",
+            "SasToken"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccessMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ManagedIdentity",
+                "value": "ManagedIdentity",
+                "description": "Managed Identity access mode"
+              },
+              {
+                "name": "SasToken",
+                "value": "SasToken",
+                "description": "SAS Token access mode"
+              }
+            ]
+          }
         }
       }
     },
@@ -5012,6 +6865,133 @@
       "required": [
         "source"
       ]
+    },
+    "ImportPipeline": {
+      "type": "object",
+      "description": "An object that represents an import pipeline for a container registry.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImportPipelineProperties",
+          "description": "The properties of the import pipeline.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the import pipeline."
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the import pipeline."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ImportPipelineListResult": {
+      "type": "object",
+      "description": "The result of a request to list import pipelines for a container registry.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of import pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of import pipelines.",
+          "items": {
+            "$ref": "#/definitions/ImportPipeline"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next list of import pipelines."
+        }
+      }
+    },
+    "ImportPipelineProperties": {
+      "type": "object",
+      "description": "The properties of an import pipeline.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ImportPipelineSourceProperties",
+          "description": "The source properties of the import pipeline."
+        },
+        "trigger": {
+          "$ref": "#/definitions/PipelineTriggerProperties",
+          "description": "The properties that describe the trigger of the import pipeline."
+        },
+        "options": {
+          "type": "array",
+          "description": "The list of all options configured for the pipeline.",
+          "items": {
+            "$ref": "#/definitions/PipelineOptions"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the pipeline at the time the operation was called.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "ImportPipelineSourceProperties": {
+      "type": "object",
+      "description": "The properties of the import pipeline source.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of source for the import pipeline.",
+          "default": "AzureStorageBlobContainer",
+          "enum": [
+            "AzureStorageBlobContainer"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineSourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AzureStorageBlobContainer",
+                "value": "AzureStorageBlobContainer"
+              }
+            ]
+          }
+        },
+        "uri": {
+          "type": "string",
+          "description": "The source uri of the import pipeline.\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\nWhen 'AzureStorageBlobContainer': \"https://accountName.blob.core.windows.net/containerName\""
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "They key vault secret uri to obtain the source storage SAS token."
+        },
+        "storageAccessMode": {
+          "type": "string",
+          "description": "The storage access mode used for the customer storage account.",
+          "default": "SasToken",
+          "enum": [
+            "ManagedIdentity",
+            "SasToken"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccessMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ManagedIdentity",
+                "value": "ManagedIdentity",
+                "description": "Managed Identity access mode"
+              },
+              {
+                "name": "SasToken",
+                "value": "SasToken",
+                "description": "SAS Token access mode"
+              }
+            ]
+          }
+        }
+      }
     },
     "ImportSource": {
       "type": "object",
@@ -5355,6 +7335,23 @@
         }
       }
     },
+    "PackageSourceType": {
+      "type": "string",
+      "description": "The type of package source for a archive.",
+      "enum": [
+        "remote"
+      ],
+      "x-ms-enum": {
+        "name": "PackageSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "remote",
+            "value": "remote"
+          }
+        ]
+      }
+    },
     "ParentProperties": {
       "type": "object",
       "description": "The properties of the connected registry parent.",
@@ -5385,6 +7382,293 @@
         "modelAsString": false
       }
     },
+    "PipelineOptions": {
+      "type": "string",
+      "enum": [
+        "OverwriteTags",
+        "OverwriteBlobs",
+        "DeleteSourceBlobOnSuccess",
+        "ContinueOnErrors"
+      ],
+      "x-ms-enum": {
+        "name": "PipelineOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OverwriteTags",
+            "value": "OverwriteTags"
+          },
+          {
+            "name": "OverwriteBlobs",
+            "value": "OverwriteBlobs"
+          },
+          {
+            "name": "DeleteSourceBlobOnSuccess",
+            "value": "DeleteSourceBlobOnSuccess"
+          },
+          {
+            "name": "ContinueOnErrors",
+            "value": "ContinueOnErrors"
+          }
+        ]
+      }
+    },
+    "PipelineRun": {
+      "type": "object",
+      "description": "An object that represents a pipeline run for a container registry.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineRunProperties",
+          "description": "The properties of a pipeline run.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PipelineRunListResult": {
+      "type": "object",
+      "description": "The result of a request to list pipeline runs for a container registry.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of pipeline runs. Since this list may be incomplete, the nextLink field should be used to request the next list of pipeline runs.",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next list of pipeline runs."
+        }
+      }
+    },
+    "PipelineRunProperties": {
+      "type": "object",
+      "description": "The properties of a pipeline run.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of a pipeline run.",
+          "readOnly": true
+        },
+        "request": {
+          "$ref": "#/definitions/PipelineRunRequest",
+          "description": "The request parameters for a pipeline run."
+        },
+        "response": {
+          "$ref": "#/definitions/PipelineRunResponse",
+          "description": "The response of a pipeline run.",
+          "readOnly": true
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the pipeline run should be forced to recreate even if the pipeline run configuration has not changed."
+        }
+      }
+    },
+    "PipelineRunRequest": {
+      "type": "object",
+      "description": "The request properties provided for a pipeline run.",
+      "properties": {
+        "pipelineResourceId": {
+          "type": "string",
+          "description": "The resource ID of the pipeline to run."
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "List of source artifacts to be transferred by the pipeline. \nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\nSpecify an image by tag ('hello-world:latest').\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/PipelineRunSourceProperties",
+          "description": "The source properties of the pipeline run."
+        },
+        "target": {
+          "$ref": "#/definitions/PipelineRunTargetProperties",
+          "description": "The target properties of the pipeline run."
+        },
+        "catalogDigest": {
+          "type": "string",
+          "description": "The digest of the tar used to transfer the artifacts."
+        }
+      }
+    },
+    "PipelineRunResponse": {
+      "type": "object",
+      "description": "The response properties returned for a pipeline run.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The current status of the pipeline run."
+        },
+        "importedArtifacts": {
+          "type": "array",
+          "description": "The artifacts imported in the pipeline run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "progress": {
+          "$ref": "#/definitions/ProgressProperties",
+          "description": "The current progress of the copy operation."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the pipeline run started."
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the pipeline run finished."
+        },
+        "source": {
+          "$ref": "#/definitions/ImportPipelineSourceProperties",
+          "description": "The source of the pipeline run."
+        },
+        "target": {
+          "$ref": "#/definitions/ExportPipelineTargetProperties",
+          "description": "The target of the pipeline run."
+        },
+        "catalogDigest": {
+          "type": "string",
+          "description": "The digest of the tar used to transfer the artifacts."
+        },
+        "trigger": {
+          "$ref": "#/definitions/PipelineTriggerDescriptor",
+          "description": "The trigger that caused the pipeline run."
+        },
+        "pipelineRunErrorMessage": {
+          "type": "string",
+          "description": "The detailed error message for the pipeline run in the case of failure."
+        }
+      }
+    },
+    "PipelineRunSourceProperties": {
+      "type": "object",
+      "description": "The pipeline run source properties",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the source.",
+          "default": "AzureStorageBlob",
+          "enum": [
+            "AzureStorageBlob"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineRunSourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AzureStorageBlob",
+                "value": "AzureStorageBlob"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the source."
+        }
+      }
+    },
+    "PipelineRunTargetProperties": {
+      "type": "object",
+      "description": "The pipeline run target properties",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the target.",
+          "default": "AzureStorageBlob",
+          "enum": [
+            "AzureStorageBlob"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineRunTargetType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AzureStorageBlob",
+                "value": "AzureStorageBlob"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the target."
+        }
+      }
+    },
+    "PipelineSourceTriggerDescriptor": {
+      "type": "object",
+      "description": "The pipeline source trigger descriptor.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the source update happened."
+        }
+      }
+    },
+    "PipelineSourceTriggerProperties": {
+      "type": "object",
+      "description": "The source trigger properties of the import pipeline",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The current status of the source trigger.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "PipelineTriggerDescriptor": {
+      "type": "object",
+      "description": "The pipeline trigger descriptor",
+      "properties": {
+        "sourceTrigger": {
+          "$ref": "#/definitions/PipelineSourceTriggerDescriptor",
+          "description": "The source trigger that caused the pipeline run."
+        }
+      }
+    },
+    "PipelineTriggerProperties": {
+      "type": "object",
+      "description": "The trigger properties of the import pipeline",
+      "properties": {
+        "sourceTrigger": {
+          "$ref": "#/definitions/PipelineSourceTriggerProperties",
+          "description": "The source trigger properties of the pipeline."
+        }
+      }
+    },
     "Policies": {
       "type": "object",
       "description": "The policies for a container registry.",
@@ -5408,6 +7692,10 @@
         "azureADAuthenticationAsArmPolicy": {
           "$ref": "#/definitions/AzureADAuthenticationAsArmPolicy",
           "description": "The policy for using Azure Resource Manager audience token for a container registry."
+        },
+        "softDeletePolicy": {
+          "$ref": "#/definitions/SoftDeletePolicy",
+          "description": "The soft delete policy for a container registry."
         }
       }
     },
@@ -5505,6 +7793,16 @@
         "actionsRequired": {
           "$ref": "#/definitions/ActionsRequired",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      }
+    },
+    "ProgressProperties": {
+      "type": "object",
+      "description": "The progress properties.",
+      "properties": {
+        "percentage": {
+          "type": "string",
+          "description": "The percentage complete of the copy operation."
         }
       }
     },
@@ -5690,6 +7988,50 @@
         "type": {
           "$ref": "#/definitions/ContainerRegistryResourceType",
           "description": "The resource type of the container registry. This field must be set to 'Microsoft.ContainerRegistry/registries'."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The resource group name of the container registry.",
+          "minLength": 1,
+          "maxLength": 90
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "type": "string",
+          "description": "The auto generated domain name label of the container registry. This value defaults to \"Unsecure\".",
+          "default": "Unsecure",
+          "enum": [
+            "Unsecure",
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "NoReuse"
+          ],
+          "x-ms-enum": {
+            "name": "AutoGeneratedDomainNameLabelScope",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unsecure",
+                "value": "Unsecure"
+              },
+              {
+                "name": "TenantReuse",
+                "value": "TenantReuse"
+              },
+              {
+                "name": "SubscriptionReuse",
+                "value": "SubscriptionReuse"
+              },
+              {
+                "name": "ResourceGroupReuse",
+                "value": "ResourceGroupReuse"
+              },
+              {
+                "name": "NoReuse",
+                "value": "NoReuse"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -5701,6 +8043,10 @@
       "type": "object",
       "description": "The result of a request to check the availability of a container registry name.",
       "properties": {
+        "availableLoginServerName": {
+          "type": "string",
+          "description": "The complete login server name with domain name label (DNL) hash, if available"
+        },
         "nameAvailable": {
           "type": "boolean",
           "description": "The value that indicates whether the name is available."
@@ -5870,6 +8216,67 @@
           "description": "Enables registry-wide pull from unauthenticated clients.",
           "default": false
         },
+        "metadataSearch": {
+          "type": "string",
+          "description": "Determines whether registry artifacts are indexed for metadata search.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MetadataSearch",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "type": "string",
+          "description": "Determines the domain name label reuse scope.",
+          "default": "Unsecure",
+          "enum": [
+            "Unsecure",
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "NoReuse"
+          ],
+          "x-ms-enum": {
+            "name": "AutoGeneratedDomainNameLabelScope",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unsecure",
+                "value": "Unsecure"
+              },
+              {
+                "name": "TenantReuse",
+                "value": "TenantReuse"
+              },
+              {
+                "name": "SubscriptionReuse",
+                "value": "SubscriptionReuse"
+              },
+              {
+                "name": "ResourceGroupReuse",
+                "value": "ResourceGroupReuse"
+              },
+              {
+                "name": "NoReuse",
+                "value": "NoReuse"
+              }
+            ]
+          }
+        },
         "roleAssignmentMode": {
           "type": "string",
           "description": "Determines registry role assignment mode.",
@@ -5953,6 +8360,29 @@
         "anonymousPullEnabled": {
           "type": "boolean",
           "description": "Enables registry-wide pull from unauthenticated clients."
+        },
+        "metadataSearch": {
+          "type": "string",
+          "description": "Determines whether registry artifacts are indexed for metadata search.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MetadataSearch",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "roleAssignmentMode": {
           "$ref": "#/definitions/RoleAssignmentMode",
@@ -6432,6 +8862,47 @@
             "value": "Premium"
           }
         ]
+      }
+    },
+    "SoftDeletePolicy": {
+      "type": "object",
+      "description": "The soft delete policy for a container registry",
+      "properties": {
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days after which a soft-deleted item is permanently deleted.",
+          "default": 7
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the policy was last updated.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "enabled",
+                "value": "enabled"
+              },
+              {
+                "name": "disabled",
+                "value": "disabled"
+              }
+            ]
+          }
+        }
       }
     },
     "Source": {
