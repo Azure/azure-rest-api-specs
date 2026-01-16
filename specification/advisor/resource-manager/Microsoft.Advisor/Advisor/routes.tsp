@@ -8,6 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 
@@ -190,6 +191,8 @@ op predict is ArmProviderActionSync<
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_05_01_preview)
+@removed(Versions.v2026_02_01)
 interface AssessmentTypesOperationGroup {
   /**
    * Get list of Azure Advisor assessment types.
