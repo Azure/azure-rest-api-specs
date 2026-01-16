@@ -210,6 +210,7 @@ model DisableSerialConsoleResultProperties {
 /**
  * Returns whether or not Serial Console is disabled (enabled).
  */
+@summary("Serial Console Enable Result")
 model EnableSerialConsoleResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   properties?: EnableSerialConsoleResultProperties;
