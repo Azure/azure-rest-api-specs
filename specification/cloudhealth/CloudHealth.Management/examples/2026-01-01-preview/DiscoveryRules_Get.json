@@ -17,8 +17,16 @@
           "displayName": "myDisplayName",
           "discoverRelationships": "Enabled",
           "addRecommendedSignals": "Enabled",
-          "errorMessage": "Authorization error on execution",
-          "resourceGraphQuery": "resources | where subscriptionId == '7ddfffd7-9b32-40df-1234-828cbd55d6f4' | where resourceGroup == 'my-rg'",
+          "specification": {
+            "kind": "ResourceGraphQuery",
+            "resourceGraphQuery": "resources | where subscriptionId == '7ddfffd7-9b32-40df-1234-828cbd55d6f4' | where resourceGroup == 'my-rg'"
+          },
+          "error": {
+            "message": "Authorization error on execution",
+            "context": [
+              "subscriptionId: 7ddfffd7-9b32-40df-1234-828cbd55d6f4"
+            ]
+          },
           "entityName": "f1f0ef5e-a5b5-4d02-b69c-7145f4658829"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudHealth/healthModels/myHealthModel/discoveryRules/myDiscoveryRule",

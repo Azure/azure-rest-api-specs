@@ -1864,9 +1864,9 @@
         ]
       }
     },
-    "ApplicationInsightsTopologyDiscoveryRuleProperties": {
+    "ApplicationInsightsTopologySpecification": {
       "type": "object",
-      "description": "Discovery rule properties for an Application Insights topology query",
+      "description": "Discovery rule specification for an Application Insights topology query",
       "properties": {
         "applicationInsightsResourceId": {
           "type": "string",
@@ -1886,7 +1886,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DiscoveryRulePropertiesV2"
+          "$ref": "#/definitions/DiscoveryRuleSpecification"
         }
       ],
       "x-ms-discriminator-value": "ApplicationInsightsTopology"
@@ -2229,7 +2229,7 @@
       "description": "A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiscoveryRulePropertiesV2",
+          "$ref": "#/definitions/DiscoveryRuleProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -2241,7 +2241,7 @@
     },
     "DiscoveryRuleKind": {
       "type": "string",
-      "description": "Discovery rule kind discriminator",
+      "description": "Discovery rule specification kind discriminator",
       "enum": [
         "ResourceGraphQuery",
         "ApplicationInsightsTopology"
@@ -2252,11 +2252,13 @@
         "values": [
           {
             "name": "ResourceGraphQuery",
-            "value": "ResourceGraphQuery"
+            "value": "ResourceGraphQuery",
+            "description": "Azure Resource Graph query based discovery"
           },
           {
             "name": "ApplicationInsightsTopology",
-            "value": "ApplicationInsightsTopology"
+            "value": "ApplicationInsightsTopology",
+            "description": "Application Insights topology based discovery"
           }
         ]
       }
@@ -2282,7 +2284,7 @@
         "value"
       ]
     },
-    "DiscoveryRulePropertiesV2": {
+    "DiscoveryRuleProperties": {
       "type": "object",
       "description": "Discovery rule properties",
       "properties": {
@@ -2297,10 +2299,6 @@
           "minLength": 1,
           "maxLength": 260
         },
-        "discoveryRuleKind": {
-          "$ref": "#/definitions/DiscoveryRuleKind",
-          "description": "Kind of the discovery rule"
-        },
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
           "description": "Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities."
@@ -2312,6 +2310,10 @@
         "addRecommendedSignals": {
           "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
           "description": "Whether to add all recommended signals to the discovered entities."
+        },
+        "specification": {
+          "$ref": "#/definitions/DiscoveryRuleSpecification",
+          "description": "Specification of the discovery rule defining how entities are discovered."
         },
         "deletionDate": {
           "type": "string",
@@ -2330,12 +2332,11 @@
           "readOnly": true
         }
       },
-      "discriminator": "discoveryRuleKind",
       "required": [
-        "discoveryRuleKind",
         "authenticationSetting",
         "discoverRelationships",
         "addRecommendedSignals",
+        "specification",
         "entityName"
       ]
     },
@@ -2386,6 +2387,20 @@
           }
         ]
       }
+    },
+    "DiscoveryRuleSpecification": {
+      "type": "object",
+      "description": "Base model for discovery rule specifications",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DiscoveryRuleKind",
+          "description": "Kind of the discovery rule specification"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "Entity": {
       "type": "object",
@@ -3364,9 +3379,9 @@
         "childEntityName"
       ]
     },
-    "ResourceGraphQueryDiscoveryRuleProperties": {
+    "ResourceGraphQuerySpecification": {
       "type": "object",
-      "description": "Discovery rule properties for an Azure Resource Graph query",
+      "description": "Discovery rule specification for an Azure Resource Graph query",
       "properties": {
         "resourceGraphQuery": {
           "type": "string",
@@ -3380,7 +3395,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DiscoveryRulePropertiesV2"
+          "$ref": "#/definitions/DiscoveryRuleSpecification"
         }
       ],
       "x-ms-discriminator-value": "ResourceGraphQuery"

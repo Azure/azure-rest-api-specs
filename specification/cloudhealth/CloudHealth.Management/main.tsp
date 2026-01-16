@@ -925,7 +925,7 @@ scalar discoveryRuleName extends string;
 
 @doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
 @parentResource(HealthModel)
-model DiscoveryRule is ProxyResource<DiscoveryRulePropertiesV2> {
+model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
   @doc("Name of the discovery rule. Must be unique within a health model.")
   @key("discoveryRuleName")
   @segment("discoveryrules")
@@ -933,7 +933,6 @@ model DiscoveryRule is ProxyResource<DiscoveryRulePropertiesV2> {
   name: discoveryRuleName;
 }
 
-@removed(Versions.v2026_01_01_preview)
 @doc("Discovery rule properties")
 model DiscoveryRuleProperties {
   @visibility(Lifecycle.Read)
@@ -945,6 +944,7 @@ model DiscoveryRuleProperties {
   @maxLength(260)
   displayName?: string;
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
   @minLength(1)
   @maxLength(5000)
@@ -959,14 +959,25 @@ model DiscoveryRuleProperties {
   @doc("Whether to add all recommended signals to the discovered entities.")
   addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
 
+  @added(Versions.v2026_01_01_preview)
+  @doc("Specification of the discovery rule defining how entities are discovered.")
+  specification: DiscoveryRuleSpecification;
+
   @visibility(Lifecycle.Read)
   @doc("Date when the discovery rule was (soft-)deleted.")
   deletionDate?: utcDateTime;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Error message if the last discovery operation failed.")
   errorMessage?: string;
 
+  @added(Versions.v2026_01_01_preview)
+  @visibility(Lifecycle.Read)
+  @doc("Error details if the last discovery operation failed.")
+  error?: DiscoveryError;
+
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Number of discovered entities in the last discovery operation.")
   numberOfDiscoveredEntities?: int32;
@@ -977,54 +988,18 @@ model DiscoveryRuleProperties {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("Discovery rule properties")
-@discriminator("discoveryRuleKind")
-model DiscoveryRulePropertiesV2 {
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
-  provisioningState?: HealthModelProvisioningState;
-
-  @doc("Display name")
-  @minLength(1)
-  @maxLength(260)
-  displayName?: string;
-
-  @doc("Kind of the discovery rule")
-  discoveryRuleKind: DiscoveryRuleKind;
-
-  @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
-  authenticationSetting: authenticationSettingName;
-
-  @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
-  discoverRelationships: DiscoveryRuleRelationshipDiscoveryBehavior;
-
-  @doc("Whether to add all recommended signals to the discovered entities.")
-  addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
-
-  @visibility(Lifecycle.Read)
-  @doc("Date when the discovery rule was (soft-)deleted.")
-  deletionDate?: utcDateTime;
-
-  @visibility(Lifecycle.Read)
-  @doc("Error details if the last discovery operation failed.")
-  error?: DiscoveryError;
-
-  @visibility(Lifecycle.Read)
-  @doc("Name of the entity which represents the discovery rule. Note: It might take a few minutes after creating the discovery rule until the entity is created.")
-  entityName: string;
+@doc("Base model for discovery rule specifications")
+@discriminator("kind")
+model DiscoveryRuleSpecification {
+  @doc("Kind of the discovery rule specification")
+  kind: DiscoveryRuleKind;
 }
 
-@@typeChangedFrom(DiscoveryRule.properties,
-  Versions.v2026_01_01_preview,
-  DiscoveryRuleProperties
-);
-
 @added(Versions.v2026_01_01_preview)
-@doc("Discovery rule properties for an Azure Resource Graph query")
-model ResourceGraphQueryDiscoveryRuleProperties
-  extends DiscoveryRulePropertiesV2 {
-  @doc("Kind of the discovery rule")
-  discoveryRuleKind: DiscoveryRuleKind.ResourceGraphQuery;
+@doc("Discovery rule specification for an Azure Resource Graph query")
+model ResourceGraphQuerySpecification extends DiscoveryRuleSpecification {
+  @doc("Kind of the discovery rule specification")
+  kind: DiscoveryRuleKind.ResourceGraphQuery;
 
   @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
   @minLength(1)
@@ -1033,11 +1008,11 @@ model ResourceGraphQueryDiscoveryRuleProperties
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("Discovery rule properties for an Application Insights topology query")
-model ApplicationInsightsTopologyDiscoveryRuleProperties
-  extends DiscoveryRulePropertiesV2 {
-  @doc("Kind of the discovery rule")
-  discoveryRuleKind: DiscoveryRuleKind.ApplicationInsightsTopology;
+@doc("Discovery rule specification for an Application Insights topology query")
+model ApplicationInsightsTopologySpecification
+  extends DiscoveryRuleSpecification {
+  @doc("Kind of the discovery rule specification")
+  kind: DiscoveryRuleKind.ApplicationInsightsTopology;
 
   @doc("Application Insights resource ID")
   applicationInsightsResourceId: armResourceIdentifier<[
@@ -1070,10 +1045,14 @@ union DiscoveryRuleRecommendedSignalsBehavior {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("Discovery rule kind discriminator")
+@doc("Discovery rule specification kind discriminator")
 union DiscoveryRuleKind {
   string,
+
+  @doc("Azure Resource Graph query based discovery")
   ResourceGraphQuery: "ResourceGraphQuery",
+
+  @doc("Application Insights topology based discovery")
   ApplicationInsightsTopology: "ApplicationInsightsTopology",
 }
 
