@@ -22,6 +22,8 @@ export function includesSegment(path, segment) {
 }
 
 /**
+ * Wraps `path.resolve(path)` with a cache to improve performance
+ *
  * @param {string} path
  * @returns {string}
  */
@@ -30,7 +32,9 @@ export function resolveCached(path) {
 }
 
 /**
- * @param {string} from
+ * Wraps `path.resolve(from, to)` with a cache to improve performance
+
+* @param {string} from
  * @param {string} to
  * @returns {string}
  */
