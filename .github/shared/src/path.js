@@ -1,11 +1,11 @@
 import { basename, dirname, resolve } from "path";
-import { StringKeyedMemoryCache, StringKeyedMemoryCache2 } from "./memory-cache.js";
+import { ObjectCache, ObjectCache2 } from "./cache.js";
 
-/** @type {StringKeyedMemoryCache<string>} */
-const resolveCache = new StringKeyedMemoryCache();
+/** @type {ObjectCache<string>} */
+const resolveCache = new ObjectCache();
 
-/** @type {StringKeyedMemoryCache2<string>} */
-const resolveCache2 = new StringKeyedMemoryCache2();
+/** @type {ObjectCache2<string>} */
+const resolveCache2 = new ObjectCache2();
 
 /**
  *

@@ -1,9 +1,11 @@
 /**
- * Caches values in memory with a single key.
+ * Caches values in memory with a single key of any type.
+ *
+ * `ObjectCache` is faster for string keys.
  *
  * @template K, V
  */
-export class MemoryCache {
+export class MapCache {
   /** @type {Map<K, V>} */
   #map = new Map();
 
@@ -30,14 +32,16 @@ export class MemoryCache {
 }
 
 /**
- * Caches values in memory with an ordered pair of keys.
+ * Caches values in memory with an ordered pair of keys of any types.
+ *
+ * `ObjectCache2` is faster for string keys.
  *
  * @template K1, K2, V
  */
-export class MemoryCache2 {
+export class MapCache2 {
   // Two-layer nested cache
-  /** @type {MemoryCache<K1, MemoryCache<K2, V>>} */
-  #cache1 = new MemoryCache();
+  /** @type {MapCache<K1, MapCache<K2, V>>} */
+  #cache1 = new MapCache();
 
   /**
    * Returns cached value, initializing if necessary.
@@ -53,7 +57,7 @@ export class MemoryCache2 {
    */
   getOrCreate(key1, key2, factory) {
     // key1 => cache for the next layer
-    const cache2 = this.#cache1.getOrCreate(key1, () => new MemoryCache());
+    const cache2 = this.#cache1.getOrCreate(key1, () => new MapCache());
 
     // key2 => final value
     return cache2.getOrCreate(key2, factory);
@@ -61,9 +65,13 @@ export class MemoryCache2 {
 }
 
 /**
+ * Caches values in memory with a single string key.
+ *
+ * `MapCache` is slower but supports keys of any type.
+ *
  * @template V
  */
-export class StringKeyedMemoryCache {
+export class ObjectCache {
   /** @type {Record<string, V>} */
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   #map = Object.create(null);
@@ -91,12 +99,16 @@ export class StringKeyedMemoryCache {
 }
 
 /**
+ * Caches values in memory with an ordered pair of string keys.
+ *
+ * `MapCache2` is slower but supports keys of any type.
+ *
  * @template V
  */
-export class StringKeyedMemoryCache2 {
+export class ObjectCache2 {
   // Two-layer nested cache
-  /** @type {StringKeyedMemoryCache<StringKeyedMemoryCache<V>>} */
-  #cache1 = new StringKeyedMemoryCache();
+  /** @type {ObjectCache<ObjectCache<V>>} */
+  #cache1 = new ObjectCache();
 
   /**
    * Returns cached value, initializing if necessary.
@@ -112,7 +124,7 @@ export class StringKeyedMemoryCache2 {
    */
   getOrCreate(key1, key2, factory) {
     // key1 => cache for the next layer
-    const cache2 = this.#cache1.getOrCreate(key1, () => new StringKeyedMemoryCache());
+    const cache2 = this.#cache1.getOrCreate(key1, () => new ObjectCache());
 
     // key2 => final value
     return cache2.getOrCreate(key2, factory);

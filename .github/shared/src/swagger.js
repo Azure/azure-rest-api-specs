@@ -4,8 +4,8 @@ import { dirname, relative } from "path";
 import { inspect } from "util";
 import { z } from "zod";
 import { mapAsync } from "./array.js";
+import { ObjectCache } from "./cache.js";
 import { example, preview } from "./changed-files.js";
-import { MemoryCache } from "./memory-cache.js";
 import { resolveCached, resolveCached2 } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
@@ -110,30 +110,30 @@ export class Swagger {
   /**
    * Caches the contents of files on disk, using the resolved path as the key.
    *
-   * @type {MemoryCache<string, Promise<string>>}
+   * @type {ObjectCache<Promise<string>>}
    */
-  static #contentCache = new MemoryCache();
+  static #contentCache = new ObjectCache();
 
   /**
    * Caches JSON objects parsed from text, using the resolved path (or content string itself) as the key.
    *
-   * @type {MemoryCache<string, Promise<unknown>>}
+   * @type {ObjectCache<Promise<unknown>>}
    * */
-  static #contentJsonCache = new MemoryCache();
+  static #contentJsonCache = new ObjectCache();
 
   /**
    * Caches SwaggerObject objects parsed from JSON objects, using the resolved path (or content string itself) as the key.
    *
-   * @type {MemoryCache<string, Promise<SwaggerObject>>}
+   * @type {ObjectCache<Promise<SwaggerObject>>}
    */
-  static #contentObjectCache = new MemoryCache();
+  static #contentObjectCache = new ObjectCache();
 
   /**
    * Caches operations extracted from a SwaggerObject, using the resolved path (or content string itself) as the key.
    *
-   * @type {MemoryCache<string, Promise<Map<string, Operation>>>}
+   * @type {ObjectCache<Promise<Map<string, Operation>>>}
    */
-  static #operationsCache = new MemoryCache();
+  static #operationsCache = new ObjectCache();
 
   /**
    * Caches reference paths extracted from a JSON object, using the resolved path (or content string itself) as the key.
@@ -143,9 +143,9 @@ export class Swagger {
    * - Swagger objects have backpointers to SpecModel, so the captured object graph can be very large
    * - Swagger object should be relatively "cheap", since the "expensive" properties are cached statically.
    *
-   * @type {MemoryCache<string, Promise<string[]>>}
+   * @type {ObjectCache<Promise<string[]>>}
    */
-  static #refCache = new MemoryCache();
+  static #refCache = new ObjectCache();
 
   /**
    * Optional content of swagger file, passed in via `options`.  If undefined, content is loaded from `#path`.
