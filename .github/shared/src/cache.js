@@ -45,7 +45,7 @@ export class KeyedPairCache {
 
   /**
    * Returns cached value, initializing if necessary.
-   * Keys are ordered, meaning (key1, key2) != (key2, key1).
+   * Keys are ordered, so (key1, key2) != (key2, key1).
    *
    * @param {K1} key1
    * @param {K2} key2
@@ -112,7 +112,7 @@ export class StringKeyPairCache {
 
   /**
    * Returns cached value, initializing if necessary.
-   * Keys are ordered, meaning (key1, key2) != (key2, key1).
+   * Keys are ordered, so (key1, key2) != (key2, key1).
    *
    * @param {string} key1
    * @param {string} key2
