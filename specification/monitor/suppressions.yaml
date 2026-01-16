@@ -7,7 +7,10 @@
   reason: This is a reorganization of existing API versions, not introducing new API versions. These are old Swagger docs before Typespec requirements were implemented.
 
 - tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
+  reason: >
+    TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-java.*
@@ -15,7 +18,10 @@
     - Microsoft.Monitor.Management/tspconfig.yaml
 
 - tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
+  reason: >
+    TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-go.*
