@@ -52,7 +52,7 @@ union _AgentIncludable {
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.WebSearchPreviewTool,
+@@copyProperties(OpenAI.WebSearchTool,
   {
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection

@@ -26,7 +26,7 @@ interface Conversations {
   @operationId("createConversation")
   createConversation is AgentOperation<
     OpenAI.CreateConversationBody,
-    OpenAI.ConversationResource
+    OpenAI.Conversation
   >;
 
   /**
@@ -43,7 +43,7 @@ interface Conversations {
 
       ...OpenAI.UpdateConversationBody;
     },
-    OpenAI.ConversationResource
+    OpenAI.Conversation
   >;
 
   /**
@@ -59,7 +59,7 @@ interface Conversations {
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
     },
-    OpenAI.ConversationResource
+    OpenAI.Conversation
   >;
 
   /**
@@ -95,7 +95,7 @@ interface Conversations {
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
     },
-    AgentsPagedResult<OpenAI.ConversationResource>
+    AgentsPagedResult<OpenAI.Conversation>
   >;
 
   /**
@@ -161,7 +161,7 @@ interface Conversations {
       /** The id of the conversation item to delete. */
       @path item_id: string;
     },
-    OpenAI.ConversationResource
+    OpenAI.Conversation
   >;
 
   /**
