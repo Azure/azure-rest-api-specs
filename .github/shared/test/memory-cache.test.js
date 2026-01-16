@@ -1,5 +1,42 @@
 import { describe, expect, it } from "vitest";
-import { MemoryCache, MemoryCache2 } from "../src/memory-cache.js";
+import { MemoryCache, MemoryCache2, StringKeyedMemoryCache } from "../src/memory-cache.js";
+
+describe("StringKeyedMemoryCache", () => {
+  it("createAndGetSync", () => {
+    /** @type {StringKeyedMemoryCache<string>} */
+    const cache = new StringKeyedMemoryCache();
+
+    let createdCount = 0;
+    const getOrCreate = () =>
+      cache.getOrCreate("foo", () => {
+        createdCount++;
+        return "bar";
+      });
+
+    for (let i = 0; i < 3; i++) {
+      expect(getOrCreate()).toEqual("bar");
+    }
+    expect(createdCount).toEqual(1);
+  });
+
+  it("createAndGetAsync", async () => {
+    /** @type {StringKeyedMemoryCache<Promise<string>>} */
+    const cache = new StringKeyedMemoryCache();
+
+    let createdCount = 0;
+    const getOrCreate = () =>
+      cache.getOrCreate("foo", async () => {
+        await Promise.resolve();
+        createdCount++;
+        return "bar";
+      });
+
+    for (let i = 0; i < 3; i++) {
+      await expect(getOrCreate()).resolves.toEqual("bar");
+    }
+    expect(createdCount).toEqual(1);
+  });
+});
 
 describe("MemoryCache", () => {
   it("createAndGetSync", () => {

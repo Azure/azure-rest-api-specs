@@ -1,4 +1,34 @@
 /**
+ * @template V
+ */
+export class StringKeyedMemoryCache {
+  /** @type {Record<string, V>} */
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  #map = Object.create(null);
+
+  /**
+   * Returns cached value, initializing if necessary
+   *
+   * @param {string} key
+   * @param {() => V} factory
+   * @returns {V} cached value
+   *
+   * @example
+   * const text = cache.getOrCreate(path, async () => await readFile(path));
+   */
+  getOrCreate(key, factory) {
+    let value = this.#map[key];
+
+    if (value === undefined) {
+      value = factory();
+      this.#map[key] = value;
+    }
+
+    return value;
+  }
+}
+
+/**
  * Caches values in memory with a single key.
  *
  * @template K, V
