@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2025-12-12-preview",
+    "resourceGroupName": "rgName",
+    "servicesHubConnectorName": "ServicesHubConnectorName1",
+    "subscriptionId": "550e8400-e29b-41d4-a716-446655440000",
+    "body": {
+      "properties": {
+        "logAnalyticsWorkspaceId": "e0566fa0-d57d-4d6a-99f6-224dd1015783",
+        "surveyId": "survey-123",
+        "solutionDisplayName": "Windows Client",
+        "solutionName": "WindowsClientAssessmentPlus",
+        "culture": "en-US",
+        "reportType": "excel"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "fileName": "SQL_Survey_Report_2025-12-16.xlsx",
+          "content": "{base64EncodedExcelFile}"
+        }
+      }
+    }
+  },
+  "operationId": "Download_SurveyReport",
+  "title": "Download the Survey Report"
+}

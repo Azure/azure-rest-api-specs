@@ -17,6 +17,17 @@ union HttpMethod {
   string,
 }
 
+@doc("Supported HTTP pagination methods")
+union PaginationMethod {
+  @doc("Pagination using page-based pagination")
+  Page: "Page",
+
+  @doc("Pagination using cursor-based pagination")
+  Cursor: "Cursor",
+
+  string,
+}
+
 @doc("HTTP key-value pair")
 model HttpKeyValuePair {
   @doc("HTTP header, request parameter, or path variable name")
@@ -24,6 +35,37 @@ model HttpKeyValuePair {
 
   @doc("Value associated with the key")
   value: string;
+}
+
+@doc("HTTP pagination information")
+@discriminator("type")
+model Pagination {
+  @doc("Type of pagination")
+  type: PaginationMethod;
+}
+
+@doc("HTTP Page pagination information")
+model PagePagination extends Pagination {
+  @doc("Type of pagination")
+  type: PaginationMethod.Page;
+
+  @doc("Initial value for pagination. For cursor-based pagination, this is the initial cursor value. For page-based pagination, this is the initial page number.")
+  paginationInitialValue?: string;
+
+  @doc("Number of items to increment per page when using page-based pagination.")
+  pageIncrement?: int32;
+}
+
+@doc("HTTP Cursor pagination information")
+model CursorPagination extends Pagination {
+  @doc("Type of pagination")
+  type: PaginationMethod.Cursor;
+
+  @doc("Initial value for pagination. For cursor-based pagination, this is the initial cursor value. For page-based pagination, this is the initial page number.")
+  paginationInitialValue?: string;
+
+  @doc("JSON Pointer expression to extract the cursor value from HTTP response body when using cursor-based pagination.")
+  cursorJsonPointer?: string;
 }
 
 @doc("Configuration for HttpSourceConnector")
@@ -68,4 +110,10 @@ model HttpSourceConnectorProperties extends DataSourceProperties {
 
   @doc("Authentication for HTTP")
   authentication: Models.Auth.Authentication;
+
+  @doc("JSON Pointer expression to extract data from HTTP response body.")
+  responseDataJsonPointer?: string;
+
+  @doc("HTTP pagination to use.")
+  pagination?: Pagination;
 }
