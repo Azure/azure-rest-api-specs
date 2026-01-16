@@ -3676,6 +3676,12 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
    * The virtual machine scale set zones.
    */
   zones?: string[];
+
+  /**
+   * User-defined constraints for virtual machine scale set hardware placement.
+   */
+  @added(Versions.v2025_11_01)
+  placement?: Placement;
 }
 
 /**
@@ -3751,12 +3757,6 @@ model VirtualMachineScaleSetUpdateProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
-
-  /**
-   * User-defined constraints for virtual machine scale set hardware placement.
-   */
-  @added(Versions.v2025_11_01)
-  placement?: Placement;
 }
 
 /**
