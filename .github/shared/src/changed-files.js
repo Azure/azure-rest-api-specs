@@ -1,9 +1,13 @@
 import debug from "debug";
 import { simpleGit } from "simple-git";
+import { ObjectCache } from "./cache.js";
 import { includesSegment } from "./path.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
+
+/** @type {ObjectCache<boolean>} */
+const exampleCache = new ObjectCache();
 
 /**
  * Get a list of changed files in a git repository
@@ -229,8 +233,16 @@ export function stable(file) {
  * @returns {boolean}
  */
 export function example(file) {
-  // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && includesSegment(file, "examples");
+  return (
+    typeof file === "string" &&
+    // Intentionally use un-resolved path as key for perf, since we are OK
+    // caching the same result for different representations of the same path.
+    exampleCache.getOrCreate(
+      file,
+      // Folder name "examples" should match case for consistency across specs
+      () => json(file) && includesSegment(file, "examples"),
+    )
+  );
 }
 
 /**
