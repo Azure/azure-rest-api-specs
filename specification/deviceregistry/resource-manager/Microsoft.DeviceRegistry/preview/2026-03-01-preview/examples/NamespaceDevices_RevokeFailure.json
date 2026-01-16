@@ -1,6 +1,6 @@
 {
-  "title": "Devices_Revoke",
-  "operationId": "Devices_Revoke",
+  "title": "NamespaceDevices_RevokeFailure",
+  "operationId": "NamespaceDevices_Revoke",
   "parameters": {
     "api-version": "2026-03-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -22,7 +22,11 @@
         "location": "https://contoso.com/operationstatus"
       },
       "body": {
-        "result": "Succeeded"
+        "result": "Failed",
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The resource was not found."
+        }
       }
     }
   }
