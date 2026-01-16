@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "name": "testSite",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "site",
+            "type": "Microsoft.Web/sites/privateLinkResources",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/privateLinkResources/site",
+            "properties": {
+              "groupId": "sites",
+              "requiredMembers": [
+                "sites"
+              ],
+              "requiredZoneNames": [
+                "privatelink.testsite.azurewebsites.net"
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "StaticSites_GetPrivateLinkResources",
+  "title": "Get private link resources of a site"
+}

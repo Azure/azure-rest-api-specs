@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "diagnosticCategory": "availability",
+    "resourceGroupName": "Sample-WestUSResourceGroup",
+    "siteName": "SampleApp",
+    "slot": "Production",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "appanalysis",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/diagnostics/availability/analyses/appanalysis",
+            "properties": {
+              "description": "Determine causes of availability loss as well as solutions for these problems"
+            }
+          },
+          {
+            "name": "apprestartanalysis",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/diagnostics/availability/analyses/apprestartanalyses",
+            "properties": {
+              "description": "Find the reasons that your app restarted"
+            }
+          },
+          {
+            "name": "memoryanalysis",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/diagnostics/availability/analyses/memoryanalysis",
+            "properties": {
+              "description": "Detect issues with memory as well as suggest ways to troubleshoot memory problems"
+            }
+          },
+          {
+            "name": "tcpconnectionsanalysis",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/diagnostics/availability/analyses/tcpconnectionsanalysis",
+            "properties": {
+              "description": "Analyze port usage and find out if a high number of connections is causing problems for your web app"
+            }
+          },
+          {
+            "name": "perfanalysis",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/diagnostics/availability/analyses/perfanalysis",
+            "properties": {
+              "description": "Determine causes of performance degredation as well as solutions for these problems"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Diagnostics_ListSiteAnalysesSlot",
+  "title": "List App Analyses"
+}
