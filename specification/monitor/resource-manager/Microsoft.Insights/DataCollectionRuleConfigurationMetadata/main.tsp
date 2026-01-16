@@ -18,7 +18,9 @@ using Azure.ResourceManager;
  * including supported data sources, destinations, and stream specifications.
  */
 @armProviderNamespace("Microsoft.Insights")
-@service(#{ title: "Azure Monitor Data Collection Rule Configuration Metadata API" })
+@service(#{
+  title: "Azure Monitor Data Collection Rule Configuration Metadata API",
+})
 @versioned(Versions)
 namespace Microsoft.Insights;
 
@@ -33,6 +35,7 @@ enum Versions {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 /** Operations for fetching data collection rule configuration metadata. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a location-based action interface, not a standard ARM resource interface"
 @tag("DataCollectionRuleConfigurationMetadata")
 interface DataCollectionRuleConfigurationMetadata {
   /** Fetches summary configuration metadata for all supported data sources. */

@@ -43,6 +43,7 @@ model TelemetryTypeMetadata {
   supportedResourceTypes?: string[];
 
   /** Detailed stream information per resource type (only in fetchDetails response). */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Using Record to represent dynamic resource type keys in the response"
   supportedStreams?: Record<StreamMetadata[]>;
 }
 
