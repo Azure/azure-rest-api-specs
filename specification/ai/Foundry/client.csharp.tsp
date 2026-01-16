@@ -143,3 +143,6 @@ namespace Azure.AI.Projects;
   "operationStatus",
   "csharp"
 );
+
+// Evaluators
+@@access(EvaluatorDefinitionType, Access.public);
