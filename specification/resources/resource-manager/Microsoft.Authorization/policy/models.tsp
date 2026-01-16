@@ -1121,7 +1121,7 @@ model PolicyTokenEvaluatedRequestDetails {
   /**
    * The hashed payload of the resource operation that is targeted by the issued token.
    */
-  contentHash?: string;
+  contentHash: string;
 }
 
 /**
