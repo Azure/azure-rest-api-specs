@@ -46,6 +46,10 @@ model AzureVirtualDesktopProperties is VirtualDesktopInfrastructureProperties {
 
   @doc("The redirect URL for the service.")
   redirectUrl: url;
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("The tenant primary domain. Example: microsoft.onmicrosoft.com")
+  tenantPrimaryDomain: string;
 }
 
 @armResourceOperations

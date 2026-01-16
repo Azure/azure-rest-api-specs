@@ -4,6 +4,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using TypeSpec.Versioning;
+
+namespace Microsoft.ChangeSafety;
+
 @doc("The status of the current resource.")
 @Azure.Core.lroStatus
 union ProvisioningState {
@@ -45,7 +49,12 @@ union Status {
   string,
 
   @doc("Resource is in running.")
+  @removed(Versions.v2026_01_01_preview)
   Running: "Running",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Resource is in InProgress.")
+  InProgress: "InProgress",
 
   @doc("Resource completed.")
   Succeeded: "Succeeded",
@@ -65,3 +74,11 @@ union Status {
   @doc("Resource is initialized.")
   Initialized: "Initialized",
 }
+
+@doc("Azure resource Id of a StageProgression.")
+scalar StageProgressionResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/changeStates/stageProgressions",
+    }
+  ]>;

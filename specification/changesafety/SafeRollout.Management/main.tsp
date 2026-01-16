@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./saferollout.tsp";
 import "./step.tsp";
+import "./stage.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -18,4 +19,10 @@ namespace Microsoft.ChangeSafety;
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_03_01_preview: "2025-03-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_01_01_preview: "2026-01-01-preview",
 }
+
+@added(Versions.v2026_01_01_preview)
+interface Operations extends Azure.ResourceManager.Operations {}
