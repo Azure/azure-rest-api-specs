@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-07-preview` is specified on t
 
 ```yaml $(tag) == 'package-2025-07-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2025-07-15-preview/EventGrid.json
+- preview/2025-07-15-preview/EventGrid.json
 
 suppressions:
   - code: PatchBodyParametersSchema
@@ -636,7 +636,7 @@ These settings apply only when `--tag=package-2025-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-02'
 input-file:
-  - Microsoft.EventGrid/stable/2025-02-15/EventGrid.json
+- stable/2025-02-15/EventGrid.json
 
 suppressions:
   - code: PatchBodyParametersSchema
@@ -866,7 +866,7 @@ These settings apply only when `--tag=package-2024-12-preview` is specified on t
 
 ```yaml $(tag) == 'package-2024-12-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2024-12-15-preview/EventGrid.json
+- preview/2024-12-15-preview/EventGrid.json
 
 suppressions:
   - code: PatchPropertiesCorrespondToPutProperties
@@ -911,7 +911,7 @@ These settings apply only when `--tag=package-2024-06-preview` is specified on t
 
 ```yaml $(tag) == 'package-2024-06-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2024-06-01-preview/EventGrid.json
+- preview/2024-06-01-preview/EventGrid.json
 
 suppressions:
   - code: PatchPropertiesCorrespondToPutProperties
@@ -948,7 +948,7 @@ These settings apply only when `--tag=package-2023-12-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-12-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2023-12-15-preview/EventGrid.json
+- preview/2023-12-15-preview/EventGrid.json
 
 suppressions:
   - code: PathContainsResourceType
@@ -970,7 +970,7 @@ These settings apply only when `--tag=package-2023-06-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-06-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
+- preview/2023-06-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2022-06
@@ -979,7 +979,7 @@ These settings apply only when `--tag=package-2022-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-06'
 input-file:
-  - Microsoft.EventGrid/stable/2022-06-15/EventGrid.json
+- stable/2022-06-15/EventGrid.json
 ```
 
 ### Tag: package-2021-10-preview
@@ -988,7 +988,7 @@ These settings apply only when `--tag=package-2021-10-preview` is specified on t
 
 ```yaml $(tag) == 'package-2021-10-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2021-10-15-preview/EventGrid.json
+- preview/2021-10-15-preview/EventGrid.json
 ```
 
 ### Tag: package-2021-12
@@ -997,7 +997,7 @@ These settings apply only when `--tag=package-2021-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-12'
 input-file:
-  - Microsoft.EventGrid/stable/2021-12-01/EventGrid.json
+- stable/2021-12-01/EventGrid.json
 ```
 
 ## Suppression
@@ -1015,7 +1015,7 @@ These settings apply only when `--tag=package-2021-06-preview` is specified on t
 
 ```yaml $(tag) == 'package-2021-06-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2021-06-01-preview/EventGrid.json
+- preview/2021-06-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2020-10-preview
@@ -1024,7 +1024,7 @@ These settings apply only when `--tag=package-2020-10-preview` is specified on t
 
 ```yaml $(tag) == 'package-2020-10-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2020-10-15-preview/EventGrid.json
+- preview/2020-10-15-preview/EventGrid.json
 ```
 
 ### Tag: package-2020-06
@@ -1033,7 +1033,7 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-06'
 input-file:
-  - Microsoft.EventGrid/stable/2020-06-01/EventGrid.json
+- stable/2020-06-01/EventGrid.json
 ```
 
 ### Tag: package-2020-04-preview
@@ -1042,7 +1042,7 @@ These settings apply only when `--tag=package-2020-04-preview` is specified on t
 
 ```yaml $(tag) == 'package-2020-04-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2020-04-01-preview/EventGrid.json
+- preview/2020-04-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2020-01-preview
@@ -1051,7 +1051,7 @@ These settings apply only when `--tag=package-2020-01-preview` is specified on t
 
 ```yaml $(tag) == 'package-2020-01-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2020-01-01-preview/EventGrid.json
+- preview/2020-01-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2019-06
@@ -1060,7 +1060,7 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2019-06'
 input-file:
-  - Microsoft.EventGrid/stable/2019-06-01/EventGrid.json
+- stable/2019-06-01/EventGrid.json
 ```
 
 ### Tag: package-2019-02-preview
@@ -1069,7 +1069,7 @@ These settings apply only when `--tag=package-2019-02-preview` is specified on t
 
 ```yaml $(tag) == 'package-2019-02-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2019-02-01-preview/EventGrid.json
+- preview/2019-02-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2019-01
@@ -1078,7 +1078,7 @@ These settings apply only when `--tag=package-2019-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2019-01'
 input-file:
-  - Microsoft.EventGrid/stable/2019-01-01/EventGrid.json
+- stable/2019-01-01/EventGrid.json
 ```
 
 ## Suppression
@@ -1096,7 +1096,7 @@ These settings apply only when `--tag=package-2018-09-preview` is specified on t
 
 ```yaml $(tag) == 'package-2018-09-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2018-09-15-preview/EventGrid.json
+- preview/2018-09-15-preview/EventGrid.json
 ```
 
 ## Suppression
@@ -1121,7 +1121,7 @@ These settings apply only when `--tag=package-2018-05-preview` is specified on t
 
 ```yaml $(tag) == 'package-2018-05-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2018-05-01-preview/EventGrid.json
+- preview/2018-05-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2018-01
@@ -1130,7 +1130,7 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-01'
 input-file:
-  - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- stable/2018-01-01/EventGrid.json
 ```
 
 ### Tag: package-2017-09-preview
@@ -1139,7 +1139,7 @@ These settings apply only when `--tag=package-2017-09-preview` is specified on t
 
 ```yaml $(tag) == 'package-2017-09-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2017-09-15-preview/EventGrid.json
+- preview/2017-09-15-preview/EventGrid.json
 ```
 
 ### Tag: package-2017-06-preview
@@ -1148,7 +1148,7 @@ These settings apply only when `--tag=package-2017-06-preview` is specified on t
 
 ```yaml $(tag) == 'package-2017-06-preview'
 input-file:
-  - Microsoft.EventGrid/preview/2017-06-15-preview/EventGrid.json
+- preview/2017-06-15-preview/EventGrid.json
 ```
 
 ---
