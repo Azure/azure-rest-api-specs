@@ -1195,7 +1195,7 @@ interface HealthModels {
 @armResourceOperations(SignalDefinition)
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SignalDefinition>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
   delete is ArmResourceDeleteSync<SignalDefinition>;
 
   listByHealthModel is ArmResourceListByParent<
@@ -1208,7 +1208,7 @@ interface SignalDefinitions {
 @armResourceOperations(AuthenticationSetting)
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<AuthenticationSetting>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
   delete is ArmResourceDeleteSync<AuthenticationSetting>;
 
   listByHealthModel is ArmResourceListByParent<AuthenticationSetting>;
@@ -1259,7 +1259,7 @@ interface Entities {
 @armResourceOperations(Relationship)
 interface Relationships {
   get is ArmResourceRead<Relationship>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Relationship>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
   delete is ArmResourceDeleteSync<Relationship>;
 
   listByHealthModel is ArmResourceListByParent<
@@ -1272,7 +1272,7 @@ interface Relationships {
 @armResourceOperations(DiscoveryRule)
 interface DiscoveryRules {
   get is ArmResourceRead<DiscoveryRule>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiscoveryRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
   delete is ArmResourceDeleteSync<DiscoveryRule>;
 
   listByHealthModel is ArmResourceListByParent<
