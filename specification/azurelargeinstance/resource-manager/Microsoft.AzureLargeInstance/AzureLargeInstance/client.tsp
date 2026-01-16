@@ -36,20 +36,44 @@ using Microsoft.AzureLargeInstance;
   "csharp"
 );
 @@clientName(Disk, "LargeInstanceDisk", "csharp");
+@@clientName(Disk.diskSizeGB, "DiskSizeInGB", "csharp");
 @@clientName(ForceState, "LargeInstanceForceState", "csharp");
 @@clientName(HardwareProfile, "LargeInstanceHardwareProfile", "csharp");
+@@clientName(HardwareProfile.azureLargeInstanceSize,
+  "LargeInstanceSize",
+  "csharp"
+);
 @@clientName(IpAddress, "LargeInstanceIPAddress", "csharp");
 @@clientName(NetworkProfile, "LargeInstanceNetworkProfile", "csharp");
 @@clientName(OsProfile, "LargeInstanceOSProfile", "csharp");
+@@clientName(OsProfile.osType, "OSType", "csharp");
 @@clientName(StorageBillingProperties,
   "LargeInstanceStorageBillingProperties",
   "csharp"
 );
 @@clientName(StorageProfile, "LargeInstanceStorageProfile", "csharp");
+@@clientName(StorageProfile.nfsIpAddress, "NfsIPAddress", "csharp");
+@@clientName(StorageProfile.osDisks, "OSDisk", "csharp");
 @@clientName(StorageProperties, "LargeInstanceStorageProperties", "csharp");
 @@clientName(ProvisioningState,
   "LargeStorageInstanceProvisioningState",
   "csharp"
 );
+@@clientName(AzureLargeStorageInstanceProperties,
+  "LargeStorageInstanceProperties",
+  "csharp"
+);
+@@clientName(AzureLargeInstanceProperties, "LargeInstanceProperties", "csharp");
+@@clientName(AzureLargeInstanceProperties.hwRevision,
+  "HardwareRevision",
+  "csharp"
+);
+@@clientName(AzureLargeInstanceProperties.azureLargeInstanceId,
+  "LargeInstanceId",
+  "csharp"
+);
+@@clientName(AzureLargeInstanceProperties.osProfile, "OSProfile", "csharp");
 @@clientName(AzureLargeStorageInstanceTagsUpdate.tags, "Tags", "csharp");
-@@clientName(ForceState.forceState, "ForceState ", "csharp");
+@@clientName(ForceState.forceState, "ForceState", "csharp");
+@@clientName(Tags.tags, "tagsValue", "csharp");
+@@clientName(IpAddress.ipAddress, "IPAddress", "csharp");

@@ -452,7 +452,6 @@ model NetworkProfile {
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
   @doc("Specifies the IP address of the network interface.")
-  @clientName("ipAddressValue", "csharp")
   ipAddress?: string;
 }
 
@@ -462,14 +461,12 @@ model IpAddress {
   """)
 model ForceState {
   @doc("Whether to force restart by shutting all processes.")
-  @clientName("forceStateValue", "csharp")
   forceState?: AzureLargeInstanceForcePowerState;
 }
 
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
-  @clientName("tagsValue", "csharp")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
 }
@@ -520,7 +517,6 @@ model StorageBillingProperties {
 @doc("The type used for updating tags in AzureLargeStorageInstance resources.")
 model AzureLargeStorageInstanceTagsUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
-  @clientName("tagsValue", "csharp")
   @doc("Resource tags.")
   tags?: Record<string>;
 
