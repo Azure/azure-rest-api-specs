@@ -121,6 +121,26 @@ union _AgentItemType {
   }
 );
 
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary union change"
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Union is intentional here"
+@@changePropertyType(OpenAI.ApplyPatchToolCall.created_by, CreatedBy | string);
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary union change"
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Union is intentional here"
+@@changePropertyType(OpenAI.ApplyPatchToolCallOutput.created_by,
+  CreatedBy | string
+);
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary union change"
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Union is intentional here"
+@@changePropertyType(OpenAI.FunctionShellCall.created_by, CreatedBy | string);
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary union change"
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Union is intentional here"
+@@changePropertyType(OpenAI.FunctionShellCallOutput.created_by,
+  CreatedBy | string
+);
+
 model CreatedBy {
   @doc("The agent that created the item.")
   agent?: AgentId;
