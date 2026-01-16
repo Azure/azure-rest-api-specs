@@ -83,10 +83,6 @@ suppressions:
     reason: 2024-05-01-preview is for internal testing only and recommended by API spec review office hours.
     from:
       - stackhcivm.json
-  - code: PostResponseCodes
-    reason: Long-running POST operations (start, stop, restart, pause, save, powerOff) follow existing pattern returning 202 for async acceptance, consistent with service implementation.
-    from:
-      - stackhcivm.json
 ```
 
 ### Tag: package-preview-2026-04-01-preview
