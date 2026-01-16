@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
 /**
  * Use these APIs to view extension type resources through ARM, for Kubernetes Clusters.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "ExtensionTypesClient" })
 @versioned(Versions)

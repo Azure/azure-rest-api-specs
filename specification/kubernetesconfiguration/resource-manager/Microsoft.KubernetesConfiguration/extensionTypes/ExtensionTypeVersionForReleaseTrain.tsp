@@ -61,15 +61,11 @@ interface ExtensionTypeVersionForReleaseTrains {
   /**
    * Get details of a version for an extension type and location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionTypes_GetVersion")
   getVersion is ExtensionTypeVersionForReleaseTrainOps.Read<ExtensionTypeVersionForReleaseTrain>;
 
   /**
    * List the versions for an extension type and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionTypes_ListVersions")
   listVersions is ExtensionTypeVersionForReleaseTrainOps.List<
     ExtensionTypeVersionForReleaseTrain,
     Parameters = {
@@ -151,15 +147,11 @@ interface ExtensionTypeVersionForReleaseTrainOperationGroup {
   /**
    * Get details of a version for an Extension Type installable to the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionTypes_ClusterGetVersion")
   clusterGetVersion is ExtensionTypeVersionForReleaseTrainOperationGroupOps.Read<ExtensionTypeVersionForReleaseTrain>;
 
   /**
    * List the version for an Extension Type installable to the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionTypes_ClusterListVersions")
   clusterListVersions is ExtensionTypeVersionForReleaseTrainOperationGroupOps.List<
     ExtensionTypeVersionForReleaseTrain,
     Parameters = {

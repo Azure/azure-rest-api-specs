@@ -123,7 +123,7 @@ interface FluxConfigurations {
    * Update an existing Kubernetes Flux Configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is FluxConfigurationOperationGroupOps.CustomPatchAsync<
     FluxConfiguration,
@@ -138,8 +138,8 @@ interface FluxConfigurations {
   /**
    * This will delete the YAML file used to set up the Flux Configuration, thus stopping future sync from the source repo.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is FluxConfigurationOperationGroupOps.DeleteWithoutOkAsync<
     FluxConfiguration,
     Parameters = {
@@ -164,8 +164,6 @@ interface FluxConfigurations {
   /**
    * Get Async Operation status
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FluxConfigOperationStatus_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/{fluxConfigurationName}/operations/{operationId}")
   fluxConfigOperationStatusGet is FluxConfigurationsBuildingOps.ActionSync<

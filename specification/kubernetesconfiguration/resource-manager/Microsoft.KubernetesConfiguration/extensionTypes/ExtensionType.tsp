@@ -139,15 +139,11 @@ interface ExtensionTypeOperationGroup {
   /**
    * Get an Extension Type installable to the cluster based region and type for the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionTypes_Get")
   get is ExtensionTypeOperationGroupOps.Read<ExtensionType>;
 
   /**
    * List installable Extension Types for the cluster based region and type for the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionTypes_List")
   list is ExtensionTypeOperationGroupOps.List<
     ExtensionType,
     Parameters = {

@@ -24,7 +24,7 @@ model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
   /**
    * Identity of the Extension resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.Identity;
 
   ...Azure.ResourceManager.ResourcePlanProperty;
@@ -130,7 +130,7 @@ interface Extensions {
    * Patch an existing Kubernetes Cluster Extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ExtensionOps.CustomPatchAsync<
     Extension,
@@ -146,8 +146,8 @@ interface Extensions {
   /**
    * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ExtensionOps.DeleteWithoutOkAsync<
     Extension,
     Parameters = {
@@ -169,8 +169,6 @@ interface Extensions {
   /**
    * Get Async Operation status
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationStatus_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}")
   operationStatusGet is ExtensionBuildingOps.ActionSync<

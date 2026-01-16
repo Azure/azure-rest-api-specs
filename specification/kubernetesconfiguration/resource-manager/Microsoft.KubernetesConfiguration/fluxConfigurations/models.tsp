@@ -260,15 +260,15 @@ model FluxConfigurationProperties {
   /**
    * Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kustomizations?: Record<KustomizationDefinition> | null;
 
   /**
    * Key-value pairs of protected configuration settings for the configuration
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   configurationProtectedSettings?: Record<string> | null;
 
@@ -282,21 +282,21 @@ model FluxConfigurationProperties {
   /**
    * Public Key associated with this fluxConfiguration (either generated within the cluster or provided by the user).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   repositoryPublicKey?: string | null;
 
   /**
    * Branch and/or SHA of the source commit synced with the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sourceSyncedCommitId?: string | null;
 
   /**
    * Datetime the fluxConfiguration synced its source on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   @visibility(Lifecycle.Read)
   sourceUpdatedAt?: utcDateTime | null;
@@ -304,7 +304,7 @@ model FluxConfigurationProperties {
   /**
    * Datetime the fluxConfiguration synced its status on the cluster with Azure.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   @visibility(Lifecycle.Read)
   statusUpdatedAt?: utcDateTime | null;
@@ -312,13 +312,13 @@ model FluxConfigurationProperties {
   /**
    * Whether flux configuration deployment should wait for cluster to reconcile the kustomizations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   waitForReconciliation?: boolean | null;
 
   /**
    * Maximum duration to wait for flux configuration reconciliation. E.g PT1H, PT5M, P1D
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reconciliationWaitDuration?: string | null;
 
   /**
@@ -336,7 +336,7 @@ model FluxConfigurationProperties {
   /**
    * Error message returned to the user in the case of provisioning failure.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorMessage?: string | null;
 }
@@ -348,19 +348,19 @@ model GitRepositoryDefinition {
   /**
    * The URL to sync for the flux configuration git repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: string | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster git repository source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster git repository source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
@@ -371,26 +371,26 @@ model GitRepositoryDefinition {
   /**
    * Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sshKnownHosts?: string | null;
 
   /**
    * Plaintext HTTPS username used to access private git repositories over HTTPS
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   httpsUser?: string | null;
 
   /**
    * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   httpsCACert?: string | null;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
 
   /**
@@ -406,25 +406,25 @@ model RepositoryRefDefinition {
   /**
    * The git repository branch name to checkout.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   branch?: string | null;
 
   /**
    * The git repository tag name to checkout. This takes precedence over branch.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tag?: string | null;
 
   /**
    * The semver range used to match against git repository tags. This takes precedence over tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   semver?: string | null;
 
   /**
    * The commit SHA to checkout. This value must be combined with the branch name to be valid. This takes precedence over semver.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   commit?: string | null;
 }
 
@@ -450,25 +450,25 @@ model BucketDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster bucket source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster bucket source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
    * Plaintext access key used to securely access the S3 bucket
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessKey?: string | null;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
 }
 
@@ -479,25 +479,25 @@ model AzureBlobDefinition {
   /**
    * The URL to sync for the flux configuration Azure Blob storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: string | null;
 
   /**
    * The Azure Blob container name to sync from the url endpoint for the flux configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName?: string | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster Azure Blob source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
@@ -508,14 +508,14 @@ model AzureBlobDefinition {
   /**
    * The account key (shared key) to access the storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   accountKey?: string | null;
 
   /**
    * The Shared Access token to access the storage container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   sasToken?: string | null;
 
@@ -527,7 +527,7 @@ model AzureBlobDefinition {
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
 }
 
@@ -538,33 +538,33 @@ model ServicePrincipalDefinition {
   /**
    * The client Id for authenticating a Service Principal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientId?: string | null;
 
   /**
    * The tenant Id for authenticating a Service Principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: string | null;
 
   /**
    * The client secret for authenticating a Service Principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientSecret?: string | null;
 
   /**
    * Base64-encoded certificate used to authenticate a Service Principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientCertificate?: string | null;
 
   /**
    * The password for the certificate used to authenticate a Service Principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientCertificatePassword?: string | null;
 
@@ -581,7 +581,7 @@ model ManagedIdentityDefinition {
   /**
    * The client Id for authenticating a Managed Identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientId?: string | null;
 }
 
@@ -593,19 +593,19 @@ model OCIRepositoryDefinition {
   /**
    * The URL to sync for the flux configuration OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: url | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster OCI repository source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster OCI repository source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
@@ -636,7 +636,7 @@ model OCIRepositoryDefinition {
   /**
    * The service account name to authenticate with the OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceAccountName?: string | null;
 
   /**
@@ -647,7 +647,7 @@ model OCIRepositoryDefinition {
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
 }
 
@@ -659,19 +659,19 @@ model OCIRepositoryRefDefinition {
   /**
    * The OCI repository image tag name to pull. This defaults to 'latest'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tag?: string | null;
 
   /**
    * The semver range used to match against OCI repository tags. This takes precedence over tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   semver?: string | null;
 
   /**
    * The image digest to pull from OCI repository, the value should be in the format ‘sha256:’. This takes precedence over semver.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   digest?: string | null;
 }
 
@@ -682,13 +682,13 @@ model LayerSelectorDefinition {
   /**
    * The first layer matching the specified media type will be used.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   mediaType?: string | null;
 
   /**
    * The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   operation?: OperationType | null;
 }
 
@@ -704,7 +704,7 @@ model VerifyDefinition {
   /**
    * An object containing trusted public keys of trusted authors.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   verificationConfig?: Record<string>;
 
   /**
@@ -736,21 +736,21 @@ model TlsConfigDefinition {
   /**
    * Base64-encoded certificate used to authenticate a client with the OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientCertificate?: string | null;
 
   /**
    * Base64-encoded private key used to authenticate a client with the OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   privateKey?: string | null;
 
   /**
    * Base64-encoded CA certificate used to verify the server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   caCertificate?: string | null;
 }
@@ -773,25 +773,25 @@ model KustomizationDefinition {
   /**
    * Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dependsOn?: string[] | null;
 
   /**
    * The maximum time to attempt to reconcile the Kustomization on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   retryIntervalInSeconds?: int64 | null;
 
   /**
@@ -812,7 +812,7 @@ model KustomizationDefinition {
   /**
    * Used for variable substitution for this Kustomization after kustomize build.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   postBuild?: PostBuildDefinition | null;
 }
 
@@ -823,8 +823,8 @@ model PostBuildDefinition {
   /**
    * Key/value pairs holding the variables to be substituted in this Kustomization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   substitute?: Record<string> | null;
 
   /**
@@ -881,7 +881,7 @@ model ObjectStatusDefinition {
   /**
    * Object reference to the Kustomization that applied this object
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   appliedBy?: ObjectReferenceDefinition | null;
 
   /**
@@ -949,7 +949,7 @@ model HelmReleasePropertiesDefinition {
   /**
    * The revision number of the last released object change
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lastRevisionApplied?: int64 | null;
 
   /**
@@ -960,19 +960,19 @@ model HelmReleasePropertiesDefinition {
   /**
    * Total number of times that the HelmRelease failed to install or upgrade
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   failureCount?: int64 | null;
 
   /**
    * Number of times that the HelmRelease failed to install
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   installFailureCount?: int64 | null;
 
   /**
    * Number of times that the HelmRelease failed to upgrade
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   upgradeFailureCount?: int64 | null;
 }
 
@@ -1023,13 +1023,13 @@ model FluxConfigurationPatchProperties {
   /**
    * Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kustomizations?: Record<KustomizationPatchDefinition>;
 
   /**
    * Key-value pairs of protected configuration settings for the configuration
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   configurationProtectedSettings?: Record<string>;
 }
 
@@ -1040,19 +1040,19 @@ model GitRepositoryPatchDefinition {
   /**
    * The URL to sync for the flux configuration git repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: string | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster git repository source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the cluster git repository source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null;
 
   /**
@@ -1063,32 +1063,32 @@ model GitRepositoryPatchDefinition {
   /**
    * Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sshKnownHosts?: string | null;
 
   /**
    * Plaintext HTTPS username used to access private git repositories over HTTPS
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   httpsUser?: string | null;
 
   /**
    * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   httpsCACert?: string | null;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
 
   /**
    * Name of the provider used for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provider?: ProviderType | null;
 }
 
@@ -1099,43 +1099,43 @@ model BucketPatchDefinition {
   /**
    * The URL to sync for the flux configuration S3 bucket.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: string | null;
 
   /**
    * The bucket name to sync from the url endpoint for the flux configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bucketName?: string | null;
 
   /**
    * Specify whether to use insecure communication when puling data from the S3 bucket.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   insecure?: boolean | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster bucket source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the cluster bucket source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null;
 
   /**
    * Plaintext access key used to securely access the S3 bucket
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accessKey?: string | null;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
 }
 
@@ -1146,25 +1146,25 @@ model AzureBlobPatchDefinition {
   /**
    * The URL to sync for the flux configuration Azure Blob storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: string | null;
 
   /**
    * The Azure Blob container name to sync from the url endpoint for the flux configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName?: string | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the cluster Azure Blob source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null;
 
   /**
@@ -1175,14 +1175,14 @@ model AzureBlobPatchDefinition {
   /**
    * The account key (shared key) to access the storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   accountKey?: string | null;
 
   /**
    * The Shared Access token to access the storage container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   sasToken?: string | null;
 
@@ -1194,7 +1194,7 @@ model AzureBlobPatchDefinition {
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
 }
 
@@ -1205,33 +1205,33 @@ model ServicePrincipalPatchDefinition {
   /**
    * The client Id for authenticating a Service Principal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientId?: string | null;
 
   /**
    * The tenant Id for authenticating a Service Principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: string | null;
 
   /**
    * The client secret for authenticating a Service Principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientSecret?: string | null;
 
   /**
    * Base64-encoded certificate used to authenticate a Service Principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientCertificate?: string;
 
   /**
    * The password for the certificate used to authenticate a Service Principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientCertificatePassword?: string | null;
 
@@ -1248,7 +1248,7 @@ model ManagedIdentityPatchDefinition {
   /**
    * The client Id for authenticating a Managed Identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientId?: string | null;
 }
 
@@ -1260,19 +1260,19 @@ model OCIRepositoryPatchDefinition {
   /**
    * The URL to sync for the flux configuration OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   url?: url | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster OCI repository source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the cluster OCI repository source with the remote.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null;
 
   /**
@@ -1293,19 +1293,19 @@ model OCIRepositoryPatchDefinition {
   /**
    * Specify whether to allow connecting to a non-TLS HTTP container registry.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   insecure?: boolean = false;
 
   /**
    * Specifies whether to use Workload Identity to authenticate with the OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   useWorkloadIdentity?: boolean = false;
 
   /**
    * The service account name to authenticate with the OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceAccountName?: string | null;
 
   /**
@@ -1316,7 +1316,7 @@ model OCIRepositoryPatchDefinition {
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localAuthRef?: string | null;
 }
 
@@ -1328,19 +1328,19 @@ model OCIRepositoryRefPatchDefinition {
   /**
    * The OCI repository image tag name to pull. This defaults to 'latest'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tag?: string | null;
 
   /**
    * The semver range used to match against OCI repository tags. This takes precedence over tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   semver?: string | null;
 
   /**
    * The image digest to pull from OCI repository, the value should be in the format ‘sha256:’. This takes precedence over semver.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   digest?: string | null;
 }
 
@@ -1351,13 +1351,13 @@ model LayerSelectorPatchDefinition {
   /**
    * The first layer matching the specified media type will be used.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   mediaType?: string | null;
 
   /**
    * The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   operation?: OperationType | null;
 }
 
@@ -1373,7 +1373,7 @@ model VerifyPatchDefinition {
   /**
    * An object containing trusted public keys of trusted authors.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   verificationConfig?: Record<string>;
 
   /**
@@ -1405,21 +1405,21 @@ model TlsConfigPatchDefinition {
   /**
    * Base64-encoded certificate used to authenticate a client with the OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   clientCertificate?: string | null;
 
   /**
    * Base64-encoded private key used to authenticate a client with the OCI repository.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   privateKey?: string | null;
 
   /**
    * Base64-encoded CA certificate used to verify the server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   caCertificate?: string | null;
 }
@@ -1431,56 +1431,56 @@ model KustomizationPatchDefinition {
   /**
    * The path in the source reference to reconcile on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   path?: string | null;
 
   /**
    * Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dependsOn?: string[] | null;
 
   /**
    * The maximum time to attempt to reconcile the Kustomization on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   syncIntervalInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   retryIntervalInSeconds?: int64 | null;
 
   /**
    * Enable/disable garbage collections of Kubernetes objects created by this Kustomization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   prune?: boolean | null;
 
   /**
    * Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   force?: boolean | null;
 
   /**
    * Enable/disable health check for all Kubernetes objects created by this Kustomization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   wait?: boolean | null;
 
   /**
    * Used for variable substitution for this Kustomization after kustomize build.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   postBuild?: PostBuildPatchDefinition | null;
 }
 
@@ -1491,7 +1491,7 @@ model PostBuildPatchDefinition {
   /**
    * Key/value pairs holding the variables to be substituted in this Kustomization.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   substitute?: Record<string>;
 
   /**
@@ -1548,7 +1548,7 @@ model OperationStatusResult {
   /**
    * Additional information, if available.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<string>;
 
   /**

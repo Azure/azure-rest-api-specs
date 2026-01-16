@@ -42,7 +42,7 @@ alias OperationStatusOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionO
     clusterName: string;
   },
   {
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @key
     @segment("providers")
@@ -51,13 +51,11 @@ alias OperationStatusOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionO
   {}
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusOperationGroup {
   /**
    * List Async Operations, currently in progress, in a cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationStatus_List")
   @autoRoute
   @get
   @action("operations")

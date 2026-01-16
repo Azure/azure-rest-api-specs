@@ -15,8 +15,8 @@ namespace Microsoft.KubernetesConfiguration;
  */
 model ExtensionTypesList is Azure.Core.Page<ExtensionType>;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExtensionTypeProperties {
   /**
    * Is this Extension Type a system extension.
@@ -92,7 +92,7 @@ model ExtensionTypePropertiesSupportedScopes {
 /**
  * Extension scope settings
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterScopeSettings
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -122,8 +122,8 @@ model ClusterScopeSettingsProperties {
 model ExtensionTypeVersionsList
   is Azure.Core.Page<ExtensionTypeVersionForReleaseTrain>;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExtensionTypeVersionForReleaseTrainProperties {
   /**
    * The version number for the extension type
@@ -145,19 +145,19 @@ model ExtensionTypeVersionForReleaseTrainProperties {
  * The list of supported Kubernetes cluster versions for this extension type
  */
 model ExtensionTypeVersionForReleaseTrainPropertiesUnsupportedKubernetesVersions {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   connectedCluster?: ExtensionTypeVersionUnsupportedKubernetesMatrixItem[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   appliances?: ExtensionTypeVersionUnsupportedKubernetesMatrixItem[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   provisionedCluster?: ExtensionTypeVersionUnsupportedKubernetesMatrixItem[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   managedCluster?: ExtensionTypeVersionUnsupportedKubernetesMatrixItem[];
 }
