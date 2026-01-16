@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { MapCache, MapCache2, ObjectCache, ObjectCache2 } from "../src/cache.js";
+import { KeyedCache, KeyedCache2, StringKeyCache, StringKeyCache2 } from "../src/cache.js";
 
-describe("MemoryCache", () => {
+describe("KeyedCache", () => {
   it("createAndGetSync", () => {
-    /** @type {MapCache<number, string>} */
-    const cache = new MapCache();
+    /** @type {KeyedCache<number, string>} */
+    const cache = new KeyedCache();
 
     let createdCount = 0;
     const getOrCreate = () =>
@@ -20,8 +20,8 @@ describe("MemoryCache", () => {
   });
 
   it("createAndGetAsync", async () => {
-    /** @type {MapCache<number, Promise<string>>} */
-    const cache = new MapCache();
+    /** @type {KeyedCache<number, Promise<string>>} */
+    const cache = new KeyedCache();
 
     let createdCount = 0;
     const getOrCreate = () =>
@@ -38,10 +38,10 @@ describe("MemoryCache", () => {
   });
 });
 
-describe("MemoryCache2", () => {
+describe("KeyedCache2", () => {
   it("createAndGetSync", () => {
-    /** @type {MapCache2<number, number, string>} */
-    const cache = new MapCache2();
+    /** @type {KeyedCache2<number, number, string>} */
+    const cache = new KeyedCache2();
 
     let createdCount = 0;
     const getOrCreate = () =>
@@ -57,8 +57,8 @@ describe("MemoryCache2", () => {
   });
 
   it("createAndGetAsync", async () => {
-    /** @type {MapCache2<number, number, Promise<string>>} */
-    const cache = new MapCache2();
+    /** @type {KeyedCache2<number, number, Promise<string>>} */
+    const cache = new KeyedCache2();
 
     let createdCount = 0;
     const getOrCreate = () =>
@@ -75,8 +75,8 @@ describe("MemoryCache2", () => {
   });
 
   it("keys are ordered", () => {
-    /** @type {MapCache2<string, string, string>} */
-    const cache = new MapCache2();
+    /** @type {KeyedCache2<string, string, string>} */
+    const cache = new KeyedCache2();
 
     const getOrCreateFooBar = () => cache.getOrCreate(42, 7, () => "42-7");
     const getOrCreateBarFoo = () => cache.getOrCreate(7, 42, () => "7-42");
@@ -88,10 +88,10 @@ describe("MemoryCache2", () => {
   });
 });
 
-describe("ObjectCache", () => {
+describe("StringKeyCache", () => {
   it("createAndGetSync", () => {
-    /** @type {ObjectCache<string>} */
-    const cache = new ObjectCache();
+    /** @type {StringKeyCache<string>} */
+    const cache = new StringKeyCache();
 
     let createdCount = 0;
     const getOrCreate = () =>
@@ -107,8 +107,8 @@ describe("ObjectCache", () => {
   });
 
   it("createAndGetAsync", async () => {
-    /** @type {ObjectCache<Promise<string>>} */
-    const cache = new ObjectCache();
+    /** @type {StringKeyCache<Promise<string>>} */
+    const cache = new StringKeyCache();
 
     let createdCount = 0;
     const getOrCreate = () =>
@@ -125,10 +125,10 @@ describe("ObjectCache", () => {
   });
 });
 
-describe("ObjectCache2", () => {
+describe("StringKeyCache2", () => {
   it("createAndGetSync", () => {
-    /** @type {ObjectCache2<string>} */
-    const cache = new ObjectCache2();
+    /** @type {StringKeyCache2<string>} */
+    const cache = new StringKeyCache2();
 
     let createdCount = 0;
     const getOrCreate = () =>
@@ -144,8 +144,8 @@ describe("ObjectCache2", () => {
   });
 
   it("createAndGetAsync", async () => {
-    /** @type {ObjectCache2<Promise<string>>} */
-    const cache = new ObjectCache2();
+    /** @type {StringKeyCache2<Promise<string>>} */
+    const cache = new StringKeyCache2();
 
     let createdCount = 0;
     const getOrCreate = () =>
@@ -162,8 +162,8 @@ describe("ObjectCache2", () => {
   });
 
   it("keys are ordered", () => {
-    /** @type {ObjectCache2<string>} */
-    const cache = new ObjectCache2();
+    /** @type {StringKeyCache2<string>} */
+    const cache = new StringKeyCache2();
 
     const getOrCreateFooBar = () => cache.getOrCreate("foo", "bar", () => "foo-bar");
     const getOrCreateBarFoo = () => cache.getOrCreate("bar", "foo", () => "bar-foo");
