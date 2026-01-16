@@ -74,3 +74,31 @@ interface ApplicationTypeVersionResources {
 @@doc(ApplicationTypeVersionResources.createOrUpdate::parameters.resource,
   "The application type version resource."
 );
+
+/**
+ * The properties of the application type version resource.
+ */
+model ApplicationTypeVersionResourceProperties {
+  /**
+   * The current deployment or provisioning state, which only appears in the response
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The URL to the application package
+   */
+  appPackageUrl: string;
+
+  /**
+   * List of application type parameters that can be overridden when creating or updating the application.
+   */
+  @visibility(Lifecycle.Read)
+  defaultParameterList?: Record<string>;
+}
+
+/**
+ * The list of application type version resources for the specified application type name resource.
+ */
+model ApplicationTypeVersionResourceList
+  is Azure.Core.Page<ApplicationTypeVersionResource>;

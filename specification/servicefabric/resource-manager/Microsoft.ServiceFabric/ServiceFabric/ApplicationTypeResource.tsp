@@ -72,3 +72,19 @@ interface ApplicationTypeResources {
 @@doc(ApplicationTypeResources.createOrUpdate::parameters.resource,
   "The application type name resource."
 );
+
+/**
+ * The application type name properties
+ */
+model ApplicationTypeResourceProperties {
+  /**
+   * The current deployment or provisioning state, which only appears in the response.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+}
+
+/**
+ * The list of application type names.
+ */
+model ApplicationTypeResourceList is Azure.Core.Page<ApplicationTypeResource>;
