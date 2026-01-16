@@ -18,3 +18,4 @@ using Microsoft.KubernetesConfiguration;
 @@clientName(FluxConfigurations.fluxConfigOperationStatusGet, "Get");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FluxConfiguration.properties);
+@@visibility(FluxConfigurationsList.value, Lifecycle.Read);

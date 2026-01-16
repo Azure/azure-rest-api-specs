@@ -1132,7 +1132,8 @@
           "description": "The FluxConfiguration items on this page",
           "items": {
             "$ref": "#/definitions/FluxConfiguration"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -1193,7 +1194,8 @@
         },
         "provider": {
           "$ref": "#/definitions/ProviderType",
-          "description": "Name of the provider used for authentication."
+          "description": "Name of the provider used for authentication.",
+          "x-nullable": true
         }
       }
     },
@@ -1887,6 +1889,7 @@
         "substitute": {
           "type": "object",
           "description": "Key/value pairs holding the variables to be substituted in this Kustomization.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -2250,6 +2253,7 @@
         "verificationConfig": {
           "type": "object",
           "description": "An object containing trusted public keys of trusted authors.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -2257,10 +2261,10 @@
         "matchOidcIdentity": {
           "type": "array",
           "description": "Array defining the criteria for matching the identity while verifying an OCI artifact.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MatchOidcIdentityDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2275,6 +2279,7 @@
         "verificationConfig": {
           "type": "object",
           "description": "An object containing trusted public keys of trusted authors.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -2282,10 +2287,10 @@
         "matchOidcIdentity": {
           "type": "array",
           "description": "Array defining the criteria for matching the OIDC identity while verifying an OCI artifact.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MatchOidcIdentityPatchDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     }

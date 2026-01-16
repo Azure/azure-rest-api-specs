@@ -396,7 +396,8 @@ model GitRepositoryDefinition {
   /**
    * Name of the provider used for authentication.
    */
-  provider?: ProviderType;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  provider?: ProviderType | null;
 }
 
 /**
@@ -704,14 +705,15 @@ model VerifyDefinition {
   /**
    * An object containing trusted public keys of trusted authors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  verificationConfig?: Record<string>;
+  verificationConfig?: Record<string> | null;
 
   /**
    * Array defining the criteria for matching the identity while verifying an OCI artifact.
    */
-  @identifiers(#[])
-  matchOidcIdentity?: MatchOidcIdentityDefinition[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  matchOidcIdentity?: MatchOidcIdentityDefinition[] | null;
 }
 
 /**
@@ -1373,14 +1375,15 @@ model VerifyPatchDefinition {
   /**
    * An object containing trusted public keys of trusted authors.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  verificationConfig?: Record<string>;
+  verificationConfig?: Record<string> | null;
 
   /**
    * Array defining the criteria for matching the OIDC identity while verifying an OCI artifact.
    */
-  @identifiers(#[])
-  matchOidcIdentity?: MatchOidcIdentityPatchDefinition[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  matchOidcIdentity?: MatchOidcIdentityPatchDefinition[] | null;
 }
 
 /**
@@ -1491,8 +1494,9 @@ model PostBuildPatchDefinition {
   /**
    * Key/value pairs holding the variables to be substituted in this Kustomization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  substitute?: Record<string>;
+  substitute?: Record<string> | null;
 
   /**
    * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
