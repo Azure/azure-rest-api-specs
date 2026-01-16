@@ -103,6 +103,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get EventHub config": {
+            "$ref": "./examples/EventHubConfigurationOperations_GetEventHubConfiguration.json"
+          }
         }
       },
       "put": {
@@ -143,6 +148,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or replace EventHub configuration": {
+            "$ref": "./examples/EventHubConfigurationOperations_CreateOrReplaceEventHubConfiguration.json"
+          }
         }
       },
       "delete": {
@@ -171,6 +181,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete EventHub config": {
+            "$ref": "./examples/EventHubConfigurationOperations_DeleteEventHubConfiguration.json"
           }
         }
       }
@@ -202,6 +217,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Send EventHub ping event": {
+            "$ref": "./examples/EventHubConfigurationOperations_PingEventHub.json"
           }
         }
       }
@@ -247,6 +267,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/OperationOperations_GetOperation.json"
+          }
         }
       }
     },
@@ -289,6 +314,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List translations": {
+            "$ref": "./examples/TranslationOperations_ListTranslation.json"
           }
         },
         "x-ms-pageable": {
@@ -336,6 +366,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Translation": {
+            "$ref": "./examples/TranslationOperations_GetTranslation.json"
           }
         }
       },
@@ -412,6 +447,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Translation": {
+            "$ref": "./examples/TranslationOperations_CreateTranslation.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
@@ -453,6 +493,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Translation": {
+            "$ref": "./examples/TranslationOperations_DeleteTranslation.json"
           }
         }
       }
@@ -506,6 +551,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Iteration": {
+            "$ref": "./examples/IterationOperations_ListIteration.json"
           }
         },
         "x-ms-pageable": {
@@ -563,6 +613,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Iteration": {
+            "$ref": "./examples/IterationOperations_GetIteration.json"
           }
         }
       },
@@ -647,6 +702,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create Iteration": {
+            "$ref": "./examples/IterationOperations_CreateIteration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1135,7 +1195,8 @@
         },
         "properties": {
           "$ref": "#/definitions/TranslationProperties",
-          "description": "Translation properties."
+          "description": "Translation properties.",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -1241,7 +1302,8 @@
         "timeToLiveInHours": {
           "type": "integer",
           "format": "int32",
-          "description": "Time to live in hours for the translation data. After the specified hours, the data will be deleted automatically."
+          "description": "Time to live in hours for the translation data. After the specified hours, the data will be deleted automatically.",
+          "readOnly": true
         }
       }
     },
