@@ -65,6 +65,12 @@ using Microsoft.Advisor;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TriageResource.properties);
 
+// Rename resourceType property to avoid conflict with inherited ResourceType from ResourceData
+@@clientName(TriageResourceProperties.resourceType,
+  "TriageResourceType",
+  "csharp"
+);
+
 @@scope(ResourceRecommendationBases.list, "!csharp");
 
 @@clientName(Microsoft.Advisor, "AdvisorManagementClient", "javascript,python");
@@ -133,12 +139,12 @@ using Microsoft.Advisor;
 @@clientName(PredictionRequest, "AdvisorPredictionContent", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(ConfigurationsOperationGroup.listBySubscription,
-  "GetAdvisorConfigurations",
+  "GetAdvisorConfigurationsBySubscription",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(ConfigurationsOperationGroup.listByResourceGroup,
-  "GetAdvisorConfigurations",
+  "GetAdvisorConfigurationsByResourceGroup",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
