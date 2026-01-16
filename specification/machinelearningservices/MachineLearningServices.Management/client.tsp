@@ -18,4 +18,9 @@ using Microsoft.MachineLearningServices;
 @@clientName(UserAccountCredentials.adminUserName, "adminUsername", "java");
 @@clientName(ComputeInstanceSshSettings.adminUserName, "adminUsername", "java");
 
+// Java casing fixes for FQDN-related types
 @@clientName(ExternalFQDNResponse, "ExternalFqdnResponse", "java");
+@@clientName(FqdnEndpointsPropertyBag, "FqdnEndpointsPropertyBag", "java");
+@@clientName(FqdnEndpoints, "FqdnEndpoints", "java");
+@@clientName(FqdnEndpoint, "FqdnEndpoint", "java");
+@@clientName(FqdnEndpointDetail, "FqdnEndpointDetail", "java");
