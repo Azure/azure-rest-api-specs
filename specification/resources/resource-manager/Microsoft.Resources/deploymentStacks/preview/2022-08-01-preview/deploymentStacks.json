@@ -1050,6 +1050,10 @@
       "type": "object",
       "description": "Deployment stack properties.",
       "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The error detail."
+        },
         "template": {
           "type": "object",
           "description": "The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.",
@@ -1156,11 +1160,6 @@
       "required": [
         "actionOnUnmanage",
         "denySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentStacksError"
-        }
       ]
     },
     "DeploymentStackProvisioningState": {
@@ -1289,16 +1288,6 @@
             "description": "Keep the specified resources in Azure"
           }
         ]
-      }
-    },
-    "DeploymentStacksError": {
-      "type": "object",
-      "description": "Deployment Stacks error response.",
-      "properties": {
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The error detail."
-        }
       }
     },
     "DeploymentStacksParametersLink": {
