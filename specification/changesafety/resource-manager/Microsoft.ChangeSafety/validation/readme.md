@@ -68,8 +68,8 @@ directive:
     from: validation.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
     where: 
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations/{validationName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"].put
   - suppress: PathForTrackedResourceTypes
     from: validation.json
     reason: Validation supports subscription-level operations but includes location for MSI; not tracked resource.
