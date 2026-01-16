@@ -130,3 +130,5 @@ export class StringKeyPairCache {
     return cache2.getOrCreate(key2, factory);
   }
 }
+
+// TODO: Compare perf of StringKeyPairCache, with an implementation that directly wraps object, not StringKeyCache
