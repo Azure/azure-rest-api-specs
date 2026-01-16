@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -119,6 +120,39 @@ union CreatedByType {
 }
 
 /**
+ * Status of Direct Connect Escalation.
+ */
+@added(Versions.v2025_06_01_preview)
+union EscalationStatus {
+  string,
+
+  /**
+   * Escalation is available and uninitiated
+   */
+  EscalationAvailable: "EscalationAvailable",
+
+  /**
+   * Escalation is unavailable and has been initiated
+   */
+  EscalationInitiated: "EscalationInitiated",
+
+  /**
+   * Escalation is unavailable and has finished processing after being initiated
+   */
+  EscalationProcessed: "EscalationProcessed",
+
+  /**
+   * Escalation is unavailable and cannot be initiated due to direct escalation being unsupported on this product or topic
+   */
+  EscalationUnsupported: "EscalationUnsupported",
+
+  /**
+   * Escalation is unavailable and cannot be initiated due to customer not being enrolled to direct escalation
+   */
+  EscalationUnavailable: "EscalationUnavailable",
+}
+
+/**
  * The type of resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
@@ -203,6 +237,143 @@ model ServiceProperties {
    * ARM Resource types.
    */
   resourceTypes?: string[];
+}
+
+/**
+ * Input to problem classification Classification API.
+ */
+@added(Versions.v2025_06_01_preview)
+model ServiceClassificationRequest {
+  /**
+   * Natural language description of the customer’s issue.
+   */
+  issueSummary?: string;
+
+  /**
+   * ARM resource Id of the resource that is having the issue.
+   */
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Additional information in the form of a string.
+   */
+  additionalContext?: string;
+}
+
+/**
+ * Output of the service classification API.
+ */
+@added(Versions.v2025_06_01_preview)
+model ServiceClassificationOutput {
+  /**
+   * Set of problem classification objects classified.
+   */
+  @identifiers(#[])
+  serviceClassificationResults?: ServiceClassificationAnswer[];
+}
+
+/**
+ * Service Classification result object.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_06_01_preview)
+model ServiceClassificationAnswer extends ClassificationService {
+  /**
+   * Child service.
+   */
+  childService?: ClassificationService;
+}
+
+/**
+ * Service Classification result object.
+ */
+@added(Versions.v2025_06_01_preview)
+model ClassificationService {
+  /**
+   * Azure resource Id of the service.
+   */
+  @visibility(Lifecycle.Read)
+  serviceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Localized name of the azure service.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * List of applicable ARM resource types for this service.
+   */
+  resourceTypes?: string[];
+}
+
+/**
+ * Input to problem classification Classification API.
+ */
+model ProblemClassificationsClassificationInput {
+  /**
+   * Natural language description of the customer’s issue.
+   */
+  issueSummary: string;
+
+  /**
+   * ARM resource Id of the resource that is having the issue.
+   */
+  resourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Output of the problem classification Classification API.
+ */
+model ProblemClassificationsClassificationOutput {
+  /**
+   * Set of problem classification objects classified.
+   */
+  @identifiers(#[])
+  problemClassificationResults?: ProblemClassificationsClassificationResult[];
+}
+
+/**
+ * ProblemClassification Classification result object.
+ */
+model ProblemClassificationsClassificationResult {
+  /**
+   * Identifier that may be used for solution discovery or some other purposes.
+   */
+  @visibility(Lifecycle.Read)
+  problemId?: string;
+
+  /**
+   * Title of the problem classification result.
+   */
+  @visibility(Lifecycle.Read)
+  title?: string;
+
+  /**
+   * Description of the problem classification result.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /**
+   * Identifier of the service associated with this problem classification result.
+   */
+  @visibility(Lifecycle.Read)
+  serviceId?: string;
+
+  /**
+   * Identifier that may be used for support ticket creation.
+   */
+  @visibility(Lifecycle.Read)
+  problemClassificationId?: string;
+
+  /**
+   * Related service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  @OpenAPI.extension("x-ms-client-flatten", true)
+  @added(Versions.v2025_06_01_preview)
+  relatedService?: ClassificationService;
 }
 
 /**
@@ -443,6 +614,18 @@ model SupportTicketDetailsProperties {
    */
   @identifiers(#[])
   secondaryConsent?: SecondaryConsent[];
+
+  /**
+   * Direct Connect Escalation details for a support ticket.
+   */
+  @added(Versions.v2025_06_01_preview)
+  directConnectEscalation?: DirectConnectEscalation;
+
+  /**
+   * Contains a link to the post on the community forum.
+   */
+  @added(Versions.v2025_06_01_preview)
+  communityForumPost?: string;
 }
 
 /**
@@ -621,6 +804,12 @@ model UpdateSupportTicket {
    */
   @identifiers(#[])
   secondaryConsent?: SecondaryConsent[];
+
+  /**
+   * Direct Connect Escalation details for a support ticket.
+   */
+  @added(Versions.v2025_06_01_preview)
+  directConnectEscalation?: DirectConnectEscalation;
 }
 
 /**
@@ -827,4 +1016,58 @@ model UploadFile {
    * Index of the uploaded chunk (Index starts at 0)
    */
   chunkIndex?: int32;
+}
+
+/**
+ * Direct Connect Escalation details for a support ticket.
+ */
+@added(Versions.v2025_06_01_preview)
+model DirectConnectEscalation {
+  /**
+   * Status of Direct Connect Escalation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "azureEEStatus should not be converted to camel case because 'EE' is an abbreviation for 'Escalate to Engineering'."
+  azureEEStatus?: EscalationStatus;
+
+  /**
+   * An array containing the allowed severities for direct connect escalation.
+   */
+  allowedSeverities?: SeverityLevel[];
+
+  /**
+   * Reason for escalation / business impact.
+   */
+  reasonForEscalation?: string;
+}
+
+/**
+ * The look up resource Id request body
+ */
+@added(Versions.v2025_06_01_preview)
+model LookUpResourceIdRequest {
+  /**
+   * The System generated Id that is unique. Use supportTicketId property for Microsoft.Support/supportTickets resource type.
+   */
+  identifier?: string;
+
+  /**
+   * The type of resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  @OpenAPI.extension(
+    "x-ms-enum",
+    #{ name: "ResourceType", modelAsString: false }
+  )
+  type?: "Microsoft.Support/supportTickets";
+}
+
+/**
+ * The look up resource id response
+ */
+@added(Versions.v2025_06_01_preview)
+model LookUpResourceIdResponse {
+  /**
+   * The resource Id of support resource type.
+   */
+  resourceId?: string;
 }
