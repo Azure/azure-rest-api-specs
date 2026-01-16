@@ -354,11 +354,13 @@ model GitRepositoryDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster git repository source with the remote.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster git repository source with the remote.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
@@ -448,11 +450,13 @@ model BucketDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster bucket source with the remote.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster bucket source with the remote.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
@@ -487,11 +491,13 @@ model AzureBlobDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster Azure Blob source with the remote.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
@@ -593,11 +599,13 @@ model OCIRepositoryDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster OCI repository source with the remote.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster OCI repository source with the remote.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
@@ -771,11 +779,13 @@ model KustomizationDefinition {
   /**
    * The maximum time to attempt to reconcile the Kustomization on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   syncIntervalInSeconds?: int64 | null = 600;
 
   /**
