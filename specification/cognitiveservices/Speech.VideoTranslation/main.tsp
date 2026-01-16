@@ -328,6 +328,7 @@ model IterationInput {
 @doc("Translation properties.")
 model TranslationProperties {
   @doc("Time to live in hours for the translation data. After the specified hours, the data will be deleted automatically.")
+  @visibility(Lifecycle.Read)
   timeToLiveInHours?: int32;
 }
 
@@ -375,6 +376,7 @@ model Translation {
 
   @added(ApiVersions.v2026_03_01)
   @doc("Translation properties.")
+  @visibility(Lifecycle.Read)
   properties?: TranslationProperties;
 
   @doc("Translation display name.")
