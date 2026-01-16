@@ -53,6 +53,26 @@ using Microsoft.MachineLearningServices;
   "java"
 );
 
+@@clientName(PublicNetworkAccessType, "PublicNetworkAccess", "java");
+@@clientName(EndpointServiceConnectionStatus,
+  "PrivateEndpointServiceConnectionStatus",
+  "java"
+);
+@@clientName(ListWorkspaceKeysResult.userStorageArmId,
+  "userStorageResourceId",
+  "java"
+);
+@@clientName(ServerlessComputeSettings.serverlessComputeNoPublicIP,
+  "serverlessComputeNoPublicIp",
+  "java"
+);
+@@alternateType(PipelineJob.settings, unknown, "java");
+@@alternateType(SweepJob.searchSpace, unknown, "java");
+@@alternateType(EndpointScheduleAction.endpointInvocationDefinition,
+  unknown,
+  "java"
+);
+
 @@clientName(Microsoft.MachineLearningServices,
   "MachineLearningServicesMgmtClient",
   "python"
