@@ -23,7 +23,7 @@ model SerialPort is Azure.ResourceManager.ProxyResource<SerialPortProperties> {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ParentResourceParameters {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
@@ -49,7 +49,7 @@ model ParentResourceParameters {
   parentResource: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SerialPorts {
   /**
