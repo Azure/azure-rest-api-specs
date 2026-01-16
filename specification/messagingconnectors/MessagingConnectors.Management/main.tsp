@@ -19,9 +19,9 @@ namespace Microsoft.MessagingConnectors;
 
 @doc("Microsoft.MessagingConnectors api versions.")
 enum Versions {
-  @doc("2025-11-01-preview version")
+  @doc("2025-12-01-preview version")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_11_01_preview: "2025-11-01-preview",
+  v2025_12_01_preview: "2025-12-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

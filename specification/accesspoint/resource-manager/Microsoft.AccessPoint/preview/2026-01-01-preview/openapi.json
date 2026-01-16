@@ -1,0 +1,3312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AccessPoint management service",
+    "version": "2026-01-01-preview",
+    "description": "Microsoft.AccessPoint Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AccessPointOperations"
+    },
+    {
+      "name": "UpdateGroupOperations"
+    },
+    {
+      "name": "NetworkOperations"
+    },
+    {
+      "name": "DeviceOperations"
+    },
+    {
+      "name": "DeviceServiceLinkOperations"
+    },
+    {
+      "name": "AzureVirtualDesktopOperations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AccessPoint/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AccessPoint/accessPointAccounts": {
+      "get": {
+        "operationId": "AccessPointOperations_ListBySubscription",
+        "tags": [
+          "AccessPointOperations"
+        ],
+        "description": "List AccessPointAccount resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessPointAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointOperations_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/AccessPointOperations_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts": {
+      "get": {
+        "operationId": "AccessPointOperations_ListByResourceGroup",
+        "tags": [
+          "AccessPointOperations"
+        ],
+        "description": "List AccessPointAccount resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessPointAccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointOperations_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/AccessPointOperations_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}": {
+      "get": {
+        "operationId": "AccessPointOperations_Get",
+        "tags": [
+          "AccessPointOperations"
+        ],
+        "description": "Get a AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessPointAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointOperations_Get_MaximumSet": {
+            "$ref": "./examples/AccessPointOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AccessPointOperations_CreateOrUpdate",
+        "tags": [
+          "AccessPointOperations"
+        ],
+        "description": "Create a AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessPointAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AccessPointAccount' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AccessPointAccount"
+            }
+          },
+          "201": {
+            "description": "Resource 'AccessPointAccount' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AccessPointAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointOperations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/AccessPointOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AccessPointOperations_Update",
+        "tags": [
+          "AccessPointOperations"
+        ],
+        "description": "Update a AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessPointAccountTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessPointAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointOperations_Update_MaximumSet": {
+            "$ref": "./examples/AccessPointOperations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AccessPointOperations_Delete",
+        "tags": [
+          "AccessPointOperations"
+        ],
+        "description": "Delete a AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointOperations_Delete_MaximumSet": {
+            "$ref": "./examples/AccessPointOperations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/azureVirtualDesktops": {
+      "get": {
+        "operationId": "AzureVirtualDesktopOperations_ListByParent",
+        "tags": [
+          "AzureVirtualDesktopOperations"
+        ],
+        "description": "List AzureVirtualDesktop resources by AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureVirtualDesktopListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureVirtualDesktopOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/AzureVirtualDesktopOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/azureVirtualDesktops/{azureVirtualDesktopName}": {
+      "get": {
+        "operationId": "AzureVirtualDesktopOperations_Get",
+        "tags": [
+          "AzureVirtualDesktopOperations"
+        ],
+        "description": "Get a AzureVirtualDesktop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "azureVirtualDesktopName",
+            "in": "path",
+            "description": "The name of the AzureVirtualDesktop",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureVirtualDesktop"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureVirtualDesktopOperations_Get_MaximumSet": {
+            "$ref": "./examples/AzureVirtualDesktopOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureVirtualDesktopOperations_CreateOrUpdate",
+        "tags": [
+          "AzureVirtualDesktopOperations"
+        ],
+        "description": "Create a AzureVirtualDesktop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "azureVirtualDesktopName",
+            "in": "path",
+            "description": "The name of the AzureVirtualDesktop",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureVirtualDesktop"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureVirtualDesktop' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureVirtualDesktop"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureVirtualDesktop' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureVirtualDesktop"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureVirtualDesktopOperations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/AzureVirtualDesktopOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AzureVirtualDesktopOperations_Update",
+        "tags": [
+          "AzureVirtualDesktopOperations"
+        ],
+        "description": "Update a AzureVirtualDesktop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "azureVirtualDesktopName",
+            "in": "path",
+            "description": "The name of the AzureVirtualDesktop",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureVirtualDesktopUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureVirtualDesktop"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureVirtualDesktopOperations_Update_MaximumSet": {
+            "$ref": "./examples/AzureVirtualDesktopOperations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AzureVirtualDesktopOperations_Delete",
+        "tags": [
+          "AzureVirtualDesktopOperations"
+        ],
+        "description": "Delete a AzureVirtualDesktop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "azureVirtualDesktopName",
+            "in": "path",
+            "description": "The name of the AzureVirtualDesktop",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureVirtualDesktopOperations_Delete_MaximumSet": {
+            "$ref": "./examples/AzureVirtualDesktopOperations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/deviceServiceLinks": {
+      "get": {
+        "operationId": "DeviceServiceLinkOperations_ListByParent",
+        "tags": [
+          "DeviceServiceLinkOperations"
+        ],
+        "description": "List DeviceServiceLink resources by AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceLinkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceServiceLinkOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/DeviceServiceLinkOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/deviceServiceLinks/{deviceServiceLinkName}": {
+      "get": {
+        "operationId": "DeviceServiceLinkOperations_Get",
+        "tags": [
+          "DeviceServiceLinkOperations"
+        ],
+        "description": "Get a DeviceServiceLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceServiceLinkName",
+            "in": "path",
+            "description": "The name of the DeviceServiceLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceLink"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceServiceLinkOperations_Get_MaximumSet": {
+            "$ref": "./examples/DeviceServiceLinkOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceServiceLinkOperations_CreateOrUpdate",
+        "tags": [
+          "DeviceServiceLinkOperations"
+        ],
+        "description": "Create a DeviceServiceLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceServiceLinkName",
+            "in": "path",
+            "description": "The name of the DeviceServiceLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceLink"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeviceServiceLink' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceLink"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeviceServiceLink' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceLink"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceServiceLinkOperations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/DeviceServiceLinkOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DeviceServiceLinkOperations_Update",
+        "tags": [
+          "DeviceServiceLinkOperations"
+        ],
+        "description": "Update a DeviceServiceLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceServiceLinkName",
+            "in": "path",
+            "description": "The name of the DeviceServiceLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceLinkUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceLink"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceServiceLinkOperations_Update_MaximumSet": {
+            "$ref": "./examples/DeviceServiceLinkOperations_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DeviceServiceLinkOperations_Delete",
+        "tags": [
+          "DeviceServiceLinkOperations"
+        ],
+        "description": "Delete a DeviceServiceLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceServiceLinkName",
+            "in": "path",
+            "description": "The name of the DeviceServiceLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceServiceLinkOperations_Delete_MaximumSet": {
+            "$ref": "./examples/DeviceServiceLinkOperations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/devices": {
+      "get": {
+        "operationId": "DeviceOperations_ListByParent",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "List Device resources by AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/devices/{deviceName}": {
+      "get": {
+        "operationId": "DeviceOperations_Get",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Get a Device",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_Get_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceOperations_CreateOrUpdate",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Create a Device",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Device' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "201": {
+            "description": "Resource 'Device' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DeviceOperations_Update",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Update a Device",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_Update_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceOperations_Delete",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Delete a Device",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_Delete_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/devices/{deviceName}/displayMessage": {
+      "post": {
+        "operationId": "DeviceOperations_DisplayMessage",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Displays a provided messages on a device.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DisplayMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_DisplayMessage_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_DisplayMessage_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/devices/{deviceName}/logOffUser": {
+      "post": {
+        "operationId": "DeviceOperations_LogOffUser",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Sends a user log off command to a device.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_LogOffUser_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_LogOffUser_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/devices/{deviceName}/reboot": {
+      "post": {
+        "operationId": "DeviceOperations_Reboot",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Sends a restart command to a device.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_Reboot_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_Reboot_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/devices/{deviceName}/refreshConnection": {
+      "post": {
+        "operationId": "DeviceOperations_RefreshConnection",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Refreshes the connection of a device.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_RefreshConnection_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_RefreshConnection_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/devices/{deviceName}/revokeCertificates": {
+      "post": {
+        "operationId": "DeviceOperations_RevokeCertificates",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Revokes device certificates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_RevokeCertificates_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_RevokeCertificates_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/devices/{deviceName}/shutdown": {
+      "post": {
+        "operationId": "DeviceOperations_Shutdown",
+        "tags": [
+          "DeviceOperations"
+        ],
+        "description": "Sends a shutdown command to a device.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceOperations_Shutdown_MaximumSet": {
+            "$ref": "./examples/DeviceOperations_Shutdown_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/networks": {
+      "get": {
+        "operationId": "NetworkOperations_ListByParent",
+        "tags": [
+          "NetworkOperations"
+        ],
+        "description": "List Network resources by AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/NetworkOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/networks/{networkName}": {
+      "get": {
+        "operationId": "NetworkOperations_Get",
+        "tags": [
+          "NetworkOperations"
+        ],
+        "description": "Get a Network",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "networkName",
+            "in": "path",
+            "description": "The name of the Network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Network"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkOperations_Get_MaximumSet": {
+            "$ref": "./examples/NetworkOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkOperations_CreateOrUpdate",
+        "tags": [
+          "NetworkOperations"
+        ],
+        "description": "Create a Network",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "networkName",
+            "in": "path",
+            "description": "The name of the Network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Network"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Network' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Network"
+            }
+          },
+          "201": {
+            "description": "Resource 'Network' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Network"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkOperations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NetworkOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NetworkOperations_Update",
+        "tags": [
+          "NetworkOperations"
+        ],
+        "description": "Update a Network",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "networkName",
+            "in": "path",
+            "description": "The name of the Network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Network"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkOperations_Update_MaximumSet": {
+            "$ref": "./examples/NetworkOperations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkOperations_Delete",
+        "tags": [
+          "NetworkOperations"
+        ],
+        "description": "Delete a Network",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "networkName",
+            "in": "path",
+            "description": "The name of the Network",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkOperations_Delete_MaximumSet": {
+            "$ref": "./examples/NetworkOperations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/updateGroups": {
+      "get": {
+        "operationId": "UpdateGroupOperations_ListByParent",
+        "tags": [
+          "UpdateGroupOperations"
+        ],
+        "description": "List UpdateGroup resources by AccessPointAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateGroupOperations_ListByParent_MaximumSet": {
+            "$ref": "./examples/UpdateGroupOperations_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AccessPoint/accessPointAccounts/{accessPointAccountName}/updateGroups/{updateGroupName}": {
+      "get": {
+        "operationId": "UpdateGroupOperations_Get",
+        "tags": [
+          "UpdateGroupOperations"
+        ],
+        "description": "Get a UpdateGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "updateGroupName",
+            "in": "path",
+            "description": "The name of the Update Group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateGroupOperations_Get_MaximumSet": {
+            "$ref": "./examples/UpdateGroupOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateGroupOperations_CreateOrUpdate",
+        "tags": [
+          "UpdateGroupOperations"
+        ],
+        "description": "Create a UpdateGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "updateGroupName",
+            "in": "path",
+            "description": "The name of the Update Group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'UpdateGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'UpdateGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateGroupOperations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/UpdateGroupOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "UpdateGroupOperations_Update",
+        "tags": [
+          "UpdateGroupOperations"
+        ],
+        "description": "Update a UpdateGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "updateGroupName",
+            "in": "path",
+            "description": "The name of the Update Group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateGroupOperations_Update_MaximumSet": {
+            "$ref": "./examples/UpdateGroupOperations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "UpdateGroupOperations_Delete",
+        "tags": [
+          "UpdateGroupOperations"
+        ],
+        "description": "Delete a UpdateGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accessPointAccountName",
+            "in": "path",
+            "description": "The name of the Access Point",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "updateGroupName",
+            "in": "path",
+            "description": "The name of the Update Group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateGroupOperations_Delete_MaximumSet": {
+            "$ref": "./examples/UpdateGroupOperations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccessPointAccount": {
+      "type": "object",
+      "description": "An Access Point Account Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccessPointAccountProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AccessPointAccountListResult": {
+      "type": "object",
+      "description": "The response of a AccessPointAccount list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccessPointAccount items on this page",
+          "items": {
+            "$ref": "#/definitions/AccessPointAccount"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AccessPointAccountProperties": {
+      "type": "object",
+      "description": "Access Point Account Properties.",
+      "properties": {
+        "imageMod": {
+          "type": "string",
+          "description": "The image modification for the access point account"
+        },
+        "classification": {
+          "type": "string",
+          "description": "The classification of the access point account"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "imageMod",
+        "classification"
+      ]
+    },
+    "AccessPointAccountTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AccessPointAccount resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AudioInputCapability": {
+      "type": "string",
+      "description": "Audio input options for Azure Virtual Desktop.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "AudioInputCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Audio input is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Audio input is enabled."
+          }
+        ]
+      }
+    },
+    "AudioOutputCapability": {
+      "type": "string",
+      "description": "Audio output options for Azure Virtual Desktop.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "AudioOutputCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Audio output is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Audio output is enabled."
+          }
+        ]
+      }
+    },
+    "Azure.Core.ipV4Address": {
+      "type": "string",
+      "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AzureVirtualDesktop": {
+      "type": "object",
+      "description": "An Azure Virtual Desktop Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureVirtualDesktopProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AzureVirtualDesktopListResult": {
+      "type": "object",
+      "description": "The response of a AzureVirtualDesktop list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureVirtualDesktop items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureVirtualDesktop"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureVirtualDesktopProperties": {
+      "type": "object",
+      "description": "Azure Virtual Desktop Properties",
+      "properties": {
+        "hostNetworkLevel": {
+          "type": "string",
+          "description": "The network level for the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional details."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "audioOutputCapability": {
+          "$ref": "#/definitions/AudioOutputCapability",
+          "description": "Selected capability for audio output."
+        },
+        "audioInputCapability": {
+          "$ref": "#/definitions/AudioInputCapability",
+          "description": "Selected capability for audio input."
+        },
+        "cameraCapability": {
+          "$ref": "#/definitions/CameraCapability",
+          "description": "Selected capability for camera."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The Entra Application (client) ID to associate with this service instance."
+        },
+        "redirectUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The redirect URL for the service."
+        },
+        "tenantPrimaryDomain": {
+          "type": "string",
+          "description": "The tenant primary domain. Example: microsoft.onmicrosoft.com"
+        }
+      },
+      "required": [
+        "hostNetworkLevel",
+        "audioOutputCapability",
+        "audioInputCapability",
+        "cameraCapability",
+        "applicationId",
+        "redirectUrl",
+        "tenantPrimaryDomain"
+      ]
+    },
+    "AzureVirtualDesktopPropertiesUpdate": {
+      "type": "object",
+      "description": "Azure Virtual Desktop Properties",
+      "properties": {
+        "hostNetworkLevel": {
+          "type": "string",
+          "description": "The network level for the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional details."
+        },
+        "audioOutputCapability": {
+          "$ref": "#/definitions/AudioOutputCapability",
+          "description": "Selected capability for audio output."
+        },
+        "audioInputCapability": {
+          "$ref": "#/definitions/AudioInputCapability",
+          "description": "Selected capability for audio input."
+        },
+        "cameraCapability": {
+          "$ref": "#/definitions/CameraCapability",
+          "description": "Selected capability for camera."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The Entra Application (client) ID to associate with this service instance."
+        },
+        "redirectUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The redirect URL for the service."
+        },
+        "tenantPrimaryDomain": {
+          "type": "string",
+          "description": "The tenant primary domain. Example: microsoft.onmicrosoft.com"
+        }
+      }
+    },
+    "AzureVirtualDesktopUpdate": {
+      "type": "object",
+      "description": "An Azure Virtual Desktop Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureVirtualDesktopPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BaseResourceProperties": {
+      "type": "object",
+      "description": "Properties for a base resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CameraCapability": {
+      "type": "string",
+      "description": "Camera options for Azure Virtual Desktop.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "CameraCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Camera is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Camera is enabled."
+          }
+        ]
+      }
+    },
+    "Device": {
+      "type": "object",
+      "description": "An Access Point Device Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DeviceListResult": {
+      "type": "object",
+      "description": "The response of a Device list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Device items on this page",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceProperties": {
+      "type": "object",
+      "description": "Device Properties.",
+      "properties": {
+        "mac": {
+          "type": "string",
+          "description": "The unique MAC address of the device.",
+          "pattern": "^[a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serial": {
+          "type": "string",
+          "description": "The unique serial number of the device.",
+          "pattern": "^[a-zA-Z0-9]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deviceState": {
+          "$ref": "#/definitions/DeviceState",
+          "description": "Indicates the current state of the device."
+        },
+        "updateGroupResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the associated Update Group resource."
+        },
+        "networkResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the associated Network resource."
+        },
+        "ipAddress": {
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "description": "The IP address of the device that belongs to the attached network."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label associated with the device."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional details."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "mac",
+        "serial",
+        "deviceState",
+        "updateGroupResourceId",
+        "networkResourceId",
+        "ipAddress",
+        "label"
+      ]
+    },
+    "DevicePropertiesUpdate": {
+      "type": "object",
+      "description": "Device Properties.",
+      "properties": {
+        "deviceState": {
+          "$ref": "#/definitions/DeviceState",
+          "description": "Indicates the current state of the device."
+        },
+        "updateGroupResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the associated Update Group resource."
+        },
+        "networkResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the associated Network resource."
+        },
+        "ipAddress": {
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "description": "The IP address of the device that belongs to the attached network."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label associated with the device."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional details."
+        }
+      }
+    },
+    "DeviceServiceLink": {
+      "type": "object",
+      "description": "Represents link between a Device and a Virtual Desktop Infrastructure service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceServiceLinkProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceServiceLinkListResult": {
+      "type": "object",
+      "description": "The response of a DeviceServiceLink list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceServiceLink items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceServiceLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceServiceLinkProperties": {
+      "type": "object",
+      "description": "Device Service Link properties",
+      "properties": {
+        "deviceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the associated Device resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the associated Virtual Desktop Infrastructure service resource."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceResourceId",
+        "serviceResourceId"
+      ]
+    },
+    "DeviceServiceLinkPropertiesUpdate": {
+      "type": "object",
+      "description": "Device Service Link properties",
+      "properties": {
+        "serviceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID of the associated Virtual Desktop Infrastructure service resource."
+        }
+      }
+    },
+    "DeviceServiceLinkUpdate": {
+      "type": "object",
+      "description": "Represents link between a Device and a Virtual Desktop Infrastructure service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceServiceLinkPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceState": {
+      "type": "string",
+      "description": "The current state of the device.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Device is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Device is enabled."
+          }
+        ]
+      }
+    },
+    "DeviceUpdate": {
+      "type": "object",
+      "description": "An Access Point Device Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DevicePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "DisplayMessageRequest": {
+      "type": "object",
+      "description": "The request body for the displayMessage device action.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The message to be displayed on the device."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "Network": {
+      "type": "object",
+      "description": "An Access Point Network Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkListResult": {
+      "type": "object",
+      "description": "The response of a Network list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Network items on this page",
+          "items": {
+            "$ref": "#/definitions/Network"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkProperties": {
+      "type": "object",
+      "description": "Network Properties.",
+      "properties": {
+        "siteName": {
+          "type": "string",
+          "description": "The user friendly name for a network."
+        },
+        "startingIpAddress": {
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "description": "The starting IP address in the range."
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of the network, specified as a CIDR netmask or number of IP addresses."
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Maximum Transmission Unit (MTU) of the network."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "siteName",
+        "startingIpAddress",
+        "size",
+        "mtu"
+      ]
+    },
+    "NetworkPropertiesUpdate": {
+      "type": "object",
+      "description": "Network Properties.",
+      "properties": {
+        "siteName": {
+          "type": "string",
+          "description": "The user friendly name for a network."
+        },
+        "startingIpAddress": {
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "description": "The starting IP address in the range."
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of the network, specified as a CIDR netmask or number of IP addresses."
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Maximum Transmission Unit (MTU) of the network."
+        }
+      }
+    },
+    "NetworkUpdate": {
+      "type": "object",
+      "description": "An Access Point Network Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning status of the resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning the resource is in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The change request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "UpdateGroup": {
+      "type": "object",
+      "description": "An Access Point Update Group Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpdateGroupListResult": {
+      "type": "object",
+      "description": "The response of a UpdateGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateGroupProperties": {
+      "type": "object",
+      "description": "Update Group Properties.",
+      "properties": {
+        "imageMod": {
+          "type": "string",
+          "description": "The image modification name to associate."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional details."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "imageMod"
+      ]
+    },
+    "UpdateGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Update Group Properties.",
+      "properties": {
+        "imageMod": {
+          "type": "string",
+          "description": "The image modification name to associate."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional details."
+        }
+      }
+    },
+    "UpdateGroupUpdate": {
+      "type": "object",
+      "description": "An Access Point Update Group Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateGroupPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VirtualDesktopInfrastructureProperties": {
+      "type": "object",
+      "description": "Properties for all Virtual Desktop Infrastructure resources.",
+      "properties": {
+        "hostNetworkLevel": {
+          "type": "string",
+          "description": "The network level for the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "Additional details."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "hostNetworkLevel"
+      ]
+    }
+  },
+  "parameters": {}
+}

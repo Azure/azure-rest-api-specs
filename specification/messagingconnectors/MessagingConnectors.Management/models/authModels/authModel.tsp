@@ -36,5 +36,8 @@ union AuthenticationMode {
   @doc("Certificate model.")
   Certificate: "Certificate",
 
+  @doc("FabricConnection model.")
+  FabricConnection: "FabricConnection",
+
   string,
 }
