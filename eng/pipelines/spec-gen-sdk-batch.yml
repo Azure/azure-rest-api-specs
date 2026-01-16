@@ -33,12 +33,9 @@ variables:
       value: ${{ parameters.SpecBatchTypes }}
 
 stages:
-  - ${{ each batchType in split(variables.batchTypes, ',') }}:
-    - stage: ${{ replace(batchType, '-', '_') }}
-      displayName: 'Run ${{ batchType }}'
-      extends:
-        template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
-        parameters:
-          SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
-          SdkRepoUrl: $(SdkRepoUrl)
-          SpecBatchTypes: ${{ batchType }}
+  ${{ each batchType in split(variables.batchTypes, ',') }}:
+    - template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
+      parameters:
+        SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
+        SdkRepoUrl: $(SdkRepoUrl)
+        SpecBatchTypes: ${{ batchType }}
