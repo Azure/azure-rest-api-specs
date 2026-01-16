@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Informatica.DataManagement",
-    "version": "2024-05-08",
+    "version": "2025-11-27",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -58,29 +58,21 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_Min": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -97,10 +89,10 @@
         "description": "List InformaticaOrganizationResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -113,16 +105,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_ListBySubscription": {
-            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "Organizations_ListBySubscription_Min": {
-            "$ref": "./examples/Organizations_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -139,13 +123,13 @@
         "description": "List InformaticaOrganizationResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -158,16 +142,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_ListByResourceGroup": {
-            "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "Organizations_ListByResourceGroup_Min": {
-            "$ref": "./examples/Organizations_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -184,13 +160,13 @@
         "description": "Get a InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -211,16 +187,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_Get": {
-            "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
-          },
-          "Organizations_Get_Min": {
-            "$ref": "./examples/Organizations_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -232,13 +200,13 @@
         "description": "Create a InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -281,16 +249,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_CreateOrUpdate": {
-            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Organizations_CreateOrUpdate_Min": {
-            "$ref": "./examples/Organizations_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -306,13 +266,13 @@
         "description": "Update a InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -342,16 +302,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_Update": {
-            "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
-          },
-          "Organizations_Update_Min": {
-            "$ref": "./examples/Organizations_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -363,13 +315,13 @@
         "description": "Delete a InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -401,16 +353,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_Delete": {
-            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
-          },
-          "Organizations_Delete_Min": {
-            "$ref": "./examples/Organizations_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -428,13 +372,13 @@
         "description": "Gets all serverless runtime resources in a given informatica organization resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -455,16 +399,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_GetAllServerlessRuntimes": {
-            "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MaximumSet_Gen.json"
-          },
-          "Organizations_GetAllServerlessRuntimes_Min": {
-            "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MinimumSet_Gen.json"
           }
         }
       }
@@ -478,13 +414,13 @@
         "description": "Gets Metadata of the serverless runtime environment.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -505,16 +441,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_GetServerlessMetadata": {
-            "$ref": "./examples/Organizations_GetServerlessMetadata_MaximumSet_Gen.json"
-          },
-          "Organizations_GetServerlessMetadata_Min": {
-            "$ref": "./examples/Organizations_GetServerlessMetadata_MinimumSet_Gen.json"
           }
         }
       }
@@ -528,13 +456,13 @@
         "description": "List InformaticaServerlessRuntimeResource resources by InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -555,13 +483,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_ListByInformaticaOrganizationResource": {
-            "$ref": "./examples/ServerlessRuntimes_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -578,13 +501,13 @@
         "description": "Get a InformaticaServerlessRuntimeResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -613,16 +536,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_Get": {
-            "$ref": "./examples/ServerlessRuntimes_Get_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_Get_Min": {
-            "$ref": "./examples/ServerlessRuntimes_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -634,13 +549,13 @@
         "description": "Create a InformaticaServerlessRuntimeResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -691,16 +606,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_CreateOrUpdate": {
-            "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_CreateOrUpdate_Min": {
-            "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -716,13 +623,13 @@
         "description": "Update a InformaticaServerlessRuntimeResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -760,16 +667,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_Update": {
-            "$ref": "./examples/ServerlessRuntimes_Update_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_Update_Min": {
-            "$ref": "./examples/ServerlessRuntimes_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -781,13 +680,13 @@
         "description": "Delete a InformaticaServerlessRuntimeResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -827,13 +726,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_Delete": {
-            "$ref": "./examples/ServerlessRuntimes_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -851,13 +745,13 @@
         "description": "Checks all dependencies for a serverless runtime resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -886,16 +780,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_CheckDependencies": {
-            "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_CheckDependencies_Min": {
-            "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MinimumSet_Gen.json"
           }
         }
       }
@@ -909,13 +795,13 @@
         "description": "Returns a serverless runtime resource by ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -944,13 +830,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_ServerlessResourceById": {
-            "$ref": "./examples/ServerlessRuntimes_ServerlessResourceById_MaximumSet_Gen.json"
           }
         }
       }
@@ -964,13 +845,13 @@
         "description": "Starts a failed runtime resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
@@ -996,13 +877,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_StartFailedServerlessRuntime": {
-            "$ref": "./examples/ServerlessRuntimes_StartFailedServerlessRuntime_MaximumSet_Gen.json"
           }
         }
       }
@@ -1098,11 +974,6 @@
           "description": "Application type value"
         }
       }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "CdiConfigProps": {
       "type": "object",
@@ -1328,6 +1199,14 @@
           "type": "string",
           "description": "Supplementary File location"
         },
+        "serverlessRuntimeDataDisks": {
+          "type": "array",
+          "description": "Serverless runtime data disks",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeDataDisk"
+          },
+          "x-ms-identifiers": []
+        },
         "platform": {
           "type": "string",
           "description": "Serverless Account Platform"
@@ -1349,7 +1228,7 @@
           "description": "Compute Units"
         },
         "tenantId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Tenant ID"
         },
         "subscriptionId": {
@@ -1378,11 +1257,15 @@
           "$ref": "#/definitions/OrganizationProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1411,6 +1294,10 @@
       "type": "object",
       "description": "The template for adding optional properties.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -1496,6 +1383,14 @@
           "type": "string",
           "description": "Supplementary file location."
         },
+        "serverlessRuntimeDataDisks": {
+          "type": "array",
+          "description": "Serverless runtime data disks",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeDataDisk"
+          },
+          "x-ms-identifiers": []
+        },
         "serverlessRuntimeConfig": {
           "$ref": "#/definitions/ServerlessRuntimeConfigProperties",
           "description": "Serverless config properties"
@@ -1525,11 +1420,15 @@
           "$ref": "#/definitions/InformaticaServerlessRuntimeProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1574,6 +1473,10 @@
       "type": "object",
       "description": "The template for adding optional properties.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "properties": {
           "$ref": "#/definitions/ServerlessRuntimePropertiesCustomUpdate",
           "description": "Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource"
@@ -1598,6 +1501,11 @@
           "type": "string",
           "description": "Marketplace Subscription Id"
         },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status of a resource",
+          "readOnly": true
+        },
         "offerDetails": {
           "$ref": "#/definitions/OfferDetails",
           "description": "Marketplace offer details."
@@ -1615,10 +1523,51 @@
           "type": "string",
           "description": "Marketplace Subscription Id"
         },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status of a resource",
+          "readOnly": true
+        },
         "offerDetails": {
           "$ref": "#/definitions/OfferDetailsUpdate",
           "description": "Marketplace offer details."
         }
+      }
+    },
+    "MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of a resource.",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribe",
+        "Suspend",
+        "Unsubscribe"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Purchased but not yet activated"
+          },
+          {
+            "name": "Subscribe",
+            "value": "Subscribe",
+            "description": "Marketplace subscription is activated"
+          },
+          {
+            "name": "Suspend",
+            "value": "Suspend",
+            "description": "This state indicates that a customer's payment for the Marketplace service was not received"
+          },
+          {
+            "name": "Unsubscribe",
+            "value": "Unsubscribe",
+            "description": "Customer has cancelled the subscription"
+          }
+        ]
       }
     },
     "NetworkInterfaceConfiguration": {
@@ -1626,12 +1575,8 @@
       "description": "Informatica Serverless Runtime Network Interface configurations.",
       "properties": {
         "vnetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Virtual network resource id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "$ref": "#/definitions/VnetResourceId",
+          "description": "Virtual network resource id"
         },
         "subnetId": {
           "type": "string",
@@ -1656,12 +1601,8 @@
       "description": "The template for adding optional properties.",
       "properties": {
         "vnetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Virtual network resource id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "$ref": "#/definitions/VnetResourceId",
+          "description": "Virtual network resource id"
         },
         "subnetId": {
           "type": "string",
@@ -2033,6 +1974,32 @@
         }
       }
     },
+    "ServerlessRuntimeDataDisk": {
+      "type": "object",
+      "description": "Serverless Runtime Data Disk",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the data disk"
+        },
+        "serverHostOrIpAddress": {
+          "type": "string",
+          "description": "Server Host or IP Address"
+        },
+        "sourceMount": {
+          "type": "string",
+          "description": "Source mount point"
+        },
+        "targetMount": {
+          "type": "string",
+          "description": "Target mount point"
+        },
+        "mountOptions": {
+          "type": "string",
+          "description": "Mount options"
+        }
+      }
+    },
     "ServerlessRuntimeDependency": {
       "type": "object",
       "description": "Dependency reference for a serverless runtime resource",
@@ -2137,6 +2104,14 @@
         "supplementaryFileLocation": {
           "type": "string",
           "description": "Supplementary file location."
+        },
+        "serverlessRuntimeDataDisks": {
+          "type": "array",
+          "description": "Serverless runtime data disks",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeDataDisk"
+          },
+          "x-ms-identifiers": []
         },
         "serverlessRuntimeConfig": {
           "$ref": "#/definitions/ServerlessRuntimeConfigPropertiesUpdate",
@@ -2249,6 +2224,18 @@
           "description": "Phone number of the user used by for contacting them if needed",
           "maxLength": 40
         }
+      }
+    },
+    "VnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
       }
     },
     "email": {
