@@ -1,0 +1,25 @@
+{
+  "title": "ProductList_ListByTenant",
+  "operationId": "ProductList_ListByTenant",
+  "parameters": {
+    "api-version": "2025-05-01",
+    "language": "en",
+    "$filter": "productType eq 'SaaS'",
+    "$select": "displayName,uniqueProductId,productType,publisherDisplayName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "uniqueProductId": "microsoft.managedinstance_standard",
+            "displayName": "Azure SQL Managed Instance",
+            "publisherDisplayName": "Microsoft",
+            "productType": "SaaS"
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Marketplace/products?api-version=2025-05-01&language=en&$select=displayName,uniqueProductId,productType,publisherDisplayName&$filter=productType eq 'SaaS'&$skiptoken=W3sid..."
+      }
+    }
+  }
+}

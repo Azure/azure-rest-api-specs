@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "name": "sample-managedhsm-name",
+    "api-version": "2025-05-01",
+    "keyName": "sample-key-name",
+    "keyVersion": "fd618d9519b74f9aae94ade66b876acc",
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fd618d9519b74f9aae94ade66b876acc",
+        "type": "Microsoft.KeyVault/managedHSMs/keys/versions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-managedhsm-name/keys/sample-key-name/versions/fd618d9519b74f9aae94ade66b876acc",
+        "properties": {
+          "attributes": {
+            "created": 1598533051,
+            "enabled": true,
+            "recoveryLevel": "Purgeable",
+            "updated": 1598533051
+          },
+          "keyOps": [
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify",
+            "wrapKey",
+            "unwrapKey"
+          ],
+          "keySize": 2048,
+          "keyUri": "https://sample-managedhsm-name.managedhsm.azure.net:443/keys/sample-key-name",
+          "keyUriWithVersion": "https://sample-managedhsm-name.managedhsm.azure.net:443/keys/sample-key-name/fd618d9519b74f9aae94ade66b876acc",
+          "kty": "RSA"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "",
+          "message": ""
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ManagedHsmKeys_GetVersion",
+  "title": "Get a key version"
+}

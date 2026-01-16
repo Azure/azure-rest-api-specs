@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subnetName": "subnet1",
+    "virtualNetworkName": "vnetname",
+    "resourceGroupName": "subnet-test",
+    "api-version": "2025-05-01",
+    "subscriptionId": "subid",
+    "subnetParameters": {
+      "properties": {
+        "addressPrefix": "10.0.0.0/16",
+        "serviceGateway": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/serviceGateways/SG1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1",
+        "name": "subnet1",
+        "properties": {
+          "addressPrefix": "10.0.0.0/16",
+          "provisioningState": "Succeeded",
+          "serviceGateway": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/serviceGateways/SG1"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1",
+        "name": "subnet1",
+        "properties": {
+          "addressPrefix": "10.0.0.0/16",
+          "provisioningState": "Succeeded",
+          "serviceGateway": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/serviceGateways/SG1"
+          }
+        }
+      }
+    }
+  }
+}

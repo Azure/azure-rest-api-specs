@@ -1,0 +1,82 @@
+{
+  "title": "NetworkTaps_Update_MaximumSet_Gen",
+  "operationId": "NetworkTaps_Update",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkTapName": "example-networkTap",
+    "properties": {
+      "tags": {
+        "keyId": "keyValue"
+      },
+      "properties": {
+        "annotation": "annotation1",
+        "pollingType": "Pull",
+        "destinations": [
+          {
+            "name": "example-destinaionName",
+            "destinationType": "IsolationDomain",
+            "destinationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsloationDomains/example-l3Domain/internalNetworks/example-internalNetwork",
+            "isolationDomainProperties": {
+              "encapsulation": "None",
+              "neighborGroupIds": [
+                "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup"
+              ]
+            },
+            "destinationTapRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-destinationTapRule"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "networkPacketBrokerId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkPacketBrokers/example-networkPacketBroker",
+          "sourceTapRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-sourceTapRule",
+          "destinations": [
+            {
+              "name": "example-destinaionName",
+              "destinationType": "IsolationDomain",
+              "destinationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsloationDomains/example-l3Domain/internalNetworks/example-internalNetwork",
+              "isolationDomainProperties": {
+                "encapsulation": "None",
+                "neighborGroupIds": [
+                  "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup"
+                ]
+              },
+              "destinationTapRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-destinationTapRule"
+            }
+          ],
+          "pollingType": "Pull",
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
+        },
+        "tags": {
+          "keyId": "keyValue"
+        },
+        "location": "eastuseuap",
+        "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTaps/example-networkTap",
+        "name": "example-networkTap",
+        "type": "microsoft.managednetworkfabric/networkTaps",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

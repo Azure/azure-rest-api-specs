@@ -1,7 +1,7 @@
-import "../../Common/StandardizedContracts/CommonEnums.tsp";
-import "../../Common/StandardizedContracts/Scope.tsp";
-import "../../Common/StandardizedContracts/CommonModels.tsp";
-import "../../Common/StandardizedContracts/AssessmentProperties.tsp";
+import "../Common/StandardizedContracts/CommonEnums.tsp";
+import "../Common/StandardizedContracts/Scope.tsp";
+import "../Common/StandardizedContracts/CommonModels.tsp";
+import "../Common/StandardizedContracts/AssessmentProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

@@ -74,7 +74,7 @@
     "Accept-Language": {
       "name": "Accept-Language",
       "in": "header",
-      "description": "Language in which search results should be returned. \n\nPlease refer to [Supported Languages](/azure/azure-maps/supported-languages) for details.",
+      "description": "Language in which search results should be returned. \n\nPlease refer to [Supported Languages](/azure/azure-maps/supported-languages?pivots=service-latest) for details.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "client"
@@ -97,7 +97,7 @@
     "Bbox": {
       "name": "bbox",
       "in": "query",
-      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2",
+      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangle are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2.\n\nMinimum size: approximately 0.00001 degrees (~0.01 meters).\n\n  Maximum size: up to the full global extent (-180,-90 to 180,90)",
       "required": false,
       "type": "array",
       "items": {
@@ -288,7 +288,7 @@
     "/geocode": {
       "get": {
         "summary": "Use to get longitude and latitude coordinates of a street address or name of a place.",
-        "description": "\n\nThe `Get Geocoding` API is an HTTP `GET` request that returns the longitude and latitude coordinates of the location being searched.\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocoding endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No Point of Interest (POIs) will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties and states. The response also returns detailed address properties such as street, postal code, municipality, and country/region information.",
+        "description": "\n\nThe `Get Geocoding` API is an HTTP `GET` request that returns the longitude and latitude coordinates of the location being searched.\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocoding endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No Point of Interest (POIs) will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties and states. The response also returns detailed address properties such as street, postal code, municipality, and country/region information.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
         "operationId": "Search_GetGeocoding",
         "produces": [
           "application/geo+json"
@@ -327,14 +327,14 @@
           {
             "name": "addressLine",
             "in": "query",
-            "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\n**If query is given, should not use this parameter.**",
+            "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "countryRegion",
             "in": "query",
-            "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\n**If query is given, should not use this parameter.**",
+            "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
@@ -350,35 +350,35 @@
           {
             "name": "adminDistrict",
             "in": "query",
-            "description": "The country subdivision portion of an address, such as WA.\n\n**If query is given, should not use this parameter.**",
+            "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "adminDistrict2",
             "in": "query",
-            "description": "The county for the structured address, such as King.\n\n**If query is given, should not use this parameter.**",
+            "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "adminDistrict3",
             "in": "query",
-            "description": "The named area for the structured address.\n\n**If query is given, should not use this parameter.**",
+            "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "locality",
             "in": "query",
-            "description": "The locality portion of an address, such as Seattle.\n\n**If query is given, should not use this parameter.**",
+            "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
           {
             "name": "postalCode",
             "in": "query",
-            "description": "The postal code portion of an address.\n\n**If query is given, should not use this parameter.**",
+            "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
@@ -408,7 +408,7 @@
     "/geocode:batch": {
       "post": {
         "summary": "Use to send a batch of queries to the [Geocoding](/rest/api/maps/search/get-geocoding) API in a single request.",
-        "description": "\n\nThe `Get Geocoding Batch` API is an HTTP `POST` request that sends batches of up to **100** queries to the [Geocoding](/rest/api/maps/search/get-geocoding) API in a single request. \n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/geocode:batch?api-version=2023-06-01\n```\n### POST Body for Batch Request\nTo send the _geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"addressLine\": \"One, Microsoft Way, Redmond, WA 98052\",\n      \"top\": 2\n    },\n    {\n      \"addressLine\": \"Pike Pl\",\n      \"adminDistrict\": \"WA\",\n      \"locality\": \"Seattle\",\n      \"top\": 3\n    }\n  ]\n}\n```\n\nA _geocoding_ batchItem object can accept any of the supported _geocoding_ [URI parameters](/rest/api/maps/search/get-geocoding#uri-parameters).\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](/rest/api/maps/search/get-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "\n\nThe `Get Geocoding Batch` API is an HTTP `POST` request that sends batches of up to **100** queries to the [Geocoding](/rest/api/maps/search/get-geocoding) API in a single request.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/). \n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/geocode:batch?api-version=2023-06-01\n```\n### POST Body for Batch Request\nTo send the _geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"addressLine\": \"One, Microsoft Way, Redmond, WA 98052\",\n      \"top\": 2\n    },\n    {\n      \"addressLine\": \"Pike Pl\",\n      \"adminDistrict\": \"WA\",\n      \"locality\": \"Seattle\",\n      \"top\": 3\n    }\n  ]\n}\n```\n\nA _geocoding_ batchItem object can accept any of the supported _geocoding_ [URI parameters](/rest/api/maps/search/get-geocoding#uri-parameters).\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](/rest/api/maps/search/get-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.",
         "operationId": "Search_GetGeocodingBatch",
         "x-ms-examples": {
           "A Geocoding Batch API call containing 2 Geocoding queries": {
@@ -451,7 +451,7 @@
     "/search/polygon": {
       "get": {
         "summary": "Use to get polygon data of a geographical area shape such as a city or a country region.",
-        "description": "\n\nThe `Get Polygon` API is an HTTP `GET` request that supplies polygon data of a geographical area outline such as a city or a country region.",
+        "description": "\n\nThe `Get Polygon` API is an HTTP `GET` request that supplies polygon data of a geographical area outline such as a city or a country region.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
         "operationId": "Search_GetPolygon",
         "produces": [
           "application/geo+json"
@@ -512,7 +512,7 @@
     "/reverseGeocode": {
       "get": {
         "summary": "Use to get a street address and location info from longitude and latitude coordinates.",
-        "description": "\n\nThe `Get Reverse Geocoding` API is an HTTP `GET` request used to translate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Useful in tracking applications where you receive a GPS feed from the device or asset and wish to know the address associated with the coordinates. This endpoint will return address information for a given coordinate.",
+        "description": "\n\nThe `Get Reverse Geocoding` API is an HTTP `GET` request used to translate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Useful in tracking applications where you receive a GPS feed from the device or asset and wish to know the address associated with the coordinates. This endpoint will return address information for a given coordinate.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
         "operationId": "Search_GetReverseGeocoding",
         "produces": [
           "application/geo+json"
@@ -570,7 +570,7 @@
     "/reverseGeocode:batch": {
       "post": {
         "summary": "Use to send a batch of queries to the [Reverse Geocoding](/rest/api/maps/search/get-reverse-geocoding) API in a single request.",
-        "description": "\n\nThe `Get Reverse Geocoding Batch` API is an HTTP `POST` request that sends batches of up to **100** queries to [Reverse Geocoding](/rest/api/maps/search/get-reverse-geocoding) API using a single request.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/reverseGeocode:batch?api-version=2023-06-01\n```\n### POST Body for Batch Request\nTo send the _reverse geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _reverse geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"coordinates\": [-122.128275, 47.639429],\n      \"resultTypes\": [\"Address\", \"PopulatedPlace\"]\n    },\n    {\n      \"coordinates\": [-122.341979399674, 47.6095253501216]\n    }\n  ]\n}\n```\n\nA _reverse geocoding_ batchItem object can accept any of the supported _reverse geocoding_ [URI parameters](/rest/api/maps/search/get-reverse-geocoding#uri-parameters).\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](/rest/api/maps/search/get-reverse-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "\n\nThe `Get Reverse Geocoding Batch` API is an HTTP `POST` request that sends batches of up to **100** queries to [Reverse Geocoding](/rest/api/maps/search/get-reverse-geocoding) API using a single request.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/). \n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/reverseGeocode:batch?api-version=2023-06-01\n```\n### POST Body for Batch Request\nTo send the _reverse geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _reverse geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"coordinates\": [-122.128275, 47.639429],\n      \"resultTypes\": [\"Address\", \"PopulatedPlace\"]\n    },\n    {\n      \"coordinates\": [-122.341979399674, 47.6095253501216]\n    }\n  ]\n}\n```\n\nA _reverse geocoding_ batchItem object can accept any of the supported _reverse geocoding_ [URI parameters](/rest/api/maps/search/get-reverse-geocoding#uri-parameters).\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](/rest/api/maps/search/get-reverse-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.",
         "operationId": "Search_GetReverseGeocodingBatch",
         "x-ms-examples": {
           "A Reverse Geocoding Batch API call containing 2 Reverse Geocoding queries": {
@@ -613,7 +613,7 @@
     "/geocode:autocomplete": {
       "get": {
         "summary": "Use to get ranked list of suggested entities based on a user's location and a partial query.",
-        "description": "\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.\n\n",
+        "description": "\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
         "operationId": "Search_GetGeocodeAutocomplete",
         "produces": [
           "application/geo+json"
@@ -659,10 +659,34 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Coordinates"
+            "name": "coordinates",
+            "in": "query",
+            "description": "Required when `bbox` is not provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat\n\n**Note:** `coordinates` becomes a secondary signal if `bbox` is provided.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "collectionFormat": "csv",
+            "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "#/parameters/Bbox"
+            "name": "bbox",
+            "in": "query",
+            "description": "Required when `coordinates` is not provided. A rectangular area on the earth defined as a bounding box object. The sides of the rectangle are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2.\n\nMinimum size: approximately 0.00001 degrees (~0.01 meters).\n\n  Maximum size: up to the full global extent (-180,-90 to 180,90)",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4,
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/Top"
@@ -1488,11 +1512,11 @@
           "type": "string"
         },
         "addressLine": {
-          "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\n**If query is given, should not use this parameter.**",
+          "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "countryRegion": {
-          "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\n**If query is given, should not use this parameter.**",
+          "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "bbox": {
@@ -1521,23 +1545,23 @@
           "maxItems": 2
         },
         "adminDistrict": {
-          "description": "The country subdivision portion of an address, such as WA.\n\n**If query is given, should not use this parameter.**",
+          "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "adminDistrict2": {
-          "description": "The county for the structured address, such as King.\n\n**If query is given, should not use this parameter.**",
+          "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "adminDistrict3": {
-          "description": "The named area for the structured address.\n\n**If query is given, should not use this parameter.**",
+          "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "locality": {
-          "description": "The locality portion of an address, such as Seattle.\n\n**If query is given, should not use this parameter.**",
+          "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         },
         "postalCode": {
-          "description": "The postal code portion of an address.\n\n**If query is given, should not use this parameter.**",
+          "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
           "type": "string"
         }
       }
@@ -1715,7 +1739,8 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Feature"
+                "value": "Feature",
+                "description": "Specifies the `GeoJSON` Feature object type."
               }
             ]
           }
@@ -1924,7 +1949,7 @@
     },
     "FeatureCollectionType": {
       "type": "string",
-      "description": "The type of a FeatureCollection object must be FeatureCollection.",
+      "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "enum": [
         "FeatureCollection"
       ],
@@ -1933,7 +1958,8 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "FeatureCollection"
+            "value": "FeatureCollection",
+            "description": "Specifies the `GeoJSON` `FeatureCollection` object type."
           }
         ]
       }
@@ -2032,7 +2058,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of a feature must be Feature.",
+          "description": "Specifies the `GeoJSON` type. The only supported object type is Feature. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
           "enum": [
             "Feature"
           ],
@@ -2041,7 +2067,8 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "Feature"
+                "value": "Feature",
+                "description": "Specifies the `GeoJSON` Feature object type."
               }
             ]
           }

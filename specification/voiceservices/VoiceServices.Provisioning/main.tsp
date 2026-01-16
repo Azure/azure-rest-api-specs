@@ -37,7 +37,6 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @doc("The Microsoft.VoiceServices service versions.")
 enum Versions {
   @doc("2024-02-29-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_02_29_preview: "2024-02-29-preview",
 }
 

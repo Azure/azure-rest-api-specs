@@ -36,13 +36,6 @@ input-file:
   - preview/2025-05-15-preview/azure-ai-projects.json
 ```
 
-### Release v2025-07-31-preview
-These settings apply only when `--tag=2025-07-31-preview` is specified on the command line.
-``` yaml $(tag) == '2025-07-31-preview'
-input-file:
-  - preview/2025-07-31-preview/azure-ai-projects.json
-```
-
 # Suppressions
 ``` yaml
 suppressions:

@@ -1,0 +1,157 @@
+{
+  "operationId": "Clusters_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2023-03-02-preview",
+    "resourceGroupName": "TestGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "title": "List the clusters by resource group",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "testcluster1",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster1",
+            "location": "eastus",
+            "properties": {
+              "aadAuthEnabled": "disabled",
+              "administratorLogin": "citus",
+              "citusVersion": "11.1",
+              "coordinatorEnablePublicIpAccess": true,
+              "coordinatorServerEdition": "GeneralPurpose",
+              "coordinatorStorageQuotaInMb": 2097152,
+              "coordinatorVCores": 4,
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "databaseName": "citus",
+              "earliestRestoreTime": "2020-09-14T00:00:37.467Z",
+              "enableHa": false,
+              "enableShardsOnCoordinator": false,
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "nodeCount": 3,
+              "nodeEnablePublicIpAccess": false,
+              "nodeServerEdition": "MemoryOptimized",
+              "nodeStorageQuotaInMb": 2097152,
+              "nodeVCores": 8,
+              "passwordEnabled": "enabled",
+              "postgresqlVersion": "14",
+              "preferredPrimaryZone": "1",
+              "privateEndpointConnections": [],
+              "provisioningState": "Succeeded",
+              "readReplicas": [
+                "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSQL/serverGroupsv2/testreadreplica-01",
+                "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSQL/serverGroupsv2/testreadreplica-02"
+              ],
+              "serverNames": [
+                {
+                  "name": "testcluster1-c",
+                  "fullyQualifiedDomainName": "testcluster1-c.postgres.database.azure.com"
+                },
+                {
+                  "name": "testcluster1-w0",
+                  "fullyQualifiedDomainName": "testcluster1-w0.postgres.database.azure.com"
+                },
+                {
+                  "name": "testcluster1-w1",
+                  "fullyQualifiedDomainName": "testcluster1-w1.postgres.database.azure.com"
+                },
+                {
+                  "name": "testcluster1-w2",
+                  "fullyQualifiedDomainName": "testcluster1-w2.postgres.database.azure.com"
+                }
+              ],
+              "sourceResourceId": null,
+              "state": "Ready"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "additionalProp1": "string"
+            }
+          },
+          {
+            "name": "testcluster2",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster2",
+            "location": "eastus",
+            "properties": {
+              "aadAuthEnabled": "disabled",
+              "administratorLogin": "citus",
+              "citusVersion": "11.1",
+              "coordinatorEnablePublicIpAccess": true,
+              "coordinatorServerEdition": "GeneralPurpose",
+              "coordinatorStorageQuotaInMb": 524288,
+              "coordinatorVCores": 4,
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "databaseName": "citus",
+              "earliestRestoreTime": "2020-09-15T00:01:32.317Z",
+              "enableHa": true,
+              "enableShardsOnCoordinator": false,
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "nodeCount": 2,
+              "nodeEnablePublicIpAccess": false,
+              "nodeServerEdition": "MemoryOptimized",
+              "nodeStorageQuotaInMb": 524288,
+              "nodeVCores": 8,
+              "passwordEnabled": "enabled",
+              "postgresqlVersion": "15",
+              "preferredPrimaryZone": "1",
+              "privateEndpointConnections": [],
+              "provisioningState": "Succeeded",
+              "readReplicas": [],
+              "serverNames": [
+                {
+                  "name": "testcluster2-c",
+                  "fullyQualifiedDomainName": "testcluster2-c.postgres.database.azure.com"
+                },
+                {
+                  "name": "testcluster2-w0",
+                  "fullyQualifiedDomainName": "testcluster2-w0.postgres.database.azure.com"
+                },
+                {
+                  "name": "testcluster2-w1",
+                  "fullyQualifiedDomainName": "testcluster2-w1.postgres.database.azure.com"
+                }
+              ],
+              "sourceResourceId": null,
+              "state": "Ready"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "additionalProp1": "string"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

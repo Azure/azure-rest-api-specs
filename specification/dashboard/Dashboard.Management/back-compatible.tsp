@@ -11,11 +11,15 @@ using Azure.Core;
   "requestBodyParameters"
 );
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(ManagedPrivateEndpointModels.create::parameters.resource,
   "requestBodyParameters"
@@ -23,8 +27,10 @@ using Azure.Core;
 @@clientName(ManagedPrivateEndpointModels.update::parameters.properties,
   "requestBodyParameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ManagedPrivateEndpointModel.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedPrivateEndpointModel.properties
+);
 
 @@clientName(IntegrationFabrics.create::parameters.resource,
   "requestBodyParameters"
@@ -40,8 +46,10 @@ using Azure.Core;
   "requestBodyParameters"
 );
 @@clientName(PrivateEndpointConnections.approve::parameters.resource, "body");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ManagedDashboard.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedDashboard.properties
+);
 @@alternateType(ManagedPrivateEndpointModelProperties.privateLinkResourceId,
   armResourceIdentifier
 );

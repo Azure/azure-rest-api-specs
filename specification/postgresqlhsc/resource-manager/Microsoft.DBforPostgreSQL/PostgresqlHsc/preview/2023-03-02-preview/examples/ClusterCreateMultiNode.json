@@ -1,0 +1,177 @@
+{
+  "operationId": "Clusters_Create",
+  "parameters": {
+    "api-version": "2023-03-02-preview",
+    "clusterName": "testcluster-multinode",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "administratorLoginPassword": "password",
+        "citusVersion": "11.1",
+        "coordinatorEnablePublicIpAccess": true,
+        "coordinatorServerEdition": "GeneralPurpose",
+        "coordinatorStorageQuotaInMb": 524288,
+        "coordinatorVCores": 4,
+        "enableHa": true,
+        "enableShardsOnCoordinator": false,
+        "nodeCount": 3,
+        "nodeEnablePublicIpAccess": false,
+        "nodeServerEdition": "MemoryOptimized",
+        "nodeStorageQuotaInMb": 524288,
+        "nodeVCores": 8,
+        "postgresqlVersion": "15",
+        "preferredPrimaryZone": "1"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "TestGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "title": "Create a new multi-node cluster",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testcluster-multinode",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-multinode",
+        "location": "westus",
+        "properties": {
+          "aadAuthEnabled": "disabled",
+          "administratorLogin": "citus",
+          "citusVersion": "11.1",
+          "coordinatorEnablePublicIpAccess": true,
+          "coordinatorServerEdition": "GeneralPurpose",
+          "coordinatorStorageQuotaInMb": 524288,
+          "coordinatorVCores": 4,
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "databaseName": "citus",
+          "earliestRestoreTime": null,
+          "enableHa": true,
+          "enableShardsOnCoordinator": false,
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "nodeCount": 3,
+          "nodeEnablePublicIpAccess": false,
+          "nodeServerEdition": "MemoryOptimized",
+          "nodeStorageQuotaInMb": 524288,
+          "nodeVCores": 8,
+          "passwordEnabled": "enabled",
+          "postgresqlVersion": "15",
+          "preferredPrimaryZone": "1",
+          "privateEndpointConnections": [],
+          "provisioningState": "Provisioning",
+          "readReplicas": [],
+          "serverNames": [
+            {
+              "name": "testcluster-multinode-c",
+              "fullyQualifiedDomainName": "c.testcluster-multinode.postgres.database.azure.com"
+            },
+            {
+              "name": "testcluster-multinode-w0",
+              "fullyQualifiedDomainName": "w0.testcluster-multinode.postgres.database.azure.com"
+            },
+            {
+              "name": "testcluster-multinode-w2",
+              "fullyQualifiedDomainName": "w0.testcluster-multinode.postgres.database.azure.com"
+            },
+            {
+              "name": "testcluster-multinode-w3",
+              "fullyQualifiedDomainName": "w0.testcluster-multinode.postgres.database.azure.com"
+            }
+          ],
+          "sourceResourceId": null,
+          "state": "Provisioning"
+        },
+        "systemData": {
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testcluster-multinode",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster-multinode",
+        "location": "westus",
+        "properties": {
+          "aadAuthEnabled": "disabled",
+          "administratorLogin": "citus",
+          "citusVersion": "11.1",
+          "coordinatorEnablePublicIpAccess": true,
+          "coordinatorServerEdition": "GeneralPurpose",
+          "coordinatorStorageQuotaInMb": 524288,
+          "coordinatorVCores": 4,
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "databaseName": "citus",
+          "earliestRestoreTime": null,
+          "enableHa": true,
+          "enableShardsOnCoordinator": false,
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "nodeCount": 3,
+          "nodeEnablePublicIpAccess": false,
+          "nodeServerEdition": "MemoryOptimized",
+          "nodeStorageQuotaInMb": 524288,
+          "nodeVCores": 8,
+          "passwordEnabled": "enabled",
+          "postgresqlVersion": "15",
+          "preferredPrimaryZone": "1",
+          "privateEndpointConnections": [],
+          "provisioningState": "Provisioning",
+          "readReplicas": [],
+          "serverNames": [
+            {
+              "name": "testcluster-multinode-c",
+              "fullyQualifiedDomainName": "c.testcluster-multinode.postgres.database.azure.com"
+            },
+            {
+              "name": "testcluster-multinode-w0",
+              "fullyQualifiedDomainName": "w0.testcluster-multinode.postgres.database.azure.com"
+            },
+            {
+              "name": "testcluster-multinode-w2",
+              "fullyQualifiedDomainName": "w0.testcluster-multinode.postgres.database.azure.com"
+            },
+            {
+              "name": "testcluster-multinode-w3",
+              "fullyQualifiedDomainName": "w0.testcluster-multinode.postgres.database.azure.com"
+            }
+          ],
+          "sourceResourceId": null,
+          "state": "Provisioning"
+        },
+        "systemData": {
+          "createdAt": "2022-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westus/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2023-03-02-preview"
+      }
+    }
+  }
+}

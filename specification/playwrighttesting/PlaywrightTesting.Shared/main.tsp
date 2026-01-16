@@ -14,7 +14,6 @@ namespace Microsoft.PlaywrightTesting.Shared;
 @doc("The PlaywrightTesting Accounts Model Version.")
 enum Versions {
   @doc("Version 1.0")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_0,
 }
 

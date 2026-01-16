@@ -7,8 +7,7 @@ import "@typespec/http";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
+@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2025_06_01)
 namespace JavaClient;
 
 // Get Application Operation
@@ -25,6 +24,7 @@ op getApplicationCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetApplicationRequiredParameters;
 
     @doc("Optional parameters for Get Application operation.")
+    @bodyIgnore
     options?: BatchApplicationGetOptions;
   },
   Azure.Batch.BatchApplication
@@ -48,6 +48,7 @@ model BatchApplicationsListOptions {
 op listApplicationsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Applications operation.")
+    @bodyIgnore
     options?: BatchApplicationsListOptions;
   },
   Azure.Batch.BatchApplicationListResult
@@ -71,6 +72,7 @@ model BatchPoolUsageMetricsListOptions {
 op listPoolUsageMetricsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Pool Usage Metrics operation.")
+    @bodyIgnore
     options?: BatchPoolUsageMetricsListOptions;
   },
   Azure.Batch.BatchPoolListUsageMetricsResult
@@ -95,6 +97,7 @@ op createPoolCustomization is Azure.Batch.CreateOperation<
     ...Azure.Batch.CreatePoolRequiredParameters;
 
     @doc("Optional parameters for Create Pool operation.")
+    @bodyIgnore
     options?: BatchPoolCreateOptions;
   },
   void
@@ -115,6 +118,7 @@ model BatchPoolsListOptions {
 op listPoolsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Pools operation.")
+    @bodyIgnore
     options?: BatchPoolsListOptions;
   },
   Azure.Batch.BatchPoolListResult
@@ -136,6 +140,7 @@ op deletePoolCustomization is Azure.Batch.DeleteOperation<
     ...Azure.Batch.DeletePoolRequiredParameters;
 
     @doc("Optional parameters for Delete Pool operation.")
+    @bodyIgnore
     options?: BatchPoolDeleteOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -160,6 +165,7 @@ op poolExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalRes
     ...Azure.Batch.PoolExistsRequiredParameters;
 
     @doc("Optional parameters for Pool Exists operation.")
+    @bodyIgnore
     options?: BatchPoolExistsOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -185,6 +191,7 @@ op getPoolCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetPoolRequiredParameters;
 
     @doc("Optional parameters for Get Pool operation.")
+    @bodyIgnore
     options?: BatchPoolGetOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -208,6 +215,7 @@ op updatePoolCustomization is Azure.Batch.UpdateOperation<
     ...Azure.Batch.UpdatePoolRequiredParameters;
 
     @doc("Optional parameters for Update Pool operation.")
+    @bodyIgnore
     options?: BatchPoolUpdateOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -231,6 +239,7 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.DisablePoolAutoscaleRequiredParameters;
 
     @doc("Optional parameters for Disable Pool AutoScale operation.")
+    @bodyIgnore
     options?: BatchPoolDisableAutoScaleOptions;
   },
   Azure.Batch.RequestSuccessResponseHeaders
@@ -255,6 +264,7 @@ op enablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.EnablePoolAutoscaleRequiredParameters;
 
     @doc("Optional parameters for Enable Pool AutoScale operation.")
+    @bodyIgnore
     options?: BatchPoolEnableAutoScaleOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -281,6 +291,7 @@ op evaluatePoolAutoScaleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.EvaluatePoolAutoScaleRequiredParameters;
 
     @doc("Optional parameters for Evaluate Pool AutoScale operation.")
+    @bodyIgnore
     options?: BatchPoolEvaluateAutoScaleOptions;
   },
   Azure.Batch.AutoScaleRun & Azure.Batch.RequestSuccessResponseHeaders
@@ -305,6 +316,7 @@ op resizePoolCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.ResizePoolRequiredParameters;
 
     @doc("Optional parameters for Resize Pool operation.")
+    @bodyIgnore
     options?: BatchPoolResizeOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -328,6 +340,7 @@ op stopPoolResizeCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.StopPoolResizeRequiredParameters;
 
     @doc("Optional parameters for Stop Pool Resize operation.")
+    @bodyIgnore
     options?: BatchPoolResizeStopOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -354,6 +367,7 @@ op replacePoolPropertiesCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.ReplacePoolPropertiesRequiredParameters;
 
     @doc("Optional parameters for Replace Pool Properties operation.")
+    @bodyIgnore
     options?: BatchPoolPropertiesReplaceOptions;
   },
   Azure.Batch.NoContentSuccessResponseHeaders
@@ -378,6 +392,7 @@ op removeNodesCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.RemoveNodesRequiredParameters;
 
     @doc("Optional parameters for Remove Nodes operation.")
+    @bodyIgnore
     options?: BatchNodesRemoveOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -400,6 +415,7 @@ model SupportedBatchImagesListOptions {
 op listSupportedImagesCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Supported Images operation.")
+    @bodyIgnore
     options?: SupportedBatchImagesListOptions;
   },
   Azure.Batch.BatchAccountListSupportedImagesResult
@@ -423,6 +439,7 @@ model BatchPoolNodeCountsListOptions {
 op listPoolNodeCountsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Pool Node Counts operation.")
+    @bodyIgnore
     options?: BatchPoolNodeCountsListOptions;
   },
   Azure.Batch.BatchPoolNodeCountsListResult
@@ -448,6 +465,7 @@ op deleteJobCustomization is Azure.Batch.DeleteOperation<
     ...Azure.Batch.DeleteJobRequiredParameters;
 
     @doc("Optional parameters for Delete Job operation.")
+    @bodyIgnore
     options?: BatchJobDeleteOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -472,6 +490,7 @@ op getJobCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetJobRequiredParameters;
 
     @doc("Optional parameters for Get Job operation.")
+    @bodyIgnore
     options?: BatchJobGetOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -495,6 +514,7 @@ op updateJobCustomization is Azure.Batch.UpdateOperation<
     ...Azure.Batch.UpdateJobRequiredParameters;
 
     @doc("Optional parameters for Update Job operation.")
+    @bodyIgnore
     options?: BatchJobUpdateOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -518,6 +538,7 @@ op replaceJobCustomization is Azure.Batch.ReplaceOperation<
     ...Azure.Batch.ReplaceJobRequiredParameters;
 
     @doc("Optional parameters for Replace Job operation.")
+    @bodyIgnore
     options?: BatchJobReplaceOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -541,6 +562,7 @@ op disableJobCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.DisableJobRequiredParameters;
 
     @doc("Optional parameters for Disable Job operation.")
+    @bodyIgnore
     options?: BatchJobDisableOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -564,6 +586,7 @@ op enableJobCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.EnableJobRequiredParameters;
 
     @doc("Optional parameters for Enable Job operation.")
+    @bodyIgnore
     options?: BatchJobEnableOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -588,6 +611,7 @@ op terminateJobCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.TerminateJobRequiredParameters;
 
     @doc("Optional parameters for Terminate Job operation.")
+    @bodyIgnore
     options?: BatchJobTerminateOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -611,6 +635,7 @@ op createJobCustomization is Azure.Batch.CreateOperation<
     ...Azure.Batch.CreateJobRequiredParameters;
 
     @doc("Optional parameters for Create Job operation.")
+    @bodyIgnore
     options?: BatchJobCreateOptions;
   },
   void
@@ -631,6 +656,7 @@ model BatchJobsListOptions {
 op listJobsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Jobs operation.")
+    @bodyIgnore
     options?: BatchJobsListOptions;
   },
   Azure.Batch.BatchJobListResult
@@ -653,6 +679,7 @@ op listJobsFromScheduleCustomization is Azure.Batch.ListOperation<
     ...Azure.Batch.ListJobsFromScheduleRequiredParameters;
 
     @doc("Optional parameters for List Jobs From Schedule operation.")
+    @bodyIgnore
     options?: BatchJobsFromScheduleListOptions;
   },
   Azure.Batch.BatchJobListResult
@@ -678,6 +705,7 @@ op listJobPreparationAndReleaseTaskStatusCustomization is Azure.Batch.ListOperat
     ...Azure.Batch.ListJobPreparationAndReleaseTaskStatusRequiredParameters;
 
     @doc("Optional parameters for List Jobs Preparation and Release Task Status operation.")
+    @bodyIgnore
     options?: BatchJobPreparationAndReleaseTaskStatusListOptions;
   },
   Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult
@@ -702,6 +730,7 @@ op getJobTaskCountsCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetJobTaskCountsRequiredParameters;
 
     @doc("Optional parameters for Get Job Task Counts operation.")
+    @bodyIgnore
     options?: BatchJobTaskCountsGetOptions;
   },
   Azure.Batch.BatchTaskCountsResult
@@ -709,126 +738,6 @@ op getJobTaskCountsCustomization is Azure.Batch.ReadOperation<
 
 @@override(Azure.Batch.Jobs.getJobTaskCounts,
   getJobTaskCountsCustomization,
-  "java"
-);
-
-// Create Certificate Operation
-@doc("Optional parameters for Create Certificate operation.")
-model BatchCertificateCreateOptions {
-  ...Azure.Batch.CommonJsonParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for Create Certificate operation.")
-@route("/certificates")
-op createCertificateCustomization is Azure.Batch.CreateOperation<
-  {
-    ...Azure.Batch.CreateCertificateRequiredParameters;
-
-    @doc("Optional parameters for Create Certificate operation.")
-    options?: BatchCertificateCreateOptions;
-  },
-  void
->;
-
-@@override(Azure.Batch.Certificates.createCertificate,
-  createCertificateCustomization,
-  "java"
-);
-
-// List Certificates Operation
-@doc("Optional parameters for List Certificates operation.")
-model BatchCertificatesListOptions {
-  ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListCertificatesOptionalParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for List Certificates operation.")
-@route("/certificates")
-op listCertificatesCustomization is Azure.Batch.ListOperation<
-  {
-    @doc("Optional parameters for List Certificates operation.")
-    options?: BatchCertificatesListOptions;
-  },
-  Azure.Batch.BatchCertificateListResult
->;
-
-@@override(Azure.Batch.Certificates.listCertificates,
-  listCertificatesCustomization,
-  "java"
-);
-
-// Cancel Certificate Deletion Operation
-@doc("Optional parameters for Cancel Certificate Deletion operation.")
-model BatchCertificateCancelDeletionOptions {
-  ...Azure.Batch.CommonParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for Cancel Certificate Deletion operation.")
-@route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
-op cancelCertificateDeletionCustomization is Azure.Batch.PostOperation<
-  {
-    ...Azure.Batch.CancelCertificateDeletionRequiredParameters;
-
-    @doc("Optional parameters for Cancel Certificate Deletion operation.")
-    options?: BatchCertificateCancelDeletionOptions;
-  },
-  Azure.Batch.NoContentSuccessResponseHeaders
->;
-
-@@override(Azure.Batch.Certificates.cancelCertificateDeletion,
-  cancelCertificateDeletionCustomization,
-  "java"
-);
-
-// Delete Certificate Operation
-@doc("Optional parameters for Delete Certificate operation.")
-model BatchCertificateDeleteOptions {
-  ...Azure.Batch.CommonParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for Delete Certificate operation.")
-@route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-op deleteCertificateCustomization is Azure.Batch.DeleteOperation<
-  {
-    ...Azure.Batch.DeleteCertificateRequiredParameters;
-
-    @doc("Optional parameters for Delete Certificate operation.")
-    options?: BatchCertificateDeleteOptions;
-  },
-  Azure.Batch.DeleteCertificateResponse
->;
-
-@@override(Azure.Batch.Certificates.deleteCertificate,
-  deleteCertificateCustomization,
-  "java"
-);
-
-// Get Certificate Operation
-@doc("Optional parameters for Get Certificate operation.")
-model BatchCertificateGetOptions {
-  ...Azure.Batch.CommonParameters;
-  ...Azure.Batch.GetCertificateOptionalParameters;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@doc("Custom override for Get Certificate operation.")
-@route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-op getCertificateCustomization is Azure.Batch.ReadOperation<
-  {
-    ...Azure.Batch.GetCertificateRequiredParameters;
-
-    @doc("Optional parameters for Get Certificate operation.")
-    options?: BatchCertificateGetOptions;
-  },
-  Azure.Batch.BatchCertificate
->;
-
-@@override(Azure.Batch.Certificates.getCertificate,
-  getCertificateCustomization,
   "java"
 );
 
@@ -847,6 +756,7 @@ op jobScheduleExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditi
     ...Azure.Batch.JobScheduleExistsRequiredParameters;
 
     @doc("Optional parameters for Job Schedule Exists operation.")
+    @bodyIgnore
     options?: BatchJobScheduleExistsOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -875,6 +785,7 @@ op deleteJobScheduleCustomization is Azure.Batch.DeleteOperation<
     ...Azure.Batch.DeleteJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Delete Job Schedule operation.")
+    @bodyIgnore
     options?: BatchJobScheduleDeleteOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -902,6 +813,7 @@ op getJobScheduleCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Get Job Schedule operation.")
+    @bodyIgnore
     options?: BatchJobScheduleGetOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -928,6 +840,7 @@ op updateJobScheduleCustomization is Azure.Batch.UpdateOperation<
     ...Azure.Batch.UpdateJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Update Job Schedule operation.")
+    @bodyIgnore
     options?: BatchJobScheduleUpdateOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -954,6 +867,7 @@ op replaceJobScheduleCustomization is Azure.Batch.ReplaceOperation<
     ...Azure.Batch.ReplaceJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Replace Job Schedule operation.")
+    @bodyIgnore
     options?: BatchJobScheduleReplaceOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -980,6 +894,7 @@ op disableJobScheduleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.DisableJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Disable Job Schedule operation.")
+    @bodyIgnore
     options?: BatchJobScheduleDisableOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -1006,6 +921,7 @@ op enableJobScheduleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.EnableJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Enable Job Schedule operation.")
+    @bodyIgnore
     options?: BatchJobScheduleEnableOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -1033,6 +949,7 @@ op terminateJobScheduleCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.TerminateJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Terminate Job Schedule operation.")
+    @bodyIgnore
     options?: BatchJobScheduleTerminateOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -1059,6 +976,7 @@ op createJobScheduleCustomization is Azure.Batch.CreateOperation<
     ...Azure.Batch.CreateJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Create Job Schedule operation.")
+    @bodyIgnore
     options?: BatchJobScheduleCreateOptions;
   },
   void
@@ -1082,6 +1000,7 @@ model BatchJobSchedulesListOptions {
 op listJobSchedulesCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Job Schedules operation.")
+    @bodyIgnore
     options?: BatchJobSchedulesListOptions;
   },
   Azure.Batch.BatchJobScheduleListResult
@@ -1106,6 +1025,7 @@ op createTaskCustomization is Azure.Batch.CreateOperation<
     ...Azure.Batch.CreateTaskRequiredParameters;
 
     @doc("Optional parameters for Create Task operation.")
+    @bodyIgnore
     options?: BatchTaskCreateOptions;
   },
   void
@@ -1128,6 +1048,7 @@ op listTasksCustomization is Azure.Batch.ListOperation<
     ...Azure.Batch.ListTasksRequiredParameters;
 
     @doc("Optional parameters for List Tasks operation.")
+    @bodyIgnore
     options?: BatchTasksListOptions;
   },
   Azure.Batch.BatchTaskListResult
@@ -1149,6 +1070,7 @@ op createTaskCollectionCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.CreateTaskCollectionRequiredParameters;
 
     @doc("Optional parameters for Create Task Collection operation.")
+    @bodyIgnore
     options?: BatchTaskCollectionCreateOptions;
   },
   Azure.Batch.BatchCreateTaskCollectionResult
@@ -1173,6 +1095,7 @@ op deleteTaskCustomization is Azure.Batch.DeleteOperation<
     ...Azure.Batch.DeleteTaskRequiredParameters;
 
     @doc("Optional parameters for Delete Task operation.")
+    @bodyIgnore
     options?: BatchTaskDeleteOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -1197,6 +1120,7 @@ op getTaskCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetTaskRequiredParameters;
 
     @doc("Optional parameters for Get Task operation.")
+    @bodyIgnore
     options?: BatchTaskGetOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -1220,6 +1144,7 @@ op replaceTaskCustomization is Azure.Batch.ReplaceOperation<
     ...Azure.Batch.ReplaceTaskRequiredParameters;
 
     @doc("Optional parameters for Replace Task operation.")
+    @bodyIgnore
     options?: BatchTaskReplaceOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -1245,6 +1170,7 @@ op listSubTasksCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.ListSubTasksRequiredParameters;
 
     @doc("Optional parameters for List SubTasks operation.")
+    @bodyIgnore
     options?: BatchSubTasksListOptions;
   },
   Azure.Batch.BatchTaskListSubtasksResult
@@ -1266,6 +1192,7 @@ op terminateTaskCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.TerminateTaskRequiredParameters;
 
     @doc("Optional parameters for Terminate Task operation.")
+    @bodyIgnore
     options?: BatchTaskTerminateOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -1289,6 +1216,7 @@ op reactivateTaskCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.ReactivateTaskRequiredParameters;
 
     @doc("Optional parameters for Reactivate Task operation.")
+    @bodyIgnore
     options?: BatchTaskReactivateOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
@@ -1316,6 +1244,7 @@ op deleteTaskFileCustomization is Azure.Batch.DeleteOperation<
     ...Azure.Batch.BatchTaskFileClientPathContent;
 
     @doc("Optional parameters for Delete Task File operation.")
+    @bodyIgnore
     options?: BatchTaskFileDeleteOptions;
   },
   Azure.Batch.DeleteTaskFileResponse
@@ -1342,6 +1271,7 @@ op getTaskFileCustomization is Azure.Batch.FileOperation<
     ...Azure.Batch.BatchTaskFileClientPathContent;
 
     @doc("Optional parameters for Get Task File operation.")
+    @bodyIgnore
     options?: BatchTaskFileGetOptions;
   },
   Azure.Batch.GetTaskFileResponse
@@ -1364,6 +1294,7 @@ op getTaskFilePropertiesCustomization is Azure.Batch.HeadFileOperation<
     ...Azure.Batch.BatchTaskFileClientPathContent;
 
     @doc("Optional parameters for Get Task File Properties operation.")
+    @bodyIgnore
     options?: BatchTaskFilePropertiesGetOptions;
   },
   {}
@@ -1389,6 +1320,7 @@ op listTaskFilesCustomization is Azure.Batch.ListOperation<
     ...Azure.Batch.ListTaskFilesRequiredParameters;
 
     @doc("Optional parameters for List Task Files operation.")
+    @bodyIgnore
     options?: BatchTaskFilesListOptions;
   },
   Azure.Batch.BatchNodeFileListResult
@@ -1410,6 +1342,7 @@ op createNodeUserCustomization is Azure.Batch.CreateOperation<
     ...Azure.Batch.CreateNodeUserRequiredParameters;
 
     @doc("Optional parameters for Create Node User operation.")
+    @bodyIgnore
     options?: BatchNodeUserCreateOptions;
   },
   void
@@ -1434,6 +1367,7 @@ op deleteNodeUserCustomization is Azure.Batch.DeleteOperation<
     ...Azure.Batch.DeleteNodeUserRequiredParameters;
 
     @doc("Optional parameters for Delete Node User operation.")
+    @bodyIgnore
     options?: BatchNodeUserDeleteOptions;
   },
   Azure.Batch.DeleteNodeUserResponse
@@ -1458,6 +1392,7 @@ op replaceNodeUserCustomization is Azure.Batch.ReplaceOperation<
     ...Azure.Batch.ReplaceNodeUserRequiredParameters;
 
     @doc("Optional parameters for Replace Node User operation.")
+    @bodyIgnore
     options?: BatchNodeUserReplaceOptions;
   },
   Azure.Batch.RequestSuccessResponseHeaders
@@ -1483,6 +1418,7 @@ op getNodeCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetNodeRequiredParameters;
 
     @doc("Optional parameters for Get Node operation.")
+    @bodyIgnore
     options?: BatchNodeGetOptions;
   },
   Azure.Batch.BatchNode
@@ -1505,6 +1441,7 @@ op rebootNodeCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.RebootNodeRequiredParameters;
 
     @doc("Optional parameters for Reboot Node operation.")
+    @bodyIgnore
     options?: BatchNodeRebootOptions;
   },
   Azure.Batch.AcceptedProcessingResponseHeaders
@@ -1526,6 +1463,7 @@ op startNodeCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.StartNodeRequiredParameters;
 
     @doc("Optional parameters for Start Node operation.")
+    @bodyIgnore
     options?: BatchNodeStartOptions;
   },
   Azure.Batch.AcceptedProcessingResponseHeaders
@@ -1548,6 +1486,7 @@ op deallocateNodeCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.DeallocateNodeRequiredParameters;
 
     @doc("Optional parameters for Deallocate Node operation.")
+    @bodyIgnore
     options?: BatchNodeDeallocateOptions;
   },
   Azure.Batch.AcceptedProcessingResponseHeaders
@@ -1573,6 +1512,7 @@ op reimageNodeCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.ReimageNodeRequiredParameters;
 
     @doc("Optional parameters for Reimage Node operation.")
+    @bodyIgnore
     options?: BatchNodeReimageOptions;
   },
   Azure.Batch.AcceptedProcessingResponseHeaders
@@ -1595,6 +1535,7 @@ op disableNodeSchedulingCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.DisableNodeSchedulingRequiredParameters;
 
     @doc("Optional parameters for Disable Node Scheduling operation.")
+    @bodyIgnore
     options?: BatchNodeSchedulingDisableOptions;
   },
   Azure.Batch.RequestSuccessResponseHeaders
@@ -1619,6 +1560,7 @@ op enableNodeSchedulingCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.EnableNodeSchedulingRequiredParameters;
 
     @doc("Optional parameters for Enable Node Scheduling operation.")
+    @bodyIgnore
     options?: BatchNodeSchedulingEnableOptions;
   },
   Azure.Batch.RequestSuccessResponseHeaders
@@ -1643,6 +1585,7 @@ op getNodeRemoteLoginSettingsCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetNodeRemoteLoginSettingsRequiredParameters;
 
     @doc("Optional parameters for Get Node Remote Login Settings operation.")
+    @bodyIgnore
     options?: BatchNodeRemoteLoginSettingsGetOptions;
   },
   Azure.Batch.BatchNodeRemoteLoginSettings
@@ -1667,6 +1610,7 @@ op uploadNodeLogsCustomization is Azure.Batch.PostOperation<
     ...Azure.Batch.UploadNodeLogsRequiredParameters;
 
     @doc("Optional parameters for Upload Node Logs operation.")
+    @bodyIgnore
     options?: BatchNodeLogsUploadOptions;
   },
   Azure.Batch.UploadBatchServiceLogsResult
@@ -1692,6 +1636,7 @@ op listNodesCustomization is Azure.Batch.ListOperation<
     ...Azure.Batch.ListNodesRequiredParameters;
 
     @doc("Optional parameters for List Nodes operation.")
+    @bodyIgnore
     options?: BatchNodesListOptions;
   },
   Azure.Batch.BatchNodeListResult
@@ -1714,6 +1659,7 @@ op getNodeExtensionCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetNodeExtensionRequiredParameters;
 
     @doc("Optional parameters for Get Node Extension operation.")
+    @bodyIgnore
     options?: BatchNodeExtensionGetOptions;
   },
   Azure.Batch.BatchNodeVMExtension
@@ -1739,6 +1685,7 @@ op listNodeExtensionsCustomization is Azure.Batch.ListOperation<
     ...Azure.Batch.ListNodeExtensionsRequiredParameters;
 
     @doc("Optional parameters for List Node Extensions operation.")
+    @bodyIgnore
     options?: BatchNodeExtensionsListOptions;
   },
   Azure.Batch.BatchNodeVMExtensionListResult
@@ -1764,6 +1711,7 @@ op deleteNodeFileCustomization is Azure.Batch.DeleteOperation<
     ...Azure.Batch.BatchNodeFileClientPathContent;
 
     @doc("Optional parameters for Delete Node File operation.")
+    @bodyIgnore
     options?: BatchNodeFileDeleteOptions;
   },
   Azure.Batch.DeleteNodeFileResponse
@@ -1790,6 +1738,7 @@ op getNodeFileCustomization is Azure.Batch.FileOperation<
     ...Azure.Batch.BatchNodeFileClientPathContent;
 
     @doc("Optional parameters for Get Node File operation.")
+    @bodyIgnore
     options?: BatchNodeFileGetOptions;
   },
   Azure.Batch.GetNodeFileResponse
@@ -1812,6 +1761,7 @@ op getNodeFilePropertiesCustomization is Azure.Batch.HeadFileOperation<
     ...Azure.Batch.BatchNodeFileClientPathContent;
 
     @doc("Optional parameters for Get Node File Properties operation.")
+    @bodyIgnore
     options?: BatchNodeFilePropertiesGetOptions;
   },
   {}
@@ -1837,6 +1787,7 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
     ...Azure.Batch.ListNodeFilesRequiredParameters;
 
     @doc("Optional parameters for List Node Files operation.")
+    @bodyIgnore
     options?: BatchNodeFilesListOptions;
   },
   Azure.Batch.BatchNodeFileListResult
@@ -1985,9 +1936,6 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
 // Updating original operations that have been converted to LRO methods to have internal access
 @@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "java");
 @@access(BatchNodeDeallocateOptions, Access.public, "java");
-
-@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "java");
-@@access(BatchCertificateDeleteOptions, Access.public, "java");
 
 @@access(Azure.Batch.Jobs.deleteJob, Access.internal, "java");
 @@access(BatchJobDeleteOptions, Access.public, "java");

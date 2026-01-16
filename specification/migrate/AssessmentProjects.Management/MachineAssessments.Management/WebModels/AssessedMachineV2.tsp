@@ -1,4 +1,4 @@
-import "../../Common/StandardizedContracts/AssessedWorkloadProperties.tsp";
+import "../Normalized Contract/StandardizedContracts/AssessedWorkloadProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -50,7 +50,7 @@ model AssessedMachineExtendedDetails {
 
   @doc("Dictionary of disks attached to the machine. Key is ID of disk. Value is a disk object.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disks?: AssessedDiskDataV3[];
 
   @doc("Gets or sets the processor details of the host.")
@@ -61,7 +61,7 @@ model AssessedMachineExtendedDetails {
     assessment.
     """)
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkAdapters?: AssessedMachineNetworkAdaptersV3[];
 
   @doc("Assessed machine type.")
@@ -116,7 +116,7 @@ model AssessedMachineExtendedDetails {
 
   @doc("List of errors for this machine.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: Error[];
 }
 
@@ -136,7 +136,7 @@ model MachineAssessmentRecommendation
   > {
   @doc("VM Security Suitability Results.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   vmSecuritySuitabilityResults?: VmSecuritySuitability[];
 
   @doc("Recommended security type for the VM.")

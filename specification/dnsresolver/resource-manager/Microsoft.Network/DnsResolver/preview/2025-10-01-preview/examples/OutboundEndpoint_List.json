@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "dnsResolverName": "sampleDnsResolver",
+    "resourceGroupName": "sampleResourceGroup",
+    "subscriptionId": "abdd4249-9f34-4cc6-8e42-c2e32110603e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/api/mresolver/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/outboundEndpoints?$skipToken=skipToken&api-version=2025-10-01-preview",
+        "value": [
+          {
+            "name": "sampleOutboundEndpoint",
+            "type": "Microsoft.Network/dnsResolvers/outboundEndpoints",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/outboundEndpoints/sampleOutboundEndpoint",
+            "location": "westus2",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "b4d35f41-0c70-4ec7-bb3e-0cd9f8b7e4be",
+              "subnet": {
+                "id": "/subscriptions/0403cfa9-9659-4f33-9f30-1f191c51d111/resourceGroups/sampleVnetResourceGroupName/providers/Microsoft.Network/virtualNetworks/sampleVirtualNetwork/subnets/sampleSubnet"
+              }
+            },
+            "systemData": {
+              "createdAt": "2021-04-01T01:01:01.1075056Z",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-04-02T02:03:01.1974346Z",
+              "lastModifiedByType": "Application"
+            },
+            "tags": {
+              "key1": "value1"
+            }
+          },
+          {
+            "name": "sampleOutboundEndpoint1",
+            "type": "Microsoft.Network/dnsResolvers/outboundEndpoints",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/outboundEndpoints/sampleOutboundEndpoint1",
+            "location": "westus2",
+            "properties": {
+              "provisioningState": "Succecced",
+              "resourceGuid": "b4d35f41-0c70-4ec7-bb3e-0cd9f8b7e4be",
+              "subnet": {
+                "id": "/subscriptions/0403cfa9-9659-4f33-9f30-1f191c51d111/resourceGroups/sampleVnetResourceGroupName/providers/Microsoft.Network/virtualNetworks/sampleVirtualNetwork/subnets/sampleSubnet1"
+              }
+            },
+            "systemData": {
+              "createdAt": "2021-04-01T01:01:01.1075056Z",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-04-02T02:03:01.1974346Z",
+              "lastModifiedByType": "Application"
+            },
+            "tags": {
+              "key1": "value1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "OutboundEndpoints_List",
+  "title": "List outbound endpoints by DNS resolver"
+}

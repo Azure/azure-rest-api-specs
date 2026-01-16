@@ -27,12 +27,22 @@ These are the global settings for the hybridaks.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-preview-2025-02-01-preview
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-preview-2025-02-01-preview
+
+These settings apply only when `--tag=package-preview-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02-01-preview'
+input-file:
+  - Microsoft.HybridContainerService/preview/2025-02-01-preview/provisionedClusterInstances.json
+  - Microsoft.HybridContainerService/preview/2025-02-01-preview/virtualNetworks.json
 ```
 
 ### Tag: package-2024-01

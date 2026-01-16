@@ -1,0 +1,49 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - apim
+  - aseregions
+  - creds
+  - csrs
+  - customdnssuffix
+  - dapr
+  - fdid
+  - icann
+  - ipssl
+  - iscloneable
+  - ishostingenvironmentnameavailable
+  - jwts
+  - myapp
+  - perfmon
+  - puid
+  - ravbhatnagar
+  - rdworkername
+  - snapshotsdr
+  - unparked
+  - unregistering
+  - virtualip
+  - vnets
+  - vstsrm
+  - weidongxu
+  - whois
+  - zilla
+overrides:
+  - filename: >-
+      **/specification/certificateregistration/resource-manager/Microsoft.CertificateRegistration/**/CommonDefinitions.json
+    words:
+      - guage
+  - filename: >-
+      **/specification/certificateregistration/resource-manager/Microsoft.CertificateRegistration/CertificateRegistration/models.tsp
+    words:
+      - Guage
+  - filename: >-
+      **/specification/certificateregistration/resource-manager/Microsoft.CertificateRegistration/CertificateRegistration/stable/2024-11-01/openapi.json
+    words:
+      - Guage
+  
