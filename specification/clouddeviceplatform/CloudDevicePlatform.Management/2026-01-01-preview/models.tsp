@@ -25,7 +25,6 @@ model PartnerBusiness is ProxyResource<PartnerBusinessProperties> {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/empty-updatable-properties"
 @added(Versions.v2026_01_01_preview)
 @doc("Represents the properties of a CloudDevicePlatform partner business resource.")
 model PartnerBusinessProperties {

@@ -22,7 +22,6 @@ model DelegatedIdentity is TrackedResource<DelegatedIdentityProperties> {
   ...Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationProperty;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/empty-updatable-properties"
 @added(Versions.v2024_06_01_preview)
 @doc("Represents the properties of a CloudDevicePlatform delegated identity resource.")
 model DelegatedIdentityProperties {

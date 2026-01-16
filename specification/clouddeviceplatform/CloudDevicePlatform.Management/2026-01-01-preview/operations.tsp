@@ -8,7 +8,7 @@ namespace Microsoft.CloudDevicePlatform.V20260101Preview;
 
 @added(Versions.v2026_01_01_preview)
 @armResourceOperations
-interface PartnerBusinessOperations {
+interface PartnerBusinesses {
   createOrUpdate is ArmResourceCreateOrReplaceSync<PartnerBusiness>;
   delete is ArmResourceDeleteSync<PartnerBusiness>;
   get is ArmResourceRead<PartnerBusiness>;

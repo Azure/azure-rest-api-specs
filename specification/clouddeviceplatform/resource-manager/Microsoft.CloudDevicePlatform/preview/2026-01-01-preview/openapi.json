@@ -40,7 +40,7 @@
   },
   "tags": [
     {
-      "name": "PartnerBusinessOperations"
+      "name": "PartnerBusinesses"
     },
     {
       "name": "Operations"
@@ -127,9 +127,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CloudDevicePlatform/partnerBusinesses": {
       "get": {
-        "operationId": "PartnerBusinessOperations_ListBySubscription",
+        "operationId": "PartnerBusinesses_ListBySubscription",
         "tags": [
-          "PartnerBusinessOperations"
+          "PartnerBusinesses"
         ],
         "description": "List PartnerBusiness resources by subscription ID",
         "parameters": [
@@ -152,6 +152,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PartnerBusinesses_ListBySubscription": {
+            "$ref": "./examples/PartnerBusinesses_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -409,9 +414,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudDevicePlatform/partnerBusinesses/{partnerBusinessName}": {
       "get": {
-        "operationId": "PartnerBusinessOperations_Get",
+        "operationId": "PartnerBusinesses_Get",
         "tags": [
-          "PartnerBusinessOperations"
+          "PartnerBusinesses"
         ],
         "description": "Get a PartnerBusiness",
         "parameters": [
@@ -446,12 +451,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PartnerBusinesses_Get": {
+            "$ref": "./examples/PartnerBusinesses_Get.json"
+          }
         }
       },
       "put": {
-        "operationId": "PartnerBusinessOperations_CreateOrUpdate",
+        "operationId": "PartnerBusinesses_CreateOrUpdate",
         "tags": [
-          "PartnerBusinessOperations"
+          "PartnerBusinesses"
         ],
         "description": "Create a PartnerBusiness",
         "parameters": [
@@ -501,12 +511,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PartnerBusinesses_CreateOrUpdate": {
+            "$ref": "./examples/PartnerBusinesses_CreateOrUpdate.json"
+          }
         }
       },
       "delete": {
-        "operationId": "PartnerBusinessOperations_Delete",
+        "operationId": "PartnerBusinesses_Delete",
         "tags": [
-          "PartnerBusinessOperations"
+          "PartnerBusinesses"
         ],
         "description": "Delete a PartnerBusiness",
         "parameters": [
@@ -540,6 +555,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PartnerBusinesses_Delete": {
+            "$ref": "./examples/PartnerBusinesses_Delete.json"
           }
         }
       }
