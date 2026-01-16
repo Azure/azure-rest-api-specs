@@ -4,12 +4,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "../common/service.tsp";
-import "../common/custom_types.tsp";
+import "../Foundry/src/common/service.tsp";
+import "../Foundry/src/common/custom_types.tsp";
 
-import "../agents/routes.tsp";
-import "../memory_stores/routes.tsp";
+import "../Foundry/src/agents/routes.tsp";
+import "../Foundry/src/memory_stores/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
-import "../responses/models.tsp";
-import "../conversations/models.tsp";
+import "../Foundry/src/responses/models.tsp";
+import "../Foundry/src/conversations/models.tsp";

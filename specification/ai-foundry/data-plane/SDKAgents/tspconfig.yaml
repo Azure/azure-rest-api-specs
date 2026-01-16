@@ -1,32 +1,31 @@
 parameters:
   "service-dir":
     default: "sdk/ai"
-emit:
 options:
-  "@typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
-    package-name: Azure.AI.Projects.OpenAI
+  "@azure-tools/typespec-java":
     api-version: "2025-11-15-preview"
+    package-dir: "azure-ai-agents"
+    namespace: "com.azure.ai.agents"
+    service-name: "Agents"
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
+    generate-samples: false
+    custom-types-subpackage: "implementation.models"
+    rename-model:
+      MCPToolAllowedTools1: MCPToolAllowedTools
+      MCPToolRequireApproval1: MCPToolRequireApproval
+    customization-class: customizations/src/main/java/AgentsCustomizations.java
+    flavor: azure
+  "@typespec/json-schema":
+    emitAllModels: true
+    emitAllRefs: false
+    emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
+    file-type: json
+    bundleId: azure-ai-agents-v2.json
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
-      - "specification/ai-foundry/data-plane/Foundry/src/.external-readonly/"
-      - "specification/ai-foundry/data-plane/Foundry/src/agents/"
-      - "specification/ai-foundry/data-plane/Foundry/src/common/"
-      - "specification/ai-foundry/data-plane/Foundry/src/connections/"
-      - "specification/ai-foundry/data-plane/Foundry/src/datasets/"
-      - "specification/ai-foundry/data-plane/Foundry/src/indexes/"
-      - "specification/ai-foundry/data-plane/Foundry/src/deployments/"
-      - "specification/ai-foundry/data-plane/Foundry/src/red-teams/"
-      - "specification/ai-foundry/data-plane/Foundry/src/evaluationrules/"
-      - "specification/ai-foundry/data-plane/Foundry/src/openai-evaluations/"
-      - "specification/ai-foundry/data-plane/Foundry/src/evaluation_taxonomies/"
-      - "specification/ai-foundry/data-plane/Foundry/src/evaluators/"
-      - "specification/ai-foundry/data-plane/Foundry/src/insights/"
-      - "specification/ai-foundry/data-plane/Foundry/src/schedules/"
-      - "specification/ai-foundry/data-plane/Foundry/src/memory_stores/"
-      - "specification/ai-foundry/data-plane/Foundry/src/conversations/"
-      - "specification/ai-foundry/data-plane/Foundry/src/responses/"
-      - "specification/ai-foundry/data-plane/Foundry/src/tools/"
+      - "specification/ai-foundry/data-plane/Foundry"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
