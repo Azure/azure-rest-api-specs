@@ -20,9 +20,13 @@ namespace Azure.AI.Projects;
 @@scope(Responses.listInputItems, "!csharp");
 @@scope(Responses.listResponses, "!csharp");
 
+// These operations are temporarily preserved to root request/response models for
+// interim convenience layer support; to be removed once available in
+// https://github.com/openai/openai-dotnet
 // @@scope(Conversations.createConversation, "!csharp");
-@@scope(Conversations.listConversations, "!csharp");
 // @@scope(Conversations.updateConversation, "!csharp");
+
+@@scope(Conversations.listConversations, "!csharp");
 @@scope(Conversations.getConversation, "!csharp");
 @@scope(Conversations.deleteConversation, "!csharp");
 @@scope(Conversations.createConversationItems, "!csharp");
@@ -32,8 +36,6 @@ namespace Azure.AI.Projects;
 
 @@usage(OpenAI.Conversation, Usage.output);
 @@access(OpenAI.Conversation, Access.public);
-// #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-// @@changePropertyType(OpenAI.Conversation.metadata, Record<string>);
 @@clientName(OpenAI.Conversation, "ProjectConversation");
 @@usage(OpenAI.CreateConversationBody, Usage.input);
 @@access(OpenAI.CreateConversationBody, Access.public);
