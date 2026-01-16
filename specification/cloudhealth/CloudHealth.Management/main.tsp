@@ -1348,7 +1348,8 @@ interface DiscoveryRules {
   deleteV1 is ArmResourceDeleteSync<DiscoveryRule>;
 
   @added(Versions.v2026_01_01_preview)
-  @sharedRoute  createOrUpdate is ArmResourceCreateOrReplaceAsync<DiscoveryRule>;
+  @sharedRoute
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DiscoveryRule>;
 
   @added(Versions.v2026_01_01_preview)
   @sharedRoute
