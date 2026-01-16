@@ -38,7 +38,7 @@ describe("KeyedCache", () => {
   });
 });
 
-describe("KeyedCache2", () => {
+describe("KeyedPairCache", () => {
   it("createAndGetSync", () => {
     /** @type {KeyedPairCache<number, number, string>} */
     const cache = new KeyedPairCache();
@@ -125,7 +125,7 @@ describe("StringKeyCache", () => {
   });
 });
 
-describe("StringKeyCache2", () => {
+describe("StringKeyPairCache", () => {
   it("createAndGetSync", () => {
     /** @type {StringKeyPairCache<string>} */
     const cache = new StringKeyPairCache();
