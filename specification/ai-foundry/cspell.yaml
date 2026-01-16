@@ -7,82 +7,61 @@
 import:
   - ../../cspell.yaml
 words:
-  - acrad
-  - agatston
-  - apim
-  - ascvd
-  - birads
-  - ceus
-  - cusick
-  - dicom
-  - fhir
-  - findsimilars
-  - frax
-  - hnpcc
-  - interventional
-  - kellgren
-  - loinc
-  - mednax
-  - onco
-  - oncophenotype
-  - openai
-  - presentationml
-  - reslution
-  - rrggbb
-  - snomed
-  - spreadsheetml
-  - supress
-  - tcgc
-  - telehealth
-  - tonnis
-  - tyrer
-  - ubinary
-  - umls
-  - unversioned
-  - upca
-  - upce
-  - wordprocessingml
-  - azureai
-  - atbash
-  - onedp
-  - ansii
-  - upia
-  - aoai
-  - azaiprojects
+  # Common words to ignore across all of Foundry:
+  #   Only include here if the words span across scenario areas and are unlikely to adjacent to
+  #   easy-to-make typographic errors. If possible, add to a more targeted override, below.
+  - agentic
+  - AOAI
+  - CSDL
+  - evals
+  - includable
+  - includables
+  - logprobs
 overrides:
-  - filename: '**/specification/ai-foundry/data-plane/Foundry/**/*.*'
+  # Red-team related terms
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/red-teams'
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
+    - '**/specification/ai-foundry/data-plane/Foundry/stable'
+    - '**/specification/ai-foundry/data-plane/Foundry/preview'
     words:
-      - bleu
-      - cfile
-      - ckpt
-      - cntr
-      - dall
-      - davinci
-      - evals
-      - flac
-      - ftckpt
-      - ftevent
-      - ftjob
-      - gleu
-      - granularities
-      - ilike
-      - includable
-      - inpaint
-      - inpainting
-      - Issh
-      - KGDCGL
-      - logit
-      - logprobs
-      - mcpl
-      - mpga
-      - mpxmy
-      - pcma
-      - pcmu
-      - rerank
-      - sess
-      - vsfb
-      - wandb
-      - webp
-      - xhigh
-      - Xxulc
-      - Zdws
+      - atbash # Atbash cipher
+      - UPIA # Injected prompt attack
+  # Evaluation related terms
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/openai-evaluations'
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
+    - '**/specification/ai-foundry/data-plane/Foundry/stable'
+    - '**/specification/ai-foundry/data-plane/Foundry/preview'
+    words:
+    - gleu # Evaluation metric
+  # Audio/realtime related terms
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
+    - '**/specification/ai-foundry/data-plane/Foundry/stable'
+    - '**/specification/ai-foundry/data-plane/Foundry/preview'
+    words:
+    - flac # Lossless audio format
+    - pcma # Audio codec
+    - pcmu # Audio codec
+  # TypeSpec patterns: ignore common false positives in client customizations
+  - filename: '**/*client*tsp'
+    ignoreRegExpList:
+      - '/@@clientName\([^\"]*\"([^\"]*)/g'
+  # Example and output patterns: ignore common false positives in examples and emission outputs
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/examples'
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
+    - '**/specification/ai-foundry/data-plane/Foundry/stable'
+    - '**/specification/ai-foundry/data-plane/Foundry/preview'
+    words:
+      - xhigh # Image generation quality level
+      - inpainting # Image generation concept
+      - ilike # Comparison operator
+    ignoreRegExpList:
+      - '"(?:id|.*_id|.*_checkpoint|.*_model)"\s*:\s*"[^"]*"' # Ignore IDs in examples
+      - '\\"(?:id|.*_id|.*_checkpoint|.*_model)\\"\s*:\s*\\"[^"\\]*\\"' # Ignore IDs in examples (JSON)
+      - '(?<=`)[^`\n]+(?=`)' # Ignore backtick-fenced literals in examples
+      - logit_bias
+      - apim-request-id
+      - davinci # legacy OpenAI model name
