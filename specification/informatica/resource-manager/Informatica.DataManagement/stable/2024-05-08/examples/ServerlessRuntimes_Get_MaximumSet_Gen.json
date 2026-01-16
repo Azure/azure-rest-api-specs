@@ -3,65 +3,65 @@
   "operationId": "ServerlessRuntimes_Get",
   "parameters": {
     "api-version": "2024-05-08",
-    "subscriptionId": "3599DA28-E346-4D9F-811E-189C0445F0FE",
-    "resourceGroupName": "rgopenapi",
-    "organizationName": "e3Y",
-    "serverlessRuntimeName": "48-"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization",
+    "serverlessRuntimeName": "myServerlessRuntime"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Accepted",
-          "description": "mqkaenjmxakvzrwmirelmhgiedto",
+          "provisioningState": "Succeeded",
+          "description": "Production serverless runtime for data integration",
           "platform": "AZURE",
           "applicationType": "CDI",
-          "computeUnits": "bsctukmndvowse",
-          "executionTimeout": "ruiougpypny",
-          "serverlessAccountLocation": "bkxdfopapbqucyhduewrubjpaei",
+          "computeUnits": "4",
+          "executionTimeout": "3600",
+          "serverlessAccountLocation": "westus",
           "serverlessRuntimeNetworkProfile": {
             "networkInterfaceConfiguration": {
-              "vnetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/HypernetVnet1",
-              "subnetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/subnet1",
-              "vnetResourceGuid": "5328d299-1462-4be0-bef1-303a28e556a0"
+              "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Network/virtualNetworks/myVnet",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default",
+              "vnetResourceGuid": "11111111-1111-1111-1111-111111111111"
             }
           },
           "advancedCustomProperties": [
             {
-              "key": "qcmc",
-              "value": "unraxmnohdmvutt"
+              "key": "maxConnections",
+              "value": "100"
             }
           ],
-          "supplementaryFileLocation": "zmlqtkncwgqhhupsnqluumz",
+          "supplementaryFileLocation": "/files/supplements",
           "serverlessRuntimeConfig": {
             "cdiConfigProps": [
               {
-                "engineName": "hngsdqvtjdhwqlbqfotipaiwjuys",
-                "engineVersion": "zlrlbg",
+                "engineName": "CDI Engine",
+                "engineVersion": "1.0",
                 "applicationConfigs": [
                   {
-                    "type": "lw",
-                    "name": "upfvjrqcrwwedfujkmsodeinw",
-                    "value": "mozgsetpwjmtyl",
-                    "platform": "dixfyeobngivyvf",
-                    "customized": "j",
-                    "defaultValue": "zvgkqwmi"
+                    "type": "string",
+                    "name": "connectionPoolSize",
+                    "value": "10",
+                    "platform": "AZURE",
+                    "customized": "true",
+                    "defaultValue": "5"
                   }
                 ]
               }
             ],
             "cdieConfigProps": [
               {
-                "engineName": "hngsdqvtjdhwqlbqfotipaiwjuys",
-                "engineVersion": "zlrlbg",
+                "engineName": "CDIE Engine",
+                "engineVersion": "1.0",
                 "applicationConfigs": [
                   {
-                    "type": "lw",
-                    "name": "upfvjrqcrwwedfujkmsodeinw",
-                    "value": "mozgsetpwjmtyl",
-                    "platform": "dixfyeobngivyvf",
-                    "customized": "j",
-                    "defaultValue": "zvgkqwmi"
+                    "type": "string",
+                    "name": "maxRetries",
+                    "value": "3",
+                    "platform": "AZURE",
+                    "customized": "false",
+                    "defaultValue": "3"
                   }
                 ]
               }
@@ -69,24 +69,35 @@
           },
           "serverlessRuntimeTags": [
             {
-              "name": "korveuycuwhs",
-              "value": "uyiuegxnkgp"
+              "name": "environment",
+              "value": "production"
             }
           ],
           "serverlessRuntimeUserContextProperties": {
-            "userContextToken": "oludf"
+            "userContextToken": "user-context-token-123"
           }
         },
-        "id": "vcdjzfgqjv",
-        "name": "byzccgftqjthb",
-        "type": "due",
+        "identity": {
+          "principalId": "22222222-2222-2222-2222-222222222222",
+          "tenantId": "33333333-3333-3333-3333-333333333333",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "44444444-4444-4444-4444-444444444444",
+              "clientId": "55555555-5555-5555-5555-555555555555"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes/myServerlessRuntime",
+        "name": "myServerlessRuntime",
+        "type": "Informatica.DataManagement/organizations/serverlessRuntimes",
         "systemData": {
-          "createdBy": "kocqbxulqrggzbfrifpvy",
+          "createdBy": "user@example.com",
           "createdByType": "User",
-          "createdAt": "2023-12-05T15:45:15.582Z",
-          "lastModifiedBy": "lzpllqnildoamkmgf",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-12-05T15:45:15.582Z"
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
         }
       }
     }

@@ -3,24 +3,32 @@
   "operationId": "ServerlessRuntimes_CheckDependencies",
   "parameters": {
     "api-version": "2024-05-08",
-    "subscriptionId": "3599DA28-E346-4D9F-811E-189C0445F0FE",
-    "resourceGroupName": "rgopenapi",
-    "organizationName": "3P",
-    "serverlessRuntimeName": "M"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization",
+    "serverlessRuntimeName": "myServerlessRuntime"
   },
   "responses": {
     "200": {
       "body": {
-        "count": 28,
-        "id": "uwjsqpxr",
+        "count": 2,
+        "id": "dependency-check-123",
         "references": [
           {
-            "id": "uzp",
-            "appContextId": "t",
-            "path": "yxbpmcmfhhtht",
-            "documentType": "jpcz",
-            "description": "vlkyqkevlrpge",
-            "lastUpdatedTime": "yyf"
+            "id": "ref-001",
+            "appContextId": "app-context-001",
+            "path": "/data/mappings/mapping1",
+            "documentType": "Mapping",
+            "description": "Data integration mapping",
+            "lastUpdatedTime": "2024-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "ref-002",
+            "appContextId": "app-context-002",
+            "path": "/data/connections/connection1",
+            "documentType": "Connection",
+            "description": "Database connection",
+            "lastUpdatedTime": "2024-01-02T00:00:00.000Z"
           }
         ]
       }

@@ -3,42 +3,42 @@
   "operationId": "Organizations_GetAllServerlessRuntimes",
   "parameters": {
     "api-version": "2024-05-08",
-    "subscriptionId": "3599DA28-E346-4D9F-811E-189C0445F0FE",
-    "resourceGroupName": "rgopenapi",
-    "organizationName": "t"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization"
   },
   "responses": {
     "200": {
       "body": {
         "informaticaRuntimeResources": [
           {
-            "name": "wwhnptecwbip",
-            "createdTime": "wfbezwbdyszdvwlzvthrxi",
-            "updatedTime": "mjiscnhzzutsrsffhdqsl",
-            "createdBy": "sxizcppjasypefvhacvzfhzn",
-            "updatedBy": "uhsmrmagqrtfd",
-            "id": "hgnqusidmutarhmwnswhalpjzievdm",
+            "name": "myServerlessRuntime",
+            "createdTime": "2024-01-01T00:00:00.000Z",
+            "updatedTime": "2024-01-01T12:00:00.000Z",
+            "createdBy": "user@example.com",
+            "updatedBy": "user@example.com",
+            "id": "runtime-123",
             "type": "SERVERLESS",
-            "status": "exvtblad",
-            "statusLocalized": "otg",
-            "statusMessage": "bnosdq",
+            "status": "Running",
+            "statusLocalized": "Running",
+            "statusMessage": "Runtime is running",
             "serverlessConfigProperties": {
-              "subnet": "mmhpqazmxniguwzmqiu",
-              "applicationType": "qnrsngoycualsvmmsu",
-              "resourceGroupName": "ly",
-              "advancedCustomProperties": "pvusvtqtkhozfuqtokw",
-              "supplementaryFileLocation": "wylmhc",
-              "platform": "p",
-              "tags": "tevuusglxuivd",
-              "vnet": "vvs",
-              "executionTimeout": "pbnxiricrjifreoiazmzeqiwu",
-              "computeUnits": "ao",
-              "tenantId": "00000000-0000-0000-0000-000000000000",
-              "subscriptionId": "zl",
-              "region": "lrudpuvzcuh",
-              "serverlessArmResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Informatica.DataManagement/organizations/org1/serverlessRuntimes/serverlessRuntimeName"
+              "subnet": "default",
+              "applicationType": "CDI",
+              "resourceGroupName": "rg-example",
+              "advancedCustomProperties": "{}",
+              "supplementaryFileLocation": "/files",
+              "platform": "AZURE",
+              "tags": "environment=production",
+              "vnet": "myVnet",
+              "executionTimeout": "3600",
+              "computeUnits": "4",
+              "tenantId": "00000000-0000-0000-0000-000000000001",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "region": "westus",
+              "serverlessArmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes/myServerlessRuntime"
             },
-            "description": "kozzyfee"
+            "description": "Production serverless runtime"
           }
         ]
       }
