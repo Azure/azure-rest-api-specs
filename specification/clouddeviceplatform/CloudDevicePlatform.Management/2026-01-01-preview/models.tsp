@@ -13,32 +13,16 @@ using Azure.ResourceManager;
 namespace Microsoft.CloudDevicePlatform.V20260101Preview;
 
 // --------------------------------------------
-// DelegatedIdentity Resource Model Definitions
-// --------------------------------------------
-@added(Versions.v2026_01_01_preview)
-@parentResource(PartnerBusiness)
-@doc("Represents a CloudDevicePlatform delegated identity resource.")
-model DelegatedIdentityV20260101Preview is TrackedResource<DelegatedIdentityProperties> {
-  ...ResourceNameParameter<
-    Resource = DelegatedIdentityV20260101Preview,
-    NamePattern = "^[a-zA-Z0-9-]{3,128}$",
-    SegmentName = "delegatedIdentities"
-  >;
-  ...Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationProperty;
-}
-
-// --------------------------------------------
 // PartnerBusiness Resource Model Definitions
 // --------------------------------------------
 @added(Versions.v2026_01_01_preview)
 @doc("Represents a CloudDevicePlatform partner business resource.")
-model PartnerBusiness is TrackedResource<PartnerBusinessProperties> {
+model PartnerBusiness is ProxyResource<PartnerBusinessProperties> {
   ...ResourceNameParameter<
     Resource = PartnerBusiness,
     NamePattern = "^[a-zA-Z0-9-]{3,128}$",
     SegmentName = "partnerBusinesses"
   >;
-  ...Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationProperty;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/empty-updatable-properties"
@@ -48,13 +32,4 @@ model PartnerBusinessProperties {
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
-}
-
-@added(Versions.v2026_01_01_preview)
-@doc("Represents the properties of a PartnerBusiness resource that can be updated.")
-model PartnerBusinessUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  @doc("Updatable managed service identity")
-  identity?: Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate;
 }
