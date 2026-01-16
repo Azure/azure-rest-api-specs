@@ -28,19 +28,20 @@ These are the global settings for the PureStorage.Block.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2024-11-01
+```
 
-  - tag: package-2026-01-01-preview
-    input-file:
-      - purestorage/preview/2026-01-01-preview/purestorage.json
-  - tag: package-2024-11-01-preview
-    input-file:
-      - purestorage/preview/2024-11-01-preview/purestorage.json
-  - tag: package-2024-11-01
-    input-file:
-      - purestorage/stable/2024-11-01/purestorage.json
-  - tag: package-2024-10-01-preview
-    input-file:
-      - purestorage/preview/2024-10-01-preview/purestorage.json```
+### Tag: package-2026-01-01
+
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+  - PureStorage.Block/stable/2026-01-01/purestorage.json
+
+suppressions:
+ - code: PathContainsResourceType
+   reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
+```
 
 ### Tag: package-2024-11-01
 
