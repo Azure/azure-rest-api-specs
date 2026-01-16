@@ -1187,7 +1187,7 @@ interface HealthModels {
       HealthModelProperties
     >
   >;
-  delete is ArmResourceDeleteSync<HealthModel>;
+  delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
   listByResourceGroup is ArmResourceListByParent<HealthModel>;
   listBySubscription is ArmListBySubscription<HealthModel>;
 }
