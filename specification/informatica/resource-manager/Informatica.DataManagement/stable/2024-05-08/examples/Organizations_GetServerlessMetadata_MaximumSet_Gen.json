@@ -3,9 +3,9 @@
   "operationId": "Organizations_GetServerlessMetadata",
   "parameters": {
     "api-version": "2024-05-08",
-    "subscriptionId": "3599DA28-E346-4D9F-811E-189C0445F0FE",
-    "resourceGroupName": "rgopenapi",
-    "organizationName": "3_UC"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization"
   },
   "responses": {
     "200": {
@@ -15,55 +15,61 @@
           "platform": "AZURE",
           "applicationTypes": [
             {
-              "name": "kdbgedaiazvoakoheguldnmhadcs",
-              "value": "ipbrpyvxilvqfnwktnq"
+              "name": "CDI",
+              "value": "Cloud Data Integration"
             }
           ],
           "computeUnits": [
             {
-              "name": "dvvnxwibhl",
+              "name": "Standard",
               "value": [
-                "msdbcuekw"
+                "4",
+                "8",
+                "16"
               ]
             }
           ],
-          "executionTimeout": "zmypifivoqmdpzfjhtpqzvlxol",
+          "executionTimeout": "3600",
           "regions": [
             {
-              "id": "mqkbutwvzbnnisnen",
-              "name": "wwnertzjidsshgoesojbnaopb"
+              "id": "westus",
+              "name": "West US"
+            },
+            {
+              "id": "eastus",
+              "name": "East US"
             }
           ]
         },
         "serverlessRuntimeConfigProperties": {
           "cdiConfigProps": [
             {
-              "engineName": "hngsdqvtjdhwqlbqfotipaiwjuys",
-              "engineVersion": "zlrlbg",
+              "engineName": "CDI Engine",
+              "engineVersion": "1.0",
               "applicationConfigs": [
                 {
-                  "type": "lw",
-                  "name": "upfvjrqcrwwedfujkmsodeinw",
-                  "value": "mozgsetpwjmtyl",
-                  "platform": "dixfyeobngivyvf",
-                  "customized": "j",
-                  "defaultValue": "zvgkqwmi"
+                  "type": "string",
+                  "name": "configName",
+                  "value": "configValue",
+                  "platform": "AZURE",
+                  "customized": "false",
+                  "defaultValue": "default"
                 }
               ]
             }
           ],
           "cdieConfigProps": [
             {
-              "engineName": "hngsdqvtjdhwqlbqfotipaiwjuys",
-              "engineVersion": "zlrlbg",
+              "engineName": "CDIE Engine",
+              "engineVersion": "1.0",
               "applicationConfigs": [
                 {
-                  "type": "lw",
-                  "name": "upfvjrqcrwwedfujkmsodeinw",
-                  "value": "mozgsetpwjmtyl",
-                  "platform": "dixfyeobngivyvf",
-                  "customized": "j",
-                  "defaultValue": "zvgkqwmi"
+                  "type": "string",
+                  "name": "configName",
+                  "value": "configValue",
+                  "platform": "AZURE",
+                  "customized": "false",
+                  "defaultValue": "default"
                 }
               ]
             }

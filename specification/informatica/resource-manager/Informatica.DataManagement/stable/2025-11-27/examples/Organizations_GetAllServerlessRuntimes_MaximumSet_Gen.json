@@ -1,0 +1,56 @@
+{
+  "title": "Organizations_GetAllServerlessRuntimes",
+  "operationId": "Organizations_GetAllServerlessRuntimes",
+  "parameters": {
+    "api-version": "2025-11-27",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "informaticaRuntimeResources": [
+          {
+            "name": "myServerlessRuntime",
+            "createdTime": "2024-01-01T00:00:00.000Z",
+            "updatedTime": "2024-01-01T12:00:00.000Z",
+            "createdBy": "user@example.com",
+            "updatedBy": "user@example.com",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes/myServerlessRuntime",
+            "type": "SERVERLESS",
+            "status": "Running",
+            "statusLocalized": "Running",
+            "statusMessage": "Runtime is running successfully",
+            "serverlessConfigProperties": {
+              "subnet": "default",
+              "applicationType": "CDI",
+              "resourceGroupName": "rg-example",
+              "advancedCustomProperties": "{}",
+              "supplementaryFileLocation": "/files",
+              "serverlessRuntimeDataDisks": [
+                {
+                  "type": "NFS",
+                  "serverHostOrIpAddress": "10.0.0.5",
+                  "sourceMount": "/source/data",
+                  "targetMount": "/target/data",
+                  "mountOptions": "rw,sync"
+                }
+              ],
+              "platform": "AZURE",
+              "tags": "environment=production",
+              "vnet": "myVnet",
+              "executionTimeout": "3600",
+              "computeUnits": "4",
+              "tenantId": "00000000-0000-0000-0000-000000000001",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "region": "westus",
+              "serverlessArmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes/myServerlessRuntime"
+            },
+            "description": "Production serverless runtime"
+          }
+        ]
+      }
+    }
+  }
+}
