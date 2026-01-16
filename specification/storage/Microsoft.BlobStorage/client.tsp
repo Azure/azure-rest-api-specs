@@ -45,7 +45,7 @@ namespace Customizations;
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
 @@alternateType(BlobItemInternal,
   {
-    identity: "crate::models::BlobItemInternalCustom",
+    identity: "crate::models::BlobItemInternal",
   },
   "rust"
 );
