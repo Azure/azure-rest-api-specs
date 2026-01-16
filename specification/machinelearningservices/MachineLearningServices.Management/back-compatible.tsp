@@ -468,3 +468,21 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpoint, "FQDNEndpoint");
 @@clientName(FqdnEndpointDetail, "FQDNEndpointDetail");
 @@clientName(FqdnEndpoints, "FQDNEndpoints");
+
+namespace Microsoft.MachineLearningServices {
+  model WorkspaceConnection is WorkspaceConnectionPropertiesV2BasicResource;
+}
+
+@@alternateType(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+  WorkspaceConnection,
+  "go"
+);
+@@clientName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+  "parameters",
+  "go"
+);
+
+@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "properties",
+  "go"
+);

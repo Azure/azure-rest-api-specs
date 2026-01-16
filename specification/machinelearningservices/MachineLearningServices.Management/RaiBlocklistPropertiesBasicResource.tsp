@@ -81,7 +81,7 @@ interface RaiBlocklistPropertiesBasicResources {
       _?: RaiBlocklistItemPropertiesBasicResource[];
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+      ArmLroLocationHeader<FinalResult = RaiBlocklistItemPropertiesBasicResource[]>
   >;
 
   /**

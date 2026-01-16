@@ -30,15 +30,44 @@ using Microsoft.MachineLearningServices;
 @@clientName(ExternalFQDNResponse, "ExternalFqdnResponse", "java");
 
 // Java casing fixes for AAD-related types
-@@clientName(AADAuthTypeWorkspaceConnectionProperties, "AadAuthTypeWorkspaceConnectionProperties", "java");
+@@clientName(AADAuthTypeWorkspaceConnectionProperties,
+  "AadAuthTypeWorkspaceConnectionProperties",
+  "java"
+);
 
 // Java casing fixes for CMK-related members
-@@clientName(WorkspaceProperties.enableServiceSideCMKEncryption, "enableServiceSideCmkEncryption", "java");
+@@clientName(WorkspaceProperties.enableServiceSideCMKEncryption,
+  "enableServiceSideCmkEncryption",
+  "java"
+);
 
 // Java casing fixes for AKS-related types
 @@clientName(AksNetworkingConfiguration, "AKSNetworkingConfiguration", "java");
 @@clientName(AksComputeSecrets, "AKSComputeSecrets", "java");
-@@clientName(AksComputeSecretsProperties, "AKSComputeSecretsProperties", "java");
+@@clientName(AksComputeSecretsProperties,
+  "AKSComputeSecretsProperties",
+  "java"
+);
+
+@@clientName(PublicNetworkAccessType, "PublicNetworkAccess", "java");
+@@clientName(EndpointServiceConnectionStatus,
+  "PrivateEndpointServiceConnectionStatus",
+  "java"
+);
+@@clientName(ListWorkspaceKeysResult.userStorageArmId,
+  "userStorageResourceId",
+  "java"
+);
+@@clientName(ServerlessComputeSettings.serverlessComputeNoPublicIP,
+  "serverlessComputeNoPublicIp",
+  "java"
+);
+@@alternateType(PipelineJob.settings, unknown, "java");
+@@alternateType(SweepJob.searchSpace, unknown, "java");
+@@alternateType(EndpointScheduleAction.endpointInvocationDefinition,
+  unknown,
+  "java"
+);
 
 // Java casing fixes for PAT/PTU-related types and members
 @@clientName(PTUDeploymentUsage, "PtuDeploymentUsage", "java");

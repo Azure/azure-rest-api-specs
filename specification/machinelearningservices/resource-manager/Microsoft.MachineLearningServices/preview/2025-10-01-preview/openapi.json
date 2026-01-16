@@ -9418,7 +9418,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RaiBlocklistItemPropertiesBasicResourceArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -38981,6 +38982,12 @@
       "required": [
         "value"
       ]
+    },
+    "RaiBlocklistItemPropertiesBasicResourceArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RaiBlocklistItemPropertiesBasicResource"
+      }
     },
     "RaiBlocklistItemsBulkAddRequest": {
       "type": "array",
