@@ -314,47 +314,68 @@ def resolve_external_common_types_refs(
 
     def load_common_types_file(ref_path: str) -> Optional[Dict[str, Any]]:
         """Load a common-types file and cache it."""
-        if ref_path in common_types_cache:
-            return common_types_cache[ref_path]
+        # Use just the file path (before #) as cache key
+        file_path_only = ref_path.split("#")[0]
+
+        if file_path_only in common_types_cache:
+            return common_types_cache[file_path_only]
 
         if not swagger_file_path:
             return None
 
         try:
             # Resolve the relative path
-            common_types_file = swagger_file_path.parent / ref_path.split("#")[0]
+            common_types_file = swagger_file_path.parent / file_path_only
             if common_types_file.exists():
                 import json
 
                 with open(common_types_file, "r", encoding="utf-8") as f:
                     content = json.load(f)
-                    common_types_cache[ref_path] = content
+                    common_types_cache[file_path_only] = content
                     return content
         except Exception as e:
             print(f"Warning: Failed to load common-types file {ref_path}: {e}")
 
         return None
 
-    def resolve_ref(ref_obj: Any, context: str = "") -> Any:
+    # Track visited refs to detect circular references
+    visited_refs: Set[str] = set()
+
+    def resolve_ref(ref_obj: Any, context: str = "", depth: int = 0) -> Any:
         """
         Resolve a single $ref, handling both local and external common-types refs.
+        Recursively resolves nested refs within the resolved object.
 
         Args:
             ref_obj: Object that may contain a $ref field
             context: Context for debugging (parameter/definition)
+            depth: Current recursion depth to prevent infinite loops
 
         Returns:
-            Resolved object with $ref inlined
+            Resolved object with $ref inlined and nested refs resolved
         """
         if not isinstance(ref_obj, dict):
             return ref_obj
 
         ref = ref_obj.get("$ref", "")
         if not ref:
-            return ref_obj
+            # No $ref, but still need to recursively resolve any nested refs
+            return walk_and_resolve(ref_obj, context, depth)
 
-        # Handle external common-types references
-        if "common-types/resource-management" in ref:
+        # Prevent infinite recursion with circular refs
+        if depth > 50:
+            print(f"Warning: Maximum recursion depth reached resolving {ref}")
+            return {"$circular_ref": ref}
+
+        if ref in visited_refs:
+            return {"$circular_ref": ref}
+
+        visited_refs.add(ref)
+
+        resolved_obj = None
+
+        # Handle external common-types references (v5, v6, etc.)
+        if "common-types/resource-management/" in ref:
             # Extract file path and fragment
             parts = ref.split("#")
             if len(parts) == 2:
@@ -370,28 +391,45 @@ def resolve_external_common_types_refs(
                         name = fragment_parts[1]
 
                         if section in common_types_doc and name in common_types_doc[section]:
-                            # Return a deep copy of the referenced definition
-                            return copy.deepcopy(common_types_doc[section][name])
+                            # Get a deep copy of the referenced definition
+                            resolved_obj = copy.deepcopy(common_types_doc[section][name])
 
-        # Handle local references (already resolved by resolve_global_parameters)
-        # If we get here, return the ref as-is
+        # Handle local references to definitions in the same file
+        elif ref.startswith("#/definitions/"):
+            def_name = ref.split("/")[-1]
+            if "definitions" in resolved and def_name in resolved["definitions"]:
+                resolved_obj = copy.deepcopy(resolved["definitions"][def_name])
+
+        visited_refs.discard(ref)
+
+        # If we resolved the ref, recursively resolve any nested refs within it
+        if resolved_obj is not None:
+            # Merge any additional properties from ref_obj (beyond $ref)
+            for key, value in ref_obj.items():
+                if key != "$ref" and key not in resolved_obj:
+                    resolved_obj[key] = value
+
+            # Recursively resolve nested refs in the resolved object
+            return walk_and_resolve(resolved_obj, f"{context}→{ref}", depth + 1)
+
+        # If we couldn't resolve, return the ref as-is
         return ref_obj
 
-    def walk_and_resolve(obj: Any, context: str = "") -> Any:
+    def walk_and_resolve(obj: Any, context: str = "", depth: int = 0) -> Any:
         """Recursively walk the swagger document and resolve all refs."""
         if isinstance(obj, dict):
             # Check if this dict has a $ref
             if "$ref" in obj:
-                return resolve_ref(obj, context)
+                return resolve_ref(obj, context, depth)
 
             # Recursively process all fields
             result = {}
             for key, value in obj.items():
-                result[key] = walk_and_resolve(value, f"{context}.{key}")
+                result[key] = walk_and_resolve(value, f"{context}.{key}", depth)
             return result
 
         elif isinstance(obj, list):
-            return [walk_and_resolve(item, f"{context}[]") for item in obj]
+            return [walk_and_resolve(item, f"{context}[]", depth) for item in obj]
 
         else:
             return obj
