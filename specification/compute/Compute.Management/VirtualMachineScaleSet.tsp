@@ -69,7 +69,7 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
   etag?: string;
 
   /**
-   * Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. This property cannot be changed once VMSS is provisioned. Minimum api-version: 2025-04-01.
+   * Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. Minimum api-version: 2025-04-01.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @added(Versions.v2025_04_01)
