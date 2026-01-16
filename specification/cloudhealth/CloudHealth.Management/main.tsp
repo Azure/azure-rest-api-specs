@@ -1107,7 +1107,7 @@ model EntityHistoryResponse {
 
   @doc("List of health state transitions")
   @identifiers(#["occurredAt"])
-  transitions: HealthStateTransition[];
+  history: HealthStateTransition[];
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1137,19 +1137,19 @@ model SignalHistoryRequest {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("Response containing signal history time series")
+@doc("Response containing signal history")
 model SignalHistoryResponse {
   @doc("Name of the signal")
   signalName: signalName;
 
-  @doc("Time series data points")
+  @doc("Signal history data points")
   @identifiers(#["occurredAt"])
-  timeSeries: SignalTimeSeriesPoint[];
+  history: SignalHistoryDataPoint[];
 }
 
 @added(Versions.v2026_01_01_preview)
 @doc("A data point in the signal time series")
-model SignalTimeSeriesPoint {
+model SignalHistoryDataPoint {
   @doc("Timestamp of the data point")
   occurredAt: utcDateTime;
 
