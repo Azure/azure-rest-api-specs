@@ -1,11 +1,12 @@
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
-import { dirname, relative, resolve } from "path";
+import { dirname, relative } from "path";
 import { inspect } from "util";
 import { z } from "zod";
 import { mapAsync } from "./array.js";
 import { example, preview } from "./changed-files.js";
 import { MemoryCache } from "./memory-cache.js";
+import { resolveCached, resolveCached2 } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
@@ -173,7 +174,7 @@ export class Swagger {
     const { content, logger, tag } = options;
 
     const rootDir = dirname(tag?.readme?.path ?? "");
-    this.#path = resolve(rootDir, path);
+    this.#path = resolveCached2(rootDir, path);
 
     this.#content = content;
     this.#logger = logger;
@@ -257,7 +258,7 @@ export class Swagger {
         schema
           .paths("file")
           // Exclude ourself
-          .filter((p) => resolve(p) !== resolve(this.#path))
+          .filter((p) => resolveCached(p) !== resolveCached(this.#path))
       );
     });
 

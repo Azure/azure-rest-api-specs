@@ -1,4 +1,11 @@
 import { basename, dirname, resolve } from "path";
+import { MemoryCache, MemoryCache2 } from "./memory-cache.js";
+
+/** @type {MemoryCache<string, string>} */
+const resolveCache = new MemoryCache();
+
+/** @type {MemoryCache2<string, string, string>} */
+const resolveCache2 = new MemoryCache2();
 
 /**
  *
@@ -15,6 +22,23 @@ export function includesSegment(path, segment) {
 }
 
 /**
+ * @param {string} path
+ * @returns {string}
+ */
+export function resolveCached(path) {
+  return resolveCache.getOrCreate(path, () => resolve(path));
+}
+
+/**
+ * @param {string} from
+ * @param {string} to
+ * @returns {string}
+ */
+export function resolveCached2(from, to) {
+  return resolveCache2.getOrCreate(from, to, () => resolve(from, to));
+}
+
+/**
  * @param {string} path Absolute or relative path
  * @param {string} segment File or folder
  * @returns {string} Portion of resolved path up to (and including) the last occurrence of segment
@@ -26,7 +50,7 @@ export function includesSegment(path, segment) {
 export function untilLastSegment(path, segment) {
   // Shares code with `untilLastSegmentWithParent()`, but not worth refactoring yet
 
-  let current = resolve(path);
+  let current = resolveCached(path);
 
   while (true) {
     const parent = dirname(current);
@@ -56,7 +80,7 @@ export function untilLastSegment(path, segment) {
 export function untilLastSegmentWithParent(path, segment) {
   // Shares code with `untilLastSegment()`, but not worth refactoring yet
 
-  let current = resolve(path);
+  let current = resolveCached(path);
 
   while (true) {
     const parent = dirname(current);
