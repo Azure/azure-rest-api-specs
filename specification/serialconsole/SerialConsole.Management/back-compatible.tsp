@@ -8,5 +8,5 @@ using Microsoft.SerialConsole;
 @@Legacy.flattenProperty(SerialPort.properties);
 
 @@doc(Operations.list, "Gets a list of Serial Console API operations.");
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME"
-@@TypeSpec.OpenAPI.operationId(Operations.list, "ListOperations");
+@@clientName(Operations.list, "ListOperations");
+@@clientLocation(Operations.list, Microsoft.SerialConsole);

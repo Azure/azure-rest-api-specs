@@ -108,7 +108,7 @@ model SerialConsoleOperationsValueItemDisplay {
 /**
  * An error response from the service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -121,7 +121,7 @@ model CloudError {
 /**
  * An error response from the Batch service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
@@ -169,7 +169,7 @@ model SerialConsoleStatusProperties {
 @error
 model GetSerialConsoleSubscriptionNotFoundError {
   ...NotFoundResponse;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @bodyRoot body: GetSerialConsoleSubscriptionNotFound;
 }
 
