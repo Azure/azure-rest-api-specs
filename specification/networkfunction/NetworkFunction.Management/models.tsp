@@ -157,6 +157,7 @@ model Operation {
   origin?: string;
 }
 
+model OperationListResult is Azure.Core.Page<Operation>;
 /**
  * Display metadata associated with the operation.
  */
@@ -186,6 +187,7 @@ model OperationDisplay {
  * An error response from the service.
  */
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * An error response from the service.
@@ -196,6 +198,7 @@ model CloudError {
 /**
  * An error response from the service.
  */
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -226,8 +229,7 @@ model AzureTrafficCollectorPropertiesFormat {
   /**
    * Collector Policies for Azure Traffic Collector.
    */
-  @visibility(Lifecycle.Read)
-  collectorPolicies?: ResourceReference[];
+  collectorPolicies?: CollectorPolicy[];
 
   /**
    * The virtualHub to which the Azure Traffic Collector belongs.

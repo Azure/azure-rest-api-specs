@@ -44,30 +44,6 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].patch__added` | added | `{"operationId":"CollectorPolicies_UpdateTags","parameters":[{"name":"azureTrafficCollectorName","in"...` |
 
-### Changes for `CloudError`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CloudError__deleted` | deleted | `{"type":"object","properties":{"error":{"$ref":"#/definitions/CloudErrorBody"}},"x-ms-external":true...` |
-
-### Changes for `CloudErrorBody`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CloudErrorBody__deleted` | deleted | `{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"target":{"type"...` |
-
-### Changes for `Operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Operation__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"isDataAction":{"type":"boolean","default":f...` |
-
-### Changes for `OperationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `ProxyResource`
 
 | Path | Change Type | Value |
@@ -86,18 +62,19 @@
 |------|------------|-------|
 | `definitions.TrackedResource__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","readOnly":true},"name":{"type":"string","readO...` |
 
+### Changes for `OperationDisplay`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.OperationDisplay__added` | added | `{"type":"object","properties":{"provider":{"type":"string"},"resource":{"type":"string"},"operation"...` |
+
 ### Changes for `required`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureTrafficCollectorListResult.required__added` | added | `["value"]` |
 | `definitions.CollectorPolicyListResult.required__added` | added | `["value"]` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureTrafficCollectorPropertiesFormat.properties.collectorPolicies.readOnly__added` | added | `true` |
+| `definitions.OperationListResult.required__added` | added | `["value"]` |
 
 ### Changes for `systemData`
 
@@ -105,24 +82,34 @@
 |------|------------|-------|
 | `definitions.CollectorPolicy.properties.systemData__deleted` | deleted | `{"allOf":[{"$ref":"#/definitions/SystemData"}],"readOnly":true}` |
 
+### Changes for `default`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Operation.properties.isDataAction.default__deleted` | deleted | `false` |
+
+### Changes for `type`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Operation.properties.display.type__deleted` | deleted | `object` |
+
+### Changes for `properties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Operation.properties.display.properties__deleted` | deleted | `{"provider":{"type":"string","description":"Service provider: Microsoft NetworkFunction."},"resource...` |
+
+### Changes for `$ref`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Operation.properties.display.$ref__added` | added | `#/definitions/OperationDisplay` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.AzureTrafficCollector.allOf[0].$ref` | `#/definitions/TrackedResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
-| `definitions.AzureTrafficCollectorPropertiesFormat.properties.collectorPolicies.items.$ref` | `#/definitions/CollectorPolicy` | `#/definitions/ResourceReference` |
 | `definitions.CollectorPolicy.allOf[0].$ref` | `#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
-| `paths['/providers/microsoft.NetworkFunction/operations'].get.operationId` | `NetworkFunction_ListOperations` | `Operations_List` |
-| `paths['/providers/microsoft.NetworkFunction/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult` |
-| `paths['/providers/microsoft.NetworkFunction/operations'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.NetworkFunction/azureTrafficCollectors'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].delete.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].patch.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].put.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].delete.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].put.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` |
 

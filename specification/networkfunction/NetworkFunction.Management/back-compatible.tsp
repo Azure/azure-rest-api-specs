@@ -27,3 +27,6 @@ using Microsoft.NetworkFunction;
 @@clientName(CollectorPolicies.updateTags::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(CollectorPolicy.properties);
+
+@@clientLocation(Operations.list, "NetworkFunction");
+@@clientName(Operations.list, "ListOperations");

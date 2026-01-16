@@ -31,12 +31,15 @@ interface CollectorPolicies {
   /**
    * Gets the collector policy in a specified Traffic Collector
    */
-  get is ArmResourceRead<CollectorPolicy>;
+  get is ArmResourceRead<CollectorPolicy, Error = CloudError>;
 
   /**
    * Creates or updates a Collector Policy resource
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CollectorPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    CollectorPolicy,
+    Error = CloudError
+  >;
 
   /**
    * Updates the specified Collector Policy tags.
@@ -50,13 +53,14 @@ interface CollectorPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     CollectorPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * Return list of Collector policies in a Azure Traffic Collector
    */
-  list is ArmResourceListByParent<CollectorPolicy>;
+  list is ArmResourceListByParent<CollectorPolicy, Error = CloudError>;
 }
 
 @@doc(CollectorPolicy.name, "Collector Policy Name");

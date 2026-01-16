@@ -29,12 +29,15 @@ interface AzureTrafficCollectors {
   /**
    * Gets the specified Azure Traffic Collector in a specified resource group
    */
-  get is ArmResourceRead<AzureTrafficCollector>;
+  get is ArmResourceRead<AzureTrafficCollector, Error = CloudError>;
 
   /**
    * Creates or updates a Azure Traffic Collector resource
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AzureTrafficCollector>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    AzureTrafficCollector,
+    Error = CloudError
+  >;
 
   /**
    * Updates the specified Azure Traffic Collector tags.
@@ -42,7 +45,8 @@ interface AzureTrafficCollectors {
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     AzureTrafficCollector,
-    PatchModel = TagsObject
+    PatchModel = TagsObject,
+    Error = CloudError
   >;
 
   /**
@@ -51,7 +55,8 @@ interface AzureTrafficCollectors {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureTrafficCollector,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -59,14 +64,17 @@ interface AzureTrafficCollectors {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AzureTrafficCollectorsByResourceGroup_List")
-  list is ArmResourceListByParent<AzureTrafficCollector>;
+  list is ArmResourceListByParent<AzureTrafficCollector, Error = CloudError>;
 
   /**
    * Return list of Azure Traffic Collectors in a subscription
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AzureTrafficCollectorsBySubscription_List")
-  azureTrafficCollectorsBySubscriptionList is ArmListBySubscription<AzureTrafficCollector>;
+  azureTrafficCollectorsBySubscriptionList is ArmListBySubscription<
+    AzureTrafficCollector,
+    Error = CloudError
+  >;
 }
 
 @@doc(AzureTrafficCollector.name, "Azure Traffic Collector name");
