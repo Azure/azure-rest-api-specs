@@ -2955,7 +2955,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.ConversationResource'
+                $ref: '#/components/schemas/OpenAI.Conversation'
         default:
           description: An unexpected error response.
           content:
@@ -3050,7 +3050,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/OpenAI.ConversationResource'
+                      $ref: '#/components/schemas/OpenAI.Conversation'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -3095,7 +3095,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.ConversationResource'
+                $ref: '#/components/schemas/OpenAI.Conversation'
         default:
           description: An unexpected error response.
           content:
@@ -3134,7 +3134,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.ConversationResource'
+                $ref: '#/components/schemas/OpenAI.Conversation'
         default:
           description: An unexpected error response.
           content:
@@ -3407,7 +3407,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.ConversationResource'
+                $ref: '#/components/schemas/OpenAI.Conversation'
         default:
           description: An unexpected error response.
           content:
@@ -11178,32 +11178,16 @@ components:
           description: The unique ID of the conversation.
       description: The conversation that this response belongs to.
       title: Conversation object
-    OpenAI.ConversationResource:
+    OpenAI.ConversationReference:
       type: object
       required:
         - id
-        - object
-        - metadata
-        - created_at
       properties:
         id:
           type: string
           description: The unique ID of the conversation.
-        object:
-          type: string
-          enum:
-            - conversation
-          description: The object type, which is always `conversation`.
-          x-stainless-const: true
-          default: conversation
-        metadata:
-          description: |-
-            Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.
-              Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters.
-        created_at:
-          type: integer
-          format: unixtime
-          description: The time at which the conversation was created, measured in seconds since the Unix epoch.
+      description: The conversation that this response belongs to. Input items and output items from this response are automatically added to this conversation.
+      title: Conversation
     OpenAI.CreateChatCompletionRequestResponseFormat:
       type: object
       required:
@@ -16189,6 +16173,10 @@ components:
             - mcp_approval_request
             - mcp_approval_response
             - mcp_call
+            - structured_outputs
+            - workflow_action
+            - memory_search_call
+            - oauth_consent_request
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -17878,7 +17866,7 @@ components:
         conversation:
           type: object
           allOf:
-            - $ref: '#/components/schemas/OpenAI.Conversation'
+            - $ref: '#/components/schemas/OpenAI.ConversationReference'
           nullable: true
         agent:
           allOf:
@@ -21275,12 +21263,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.SearchContextSize'
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
-        custom_search_configuration:
-          allOf:
-            - $ref: '#/components/schemas/WebSearchConfiguration'
-          description: |-
-            The project connections attached to this tool. There can be a maximum of 1 connection
-            resource attached to the tool.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search).
@@ -21314,6 +21296,12 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        custom_search_configuration:
+          allOf:
+            - $ref: '#/components/schemas/WebSearchConfiguration'
+          description: |-
+            The project connections attached to this tool. There can be a maximum of 1 connection
+            resource attached to the tool.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
