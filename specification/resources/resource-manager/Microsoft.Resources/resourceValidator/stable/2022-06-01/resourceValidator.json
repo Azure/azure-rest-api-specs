@@ -1,0 +1,207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Resource Validation Client",
+    "version": "2022-06-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ResourceValidationClient"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Resources/validateResources": {
+      "post": {
+        "operationId": "ResourceValidationClient_ValidateResources",
+        "tags": [
+          "ResourceValidationClient"
+        ],
+        "description": "Validates multiple ARM resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate multiple ARM resources": {
+            "$ref": "./examples/ResourceValidationClient_ValidateResources.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceValidationRequest": {
+      "type": "object",
+      "description": "Request to validate resources",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The resource provider namespace of the resources being validated"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resources being validated"
+        },
+        "location": {
+          "type": "string",
+          "description": "The optional location for the resources being validated"
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope of the resources being validated"
+        },
+        "resources": {
+          "type": "array",
+          "description": "The list of resources to validate. Each resource in the list must have the same namespace, type, and location.\nThe namespace and type on each resource must match the corresponding values in the top-level request.\nThe location on each resource must match the top-level location in the request if specified.",
+          "items": {
+            "$ref": "#/definitions/ResourceValidationRequestResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "validationType": {
+          "$ref": "#/definitions/ResourceValidationType",
+          "description": "The type of resource validation to perform"
+        },
+        "performPreflightWithoutRbacWriteCheck": {
+          "type": "boolean",
+          "description": "If true, the validation will be performed without checking RBAC write permissions."
+        }
+      },
+      "required": [
+        "provider",
+        "type",
+        "scope",
+        "resources"
+      ]
+    },
+    "ResourceValidationRequestResource": {
+      "type": "object",
+      "description": "The body of the resource to validate. In most cases, this should be the exact same resource body as on an ARM resource PUT request plus the apiVersion property.",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use with this resource."
+        },
+        "onlyIfNotExists": {
+          "type": "boolean",
+          "description": "Set this to true if this resource is meant to be provisioned only if it does not exist."
+        }
+      },
+      "required": [
+        "apiVersion"
+      ],
+      "additionalProperties": {}
+    },
+    "ResourceValidationResponse": {
+      "type": "object",
+      "description": "Resource validator successful response",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceValidationResponseProperties",
+          "description": "Details about the results of the validation"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ResourceValidationResponseProperties": {
+      "type": "object",
+      "description": "Details about the results of the validation",
+      "properties": {
+        "validatedResources": {
+          "type": "array",
+          "description": "List of ARM resource IDs corresponding to the resources that were successfully validated",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "validatedResources"
+      ]
+    },
+    "ResourceValidationType": {
+      "type": "string",
+      "description": "The type of resource validation",
+      "enum": [
+        "ArmFull",
+        "ArmPartial"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceValidationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ArmFull",
+            "value": "ArmFull",
+            "description": "Perform all available validation checks on the resources."
+          },
+          {
+            "name": "ArmPartial",
+            "value": "ArmPartial",
+            "description": "Validate properties of the resource without verifying Azure Policy, RBAC, or involving the resource providers."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

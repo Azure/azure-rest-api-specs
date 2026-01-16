@@ -1,0 +1,45 @@
+{
+  "operationId": "ResourceValidationClient_ValidateResources",
+  "title": "Validate multiple ARM resources",
+  "parameters": {
+    "api-version": "2022-06-01",
+    "body": {
+      "provider": "Microsoft.Example",
+      "type": "examples",
+      "location": "westus3",
+      "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup",
+      "resources": [
+        {
+          "apiVersion": "2026-01-14",
+          "name": "exampleResource1",
+          "type": "Microsoft.Example/examples",
+          "properties": {
+            "exampleProperty": "exampleValue1"
+          }
+        },
+        {
+          "apiVersion": "2026-01-14",
+          "name": "exampleResource2",
+          "type": "Microsoft.Example/examples",
+          "properties": {
+            "exampleProperty": "exampleValue2"
+          }
+        }
+      ],
+      "validationType": "ArmFull",
+      "performPreflightWithoutRbacWriteCheck": true
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "validatedResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/examples/exampleResource1",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/examples/exampleResource2"
+          ]
+        }
+      }
+    }
+  }
+}
