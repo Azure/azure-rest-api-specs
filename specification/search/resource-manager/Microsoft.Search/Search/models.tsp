@@ -957,12 +957,6 @@ model Sku {
 }
 
 /**
- * The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model UserAssignedManagedIdentities is Record<UserAssignedIdentity>;
-
-/**
  * Details about the search service identity. A null value indicates that the search service has no identity assigned.
  */
 model Identity {
@@ -987,7 +981,7 @@ model Identity {
    * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAssignedIdentities?: UserAssignedManagedIdentities;
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
 /**
