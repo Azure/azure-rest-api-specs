@@ -75,5 +75,4 @@ using Microsoft.AzureLargeInstance;
 @@clientName(AzureLargeInstanceProperties.osProfile, "OSProfile", "csharp");
 @@clientName(AzureLargeStorageInstanceTagsUpdate.tags, "Tags", "csharp");
 @@clientName(ForceState.forceState, "ForceState", "csharp");
-@@clientName(Tags.tags, "tagsValue", "csharp");
 @@clientName(IpAddress.ipAddress, "IPAddress", "csharp");

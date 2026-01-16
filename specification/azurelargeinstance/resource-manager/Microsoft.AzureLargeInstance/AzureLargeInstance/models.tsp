@@ -452,6 +452,7 @@ model NetworkProfile {
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
   @doc("Specifies the IP address of the network interface.")
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipAddress?: string;
 }
 
@@ -461,6 +462,7 @@ model IpAddress {
   """)
 model ForceState {
   @doc("Whether to force restart by shutting all processes.")
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   forceState?: AzureLargeInstanceForcePowerState;
 }
 
@@ -468,6 +470,7 @@ model ForceState {
 model Tags {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
   @doc("Tags field of the AzureLargeInstance instance.")
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 

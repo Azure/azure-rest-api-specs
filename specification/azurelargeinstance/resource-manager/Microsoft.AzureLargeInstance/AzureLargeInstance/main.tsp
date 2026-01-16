@@ -6,7 +6,6 @@ import "./models.tsp";
 import "./AzureLargeInstance.tsp";
 import "./AzureLargeStorageInstance.tsp";
 import "./back-compatible.tsp";
-import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
