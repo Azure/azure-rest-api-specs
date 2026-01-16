@@ -815,3 +815,12 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "go"
 );
 @@clientLocation(usageBySubscriptionSku, "ManagementClient", "go");
+/** Network security perimeter configuration */
+model AccessRulePropertiesSubscriptionsItem {
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: Azure.Core.armResourceIdentifier;
+}
+@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+  AccessRulePropertiesSubscriptionsItem,
+  "go"
+);
