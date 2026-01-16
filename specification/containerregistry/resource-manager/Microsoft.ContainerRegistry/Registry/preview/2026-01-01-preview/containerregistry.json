@@ -5895,7 +5895,7 @@
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
-          "description": "The identity of the cache rule."
+          "description": "The identity of the import pipeline."
         }
       },
       "allOf": [
@@ -6497,6 +6497,28 @@
           {
             "name": "disabled",
             "value": "disabled"
+          }
+        ]
+      }
+    },
+    "EndpointProtocol": {
+      "type": "string",
+      "description": "The connectivity protocol for the registry.",
+      "enum": [
+        "IPv4",
+        "IPv4AndIPv6"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4"
+          },
+          {
+            "name": "IPv4AndIPv6",
+            "value": "IPv4AndIPv6"
           }
         ]
       }
@@ -7983,6 +8005,28 @@
         "name"
       ]
     },
+    "RegionalEndpoints": {
+      "type": "string",
+      "description": "Whether or not per-region endpoints are enabled for accessing the registry.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "RegionalEndpoints",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
     "Registry": {
       "type": "object",
       "description": "An object that represents a container registry.",
@@ -8200,21 +8244,40 @@
           },
           "readOnly": true
         },
-        "regionalEndpointEnabled": {
-          "type": "boolean",
-          "description": "Enable per-region endpoints for accessing registry."
+        "regionalEndpoints": {
+          "type": "string",
+          "description": "Enable per-region endpoints for accessing registry.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "RegionalEndpoints",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "regionalEndpointHostNames": {
           "type": "array",
-          "description": "List of host names that will serve registry when regionalEndpointEnabled is true.",
+          "description": "List of host names that will serve registry when RegionalEndpoints is enabled.",
           "items": {
             "type": "string"
           },
           "readOnly": true
         },
-        "dualStackEndpointsEnabled": {
-          "type": "boolean",
-          "description": "Indicates if the registry is using dual stack endpoints (IPv4 and IPv6) for connectivity."
+        "endpointProtocol": {
+          "$ref": "#/definitions/EndpointProtocol",
+          "description": "The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6)."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -8413,13 +8476,13 @@
           "type": "boolean",
           "description": "Enable a single data endpoint per region for serving data."
         },
-        "regionalEndpointEnabled": {
-          "type": "boolean",
+        "regionalEndpoints": {
+          "$ref": "#/definitions/RegionalEndpoints",
           "description": "Enable per-region endpoints for accessing registry."
         },
-        "dualStackEndpointsEnabled": {
-          "type": "boolean",
-          "description": "Indicates if the registry is using dual stack endpoints (IPv4 and IPv6) for connectivity."
+        "endpointProtocol": {
+          "$ref": "#/definitions/EndpointProtocol",
+          "description": "The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6)."
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
@@ -8491,11 +8554,13 @@
       "properties": {
         "syncTrigger": {
           "type": "string",
-          "description": "The action that triggered the most recent registry sync."
+          "description": "The action that triggered the most recent registry sync.",
+          "readOnly": true
         },
         "syncState": {
           "type": "string",
-          "description": "The status of the connected registry's most recent sync."
+          "description": "The status of the connected registry's most recent sync.",
+          "readOnly": true
         },
         "lastSyncStartTime": {
           "type": "string",

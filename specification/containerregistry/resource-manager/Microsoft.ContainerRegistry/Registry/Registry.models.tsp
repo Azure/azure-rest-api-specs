@@ -169,6 +169,37 @@ union RoleAssignmentMode {
 }
 
 /**
+ * Whether or not per-region endpoints are enabled for accessing the registry.
+ */
+@added(Versions.vLatestPreview)
+union RegionalEndpoints {
+  string,
+
+  /**
+   * Regional endpoints are enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Regional endpoints are disabled.
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * The connectivity protocol for the registry.
+ */
+union EndpointProtocol {
+  string,
+
+  /** IPv4 connectivity only */
+  IPv4: "IPv4",
+
+  /** IPv4 and IPv6 (dual stack) connectivity */
+  IPv4AndIPv6: "IPv4AndIPv6",
+}
+
+/**
  * The unit of measurement.
  */
 union RegistryUsageUnit {
@@ -301,20 +332,20 @@ model RegistryProperties {
    * Enable per-region endpoints for accessing registry.
    */
   @added(Versions.vLatestPreview)
-  regionalEndpointEnabled?: boolean;
+  regionalEndpoints?: RegionalEndpoints = RegionalEndpoints.Disabled;
 
   /**
-   * List of host names that will serve registry when regionalEndpointEnabled is true.
+   * List of host names that will serve registry when RegionalEndpoints is enabled.
    */
   @visibility(Lifecycle.Read)
   @added(Versions.vLatestPreview)
   regionalEndpointHostNames?: string[];
 
   /**
-   * Indicates if the registry is using dual stack endpoints (IPv4 and IPv6) for connectivity.
+   * The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6).
    */
   @added(Versions.vLatestPreview)
-  dualStackEndpointsEnabled?: boolean;
+  endpointProtocol?: EndpointProtocol;
 
   /**
    * List of private endpoint connections for a container registry.
@@ -680,13 +711,13 @@ model RegistryPropertiesUpdateParameters {
    * Enable per-region endpoints for accessing registry.
    */
   @added(Versions.vLatestPreview)
-  regionalEndpointEnabled?: boolean;
+  regionalEndpoints?: RegionalEndpoints;
 
   /**
-   * Indicates if the registry is using dual stack endpoints (IPv4 and IPv6) for connectivity.
+   * The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6).
    */
   @added(Versions.vLatestPreview)
-  dualStackEndpointsEnabled?: boolean;
+  endpointProtocol?: EndpointProtocol;
 
   /**
    * Whether or not public network access is allowed for the container registry.
