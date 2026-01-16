@@ -24,3 +24,11 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpoints, "FqdnEndpoints", "java");
 @@clientName(FqdnEndpoint, "FqdnEndpoint", "java");
 @@clientName(FqdnEndpointDetail, "FqdnEndpointDetail", "java");
+
+// Java casing fixes for AAD-related types
+@@clientName(AADAuthTypeWorkspaceConnectionProperties, "AadAuthTypeWorkspaceConnectionProperties", "java");
+
+// Java casing fixes for AKS-related types
+@@clientName(AksNetworkingConfiguration, "AKSNetworkingConfiguration", "java");
+@@clientName(AksComputeSecrets, "AKSComputeSecrets", "java");
+@@clientName(AksComputeSecretsProperties, "AKSComputeSecretsProperties", "java");
