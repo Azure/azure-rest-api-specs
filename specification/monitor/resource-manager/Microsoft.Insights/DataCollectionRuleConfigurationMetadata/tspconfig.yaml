@@ -16,3 +16,35 @@ options:
     new-line: lf
     omit-unreachable-types: true
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.ResourceManager.Monitor"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Monitor"
+    clear-output-folder: true
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitor"
+    namespace: "azure.mgmt.monitor"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitor"
+    namespace: "com.azure.resourcemanager.monitor"
+    service-name: "Monitor"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-monitor"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-monitor"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/monitor"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitor"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
