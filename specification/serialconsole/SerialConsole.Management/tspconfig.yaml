@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/serialconsole"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,40 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/SerialConsole/{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-serialconsole"
+    namespace: "azure.mgmt.serialconsole"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-serialconsole"
+    namespace: "com.azure.resourcemanager.serialconsole"
+    service-name: "SerialConsole" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-serialconsole"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-serialconsole"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/serialconsole"
+    emitter-output-dir: "{output-dir}/{service-dir}/armserialconsole"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armserialconsole"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.SerialConsole"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
