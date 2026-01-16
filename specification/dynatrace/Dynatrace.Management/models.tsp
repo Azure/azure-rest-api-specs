@@ -1329,10 +1329,10 @@ model LinkableEnvironmentResponse {
 @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
 model ActivateSaaSParameterRequest {
   /**
-   * SaaS guid of marketplace saas subscription to be activated.
+   * SaaS guid of marketplace SaaS subscription to be activated.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
-  saasGuid: string;
+  saaSGuid?: string;
 
   /**
    * Admin user details
@@ -1431,5 +1431,5 @@ model SaaSResourceDetailsResponse
    * Id of the Marketplace SaaS Resource
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
-  saaSId?: string;
+  saaSGuid?: string;
 }

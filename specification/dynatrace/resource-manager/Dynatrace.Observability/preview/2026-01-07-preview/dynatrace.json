@@ -144,8 +144,11 @@
           }
         },
         "x-ms-examples": {
-          "SaaS_ActivateSaaS": {
-            "$ref": "./examples/SaaS_ActivateResource.json"
+          "SaaS_ActivateSaaS_MaximumSet_Gen": {
+            "$ref": "./examples/SaaS_ActivateResource_MaximumSet_Gen.json"
+          },
+          "SaaS_ActivateSaaS_MinimumSet_Gen": {
+            "$ref": "./examples/SaaS_ActivateResource_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2185,9 +2188,9 @@
       "type": "object",
       "description": "SaaS guid for activate and Validate SaaS Resource",
       "properties": {
-        "saasGuid": {
+        "saaSGuid": {
           "type": "string",
-          "description": "SaaS guid of marketplace saas subscription to be activated."
+          "description": "SaaS guid of marketplace SaaS subscription to be activated."
         },
         "adminUserDetails": {
           "$ref": "#/definitions/AdminUserDetails",
@@ -2195,7 +2198,6 @@
         }
       },
       "required": [
-        "saasGuid",
         "adminUserDetails"
       ]
     },
@@ -3533,7 +3535,7 @@
       "type": "object",
       "description": "Marketplace SaaS resource details.",
       "properties": {
-        "saaSId": {
+        "saaSGuid": {
           "type": "string",
           "description": "Id of the Marketplace SaaS Resource"
         }
