@@ -34,11 +34,11 @@ export class KeyedCache {
 /**
  * Caches values in memory with an ordered pair of keys of any types.
  *
- * `StringKeyCache2` is faster for string keys.
+ * `StringKeyPairCache` is faster for string keys.
  *
  * @template K1, K2, V
  */
-export class KeyedCache2 {
+export class KeyedPairCache {
   // Two-layer nested cache
   /** @type {KeyedCache<K1, KeyedCache<K2, V>>} */
   #cache1 = new KeyedCache();
@@ -101,11 +101,11 @@ export class StringKeyCache {
 /**
  * Caches values in memory with an ordered pair of string keys.
  *
- * `KeyedCache2` is slower but supports keys of any type.
+ * `KeyedPairCache` is slower but supports keys of any type.
  *
  * @template V
  */
-export class StringKeyCache2 {
+export class StringKeyPairCache {
   // Two-layer nested cache
   /** @type {StringKeyCache<StringKeyCache<V>>} */
   #cache1 = new StringKeyCache();
