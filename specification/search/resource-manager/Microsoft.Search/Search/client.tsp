@@ -821,6 +821,6 @@ model AccessRulePropertiesSubscriptionsItem {
   id?: Azure.Core.armResourceIdentifier;
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
-  AccessRulePropertiesSubscriptionsItem,
+  AccessRulePropertiesSubscriptionsItem[],
   "go"
 );
