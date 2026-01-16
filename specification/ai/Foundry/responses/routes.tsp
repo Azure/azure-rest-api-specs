@@ -26,7 +26,7 @@ interface Responses {
   @operationId("createResponse")
   @post
   @sharedRoute
-  createResponse is AgentOperation<OpenAI.CreateResponse, OpenAI.Response>;
+  createResponse is AgentOperation<CreateResponseRequest, OpenAI.Response>;
 
   /**
    * Creates a model response (streaming response).
@@ -37,7 +37,7 @@ interface Responses {
   @post
   @sharedRoute
   createResponseStream(
-    @body request: OpenAI.CreateResponse,
+    @body request: CreateResponseRequest,
   ): SseResponseOf<OpenAI.CreateResponseStreamingResponse>;
 
   /**
@@ -60,11 +60,7 @@ interface Responses {
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
 
-      @query(#{ name: "include[]", explode: true })
-      includables?: OpenAI.IncludeEnum[] = #[];
-
-      @query stream?: boolean = false;
-      @query starting_after?: int32;
+      ...GetResponseRequest;
     },
     OpenAI.Response
   >;
@@ -87,11 +83,9 @@ interface Responses {
     @example("resp_677efb5139a88190b512bc3fef8e535d")
     response_id: string,
 
-    @query(#{ name: "include[]", explode: true })
-    includables?: OpenAI.IncludeEnum[] = #[],
+    ...GetResponseStreamRequest,
 
     @header accept: "text/event-stream",
-    @query starting_after?: int32,
   ): SseResponseOf<OpenAI.CreateResponseStreamingResponse>;
 
   /**

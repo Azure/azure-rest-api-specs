@@ -2,6 +2,7 @@ import "../.external-readonly/azure.openai.v1.typespec/models/responses.tsp";
 import "../conversations/models.tsp";
 import "../tools/models.tsp";
 import "@azure-tools/typespec-azure-core/experimental";
+import "@typespec/json-schema";
 
 import "@typespec/http";
 import "@typespec/openapi";
@@ -9,8 +10,30 @@ import "@typespec/openapi";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core.Experimental;
+using TypeSpec.JsonSchema;
 
 namespace Azure.AI.Projects;
+
+@jsonSchema
+model CreateResponseRequest is OpenAI.CreateResponse;
+
+@jsonSchema
+model GetResponseRequest {
+  @query(#{ name: "include[]", explode: true })
+  includables?: OpenAI.IncludeEnum[] = #[];
+
+  @query stream?: boolean = false;
+
+  @query starting_after?: int32;
+}
+
+@jsonSchema
+model GetResponseStreamRequest {
+  @query(#{ name: "include[]", explode: true })
+  includables?: OpenAI.IncludeEnum[] = #[];
+
+  @query starting_after?: int32;
+}
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.CreateResponse,

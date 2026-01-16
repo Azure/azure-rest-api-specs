@@ -1,13 +1,16 @@
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/json-schema";
 
 import "../responses/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.JsonSchema;
 
 namespace Azure.AI.Projects;
 
+@jsonSchema
 model CreateAgentVersionRequest {
   ...MetadataPropertyForRequest;
 
@@ -50,6 +53,7 @@ model UpdateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+@jsonSchema
 model CreateAgentRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -63,6 +67,7 @@ model CreateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
+@jsonSchema
 model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }

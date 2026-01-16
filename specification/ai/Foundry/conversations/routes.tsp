@@ -26,7 +26,7 @@ interface Conversations {
   @post
   @operationId("createConversation")
   createConversation is AgentOperation<
-    OpenAI.CreateConversationBody,
+    CreateConversationRequest,
     OpenAI.ConversationResource
   >;
 
@@ -42,7 +42,7 @@ interface Conversations {
       /** The id of the conversation to update. */
       @path conversation_id: string;
 
-      ...OpenAI.UpdateConversationBody;
+      ...UpdateConversationRequest;
     },
     OpenAI.ConversationResource
   >;
@@ -112,17 +112,7 @@ interface Conversations {
       /** The id of the conversation on which the item needs to be created. */
       @path conversation_id: string;
 
-      /**
-       * Additional fields to include in the response.
-       * See the `include` parameter for listing Conversation items for more information.
-       */
-      @query include?: string[];
-
-      /** The items to add to the conversation. You may add up to 20 items at a time. */
-      #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-      @maxItems(20)
-      items: (OpenAI.Item | OpenAI.EasyInputMessage)[];
+      ...CreateConversationItemsRequest;
     },
     OpenAI.ConversationItemList
   >;
