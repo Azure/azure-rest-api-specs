@@ -48,7 +48,7 @@ foreach ($file in $files) {
     $filePath = Join-Path $examplesPath $file
     if (Test-Path $filePath) {
         $json = Get-Content $filePath -Raw | ConvertFrom-Json
-        
+
         # Remove storageContainerName from response body
         if ($file -eq "AvsStorageContainers_ListByStoragePool_MaximumSet_Gen.json") {
             foreach ($item in $json.responses.'200'.body.value) {
@@ -57,7 +57,7 @@ foreach ($file in $files) {
         } else {
             $json.responses.'200'.body.PSObject.Properties.Remove('storageContainerName')
         }
-        
+
         $json | ConvertTo-Json -Depth 100 | Set-Content -Path $filePath -NoNewline
         Write-Host "  Fixed: $file" -ForegroundColor Green
     }
@@ -83,11 +83,11 @@ foreach ($file in $patternFixes.Keys) {
     $filePath = Join-Path $examplesPath $file
     if (Test-Path $filePath) {
         $json = Get-Content $filePath -Raw | ConvertFrom-Json
-        
+
         foreach ($param in $patternFixes[$file].Keys) {
             $json.parameters.$param = $patternFixes[$file][$param]
         }
-        
+
         $json | ConvertTo-Json -Depth 100 | Set-Content -Path $filePath -NoNewline
         Write-Host "  Fixed: $file" -ForegroundColor Green
     }
@@ -107,14 +107,14 @@ foreach ($file in $volumesFiles) {
     $filePath = Join-Path $examplesPath $file
     if (Test-Path $filePath) {
         $json = Get-Content $filePath -Raw | ConvertFrom-Json
-        
+
         # Replace volumeId with volumeName
         if ($json.parameters.volumeId) {
             $volumeName = $json.parameters.volumeId
             $json.parameters.PSObject.Properties.Remove('volumeId')
             $json.parameters | Add-Member -MemberType NoteProperty -Name 'volumeName' -Value $volumeName
         }
-        
+
         $json | ConvertTo-Json -Depth 100 | Set-Content -Path $filePath -NoNewline
         Write-Host "  Fixed: $file" -ForegroundColor Green
     }
