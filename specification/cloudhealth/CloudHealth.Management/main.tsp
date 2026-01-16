@@ -1217,7 +1217,7 @@ interface AuthenticationSettings {
 @armResourceOperations(Entity)
 interface Entities {
   get is ArmResourceRead<Entity>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Entity>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
   delete is ArmResourceDeleteSync<Entity>;
 
   listByHealthModel is ArmResourceListByParent<
