@@ -2514,89 +2514,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials/default/revokeByResource": {
-      "post": {
-        "operationId": "Credentials_RevokeByResource",
-        "tags": [
-          "Credentials"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CredentialsRevokeByResourceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CredentialsRevokeByResourceResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Credentials_RevokeByResource": {
-            "$ref": "./examples/Credentials_RevokeByResource.json"
-          },
-          "Credentials_RevokeByResourceFailure": {
-            "$ref": "./examples/Credentials_RevokeByResourceFailure.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials/default/synchronize": {
       "post": {
         "operationId": "Credentials_Synchronize",
@@ -3016,6 +2933,91 @@
         "x-ms-examples": {
           "Delete_NamespaceDevice": {
             "$ref": "./examples/Delete_NamespaceDevice.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/devices/{deviceName}/revoke": {
+      "post": {
+        "operationId": "NamespaceDevices_Revoke",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCredentialsRevokeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceCredentialsRevokeResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5625,94 +5627,6 @@
         }
       }
     },
-    "CredentialsRevokeByResourceRequest": {
-      "type": "object",
-      "description": "Request payload for revoking device credentials.",
-      "properties": {
-        "resourceIds": {
-          "type": "array",
-          "description": "List of resource ids whose credentials should be revoked.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.DeviceRegistry/namespaces/devices"
-                },
-                {
-                  "type": "Microsoft.DeviceRegistry/namespaces/assets"
-                }
-              ]
-            }
-          }
-        },
-        "disable": {
-          "type": "boolean",
-          "description": "Indicates whether to disable the device(s) after revoking credentials. Prevents new credentials to be issued."
-        }
-      },
-      "required": [
-        "resourceIds"
-      ]
-    },
-    "CredentialsRevokeByResourceResponse": {
-      "type": "object",
-      "description": "Request payload for revoking device credentials.",
-      "properties": {
-        "revocationResults": {
-          "type": "array",
-          "description": "Results for revocation action.",
-          "items": {
-            "$ref": "#/definitions/CredentialsRevokeByResourceRevocationResult"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "revocationResults"
-      ]
-    },
-    "CredentialsRevokeByResourceRevocationResult": {
-      "type": "object",
-      "description": "Represents revocation of resource result.",
-      "properties": {
-        "resourceId": {
-          "type": "array",
-          "description": "Resource id.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.DeviceRegistry/namespaces/devices"
-                },
-                {
-                  "type": "Microsoft.DeviceRegistry/namespaces/assets"
-                }
-              ]
-            }
-          }
-        },
-        "result": {
-          "type": "string",
-          "description": "Indicates whether revocation succeeded or failed."
-        },
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error details."
-        }
-      },
-      "required": [
-        "resourceId",
-        "result"
-      ]
-    },
     "DataPoint": {
       "type": "object",
       "description": "Defines the data point properties.",
@@ -5936,6 +5850,33 @@
           }
         }
       }
+    },
+    "DeviceCredentialsRevokeRequest": {
+      "type": "object",
+      "description": "Request payload for revoking device credentials.",
+      "properties": {
+        "disable": {
+          "type": "boolean",
+          "description": "Indicates whether to disable the device(s) after revoking credentials. Prevents new credentials to be issued."
+        }
+      }
+    },
+    "DeviceCredentialsRevokeResponse": {
+      "type": "object",
+      "description": "Request payload for revoking device credentials.",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Indicates whether revocation succeeded or failed."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error details."
+        }
+      },
+      "required": [
+        "result"
+      ]
     },
     "DeviceMessagingEndpoint": {
       "type": "object",
