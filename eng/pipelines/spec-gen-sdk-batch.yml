@@ -13,9 +13,32 @@ parameters:
     default: 'sample-typespecs'
     displayName: 'Batch Specs to Run'
 
-extends:
-  template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
-  parameters:
-    SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
-    SdkRepoUrl: $(SdkRepoUrl)
-    SpecBatchTypes: ${{ parameters.SpecBatchTypes }}
+trigger: none
+pr: none
+
+schedules:
+  - cron: '0 0 * * 0' # Every Sunday at 00:00 UTC
+    displayName: 'Weekly TypeSpec batch run'
+    branches:
+      include:
+        - main
+    always: true # Run even if there are no code changes
+
+# Determine batch types to run: for scheduled runs use both mgmt and dataplane, otherwise use parameter
+variables:
+  - name: batchTypes
+    ${{ if eq(variables['Build.Reason'], 'Schedule') }}:
+      value: 'all-mgmtplane-typespecs,all-dataplane-typespecs'
+    ${{ else }}:
+      value: ${{ parameters.SpecBatchTypes }}
+
+stages:
+  - ${{ each batchType in split(variables.batchTypes, ',') }}:
+    - stage: ${{ replace(batchType, '-', '_') }}
+      displayName: 'Run ${{ batchType }}'
+      extends:
+        template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
+        parameters:
+          SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
+          SdkRepoUrl: $(SdkRepoUrl)
+          SpecBatchTypes: ${{ batchType }}
