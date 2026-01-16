@@ -24,6 +24,44 @@ model Feature is Azure.ResourceManager.ProxyResource<FeatureProperties, false> {
   >;
 }
 
+alias FeaturesListParameters = {
+  /**
+   * Continuation token for pagination.
+   */
+  @query("$skip")
+  $skip?: string;
+
+  /**
+   * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+   */
+  @query("tags")
+  tags?: string;
+
+  /**
+   * feature name.
+   */
+  @query("featureName")
+  featureName?: string;
+
+  /**
+   * Description of the featureset.
+   */
+  @query("description")
+  description?: string;
+
+  /**
+   * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+   */
+  @query("listViewType")
+  listViewType?: ListViewType = ListViewType.ActiveOnly;
+
+  /**
+   * Page size.
+   */
+  @query("pageSize")
+  pageSize?: int32 = 1000;
+};
+
 @armResourceOperations
 interface FeatureOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -77,43 +115,7 @@ interface Features {
   @summary("List Features.")
   list is FeatureOps.List<
     Feature,
-    Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
-
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
-      @query("tags")
-      tags?: string;
-
-      /**
-       * feature name.
-       */
-      @query("featureName")
-      featureName?: string;
-
-      /**
-       * Description of the featureset.
-       */
-      @query("description")
-      description?: string;
-
-      /**
-       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType = ListViewType.ActiveOnly;
-
-      /**
-       * Page size.
-       */
-      @query("pageSize")
-      pageSize?: int32 = 1000;
-    },
+    Parameters = FeaturesListParameters,
     Response = ArmResponse<FeatureResourceArmPaginatedResult>
   >;
 }

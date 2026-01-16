@@ -26,6 +26,26 @@ model WorkspaceConnectionPropertiesV2BasicResource
   >;
 }
 
+alias WorkspaceConnectionListParameters = {
+  /**
+   * Target of the workspace connection.
+   */
+  @query("target")
+  target?: string;
+
+  /**
+   * Category of the workspace connection.
+   */
+  @query("category")
+  category?: string;
+
+  /**
+   * query parameter that indicates if get connection call should return both connections and datastores
+   */
+  @query("includeAll")
+  includeAll?: boolean = false;
+};
+
 @armResourceOperations
 interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
@@ -68,25 +88,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   @summary("List all the available machine learning workspaces connections under the specified workspace.")
   list is ArmResourceListByParent<
     WorkspaceConnectionPropertiesV2BasicResource,
-    Parameters = {
-      /**
-       * Target of the workspace connection.
-       */
-      @query("target")
-      target?: string;
-
-      /**
-       * Category of the workspace connection.
-       */
-      @query("category")
-      category?: string;
-
-      /**
-       * query parameter that indicates if get connection call should return both connections and datastores
-       */
-      @query("includeAll")
-      includeAll?: boolean = false;
-    },
+    Parameters = WorkspaceConnectionListParameters,
     Response = ArmResponse<WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult>
   >;
 
