@@ -25,7 +25,7 @@ union _AgentToolType {
   a2a_preview: "a2a_preview",
   azure_function: "azure_function",
 
-    @removed(Versions.v1)
+  @removed(Versions.v1)
   memory_search: "memory_search",
 }
 
@@ -46,19 +46,19 @@ union _AgentIncludable {
     /**
      * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
      */
-        @removed(Versions.v1)
+    @removed(Versions.v1)
     project_connection_id?: string,
   }
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.WebSearchPreviewTool,
+@@copyProperties(OpenAI.WebSearchTool,
   {
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
      * resource attached to the tool.
      */
-        @removed(Versions.v1)
+    @removed(Versions.v1)
     custom_search_configuration?: WebSearchConfiguration,
   }
 );

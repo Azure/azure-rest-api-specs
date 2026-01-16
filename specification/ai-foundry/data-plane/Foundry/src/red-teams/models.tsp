@@ -88,16 +88,16 @@ union AttackStrategy {
   Baseline: "baseline",
 
   @doc("Represents indirect jailbreak attacks that use complex methods to bypass AI safeguards.")
-    IndirectJailbreak: "indirect_jailbreak",
+  IndirectJailbreak: "indirect_jailbreak",
 
   @doc("Alters the tense of the text, changing its temporal context.")
-    Tense: "tense",
+  Tense: "tense",
 
   @doc("Creates multi-turn conversations to simulate extended interactions.")
-    MultiTurn: "multi_turn",
+  MultiTurn: "multi_turn",
 
   @doc("Gradually increases the intensity or complexity of the attack over time.")
-    Crescendo: "crescendo",
+  Crescendo: "crescendo",
 }
 
 @doc("Risk category for the attack objective.")
@@ -118,22 +118,22 @@ union RiskCategory {
   SelfHarm: "SelfHarm",
 
   @doc("Represents content that involves illegal activities.")
-    ProtectedMaterial: "ProtectedMaterial",
+  ProtectedMaterial: "ProtectedMaterial",
 
   @doc("Represents content that contains vulnerabilities in code.")
-    CodeVulnerability: "CodeVulnerability",
+  CodeVulnerability: "CodeVulnerability",
 
   @doc("Represents content that lacks a solid grounding in fact.")
-    UngroundedAttributes: "UngroundedAttributes",
+  UngroundedAttributes: "UngroundedAttributes",
 
   @doc("Represents content that involves prohibited actions.")
-    ProhibitedActions: "ProhibitedActions",
+  ProhibitedActions: "ProhibitedActions",
 
   @doc("Represents content that involves sensitive data leakage.")
-    SensitiveDataLeakage: "SensitiveDataLeakage",
+  SensitiveDataLeakage: "SensitiveDataLeakage",
 
   @doc("Represents content that involves task adherence.")
-    TaskAdherence: "TaskAdherence",
+  TaskAdherence: "TaskAdherence",
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")

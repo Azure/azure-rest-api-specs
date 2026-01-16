@@ -4538,7 +4538,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.ConversationResource"
+                  "$ref": "#/components/schemas/OpenAI.Conversation"
                 }
               }
             }
@@ -4661,7 +4661,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/OpenAI.ConversationResource"
+                        "$ref": "#/components/schemas/OpenAI.Conversation"
                       },
                       "description": "The requested list of items."
                     },
@@ -4731,7 +4731,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.ConversationResource"
+                  "$ref": "#/components/schemas/OpenAI.Conversation"
                 }
               }
             }
@@ -4792,7 +4792,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.ConversationResource"
+                  "$ref": "#/components/schemas/OpenAI.Conversation"
                 }
               }
             }
@@ -5190,7 +5190,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.ConversationResource"
+                  "$ref": "#/components/schemas/OpenAI.Conversation"
                 }
               }
             }
@@ -14841,6 +14841,43 @@
           "64g"
         ]
       },
+      "OpenAI.Conversation": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "metadata",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the conversation."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "conversation"
+            ],
+            "description": "The object type, which is always `conversation`.",
+            "x-stainless-const": true,
+            "default": "conversation"
+          },
+          "metadata": {
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.\n  Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters."
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The time at which the conversation was created, measured in seconds since the Unix epoch."
+          }
+        },
+        "title": "The conversation object",
+        "x-oaiMeta": {
+          "name": "The conversation object",
+          "group": "conversations"
+        }
+      },
       "OpenAI.ConversationItem": {
         "type": "object",
         "required": [
@@ -16155,38 +16192,6 @@
         },
         "description": "The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.",
         "title": "Conversation"
-      },
-      "OpenAI.ConversationResource": {
-        "type": "object",
-        "required": [
-          "id",
-          "object",
-          "metadata",
-          "created_at"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the conversation."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "conversation"
-            ],
-            "description": "The object type, which is always `conversation`.",
-            "x-stainless-const": true,
-            "default": "conversation"
-          },
-          "metadata": {
-            "description": "Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.\n  Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters."
-          },
-          "created_at": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The time at which the conversation was created, measured in seconds since the Unix epoch."
-          }
-        }
       },
       "OpenAI.CreateChatCompletionRequestResponseFormat": {
         "type": "object",
@@ -23000,7 +23005,11 @@
               "mcp_list_tools",
               "mcp_approval_request",
               "mcp_approval_response",
-              "mcp_call"
+              "mcp_call",
+              "structured_outputs",
+              "workflow_action",
+              "memory_search_call",
+              "oauth_consent_request"
             ]
           }
         ]
@@ -29384,14 +29393,6 @@
               }
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
-          },
-          "custom_search_configuration": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebSearchConfiguration"
-              }
-            ],
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
           }
         },
         "allOf": [
@@ -29443,6 +29444,14 @@
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
+          },
+          "custom_search_configuration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebSearchConfiguration"
+              }
+            ],
+            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
           }
         },
         "allOf": [
