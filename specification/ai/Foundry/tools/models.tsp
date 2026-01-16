@@ -1,10 +1,12 @@
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core/experimental";
 import "@azure-tools/openai-typespec/models/responses";
+import "@azure-tools/typespec-client-generator-core";
 
 import "../memory_stores/models.tsp";
 
 using Azure.Core.Experimental;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
@@ -32,6 +34,11 @@ union _AgentToolType {
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
+
+@@clientName(Azure.AI.Projects._AgentToolType.a2a_preview,
+  "A2A_PREVIEW",
+  "python"
+);
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
