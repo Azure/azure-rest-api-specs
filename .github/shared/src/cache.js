@@ -17,7 +17,7 @@ export class MapCache {
    * @returns {V} cached value
    *
    * @example
-   * const text = cache.getOrCreate(path, async () => await readFile(path));
+   * const result = cache.getOrCreate(42, async () => await doWork(42));
    */
   getOrCreate(key, factory) {
     let value = this.#map.get(key);
@@ -53,7 +53,7 @@ export class MapCache2 {
    * @returns {V} cached value
    *
    * @example
-   * const text = cache.getOrCreate(folder, file, async () => await readFile(resolve(folder, file)));
+   * const result = cache.getOrCreate(42, 7 async () => await doWork(42, 7));
    */
   getOrCreate(key1, key2, factory) {
     // key1 => cache for the next layer
