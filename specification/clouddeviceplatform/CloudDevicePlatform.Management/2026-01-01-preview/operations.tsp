@@ -12,5 +12,6 @@ interface PartnerBusinesses {
   createOrUpdate is ArmResourceCreateOrReplaceSync<PartnerBusiness>;
   delete is ArmResourceDeleteSync<PartnerBusiness>;
   get is ArmResourceRead<PartnerBusiness>;
+  listByResourceGroup is ArmResourceListByParent<PartnerBusiness>;
   listBySubscription is ArmListBySubscription<PartnerBusiness>;
 }
