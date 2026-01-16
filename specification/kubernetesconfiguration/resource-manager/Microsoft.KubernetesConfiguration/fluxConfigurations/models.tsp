@@ -275,9 +275,9 @@ model FluxConfigurationProperties {
   /**
    * Statuses of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects provisioned by the fluxConfiguration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @identifiers(#["name", "namespace", "kind"])
-  statuses?: ObjectStatusDefinition[];
+  statuses?: ObjectStatusDefinition[] | null;
 
   /**
    * Public Key associated with this fluxConfiguration (either generated within the cluster or provided by the user).
@@ -889,8 +889,8 @@ model ObjectStatusDefinition {
   /**
    * List of Kubernetes object status conditions present on the cluster
    */
-  @identifiers(#["type"])
-  statusConditions?: ObjectStatusConditionDefinition[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  statusConditions?: ObjectStatusConditionDefinition[] | null;
 
   /**
    * Additional properties that are provided from objects of the HelmRelease kind
@@ -1501,8 +1501,8 @@ model PostBuildPatchDefinition {
   /**
    * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
    */
-  @identifiers(#[])
-  substituteFrom?: SubstituteFromPatchDefinition[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  substituteFrom?: SubstituteFromPatchDefinition[] | null;
 }
 
 /**

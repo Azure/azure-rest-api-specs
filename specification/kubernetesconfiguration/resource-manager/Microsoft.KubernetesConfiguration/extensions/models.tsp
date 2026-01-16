@@ -172,8 +172,8 @@ model ExtensionProperties {
   /**
    * Status from this extension.
    */
-  @identifiers(#[])
-  statuses?: ExtensionStatus[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  statuses?: ExtensionStatus[] | null;
 
   /**
    * Error information from the Agent - e.g. errors during installation.

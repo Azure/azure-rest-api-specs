@@ -1020,15 +1020,11 @@
         "statuses": {
           "type": "array",
           "description": "Statuses of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects provisioned by the fluxConfiguration.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ObjectStatusDefinition"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name",
-            "namespace",
-            "kind"
-          ]
+          "readOnly": true
         },
         "repositoryPublicKey": {
           "type": "string",
@@ -1790,12 +1786,10 @@
         "statusConditions": {
           "type": "array",
           "description": "List of Kubernetes object status conditions present on the cluster",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ObjectStatusConditionDefinition"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
+          }
         },
         "helmReleaseProperties": {
           "$ref": "#/definitions/HelmReleasePropertiesDefinition",
@@ -1897,10 +1891,10 @@
         "substituteFrom": {
           "type": "array",
           "description": "Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/SubstituteFromPatchDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
