@@ -27,12 +27,16 @@ These are the global settings for the informatica.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-05-08
+tag: package-2025-11-27
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
+### Tag: package-2025-11-27
+
+These settings apply only when `--tag=package-2025-11-27` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-27'
+input-file:
+  - Informatica.DataManagement/stable/2025-11-27/openapi.json
 ```
 
 ### Tag: package-2024-05-08
@@ -42,7 +46,6 @@ These settings apply only when `--tag=package-2024-05-08` is specified on the co
 ```yaml $(tag) == 'package-2024-05-08'
 input-file:
   - Informatica.DataManagement/stable/2024-05-08/openapi.json
-
 ```
 
 ---
@@ -59,6 +62,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_informaticadatamanagement']
@@ -76,6 +80,10 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 
