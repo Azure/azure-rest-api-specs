@@ -5,7 +5,7 @@ import { StringKeyCache, StringKeyPairCache } from "./cache.js";
 const resolveCache = new StringKeyCache();
 
 /** @type {StringKeyPairCache<string>} */
-const resolveCache2 = new StringKeyPairCache();
+const resolvePairCache = new StringKeyPairCache();
 
 /**
  *
@@ -34,8 +34,8 @@ export function resolveCached(path) {
  * @param {string} to
  * @returns {string}
  */
-export function resolveCached2(from, to) {
-  return resolveCache2.getOrCreate(from, to, () => resolve(from, to));
+export function resolvePairCached(from, to) {
+  return resolvePairCache.getOrCreate(from, to, () => resolve(from, to));
 }
 
 /**

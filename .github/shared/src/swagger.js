@@ -6,7 +6,7 @@ import { z } from "zod";
 import { mapAsync } from "./array.js";
 import { StringKeyCache } from "./cache.js";
 import { example, preview } from "./changed-files.js";
-import { resolveCached, resolveCached2 } from "./path.js";
+import { resolveCached, resolvePairCached } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
@@ -174,7 +174,7 @@ export class Swagger {
     const { content, logger, tag } = options;
 
     const rootDir = dirname(tag?.readme?.path ?? "");
-    this.#path = resolveCached2(rootDir, path);
+    this.#path = resolvePairCached(rootDir, path);
 
     this.#content = content;
     this.#logger = logger;

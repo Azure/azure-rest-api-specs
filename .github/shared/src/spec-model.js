@@ -2,7 +2,7 @@ import { readdir } from "fs/promises";
 import { inspect } from "util";
 import { flatMapAsync, mapAsync } from "./array.js";
 import { readme } from "./changed-files.js";
-import { resolveCached, resolveCached2 } from "./path.js";
+import { resolveCached, resolvePairCached } from "./path.js";
 import { Readme } from "./readme.js";
 import { SpecModelError } from "./spec-model-error.js";
 
@@ -202,7 +202,7 @@ export class SpecModel {
       const readmePaths = files
         // filter before resolve to (slightly) improve perf, since filter only needs filename
         .filter(readme)
-        .map((p) => resolveCached2(this.#folder, p));
+        .map((p) => resolvePairCached(this.#folder, p));
 
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
 
