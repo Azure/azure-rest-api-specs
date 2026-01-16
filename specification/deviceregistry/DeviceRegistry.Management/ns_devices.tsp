@@ -51,11 +51,9 @@ alias NamespaceDevicePropertiesUpdate = {
   enabled?: boolean;
 };
 
-
 @doc("Request payload for revoking device credentials.")
 @added(Versions.v2026_03_01_preview)
 model DeviceCredentialsRevokeRequest {
-
   @doc("Indicates whether to disable the device(s) after revoking credentials. Prevents new credentials to be issued.")
   disable?: boolean;
 }
@@ -63,7 +61,6 @@ model DeviceCredentialsRevokeRequest {
 @doc("Request payload for revoking device credentials.")
 @added(Versions.v2026_03_01_preview)
 model DeviceCredentialsRevokeResponse {
-
   @doc("Indicates whether revocation succeeded or failed.")
   result: string;
 
