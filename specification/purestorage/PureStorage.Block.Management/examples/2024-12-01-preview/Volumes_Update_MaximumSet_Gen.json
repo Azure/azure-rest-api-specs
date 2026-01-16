@@ -1,0 +1,51 @@
+{
+  "title": "Volumes_Update_MaximumSet",
+  "operationId": "Volumes_Update",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "6808FCAE-462F-4398-819F-CCA6DFD71000",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "test-pool-1",
+    "volumeGroupName": "test-vg-1",
+    "volumeName": "test-vol-1",
+    "properties": {
+      "properties": {
+        "provisionedSize": 13
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "space": {
+            "totalUsed": 23,
+            "unique": 17,
+            "snapshots": 30,
+            "shared": 16
+          },
+          "provisionedSize": 8,
+          "serialNumber": "xnprqasdlv",
+          "createdAt": "amzaly",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/6808FCAE-462F-4398-819F-CCA6DFD71000/resourceGroups/rgpurestorage/providers/Microsoft.PureStorage/storagePools/test-pool-1",
+        "name": "aqgjgpkajkzsujsbsxpzvfw",
+        "type": "stbjkvyrcdifepfpobk",
+        "systemData": {
+          "createdBy": "dgelsvvswlwm",
+          "createdByType": "User",
+          "createdAt": "2026-01-12T06:41:26.821Z",
+          "lastModifiedBy": "lg",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-12T06:41:26.821Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

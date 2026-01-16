@@ -1,0 +1,70 @@
+{
+  "title": "AvsStorageContainerVolumes_Update_MaximumSet",
+  "operationId": "6b38e4d6-9f43-441c-9188-9b5cf77d59ec",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "6808FCAE-462F-4398-819F-CCA6DFD71000",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "test-pool-1",
+    "storageContainerName": "testResource1",
+    "volumeId": "abc123-def456-789",
+    "properties": {
+      "properties": {
+        "softDeletion": {
+          "destroyed": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storagePoolInternalId": "urhhfewjxrngsi",
+          "storagePoolResourceId": "quhtdlkyjdrbuhkj",
+          "volumeInternalId": "08a23af4-d7e4-4591-bacf-a5d1aabd6e6e",
+          "displayName": "rplx",
+          "space": {
+            "totalUsed": 23,
+            "unique": 17,
+            "snapshots": 30,
+            "shared": 16
+          },
+          "softDeletion": {
+            "destroyed": true,
+            "eradicationTimestamp": "bohxtrsaedfhzslslvfzecnyribnt"
+          },
+          "createdTimestamp": "rkjzcdbvovbcfuypbblsarkhdbgb",
+          "provisionedSize": 7,
+          "volumeType": "avs",
+          "avs": {
+            "diskId": "wfjogvzuqvw",
+            "diskName": "keppt",
+            "folder": "ny",
+            "avsVmInternalId": "6e9715fc-e816-43e1-bd75-03a1fbb25e39",
+            "avsVmResourceId": "871ce063-75cb-4176-adef-f79bf661ace7",
+            "avsVmName": "fcxfvhcafhhaqfjp",
+            "avsStorageContainerResourceId": "etlfjnit"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/6808FCAE-462F-4398-819F-CCA6DFD71000/resourceGroups/rgpurestorage/providers/Microsoft.PureStorage/storagePools/test-pool-1/volumeGroups/test-vg-1/volumes/test-vol-1",
+        "name": "rwqatqcbiynyaxzahrwivdlkxj",
+        "type": "cduyqrdeqcsvrwidzmqi",
+        "systemData": {
+          "createdBy": "dgelsvvswlwm",
+          "createdByType": "User",
+          "createdAt": "2026-01-12T06:41:26.821Z",
+          "lastModifiedBy": "lg",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-12T06:41:26.821Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

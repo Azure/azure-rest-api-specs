@@ -1,0 +1,55 @@
+{
+  "title": "Reservations_GetResourceLimits_MaximumSet",
+  "operationId": "801f9d9f-c043-41a0-a930-2b4f863d5ecd",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "6808FCAE-462F-4398-819F-CCA6DFD71000",
+    "resourceGroupName": "rgpurestorage",
+    "reservationName": "30c0c243-2d2d-4bb3-a264-2f46ccbaf319"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "storagePool": {
+          "provisionedBandwidthMbPerSec": {
+            "min": 25,
+            "max": 9
+          },
+          "provisionedIops": {
+            "min": 25,
+            "max": 9
+          },
+          "physicalAvailabilityZones": [
+            "fpal"
+          ]
+        },
+        "volume": {
+          "provisionedSize": {
+            "min": 25,
+            "max": 9
+          }
+        },
+        "protectionPolicy": {
+          "frequency": {
+            "min": 25,
+            "max": 9
+          },
+          "retention": {
+            "min": 25,
+            "max": 9
+          }
+        },
+        "performancePolicy": {
+          "iopsLimit": {
+            "min": 25,
+            "max": 9
+          },
+          "bandwidthLimit": {
+            "min": 25,
+            "max": 9
+          }
+        }
+      }
+    }
+  }
+}
