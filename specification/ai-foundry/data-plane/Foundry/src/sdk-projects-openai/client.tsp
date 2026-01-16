@@ -265,7 +265,19 @@ namespace Azure.AI.Projects;
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@changePropertyType(OpenAI.InputMessage.role, OpenAI.MessageRole);
+
+@@copyProperties(OpenAI.ItemResource,
+  {
+    id?: string,
+  }
+);
+
 @@usage(OpenAI.ItemResource, Usage.json);
+@@access(OpenAI.ItemResource, Access.public);
+@@clientName(OpenAI.ItemResource, "AgentResponseItem");
+
 @@usage(OpenAI.CreateResponseStreamingResponse, Usage.json);
 
 @@usage(AgentId, Usage.output);
@@ -279,9 +291,6 @@ namespace Azure.AI.Projects;
 
 @@usage(AgentDefinition, Usage.input | Usage.output);
 @@access(AgentDefinition, Access.public);
-
-@@access(OpenAI.ItemResource, Access.public);
-@@clientName(OpenAI.ItemResource, "AgentResponseItem");
 
 @@usage(PromptAgentDefinition, Usage.input | Usage.output);
 @@access(PromptAgentDefinition, Access.public);
