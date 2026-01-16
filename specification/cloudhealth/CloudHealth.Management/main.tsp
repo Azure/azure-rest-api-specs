@@ -1195,8 +1195,8 @@ interface HealthModels {
 @armResourceOperations(SignalDefinition)
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
-  createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
-  delete is ArmResourceDeleteSync<SignalDefinition>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<SignalDefinition>;
+  delete is ArmResourceDeleteWithoutOkAsync<SignalDefinition>;
 
   listByHealthModel is ArmResourceListByParent<
     SignalDefinition,
@@ -1208,8 +1208,8 @@ interface SignalDefinitions {
 @armResourceOperations(AuthenticationSetting)
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
-  delete is ArmResourceDeleteSync<AuthenticationSetting>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AuthenticationSetting>;
+  delete is ArmResourceDeleteWithoutOkAsync<AuthenticationSetting>;
 
   listByHealthModel is ArmResourceListByParent<AuthenticationSetting>;
 }
@@ -1217,8 +1217,8 @@ interface AuthenticationSettings {
 @armResourceOperations(Entity)
 interface Entities {
   get is ArmResourceRead<Entity>;
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
-  delete is ArmResourceDeleteSync<Entity>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Entity>;
+  delete is ArmResourceDeleteWithoutOkAsync<Entity>;
 
   listByHealthModel is ArmResourceListByParent<
     Entity,
@@ -1259,8 +1259,8 @@ interface Entities {
 @armResourceOperations(Relationship)
 interface Relationships {
   get is ArmResourceRead<Relationship>;
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
-  delete is ArmResourceDeleteSync<Relationship>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Relationship>;
+  delete is ArmResourceDeleteWithoutOkAsync<Relationship>;
 
   listByHealthModel is ArmResourceListByParent<
     Relationship,
@@ -1272,8 +1272,8 @@ interface Relationships {
 @armResourceOperations(DiscoveryRule)
 interface DiscoveryRules {
   get is ArmResourceRead<DiscoveryRule>;
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
-  delete is ArmResourceDeleteSync<DiscoveryRule>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiscoveryRule>;
+  delete is ArmResourceDeleteWithoutOkAsync<DiscoveryRule>;
 
   listByHealthModel is ArmResourceListByParent<
     DiscoveryRule,
