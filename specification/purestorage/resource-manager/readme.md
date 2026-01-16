@@ -28,7 +28,19 @@ These are the global settings for the PureStorage.Block.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2024-11-01
-```
+
+  - tag: package-2026-01-01-preview
+    input-file:
+      - purestorage/preview/2026-01-01-preview/purestorage.json
+  - tag: package-2024-11-01-preview
+    input-file:
+      - purestorage/preview/2024-11-01-preview/purestorage.json
+  - tag: package-2024-11-01
+    input-file:
+      - purestorage/stable/2024-11-01/purestorage.json
+  - tag: package-2024-10-01-preview
+    input-file:
+      - purestorage/preview/2024-10-01-preview/purestorage.json```
 
 ### Tag: package-2024-11-01
 

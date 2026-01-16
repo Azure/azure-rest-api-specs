@@ -35,9 +35,9 @@ enum Versions {
   v1_stable: "2024-11-01",
 
   @doc("Version 3 preview with Azure native VM support.")
-  @useDependency(LiftrBase.Versions.v2024_12_01_preview)
+  @useDependency(LiftrBase.Versions.v2026_01_01_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
-  v2024_12_01_preview: "2024-12-01-preview",
+  v2026_01_01_preview: "2026-01-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -918,7 +918,7 @@ model AzureProperties {
   volumeGroupInternalId: string;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("Volume Group resource")
 @parentResource(StoragePool)
 model VolumeGroup is TrackedResource<VolumeGroupProperties> {
@@ -933,7 +933,7 @@ model VolumeGroup is TrackedResource<VolumeGroupProperties> {
   name: string;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("Properties of a volume group")
 model VolumeGroupProperties {
   @doc("Pure Storage's internal ID of the storage pool")
@@ -959,7 +959,7 @@ model VolumeGroupProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("Performance parameters for volume group")
 model PerformanceParameters {
   @doc("Bandwidth limit in MB per second")
@@ -969,7 +969,7 @@ model PerformanceParameters {
   iopsLimit?: int64;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("Protection parameters for volume group")
 model ProtectionParameters {
   @doc("Retention period for snapshots")
@@ -979,7 +979,7 @@ model ProtectionParameters {
   frequency?: string;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("ISCSI connection endpoint details")
 model IscsiEndpoint {
   @doc("IP address of the endpoint")
@@ -992,7 +992,7 @@ model IscsiEndpoint {
   iqn: string;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("ISCSI connection parameters")
 model IscsiConnectionParameters {
   @doc("List of ISCSI endpoints for connection")
@@ -1000,14 +1000,14 @@ model IscsiConnectionParameters {
   endpoints: IscsiEndpoint[];
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("Connection parameters response")
 model ConnectionParametersResponse {
   @doc("ISCSI connection parameters")
   iscsi: IscsiConnectionParameters;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("Volume group status information")
 model VolumeGroupStatus {
   @doc("Storage space usage for the volume group")
@@ -1017,7 +1017,7 @@ model VolumeGroupStatus {
   connectedHostCount: int32;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @armResourceOperations
 interface VolumeGroups {
   @doc("Get a volume group")
@@ -1055,7 +1055,7 @@ interface VolumeGroups {
   ): ArmResponse<VolumeGroupStatus> | ErrorResponse;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("Native VM Volume resource")
 @parentResource(VolumeGroup)
 model Volume is ProxyResource<NativeVmVolumeProperties> {
@@ -1070,7 +1070,7 @@ model Volume is ProxyResource<NativeVmVolumeProperties> {
   name: string;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @doc("Properties of a native VM volume")
 model NativeVmVolumeProperties {
   @doc("Storage space usage for the volume")
@@ -1097,7 +1097,7 @@ model NativeVmVolumeProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2024_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 @armResourceOperations
 interface Volumes {
   @doc("Get a volume")
