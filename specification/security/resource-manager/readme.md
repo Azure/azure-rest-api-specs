@@ -77,18 +77,18 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: AvoidAdditionalProperties
+    from: Microsoft.Security\preview\2026-01-01-preview\securityConnectors.json
+    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
+  - code: UnSupportedPatchProperties
+    from: Microsoft.Security\preview\2026-01-01-preview\securityConnectors.json
+    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
   - code: ResourceNameRestriction
-    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    from: Microsoft.Security\preview\2026-01-01-preview\securityConnectors.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
   - code: PatchBodyParametersSchema
-    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    from: Microsoft.Security\preview\2026-01-01-preview\securityConnectors.json
     reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
-  - code: UnSupportedPatchProperties
-    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
-    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
-  - code: AvoidAdditionalProperties
-    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
-    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
 ```
 
 ### Basic Information
@@ -105,6 +105,14 @@ tag: package-composite-v3
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-preview-2026-01-01-preview
+These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-01-preview'
+input-file:
+  - Microsoft.Security/preview/2026-01-01-preview/securityConnectors.json
+```
 
 ### Tag: package-2026-01
 
@@ -663,7 +671,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
-- Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2026-01-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2025-05-04-preview/assessments.json
 - Microsoft.Security/preview/2025-09-01-preview/defenderForStorageSettings.json
