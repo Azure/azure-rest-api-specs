@@ -1,4 +1,5 @@
 import path from "node:path";
+import { inspect } from "node:util";
 import { logMessage } from "./log.js";
 import { SpecGenSdkCmdInput } from "./types.js";
 import {
@@ -224,7 +225,7 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
           );
           changedSpecs.push(...newSpecs);
           logMessage(
-            `\t readme folders: ${info.resourceManagerPaths[0].path}, tspconfig folders: ${info.managementPaths}`,
+            `\t readme folders: ${info.resourceManagerPaths[0].path}, tspconfig folders: ${inspect(info.managementPaths)}`,
           );
           for (const p of info.managementPaths) {
             delete typespecProjectResult[p];
@@ -242,7 +243,7 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
               const newSpecs = createCombinedSpecs(rmPath.path, matchingManagements, results);
               changedSpecs.push(...newSpecs);
               logMessage(
-                `\t readme folders: ${rmPath.path}, tspconfig folders: ${matchingManagements}`,
+                `\t readme folders: ${rmPath.path}, tspconfig folders: ${inspect(matchingManagements)}`,
               );
               for (const p of matchingManagements) {
                 delete typespecProjectResult[p];
@@ -264,7 +265,7 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
           );
           changedSpecs.push(...newSpecs);
           logMessage(
-            `\t readme folders: ${info.dataPlanePaths[0].path}, tspconfig folders: ${info.otherTypeSpecPaths}`,
+            `\t readme folders: ${info.dataPlanePaths[0].path}, tspconfig folders: ${inspect(info.otherTypeSpecPaths)}`,
           );
           for (const p of info.otherTypeSpecPaths) {
             delete typespecProjectResult[p];
@@ -282,7 +283,7 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
               const newSpecs = createCombinedSpecs(dpPath.path, matchingTypeSpecs, results);
               changedSpecs.push(...newSpecs);
               logMessage(
-                `\t readme folders: ${dpPath.path}, tspconfig folders: ${matchingTypeSpecs}`,
+                `\t readme folders: ${dpPath.path}, tspconfig folders: ${inspect(matchingTypeSpecs)}`,
               );
               for (const p of matchingTypeSpecs) {
                 delete typespecProjectResult[p];
@@ -386,7 +387,7 @@ export function groupSpecConfigPaths(
         );
         changedSpecs.push(...newSpecs);
         logMessage(
-          `\t readme folders: ${info.resourceManagerPaths[0].path}, tspconfig folders: ${info.managementPaths}`,
+          `\t readme folders: ${info.resourceManagerPaths[0].path}, tspconfig folders: ${inspect(info.managementPaths)}`,
         );
         for (const p of info.managementPaths) {
           delete tspconfigFolderMap[p];
@@ -404,7 +405,7 @@ export function groupSpecConfigPaths(
             const newSpecs = createCombinedSpecs(rmPath.path, matchingManagements, results);
             changedSpecs.push(...newSpecs);
             logMessage(
-              `\t readme folders: ${rmPath.path}, tspconfig folders: ${matchingManagements}`,
+              `\t readme folders: ${rmPath.path}, tspconfig folders: ${inspect(matchingManagements)}`,
             );
             for (const p of matchingManagements) {
               delete tspconfigFolderMap[p];
@@ -426,7 +427,7 @@ export function groupSpecConfigPaths(
         );
         changedSpecs.push(...newSpecs);
         logMessage(
-          `\t readme folders: ${info.dataPlanePaths[0].path}, tspconfig folders: ${info.otherTypeSpecPaths}`,
+          `\t readme folders: ${info.dataPlanePaths[0].path}, tspconfig folders: ${inspect(info.otherTypeSpecPaths)}`,
         );
         for (const p of info.otherTypeSpecPaths) {
           delete tspconfigFolderMap[p];
@@ -444,7 +445,7 @@ export function groupSpecConfigPaths(
             const newSpecs = createCombinedSpecs(dpPath.path, matchingTypeSpecs, results);
             changedSpecs.push(...newSpecs);
             logMessage(
-              `\t readme folders: ${dpPath.path}, tspconfig folders: ${matchingTypeSpecs}`,
+              `\t readme folders: ${dpPath.path}, tspconfig folders: ${inspect(matchingTypeSpecs)}`,
             );
             for (const p of matchingTypeSpecs) {
               delete tspconfigFolderMap[p];
