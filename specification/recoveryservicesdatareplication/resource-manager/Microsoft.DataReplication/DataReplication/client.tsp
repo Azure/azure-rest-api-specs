@@ -460,7 +460,7 @@ using Microsoft.DataReplication;
 );
 @@clientName(VMNicSelection, "VmNicSelection", "csharp");
 @@clientName(CheckNameAvailability.post,
-  "DataReplicationCheckNameAvailability",
+  "CheckDataReplicationNameAvailability",
   "csharp"
 );
 @@clientName(DeploymentPreflight.post,
