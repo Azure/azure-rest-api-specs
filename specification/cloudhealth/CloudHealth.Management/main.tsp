@@ -1187,7 +1187,7 @@ interface HealthModels {
       HealthModelProperties
     >
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
+  delete is ArmResourceDeleteSync<HealthModel>;
   listByResourceGroup is ArmResourceListByParent<HealthModel>;
   listBySubscription is ArmListBySubscription<HealthModel>;
 }
@@ -1196,7 +1196,7 @@ interface HealthModels {
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<SignalDefinition>;
-  delete is ArmResourceDeleteWithoutOkAsync<SignalDefinition>;
+  delete is ArmResourceDeleteSync<SignalDefinition>;
 
   listByHealthModel is ArmResourceListByParent<
     SignalDefinition,
@@ -1209,7 +1209,7 @@ interface SignalDefinitions {
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AuthenticationSetting>;
-  delete is ArmResourceDeleteWithoutOkAsync<AuthenticationSetting>;
+  delete is ArmResourceDeleteSync<AuthenticationSetting>;
 
   listByHealthModel is ArmResourceListByParent<AuthenticationSetting>;
 }
@@ -1218,7 +1218,7 @@ interface AuthenticationSettings {
 interface Entities {
   get is ArmResourceRead<Entity>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Entity>;
-  delete is ArmResourceDeleteWithoutOkAsync<Entity>;
+  delete is ArmResourceDeleteSync<Entity>;
 
   listByHealthModel is ArmResourceListByParent<
     Entity,
@@ -1260,7 +1260,7 @@ interface Entities {
 interface Relationships {
   get is ArmResourceRead<Relationship>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Relationship>;
-  delete is ArmResourceDeleteWithoutOkAsync<Relationship>;
+  delete is ArmResourceDeleteSync<Relationship>;
 
   listByHealthModel is ArmResourceListByParent<
     Relationship,
@@ -1273,7 +1273,7 @@ interface Relationships {
 interface DiscoveryRules {
   get is ArmResourceRead<DiscoveryRule>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiscoveryRule>;
-  delete is ArmResourceDeleteWithoutOkAsync<DiscoveryRule>;
+  delete is ArmResourceDeleteSync<DiscoveryRule>;
 
   listByHealthModel is ArmResourceListByParent<
     DiscoveryRule,
