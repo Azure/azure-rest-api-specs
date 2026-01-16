@@ -50,6 +50,7 @@ interface UsagesOperationGroup {
   @externalDocs("https://aka.ms/search-manage")
   @list
   listBySubscription is ArmProviderActionSync<
+    Request = void,
     Response = QuotaUsagesListResult,
     Scope = SubscriptionActionScope,
     Parameters = {

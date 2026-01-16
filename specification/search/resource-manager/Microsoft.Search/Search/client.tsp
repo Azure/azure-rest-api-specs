@@ -37,8 +37,6 @@ model `search-management-request-options` {
 op servicesCheckNameAvailabilityCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  name: string,
   ...Azure.ResourceManager.Legacy.Provider,
 
   /**
@@ -60,8 +58,7 @@ op servicesCheckNameAvailabilityCustomization(
 op usagesListBySubscriptionCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  name: string,
+  ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   ...LocationParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -723,3 +720,107 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 );
 
 @@clientName(Microsoft.Search, "SearchManagementClient", "python");
+
+@@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(usagesListBySubscriptionCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(usageBySubscriptionSkuCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(searchServicesListBySubscriptionCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(searchServicesListByResourceGroupCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(searchGetCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(searchCreateOrUpdateCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(searchUpdateCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(searchDeleteCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(queryKeysCreateCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(queryKeysDeleteCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+
+@@clientName(adminKeysGetCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(queryKeysListBySearchServiceCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(privateEndpointConnectionsListByServiceCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(privateEndpointConnectionsGetCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(privateEndpointConnectionsUpdateCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(privateEndpointConnectionsDeleteCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(privateLinkResourcesListSupportedCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(privateLinkResourcesRegenerateCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(SharedPrivateLinkResourcesListByServiceCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(SharedPrivateLinkResourcesGetCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientName(SharedPrivateLinkResourcesDeleteCustomization::parameters.params,
+  "searchManagementRequestOptions",
+  "go"
+);
+@@clientLocation(usageBySubscriptionSku, "ManagementClient", "go");
+/** Network security perimeter configuration */
+model AccessRulePropertiesSubscriptionsItem {
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: Azure.Core.armResourceIdentifier;
+}
+@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+  AccessRulePropertiesSubscriptionsItem[],
+  "go"
+);

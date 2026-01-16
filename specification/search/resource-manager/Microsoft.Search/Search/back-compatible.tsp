@@ -44,15 +44,15 @@ using Microsoft.Search;
   "checkNameAvailabilityInput"
 );
 
-@@minLength(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+@@minLength(Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   38
 );
-@@maxLength(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+@@maxLength(Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   100
 );
-@@pattern(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+@@pattern(Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$"
 );
-@@doc(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+@@doc(Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   "The network security perimeter configuration name."
 );
