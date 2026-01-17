@@ -77,8 +77,8 @@ suppressions:
   - code: GuidUsage
     reason: The parameters are required to be guid.
     where:
-      - Microsoft.ServicesHub/preview/2025-12-12-preview/serviceshub-preview.json#L1698
-      - Microsoft.ServicesHub/preview/2025-12-12-preview/serviceshub-preview.json#L2222
+      - $.definitions.ServicesHubEnableSolutionProperties.properties.connectorSubscriptionId.format
+      - $.definitions.SurveyAnalyzedPayloadProperties.properties.logAnalyticsWorkspaceId.format
 ```
 
 ---
