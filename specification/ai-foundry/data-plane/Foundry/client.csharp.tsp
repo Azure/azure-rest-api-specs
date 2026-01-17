@@ -25,6 +25,11 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
 
 // --------------------------------------------------------------------------------
+// Fix the xref.
+// --------------------------------------------------------------------------------
+@@clientNamespace(OpenAI, "Azure.AI.Projects", "csharp");
+
+// --------------------------------------------------------------------------------
 // Root client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects, "AIProjectClient");
@@ -138,3 +143,6 @@ namespace Azure.AI.Projects;
   "operationStatus",
   "csharp"
 );
+
+// Evaluators
+@@access(EvaluatorDefinitionType, Access.public);
