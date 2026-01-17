@@ -4,7 +4,7 @@ import { dirname, relative } from "path";
 import { inspect } from "util";
 import { z } from "zod";
 import { mapAsync } from "./array.js";
-import { StringKeyCache } from "./cache.js";
+import { StringKeyCache, StringKeyPairCache } from "./cache.js";
 import { example, preview } from "./changed-files.js";
 import { resolveCached, resolvePairCached } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
@@ -135,6 +135,9 @@ export class Swagger {
    */
   static #operationsCache = new StringKeyCache();
 
+  /** @type {StringKeyPairCache<Promise<Map<string, Swagger>>>} */
+  static #refCache = new StringKeyPairCache();
+
   /**
    * Caches reference paths extracted from a JSON object, using the resolved path (or content string itself) as the key.
    *
@@ -145,7 +148,7 @@ export class Swagger {
    *
    * @type {StringKeyCache<Promise<string[]>>}
    */
-  static #refCache = new StringKeyCache();
+  static #refPathCache = new StringKeyCache();
 
   /**
    * Optional content of swagger file, passed in via `options`.  If undefined, content is loaded from `#path`.
@@ -242,38 +245,47 @@ export class Swagger {
   }
 
   async #getRefs() {
-    // Safe to cache refPaths, since it's just an array of string paths
-    const refPaths = await Swagger.#refCache.getOrCreate(this.#content ?? this.#path, async () => {
-      const contentJSON = await this.#getContentJSON();
+    return await Swagger.#refCache.getOrCreate(
+      this.#tag?.name || "",
+      this.#content || this.#path,
+      async () => {
+        // Safe to cache refPaths, since it's just an array of string paths
+        const refPaths = await Swagger.#refPathCache.getOrCreate(
+          this.#content ?? this.#path,
+          async () => {
+            const contentJSON = await this.#getContentJSON();
 
-      const schema = await this.#wrapError(
-        async () =>
-          await $RefParser.resolve(this.#path, contentJSON, {
-            resolve: { file: excludeExamples, http: false },
+            const schema = await this.#wrapError(
+              async () =>
+                await $RefParser.resolve(this.#path, contentJSON, {
+                  resolve: { file: excludeExamples, http: false },
+                }),
+              "Failed to resolve file for swagger",
+            );
+
+            return (
+              schema
+                .paths("file")
+                // Exclude ourself
+                .filter((p) => resolveCached(p) !== resolveCached(this.#path))
+            );
+          },
+        );
+
+        // We should *not* cache the returned Swagger objects themselves, for two reasons:
+        // - Swagger objects created from the same content may have different tags
+        // - Swagger objects have backpointers to SpecModel, so the captured object graph can be very large
+        // - Swagger object should be relatively "cheap", since the "expensive" properties are cached statically.
+        return new Map(
+          refPaths.map((p) => {
+            const swagger = new Swagger(p, {
+              logger: this.#logger,
+              tag: this.#tag,
+            });
+            return [swagger.path, swagger];
           }),
-        "Failed to resolve file for swagger",
-      );
-
-      return (
-        schema
-          .paths("file")
-          // Exclude ourself
-          .filter((p) => resolveCached(p) !== resolveCached(this.#path))
-      );
-    });
-
-    // We should *not* cache the returned Swagger objects themselves, for two reasons:
-    // - Swagger objects created from the same content may have different tags
-    // - Swagger objects have backpointers to SpecModel, so the captured object graph can be very large
-    // - Swagger object should be relatively "cheap", since the "expensive" properties are cached statically.
-    return new Map(
-      refPaths.map((p) => {
-        const swagger = new Swagger(p, {
-          logger: this.#logger,
-          tag: this.#tag,
-        });
-        return [swagger.path, swagger];
-      }),
+        );
+      },
     );
   }
 
