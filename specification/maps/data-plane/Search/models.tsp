@@ -739,35 +739,6 @@ model GeocodePointsItem {
 }
 
 /**
- * A valid `GeoJSON Point` geometry type. Please refer to [RFC
- * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
- */
-model GeoJsonPoint extends GeoJsonGeometry {
-  ...GeoJsonPointData;
-
-  /**
-   * Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-   * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-   * GeometryCollection, Feature and FeatureCollection.
-   */
-  type: GeoJsonObjectType.GeoJsonPoint;
-}
-
-/**
-* A valid `GeoJSON` geometry object. The type must be one of the seven valid
-* GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,
-* Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
-*/
-/**
- * A valid `GeoJSON` geometry object. The type must be one of the seven valid
- * GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,
- * Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
- * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
- */
-model GeoJsonGeometry is GeoJsonObject;
-
-/**
 * A valid `GeoJSON` object. Please refer to [RFC
 * 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.
 */
@@ -784,19 +755,6 @@ type: GeoJsonObjectType;
 * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
 */
 "bbox"?: float64[];
-}
-
-/**
-* Data contained by a `GeoJson Point`.
-*/
-model GeoJsonPointData {
-/**
-* A `Position` is an array of numbers with two or more elements. The first two
-* elements are _longitude_ and _latitude_, precisely in that order.
-* _Altitude/Elevation_ is an optional third element. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.
-*/
-"coordinates": float64[];
 }
 
 /**
@@ -835,13 +793,11 @@ model ErrorDetail {
 * The error details.
 */
 @visibility(Lifecycle.Read)
-@identifiers(#[])
 "details"?: ErrorDetail[];
 /**
 * The error additional info.
 */
 @visibility(Lifecycle.Read)
-@identifiers(#[])
 "additionalInfo"?: ErrorAdditionalInfo[];
 }
 
@@ -1029,7 +985,8 @@ model GeocodingBatchResponseItem {
 
 /**
 * `GeoJSON GeocodingFeature` object that describe the boundaries of a
-* geographical area. Geometry of the feature is described with `GeoJSON
+* geographical area. Geometry of the feature is described with 
+* `GeoJSON
 * GeometryCollection`.
 * 
 * Please note, the service typically returns a GeometryCollection with Polygon or
@@ -1051,28 +1008,6 @@ model Boundary {
 "properties"?: BoundaryProperties;
 }
 
-/**
-* A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.
-*/
-model GeoJsonGeometryCollection extends GeoJsonGeometry {
-...GeoJsonGeometryCollectionData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "GeometryCollection";
-}
-
-
-model GeoJsonGeometryCollectionData {
-/**
-* Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates
-* in GeoJSON are in x, y order (longitude, latitude).
-*/
-"geometries": GeoJsonGeometry[];
-}
 
 /**
 * Properties of a Boundary object.
@@ -1229,178 +1164,4 @@ model AutocompleteProperties {
 * Address.
 */
 "name"?: string;
-}
-
-/**
-* A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.
-*/
-model GeoJsonMultiPoint extends GeoJsonGeometry {
-...GeoJsonMultiPointData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "MultiPoint";
-}
-
-/**
-* Data contained by a `GeoJson MultiPoint`.
-*/
-model GeoJsonMultiPointData {
-/**
-* Coordinates for the `GeoJson MultiPoint` geometry.
-*/
-"coordinates": float64[][];
-}
-
-/**
-* A valid `GeoJSON LineString` geometry type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.
-*/
-model GeoJsonLineString extends GeoJsonGeometry {
-...GeoJsonLineStringData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "LineString";
-}
-
-
-model GeoJsonLineStringData {
-/**
-* Coordinates for the `GeoJson LineString` geometry.
-*/
-"coordinates": float64[][];
-}
-
-/**
-* A valid `GeoJSON MultiLineString` geometry type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1.5) for details.
-*/
-model GeoJsonMultiLineString extends GeoJsonGeometry {
-...GeoJsonMultiLineStringData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "MultiLineString";
-}
-
-
-model GeoJsonMultiLineStringData {
-/**
-* Coordinates for the `GeoJson MultiLineString` geometry.
-*/
-"coordinates": float64[][][];
-}
-
-/**
-* A valid `GeoJSON Polygon` geometry type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.
-*/
-model GeoJsonPolygon extends GeoJsonGeometry {
-...GeoJsonPolygonData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "Polygon";
-}
-
-
-model GeoJsonPolygonData {
-/**
-* Coordinates for the `GeoJson Polygon` geometry type.
-*/
-"coordinates": float64[][][];
-}
-
-/**
-* A valid `GeoJSON MultiPolygon` object type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1.7) for details.
-*/
-model GeoJsonMultiPolygon extends GeoJsonGeometry {
-...GeoJsonMultiPolygonData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "MultiPolygon";
-}
-
-
-model GeoJsonMultiPolygonData {
-/**
-* Contains a list of valid `GeoJSON Polygon` objects. **Note** that coordinates
-* in GeoJSON are in x, y order (longitude, latitude).
-*/
-"coordinates": float64[][][][];
-}
-
-/**
-* A valid `GeoJSON Feature` object type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.
-*/
-model GeoJsonFeature extends GeoJsonObject {
-...GeoJsonFeatureData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "Feature";
-}
-
-
-model GeoJsonFeatureData {
-/**
-* A valid `GeoJSON` geometry object. The type must be one of the seven valid
-* GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,
-* Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
-*/
-"geometry": GeoJsonGeometry;
-/**
-* Properties can contain any additional metadata about the `Feature`. Value can
-* be any JSON object or a JSON null value
-*/
-"properties"?: unknown;
-/**
-* Identifier for the feature.
-*/
-"id"?: string;
-/**
-* The type of the feature. The value depends on the data model the current
-* feature is part of. Some data models may have an empty value.
-*/
-"featureType"?: string;
-}
-
-/**
-* A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.
-*/
-model GeoJsonFeatureCollection extends GeoJsonObject {
-...GeoJsonFeatureCollectionData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "FeatureCollection";
-}
-
-
-model GeoJsonFeatureCollectionData {
-/**
-* Contains a list of valid `GeoJSON Feature` objects.
-*/
-"features": GeoJsonFeature[];
 }
