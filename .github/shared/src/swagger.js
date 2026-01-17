@@ -270,6 +270,7 @@ export class Swagger {
       // But, they are safe to cache in this instance.
       this.#refs = new Map(
         refPaths.map((p) => {
+          // TODO: Can we replace `new Swagger()` with "lookup existing swagger from Tag backpointer"?
           const swagger = new Swagger(p, {
             logger: this.#logger,
             tag: this.#tag,
