@@ -285,22 +285,6 @@ model AvailableOperationDisplay {
 }
 
 /**
- * Describes the result of the request to list VM Sizes for Service Fabric Clusters.
- */
-model VMSizesResult is Azure.Core.Page<VMSizeResource>;
-
-/**
- * VM Sizes properties.
- */
-model VMSize {
-  /**
-   * VM Size name.
-   */
-  @visibility(Lifecycle.Read)
-  size?: string;
-}
-
-/**
  * The resource model definition for proxy-only resource.
  */
 model ProxyResource {

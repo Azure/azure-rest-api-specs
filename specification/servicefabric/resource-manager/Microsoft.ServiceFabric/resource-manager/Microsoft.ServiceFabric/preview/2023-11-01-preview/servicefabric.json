@@ -46,7 +46,7 @@
       "name": "Clusters"
     },
     {
-      "name": "VMSizeResources"
+      "name": "VMSizes"
     },
     {
       "name": "ApplicationTypeResources"
@@ -353,11 +353,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/unsupportedVmSizes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/unsupportedVmSizes": {
       "get": {
         "operationId": "UnsupportedVmSizes_List",
         "tags": [
-          "VMSizeResources"
+          "VMSizes"
         ],
         "description": "Get the lists of unsupported vm sizes for Service Fabric Clusters.",
         "parameters": [
@@ -366,6 +366,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location for the unsupported VM size(s). This is different from cluster location.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -392,11 +400,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/unsupportedVmSizes/{vmSize}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/unsupportedVmSizes/{vmSize}": {
       "get": {
         "operationId": "UnsupportedVmSizes_Get",
         "tags": [
-          "VMSizeResources"
+          "VMSizes"
         ],
         "description": "Get unsupported vm size for Service Fabric Clusters.",
         "parameters": [
@@ -407,11 +415,15 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
             "name": "vmSize",
             "in": "path",
             "description": "VM Size name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -4754,14 +4766,25 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VMSize",
-          "description": "VM Size properties."
+          "description": "VM Size properties.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "VM Size id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "VM Size type.",
+          "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "VMSizesResult": {
       "type": "object",
