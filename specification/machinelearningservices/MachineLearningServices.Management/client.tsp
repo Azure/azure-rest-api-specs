@@ -71,7 +71,10 @@ using Microsoft.MachineLearningServices;
 
 // Java casing fixes for PAT/PTU-related types and members
 @@clientName(PTUDeploymentUsage, "PtuDeploymentUsage", "java");
-@@clientName(PATAuthTypeWorkspaceConnectionProperties, "PatAuthTypeWorkspaceConnectionProperties", "java");
+@@clientName(PATAuthTypeWorkspaceConnectionProperties,
+  "PatAuthTypeWorkspaceConnectionProperties",
+  "java"
+);
 
 @@clientName(Microsoft.MachineLearningServices,
   "MachineLearningServicesMgmtClient",
@@ -159,3 +162,19 @@ using Microsoft.MachineLearningServices;
   "EnabledOnly",
   "python"
 );
+
+// Java mitigation for unknown type conversions in complex properties
+@@alternateType(JobBase.settings, unknown, "java");
+@@alternateType(CommandJob.settings, unknown, "java");
+@@alternateType(SweepJob.searchSpace, unknown, "java");
+@@alternateType(SweepJob.settings, unknown, "java");
+@@alternateType(ImageModelJobInput.settings, unknown, "java");
+@@alternateType(TableModelJobInput.settings, unknown, "java");
+
+// Java property casing fixes for additional properties
+@@clientName(NotebookAccessTokenResult.expiryTime, "expiryTime", "java");
+@@clientName(EnvironmentVersionResource.properties, "properties", "java");
+@@clientName(CodeVersionResource.properties, "properties", "java");
+@@clientName(ModelVersionResource.properties, "properties", "java");
+@@clientName(ComponentVersionResource.properties, "properties", "java");
+@@clientName(DataVersionBaseResource.properties, "properties", "java");
