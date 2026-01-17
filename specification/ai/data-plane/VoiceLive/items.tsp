@@ -63,7 +63,6 @@ union RequestImageContentPartDetail {
   high: "high",
 }
 
-
 /** Output text content part. */
 @usage(ResponseUsage)
 model OutputTextContentPart extends MessageContentPart {
@@ -243,6 +242,7 @@ model ResponseCancelledDetails extends ResponseStatusDetails {
   // Narrow the discriminator to a literal in each child:
   type: "cancelled";
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   reason: "turn_detected" | "client_cancelled" | string;
 }
 
@@ -250,6 +250,7 @@ model ResponseCancelledDetails extends ResponseStatusDetails {
 @usage(ResponseUsage)
 model ResponseIncompleteDetails extends ResponseStatusDetails {
   type: "incomplete";
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   reason: "max_output_tokens" | "content_filter" | string;
 }
 
