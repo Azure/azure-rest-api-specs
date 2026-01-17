@@ -146,6 +146,18 @@ union SecurityRuleDirection {
   string,
 }
 
+@added(Versions.v2026_02_01_preview)
+@doc("Disk creation option values [Copy, Empty]")
+union DiskCreateOption {
+  @doc("Create a disk by copying from a source resource")
+  Copy: "Copy",
+
+  @doc("Create an empty disk")
+  Empty: "Empty",
+
+  string,
+}
+
 @doc("The format of the actual VHD file [vhd, vhdx]")
 union DiskFileFormat {
   @doc("VHDX file format")
@@ -1949,6 +1961,77 @@ model StorageContainersUpdateRequest {
   tags?: Record<string>;
 }
 
+@added(Versions.v2026_02_01_preview)
+@doc("Data used when creating a disk or snapshot")
+model CreationData {
+  @doc("This enumerates the possible sources of a disk's creation")
+  createOption: DiskCreateOption;
+
+  @doc("ARM ID of the source resource used for disk creation. Required when createOption is Copy")
+  sourceResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/snapshots";
+    }
+  ]>;
+
+  @doc("Unique ID identifying the source of this resource. Read-only and not required for disk creation. It is populated automatically with the uniqueId value from the source.")
+  @visibility(Lifecycle.Read)
+  sourceUniqueId?: string;
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("Properties under the snapshot resource")
+model SnapshotProperties {
+  @doc("Data used when creating a snapshot")
+  creationData?: CreationData;
+
+  @doc("The time when the snapshot was created.")
+  @visibility(Lifecycle.Read)
+  timeCreated?: utcDateTime;
+
+  @doc("The size of the disk in bytes.")
+  @visibility(Lifecycle.Read)
+  diskSizeBytes?: int64;
+
+  @doc("Globally unique ID identifying the snapshot in the format of 32-character hexadecimal string.")
+  @visibility(Lifecycle.Read)
+  uniqueId?: string;
+
+  @doc("Provisioning state of the snapshot.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of snapshots")
+  @visibility(Lifecycle.Read)
+  status?: SnapshotStatus;
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("VHD Status provisioning status")
+model SnapshotStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the snapshot")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the snapshot [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("The observed state of snapshots")
+model SnapshotStatus {
+  @doc("Snapshot provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("Provisioning status of the snapshot")
+  provisioningStatus?: SnapshotStatusProvisioningStatus;
+}
+
 @doc("Properties under the virtual hard disk resource")
 model VirtualHardDiskProperties {
   @doc("Block size in bytes")
@@ -2033,7 +2116,7 @@ model VirtualHardDiskStatus {
   managedBy?: string[];
 
   @added(Versions.v2025_06_01_preview)
-  @doc("Unique Guid identifying the resource.")
+  @doc("Globally unique ID identifying the Virtual Hard Disk in the format of 32-character hexadecimal string.")
   uniqueId?: string;
 }
 
