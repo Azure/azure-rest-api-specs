@@ -87,7 +87,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute("specification/foo/Foo.Management/Foo");
+    const result = await new LinterRulesetRule().execute("specification/foo/Foo.Management");
     assert(!result.success);
   });
 

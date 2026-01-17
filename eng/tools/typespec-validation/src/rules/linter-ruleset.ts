@@ -47,7 +47,7 @@ export class LinterRulesetRule implements Rule {
     let requiredRuleset = "";
     if (
       normalizedFolder.includes("/resource-manager/") ||
-      normalizedFolder.includes(".Management/")
+      normalizedFolder.trim().endsWith(".Management")
     ) {
       requiredRuleset = "@azure-tools/typespec-azure-rulesets/resource-manager";
     } else if (clientTspExists && !mainTspExists) {
