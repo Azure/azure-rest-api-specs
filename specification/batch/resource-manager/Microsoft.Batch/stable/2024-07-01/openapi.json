@@ -43,31 +43,34 @@
       "name": "Operations"
     },
     {
-      "name": "BatchAccounts"
+      "name": "BatchAccount"
     },
     {
       "name": "DetectorResponses"
     },
     {
-      "name": "ApplicationPackages"
+      "name": "ApplicationPackage"
     },
     {
-      "name": "Applications"
+      "name": "Application"
     },
     {
-      "name": "Certificates"
+      "name": "Certificate"
     },
     {
-      "name": "PrivateLinkResources"
+      "name": "PrivateLinkResource"
     },
     {
-      "name": "PrivateEndpointConnections"
+      "name": "PrivateEndpointConnection"
     },
     {
-      "name": "Pools"
+      "name": "Pool"
     },
     {
-      "name": "NetworkSecurityPerimeterConfigurations"
+      "name": "NetworkSecurityPerimeter"
+    },
+    {
+      "name": "Location"
     }
   ],
   "paths": {
@@ -111,7 +114,7 @@
       "get": {
         "operationId": "BatchAccount_List",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "description": "Gets information about the Batch accounts associated with the subscription.",
         "parameters": [
@@ -149,6 +152,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/checkNameAvailability": {
       "post": {
         "operationId": "Location_CheckNameAvailability",
+        "tags": [
+          "Location"
+        ],
         "description": "Checks whether the Batch account name is available in the specified region.",
         "parameters": [
           {
@@ -201,6 +207,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/quotas": {
       "get": {
         "operationId": "Location_GetQuotas",
+        "tags": [
+          "Location"
+        ],
         "description": "Gets the Batch service quotas for the specified subscription at the given location.",
         "parameters": [
           {
@@ -241,6 +250,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/virtualMachineSkus": {
       "get": {
         "operationId": "Location_ListSupportedVirtualMachineSkus",
+        "tags": [
+          "Location"
+        ],
         "description": "Gets the list of Batch supported Virtual Machine VM sizes available at the given location.",
         "parameters": [
           {
@@ -300,7 +312,7 @@
       "get": {
         "operationId": "BatchAccount_ListByResourceGroup",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "description": "Gets information about the Batch accounts associated with the specified resource group.",
         "parameters": [
@@ -342,7 +354,7 @@
       "get": {
         "operationId": "BatchAccount_Get",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "description": "Gets information about the specified Batch account.",
         "parameters": [
@@ -392,7 +404,7 @@
       "put": {
         "operationId": "BatchAccount_Create",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
         "parameters": [
@@ -479,7 +491,7 @@
       "patch": {
         "operationId": "BatchAccount_Update",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "description": "Updates the properties of an existing Batch account.",
         "parameters": [
@@ -535,7 +547,7 @@
       "delete": {
         "operationId": "BatchAccount_Delete",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "description": "Deletes the specified Batch account.",
         "parameters": [
@@ -602,7 +614,7 @@
       "get": {
         "operationId": "Application_List",
         "tags": [
-          "Applications"
+          "Application"
         ],
         "description": "Lists all of the applications in the specified account.",
         "parameters": [
@@ -662,7 +674,7 @@
       "get": {
         "operationId": "Application_Get",
         "tags": [
-          "Applications"
+          "Application"
         ],
         "description": "Gets information about the specified application.",
         "parameters": [
@@ -719,7 +731,7 @@
       "put": {
         "operationId": "Application_Create",
         "tags": [
-          "Applications"
+          "Application"
         ],
         "description": "Adds an application to the specified Batch account.",
         "parameters": [
@@ -785,7 +797,7 @@
       "patch": {
         "operationId": "Application_Update",
         "tags": [
-          "Applications"
+          "Application"
         ],
         "description": "Updates settings for the specified application.",
         "parameters": [
@@ -851,7 +863,7 @@
       "delete": {
         "operationId": "Application_Delete",
         "tags": [
-          "Applications"
+          "Application"
         ],
         "description": "Deletes an application.",
         "parameters": [
@@ -910,7 +922,7 @@
       "get": {
         "operationId": "ApplicationPackage_List",
         "tags": [
-          "ApplicationPackages"
+          "ApplicationPackage"
         ],
         "description": "Lists all of the application packages in the specified application.",
         "parameters": [
@@ -980,7 +992,7 @@
       "get": {
         "operationId": "ApplicationPackage_Get",
         "tags": [
-          "ApplicationPackages"
+          "ApplicationPackage"
         ],
         "description": "Gets information about the specified application package.",
         "parameters": [
@@ -1047,7 +1059,7 @@
       "put": {
         "operationId": "ApplicationPackage_Create",
         "tags": [
-          "ApplicationPackages"
+          "ApplicationPackage"
         ],
         "description": "Creates an application package record. The record contains a storageUrl where the package should be uploaded to.  Once it is uploaded the `ApplicationPackage` needs to be activated using `ApplicationPackageActive` before it can be used. If the auto storage account was configured to use storage keys, the URL returned will contain a SAS.",
         "parameters": [
@@ -1123,7 +1135,7 @@
       "delete": {
         "operationId": "ApplicationPackage_Delete",
         "tags": [
-          "ApplicationPackages"
+          "ApplicationPackage"
         ],
         "description": "Deletes an application package record and its associated binary file.",
         "parameters": [
@@ -1192,7 +1204,7 @@
       "post": {
         "operationId": "ApplicationPackage_Activate",
         "tags": [
-          "ApplicationPackages"
+          "ApplicationPackage"
         ],
         "description": "Activates the specified application package. This should be done after the `ApplicationPackage` was created and uploaded. This needs to be done before an `ApplicationPackage` can be used on Pools or Tasks.",
         "parameters": [
@@ -1270,7 +1282,7 @@
       "get": {
         "operationId": "Certificate_ListByBatchAccount",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "summary": "Lists all of the certificates in the specified account.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
@@ -1349,7 +1361,7 @@
       "get": {
         "operationId": "Certificate_Get",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "summary": "Gets information about the specified certificate.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
@@ -1417,7 +1429,7 @@
       "put": {
         "operationId": "Certificate_Create",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "summary": "Creates a new certificate inside the specified account.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
@@ -1511,7 +1523,7 @@
       "patch": {
         "operationId": "Certificate_Update",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "summary": "Updates the properties of an existing certificate.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
@@ -1592,7 +1604,7 @@
       "delete": {
         "operationId": "Certificate_Delete",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "summary": "Deletes the specified certificate.",
         "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
@@ -1671,7 +1683,7 @@
       "post": {
         "operationId": "Certificate_CancelDeletion",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "summary": "Cancels a failed deletion of a certificate from the specified account.",
         "description": "If you try to delete a certificate that is being used by a pool or compute node, the status of the certificate changes to deleteFailed. If you decide that you want to continue using the certificate, you can use this operation to set the status of the certificate back to active. If you intend to delete the certificate, you do not need to run this operation after the deletion failed. You must make sure that the certificate is not being used by any resources, and then you can try again to delete the certificate.\n\nWarning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
@@ -1846,7 +1858,7 @@
       "post": {
         "operationId": "BatchAccount_GetKeys",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "summary": "Gets the account keys for the specified Batch account.",
         "description": "This operation applies only to Batch accounts with allowedAuthenticationModes containing 'SharedKey'. If the Batch account doesn't contain 'SharedKey' in its allowedAuthenticationMode, clients cannot use shared keys to authenticate, and must use another allowedAuthenticationModes instead. In this case, getting the keys will fail.",
@@ -1896,7 +1908,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeter_ListConfigurations",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeter"
         ],
         "description": "Lists all of the NSP configurations in the specified account.",
         "parameters": [
@@ -1948,7 +1960,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeter_GetConfiguration",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeter"
         ],
         "description": "Gets information about the specified NSP configuration.",
         "parameters": [
@@ -2006,7 +2018,7 @@
       "post": {
         "operationId": "NetworkSecurityPerimeter_ReconcileConfiguration",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeter"
         ],
         "description": "Reconciles the specified NSP configuration.",
         "parameters": [
@@ -2076,7 +2088,7 @@
       "get": {
         "operationId": "BatchAccount_ListOutboundNetworkDependenciesEndpoints",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "description": "Lists the endpoints that a Batch Compute Node under this Batch Account may call as part of Batch service administration. If you are deploying a Pool inside of a virtual network that you specify, you must make sure your network allows outbound access to these endpoints. Failure to allow access to these endpoints may cause Batch to mark the affected nodes as unusable. For more information about creating a pool inside of a virtual network, see https://learn.microsoft.com/azure/batch/batch-virtual-network.",
         "parameters": [
@@ -2128,7 +2140,7 @@
       "get": {
         "operationId": "Pool_ListByBatchAccount",
         "tags": [
-          "Pools"
+          "Pool"
         ],
         "description": "Lists all of the pools in the specified account.",
         "parameters": [
@@ -2205,7 +2217,7 @@
       "get": {
         "operationId": "Pool_Get",
         "tags": [
-          "Pools"
+          "Pool"
         ],
         "description": "Gets information about the specified pool.",
         "parameters": [
@@ -2286,7 +2298,7 @@
       "put": {
         "operationId": "Pool_Create",
         "tags": [
-          "Pools"
+          "Pool"
         ],
         "description": "Creates a new pool inside the specified account.",
         "parameters": [
@@ -2411,7 +2423,7 @@
       "patch": {
         "operationId": "Pool_Update",
         "tags": [
-          "Pools"
+          "Pool"
         ],
         "description": "Updates the properties of an existing pool.",
         "parameters": [
@@ -2499,7 +2511,7 @@
       "delete": {
         "operationId": "Pool_Delete",
         "tags": [
-          "Pools"
+          "Pool"
         ],
         "description": "Deletes the specified pool.",
         "parameters": [
@@ -2576,7 +2588,7 @@
       "post": {
         "operationId": "Pool_DisableAutoScale",
         "tags": [
-          "Pools"
+          "Pool"
         ],
         "description": "Disables automatic scaling for a pool.",
         "parameters": [
@@ -2641,7 +2653,7 @@
       "post": {
         "operationId": "Pool_StopResize",
         "tags": [
-          "Pools"
+          "Pool"
         ],
         "summary": "Stops an ongoing resize operation on the pool.",
         "description": "This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state. After stopping, the pool stabilizes at the number of nodes it was at when the stop operation was done. During the stop operation, the pool allocation state changes first to stopping and then to steady. A resize operation need not be an explicit resize pool request; this API can also be used to halt the initial sizing of the pool when it is created.",
@@ -2707,7 +2719,7 @@
       "get": {
         "operationId": "PrivateEndpointConnection_ListByBatchAccount",
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateEndpointConnection"
         ],
         "description": "Lists all of the private endpoint connections in the specified account.",
         "parameters": [
@@ -2767,7 +2779,7 @@
       "get": {
         "operationId": "PrivateEndpointConnection_Get",
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateEndpointConnection"
         ],
         "description": "Gets information about the specified private endpoint connection.",
         "parameters": [
@@ -2824,7 +2836,7 @@
       "patch": {
         "operationId": "PrivateEndpointConnection_Update",
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateEndpointConnection"
         ],
         "description": "Updates the properties of an existing private endpoint connection.",
         "parameters": [
@@ -2921,7 +2933,7 @@
       "delete": {
         "operationId": "PrivateEndpointConnection_Delete",
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateEndpointConnection"
         ],
         "description": "Deletes the specified private endpoint connection.",
         "parameters": [
@@ -3000,7 +3012,7 @@
       "get": {
         "operationId": "PrivateLinkResource_ListByBatchAccount",
         "tags": [
-          "PrivateLinkResources"
+          "PrivateLinkResource"
         ],
         "description": "Lists all of the private link resources in the specified account.",
         "parameters": [
@@ -3060,7 +3072,7 @@
       "get": {
         "operationId": "PrivateLinkResource_Get",
         "tags": [
-          "PrivateLinkResources"
+          "PrivateLinkResource"
         ],
         "description": "Gets information about the specified private link resource.",
         "parameters": [
@@ -3119,7 +3131,7 @@
       "post": {
         "operationId": "BatchAccount_RegenerateKey",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "summary": "Regenerates the specified account key for the Batch account.",
         "description": "This operation applies only to Batch accounts with allowedAuthenticationModes containing 'SharedKey'. If the Batch account doesn't contain 'SharedKey' in its allowedAuthenticationMode, clients cannot use shared keys to authenticate, and must use another allowedAuthenticationModes instead. In this case, regenerating the keys will fail.",
@@ -3178,7 +3190,7 @@
       "post": {
         "operationId": "BatchAccount_SynchronizeAutoStorageKeys",
         "tags": [
-          "BatchAccounts"
+          "BatchAccount"
         ],
         "description": "Synchronizes access keys for the auto-storage account configured for the specified Batch account, only if storage key authentication is being used.",
         "parameters": [

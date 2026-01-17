@@ -40,6 +40,7 @@ model PrivateLinkResource
 }
 
 @armResourceOperations
+@tag("PrivateLinkResource")
 interface PrivateLinkResources {
   /**
    * Gets information about the specified private link resource.

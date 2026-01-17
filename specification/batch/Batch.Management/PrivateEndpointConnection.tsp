@@ -40,6 +40,7 @@ model PrivateEndpointConnection
 }
 
 @armResourceOperations
+@tag("PrivateEndpointConnection")
 interface PrivateEndpointConnections {
   /**
    * Gets information about the specified private endpoint connection.

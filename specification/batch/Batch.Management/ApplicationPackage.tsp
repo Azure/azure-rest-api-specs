@@ -40,6 +40,7 @@ model ApplicationPackage
 }
 
 @armResourceOperations
+@tag("ApplicationPackage")
 interface ApplicationPackages {
   /**
    * Gets information about the specified application package.

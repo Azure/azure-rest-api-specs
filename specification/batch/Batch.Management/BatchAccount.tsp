@@ -30,6 +30,7 @@ model BatchAccount
 }
 
 @armResourceOperations
+@tag("BatchAccount")
 interface BatchAccounts {
   /**
    * Gets information about the specified Batch account.

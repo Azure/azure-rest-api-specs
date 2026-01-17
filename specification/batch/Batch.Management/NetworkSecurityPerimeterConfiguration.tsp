@@ -22,6 +22,7 @@ model NetworkSecurityPerimeterConfiguration
 alias NspConfigurationOperations = Azure.ResourceManager.NspConfigurations<NetworkSecurityPerimeterConfiguration>;
 
 @armResourceOperations
+@tag("NetworkSecurityPerimeter")
 interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets information about the specified NSP configuration.
