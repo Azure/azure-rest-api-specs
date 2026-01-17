@@ -1,0 +1,98 @@
+{
+  "title": "CreateOrReplace_Policies",
+  "operationId": "Policies_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgdeviceregistry",
+    "namespaceName": "mynamespace",
+    "policyName": "mypolicy",
+    "resource": {
+      "properties": {
+        "certificate": {
+          "certificateAuthorityConfiguration": {
+            "keyType": "ECC"
+          },
+          "leafCertificateConfiguration": {
+            "validityPeriodInDays": 10
+          }
+        }
+      },
+      "tags": {
+        "key1088": "xzrpbqsac"
+      },
+      "location": "zjqtuvprnxvimzkkxaobgkm"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "certificate": {
+            "certificateAuthorityConfiguration": {
+              "keyType": "ECC",
+              "subject": "CN=07b5d73a70e046f288ddc64518bc517e",
+              "validityNotBefore": "2025-06-12T20:17:41.741Z",
+              "validityNotAfter": "2025-06-12T20:17:41.741Z"
+            },
+            "leafCertificateConfiguration": {
+              "validityPeriodInDays": 10
+            }
+          }
+        },
+        "tags": {
+          "key1088": "xzrpbqsac"
+        },
+        "location": "East US 2",
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/Microsoft.DeviceRegistry/namespaces/adr-ns-gbk-01/credentials/default/policies/mypolicy",
+        "name": "mypolicy",
+        "type": "Microsoft.DeviceRegistry/namespaces/credentials/policies",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-09-13T19:38:09.5283958Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-09-13T19:38:16.6634263Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "certificate": {
+            "certificateAuthorityConfiguration": {
+              "keyType": "ECC",
+              "subject": "CN=07b5d73a70e046f288ddc64518bc517e",
+              "validityNotBefore": "2025-06-12T20:17:41.741Z",
+              "validityNotAfter": "2025-06-12T20:17:41.741Z"
+            },
+            "leafCertificateConfiguration": {
+              "validityPeriodInDays": 10
+            }
+          }
+        },
+        "tags": {
+          "key1088": "xzrpbqsac"
+        },
+        "location": "East US 2",
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/Microsoft.DeviceRegistry/namespaces/adr-ns-gbk-01/credentials/default/policies/mypolicy",
+        "name": "mypolicy",
+        "type": "Microsoft.DeviceRegistry/namespaces/credentials/policies",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-09-13T19:38:09.5283958Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-09-13T19:38:16.6634263Z"
+        }
+      }
+    }
+  }
+}
