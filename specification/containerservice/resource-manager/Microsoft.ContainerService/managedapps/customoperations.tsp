@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./appdeployment.tsp";
+import "./rollouts.tsp";
 
 using Azure.Core;
 using TypeSpec.OpenAPI;
@@ -56,3 +57,29 @@ op RollbackDeployment<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<AppDeployment> | ErrorResponse;
+
+/** Advances the rollout to the next stage. Returns the next stage to run */
+@autoRoute
+@armResourceAction(TResource)
+@post
+@action("advance")
+op AdvanceRollout<
+  TResource extends Azure.ResourceManager.Foundations.Resource,
+  Rollout,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+): ArmResponse<RolloutStage> | ErrorResponse;
+
+/** Gets the latest revision for a managed app */
+@autoRoute
+@armResourceRead(TResource)
+@get
+@action("latest")
+op GetLatestRevision<
+  TResource extends Azure.ResourceManager.Foundations.Resource,
+  Revision,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+): ArmResponse<Revision> | ErrorResponse;

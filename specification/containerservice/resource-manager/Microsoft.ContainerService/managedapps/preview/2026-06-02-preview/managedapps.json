@@ -46,13 +46,19 @@
       "name": "Apps"
     },
     {
-      "name": "AppRevisions"
+      "name": "Revisions"
+    },
+    {
+      "name": "FleetAppDeployments"
     },
     {
       "name": "AppDeployments"
     },
     {
       "name": "TrafficRules"
+    },
+    {
+      "name": "Rollouts"
     }
   ],
   "paths": {
@@ -118,6 +124,292 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/appDeployments": {
+      "get": {
+        "operationId": "FleetAppDeployments_List",
+        "tags": [
+          "FleetAppDeployments"
+        ],
+        "description": "List FleetAppDeployment resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetAppDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/appDeployments/{appDeploymentName}": {
+      "get": {
+        "operationId": "FleetAppDeployments_Get",
+        "tags": [
+          "FleetAppDeployments"
+        ],
+        "description": "Get a FleetAppDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appDeploymentName",
+            "in": "path",
+            "description": "The name of the AppDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetAppDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "FleetAppDeployments_CreateOrUpdate",
+        "tags": [
+          "FleetAppDeployments"
+        ],
+        "description": "Create a FleetAppDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appDeploymentName",
+            "in": "path",
+            "description": "The name of the AppDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetAppDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FleetAppDeployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetAppDeployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'FleetAppDeployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetAppDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FleetAppDeployments_Delete",
+        "tags": [
+          "FleetAppDeployments"
+        ],
+        "description": "Delete a FleetAppDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appDeploymentName",
+            "in": "path",
+            "description": "The name of the AppDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/appDeployments/{appDeploymentName}/render": {
+      "post": {
+        "operationId": "FleetAppDeployments_Render",
+        "tags": [
+          "FleetAppDeployments"
+        ],
+        "description": "Renders the app deployment kubernetes manifests",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appDeploymentName",
+            "in": "path",
+            "description": "The name of the AppDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RenderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -374,13 +666,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/appRevisions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/deployments": {
       "get": {
-        "operationId": "AppRevisions_List",
+        "operationId": "Apps_AppDeployments",
         "tags": [
-          "AppRevisions"
+          "Apps"
         ],
-        "description": "List AppRevision resources by ManagedApp",
+        "description": "Lists the deployments for a given App Revision or Managed App.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -404,7 +696,49 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AppRevisionListResult"
+              "$ref": "#/definitions/AppDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/revisions": {
+      "get": {
+        "operationId": "Revisions_List",
+        "tags": [
+          "Revisions"
+        ],
+        "description": "List Revision resources by ManagedApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RevisionListResult"
             }
           },
           "default": {
@@ -419,13 +753,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/appRevisions/{appRevisionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/revisions/{revisionName}": {
       "get": {
-        "operationId": "AppRevisions_Get",
+        "operationId": "Revisions_Get",
         "tags": [
-          "AppRevisions"
+          "Revisions"
         ],
-        "description": "Get a AppRevision",
+        "description": "Get a Revision",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -445,9 +779,9 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "appRevisionName",
+            "name": "revisionName",
             "in": "path",
-            "description": "The name of the AppRevision",
+            "description": "The name of the Revision",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -457,7 +791,202 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AppRevision"
+              "$ref": "#/definitions/Revision"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/revisions/{revisionName}/deployments": {
+      "get": {
+        "operationId": "Revisions_RevisionDeployments",
+        "tags": [
+          "Revisions"
+        ],
+        "description": "List deployments for an app revision",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "The name of the Revision",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/revisions/{revisionName}/latest": {
+      "get": {
+        "operationId": "Revisions_LatestRevision",
+        "tags": [
+          "Revisions"
+        ],
+        "description": "Gets the latest revision for a managed app",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "revisionName",
+            "in": "path",
+            "description": "The name of the Revision",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Revision"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/rollouts": {
+      "get": {
+        "operationId": "Rollouts_List",
+        "tags": [
+          "Rollouts"
+        ],
+        "description": "List Rollout resources by ManagedApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RolloutListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/rollouts/{rolloutName}": {
+      "get": {
+        "operationId": "Rollouts_Get",
+        "tags": [
+          "Rollouts"
+        ],
+        "description": "Get a Rollout",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "rolloutName",
+            "in": "path",
+            "description": "The name of the Rollout",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Rollout"
             }
           },
           "default": {
@@ -469,11 +998,11 @@
         }
       },
       "put": {
-        "operationId": "AppRevisions_CreateOrUpdate",
+        "operationId": "Rollouts_CreateOrUpdate",
         "tags": [
-          "AppRevisions"
+          "Rollouts"
         ],
-        "description": "Create a AppRevision",
+        "description": "Create a Rollout",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -493,9 +1022,9 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "appRevisionName",
+            "name": "rolloutName",
             "in": "path",
-            "description": "The name of the AppRevision",
+            "description": "The name of the Rollout",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -506,21 +1035,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AppRevision"
+              "$ref": "#/definitions/Rollout"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AppRevision' update operation succeeded",
+            "description": "Resource 'Rollout' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AppRevision"
+              "$ref": "#/definitions/Rollout"
             }
           },
           "201": {
-            "description": "Resource 'AppRevision' create operation succeeded",
+            "description": "Resource 'Rollout' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AppRevision"
+              "$ref": "#/definitions/Rollout"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -547,11 +1076,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AppRevisions_Delete",
+        "operationId": "Rollouts_Delete",
         "tags": [
-          "AppRevisions"
+          "Rollouts"
         ],
-        "description": "Deletes an app revision. This will also delete all deployments that reference this revision. WARNING: This operation is destructive",
+        "description": "Delete a Rollout",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -571,9 +1100,9 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "appRevisionName",
+            "name": "rolloutName",
             "in": "path",
-            "description": "The name of the AppRevision",
+            "description": "The name of the Rollout",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -610,13 +1139,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/appRevisions/{appRevisionName}/deployments": {
-      "get": {
-        "operationId": "AppRevisions_RevisionDeployments",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/rollouts/{rolloutName}/advance": {
+      "post": {
+        "operationId": "Rollouts_AdvanceStage",
         "tags": [
-          "AppRevisions"
+          "Rollouts"
         ],
-        "description": "Lists the deployments for a given App Revision or Managed App.",
+        "description": "Advances the rollout to the next stage. Returns the next stage to run",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -636,9 +1165,9 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "appRevisionName",
+            "name": "rolloutName",
             "in": "path",
-            "description": "The name of the AppRevision",
+            "description": "The name of the Rollout",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -648,7 +1177,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AppDeploymentListResult"
+              "$ref": "#/definitions/RolloutStage"
             }
           },
           "default": {
@@ -660,13 +1189,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/deployments": {
-      "get": {
-        "operationId": "Apps_AppDeployments",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/rollouts/{rolloutName}/rollback": {
+      "post": {
+        "operationId": "Rollouts_Rollback",
         "tags": [
-          "Apps"
+          "Rollouts"
         ],
-        "description": "Lists the deployments for a given App Revision or Managed App.",
+        "description": "Rollback the app deployment to the previous revision",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -684,13 +1213,21 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "rolloutName",
+            "in": "path",
+            "description": "The name of the Rollout",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AppDeploymentListResult"
+              "$ref": "#/definitions/AppDeployment"
             }
           },
           "default": {
@@ -938,13 +1475,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/appDeployments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/appDeployments": {
       "get": {
         "operationId": "AppDeployments_List",
         "tags": [
           "AppDeployments"
         ],
-        "description": "List AppDeployment resources by ManagedNamespace",
+        "description": "List AppDeployment resources by ManagedCluster",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -959,14 +1496,6 @@
             "name": "managedClusterName",
             "in": "path",
             "description": "The name of the ManagedCluster",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "managedNamespaceName",
-            "in": "path",
-            "description": "The name of the ManagedNamespace",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -991,7 +1520,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/appDeployments/{appDeploymentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/appDeployments/{appDeploymentName}": {
       "get": {
         "operationId": "AppDeployments_Get",
         "tags": [
@@ -1012,14 +1541,6 @@
             "name": "managedClusterName",
             "in": "path",
             "description": "The name of the ManagedCluster",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "managedNamespaceName",
-            "in": "path",
-            "description": "The name of the ManagedNamespace",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1068,14 +1589,6 @@
             "name": "managedClusterName",
             "in": "path",
             "description": "The name of the ManagedCluster",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "managedNamespaceName",
-            "in": "path",
-            "description": "The name of the ManagedNamespace",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1159,14 +1672,6 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "managedNamespaceName",
-            "in": "path",
-            "description": "The name of the ManagedNamespace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
             "name": "appDeploymentName",
             "in": "path",
             "description": "The name of the AppDeployment",
@@ -1206,7 +1711,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/appDeployments/{appDeploymentName}/render": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/appDeployments/{appDeploymentName}/render": {
       "post": {
         "operationId": "AppDeployments_Render",
         "tags": [
@@ -1227,14 +1732,6 @@
             "name": "managedClusterName",
             "in": "path",
             "description": "The name of the ManagedCluster",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "managedNamespaceName",
-            "in": "path",
-            "description": "The name of the ManagedNamespace",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1263,64 +1760,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/appDeployments/{appDeploymentName}/rollback": {
-      "post": {
-        "operationId": "AppDeployments_Rollback",
-        "tags": [
-          "AppDeployments"
-        ],
-        "description": "Rollback the app deployment to the previous revision",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "managedClusterName",
-            "in": "path",
-            "description": "The name of the ManagedCluster",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "managedNamespaceName",
-            "in": "path",
-            "description": "The name of the ManagedNamespace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "appDeploymentName",
-            "in": "path",
-            "description": "The name of the AppDeployment",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AppDeployment"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1331,10 +1770,6 @@
         "properties": {
           "$ref": "#/definitions/AppDeploymentProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -1384,76 +1819,22 @@
           "$ref": "#/definitions/AppRevisionId",
           "description": "The App Revision Id"
         },
-        "previousAppRevisionId": {
-          "$ref": "#/definitions/AppRevisionId",
-          "description": "The previous App Revision Id. This is used for rolling back to a previous revision",
+        "namespace": {
+          "type": "string",
+          "description": "The kubernetes namespace to deploy into"
+        },
+        "identity": {
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "The user assigned identity assigned to the app deployment",
           "readOnly": true
         },
-        "listOverridePolicy": {
-          "$ref": "#/definitions/ListOverridePolicy",
-          "description": "The override policy for list fields, Replace or Append. Default is replace"
+        "observability": {
+          "$ref": "#/definitions/ObservabilityProperties",
+          "description": "Observability properties for the app."
         },
-        "namespacedPermissions": {
-          "type": "array",
-          "description": "An array of permissions for k8s resources in the same namespace associated with the app. This is an override only. Any value here will overwrite permissions inherited from the app",
-          "items": {
-            "$ref": "#/definitions/Permissions"
-          },
-          "x-ms-identifiers": [
-            "apiGroups",
-            "resources",
-            "verbs"
-          ]
-        },
-        "clusterWidePermissions": {
-          "type": "array",
-          "description": "An array of permissions for k8s resources, cluster wide, associated with the app. This is an override only. Any value here will overwrite permissions inherited from the app",
-          "items": {
-            "$ref": "#/definitions/Permissions"
-          },
-          "x-ms-identifiers": [
-            "apiGroups",
-            "resources",
-            "verbs"
-          ]
-        },
-        "healthChecks": {
-          "type": "array",
-          "description": "An array of health checks for the app. This is an override only. Any value here will overwrite health checks inherited from the app",
-          "items": {
-            "$ref": "#/definitions/HealthCheck"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
-        },
-        "scaling": {
-          "$ref": "#/definitions/ScalingType",
-          "description": "Scaling type for the app. This is an override only. Any value here will overwrite scaling inherited from the app"
-        },
-        "template": {
-          "$ref": "#/definitions/DeploymentTemplate",
-          "description": "Deployment Template for the app. Specify any configuration that will be needed or used for this deployment. This is an override only. Any value here will overwrite the template inherited from the app"
-        },
-        "volumeMounts": {
-          "type": "array",
-          "description": "An array of volume mounts for the app deployment",
-          "items": {
-            "$ref": "#/definitions/VolumeMount"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "autoscalingTriggers": {
-          "type": "array",
-          "description": "An array of KEDA autoscaling triggers for the app deployment.",
-          "items": {
-            "$ref": "#/definitions/AutoscalingTrigger"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
+        "overrides": {
+          "$ref": "#/definitions/AppTemplate",
+          "description": "Overrides for the app template. This will overwrite the template inherited from the app"
         },
         "generatedServiceAccountName": {
           "type": "string",
@@ -1478,22 +1859,87 @@
       },
       "required": [
         "appRevisionId",
+        "namespace",
+        "identity",
         "generatedServiceAccountName",
         "generatedKubernetesServiceName"
+      ]
+    },
+    "AppDeploymentUserAssignedIdentity": {
+      "type": "object",
+      "description": "App Deployment User Assigned Identity",
+      "properties": {
+        "userAssignedIdentityId": {
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "The resource id of the user assigned identity"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of the user assigned identity"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of the user assigned identity"
+        }
+      },
+      "required": [
+        "userAssignedIdentityId",
+        "clientId",
+        "principalId"
       ]
     },
     "AppProperties": {
       "type": "object",
       "description": "App properties",
       "properties": {
-        "appType": {
-          "type": "string",
-          "description": "Type of App"
+        "template": {
+          "$ref": "#/definitions/AppTemplate",
+          "description": "Template for the app"
         },
-        "imageBase": {
-          "type": "string",
-          "description": "Image Base of App. This represents the container registry and image name. i.e. myregistry.azurecr.io/myapp"
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "template"
+      ]
+    },
+    "AppRevisionId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/apps/revisions"
+          }
+        ]
+      }
+    },
+    "AppRevisionProperties": {
+      "type": "object",
+      "description": "Properties of the App Revision",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/AppTemplate",
+          "description": "Template for the app. This represents a point in time snapshot of the app template"
         },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "template"
+      ]
+    },
+    "AppTemplate": {
+      "type": "object",
+      "description": "Template for the app or app deployment",
+      "properties": {
         "namespacedPermissions": {
           "type": "array",
           "description": "Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace",
@@ -1518,19 +1964,25 @@
             "verbs"
           ]
         },
-        "healthChecks": {
+        "containerProbes": {
           "type": "array",
-          "description": "An array of health checks for the app. If not specified, the default is an http request to /healthz",
+          "description": "An array of container probes for the app. If not specified, the default is an http request to /healthz",
           "items": {
-            "$ref": "#/definitions/HealthCheck"
+            "$ref": "#/definitions/ContainerProbes"
           },
           "x-ms-identifiers": [
             "type"
           ]
         },
-        "observability": {
-          "$ref": "#/definitions/ObservabilityProperties",
-          "description": "Observability properties for the app"
+        "healthChecks": {
+          "type": "array",
+          "description": "An array of prometheus expressions to evaluate to determine if the app is healthy. Multiple expressions in this list are logically AND-ed together, so all must return true in order for the app to be considered healthy",
+          "items": {
+            "$ref": "#/definitions/HealthCheck"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "scaling": {
           "$ref": "#/definitions/ScalingType",
@@ -1543,113 +1995,11 @@
         "template": {
           "$ref": "#/definitions/DeploymentTemplate",
           "description": "Deployment Template for the app. Specify any configuration that will be needed or used for every deployment"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
         }
       },
       "required": [
-        "imageBase",
         "template"
       ]
-    },
-    "AppRevision": {
-      "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AppRevisionProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AppRevisionId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.ContainerService/apps/appRevisions"
-          }
-        ]
-      }
-    },
-    "AppRevisionListResult": {
-      "type": "object",
-      "description": "The response of a AppRevision list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AppRevision items on this page",
-          "items": {
-            "$ref": "#/definitions/AppRevision"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AppRevisionProperties": {
-      "type": "object",
-      "description": "Properties of the App Revision",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/AppRevisionStatus",
-          "description": "Status of the revision. Setting this to \"Revoked\" will prevent the revision from being used in a deployment"
-        },
-        "gitSha": {
-          "type": "string",
-          "description": "The git SHA of the container image",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "status",
-        "gitSha"
-      ]
-    },
-    "AppRevisionStatus": {
-      "type": "string",
-      "description": "Status of the App Revision",
-      "enum": [
-        "active",
-        "revoked"
-      ],
-      "x-ms-enum": {
-        "name": "AppRevisionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "active",
-            "description": "Active, can be used in a deployment"
-          },
-          {
-            "name": "Revoked",
-            "value": "revoked",
-            "description": "Revoked, cannot be used in a deployment"
-          }
-        ]
-      }
     },
     "AutoscalingTrigger": {
       "type": "object",
@@ -2360,7 +2710,7 @@
           "type": "array",
           "description": "An array of health checks for the container",
           "items": {
-            "$ref": "#/definitions/HealthCheck"
+            "$ref": "#/definitions/ContainerProbes"
           },
           "x-ms-identifiers": [
             "type"
@@ -2369,6 +2719,16 @@
         "resources": {
           "$ref": "#/definitions/ResourceRequirements",
           "description": "Container Resource Requirements. If not specified, defaults will be applied"
+        },
+        "volumeMounts": {
+          "type": "array",
+          "description": "Volume mounts for the container",
+          "items": {
+            "$ref": "#/definitions/VolumeMount"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -2402,10 +2762,71 @@
         "port"
       ]
     },
+    "ContainerProbes": {
+      "type": "object",
+      "description": "Health check configuration",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ProbeType",
+          "description": "Type of health check"
+        },
+        "protocol": {
+          "$ref": "#/definitions/ProbeProtocol",
+          "description": "Protocol for the health check"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path for HTTP health checks"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port to check"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of seconds after the container has started before health checks are initiated",
+          "default": 0
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often (in seconds) to perform the health check",
+          "default": 10
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of seconds after which the health check times out",
+          "default": 1
+        },
+        "successThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum consecutive successes for the health check to be considered successful after having failed",
+          "default": 1
+        },
+        "failureThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum consecutive failures for the health check to be considered failed after having succeeded",
+          "default": 3
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ]
+    },
     "DeploymentTemplate": {
       "type": "object",
       "description": "Deployment template for the app",
       "properties": {
+        "image": {
+          "type": "string",
+          "description": "Container image of App. This represents a fully qualified container image name, including the registry and tag. i.e. myregistry.azurecr.io/myapp:v1"
+        },
         "replicas": {
           "type": "integer",
           "format": "int32",
@@ -2499,6 +2920,7 @@
         }
       },
       "required": [
+        "image",
         "command"
       ]
     },
@@ -2537,6 +2959,68 @@
         "name",
         "value"
       ]
+    },
+    "Fleet": {
+      "type": "object",
+      "description": "Fleet resource, just a placeholder",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FleetAppDeployment": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppDeploymentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FleetAppDeploymentListResult": {
+      "type": "object",
+      "description": "The response of a FleetAppDeployment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetAppDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetAppDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetProperties": {
+      "type": "object",
+      "description": "Fleet properties. Just a placeholder",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
     },
     "GitHubRunnerTriggerMetadata": {
       "type": "object",
@@ -2590,117 +3074,67 @@
     },
     "HealthCheck": {
       "type": "object",
-      "description": "Health check configuration",
+      "description": "Health check for the app",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/HealthCheckType",
-          "description": "Type of health check"
-        },
-        "protocol": {
-          "$ref": "#/definitions/HealthCheckProtocol",
-          "description": "Protocol for the health check"
-        },
-        "path": {
+        "name": {
           "type": "string",
-          "description": "Path for HTTP health checks"
+          "description": "Name of the health check"
         },
-        "port": {
+        "query": {
+          "type": "string",
+          "description": "Prometheus expression to evaluate. Expression must evaluate to true if the app is healthy"
+        },
+        "durationSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Port to check"
+          "description": "Duration in seconds for which the query must be true to consider the app healthy",
+          "default": 30
         },
-        "initialDelaySeconds": {
+        "frequencySeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of seconds after the container has started before health checks are initiated",
-          "default": 0
+          "description": "The frequency in seconds at which the query is evaluated",
+          "default": 5
         },
-        "periodSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often (in seconds) to perform the health check",
-          "default": 10
-        },
-        "timeoutSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of seconds after which the health check times out",
-          "default": 1
-        },
-        "successThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Minimum consecutive successes for the health check to be considered successful after having failed",
-          "default": 1
-        },
-        "failureThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Minimum consecutive failures for the health check to be considered failed after having succeeded",
-          "default": 3
+        "state": {
+          "$ref": "#/definitions/HealthCheckState",
+          "description": "The evaluated state of this health check",
+          "readOnly": true
         }
       },
       "required": [
-        "type",
-        "port"
+        "name",
+        "query",
+        "durationSeconds",
+        "frequencySeconds"
       ]
     },
-    "HealthCheckProtocol": {
+    "HealthCheckState": {
       "type": "string",
-      "description": "Protocol for the health check",
+      "description": "Health check state",
       "enum": [
-        "HTTP",
-        "TCP",
-        "gRPC"
+        "healthy",
+        "unhealthy",
+        "unknown"
       ],
       "x-ms-enum": {
-        "name": "HealthCheckProtocol",
+        "name": "HealthCheckState",
         "modelAsString": true,
         "values": [
           {
-            "name": "HTTP",
-            "value": "HTTP",
-            "description": "HTTP protocol"
+            "name": "Healthy",
+            "value": "healthy",
+            "description": "Health check is healthy"
           },
           {
-            "name": "TCP",
-            "value": "TCP",
-            "description": "TCP protocol"
+            "name": "Unhealthy",
+            "value": "unhealthy",
+            "description": "Health check is unhealthy"
           },
           {
-            "name": "gRPC",
-            "value": "gRPC",
-            "description": "gRPC protocol"
-          }
-        ]
-      }
-    },
-    "HealthCheckType": {
-      "type": "string",
-      "description": "Type of health check",
-      "enum": [
-        "liveness",
-        "readiness",
-        "startup"
-      ],
-      "x-ms-enum": {
-        "name": "HealthCheckType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Liveness",
-            "value": "liveness",
-            "description": "Liveness probe"
-          },
-          {
-            "name": "Readiness",
-            "value": "readiness",
-            "description": "Readiness probe"
-          },
-          {
-            "name": "Startup",
-            "value": "startup",
-            "description": "Startup probe"
+            "name": "Unknown",
+            "value": "unknown",
+            "description": "Health check is unknown"
           }
         ]
       }
@@ -2711,7 +3145,7 @@
       "properties": {
         "state": {
           "$ref": "#/definitions/IngressState",
-          "description": "Ingress state, enabled or disabled"
+          "description": "Ingress state, enabled or disabled. Intended to answer the question 'does my app accept public traffic?'. Use TrafficRules to configure traffic routing"
         },
         "ingressType": {
           "$ref": "#/definitions/IngressType",
@@ -2813,30 +3247,6 @@
         "value"
       ]
     },
-    "ListOverridePolicy": {
-      "type": "string",
-      "description": "List Override Policy for list fields in the deployment template",
-      "enum": [
-        "Replace",
-        "Append"
-      ],
-      "x-ms-enum": {
-        "name": "ListOverridePolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Replace",
-            "value": "Replace",
-            "description": "Replace existing list fields with those from the deployment"
-          },
-          {
-            "name": "Append",
-            "value": "Append",
-            "description": "Append to existing list fields with those from the deployment"
-          }
-        ]
-      }
-    },
     "ManagedApp": {
       "type": "object",
       "description": "App resource",
@@ -2844,10 +3254,6 @@
         "properties": {
           "$ref": "#/definitions/AppProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -2881,10 +3287,6 @@
       "type": "object",
       "description": "The type used for update operations of the ManagedApp.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -2902,69 +3304,15 @@
       "type": "object",
       "description": "The updatable properties of the ManagedApp.",
       "properties": {
-        "appType": {
-          "type": "string",
-          "description": "Type of App"
-        },
-        "imageBase": {
-          "type": "string",
-          "description": "Image Base of App. This represents the container registry and image name. i.e. myregistry.azurecr.io/myapp"
-        },
-        "namespacedPermissions": {
-          "type": "array",
-          "description": "Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace",
-          "items": {
-            "$ref": "#/definitions/Permissions"
-          },
-          "x-ms-identifiers": [
-            "apiGroups",
-            "resources",
-            "verbs"
-          ]
-        },
-        "clusterWidePermissions": {
-          "type": "array",
-          "description": "Represents the permissions for k8s resources that this app has, cluster wide. Do not set this field if the app is not supposed to read resources outside of the namespace it is deployed in. This will create kubernetes ClusterRoles and ClusterRoleBindings for the app when it is deployed into a managed namespace",
-          "items": {
-            "$ref": "#/definitions/Permissions"
-          },
-          "x-ms-identifiers": [
-            "apiGroups",
-            "resources",
-            "verbs"
-          ]
-        },
-        "healthChecks": {
-          "type": "array",
-          "description": "An array of health checks for the app. If not specified, the default is an http request to /healthz",
-          "items": {
-            "$ref": "#/definitions/HealthCheck"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
-        },
-        "observability": {
-          "$ref": "#/definitions/ObservabilityProperties",
-          "description": "Observability properties for the app"
-        },
-        "scaling": {
-          "$ref": "#/definitions/ScalingType",
-          "description": "Scaling type for the app. Default is manual scaling"
-        },
-        "ingressConfiguration": {
-          "$ref": "#/definitions/IngressProperties",
-          "description": "Ingress configuration for the app"
-        },
         "template": {
-          "$ref": "#/definitions/DeploymentTemplate",
-          "description": "Deployment Template for the app. Specify any configuration that will be needed or used for every deployment"
+          "$ref": "#/definitions/AppTemplate",
+          "description": "Template for the app"
         }
       }
     },
     "ManagedCluster": {
       "type": "object",
-      "description": "Managed Cluster resource. This is just a placeholder until the managed cluster proper is converted to typespec",
+      "description": "Represents a managed cluster. Just a placeholder until rest of aks is converted to typespec",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedClusterProperties",
@@ -2979,33 +3327,7 @@
     },
     "ManagedClusterProperties": {
       "type": "object",
-      "description": "Properties of the Managed Cluster",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedNamespace": {
-      "type": "object",
-      "description": "Managed Namespace resource. This is just a placeholder until the managed namespace proper is converted to typespec",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagedNamespaceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "ManagedNamespaceProperties": {
-      "type": "object",
-      "description": "Provisioning state of the resource.",
+      "description": "Managed Cluster properties. Just a placeholder",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3071,6 +3393,66 @@
       "required": [
         "claimName"
       ]
+    },
+    "ProbeProtocol": {
+      "type": "string",
+      "description": "Protocol for the health check",
+      "enum": [
+        "HTTP",
+        "TCP",
+        "gRPC"
+      ],
+      "x-ms-enum": {
+        "name": "ProbeProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HTTP",
+            "value": "HTTP",
+            "description": "HTTP protocol"
+          },
+          {
+            "name": "TCP",
+            "value": "TCP",
+            "description": "TCP protocol"
+          },
+          {
+            "name": "gRPC",
+            "value": "gRPC",
+            "description": "gRPC protocol"
+          }
+        ]
+      }
+    },
+    "ProbeType": {
+      "type": "string",
+      "description": "Type of health check",
+      "enum": [
+        "liveness",
+        "readiness",
+        "startup"
+      ],
+      "x-ms-enum": {
+        "name": "ProbeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Liveness",
+            "value": "liveness",
+            "description": "Liveness probe"
+          },
+          {
+            "name": "Readiness",
+            "value": "readiness",
+            "description": "Readiness probe"
+          },
+          {
+            "name": "Startup",
+            "value": "startup",
+            "description": "Startup probe"
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -3156,6 +3538,247 @@
       "required": [
         "cpu",
         "memory"
+      ]
+    },
+    "Revision": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppRevisionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RevisionListResult": {
+      "type": "object",
+      "description": "The response of a Revision list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Revision items on this page",
+          "items": {
+            "$ref": "#/definitions/Revision"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Rollout": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RolloutProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RolloutListResult": {
+      "type": "object",
+      "description": "The response of a Rollout list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Rollout items on this page",
+          "items": {
+            "$ref": "#/definitions/Rollout"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RolloutProperties": {
+      "type": "object",
+      "description": "Properties of the Rollout",
+      "properties": {
+        "rolloutTemplate": {
+          "$ref": "#/definitions/RolloutTemplateId",
+          "description": "The rollout template to use for this rollout"
+        },
+        "stages": {
+          "type": "array",
+          "description": "Stages in which to complete the rollout",
+          "items": {
+            "$ref": "#/definitions/RolloutStage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "deployment"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "rolloutTemplate",
+        "stages"
+      ]
+    },
+    "RolloutStage": {
+      "type": "object",
+      "description": "A stage in the rollout",
+      "properties": {
+        "previousAppRevisionId": {
+          "$ref": "#/definitions/AppRevisionId",
+          "description": "The previous AppRevisionID of this deployment"
+        },
+        "desiredAppRevisionId": {
+          "$ref": "#/definitions/AppRevisionId",
+          "description": "The desired AppRevisionID of this deployment"
+        },
+        "deployment": {
+          "$ref": "#/definitions/AppDeployment",
+          "description": "The app deployment to which this rollout stage applies"
+        },
+        "bakeTimeInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time to bake after deployment before proceeding to the next stage, in minutes",
+          "default": 1440
+        },
+        "state": {
+          "$ref": "#/definitions/RolloutStageState",
+          "description": "State of the Rollout Stage"
+        }
+      },
+      "required": [
+        "previousAppRevisionId",
+        "desiredAppRevisionId",
+        "deployment",
+        "bakeTimeInMinutes"
+      ]
+    },
+    "RolloutStageState": {
+      "type": "string",
+      "description": "State of the Rollout Stage",
+      "enum": [
+        "pending",
+        "inProgress",
+        "passedHealthCheck",
+        "unhealthy",
+        "baking",
+        "completed",
+        "canceled"
+      ],
+      "x-ms-enum": {
+        "name": "RolloutStageState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "Pending"
+          },
+          {
+            "name": "InProgress",
+            "value": "inProgress",
+            "description": "InProgress"
+          },
+          {
+            "name": "PassedHealthCheck",
+            "value": "passedHealthCheck",
+            "description": "PassedHealthCheck"
+          },
+          {
+            "name": "Unhealthy",
+            "value": "unhealthy",
+            "description": "Unhealthy"
+          },
+          {
+            "name": "Baking",
+            "value": "baking",
+            "description": "Baking"
+          },
+          {
+            "name": "Completed",
+            "value": "completed",
+            "description": "Completed"
+          },
+          {
+            "name": "Canceled",
+            "value": "canceled",
+            "description": "Canceled"
+          }
+        ]
+      }
+    },
+    "RolloutTemplate": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RolloutTemplateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RolloutTemplateId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/managedApps/rolloutTemplates"
+          }
+        ]
+      }
+    },
+    "RolloutTemplateProperties": {
+      "type": "object",
+      "description": "Properties of the Rollout Template",
+      "properties": {
+        "stages": {
+          "type": "array",
+          "description": "Stages in which to complete the rollout",
+          "items": {
+            "$ref": "#/definitions/RolloutStage"
+          },
+          "x-ms-identifiers": [
+            "deployment"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "stages"
       ]
     },
     "ScalingType": {
@@ -3349,6 +3972,18 @@
         "hostName",
         "deployments"
       ]
+    },
+    "UserAssignedIdentity": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+          }
+        ]
+      }
     },
     "Volume": {
       "type": "object",

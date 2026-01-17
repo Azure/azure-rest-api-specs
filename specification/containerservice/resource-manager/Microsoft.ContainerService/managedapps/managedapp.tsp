@@ -8,25 +8,42 @@ import "./volumetypes.tsp";
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 
 namespace Microsoft.ContainerService;
 
 /** App resource */
 model ManagedApp is Azure.ResourceManager.TrackedResource<AppProperties> {
   ...ResourceNameParameter<ManagedApp>;
+}
 
-  /** Managed Identity for all deployments of the app, if specified */
-  ...ManagedServiceIdentityProperty;
+@parentResource(ManagedApp)
+model Revision is Azure.ResourceManager.ProxyResource<AppRevisionProperties> {
+  ...ResourceNameParameter<Revision>;
 }
 
 /** App properties */
 model AppProperties {
-  /** Type of App */
-  appType?: string;
+  /** Template for the app */
+  template: AppTemplate;
 
-  /** Image Base of App. This represents the container registry and image name. i.e. myregistry.azurecr.io/myapp */
-  imageBase: string;
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
 
+/** Properties of the App Revision */
+model AppRevisionProperties {
+  /** Template for the app. This represents a point in time snapshot of the app template */
+  template: AppTemplate;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** Template for the app or app deployment */
+model AppTemplate {
   /** Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace */
   @identifiers(#["apiGroups", "resources", "verbs"])
   namespacedPermissions?: Permissions[];
@@ -35,12 +52,13 @@ model AppProperties {
   @identifiers(#["apiGroups", "resources", "verbs"])
   clusterWidePermissions?: Permissions[];
 
-  /** An array of health checks for the app. If not specified, the default is an http request to /healthz */
+  /** An array of container probes for the app. If not specified, the default is an http request to /healthz */
   @identifiers(#["type"])
-  healthChecks?: HealthCheck[];
+  containerProbes?: ContainerProbes[];
 
-  /** Observability properties for the app */
-  observability?: ObservabilityProperties;
+  /** An array of prometheus expressions to evaluate to determine if the app is healthy. Multiple expressions in this list are logically AND-ed together, so all must return true in order for the app to be considered healthy */
+  @identifiers(#["name"])
+  healthChecks?: HealthCheck[];
 
   /** Scaling type for the app. Default is manual scaling */
   scaling?: ScalingType;
@@ -50,14 +68,13 @@ model AppProperties {
 
   /** Deployment Template for the app. Specify any configuration that will be needed or used for every deployment */
   template: DeploymentTemplate;
-
-  /** The status of the last operation. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
 }
 
 /** Deployment template for the app */
 model DeploymentTemplate {
+  /** Container image of App. This represents a fully qualified container image name, including the registry and tag. i.e. myregistry.azurecr.io/myapp:v1 */
+  image: string;
+
   /** Number of replicas. Only needed if the ScalingType is Manual. Defaults to 3 */
   replicas?: int32;
 
@@ -148,10 +165,14 @@ model Container {
 
   /** An array of health checks for the container */
   @identifiers(#["type"])
-  healthChecks: HealthCheck[];
+  healthChecks: ContainerProbes[];
 
   /** Container Resource Requirements. If not specified, defaults will be applied */
   resources?: ResourceRequirements;
+
+  /** Volume mounts for the container */
+  @identifiers(#["name"])
+  volumeMounts?: VolumeMount[];
 }
 
 /** Resource requirements for a container */
@@ -198,7 +219,7 @@ union IngressState {
 
 /** Ingress properties */
 model IngressProperties {
-  /** Ingress state, enabled or disabled */
+  /** Ingress state, enabled or disabled. Intended to answer the question 'does my app accept public traffic?'. Use TrafficRules to configure traffic routing */
   state: IngressState;
 
   /** Ingress type needed. I.e. http, grpc, */
@@ -229,15 +250,6 @@ scalar azureManagedPrometheusWorkspaceId
     }
   ]>;
 
-/** Observability properties for the app */
-model ObservabilityProperties {
-  /** Log Analytics Workspace ID */
-  logAnalyticsWorkspaceId?: logAnalyticsWorkspaceId;
-
-  /** Azure Managed Prometheus Workspace ID */
-  azureMonitorAccount?: azureManagedPrometheusWorkspaceId;
-}
-
 /** Role definition for k8s resources that the app needs to access */
 model Permissions {
   /** API groups */
@@ -251,7 +263,7 @@ model Permissions {
 }
 
 /** Type of health check */
-union HealthCheckType {
+union ProbeType {
   /** Liveness probe */
   Liveness: "liveness",
 
@@ -265,7 +277,7 @@ union HealthCheckType {
 }
 
 /** Protocol for the health check */
-union HealthCheckProtocol {
+union ProbeProtocol {
   /** HTTP protocol */
   HTTP: "HTTP",
 
@@ -279,12 +291,12 @@ union HealthCheckProtocol {
 }
 
 /** Health check configuration */
-model HealthCheck {
+model ContainerProbes {
   /** Type of health check */
-  type: HealthCheckType;
+  type: ProbeType;
 
   /** Protocol for the health check */
-  protocol?: HealthCheckProtocol;
+  protocol?: ProbeProtocol;
 
   /** Path for HTTP health checks */
   path?: string;
@@ -306,6 +318,38 @@ model HealthCheck {
 
   /** Minimum consecutive failures for the health check to be considered failed after having succeeded */
   failureThreshold?: int32 = 3;
+}
+
+/** Health check for the app */
+model HealthCheck {
+  /** Name of the health check */
+  name: string;
+
+  /** Prometheus expression to evaluate. Expression must evaluate to true if the app is healthy */
+  query: string;
+
+  /** Duration in seconds for which the query must be true to consider the app healthy */
+  durationSeconds: int32 = 30;
+
+  /** The frequency in seconds at which the query is evaluated */
+  frequencySeconds: int32 = 5;
+
+  /** The evaluated state of this health check */
+  @visibility(Lifecycle.Read)
+  state?: HealthCheckState;
+}
+/** Health check state */
+union HealthCheckState {
+  /** Health check is healthy */
+  Healthy: "healthy",
+
+  /** Health check is unhealthy */
+  Unhealthy: "unhealthy",
+
+  /** Health check is unknown */
+  Unknown: "unknown",
+
+  string,
 }
 
 /** The resource provisioning state. */
@@ -347,17 +391,28 @@ interface Apps {
 }
 
 @armResourceOperations
-interface AppRevisions {
+interface Revisions {
   // App Revision Operations
-  list is ArmResourceListByParent<AppRevision>;
-  get is ArmResourceRead<AppRevision>;
+  list is ArmResourceListByParent<Revision>;
+  get is ArmResourceRead<Revision>;
+  /** List deployments for an app revision */
+  revisionDeployments is ListDeployments<Revision>;
+  latestRevision is GetLatestRevision<Revision, Revision>;
+}
+
+@armResourceOperations
+interface FleetAppDeployments {
+  // Fleet App Deployment Operations
+  list is ArmResourceListByParent<FleetAppDeployment>;
+  get is ArmResourceRead<FleetAppDeployment>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    AppRevision,
-    Azure.ResourceManager.Foundations.BaseParameters<AppRevision>
+    FleetAppDeployment,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetAppDeployment>
   >;
-  /** Deletes an app revision. This will also delete all deployments that reference this revision. WARNING: This operation is destructive */
-  delete is ArmResourceDeleteWithoutOkAsync<AppRevision>;
-  revisionDeployments is ListDeployments<AppRevision>;
+  delete is ArmResourceDeleteWithoutOkAsync<FleetAppDeployment>;
+
+  /** Renders the app deployment kubernetes manifests */
+  render is RenderManifests<FleetAppDeployment, RenderResponse>;
 }
 
 @armResourceOperations
@@ -370,8 +425,6 @@ interface AppDeployments {
     Azure.ResourceManager.Foundations.BaseParameters<AppDeployment>
   >;
   delete is ArmResourceDeleteWithoutOkAsync<AppDeployment>;
-  /** Rollback the app deployment to the previous revision */
-  rollback is RollbackDeployment<AppDeployment, AppDeployment>;
 
   /** Renders the app deployment kubernetes manifests */
   render is RenderManifests<AppDeployment, RenderResponse>;
