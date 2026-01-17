@@ -1,103 +1,1959 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Render Service",
+    "title": "Maps Render",
     "version": "2024-04-01",
-    "description": "Azure Maps Render REST APIs"
+    "description": "Azure Maps Render REST APIs",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
-  "consumes": [],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "https://atlas.microsoft.com"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
-  "securityDefinitions": {
-    "AADToken": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
-      "scopes": {
-        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
-      }
-    },
-    "AzureKey": {
-      "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
-      "name": "subscription-key",
-      "in": "header"
-    },
-    "SasToken": {
-      "type": "apiKey",
-      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
-      "name": "SAS Token",
-      "in": "header"
-    }
-  },
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "AADToken": [
+      "AadOauth2Auth": [
         "https://atlas.microsoft.com/.default"
       ]
     },
     {
-      "AzureKey": []
+      "SharedKeyAuth": []
     },
     {
-      "SasToken": []
+      "SasTokenAuth": []
     }
   ],
-  "responses": {},
-  "parameters": {
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API. Current version is 2024-04-01.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "client"
-    },
-    "BoundingBoxNorthEast": {
-      "name": "maxcoordinates",
-      "x-ms-client-name": "northEast",
-      "in": "query",
-      "description": "Maximum coordinates (north-east point) of bounding box in latitude longitude coordinate system. E.g. 52.41064,4.84228",
-      "required": true,
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "double"
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": ""
       },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "BoundingBox"
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
+    "SasTokenAuth": {
+      "type": "apiKey",
+      "description": "SAS Token Authentication",
+      "name": "SAS Token",
+      "in": "header"
+    },
+    "SharedKeyAuth": {
+      "type": "apiKey",
+      "description": "Shared Key Authentication",
+      "name": "subscription-key",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/map/attribution": {
+      "get": {
+        "operationId": "Render_GetMapAttribution",
+        "summary": "Use to get map copyright attribution information.",
+        "description": "The `Get Map Attribution` API allows users to request map copyright attribution\ninformation for a section of a tileset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "tilesetId",
+            "in": "query",
+            "description": "A tileset is a collection of raster or vector data broken up into a uniform\ngrid of square tiles at preset zoom levels. Every tileset has a **tilesetId**\nto use when making requests. The ready-to-use tilesets supplied by Azure Maps\nare listed below. For example, microsoft.base.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "microsoft.base",
+              "microsoft.base.labels",
+              "microsoft.base.hybrid",
+              "microsoft.terra.main",
+              "microsoft.base.road",
+              "microsoft.base.darkgrey",
+              "microsoft.base.labels.road",
+              "microsoft.base.labels.darkgrey",
+              "microsoft.base.hybrid.road",
+              "microsoft.base.hybrid.darkgrey",
+              "microsoft.imagery",
+              "microsoft.weather.radar.main",
+              "microsoft.weather.infrared.main",
+              "microsoft.traffic.absolute",
+              "microsoft.traffic.absolute.main",
+              "microsoft.traffic.relative",
+              "microsoft.traffic.relative.main",
+              "microsoft.traffic.relative.dark",
+              "microsoft.traffic.delay",
+              "microsoft.traffic.delay.main",
+              "microsoft.traffic.reduced.main",
+              "microsoft.traffic.incident"
+            ],
+            "x-ms-enum": {
+              "name": "TilesetID",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "microsoft.base",
+                  "value": "microsoft.base",
+                  "description": "A base map is a standard map that displays roads, natural and artificial\nfeatures along with the labels for those features in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.base.labels",
+                  "value": "microsoft.base.labels",
+                  "description": "Displays labels for roads, natural and artificial features in a vector\ntile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.base.hybrid",
+                  "value": "microsoft.base.hybrid",
+                  "description": "Displays road, boundary and label data in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.terra.main",
+                  "value": "microsoft.terra.main",
+                  "description": "Shaded relief and terra layers.<br>\n\nSupports zoom levels 0 through 6. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.road",
+                  "value": "microsoft.base.road",
+                  "description": "All layers with our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.darkgrey",
+                  "value": "microsoft.base.darkgrey",
+                  "description": "All layers with our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.labels.road",
+                  "value": "microsoft.base.labels.road",
+                  "description": "Label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.labels.darkgrey",
+                  "value": "microsoft.base.labels.darkgrey",
+                  "description": "Label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.hybrid.road",
+                  "value": "microsoft.base.hybrid.road",
+                  "description": "Road, boundary and label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.hybrid.darkgrey",
+                  "value": "microsoft.base.hybrid.darkgrey",
+                  "description": "Road, boundary and label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.imagery",
+                  "value": "microsoft.imagery",
+                  "description": "A combination of satellite or aerial imagery. Only available in S1 and G2\npricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.weather.radar.main",
+                  "value": "microsoft.weather.radar.main",
+                  "description": "Weather radar tiles. Latest weather radar images including areas of rain, snow,\nice and mixed conditions. For more information on the Azure Maps Weather\nservice coverage, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage).  For more information on Radar\ndata, see [Weather services in Azure\nMaps](/azure/azure-maps/weather-services-concepts#radar-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.weather.infrared.main",
+                  "value": "microsoft.weather.infrared.main",
+                  "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their\ntemperature.  For more information, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage). For more information about the\nsatellite data returned, see [Weather services in Azure\nMaps](https://learn.microsoft.com/azure/azure-maps/weather-services-concepts#satellite-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.traffic.absolute",
+                  "value": "microsoft.traffic.absolute",
+                  "description": "absolute traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.absolute.main",
+                  "value": "microsoft.traffic.absolute.main",
+                  "description": "absolute traffic tiles in raster in our main style."
+                },
+                {
+                  "name": "microsoft.traffic.relative",
+                  "value": "microsoft.traffic.relative",
+                  "description": "relative traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.relative.main",
+                  "value": "microsoft.traffic.relative.main",
+                  "description": "relative traffic tiles in raster in our main style."
+                },
+                {
+                  "name": "microsoft.traffic.relative.dark",
+                  "value": "microsoft.traffic.relative.dark",
+                  "description": "relative traffic tiles in raster in our dark style."
+                },
+                {
+                  "name": "microsoft.traffic.delay",
+                  "value": "microsoft.traffic.delay",
+                  "description": "traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.delay.main",
+                  "value": "microsoft.traffic.delay.main",
+                  "description": "traffic tiles in raster in our main style"
+                },
+                {
+                  "name": "microsoft.traffic.reduced.main",
+                  "value": "microsoft.traffic.reduced.main",
+                  "description": "reduced traffic tiles in raster in our main style"
+                },
+                {
+                  "name": "microsoft.traffic.incident",
+                  "value": "microsoft.traffic.incident",
+                  "description": "incident tiles in vector"
+                }
+              ]
+            }
+          },
+          {
+            "name": "zoom",
+            "in": "query",
+            "description": "Zoom level for the desired map attribution.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "bounds",
+            "in": "query",
+            "description": "The string that represents the rectangular area of a bounding box. The bounds\nparameter is defined by the 4 bounding box coordinates, with WGS84 longitude\nand latitude of the southwest corner followed by  WGS84 longitude and latitude\nof the northeast corner. The string is presented in the following  format:\n`[SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude]`.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MapAttribution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Attribution Request": {
+            "$ref": "./examples/Render_GetMapAttribution.json"
+          }
+        }
       }
     },
-    "BoundingBoxSouthWest": {
-      "name": "mincoordinates",
-      "x-ms-client-name": "southWest",
-      "in": "query",
-      "description": "Minimum coordinates (south-west point) of bounding box in latitude longitude coordinate system. E.g. 52.41064,4.84228",
-      "required": true,
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "double"
-      },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "BoundingBox"
+    "/map/copyright/bounding/{format}": {
+      "get": {
+        "operationId": "Render_GetCopyrightFromBoundingBox",
+        "summary": "Use to get copyright information for the specified bounding box.",
+        "description": "Returns copyright information for a given bounding box. Bounding-box requests\nshould specify the minimum and maximum longitude and latitude (EPSG-3857)\ncoordinates",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "mincoordinates",
+            "in": "query",
+            "description": "Minimum coordinates (south-west point) of bounding box in latitude longitude\ncoordinate system. E.g. 52.41064,4.84228",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "southWest"
+          },
+          {
+            "name": "maxcoordinates",
+            "in": "query",
+            "description": "Maximum coordinates (north-east point) of bounding box in latitude longitude\ncoordinate system. E.g. 52.41064,4.84228",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "northEast"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json",
+              "xml"
+            ],
+            "x-ms-enum": {
+              "name": "ResponseFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                },
+                {
+                  "name": "xml",
+                  "value": "xml",
+                  "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Yes/no value to exclude textual data from response. Only images and\ncountry/region names will be in response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-ms-enum": {
+              "name": "IncludeText",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "yes",
+                  "value": "yes",
+                  "description": "Include all textual data in response."
+                },
+                {
+                  "name": "no",
+                  "value": "no",
+                  "description": "Exclude textual data from response. Only images and country/region names will\nbe in response."
+                }
+              ]
+            },
+            "x-ms-client-name": "includeText"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Copyright"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful BoundingBox Copyright Request": {
+            "$ref": "./examples/Render_GetCopyrightFromBoundingBox.json"
+          }
+        }
+      }
+    },
+    "/map/copyright/caption/{format}": {
+      "get": {
+        "operationId": "Render_GetCopyrightCaption",
+        "summary": "Use to get copyright information to use when rendering a tile.",
+        "description": "The `Get Copyright Caption` API is an HTTP GET request designed to serve\ncopyright information to be used with tiles requested from the Render service.\nIn addition to a basic copyright for the whole map, it can serve specific\ngroups of copyrights for some countries/regions.\n\nAs an alternative to copyrights for map request, it can also return captions\nfor displaying provider information on the map.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json",
+              "xml"
+            ],
+            "x-ms-enum": {
+              "name": "ResponseFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                },
+                {
+                  "name": "xml",
+                  "value": "xml",
+                  "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CopyrightCaption"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copyright Caption Request": {
+            "$ref": "./examples/Render_GetCopyrightCaption.json"
+          }
+        }
+      }
+    },
+    "/map/copyright/tile/{format}": {
+      "get": {
+        "operationId": "Render_GetCopyrightForTile",
+        "summary": "Use to get copyright information.",
+        "description": "To obtain the copyright information for a particular tile, the request should\nspecify the tile's zoom level and x and y coordinates. For more information,\nsee [Zoom Levels and Tile Grid](/azure/azure-maps/zoom-levels-and-tile-grid).\n\nCopyrights API is designed to serve copyright information for Render service.\nIn addition to basic copyright for the whole map, API is serving specific\ngroups of copyrights for some countries/regions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "zoom",
+            "in": "query",
+            "description": "Zoom level for the desired tile.\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "z"
+          },
+          {
+            "name": "x",
+            "in": "query",
+            "description": "X coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json",
+              "xml"
+            ],
+            "x-ms-enum": {
+              "name": "ResponseFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                },
+                {
+                  "name": "xml",
+                  "value": "xml",
+                  "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Yes/no value to exclude textual data from response. Only images and\ncountry/region names will be in response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-ms-enum": {
+              "name": "IncludeText",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "yes",
+                  "value": "yes",
+                  "description": "Include all textual data in response."
+                },
+                {
+                  "name": "no",
+                  "value": "no",
+                  "description": "Exclude textual data from response. Only images and country/region names will\nbe in response."
+                }
+              ]
+            },
+            "x-ms-client-name": "includeText"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Copyright"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Tile Copyright Request": {
+            "$ref": "./examples/Render_GetCopyrightForTile.json"
+          }
+        }
+      }
+    },
+    "/map/copyright/world/{format}": {
+      "get": {
+        "operationId": "Render_GetCopyrightForWorld",
+        "summary": "Use to get copyright information for for the world.",
+        "description": "Returns the copyright information for the world. To obtain the default\ncopyright information for the whole world, don't specify a tile or bounding\nbox.\n\nCopyrights API is designed to serve copyright information for Render service.\nIn addition to basic copyright for the whole map, API is serving specific\ngroups of copyrights for some countries/regions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "format",
+            "in": "path",
+            "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "json",
+              "xml"
+            ],
+            "x-ms-enum": {
+              "name": "ResponseFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+                },
+                {
+                  "name": "xml",
+                  "value": "xml",
+                  "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+                }
+              ]
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Yes/no value to exclude textual data from response. Only images and\ncountry/region names will be in response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-ms-enum": {
+              "name": "IncludeText",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "yes",
+                  "value": "yes",
+                  "description": "Include all textual data in response."
+                },
+                {
+                  "name": "no",
+                  "value": "no",
+                  "description": "Exclude textual data from response. Only images and country/region names will\nbe in response."
+                }
+              ]
+            },
+            "x-ms-client-name": "includeText"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Copyright"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful World Copyright Request": {
+            "$ref": "./examples/Render_GetCopyrightForWorld.json"
+          }
+        }
+      }
+    },
+    "/map/statetile": {
+      "get": {
+        "operationId": "Render_GetMapStateTile",
+        "summary": "Use to get state tiles in vector format that can then be used to display\nfeature state information in an indoor map.",
+        "description": "Fetches state tiles in vector format typically to be integrated into indoor\nmaps module of map control or SDK. The map control will call this API after\nuser turns on dynamic styling. For more information, see [Zoom Levels and Tile\nGrid](/azure/location-based-services/zoom-levels-and-tile-grid).",
+        "produces": [
+          "application/json",
+          "application/vnd.mapbox-vector-tile"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "zoom",
+            "in": "query",
+            "description": "Zoom level for the desired tile.\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "z"
+          },
+          {
+            "name": "x",
+            "in": "query",
+            "description": "X coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "statesetId",
+            "in": "query",
+            "description": "The stateset id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful State Tile Request": {
+            "$ref": "./examples/Render_GetMapStateTile.json"
+          }
+        }
+      }
+    },
+    "/map/static": {
+      "get": {
+        "operationId": "Render_GetMapStaticImage",
+        "description": "This rendering API produces static, rasterized map views of a user-defined\narea. It's suitable for lightweight web applications, when the desired user\nexperience doesn't require interactive map controls, or when bandwidth is\nlimited. This API is also useful for embedding maps in applications outside of\nthe browser, in backend services, report generation, or desktop applications.\n\nThis API includes parameters for basic data visualization:\n\n- Labeled pushpins in multiple styles.\n- Render circle, path, and polygon geometry types.\n\nFor more information and detailed examples, see [Render custom data on a raster\nmap](/azure/azure-maps/how-to-render-custom-data).\n<br><br>\nThe dimensions of the bbox parameter are constrained, depending on the zoom\nlevel. This ensures the resulting image has an appropriate level of detail.\n<br><br>\n\n|Zoom Level | Min Lon Range   | Max Lon Range   | Min Lat Range| Max Lat\nRange|\n\n|:----------|:----------------|:----------------|:----------------|:-------------|\n|0          | 56.25     | 360.0       | 30.1105585173    | 180.0        |\n|1          | 28.125         | 360.0       | 14.87468995    | 180.0        |\n|2         | 14.063       | 351.5625      |  7.4130741851    | 137.9576312246\n|\n|3     | 7.03125     | 175.78125    |  3.7034501005    |   73.6354071932\n|\n|4     | 3.515625    | 87.890625  | 1.8513375155  | 35.4776115315  |\n|5          | 1.7578125  | 43.9453125  | 0.925620264 | 17.4589959239  |\n|6       | 0.87890625 | 21.97265625 | 0.4628040687  | 8.6907788223  |\n|7      | 0.439453125 |  10.986328125 | 0.2314012764  | 4.3404320789 |\n|8       | 0.2197265625 | 5.4931640625 | 0.1157005434  | 2.1695927024  |\n|9      | 0.1098632812 | 2.7465820312  |  0.0578502599  | 1.0847183194  |\n|10    | 0.0549316406  | 1.3732910156 | 0.0289251285  | 0.5423494021  |\n|11     | 0.0274658203 | 0.6866455078 | 0.014462564 | 0.2711734813 |\n|12      |  0.0137329102  | 0.3433227539 | 0.007231282 | 0.1355865882  |\n|13    | 0.0068664551 | 0.171661377 | 0.003615641 | 0.067793275 |\n|14     |  0.0034332275  | 0.0858306885 | 0.0018078205 | 0.0338966351 |\n|15     |  0.0017166138 | 0.0429153442 | 0.0009039102 | 0.0169483173 |\n|16   |  0.0008583069  | 0.0214576721  |  0.0004519551  | 0.0084741586 |\n|17  | 0.0004291534 |  0.0107288361  |  0.0002259776 | 0.0042370793 |\n|18    | 0.0002145767 | 0.005364418 | 0.0001129888 | 0.0021185396 |\n|19    | 0.0001072884  |  0.002682209  | 5.64944E-05 | 0.0010592698 |\n|20    |  5.36442E-05  | 0.0013411045 | 2.82472E-05  | 0.0005296349 |\n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the API.",
+        "produces": [
+          "image/png",
+          "image/jpeg",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "tilesetId",
+            "in": "query",
+            "description": "Map style to be returned. Possible values are microsoft.base.road,\nmicrosoft.base.darkgrey, and microsoft.imagery.  Default value is set to be\nmicrosoft.base.road. For more information, see [Render\nTilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "microsoft.base.road",
+              "microsoft.base.darkgrey",
+              "microsoft.imagery"
+            ],
+            "x-ms-enum": {
+              "name": "Tileset",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "microsoft.base.road",
+                  "value": "microsoft.base.road",
+                  "description": "microsoft.base.road"
+                },
+                {
+                  "name": "microsoft.base.darkgrey",
+                  "value": "microsoft.base.darkgrey",
+                  "description": "microsoft.base.darkgrey"
+                },
+                {
+                  "name": "microsoft.imagery",
+                  "value": "microsoft.imagery",
+                  "description": "microsoft.imagery"
+                }
+              ]
+            }
+          },
+          {
+            "name": "trafficLayer",
+            "in": "query",
+            "description": "Optional Value, indicating no traffic flow overlaid on the image result.\nPossible values are microsoft.traffic.relative.main and none. Default value is\nnone, indicating no traffic flow returned. If traffic related tilesetId is\nprovided, will return map image with corresponding traffic layer. For more\ninformation, see [Render\nTilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "microsoft.traffic.relative.main",
+              "none"
+            ],
+            "x-ms-enum": {
+              "name": "TrafficTilesetId",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "microsoft.traffic.relative.main",
+                  "value": "microsoft.traffic.relative.main",
+                  "description": "Supported traffic related tilesetId."
+                },
+                {
+                  "name": "none",
+                  "value": "none",
+                  "description": "Default value, no traffic flow overlay."
+                }
+              ]
+            }
+          },
+          {
+            "name": "zoom",
+            "in": "query",
+            "description": "Desired zoom level of the map. Support zoom value range from 0-20 (inclusive)\nfor tilesetId being microsoft.base.road or microsoft.base.darkgrey. Support\nzoom value range from 0-19 (inclusive) for tilesetId being microsoft.imagery.\nDefault value is 12.<br><br>For more information, see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "maximum": 20
+          },
+          {
+            "name": "center",
+            "in": "query",
+            "description": "Coordinates of the center point in double. Format: 'lon,lat'. Longitude range:\n-180 to 180. Latitude range: -90 to 90.\n\nNote: Either center or bbox are required parameters. They are\nmutually exclusive.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "bbox",
+            "in": "query",
+            "description": "A bounding box is defined by two latitudes and two longitudes that represent\nthe four sides of a rectangular area on the Earth. Format : 'minLon, minLat,\nmaxLon, maxLat' (in double).\n\nNote: Either bbox or center are required\nparameters. They are mutually exclusive. bbox shouldn’t be used with\nheight or width.\n\nThe maximum and minimum allowed ranges for Lat and Lon are defined for each\nzoom level\nin the table at the top of this page.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "boundingBoxPrivate"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "description": "Height of the resulting image in pixels. Range from 80 to 1500. Default\nis 512. It shouldn’t be used with bbox.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 80,
+            "maximum": 1500
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "description": "Width of the resulting image in pixels. Range from 80 to 2000. Default is 512.\nIt should not be used with bbox.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 80,
+            "maximum": 2000
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language in which search results should be returned. Should be one of supported\nIETF language tags, case insensitive. When data in specified language is not\navailable for a specific field, default language is used.\n\nPlease refer to [Supported\nLanguages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for\ndetails.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "description": "The View parameter (also called the \"user region\" parameter) allows you to show\nthe correct maps for a certain country/region for geopolitically disputed\nregions. Different countries/regions have different views of such regions, and\nthe View parameter allows your application to comply with the view required by\nthe country/region your application will be serving. By default, the View\nparameter is set to “Unified” even if you haven’t defined it in  the request.\nIt is your responsibility to determine the location of your users, and then set\nthe View parameter correctly for that location. Alternatively, you have the\noption to set ‘View=Auto’, which will return the map data based on the IP\naddress of the request. The View parameter in Azure Maps must be used in\ncompliance with applicable laws, including those  regarding mapping, of the\ncountry/region where maps, images and other data and third party content that\nyou are authorized to  access via Azure Maps is made available. Example:\nview=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews)\nfor details and to see the available Views.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AE",
+              "AR",
+              "BH",
+              "IN",
+              "IQ",
+              "JO",
+              "KW",
+              "LB",
+              "MA",
+              "OM",
+              "PK",
+              "PS",
+              "QA",
+              "SA",
+              "SY",
+              "US",
+              "YE",
+              "Auto",
+              "Unified"
+            ],
+            "x-ms-enum": {
+              "name": "LocalizedMapView",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AE",
+                  "value": "AE",
+                  "description": "United Arab Emirates (Arabic View)"
+                },
+                {
+                  "name": "AR",
+                  "value": "AR",
+                  "description": "Argentina (Argentinian View)"
+                },
+                {
+                  "name": "BH",
+                  "value": "BH",
+                  "description": "Bahrain (Arabic View)"
+                },
+                {
+                  "name": "IN",
+                  "value": "IN",
+                  "description": "India (Indian View)"
+                },
+                {
+                  "name": "IQ",
+                  "value": "IQ",
+                  "description": "Iraq (Arabic View)"
+                },
+                {
+                  "name": "JO",
+                  "value": "JO",
+                  "description": "Jordan (Arabic View)"
+                },
+                {
+                  "name": "KW",
+                  "value": "KW",
+                  "description": "Kuwait (Arabic View)"
+                },
+                {
+                  "name": "LB",
+                  "value": "LB",
+                  "description": "Lebanon (Arabic View)"
+                },
+                {
+                  "name": "MA",
+                  "value": "MA",
+                  "description": "Morocco (Moroccan View)"
+                },
+                {
+                  "name": "OM",
+                  "value": "OM",
+                  "description": "Oman (Arabic View)"
+                },
+                {
+                  "name": "PK",
+                  "value": "PK",
+                  "description": "Pakistan (Pakistani View)"
+                },
+                {
+                  "name": "PS",
+                  "value": "PS",
+                  "description": "Palestinian Authority (Arabic View)"
+                },
+                {
+                  "name": "QA",
+                  "value": "QA",
+                  "description": "Qatar (Arabic View)"
+                },
+                {
+                  "name": "SA",
+                  "value": "SA",
+                  "description": "Saudi Arabia (Arabic View)"
+                },
+                {
+                  "name": "SY",
+                  "value": "SY",
+                  "description": "Syria (Arabic View)"
+                },
+                {
+                  "name": "US",
+                  "value": "US",
+                  "description": "United States of America"
+                },
+                {
+                  "name": "YE",
+                  "value": "YE",
+                  "description": "Yemen (Arabic View)"
+                },
+                {
+                  "name": "Auto",
+                  "value": "Auto",
+                  "description": "Return the map data based on the IP address of the request."
+                },
+                {
+                  "name": "Unified",
+                  "value": "Unified",
+                  "description": "Unified View (Others)"
+                }
+              ]
+            },
+            "x-ms-client-name": "localizedMapView"
+          },
+          {
+            "name": "pins",
+            "in": "query",
+            "description": "Pushpin style and instances. Use this parameter to optionally add pushpins to\nthe image.\nThe pushpin style describes the appearance of the pushpins, and the instances\nspecify\nthe coordinates of the pushpins (in double) and optional labels for each pin.\n(Be sure to properly URL-encode values of this\nparameter since it will contain reserved characters such as pipes and\npunctuation.)\n\nThe Azure Maps account S0 SKU only supports a single instance of the pins\nparameter and the number of locations is limited to 5 per pin. Other SKUs\nallow up to 25 instances of the pins parameter to specify multiple pin styles,\nand the number of locations is limited to 50 per pin.\n\nTo render a pushpin at latitude 45°N and longitude 122°W using the default\nbuilt-in pushpin style, add the\nquerystring parameter\n\n`pins=default||-122 45`\n\nNote that the longitude comes before the latitude.\nAfter URL encoding this will look like\n\n`pins=default%7C%7C-122+45`\n\nAll of the examples here show the pins\nparameter without URL encoding, for clarity.\n\nTo render a pin at multiple locations, separate each location with a pipe\ncharacter. For example, use\n\n`pins=default||-122 45|-119.5 43.2|-121.67 47.12`\n\nThe S0 Azure Maps account SKU only allows five pushpins. Other account SKUs do\nnot have this limitation.\n\n### Style Modifiers\n\nYou can modify the appearance of the pins by adding style modifiers. These are\nadded after the style but before\nthe locations and labels. Style modifiers each have a two-letter name. These\nabbreviated names are used to help\nreduce the length of the URL.\n\nTo change the color of the pushpin, use the 'co' style modifier and specify the\ncolor using the HTML/CSS RGB color\nformat which is a six-digit hexadecimal number (the three-digit form is not\nsupported). For example, to use\na deep pink color which you would specify as #FF1493 in CSS, use\n\n`pins=default|coFF1493||-122 45`\n\n### Pushpin Labels\n\nTo add a label to the pins, put the label in single quotes just before the\ncoordinates. Avoid using special character such as `|` or `||` in label. For\nexample, to label\nthree pins with the values '1', '2', and '3', use\n\n`pins=default||'1'-122 45|'2'-119.5 43.2|'3'-121.67 47.12`\n\nThere is a built-in pushpin style called 'none' that does not display a pushpin\nimage. You can use this if\nyou want to display labels without any pin image. For example,\n\n`pins=none||'A'-122 45|'B'-119.5 43.2`\n\nTo change the color of the pushpin labels, use the 'lc' label color style\nmodifier. For example, to use pink\npushpins with black labels, use\n\n`pins=default|coFF1493|lc000000||-122 45`\n\nTo change the size of the labels, use the 'ls' label size style modifier. The\nlabel size represents the approximate\nheight of the label text in pixels. For example, to increase the label size to\n12, use\n\n`pins=default|ls12||'A'-122 45|'B'-119 43`\n\nThe labels are centered at the pushpin 'label anchor.' The anchor location is\npredefined for built-in pushpins and\nis at the top center of custom pushpins (see below). To override the label\nanchor, using the 'la' style modifier\nand provide X and Y pixel coordinates for the anchor. These coordinates are\nrelative to the top left corner of the\npushpin image. Positive X values move the anchor to the right, and positive Y\nvalues move the anchor down. For example,\nto position the label anchor 10 pixels right and 4 pixels above the top left\ncorner of the pushpin image,\nuse\n\n`pins=default|la10 -4||'A'-122 45|'B'-119 43`\n\n### Custom Pushpins\n\nTo use a custom pushpin image, use the word 'custom' as the pin style name, and\nthen specify a URL after the\nlocation and label information. The maximum allowed size for a customized label\nimage is 65,536 pixels. Use two pipe characters to indicate that you're done\nspecifying locations and are\nstarting the URL. For example,\n\n`pins=custom||-122 45||http://contoso.com/pushpins/red.png`\n\nAfter URL encoding, this would look like\n\n`pins=custom%7C%7C-122+45%7C%7Chttp%3A%2F%2Fcontoso.com%2Fpushpins%2Fred.png`\n\nBy default, custom pushpin images are drawn centered at the pin coordinates.\nThis usually isn't ideal as it obscures\nthe location that you're trying to highlight. To override the anchor location\nof the pin image, use the 'an'\nstyle modifier. This uses the same format as the 'la' label anchor style\nmodifier. For example, if your custom\npin image has the tip of the pin at the top left corner of the image, you can\nset the anchor to that spot by\nusing\n\n`pins=custom|an0 0||-122 45||http://contoso.com/pushpins/red.png`\n\nNote: If you use the 'co' color modifier with a custom pushpin image, the\nspecified color will replace the RGB\nchannels of the pixels in the image but will leave the alpha (opacity) channel\nunchanged. This would usually\nonly be done with a solid-color custom image.\n\n### Scale, Rotation, and Opacity\n\nYou can make pushpins and their labels larger or smaller by using the 'sc'\nscale style modifier. This is a\nvalue greater than zero. A value of 1 is the standard scale. Values larger than\n1 will make the pins larger, and\nvalues smaller than 1 will make them smaller. For example, to draw the pushpins\n50% larger than normal, use\n\n`pins=default|sc1.5||-122 45`\n\nYou can rotate pushpins and their labels by using the 'ro' rotation style\nmodifier. This is a number of degrees\nof clockwise rotation. Use a negative number to rotate counter-clockwise. For\nexample, to rotate the pushpins\n90 degrees clockwise and double their size, use\n\n`pins=default|ro90|sc2||-122 45`\n\nYou can make pushpins and their labels partially transparent by specifying the\n'al' alpha style modifier.\nThis is a number between 0 and 1 indicating the opacity of the pushpins. Zero\nmakes them completely transparent\n(and not visible) and 1 makes them completely opaque (which is the default).\nFor example, to make pushpins\nand their labels only 67% opaque, use\n\n`pins=default|al.67||-122 45`\n\n### Style Modifier Summary\n\nModifier  | Description    | Type    | Range\n:--------:|---------------|--------|----------\nal        | Alpha (opacity) |  float | 0 to 1\nan        | Pin anchor    | <int32, int32>  | *\nco        | Pin color      | string | 000000 to FFFFFF\nla        | Label anchor   | <int32, int32> | *\nlc        | Label color   | string  | 000000 to FFFFFF\nls        | Label size      | float | Greater than 0\nro        | Rotation    | float    | -360 to 360\nsc        | Scale         | float  | Greater than 0\n\n* X and Y coordinates can be anywhere within pin image or a margin around it.\nThe margin size is the minimum of the pin width and height.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Path style and locations (in double). Use this parameter to optionally add\nlines, polygons or circles to the image.\nThe path style describes the appearance of the line and fill. (Be sure to\nproperly URL-encode values of this\nparameter since it will contain reserved characters such as pipes and\npunctuation.)\n\nPath parameter is supported in Azure Maps account SKU starting with S1.\nMultiple instances of the path parameter\nallow to specify multiple geometries with their styles. Number of parameters\nper request is limited to 10 and\nnumber of locations is limited to 100 per path.\n\nTo render a circle with radius 100 meters and center point at latitude 45°N and\nlongitude 122°W using the default style, add the\nquerystring parameter\n\n`path=ra100||-122 45`\n\nNote that the longitude comes before the latitude.\nAfter URL encoding this will look like\n\n`path=ra100%7C%7C-122+45`\n\nAll of the examples here show the path parameter without URL encoding, for\nclarity.\n\nTo render a line, separate each location with a pipe character. For example,\nuse\n\n`path=||-122 45|-119.5 43.2|-121.67 47.12`\n\nA polygon is specified with a closed path, where the first and last points are\nequal. For example, use\n\n`path=||-122 45|-119.5 43.2|-121.67 47.12|-122 45`\n\nLongitude value for locations of lines and polygons can be in the range from\n-360 to 360 to allow for rendering of geometries crossing the anti-meridian.\n\n### Style Modifiers\n\nYou can modify the appearance of the path by adding style modifiers. These are\nadded before the locations.\nStyle modifiers each have a two-letter name. These abbreviated names are used\nto help reduce the length\nof the URL.\n\nTo change the color of the outline, use the 'lc' style modifier and specify the\ncolor using the HTML/CSS RGB color\nformat which is a six-digit hexadecimal number (the three-digit form is not\nsupported). For example, to use\na deep pink color which you would specify as #FF1493 in CSS, use\n\n`path=lcFF1493||-122 45|-119.5 43.2`\n\nMultiple style modifiers may be combined to create a more complex visual style.\n\n`lc0000FF|lw3|la0.60|fa0.50||-122.2 47.6|-122.2 47.7|-122.3 47.7|-122.3 47.6|-122.2 47.6`\n\n### Style Modifier Summary\n\nModifier  | Description       | Type     | Range\n:--------:|---------------|--------|----------\nlc        | Line color      | string       | 000000 to FFFFFF\nfc        | Fill color        | string       | 000000 to FFFFFF\nla    | Line alpha (opacity)     |  float     | 0 to 1\nfa  | Fill alpha (opacity)   |     float       | 0 to 1\nlw   | Line width     |int32        | (0, 50]\nra        | Circle radius (meters) |   float  | Greater than 0",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header field can be used to specify preferences regarding response\nmedia types. Allowed media types include image/jpeg and image/png. Return image\nin image/png if Accept header is not specified.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "image/png",
+              "image/jpeg"
+            ],
+            "x-ms-enum": {
+              "name": "MediaType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "image/png",
+                  "value": "image/png",
+                  "description": "Return image in png format."
+                },
+                {
+                  "name": "image/jpeg",
+                  "value": "image/jpeg",
+                  "description": "Return image in jpeg format."
+                }
+              ]
+            },
+            "x-ms-client-name": "accept"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Static Image Request": {
+            "$ref": "./examples/Render_GetMapStaticImage.json"
+          }
+        }
+      }
+    },
+    "/map/tile": {
+      "get": {
+        "operationId": "Render_GetMapTile",
+        "summary": "Use to request map tiles in vector or raster format.",
+        "description": "The `Get Map Tiles` API enables users to request map tiles in either vector or\nraster formats, typically for integration into a map control or SDK. Supported\ntile types include Azure Maps road tiles and real-time Weather Radar tiles. By\ndefault, the Azure Maps [Web SDK](/azure/azure-maps/about-azure-maps#web-sdk)\nuses vector tiles for rendering its web map control.",
+        "produces": [
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/pbf",
+          "application/vnd.mapbox-vector-tile"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "tilesetId",
+            "in": "query",
+            "description": "A tileset is a collection of raster or vector data broken up into a uniform\ngrid of square tiles at preset zoom levels. Every tileset has a **tilesetId**\nto use when making requests. The ready-to-use tilesets supplied by Azure Maps\nare listed below. For example, microsoft.base.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "microsoft.base",
+              "microsoft.base.labels",
+              "microsoft.base.hybrid",
+              "microsoft.terra.main",
+              "microsoft.base.road",
+              "microsoft.base.darkgrey",
+              "microsoft.base.labels.road",
+              "microsoft.base.labels.darkgrey",
+              "microsoft.base.hybrid.road",
+              "microsoft.base.hybrid.darkgrey",
+              "microsoft.imagery",
+              "microsoft.weather.radar.main",
+              "microsoft.weather.infrared.main",
+              "microsoft.traffic.absolute",
+              "microsoft.traffic.absolute.main",
+              "microsoft.traffic.relative",
+              "microsoft.traffic.relative.main",
+              "microsoft.traffic.relative.dark",
+              "microsoft.traffic.delay",
+              "microsoft.traffic.delay.main",
+              "microsoft.traffic.reduced.main",
+              "microsoft.traffic.incident"
+            ],
+            "x-ms-enum": {
+              "name": "TilesetID",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "microsoft.base",
+                  "value": "microsoft.base",
+                  "description": "A base map is a standard map that displays roads, natural and artificial\nfeatures along with the labels for those features in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.base.labels",
+                  "value": "microsoft.base.labels",
+                  "description": "Displays labels for roads, natural and artificial features in a vector\ntile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.base.hybrid",
+                  "value": "microsoft.base.hybrid",
+                  "description": "Displays road, boundary and label data in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.terra.main",
+                  "value": "microsoft.terra.main",
+                  "description": "Shaded relief and terra layers.<br>\n\nSupports zoom levels 0 through 6. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.road",
+                  "value": "microsoft.base.road",
+                  "description": "All layers with our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.darkgrey",
+                  "value": "microsoft.base.darkgrey",
+                  "description": "All layers with our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.labels.road",
+                  "value": "microsoft.base.labels.road",
+                  "description": "Label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.labels.darkgrey",
+                  "value": "microsoft.base.labels.darkgrey",
+                  "description": "Label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.hybrid.road",
+                  "value": "microsoft.base.hybrid.road",
+                  "description": "Road, boundary and label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.hybrid.darkgrey",
+                  "value": "microsoft.base.hybrid.darkgrey",
+                  "description": "Road, boundary and label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.imagery",
+                  "value": "microsoft.imagery",
+                  "description": "A combination of satellite or aerial imagery. Only available in S1 and G2\npricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.weather.radar.main",
+                  "value": "microsoft.weather.radar.main",
+                  "description": "Weather radar tiles. Latest weather radar images including areas of rain, snow,\nice and mixed conditions. For more information on the Azure Maps Weather\nservice coverage, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage).  For more information on Radar\ndata, see [Weather services in Azure\nMaps](/azure/azure-maps/weather-services-concepts#radar-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.weather.infrared.main",
+                  "value": "microsoft.weather.infrared.main",
+                  "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their\ntemperature.  For more information, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage). For more information about the\nsatellite data returned, see [Weather services in Azure\nMaps](https://learn.microsoft.com/azure/azure-maps/weather-services-concepts#satellite-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.traffic.absolute",
+                  "value": "microsoft.traffic.absolute",
+                  "description": "absolute traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.absolute.main",
+                  "value": "microsoft.traffic.absolute.main",
+                  "description": "absolute traffic tiles in raster in our main style."
+                },
+                {
+                  "name": "microsoft.traffic.relative",
+                  "value": "microsoft.traffic.relative",
+                  "description": "relative traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.relative.main",
+                  "value": "microsoft.traffic.relative.main",
+                  "description": "relative traffic tiles in raster in our main style."
+                },
+                {
+                  "name": "microsoft.traffic.relative.dark",
+                  "value": "microsoft.traffic.relative.dark",
+                  "description": "relative traffic tiles in raster in our dark style."
+                },
+                {
+                  "name": "microsoft.traffic.delay",
+                  "value": "microsoft.traffic.delay",
+                  "description": "traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.delay.main",
+                  "value": "microsoft.traffic.delay.main",
+                  "description": "traffic tiles in raster in our main style"
+                },
+                {
+                  "name": "microsoft.traffic.reduced.main",
+                  "value": "microsoft.traffic.reduced.main",
+                  "description": "reduced traffic tiles in raster in our main style"
+                },
+                {
+                  "name": "microsoft.traffic.incident",
+                  "value": "microsoft.traffic.incident",
+                  "description": "incident tiles in vector"
+                }
+              ]
+            }
+          },
+          {
+            "name": "zoom",
+            "in": "query",
+            "description": "Zoom level for the desired tile.\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "z"
+          },
+          {
+            "name": "x",
+            "in": "query",
+            "description": "X coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "y",
+            "in": "query",
+            "description": "Y coordinate of the tile on zoom grid. Value must be in the range [0,\n2<sup>`zoom`</sup> -1].\n\nPlease see [Zoom Levels and Tile\nGrid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)\nfor details.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "timeStamp",
+            "in": "query",
+            "description": "The desired date and time of the requested tile. This parameter must be\nspecified in the standard date-time format (e.g. 2019-11-14T16:03:00-08:00), as\ndefined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601). This parameter\nis only supported when tilesetId parameter is set to one of the values below.\n\n* microsoft.weather.infrared.main: We provide tiles up to 3 hours in the past.\nTiles are available in 10-minute intervals. We round the timeStamp value to the\nnearest 10-minute time frame.\n* microsoft.weather.radar.main: We provide tiles up to 1.5 hours in the past\nand up to 2 hours in the future. Tiles are available in 5-minute intervals. We\nround the timeStamp value to the nearest 5-minute time frame.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "tileSize",
+            "in": "query",
+            "description": "The size of the returned map tile in pixels.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "256",
+              "512"
+            ],
+            "x-ms-enum": {
+              "name": "MapTileSize",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "size256",
+                  "value": "256",
+                  "description": "Return a 256 by 256 pixel tile."
+                },
+                {
+                  "name": "size512",
+                  "value": "512",
+                  "description": "Return a 512 by 512 pixel tile."
+                }
+              ]
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language in which search results should be returned. Should be one of supported\nIETF language tags, case insensitive. When data in specified language is not\navailable for a specific field, default language is used.\n\nPlease refer to [Supported\nLanguages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for\ndetails.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "description": "The View parameter (also called the \"user region\" parameter) allows you to show\nthe correct maps for a certain country/region for geopolitically disputed\nregions. Different countries/regions have different views of such regions, and\nthe View parameter allows your application to comply with the view required by\nthe country/region your application will be serving. By default, the View\nparameter is set to “Unified” even if you haven’t defined it in  the request.\nIt is your responsibility to determine the location of your users, and then set\nthe View parameter correctly for that location. Alternatively, you have the\noption to set ‘View=Auto’, which will return the map data based on the IP\naddress of the request. The View parameter in Azure Maps must be used in\ncompliance with applicable laws, including those  regarding mapping, of the\ncountry/region where maps, images and other data and third party content that\nyou are authorized to  access via Azure Maps is made available. Example:\nview=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews)\nfor details and to see the available Views.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AE",
+              "AR",
+              "BH",
+              "IN",
+              "IQ",
+              "JO",
+              "KW",
+              "LB",
+              "MA",
+              "OM",
+              "PK",
+              "PS",
+              "QA",
+              "SA",
+              "SY",
+              "US",
+              "YE",
+              "Auto",
+              "Unified"
+            ],
+            "x-ms-enum": {
+              "name": "LocalizedMapView",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AE",
+                  "value": "AE",
+                  "description": "United Arab Emirates (Arabic View)"
+                },
+                {
+                  "name": "AR",
+                  "value": "AR",
+                  "description": "Argentina (Argentinian View)"
+                },
+                {
+                  "name": "BH",
+                  "value": "BH",
+                  "description": "Bahrain (Arabic View)"
+                },
+                {
+                  "name": "IN",
+                  "value": "IN",
+                  "description": "India (Indian View)"
+                },
+                {
+                  "name": "IQ",
+                  "value": "IQ",
+                  "description": "Iraq (Arabic View)"
+                },
+                {
+                  "name": "JO",
+                  "value": "JO",
+                  "description": "Jordan (Arabic View)"
+                },
+                {
+                  "name": "KW",
+                  "value": "KW",
+                  "description": "Kuwait (Arabic View)"
+                },
+                {
+                  "name": "LB",
+                  "value": "LB",
+                  "description": "Lebanon (Arabic View)"
+                },
+                {
+                  "name": "MA",
+                  "value": "MA",
+                  "description": "Morocco (Moroccan View)"
+                },
+                {
+                  "name": "OM",
+                  "value": "OM",
+                  "description": "Oman (Arabic View)"
+                },
+                {
+                  "name": "PK",
+                  "value": "PK",
+                  "description": "Pakistan (Pakistani View)"
+                },
+                {
+                  "name": "PS",
+                  "value": "PS",
+                  "description": "Palestinian Authority (Arabic View)"
+                },
+                {
+                  "name": "QA",
+                  "value": "QA",
+                  "description": "Qatar (Arabic View)"
+                },
+                {
+                  "name": "SA",
+                  "value": "SA",
+                  "description": "Saudi Arabia (Arabic View)"
+                },
+                {
+                  "name": "SY",
+                  "value": "SY",
+                  "description": "Syria (Arabic View)"
+                },
+                {
+                  "name": "US",
+                  "value": "US",
+                  "description": "United States of America"
+                },
+                {
+                  "name": "YE",
+                  "value": "YE",
+                  "description": "Yemen (Arabic View)"
+                },
+                {
+                  "name": "Auto",
+                  "value": "Auto",
+                  "description": "Return the map data based on the IP address of the request."
+                },
+                {
+                  "name": "Unified",
+                  "value": "Unified",
+                  "description": "Unified View (Others)"
+                }
+              ]
+            },
+            "x-ms-client-name": "localizedMapView"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Tile Request": {
+            "$ref": "./examples/Render_GetMapTile.json"
+          }
+        }
+      }
+    },
+    "/map/tileset": {
+      "get": {
+        "operationId": "Render_GetMapTileset",
+        "summary": "Use to get metadata for a tileset.",
+        "description": "The Get Map Tileset API allows users to request metadata for a tileset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-id",
+            "in": "header",
+            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "tilesetId",
+            "in": "query",
+            "description": "A tileset is a collection of raster or vector data broken up into a uniform\ngrid of square tiles at preset zoom levels. Every tileset has a **tilesetId**\nto use when making requests. The ready-to-use tilesets supplied by Azure Maps\nare listed below. For example, microsoft.base.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "microsoft.base",
+              "microsoft.base.labels",
+              "microsoft.base.hybrid",
+              "microsoft.terra.main",
+              "microsoft.base.road",
+              "microsoft.base.darkgrey",
+              "microsoft.base.labels.road",
+              "microsoft.base.labels.darkgrey",
+              "microsoft.base.hybrid.road",
+              "microsoft.base.hybrid.darkgrey",
+              "microsoft.imagery",
+              "microsoft.weather.radar.main",
+              "microsoft.weather.infrared.main",
+              "microsoft.traffic.absolute",
+              "microsoft.traffic.absolute.main",
+              "microsoft.traffic.relative",
+              "microsoft.traffic.relative.main",
+              "microsoft.traffic.relative.dark",
+              "microsoft.traffic.delay",
+              "microsoft.traffic.delay.main",
+              "microsoft.traffic.reduced.main",
+              "microsoft.traffic.incident"
+            ],
+            "x-ms-enum": {
+              "name": "TilesetID",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "microsoft.base",
+                  "value": "microsoft.base",
+                  "description": "A base map is a standard map that displays roads, natural and artificial\nfeatures along with the labels for those features in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.base.labels",
+                  "value": "microsoft.base.labels",
+                  "description": "Displays labels for roads, natural and artificial features in a vector\ntile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.base.hybrid",
+                  "value": "microsoft.base.hybrid",
+                  "description": "Displays road, boundary and label data in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+                },
+                {
+                  "name": "microsoft.terra.main",
+                  "value": "microsoft.terra.main",
+                  "description": "Shaded relief and terra layers.<br>\n\nSupports zoom levels 0 through 6. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.road",
+                  "value": "microsoft.base.road",
+                  "description": "All layers with our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.darkgrey",
+                  "value": "microsoft.base.darkgrey",
+                  "description": "All layers with our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.labels.road",
+                  "value": "microsoft.base.labels.road",
+                  "description": "Label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.labels.darkgrey",
+                  "value": "microsoft.base.labels.darkgrey",
+                  "description": "Label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.hybrid.road",
+                  "value": "microsoft.base.hybrid.road",
+                  "description": "Road, boundary and label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.base.hybrid.darkgrey",
+                  "value": "microsoft.base.hybrid.darkgrey",
+                  "description": "Road, boundary and label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.imagery",
+                  "value": "microsoft.imagery",
+                  "description": "A combination of satellite or aerial imagery. Only available in S1 and G2\npricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.weather.radar.main",
+                  "value": "microsoft.weather.radar.main",
+                  "description": "Weather radar tiles. Latest weather radar images including areas of rain, snow,\nice and mixed conditions. For more information on the Azure Maps Weather\nservice coverage, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage).  For more information on Radar\ndata, see [Weather services in Azure\nMaps](/azure/azure-maps/weather-services-concepts#radar-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.weather.infrared.main",
+                  "value": "microsoft.weather.infrared.main",
+                  "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their\ntemperature.  For more information, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage). For more information about the\nsatellite data returned, see [Weather services in Azure\nMaps](https://learn.microsoft.com/azure/azure-maps/weather-services-concepts#satellite-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+                },
+                {
+                  "name": "microsoft.traffic.absolute",
+                  "value": "microsoft.traffic.absolute",
+                  "description": "absolute traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.absolute.main",
+                  "value": "microsoft.traffic.absolute.main",
+                  "description": "absolute traffic tiles in raster in our main style."
+                },
+                {
+                  "name": "microsoft.traffic.relative",
+                  "value": "microsoft.traffic.relative",
+                  "description": "relative traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.relative.main",
+                  "value": "microsoft.traffic.relative.main",
+                  "description": "relative traffic tiles in raster in our main style."
+                },
+                {
+                  "name": "microsoft.traffic.relative.dark",
+                  "value": "microsoft.traffic.relative.dark",
+                  "description": "relative traffic tiles in raster in our dark style."
+                },
+                {
+                  "name": "microsoft.traffic.delay",
+                  "value": "microsoft.traffic.delay",
+                  "description": "traffic tiles in vector"
+                },
+                {
+                  "name": "microsoft.traffic.delay.main",
+                  "value": "microsoft.traffic.delay.main",
+                  "description": "traffic tiles in raster in our main style"
+                },
+                {
+                  "name": "microsoft.traffic.reduced.main",
+                  "value": "microsoft.traffic.reduced.main",
+                  "description": "reduced traffic tiles in raster in our main style"
+                },
+                {
+                  "name": "microsoft.traffic.incident",
+                  "value": "microsoft.traffic.incident",
+                  "description": "incident tiles in vector"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MapTileset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Tileset Request": {
+            "$ref": "./examples/Render_GetMapTileset.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Copyright": {
+      "type": "object",
+      "description": "This object is returned from a successful copyright request",
+      "properties": {
+        "formatVersion": {
+          "type": "string",
+          "description": "Format Version property",
+          "readOnly": true
+        },
+        "generalCopyrights": {
+          "type": "array",
+          "description": "General Copyrights array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "regions": {
+          "type": "array",
+          "description": "Regions array",
+          "items": {
+            "$ref": "#/definitions/RegionCopyrights"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CopyrightCaption": {
+      "type": "object",
+      "description": "This object is returned from a successful copyright call",
+      "properties": {
+        "formatVersion": {
+          "type": "string",
+          "description": "Format Version property",
+          "readOnly": true
+        },
+        "copyrightsCaption": {
+          "type": "string",
+          "description": "Copyrights Caption property",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional info.",
+          "additionalProperties": {},
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error\ndetails for failed operations. (This also follows the OData error response\nformat.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      }
+    },
+    "IncludeText": {
+      "type": "string",
+      "description": "Include textual data in response.",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "x-ms-enum": {
+        "name": "IncludeText",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "yes",
+            "value": "yes",
+            "description": "Include all textual data in response."
+          },
+          {
+            "name": "no",
+            "value": "no",
+            "description": "Exclude textual data from response. Only images and country/region names will\nbe in response."
+          }
+        ]
+      }
+    },
+    "LocalizedMapView": {
+      "type": "string",
+      "description": "The View parameter (also called the \\\"user region\\\" parameter) allows you to show the correct maps for a certain country/region for geopolitically disputed regions. Different countries/regions have different views of such regions, and the View parameter allows your application to comply with the view required by the country/region your application will be serving. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country/region where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\\n\\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+      "enum": [
+        "AE",
+        "AR",
+        "BH",
+        "IN",
+        "IQ",
+        "JO",
+        "KW",
+        "LB",
+        "MA",
+        "OM",
+        "PK",
+        "PS",
+        "QA",
+        "SA",
+        "SY",
+        "US",
+        "YE",
+        "Auto",
+        "Unified"
+      ],
+      "x-ms-enum": {
+        "name": "LocalizedMapView",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AE",
+            "value": "AE",
+            "description": "United Arab Emirates (Arabic View)"
+          },
+          {
+            "name": "AR",
+            "value": "AR",
+            "description": "Argentina (Argentinian View)"
+          },
+          {
+            "name": "BH",
+            "value": "BH",
+            "description": "Bahrain (Arabic View)"
+          },
+          {
+            "name": "IN",
+            "value": "IN",
+            "description": "India (Indian View)"
+          },
+          {
+            "name": "IQ",
+            "value": "IQ",
+            "description": "Iraq (Arabic View)"
+          },
+          {
+            "name": "JO",
+            "value": "JO",
+            "description": "Jordan (Arabic View)"
+          },
+          {
+            "name": "KW",
+            "value": "KW",
+            "description": "Kuwait (Arabic View)"
+          },
+          {
+            "name": "LB",
+            "value": "LB",
+            "description": "Lebanon (Arabic View)"
+          },
+          {
+            "name": "MA",
+            "value": "MA",
+            "description": "Morocco (Moroccan View)"
+          },
+          {
+            "name": "OM",
+            "value": "OM",
+            "description": "Oman (Arabic View)"
+          },
+          {
+            "name": "PK",
+            "value": "PK",
+            "description": "Pakistan (Pakistani View)"
+          },
+          {
+            "name": "PS",
+            "value": "PS",
+            "description": "Palestinian Authority (Arabic View)"
+          },
+          {
+            "name": "QA",
+            "value": "QA",
+            "description": "Qatar (Arabic View)"
+          },
+          {
+            "name": "SA",
+            "value": "SA",
+            "description": "Saudi Arabia (Arabic View)"
+          },
+          {
+            "name": "SY",
+            "value": "SY",
+            "description": "Syria (Arabic View)"
+          },
+          {
+            "name": "US",
+            "value": "US",
+            "description": "United States of America"
+          },
+          {
+            "name": "YE",
+            "value": "YE",
+            "description": "Yemen (Arabic View)"
+          },
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Return the map data based on the IP address of the request."
+          },
+          {
+            "name": "Unified",
+            "value": "Unified",
+            "description": "Unified View (Others)"
+          }
+        ]
+      }
+    },
+    "MapAttribution": {
+      "type": "object",
+      "description": "Copyright attribution for the requested section of a tileset.",
+      "properties": {
+        "copyrights": {
+          "type": "array",
+          "description": "A list of copyright strings.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
       }
     },
     "MapTileSize": {
-      "name": "tileSize",
-      "in": "query",
-      "description": "The size of the returned map tile in pixels.",
       "type": "string",
+      "description": "The size of the returned map tile in pixels.",
       "enum": [
         "256",
         "512"
@@ -107,25 +1963,240 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "256",
             "name": "size256",
+            "value": "256",
             "description": "Return a 256 by 256 pixel tile."
           },
           {
-            "value": "512",
             "name": "size512",
+            "value": "512",
             "description": "Return a 512 by 512 pixel tile."
           }
         ]
-      },
-      "x-ms-parameter-location": "method"
+      }
     },
-    "TilesetId": {
-      "name": "tilesetId",
-      "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset zoom levels. Every tileset has a **tilesetId** to use when making requests. The ready-to-use tilesets supplied by Azure Maps are listed below. For example, microsoft.base.",
+    "MapTileset": {
+      "type": "object",
+      "description": "Metadata for a tileset in the TileJSON format.",
+      "properties": {
+        "tilejson": {
+          "type": "string",
+          "description": "Describes the version of the TileJSON spec that is implemented by this JSON\nobject.",
+          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "A name describing the tileset. The name can contain any legal character.\nImplementations SHOULD NOT interpret the name as HTML.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Text description of the tileset. The description can contain any legal\ncharacter. Implementations SHOULD NOT interpret the description as HTML.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "A semver.org style version number for the tiles contained within the tileset.\nWhen changes across tiles are introduced, the minor version MUST change.",
+          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
+          "readOnly": true
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Copyright attribution to be displayed on the map. Implementations MAY decide to\ntreat this as HTML or literal text. For security reasons, make absolutely sure\nthat this field can't be abused as a vector for XSS or beacon tracking.",
+          "readOnly": true
+        },
+        "template": {
+          "type": "string",
+          "description": "A mustache template to be used to format data from grids for interaction.",
+          "readOnly": true
+        },
+        "legend": {
+          "type": "string",
+          "description": "A legend to be displayed with the map. Implementations MAY decide to treat this\nas HTML or literal text. For security reasons, make absolutely sure that this\nfield can't be abused as a vector for XSS or beacon tracking.",
+          "readOnly": true
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Default: \"xyz\". Either \"xyz\" or \"tms\". Influences the y direction of the tile\ncoordinates. The global-mercator (aka Spherical Mercator) profile is assumed.",
+          "readOnly": true
+        },
+        "tiles": {
+          "type": "array",
+          "description": "An array of tile endpoints. If multiple endpoints are specified, clients may\nuse any combination of endpoints. All endpoints MUST return the same content\nfor the same URL. The array MUST contain at least one endpoint.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "grids": {
+          "type": "array",
+          "description": "An array of interactivity endpoints.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "data": {
+          "type": "array",
+          "description": "An array of data files in GeoJSON format.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "minzoom": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum zoom level.",
+          "minimum": 0,
+          "maximum": 30,
+          "readOnly": true
+        },
+        "maxzoom": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum zoom level.",
+          "minimum": 0,
+          "maximum": 30,
+          "readOnly": true
+        },
+        "bounds": {
+          "type": "array",
+          "description": "The maximum extent of available map tiles. Bounds MUST define an area covered\nby all zoom levels. The bounds are represented in WGS:84 latitude and longitude\nvalues, in the order left, bottom, right, top. Values may be integers or\nfloating point numbers.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "readOnly": true
+        },
+        "center": {
+          "type": "array",
+          "description": "The default location of the tileset in the form [longitude, latitude, zoom].\nThe zoom level MUST be between minzoom and maxzoom. Implementations can use\nthis value to set the default location.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MediaType": {
       "type": "string",
-      "in": "query",
-      "required": true,
+      "description": "The desired media type of the response.",
+      "enum": [
+        "image/png",
+        "image/jpeg"
+      ],
+      "x-ms-enum": {
+        "name": "MediaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "image/png",
+            "value": "image/png",
+            "description": "Return image in png format."
+          },
+          {
+            "name": "image/jpeg",
+            "value": "image/jpeg",
+            "description": "Return image in jpeg format."
+          }
+        ]
+      }
+    },
+    "RegionCopyrights": {
+      "type": "object",
+      "description": "Region copyrights",
+      "properties": {
+        "copyrights": {
+          "type": "array",
+          "description": "Copyrights array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "country": {
+          "$ref": "#/definitions/RegionCopyrightsCountry",
+          "description": "Country property",
+          "readOnly": true
+        }
+      }
+    },
+    "RegionCopyrightsCountry": {
+      "type": "object",
+      "description": "Country property",
+      "properties": {
+        "ISO3": {
+          "type": "string",
+          "description": "ISO3 property",
+          "readOnly": true
+        },
+        "label": {
+          "type": "string",
+          "description": "Label property",
+          "readOnly": true
+        }
+      }
+    },
+    "ResponseFormat": {
+      "type": "string",
+      "description": "Desired format of the response. Value can be either _json_ or _xml_.",
+      "enum": [
+        "json",
+        "xml"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange\nFormat](https://tools.ietf.org/html/rfc8259)"
+          },
+          {
+            "name": "xml",
+            "value": "xml",
+            "description": "[The Extensible Markup Language](https://www.w3.org/TR/xml/)"
+          }
+        ]
+      }
+    },
+    "Tileset": {
+      "type": "string",
+      "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset zoom levels. Every tileset has a **tilesetId** to use when making requests. The ready-to-use tilesets supplied by Azure Maps are listed below. For example, microsoft.base.",
+      "enum": [
+        "microsoft.base.road",
+        "microsoft.base.darkgrey",
+        "microsoft.imagery"
+      ],
+      "x-ms-enum": {
+        "name": "Tileset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "microsoft.base.road",
+            "value": "microsoft.base.road",
+            "description": "microsoft.base.road"
+          },
+          {
+            "name": "microsoft.base.darkgrey",
+            "value": "microsoft.base.darkgrey",
+            "description": "microsoft.base.darkgrey"
+          },
+          {
+            "name": "microsoft.imagery",
+            "value": "microsoft.imagery",
+            "description": "microsoft.imagery"
+          }
+        ]
+      }
+    },
+    "TilesetID": {
+      "type": "string",
+      "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset zoom levels. Every tileset has a **tilesetId** to use when making requests. The ready-to-use tilesets supplied by Azure Maps are listed below. For example, microsoft.base.",
       "enum": [
         "microsoft.base",
         "microsoft.base.labels",
@@ -155,868 +2226,153 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "microsoft.base",
             "value": "microsoft.base",
-            "description": "A base map is a standard map that displays roads, natural and artificial features along with the labels for those features in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+            "description": "A base map is a standard map that displays roads, natural and artificial\nfeatures along with the labels for those features in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
           },
           {
+            "name": "microsoft.base.labels",
             "value": "microsoft.base.labels",
-            "description": "Displays labels for roads, natural and artificial features in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
+            "description": "Displays labels for roads, natural and artificial features in a vector\ntile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
           },
           {
+            "name": "microsoft.base.hybrid",
             "value": "microsoft.base.hybrid",
             "description": "Displays road, boundary and label data in a vector tile.<br>\n\nSupports zoom levels 0 through 22. Format: vector (pbf)."
           },
           {
+            "name": "microsoft.terra.main",
             "value": "microsoft.terra.main",
             "description": "Shaded relief and terra layers.<br>\n\nSupports zoom levels 0 through 6. Format: raster (png)."
           },
           {
+            "name": "microsoft.base.road",
             "value": "microsoft.base.road",
             "description": "All layers with our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
+            "name": "microsoft.base.darkgrey",
             "value": "microsoft.base.darkgrey",
             "description": "All layers with our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
+            "name": "microsoft.base.labels.road",
             "value": "microsoft.base.labels.road",
             "description": "Label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
+            "name": "microsoft.base.labels.darkgrey",
             "value": "microsoft.base.labels.darkgrey",
             "description": "Label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
+            "name": "microsoft.base.hybrid.road",
             "value": "microsoft.base.hybrid.road",
             "description": "Road, boundary and label data in our main style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
+            "name": "microsoft.base.hybrid.darkgrey",
             "value": "microsoft.base.hybrid.darkgrey",
             "description": "Road, boundary and label data in our dark grey style.<br>\n\nSupports zoom levels 0 through 22. Format: raster (png)."
           },
           {
+            "name": "microsoft.imagery",
             "value": "microsoft.imagery",
-            "description": "A combination of satellite or aerial imagery. Only available in S1 and G2 pricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
+            "description": "A combination of satellite or aerial imagery. Only available in S1 and G2\npricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
           },
           {
+            "name": "microsoft.weather.radar.main",
             "value": "microsoft.weather.radar.main",
-            "description": "Weather radar tiles. Latest weather radar images including areas of rain, snow, ice and mixed conditions. For more information on the Azure Maps Weather service coverage, see [Azure Maps weather services coverage](/azure/azure-maps/weather-coverage).  For more information on Radar data, see [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#radar-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+            "description": "Weather radar tiles. Latest weather radar images including areas of rain, snow,\nice and mixed conditions. For more information on the Azure Maps Weather\nservice coverage, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage).  For more information on Radar\ndata, see [Weather services in Azure\nMaps](/azure/azure-maps/weather-services-concepts#radar-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
           },
           {
+            "name": "microsoft.weather.infrared.main",
             "value": "microsoft.weather.infrared.main",
-            "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their temperature.  For more information, see [Azure Maps weather services coverage](/azure/azure-maps/weather-coverage). For more information about the satellite data returned, see [Weather services in Azure Maps](https://learn.microsoft.com/azure/azure-maps/weather-services-concepts#satellite-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+            "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their\ntemperature.  For more information, see [Azure Maps weather services\ncoverage](/azure/azure-maps/weather-coverage). For more information about the\nsatellite data returned, see [Weather services in Azure\nMaps](https://learn.microsoft.com/azure/azure-maps/weather-services-concepts#satellite-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
           },
           {
+            "name": "microsoft.traffic.absolute",
             "value": "microsoft.traffic.absolute",
             "description": "absolute traffic tiles in vector"
           },
           {
+            "name": "microsoft.traffic.absolute.main",
             "value": "microsoft.traffic.absolute.main",
             "description": "absolute traffic tiles in raster in our main style."
           },
           {
+            "name": "microsoft.traffic.relative",
             "value": "microsoft.traffic.relative",
             "description": "relative traffic tiles in vector"
           },
           {
+            "name": "microsoft.traffic.relative.main",
             "value": "microsoft.traffic.relative.main",
             "description": "relative traffic tiles in raster in our main style."
           },
           {
+            "name": "microsoft.traffic.relative.dark",
             "value": "microsoft.traffic.relative.dark",
             "description": "relative traffic tiles in raster in our dark style."
           },
           {
+            "name": "microsoft.traffic.delay",
             "value": "microsoft.traffic.delay",
             "description": "traffic tiles in vector"
           },
           {
+            "name": "microsoft.traffic.delay.main",
             "value": "microsoft.traffic.delay.main",
             "description": "traffic tiles in raster in our main style"
           },
           {
+            "name": "microsoft.traffic.reduced.main",
             "value": "microsoft.traffic.reduced.main",
             "description": "reduced traffic tiles in raster in our main style"
           },
           {
+            "name": "microsoft.traffic.incident",
             "value": "microsoft.traffic.incident",
             "description": "incident tiles in vector"
           }
         ]
-      },
-      "x-ms-parameter-location": "method"
-    }
-  },
-  "paths": {
-    "/map/tile": {
-      "get": {
-        "summary": "Use to request map tiles in vector or raster format.",
-        "description": "\n\nThe `Get Map Tiles` API enables users to request map tiles in either vector or raster formats, typically for integration into a map control or SDK. Supported tile types include Azure Maps road tiles and real-time Weather Radar tiles. By default, the Azure Maps [Web SDK](/azure/azure-maps/about-azure-maps#web-sdk) uses vector tiles for rendering its web map control.",
-        "operationId": "Render_GetMapTile",
-        "x-ms-client-name": "GetMapTile",
-        "x-ms-examples": {
-          "Successful Tile Request": {
-            "$ref": "./examples/Render_GetMapTile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TilesetId"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
-          },
-          {
-            "name": "timeStamp",
-            "in": "query",
-            "format": "date-time",
-            "description": "The desired date and time of the requested tile. This parameter must be specified in the standard date-time format (e.g. 2019-11-14T16:03:00-08:00), as defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601). This parameter is only supported when tilesetId parameter is set to one of the values below.\n  \n* microsoft.weather.infrared.main: We provide tiles up to 3 hours in the past. Tiles are available in 10-minute intervals. We round the timeStamp value to the nearest 10-minute time frame.\n* microsoft.weather.radar.main: We provide tiles up to 1.5 hours in the past and up to 2 hours in the future. Tiles are available in 5-minute intervals. We round the timeStamp value to the nearest 5-minute time frame.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/MapTileSize"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "image/jpeg",
-          "image/png",
-          "image/pbf",
-          "application/vnd.mapbox-vector-tile"
-        ],
-        "responses": {
-          "200": {
-            "description": "The tile returned from a successful API call.",
-            "schema": {
-              "type": "object",
-              "format": "file",
-              "readOnly": true
-            },
-            "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content-type for the response."
-              }
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
       }
     },
-    "/map/tileset": {
-      "get": {
-        "summary": "Use to get metadata for a tileset.",
-        "description": "\n\nThe Get Map Tileset API allows users to request metadata for a tileset.",
-        "operationId": "Render_GetMapTileset",
-        "x-ms-examples": {
-          "Successful Tileset Request": {
-            "$ref": "./examples/Render_GetMapTileset.json"
+    "TrafficTilesetId": {
+      "type": "string",
+      "description": "Value indicating no traffic flow overlaid on the image result.",
+      "enum": [
+        "microsoft.traffic.relative.main",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "TrafficTilesetId",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "microsoft.traffic.relative.main",
+            "value": "microsoft.traffic.relative.main",
+            "description": "Supported traffic related tilesetId."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Default value, no traffic flow overlay."
           }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TilesetId"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MapTileset"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/map/attribution": {
-      "get": {
-        "summary": "Use to get map copyright attribution information.",
-        "description": "\n\nThe `Get Map Attribution` API allows users to request map copyright attribution information for a section of a tileset.",
-        "operationId": "Render_GetMapAttribution",
-        "x-ms-examples": {
-          "Successful Attribution Request": {
-            "$ref": "./examples/Render_GetMapAttribution.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/TilesetId"
-          },
-          {
-            "name": "zoom",
-            "in": "query",
-            "description": "Zoom level for the desired map attribution.",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "name": "bounds",
-            "in": "query",
-            "description": "The string that represents the rectangular area of a bounding box. The bounds parameter is defined by the 4 bounding box coordinates, with WGS84 longitude and latitude of the southwest corner followed by  WGS84 longitude and latitude of the northeast corner. The string is presented in the following  format: `[SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude]`.",
-            "required": true,
-            "type": "array",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MapAttribution"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/map/statetile": {
-      "get": {
-        "summary": "Use to get state tiles in vector format that can then be used to display feature state information in an indoor map.",
-        "description": "\n\nFetches state tiles in vector format typically to be integrated into indoor maps module of map control or SDK. The map control will call this API after user turns on dynamic styling. For more information, see [Zoom Levels and Tile Grid](/azure/location-based-services/zoom-levels-and-tile-grid).",
-        "operationId": "Render_GetMapStateTile",
-        "x-ms-examples": {
-          "Successful State Tile Request": {
-            "$ref": "./examples/Render_GetMapStateTile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
-          },
-          {
-            "name": "statesetId",
-            "in": "query",
-            "description": "The stateset id.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/vnd.mapbox-vector-tile",
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "This tile is returned from a successful Get Map State Tile call",
-            "schema": {
-              "type": "object",
-              "format": "file",
-              "readOnly": true
-            },
-            "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content-type for the response."
-              }
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/map/copyright/caption/{format}": {
-      "get": {
-        "summary": "Use to get copyright information to use when rendering a tile.",
-        "description": "\n\nThe `Get Copyright Caption` API is an HTTP GET request designed to serve copyright information to be used with tiles requested from the Render service. In addition to a basic copyright for the whole map, it can serve specific groups of copyrights for some countries/regions.\n\nAs an alternative to copyrights for map request, it can also return captions for displaying provider information on the map.",
-        "operationId": "Render_GetCopyrightCaption",
-        "x-ms-examples": {
-          "Successful Copyright Caption Request": {
-            "$ref": "./examples/Render_GetCopyrightCaption.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CopyrightCaption"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/map/static": {
-      "get": {
-        "description": "This rendering API produces static, rasterized map views of a user-defined area. It's suitable for lightweight web applications, when the desired user experience doesn't require interactive map controls, or when bandwidth is limited. This API is also useful for embedding maps in applications outside of the browser, in backend services, report generation, or desktop applications. \n\n This API includes parameters for basic data visualization: \n\n- Labeled pushpins in multiple styles.\n- Render circle, path, and polygon geometry types.\n\nFor more information and detailed examples, see [Render custom data on a raster map](/azure/azure-maps/how-to-render-custom-data).\n<br><br>\nThe dimensions of the bbox parameter are constrained, depending on the zoom level. This ensures the resulting image has an appropriate level of detail.\n<br><br>\n\n  |Zoom Level | Min Lon Range   | Max Lon Range   | Min Lat Range| Max Lat Range|\n  |:----------|:----------------|:----------------|:----------------|:-------------|\n  |0          | 56.25     | 360.0       | 30.1105585173    | 180.0        | \n  |1          | 28.125         | 360.0       | 14.87468995    | 180.0        |\n  |2         | 14.063       | 351.5625      |  7.4130741851    | 137.9576312246       |\n  |3     | 7.03125     | 175.78125    |  3.7034501005    |   73.6354071932     |\n  |4     | 3.515625    | 87.890625  | 1.8513375155  | 35.4776115315  |\n  |5          | 1.7578125  | 43.9453125  | 0.925620264 | 17.4589959239  |\n  |6       | 0.87890625 | 21.97265625 | 0.4628040687  | 8.6907788223  |\n  |7      | 0.439453125 |  10.986328125 | 0.2314012764  | 4.3404320789 |\n  |8       | 0.2197265625 | 5.4931640625 | 0.1157005434  | 2.1695927024  |\n  |9      | 0.1098632812 | 2.7465820312  |  0.0578502599  | 1.0847183194  |\n  |10    | 0.0549316406  | 1.3732910156 | 0.0289251285  | 0.5423494021  |\n  |11     | 0.0274658203 | 0.6866455078 | 0.014462564 | 0.2711734813 |\n  |12      |  0.0137329102  | 0.3433227539 | 0.007231282 | 0.1355865882  |\n  |13    | 0.0068664551 | 0.171661377 | 0.003615641 | 0.067793275 |\n  |14     |  0.0034332275  | 0.0858306885 | 0.0018078205 | 0.0338966351 |\n  |15     |  0.0017166138 | 0.0429153442 | 0.0009039102 | 0.0169483173 |  \n  |16   |  0.0008583069  | 0.0214576721  |  0.0004519551  | 0.0084741586 | \n  |17  | 0.0004291534 |  0.0107288361  |  0.0002259776 | 0.0042370793 |\n  |18    | 0.0002145767 | 0.005364418 | 0.0001129888 | 0.0021185396 |\n  |19    | 0.0001072884  |  0.002682209  | 5.64944E-05 | 0.0010592698 |\n  |20    |  5.36442E-05  | 0.0013411045 | 2.82472E-05  | 0.0005296349 | \n\n_Note_ : Either **center** or **bbox** parameter must be supplied to the API.",
-        "operationId": "Render_GetMapStaticImage",
-        "x-ms-examples": {
-          "Successful Static Image Request": {
-            "$ref": "./examples/Render_GetMapStaticImage.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "tilesetId",
-            "in": "query",
-            "description": "Map style to be returned. Possible values are microsoft.base.road, microsoft.base.darkgrey, and microsoft.imagery.  Default value is set to be microsoft.base.road. For more information, see [Render TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid).",
-            "type": "string",
-            "enum": [
-              "microsoft.base.road",
-              "microsoft.base.darkgrey",
-              "microsoft.imagery"
-            ],
-            "x-ms-enum": {
-              "name": "TilesetId",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "microsoft.base.road",
-                  "description": "TilesetId contains all layers with rendering main style."
-                },
-                {
-                  "value": "microsoft.base.darkgrey",
-                  "description": "TilesetId contains all layers with our dark grey style."
-                },
-                {
-                  "value": "microsoft.imagery",
-                  "description": "TilesetId contains a combination of satellite and aerial imagery."
-                }
-              ]
-            }
-          },
-          {
-            "name": "trafficLayer",
-            "in": "query",
-            "description": "Optional Value, indicating no traffic flow overlaid on the image result. Possible values are microsoft.traffic.relative.main and none. Default value is none, indicating no traffic flow returned. If traffic related tilesetId is provided, will return map image with corresponding traffic layer. For more information, see [Render TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid).",
-            "type": "string",
-            "enum": [
-              "microsoft.traffic.relative.main",
-              "none"
-            ],
-            "x-ms-enum": {
-              "name": "TrafficTilesetId",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "microsoft.traffic.relative.main",
-                  "description": " Supported traffic related tilesetId."
-                },
-                {
-                  "value": "none",
-                  "description": " Default value, no traffic flow overlay."
-                }
-              ]
-            }
-          },
-          {
-            "name": "zoom",
-            "in": "query",
-            "description": "Desired zoom level of the map. Support zoom value range from 0-20 (inclusive) for tilesetId being microsoft.base.road or microsoft.base.darkgrey. Support zoom value range from 0-19 (inclusive) for tilesetId being microsoft.imagery. Default value is 12.<br><br>For more information, see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid).",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 20
-          },
-          {
-            "name": "center",
-            "in": "query",
-            "description": "Coordinates of the center point in double. Format: 'lon,lat'. Longitude range: -180 to 180. Latitude range: -90 to 90. \n\nNote: Either center or bbox are required parameters. They are\nmutually exclusive.",
-            "type": "array",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "bbox",
-            "x-ms-client-name": "boundingBoxPrivate",
-            "in": "query",
-            "description": "A bounding box is defined by two latitudes and two longitudes that represent the four sides of a rectangular area on the Earth. Format : 'minLon, minLat,\nmaxLon, maxLat' (in double). \n\nNote: Either bbox or center are required\nparameters. They are mutually exclusive. bbox shouldn’t be used with\nheight or width.\n\nThe maximum and minimum allowed ranges for Lat and Lon are defined for each zoom level\nin the table at the top of this page.",
-            "type": "array",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          {
-            "name": "height",
-            "in": "query",
-            "description": "Height of the resulting image in pixels. Range from 80 to 1500. Default\nis 512. It shouldn’t be used with bbox.",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 80,
-            "maximum": 1500
-          },
-          {
-            "name": "width",
-            "in": "query",
-            "description": "Width of the resulting image in pixels. Range from 80 to 2000. Default is 512. It should not be used with bbox.",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 80,
-            "maximum": 2000
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/Language"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/View"
-          },
-          {
-            "name": "pins",
-            "description": "Pushpin style and instances. Use this parameter to optionally add pushpins to the image.\nThe pushpin style describes the appearance of the pushpins, and the instances specify\nthe coordinates of the pushpins (in double) and optional labels for each pin. (Be sure to properly URL-encode values of this\nparameter since it will contain reserved characters such as pipes and punctuation.)\n\nThe Azure Maps account S0 SKU only supports a single instance of the pins parameter and the number of locations is limited to 5 per pin. Other SKUs\nallow up to 25 instances of the pins parameter to specify multiple pin styles, and the number of locations is limited to 50 per pin.\n\nTo render a pushpin at latitude 45°N and longitude 122°W using the default built-in pushpin style, add the\nquerystring parameter \n\n`pins=default||-122 45` \n\nNote that the longitude comes before the latitude.\nAfter URL encoding this will look like\n\n`pins=default%7C%7C-122+45`\n\nAll of the examples here show the pins\nparameter without URL encoding, for clarity.\n\nTo render a pin at multiple locations, separate each location with a pipe character. For example, use\n\n`pins=default||-122 45|-119.5 43.2|-121.67 47.12`\n\nThe S0 Azure Maps account SKU only allows five pushpins. Other account SKUs do not have this limitation.\n\n### Style Modifiers\n\nYou can modify the appearance of the pins by adding style modifiers. These are added after the style but before\nthe locations and labels. Style modifiers each have a two-letter name. These abbreviated names are used to help\nreduce the length of the URL.\n\nTo change the color of the pushpin, use the 'co' style modifier and specify the color using the HTML/CSS RGB color\nformat which is a six-digit hexadecimal number (the three-digit form is not supported). For example, to use\na deep pink color which you would specify as #FF1493 in CSS, use\n\n`pins=default|coFF1493||-122 45`\n\n### Pushpin Labels\n\nTo add a label to the pins, put the label in single quotes just before the coordinates. Avoid using special character such as `|` or `||` in label. For example, to label\nthree pins with the values '1', '2', and '3', use\n\n`pins=default||'1'-122 45|'2'-119.5 43.2|'3'-121.67 47.12`\n\nThere is a built-in pushpin style called 'none' that does not display a pushpin image. You can use this if\nyou want to display labels without any pin image. For example,\n\n`pins=none||'A'-122 45|'B'-119.5 43.2`\n\nTo change the color of the pushpin labels, use the 'lc' label color style modifier. For example, to use pink\npushpins with black labels, use\n\n`pins=default|coFF1493|lc000000||-122 45`\n\nTo change the size of the labels, use the 'ls' label size style modifier. The label size represents the approximate\nheight of the label text in pixels. For example, to increase the label size to 12, use\n\n`pins=default|ls12||'A'-122 45|'B'-119 43`\n\nThe labels are centered at the pushpin 'label anchor.' The anchor location is predefined for built-in pushpins and\nis at the top center of custom pushpins (see below). To override the label anchor, using the 'la' style modifier\nand provide X and Y pixel coordinates for the anchor. These coordinates are relative to the top left corner of the\npushpin image. Positive X values move the anchor to the right, and positive Y values move the anchor down. For example,\nto position the label anchor 10 pixels right and 4 pixels above the top left corner of the pushpin image,\nuse\n\n`pins=default|la10 -4||'A'-122 45|'B'-119 43`\n\n### Custom Pushpins\n\nTo use a custom pushpin image, use the word 'custom' as the pin style name, and then specify a URL after the\nlocation and label information. The maximum allowed size for a customized label image is 65,536 pixels. Use two pipe characters to indicate that you're done specifying locations and are\nstarting the URL. For example,\n\n`pins=custom||-122 45||http://contoso.com/pushpins/red.png`\n\nAfter URL encoding, this would look like\n\n`pins=custom%7C%7C-122+45%7C%7Chttp%3A%2F%2Fcontoso.com%2Fpushpins%2Fred.png`\n\nBy default, custom pushpin images are drawn centered at the pin coordinates. This usually isn't ideal as it obscures\nthe location that you're trying to highlight. To override the anchor location of the pin image, use the 'an'\nstyle modifier. This uses the same format as the 'la' label anchor style modifier. For example, if your custom\npin image has the tip of the pin at the top left corner of the image, you can set the anchor to that spot by\nusing\n\n`pins=custom|an0 0||-122 45||http://contoso.com/pushpins/red.png`\n\nNote: If you use the 'co' color modifier with a custom pushpin image, the specified color will replace the RGB \nchannels of the pixels in the image but will leave the alpha (opacity) channel unchanged. This would usually\nonly be done with a solid-color custom image.\n\n### Scale, Rotation, and Opacity\n\nYou can make pushpins and their labels larger or smaller by using the 'sc' scale style modifier. This is a\nvalue greater than zero. A value of 1 is the standard scale. Values larger than 1 will make the pins larger, and\nvalues smaller than 1 will make them smaller. For example, to draw the pushpins 50% larger than normal, use\n\n`pins=default|sc1.5||-122 45`\n\nYou can rotate pushpins and their labels by using the 'ro' rotation style modifier. This is a number of degrees\nof clockwise rotation. Use a negative number to rotate counter-clockwise. For example, to rotate the pushpins\n90 degrees clockwise and double their size, use\n\n`pins=default|ro90|sc2||-122 45`\n\nYou can make pushpins and their labels partially transparent by specifying the 'al' alpha style modifier.\nThis is a number between 0 and 1 indicating the opacity of the pushpins. Zero makes them completely transparent\n(and not visible) and 1 makes them completely opaque (which is the default). For example, to make pushpins\nand their labels only 67% opaque, use\n\n`pins=default|al.67||-122 45`\n\n### Style Modifier Summary\n\nModifier  | Description    | Type    | Range            \n:--------:|---------------|--------|----------\nal        | Alpha (opacity) |  float | 0 to 1           \nan        | Pin anchor    | <int32, int32>  | *                \nco        | Pin color      | string | 000000 to FFFFFF \nla        | Label anchor   | <int32, int32> | *                \nlc        | Label color   | string  | 000000 to FFFFFF \nls        | Label size      | float | Greater than 0   \nro        | Rotation    | float    | -360 to 360      \nsc        | Scale         | float  | Greater than 0   \n\n* X and Y coordinates can be anywhere within pin image or a margin around it.\nThe margin size is the minimum of the pin width and height.",
-            "in": "query",
-            "type": "array",
-            "collectionFormat": "multi",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "description": "Path style and locations (in double). Use this parameter to optionally add lines, polygons or circles to the image.\nThe path style describes the appearance of the line and fill. (Be sure to properly URL-encode values of this\nparameter since it will contain reserved characters such as pipes and punctuation.)\n\nPath parameter is supported in Azure Maps account SKU starting with S1. Multiple instances of the path parameter \nallow to specify multiple geometries with their styles. Number of parameters per request is limited to 10 and\nnumber of locations is limited to 100 per path.\n\nTo render a circle with radius 100 meters and center point at latitude 45°N and longitude 122°W using the default style, add the\nquerystring parameter \n\n`path=ra100||-122 45` \n\nNote that the longitude comes before the latitude.\nAfter URL encoding this will look like\n\n`path=ra100%7C%7C-122+45`\n\nAll of the examples here show the path parameter without URL encoding, for clarity.\n\nTo render a line, separate each location with a pipe character. For example, use\n\n`path=||-122 45|-119.5 43.2|-121.67 47.12`\n\nA polygon is specified with a closed path, where the first and last points are equal. For example, use\n\n`path=||-122 45|-119.5 43.2|-121.67 47.12|-122 45`\n\nLongitude value for locations of lines and polygons can be in the range from -360 to 360 to allow for rendering of geometries crossing the anti-meridian.\n\n### Style Modifiers\n\nYou can modify the appearance of the path by adding style modifiers. These are added before the locations. \nStyle modifiers each have a two-letter name. These abbreviated names are used to help reduce the length\nof the URL.\n\nTo change the color of the outline, use the 'lc' style modifier and specify the color using the HTML/CSS RGB color\nformat which is a six-digit hexadecimal number (the three-digit form is not supported). For example, to use\na deep pink color which you would specify as #FF1493 in CSS, use\n\n`path=lcFF1493||-122 45|-119.5 43.2`\n\nMultiple style modifiers may be combined to create a more complex visual style.\n\n`lc0000FF|lw3|la0.60|fa0.50||-122.2 47.6|-122.2 47.7|-122.3 47.7|-122.3 47.6|-122.2 47.6`\n\n### Style Modifier Summary\n\nModifier  | Description       | Type     | Range            \n:--------:|---------------|--------|----------\nlc        | Line color      | string       | 000000 to FFFFFF\nfc        | Fill color        | string       | 000000 to FFFFFF\nla    | Line alpha (opacity)     |  float     | 0 to 1           \nfa  | Fill alpha (opacity)   |     float       | 0 to 1           \nlw   | Line width     |int32        | (0, 50]           \nra        | Circle radius (meters) |   float  | Greater than 0",
-            "in": "query",
-            "type": "array",
-            "collectionFormat": "multi",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "The Accept header field can be used to specify preferences regarding response media types. Allowed media types include image/jpeg and image/png. Return image in image/png if Accept header is not specified.",
-            "required": false,
-            "type": "string",
-            "items": {
-              "type": "string"
-            },
-            "x-ms-parameter-location": "client",
-            "enum": [
-              "image/png",
-              "image/jpeg"
-            ],
-            "x-ms-enum": {
-              "name": "MediaType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "image/png",
-                  "description": "Return image in png format."
-                },
-                {
-                  "value": "image/jpeg",
-                  "description": "Return image in jpeg format."
-                }
-              ]
-            }
-          }
-        ],
-        "produces": [
-          "image/jpeg",
-          "image/png"
-        ],
-        "responses": {
-          "200": {
-            "description": "This image is returned from a successful Get Map Static Image call.",
-            "schema": {
-              "type": "object",
-              "format": "file",
-              "readOnly": true
-            },
-            "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content-type for the response."
-              }
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/map/copyright/bounding/{format}": {
-      "get": {
-        "summary": "Use to get copyright information for the specified bounding box.",
-        "description": "\n\nReturns copyright information for a given bounding box. Bounding-box requests should specify the minimum and maximum longitude and latitude (EPSG-3857) coordinates",
-        "operationId": "Render_GetCopyrightFromBoundingBox",
-        "x-ms-examples": {
-          "Successful BoundingBox Copyright Request": {
-            "$ref": "./examples/Render_GetCopyrightFromBoundingBox.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/BoundingBoxSouthWest"
-          },
-          {
-            "$ref": "#/parameters/BoundingBoxNorthEast"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Copyright"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/map/copyright/tile/{format}": {
-      "get": {
-        "summary": "Use to get copyright information.",
-        "description": "\n\nTo obtain the copyright information for a particular tile, the request should specify the tile's zoom level and x and y coordinates. For more information, see [Zoom Levels and Tile Grid](/azure/azure-maps/zoom-levels-and-tile-grid).\n\nCopyrights API is designed to serve copyright information for Render service. In addition to basic copyright for the whole map, API is serving specific groups of copyrights for some countries/regions.",
-        "operationId": "Render_GetCopyrightForTile",
-        "x-ms-examples": {
-          "Successful Tile Copyright Request": {
-            "$ref": "./examples/Render_GetCopyrightForTile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/zTileIndex"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Copyright"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/map/copyright/world/{format}": {
-      "get": {
-        "summary": "Use to get copyright information for for the world.",
-        "description": "\n\nReturns the copyright information for the world. To obtain the default copyright information for the whole world, don't specify a tile or bounding box. \n\nCopyrights API is designed to serve copyright information for Render service. In addition to basic copyright for the whole map, API is serving specific groups of copyrights for some countries/regions. ",
-        "operationId": "Render_GetCopyrightForWorld",
-        "x-ms-examples": {
-          "Successful World Copyright Request": {
-            "$ref": "./examples/Render_GetCopyrightForWorld.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/IncludeText"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Copyright"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
-          }
-        }
+        ]
       }
     }
   },
-  "definitions": {
-    "Copyright": {
-      "description": "This object is returned from a successful copyright request",
-      "type": "object",
-      "properties": {
-        "formatVersion": {
-          "description": "Format Version property",
-          "type": "string",
-          "readOnly": true
-        },
-        "generalCopyrights": {
-          "description": "General Copyrights array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string",
-            "readOnly": true
-          }
-        },
-        "regions": {
-          "description": "Regions array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/RegionCopyrights"
-          }
-        }
-      }
-    },
-    "CopyrightCaption": {
-      "description": "This object is returned from a successful copyright call",
-      "type": "object",
-      "properties": {
-        "formatVersion": {
-          "description": "Format Version property",
-          "type": "string",
-          "readOnly": true
-        },
-        "copyrightsCaption": {
-          "description": "Copyrights Caption property",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "MapAttribution": {
-      "description": "Copyright attribution for the requested section of a tileset.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "copyrights": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of copyright strings."
-        }
-      }
-    },
-    "MapTileset": {
-      "description": "Metadata for a tileset in the TileJSON format.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "tilejson": {
-          "type": "string",
-          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
-          "description": "Describes the version of the TileJSON spec that is implemented by this JSON object."
-        },
-        "name": {
-          "type": "string",
-          "description": "A name describing the tileset. The name can contain any legal character. Implementations SHOULD NOT interpret the name as HTML."
-        },
-        "description": {
-          "type": "string",
-          "description": "Text description of the tileset. The description can contain any legal character. Implementations SHOULD NOT interpret the description as HTML."
-        },
-        "version": {
-          "type": "string",
-          "pattern": "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
-          "description": "A semver.org style version number for the tiles contained within the tileset. When changes across tiles are introduced, the minor version MUST change."
-        },
-        "attribution": {
-          "type": "string",
-          "description": "Copyright attribution to be displayed on the map. Implementations MAY decide to treat this as HTML or literal text. For security reasons, make absolutely sure that this field can't be abused as a vector for XSS or beacon tracking."
-        },
-        "template": {
-          "type": "string",
-          "description": "A mustache template to be used to format data from grids for interaction."
-        },
-        "legend": {
-          "type": "string",
-          "description": "A legend to be displayed with the map. Implementations MAY decide to treat this as HTML or literal text. For security reasons, make absolutely sure that this field can't be abused as a vector for XSS or beacon tracking."
-        },
-        "scheme": {
-          "type": "string",
-          "description": "Default: \"xyz\". Either \"xyz\" or \"tms\". Influences the y direction of the tile coordinates. The global-mercator (aka Spherical Mercator) profile is assumed."
-        },
-        "tiles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "An array of tile endpoints. If multiple endpoints are specified, clients may use any combination of endpoints. All endpoints MUST return the same content for the same URL. The array MUST contain at least one endpoint."
-        },
-        "grids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "An array of interactivity endpoints."
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "An array of data files in GeoJSON format."
-        },
-        "minzoom": {
-          "x-ms-client-name": "minZoom",
-          "minimum": 0,
-          "maximum": 30,
-          "type": "integer",
-          "description": "The minimum zoom level."
-        },
-        "maxzoom": {
-          "x-ms-client-name": "maxZoom",
-          "minimum": 0,
-          "maximum": 30,
-          "type": "integer",
-          "description": "The maximum zoom level."
-        },
-        "bounds": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          },
-          "description": "The maximum extent of available map tiles. Bounds MUST define an area covered by all zoom levels. The bounds are represented in WGS:84 latitude and longitude values, in the order left, bottom, right, top. Values may be integers or floating point numbers."
-        },
-        "center": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          },
-          "description": "The default location of the tileset in the form [longitude, latitude, zoom]. The zoom level MUST be between minzoom and maxzoom. Implementations can use this value to set the default location."
-        }
-      }
-    },
-    "RegionCopyrights": {
-      "type": "object",
-      "properties": {
-        "copyrights": {
-          "description": "Copyrights array",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string",
-            "readOnly": true
-          }
-        },
-        "country": {
-          "description": "Country property",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "ISO3": {
-              "description": "ISO3 property",
-              "type": "string",
-              "readOnly": true
-            },
-            "label": {
-              "description": "Label property",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
