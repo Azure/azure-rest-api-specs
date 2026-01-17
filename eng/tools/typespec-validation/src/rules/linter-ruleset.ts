@@ -45,7 +45,10 @@ export class LinterRulesetRule implements Rule {
     const normalizedFolder = folder.replace(/\\/g, "/");
 
     let requiredRuleset = "";
-    if (normalizedFolder.includes("/resource-manager/") || normalizedFolder.includes(".Management/")) {
+    if (
+      normalizedFolder.includes("/resource-manager/") ||
+      normalizedFolder.includes(".Management/")
+    ) {
       requiredRuleset = "@azure-tools/typespec-azure-rulesets/resource-manager";
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
