@@ -160,8 +160,14 @@ export class Swagger {
   /** @type {Tag | undefined} Tag that contains this Swagger */
   #tag;
 
-  /** @type {Map<string, Swagger> | undefined} referenced swaggers, safe to cache in instance (but not statically) */
+  /** @type {Map<string, Swagger> | undefined} all references, safe to cache in instance (but not statically) */
+  #allRefs;
+
+  /** @type {Map<string, Swagger> | undefined} referenced swaggers (excluding examples), safe to cache in instance (but not statically) */
   #refs;
+
+  /** @type {Map<string, Swagger> | undefined} referenced examples (excluding swaggers), safe to cache in instance (but not statically) */
+  #examples;
 
   /**
    * @param {string} path
@@ -233,18 +239,19 @@ export class Swagger {
    * @returns {Promise<Map<string, Swagger>>} Map of swaggers referenced from this swagger, using `path` as key
    */
   async getRefs() {
-    // TODO: Cache in instance, to avoid recreating Map
+    if (this.#refs === undefined) {
+      const allRefs = await this.#getRefs();
 
-    const allRefs = await this.#getRefs();
+      // filter out any paths that are examples
+      const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
 
-    // filter out any paths that are examples
-    const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
-
-    return filtered;
+      this.#refs = filtered;
+    }
+    return this.#refs;
   }
 
   async #getRefs() {
-    if (this.#refs === undefined) {
+    if (this.#allRefs === undefined) {
       // Safe to cache refPaths statically, since it's just an array of string paths
       const refPaths = await Swagger.#refPathCache.getOrCreate(
         this.#content ?? this.#path,
@@ -270,7 +277,7 @@ export class Swagger {
 
       // Swagger objects should not be cached statically, because they may belong to different Tags, Readmes, or SpecModels.
       // But, they are safe to cache in this instance.
-      this.#refs = new Map(
+      this.#allRefs = new Map(
         refPaths.map((p) => {
           // TODO: Can we replace `new Swagger()` with "lookup existing swagger from Tag backpointer"?
           const swagger = new Swagger(p, {
@@ -282,19 +289,22 @@ export class Swagger {
       );
     }
 
-    return this.#refs;
+    return this.#allRefs;
   }
 
   /**
    * @returns {Promise<Map<string, Swagger>>} Map of examples referenced from this swagger, using `path` as key
    */
   async getExamples() {
-    const allRefs = await this.#getRefs();
+    if (this.#examples === undefined) {
+      const allRefs = await this.#getRefs();
 
-    // filter out any paths that are examples
-    const filtered = new Map([...allRefs].filter(([path]) => example(path)));
+      // filter out any paths that are examples
+      const filtered = new Map([...allRefs].filter(([path]) => example(path)));
 
-    return filtered;
+      this.#examples = filtered;
+    }
+    return this.#examples;
   }
 
   /**
