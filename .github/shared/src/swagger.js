@@ -233,6 +233,8 @@ export class Swagger {
    * @returns {Promise<Map<string, Swagger>>} Map of swaggers referenced from this swagger, using `path` as key
    */
   async getRefs() {
+    // TODO: Cache in instance, to avoid recreating Map
+
     const allRefs = await this.#getRefs();
 
     // filter out any paths that are examples
