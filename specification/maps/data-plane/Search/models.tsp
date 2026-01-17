@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "./common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -233,301 +234,270 @@ namespace MapsSearch;
 * Type of suggestion
 */
 @added(Versions.v2025_06_01_preview)
-    union AutocompleteResultTypeEnum {
-        string,
-
-        /**
-* Address
-*/"Address": "Address", /**
-* AdminDivision1
-*/"AdminDivision1": "AdminDivision1", /**
-* AdminDivision2
-*/"AdminDivision2": "AdminDivision2", /**
-* AdminDivision3
-*/"AdminDivision3": "AdminDivision3", /**
-* AdministrativeBuilding
-*/"AdministrativeBuilding": "AdministrativeBuilding", /**
-* Airport
-*/"Airport": "Airport", /**
-* AirportTerminal
-*/"AirportTerminal": "AirportTerminal", /**
-* AmusementPark
-*/"AmusementPark": "AmusementPark", /**
-* AncientSite
-*/"AncientSite": "AncientSite", /**
-* Aquarium
-*/"Aquarium": "Aquarium", /**
-* Archipelago
-*/"Archipelago": "Archipelago", /**
-* Basin
-*/"Basin": "Basin", /**
-* Battlefield
-*/"Battlefield": "Battlefield", /**
-* Bay
-*/"Bay": "Bay", /**
-* Beach
-*/"Beach": "Beach", /**
-* Bridge
-*/"Bridge": "Bridge", /**
-* BusinessStructure
-*/"BusinessStructure": "BusinessStructure", /**
-* Camp
-*/"Camp": "Camp", /**
-* Canal
-*/"Canal": "Canal", /**
-* Casino
-*/"Casino": "Casino", /**
-* Castle
-*/"Castle": "Castle", /**
-* Cave
-*/"Cave": "Cave", /**
-* Cemetery
-*/"Cemetery": "Cemetery", /**
-* Channel
-*/"Channel": "Channel", /**
-* Church
-*/"Church": "Church", /**
-* Cliff
-*/"Cliff": "Cliff", /**
-* Coast
-*/"Coast": "Coast", /**
-* CommunityCenter
-*/"CommunityCenter": "CommunityCenter", /**
-* Continent
-*/"Continent": "Continent", /**
-* CountryRegion
-*/"CountryRegion": "CountryRegion", /**
-* Crater
-*/"Crater": "Crater", /**
-* CulturalRegion
-*/"CulturalRegion": "CulturalRegion", /**
-* Dam
-*/"Dam": "Dam", /**
-* Delta
-*/"Delta": "Delta", /**
-* Desert
-*/"Desert": "Desert", /**
-* DrainageBasin
-*/"DrainageBasin": "DrainageBasin", /**
-* Dune
-*/"Dune": "Dune", /**
-* FacilityStructure
-*/"FacilityStructure": "FacilityStructure", /**
-* FerryTerminal
-*/"FerryTerminal": "FerryTerminal", /**
-* FinancialStructure
-*/"FinancialStructure": "FinancialStructure", /**
-* FireStation
-*/"FireStation": "FireStation", /**
-* Forest
-*/"Forest": "Forest", /**
-* Fort
-*/"Fort": "Fort", /**
-* Garden
-*/"Garden": "Garden", /**
-* Geyser
-*/"Geyser": "Geyser", /**
-* Glacier
-*/"Glacier": "Glacier", /**
-* GolfCourse
-*/"GolfCourse": "GolfCourse", /**
-* GreaterPopulatedPlace
-*/"GreaterPopulatedPlace": "GreaterPopulatedPlace", /**
-* HigherEducationFacility
-*/"HigherEducationFacility": "HigherEducationFacility", /**
-* HistoricalSite
-*/"HistoricalSite": "HistoricalSite", /**
-* Hospital
-*/"Hospital": "Hospital", /**
-* HotSpring
-*/"HotSpring": "HotSpring", /**
-* Ice
-*/"Ice": "Ice", /**
-* IndigenousPeoplesReserve
-*/"IndigenousPeoplesReserve": "IndigenousPeoplesReserve", /**
-* IndustrialStructure
-*/"IndustrialStructure": "IndustrialStructure", /**
-* Island
-*/"Island": "Island", /**
-* Isthmus
-*/"Isthmus": "Isthmus", /**
-* Lake
-*/"Lake": "Lake", /**
-* LandArea
-*/"LandArea": "LandArea", /**
-* Landform
-*/"Landform": "Landform", /**
-* LandmarkBuilding
-*/"LandmarkBuilding": "LandmarkBuilding", /**
-* Library
-*/"Library": "Library", /**
-* Lighthouse
-*/"Lighthouse": "Lighthouse", /**
-* Marina
-*/"Marina": "Marina", /**
-* Market
-*/"Market": "Market", /**
-* MedicalStructure
-*/"MedicalStructure": "MedicalStructure", /**
-* MetroStation
-*/"MetroStation": "MetroStation", /**
-* MilitaryBase
-*/"MilitaryBase": "MilitaryBase", /**
-* Mission
-*/"Mission": "Mission", /**
-* Monument
-*/"Monument": "Monument", /**
-* Mosque
-*/"Mosque": "Mosque", /**
-* Mountain
-*/"Mountain": "Mountain", /**
-* MountainRange
-*/"MountainRange": "MountainRange", /**
-* MultiModalStation
-*/"MultiModalStation": "MultiModalStation", /**
-* Museum
-*/"Museum": "Museum", /**
-* NauticalStructure
-*/"NauticalStructure": "NauticalStructure", /**
-* Neighborhood
-*/"Neighborhood": "Neighborhood", /**
-* Oasis
-*/"Oasis": "Oasis", /**
-* ObservationPoint
-*/"ObservationPoint": "ObservationPoint", /**
-* Ocean
-*/"Ocean": "Ocean", /**
-* OfficeBuilding
-*/"OfficeBuilding": "OfficeBuilding", /**
-* Other
-*/"Other": "Other", /**
-* Park
-*/"Park": "Park", /**
-* ParkingStructure
-*/"ParkingStructure": "ParkingStructure", /**
-* Pass
-*/"Pass": "Pass", /**
-* Peninsula
-*/"Peninsula": "Peninsula", /**
-* Plain
-*/"Plain": "Plain", /**
-* Planet
-*/"Planet": "Planet", /**
-* Plateau
-*/"Plateau": "Plateau", /**
-* Playground
-*/"Playground": "Playground", /**
-* PlayingField
-*/"PlayingField": "PlayingField", /**
-* Pole
-*/"Pole": "Pole", /**
-* PoliticalUnit
-*/"PoliticalUnit": "PoliticalUnit", /**
-* PopulatedPlace
-*/"PopulatedPlace": "PopulatedPlace", /**
-* Port
-*/"Port": "Port", /**
-* Postcode1
-*/"Postcode1": "Postcode1", /**
-* Promontory
-*/"Promontory": "Promontory", /**
-* RaceTrack
-*/"RaceTrack": "RaceTrack", /**
-* RailwayStation
-*/"RailwayStation": "RailwayStation", /**
-* Reef
-*/"Reef": "Reef", /**
-* ReligiousStructure
-*/"ReligiousStructure": "ReligiousStructure", /**
-* Reserve
-*/"Reserve": "Reserve", /**
-* ResidentialStructure
-*/"ResidentialStructure": "ResidentialStructure", /**
-* River
-*/"River": "River", /**
-* RoadBlock
-*/"RoadBlock": "RoadBlock", /**
-* Ruin
-*/"Ruin": "Ruin", /**
-* ScientificResearchBase
-*/"ScientificResearchBase": "ScientificResearchBase", /**
-* Sea
-*/"Sea": "Sea", /**
-* SeaplaneLandingArea
-*/"SeaplaneLandingArea": "SeaplaneLandingArea", /**
-* Shrine
-*/"Shrine": "Shrine", /**
-* SkiArea
-*/"SkiArea": "SkiArea", /**
-* Spring
-*/"Spring": "Spring", /**
-* Stadium
-*/"Stadium": "Stadium", /**
-* StatisticalDistrict
-*/"StatisticalDistrict": "StatisticalDistrict", /**
-* Temple
-*/"Temple": "Temple", /**
-* Theater
-*/"Theater": "Theater", /**
-* TouristRailway
-*/"TouristRailway": "TouristRailway", /**
-* TouristStructure
-*/"TouristStructure": "TouristStructure", /**
-* Trailhead
-*/"Trailhead": "Trailhead", /**
-* TransportationStructure
-*/"TransportationStructure": "TransportationStructure", /**
-* Tunnel
-*/"Tunnel": "Tunnel", /**
-* Valley
-*/"Valley": "Valley", /**
-* Volcano
-*/"Volcano": "Volcano", /**
-* Walkway
-*/"Walkway": "Walkway", /**
-* Wall
-*/"Wall": "Wall", /**
-* Waterfall
-*/"Waterfall": "Waterfall", /**
-* WaterFeature
-*/"WaterFeature": "WaterFeature", /**
-* Wetland
-*/"Wetland": "Wetland", /**
-* Winery
-*/"Winery": "Winery", /**
-* Zoo
-*/"Zoo": "Zoo"
-    }
-
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-    enum GeoJsonObjectType {
-        /**
-* `GeoJSON Point` geometry.
-*/"GeoJsonPoint": "Point", /**
-* `GeoJSON MultiPoint` geometry.
-*/"GeoJsonMultiPoint": "MultiPoint", /**
-* `GeoJSON LineString` geometry.
-*/"GeoJsonLineString": "LineString", /**
-* `GeoJSON MultiLineString` geometry.
-*/"GeoJsonMultiLineString": "MultiLineString", /**
-* `GeoJSON Polygon` geometry.
-*/"GeoJsonPolygon": "Polygon", /**
-* `GeoJSON MultiPolygon` geometry.
-*/"GeoJsonMultiPolygon": "MultiPolygon", /**
-* `GeoJSON GeometryCollection` geometry.
-*/"GeoJsonGeometryCollection": "GeometryCollection", /**
-* `GeoJSON Feature` object.
-*/"GeoJsonFeature": "Feature", /**
-* `GeoJSON FeatureCollection` object.
-*/"GeoJsonFeatureCollection": "FeatureCollection"
-    }
-
-
-
+union AutocompleteResultTypeEnum {
+    string,
+    
+    /** Address */
+    "Address": "Address", 
+    /** AdminDivision1 */
+    "AdminDivision1": "AdminDivision1", 
+    /** AdminDivision2 */
+    "AdminDivision2": "AdminDivision2", 
+    /** AdminDivision3 */
+    "AdminDivision3": "AdminDivision3", 
+    /** AdministrativeBuilding */
+    "AdministrativeBuilding": "AdministrativeBuilding", 
+    /** Airport */
+    "Airport": "Airport", 
+    /** AirportTerminal */
+    "AirportTerminal": "AirportTerminal", 
+    /** AmusementPark */
+    "AmusementPark": "AmusementPark", 
+    /** AncientSite */
+    "AncientSite": "AncientSite", 
+    /** Aquarium */
+    "Aquarium": "Aquarium", 
+    /** Archipelago */
+    "Archipelago": "Archipelago", 
+    /** Basin */
+    "Basin": "Basin", 
+    /** Battlefield */
+    "Battlefield": "Battlefield", 
+    /** Bay */
+    "Bay": "Bay", 
+    /** Beach */
+    "Beach": "Beach", 
+    /** Bridge */
+    "Bridge": "Bridge", 
+    /** BusinessStructure */
+    "BusinessStructure": "BusinessStructure", 
+    /** Camp */
+    "Camp": "Camp", 
+    /** Canal */
+    "Canal": "Canal", 
+    /** Casino */
+    "Casino": "Casino", 
+    /** Castle */
+    "Castle": "Castle", 
+    /** Cave */
+    "Cave": "Cave", 
+    /** Cemetery */
+    "Cemetery": "Cemetery", 
+    /** Channel */
+    "Channel": "Channel", 
+    /** Church */
+    "Church": "Church", 
+    /** Cliff */
+    "Cliff": "Cliff", 
+    /** Coast */
+    "Coast": "Coast", 
+    /** CommunityCenter */
+    "CommunityCenter": "CommunityCenter", 
+    /** Continent */
+    "Continent": "Continent", 
+    /** CountryRegion */
+    "CountryRegion": "CountryRegion", 
+    /** Crater */
+    "Crater": "Crater", 
+    /** CulturalRegion */
+    "CulturalRegion": "CulturalRegion", 
+    /** Dam */
+    "Dam": "Dam", 
+    /** Delta */
+    "Delta": "Delta", 
+    /** Desert */
+    "Desert": "Desert", 
+    /** DrainageBasin */
+    "DrainageBasin": "DrainageBasin", 
+    /** Dune */
+    "Dune": "Dune", 
+    /** FacilityStructure */
+    "FacilityStructure": "FacilityStructure", 
+    /** FerryTerminal */
+    "FerryTerminal": "FerryTerminal", 
+    /** FinancialStructure */
+    "FinancialStructure": "FinancialStructure", 
+    /** FireStation */
+    "FireStation": "FireStation", 
+    /** Forest */
+    "Forest": "Forest", 
+    /** Fort */
+    "Fort": "Fort", 
+    /** Garden */
+    "Garden": "Garden", 
+    /** Geyser */
+    "Geyser": "Geyser", 
+    /** Glacier */
+    "Glacier": "Glacier", 
+    /** GolfCourse */
+    "GolfCourse": "GolfCourse", 
+    /** GreaterPopulatedPlace */
+    "GreaterPopulatedPlace": "GreaterPopulatedPlace", 
+    /** HigherEducationFacility */
+    "HigherEducationFacility": "HigherEducationFacility", 
+    /** HistoricalSite */
+    "HistoricalSite": "HistoricalSite", 
+    /** Hospital */
+    "Hospital": "Hospital", 
+    /** HotSpring */
+    "HotSpring": "HotSpring", 
+    /** Ice */
+    "Ice": "Ice", 
+    /** IndigenousPeoplesReserve */
+    "IndigenousPeoplesReserve": "IndigenousPeoplesReserve", 
+    /** IndustrialStructure */
+    "IndustrialStructure": "IndustrialStructure", 
+    /** Island */
+    "Island": "Island", 
+    /** Isthmus */
+    "Isthmus": "Isthmus", 
+    /** Lake */
+    "Lake": "Lake", 
+    /** LandArea */
+    "LandArea": "LandArea", 
+    /** Landform */
+    "Landform": "Landform", 
+    /** LandmarkBuilding */
+    "LandmarkBuilding": "LandmarkBuilding", 
+    /** Library */
+    "Library": "Library", 
+    /** Lighthouse */
+    "Lighthouse": "Lighthouse", 
+    /** Marina */
+    "Marina": "Marina", 
+    /** Market */
+    "Market": "Market", 
+    /** MedicalStructure */
+    "MedicalStructure": "MedicalStructure", 
+    /** MetroStation */
+    "MetroStation": "MetroStation", 
+    /** MilitaryBase */
+    "MilitaryBase": "MilitaryBase", 
+    /** Mission */
+    "Mission": "Mission", 
+    /** Monument */
+    "Monument": "Monument", 
+    /** Mosque */
+    "Mosque": "Mosque", 
+    /** Mountain */
+    "Mountain": "Mountain", 
+    /** MountainRange */
+    "MountainRange": "MountainRange", 
+    /** MultiModalStation */
+    "MultiModalStation": "MultiModalStation", 
+    /** Museum */
+    "Museum": "Museum", 
+    /** NauticalStructure */
+    "NauticalStructure": "NauticalStructure", 
+    /** Neighborhood */
+    "Neighborhood": "Neighborhood", 
+    /** Oasis */
+    "Oasis": "Oasis", 
+    /** ObservationPoint */
+    "ObservationPoint": "ObservationPoint", 
+    /** Ocean */
+    "Ocean": "Ocean", 
+    /** OfficeBuilding */
+    "OfficeBuilding": "OfficeBuilding", 
+    /** Other */
+    "Other": "Other", 
+    /** Park */
+    "Park": "Park", 
+    /** ParkingStructure */
+    "ParkingStructure": "ParkingStructure", 
+    /** Pass */
+    "Pass": "Pass", 
+    /** Peninsula */
+    "Peninsula": "Peninsula", 
+    /** Plain */
+    "Plain": "Plain", 
+    /** Planet */
+    "Planet": "Planet", 
+    /** Plateau */
+    "Plateau": "Plateau", 
+    /** Playground */
+    "Playground": "Playground", 
+    /** PlayingField */
+    "PlayingField": "PlayingField", 
+    /** Pole */
+    "Pole": "Pole", 
+    /** PoliticalUnit */
+    "PoliticalUnit": "PoliticalUnit", 
+    /** PopulatedPlace */
+    "PopulatedPlace": "PopulatedPlace", 
+    /** Port */
+    "Port": "Port", 
+    /** Postcode1 */
+    "Postcode1": "Postcode1", 
+    /** Promontory */
+    "Promontory": "Promontory", 
+    /** RaceTrack */
+    "RaceTrack": "RaceTrack", 
+    /** RailwayStation */
+    "RailwayStation": "RailwayStation", 
+    /** Reef */
+    "Reef": "Reef", 
+    /** ReligiousStructure */
+    "ReligiousStructure": "ReligiousStructure", 
+    /** Reserve */
+    "Reserve": "Reserve", 
+    /** ResidentialStructure */
+    "ResidentialStructure": "ResidentialStructure", 
+    /** River */
+    "River": "River", 
+    /** RoadBlock */
+    "RoadBlock": "RoadBlock", 
+    /** Ruin */
+    "Ruin": "Ruin", 
+    /** ScientificResearchBase */
+    "ScientificResearchBase": "ScientificResearchBase", 
+    /** Sea */
+    "Sea": "Sea", 
+    /** SeaplaneLandingArea */
+    "SeaplaneLandingArea": "SeaplaneLandingArea", 
+    /** Shrine */
+    "Shrine": "Shrine", 
+    /** SkiArea */
+    "SkiArea": "SkiArea", 
+    /** Spring */
+    "Spring": "Spring", 
+    /** Stadium */
+    "Stadium": "Stadium", 
+    /** StatisticalDistrict */
+    "StatisticalDistrict": "StatisticalDistrict", 
+    /** Temple */
+    "Temple": "Temple", 
+    /** Theater */
+    "Theater": "Theater", 
+    /** TouristRailway */
+    "TouristRailway": "TouristRailway", 
+    /** TouristStructure */
+    "TouristStructure": "TouristStructure", 
+    /** Trailhead */
+    "Trailhead": "Trailhead", 
+    /** TransportationStructure */
+    "TransportationStructure": "TransportationStructure", 
+    /** Tunnel */
+    "Tunnel": "Tunnel", 
+    /** Valley */
+    "Valley": "Valley", 
+    /** Volcano */
+    "Volcano": "Volcano", 
+    /** Walkway */
+    "Walkway": "Walkway", 
+    /** Wall */
+    "Wall": "Wall", 
+    /** Waterfall */
+    "Waterfall": "Waterfall", 
+    /** WaterFeature */
+    "WaterFeature": "WaterFeature", 
+    /** Wetland */
+    "Wetland": "Wetland", 
+    /** Winery */
+    "Winery": "Winery", 
+    /** Zoo */
+    "Zoo": "Zoo"
+}
 
 /**
 * This object is returned from a successful Geocoding call
@@ -769,17 +739,18 @@ model GeocodePointsItem {
 }
 
 /**
-* A valid `GeoJSON Point` geometry type. Please refer to [RFC
-* 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
-*/
+ * A valid `GeoJSON Point` geometry type. Please refer to [RFC
+ * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.
+ */
 model GeoJsonPoint extends GeoJsonGeometry {
-...GeoJsonPointData;
-/**
-* Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-* types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-* GeometryCollection, Feature and FeatureCollection.
-*/
-"type": "Point";
+  ...GeoJsonPointData;
+
+  /**
+   * Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
+   * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
+   * GeometryCollection, Feature and FeatureCollection.
+   */
+  type: GeoJsonObjectType.GeoJsonPoint;
 }
 
 /**
@@ -788,9 +759,13 @@ model GeoJsonPoint extends GeoJsonGeometry {
 * Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
 * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
 */
-@discriminator("type")
-model GeoJsonGeometry extends GeoJsonObject {
-}
+/**
+ * A valid `GeoJSON` geometry object. The type must be one of the seven valid
+ * GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,
+ * Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
+ * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
+ */
+model GeoJsonGeometry is GeoJsonObject;
 
 /**
 * A valid `GeoJSON` object. Please refer to [RFC
@@ -803,7 +778,7 @@ model GeoJsonObject {
 * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
 * GeometryCollection, Feature and FeatureCollection.
 */
-"type": GeoJsonObjectType;
+type: GeoJsonObjectType;
 /**
 * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
 * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
