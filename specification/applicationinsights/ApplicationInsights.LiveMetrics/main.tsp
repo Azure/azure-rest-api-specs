@@ -10,10 +10,11 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+#suppress "@azure-tools/typespec-autorest/unsupported-auth" "NoAuth is supported"
 @doc("Live Metrics REST APIs.")
 @versioned(Versions)
 @useAuth(
-  OAuth2Auth<[
+  NoAuth | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
