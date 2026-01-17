@@ -17,37 +17,42 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+/** Shared Key Authentication */
+model SharedKeyAuth is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
+
+/** SAS Token Authentication */
+model SasTokenAuth is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
+
 /**
  * Azure Maps Search REST APIs
  */
 @useAuth(
-  AadOauth2Auth<["https://atlas.microsoft.com/.default"]> | ApiKeyAuth<
-    ApiKeyLocation.header,
-    "subscription-key"
-  > | ApiKeyAuth<ApiKeyLocation.header, "SAS Token">
+  AadOauth2Auth<[
+    "https://atlas.microsoft.com/.default"
+  ]> | SharedKeyAuth | SasTokenAuth
 )
-@service(#{ title: "SearchClient" })
+@service(#{ title: "Maps Search" })
 @versioned(Versions)
 @server(
-  "{$host}",
+  "{endpoint}",
   "Azure Maps Search REST APIs",
   {
-    $host: string,
+    endpoint: "https://atlas.microsoft.com",
   }
 )
-namespace SearchClient;
-
-/**
- * The available API versions.
- */
-enum Versions {
+namespace MapsSearch {
   /**
-   * The 2025-01-01 API version.
+   * The available API versions.
    */
-  v2025_01_01: "2025-01-01",
+  enum Versions {
+    /**
+     * The 2025-01-01 API version.
+     */
+    v2025_01_01: "2025-01-01",
 
-  /**
-   * The 2025-06-01-preview API version.
-   */
-  v2025_06_01_preview: "2025-06-01-preview",
+    /**
+     * The 2025-06-01-preview API version.
+     */
+    v2025_06_01_preview: "2025-06-01-preview",
+  }
 }
