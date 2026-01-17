@@ -157,7 +157,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ClusterCodeVersionsResultListResult"
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
           },
           "default": {
@@ -201,7 +201,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ClusterCodeVersionsResultListResult"
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
           },
           "default": {
@@ -265,7 +265,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ClusterCodeVersionsResultListResult"
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
           },
           "default": {
@@ -336,7 +336,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ClusterCodeVersionsResultListResult"
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
             }
           },
           "default": {
@@ -558,7 +558,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The cluster resource.",
             "required": true,
@@ -635,7 +635,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The parameters which contains the property value and property name which used to update the cluster configuration.",
             "required": true,
@@ -862,7 +862,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The application type name resource.",
             "required": true,
@@ -1111,7 +1111,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The application type version resource.",
             "required": true,
@@ -1361,7 +1361,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The application resource.",
             "required": true,
@@ -1442,7 +1442,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The application resource for patch operations.",
             "required": true,
@@ -1706,7 +1706,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The service resource.",
             "required": true,
@@ -1791,7 +1791,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The service resource for patch operations.",
             "required": true,
@@ -1934,7 +1934,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "versionsDescription",
             "in": "body",
             "description": "The upgrade path description with target version.",
             "required": false,
@@ -2155,7 +2155,19 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/ApplicationResourceUpdateProperties",
+              "description": "The resource-specific properties for this resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
         }
       ]
     },
@@ -2683,6 +2695,27 @@
         }
       ]
     },
+    "ClusterCodeVersionsListResult": {
+      "type": "object",
+      "description": "The response of a ClusterCodeVersions list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClusterCodeVersions items on this page",
+          "items": {
+            "$ref": "#/definitions/ClusterCodeVersionsResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ClusterCodeVersionsResult": {
       "type": "object",
       "description": "The result of the Service Fabric runtime versions",
@@ -2704,27 +2737,6 @@
           "description": "The detail of the Service Fabric runtime version result"
         }
       }
-    },
-    "ClusterCodeVersionsResultListResult": {
-      "type": "object",
-      "description": "The response of a ClusterCodeVersionsResult list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ClusterCodeVersionsResult items on this page",
-          "items": {
-            "$ref": "#/definitions/ClusterCodeVersionsResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "ClusterEnvironment": {
       "type": "string",
@@ -3849,56 +3861,6 @@
         ]
       }
     },
-    "ProxyResource": {
-      "type": "object",
-      "description": "The resource model definition for proxy-only resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure resource identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Azure resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "It will be deprecated in New API, resource location depends on the parent resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Azure resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "Azure resource etag.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        }
-      }
-    },
     "ReliabilityLevel": {
       "type": "string",
       "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n- None - Run the System services with a target replica set count of 1. This should only be used for test clusters.\n- Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.\n- Silver - Run the System services with a target replica set count of 5.\n- Gold - Run the System services with a target replica set count of 7.\n- Platinum - Run the System services with a target replica set count of 9.",
@@ -4213,9 +4175,9 @@
             "create"
           ]
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -4327,12 +4289,32 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceResourceUpdateProperties",
-          "description": "The service resource properties for patch operations."
+          "description": "The RP-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -4646,38 +4628,6 @@
             "description": "TrustedPublisher"
           }
         ]
-      }
-    },
-    "SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)."
-        }
       }
     },
     "UniformInt64RangePartitionSchemeDescription": {

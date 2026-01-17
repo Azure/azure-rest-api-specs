@@ -341,7 +341,8 @@ model ApplicationUserAssignedIdentity {
  * The application resource for patch operations.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ApplicationResourceUpdate extends ProxyResource {
+model ApplicationResourceUpdate
+  extends ProxyResource<ApplicationResourceUpdateProperties> {
   /**
    * The application resource properties for patch operations.
    */

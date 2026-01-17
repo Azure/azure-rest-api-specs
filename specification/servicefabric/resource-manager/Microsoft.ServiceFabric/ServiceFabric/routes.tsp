@@ -13,6 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Necessary to avoid standard routing"
 interface ClusterVersionsOperationGroup {
   /**
    * Gets information about an available Service Fabric cluster code version.
@@ -31,7 +32,7 @@ interface ClusterVersionsOperationGroup {
      */
     @path
     clusterVersion: string,
-  ): ArmResponse<ResourceListResult<ClusterCodeVersionsResult>> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorResponse;
 
   /**
    * Gets information about an available Service Fabric cluster code version by environment.
@@ -57,7 +58,7 @@ interface ClusterVersionsOperationGroup {
      */
     @path
     clusterVersion: string,
-  ): ArmResponse<ResourceListResult<ClusterCodeVersionsResult>> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorResponse;
 
   /**
    * Gets all available code versions for Service Fabric cluster resources by location.
@@ -68,7 +69,7 @@ interface ClusterVersionsOperationGroup {
   @get
   @action("clusterVersions")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<ClusterCodeVersionsResult>,
+    Response = ResourceListResult<ClusterCodeVersions>,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -81,7 +82,7 @@ interface ClusterVersionsOperationGroup {
   @get
   @action("clusterVersions")
   listByEnvironment is ArmProviderActionSync<
-    Response = ResourceListResult<ClusterCodeVersionsResult>,
+    Response = ResourceListResult<ClusterCodeVersions>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -94,4 +95,43 @@ interface ClusterVersionsOperationGroup {
       environment: ClusterVersionsEnvironment;
     }
   >;
+}
+
+/**
+ * The result of the Service Fabric runtime versions
+ */
+model ClusterCodeVersions {
+  /**
+   * The identification of the result
+   */
+  id?: string;
+
+  /**
+   * The name of the result
+   */
+  name?: string;
+
+  /**
+   * The result resource type
+   */
+  type?: string;
+
+  /**
+   * The detail of the Service Fabric runtime version result
+   */
+  properties?: ClusterVersionDetails;
+}
+
+union ClusterVersionsEnvironment {
+  string,
+
+  /**
+   * Windows
+   */
+  Windows: "Windows",
+
+  /**
+   * Linux
+   */
+  Linux: "Linux",
 }

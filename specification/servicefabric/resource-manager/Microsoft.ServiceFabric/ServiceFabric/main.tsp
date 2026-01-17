@@ -19,6 +19,7 @@ import "./ApplicationTypeVersionResource.tsp";
 import "./ApplicationResource.tsp";
 import "./ServiceResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

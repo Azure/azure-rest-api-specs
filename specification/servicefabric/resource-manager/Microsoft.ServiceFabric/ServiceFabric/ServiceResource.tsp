@@ -23,7 +23,7 @@ model ServiceResource
     SegmentName = "services",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  ...EntityTagProperty;
 }
 
 @armResourceOperations
@@ -235,11 +235,15 @@ model ServicePlacementPolicyDescription {
  * The service resource for patch operations.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ServiceResourceUpdate extends ProxyResource {
-  /**
-   * The service resource properties for patch operations.
-   */
-  properties?: ServiceResourceUpdateProperties;
+model ServiceResourceUpdate
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ServiceResourceUpdateProperties> {
+  ...ResourceNameParameter<
+    Resource = ServiceResource,
+    KeyName = "serviceName",
+    SegmentName = "services",
+    NamePattern = ""
+  >;
+  ...EntityTagProperty;
 }
 
 /**

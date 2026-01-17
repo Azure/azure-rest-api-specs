@@ -849,31 +849,6 @@ model ClusterPropertiesUpdateParameters {
   enableHttpGatewayExclusiveAuthMode?: boolean;
 }
 
-/**
- * The result of the Service Fabric runtime versions
- */
-model ClusterCodeVersionsResult {
-  /**
-   * The identification of the result
-   */
-  id?: string;
-
-  /**
-   * The name of the result
-   */
-  name?: string;
-
-  /**
-   * The result resource type
-   */
-  type?: string;
-
-  /**
-   * The detail of the Service Fabric runtime version result
-   */
-  properties?: ClusterVersionDetails;
-}
-
 model UpgradableVersionsDescription {
   /**
    * The target code version.
