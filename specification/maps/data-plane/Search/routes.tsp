@@ -9,7 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
-namespace SearchClient;
+namespace MapsSearch;
 
 interface SearchOperationGroup {
   /**
