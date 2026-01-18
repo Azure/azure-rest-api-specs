@@ -1,0 +1,72 @@
+{
+  "title": "ManagedOps_List",
+  "operationId": "ManagedOps_List",
+  "parameters": {
+    "api-version": "2025-07-28-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.ManagedOps/managedOps/default",
+            "name": "default",
+            "type": "Microsoft.ManagedOps/managedOps",
+            "systemData": {
+              "createdBy": "myUser",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "myUser",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            },
+            "properties": {
+              "sku": {
+                "name": "ManagedOps",
+                "tier": "Basic"
+              },
+              "desiredConfiguration": {
+                "changeTrackingAndInventory": {
+                  "logAnalyticsWorkspaceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/00000000-0000-0000-0000-000000000000-Default"
+                },
+                "azureMonitorInsights": {
+                  "azureMonitorWorkspaceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/example"
+                },
+                "userAssignedManagedIdentityId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity",
+                "defenderForServers": "Enable",
+                "defenderCspm": "Enable"
+              },
+              "provisioningState": "Provisioning",
+              "policyAssignmentProperties": {
+                "policyInitiativeAssignmentId": "/subscriptions/aa4c0cba-5c0a-4751-a5e3-ea28e50afeeb/providers/microsoft.authorization/policyassignments/test-edition-policy-2"
+              },
+              "services": {
+                "changeTrackingAndInventory": {
+                  "dcrId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/xingftestrg/providers/Microsoft.Insights/dataCollectionRules/ct-dcr131878407",
+                  "enablementStatus": "Enabled"
+                },
+                "azureMonitorInsights": {
+                  "dcrId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/xingftestrg/providers/Microsoft.Insights/dataCollectionRules/ami-dcr131878407",
+                  "enablementStatus": "Enabled"
+                },
+                "azureUpdateManager": {
+                  "enablementStatus": "Enabled"
+                },
+                "azurePolicyAndMachineConfiguration": {
+                  "enablementStatus": "Enabled"
+                },
+                "defenderForServers": {
+                  "enablementStatus": "Enabled"
+                },
+                "defenderCspm": {
+                  "enablementStatus": "Enabled"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
