@@ -74,6 +74,10 @@ using Microsoft.MachineLearningServices;
 );
 
 @@clientName(Microsoft.MachineLearningServices,
+  "MachineLearningManager",
+  "java"
+);
+@@clientName(Microsoft.MachineLearningServices,
   "MachineLearningServicesMgmtClient",
   "python"
 );
@@ -81,6 +85,10 @@ using Microsoft.MachineLearningServices;
   "ComputeInstancePropertiesComputeInstanceAuthorizationType",
   "python"
 );
+
+// Java operation group naming for backward compatibility
+@@clientName(ComputeResources, "Computes", "java");
+@@clientName(JobBases, "Jobs", "java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(DatastoresCreateOrUpdateParameters.skipValidation,
