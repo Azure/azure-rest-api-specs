@@ -11,6 +11,16 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.MachineLearningServices;
 
+model ManagedResourceGroupAssignedIdentities {
+  /** Identity principal Id */
+  principalId?: string;
+}
+
+model ManagedResourceGroupSettings {
+  /** List of assigned identities for the managed resource group */
+  assignedIdentities?: ManagedResourceGroupAssignedIdentities[];
+}
+
 model Registry
   is Azure.ResourceManager.TrackedResource<RegistryProperties, false> {
   ...ResourceNameParameter<
@@ -26,6 +36,16 @@ model Registry
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
+
+  /**
+   * ResourceId of the managed RG if the registry has system created resources
+   */
+  managedResourceGroup?: ArmResourceId;
+
+  /**
+   * Managed resource group specific settings
+   */
+  managedResourceGroupSettings?: ManagedResourceGroupSettings;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
@@ -117,6 +137,81 @@ interface Registries {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Registry>,
     Error = ErrorResponse
   >;
+}
+
+/**
+ * Private Endpoint Connection resource for a Registry.
+ */
+model RegistryPrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<RegistryPrivateEndpointConnectionProperties> {
+  // Add any additional properties if needed
+}
+
+/**
+ * Properties of the Private Endpoint Connection.
+ */
+model RegistryPrivateEndpointConnectionProperties {
+  groupIds?: string[];
+  privateEndpoint?: PrivateEndpointResource;
+  registryPrivateLinkServiceConnectionState?: RegistryPrivateLinkServiceConnectionState;
+  provisioningState?: string;
+}
+
+/**
+ * The PE network resource that is linked to this PE connection.
+ */
+model PrivateEndpointResource {
+  subnetArmId?: string;
+  // Add other properties as needed
+}
+
+/**
+ * The connection state.
+ */
+model RegistryPrivateLinkServiceConnectionState {
+  actionsRequired?: string;
+  description?: string;
+  status?: EndpointServiceConnectionStatus;
+}
+
+/**
+ * Connection status of the service consumer with the service provider.
+ */
+enum EndpointServiceConnectionStatus {
+  Approved: "Approved",
+  Pending: "Pending",
+  Rejected: "Rejected",
+  Disconnected: "Disconnected"
+}
+
+/**
+ * PrivateEndpointConnections ARM operations for Registry.
+ */
+@armResourceOperations
+interface RegistryPrivateEndpointConnections {
+  /**
+   * Get a private endpoint connection.
+   */
+  @summary("Get a private endpoint connection")
+  get is ArmChildResourceRead<RegistryPrivateEndpointConnection, ParentResource = Registry>;
+
+  /**
+   * Create or update a private endpoint connection.
+   */
+  @summary("Create or update a private endpoint connection")
+  createOrUpdate is ArmChildResourceCreateOrReplaceAsync<RegistryPrivateEndpointConnection, ParentResource = Registry>;
+
+  /**
+   * Delete a private endpoint connection.
+   */
+  @summary("Delete a private endpoint connection")
+  delete is ArmChildResourceDeleteWithoutOkAsync<RegistryPrivateEndpointConnection, ParentResource = Registry>;
+
+  /**
+   * List private endpoint connections for a registry.
+   */
+  @summary("List private endpoint connections for a registry")
+  listByRegistry is ArmChildResourceListByParent<RegistryPrivateEndpointConnection, ParentResource = Registry>;
 }
 
 @@doc(Registry.name,
