@@ -147,6 +147,33 @@ union BillingStatus {
   string,
 }
 
+/**
+ * Benefit plans status
+ */
+@added(Microsoft.Edge.Versions.v2026_01_01)
+union BenefitPlanStatus {
+  /**
+   * Benefit plan is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Benefit plan is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("The benefit plans")
+@added(Microsoft.Edge.Versions.v2026_01_01)
+model BenefitPlans {
+  @doc("Azure Hybrid Windows Server Benefit plan")
+  azureHybridWindowsServerBenefit?: BenefitPlanStatus;
+}
+
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)
@@ -161,6 +188,13 @@ model DisconnectedOperationProperties {
   @doc("The billing model")
   billingModel: BillingModel;
 
+  @renamedFrom(Microsoft.Edge.Versions.v2026_01_01, "connectionIntent")
+  @removed(Microsoft.Edge.Versions.v2026_01_01)
+  @doc("The connection intent")
+  oldConnectionIntent: ConnectionIntent;
+
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The connection intent")
   connectionIntent: ConnectionIntent;
 
@@ -179,6 +213,10 @@ model DisconnectedOperationProperties {
   @doc("The billing configuration")
   @added(Microsoft.Edge.Versions.v2025_08_01)
   billingConfiguration?: BillingConfiguration;
+
+  @doc("The benefit plans")
+  @added(Versions.v2026_01_01)
+  benefitPlans?: BenefitPlans;
 }
 
 @doc("The disconnected operation manifest")
@@ -215,6 +253,16 @@ model DisconnectedOperationDeploymentManifest {
   @doc("The cloud in which the resource is registered")
   @added(Microsoft.Edge.Versions.v2025_06_01)
   cloud?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  billingConfiguration?: BillingConfiguration;
+
+  @visibility(Lifecycle.Read)
+  @doc("The benefit plans")
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  benefitPlans?: BenefitPlans;
 }
 
 /**
@@ -234,6 +282,50 @@ union ReleaseType {
   Update: "Update",
 
   string,
+}
+
+/**
+ * System Reboot
+ */
+@added(Microsoft.Edge.Versions.v2026_01_01)
+union SystemReboot {
+  /**
+   * System reboot is required.
+   */
+  Required: "Required",
+
+  string,
+
+  /**
+   * System reboot is not required.
+   */
+  NotRequired: "NotRequired",
+
+  string,
+}
+
+@added(Microsoft.Edge.Versions.v2026_01_01)
+@doc("The update properties of the Update Release type Image")
+model ImageUpdateProperties {
+  @visibility(Lifecycle.Read)
+  @doc("Indicates if a system reboot is required after applying the update.")
+  systemReboot: SystemReboot;
+
+  @visibility(Lifecycle.Read)
+  @doc("Details of security updates included in this image release.")
+  securityUpdates: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The operating system version provided by this image update.")
+  osVersion: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The version(s) of the agent software included in this image update.")
+  agentVersion: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Details of feature updates included in this image release.")
+  featureUpdates: string;
 }
 
 @doc("The image properties")
@@ -265,6 +357,11 @@ model ImageProperties {
   @visibility(Lifecycle.Read)
   @doc("The versions that are compatible for this update package.")
   compatibleVersions?: Array<string>;
+
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  @visibility(Lifecycle.Read)
+  @doc("Image update properties for update release type image.")
+  updateProperties?: ImageUpdateProperties;
 }
 
 @doc("The image download properties")
