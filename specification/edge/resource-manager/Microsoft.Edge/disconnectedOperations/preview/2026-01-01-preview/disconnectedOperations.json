@@ -1209,6 +1209,53 @@
       },
       "readOnly": true
     },
+    "BenefitPlanStatus": {
+      "type": "string",
+      "description": "Benefit plans status",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "BenefitPlanStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Benefit plan is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Benefit plan is disabled."
+          }
+        ]
+      }
+    },
+    "BenefitPlans": {
+      "type": "object",
+      "description": "The benefit plans",
+      "properties": {
+        "azureHybridWindowsServerBenefit": {
+          "$ref": "#/definitions/BenefitPlanStatus",
+          "description": "Azure Hybrid Windows Server Benefit plan"
+        }
+      },
+      "required": [
+        "azureHybridWindowsServerBenefit"
+      ]
+    },
+    "BenefitPlansUpdate": {
+      "type": "object",
+      "description": "The benefit plans",
+      "properties": {
+        "azureHybridWindowsServerBenefit": {
+          "$ref": "#/definitions/BenefitPlanStatus",
+          "description": "Azure Hybrid Windows Server Benefit plan"
+        }
+      }
+    },
     "BillingConfiguration": {
       "type": "object",
       "description": "The billing configuration",
@@ -1471,6 +1518,11 @@
           "$ref": "#/definitions/BillingConfiguration",
           "description": "The billing configuration",
           "readOnly": true
+        },
+        "benefitPlans": {
+          "$ref": "#/definitions/BenefitPlans",
+          "description": "The benefit plans",
+          "readOnly": true
         }
       },
       "required": [
@@ -1479,8 +1531,7 @@
         "stampId",
         "location",
         "billingModel",
-        "connectionIntent",
-        "billingConfiguration"
+        "connectionIntent"
       ]
     },
     "DisconnectedOperationListResult": {
@@ -1555,19 +1606,17 @@
         },
         "billingConfiguration": {
           "$ref": "#/definitions/BillingConfiguration",
-          "description": "The billing configuration",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "The billing configuration"
+        },
+        "benefitPlans": {
+          "$ref": "#/definitions/BenefitPlans",
+          "description": "The benefit plans"
         }
       },
       "required": [
         "stampId",
         "billingModel",
-        "connectionIntent",
-        "billingConfiguration"
+        "connectionIntent"
       ]
     },
     "DisconnectedOperationUpdate": {
@@ -1618,12 +1667,11 @@
         },
         "billingConfiguration": {
           "$ref": "#/definitions/BillingConfigurationUpdate",
-          "description": "The billing configuration",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "The billing configuration"
+        },
+        "benefitPlans": {
+          "$ref": "#/definitions/BenefitPlansUpdate",
+          "description": "The benefit plans"
         }
       }
     },

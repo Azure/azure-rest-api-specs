@@ -147,6 +147,33 @@ union BillingStatus {
   string,
 }
 
+/**
+ * Benefit plans status
+ */
+@added(Microsoft.Edge.Versions.v2026_01_01)
+union BenefitPlanStatus {
+  /**
+   * Benefit plan is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Benefit plan is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("The benefit plans")
+@added(Microsoft.Edge.Versions.v2026_01_01)
+model BenefitPlans {
+  @doc("Azure Hybrid Windows Server Benefit plan")
+  azureHybridWindowsServerBenefit: BenefitPlanStatus;
+}
+
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)
@@ -183,16 +210,13 @@ model DisconnectedOperationProperties {
   @visibility(Lifecycle.Update, Lifecycle.Read)
   deviceVersion?: string;
 
-  @renamedFrom(Microsoft.Edge.Versions.v2026_01_01, "billingConfiguration")
-  @removed(Microsoft.Edge.Versions.v2026_01_01)
   @doc("The billing configuration")
   @added(Microsoft.Edge.Versions.v2025_08_01)
-  oldBillingConfiguration?: BillingConfiguration;
+  billingConfiguration?: BillingConfiguration;
 
-  @doc("The billing configuration")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @added(Microsoft.Edge.Versions.v2026_01_01)
-  billingConfiguration: BillingConfiguration;
+  @doc("The benefit plans")
+  @added(Versions.v2026_01_01)
+  benefitPlans?: BenefitPlans;
 }
 
 @doc("The disconnected operation manifest")
@@ -233,7 +257,12 @@ model DisconnectedOperationDeploymentManifest {
   @visibility(Lifecycle.Read)
   @doc("The billing configuration")
   @added(Microsoft.Edge.Versions.v2026_01_01)
-  billingConfiguration: BillingConfiguration;
+  billingConfiguration?: BillingConfiguration;
+
+  @visibility(Lifecycle.Read)
+  @doc("The benefit plans")
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  benefitPlans?: BenefitPlans;
 }
 
 /**
