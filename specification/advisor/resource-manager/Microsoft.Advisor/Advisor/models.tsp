@@ -754,6 +754,11 @@ model OperationEntity {
    * The operation supported by Advisor.
    */
   display?: OperationDisplayInfo;
+
+  /**
+   * Indicates whether the operation applies to data plane.
+   */
+  isDataAction?: boolean;
 }
 
 /**

@@ -35,7 +35,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "AdvisorManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Advisor;
 
 /**
