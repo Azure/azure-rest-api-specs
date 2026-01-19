@@ -12,10 +12,7 @@ using Microsoft.Communication;
   "CommunicationServicesProvisioningState",
   "python"
 );
-@@clientName(Domains_ProvisioningState,
-  "DomainsProvisioningState",
-  "python"
-);
+@@clientName(Domains_ProvisioningState, "DomainsProvisioningState", "python");
 @@clientName(EmailServices_ProvisioningState,
   "EmailServicesProvisioningState",
   "python"
