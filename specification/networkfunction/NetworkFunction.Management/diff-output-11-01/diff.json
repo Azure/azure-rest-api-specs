@@ -258,6 +258,9 @@
       }
     },
     "AzureTrafficCollector": {
+      "required__added": [
+        "location"
+      ],
       "properties": {
         "location__added": {
           "type": "string",
@@ -302,6 +305,22 @@
       }
     },
     "CollectorPolicy": {
+      "required__added": [
+        "location"
+      ],
+      "properties": {
+        "location__added": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags__added": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
       "allOf": [
         [
           "~",

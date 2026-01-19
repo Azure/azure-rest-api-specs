@@ -46,25 +46,29 @@
 |------|------------|-------|
 | `definitions.OperationDisplay__added` | added | `{"type":"object","description":"Display metadata associated with the operation.","properties":{"prov...` |
 
+### Changes for `required`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureTrafficCollector.required__added` | added | `["location"]` |
+| `definitions.AzureTrafficCollectorListResult.required__added` | added | `["value"]` |
+| `definitions.CollectorPolicy.required__added` | added | `["location"]` |
+| `definitions.CollectorPolicyListResult.required__added` | added | `["value"]` |
+| `definitions.OperationListResult.required__added` | added | `["value"]` |
+
 ### Changes for `location`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureTrafficCollector.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.CollectorPolicy.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
 
 ### Changes for `tags`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureTrafficCollector.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureTrafficCollectorListResult.required__added` | added | `["value"]` |
-| `definitions.CollectorPolicyListResult.required__added` | added | `["value"]` |
-| `definitions.OperationListResult.required__added` | added | `["value"]` |
+| `definitions.CollectorPolicy.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 
 ### Changes for `readOnly`
 
