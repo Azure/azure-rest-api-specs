@@ -324,14 +324,6 @@ model IterationInput {
   pushResultToAzureStorageBlobManagedIdentityClientId?: Guid;
 }
 
-@added(ApiVersions.v2026_03_01)
-@doc("Translation properties.")
-model TranslationProperties {
-  @doc("Time to live in hours for the translation data. After the specified hours, the data will be deleted automatically.")
-  @visibility(Lifecycle.Read)
-  timeToLiveInHours?: int32;
-}
-
 @added(ApiVersions.v2025_05_20)
 @doc("EventHub configuration.")
 model EventHubConfiguration {
@@ -374,11 +366,6 @@ model Translation {
   @doc("First iteration input for the translation, this property is only used when autoCreateFirstIteration is true.")
   firstIterationInput?: IterationInput;
 
-  @added(ApiVersions.v2026_03_01)
-  @doc("Translation properties.")
-  @visibility(Lifecycle.Read)
-  properties?: TranslationProperties;
-
   @doc("Translation display name.")
   displayName?: string;
 
@@ -388,6 +375,11 @@ model Translation {
   @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
   @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("The timestamp when the translation will be automatically deleted. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @visibility(Lifecycle.Read)
+  expiresDateTime?: utcDateTime;
 
   @doc("Latest iteration of the translation.")
   @visibility(Lifecycle.Read)

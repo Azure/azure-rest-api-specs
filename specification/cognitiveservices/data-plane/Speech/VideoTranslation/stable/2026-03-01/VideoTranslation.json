@@ -1193,11 +1193,6 @@
           "$ref": "#/definitions/IterationInput",
           "description": "First iteration input for the translation, this property is only used when autoCreateFirstIteration is true."
         },
-        "properties": {
-          "$ref": "#/definitions/TranslationProperties",
-          "description": "Translation properties.",
-          "readOnly": true
-        },
         "displayName": {
           "type": "string",
           "description": "Translation display name."
@@ -1210,6 +1205,12 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        },
+        "expiresDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the translation will be automatically deleted. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "readOnly": true
         },
         "latestIteration": {
@@ -1294,18 +1295,6 @@
         "targetLocale",
         "voiceKind"
       ]
-    },
-    "TranslationProperties": {
-      "type": "object",
-      "description": "Translation properties.",
-      "properties": {
-        "timeToLiveInHours": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to live in hours for the translation data. After the specified hours, the data will be deleted automatically.",
-          "readOnly": true
-        }
-      }
     },
     "VoiceKind": {
       "type": "string",
