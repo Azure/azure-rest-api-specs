@@ -8,3 +8,15 @@ using Microsoft.Communication;
   "CommunicationServiceManagementClient",
   "javascript,python"
 );
+@@clientName(CommunicationServices_ProvisioningState,
+  "CommunicationServicesProvisioningState",
+  "python"
+);
+@@clientName(Domains_ProvisioningState,
+  "DomainsProvisioningState",
+  "python"
+);
+@@clientName(EmailServices_ProvisioningState,
+  "EmailServicesProvisioningState",
+  "python"
+);
