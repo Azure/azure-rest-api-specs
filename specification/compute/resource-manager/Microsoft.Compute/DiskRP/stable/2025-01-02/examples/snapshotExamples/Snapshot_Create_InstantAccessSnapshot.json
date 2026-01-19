@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-01-02",
+    "snapshotName": "mySnapshot2",
+    "snapshot": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "Copy",
+          "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk1",
+          "instantAccessDurationMinutes": 120
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2",
+        "name": "mySnapshot2",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk1",
+            "instantAccessDurationMinutes": 120
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2",
+        "name": "mySnapshot2",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Updating",
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk1",
+            "instantAccessDurationMinutes": 120
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Snapshots_CreateOrUpdate",
+  "title": "create a snapshot which can be instantly accessable."
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Retrieves an existing distribution policy by Id",
+  "operationId": "JobRouterAdministrationOperations_GetDistributionPolicy",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "distributionPolicyId": "MainDistributionPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "MainDistributionPolicy",
+        "name": "Main",
+        "offerExpiresAfterSeconds": 300,
+        "mode": {
+          "kind": "longestIdle",
+          "minConcurrentOffers": 1,
+          "maxConcurrentOffers": 5,
+          "bypassSelectors": false
+        },
+        "etag": "etag"
+      }
+    }
+  }
+}

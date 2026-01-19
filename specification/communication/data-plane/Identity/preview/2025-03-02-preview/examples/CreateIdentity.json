@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-03-02-preview",
+    "content-type": "application/json",
+    "endpoint": "https://my-resource.communication.azure.com",
+    "body": {
+      "customId": "sally@contoso.com",
+      "createTokenWithScopes": [
+        "chat",
+        "voip",
+        "chat.join",
+        "chat.join.limited",
+        "voip.join"
+      ],
+      "expiresInMinutes": 60
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "identity": {
+          "customId": "sally@contoso.com",
+          "id": "8:acs:2dee53b4-368b-45b4-ab52-8493fb117652_00000005-14a2-493b-8a72-5a3a0d000081",
+          "lastTokenIssuedAt": "2025-02-10T21:39:39.3244584+00:00"
+        },
+        "accessToken": {
+          "token": "token",
+          "expiresOn": "2023-10-10T21:39:39.3244584+00:00"
+        }
+      }
+    }
+  }
+}

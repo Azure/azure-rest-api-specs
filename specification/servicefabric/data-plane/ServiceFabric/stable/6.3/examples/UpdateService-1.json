@@ -1,0 +1,34 @@
+{
+  "operationId": "UpdateService",
+  "description": "This example shows how to update placement and load balancing related settings of a stateless Service Fabric service.",
+  "parameters": {
+    "serviceId": "test~test1",
+    "api-version": "6.0",
+    "ServiceUpdateDescription": {
+      "ServiceKind": "Stateless",
+      "Flags": "1568",
+      "PlacementConstraints": "Color==Red",
+      "DefaultMoveCost": "High",
+      "ScalingPolicies": [
+        {
+          "ScalingTrigger": {
+            "Kind": "AveragePartitionLoad",
+            "MetricName": "servicefabric:/_CpuCores",
+            "LowerLoadThreshold": 0.500000,
+            "UpperLoadThreshold": 0.800000,
+            "ScaleIntervalInSeconds": 900
+          },
+          "ScalingMechanism": {
+            "Kind": "PartitionInstanceCount",
+            "MinInstanceCount": 4,
+            "MaxInstanceCount": 6,
+            "ScaleIncrement": 2
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {}
+  }
+}

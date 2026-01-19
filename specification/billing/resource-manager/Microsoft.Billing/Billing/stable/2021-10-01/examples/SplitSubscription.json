@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01",
+    "billingAccountName": "{billingAccountName}",
+    "billingSubscriptionName": "9e030ae5-51ed-4e02-8e17-d51b3aa55980",
+    "parameters": {
+      "billingFrequency": "P1M",
+      "quantity": 4,
+      "targetProductTypeId": "CFQ7TTC0LDPB",
+      "targetSkuId": "0001",
+      "termDuration": "P1Y"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/7f271b5e-a89e-45cc-8fa5-cd5c643f8b5e",
+        "name": "7f271b5e-a89e-45cc-8fa5-cd5c643f8b5e",
+        "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
+        "properties": {
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664",
+          "billingProfileDisplayName": "Contoso operations billing profile",
+          "billingProfileName": "2b72f936-0166-47d6-91a3-ef9f84f36664",
+          "billingFrequency": "P1M",
+          "displayName": "Subscription 3",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/2b72f936-0166-47d6-91a3-ef9f84f36664/invoiceSections/5c562559-e31b-4bfe-b608-f8b5b3fbd073",
+          "invoiceSectionDisplayName": "Contoso operations invoice section",
+          "invoiceSectionName": "5c562559-e31b-4bfe-b608-f8b5b3fbd073",
+          "productCategory": "SeatBased",
+          "productType": "Microsoft 365 Business Standard",
+          "productTypeId": "CFQ7TTC0LDPB",
+          "purchaseDate": "2021-10-01T00:00:00Z",
+          "quantity": 4,
+          "skuId": "0001",
+          "skuDescription": "Microsoft 365 Business Standard",
+          "status": "Active",
+          "termDuration": "P1Y",
+          "termStartDate": "2021-10-01T00:00:00Z",
+          "termEndDate": "2022-09-30T00:00:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/operationResults/splitBillingSubscription_7f271b5e-a89e-45cc-8fa5-cd5c643f8b5e:f9bd2643-e786-4c93-9978-3c7f2d574580?api-version=2021-10-01",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

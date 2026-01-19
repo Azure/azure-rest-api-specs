@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg3467",
+    "jobName": "sj9742",
+    "inputName": "input7970",
+    "input": {
+      "properties": {
+        "type": "Stream",
+        "datasource": {
+          "type": "Microsoft.EventGrid/EventSubscriptions",
+          "properties": {
+            "subscriber": {
+              "type": "Microsoft.EventHub/EventHub",
+              "properties": {
+                "serviceBusNamespace": "sdktest",
+                "sharedAccessPolicyName": "RootManageSharedAccessKey",
+                "sharedAccessPolicyKey": "someSharedAccessPolicyKey==",
+                "consumerGroupName": "sdkconsumergroup",
+                "eventHubName": "sdkeventhub",
+                "partitionCount": 16,
+                "authenticationMode": "Msi"
+              }
+            },
+            "schema": "CloudEventSchema",
+            "storageAccounts": [
+              {
+                "authenticationMode": "Msi",
+                "accountName": "myaccount",
+                "accountKey": "myaccountkey"
+              }
+            ],
+            "eventTypes": [
+              "Microsoft.Storage.BlobCreated"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "bd8009b3-8165-4bd3-aad2-29a2b378dd14"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3467/providers/Microsoft.StreamAnalytics/streamingjobs/sj9742/inputs/input7970",
+        "name": "input7970",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.EventGrid/EventSubscriptions",
+            "properties": {
+              "subscriber": {
+                "type": "Microsoft.EventHub/EventHub",
+                "properties": {
+                  "serviceBusNamespace": "sdktest",
+                  "sharedAccessPolicyName": "RootManageSharedAccessKey",
+                  "consumerGroupName": "sdkconsumergroup",
+                  "eventHubName": "sdkeventhub",
+                  "partitionCount": 16,
+                  "authenticationMode": "Msi"
+                }
+              },
+              "schema": "CloudEventSchema",
+              "storageAccounts": [
+                {
+                  "authenticationMode": "Msi",
+                  "accountName": "myaccount"
+                }
+              ],
+              "eventTypes": [
+                "Microsoft.Storage.BlobCreated"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "bd8009b3-8165-4bd3-aad2-29a2b378dd14"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3467/providers/Microsoft.StreamAnalytics/streamingjobs/sj9742/inputs/input7970",
+        "name": "input7970",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.EventGrid/EventSubscriptions",
+            "properties": {
+              "subscriber": {
+                "type": "Microsoft.EventHub/EventHub",
+                "properties": {
+                  "serviceBusNamespace": "sdktest",
+                  "sharedAccessPolicyName": "RootManageSharedAccessKey",
+                  "consumerGroupName": "sdkconsumergroup",
+                  "eventHubName": "sdkeventhub",
+                  "partitionCount": 16,
+                  "authenticationMode": "Msi"
+                }
+              },
+              "schema": "CloudEventSchema",
+              "storageAccounts": [
+                {
+                  "authenticationMode": "Msi",
+                  "accountName": "myaccount"
+                }
+              ],
+              "eventTypes": [
+                "Microsoft.Storage.BlobCreated"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

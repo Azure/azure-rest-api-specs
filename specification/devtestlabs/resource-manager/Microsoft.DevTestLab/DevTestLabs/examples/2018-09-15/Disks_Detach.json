@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "name": "{diskName}",
+    "api-version": "2018-09-15",
+    "detachDiskProperties": {
+      "leasedByLabVmId": "/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}"
+    },
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "userName": "{userId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.DevTestLabs/locations/{location}"
+      }
+    }
+  },
+  "operationId": "Disks_Detach",
+  "title": "Disks_Detach"
+}

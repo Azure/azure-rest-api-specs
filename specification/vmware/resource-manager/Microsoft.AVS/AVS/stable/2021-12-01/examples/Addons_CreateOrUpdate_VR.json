@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "addonName": "vr",
+    "addon": {
+      "properties": {
+        "addonType": "VR",
+        "vrsCount": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/addons/vr",
+        "name": "vr",
+        "properties": {
+          "addonType": "VR",
+          "vrsCount": 1,
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.AVS/privateClouds/addons"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/addons/vr",
+        "name": "vr",
+        "properties": {
+          "addonType": "VR",
+          "vrsCount": 1,
+          "provisioningState": "Updating"
+        },
+        "type": "Microsoft.AVS/privateClouds/addons"
+      }
+    }
+  }
+}

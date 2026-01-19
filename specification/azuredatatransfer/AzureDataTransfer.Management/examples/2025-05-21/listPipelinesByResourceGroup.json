@@ -1,0 +1,35 @@
+{
+  "operationId": "Pipelines_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Gets pipelines in a resource group",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testPipeline",
+            "type": "Microsoft.AzureDataTransfer/pipelines",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline",
+            "location": "East US",
+            "properties": {
+              "remoteCloud": "testdc"
+            }
+          },
+          {
+            "name": "testPipeline2",
+            "type": "Microsoft.AzureDataTransfer/pipelines",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline2",
+            "location": "East US",
+            "properties": {
+              "remoteCloud": "testdc"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

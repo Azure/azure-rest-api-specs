@@ -1,0 +1,234 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-12-01",
+    "title": "YourServiceName",
+    "description": "Description of the new service",
+    "x-ms-code-generation-settings": {
+      "name": "YourServiceNameClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.YourServiceName/cats/{catName}": {
+      "get": {
+        "operationId": "Cats_Get",
+        "x-ms-examples": {
+          "GetCat": "./examples/CatsGet.json"
+        },
+        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CatNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Cats_CreateOrUpdate",
+        "x-ms-examples": {
+          "UpdateCat": "./examples/CatsCreateOrUpdate.json"
+        },
+        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CatNameParameter",
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for creating or updating a cat.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Result": {
+      "description": "Sample result definition",
+      "properties": {
+        "sampleProperty": {
+          "type": "string",
+          "description": "Sample property of type string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Cat": {
+      "description": "Sample cat model",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the cat"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the cat"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the cat"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the cat"
+        },
+        "properties": {
+          "$ref": "#/definitions/CatProperties"
+        }
+      }
+    },
+    "CatProperties": {
+      "description": "Sample cat properties model",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "The full name of the cat"
+        },
+        "mateId": {
+          "type": "string",
+          "description": "The id of the cat's mate"
+        }
+      },
+      "required": ["name"]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "CatNameParameter": {
+      "name": "catName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cat."
+    }
+  }
+}

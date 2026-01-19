@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "configuration": {
+      "location": "westus2",
+      "properties": {
+        "maintenanceScope": "OSImage",
+        "maintenanceWindow": {
+          "duration": "05:00",
+          "expirationDateTime": "9999-12-31 00:00",
+          "recurEvery": "Month Third Sunday",
+          "startDateTime": "2020-04-30 08:00",
+          "timeZone": "Pacific Standard Time"
+        },
+        "namespace": "Microsoft.Maintenance",
+        "visibility": "Custom"
+      }
+    },
+    "resourceGroupName": "examplerg",
+    "resourceName": "configuration1",
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "configuration1",
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourcegroups/examplerg/providers/Microsoft.Maintenance/maintenanceConfigurations/configuration1",
+        "location": "westus2",
+        "properties": {
+          "maintenanceScope": "OSImage",
+          "maintenanceWindow": {
+            "duration": "05:00",
+            "expirationDateTime": "9999-12-31 00:00",
+            "recurEvery": "Month Third Sunday",
+            "startDateTime": "2020-04-30 08:00",
+            "timeZone": "Pacific Standard Time"
+          },
+          "namespace": "Microsoft.Maintenance",
+          "visibility": "Custom"
+        }
+      }
+    }
+  },
+  "operationId": "MaintenanceConfigurations_Update",
+  "title": "MaintenanceConfigurations_UpdateForResource"
+}

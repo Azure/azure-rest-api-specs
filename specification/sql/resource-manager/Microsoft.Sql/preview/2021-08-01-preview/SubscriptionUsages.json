@@ -1,0 +1,187 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/usages": {
+      "get": {
+        "tags": [
+          "SubscriptionUsages"
+        ],
+        "description": "Gets all subscription usage metrics in a given location.",
+        "operationId": "SubscriptionUsages_ListByLocation",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the subscription location usages.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionUsageListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List subscription usages in the given location.": {
+            "$ref": "./examples/SubscriptionUsageListByLocation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/usages/{usageName}": {
+      "get": {
+        "tags": [
+          "SubscriptionUsages"
+        ],
+        "description": "Gets a subscription usage metric.",
+        "operationId": "SubscriptionUsages_Get",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usageName",
+            "in": "path",
+            "description": "Name of usage metric to return.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved particular subscription location usage.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionUsage"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get specific subscription usage in the given location.": {
+            "$ref": "./examples/SubscriptionUsageGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SubscriptionUsageListResult": {
+      "description": "A list of subscription usage metrics in a location.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionUsage"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionUsageProperties": {
+      "description": "Properties of a subscription usage.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "User-readable name of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentValue": {
+          "format": "double",
+          "description": "Current value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "limit": {
+          "format": "double",
+          "description": "Boundary value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit of the metric.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionUsage": {
+      "description": "Usage Metric of a Subscription in a Location.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionUsageProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

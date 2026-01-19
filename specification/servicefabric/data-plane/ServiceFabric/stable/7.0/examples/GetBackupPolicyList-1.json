@@ -1,0 +1,63 @@
+{
+  "operationId": "GetBackupPolicyList",
+  "description": "This example shows how to get list of backup policies. The number of results in a page are limited to maximum of two using the MaxResult parameter.",
+  "parameters": {
+    "api-version": "6.4",
+    "MaxResults": 2
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContinuationToken": "FileShare10MinBackupPolicy",
+        "Items": [
+          {
+            "Name": "DailyAzureBackupPolicy",
+            "AutoRestoreOnDataLoss": false,
+            "MaxIncrementalBackups": 3,
+            "Schedule": {
+              "ScheduleKind": "TimeBased",
+              "ScheduleFrequencyType": "Daily",
+              "RunTimes": [
+                "0001-01-01T09:00:00Z",
+                "0001-01-01T17:00:00Z"
+              ]
+            },
+            "Storage": {
+              "StorageKind": "AzureBlobStore",
+              "FriendlyName": "Azure_storagesample",
+              "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=<PutYourAccountKeyHere>",
+              "ContainerName": "BackupContainer"
+            },
+            "RetentionPolicy": {
+              "RetentionPolicyType": "Basic",
+              "MinimumNumberOfBackups": 30,
+              "RetentionDuration": "P29D"
+            }
+          },
+          {
+            "Name": "FileShare10MinBackupPolicy",
+            "AutoRestoreOnDataLoss": false,
+            "MaxIncrementalBackups": 3,
+            "Schedule": {
+              "ScheduleKind": "FrequencyBased",
+              "Interval": "PT10M"
+            },
+            "Storage": {
+              "StorageKind": "FileShare",
+              "FriendlyName": "FileShare_myshare",
+              "Path": "\\\\myshare\\backupshare",
+              "PrimaryUserName": "backupaccount",
+              "PrimaryPassword": "****"
+            },
+            "RetentionPolicy": {
+              "RetentionPolicyType": "Basic",
+              "MinimumNumberOfBackups": 20,
+              "RetentionDuration": "P20D"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

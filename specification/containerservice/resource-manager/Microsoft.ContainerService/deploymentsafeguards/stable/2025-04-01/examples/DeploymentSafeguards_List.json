@@ -1,0 +1,41 @@
+{
+  "operationId": "DeploymentSafeguards_List",
+  "title": "List DeploymentSafeguards by parent resource",
+  "parameters": {
+    "resourceUri": "subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+    "api-version": "2025-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "kd30rkdfo49="
+      },
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1/providers/Microsoft.ContainerService/deploymentSafeguards/default",
+            "name": "default",
+            "type": "Microsoft.ContainerService/deploymentSafeguards",
+            "systemData": {
+              "createdBy": "someUser",
+              "createdByType": "User",
+              "createdAt": "2022-03-23T05:40:40.657Z",
+              "lastModifiedBy": "someOtherUser",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+            },
+            "eTag": "23ujdflewrj3=",
+            "properties": {
+              "level": "Warn",
+              "systemExcludedNamespaces": [
+                "kube-system",
+                "gatekeeper-system"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

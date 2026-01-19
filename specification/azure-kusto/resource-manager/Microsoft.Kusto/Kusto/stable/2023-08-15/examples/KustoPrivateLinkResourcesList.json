@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "kustoCluster",
+    "api-version": "2023-08-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/privateLinkResources/cluster",
+            "name": "cluster",
+            "type": "Microsoft.Kusto/clusters/PrivateLinkResources",
+            "properties": {
+              "groupId": "cluster",
+              "requiredMembers": [
+                "Engine",
+                "DataManagement",
+                "blob-ne3kstrldkustoCluster00",
+                "queue-ne3kstrldkustoCluster00",
+                "table-ne3kstrldkustoCluster00",
+                "blob-qmukstrldkustoCluster01",
+                "queue-qmukstrldkustoCluster01",
+                "table-qmukstrldkustoCluster01"
+              ],
+              "requiredZoneNames": [
+                "privatelink.westus2.kusto.windows.net",
+                "privatelink.blob.core.windows.net",
+                "privatelink.queue.core.windows.net",
+                "privatelink.table.core.windows.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

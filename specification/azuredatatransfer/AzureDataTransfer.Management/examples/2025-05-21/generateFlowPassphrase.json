@@ -1,0 +1,25 @@
+{
+  "operationId": "Flows_GeneratePassphrase",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "connectionName": "testConnection",
+    "flowName": "testFlow",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Generate a new compliant streaming passphrase",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.AzureDataTransfer/locations/eastUS?api-version=2025-05-21"
+      }
+    }
+  }
+}

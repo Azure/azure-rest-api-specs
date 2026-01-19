@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2",
+    "assessmentName": "21300918-b2e3-0346-785f-c77ff57d243b",
+    "$expand": "links"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2/providers/Microsoft.Security/assessments/21300918-b2e3-0346-785f-c77ff57d243b",
+        "name": "21300918-b2e3-0346-785f-c77ff57d243b",
+        "type": "Microsoft.Security/assessments",
+        "properties": {
+          "resourceDetails": {
+            "source": "Azure",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachineScaleSets/vmss2"
+          },
+          "displayName": "Install endpoint protection solution on virtual machine scale sets",
+          "status": {
+            "code": "NotApplicable",
+            "cause": "OffByPolicy",
+            "description": "The effective policy for the assessment was evaluated to off - use Microsoft.Authorization/policyAssignments to turn this assessment on",
+            "statusChangeDate": "2021-04-12T09:07:18.6759138Z",
+            "firstEvaluationDate": "2021-04-12T09:07:18.6759138Z"
+          },
+          "additionalData": {
+            "linkedWorkspaceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myLaWorkspace"
+          },
+          "links": {
+            "azurePortalUri": "https://www.portal.azure.com/?fea#blade/Microsoft_Azure_Security/RecommendationsBlade/assessmentKey/21300918-b2e3-0346-785f-c77ff57d243b"
+          }
+        }
+      }
+    }
+  }
+}

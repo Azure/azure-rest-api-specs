@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-02-01-preview",
+    "id": "JessicaMultiStyle",
+    "Operation-Id": "a01a127a-c204-4e46-a8c1-fab01559b05b",
+    "model": {
+      "voiceName": "JessicaMultiStyleNeural",
+      "description": "Jessica multi style voice",
+      "recipe": {
+        "kind": "MultiStyle"
+      },
+      "projectId": "Jessica",
+      "consentId": "Jessica",
+      "trainingSetId": "Jessica-300",
+      "locale": "en-US",
+      "properties": {
+        "presetStyles": [
+          "cheerful",
+          "sad"
+        ],
+        "styleTrainingSetIds": {
+          "happy": "JessicaHappy-300",
+          "myStyle2": "JessicaStyle2"
+        }
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/customvoice/operations/a01a127a-c204-4e46-a8c1-fab01559b05b?api-version=2024-02-01-preview",
+        "Operation-Id": "a01a127a-c204-4e46-a8c1-fab01559b05b"
+      },
+      "body": {
+        "id": "JessicaMultiStyle",
+        "voiceName": "JessicaMultiStyleNeural",
+        "description": "Jessica multi style voice",
+        "recipe": {
+          "kind": "MultiStyle",
+          "version": "V3.2023.06"
+        },
+        "projectId": "Jessica",
+        "consentId": "Jessica",
+        "trainingSetId": "Jessica-300",
+        "locale": "en-US",
+        "engineVersion": "2023.07.04.0",
+        "properties": {
+          "presetStyles": [
+            "cheerful",
+            "sad"
+          ],
+          "styleTrainingSetIds": {
+            "happy": "JessicaHappy-300",
+            "myStyle2": "JessicaStyle2"
+          },
+          "voiceStyles": [
+            "cheerful",
+            "sad",
+            "happy",
+            "myStyle2"
+          ]
+        },
+        "status": "NotStarted",
+        "createdDateTime": "2023-04-01T05:30:00.000Z",
+        "lastActionDateTime": "2023-04-02T10:15:30.000Z"
+      }
+    }
+  }
+}

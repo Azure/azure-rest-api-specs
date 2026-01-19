@@ -1,0 +1,244 @@
+{
+  "title": "Organizations_Get_MaximumSet",
+  "operationId": "Organizations_Get",
+  "parameters": {
+    "api-version": "2025-06-23-preview",
+    "subscriptionId": "DFF26289-4E9C-46D0-890E-F8BE27BDA8C2",
+    "resourceGroupName": "rgneon",
+    "organizationName": "myOrganization"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "marketplaceDetails": {
+            "subscriptionId": "DFF26289-4E9C-46D0-890E-F8BE27BDA8C2",
+            "subscriptionStatus": "Active",
+            "offerDetails": {
+              "publisherId": "neon-tech",
+              "offerId": "neon-postgres",
+              "planId": "standard",
+              "planName": "Standard Plan",
+              "termUnit": "Monthly",
+              "termId": "standard-monthly"
+            }
+          },
+          "userDetails": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "emailAddress": "john.doe@example.com",
+            "upn": "john.doe@example.com",
+            "phoneNumber": "+1-555-123-4567"
+          },
+          "companyDetails": {
+            "companyName": "Contoso Ltd",
+            "country": "United States",
+            "officeAddress": "123 Main Street, Seattle, WA",
+            "businessPhone": "+1-555-123-4567",
+            "domain": "contoso.com",
+            "numberOfEmployees": 500
+          },
+          "provisioningState": "Succeeded",
+          "partnerOrganizationProperties": {
+            "organizationId": "org-123",
+            "organizationName": "myOrganization",
+            "singleSignOnProperties": {
+              "singleSignOnState": "Configured",
+              "enterpriseAppId": "12345678-1234-1234-1234-123456789012",
+              "singleSignOnUrl": "https://sso.contoso.com",
+              "aadDomains": [
+                "contoso.com"
+              ]
+            }
+          },
+          "projectProperties": {
+            "entityId": "project-123",
+            "entityName": "myProject",
+            "createdAt": "2023-06-01T10:00:00Z",
+            "provisioningState": "Succeeded",
+            "attributes": [
+              {
+                "name": "environment",
+                "value": "production"
+              }
+            ],
+            "regionId": "westus",
+            "storage": 100,
+            "pgVersion": 15,
+            "historyRetention": 7,
+            "defaultEndpointSettings": {
+              "autoscalingLimitMinCu": 2,
+              "autoscalingLimitMaxCu": 8
+            },
+            "branch": {
+              "entityId": "branch-main",
+              "entityName": "main",
+              "createdAt": "2023-06-01T10:00:00Z",
+              "provisioningState": "Succeeded",
+              "attributes": [
+                {
+                  "name": "environment",
+                  "value": "production"
+                }
+              ],
+              "projectId": "project-123",
+              "parentId": "parent-id-123",
+              "roleName": "postgres",
+              "databaseName": "postgres",
+              "roles": [
+                {
+                  "entityId": "role-123",
+                  "entityName": "adminRole",
+                  "createdAt": "2023-06-01T10:00:00Z",
+                  "provisioningState": "Succeeded",
+                  "attributes": [
+                    {
+                      "name": "environment",
+                      "value": "production"
+                    }
+                  ],
+                  "branchId": "branch-main",
+                  "permissions": [
+                    "ALL"
+                  ],
+                  "isSuperUser": true,
+                  "roleName": "postgres",
+                  "lastUpdated": "2023-06-15T10:00:00Z",
+                  "owns": "neonDb + 2"
+                }
+              ],
+              "databases": [
+                {
+                  "entityId": "db-123",
+                  "entityName": "postgres",
+                  "createdAt": "2023-06-01T10:00:00Z",
+                  "provisioningState": "Succeeded",
+                  "attributes": [
+                    {
+                      "name": "environment",
+                      "value": "production"
+                    }
+                  ],
+                  "branchId": "branch-main",
+                  "ownerName": "postgres",
+                  "databaseName": "postgres",
+                  "lastUpdated": "2023-06-15T10:00:00Z"
+                }
+              ],
+              "endpoints": [
+                {
+                  "entityId": "ep-123",
+                  "entityName": "primary",
+                  "createdAt": "2023-06-01T10:00:00Z",
+                  "provisioningState": "Succeeded",
+                  "attributes": [
+                    {
+                      "name": "environment",
+                      "value": "production"
+                    }
+                  ],
+                  "projectId": "project-123",
+                  "branchId": "branch-main",
+                  "endpointType": "read_write",
+                  "endpointId": "ep-123",
+                  "computeName": "primary",
+                  "status": "active",
+                  "lastActive": "2023-06-30T10:00:00Z",
+                  "size": {
+                    "autoscalingLimitMinCu": 2,
+                    "autoscalingLimitMaxCu": 8
+                  }
+                }
+              ],
+              "branchId": "branch-main",
+              "dataSize": "512MB",
+              "lastActive": "2023-06-30T10:00:00Z",
+              "computeHours": "24"
+            },
+            "roles": [
+              {
+                "entityId": "role-123",
+                "entityName": "adminRole",
+                "createdAt": "2023-06-01T10:00:00Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "production"
+                  }
+                ],
+                "branchId": "branch-main",
+                "permissions": [
+                  "ALL"
+                ],
+                "isSuperUser": true,
+                "roleName": "postgres",
+                "lastUpdated": "2023-06-15T10:00:00Z",
+                "owns": "neonDb + 2"
+              }
+            ],
+            "databases": [
+              {
+                "entityId": "db-123",
+                "entityName": "postgres",
+                "createdAt": "2023-06-01T10:00:00Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "production"
+                  }
+                ],
+                "branchId": "branch-main",
+                "ownerName": "postgres",
+                "databaseName": "postgres",
+                "lastUpdated": "2023-06-15T10:00:00Z"
+              }
+            ],
+            "endpoints": [
+              {
+                "entityId": "ep-123",
+                "entityName": "primary",
+                "createdAt": "2023-06-01T10:00:00Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "production"
+                  }
+                ],
+                "projectId": "project-123",
+                "branchId": "branch-main",
+                "endpointType": "read_write",
+                "endpointId": "ep-123",
+                "computeName": "primary",
+                "status": "active",
+                "lastActive": "2023-06-30T10:00:00Z",
+                "size": {
+                  "autoscalingLimitMinCu": 2,
+                  "autoscalingLimitMaxCu": 8
+                }
+              }
+            ]
+          }
+        },
+        "tags": {
+          "environment": "production",
+          "department": "engineering"
+        },
+        "location": "westus",
+        "id": "/subscriptions/DFF26289-4E9C-46D0-890E-F8BE27BDA8C2/resourceGroups/rgneon/providers/Microsoft.Neon.Postgres/organizations/myOrganization",
+        "name": "myOrganization",
+        "type": "Microsoft.Neon.Postgres/organizations",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-15T10:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-15T10:05:00Z"
+        }
+      }
+    }
+  }
+}

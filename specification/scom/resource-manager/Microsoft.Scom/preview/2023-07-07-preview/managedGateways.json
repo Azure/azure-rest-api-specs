@@ -1,0 +1,339 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for managing SCOM managed instances and monitored resources.",
+    "version": "2023-07-07-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "instanceName": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the SCOM managed instance.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+    },
+    "managedGatewayName": {
+      "name": "managedGatewayName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The gateway resource name.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/managedGateways/{managedGatewayName}": {
+      "get": {
+        "operationId": "ManagedGateways_Get",
+        "description": "Retrieve the details of the gateway resource.",
+        "tags": [
+          "Gateway Resources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/managedGatewayName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Managed gateway retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGateway"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedGateway_Get": {
+            "$ref": "./examples/ManagedGateway_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedGateways_CreateOrUpdate",
+        "description": "Create or update a gateway resource.",
+        "tags": [
+          "Gateway Resources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/managedGatewayName"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Managed gateway created successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGateway"
+            }
+          },
+          "200": {
+            "description": "Managed gateway update successful.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGateway"
+            }
+          },
+          "202": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/ManagedGateway"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedGateway_CreateOrUpdate": {
+            "$ref": "./examples/ManagedGateway_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ManagedGateways_Delete",
+        "description": "Remove a gateway resource.",
+        "tags": [
+          "Gateway Resources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/managedGatewayName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deletion operation has been successful."
+          },
+          "204": {
+            "description": "The deletion operation has been successful."
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedGateway_Delete": {
+            "$ref": "./examples/ManagedGateway_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/managedGateways": {
+      "get": {
+        "operationId": "ManagedGateways_ListByManagedInstance",
+        "description": "A comprehensive list of all gateway resources within a SCOM managed instance.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "Gateway Resources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGateways"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedGateways_ListByResourceGroup": {
+            "$ref": "./examples/ManagedGateways_ListByResourceGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedGateway": {
+      "type": "object",
+      "description": "A gateway resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a gateway resource.",
+          "$ref": "#/definitions/ManagedGatewayProperties"
+        }
+      }
+    },
+    "ManagedGatewayProperties": {
+      "type": "object",
+      "description": "The properties of a gateway resource.",
+      "properties": {
+        "resourceId": {
+          "description": "ArmId of the gateway to be monitored.",
+          "type": "string"
+        },
+        "resourceLocation": {
+          "description": "Location of the gateway to be monitored.",
+          "type": "string"
+        },
+        "computerName": {
+          "description": "ComputerName of the gateway to be monitored.",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "The domain name associated with the gateway to be monitored.",
+          "type": "string"
+        },
+        "managementServerEndpoint": {
+          "description": "The management server endpoint to which the gateway is directed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthStatus": {
+          "description": "The health status of the gateway resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "description": "The connection status of the gateway resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The version of the gateway resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "installType": {
+          "description": "Install type of gateway resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedGateways": {
+      "type": "object",
+      "description": "A paginated list of SCOM gateways.",
+      "properties": {
+        "value": {
+          "description": "The contents displayed on the page.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ManagedGateway"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

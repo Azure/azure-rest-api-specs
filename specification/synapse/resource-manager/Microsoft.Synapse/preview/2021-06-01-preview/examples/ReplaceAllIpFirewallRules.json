@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "api-version": "2021-06-01-preview",
+    "request": {
+      "ipFirewallRules": {
+        "ExampleFirewallRule": {
+          "startIpAddress": "10.0.0.0",
+          "endIpAddress": "10.0.0.254"
+        },
+        "AnotherExampleFirewallRule": {
+          "startIpAddress": "10.0.1.0",
+          "endIpAddress": "10.0.1.254"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationId": "00000000-1111-4444-2222-333333333333"
+      }
+    },
+    "202": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "operationId": "MongoClusters_CheckNameAvailability",
+  "title": "Checks and confirms the Mongo Cluster name is availability for use.",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "location": "westus2",
+    "api-version": "2025-04-01-preview",
+    "body": {
+      "name": "newmongocluster",
+      "type": "Microsoft.DocumentDB/mongoClusters"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nameAvailable": true
+      }
+    }
+  }
+}

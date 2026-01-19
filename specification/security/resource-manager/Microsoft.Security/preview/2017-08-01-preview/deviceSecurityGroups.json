@@ -37,14 +37,14 @@
     "/{resourceId}/providers/Microsoft.Security/deviceSecurityGroups": {
       "get": {
         "x-ms-examples": {
-          "List all device security groups for the specified IoT hub resource": {
+          "List all device security groups for the specified IoT Hub resource": {
             "$ref": "./examples/DeviceSecurityGroups/ListDeviceSecurityGroups_example.json"
           }
         },
         "tags": [
           "DeviceSecurityGroups"
         ],
-        "description": "Gets the list of device security groups for the specified IoT hub resource.",
+        "description": "Use this method get the list of device security groups for the specified IoT Hub resource.",
         "operationId": "DeviceSecurityGroups_List",
         "parameters": [
           {
@@ -76,14 +76,14 @@
     "/{resourceId}/providers/Microsoft.Security/deviceSecurityGroups/{deviceSecurityGroupName}": {
       "get": {
         "x-ms-examples": {
-          "Get an device security group for the specified IoT hub resource": {
+          "Get a device security group for the specified IoT Hub resource": {
             "$ref": "./examples/DeviceSecurityGroups/GetDeviceSecurityGroups_example.json"
           }
         },
         "tags": [
           "DeviceSecurityGroups"
         ],
-        "description": "Gets the device security group for the specified IoT hub resource.",
+        "description": "Use this method to get the device security group for the specified IoT Hub resource.",
         "operationId": "DeviceSecurityGroups_Get",
         "parameters": [
           {
@@ -98,7 +98,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to get security group.",
+            "description": "Successful request to get device security group.",
             "schema": {
               "$ref": "#/definitions/DeviceSecurityGroup"
             }
@@ -120,7 +120,7 @@
         "tags": [
           "DeviceSecurityGroups"
         ],
-        "description": "Creates or updates the device security group on a specified IoT hub resource.",
+        "description": "Use this method to creates or updates the device security group on a specified IoT Hub resource.",
         "operationId": "DeviceSecurityGroups_CreateOrUpdate",
         "parameters": [
           {
@@ -138,13 +138,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Security group was updated",
+            "description": "Security group was updated.",
             "schema": {
               "$ref": "#/definitions/DeviceSecurityGroup"
             }
           },
           "201": {
-            "description": "Security group was created",
+            "description": "Security group was created.",
             "schema": {
               "$ref": "#/definitions/DeviceSecurityGroup"
             }
@@ -159,14 +159,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a device security group for the specified IoT hub resource": {
+          "Delete a device security group for the specified IoT Hub resource": {
             "$ref": "./examples/DeviceSecurityGroups/DeleteDeviceSecurityGroups_example.json"
           }
         },
         "tags": [
           "DeviceSecurityGroups"
         ],
-        "description": "Deletes the security group",
+        "description": "User this method to deletes the device security group.",
         "operationId": "DeviceSecurityGroups_Delete",
         "parameters": [
           {
@@ -238,7 +238,7 @@
       "properties": {
         "thresholdRules": {
           "type": "array",
-          "description": "A list of threshold custom alert rules.",
+          "description": "The list of custom alert threshold rules.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/ThresholdCustomAlertRule"
@@ -246,7 +246,7 @@
         },
         "timeWindowRules": {
           "type": "array",
-          "description": "A list of time window custom alert rules.",
+          "description": "The list of custom alert time-window rules.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/TimeWindowCustomAlertRule"
@@ -254,7 +254,7 @@
         },
         "allowlistRules": {
           "type": "array",
-          "description": "A list of allow-list custom alert rules.",
+          "description": "The allow-list custom alert rules.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/AllowlistCustomAlertRule"
@@ -262,7 +262,7 @@
         },
         "denylistRules": {
           "type": "array",
-          "description": "A list of deny-list custom alert rules.",
+          "description": "The deny-list custom alert rules.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/DenylistCustomAlertRule"
@@ -272,7 +272,8 @@
     },
     "CustomAlertRule": {
       "type": "object",
-      "description": "A custom alert rule",
+      "description": "A custom alert rule.",
+      "discriminator": "ruleType",
       "properties": {
         "displayName": {
           "type": "string",
@@ -286,7 +287,7 @@
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "Whether the custom alert is enabled."
+          "description": "Status of the custom alert."
         },
         "ruleType": {
           "type": "string",
@@ -300,7 +301,7 @@
     },
     "ListCustomAlertRule": {
       "type": "object",
-      "description": "A List custom alert rule",
+      "description": "A List custom alert rule.",
       "allOf": [
         {
           "$ref": "#/definitions/CustomAlertRule"
@@ -309,7 +310,7 @@
       "properties": {
         "valueType": {
           "type": "string",
-          "description": "The value type of the items in the list",
+          "description": "The value type of the items in the list.",
           "enum": [
             "IpCidr",
             "String"
@@ -334,7 +335,7 @@
     },
     "AllowlistCustomAlertRule": {
       "type": "object",
-      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is allowed",
+      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is allowed.",
       "allOf": [
         {
           "$ref": "#/definitions/ListCustomAlertRule"
@@ -347,42 +348,45 @@
           "items": {
             "type": "string"
           }
-        },
-        "ruleType": {
-          "type": "string",
-          "description": "The type of the custom alert rule.",
-          "enum": [
-            "ConnectionToIpNotAllowed",
-            "LocalUserNotAllowed",
-            "ProcessNotAllowed"
-          ],
-          "x-ms-enum": {
-            "name": "ruleType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "ConnectionToIpNotAllowed",
-                "description": "Outbound connection to an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation."
-              },
-              {
-                "value": "LocalUserNotAllowed",
-                "description": "Login by a local user that isn't allowed. Allow list consists of login names to allow."
-              },
-              {
-                "value": "ProcessNotAllowed",
-                "description": "Execution of a process that isn't allowed. Allow list consists of process names to allow."
-              }
-            ]
-          }
         }
       },
       "required": [
         "allowlistValues"
       ]
     },
+    "ConnectionToIpNotAllowed": {
+      "type": "object",
+      "description": "Outbound connection to an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AllowlistCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "LocalUserNotAllowed": {
+      "type": "object",
+      "description": "Login by a local user that isn't allowed. Allow list consists of login names to allow.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AllowlistCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "ProcessNotAllowed": {
+      "type": "object",
+      "description": "Execution of a process that isn't allowed. Allow list consists of process names to allow.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AllowlistCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
     "DenylistCustomAlertRule": {
       "type": "object",
-      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is denied",
+      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is denied.",
       "allOf": [
         {
           "$ref": "#/definitions/ListCustomAlertRule"
@@ -429,9 +433,6 @@
       "description": "A custom alert rule that checks if the number of activities (depends on the custom alert type) in a time window is within the given range.",
       "allOf": [
         {
-          "$ref": "#/definitions/CustomAlertRule"
-        },
-        {
           "$ref": "#/definitions/ThresholdCustomAlertRule"
         }
       ],
@@ -440,103 +441,171 @@
           "type": "string",
           "description": "The time window size in iso8601 format.",
           "format": "duration"
-        },
-        "ruleType": {
-          "type": "string",
-          "description": "The type of the custom alert rule.",
-          "enum": [
-            "ActiveConnectionsNotInAllowedRange",
-            "AmqpC2DMessagesNotInAllowedRange",
-            "MqttC2DMessagesNotInAllowedRange",
-            "HttpC2DMessagesNotInAllowedRange",
-            "AmqpC2DRejectedMessagesNotInAllowedRange",
-            "MqttC2DRejectedMessagesNotInAllowedRange",
-            "HttpC2DRejectedMessagesNotInAllowedRange",
-            "AmqpD2CMessagesNotInAllowedRange",
-            "MqttD2CMessagesNotInAllowedRange",
-            "HttpD2CMessagesNotInAllowedRange",
-            "DirectMethodInvokesNotInAllowedRange",
-            "FailedLocalLoginsNotInAllowedRange",
-            "FileUploadsNotInAllowedRange",
-            "QueuePurgesNotInAllowedRange",
-            "TwinUpdatesNotInAllowedRange",
-            "UnauthorizedOperationsNotInAllowedRange"
-          ],
-          "x-ms-enum": {
-            "name": "ruleType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "ActiveConnectionsNotInAllowedRange",
-                "description": "Number of active connections is not in allowed range."
-              },
-              {
-                "value": "AmqpC2DMessagesNotInAllowedRange",
-                "description": "Number of cloud to device messages (AMQP protocol) is not in allowed range."
-              },
-              {
-                "value": "MqttC2DMessagesNotInAllowedRange",
-                "description": "Number of cloud to device messages (MQTT protocol) is not in allowed range."
-              },
-              {
-                "value": "HttpC2DMessagesNotInAllowedRange",
-                "description": "Number of cloud to device messages (HTTP protocol) is not in allowed range."
-              },
-              {
-                "value": "AmqpC2DRejectedMessagesNotInAllowedRange",
-                "description": "Number of rejected cloud to device messages (AMQP protocol) is not in allowed range."
-              },
-              {
-                "value": "MqttC2DRejectedMessagesNotInAllowedRange",
-                "description": "Number of rejected cloud to device messages (MQTT protocol) is not in allowed range."
-              },
-              {
-                "value": "HttpC2DRejectedMessagesNotInAllowedRange",
-                "description": "Number of rejected cloud to device messages (HTTP protocol) is not in allowed range."
-              },
-              {
-                "value": "AmqpD2CMessagesNotInAllowedRange",
-                "description": "Number of device to cloud messages (AMQP protocol) is not in allowed range."
-              },
-              {
-                "value": "MqttD2CMessagesNotInAllowedRange",
-                "description": "Number of device to cloud messages (MQTT protocol) is not in allowed range."
-              },
-              {
-                "value": "HttpD2CMessagesNotInAllowedRange",
-                "description": "Number of device to cloud messages (HTTP protocol) is not in allowed range."
-              },
-              {
-                "value": "DirectMethodInvokesNotInAllowedRange",
-                "description": "Number of direct method invokes is not in allowed range."
-              },
-              {
-                "value": "FailedLocalLoginsNotInAllowedRange",
-                "description": "Number of failed local logins is not in allowed range."
-              },
-              {
-                "value": "FileUploadsNotInAllowedRange",
-                "description": "Number of file uploads is not in allowed range."
-              },
-              {
-                "value": "QueuePurgesNotInAllowedRange",
-                "description": "Number of device queue purges is not in allowed range."
-              },
-              {
-                "value": "TwinUpdatesNotInAllowedRange",
-                "description": "Number of twin updates is not in allowed range."
-              },
-              {
-                "value": "UnauthorizedOperationsNotInAllowedRange",
-                "description": "Number of unauthorized operations is not in allowed range."
-              }
-            ]
-          }
         }
       },
       "required": [
         "timeWindowSize"
       ]
+    },
+    "ActiveConnectionsNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of active connections is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "AmqpC2DMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of cloud to device messages (AMQP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "MqttC2DMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of cloud to device messages (MQTT protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "HttpC2DMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of cloud to device messages (HTTP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "AmqpC2DRejectedMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of rejected cloud to device messages (AMQP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "MqttC2DRejectedMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of rejected cloud to device messages (MQTT protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "HttpC2DRejectedMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of rejected cloud to device messages (HTTP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "AmqpD2CMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of device to cloud messages (AMQP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "MqttD2CMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of device to cloud messages (MQTT protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "HttpD2CMessagesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of device to cloud messages (HTTP protocol) is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "DirectMethodInvokesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of direct method invokes is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "FailedLocalLoginsNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of failed local logins is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "FileUploadsNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of file uploads is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "QueuePurgesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of device queue purges is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "TwinUpdatesNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of twin updates is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
+    },
+    "UnauthorizedOperationsNotInAllowedRange": {
+      "type": "object",
+      "description": "Number of unauthorized operations is not in allowed range.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TimeWindowCustomAlertRule"
+        }
+      ],
+      "properties": {}
     }
   },
   "parameters": {
@@ -545,7 +614,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the security group. Please notice that the name is case insensitive.",
+      "description": "The name of the device security group. Note that the name of the device security group is case insensitive.",
       "x-ms-parameter-location": "method"
     },
     "DeviceSecurityGroup": {

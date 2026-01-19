@@ -1,0 +1,217 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "cacheName": "sc1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2021-05-01",
+    "cache": {
+      "tags": {
+        "Dept": "Contoso"
+      },
+      "location": "westus",
+      "properties": {
+        "cacheSizeGB": 3072,
+        "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+        "networkSettings": {
+          "mtu": 1500,
+          "dnsServers": [
+            "10.1.22.33",
+            "10.1.12.33"
+          ],
+          "dnsSearchDomain": "contoso.com",
+          "ntpServer": "time.contoso.com"
+        },
+        "securitySettings": {
+          "accessPolicies": [
+            {
+              "name": "default",
+              "accessRules": [
+                {
+                  "scope": "default",
+                  "access": "rw",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": false
+                }
+              ]
+            },
+            {
+              "name": "restrictive",
+              "accessRules": [
+                {
+                  "scope": "host",
+                  "filter": "10.99.3.145",
+                  "access": "rw",
+                  "suid": true,
+                  "submountAccess": true,
+                  "rootSquash": false
+                },
+                {
+                  "scope": "network",
+                  "filter": "10.99.1.0/24",
+                  "access": "rw",
+                  "suid": true,
+                  "submountAccess": true,
+                  "rootSquash": false
+                },
+                {
+                  "scope": "default",
+                  "access": "no",
+                  "suid": false,
+                  "submountAccess": true,
+                  "rootSquash": true,
+                  "anonymousUID": "65534",
+                  "anonymousGID": "65534"
+                }
+              ]
+            }
+          ]
+        },
+        "directoryServicesSettings": {
+          "activeDirectory": {
+            "primaryDnsIpAddress": "192.0.2.10",
+            "secondaryDnsIpAddress": "192.0.2.11",
+            "cacheNetBiosName": "contosoSmb",
+            "domainName": "contosoAd.contoso.local",
+            "domainNetBiosName": "contosoAd"
+          },
+          "usernameDownload": {
+            "extendedGroups": true,
+            "usernameSource": "AD"
+          }
+        }
+      },
+      "sku": {
+        "name": "Standard_2G"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "Dept": "Contoso"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1",
+        "location": "westus",
+        "name": "sc1",
+        "type": "Microsoft.StorageCache/Cache",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "cacheSizeGB": 3072,
+          "health": {
+            "state": "Transitioning",
+            "statusDescription": "Cache is being created.",
+            "conditions": [
+              {
+                "timestamp": "2021-04-21T18:25:43.511Z",
+                "message": "Cannot contact DNS server"
+              }
+            ]
+          },
+          "mountAddresses": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "provisioningState": "Updating",
+          "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+          "upgradeStatus": {
+            "currentFirmwareVersion": "V5.1.12",
+            "firmwareUpdateStatus": "available",
+            "firmwareUpdateDeadline": "2019-04-21T18:25:43.511Z",
+            "lastFirmwareUpdate": "2019-01-21T18:25:43.511Z",
+            "pendingFirmwareVersion": "V5.1.15"
+          },
+          "networkSettings": {
+            "mtu": 1500,
+            "dnsServers": [
+              "10.1.22.33",
+              "10.1.12.33"
+            ],
+            "dnsSearchDomain": "contoso.com",
+            "ntpServer": "time.contoso.com"
+          },
+          "securitySettings": {
+            "accessPolicies": [
+              {
+                "name": "default",
+                "accessRules": [
+                  {
+                    "scope": "default",
+                    "access": "rw",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  }
+                ]
+              },
+              {
+                "name": "restrictive",
+                "accessRules": [
+                  {
+                    "scope": "host",
+                    "filter": "10.99.3.145",
+                    "access": "rw",
+                    "suid": true,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  },
+                  {
+                    "scope": "network",
+                    "filter": "10.99.1.0/24",
+                    "access": "rw",
+                    "suid": true,
+                    "submountAccess": true,
+                    "rootSquash": false
+                  },
+                  {
+                    "scope": "default",
+                    "access": "no",
+                    "suid": false,
+                    "submountAccess": true,
+                    "rootSquash": true,
+                    "anonymousUID": "65534",
+                    "anonymousGID": "65534"
+                  }
+                ]
+              }
+            ]
+          },
+          "directoryServicesSettings": {
+            "activeDirectory": {
+              "primaryDnsIpAddress": "192.0.2.10",
+              "secondaryDnsIpAddress": "192.0.2.11",
+              "domainName": "contosoAd.contoso.local",
+              "domainNetBiosName": "contosoAd",
+              "cacheNetBiosName": "contosoSmb",
+              "domainJoined": "Yes"
+            },
+            "usernameDownload": {
+              "extendedGroups": true,
+              "usernameSource": "AD",
+              "groupFileURI": "",
+              "userFileURI": "",
+              "ldapServer": "",
+              "ldapBaseDN": "",
+              "encryptLdapConnection": false,
+              "requireValidCertificate": false,
+              "autoDownloadCertificate": false,
+              "caCertificateURI": "",
+              "usernameDownloaded": "Yes"
+            }
+          }
+        },
+        "sku": {
+          "name": "Standard_2G"
+        }
+      }
+    }
+  }
+}

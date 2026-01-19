@@ -1,0 +1,198 @@
+{
+  "title": "Projects_Get_MaximumSet",
+  "operationId": "Projects_Get",
+  "parameters": {
+    "api-version": "2025-06-23-preview",
+    "subscriptionId": "DFF26289-4E9C-46D0-890E-F8BE27BDA8C2",
+    "resourceGroupName": "rgneon",
+    "organizationName": "myOrganization",
+    "projectName": "myProject"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "entityId": "project-123",
+          "entityName": "myProject",
+          "createdAt": "2025-06-15T10:30:15Z",
+          "provisioningState": "Succeeded",
+          "attributes": [
+            {
+              "name": "environment",
+              "value": "development"
+            }
+          ],
+          "regionId": "westus",
+          "storage": 22,
+          "pgVersion": 14,
+          "historyRetention": 3,
+          "defaultEndpointSettings": {
+            "autoscalingLimitMinCu": 3,
+            "autoscalingLimitMaxCu": 28
+          },
+          "branch": {
+            "entityId": "branch-123",
+            "entityName": "main",
+            "createdAt": "2025-06-15T10:35:22Z",
+            "provisioningState": "Succeeded",
+            "attributes": [
+              {
+                "name": "environment",
+                "value": "development"
+              }
+            ],
+            "projectId": "project-123",
+            "parentId": "main-branch",
+            "roleName": "admin",
+            "databaseName": "postgres",
+            "roles": [
+              {
+                "entityId": "role-123",
+                "entityName": "read_only_role",
+                "createdAt": "2025-06-15T10:40:18Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "branchId": "branch-123",
+                "permissions": [
+                  "SELECT"
+                ],
+                "isSuperUser": true,
+                "roleName": "reader",
+                "lastUpdated": "2025-06-30T14:25:10Z",
+                "owns": "neonDb + 2"
+              }
+            ],
+            "databases": [
+              {
+                "entityId": "db-123",
+                "entityName": "appdb",
+                "createdAt": "2025-06-15T10:42:33Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "branchId": "branch-123",
+                "ownerName": "postgres",
+                "databaseName": "application",
+                "lastUpdated": "2025-06-30T14:28:45Z"
+              }
+            ],
+            "endpoints": [
+              {
+                "entityId": "endpoint-123",
+                "entityName": "read-endpoint",
+                "createdAt": "2025-06-15T10:45:12Z",
+                "provisioningState": "Succeeded",
+                "attributes": [
+                  {
+                    "name": "environment",
+                    "value": "development"
+                  }
+                ],
+                "projectId": "project-123",
+                "branchId": "branch-123",
+                "endpointType": "read_only",
+                "endpointId": "endpoint-123",
+                "computeName": "read-replica",
+                "status": "active",
+                "lastActive": "2025-06-30T15:30:22Z",
+                "size": {
+                  "autoscalingLimitMinCu": 3,
+                  "autoscalingLimitMaxCu": 14
+                }
+              }
+            ],
+            "branchId": "branch-123",
+            "dataSize": "10GB",
+            "lastActive": "2025-06-30T18:45:10Z",
+            "computeHours": "120"
+          },
+          "roles": [
+            {
+              "entityId": "role-456",
+              "entityName": "admin_role",
+              "createdAt": "2025-06-15T10:40:18Z",
+              "provisioningState": "Succeeded",
+              "attributes": [
+                {
+                  "name": "environment",
+                  "value": "development"
+                }
+              ],
+              "branchId": "branch-123",
+              "permissions": [
+                "ALL"
+              ],
+              "isSuperUser": true,
+              "roleName": "administrator",
+              "lastUpdated": "2025-06-30T14:25:10Z",
+              "owns": "neonDb + 2"
+            }
+          ],
+          "databases": [
+            {
+              "entityId": "db-456",
+              "entityName": "maindb",
+              "createdAt": "2025-06-15T10:42:33Z",
+              "provisioningState": "Succeeded",
+              "attributes": [
+                {
+                  "name": "environment",
+                  "value": "development"
+                }
+              ],
+              "branchId": "branch-123",
+              "ownerName": "postgres",
+              "databaseName": "main",
+              "lastUpdated": "2025-06-30T14:28:45Z"
+            }
+          ],
+          "endpoints": [
+            {
+              "entityId": "endpoint-456",
+              "entityName": "primary-endpoint",
+              "createdAt": "2025-06-15T10:45:12Z",
+              "provisioningState": "Succeeded",
+              "attributes": [
+                {
+                  "name": "environment",
+                  "value": "development"
+                }
+              ],
+              "projectId": "project-123",
+              "branchId": "branch-123",
+              "endpointType": "read_write",
+              "endpointId": "endpoint-456",
+              "computeName": "primary",
+              "status": "active",
+              "lastActive": "2025-06-30T15:30:22Z",
+              "size": {
+                "autoscalingLimitMinCu": 3,
+                "autoscalingLimitMaxCu": 14
+              }
+            }
+          ]
+        },
+        "id": "/subscriptions/DFF26289-4E9C-46D0-890E-F8BE27BDA8C2/resourceGroups/rgneon/providers/Neon.Postgres/organizations/myOrganization/projects/myProject",
+        "name": "myProject",
+        "type": "Microsoft.Neon.Postgres/organizations/projects",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-01T09:55:42.307Z",
+          "lastModifiedBy": "admin@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-01T09:55:42.307Z"
+        }
+      }
+    }
+  }
+}

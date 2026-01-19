@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "parameters": {
+      "location": "SoutheastAsia",
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "restorePointInTime": "2021-06-24T00:00:37.467Z",
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/sourceserver"
+      },
+      "sku": {
+        "name": "Standard_D14_v2",
+        "tier": "GeneralPurpose"
+      },
+      "tags": {
+        "num": "1"
+      }
+    },
+    "resourceGroupName": "TargetResourceGroup",
+    "serverName": "targetserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/targetserver",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "adminuser",
+          "availabilityZone": "1",
+          "backup": {
+            "backupIntervalHours": 24,
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-24T00:15:24.00+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "targetserver.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "replicaCapacity": 10,
+          "replicationRole": "None",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 360,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 20,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7"
+        },
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "num": "1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/targetserver",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "adminuser",
+          "availabilityZone": "1",
+          "backup": {
+            "backupIntervalHours": 24,
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-24T00:15:24.00+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "targetserver.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenancePolicy": {
+            "patchStrategy": "Regular"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "replicaCapacity": 10,
+          "replicationRole": "None",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 360,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 20,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7"
+        },
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "num": "1"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Servers_Create",
+  "title": "Create a server as a point in time restore"
+}

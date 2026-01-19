@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "resourceName": "myIoTCentralApp",
+    "api-version": "2018-09-01",
+    "AppPatch": {
+      "properties": {
+        "displayName": "My IoT Central App 2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "code": "200",
+        "message": "OK",
+        "target": "ResourceHandler.ExecutePatchRequest"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/IoTApps/myIoTCentralApp",
+        "location": "westus",
+        "type": "Microsoft.IoTCentral/IoTApps",
+        "name": "myIoTCentralApp",
+        "tags": {
+          "key": "value"
+        },
+        "properties": {
+          "applicationId": "6ebd8fd3-6e34-419e-908f-9be61ec6f6d6",
+          "displayName": "My IoT Central App 2",
+          "subdomain": "my-iot-central-app-2",
+          "template": "iotc-default@1.0.0"
+        },
+        "sku": {
+          "name": "F1"
+        }
+      }
+    },
+    "202": {},
+    "default": {
+      "description": "Error message returned for an unexpected response",
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "target": "Error target"
+        }
+      }
+    }
+  }
+}

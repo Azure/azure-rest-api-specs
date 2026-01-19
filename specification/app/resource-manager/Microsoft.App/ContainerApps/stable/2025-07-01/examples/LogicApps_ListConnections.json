@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "containerAppName": "testapp2",
+    "logicAppName": "testapp2",
+    "api-version": "2025-07-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testapp2/providers/Microsoft.App/logicApps/testapp2/workflowconfigurations/connections",
+        "name": "testapp2/connections",
+        "type": "Microsoft.App/logicApps/workflowsconfiguration",
+        "properties": {
+          "files": {
+            "connections.json": {
+              "managedApiConnections": {
+                "office365": {
+                  "api": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/centraluseuap/managedApis/arm"
+                  },
+                  "connection": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/examplerg/providers/Microsoft.Web/connections/arm"
+                  },
+                  "connectionRuntimeUrl": "https://9d51d1ffc9f77572.00.common.logic.azure-apihub.net/apim/arm/connectionruntimeid",
+                  "authentication": {
+                    "type": "Raw",
+                    "scheme": "Key",
+                    "parameter": "@appsetting('office365-connectionKey')"
+                  }
+                }
+              }
+            }
+          },
+          "health": {
+            "state": "Healthy"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-04-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/592f1174cc83890dc4f32686",
+            "type": "Microsoft.ApiManagement/service/namedValues",
+            "name": "592f1174cc83890dc4f32686",
+            "properties": {
+              "displayName": "Logger-Credentials-592f1174cc83890dc4f32687",
+              "value": "propValue",
+              "secret": false
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop6",
+            "type": "Microsoft.ApiManagement/service/namedValues",
+            "name": "testprop6",
+            "properties": {
+              "displayName": "prop6namekv",
+              "keyVault": {
+                "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret",
+                "identityClientId": "2d2df842-44d8-4885-8dec-77cc1a984a31",
+                "lastStatus": {
+                  "code": "Success",
+                  "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
+                }
+              },
+              "tags": [
+                "foo",
+                "bar"
+              ],
+              "secret": true
+            }
+          }
+        ],
+        "count": 1,
+        "nextLink": ""
+      }
+    }
+  }
+}

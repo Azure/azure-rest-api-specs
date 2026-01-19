@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "name": "{servicerunnerName}",
+    "api-version": "2018-09-15",
+    "labName": "{devtestlabName}",
+    "resourceGroupName": "resourceGroupName",
+    "serviceRunner": {
+      "identity": {
+        "type": "{identityType}",
+        "clientSecretUrl": "{identityClientSecretUrl}",
+        "principalId": "{identityPrincipalId}",
+        "tenantId": "{identityTenantId}"
+      },
+      "location": "{location}",
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    },
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{serviceRunnerName}",
+        "type": "Microsoft.DevTestLab/labs/serviceRunners",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/serviceRunners/{serviceRunnerName}",
+        "identity": {
+          "type": "{identityType}",
+          "clientSecretUrl": "{identityClientSecretUrl}",
+          "principalId": "{identityPrincipalId}",
+          "tenantId": "{identityTenantId}"
+        },
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{serviceRunnerName}",
+        "type": "Microsoft.DevTestLab/labs/serviceRunners",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/serviceRunners/{serviceRunnerName}",
+        "identity": {
+          "type": "{identityType}",
+          "clientSecretUrl": "{identityClientSecretUrl}",
+          "principalId": "{identityPrincipalId}",
+          "tenantId": "{identityTenantId}"
+        },
+        "location": "{location}",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "ServiceRunners_CreateOrUpdate",
+  "title": "ServiceRunners_CreateOrUpdate"
+}

@@ -1,0 +1,242 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "api-version": "2022-03-01-preview",
+    "runId": "4b200abf-c90c-43cf-98ae-b9f2bcf90373"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 10 Mar 2021 07:24:29 GMT",
+        "Server": "Kestrel Microsoft-HTTPAPI/2.0",
+        "Transfer-Encoding": "chunked",
+        "Content-Type": "application/json; charset=utf-8",
+        "x-ms-request-id": "393b45f1-a176-4e74-accd-5f66d7f81ec6"
+      },
+      "body": {
+        "message": "Notebook execution is in Failed state",
+        "result": {
+          "snapshot": {
+            "id": "4b200abf-c90c-43cf-98ae-b9f2bcf90373",
+            "notebook": "exampleNotebook",
+            "parameters": {
+              "param1": {
+                "type": "String",
+                "value": "Run"
+              },
+              "param2": {
+                "type": "String",
+                "value": "Run2"
+              }
+            },
+            "notebookContent": {
+              "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspace/notebooks/exampleNotebook",
+              "name": "exampleNotebook",
+              "type": "Microsoft.Synapse/workspaces/notebooks",
+              "properties": {
+                "nbformat": 4,
+                "nbformat_minor": 2,
+                "bigDataPool": {
+                  "referenceName": "exampleSparkpool",
+                  "type": "BigDataPoolReference"
+                },
+                "sessionProperties": {
+                  "driverMemory": "56g",
+                  "driverCores": 8,
+                  "executorMemory": "56g",
+                  "executorCores": 8,
+                  "numExecutors": 2
+                },
+                "metadata": {
+                  "language_info": {
+                    "name": "python",
+                    "codemirror_mode": null,
+                    "version": null
+                  },
+                  "a365ComputeOptions": {
+                    "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleworkspace/bigDataPools/exampleSparkpool",
+                    "name": "exampleSparkpool",
+                    "type": "Spark",
+                    "endpoint": "https://exampleWorkspace.dev.azuresynapse-dogfood.net/livyApi/versions/2019-11-01-preview/sparkPools/exampleSparkpool",
+                    "auth": {
+                      "type": "AAD",
+                      "authResource": "https://dev.azuresynapse.net"
+                    },
+                    "sparkVersion": "2.4",
+                    "nodeCount": 3,
+                    "cores": 8,
+                    "memory": 56,
+                    "extraHeader": null
+                  },
+                  "synapse_widget": {
+                    "version": "0.1",
+                    "state": {}
+                  },
+                  "kernelspec": {
+                    "name": "synapse_pyspark",
+                    "display_name": "python"
+                  }
+                },
+                "cells": [
+                  {
+                    "cell_type": "code",
+                    "source": [
+                      "num = 10"
+                    ],
+                    "outputs": [
+                      {
+                        "output_type": "display_data",
+                        "data": {
+                          "application/vnd.livy.statement-meta+json": {
+                            "spark_pool": "exampleSparkpool",
+                            "session_id": 1,
+                            "statement_id": 1,
+                            "state": "finished",
+                            "livy_statement_state": "available",
+                            "queued_time": "2021-09-06T10:24:57.6453419Z",
+                            "session_start_time": "2021-09-06T10:24:57.6941584Z",
+                            "execution_start_time": "2021-09-06T10:28:50.1738715Z",
+                            "execution_finish_time": "2021-09-06T10:28:50.1739715Z"
+                          },
+                          "text/plain": "StatementMeta(exampleSparkpool, 1, 1, Finished, Available)"
+                        },
+                        "metadata": {}
+                      },
+                      {
+                        "output_type": "execute_result",
+                        "execution_count": 1,
+                        "data": {
+                          "text/plain": ""
+                        },
+                        "metadata": {}
+                      }
+                    ],
+                    "metadata": {
+                      "tags": [
+                        "parameters"
+                      ],
+                      "jupyter": {
+                        "source_hidden": false,
+                        "outputs_hidden": false
+                      },
+                      "nteract": {
+                        "transient": {
+                          "deleting": false
+                        }
+                      },
+                      "collapsed": true
+                    }
+                  },
+                  {
+                    "cell_type": "code",
+                    "source": [
+                      "# This cell is generated from runtime parameters. Learn more: https://go.microsoft.com/fwlink/?linkid=2161015\n",
+                      "param1 = \"Run\"\n",
+                      "param2 = \"Run2\"\n"
+                    ],
+                    "outputs": [
+                      {
+                        "output_type": "display_data",
+                        "data": {
+                          "application/vnd.livy.statement-meta+json": {
+                            "spark_pool": "exampleSparkpool",
+                            "session_id": 1,
+                            "statement_id": 2,
+                            "state": "finished",
+                            "livy_statement_state": "available",
+                            "queued_time": "2021-09-06T10:24:57.6541813Z",
+                            "session_start_time": null,
+                            "execution_start_time": "2021-09-06T10:28:50.5257245Z",
+                            "execution_finish_time": "2021-09-06T10:28:50.5258235Z"
+                          },
+                          "text/plain": "StatementMeta(exampleSparkpool, 1, 2, Finished, Available)"
+                        },
+                        "metadata": {}
+                      },
+                      {
+                        "output_type": "execute_result",
+                        "execution_count": 2,
+                        "data": {
+                          "text/plain": ""
+                        },
+                        "metadata": {}
+                      }
+                    ],
+                    "metadata": {
+                      "tags": [
+                        "parameters_overwritten"
+                      ]
+                    }
+                  },
+                  {
+                    "cell_type": "code",
+                    "source": [
+                      "mssparkutils.notebook.exit(\"SUCCESS_exampleNotebook with num is \" + str(num))"
+                    ],
+                    "outputs": [
+                      {
+                        "output_type": "display_data",
+                        "data": {
+                          "application/vnd.livy.statement-meta+json": {
+                            "spark_pool": "exampleSparkpool",
+                            "session_id": 1,
+                            "statement_id": 3,
+                            "state": "finished",
+                            "livy_statement_state": "available",
+                            "queued_time": "2021-09-06T10:24:57.6615537Z",
+                            "session_start_time": null,
+                            "execution_start_time": "2021-09-06T10:28:50.8668915Z",
+                            "execution_finish_time": "2021-09-06T10:28:51.2691628Z"
+                          },
+                          "text/plain": "StatementMeta(exampleSparkpool, 1, 3, Finished, Available)"
+                        },
+                        "metadata": {}
+                      },
+                      {
+                        "output_type": "display_data",
+                        "data": {
+                          "text/plain": "ExitValue: SUCCESS_exampleNotebook with num is 10"
+                        },
+                        "metadata": {}
+                      }
+                    ],
+                    "metadata": {}
+                  }
+                ],
+                "folder": null
+              },
+              "etag": "0f00eb17-0000-3400-0000-60502a1e0000"
+            },
+            "sparkPool": "exampleSparkpool",
+            "sessionId": null,
+            "sessionOptions": {
+              "kind": null,
+              "proxyUser": null,
+              "jars": null,
+              "pyFiles": null,
+              "files": null,
+              "driverMemory": "28g",
+              "driverCores": 4,
+              "executorMemory": "28g",
+              "executorCores": 4,
+              "numExecutors": 2,
+              "archives": null,
+              "queue": null,
+              "name": null,
+              "conf": null,
+              "isQueueable": null,
+              "heartbeatTimeoutInSecond": null
+            },
+            "honorSessionTimeToLive": false,
+            "exitValue": "SUCCESS_exampleNotebook with num is 10"
+          },
+          "runId": "e4221395-55ae-4c6d-9756-fae966d84350",
+          "runStatus": "Succeeded",
+          "sessionId": "1",
+          "sparkPool": "exampleSparkpool",
+          "lastCheckedOn": "0001-01-01T00:00:00"
+        }
+      }
+    }
+  }
+}

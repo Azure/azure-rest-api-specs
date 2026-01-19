@@ -1,0 +1,213 @@
+{
+  "operationId": "Indexers_CreateOrUpdate",
+  "title": "SearchServiceCreateOrUpdateIndexer",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexerName": "myindexer",
+    "api-version": "2025-03-01-preview",
+    "ignoreResetRequirements": null,
+    "disableCacheReprocessingChangeDetection": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "If-Match": null,
+    "If-None-Match": null,
+    "Prefer": "return=representation",
+    "indexer": {
+      "name": "myindexer",
+      "description": "Description of the indexer",
+      "dataSourceName": "mydocdbdatasource",
+      "skillsetName": "myskillset",
+      "targetIndexName": "preview-test",
+      "schedule": {
+        "interval": "P1D",
+        "startTime": "2025-01-07T19:30:00Z"
+      },
+      "parameters": {
+        "batchSize": 10,
+        "maxFailedItems": 10,
+        "maxFailedItemsPerBatch": 5,
+        "configuration": {
+          "parsingMode": "markdown",
+          "excludedFileNameExtensions": ".png,.mp4",
+          "indexedFileNameExtensions": ".docx,.pptx",
+          "failOnUnsupportedContentType": true,
+          "failOnUnprocessableDocument": false,
+          "indexStorageMetadataOnlyForOversizedDocuments": true,
+          "delimitedTextHeaders": "Header1,Header2",
+          "delimitedTextDelimiter": "|",
+          "firstLineContainsHeaders": true,
+          "markdownParsingSubmode": "oneToOne",
+          "markdownHeaderDepth": "h6",
+          "documentRoot": "/root",
+          "dataToExtract": "storageMetadata",
+          "imageAction": "none",
+          "allowSkillsetToReadFileData": false,
+          "pdfTextRotationAlgorithm": "none",
+          "executionEnvironment": "standard"
+        }
+      },
+      "fieldMappings": [
+        {
+          "sourceFieldName": "/document",
+          "targetFieldName": "name",
+          "mappingFunction": {
+            "name": "base64Encode"
+          }
+        }
+      ],
+      "outputFieldMappings": [
+        {
+          "sourceFieldName": "/document",
+          "targetFieldName": "name",
+          "mappingFunction": {
+            "name": "base64Encode"
+          }
+        }
+      ],
+      "disabled": false,
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "myindexer",
+        "description": "Description of the indexer",
+        "dataSourceName": "mydocdbdatasource",
+        "skillsetName": "myskillset",
+        "targetIndexName": "preview-test",
+        "disabled": false,
+        "schedule": {
+          "interval": "P1D",
+          "startTime": "2024-06-06T00:01:50.265Z"
+        },
+        "parameters": {
+          "batchSize": 10,
+          "maxFailedItems": 10,
+          "maxFailedItemsPerBatch": 5,
+          "configuration": {
+            "parsingMode": "markdown",
+            "excludedFileNameExtensions": ".png,.mp4",
+            "indexedFileNameExtensions": ".docx,.pptx",
+            "failOnUnsupportedContentType": true,
+            "failOnUnprocessableDocument": false,
+            "indexStorageMetadataOnlyForOversizedDocuments": true,
+            "delimitedTextHeaders": "Header1,Header2",
+            "delimitedTextDelimiter": "|",
+            "firstLineContainsHeaders": true,
+            "markdownParsingSubmode": "oneToOne",
+            "markdownHeaderDepth": "h6",
+            "documentRoot": "/root",
+            "dataToExtract": "storageMetadata",
+            "imageAction": "none",
+            "allowSkillsetToReadFileData": false,
+            "pdfTextRotationAlgorithm": "none",
+            "executionEnvironment": "standard"
+          }
+        },
+        "fieldMappings": [
+          {
+            "sourceFieldName": "/document",
+            "targetFieldName": "name",
+            "mappingFunction": {
+              "name": "base64Encode"
+            }
+          }
+        ],
+        "outputFieldMappings": [
+          {
+            "sourceFieldName": "/document",
+            "targetFieldName": "name",
+            "mappingFunction": {
+              "name": "base64Encode"
+            }
+          }
+        ],
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "myindexer",
+        "description": "Description of the indexer",
+        "dataSourceName": "mydocdbdatasource",
+        "skillsetName": "myskillset",
+        "targetIndexName": "preview-test",
+        "disabled": false,
+        "schedule": {
+          "interval": "P1D",
+          "startTime": "2024-06-06T00:01:50.265Z"
+        },
+        "parameters": {
+          "batchSize": 10,
+          "maxFailedItems": 10,
+          "maxFailedItemsPerBatch": 5,
+          "configuration": {
+            "parsingMode": "markdown",
+            "excludedFileNameExtensions": ".png,.mp4",
+            "indexedFileNameExtensions": ".docx,.pptx",
+            "failOnUnsupportedContentType": true,
+            "failOnUnprocessableDocument": false,
+            "indexStorageMetadataOnlyForOversizedDocuments": true,
+            "delimitedTextHeaders": "Header1,Header2",
+            "delimitedTextDelimiter": "|",
+            "firstLineContainsHeaders": true,
+            "markdownParsingSubmode": "oneToOne",
+            "markdownHeaderDepth": "h6",
+            "documentRoot": "/root",
+            "dataToExtract": "storageMetadata",
+            "imageAction": "none",
+            "allowSkillsetToReadFileData": false,
+            "pdfTextRotationAlgorithm": "none",
+            "executionEnvironment": "standard"
+          }
+        },
+        "fieldMappings": [
+          {
+            "sourceFieldName": "/document",
+            "targetFieldName": "name",
+            "mappingFunction": {
+              "name": "base64Encode"
+            }
+          }
+        ],
+        "outputFieldMappings": [
+          {
+            "sourceFieldName": "/document",
+            "targetFieldName": "name",
+            "mappingFunction": {
+              "name": "base64Encode"
+            }
+          }
+        ],
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        }
+      }
+    }
+  }
+}

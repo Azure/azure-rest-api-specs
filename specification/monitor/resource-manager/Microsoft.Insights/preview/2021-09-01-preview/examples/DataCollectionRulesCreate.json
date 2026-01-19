@@ -1,0 +1,359 @@
+{
+  "parameters": {
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
+    "resourceGroupName": "myResourceGroup",
+    "dataCollectionRuleName": "myCollectionRule",
+    "api-version": "2021-09-01-preview",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "dataSources": {
+          "performanceCounters": [
+            {
+              "name": "cloudTeamCoreCounters",
+              "streams": [
+                "Microsoft-Perf"
+              ],
+              "samplingFrequencyInSeconds": 15,
+              "counterSpecifiers": [
+                "\\Processor(_Total)\\% Processor Time",
+                "\\Memory\\Committed Bytes",
+                "\\LogicalDisk(_Total)\\Free Megabytes",
+                "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length"
+              ]
+            },
+            {
+              "name": "appTeamExtraCounters",
+              "streams": [
+                "Microsoft-Perf"
+              ],
+              "samplingFrequencyInSeconds": 30,
+              "counterSpecifiers": [
+                "\\Process(_Total)\\Thread Count"
+              ]
+            }
+          ],
+          "windowsEventLogs": [
+            {
+              "name": "cloudSecurityTeamEvents",
+              "streams": [
+                "Microsoft-WindowsEvent"
+              ],
+              "xPathQueries": [
+                "Security!"
+              ]
+            },
+            {
+              "name": "appTeam1AppEvents",
+              "streams": [
+                "Microsoft-WindowsEvent"
+              ],
+              "xPathQueries": [
+                "System![System[(Level = 1 or Level = 2 or Level = 3)]]",
+                "Application!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
+              ]
+            }
+          ],
+          "syslog": [
+            {
+              "name": "cronSyslog",
+              "streams": [
+                "Microsoft-Syslog"
+              ],
+              "facilityNames": [
+                "cron"
+              ],
+              "logLevels": [
+                "Debug",
+                "Critical",
+                "Emergency"
+              ]
+            },
+            {
+              "name": "syslogBase",
+              "streams": [
+                "Microsoft-Syslog"
+              ],
+              "facilityNames": [
+                "syslog"
+              ],
+              "logLevels": [
+                "Alert",
+                "Critical",
+                "Emergency"
+              ]
+            }
+          ]
+        },
+        "destinations": {
+          "logAnalytics": [
+            {
+              "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
+              "name": "centralWorkspace"
+            }
+          ]
+        },
+        "dataFlows": [
+          {
+            "streams": [
+              "Microsoft-Perf",
+              "Microsoft-Syslog",
+              "Microsoft-WindowsEvent"
+            ],
+            "destinations": [
+              "centralWorkspace"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+        "name": "myCollectionRule",
+        "type": "Microsoft.Insights/dataCollectionRules",
+        "location": "eastus",
+        "tags": {
+          "tag1": "A",
+          "tag2": "B"
+        },
+        "properties": {
+          "immutableId": "dcr-b74e0d383fc9415abaa584ec41adece3",
+          "dataSources": {
+            "performanceCounters": [
+              {
+                "name": "cloudTeamCoreCounters",
+                "streams": [
+                  "Microsoft-Perf"
+                ],
+                "samplingFrequencyInSeconds": 15,
+                "counterSpecifiers": [
+                  "\\Processor(_Total)\\% Processor Time",
+                  "\\Memory\\Committed Bytes",
+                  "\\LogicalDisk(_Total)\\Free Megabytes",
+                  "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length"
+                ]
+              },
+              {
+                "name": "appTeamExtraCounters",
+                "streams": [
+                  "Microsoft-Perf"
+                ],
+                "samplingFrequencyInSeconds": 30,
+                "counterSpecifiers": [
+                  "\\Process(_Total)\\Thread Count"
+                ]
+              }
+            ],
+            "windowsEventLogs": [
+              {
+                "name": "cloudSecurityTeamEvents",
+                "streams": [
+                  "Microsoft-WindowsEvent"
+                ],
+                "xPathQueries": [
+                  "Security!"
+                ]
+              },
+              {
+                "name": "appTeam1AppEvents",
+                "streams": [
+                  "Microsoft-WindowsEvent"
+                ],
+                "xPathQueries": [
+                  "System![System[(Level = 1 or Level = 2 or Level = 3)]]",
+                  "Application!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
+                ]
+              }
+            ],
+            "syslog": [
+              {
+                "name": "cronSyslog",
+                "streams": [
+                  "Microsoft-Syslog"
+                ],
+                "facilityNames": [
+                  "cron"
+                ],
+                "logLevels": [
+                  "Debug",
+                  "Critical",
+                  "Emergency"
+                ]
+              },
+              {
+                "name": "syslogBase",
+                "streams": [
+                  "Microsoft-Syslog"
+                ],
+                "facilityNames": [
+                  "syslog"
+                ],
+                "logLevels": [
+                  "Alert",
+                  "Critical",
+                  "Emergency"
+                ]
+              }
+            ]
+          },
+          "destinations": {
+            "logAnalytics": [
+              {
+                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
+                "workspaceId": "9ba8bc53-bd36-4156-8667-e983e7ae0e4f",
+                "name": "centralWorkspace"
+              }
+            ]
+          },
+          "dataFlows": [
+            {
+              "streams": [
+                "Microsoft-Perf",
+                "Microsoft-Syslog",
+                "Microsoft-WindowsEvent"
+              ],
+              "destinations": [
+                "centralWorkspace"
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-04-01T12:34:56.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-04-02T12:34:56.1234567Z"
+        },
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+        "name": "myCollectionRule",
+        "type": "Microsoft.Insights/dataCollectionRules",
+        "location": "eastus",
+        "tags": {
+          "tag1": "A",
+          "tag2": "B"
+        },
+        "properties": {
+          "immutableId": "dcr-b74e0d383fc9415abaa584ec41adece3",
+          "dataSources": {
+            "performanceCounters": [
+              {
+                "name": "cloudTeamCoreCounters",
+                "streams": [
+                  "Microsoft-Perf"
+                ],
+                "samplingFrequencyInSeconds": 15,
+                "counterSpecifiers": [
+                  "\\Processor(_Total)\\% Processor Time",
+                  "\\Memory\\Committed Bytes",
+                  "\\LogicalDisk(_Total)\\Free Megabytes",
+                  "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length"
+                ]
+              },
+              {
+                "name": "appTeamExtraCounters",
+                "streams": [
+                  "Microsoft-Perf"
+                ],
+                "samplingFrequencyInSeconds": 30,
+                "counterSpecifiers": [
+                  "\\Process(_Total)\\Thread Count"
+                ]
+              }
+            ],
+            "windowsEventLogs": [
+              {
+                "name": "cloudSecurityTeamEvents",
+                "streams": [
+                  "Microsoft-WindowsEvent"
+                ],
+                "xPathQueries": [
+                  "Security!"
+                ]
+              },
+              {
+                "name": "appTeam1AppEvents",
+                "streams": [
+                  "Microsoft-WindowsEvent"
+                ],
+                "xPathQueries": [
+                  "System![System[(Level = 1 or Level = 2 or Level = 3)]]",
+                  "Application!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
+                ]
+              }
+            ],
+            "syslog": [
+              {
+                "name": "cronSyslog",
+                "streams": [
+                  "Microsoft-Syslog"
+                ],
+                "facilityNames": [
+                  "cron"
+                ],
+                "logLevels": [
+                  "Debug",
+                  "Critical",
+                  "Emergency"
+                ]
+              },
+              {
+                "name": "syslogBase",
+                "streams": [
+                  "Microsoft-Syslog"
+                ],
+                "facilityNames": [
+                  "syslog"
+                ],
+                "logLevels": [
+                  "Alert",
+                  "Critical",
+                  "Emergency"
+                ]
+              }
+            ]
+          },
+          "destinations": {
+            "logAnalytics": [
+              {
+                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
+                "workspaceId": "9ba8bc53-bd36-4156-8667-e983e7ae0e4f",
+                "name": "centralWorkspace"
+              }
+            ]
+          },
+          "dataFlows": [
+            {
+              "streams": [
+                "Microsoft-Perf",
+                "Microsoft-Syslog",
+                "Microsoft-WindowsEvent"
+              ],
+              "destinations": [
+                "centralWorkspace"
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-04-01T12:34:56.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-04-02T12:34:56.1234567Z"
+        },
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+      }
+    }
+  }
+}

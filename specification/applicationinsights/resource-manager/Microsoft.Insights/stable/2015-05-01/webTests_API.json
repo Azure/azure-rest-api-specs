@@ -200,11 +200,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified web test does not exist)."
-          },
           "200": {
             "description": "Successful request to delete a web test definition."
+          },
+          "204": {
+            "description": "No content: the request was successful, but the response is empty (the request to delete failed because the specified web test does not exist)."
           }
         },
         "x-ms-examples": {
@@ -439,7 +439,10 @@
           "description": "A list of where to physically run the tests from to give global coverage for accessibility of your application.",
           "items": {
             "$ref": "#/definitions/WebTestGeolocation"
-          }
+          },
+          "x-ms-identifiers": [
+            "Id"
+          ]
         },
         "Configuration": {
           "type": "object",

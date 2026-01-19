@@ -1,0 +1,37 @@
+{
+  "title": "Retrieves an existing exception policy by Id",
+  "operationId": "JobRouterAdministrationOperations_GetExceptionPolicy",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "exceptionPolicyId": "MainExceptionPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "MainExceptionPolicy",
+        "name": "Main",
+        "exceptionRules": [
+          {
+            "id": "MaxWaitTimeExceeded",
+            "trigger": {
+              "kind": "waitTime",
+              "thresholdSeconds": 20
+            },
+            "actions": [
+              {
+                "id": "babd4f6f-916e-4e91-9c89-e0bb05a2c425",
+                "kind": "reclassify",
+                "classificationPolicyId": "Main",
+                "labelsToUpsert": {
+                  "escalated": true
+                }
+              }
+            ]
+          }
+        ],
+        "etag": "etag"
+      }
+    }
+  }
+}

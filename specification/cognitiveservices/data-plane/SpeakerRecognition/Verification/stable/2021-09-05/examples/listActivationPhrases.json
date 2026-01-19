@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "endpoint": "https://westus.api.cognitive.microsoft.com",
+    "api-version": "2021-09-05",
+    "Content-Type": "application/json",
+    "locale": "en-US",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "value": [
+          {
+            "activationPhrase": "this is my activation phrase to identify me"
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      },
+      "body": {
+        "error": {
+          "code": "Error Code",
+          "message": "Erro Messae"
+        }
+      }
+    }
+  }
+}

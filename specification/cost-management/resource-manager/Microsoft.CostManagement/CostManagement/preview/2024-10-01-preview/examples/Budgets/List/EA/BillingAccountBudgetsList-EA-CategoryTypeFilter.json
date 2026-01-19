@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "billingAccountId": "123456",
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456",
+    "$filter": "properties/category eq 'ReservationUtilization'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/budgets/TestRUAlert",
+            "name": "TestRUAlert",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "properties": {
+              "category": "ReservationUtilization",
+              "timeGrain": "Last7Days",
+              "timePeriod": {
+                "startDate": "2023-04-01T00:00:00Z",
+                "endDate": "2025-04-01T00:00:00Z"
+              },
+              "filter": {},
+              "notifications": {
+                "Actual_LessThan_99_Percent": {
+                  "enabled": true,
+                  "operator": "LessThan",
+                  "threshold": 99,
+                  "frequency": "Weekly",
+                  "locale": "en-us",
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

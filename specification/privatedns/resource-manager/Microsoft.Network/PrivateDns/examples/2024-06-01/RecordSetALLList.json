@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "privateZoneName": "privatezone1.com",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/ALL?api-version=2024-06-01&$skipToken=skipToken",
+        "value": [
+          {
+            "name": "recorda",
+            "type": "Microsoft.Network/privateDnsZones/A",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda",
+            "properties": {
+              "aRecords": [
+                {
+                  "ipv4Address": "1.2.3.4"
+                }
+              ],
+              "fqdn": "recorda.privatezone1.com.",
+              "isAutoRegistered": false,
+              "metadata": {
+                "key1": "value1"
+              },
+              "ttl": 3600
+            }
+          },
+          {
+            "name": "recordcname",
+            "type": "Microsoft.Network/privateDnsZones/CNAME",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/CNAME/recordcname",
+            "properties": {
+              "cnameRecord": {
+                "cname": "contoso.com"
+              },
+              "fqdn": "recordcname.privatezone1.com.",
+              "isAutoRegistered": false,
+              "metadata": {
+                "key1": "value1"
+              },
+              "ttl": 3600
+            }
+          },
+          {
+            "name": "recordmx",
+            "type": "Microsoft.Network/privateDnsZones/MX",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx",
+            "properties": {
+              "fqdn": "recordmx.privatezone1.com.",
+              "isAutoRegistered": false,
+              "metadata": {
+                "key1": "value1"
+              },
+              "mxRecords": [
+                {
+                  "exchange": "mail.contoso1.com",
+                  "preference": 0
+                }
+              ],
+              "ttl": 3600
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RecordSets_List",
+  "title": "GET Private DNS Zone ALL Record Sets"
+}

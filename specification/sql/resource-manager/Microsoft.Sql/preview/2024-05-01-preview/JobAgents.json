@@ -1,0 +1,480 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents": {
+      "get": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Gets a list of job agents in a server.",
+        "operationId": "JobAgents_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of job agents.",
+            "schema": {
+              "$ref": "#/definitions/JobAgentListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ServerDisabled - Server is disabled.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List job agents in a server": {
+            "$ref": "./examples/ListJobAgentsByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}": {
+      "get": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Gets a job agent.",
+        "operationId": "JobAgents_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified job agent.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 409 ServerDisabled - Server is disabled.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a job agent": {
+            "$ref": "./examples/GetJobAgent.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Creates or updates a job agent.",
+        "operationId": "JobAgents_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be created or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested job agent resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the job agent.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingSkuName - Sku name is required.\n\n * 400 InvalidDatabaseResourceId - Invalid database resource identifier.\n\n * 400 InvalidIdentityTenantId - tenantId cannot be specified on a create or update request.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 MissingUserAssignedIdentities - identity.userAssignedIdentities must be provided when identity.type is equal to \"UserAssigned\".\n\n * 400 MissingIdentityType - Please specify the identity type.\n\n * 400 MultipleIdentitiesOnJobAgent - Please specify only one user managed identity per job agent.\n\n * 400 InvalidIdentityType - Please specify only \"None\" or \"UserAssigned\" identity types.\n\n * 400 SkuMismatchingNameCapacity - The SKU capacity provided does not match with provided SKU name.\n\n * 400 ElasticJobAgentEditionUnsupported - The given SLO is not supported for job agent. Please retry with the supported SLO.\n\n * 400 JobAgentDatabaseEditionUnsupported - The specified database's service level objective is not supported for use as a job agent database.\n\n * 400 JobAgentDatabaseSecondary - A job agent cannot be linked to a geo-secondary database.\n\n * 400 JobAgentDatabaseAlreadyLinked - The specified database is already linked to another job agent.\n\n * 400 ElasticJobAgentObjectiveAssignmentInProgress - The SLO assignment for elastic job agent '{0}' is currently in progress. Please retry operation later.\n\n * 400 ElasticJobAgentEditionUnsupported - The given SLO is not supported for job agent. Please retry with the supported SLO.\n\n * 400 DatabaseDoesNotExist - The requested database was not found\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 ElasticJobsNotSupportedOnAutoPauseEnabledDatabase - Auto-pause enabled serverless database is not supported as an Elastic Jobs database because job agent would prevent that database from pausing. You can either disable auto-pause on this serverless database or delete the job agent that is using this database. See here for more details: https://docs.microsoft.com/azure/azure-sql/database/serverless-tier-overview#auto-pausing\n\n * 400 JobAgentExceededQuota - Could not create job agent because it would exceed the quota.\n\n * 400 JobAgentAlreadyExists - The job agent already exists on the server.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ElasticJobAgentOperationUnavailable - The operation '{0}' is blocked for Elastic Job Agent '{1}' because {2}\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the job agent.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a job agent": {
+            "$ref": "./examples/CreateOrUpdateJobAgent.json"
+          },
+          "Create or update a job agent with identity": {
+            "$ref": "./examples/CreateOrUpdateJobAgentWithIdentity.json"
+          },
+          "Create or update a job agent with sku.": {
+            "$ref": "./examples/CreateOrUpdateJobAgentWithSku.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Deletes a job agent.",
+        "operationId": "JobAgents_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the job agent."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified job agent does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a job agent": {
+            "$ref": "./examples/DeleteJobAgent.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "JobAgents"
+        ],
+        "description": "Updates a job agent.",
+        "operationId": "JobAgents_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The update to the job agent.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobAgentUpdate"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the job agent.",
+            "schema": {
+              "$ref": "#/definitions/JobAgent"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 MissingIdentityType - Please specify the identity type.\n\n * 400 MultipleIdentitiesOnJobAgent - Please specify only one user managed identity per job agent.\n\n * 400 InvalidIdentityTenantId - tenantId cannot be specified on a create or update request.\n\n * 400 InvalidIdentityType - Please specify only \"None\" or \"UserAssigned\" identity types.\n\n * 400 SkuMismatchingNameCapacity - The SKU capacity provided does not match with provided SKU name.\n\n * 400 ElasticJobAgentEditionUnsupported - The given SLO is not supported for job agent. Please retry with the supported SLO.\n\n * 400 ElasticJobAgentObjectiveAssignmentInProgress - The SLO assignment for elastic job agent '{0}' is currently in progress. Please retry operation later.\n\n * 400 ElasticJobAgentEditionUnsupported - The given SLO is not supported for job agent. Please retry with the supported SLO.\n\n * 400 ElasticJobsNotSupportedOnAutoPauseEnabledDatabase - Auto-pause enabled serverless database is not supported as an Elastic Jobs database because job agent would prevent that database from pausing. You can either disable auto-pause on this serverless database or delete the job agent that is using this database. See here for more details: https://docs.microsoft.com/azure/azure-sql/database/serverless-tier-overview#auto-pausing\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 PropertyChangeUnsupported - Property cannot be modified.\n\n * 404 JobAgentNotFound - Specified job agent does not exist in the specified logical server.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ElasticJobAgentOperationUnavailable - The operation '{0}' is blocked for Elastic Job Agent '{1}' because {2}\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a job agent's tags.": {
+            "$ref": "./examples/UpdateJobAgent.json"
+          },
+          "Update a job agent's identity.": {
+            "$ref": "./examples/UpdateJobAgentWithIdentity.json"
+          },
+          "Update a job agent's sku.": {
+            "$ref": "./examples/UpdateJobAgentWithSku.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JobAgent": {
+      "description": "An Azure SQL job agent.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "identity": {
+          "$ref": "#/definitions/JobAgentIdentity",
+          "description": "The identity of the job agent."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobAgentProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobAgentIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "format": "uuid",
+          "description": "The job agent identity tenant id",
+          "type": "string"
+        },
+        "type": {
+          "description": "The job agent identity type",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssignedUserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobAgentIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The resource ids of the user assigned identities to use",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobAgentUserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "JobAgentListResult": {
+      "description": "A list of Azure SQL job agents.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAgent"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobAgentProperties": {
+      "description": "Properties of a job agent.",
+      "required": [
+        "databaseId"
+      ],
+      "type": "object",
+      "properties": {
+        "databaseId": {
+          "description": "Resource ID of the database to store job metadata in.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "description": "The state of the job agent.",
+          "enum": [
+            "Creating",
+            "Ready",
+            "Updating",
+            "Deleting",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobAgentState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "JobAgentUpdate": {
+      "description": "An update to an Azure SQL job agent.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/JobAgentIdentity",
+          "description": "Managed identity assigned to job agent"
+        },
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The name and tier of the SKU."
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "JobAgentUserAssignedIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory client id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

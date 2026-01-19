@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVirtualMachineScaleSet",
+    "api-version": "2021-07-01",
+    "expand": "userData"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVirtualMachineScaleSet",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "location": "westus",
+        "tags": {
+          "myTag1": "tagValue1"
+        },
+        "sku": {
+          "name": "Standard_D2s_v3",
+          "tier": "Standard",
+          "capacity": 4
+        },
+        "properties": {
+          "singlePlacementGroup": false,
+          "upgradePolicy": {
+            "mode": "Automatic",
+            "automaticOSUpgradePolicy": {
+              "enableAutomaticOSUpgrade": false
+            }
+          },
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "osDisk": {
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Premium_LRS"
+                },
+                "diskSizeGB": 30
+              },
+              "imageReference": {
+                "publisher": "azuredatabricks",
+                "offer": "databricks",
+                "sku": "databricksworker",
+                "version": "3.15.2"
+              },
+              "dataDisks": []
+            },
+            "applicationProfile": {
+              "galleryApplications": [
+                {
+                  "tags": "myTag1",
+                  "order": 1,
+                  "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
+                  "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config"
+                },
+                {
+                  "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
+                }
+              ]
+            },
+            "userData": "RXhhbXBsZSBVc2VyRGF0YQ==",
+            "osProfile": {
+              "computerNamePrefix": "myVirtualMachineScaleSet",
+              "adminUsername": "admin",
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": false
+              }
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "myNic",
+                  "properties": {
+                    "primary": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "myIPConfig",
+                        "properties": {
+                          "primary": true,
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+                          }
+                        }
+                      }
+                    ],
+                    "networkSecurityGroup": {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "provisioningState": "succeeded",
+          "overprovision": false,
+          "doNotRunExtensionsOnOverprovisionedVMs": false,
+          "platformFaultDomainCount": 1,
+          "hostGroup": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/hostGroups/myHostGroup"
+          }
+        }
+      }
+    }
+  }
+}

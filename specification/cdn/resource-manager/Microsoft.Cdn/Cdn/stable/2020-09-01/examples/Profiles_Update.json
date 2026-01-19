@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "profileUpdateParameters": {
+      "tags": {
+        "additionalProperties": "Tag1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "profile1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
+        "type": "Microsoft.Cdn/profiles",
+        "tags": {
+          "additionalProperties": "Tag1"
+        },
+        "location": "WestCentralUs",
+        "sku": {
+          "name": "Standard_Verizon"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "profile1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
+        "type": "Microsoft.Cdn/profiles",
+        "tags": {
+          "additionalProperties": "Tag1"
+        },
+        "location": "WestCentralUs",
+        "sku": {
+          "name": "Standard_Verizon"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "name": "{environmentName}",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "userName": "@me"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{environmentName}",
+        "type": "Microsoft.DevTestLab/labs/users/environments",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/users/{uniqueIdentifier}/environments/{environmentName}",
+        "location": "{location}",
+        "properties": {
+          "createdByUser": "user@contoso.com",
+          "deploymentProperties": {
+            "armTemplateId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/artifactSources/{artifactSourceName}/armTemplates/{armTemplateName}"
+          },
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "Environments_Get",
+  "title": "Environments_Get"
+}

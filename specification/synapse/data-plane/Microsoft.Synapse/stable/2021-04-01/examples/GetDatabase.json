@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "databaseName": "exampleDatabase",
+    "api-version": "2021-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleDatabase",
+        "type": "DATABASE",
+        "properties": {
+          "properties": {},
+          "source": {
+            "provider": "ADLS",
+            "location": "abfss://exampleBlobContainer@exampleStorageName.dfs.core.windows.net/exampleDatabase"
+          },
+          "publishStatus": "PUBLISHED",
+          "objectVersion": 1,
+          "objectId": "exampleObjectIdGuid"
+        },
+        "id": "/subscriptions/exampleSubscriptionIdGuid/resourcegroups/exampleResourceGroup/providers/microsoft.synapse/workspaces/exampleWorkspace/databases/exampleDatabase"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "SyMS response error message"
+        }
+      }
+    }
+  }
+}

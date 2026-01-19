@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
+        "name": "{billingProfileName}",
+        "type": "Microsoft.Billing/billingAccounts/billingProfiles",
+        "properties": {
+          "displayName": "Billing Profile1",
+          "address": {
+            "companyName": "Contoso",
+            "firstName": "Test",
+            "lastName": "User",
+            "addressLine1": "Test Address1",
+            "addressLine2": "Test Address2",
+            "addressLine3": "Test Address3",
+            "city": "City",
+            "postalCode": "00000",
+            "region": "WA",
+            "country": "US"
+          },
+          "billingRelationshipType": "Direct",
+          "currency": "USD",
+          "enabledAzurePlans": [
+            {
+              "skuId": "0001",
+              "skuDescription": "Microsoft Azure Dev/Test"
+            },
+            {
+              "skuId": "0002",
+              "skuDescription": "Microsoft Azure Standard"
+            }
+          ],
+          "invoiceDay": 5,
+          "invoiceEmailOptIn": true,
+          "poNumber": "ABC12345",
+          "status": "Warned",
+          "statusReasonCode": "PastDue",
+          "spendingLimit": "On",
+          "invoiceSections": [
+            {
+              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/invoiceSectionId1",
+              "name": "invoiceSectionId1",
+              "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
+              "properties": {
+                "displayName": "invoiceSectionName1",
+                "state": "Active"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

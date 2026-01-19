@@ -1,0 +1,107 @@
+{
+  "title": "DataflowEndpoint_CreateOrUpdate_ADX",
+  "operationId": "DataflowEndpoint_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "dataflowEndpointName": "adx-endpoint",
+    "resource": {
+      "properties": {
+        "endpointType": "DataExplorer",
+        "dataExplorerSettings": {
+          "host": "example.westeurope.kusto.windows.net",
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {}
+          },
+          "database": "example-database",
+          "batching": {
+            "latencySeconds": 9312,
+            "maxMessages": 9028
+          }
+        }
+      },
+      "extendedLocation": {
+        "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "endpointType": "DataExplorer",
+          "dataExplorerSettings": {
+            "host": "example.westeurope.kusto.windows.net",
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {}
+            },
+            "database": "example-database",
+            "batching": {
+              "latencySeconds": 9312,
+              "maxMessages": 9028
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "zyhxscudobzfacetvgyjiav",
+        "type": "Microsoft.IoTOperations/instances/dataflowEndpoints",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "endpointType": "DataExplorer",
+          "dataExplorerSettings": {
+            "host": "example.westeurope.kusto.windows.net",
+            "authentication": {
+              "method": "SystemAssignedManagedIdentity",
+              "systemAssignedManagedIdentitySettings": {}
+            },
+            "database": "example-database",
+            "batching": {
+              "latencySeconds": 9312,
+              "maxMessages": 9028
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "zyhxscudobzfacetvgyjiav",
+        "type": "Microsoft.IoTOperations/instances/dataflowEndpoints",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}

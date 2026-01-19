@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "res4410",
+    "accountName": "sto8607",
+    "FileServicesName": "default",
+    "api-version": "2025-01-01",
+    "monitor": "true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/fileServices/default/usages/default",
+            "name": "default",
+            "type": "Microsoft.Storage/storageAccounts/fileServices/usages",
+            "properties": {
+              "storageAccountLimits": {
+                "maxFileShares": 50,
+                "maxProvisionedStorageGiB": 262144,
+                "maxProvisionedIOPS": 102400,
+                "maxProvisionedBandwidthMiBPerSec": 10340
+              },
+              "fileShareLimits": {
+                "minProvisionedStorageGiB": 32,
+                "maxProvisionedStorageGiB": 262144,
+                "minProvisionedIOPS": 3000,
+                "maxProvisionedIOPS": 102400,
+                "minProvisionedBandwidthMiBPerSec": 125,
+                "maxProvisionedBandwidthMiBPerSec": 10340
+              },
+              "fileShareRecommendations": {
+                "baseIOPS": 3000,
+                "ioScalar": 1,
+                "baseBandwidthMiBPerSec": 125,
+                "bandwidthScalar": 0.1
+              },
+              "burstingConstants": {
+                "burstFloorIOPS": 10000,
+                "burstIOScalar": 3,
+                "burstTimeframeSeconds": 3600
+              },
+              "storageAccountUsage": {
+                "liveShares": {
+                  "fileShareCount": 2,
+                  "provisionedStorageGiB": 64,
+                  "provisionedIOPS": 6064,
+                  "provisionedBandwidthMiBPerSec": 258
+                },
+                "softDeletedShares": {
+                  "fileShareCount": 1,
+                  "provisionedStorageGiB": 100,
+                  "provisionedIOPS": 3000,
+                  "provisionedBandwidthMiBPerSec": 125
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

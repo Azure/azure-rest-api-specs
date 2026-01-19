@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-01-02",
+    "snapshotName": "myIncrementalSnapshot"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "purchasePlan": {
+            "name": "test_sku",
+            "publisher": "test_test_pmc2pc1",
+            "product": "marketplace_vm_test"
+          },
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "supportsHibernation": true,
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+            "sourceUniqueId": "d633885d-d102-4481-901e-5b2413d1a7be",
+            "instantAccessDurationMinutes": 120
+          },
+          "diskSizeGB": 100,
+          "encryptionSettingsCollection": {
+            "enabled": true,
+            "encryptionSettings": [
+              {
+                "diskEncryptionKey": {
+                  "sourceVault": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                  },
+                  "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}"
+                },
+                "keyEncryptionKey": {
+                  "sourceVault": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                  },
+                  "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+                }
+              }
+            ]
+          },
+          "encryption": {
+            "type": "EncryptionAtRestWithPlatformKey"
+          },
+          "incremental": true,
+          "networkAccessPolicy": "0",
+          "diskState": "0",
+          "diskSizeBytes": 10737418240,
+          "uniqueId": "a395e9c1-fb9e-446e-a9ba-7b2fa0bcd305",
+          "incrementalSnapshotFamilyId": "d1a341d5-1ea7-4a85-b304-944ad8021639",
+          "snapshotAccessState": "Available",
+          "timeCreated": "2016-12-28T04:41:35.079872+00:00",
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.Compute/snapshots",
+        "location": "westus",
+        "tags": {
+          "department": "Development",
+          "project": "Snapshots"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/myIncrementalSnapshot",
+        "name": "myIncrementalSnapshot"
+      }
+    }
+  },
+  "operationId": "Snapshots_Get",
+  "title": "Get information about an incremental snapshot."
+}

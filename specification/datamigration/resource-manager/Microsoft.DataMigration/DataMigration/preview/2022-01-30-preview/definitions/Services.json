@@ -1,0 +1,303 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-01-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "AvailableServiceSku": {
+      "type": "object",
+      "description": "Describes the available service SKU.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type, including the provider namespace"
+        },
+        "sku": {
+          "type": "object",
+          "description": "SKU name, tier, etc.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the SKU"
+            },
+            "family": {
+              "type": "string",
+              "description": "SKU family"
+            },
+            "size": {
+              "type": "string",
+              "description": "SKU size"
+            },
+            "tier": {
+              "type": "string",
+              "description": "The tier of the SKU, such as \"Basic\", \"General Purpose\", or \"Business Critical\""
+            }
+          }
+        },
+        "capacity": {
+          "type": "object",
+          "description": "A description of the scaling capacities of the SKU",
+          "properties": {
+            "minimum": {
+              "type": "integer",
+              "description": "The minimum capacity, usually 0 or 1."
+            },
+            "maximum": {
+              "type": "integer",
+              "description": "The maximum capacity"
+            },
+            "default": {
+              "type": "integer",
+              "description": "The default capacity"
+            },
+            "scaleType": {
+              "type": "string",
+              "description": "The scalability approach",
+              "enum": [
+                "none",
+                "manual",
+                "automatic"
+              ],
+              "x-ms-enum": {
+                "name": "ServiceScalability",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "DataMigrationService": {
+      "type": "object",
+      "description": "A Database Migration Service resource",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "HTTP strong entity tag value. Ignored if submitted"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The resource kind. Only 'vm' (the default) is supported."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Custom service properties",
+          "$ref": "#/definitions/DataMigrationServiceProperties"
+        },
+        "sku": {
+          "description": "Service SKU",
+          "$ref": "#/definitions/ServiceSku"
+        },
+        "systemData": {
+          "$ref": "../sqlmigration.json#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../sqlmigration.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DataMigrationServiceList": {
+      "type": "object",
+      "description": "OData page of service objects",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of services",
+          "items": {
+            "$ref": "#/definitions/DataMigrationService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to load the next page of services"
+        }
+      }
+    },
+    "DataMigrationServiceProperties": {
+      "type": "object",
+      "description": "Properties of the Database Migration Service instance",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource's provisioning state",
+          "enum": [
+            "Accepted",
+            "Deleting",
+            "Deploying",
+            "Stopped",
+            "Stopping",
+            "Starting",
+            "FailedToStart",
+            "FailedToStop",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "The public key of the service, used to encrypt secrets sent to the service"
+        },
+        "virtualSubnetId": {
+          "type": "string",
+          "description": "The ID of the Microsoft.Network/virtualNetworks/subnets resource to which the service should be joined"
+        },
+        "virtualNicId": {
+          "type": "string",
+          "description": "The ID of the Microsoft.Network/networkInterfaces resource which the service have"
+        },
+        "autoStopDelay": {
+          "type": "string",
+          "description": "The time delay before the service is auto-stopped when idle."
+        },
+        "deleteResourcesOnStop": {
+          "type": "boolean",
+          "description": "Whether service resources should be deleted when stopped. (Turned on by default)"
+        }
+      }
+    },
+    "DataMigrationServiceStatusResponse": {
+      "type": "object",
+      "description": "Service health status",
+      "properties": {
+        "agentVersion": {
+          "type": "string",
+          "description": "The DMS instance agent version"
+        },
+        "agentConfiguration": {
+          "type": "object",
+          "description": "Agent Configuration"
+        },
+        "status": {
+          "type": "string",
+          "description": "The machine-readable status, such as 'Initializing', 'Offline', 'Online', 'Deploying', 'Deleting', 'Stopped', 'Stopping', 'Starting', 'FailedToStart', 'FailedToStop' or 'Failed'"
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The services virtual machine size, such as 'Standard_D2_v2'"
+        },
+        "supportedTaskTypes": {
+          "type": "array",
+          "description": "The list of supported task types",
+          "items": {
+            "type": "string",
+            "description": "Migration task type"
+          }
+        }
+      }
+    },
+    "ServiceOperation": {
+      "type": "object",
+      "description": "Description of an action supported by the Database Migration Service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The fully qualified action name, e.g. Microsoft.DataMigration/services/read"
+        },
+        "display": {
+          "type": "object",
+          "description": "Localized display text",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "The localized resource provider name"
+            },
+            "resource": {
+              "type": "string",
+              "description": "The localized resource type name"
+            },
+            "operation": {
+              "type": "string",
+              "description": "The localized operation name"
+            },
+            "description": {
+              "type": "string",
+              "description": "The localized operation description"
+            }
+          }
+        }
+      }
+    },
+    "ServiceOperationList": {
+      "type": "object",
+      "description": "OData page of action (operation) objects",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of actions",
+          "items": {
+            "$ref": "#/definitions/ServiceOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to load the next page of actions"
+        }
+      }
+    },
+    "ServiceSku": {
+      "type": "object",
+      "description": "An Azure SKU instance",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique name of the SKU, such as 'P3'"
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the SKU, such as 'Basic', 'General Purpose', or 'Business Critical'"
+        },
+        "family": {
+          "type": "string",
+          "description": "The SKU family, used when the service has multiple performance classes within a tier, such as 'A', 'D', etc. for virtual machines"
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of the SKU, used when the name alone does not denote a service size or when a SKU has multiple performance classes within a family, e.g. 'A1' for virtual machines"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "The capacity of the SKU, if it supports scaling"
+        }
+      }
+    },
+    "ServiceSkuList": {
+      "type": "object",
+      "description": "OData page of available SKUs",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of service SKUs",
+          "items": {
+            "$ref": "#/definitions/AvailableServiceSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to load the next page of service SKUs"
+        }
+      }
+    }
+  }
+}

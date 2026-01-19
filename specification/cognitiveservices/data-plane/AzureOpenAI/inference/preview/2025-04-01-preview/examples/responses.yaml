@@ -1,0 +1,56 @@
+title: Create a model response.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2025-04-01-preview
+  body:
+    input:
+      - type: message
+        role: user
+        content:
+          - type: input_text
+            text: Which is larger? 10 or 0?
+    model: "{model_name}"
+responses:
+  "200":
+    body:
+      id: resp_67d868ce46348190aa70f218507b789a
+      object: response
+      created_at: 1742235854
+      status: completed
+      error: null
+      incomplete_details: null
+      instructions: null
+      max_output_tokens: null
+      model: "{model_name}"
+      output:
+        - type: message
+          id: msg_67d868ce7a7881909fcab3ba22d28951
+          status: completed
+          role: assistant
+          content:
+            - type: output_text
+              text: 10 is larger than 0.
+              annotations: []
+      parallel_tool_calls: true
+      previous_response_id: null
+      reasoning:
+        effort: null
+        generate_summary: null
+      store: true
+      temperature: 1
+      text:
+        format:
+          type: text
+      tools: []
+      top_p: 1
+      truncation: disabled
+      usage:
+        input_tokens: 34
+        input_tokens_details:
+          cached_tokens: 0
+        output_tokens: 9
+        output_tokens_details:
+          reasoning_tokens: 0
+        total_tokens: 43
+      user: null
+      metadata: {}

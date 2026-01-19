@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringName": "peeringName",
+    "registeredAsn": {
+      "properties": {
+        "asn": 65000
+      }
+    },
+    "registeredAsnName": "registeredAsnName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "registeredAsnName",
+        "type": "Microsoft.Peering/registeredAsns",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredAsns/registeredAsnName",
+        "properties": {
+          "asn": 65000,
+          "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "registeredAsnName",
+        "type": "Microsoft.Peering/registeredAsns",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredAsns/registeredAsnName",
+        "properties": {
+          "asn": 65000,
+          "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "RegisteredAsns_CreateOrUpdate",
+  "title": "Create or update a registered ASN for the peering"
+}

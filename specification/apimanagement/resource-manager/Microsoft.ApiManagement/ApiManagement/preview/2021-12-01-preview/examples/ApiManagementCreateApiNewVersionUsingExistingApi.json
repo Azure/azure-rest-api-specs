@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "subid",
+    "apiId": "echoapiv3",
+    "parameters": {
+      "properties": {
+        "displayName": "Echo API2",
+        "description": "Create Echo API into a new Version using Existing Version Set and Copy all Operations.",
+        "subscriptionRequired": true,
+        "serviceUrl": "http://echoapi.cloudapp.net/api",
+        "path": "echo2",
+        "protocols": [
+          "http",
+          "https"
+        ],
+        "isCurrent": true,
+        "apiVersion": "v4",
+        "sourceApiId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoPath",
+        "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoapiv3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "echoapiv3",
+        "properties": {
+          "displayName": "Echo API2",
+          "apiRevision": "1",
+          "description": "Create Echo API into a new Version using Existing Version Set and Copy all Operations.",
+          "subscriptionRequired": true,
+          "serviceUrl": "http://echoapi.cloudapp.net/api",
+          "path": "echo2",
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true,
+          "apiVersion": "v4",
+          "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+          "apiVersionSet": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+            "name": "Echo API2",
+            "versioningScheme": "Segment"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2021-12-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echoapiv3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "echoapiv3",
+        "properties": {
+          "displayName": "Echo API2",
+          "apiRevision": "1",
+          "description": "Create Echo API into a new Version using Existing Version Set and Copy all Operations.",
+          "subscriptionRequired": true,
+          "serviceUrl": "http://echoapi.cloudapp.net/api",
+          "path": "echo2",
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true,
+          "apiVersion": "v4",
+          "apiVersionSetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+          "apiVersionSet": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apiVersionSets/aa9c59e6-c0cd-4258-9356-9ca7d2f0b458",
+            "name": "Echo API2",
+            "versioningScheme": "Segment"
+          }
+        }
+      }
+    }
+  }
+}

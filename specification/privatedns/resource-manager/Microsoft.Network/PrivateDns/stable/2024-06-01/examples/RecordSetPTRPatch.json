@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "privateZoneName": "0.0.127.in-addr.arpa",
+    "recordType": "PTR",
+    "relativeRecordSetName": "1",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1",
+        "type": "Microsoft.Network/privateDnsZones/PTR",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/0.0.127.in-addr.arpa/PTR/1",
+        "properties": {
+          "fqdn": "1.0.0.127.in-addr.arpa.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key2": "value2"
+          },
+          "ptrRecords": [
+            {
+              "ptrdname": "localhost"
+            }
+          ],
+          "ttl": 3600
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "PATCH Private DNS Zone PTR Record Set"
+}

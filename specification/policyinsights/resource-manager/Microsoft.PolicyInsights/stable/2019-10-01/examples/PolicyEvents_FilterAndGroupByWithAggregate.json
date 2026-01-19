@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "policyEventsResource": "default",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+    "api-version": "2019-10-01",
+    "$from": "2018-02-05T18:00:00Z",
+    "$filter": "PolicyDefinitionAction eq 'audit' or PolicyDefinitionAction eq 'deny'",
+    "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, PolicyDefinitionAction, ResourceId), aggregate($count as NumEvents))",
+    "$top": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default",
+        "@odata.count": 2,
+        "value": [
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/3f3c4330183b4e218fe6fd29",
+            "policyDefinitionId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/24813039-7534-408a-9842-eb99f45721b1",
+            "policyDefinitionAction": "audit",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/microsoft.servicefabric/clusters/myCluster/applications/resourcescachemonitor/services/myService",
+            "NumEvents": 1
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/d6be6bb37e5f4333baa95c2a",
+            "policyDefinitionId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policydefinitions/5948d091-78b7-4d3b-a404-cc6a0329b0c6",
+            "policyDefinitionAction": "audit",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/microsoft.servicefabric/clusters/myCluster/applications/resourcescachemonitor/services/myService",
+            "NumEvents": 1
+          }
+        ]
+      }
+    }
+  }
+}

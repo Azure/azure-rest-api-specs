@@ -1,0 +1,86 @@
+{
+  "title": "List data export destinations in your application",
+  "description": "Get a list of data export destinations in your application.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "api-version": "1.1-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "1021f12a-6969-4eff-8518-57cac5f128ab",
+            "displayName": "Webhook No Auth",
+            "type": "webhook@v1",
+            "url": "https://webhook.site/9bda8769-d540-4d92-946b-48c5a01e59bd",
+            "headerCustomizations": {
+              "x-custom-region": {
+                "value": "westcentralus",
+                "secret": false
+              }
+            },
+            "status": "waiting"
+          },
+          {
+            "id": "70bb70e7-e308-4628-95aa-706596646f02",
+            "displayName": "Service Bus Queue",
+            "type": "servicebusqueue@v1",
+            "authorization": {
+              "type": "connectionString",
+              "connectionString": "Endpoint=sb://[namespace].servicebus.windows.net/;SharedAccessKeyName=xxx;SharedAccessKey=*****;EntityPath=[queue name]"
+            },
+            "status": "waiting"
+          },
+          {
+            "id": "7308456f-c72b-43d8-99ba-22a49ea5d51a",
+            "displayName": "Service Bus Topic",
+            "type": "servicebustopic@v1",
+            "authorization": {
+              "type": "connectionString",
+              "connectionString": "Endpoint=sb://[namespace].servicebus.windows.net/;SharedAccessKeyName=xxx;SharedAccessKey=*****;EntityPath=[topic name]"
+            },
+            "status": "waiting"
+          },
+          {
+            "id": "b3bfe8f0-ea63-42f9-82e1-bbade5250aba",
+            "displayName": "Azure Data Explorer",
+            "type": "dataexplorer@v1",
+            "clusterUrl": "https://[clusterName].westus2.kusto.windows.net",
+            "database": "iiot",
+            "table": "demo",
+            "authorization": {
+              "type": "servicePrincipal",
+              "clientId": "5b420743-2020-44c6-9b70-cc42f945db0c",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "clientSecret": "*****"
+            },
+            "status": "waiting"
+          },
+          {
+            "id": "beb083d0-cec9-4e7e-8e4b-22b88e8e3479",
+            "displayName": "Azure Blob Storage",
+            "type": "blobstorage@v1",
+            "authorization": {
+              "type": "connectionString",
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=[accountName];AccountKey=*****;EndpointSuffix=core.windows.net",
+              "containerName": "test"
+            },
+            "status": "waiting"
+          },
+          {
+            "id": "c0e2a49f-6d5b-4bc1-b448-069806b72781",
+            "displayName": "Event Hub",
+            "type": "eventhubs@v1",
+            "authorization": {
+              "type": "connectionString",
+              "connectionString": "Endpoint=sb://[namespace].servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=*****;EntityPath=[hub name]"
+            },
+            "status": "waiting"
+          }
+        ]
+      }
+    }
+  }
+}

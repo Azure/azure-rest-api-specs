@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testrg",
+    "targetDbServerName": "testtarget",
+    "migrationName": "testmigrationwithsuccessfulvalidationonly"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "77840327-7be8-44b8-adc0-af0ccccfeb36",
+          "currentStatus": {
+            "state": "Succeeded",
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {},
+              "validationDetails": {
+                "status": "Succeeded",
+                "validationStartTimeInUtc": "2023-10-16T05:29:35.634943Z",
+                "validationEndTimeInUtc": "2023-10-16T05:29:39.6663198Z",
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "SourceVersionValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "ServerParametersValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "UnknownCollationTest",
+                    "startedOn": "2023-10-16T05:29:38.904366Z",
+                    "endedOn": "2023-10-16T05:29:39.2488086Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "migrationMode": "Offline",
+          "migrationWindowEndTimeInUtc": "2023-10-16T05:30:05.8854373Z",
+          "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "dbsToMigrate": [
+            "UnknownCollationTest"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2023-10-16T05:28:58.7751329Z",
+          "triggerCutover": "True",
+          "migrateRoles": "False",
+          "migrationOption": "Validate"
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigrationwithsuccessfulvalidationonly",
+        "name": "testmigrationwithsuccessfulvalidationonly",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}

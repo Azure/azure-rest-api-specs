@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "parameters": {
+      "sku": {
+        "tier": "GeneralPurpose",
+        "name": "Standard_D8s_v3"
+      },
+      "properties": {
+        "administratorLoginPassword": "examplenewpassword",
+        "createMode": "Update",
+        "authConfig": {
+          "activeDirectoryAuth": "Enabled",
+          "passwordAuth": "Enabled",
+          "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
+        },
+        "storage": {
+          "storageSizeGB": 1024,
+          "autoGrow": "Disabled",
+          "tier": "P30"
+        },
+        "backup": {
+          "backupRetentionDays": 20
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/azureAsyncOperation/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa?api-version=2025-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2025-06-01-preview"
+      }
+    }
+  }
+}

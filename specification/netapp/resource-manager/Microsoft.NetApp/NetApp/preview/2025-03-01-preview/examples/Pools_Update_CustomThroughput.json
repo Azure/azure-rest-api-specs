@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "poolName": "customPool1",
+    "api-version": "2025-03-01-preview",
+    "body": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/customPool1",
+        "name": "account1/customPool1",
+        "type": "Microsoft.NetApp/netAppAccounts/capacityPools",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "poolId": "00000000-0000-0000-0000-000000000000",
+          "serviceLevel": "Flexible",
+          "size": 4398046511104,
+          "qosType": "Manual",
+          "totalThroughputMibps": 128,
+          "utilizedThroughputMibps": 100.47,
+          "customThroughputMibps": 128
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2025-03-01-preview&operationResultResponseType=Location"
+      }
+    }
+  }
+}

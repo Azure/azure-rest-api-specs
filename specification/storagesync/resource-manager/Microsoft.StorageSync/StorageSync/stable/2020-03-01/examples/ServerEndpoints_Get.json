@@ -1,0 +1,149 @@
+{
+  "parameters": {
+    "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb",
+    "resourceGroupName": "SampleResourceGroup_1",
+    "storageSyncServiceName": "SampleStorageSyncService_1",
+    "syncGroupName": "SampleSyncGroup_1",
+    "serverEndpointName": "SampleServerEndpoint_1",
+    "api-version": "2020-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+      },
+      "body": {
+        "name": "SampleServerEndpoint_1",
+        "properties": {
+          "serverLocalPath": "D:\\SampleServerEndpoint_1",
+          "cloudTiering": "on",
+          "volumeFreeSpacePercent": 100,
+          "friendlyName": "somemachine.redmond.corp.microsoft.com",
+          "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
+          "provisioningState": "Succeeded",
+          "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/569afb5c-7172-4cf8-a8ea-d987f727f11a",
+          "lastOperationName": "ICreateServerEndpointWorkflow",
+          "tierFilesOlderThanDays": 0,
+          "syncStatus": {
+            "downloadHealth": "Healthy",
+            "uploadHealth": "Error",
+            "combinedHealth": "Error",
+            "syncActivity": "UploadAndDownload",
+            "totalPersistentFilesNotSyncingCount": null,
+            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "uploadStatus": {
+              "lastSyncResult": -2134351810,
+              "lastSyncTimestamp": "2018-06-11T23:32:51.1057915Z",
+              "lastSyncSuccessTimestamp": null,
+              "lastSyncPerItemErrorCount": 1000,
+              "persistentFilesNotSyncingCount": null,
+              "transientFilesNotSyncingCount": null,
+              "filesNotSyncingErrors": null
+            },
+            "downloadStatus": {
+              "lastSyncResult": 0,
+              "lastSyncTimestamp": "2018-06-11T23:28:33.9217334Z",
+              "lastSyncSuccessTimestamp": "2018-06-11T23:28:33.9217334Z",
+              "lastSyncPerItemErrorCount": 0,
+              "persistentFilesNotSyncingCount": null,
+              "transientFilesNotSyncingCount": null,
+              "filesNotSyncingErrors": null
+            },
+            "uploadActivity": {
+              "timestamp": "2018-06-11T23:32:51.1057915Z",
+              "perItemErrorCount": 300,
+              "appliedItemCount": 1000,
+              "totalItemCount": 2300,
+              "appliedBytes": 57348983,
+              "totalBytes": 1958367412
+            },
+            "downloadActivity": {
+              "timestamp": "2018-06-11T23:32:51.1057915Z",
+              "perItemErrorCount": 0,
+              "appliedItemCount": 100,
+              "totalItemCount": 300,
+              "appliedBytes": 94805587,
+              "totalBytes": 19583674
+            },
+            "offlineDataTransferStatus": "InProgress"
+          },
+          "offlineDataTransfer": "on",
+          "offlineDataTransferStorageAccountResourceId": "/subscriptions/744f4d70-6d17-4921-8970-a765d14f763f/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mysa",
+          "offlineDataTransferStorageAccountTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "offlineDataTransferShareName": "myfileshare",
+          "initialDownloadPolicy": "NamespaceThenModifiedFiles",
+          "localCacheMode": "UpdateLocallyCachedFiles",
+          "cloudTieringStatus": {
+            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "health": "Error",
+            "healthLastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "lastCloudTieringResult": -2134347771,
+            "lastSuccessTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "spaceSavings": {
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "volumeSizeBytes": 922337203685477580,
+              "totalSizeCloudBytes": 100000000,
+              "cachedSizeBytes": 50000000,
+              "spaceSavingsPercent": 50,
+              "spaceSavingsBytes": 50000000
+            },
+            "cachePerformance": {
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "cacheHitBytes": 922337203685477580,
+              "cacheMissBytes": 922337203685477580,
+              "cacheHitBytesPercent": 50
+            },
+            "filesNotTiering": {
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "totalFileCount": 60,
+              "errors": [
+                {
+                  "errorCode": -2134347771,
+                  "fileCount": 10
+                },
+                {
+                  "errorCode": -2134347770,
+                  "fileCount": 20
+                },
+                {
+                  "errorCode": -2134347769,
+                  "fileCount": 30
+                }
+              ]
+            },
+            "volumeFreeSpacePolicyStatus": {
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "effectiveVolumeFreeSpacePolicy": 30,
+              "currentVolumeFreeSpacePercent": 5
+            },
+            "datePolicyStatus": {
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "tieredFilesMostRecentAccessTimestamp": "2019-04-17T19:04:59.1959227Z"
+            }
+          },
+          "recallStatus": {
+            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "totalRecallErrorsCount": 30,
+            "recallErrors": [
+              {
+                "errorCode": -2134347775,
+                "count": 5
+              },
+              {
+                "errorCode": -2134347774,
+                "count": 10
+              },
+              {
+                "errorCode": -2134347773,
+                "count": 15
+              }
+            ]
+          }
+        },
+        "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
+        "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
+      }
+    }
+  }
+}

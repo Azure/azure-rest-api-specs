@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "bd794837-4d29-4647-9105-6339bfdb4e6a",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "tiType": "main",
+    "Query": {
+      "condition": {
+        "clauses": [
+          {
+            "field": "lastUpdatedTimeUtc",
+            "operator": "OnOrBeforeAbsolute",
+            "values": [
+              "2024-02-09T23:59:59.999Z"
+            ]
+          }
+        ],
+        "stixObjectType": "attack-pattern",
+        "conditionConnective": null
+      },
+      "sortBy": {
+        "field": "lastUpdatedTimeUtc",
+        "direction": "DESC"
+      },
+      "minPageSize": 100,
+      "maxPageSize": 100
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/threatintelligence/dGxwLW1peGVkVHlwZXMtd2l0aC1SdWxlcy0y---attack-pattern--fb6aa549-c94a-4e45-b4fd-7e32602dad85",
+            "name": "dGxwLW1peGVkVHlwZXMtd2l0aC1SdWxlcy0y---attack-pattern--fb6aa549-c94a-4e45-b4fd-7e32602dad85",
+            "type": "Microsoft.SecurityInsights/threatintelligence",
+            "kind": "AttackPattern",
+            "properties": {
+              "data": {
+                "name": "Attack Pattern 2.1",
+                "description": "menuPass appears to favor spear phishing to deliver payloads to the intended targets. While the attackers behind menuPass have used other RATs in their campaign, it appears that they use PIVY as their primary persistence mechanism.",
+                "kill_chain_phases": [
+                  {
+                    "kill_chain_name": "mandiant-attack-lifecycle-model",
+                    "phase_name": "initial-compromise"
+                  }
+                ],
+                "aliases": [
+                  "alias_1",
+                  "alias_2"
+                ],
+                "external_references": [
+                  {
+                    "description": "spear phishing",
+                    "external_id": "CAPEC-163",
+                    "hashes": null,
+                    "source_name": "capec",
+                    "url": null
+                  }
+                ],
+                "granular_markings": [
+                  {
+                    "lang": "en",
+                    "marking_ref": "marking-definition--089a6ecb-cc15-43cc-9494-767639779123",
+                    "selectors": [
+                      "description",
+                      "labels"
+                    ]
+                  }
+                ],
+                "confidence": 100,
+                "lang": "en",
+                "extensions": {
+                  "sentinel-ext": {
+                    "severity": null
+                  },
+                  "extension-definition--d83fce45-ef58-4c6c-a3f4-1fbc32e98c6e": {
+                    "extension_type": "property-extension",
+                    "rank": 5,
+                    "toxicity": 8
+                  }
+                },
+                "type": "attack-pattern",
+                "id": "attack-pattern--fb6aa549-c94a-4e45-b4fd-7e32602dad85",
+                "created": "2015-05-15T09:12:16.432Z",
+                "modified": "2015-05-20T09:12:16.432Z",
+                "spec_version": "2.1",
+                "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
+                "object_marking_refs": [
+                  "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"
+                ],
+                "revoked": true,
+                "labels": [
+                  "heartbleed",
+                  "has-logo"
+                ]
+              },
+              "createdBy": {
+                "objectId": "00000000-0000-0000-0000-000000000000",
+                "email": "",
+                "name": ""
+              },
+              "source": "mySource",
+              "firstIngestedTimeUtc": "2024-02-05T22:47:29.4948816",
+              "lastIngestedTimeUtc": "2024-02-05T22:47:29.4948816",
+              "ingestionRulesVersion": "00000000-0000-0000-0000-000000000000",
+              "lastUpdateMethod": "File Import",
+              "lastModifiedBy": {
+                "objectId": "00000000-0000-0000-0000-000000000000",
+                "email": "",
+                "name": ""
+              },
+              "lastUpdatedDateTimeUtc": "2024-02-05T22:47:29.4948816",
+              "relationshipHints": null
+            }
+          }
+        ]
+      }
+    }
+  }
+}

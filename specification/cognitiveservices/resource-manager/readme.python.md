@@ -5,23 +5,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.cognitiveservices
-  package-name: azure-mgmt-cognitiveservices
-  package-version: 2.0.0
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.cognitiveservices
+package-name: azure-mgmt-cognitiveservices
+package-version: 11.0.0b1
+clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-mgmt-cognitiveservices/azure/mgmt/cognitiveservices
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-mgmt-cognitiveservices
+
+``` yaml $(python)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/cognitiveservices/azure-mgmt-cognitiveservices/azure/mgmt/cognitiveservices
 ```

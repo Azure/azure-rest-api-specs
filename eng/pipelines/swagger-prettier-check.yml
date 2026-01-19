@@ -1,0 +1,24 @@
+trigger: none
+
+jobs:
+- job:
+  pool:
+    name: azsdk-pool
+    demands: ImageOverride -equals ubuntu-24.04
+
+  timeoutInMinutes: 120
+
+  variables:
+  - template: /eng/pipelines/templates/variables/globals.yml
+
+  steps:
+  - checkout: self
+    # Required to compare head commit with base commit
+    fetchDepth: 2
+
+  - template: /eng/pipelines/templates/steps/npm-install.yml
+
+  - pwsh: |
+      $(Build.SourcesDirectory)/eng/scripts/Swagger-Prettier-Check.ps1 -Verbose
+    displayName: Swagger Prettier Check
+    ignoreLASTEXITCODE: true

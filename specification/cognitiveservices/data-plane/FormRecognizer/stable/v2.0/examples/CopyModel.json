@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "modelId": "{modelId}",
+    "body": {},
+    "copyRequest": {
+      "targetResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}",
+      "targetResourceRegion": "westus2",
+      "copyAuthorization": {
+        "modelId": "{modelId}",
+        "accessToken": "{accessToken}",
+        "expirationDateTimeTicks": 637190189980000000
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/formrecognizer/v2.0/custom/models/{modelId}/copyResults/{resultId}"
+      }
+    }
+  }
+}

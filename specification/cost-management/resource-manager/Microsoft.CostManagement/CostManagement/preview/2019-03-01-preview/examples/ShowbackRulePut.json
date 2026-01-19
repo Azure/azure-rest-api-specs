@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2019-03-01-preview",
+    "billingAccountId": "100",
+    "ruleName": "testRule",
+    "showbackRule": {
+      "properties": {
+        "description": "Welcome to Showback demo",
+        "status": "Active",
+        "ruleType": "CustomPrice",
+        "scopes": [
+          {
+            "type": "Enrollment",
+            "id": "292105a9-680d-48cf-bdad-1d023104d69f",
+            "childScope": null
+          }
+        ],
+        "details": {
+          "pricesheet": "Pay-As-You-Go (0003P)",
+          "benefits": [
+            "None"
+          ],
+          "markups": [
+            {
+              "percentage": "1.1"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/71824150/providers/Microsoft.CostManagement/showbackRules/demo",
+        "name": "demo",
+        "type": "Microsoft.CostManagement/showbackRules",
+        "properties": {
+          "version": 999,
+          "deprecationTime": "2019-03-16T09:18:20.8665509Z",
+          "creationTime": "2019-01-16T09:18:20.8665509Z",
+          "modificationTime": "2019-01-17T09:18:20.8665509Z",
+          "description": "Welcome to Showback demo",
+          "status": "NotActive",
+          "ruleType": "CustomPrice",
+          "scopes": null,
+          "details": {
+            "pricesheet": "Pay-As-You-Go (0003P)",
+            "benefits": [
+              "None"
+            ],
+            "markups": [
+              {
+                "percentage": "1.1"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

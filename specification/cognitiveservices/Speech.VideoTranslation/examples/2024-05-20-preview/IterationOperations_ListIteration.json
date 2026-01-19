@@ -1,0 +1,65 @@
+{
+  "title": "List Iteration",
+  "operationId": "IterationOperations_ListIteration",
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "api-version": "2024-05-20-preview",
+    "translationId": "TranslateMyZhCNVideo",
+    "Ocp-Apim-Subscription-Key": "{API Key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "Initial",
+            "description": "Translate video from en-US to zh-CN, fix segment issue.",
+            "input": {
+              "speakerCount": 3,
+              "subtitleMaxCharCountPerSegment": 80,
+              "webvttFile": {
+                "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+                "kind": "MetadataJson"
+              }
+            },
+            "status": "Succeeded",
+            "createdDateTime": "2023-04-10T05:30:00.000Z",
+            "lastActionDateTime": "2023-04-10T05:15:30.000Z"
+          },
+          {
+            "id": "TranslateMyZhCNVideo-Iteration-1",
+            "description": "Translate video from en-US to zh-CN.",
+            "input": {
+              "speakerCount": 3,
+              "subtitleMaxCharCountPerSegment": 80,
+              "webvttFile": {
+                "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+                "kind": "MetadataJson"
+              }
+            },
+            "status": "Failed",
+            "createdDateTime": "2023-04-01T05:30:00.000Z",
+            "lastActionDateTime": "2023-04-10T05:15:30.000Z"
+          },
+          {
+            "id": "TranslateMyZhCNVideo-Iteration-2",
+            "description": "Translate video from en-US to zh-CN.",
+            "input": {
+              "speakerCount": 3,
+              "subtitleMaxCharCountPerSegment": 80,
+              "webvttFile": {
+                "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+                "kind": "MetadataJson"
+              }
+            },
+            "status": "Running",
+            "createdDateTime": "2023-04-01T05:30:00.000Z",
+            "lastActionDateTime": "2023-04-10T05:15:30.000Z"
+          }
+        ],
+        "nextLink": "https://eastus.api.cognitive.microsoft.com/video-translation/translations/TranslateMyZhCNVideo/iterations?skip=2&maxpagesize=2&api-version=2024-05-20-preview"
+      }
+    }
+  }
+}

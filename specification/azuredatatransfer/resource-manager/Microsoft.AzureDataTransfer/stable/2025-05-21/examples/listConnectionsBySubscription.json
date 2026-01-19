@@ -1,0 +1,38 @@
+{
+  "operationId": "Connections_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Gets connections in a subscription",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testConnection",
+            "type": "Microsoft.AzureDataTransfer/connections",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
+            "location": "East US",
+            "properties": {
+              "justification": "justification",
+              "pipeline": "testdc",
+              "requirementId": "id"
+            }
+          },
+          {
+            "name": "testConnection2",
+            "type": "Microsoft.AzureDataTransfer/connections",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection2",
+            "location": "East US",
+            "properties": {
+              "justification": "justification",
+              "pipeline": "testdc",
+              "requirementId": "id"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

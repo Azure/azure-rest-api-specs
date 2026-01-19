@@ -1,0 +1,313 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-08-02-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents": {
+      "get": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "Get the Dapr Components for a managed environment.",
+        "operationId": "DaprComponents_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Dapr Components": {
+            "$ref": "./examples/DaprComponents_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}": {
+      "get": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "Get a dapr component.",
+        "operationId": "DaprComponents_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Dapr Component with secrets": {
+            "$ref": "./examples/DaprComponents_Get_Secrets.json"
+          },
+          "Get Dapr Component with secret store component": {
+            "$ref": "./examples/DaprComponents_Get_SecretStoreComponent.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "Creates or updates a Dapr Component.",
+        "description": "Creates or updates a Dapr Component in a Managed Environment.",
+        "operationId": "DaprComponents_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "daprComponentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the Dapr Component.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Create or update dapr component with secrets": {
+            "$ref": "./examples/DaprComponents_CreateOrUpdate_Secrets.json"
+          },
+          "Create or update dapr component with secret store component": {
+            "$ref": "./examples/DaprComponents_CreateOrUpdate_SecretStoreComponent.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "Delete a Dapr Component.",
+        "description": "Delete a Dapr Component from a Managed Environment.",
+        "operationId": "DaprComponents_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed"
+          },
+          "204": {
+            "description": "Environment does not exist"
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete dapr component": {
+            "$ref": "./examples/DaprComponents_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/listSecrets": {
+      "post": {
+        "tags": [
+          "DaprComponents"
+        ],
+        "summary": "List secrets for a dapr component",
+        "operationId": "DaprComponents_ListSecrets",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "componentName",
+            "in": "path",
+            "description": "Name of the Dapr Component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprSecretsCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Apps Secrets": {
+            "$ref": "./examples/DaprComponents_ListSecrets.json"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

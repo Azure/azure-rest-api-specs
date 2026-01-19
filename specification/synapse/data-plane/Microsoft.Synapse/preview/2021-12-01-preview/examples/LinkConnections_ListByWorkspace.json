@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "endpoint": "testWs.dev.azuresynapse.net",
+    "api-version": "2021-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/99c6ec47-aacb-485c-863c-018be33b9000/resourceGroups/testResourceGroup/providers/Microsoft.Synapse/workspaces/testWs/linkConnections/testLinkConnection",
+            "name": "testLinkConnection",
+            "type": "Microsoft.Synapse/workspaces/linkConnections",
+            "properties": {
+              "compute": {
+                "coreCount": 8,
+                "computeType": "General"
+              },
+              "sourceDatabase": {
+                "linkedService": {
+                  "referenceName": "exampleSourceLinkedService",
+                  "type": "LinkedServiceReference"
+                },
+                "typeProperties": {
+                  "resourceId": "/subscriptions/99c6ec47-aacb-485c-863c-018be33b9000/resourceGroups/testResourceGroup/providers/Microsoft.Sql/servers/testAzureSql",
+                  "principalId": "fcf4d3a4-35b5-4c02-8b57-502cd6456d0b"
+                }
+              },
+              "targetDatabase": {
+                "linkedService": {
+                  "referenceName": "exampleTargetLinkedService",
+                  "type": "LinkedServiceReference"
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

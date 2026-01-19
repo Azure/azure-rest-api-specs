@@ -1,0 +1,142 @@
+{
+  "parameters": {
+    "parameters": {
+      "properties": {
+        "eventHandlers": [
+          {
+            "urlTemplate": "http://host.com",
+            "userEventPattern": "*",
+            "systemEvents": [
+              "connect",
+              "connected"
+            ],
+            "auth": {
+              "type": "ManagedIdentity",
+              "managedIdentity": {
+                "resource": "abc"
+              }
+            }
+          }
+        ],
+        "eventListeners": [
+          {
+            "filter": {
+              "type": "EventName",
+              "systemEvents": [
+                "connected",
+                "disconnected"
+              ],
+              "userEventPattern": "*"
+            },
+            "endpoint": {
+              "type": "EventHub",
+              "fullyQualifiedNamespace": "example.servicebus.windows.net",
+              "eventHubName": "eventHubName1"
+            }
+          }
+        ],
+        "anonymousConnectPolicy": "allow",
+        "webSocketKeepAliveIntervalInSeconds": 50
+      }
+    },
+    "api-version": "2024-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myWebPubSubService",
+    "hubName": "exampleHub"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "eventHandlers": [
+            {
+              "urlTemplate": "http://host.com",
+              "userEventPattern": "*",
+              "systemEvents": [
+                "connect",
+                "connected"
+              ],
+              "auth": {
+                "type": "ManagedIdentity",
+                "managedIdentity": {
+                  "resource": "abc"
+                }
+              }
+            }
+          ],
+          "eventListeners": [
+            {
+              "filter": {
+                "type": "EventName",
+                "systemEvents": [
+                  "connected",
+                  "disconnected"
+                ],
+                "userEventPattern": "*"
+              },
+              "endpoint": {
+                "type": "EventHub",
+                "fullyQualifiedNamespace": "example.servicebus.windows.net",
+                "eventHubName": "eventHubName1"
+              }
+            }
+          ],
+          "anonymousConnectPolicy": "allow",
+          "webSocketKeepAliveIntervalInSeconds": 50
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
+        "name": "exampleHub",
+        "type": "Microsoft.SignalRService/WebPubSub/hubs"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "eventHandlers": [
+            {
+              "urlTemplate": "http://host.com",
+              "userEventPattern": "*",
+              "systemEvents": [
+                "connect",
+                "connected"
+              ],
+              "auth": {
+                "type": "ManagedIdentity",
+                "managedIdentity": {
+                  "resource": "abc"
+                }
+              }
+            }
+          ],
+          "eventListeners": [
+            {
+              "filter": {
+                "type": "EventName",
+                "systemEvents": [
+                  "connected",
+                  "disconnected"
+                ],
+                "userEventPattern": "*"
+              },
+              "endpoint": {
+                "type": "EventHub",
+                "fullyQualifiedNamespace": "example.servicebus.windows.net",
+                "eventHubName": "eventHubName1"
+              }
+            }
+          ],
+          "anonymousConnectPolicy": "allow",
+          "webSocketKeepAliveIntervalInSeconds": 50
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
+        "name": "exampleHub",
+        "type": "Microsoft.SignalRService/WebPubSub/hubs"
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationStatus..."
+      }
+    }
+  }
+}

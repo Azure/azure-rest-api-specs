@@ -1,0 +1,55 @@
+parameters:
+  "service-dir":
+    default: "sdk/eventhub"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.EventHubs"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-eventhub"
+    namespace: "azure.mgmt.eventhub"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-eventhub"
+    namespace: "com.azure.resourcemanager.eventhub"
+    service-name: "EventHub" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-eventhub"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-eventhub"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/eventhub"
+    emitter-output-dir: "{output-dir}/{service-dir}/armeventhub"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armeventhub"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    package-name: "Azure.ResourceManager.EventHub"
+    namespace: "{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

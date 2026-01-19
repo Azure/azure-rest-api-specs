@@ -1,0 +1,33 @@
+parameters:
+  - name: SpecBatchTypes
+    type: string
+    values:
+      - 'all-specs'
+      - 'all-typespecs'
+      - 'all-openapis'
+      - 'sample-typespecs'
+      - 'all-mgmtplane-typespecs'
+      - 'all-dataplane-typespecs'
+      - 'all-mgmtplane-openapis'
+      - 'all-dataplane-openapis'
+    default: 'sample-typespecs'
+    displayName: 'Batch Specs to Run'
+
+trigger: none
+pr: none
+
+# Determine batch types to run: for scheduled runs use both mgmt and dataplane, otherwise use parameter
+variables:
+  - name: batchTypes
+    ${{ if eq(variables['Build.Reason'], 'Schedule') }}:
+      value: 'all-mgmtplane-typespecs,all-dataplane-typespecs'
+    ${{ else }}:
+      value: ${{ parameters.SpecBatchTypes }}
+
+stages:
+- ${{ each batchType in split(variables.batchTypes, ',') }}:
+  - template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
+    parameters:
+      SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
+      SdkRepoUrl: $(SdkRepoUrl)
+      SpecBatchTypes: ${{ batchType }}

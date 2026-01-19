@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-2019-04
+tag: package-preview-2023-09
 ```
 
 ### Validations
@@ -41,13 +41,102 @@ model-validator: true
 message-format: json
 ```
 
+### Tag: package-2024-04
+
+These settings apply only when `--tag=2024-04` is specified on the command line.
+
+```yaml $(tag) == '2024-04'
+input-file:
+  - Microsoft.ResourceGraph/stable/2024-04-01/resourcegraph.json
+  - Microsoft.ResourceGraph/stable/2024-04-01/graphquery.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+```
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcecopilot.json
+  - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+```
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.ResourceGraph/stable/2022-10-01/resourcegraph.json
+  - Microsoft.ResourceGraph/stable/2022-10-01/graphquery.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+```
+
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+```
+
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+  - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+```
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
+  - Microsoft.ResourceGraph/stable/2021-03-01/graphquery.json
+```
+
+### Tag: package-preview-2020-09
+
+These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-09'
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+```
+
+### Tag: package-preview-2020-04
+
+These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-04'
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcechanges.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+```
+
 ### Tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04'
+``` yaml $(tag) == 'package-2019-04'
 input-file:
   - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
+  - Microsoft.ResourceGraph/stable/2019-04-01/graphquery.json
 ```
 
 ### Tag: package-2018-09-preview
@@ -74,21 +163,14 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-trenton
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
-## C#
+## Python
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ResourceGraph
-  output-folder: $(csharp-sdks-folder)/resourcegraph/Microsoft.Azure.Management.ResourceGraph/src/Generated
-  clear-output-folder: true
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -113,31 +195,42 @@ directive:
       Renaming it to ResourceChanges_ListResourceChanges causes yet another warning:
               "Per the Noun_Verb convention for Operation Ids, the noun 'ResourceChanges' should not appear after the underscore."
       Renaming it to ResourceChanges_Listresourcechanges seems to get rid of warnings, but the result looks very strange.
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ResourceChangesRequestParameters.properties.fetchPropertyChanges
+    from: resourcegraph.json
+    reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
+  - suppress: XmsIdentifierValidation
+    from: resourcecopilot.json
+    where: $.definitions.Error.properties.details
+    reason: Adding x-ms-identifiers to Error details array results in SDK breaking changes.
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## cli
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+These settings apply only when `--cli` is specified on the command line.
 
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
-  - $(this-folder)/Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
-  - $(this-folder)/Microsoft.ResourceGraph/preview/2018-09-01-preview/graphquery.json
-
+``` yaml $(cli)
+cli:
+  cli-name: ResourceGraph
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.ResourceGraph
+  package-name: azure-mgmt-ResourceGraph
+  clear-output-folder: false
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
+## Terraform
 
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+These settings apply only when `--terraform` is specified on the command line.
+
+``` yaml $(terraform)
+terraform:
+  cli-name: ResourceGraph
+  azure_arm: true
+  license_header: MICROSOFT_MIT_NO_VERSION
+  payload_flattening_threshold: 2
+  namespace: azure.mgmt.ResourceGraph
+  package_name: azure-mgmt-ResourceGraph
+  clear-output-folder: false
 ```
-

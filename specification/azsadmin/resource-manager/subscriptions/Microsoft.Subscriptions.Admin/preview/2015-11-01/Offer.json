@@ -5,7 +5,7 @@
     "title": "SubscriptionsManagementClient",
     "description": "The Admin Subscriptions Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/OfferList"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -49,7 +55,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers": {
       "get": {
         "x-ms-examples": {
           "Get the list of offers under a resource group.": {
@@ -78,6 +84,12 @@
             "schema": {
               "$ref": "#/definitions/OfferList"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -85,7 +97,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}": {
       "get": {
         "x-ms-examples": {
           "Get the specified offer.": {
@@ -117,6 +129,12 @@
             "schema": {
               "$ref": "#/definitions/Offer"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -145,20 +163,26 @@
             "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/NewOfferParameter"
+            "$ref": "#/parameters/OfferDefinitionParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Offer"
             }
           },
-          "200": {
-            "description": "OK",
+          "default": {
+            "description": "Unexpected Error",
             "schema": {
-              "$ref": "#/definitions/Offer"
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -194,11 +218,17 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metrics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metrics": {
       "get": {
         "x-ms-examples": {
           "Get the offer metrics.": {
@@ -230,11 +260,17 @@
             "schema": {
               "$ref": "Subscriptions.json#/definitions/MetricList"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metricDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metricDefinitions": {
       "get": {
         "x-ms-examples": {
           "Get the metric definitions.": {
@@ -266,11 +302,17 @@
             "schema": {
               "$ref": "Subscriptions.json#/definitions/MetricDefinitionList"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/link": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/link": {
       "post": {
         "x-ms-examples": {
           "Links a plan to an offer.": {
@@ -305,11 +347,17 @@
             "schema": {
               "$ref": "#/definitions/Offer"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/unlink": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/unlink": {
       "post": {
         "x-ms-examples": {
           "Unlink a plan from an offer.": {
@@ -343,6 +391,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -392,11 +446,13 @@
         },
         "subscriptionCount": {
           "description": "Current subscription count.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "maxSubscriptionsPerAccount": {
           "description": "Maximum subscriptions per account.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "basePlanIds": {
           "description": "Identifiers of the base plans that become available to the tenant immediately when a tenant subscribes to the offer.",
@@ -410,7 +466,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddonPlanDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
         }
       }
     },
@@ -454,7 +513,8 @@
         },
         "maxAcquisitionCount": {
           "description": "Maximum number of instances that can be acquired by a single subscription. If not specified, the assumed value is 1.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -489,7 +549,8 @@
         },
         "maxAcquisitionCount": {
           "description": "The maximum acquisition count by subscribers",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -508,9 +569,9 @@
     }
   },
   "parameters": {
-    "NewOfferParameter": {
+    "OfferDefinitionParameter": {
       "description": "New offer.",
-      "name": "newOffer",
+      "name": "offerDefinition",
       "in": "body",
       "required": true,
       "schema": {

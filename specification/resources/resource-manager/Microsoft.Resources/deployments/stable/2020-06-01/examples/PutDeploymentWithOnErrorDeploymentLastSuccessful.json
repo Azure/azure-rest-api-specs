@@ -1,0 +1,168 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
+    "deploymentName": "my-deployment",
+    "api-version": "2020-06-01",
+    "parameters": {
+      "properties": {
+        "templateLink": {
+          "uri": "https://example.com/exampleTemplate.json"
+        },
+        "parameters": {},
+        "mode": "Complete",
+        "onErrorDeployment": {
+          "type": "LastSuccessful"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "properties": {
+          "templateLink": {
+            "uri": "https://example.com/exampleTemplate.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {},
+          "mode": "Complete",
+          "provisioningState": "Accepted",
+          "timestamp": "2019-03-01T00:00:00.0000000Z",
+          "duration": "PT0.8204881S",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "providers": [
+            {
+              "namespace": "Microsoft.Network",
+              "resourceTypes": [
+                {
+                  "resourceType": "virtualNetworks",
+                  "locations": [
+                    "centralus"
+                  ]
+                },
+                {
+                  "resourceType": "virtualNetworks/subnets",
+                  "locations": [
+                    "centralus"
+                  ]
+                }
+              ]
+            }
+          ],
+          "dependencies": [
+            {
+              "dependsOn": [
+                {
+                  "id": "{resourceid}",
+                  "resourceType": "Microsoft.Network/virtualNetworks",
+                  "resourceName": "VNet1"
+                }
+              ],
+              "id": "{resourceid}",
+              "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+              "resourceName": "VNet1/Subnet1"
+            },
+            {
+              "dependsOn": [
+                {
+                  "id": "{resourceid}",
+                  "resourceType": "Microsoft.Network/virtualNetworks",
+                  "resourceName": "VNet1"
+                },
+                {
+                  "id": "{resourceid}",
+                  "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+                  "resourceName": "VNet1/Subnet1"
+                }
+              ],
+              "id": "{resourceid}",
+              "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+              "resourceName": "VNet1/Subnet2"
+            }
+          ],
+          "onErrorDeployment": {
+            "type": "LastSuccessful",
+            "deploymentName": "{nameOfLastSuccesfulDeployment}"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "properties": {
+          "templateLink": {
+            "uri": "https://example.com/exampleTemplate.json",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {},
+          "mode": "Complete",
+          "provisioningState": "Accepted",
+          "timestamp": "2019-03-01T00:00:00.0000000Z",
+          "duration": "PT0.8204881S",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "providers": [
+            {
+              "namespace": "Microsoft.Network",
+              "resourceTypes": [
+                {
+                  "resourceType": "virtualNetworks",
+                  "locations": [
+                    "centralus"
+                  ]
+                },
+                {
+                  "resourceType": "virtualNetworks/subnets",
+                  "locations": [
+                    "centralus"
+                  ]
+                }
+              ]
+            }
+          ],
+          "dependencies": [
+            {
+              "dependsOn": [
+                {
+                  "id": "{resourceid}",
+                  "resourceType": "Microsoft.Network/virtualNetworks",
+                  "resourceName": "VNet1"
+                }
+              ],
+              "id": "{resourceid}",
+              "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+              "resourceName": "VNet1/Subnet1"
+            },
+            {
+              "dependsOn": [
+                {
+                  "id": "{resourceid}",
+                  "resourceType": "Microsoft.Network/virtualNetworks",
+                  "resourceName": "VNet1"
+                },
+                {
+                  "id": "{resourceid}",
+                  "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+                  "resourceName": "VNet1/Subnet1"
+                }
+              ],
+              "id": "{resourceid}",
+              "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+              "resourceName": "VNet1/Subnet2"
+            }
+          ],
+          "onErrorDeployment": {
+            "type": "LastSuccessful",
+            "deploymentName": "{nameOfLastSuccesfulDeployment}"
+          }
+        }
+      }
+    }
+  }
+}
