@@ -45,7 +45,8 @@ Call the tool:
   - intent
   - resource/interface/operation names
   - key constraints / keywords
-- use user request (verbatim) as parameter
+- use user request (verbatim) as parameter `request`
+- read the relative code (.tsp) for this request, and put it as `additionalInformation` parameter
 
 ### Step 3 — Apply Changes (edits)
 Only after a grounded plan is produced:
