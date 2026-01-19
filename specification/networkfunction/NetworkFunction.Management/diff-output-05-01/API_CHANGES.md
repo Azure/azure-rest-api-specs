@@ -6,22 +6,6 @@
 |------|------------|-------|
 | `info.license__deleted` | deleted | `{"name":"Microsoft"}` |
 
-### Changes for `x-ms-examples`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/providers/microsoft.NetworkFunction/operations'].get['x-ms-examples__deleted']` | deleted | `{"OperationsList":{"$ref":"./examples/OperationsList.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.NetworkFunction/azureTrafficCollectors'].get['x-ms-examples__deleted']` | deleted | `{"List of Traffic Collectors by Subscription":{"$ref":"./examples/AzureTrafficCollectorsBySubscripti...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors'].get['x-ms-examples__deleted']` | deleted | `{"List of Traffic Collectors by ResourceGroup":{"$ref":"./examples/AzureTrafficCollectorsByResourceG...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete Traffic Collector":{"$ref":"./examples/AzureTrafficCollectorDelete.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].get['x-ms-examples__deleted']` | deleted | `{"Get Traffic Collector":{"$ref":"./examples/AzureTrafficCollectorGet.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].patch['x-ms-examples__deleted']` | deleted | `{"Update Traffic Collector tags":{"$ref":"./examples/AzureTrafficCollectorUpdateTags.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].put['x-ms-examples__deleted']` | deleted | `{"Create a traffic collector":{"$ref":"./examples/AzureTrafficCollectorCreate.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies'].get['x-ms-examples__deleted']` | deleted | `{"List of Collection Policies":{"$ref":"./examples/CollectorPoliciesList.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].delete['x-ms-examples__deleted']` | deleted | `{"Delete Collection Policy":{"$ref":"./examples/CollectorPolicyDelete.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].get['x-ms-examples__deleted']` | deleted | `{"Get Collection Policy":{"$ref":"./examples/CollectorPolicyGet.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].put['x-ms-examples__deleted']` | deleted | `{"Create a collection policy":{"$ref":"./examples/CollectorPolicyCreate.json"}}` |
-
 ### Changes for `headers`
 
 | Path | Change Type | Value |
@@ -37,12 +21,6 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/AzureTrafficCollector` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/CollectorPolicy` |
-
-### Changes for `patch`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}'].patch__added` | added | `{"operationId":"CollectorPolicies_UpdateTags","parameters":[{"name":"azureTrafficCollectorName","in"...` |
 
 ### Changes for `ProxyResource`
 
@@ -68,6 +46,18 @@
 |------|------------|-------|
 | `definitions.OperationDisplay__added` | added | `{"type":"object","properties":{"provider":{"type":"string"},"resource":{"type":"string"},"operation"...` |
 
+### Changes for `location`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureTrafficCollector.properties.location__added` | added | `{"type":"string"}` |
+
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureTrafficCollector.properties.tags__added` | added | `{"type":"object","additionalProperties":{"type":"string"}}` |
+
 ### Changes for `required`
 
 | Path | Change Type | Value |
@@ -81,12 +71,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.CollectorPolicy.properties.systemData__deleted` | deleted | `{"allOf":[{"$ref":"#/definitions/SystemData"}],"readOnly":true}` |
-
-### Changes for `default`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Operation.properties.isDataAction.default__deleted` | deleted | `false` |
 
 ### Changes for `type`
 
@@ -110,6 +94,6 @@
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `definitions.AzureTrafficCollector.allOf[0].$ref` | `#/definitions/TrackedResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
-| `definitions.CollectorPolicy.allOf[0].$ref` | `#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.AzureTrafficCollector.allOf[0].$ref` | `#/definitions/TrackedResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.CollectorPolicy.allOf[0].$ref` | `#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 

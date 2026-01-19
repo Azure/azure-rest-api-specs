@@ -1,29 +1,31 @@
 {
   "parameters": {
-    "api-version": "2022-05-01",
+    "api-version": "2022-11-01",
     "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "string",
         "value": [
           {
             "name": "atc",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.NetworkFunction/azureTrafficCollectors/atc",
             "type": "Microsoft.NetworkFunction/azureTrafficCollectors",
             "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.NetworkFunction/azureTrafficCollectors/atc",
             "location": "West US",
-            "tags": {
-              "key1": "value1"
-            },
             "properties": {
               "collectorPolicies": [],
               "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "key1": "value1"
             }
           }
-        ],
-        "nextLink": "string"
+        ]
       }
     }
-  }
+  },
+  "operationId": "AzureTrafficCollectorsBySubscription_List",
+  "title": "List of Traffic Collectors by Subscription"
 }

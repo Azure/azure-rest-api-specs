@@ -14,13 +14,28 @@ namespace Microsoft.NetworkFunction;
  * Azure Traffic Collector resource.
  */
 model AzureTrafficCollector
-  is Azure.ResourceManager.TrackedResource<AzureTrafficCollectorPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<AzureTrafficCollectorPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = AzureTrafficCollector,
     KeyName = "azureTrafficCollectorName",
     SegmentName = "azureTrafficCollectors",
     NamePattern = ""
   >;
+
+  /**
+   * Resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
@@ -52,7 +67,7 @@ interface AzureTrafficCollectors {
   /**
    * Deletes a specified Azure Traffic Collector resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureTrafficCollector,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -62,14 +77,14 @@ interface AzureTrafficCollectors {
   /**
    * Return list of Azure Traffic Collectors in a Resource Group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AzureTrafficCollectorsByResourceGroup_List")
   list is ArmResourceListByParent<AzureTrafficCollector, Error = CloudError>;
 
   /**
    * Return list of Azure Traffic Collectors in a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AzureTrafficCollectorsBySubscription_List")
   azureTrafficCollectorsBySubscriptionList is ArmListBySubscription<
     AzureTrafficCollector,

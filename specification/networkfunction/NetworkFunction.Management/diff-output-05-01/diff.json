@@ -5,47 +5,8 @@
     }
   },
   "paths": {
-    "/providers/microsoft.NetworkFunction/operations": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "OperationsList": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.NetworkFunction/azureTrafficCollectors": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "List of Traffic Collectors by Subscription": {
-            "$ref": "./examples/AzureTrafficCollectorsBySubscriptionList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "List of Traffic Collectors by ResourceGroup": {
-            "$ref": "./examples/AzureTrafficCollectorsByResourceGroupList.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "Get Traffic Collector": {
-            "$ref": "./examples/AzureTrafficCollectorGet.json"
-          }
-        }
-      },
       "put": {
-        "x-ms-examples__deleted": {
-          "Create a traffic collector": {
-            "$ref": "./examples/AzureTrafficCollectorCreate.json"
-          }
-        },
         "responses": {
           "201": {
             "headers__added": {
@@ -61,11 +22,6 @@
         }
       },
       "patch": {
-        "x-ms-examples__deleted": {
-          "Update Traffic Collector tags": {
-            "$ref": "./examples/AzureTrafficCollectorUpdateTags.json"
-          }
-        },
         "parameters": [
           [
             "+",
@@ -91,11 +47,6 @@
         ]
       },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete Traffic Collector": {
-            "$ref": "./examples/AzureTrafficCollectorDelete.json"
-          }
-        },
         "responses": {
           "202": {
             "headers__added": {
@@ -108,68 +59,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "List of Collection Policies": {
-            "$ref": "./examples/CollectorPoliciesList.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}": {
-      "patch__added": {
-        "operationId": "CollectorPolicies_UpdateTags",
-        "parameters": [
-          {
-            "name": "azureTrafficCollectorName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectorPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TagsObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CollectorPolicy"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "x-ms-examples__deleted": {
-          "Get Collection Policy": {
-            "$ref": "./examples/CollectorPolicyGet.json"
-          }
-        }
-      },
       "put": {
-        "x-ms-examples__deleted": {
-          "Create a collection policy": {
-            "$ref": "./examples/CollectorPolicyCreate.json"
-          }
-        },
         "responses": {
           "201": {
             "headers__added": {
@@ -185,11 +76,6 @@
         }
       },
       "delete": {
-        "x-ms-examples__deleted": {
-          "Delete Collection Policy": {
-            "$ref": "./examples/CollectorPolicyDelete.json"
-          }
-        },
         "responses": {
           "202": {
             "headers__added": {
@@ -315,13 +201,24 @@
       }
     },
     "AzureTrafficCollector": {
+      "properties": {
+        "location__added": {
+          "type": "string"
+        },
+        "tags__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "#/definitions/TrackedResource",
-              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -349,7 +246,7 @@
           {
             "$ref": {
               "__old": "#/definitions/ProxyResource",
-              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+              "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -362,9 +259,6 @@
     },
     "Operation": {
       "properties": {
-        "isDataAction": {
-          "default__deleted": false
-        },
         "display": {
           "type__deleted": "object",
           "properties__deleted": {

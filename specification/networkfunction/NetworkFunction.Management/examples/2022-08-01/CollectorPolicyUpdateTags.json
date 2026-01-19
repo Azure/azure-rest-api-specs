@@ -3,6 +3,12 @@
     "api-version": "2022-11-01",
     "azureTrafficCollectorName": "atc",
     "collectorPolicyName": "cp1",
+    "parameters": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
     "resourceGroupName": "rg1",
     "subscriptionId": "subid"
   },
@@ -35,10 +41,14 @@
             "ingestionType": "IPFIX"
           },
           "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
         }
       }
     }
   },
-  "operationId": "CollectorPolicies_Get",
-  "title": "Get Collection Policy"
+  "operationId": "CollectorPolicies_UpdateTags",
+  "title": "Update Collector Policy tags"
 }

@@ -18,14 +18,13 @@ using Microsoft.NetworkFunction;
 @@clientName(AzureTrafficCollectors.azureTrafficCollectorsBySubscriptionList,
   "List"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AzureTrafficCollector.properties);
 
 @@clientName(CollectorPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(CollectorPolicies.updateTags::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CollectorPolicy.properties);
 
 @@clientLocation(Operations.list, "NetworkFunction");

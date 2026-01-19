@@ -12,7 +12,7 @@ namespace Microsoft.NetworkFunction;
 /**
  * The current provisioning state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ProvisioningState {
   string,
 
@@ -112,7 +112,7 @@ union DestinationType {
   AzureMonitor: "AzureMonitor",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ApiVersionParameter {
   string,
 
@@ -144,7 +144,7 @@ model Operation {
   /**
    * Indicates whether the operation is a data action
    */
-  isDataAction?: boolean;
+  isDataAction?: boolean = false;
 
   /**
    * Display metadata associated with the operation.
@@ -186,6 +186,7 @@ model OperationDisplay {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -198,6 +199,7 @@ model CloudError {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
@@ -284,7 +286,7 @@ model TrackedResource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -297,12 +299,14 @@ model TrackedResource {
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TrackedResourceSystemData extends SystemData {}
 
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SystemData {
   /**
    * The identity that created the resource.
@@ -338,7 +342,7 @@ model TagsObject {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 

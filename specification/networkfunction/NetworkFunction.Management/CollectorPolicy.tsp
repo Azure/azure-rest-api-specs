@@ -16,13 +16,14 @@ namespace Microsoft.NetworkFunction;
  */
 @parentResource(AzureTrafficCollector)
 model CollectorPolicy
-  is Azure.ResourceManager.TrackedResource<CollectorPolicyPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<CollectorPolicyPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = CollectorPolicy,
     KeyName = "collectorPolicyName",
     SegmentName = "collectorPolicies",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
@@ -42,15 +43,9 @@ interface CollectorPolicies {
   >;
 
   /**
-   * Updates the specified Collector Policy tags.
-   */
-  @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<CollectorPolicy, PatchModel = TagsObject>;
-
-  /**
    * Deletes a specified Collector Policy resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CollectorPolicy,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -67,7 +62,4 @@ interface CollectorPolicies {
 @@doc(CollectorPolicy.properties, "Properties of the Collector Policy.");
 @@doc(CollectorPolicies.createOrUpdate::parameters.resource,
   "The parameters to provide for the created Collector Policy."
-);
-@@doc(CollectorPolicies.updateTags::parameters.properties,
-  "Parameters supplied to update Collector Policy tags."
 );
