@@ -17,3 +17,17 @@ using Microsoft.Communication;
   "EmailServicesProvisioningState",
   "python"
 );
+
+// Rename properties in DomainPropertiesVerificationStates to restore fluent method names
+@@clientName(DomainPropertiesVerificationStates.DKIM, "dkim", "java");
+@@clientName(DomainPropertiesVerificationStates.DKIM2, "dkim2", "java");
+@@clientName(DomainPropertiesVerificationStates.SPF, "spf", "java");
+@@clientName(DomainPropertiesVerificationStates.DMARC, "dmarc", "java");
+
+// Rename properties in DomainPropertiesVerificationRecords to restore fluent method names
+@@clientName(DomainPropertiesVerificationRecords.DKIM, "dkim", "java");
+@@clientName(DomainPropertiesVerificationRecords.DKIM2, "dkim2", "java");
+@@clientName(DomainPropertiesVerificationRecords.SPF, "spf", "java");
+@@clientName(DomainPropertiesVerificationRecords.DMARC, "dmarc", "java");
+
+@@clientName(CommunicationServiceProperties.hostName, "hostname", "java");
