@@ -291,10 +291,10 @@ union OutputAudioFormat {
   pcm16: "pcm16",
 
   /** 16-bit PCM audio format at 8kHz sampling rate */
-  pcm16_8000hz: "pcm16-8000hz",
+  pcm16_8000hz: "pcm16_8000hz",
 
   /** 16-bit PCM audio format at 16kHz sampling rate */
-  pcm16_16000hz: "pcm16-16000hz",
+  pcm16_16000hz: "pcm16_16000hz",
 
   /** G.711 μ-law (mu-law) audio format at 8kHz sampling rate */
   g711_ulaw: "g711_ulaw",
