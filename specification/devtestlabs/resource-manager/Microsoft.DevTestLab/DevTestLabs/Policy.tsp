@@ -13,7 +13,6 @@ namespace Microsoft.DevTestLab;
 /**
  * A Policy.
  */
-@parentResource(Lab)
 model Policy is Azure.ResourceManager.ProxyResource<PolicyProperties> {
   ...ResourceNameParameter<
     Resource = Policy,

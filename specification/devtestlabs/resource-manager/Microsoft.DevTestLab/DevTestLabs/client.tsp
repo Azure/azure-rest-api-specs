@@ -95,6 +95,11 @@ using Microsoft.DevTestLab;
   armResourceIdentifier,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NotificationChannel,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(NotificationChannel, "DevTestLabNotificationChannel", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Policy,
@@ -395,10 +400,8 @@ using Microsoft.DevTestLab;
 @@alternateType(DiskProperties.diskUri, url, "csharp");
 @@alternateType(ComputeDataDisk.diskUri, url, "csharp");
 @@alternateType(NotificationChannelProperties.webHookUrl, url, "csharp");
-
 @@clientName(Labs.importVirtualMachine, "ImportVm", "csharp");
 @@clientName(PolicySets.evaluatePolicies, "EvaluatePolicies", "csharp");
-
 @@clientName(GlobalSchedules, "DevTestLabGlobalSchedules", "csharp");
 @@clientName(Schedules, "DevTestLabSchedules", "csharp");
 @@clientName(ServiceFabricSchedules,
@@ -406,3 +409,10 @@ using Microsoft.DevTestLab;
   "csharp"
 );
 @@clientName(VirtualMachineSchedules, "DevTestLabVmSchedules", "csharp");
+@@clientName(LabProperties.publicIpId, "PublicIPId", "csharp");
+@@clientName(CustomImagePropertiesCustom.osType, "OSType", "csharp");
+@@clientName(FormulaProperties.osType, "OSType", "csharp");
+@@clientName(GalleryImageReference.osType, "OSType", "csharp");
+@@clientName(LabVirtualMachineProperties.osType, "OSType", "csharp");
+@@clientName(ComputeVmProperties.osType, "OSType", "csharp");
+@@clientName(GalleryImages.list, "GetGalleryImages", "csharp");
