@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.KeyVault;
 using Azure.Core;
 
@@ -156,7 +157,10 @@ using Azure.Core;
 @@clientName(MhsmVirtualNetworkRule, "ManagedHsmVirtualNetworkRule", "csharp");
 @@alternateType(MhsmVirtualNetworkRule.id, armResourceIdentifier, "csharp");
 @@clientName(MhsmVirtualNetworkRule.id, "SubnetId", "csharp");
-@@clientName(SecretCreateOrUpdateParameters, "KeyVaultSecretCreateOrUpdateContent", "csharp");
+@@clientName(SecretCreateOrUpdateParameters,
+  "KeyVaultSecretCreateOrUpdateContent",
+  "csharp"
+);
 @@clientName(MhsmPrivateLinkServiceConnectionState,
   "ManagedHsmPrivateLinkServiceConnectionState",
   "csharp"
@@ -260,30 +264,45 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(VaultsOperationGroup.listDeleted, "GetDeletedKeyVaults", "csharp");
-@@clientName(PrivateEndpointConnection, "KeyVaultPrivateEndpointConnection", "csharp");
+@@clientName(PrivateEndpointConnection,
+  "KeyVaultPrivateEndpointConnection",
+  "csharp"
+);
 @@clientName(DeletedVaults.getDeleted, "get", "csharp");
 @@clientName(DeletedManagedHsms.getDeleted, "get", "csharp");
-@@clientName(VaultCreateOrUpdateParameters, "KeyVaultCreateOrUpdateContent", "csharp");
+@@clientName(VaultCreateOrUpdateParameters,
+  "KeyVaultCreateOrUpdateContent",
+  "csharp"
+);
 @@alternateType(MhsmPrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Vault,
-  Azure.ResourceManager.Foundations.TrackedResource, 
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedHsm,
-  Azure.ResourceManager.Foundations.TrackedResource, 
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MhsmPrivateEndpointConnection,
-  Azure.ResourceManager.Foundations.TrackedResource, 
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+
+@@clientName(ManagedHsms.listByResource, "GetMHSMRegionsByResource", "csharp");
+
+// TODO: comment these for now since they are not working as expected
+// @@markAsPageable(ManagedHsms.listByMHSMResource, "csharp");
+
+// @@markAsPageable(Vaults.listByVault);
+
+// @@markAsPageable(Vaults.updateAccessPolicy, "csharp");
 
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
