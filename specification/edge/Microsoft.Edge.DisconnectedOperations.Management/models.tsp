@@ -171,7 +171,7 @@ union BenefitPlanStatus {
 @added(Microsoft.Edge.Versions.v2026_01_01)
 model BenefitPlans {
   @doc("Azure Hybrid Windows Server Benefit plan")
-  azureHybridWindowsServerBenefit: BenefitPlanStatus;
+  azureHybridWindowsServerBenefit?: BenefitPlanStatus;
 }
 
 @doc("The disconnected operation properties")
