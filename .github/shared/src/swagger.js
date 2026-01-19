@@ -5,6 +5,7 @@ import { inspect } from "util";
 import { z } from "zod";
 import { mapAsync } from "./array.js";
 import { example, preview } from "./changed-files.js";
+import { MemoryCache } from "./memory-cache.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
@@ -106,43 +107,57 @@ const excludeExamples = {
 
 export class Swagger {
   /**
-   * Content of swagger file, either loaded from `#path` or passed in via `options`.
+   * Caches the contents of files on disk, using the resolved path as the key.
+   *
+   * @type {MemoryCache<string, Promise<string>>}
+   */
+  static #contentCache = new MemoryCache();
+
+  /**
+   * Caches JSON objects parsed from text, using the resolved path (or content string itself) as the key.
+   *
+   * @type {MemoryCache<string, Promise<unknown>>}
+   * */
+  static #contentJsonCache = new MemoryCache();
+
+  /**
+   * Caches SwaggerObject objects parsed from JSON objects, using the resolved path (or content string itself) as the key.
+   *
+   * @type {MemoryCache<string, Promise<SwaggerObject>>}
+   */
+  static #contentObjectCache = new MemoryCache();
+
+  /**
+   * Caches operations extracted from a SwaggerObject, using the resolved path (or content string itself) as the key.
+   *
+   * @type {MemoryCache<string, Promise<Map<string, Operation>>>}
+   */
+  static #operationsCache = new MemoryCache();
+
+  /**
+   * Caches reference paths extracted from a JSON object, using the resolved path (or content string itself) as the key.
+   *
+   * We should *not* cache the returned Swagger objects themselves, for several reasons:
+   * - Swagger objects created from the same content may have different tags
+   * - Swagger objects have backpointers to SpecModel, so the captured object graph can be very large
+   * - Swagger object should be relatively "cheap", since the "expensive" properties are cached statically.
+   *
+   * @type {MemoryCache<string, Promise<string[]>>}
+   */
+  static #refCache = new MemoryCache();
+
+  /**
+   * Optional content of swagger file, passed in via `options`.  If undefined, content is loaded from `#path`.
    *
    * @type {string | undefined}
    */
   #content;
 
-  /**
-   * Content of swagger file, represented as an untyped JSON object
-   *
-   *  @type {unknown | undefined}
-   */
-  #contentJSON;
-
-  /**
-   * Content of swagger file, represented as a typed object
-   *
-   * @type {SwaggerObject | undefined}
-   * */
-  #contentObject;
-
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
-  /**
-   * Map of the operations in this swagger, using `operationId` as key
-   *
-   * @type {Map<string, Operation> | undefined}
-   */
-  #operations;
-
   /** @type {string} absolute path */
   #path;
-
-  /**
-   * @type {Map<string, Swagger> | undefined}
-   */
-  #refs;
 
   /** @type {Tag | undefined} Tag that contains this Swagger */
   #tag;
@@ -170,16 +185,17 @@ export class Swagger {
    * @throws {SpecModelError}
    */
   async #getContent() {
-    if (this.#content === undefined) {
-      const path = this.#path;
-
-      this.#content = await this.#wrapError(
-        async () => await readFile(path, { encoding: "utf8" }),
-        "Failed to read file for swagger",
-      );
-    }
-
-    return this.#content;
+    return (
+      this.#content ??
+      (await Swagger.#contentCache.getOrCreate(
+        this.#path,
+        async () =>
+          await this.#wrapError(
+            async () => await readFile(this.#path, { encoding: "utf8" }),
+            "Failed to read file for swagger",
+          ),
+      ))
+    );
   }
 
   /**
@@ -187,16 +203,14 @@ export class Swagger {
    * @throws {SpecModelError}
    */
   async #getContentJSON() {
-    if (this.#contentJSON === undefined) {
-      const content = await this.#getContent();
-
-      this.#contentJSON = await this.#wrapError(
-        () => /** @type {unknown} */ (JSON.parse(content)),
-        "Failed to parse JSON for swagger",
-      );
-    }
-
-    return this.#contentJSON;
+    return await Swagger.#contentJsonCache.getOrCreate(
+      this.#content ?? this.#path,
+      async () =>
+        await this.#wrapError(
+          async () => /** @type {unknown} */ (JSON.parse(await this.#getContent())),
+          "Failed to parse JSON for swagger",
+        ),
+    );
   }
 
   /**
@@ -204,16 +218,14 @@ export class Swagger {
    * @throws {SpecModelError}
    */
   async #getContentObject() {
-    if (this.#contentObject === undefined) {
-      const contentJSON = await this.#getContentJSON();
-
-      this.#contentObject = await this.#wrapError(
-        () => swaggerSchema.parse(contentJSON),
-        "Failed to parse schema for swagger",
-      );
-    }
-
-    return this.#contentObject;
+    return await Swagger.#contentObjectCache.getOrCreate(
+      this.#content ?? this.#path,
+      async () =>
+        await this.#wrapError(
+          async () => swaggerSchema.parse(await this.#getContentJSON()),
+          "Failed to parse schema for swagger",
+        ),
+    );
   }
 
   /**
@@ -229,35 +241,39 @@ export class Swagger {
   }
 
   async #getRefs() {
-    if (this.#refs === undefined) {
-      const path = this.#path;
+    // Safe to cache refPaths, since it's just an array of string paths
+    const refPaths = await Swagger.#refCache.getOrCreate(this.#content ?? this.#path, async () => {
       const contentJSON = await this.#getContentJSON();
 
       const schema = await this.#wrapError(
         async () =>
-          await $RefParser.resolve(path, contentJSON, {
+          await $RefParser.resolve(this.#path, contentJSON, {
             resolve: { file: excludeExamples, http: false },
           }),
         "Failed to resolve file for swagger",
       );
 
-      const refPaths = schema
-        .paths("file")
-        // Exclude ourself
-        .filter((p) => resolve(p) !== resolve(this.#path));
-
-      this.#refs = new Map(
-        refPaths.map((p) => {
-          const swagger = new Swagger(p, {
-            logger: this.#logger,
-            tag: this.#tag,
-          });
-          return [swagger.path, swagger];
-        }),
+      return (
+        schema
+          .paths("file")
+          // Exclude ourself
+          .filter((p) => resolve(p) !== resolve(this.#path))
       );
-    }
+    });
 
-    return this.#refs;
+    // We should *not* cache the returned Swagger objects themselves, for two reasons:
+    // - Swagger objects created from the same content may have different tags
+    // - Swagger objects have backpointers to SpecModel, so the captured object graph can be very large
+    // - Swagger object should be relatively "cheap", since the "expensive" properties are cached statically.
+    return new Map(
+      refPaths.map((p) => {
+        const swagger = new Swagger(p, {
+          logger: this.#logger,
+          tag: this.#tag,
+        });
+        return [swagger.path, swagger];
+      }),
+    );
   }
 
   /**
@@ -276,27 +292,28 @@ export class Swagger {
    * @returns {Promise<Map<string, Operation>>} Map of the operations in this swagger, using `operationId` as key
    */
   async getOperations() {
-    if (this.#operations === undefined) {
+    return await Swagger.#operationsCache.getOrCreate(this.#content ?? this.#path, async () => {
       const contentObject = await this.#getContentObject();
 
-      this.#operations = new Map();
+      /** @type {Map<string, Operation>} */
+      const operations = new Map();
 
       // Process regular paths
       if (contentObject.paths) {
         for (const [path, pathObject] of Object.entries(contentObject.paths)) {
-          this.#addOperations(this.#operations, path, pathObject);
+          this.#addOperations(operations, path, pathObject);
         }
       }
 
       // Process x-ms-paths (Azure extension)
       if (contentObject["x-ms-paths"]) {
         for (const [path, pathObject] of Object.entries(contentObject["x-ms-paths"])) {
-          this.#addOperations(this.#operations, path, pathObject);
+          this.#addOperations(operations, path, pathObject);
         }
       }
-    }
 
-    return this.#operations;
+      return operations;
+    });
   }
 
   /**

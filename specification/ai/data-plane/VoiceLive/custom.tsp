@@ -75,7 +75,8 @@ model RequestSession {
   temperature?: float32;
 
   /** Maximum number of tokens to generate in the response. Default is unlimited. */
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   max_response_output_tokens?: int32 | "inf";
 
   /**
@@ -323,10 +324,10 @@ union OutputAudioFormat {
   pcm16: "pcm16",
 
   /** 16-bit PCM audio format at 8kHz sampling rate */
-  pcm16_8000hz: "pcm16-8000hz",
+  pcm16_8000hz: "pcm16_8000hz",
 
   /** 16-bit PCM audio format at 16kHz sampling rate */
-  pcm16_16000hz: "pcm16-16000hz",
+  pcm16_16000hz: "pcm16_16000hz",
 
   /** G.711 μ-law (mu-law) audio format at 8kHz sampling rate */
   g711_ulaw: "g711_ulaw",
@@ -353,6 +354,7 @@ model AudioInputTranscriptionOptions {
    * 'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
    * 'azure-speech'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   `model`:
     | string
     | "whisper-1"
@@ -391,6 +393,7 @@ union Modality {
 @discriminator("model")
 @usage(RequestUsage)
 model EouDetection {
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   `model`:
     | "semantic_detection_v1"
     | "semantic_detection_v1_en"
@@ -555,6 +558,7 @@ model AzureSemanticVadMultilingual extends TurnDetection {
 @usage(RequestUsage)
 model AudioNoiseReduction {
   /** The type of noise reduction model. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   type: "azure_deep_noise_suppression" | "near_field" | "far_field" | string;
 }
 
