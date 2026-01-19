@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-11-01",
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/blockCapacityReservationGroup",
+        "properties": {
+          "capacityReservations": [
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation1"
+            },
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation2"
+            }
+          ],
+          "instanceView": {
+            "capacityReservations": [
+              {
+                "name": "blockCapacityReservation1",
+                "utilizationInfo": {
+                  "currentCapacity": 5,
+                  "virtualMachinesAllocated": [
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                    },
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  }
+                ]
+              },
+              {
+                "name": "blockCapacityReservation2",
+                "utilizationInfo": {
+                  "currentCapacity": 5,
+                  "virtualMachinesAllocated": [
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+                    },
+                    {
+                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM4"
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  }
+                ]
+              }
+            ]
+          },
+          "reservationType": "Block"
+        },
+        "location": "westus",
+        "tags": {
+          "{tagName}": "{tagValue}"
+        },
+        "name": "blockCapacityReservationGroup",
+        "zones": [
+          "3",
+          "1"
+        ]
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_Get",
+  "title": "Get a block capacity reservation Group."
+}
