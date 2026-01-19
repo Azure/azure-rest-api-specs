@@ -70,6 +70,7 @@ input-file:
   - stable/2026-01-01/SessionPools.json
   - stable/2026-01-01/SourceControls.json
   - stable/2026-01-01/Subscriptions.json
+  - stable/2026-01-01/SupportedModels.json
   - stable/2026-01-01/Usages.json
   - stable/2026-01-01/LogicAppsExtension.json
 ```
