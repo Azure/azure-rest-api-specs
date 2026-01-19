@@ -171,7 +171,7 @@ interface CriticalDataElements {
   @doc("Retrieves the count of duplicate critical data elements by passing namekeyword.")
   @route("/criticalDataElements/query/count")
   @post
-  QueryDuplicateCriticalDataElements is RpcOperation<
+  CountCriticalDataElements is RpcOperation<
     {
       @doc("The request body containing query criteria.")
       @bodyRoot
@@ -557,7 +557,7 @@ interface DataProducts {
   @doc("Retrieves the count of duplicate data products by passing namekeyword.")
   @route("/dataProducts/query/count")
   @post
-  QueryDuplicateDataProducts is RpcOperation<
+  CountDataProducts is RpcOperation<
     {
       @doc("The request body containing query criteria.")
       @bodyRoot
@@ -813,7 +813,7 @@ interface Terms {
   @doc("Retrieves the count of duplicate terms by passing namekeyword.")
   @route("/terms/query/count")
   @post
-  QueryDuplicateTerms is RpcOperation<
+  CountTerms is RpcOperation<
     {
       @doc("The request body containing query criteria.")
       @bodyRoot
@@ -982,7 +982,7 @@ interface Okr {
   @doc("Retrieves the count of duplicate objectives by passing definition.")
   @route("/objectives/query/count")
   @post
-  QueryDuplicateObjectives is RpcOperation<
+  CountObjectives is RpcOperation<
     {
       @doc("The request body containing query criteria.")
       @bodyRoot

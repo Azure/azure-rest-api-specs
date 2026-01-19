@@ -39,9 +39,8 @@ namespace PurviewUnifiedCatalog;
 
 @doc("Service API versions")
 enum ApiVersions {
-  @doc("2026-01-15-preview service API version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2026_01_15_preview: "2026-01-15-preview",
+  @doc("2025-09-15-preview service API version")
+  v2025_09_15_preview: "2025-09-15-preview",
 }
 
 alias AuthToken = OAuth2Auth<[

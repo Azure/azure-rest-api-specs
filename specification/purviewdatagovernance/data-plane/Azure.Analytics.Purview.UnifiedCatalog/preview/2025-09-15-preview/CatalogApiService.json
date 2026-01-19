@@ -20,6 +20,7 @@
       {
         "name": "endpoint",
         "in": "path",
+        "description": "The endpoint of the Purview Unified Catalog service. Example: https://api.purview-service.microsoft.com/",
         "required": true,
         "type": "string",
         "enum": [
@@ -77,7 +78,7 @@
   "paths": {
     "/businessdomains": {
       "get": {
-        "operationId": "EnumerateDomains",
+        "operationId": "BusinessDomain_EnumerateDomains",
         "tags": [
           "BusinessDomain"
         ],
@@ -124,7 +125,7 @@
         },
         "x-ms-examples": {
           "EnumerateDomains_MaximumSet": {
-            "$ref": "./examples/EnumerateDomains_MaximumSet_Gen.json"
+            "$ref": "./examples/BusinessDomain_EnumerateDomains_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -132,7 +133,7 @@
         }
       },
       "post": {
-        "operationId": "CreateDomain",
+        "operationId": "BusinessDomain_CreateDomain",
         "tags": [
           "BusinessDomain"
         ],
@@ -172,15 +173,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateDomain_MaximumSet": {
-            "$ref": "./examples/CreateDomain_MaximumSet_Gen.json"
+          "BusinessDomain_CreateDomain": {
+            "$ref": "./examples/BusinessDomain_CreateDomain_Gen.json"
           }
         }
       }
     },
     "/businessdomains/{domainId}": {
       "get": {
-        "operationId": "GetDomainById",
+        "operationId": "BusinessDomain_GetDomainById",
         "tags": [
           "BusinessDomain"
         ],
@@ -219,13 +220,13 @@
           }
         },
         "x-ms-examples": {
-          "GetDomainById_MaximumSet": {
-            "$ref": "./examples/GetDomainById_MaximumSet_Gen.json"
+          "BusinessDomain_GetDomainById": {
+            "$ref": "./examples/BusinessDomain_GetDomainById_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "UpdateDomain",
+        "operationId": "BusinessDomain_UpdateDomain",
         "tags": [
           "BusinessDomain"
         ],
@@ -273,13 +274,13 @@
           }
         },
         "x-ms-examples": {
-          "UpdateDomain_MaximumSet": {
-            "$ref": "./examples/UpdateDomain_MaximumSet_Gen.json"
+          "BusinessDomain_UpdateDomain": {
+            "$ref": "./examples/BusinessDomain_UpdateDomain_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteDomainById",
+        "operationId": "BusinessDomain_DeleteDomainById",
         "tags": [
           "BusinessDomain"
         ],
@@ -315,15 +316,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDomainById_MaximumSet": {
-            "$ref": "./examples/DeleteDomainById_MaximumSet_Gen.json"
+          "BusinessDomain_DeleteDomainById": {
+            "$ref": "./examples/BusinessDomain_DeleteDomainById_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements": {
       "get": {
-        "operationId": "ListCriticalDataElement",
+        "operationId": "CriticalDataElements_ListCriticalDataElement",
         "tags": [
           "CriticalDataElements"
         ],
@@ -382,8 +383,8 @@
           }
         },
         "x-ms-examples": {
-          "ListCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/ListCriticalDataElement_MaximumSet_Gen.json"
+          "CriticalDataElements_ListCriticalDataElement": {
+            "$ref": "./examples/CriticalDataElements_ListCriticalDataElement_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -391,7 +392,7 @@
         }
       },
       "post": {
-        "operationId": "CreateCriticalDataElement",
+        "operationId": "CriticalDataElements_CreateCriticalDataElement",
         "tags": [
           "CriticalDataElements"
         ],
@@ -431,15 +432,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/CreateCriticalDataElement_MaximumSet_Gen.json"
+          "CriticalDataElements_CreateCriticalDataElement": {
+            "$ref": "./examples/CriticalDataElements_CreateCriticalDataElement_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements/{criticalDataElementId}": {
       "get": {
-        "operationId": "GetCriticalDataElementById",
+        "operationId": "CriticalDataElements_GetCriticalDataElementById",
         "tags": [
           "CriticalDataElements"
         ],
@@ -478,13 +479,13 @@
           }
         },
         "x-ms-examples": {
-          "GetCriticalDataElementById_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataElementById_MaximumSet_Gen.json"
+          "CriticalDataElements_GetCriticalDataElementById": {
+            "$ref": "./examples/CriticalDataElements_GetCriticalDataElementById_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "UpdateCriticalDataElement",
+        "operationId": "CriticalDataElements_UpdateCriticalDataElement",
         "tags": [
           "CriticalDataElements"
         ],
@@ -532,13 +533,13 @@
           }
         },
         "x-ms-examples": {
-          "UpdateCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/UpdateCriticalDataElement_MaximumSet_Gen.json"
+          "CriticalDataElements_UpdateCriticalDataElement": {
+            "$ref": "./examples/CriticalDataElements_UpdateCriticalDataElement_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteCriticalDataElementById",
+        "operationId": "CriticalDataElements_DeleteCriticalDataElementById",
         "tags": [
           "CriticalDataElements"
         ],
@@ -574,15 +575,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteCriticalDataElementById_MaximumSet": {
-            "$ref": "./examples/DeleteCriticalDataElementById_MaximumSet_Gen.json"
+          "CriticalDataElements_DeleteCriticalDataElementById": {
+            "$ref": "./examples/CriticalDataElements_DeleteCriticalDataElementById_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements/{criticalDataElementId}/relationships": {
       "get": {
-        "operationId": "ListCriticalDataElementRelationships",
+        "operationId": "CriticalDataElements_ListCriticalDataElementRelationships",
         "tags": [
           "CriticalDataElements"
         ],
@@ -720,8 +721,8 @@
           }
         },
         "x-ms-examples": {
-          "ListCriticalDataElementRelationships_MaximumSet": {
-            "$ref": "./examples/ListCriticalDataElementRelationships_MaximumSet_Gen.json"
+          "CriticalDataElements_ListCriticalDataElementRelationships": {
+            "$ref": "./examples/CriticalDataElements_ListCriticalDataElementRelationships_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -729,7 +730,7 @@
         }
       },
       "post": {
-        "operationId": "CreateCriticalDataElementRelationship",
+        "operationId": "CriticalDataElements_CreateCriticalDataElementRelationship",
         "tags": [
           "CriticalDataElements"
         ],
@@ -876,13 +877,13 @@
           }
         },
         "x-ms-examples": {
-          "CreateCriticalDataElementRelationship_MaximumSet": {
-            "$ref": "./examples/CreateCriticalDataElementRelationship_MaximumSet_Gen.json"
+          "CriticalDataElements_CreateCriticalDataElementRelationship": {
+            "$ref": "./examples/CriticalDataElements_CreateCriticalDataElementRelationship_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteCriticalDataElementRelationship",
+        "operationId": "CriticalDataElements_DeleteCriticalDataElementRelationship",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1025,15 +1026,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteCriticalDataElementRelationship_MaximumSet": {
-            "$ref": "./examples/DeleteCriticalDataElementRelationship_MaximumSet_Gen.json"
+          "CriticalDataElements_DeleteCriticalDataElementRelationship": {
+            "$ref": "./examples/CriticalDataElements_DeleteCriticalDataElementRelationship_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements/facets": {
       "post": {
-        "operationId": "GetCriticalDataElementFacets",
+        "operationId": "CriticalDataElements_GetCriticalDataElementFacets",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1073,15 +1074,15 @@
           }
         },
         "x-ms-examples": {
-          "GetCriticalDataElementFacets_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataElementFacets_MaximumSet_Gen.json"
+          "CriticalDataElements_GetCriticalDataElementFacets": {
+            "$ref": "./examples/CriticalDataElements_GetCriticalDataElementFacets_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements/query": {
       "post": {
-        "operationId": "QueryCriticalDataElements",
+        "operationId": "CriticalDataElements_QueryCriticalDataElements",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1089,14 +1090,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "duplicatecheck",
-            "in": "query",
-            "description": "The number of duplicate checks to perform.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "request",
@@ -1129,8 +1122,8 @@
           }
         },
         "x-ms-examples": {
-          "QueryCriticalDataElements_MaximumSet": {
-            "$ref": "./examples/QueryCriticalDataElements_MaximumSet_Gen.json"
+          "CriticalDataElements_QueryCriticalDataElements": {
+            "$ref": "./examples/CriticalDataElements_QueryCriticalDataElements_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1138,9 +1131,57 @@
         }
       }
     },
+    "/criticalDataElements/query/count": {
+      "post": {
+        "operationId": "CriticalDataElements_CountCriticalDataElements",
+        "tags": [
+          "CriticalDataElements"
+        ],
+        "description": "Retrieves the count of duplicate critical data elements by passing namekeyword.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The request body containing query criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DuplicateQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityCount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CriticalDataElements_CountCriticalDataElements": {
+            "$ref": "./examples/CriticalDataElements_CountCriticalDataElements_Gen.json"
+          }
+        }
+      }
+    },
     "/dataProducts": {
       "get": {
-        "operationId": "ListDataProducts",
+        "operationId": "DataProducts_ListDataProducts",
         "tags": [
           "DataProduct"
         ],
@@ -1192,8 +1233,8 @@
           }
         },
         "x-ms-examples": {
-          "ListDataProducts_MaximumSet": {
-            "$ref": "./examples/ListDataProducts_MaximumSet_Gen.json"
+          "DataProducts_ListDataProducts": {
+            "$ref": "./examples/DataProducts_ListDataProducts_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1201,7 +1242,7 @@
         }
       },
       "post": {
-        "operationId": "CreateDataProduct",
+        "operationId": "DataProducts_CreateDataProduct",
         "tags": [
           "DataProduct"
         ],
@@ -1241,15 +1282,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateDataProduct_MaximumSet": {
-            "$ref": "./examples/CreateDataProduct_MaximumSet_Gen.json"
+          "DataProducts_CreateDataProduct": {
+            "$ref": "./examples/DataProducts_CreateDataProduct_Gen.json"
           }
         }
       }
     },
     "/dataProducts/{dataProductId}": {
       "get": {
-        "operationId": "GetDataProductById",
+        "operationId": "DataProducts_GetDataProductById",
         "tags": [
           "DataProduct"
         ],
@@ -1288,13 +1329,13 @@
           }
         },
         "x-ms-examples": {
-          "GetDataProductById_MaximumSet": {
-            "$ref": "./examples/GetDataProductById_MaximumSet_Gen.json"
+          "DataProducts_GetDataProductById": {
+            "$ref": "./examples/DataProducts_GetDataProductById_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "UpdateDataProduct",
+        "operationId": "DataProducts_UpdateDataProduct",
         "tags": [
           "DataProduct"
         ],
@@ -1342,13 +1383,13 @@
           }
         },
         "x-ms-examples": {
-          "UpdateDataProduct_MaximumSet": {
-            "$ref": "./examples/UpdateDataProduct_MaximumSet_Gen.json"
+          "DataProducts_UpdateDataProduct": {
+            "$ref": "./examples/DataProducts_UpdateDataProduct_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteDataProductById",
+        "operationId": "DataProducts_DeleteDataProductById",
         "tags": [
           "DataProduct"
         ],
@@ -1384,15 +1425,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDataProductById_MaximumSet": {
-            "$ref": "./examples/DeleteDataProductById_MaximumSet_Gen.json"
+          "DataProducts_DeleteDataProductById": {
+            "$ref": "./examples/DataProducts_DeleteDataProductById_Gen.json"
           }
         }
       }
     },
     "/dataProducts/{dataProductId}/relationships": {
       "get": {
-        "operationId": "ListDataProductRelationships",
+        "operationId": "DataProducts_ListDataProductRelationships",
         "tags": [
           "DataProduct"
         ],
@@ -1530,8 +1571,8 @@
           }
         },
         "x-ms-examples": {
-          "ListDataProductRelationships_MaximumSet": {
-            "$ref": "./examples/ListDataProductRelationships_MaximumSet_Gen.json"
+          "DataProducts_ListDataProductRelationships": {
+            "$ref": "./examples/DataProducts_ListDataProductRelationships_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1539,7 +1580,7 @@
         }
       },
       "post": {
-        "operationId": "CreateDataProductRelationship",
+        "operationId": "DataProducts_CreateDataProductRelationship",
         "tags": [
           "DataProduct"
         ],
@@ -1686,13 +1727,13 @@
           }
         },
         "x-ms-examples": {
-          "CreateDataProductRelationship_MaximumSet": {
-            "$ref": "./examples/CreateDataProductRelationship_MaximumSet_Gen.json"
+          "DataProducts_CreateDataProductRelationship": {
+            "$ref": "./examples/DataProducts_CreateDataProductRelationship_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteDataProductRelationship",
+        "operationId": "DataProducts_DeleteDataProductRelationship",
         "tags": [
           "DataProduct"
         ],
@@ -1835,15 +1876,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDataProductRelationship_MaximumSet": {
-            "$ref": "./examples/DeleteDataProductRelationship_MaximumSet_Gen.json"
+          "DataProducts_DeleteDataProductRelationship": {
+            "$ref": "./examples/DataProducts_DeleteDataProductRelationship_Gen.json"
           }
         }
       }
     },
     "/dataProducts/facets": {
       "post": {
-        "operationId": "GetDataProductFacets",
+        "operationId": "DataProducts_GetDataProductFacets",
         "tags": [
           "DataProduct"
         ],
@@ -1883,15 +1924,15 @@
           }
         },
         "x-ms-examples": {
-          "GetDataProductFacets_MaximumSet": {
-            "$ref": "./examples/GetDataProductFacets_MaximumSet_Gen.json"
+          "DataProducts_GetDataProductFacets": {
+            "$ref": "./examples/DataProducts_GetDataProductFacets_Gen.json"
           }
         }
       }
     },
     "/dataProducts/query": {
       "post": {
-        "operationId": "QueryDataProducts",
+        "operationId": "DataProducts_QueryDataProducts",
         "tags": [
           "DataProduct"
         ],
@@ -1899,14 +1940,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "duplicatecheck",
-            "in": "query",
-            "description": "Optional duplicate-check flag (1 to enable exact search).",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "dataProductOwner",
@@ -1946,8 +1979,8 @@
           }
         },
         "x-ms-examples": {
-          "QueryDataProducts_MaximumSet": {
-            "$ref": "./examples/QueryDataProducts_MaximumSet_Gen.json"
+          "DataProducts_QueryDataProducts": {
+            "$ref": "./examples/DataProducts_QueryDataProducts_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1955,9 +1988,57 @@
         }
       }
     },
+    "/dataProducts/query/count": {
+      "post": {
+        "operationId": "DataProducts_CountDataProducts",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Retrieves the count of duplicate data products by passing namekeyword.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The request body containing query criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DuplicateQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityCount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProducts_CountDataProducts": {
+            "$ref": "./examples/DataProducts_CountDataProducts_Gen.json"
+          }
+        }
+      }
+    },
     "/objectives": {
       "get": {
-        "operationId": "ListObjectives",
+        "operationId": "Okr_ListObjectives",
         "tags": [
           "OKR"
         ],
@@ -2015,8 +2096,8 @@
           }
         },
         "x-ms-examples": {
-          "ListObjectives_MaximumSet": {
-            "$ref": "./examples/ListObjectives_MaximumSet_Gen.json"
+          "Okr_ListObjectives": {
+            "$ref": "./examples/Okr_ListObjectives_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2024,7 +2105,7 @@
         }
       },
       "post": {
-        "operationId": "CreateObjective",
+        "operationId": "Okr_CreateObjective",
         "tags": [
           "OKR"
         ],
@@ -2064,15 +2145,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateObjective_MaximumSet": {
-            "$ref": "./examples/CreateObjective_MaximumSet_Gen.json"
+          "Okr_CreateObjective": {
+            "$ref": "./examples/Okr_CreateObjective_Gen.json"
           }
         }
       }
     },
     "/objectives/{objectiveId}": {
       "get": {
-        "operationId": "GetObjectiveById",
+        "operationId": "Okr_GetObjectiveById",
         "tags": [
           "OKR"
         ],
@@ -2111,13 +2192,13 @@
           }
         },
         "x-ms-examples": {
-          "GetObjectiveById_MaximumSet": {
-            "$ref": "./examples/GetObjectiveById_MaximumSet_Gen.json"
+          "Okr_GetObjectiveById": {
+            "$ref": "./examples/Okr_GetObjectiveById_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "UpdateObjective",
+        "operationId": "Okr_UpdateObjective",
         "tags": [
           "OKR"
         ],
@@ -2165,13 +2246,13 @@
           }
         },
         "x-ms-examples": {
-          "UpdateObjective_MaximumSet": {
-            "$ref": "./examples/UpdateObjective_MaximumSet_Gen.json"
+          "Okr_UpdateObjective": {
+            "$ref": "./examples/Okr_UpdateObjective_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteObjectiveById",
+        "operationId": "Okr_DeleteObjectiveById",
         "tags": [
           "OKR"
         ],
@@ -2207,15 +2288,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteObjectiveById_MaximumSet": {
-            "$ref": "./examples/DeleteObjectiveById_MaximumSet_Gen.json"
+          "Okr_DeleteObjectiveById": {
+            "$ref": "./examples/Okr_DeleteObjectiveById_Gen.json"
           }
         }
       }
     },
     "/objectives/{objectiveId}/keyResults": {
       "get": {
-        "operationId": "ListKeyResults",
+        "operationId": "Okr_ListKeyResults",
         "tags": [
           "OKR"
         ],
@@ -2254,8 +2335,8 @@
           }
         },
         "x-ms-examples": {
-          "ListKeyResults_MaximumSet": {
-            "$ref": "./examples/ListKeyResults_MaximumSet_Gen.json"
+          "Okr_ListKeyResults": {
+            "$ref": "./examples/Okr_ListKeyResults_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2263,7 +2344,7 @@
         }
       },
       "post": {
-        "operationId": "CreateKeyResult",
+        "operationId": "Okr_CreateKeyResult",
         "tags": [
           "OKR"
         ],
@@ -2311,15 +2392,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateKeyResult_MaximumSet": {
-            "$ref": "./examples/CreateKeyResult_MaximumSet_Gen.json"
+          "Okr_CreateKeyResult": {
+            "$ref": "./examples/Okr_CreateKeyResult_Gen.json"
           }
         }
       }
     },
     "/objectives/{objectiveId}/keyResults/{keyResultId}": {
       "get": {
-        "operationId": "GetKeyResultById",
+        "operationId": "Okr_GetKeyResultById",
         "tags": [
           "OKR"
         ],
@@ -2366,13 +2447,13 @@
           }
         },
         "x-ms-examples": {
-          "GetKeyResultById_MaximumSet": {
-            "$ref": "./examples/GetKeyResultById_MaximumSet_Gen.json"
+          "Okr_GetKeyResultById": {
+            "$ref": "./examples/Okr_GetKeyResultById_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "UpdateKeyResult",
+        "operationId": "Okr_UpdateKeyResult",
         "tags": [
           "OKR"
         ],
@@ -2428,8 +2509,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateKeyResult_MaximumSet": {
-            "$ref": "./examples/UpdateKeyResult_MaximumSet_Gen.json"
+          "Okr_UpdateKeyResult": {
+            "$ref": "./examples/Okr_UpdateKeyResult_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2437,7 +2518,7 @@
         }
       },
       "delete": {
-        "operationId": "DeleteKeyResultById",
+        "operationId": "Okr_DeleteKeyResultById",
         "tags": [
           "OKR"
         ],
@@ -2481,15 +2562,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteKeyResultById_MaximumSet": {
-            "$ref": "./examples/DeleteKeyResultById_MaximumSet_Gen.json"
+          "Okr_DeleteKeyResultById": {
+            "$ref": "./examples/Okr_DeleteKeyResultById_Gen.json"
           }
         }
       }
     },
     "/objectives/facets": {
       "post": {
-        "operationId": "GetObjectiveFacets",
+        "operationId": "Okr_GetObjectiveFacets",
         "tags": [
           "OKR"
         ],
@@ -2529,15 +2610,15 @@
           }
         },
         "x-ms-examples": {
-          "GetObjectiveFacets_MaximumSet": {
-            "$ref": "./examples/GetObjectiveFacets_MaximumSet_Gen.json"
+          "Okr_GetObjectiveFacets": {
+            "$ref": "./examples/Okr_GetObjectiveFacets_Gen.json"
           }
         }
       }
     },
     "/objectives/query": {
       "post": {
-        "operationId": "QueryObjectives",
+        "operationId": "Okr_QueryObjectives",
         "tags": [
           "OKR"
         ],
@@ -2545,14 +2626,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "duplicatecheck",
-            "in": "query",
-            "description": "Optional duplicate-check flag (1 to enable exact search).",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "request",
@@ -2585,8 +2658,8 @@
           }
         },
         "x-ms-examples": {
-          "QueryObjectives_MaximumSet": {
-            "$ref": "./examples/QueryObjectives_MaximumSet_Gen.json"
+          "Okr_QueryObjectives": {
+            "$ref": "./examples/Okr_QueryObjectives_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2594,9 +2667,57 @@
         }
       }
     },
+    "/objectives/query/count": {
+      "post": {
+        "operationId": "Okr_CountObjectives",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Retrieves the count of duplicate objectives by passing definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The request body containing query criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DuplicateOkrQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityCount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Okr_CountObjectives": {
+            "$ref": "./examples/Okr_CountObjectives_Gen.json"
+          }
+        }
+      }
+    },
     "/policies": {
       "get": {
-        "operationId": "ListPolicies",
+        "operationId": "Policies_ListPolicies",
         "tags": [
           "Policy"
         ],
@@ -2634,19 +2755,19 @@
           }
         },
         "x-ms-examples": {
-          "ListPolicies_MaximumSet": {
-            "$ref": "./examples/ListPolicies_MaximumSet_Gen.json"
+          "Policies_ListPolicies": {
+            "$ref": "./examples/Policies_ListPolicies_Gen.json"
           }
         }
       }
     },
     "/policies/{policyId}": {
       "put": {
-        "operationId": "UpdatePolicy",
+        "operationId": "Policies_UpdatePolicy",
         "tags": [
           "Policy"
         ],
-        "description": "Updates a policy by its identifier.",
+        "description": "Updates a policy by its identifier.\n1. BusinessDomain - Governance Domain Owners, Governance Domain Readers\n2. Data Quality - Data Product Owners, Data Steward, Data Quality Readers, Data Quality Metadata Readers, Data Profile Stewards, Data Profile Readers\n3. Data Governance - Data Governance Administrators, Data Health Readers, Data Health Owners, Governance Domain Creators, Global Asset Curators, Global Catalog Readers",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2690,15 +2811,21 @@
           }
         },
         "x-ms-examples": {
-          "UpdatePolicy_MaximumSet": {
-            "$ref": "./examples/UpdatePolicy_MaximumSet_Gen.json"
+          "UpdatePolicy_BusinessDomain": {
+            "$ref": "./examples/Policies_UpdatePolicy_BusinessDomain_Gen.json"
+          },
+          "UpdatePolicy_DataGovernanceApp": {
+            "$ref": "./examples/Policies_UpdatePolicy_DataGovernanceApp_Gen.json"
+          },
+          "UpdatePolicy_DgDataQualityScope": {
+            "$ref": "./examples/Policies_UpdatePolicy_DgDataQualityScope_Gen.json"
           }
         }
       }
     },
     "/terms": {
       "get": {
-        "operationId": "ListTerm",
+        "operationId": "Terms_ListTerm",
         "tags": [
           "Term"
         ],
@@ -2773,8 +2900,8 @@
           }
         },
         "x-ms-examples": {
-          "ListTerm_MaximumSet": {
-            "$ref": "./examples/ListTerm_MaximumSet_Gen.json"
+          "Terms_ListTerm": {
+            "$ref": "./examples/Terms_ListTerm_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2782,7 +2909,7 @@
         }
       },
       "post": {
-        "operationId": "CreateTerm",
+        "operationId": "Terms_CreateTerm",
         "tags": [
           "Term"
         ],
@@ -2822,15 +2949,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateTerm_MaximumSet": {
-            "$ref": "./examples/CreateTerm_MaximumSet_Gen.json"
+          "Terms_CreateTerm": {
+            "$ref": "./examples/Terms_CreateTerm_Gen.json"
           }
         }
       }
     },
     "/terms/{termId}": {
       "get": {
-        "operationId": "GetTerm",
+        "operationId": "Terms_GetTerm",
         "tags": [
           "Term"
         ],
@@ -2869,13 +2996,13 @@
           }
         },
         "x-ms-examples": {
-          "GetTerm_MaximumSet": {
-            "$ref": "./examples/GetTerm_MaximumSet_Gen.json"
+          "Terms_GetTerm": {
+            "$ref": "./examples/Terms_GetTerm_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "UpdateTerm",
+        "operationId": "Terms_UpdateTerm",
         "tags": [
           "Term"
         ],
@@ -2923,13 +3050,13 @@
           }
         },
         "x-ms-examples": {
-          "UpdateTerm_MaximumSet": {
-            "$ref": "./examples/UpdateTerm_MaximumSet_Gen.json"
+          "Terms_UpdateTerm": {
+            "$ref": "./examples/Terms_UpdateTerm_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteTerm",
+        "operationId": "Terms_DeleteTerm",
         "tags": [
           "Term"
         ],
@@ -2965,15 +3092,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteTerm_MaximumSet": {
-            "$ref": "./examples/DeleteTerm_MaximumSet_Gen.json"
+          "Terms_DeleteTerm": {
+            "$ref": "./examples/Terms_DeleteTerm_Gen.json"
           }
         }
       }
     },
     "/terms/{termId}/hierarchies": {
       "get": {
-        "operationId": "ListHierarchyTerms",
+        "operationId": "Terms_ListHierarchyTerms",
         "tags": [
           "Term"
         ],
@@ -3012,8 +3139,8 @@
           }
         },
         "x-ms-examples": {
-          "ListHierarchyTerms_MaximumSet": {
-            "$ref": "./examples/ListHierarchyTerms_MaximumSet_Gen.json"
+          "Terms_ListHierarchyTerms": {
+            "$ref": "./examples/Terms_ListHierarchyTerms_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -3023,7 +3150,7 @@
     },
     "/terms/{termId}/relationships": {
       "get": {
-        "operationId": "ListRelatedEntities",
+        "operationId": "Terms_ListRelatedEntities",
         "tags": [
           "Term"
         ],
@@ -3194,8 +3321,8 @@
           }
         },
         "x-ms-examples": {
-          "ListRelatedEntities_MaximumSet": {
-            "$ref": "./examples/ListRelatedEntities_MaximumSet_Gen.json"
+          "Terms_ListRelatedEntities": {
+            "$ref": "./examples/Terms_ListRelatedEntities_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -3203,7 +3330,7 @@
         }
       },
       "post": {
-        "operationId": "AddRelatedEntity",
+        "operationId": "Terms_AddRelatedEntity",
         "tags": [
           "Term"
         ],
@@ -3350,13 +3477,13 @@
           }
         },
         "x-ms-examples": {
-          "AddRelatedEntity_MaximumSet": {
-            "$ref": "./examples/AddRelatedEntity_MaximumSet_Gen.json"
+          "Terms_AddRelatedEntity": {
+            "$ref": "./examples/Terms_AddRelatedEntity_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteRelatedTerm",
+        "operationId": "Terms_DeleteRelatedTerm",
         "tags": [
           "Term"
         ],
@@ -3533,14 +3660,14 @@
         },
         "x-ms-examples": {
           "DeleteRelatedTerm_MaximumSet": {
-            "$ref": "./examples/DeleteRelatedTerm_MaximumSet_Gen.json"
+            "$ref": "./examples/Terms_DeleteRelatedTerm_Gen.json"
           }
         }
       }
     },
     "/terms/facets": {
       "post": {
-        "operationId": "GetTermFacets",
+        "operationId": "Terms_GetTermFacets",
         "tags": [
           "Term"
         ],
@@ -3580,15 +3707,15 @@
           }
         },
         "x-ms-examples": {
-          "GetTermFacets_MaximumSet": {
-            "$ref": "./examples/GetTermFacets_MaximumSet_Gen.json"
+          "Terms_GetTermFacets": {
+            "$ref": "./examples/Terms_GetTermFacets_Gen.json"
           }
         }
       }
     },
     "/terms/query": {
       "post": {
-        "operationId": "QueryTerms",
+        "operationId": "Terms_QueryTerms",
         "tags": [
           "Term"
         ],
@@ -3596,14 +3723,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "duplicatecheck",
-            "in": "query",
-            "description": "The bypassObligations to skip obligations.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "request",
@@ -3636,12 +3755,60 @@
           }
         },
         "x-ms-examples": {
-          "QueryTerms_MaximumSet": {
-            "$ref": "./examples/QueryTerms_MaximumSet_Gen.json"
+          "Terms_QueryTerms": {
+            "$ref": "./examples/Terms_QueryTerms_Gen.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/terms/query/count": {
+      "post": {
+        "operationId": "Terms_CountTerms",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves the count of duplicate terms by passing namekeyword.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The request body containing query criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DuplicateQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityCount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Terms_CountTerms": {
+            "$ref": "./examples/Terms_CountTerms_Gen.json"
+          }
         }
       }
     }
@@ -5053,6 +5220,46 @@
         "managedAttributes"
       ]
     },
+    "DuplicateOkrQueryRequest": {
+      "type": "object",
+      "description": "DuplicateOkrQueryRequest.",
+      "properties": {
+        "definition": {
+          "type": "string",
+          "description": "To filter by definition keyword."
+        }
+      },
+      "required": [
+        "definition"
+      ]
+    },
+    "DuplicateQueryRequest": {
+      "type": "object",
+      "description": "DuplicateQueryRequest.",
+      "properties": {
+        "nameKeyword": {
+          "type": "string",
+          "description": "To filter by name keyword."
+        }
+      },
+      "required": [
+        "nameKeyword"
+      ]
+    },
+    "EntityCount": {
+      "type": "object",
+      "description": "Initializes a new instance of the Entitycount class.",
+      "properties": {
+        "count": {
+          "type": "number",
+          "format": "double",
+          "description": "Count of entities which exist."
+        }
+      },
+      "required": [
+        "count"
+      ]
+    },
     "EntityReference": {
       "type": "object",
       "description": "EntityReference.",
@@ -5314,7 +5521,7 @@
           "format": "int32",
           "description": "Number of items to return."
         },
-        "orderby": {
+        "orderBy": {
           "type": "array",
           "description": "Order by specifications for the query.",
           "items": {
@@ -5355,6 +5562,13 @@
           "description": "Filter by objective owners.",
           "items": {
             "type": "string"
+          }
+        },
+        "managedAttributes": {
+          "type": "array",
+          "description": "To filter by managed attributes.",
+          "items": {
+            "$ref": "#/definitions/SharedSearchManageAttributeSearchFilter"
           }
         }
       }
@@ -5773,19 +5987,19 @@
       "properties": {
         "field": {
           "type": "string",
-          "description": "The field name to filter on."
+          "description": "The field name to filter on. Example: 'All Attributes Types.AttributeName'"
         },
         "operator": {
           "type": "string",
-          "description": "The comparison operator to use for filtering."
+          "description": "The comparison operator to use for filtering. Example: 'ne' , 'eq' ,'gt' , 'ge' , 'lt' , 'le', 'contains' ,'notcontains', 'prefix','eq-any'"
         },
         "value": {
           "type": "string",
-          "description": "The value to compare against."
+          "description": "The value to compare against. Example: '2', 'LAST_24H', LAST_7D','LAST_30D',LAST_365D','MORE_THAN_365D'"
         },
         "type": {
           "type": "string",
-          "description": "The data type of the filter value."
+          "description": "The data type of the filter value. Example: 'int','date','double','float',richtext','short','string','boolean','multiChoice'"
         }
       }
     },
