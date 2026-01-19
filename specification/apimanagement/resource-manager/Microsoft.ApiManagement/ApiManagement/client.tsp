@@ -92,7 +92,6 @@ using Azure.ResourceManager;
   "python"
 );
 
-
 /**
  * override for DeletedServiceContracts.getByName
  */
@@ -118,14 +117,19 @@ op replacePurge(
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   serviceName: string,
-  location: Azure.Core.azureLocation
+  location: Azure.Core.azureLocation,
 ): ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      @bodyRoot
-      _: DeletedServiceContract;
-    }) | ArmDeletedNoContentResponse;
+  @bodyRoot
+  _: DeletedServiceContract;
+}) | ArmDeletedNoContentResponse;
 
 @@override(DeletedServiceContracts.purge, replacePurge, "go,java");
 
-@@clientName(TagTagResourceContractProperties, "TagResourceContractProperties", "go");
-@@clientName(VersioningScheme, "APIVersionSetContractDetailsVersioningScheme", "go");
-
+@@clientName(TagTagResourceContractProperties,
+  "TagResourceContractProperties",
+  "go"
+);
+@@clientName(VersioningScheme,
+  "APIVersionSetContractDetailsVersioningScheme",
+  "go"
+);
