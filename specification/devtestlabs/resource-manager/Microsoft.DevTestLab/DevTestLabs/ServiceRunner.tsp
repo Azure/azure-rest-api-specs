@@ -29,6 +29,12 @@ model ServiceRunner is Azure.ResourceManager.ProxyResource<never> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
+
+  /**
+   * The identity of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: IdentityProperties;
 }
 
 @armResourceOperations
