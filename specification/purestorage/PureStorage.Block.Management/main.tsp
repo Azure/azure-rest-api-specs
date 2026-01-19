@@ -927,9 +927,9 @@ model VolumeGroup is TrackedResource<VolumeGroupProperties> {
   @key("volumeGroupName")
   @visibility(Lifecycle.Read)
   @path
-  @minLength(1)
-  @maxLength(127)
-  @pattern("^[a-zA-Z0-9\\-_]{1,127}$")
+  @minLength(2)
+  @maxLength(40)
+  @pattern("^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$")
   name: string;
 }
 
@@ -972,10 +972,10 @@ model PerformanceParameters {
 @added(Versions.v2026_01_01_preview)
 @doc("Protection parameters for volume group")
 model ProtectionParameters {
-  @doc("Retention period for snapshots")
+  @doc("Retention period for snapshots in ISO 8601 duration format")
   retention?: string;
 
-  @doc("Snapshot frequency")
+  @doc("Snapshot frequency in ISO 8601 duration format")
   frequency?: string;
 }
 
@@ -1056,28 +1056,29 @@ interface VolumeGroups {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("Native VM Volume resource")
+@doc("Azure Volume resource")
 @parentResource(VolumeGroup)
-model Volume is ProxyResource<NativeVmVolumeProperties> {
+model Volume is ProxyResource<AzureVolumeProperties> {
   @doc("Name of the volume")
   @segment("volumes")
   @key("volumeName")
   @visibility(Lifecycle.Read)
   @path
-  @minLength(1)
-  @maxLength(127)
-  @pattern("^[a-zA-Z0-9\\-_]{1,127}$")
+  @minLength(2)
+  @maxLength(40)
+  @pattern("^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$")
   name: string;
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("Properties of a native VM volume")
-model NativeVmVolumeProperties {
+@doc("Properties of an Azure volume")
+model AzureVolumeProperties {
   @doc("Storage space usage for the volume")
   @visibility(Lifecycle.Read)
   space?: Space;
 
   @doc("Currently provisioned size of the volume, in bytes")
+  @minValue(1048576)
   provisionedSize?: int64;
 
   @doc("Serial number of the volume")
@@ -1110,7 +1111,7 @@ interface Volumes {
     Volume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       Volume,
-      NativeVmVolumeProperties
+      AzureVolumeProperties
     >
   >;
   @doc("Delete a volume")
