@@ -64,7 +64,7 @@ interface PortalRevisionContracts {
     PortalRevisionContract,
     Response = ArmResourceCreatedResponse<
       PortalRevisionContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = void>
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = PortalRevisionContract>
     > & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.

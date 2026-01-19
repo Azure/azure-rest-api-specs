@@ -625,11 +625,6 @@
               "$ref": "#/definitions/DeletedServiceContract"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "location": {
                 "type": "string",
                 "description": "Location header"
@@ -652,7 +647,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DeletedServiceContract"
         },
         "x-ms-long-running-operation": true
       }
@@ -1113,11 +1109,6 @@
               "$ref": "#/definitions/ApiManagementGatewayResource"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "location": {
                 "type": "string",
                 "description": "Location header"
@@ -1140,7 +1131,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ApiManagementGatewayResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -2208,7 +2200,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ApiManagementServiceResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -24792,7 +24785,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PortalRevisionContract"
         },
         "x-ms-long-running-operation": true
       },

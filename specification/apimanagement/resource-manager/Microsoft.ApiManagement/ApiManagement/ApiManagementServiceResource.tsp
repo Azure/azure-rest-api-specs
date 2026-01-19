@@ -160,7 +160,8 @@ interface ApiManagementServiceResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ApiManagementServiceResource,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ApiManagementServiceResource;
     }) | ArmDeletedNoContentResponse
