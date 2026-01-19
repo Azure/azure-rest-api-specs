@@ -45,6 +45,7 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
 }
 
 @armResourceOperations
+@tag("Pool")
 interface Pools {
   /**
    * Gets information about the specified pool.

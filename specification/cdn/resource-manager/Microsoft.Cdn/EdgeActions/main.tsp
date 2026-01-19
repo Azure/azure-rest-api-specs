@@ -88,7 +88,7 @@ model EdgeActionExecutionFilter
 interface EdgeActions {
   get is ArmResourceRead<EdgeAction>;
   create is ArmResourceCreateOrUpdateAsync<EdgeAction>;
-  update is ArmResourcePatchAsync<EdgeAction, EdgeActionProperties>;
+  update is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeAction>;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
@@ -118,9 +118,12 @@ interface EdgeActions {
 interface EdgeActionVersions {
   get is ArmResourceRead<EdgeActionVersion>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     EdgeActionVersion,
-    EdgeActionVersionProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      EdgeActionVersion,
+      EdgeActionVersionProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeActionVersion>;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
@@ -143,9 +146,12 @@ interface EdgeActionVersions {
 interface EdgeActionExecutionFilters {
   get is ArmResourceRead<EdgeActionExecutionFilter>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionExecutionFilter>;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     EdgeActionExecutionFilter,
-    EdgeActionExecutionFilterProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      EdgeActionExecutionFilter,
+      EdgeActionExecutionFilterProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeActionExecutionFilter>;
   listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;
