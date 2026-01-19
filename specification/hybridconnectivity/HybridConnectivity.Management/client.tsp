@@ -179,4 +179,7 @@ namespace Microsoft.HybridConnectivity;
 );
 
 @@clientName(GenerateAwsTemplate.post, "PostGenerateAwsTemplate", "csharp");
-@@clientName(TrackedResourceUpdate, "HybridConnectivityTrackedResourceUpdate", "csharp");
+@@clientName(TrackedResourceUpdate,
+  "HybridConnectivityTrackedResourcePatch",
+  "csharp"
+);
