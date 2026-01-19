@@ -270,6 +270,7 @@ using Microsoft.MachineLearningServices;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
+@@clientName(Workspaces.createOrUpdate::parameters.resource, "parameters", "go");
 @@clientName(Workspaces.update::parameters.properties, "body");
 @@clientLocation(Workspaces.list, "WorkspaceFeatures");
 @@clientLocation(Workspaces.getAllModels, "Connection");
