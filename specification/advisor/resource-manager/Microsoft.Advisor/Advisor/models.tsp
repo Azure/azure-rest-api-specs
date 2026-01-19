@@ -146,6 +146,27 @@ union Risk {
 union State {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Rejected: "Rejected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Inprogress: "Inprogress",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Postponed: "Postponed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Dismissed: "Dismissed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Completed: "Completed"
+}
+
+/**
+ * The state of the Recommendation applicable from v2026-02-01.
+ */
+union NewState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   New: "New",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Postponed: "Postponed",
@@ -548,7 +569,7 @@ model RecommendationProperties {
    * The state of the Recommendation
    */
   @added(Versions.v2026_02_01)
-  state?: State;
+  state?: NewState;
 
    /**
    * The reason the Recommendation was dismissed.
@@ -709,7 +730,7 @@ model RecommendationPatchProperties {
   /**
    * The state of the Recommendation
    */
-  state?: State;
+  state?: NewState;
 
   /**
    * The reason the state of the Recommendation was changed.
@@ -731,7 +752,7 @@ model RecommendationStatePropertiesPayload {
   /**
    * The state of the recommendation.
    */
-  state?: State;
+  state?: NewState;
 
   /**
    * The reason the state of the Recommendation was changed.

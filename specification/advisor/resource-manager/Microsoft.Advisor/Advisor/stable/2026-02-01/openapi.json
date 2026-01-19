@@ -1555,6 +1555,38 @@
         }
       }
     },
+    "NewState": {
+      "type": "string",
+      "description": "The state of the Recommendation applicable from v2026-02-01.",
+      "enum": [
+        "New",
+        "Postponed",
+        "Dismissed",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "NewState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New"
+          },
+          {
+            "name": "Postponed",
+            "value": "Postponed"
+          },
+          {
+            "name": "Dismissed",
+            "value": "Dismissed"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed"
+          }
+        ]
+      }
+    },
     "OperationDisplayInfo": {
       "type": "object",
       "description": "The operation supported by Advisor.",
@@ -1799,7 +1831,7 @@
           "description": "The recommendation-type GUID."
         },
         "state": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/NewState",
           "description": "The state of the Recommendation"
         },
         "recommendationDismissReason": {
@@ -1838,7 +1870,7 @@
           "description": "The resource identified by Advisor."
         },
         "state": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/NewState",
           "description": "The state of the Recommendation"
         },
         "recommendationDismissReason": {
@@ -1982,7 +2014,7 @@
       "description": "Properties for recommendation state patch payload.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/NewState",
           "description": "The state of the recommendation."
         },
         "recommendationDismissReason": {
@@ -2167,38 +2199,6 @@
           "type": "string",
           "description": "The issue or opportunity identified by the recommendation and proposed solution."
         }
-      }
-    },
-    "State": {
-      "type": "string",
-      "description": "The state of the Recommendation",
-      "enum": [
-        "New",
-        "Postponed",
-        "Dismissed",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "New",
-            "value": "New"
-          },
-          {
-            "name": "Postponed",
-            "value": "Postponed"
-          },
-          {
-            "name": "Dismissed",
-            "value": "Dismissed"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed"
-          }
-        ]
       }
     },
     "SuppressionContract": {
