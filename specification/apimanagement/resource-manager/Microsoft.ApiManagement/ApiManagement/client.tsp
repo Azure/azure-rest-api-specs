@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ApiManagement;
 using Http;
+using Azure.ResourceManager;
 
 // Java-specific compatibility customizations generated per TypeSpec migration guidance.
 @@clientName(Microsoft.ApiManagement.PreferredIPVersion,
@@ -90,3 +91,41 @@ using Http;
   Microsoft.ApiManagement,
   "python"
 );
+
+
+/**
+ * override for DeletedServiceContracts.getByName
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replaceGetByName(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  serviceName: string,
+  location: Azure.Core.azureLocation,
+): Azure.ResourceManager.ArmResponse<Microsoft.ApiManagement.DeletedServiceContract> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+
+@@override(DeletedServiceContracts.getByName, replaceGetByName, "go,java");
+
+/**
+ * override for DeletedServiceContracts.purge
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replacePurge(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  serviceName: string,
+  location: Azure.Core.azureLocation
+): ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      @bodyRoot
+      _: DeletedServiceContract;
+    }) | ArmDeletedNoContentResponse;
+
+@@override(DeletedServiceContracts.purge, replacePurge, "go,java");
+
+@@clientName(TagTagResourceContractProperties, "TagResourceContractProperties", "go");
+@@clientName(VersioningScheme, "APIVersionSetContractDetailsVersioningScheme", "go");
+
