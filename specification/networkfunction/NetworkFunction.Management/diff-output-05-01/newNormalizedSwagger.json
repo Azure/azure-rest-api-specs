@@ -15,6 +15,7 @@
     "/providers/microsoft.NetworkFunction/operations": {
       "get": {
         "operationId": "NetworkFunction_ListOperations",
+        "description": "Lists all of the available NetworkFunction Rest API operations.",
         "parameters": [],
         "responses": {
           "200": {
@@ -43,6 +44,7 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.NetworkFunction/azureTrafficCollectors": {
       "get": {
         "operationId": "AzureTrafficCollectorsBySubscription_List",
+        "description": "Return list of Azure Traffic Collectors in a subscription",
         "parameters": [],
         "responses": {
           "200": {
@@ -71,6 +73,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors": {
       "get": {
         "operationId": "AzureTrafficCollectorsByResourceGroup_List",
+        "description": "Return list of Azure Traffic Collectors in a Resource Group",
         "parameters": [],
         "responses": {
           "200": {
@@ -99,6 +102,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}": {
       "get": {
         "operationId": "AzureTrafficCollectors_Get",
+        "description": "Gets the specified Azure Traffic Collector in a specified resource group",
         "parameters": [
           {
             "name": "azureTrafficCollectorName",
@@ -129,6 +133,7 @@
       },
       "put": {
         "operationId": "AzureTrafficCollectors_CreateOrUpdate",
+        "description": "Creates or updates a Azure Traffic Collector resource",
         "parameters": [
           {
             "name": "azureTrafficCollectorName",
@@ -184,6 +189,7 @@
       },
       "patch": {
         "operationId": "AzureTrafficCollectors_UpdateTags",
+        "description": "Updates the specified Azure Traffic Collector tags.",
         "parameters": [
           {
             "name": "azureTrafficCollectorName",
@@ -222,6 +228,7 @@
       },
       "delete": {
         "operationId": "AzureTrafficCollectors_Delete",
+        "description": "Deletes a specified Azure Traffic Collector resource.",
         "parameters": [
           {
             "name": "azureTrafficCollectorName",
@@ -264,6 +271,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies": {
       "get": {
         "operationId": "CollectorPolicies_List",
+        "description": "Return list of Collector policies in a Azure Traffic Collector",
         "parameters": [
           {
             "name": "azureTrafficCollectorName",
@@ -299,6 +307,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.NetworkFunction/azureTrafficCollectors/{azureTrafficCollectorName}/collectorPolicies/{collectorPolicyName}": {
       "get": {
         "operationId": "CollectorPolicies_Get",
+        "description": "Gets the collector policy in a specified Traffic Collector",
         "parameters": [
           {
             "name": "azureTrafficCollectorName",
@@ -335,6 +344,7 @@
       },
       "put": {
         "operationId": "CollectorPolicies_CreateOrUpdate",
+        "description": "Creates or updates a Collector Policy resource",
         "parameters": [
           {
             "name": "azureTrafficCollectorName",
@@ -396,6 +406,7 @@
       },
       "delete": {
         "operationId": "CollectorPolicies_Delete",
+        "description": "Deletes a specified Collector Policy resource.",
         "parameters": [
           {
             "name": "azureTrafficCollectorName",
@@ -445,22 +456,27 @@
   "definitions": {
     "AzureTrafficCollector": {
       "type": "object",
+      "description": "Azure Traffic Collector resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureTrafficCollectorPropertiesFormat",
+          "description": "Properties of the Azure Traffic Collector.",
           "x-ms-client-flatten": true
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "Resource location."
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "etag": {
           "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -493,18 +509,22 @@
     },
     "AzureTrafficCollectorPropertiesFormat": {
       "type": "object",
+      "description": "Azure Traffic Collector resource properties.",
       "properties": {
         "collectorPolicies": {
           "type": "array",
+          "description": "Collector Policies for Azure Traffic Collector.",
           "items": {
             "$ref": "#/definitions/CollectorPolicy"
           }
         },
         "virtualHub": {
-          "$ref": "#/definitions/ResourceReference"
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The virtualHub to which the Azure Traffic Collector belongs."
         },
         "provisioningState": {
           "type": "string",
+          "description": "The current provisioning state.",
           "enum": [
             "Succeeded",
             "Updating",
@@ -521,27 +541,34 @@
     },
     "CloudError": {
       "type": "object",
+      "description": "An error response from the service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the service."
         }
       },
       "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
+      "description": "An error response from the service.",
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "target": {
-          "type": "string"
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
           "type": "array",
+          "description": "A list of additional details about the error.",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           }
@@ -551,13 +578,16 @@
     },
     "CollectorPolicy": {
       "type": "object",
+      "description": "Collector policy resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CollectorPolicyPropertiesFormat",
+          "description": "Properties of the Collector Policy.",
           "x-ms-client-flatten": true
         },
         "etag": {
           "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -590,18 +620,22 @@
     },
     "CollectorPolicyPropertiesFormat": {
       "type": "object",
+      "description": "Collection policy properties.",
       "properties": {
         "ingestionPolicy": {
-          "$ref": "#/definitions/IngestionPolicyPropertiesFormat"
+          "$ref": "#/definitions/IngestionPolicyPropertiesFormat",
+          "description": "Ingestion policies."
         },
         "emissionPolicies": {
           "type": "array",
+          "description": "Emission policies.",
           "items": {
             "$ref": "#/definitions/EmissionPoliciesPropertiesFormat"
           }
         },
         "provisioningState": {
           "type": "string",
+          "description": "The current provisioning state.",
           "enum": [
             "Succeeded",
             "Updating",
@@ -618,9 +652,11 @@
     },
     "EmissionPoliciesPropertiesFormat": {
       "type": "object",
+      "description": "Emission policy properties.",
       "properties": {
         "emissionType": {
           "type": "string",
+          "description": "Emission format type.",
           "enum": [
             "IPFIX"
           ],
@@ -631,6 +667,7 @@
         },
         "emissionDestinations": {
           "type": "array",
+          "description": "Emission policy destinations.",
           "items": {
             "$ref": "#/definitions/EmissionPolicyDestination"
           }
@@ -639,9 +676,11 @@
     },
     "EmissionPolicyDestination": {
       "type": "object",
+      "description": "Emission policy destination properties.",
       "properties": {
         "destinationType": {
           "type": "string",
+          "description": "Emission destination type.",
           "enum": [
             "AzureMonitor"
           ],
@@ -654,9 +693,11 @@
     },
     "IngestionPolicyPropertiesFormat": {
       "type": "object",
+      "description": "Ingestion Policy properties.",
       "properties": {
         "ingestionType": {
           "type": "string",
+          "description": "The ingestion type.",
           "enum": [
             "IPFIX"
           ],
@@ -667,6 +708,7 @@
         },
         "ingestionSources": {
           "type": "array",
+          "description": "Ingestion Sources.",
           "items": {
             "$ref": "#/definitions/IngestionSourcesPropertiesFormat"
           }
@@ -675,9 +717,11 @@
     },
     "IngestionSourcesPropertiesFormat": {
       "type": "object",
+      "description": "Ingestion policy properties.",
       "properties": {
         "sourceType": {
           "type": "string",
+          "description": "Ingestion source type.",
           "enum": [
             "Resource"
           ],
@@ -687,42 +731,53 @@
           }
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "Resource ID."
         }
       }
     },
     "Operation": {
       "type": "object",
+      "description": "Azure Traffic Collector REST API operation definition.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
         },
         "isDataAction": {
           "type": "boolean",
+          "description": "Indicates whether the operation is a data action",
           "default": false
         },
         "display": {
-          "$ref": "#/definitions/OperationDisplay"
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display metadata associated with the operation."
         },
         "origin": {
-          "type": "string"
+          "type": "string",
+          "description": "Origin of the operation"
         }
       }
     },
     "OperationDisplay": {
       "type": "object",
+      "description": "Display metadata associated with the operation.",
       "properties": {
         "provider": {
-          "type": "string"
+          "type": "string",
+          "description": "Service provider: Microsoft NetworkFunction."
         },
         "resource": {
-          "type": "string"
+          "type": "string",
+          "description": "Resource on which the operation is performed etc."
         },
         "operation": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Description of the operation."
         }
       }
     },
@@ -749,18 +804,22 @@
     },
     "ResourceReference": {
       "type": "object",
+      "description": "Resource reference properties.",
       "properties": {
         "id": {
           "type": "string",
+          "description": "Resource ID.",
           "readOnly": true
         }
       }
     },
     "TagsObject": {
       "type": "object",
+      "description": "Tags object for patch operations.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }

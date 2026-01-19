@@ -26,7 +26,16 @@ model AzureTrafficCollector
    * Resource location.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  @TypeSpec.Versioning.added(Versions.v2022_11_01)
+  location: string;
+
+  /**
+   * Resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @TypeSpec.Versioning.removed(Versions.v2022_11_01)
+  @TypeSpec.Versioning.renamedFrom(Versions.v2022_11_01, "location")
+  oldlocation?: string;
 
   /**
    * Resource tags.
@@ -35,8 +44,13 @@ model AzureTrafficCollector
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

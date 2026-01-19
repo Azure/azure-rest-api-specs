@@ -57,3 +57,7 @@ interface Operations
       ArmResponse<OperationListResult>,
       CloudError
     > {}
+
+@@doc(Operations.list,
+  "Lists all of the available NetworkFunction Rest API operations."
+);

@@ -66,11 +66,11 @@
 | `definitions.CollectorPolicyListResult.required__added` | added | `["value"]` |
 | `definitions.OperationListResult.required__added` | added | `["value"]` |
 
-### Changes for `systemData`
+### Changes for `readOnly`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CollectorPolicy.properties.systemData__deleted` | deleted | `{"description":"Metadata pertaining to creation and last modification of the resource.","allOf":[{"$...` |
+| `definitions.AzureTrafficCollectorPropertiesFormat.properties.collectorPolicies.readOnly__deleted` | deleted | `true` |
 
 ### Changes for `type`
 
@@ -95,5 +95,6 @@
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.AzureTrafficCollector.allOf[0].$ref` | `#/definitions/TrackedResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `definitions.CollectorPolicy.allOf[0].$ref` | `#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.AzureTrafficCollectorPropertiesFormat.properties.collectorPolicies.items.$ref` | `#/definitions/ResourceReference` | `#/definitions/CollectorPolicy` |
+| `definitions.CollectorPolicy.allOf[0].$ref` | `#/definitions/TrackedResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 

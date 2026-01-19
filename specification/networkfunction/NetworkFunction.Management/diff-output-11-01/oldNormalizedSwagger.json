@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Traffic Collector",
-    "version": "2022-05-01",
+    "version": "2022-11-01",
     "description": "Azure Traffic Collector service",
     "license": {
       "name": "Microsoft"
@@ -387,6 +387,51 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "CollectorPolicies_UpdateTags",
+        "description": "Updates the specified Collector Policy tags.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            }
+          },
+          {
+            "name": "azureTrafficCollectorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectorPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CollectorPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Collector Policy tags": {
+            "$ref": "./examples/CollectorPolicyUpdateTags.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "CollectorPolicies_Delete",
         "description": "Deletes a specified Collector Policy resource.",
@@ -478,8 +523,9 @@
           "type": "array",
           "description": "Collector Policies for Azure Traffic Collector.",
           "items": {
-            "$ref": "#/definitions/CollectorPolicy"
-          }
+            "$ref": "#/definitions/ResourceReference"
+          },
+          "readOnly": true
         },
         "virtualHub": {
           "$ref": "#/definitions/ResourceReference",
@@ -552,20 +598,11 @@
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
-        },
-        "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
-          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ]
     },
@@ -896,7 +933,10 @@
           ],
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "location"
+      ]
     }
   },
   "parameters": {}
