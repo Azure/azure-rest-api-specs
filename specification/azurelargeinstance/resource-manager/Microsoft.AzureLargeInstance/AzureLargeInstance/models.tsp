@@ -451,8 +451,8 @@ model NetworkProfile {
 
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
-  @doc("Specifies the IP address of the network interface.")
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Ensure backward compatibility during conversion from the Swagger spec."
+  @doc("Specifies the IP address of the network interface.")
   ipAddress?: string;
 }
 
@@ -461,16 +461,16 @@ model IpAddress {
   and halt any existing processes that may be running on the server
   """)
 model ForceState {
-  @doc("Whether to force restart by shutting all processes.")
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Ensure backward compatibility during conversion from the Swagger spec."
+  @doc("Whether to force restart by shutting all processes.")
   forceState?: AzureLargeInstanceForcePowerState;
 }
 
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
-  @doc("Tags field of the AzureLargeInstance instance.")
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Ensure backward compatibility during conversion from the Swagger spec."
+  @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
 }
 

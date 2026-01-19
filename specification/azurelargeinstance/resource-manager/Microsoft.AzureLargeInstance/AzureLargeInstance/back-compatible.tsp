@@ -23,8 +23,18 @@ using Azure.ClientGenerator.Core;
 @@clientLocation(AzureLargeInstances.restart, "AzureLargeInstance");
 @@clientLocation(AzureLargeInstances.shutdown, "AzureLargeInstance");
 @@clientLocation(AzureLargeStorageInstances.get, "AzureLargeStorageInstance");
-@@clientLocation(AzureLargeStorageInstances.create, "AzureLargeStorageInstance");
-@@clientLocation(AzureLargeStorageInstances.update, "AzureLargeStorageInstance");
-@@clientLocation(AzureLargeStorageInstances.delete, "AzureLargeStorageInstance");
-@@clientLocation(AzureLargeStorageInstances.listByResourceGroup, "AzureLargeStorageInstance");
-@@clientLocation(AzureLargeStorageInstances.listBySubscription, "AzureLargeStorageInstance");
+@@clientLocation(AzureLargeStorageInstances.create,
+  "AzureLargeStorageInstance"
+);
+@@clientLocation(AzureLargeStorageInstances.update,
+  "AzureLargeStorageInstance"
+);
+@@clientLocation(AzureLargeStorageInstances.delete,
+  "AzureLargeStorageInstance"
+);
+@@clientLocation(AzureLargeStorageInstances.listByResourceGroup,
+  "AzureLargeStorageInstance"
+);
+@@clientLocation(AzureLargeStorageInstances.listBySubscription,
+  "AzureLargeStorageInstance"
+);
