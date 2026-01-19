@@ -6,7 +6,7 @@ using Microsoft.Communication;
 
 @@clientName(Microsoft.Communication,
   "CommunicationServiceManagementClient",
-  "javascript,python"
+  "javascript,python,java"
 );
 @@clientName(CommunicationServices_ProvisioningState,
   "CommunicationServicesProvisioningState",
