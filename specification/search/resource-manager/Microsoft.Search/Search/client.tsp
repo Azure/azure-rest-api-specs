@@ -650,73 +650,96 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   | CloudError;
 
 @@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
-  servicesCheckNameAvailabilityCustomization
+  servicesCheckNameAvailabilityCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(UsagesOperationGroup.listBySubscription,
-  usagesListBySubscriptionCustomization
+  usagesListBySubscriptionCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(usageBySubscriptionSku,
-  usageBySubscriptionSkuCustomization
+  usageBySubscriptionSkuCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listBySubscription,
-  searchServicesListBySubscriptionCustomization
+  searchServicesListBySubscriptionCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listByResourceGroup,
-  searchServicesListByResourceGroupCustomization
+  searchServicesListByResourceGroupCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.get,
-  searchGetCustomization
+  searchGetCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.createOrUpdate,
-  searchCreateOrUpdateCustomization
+  searchCreateOrUpdateCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.update,
-  searchUpdateCustomization
+  searchUpdateCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.delete,
-  searchDeleteCustomization
+  searchDeleteCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.create,
-  queryKeysCreateCustomization
+  queryKeysCreateCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.queryKeysDelete,
-  queryKeysDeleteCustomization
+  queryKeysDeleteCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.adminKeysGet,
-  adminKeysGetCustomization
+  adminKeysGetCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listBySearchService,
-  queryKeysListBySearchServiceCustomization
+  queryKeysListBySearchServiceCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.listByService,
-  privateEndpointConnectionsListByServiceCustomization
+  privateEndpointConnectionsListByServiceCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
-  privateEndpointConnectionsGetCustomization
+  privateEndpointConnectionsGetCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.update,
-  privateEndpointConnectionsUpdateCustomization
+  privateEndpointConnectionsUpdateCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
-  privateEndpointConnectionsDeleteCustomization
+  privateEndpointConnectionsDeleteCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listSupported,
-  privateLinkResourcesListSupportedCustomization
+  privateLinkResourcesListSupportedCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.regenerate,
-  privateLinkResourcesRegenerateCustomization
+  privateLinkResourcesRegenerateCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.listByService,
-  SharedPrivateLinkResourcesListByServiceCustomization
+  SharedPrivateLinkResourcesListByServiceCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.get,
-  SharedPrivateLinkResourcesGetCustomization
+  SharedPrivateLinkResourcesGetCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.createOrUpdate,
-  SharedPrivateLinkResourcesCreateOrUpdateCustomization
+  SharedPrivateLinkResourcesCreateOrUpdateCustomization,
+  "!java"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.delete,
-  SharedPrivateLinkResourcesDeleteCustomization
+  SharedPrivateLinkResourcesDeleteCustomization,
+  "!java"
 );
 
 @@clientName(Microsoft.Search, "SearchManagementClient", "python");
@@ -824,3 +847,5 @@ model AccessRulePropertiesSubscriptionsItem {
   AccessRulePropertiesSubscriptionsItem[],
   "go"
 );
+
+@@clientName(SearchServiceProperties.eTag, "etag", "java");
