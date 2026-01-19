@@ -1462,6 +1462,100 @@
         ]
       }
     },
+    "FoundryAgentContextType": {
+      "type": "string",
+      "description": "The available set of Foundry agent context types.",
+      "enum": [
+        "no_context",
+        "agent_context"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryAgentContextType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "no_context",
+            "value": "no_context",
+            "description": "Only the current user input is sent, no context maintained."
+          },
+          {
+            "name": "agent_context",
+            "value": "agent_context",
+            "description": "Agent maintains its own context (thread), only current input sent per call."
+          }
+        ]
+      }
+    },
+    "FoundryAgentTool": {
+      "type": "object",
+      "description": "The definition of a Foundry agent tool as used by the voicelive endpoint.",
+      "properties": {
+        "agent_name": {
+          "type": "string",
+          "description": "The name of the Foundry agent to call."
+        },
+        "agent_version": {
+          "type": "string",
+          "description": "The version of the Foundry agent to call."
+        },
+        "project_name": {
+          "type": "string",
+          "description": "The name of the Foundry project containing the agent."
+        },
+        "client_id": {
+          "type": "string",
+          "description": "The client ID associated with the Foundry agent."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the Foundry agent tool. If this is provided, it will be used instead of the agent's description in foundry portal."
+        },
+        "foundry_resource_override": {
+          "type": "string",
+          "description": "An optional override for the Foundry resource used to execute the agent."
+        },
+        "agent_context_type": {
+          "type": "string",
+          "description": "The context type to use when invoking the Foundry agent. Defaults to 'agent_context'.",
+          "default": "agent_context",
+          "enum": [
+            "no_context",
+            "agent_context"
+          ],
+          "x-ms-enum": {
+            "name": "FoundryAgentContextType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "no_context",
+                "value": "no_context",
+                "description": "Only the current user input is sent, no context maintained."
+              },
+              {
+                "name": "agent_context",
+                "value": "agent_context",
+                "description": "Agent maintains its own context (thread), only current input sent per call."
+              }
+            ]
+          }
+        },
+        "return_agent_response_directly": {
+          "type": "boolean",
+          "description": "Whether to return the agent's response directly in the VoiceLive response. Set to false means to ask the voice live to rewrite the response.",
+          "default": true
+        }
+      },
+      "required": [
+        "agent_name",
+        "project_name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "foundry_agent"
+    },
     "FunctionCallItem": {
       "type": "object",
       "description": "A function call item within a conversation.",
