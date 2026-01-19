@@ -588,6 +588,19 @@
           "type": "string",
           "description": "FQDN for the endpoint on which bastion host is accessible."
         },
+        "sku": {
+          "type": "string",
+          "description": "The sku of this Bastion Host.",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "default": "Standard",
+          "x-ms-enum": {
+            "name": "BastionHostSkuName",
+            "modelAsString": true
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
