@@ -649,6 +649,19 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   | NotFoundResponse
   | CloudError;
 
+@@clientName(privateEndpointConnectionsUpdateCustomization::parameters.resource,
+  "privateEndpointConnection",
+  "go"
+);
+@@clientName(SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.resource,
+  "sharedPrivateLinkResource",
+  "go"
+);
+@@clientName(servicesCheckNameAvailabilityCustomization::parameters.body,
+  "checkNameAvailabilityInput",
+  "go"
+);
+
 @@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomization
 );
