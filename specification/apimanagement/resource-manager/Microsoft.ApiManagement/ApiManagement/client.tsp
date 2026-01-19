@@ -129,7 +129,3 @@ op replacePurge(
   "TagResourceContractProperties",
   "go"
 );
-@@clientName(VersioningScheme,
-  "APIVersionSetContractDetailsVersioningScheme",
-  "go"
-);
