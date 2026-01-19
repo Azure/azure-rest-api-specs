@@ -137,6 +137,12 @@ using Microsoft.DevTestLab;
   "csharp"
 );
 @@clientName(VirtualNetwork, "DevTestLabVirtualNetwork", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ApplicableSchedule,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+@@usage(ApplicableSchedule, Usage.input, "csharp");
 @@clientName(ApplicableSchedule, "DevTestLabApplicableSchedule", "csharp");
 @@alternateType(ApplicableSchedule.location, azureLocation, "csharp");
 @@clientName(ApplyArtifactsRequest,
@@ -172,7 +178,7 @@ using Microsoft.DevTestLab;
 @@clientName(CostType, "DevTestLabCostType", "csharp");
 @@clientName(LabCostDetailsProperties, "DevTestLabCostDetails", "csharp");
 @@clientName(LabCostDetailsProperties.date, "On", "csharp");
-@@clientName(CustomImageOsType, "DevTestLabCustomImageOsType", "csharp");
+@@clientName(CustomImageOsType, "DevTestLabCustomImageOSType", "csharp");
 @@clientName(CustomImagePropertiesCustom, "DevTestLabCustomImageVhd", "csharp");
 @@clientName(CustomImagePropertiesFromVm, "DevTestLabCustomImageVm", "csharp");
 @@clientName(CustomImagePropertiesFromPlan,
@@ -184,6 +190,7 @@ using Microsoft.DevTestLab;
   "csharp"
 );
 @@clientName(StorageType, "DevTestLabStorageType", "csharp");
+@@clientName(StorageType.StandardSSD, "StandardSsd", "csharp");
 @@clientName(DataDiskProperties, "DevTestLabDataDiskProperties", "csharp");
 @@alternateType(DataDiskProperties.existingLabDiskId,
   armResourceIdentifier,
@@ -238,7 +245,19 @@ using Microsoft.DevTestLab;
 @@clientName(ExternalSubnet, "DevTestLabExternalSubnet", "csharp");
 @@alternateType(ExternalSubnet.id, armResourceIdentifier, "csharp");
 @@clientName(SubnetOverride, "DevTestLabSubnetOverride", "csharp");
+@@clientName(SubnetOverride.usePublicIpAddressPermission,
+  "UsePublicIPAddressPermission",
+  "csharp"
+);
+@@clientName(SubnetOverride.sharedPublicIpAddressConfiguration,
+  "SharedPublicIPAddressConfiguration",
+  "csharp"
+);
 @@alternateType(SubnetOverride.resourceId, armResourceIdentifier, "csharp");
+@@clientName(SubnetSharedPublicIpAddressConfiguration,
+  "SubnetSharedPublicIPAddressConfiguration",
+  "csharp"
+);
 @@clientName(FileUploadOptions, "DevTestLabFileUploadOption", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryImage,
@@ -246,6 +265,7 @@ using Microsoft.DevTestLab;
   "csharp"
 );
 @@clientName(GalleryImage, "DevTestLabGalleryImage", "csharp");
+@@usage(GalleryImage, Usage.input, "csharp");
 @@clientName(GalleryImageProperties.enabled, "IsEnabled", "csharp");
 @@clientName(GalleryImageReference,
   "DevTestLabGalleryImageReference",
@@ -265,12 +285,27 @@ using Microsoft.DevTestLab;
   "DevTestLabGenerateUploadUriResult",
   "csharp"
 );
+@@alternateType(GenerateUploadUriResponse.uploadUri, url, "csharp");
 @@clientName(HostCachingOptions, "DevTestLabHostCachingOption", "csharp");
 @@clientName(IdentityProperties, "DevTestLabManagedIdentity", "csharp");
-//@@alternateType(IdentityProperties.type, Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType, "csharp");
+@@clientName(IdentityProperties.type, "ManagedIdentityType", "csharp");
+@@alternateType(IdentityProperties.clientSecretUrl, url, "csharp");
+@@alternateType(IdentityProperties.tenantId, uuid, "csharp");
+@@alternateType(IdentityProperties.type,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "csharp"
+);
 @@alternateType(IdentityProperties.principalId, uuid, "csharp");
 @@clientName(ImportLabVirtualMachineRequest,
   "DevTestLabImportVmContent",
+  "csharp"
+);
+@@clientName(ImportLabVirtualMachineRequest.sourceVirtualMachineResourceId,
+  "SourceVmResourceId",
+  "csharp"
+);
+@@clientName(ImportLabVirtualMachineRequest.destinationVirtualMachineName,
+  "DestinationVmName",
   "csharp"
 );
 @@alternateType(ImportLabVirtualMachineRequest.sourceVirtualMachineResourceId,
@@ -290,9 +325,38 @@ using Microsoft.DevTestLab;
   "DevTestLabVmCreationContent",
   "csharp"
 );
-@@clientName(LinuxOsState, "DevTestLabLinuxOsState", "csharp");
+@@alternateType(LabVirtualMachineCreationParameter.location,
+  azureLocation,
+  "csharp"
+);
+@@clientName(LabVirtualMachineCreationParameterProperties.disallowPublicIpAddress,
+  "DisallowPublicIPAddress",
+  "csharp"
+);
+@@clientName(LinuxOsState, "DevTestLabLinuxOSState", "csharp");
+@@clientName(WindowsOsState, "DevTestLabWindowsOSState", "csharp");
+@@clientName(LinuxOsInfo, "DevTestLabLinuxOSInfo", "csharp");
+@@clientName(LinuxOsInfo.linuxOsState, "LinuxOSState", "csharp");
+@@clientName(WindowsOsInfo, "DevTestLabWindowsOSInfo", "csharp");
+@@clientName(WindowsOsInfo.windowsOsState, "WindowsOSState", "csharp");
 @@clientName(NetworkInterfaceProperties,
   "DevTestLabNetworkInterface",
+  "csharp"
+);
+@@clientName(NetworkInterfaceProperties.publicIpAddressId,
+  "PublicIPAddressId",
+  "csharp"
+);
+@@clientName(NetworkInterfaceProperties.publicIpAddress,
+  "PublicIPAddress",
+  "csharp"
+);
+@@clientName(NetworkInterfaceProperties.privateIpAddress,
+  "PrivateIPAddress",
+  "csharp"
+);
+@@clientName(NetworkInterfaceProperties.sharedPublicIpAddressConfiguration,
+  "SharedPublicIPAddressConfiguration",
   "csharp"
 );
 @@alternateType(NetworkInterfaceProperties.virtualNetworkId,
@@ -308,6 +372,7 @@ using Microsoft.DevTestLab;
   "csharp"
 );
 @@clientName(NotificationSettings, "DevTestLabNotificationSettings", "csharp");
+@@alternateType(NotificationSettings.webhookUrl, url, "csharp");
 @@clientName(NotifyParameters,
   "DevTestLabNotificationChannelNotifyContent",
   "csharp"
@@ -345,6 +410,7 @@ using Microsoft.DevTestLab;
   "DevTestLabScheduleCreationParameter",
   "csharp"
 );
+@@alternateType(ScheduleCreationParameter.location, azureLocation, "csharp");
 @@alternateType(ScheduleCreationParameterProperties.targetResourceId,
   armResourceIdentifier,
   "csharp"
@@ -352,11 +418,14 @@ using Microsoft.DevTestLab;
 @@clientName(ScheduleFragment, "DevTestLabSchedulePatch", "csharp");
 @@clientName(SourceControlType, "DevTestLabSourceControlType", "csharp");
 @@clientName(Subnet, "DevTestLabSubnet", "csharp");
+@@clientName(Subnet.allowPublicIp, "AllowPublicIP", "csharp");
 @@alternateType(Subnet.resourceId, armResourceIdentifier, "csharp");
 @@clientName(TargetCostStatus, "DevTestLabTargetCostStatus", "csharp");
 @@clientName(UsagePermissionType, "DevTestLabUsagePermissionType", "csharp");
 @@clientName(UserIdentity, "DevTestLabUserIdentity", "csharp");
+@@alternateType(UserIdentity.tenantId, uuid, "csharp");
 @@clientName(UserSecretStore, "DevTestLabUserSecretStore", "csharp");
+@@alternateType(UserSecretStore.keyVaultUri, url, "csharp");
 @@alternateType(UserSecretStore.keyVaultId, armResourceIdentifier, "csharp");
 @@clientName(VirtualMachineCreationSource,
   "DevTestLabVmCreationSource",
@@ -415,5 +484,17 @@ using Microsoft.DevTestLab;
 @@clientName(GalleryImageReference.osType, "OSType", "csharp");
 @@clientName(LabVirtualMachineProperties.osType, "OSType", "csharp");
 @@clientName(ComputeVmProperties.osType, "OSType", "csharp");
+@@clientName(LabVirtualMachineCreationParameterProperties.disallowPublicIpAddress,
+  "DisallowPublicIPAddress",
+  "csharp"
+);
+@@clientName(LabVirtualMachineProperties.disallowPublicIpAddress,
+  "DisallowPublicIPAddress",
+  "csharp"
+);
+@@clientName(ComputeVmProperties.osDiskId, "OSDiskId", "csharp");
+@@alternateType(GenerateArmTemplateRequest.location, azureLocation, "csharp");
+@@clientName(LabVhd, "DevTestLabVhd", "csharp");
+@@alternateType(LabVhd.id, url, "csharp");
 @@clientName(GalleryImages.list, "GetGalleryImages", "csharp");
 @@clientName(Labs.listVhds, "GetDevTestLabVhds", "csharp");
