@@ -791,6 +791,25 @@
         }
       }
     },
+    "BasicFillerResponseConfig": {
+      "type": "object",
+      "description": "Configuration for basic/static filler response generation.\nRandomly selects from configured texts when any trigger condition is met.",
+      "properties": {
+        "texts": {
+          "type": "array",
+          "description": "List of filler text options to randomly select from.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FillerResponseConfigBase"
+        }
+      ],
+      "x-ms-discriminator-value": "static_filler"
+    },
     "CachedTokenDetails": {
       "type": "object",
       "description": "Details of output token usage.",
@@ -1364,6 +1383,85 @@
         "error"
       ]
     },
+    "FillerResponseConfig": {},
+    "FillerResponseConfigBase": {
+      "type": "object",
+      "description": "Base model for filler response configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FillerResponseConfigType",
+          "description": "The type of filler response configuration."
+        },
+        "triggers": {
+          "type": "array",
+          "description": "List of triggers that can fire the filler. Any trigger can activate the filler (OR logic).\nSupported: 'latency', 'tool'.",
+          "default": [
+            "latency"
+          ],
+          "items": {
+            "$ref": "#/definitions/FillerTrigger"
+          }
+        },
+        "latency_threshold_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Latency threshold in milliseconds before triggering filler response. Default is 2000ms.",
+          "minimum": 0
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FillerResponseConfigType": {
+      "type": "string",
+      "description": "Filler response configuration types.",
+      "enum": [
+        "static_filler",
+        "llm_filler"
+      ],
+      "x-ms-enum": {
+        "name": "FillerResponseConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "static_filler",
+            "value": "static_filler",
+            "description": "Static filler configuration type."
+          },
+          {
+            "name": "llm_filler",
+            "value": "llm_filler",
+            "description": "LLM-based filler configuration type."
+          }
+        ]
+      }
+    },
+    "FillerTrigger": {
+      "type": "string",
+      "description": "Triggers that can activate filler response generation.",
+      "enum": [
+        "latency",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "FillerTrigger",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "latency",
+            "value": "latency",
+            "description": "Trigger filler when response latency exceeds threshold."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "Trigger filler when a tool call is being executed."
+          }
+        ]
+      }
+    },
     "FunctionCallItem": {
       "type": "object",
       "description": "A function call item within a conversation.",
@@ -1640,6 +1738,33 @@
           }
         ]
       }
+    },
+    "LlmFillerResponseConfig": {
+      "type": "object",
+      "description": "Configuration for LLM-based filler response generation.\nUses LLM to generate context-aware filler responses when any trigger condition is met.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model to use for LLM-based filler generation. Default is gpt-4.1-mini."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Custom instructions for generating filler responses. If not provided, a default prompt is used."
+        },
+        "max_completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of tokens to generate for the filler response.",
+          "default": 50,
+          "minimum": 1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FillerResponseConfigBase"
+        }
+      ],
+      "x-ms-discriminator-value": "llm_filler"
     },
     "LogProbProperties": {
       "type": "object",
@@ -2379,6 +2504,10 @@
         "reasoning_effort": {
           "$ref": "#/definitions/ReasoningEffort",
           "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
+        "filler_response": {
+          "$ref": "#/definitions/FillerResponseConfig",
+          "description": "Configuration for filler response generation during latency or tool calls."
         }
       }
     },
@@ -3127,6 +3256,10 @@
         "reasoning_effort": {
           "$ref": "#/definitions/ReasoningEffort",
           "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
+        "filler_response": {
+          "$ref": "#/definitions/FillerResponseConfig",
+          "description": "Configuration for filler response generation during latency or tool calls."
         },
         "agent": {
           "$ref": "#/definitions/AgentConfig",
