@@ -46,7 +46,7 @@ interface PolicyOps
         @path @segment("policysets") policySetName: string,
       },
       KeysOf<ResourceNameParameter<
-        Resource = Schedule,
+        Resource = Policy,
         KeyName = "name",
         SegmentName = "policies",
         NamePattern = ""
