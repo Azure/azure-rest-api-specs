@@ -126,6 +126,7 @@ model StorageDestinationConfiguration {
 @doc("The configuration for a MQTT broker state store destination.")
 @added(Versions.v2025_07_01_preview)
 model BrokerStateStoreDestinationConfiguration {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The MQTT broker state store destination key.")
   key: string;
 }

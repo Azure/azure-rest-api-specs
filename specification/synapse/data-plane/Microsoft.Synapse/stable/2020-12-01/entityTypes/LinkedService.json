@@ -6615,6 +6615,34 @@
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "description": "The port for the connection. Type: integer."
+        },
+        "uid": {
+          "type": "object",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string."
+        },
+        "securityLevel": {
+          "description": "Specifies the security level for the driver connection to the data store. PreferredUnSecured : prefer unsecured, allow fallback to secured connection if required. OnlyUnSecured : strictly unsecured, no fallback.",
+          "type": "string",
+          "enum": [
+            "PreferredUnSecured",
+            "OnlyUnSecured"
+          ],
+          "x-ms-enum": {
+            "name": "NetezzaSecurityLevelType",
+            "modelAsString": true
+          }
+        },
         "pwd": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
           "description": "The Azure key vault secret reference of password in connection string."
@@ -7138,11 +7166,15 @@
         "credential": {
           "$ref": "../artifacts.json#/definitions/CredentialReference",
           "description": "The credential reference containing authentication information."
+        },
+        "workspaceResourceId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Workspace resource id for databricks REST API. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
-        "domain",
-        "accessToken"
+        "domain"
       ]
     },
     "ResponsysLinkedService": {

@@ -13,14 +13,9 @@ options:
     output-file: "{version-status}/{version}/servicefabricmanagedclusters.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.ServiceFabricManagedClusters"
-    flavor: azure
-    suppress-abstract-base-class:
-      - "ManagedServiceProperties"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicefabricmanagedclusters"
     namespace: "azure.mgmt.servicefabricmanagedclusters"
@@ -38,7 +33,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/armservicefabricmanagedclusters"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armservicefabricmanagedclusters"
     fix-const-stuttering: true
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true

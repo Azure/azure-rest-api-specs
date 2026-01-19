@@ -25,12 +25,17 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault-generated"
-    namespace: "com.azure.resourcemanager.keyvault.generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault"
+    namespace: "com.azure.resourcemanager.keyvault"
     service-name: "KeyVault" # human-readable service name, whitespace allowed
     flavor: azure
-    premium: false
     enable-sync-stack: false
+    premium: true
+    customization-class: customization/src/main/java/KeyVaultCustomization.java
+    uuid-as-string: false
+    rename-model:
+      TrackedResource: Resource
+    client-side-validations: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-keyvault"
     flavor: azure
@@ -40,7 +45,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/keyvault"
     emitter-output-dir: "{output-dir}/{service-dir}/armkeyvault"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armkeyvault"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armkeyvault/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

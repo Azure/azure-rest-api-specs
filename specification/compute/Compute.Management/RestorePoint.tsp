@@ -49,7 +49,8 @@ interface RestorePoints {
     RestorePoint,
     Response = ArmResourceCreatedResponse<
       RestorePoint,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = RestorePoint> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 

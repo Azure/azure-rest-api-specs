@@ -32,15 +32,20 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   excludePiiCategories?: PiiCategoriesExclude[];
 
+  /** RedactionPolicy to be used on the input. */
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_15_preview)
+  redactionPolicy?: BaseRedactionPolicy;
+
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   valueExclusionPolicy?: ValueExclusionPolicy;
 
   /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   entitySynonyms?: EntitySynonyms[];
 
   /** List of RedactionPolicies to be used on the input. */
@@ -57,7 +62,7 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
 }
 
 /** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntitySynonyms {
   /** The entity name */
   entityType: EntityCategory;
@@ -90,7 +95,7 @@ model ConfidenceScoreThresholdOverride {
 }
 
 /** The entity synonyms used to enhance pii entity detection */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntitySynonym {
   /** The synonym to be used for context */
   synonym: string;
@@ -100,7 +105,7 @@ model EntitySynonym {
 }
 
 /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model ValueExclusionPolicy {
   /** Option to make the values excluded values case sensitive */
   caseSensitive: boolean = false;
@@ -110,7 +115,7 @@ model ValueExclusionPolicy {
 }
 
 /** The abstract base class for RedactionPolicy. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
@@ -130,7 +135,7 @@ model BaseRedactionPolicy {
 }
 
 /** Represents the policy of redacting with a redaction character */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -158,21 +163,21 @@ model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of not redacting found PII. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntityMaskPolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
 }
 
 /** Kinds of redaction policies supported. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 union RedactionPolicyKind {
   string,
 
@@ -214,7 +219,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2025_11_15_preview, PiiEntitiesDocumentResult[])
+  @typeChangedFrom(Versions.v2025_05_15_preview, PiiEntitiesDocumentResult[])
   documents: PiiResultWithDetectedLanguage[];
 }
 
@@ -239,15 +244,15 @@ model PiiEntityWithTags is Entity {
   tags?: EntityTag[];
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   mask?: string;
 
   /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   maskOffset?: int32;
 
   /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   maskLength?: int32;
 }
 
@@ -258,7 +263,7 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2025_11_15_preview, Entity[])
+  @typeChangedFrom(Versions.v2025_05_15_preview, Entity[])
   entities: PiiEntityWithTags[];
 }
 
@@ -825,7 +830,7 @@ union PiiCategoriesExclude {
   DriversLicenseNumber: "DriversLicenseNumber",
 
   /** Neighborhood */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   Neighborhood: "Neighborhood",
 
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
@@ -833,19 +838,21 @@ union PiiCategoriesExclude {
   SortCode: "SortCode",
 
   /** PIN */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   PIN: "PIN",
 
   /** VIN */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   VIN: "VIN",
 
   /** VIN */
   @added(Versions.v2025_11_01)
+  @removed(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   VehicleIdentificationNumber: "VehicleIdentificationNumber",
 
   /** License Plate */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   LicensePlate: "LicensePlate",
 
   /** KR Passport Number */

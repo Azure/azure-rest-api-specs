@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "jobDefinition": {
+      "properties": {
+        "description": "Example Job Definition Description",
+        "agentName": "migration-agent",
+        "copyMode": "Additive",
+        "jobType": "OnPremToCloud",
+        "sourceName": "examples-sourceEndpointName",
+        "sourceSubpath": "/",
+        "targetName": "examples-targetEndpointName",
+        "targetSubpath": "/",
+        "connections": [
+          "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/connections/example-connection"
+        ]
+      }
+    },
+    "jobDefinitionName": "examples-jobDefinitionName",
+    "projectName": "examples-projectName",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-jobDefinitionName",
+        "type": "Microsoft.StorageMover/storageMovers/projectName/jobDefinitionName",
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/projects/examples-projectName/jobDefinitions/examples-jobDefinitionName",
+        "properties": {
+          "description": "Example Job Definition Description",
+          "agentName": "migration-agent",
+          "agentResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/agents/migration-agent",
+          "copyMode": "Additive",
+          "latestJobRunName": null,
+          "latestJobRunResourceId": null,
+          "latestJobRunStatus": null,
+          "sourceName": "examples-sourceEndpointName",
+          "sourceResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-sourceEndpointName",
+          "sourceSubpath": "/",
+          "targetName": "examples-targetEndpointName",
+          "targetResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-targetEndpointName",
+          "targetSubpath": "/",
+          "connections": [
+            "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/connections/example-connection"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "JobDefinitions_CreateOrUpdate",
+  "title": "JobDefinitions_CreateOrUpdate"
+}

@@ -235,6 +235,7 @@ union BrokerStateStoreKeyType {
 @added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2025-10-01`)
 model BrokerPersistenceDynamicSettings {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The user property key to enable persistence.")
   userPropertyKey: string;
 
@@ -454,6 +455,7 @@ model VolumeClaimSpecSelector {
 
 @doc("VolumeClaimSpecSelectorMatchExpressions properties")
 model VolumeClaimSpecSelectorMatchExpressions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("key is the label key that the selector applies to.")
   key: string;
 
@@ -566,12 +568,14 @@ union BrokerMemoryProfile {
 model ClientConfig {
   @doc("Upper bound of Session Expiry Interval, in seconds.")
   @minValue(1)
-  @maxValue(4294967295)
+  // TODO: verify values/type -> 4294967295 is not an int32
+  // @maxValue(4294967295)
   maxSessionExpirySeconds?: int32;
 
   @doc("Upper bound of Message Expiry Interval, in seconds.")
   @minValue(1)
-  @maxValue(4294967295)
+  // TODO: verify values/type -> 4294967295 is not an int32
+  // @maxValue(4294967295)
   maxMessageExpirySeconds?: int32;
 
   @doc("Max message size for a packet in Bytes.")
