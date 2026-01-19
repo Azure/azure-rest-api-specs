@@ -128,11 +128,14 @@ The `@@clientName` decorator directly influences SDK generation, ensuring that:
 See [ServiceFabricManagedClusters/client.tsp](../specification/servicefabricmanagedclusters/resource-manager/Microsoft.ServiceFabric/ServiceFabricManagedClusters/client.tsp) for comprehensive examples:
 
 ```typespec
+// C#-specific parameter naming (recommended pattern)
 @@clientName(Applications.update::parameters.properties, "patch", "csharp");
 @@clientName(Applications.updateUpgrade::parameters.body, "content", "csharp");
 @@clientName(ManagedClusters.update::parameters.properties, "patch", "csharp");
 @@clientName(NodeTypes.update::parameters.properties, "patch", "csharp");
 ```
+
+**Note**: This file also contains decorators without language specification (for backward compatibility or other languages). The C#-specific decorators override those defaults.
 
 ### Health Data AI Services
 

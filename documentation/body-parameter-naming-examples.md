@@ -217,6 +217,7 @@ This pattern is already used in Azure services. Here's from Service Fabric Manag
 
 **TypeSpec (client.tsp):**
 ```typespec
+// C#-specific parameter naming
 @@clientName(Applications.update::parameters.properties, "patch", "csharp");
 @@clientName(Applications.updateUpgrade::parameters.body, "content", "csharp");
 @@clientName(Applications.resumeUpgrade::parameters.body, "content", "csharp");
@@ -225,6 +226,8 @@ This pattern is already used in Azure services. Here's from Service Fabric Manag
 @@clientName(NodeTypes.deallocate::parameters.body, "content", "csharp");
 @@clientName(NodeTypes.deleteNode::parameters.body, "content", "csharp");
 ```
+
+**Note**: The file also contains non-language-specific decorators for other purposes. The C#-specific decorators shown above override defaults for C# SDK generation.
 
 **Generated C# SDK:**
 ```csharp
