@@ -567,6 +567,7 @@ model RecommendationProperties {
    * The most recent time that Advisor checked the validity of the recommendation.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @added(Versions.v2026_02_01)
   lastRefreshed?: utcDateTime;
 
   /**
