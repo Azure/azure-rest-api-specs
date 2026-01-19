@@ -416,3 +416,4 @@ using Microsoft.DevTestLab;
 @@clientName(LabVirtualMachineProperties.osType, "OSType", "csharp");
 @@clientName(ComputeVmProperties.osType, "OSType", "csharp");
 @@clientName(GalleryImages.list, "GetGalleryImages", "csharp");
+@@clientName(Labs.listVhds, "GetDevTestLabVhds", "csharp");
