@@ -272,7 +272,7 @@ model AccessTokenRequest {
   @doc("The marketplace sku.")
   @removed(Versions.v2026_01_01_preview)
   marketPlaceSku?: string;
-  
+
   @doc("The marketplace sku.")
   @added(Versions.v2026_01_01_preview)
   marketplaceSku?: string;
@@ -281,7 +281,6 @@ model AccessTokenRequest {
   @removed(Versions.v2026_01_01_preview)
   marketPlaceSkuVersion?: string;
 
-  
   @doc("The marketplace sku version.")
   @added(Versions.v2026_01_01_preview)
   marketplaceSkuVersion?: string;
