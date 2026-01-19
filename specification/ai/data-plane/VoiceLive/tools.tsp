@@ -84,7 +84,6 @@ model ToolChoiceFunctionObject extends ToolChoiceObject {
  * The definition of an MCP server as used by the voicelive endpoint.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-#suppress "@azure-tools/typespec-autorest/union-unsupported" // require_approval is represented this way in OpenAI style.
 @usage(RequestUsage)
 model MCPServer extends Tool {
   type: ToolType.mcp;
@@ -93,6 +92,8 @@ model MCPServer extends Tool {
   authorization?: string;
   headers?: Record<string>;
   allowed_tools?: string[];
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval is represented this way in OpenAI style."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   require_approval?: MCPApprovalType | Record<string[]>;
 }
 

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
+    "resourceGroupName": "contosoResourceGroup",
+    "emailServiceName": "contosoEmailService",
+    "domainName": "contoso.com",
+    "suppressionListName": "aaaa1111-bbbb-2222-3333-aaaa11112222",
+    "api-version": "2025-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/suppressionLists/aaaa1111-bbbb-2222-3333-aaaa11112222/suppressionListAddresses/11112222-3333-4444-5555-aaaabbbbcccc",
+            "name": "11112222-3333-4444-5555-aaaabbbbcccc",
+            "type": "Microsoft.Communication/EmailServices/Domains/SuppressionLists/SuppressionListAddresses",
+            "properties": {
+              "email": "abc@fabrikam.com",
+              "firstName": "firstName",
+              "lastName": "lastName",
+              "notes": "This user was added as a test.",
+              "lastModified": "2023-06-24T01:06:26.100Z"
+            }
+          },
+          {
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/suppressionLists/aaaa1111-bbbb-2222-3333-aaaa11112222/suppressionListAddresses/abababab-3333-4444-5555-aaaabbbbcccc",
+            "name": "abababab-3333-4444-5555-aaaabbbbcccc",
+            "type": "Microsoft.Communication/EmailServices/Domains/SuppressionLists/SuppressionListAddresses",
+            "properties": {
+              "email": "user@contoso.com",
+              "firstName": "firstName",
+              "lastName": "lastName",
+              "notes": "This user was added as a test.",
+              "lastModified": "2023-06-24T01:06:26.100Z"
+            }
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The requested resource was not found"
+        }
+      }
+    }
+  }
+}
