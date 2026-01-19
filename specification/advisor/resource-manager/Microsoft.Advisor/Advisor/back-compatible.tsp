@@ -151,7 +151,7 @@ using Microsoft.Advisor;
 
 @@clientLocation(WorkloadsOperationGroup.list, "Workloads", "!csharp");
 
-@@clientName(AdvisorScoreEntity, "advisorScoreEntity", "!csharp");
+@@clientName(AdvisorScoreEntity, "advisorScoreEntity", "!csharp,!go");
 @@clientName(ResiliencyReviewCollection,
   "resiliencyReviewCollection",
   "!csharp"
