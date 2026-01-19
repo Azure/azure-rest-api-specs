@@ -14,6 +14,7 @@ union ItemType {
   mcp_call: "mcp_call",
   mcp_approval_request: "mcp_approval_request",
   mcp_approval_response: "mcp_approval_response",
+  foundry_agent_call: "foundry_agent_call",
 }
 
 // Base for user content parts
@@ -432,4 +433,31 @@ model MCPApprovalResponseRequestItem extends ConversationRequestItem {
 
   /** Whether the tool call was approved. */
   approve: boolean;
+}
+
+/** A response item that represents a call to a Foundry agent. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-azure-core/no-unknown" // The error can be of any type according to OpenAI response.
+@usage(ResponseUsage)
+model ResponseFoundryAgentCallItem extends ResponseItem {
+  /** The type of the item. */
+  type: ItemType.foundry_agent_call;
+
+  /** The name of the Foundry agent. */
+  name: string;
+
+  /** The ID of the call. */
+  call_id: string;
+
+  /** The arguments for the agent call. */
+  arguments: string;
+
+  /** The ID of the agent response, if any. */
+  agent_response_id?: string;
+
+  /** The output of the agent call. */
+  output?: string;
+
+  /** The error, if any, from the agent call. */
+  error?: unknown;
 }
