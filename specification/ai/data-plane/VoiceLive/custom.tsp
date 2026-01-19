@@ -78,6 +78,9 @@ model RequestSession {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   max_response_output_tokens?: int32 | "inf";
+
+  /** Configuration for filler response generation during latency or tool calls. */
+  filler_response?: FillerResponseConfig;
 }
 
 /** Base for session configuration in the response. */
@@ -657,6 +660,89 @@ model AgentConfig {
 
   /** The ID of the conversation thread. */
   thread_id: string;
+}
+
+// --- Filler Response Configuration -----------------------------------------
+
+/** Triggers that can activate filler response generation. */
+union FillerTrigger {
+  string,
+
+  /** Trigger filler when response latency exceeds threshold. */
+  latency: "latency",
+
+  /** Trigger filler when a tool call is being executed. */
+  tool: "tool",
+}
+
+/** Union of filler response configuration types. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" // Discriminated union for filler config types.
+union FillerResponseConfig {
+  BasicFillerResponseConfig,
+  LlmFillerResponseConfig,
+}
+
+/** Base model for filler response configuration. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@discriminator("type")
+@usage(RequestUsage)
+model FillerResponseConfigBase {
+  /** The type of filler response configuration. */
+  type: FillerResponseConfigType;
+
+  /**
+   * List of triggers that can fire the filler. Any trigger can activate the filler (OR logic).
+   * Supported: 'latency', 'tool'.
+   */
+  triggers?: FillerTrigger[] = #[FillerTrigger.latency];
+
+  /** Latency threshold in milliseconds before triggering filler response. Default is 2000ms. */
+  @minValue(0)
+  latency_threshold_ms?: int32;
+}
+
+/** Filler response configuration types. */
+union FillerResponseConfigType {
+  string,
+
+  /** Static filler configuration type. */
+  static_filler: "static_filler",
+
+  /** LLM-based filler configuration type. */
+  llm_filler: "llm_filler",
+}
+
+/**
+ * Configuration for basic/static filler response generation.
+ * Randomly selects from configured texts when any trigger condition is met.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
+model BasicFillerResponseConfig extends FillerResponseConfigBase {
+  type: FillerResponseConfigType.static_filler;
+
+  /** List of filler text options to randomly select from. */
+  texts?: string[];
+}
+
+/**
+ * Configuration for LLM-based filler response generation.
+ * Uses LLM to generate context-aware filler responses when any trigger condition is met.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
+model LlmFillerResponseConfig extends FillerResponseConfigBase {
+  type: FillerResponseConfigType.llm_filler;
+
+  /** The model to use for LLM-based filler generation. Default is gpt-4.1-mini. */
+  `model`?: string;
+
+  /** Custom instructions for generating filler responses. If not provided, a default prompt is used. */
+  instructions?: string;
+
+  /** Maximum number of tokens to generate for the filler response. */
+  @minValue(1)
+  max_completion_tokens?: int32 = 50;
 }
 
 /** Video streaming parameters for avatar. */
