@@ -231,6 +231,13 @@ model Response {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   max_output_tokens?: int32 | "inf";
+
+  /**
+   * Set of up to 16 key-value pairs that can be attached to an object.
+   * This can be useful for storing additional information about the object in a structured format.
+   * Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.
+   */
+  metadata?: Record<string>;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
@@ -1143,6 +1150,19 @@ model ResponseCreateParams {
    * added into the conversation history and returned with synthesized audio output in the created response.
    */
   pre_generated_assistant_message?: AssistantMessageItem;
+
+  /**
+   * Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.
+   * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoning_effort?: ReasoningEffort;
+
+  /**
+   * Set of up to 16 key-value pairs that can be attached to an object.
+   * This can be useful for storing additional information about the object in a structured format.
+   * Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.
+   */
+  metadata?: Record<string>;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base

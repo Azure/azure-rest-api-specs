@@ -79,8 +79,41 @@ model RequestSession {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
   max_response_output_tokens?: int32 | "inf";
 
+  /**
+   * Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.
+   * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoning_effort?: ReasoningEffort;
+
   /** Configuration for filler response generation during latency or tool calls. */
   filler_response?: FillerResponseConfig;
+}
+
+/**
+ * Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.
+ * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+union ReasoningEffort {
+  string,
+
+  /** No reasoning effort. */
+  none: "none",
+
+  /** Minimal reasoning effort. */
+  minimal: "minimal",
+
+  /** Low reasoning effort - faster responses with less reasoning. */
+  low: "low",
+
+  /** Medium reasoning effort - balanced between speed and reasoning depth. */
+  medium: "medium",
+
+  /** High reasoning effort - more thorough reasoning, may take longer. */
+  high: "high",
+
+  /** Extra high reasoning effort - maximum reasoning depth. */
+  xhigh: "xhigh",
 }
 
 /** Base for session configuration in the response. */
