@@ -85,7 +85,7 @@ interface SerialPorts {
   /**
    * Handles requests to list all SerialPort resources in a subscription.
    */
-  listBySubscriptions is ArmListBySubscription<
+  listBySubscriptions is Azure.ResourceManager.Legacy.ArmListSinglePageBySubscription<
     SerialPort,
     Response = ArmResponse<SerialPortListResult>,
     Error = CloudError
