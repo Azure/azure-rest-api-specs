@@ -1,9 +1,4 @@
 import "@azure-tools/typespec-client-generator-core";
-<<<<<<< HEAD
-import "./main.tsp";
-
-using Azure.ClientGenerator.Core;
-=======
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./main.tsp";
@@ -11,7 +6,6 @@ import "./main.tsp";
 using Http;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
->>>>>>> upstream/main
 using Microsoft.ResourceConnector;
 
 /*
@@ -70,8 +64,6 @@ op AppliancesUpdateCustomized(
   "creationTimestamp",
   "java"
 );
-<<<<<<< HEAD
-=======
 
 /*
  * .NET overrides
