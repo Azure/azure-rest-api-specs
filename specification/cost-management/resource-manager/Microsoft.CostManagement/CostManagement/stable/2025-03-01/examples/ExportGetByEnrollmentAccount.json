@@ -3,16 +3,28 @@
     "api-version": "2025-03-01",
     "billingAccountId": "100",
     "enrollmentAccountId": "456",
+<<<<<<< HEAD
+    "scope": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456",
+    "exportName": "TestExport"
+=======
     "exportName": "TestExport",
     "scope": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
+        "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+=======
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
         "eTag": "\"00000000-0000-0000-0000-000000000000\"",
         "id": "/providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport",
+>>>>>>> upstream/main
         "identity": {
           "type": "SystemAssigned",
           "principalId": "00000000-0000-0000-0000-000000000000",
@@ -21,6 +33,18 @@
         "location": "centralus",
         "properties": {
           "format": "Csv",
+<<<<<<< HEAD
+          "deliveryInfo": {
+            "destination": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "container": "exports",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "definition": {
+            "type": "ActualCost",
+            "timeframe": "Custom",
+=======
           "compressionMode": "gzip",
           "dataOverwriteBehavior": "OverwritePreviousReport",
           "definition": {
@@ -31,10 +55,28 @@
               },
               "granularity": "Daily"
             },
+>>>>>>> upstream/main
             "timePeriod": {
               "from": "2019-09-01T00:00:00Z",
               "to": "2019-09-30T00:00:00Z"
             },
+<<<<<<< HEAD
+            "dataSet": {
+              "granularity": "Daily",
+              "configuration": {
+                "dataVersion": "2023-05-01"
+              }
+            }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
+        }
+      }
+    }
+  }
+=======
             "timeframe": "Custom"
           },
           "deliveryInfo": {
@@ -52,4 +94,5 @@
   },
   "operationId": "Exports_Get",
   "title": "ExportGetByEnrollmentAccount"
+>>>>>>> upstream/main
 }

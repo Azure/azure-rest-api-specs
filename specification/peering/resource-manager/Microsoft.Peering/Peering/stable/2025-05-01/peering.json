@@ -1,6 +1,32 @@
 {
   "swagger": "2.0",
   "info": {
+<<<<<<< HEAD
+    "version": "2025-05-01",
+    "title": "PeeringManagementClient",
+    "description": "APIs to manage Peering resources through the Azure Resource Manager."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/cdnPeeringPrefixes": {
+      "get": {
+        "tags": [
+          "CdnPeeringPrefixes"
+        ],
+        "description": "Lists all of the advertised prefixes for the specified peering location",
+        "operationId": "CdnPeeringPrefixes_List",
+        "parameters": [
+          {
+=======
     "title": "PeeringManagementClient",
     "version": "2025-05-01",
     "description": "Peering Client",
@@ -113,24 +139,44 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+>>>>>>> upstream/main
             "name": "peeringLocation",
             "in": "query",
             "description": "The peering location.",
             "required": true,
             "type": "string"
+<<<<<<< HEAD
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "The request has succeeded.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/CdnPeeringPrefixListResult"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -146,6 +192,18 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/checkServiceProviderAvailability": {
       "post": {
+<<<<<<< HEAD
+        "tags": [
+          "CheckServiceProviderAvailability"
+        ],
+        "description": "Checks if the peering service provider is present within 1000 miles of customer's location",
+        "operationId": "CheckServiceProviderAvailability",
+        "parameters": [
+          {
+            "name": "checkServiceProviderAvailabilityInput",
+            "in": "body",
+            "description": "The CheckServiceProviderAvailabilityInput indicating customer location and service provider.",
+=======
         "operationId": "CheckServiceProviderAvailability",
         "description": "Checks if the peering service provider is present within 1000 miles of customer's location",
         "parameters": [
@@ -159,14 +217,39 @@
             "name": "checkServiceProviderAvailabilityInput",
             "in": "body",
             "description": "The request body",
+>>>>>>> upstream/main
             "required": true,
             "schema": {
               "$ref": "#/definitions/CheckServiceProviderAvailabilityInput"
             }
+<<<<<<< HEAD
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "enum": [
+                "Available",
+                "Unavailable"
+              ],
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckServiceProviderAvailabilityResponse"
@@ -176,6 +259,7 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -186,6 +270,17 @@
         }
       }
     },
+<<<<<<< HEAD
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/legacyPeerings": {
+      "get": {
+        "tags": [
+          "LegacyPeerings"
+        ],
+        "description": "Lists all of the legacy peerings under the given subscription matching the specified kind and location.",
+        "operationId": "LegacyPeerings_List",
+        "parameters": [
+          {
+=======
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/initializeConnectionMonitor": {
       "post": {
         "operationId": "PeeringServices_InitializeConnectionMonitor",
@@ -228,6 +323,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+>>>>>>> upstream/main
             "name": "peeringLocation",
             "in": "query",
             "description": "The location of the peering.",
@@ -246,6 +342,9 @@
             ],
             "x-ms-enum": {
               "name": "LegacyPeeringsKind",
+<<<<<<< HEAD
+              "modelAsString": true
+=======
               "modelAsString": true,
               "values": [
                 {
@@ -257,6 +356,7 @@
                   "value": "Exchange"
                 }
               ]
+>>>>>>> upstream/main
             }
           },
           {
@@ -285,6 +385,17 @@
               "PeerProp"
             ],
             "x-ms-enum": {
+<<<<<<< HEAD
+              "name": "directPeeringType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
               "name": "DirectPeeringType",
               "modelAsString": true,
               "values": [
@@ -326,19 +437,30 @@
                 }
               ]
             }
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "The request has succeeded.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/PeeringListResult"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -354,6 +476,15 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/lookingGlass": {
       "post": {
+<<<<<<< HEAD
+        "tags": [
+          "LookingGlass"
+        ],
+        "description": "Run looking glass functionality",
+        "operationId": "LookingGlass_Invoke",
+        "parameters": [
+          {
+=======
         "operationId": "LookingGlass_Invoke",
         "description": "Run looking glass functionality",
         "parameters": [
@@ -364,6 +495,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+>>>>>>> upstream/main
             "name": "command",
             "in": "query",
             "description": "The command to be executed: ping, traceroute, bgpRoute.",
@@ -376,6 +508,9 @@
             ],
             "x-ms-enum": {
               "name": "LookingGlassCommand",
+<<<<<<< HEAD
+              "modelAsString": true
+=======
               "modelAsString": true,
               "values": [
                 {
@@ -391,6 +526,7 @@
                   "value": "BgpRoute"
                 }
               ]
+>>>>>>> upstream/main
             }
           },
           {
@@ -405,6 +541,9 @@
             ],
             "x-ms-enum": {
               "name": "LookingGlassSourceType",
+<<<<<<< HEAD
+              "modelAsString": true
+=======
               "modelAsString": true,
               "values": [
                 {
@@ -416,6 +555,7 @@
                   "value": "AzureRegion"
                 }
               ]
+>>>>>>> upstream/main
             }
           },
           {
@@ -431,19 +571,38 @@
             "description": "The IP address of the destination.",
             "required": true,
             "type": "string"
+<<<<<<< HEAD
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "The request has succeeded.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/LookingGlassOutput"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -454,6 +613,18 @@
         }
       }
     },
+<<<<<<< HEAD
+    "/providers/Microsoft.Peering/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available API operations for peering resources.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns": {
       "get": {
         "operationId": "PeerAsns_ListBySubscription",
@@ -467,10 +638,22 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PeerAsnListResult"
@@ -480,12 +663,18 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "List peering operations": {
+            "$ref": "./examples/ListPeeringOperations.json"
+=======
           "List peer ASNs in a subscription": {
             "$ref": "./examples/ListPeerAsnsBySubscription.json"
+>>>>>>> upstream/main
           }
         },
         "x-ms-pageable": {
@@ -495,11 +684,19 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns/{peerAsnName}": {
       "get": {
+<<<<<<< HEAD
+=======
         "operationId": "PeerAsns_Get",
+>>>>>>> upstream/main
         "tags": [
           "PeerAsns"
         ],
         "description": "Gets the peer ASN with the specified name under the given subscription.",
+<<<<<<< HEAD
+        "operationId": "PeerAsns_Get",
+        "parameters": [
+          {
+=======
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -508,25 +705,46 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+>>>>>>> upstream/main
             "name": "peerAsnName",
             "in": "path",
             "description": "The peer ASN name.",
             "required": true,
+<<<<<<< HEAD
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "Azure operation completed successfully.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/PeerAsn"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -537,11 +755,19 @@
         }
       },
       "put": {
+<<<<<<< HEAD
+=======
         "operationId": "PeerAsns_CreateOrUpdate",
+>>>>>>> upstream/main
         "tags": [
           "PeerAsns"
         ],
         "description": "Creates a new peer ASN or updates an existing peer ASN with the specified name under the given subscription.",
+<<<<<<< HEAD
+        "operationId": "PeerAsns_CreateOrUpdate",
+        "parameters": [
+          {
+=======
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -550,6 +776,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+>>>>>>> upstream/main
             "name": "peerAsnName",
             "in": "path",
             "description": "The peer ASN name.",
@@ -565,25 +792,48 @@
             "schema": {
               "$ref": "#/definitions/PeerAsn"
             }
+<<<<<<< HEAD
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "Resource 'PeerAsn' update operation succeeded",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/PeerAsn"
             }
           },
           "201": {
+<<<<<<< HEAD
+            "description": "Created",
+=======
             "description": "Resource 'PeerAsn' create operation succeeded",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/PeerAsn"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -594,11 +844,19 @@
         }
       },
       "delete": {
+<<<<<<< HEAD
+=======
         "operationId": "PeerAsns_Delete",
+>>>>>>> upstream/main
         "tags": [
           "PeerAsns"
         ],
         "description": "Deletes an existing peer ASN with the specified name under the given subscription.",
+<<<<<<< HEAD
+        "operationId": "PeerAsns_Delete",
+        "parameters": [
+          {
+=======
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -607,16 +865,38 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+>>>>>>> upstream/main
             "name": "peerAsnName",
             "in": "path",
             "description": "The peer ASN name.",
             "required": true,
+<<<<<<< HEAD
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "Resource deleted successfully."
           },
           "204": {
@@ -626,6 +906,7 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -636,6 +917,56 @@
         }
       }
     },
+<<<<<<< HEAD
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns": {
+      "get": {
+        "tags": [
+          "PeerAsns"
+        ],
+        "description": "Lists all of the peer ASNs under the given subscription.",
+        "operationId": "PeerAsns_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeerAsnListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List peer ASNs in a subscription": {
+            "$ref": "./examples/ListPeerAsnsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringLocations": {
+      "get": {
+        "tags": [
+          "PeeringLocations"
+        ],
+        "description": "Lists all of the available peering locations for the specified kind of peering.",
+        "operationId": "PeeringLocations_List",
+        "parameters": [
+          {
+=======
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringLocations": {
       "get": {
         "operationId": "PeeringLocations_List",
@@ -648,6 +979,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
+>>>>>>> upstream/main
             "name": "kind",
             "in": "query",
             "description": "The kind of the peering.",
@@ -659,6 +991,9 @@
             ],
             "x-ms-enum": {
               "name": "PeeringLocationsKind",
+<<<<<<< HEAD
+              "modelAsString": true
+=======
               "modelAsString": true,
               "values": [
                 {
@@ -670,6 +1005,7 @@
                   "value": "Exchange"
                 }
               ]
+>>>>>>> upstream/main
             }
           },
           {
@@ -691,6 +1027,16 @@
             ],
             "x-ms-enum": {
               "name": "PeeringLocationsDirectPeeringType",
+<<<<<<< HEAD
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
               "modelAsString": true,
               "values": [
                 {
@@ -731,19 +1077,30 @@
                 }
               ]
             }
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "The request has succeeded.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/PeeringLocationListResult"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -760,6 +1117,42 @@
         }
       }
     },
+<<<<<<< HEAD
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredAsns/{registeredAsnName}": {
+      "get": {
+        "tags": [
+          "PeeringRegisteredAsns"
+        ],
+        "description": "Gets an existing registered ASN with the specified name under the given subscription, resource group and peering.",
+        "operationId": "RegisteredAsns_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registeredAsnName",
+            "in": "path",
+            "description": "The name of the registered ASN.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceCountries": {
       "get": {
         "operationId": "PeeringServiceCountries_List",
@@ -770,10 +1163,22 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredAsn"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PeeringServiceCountryListResult"
@@ -783,12 +1188,194 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "Get a registered ASN associated with the peering": {
+            "$ref": "./examples/GetRegisteredAsn.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PeeringRegisteredAsns"
+        ],
+        "description": "Creates a new registered ASN with the specified name under the given subscription, resource group and peering.",
+        "operationId": "RegisteredAsns_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
+          },
+          {
+            "name": "registeredAsnName",
+            "in": "path",
+            "description": "The name of the ASN.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registeredAsn",
+            "in": "body",
+            "description": "The properties needed to create a registered ASN.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredAsn"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredAsn"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredAsn"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a registered ASN for the peering": {
+            "$ref": "./examples/CreateRegisteredAsn.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PeeringRegisteredAsns"
+        ],
+        "description": "Deletes an existing registered ASN with the specified name under the given subscription, resource group and peering.",
+        "operationId": "RegisteredAsns_Delete",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registeredAsnName",
+            "in": "path",
+            "description": "The name of the registered ASN.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a registered ASN associated with the peering": {
+            "$ref": "./examples/DeleteRegisteredAsn.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredAsns": {
+      "get": {
+        "tags": [
+          "PeeringRegisteredAsns"
+        ],
+        "description": "Lists all registered ASNs under the given subscription, resource group and peering.",
+        "operationId": "RegisteredAsns_ListByPeering",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredAsnListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all the registered ASNs associated with the peering": {
+            "$ref": "./examples/ListRegisteredAsnsByPeering.json"
+=======
           "List peering service countries": {
             "$ref": "./examples/ListPeeringServiceCountriesBySubscription.json"
+>>>>>>> upstream/main
           }
         },
         "x-ms-pageable": {
@@ -796,6 +1383,42 @@
         }
       }
     },
+<<<<<<< HEAD
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}": {
+      "get": {
+        "tags": [
+          "PeeringRegisteredPrefixes"
+        ],
+        "description": "Gets an existing registered prefix with the specified name under the given subscription, resource group and peering.",
+        "operationId": "RegisteredPrefixes_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registeredPrefixName",
+            "in": "path",
+            "description": "The name of the registered prefix.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceLocations": {
       "get": {
         "operationId": "PeeringServiceLocations_List",
@@ -813,10 +1436,22 @@
             "description": "The country of interest, in which the locations are to be present.",
             "required": false,
             "type": "string"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredPrefix"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PeeringServiceLocationListResult"
@@ -826,12 +1461,195 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "Get a registered prefix associated with the peering": {
+            "$ref": "./examples/GetRegisteredPrefix.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PeeringRegisteredPrefixes"
+        ],
+        "description": "Creates a new registered prefix with the specified name under the given subscription, resource group and peering.",
+        "operationId": "RegisteredPrefixes_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
+          },
+          {
+            "name": "registeredPrefixName",
+            "in": "path",
+            "description": "The name of the registered prefix.",
+            "required": true,
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
+          },
+          {
+            "name": "registeredPrefix",
+            "in": "body",
+            "description": "The properties needed to create a registered prefix.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredPrefix"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredPrefix"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredPrefix"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a registered prefix for the peering": {
+            "$ref": "./examples/CreateRegisteredPrefix.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PeeringRegisteredPrefixes"
+        ],
+        "description": "Deletes an existing registered prefix with the specified name under the given subscription, resource group and peering.",
+        "operationId": "RegisteredPrefixes_Delete",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registeredPrefixName",
+            "in": "path",
+            "description": "The name of the registered prefix.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a registered prefix associated with the peering": {
+            "$ref": "./examples/DeleteRegisteredPrefix.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes": {
+      "get": {
+        "tags": [
+          "PeeringRegisteredPrefixes"
+        ],
+        "description": "Lists all registered prefixes under the given subscription, resource group and peering.",
+        "operationId": "RegisteredPrefixes_ListByPeering",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredPrefixListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all the registered prefixes associated with the peering": {
+            "$ref": "./examples/ListRegisteredPrefixesByPeering.json"
+=======
           "List peering service locations": {
             "$ref": "./examples/ListPeeringServiceLocationsBySubscription.json"
+>>>>>>> upstream/main
           }
         },
         "x-ms-pageable": {
@@ -839,6 +1657,42 @@
         }
       }
     },
+<<<<<<< HEAD
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}/validate": {
+      "post": {
+        "tags": [
+          "PeeringRegisteredPrefixes"
+        ],
+        "description": "Validates an existing registered prefix with the specified name under the given subscription, resource group and peering.",
+        "operationId": "RegisteredPrefixes_Validate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registeredPrefixName",
+            "in": "path",
+            "description": "The name of the registered prefix.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceProviders": {
       "get": {
         "operationId": "PeeringServiceProviders_List",
@@ -849,10 +1703,22 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringRegisteredPrefix"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PeeringServiceProviderListResult"
@@ -862,10 +1728,16 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "Validate a registered prefix associated with the peering": {
+            "$ref": "./examples/ValidateRegisteredPrefix.json"
+          }
+=======
           "List peering service providers": {
             "$ref": "./examples/ListPeeringServiceProviders.json"
           }
@@ -1706,16 +2578,30 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+>>>>>>> upstream/main
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}": {
       "get": {
+<<<<<<< HEAD
+=======
         "operationId": "Peerings_Get",
+>>>>>>> upstream/main
         "tags": [
           "Peerings"
         ],
         "description": "Gets an existing peering with the specified name under the given subscription and resource group.",
+<<<<<<< HEAD
+        "operationId": "Peerings_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+=======
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1725,27 +2611,48 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+>>>>>>> upstream/main
           },
           {
             "name": "peeringName",
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
+<<<<<<< HEAD
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "Azure operation completed successfully.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/Peering"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -1756,11 +2663,24 @@
         }
       },
       "put": {
+<<<<<<< HEAD
+=======
         "operationId": "Peerings_CreateOrUpdate",
+>>>>>>> upstream/main
         "tags": [
           "Peerings"
         ],
         "description": "Creates a new peering or updates an existing peering with the specified name under the given subscription and resource group.",
+<<<<<<< HEAD
+        "operationId": "Peerings_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+=======
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1770,6 +2690,7 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+>>>>>>> upstream/main
           },
           {
             "name": "peeringName",
@@ -1787,25 +2708,48 @@
             "schema": {
               "$ref": "#/definitions/Peering"
             }
+<<<<<<< HEAD
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "Resource 'Peering' update operation succeeded",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/Peering"
             }
           },
           "201": {
+<<<<<<< HEAD
+            "description": "Created",
+=======
             "description": "Resource 'Peering' create operation succeeded",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/Peering"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -1813,20 +2757,89 @@
           "Create a direct peering": {
             "$ref": "./examples/CreateDirectPeering.json"
           },
+<<<<<<< HEAD
+          "Create an exchange peering": {
+            "$ref": "./examples/CreateExchangePeering.json"
+          },
+          "Create a peering with exchange route server": {
+            "$ref": "./examples/CreatePeeringWithExchangeRouteServer.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Peerings"
+        ],
+        "description": "Deletes an existing peering with the specified name under the given subscription and resource group.",
+        "operationId": "Peerings_Delete",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a peering": {
+            "$ref": "./examples/DeletePeering.json"
+=======
           "Create a peering with exchange route server": {
             "$ref": "./examples/CreatePeeringWithExchangeRouteServer.json"
           },
           "Create an exchange peering": {
             "$ref": "./examples/CreateExchangePeering.json"
+>>>>>>> upstream/main
           }
         }
       },
       "patch": {
+<<<<<<< HEAD
+=======
         "operationId": "Peerings_Update",
+>>>>>>> upstream/main
         "tags": [
           "Peerings"
         ],
         "description": "Updates tags for a peering with the specified name under the given subscription and resource group.",
+<<<<<<< HEAD
+        "operationId": "Peerings_Update",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+=======
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1836,14 +2849,19 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+>>>>>>> upstream/main
           },
           {
             "name": "peeringName",
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
+<<<<<<< HEAD
+            "type": "string"
+=======
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           },
           {
             "name": "tags",
@@ -1853,19 +2871,38 @@
             "schema": {
               "$ref": "#/definitions/ResourceTags"
             }
+<<<<<<< HEAD
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "Azure operation completed successfully.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/Peering"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -1874,6 +2911,109 @@
             "$ref": "./examples/UpdatePeeringTags.json"
           }
         }
+<<<<<<< HEAD
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings": {
+      "get": {
+        "tags": [
+          "Peerings"
+        ],
+        "description": "Lists all of the peerings under the given subscription and resource group.",
+        "operationId": "Peerings_ListByResourceGroup",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List peerings in a resource group": {
+            "$ref": "./examples/ListPeeringsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerings": {
+      "get": {
+        "tags": [
+          "Peerings"
+        ],
+        "description": "Lists all of the peerings under the given subscription.",
+        "operationId": "Peerings_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List peerings in a subscription": {
+            "$ref": "./examples/ListPeeringsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/receivedRoutes": {
+      "get": {
+        "tags": [
+          "Peerings"
+        ],
+        "description": "Lists the prefixes received over the specified peering under the given subscription and resource group.",
+        "operationId": "ReceivedRoutes_ListByPeering",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+=======
       },
       "delete": {
         "operationId": "Peerings_Delete",
@@ -1890,12 +3030,16 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+>>>>>>> upstream/main
           },
           {
             "name": "peeringName",
             "in": "path",
             "description": "The name of the peering.",
             "required": true,
+<<<<<<< HEAD
+            "type": "string"
+=======
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
           }
@@ -1945,6 +3089,7 @@
             "required": true,
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           },
           {
             "name": "prefix",
@@ -1980,19 +3125,38 @@
             "description": "The optional page continuation token that is used in the event of paginated result.",
             "required": false,
             "type": "string"
+<<<<<<< HEAD
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "Azure operation completed successfully.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/PeeringReceivedRouteListResult"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -2006,6 +3170,647 @@
         }
       }
     },
+<<<<<<< HEAD
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests/{connectionMonitorTestName}": {
+      "get": {
+        "tags": [
+          "PeeringServiceConnectionMonitors"
+        ],
+        "description": "Gets an existing connection monitor test with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "ConnectionMonitorTests_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorTestName",
+            "in": "path",
+            "description": "The name of the connection monitor test",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Connection Monitor Test": {
+            "$ref": "./examples/GetConnectionMonitorTest.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PeeringServiceConnectionMonitors"
+        ],
+        "description": "Creates or updates a connection monitor test with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "ConnectionMonitorTests_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
+          },
+          {
+            "name": "connectionMonitorTestName",
+            "in": "path",
+            "description": "The name of the connection monitor test",
+            "required": true,
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
+          },
+          {
+            "name": "connectionMonitorTest",
+            "in": "body",
+            "description": "The properties needed to create a connection monitor test",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTest"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTest"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Connection Monitor Test": {
+            "$ref": "./examples/CreateOrUpdateConnectionMonitorTest.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PeeringServiceConnectionMonitors"
+        ],
+        "description": "Deletes an existing connection monitor test with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "ConnectionMonitorTests_Delete",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorTestName",
+            "in": "path",
+            "description": "The name of the connection monitor test",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Connection Monitor Test": {
+            "$ref": "./examples/DeleteConnectionMonitorTest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests": {
+      "get": {
+        "tags": [
+          "PeeringServiceConnectionMonitors"
+        ],
+        "description": "Lists all connection monitor tests under the given subscription, resource group and peering service.",
+        "operationId": "ConnectionMonitorTests_ListByPeeringService",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorTestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Connection Monitor Tests associated with the peering service": {
+            "$ref": "./examples/ListConnectionMonitorTestsByPeeringService.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceCountries": {
+      "get": {
+        "tags": [
+          "PeeringServiceCountries"
+        ],
+        "description": "Lists all of the available countries for peering service.",
+        "operationId": "PeeringServiceCountries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringServiceCountryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List peering service countries": {
+            "$ref": "./examples/ListPeeringServiceCountriesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceLocations": {
+      "get": {
+        "tags": [
+          "PeeringServiceLocations"
+        ],
+        "description": "Lists all of the available locations for peering service.",
+        "operationId": "PeeringServiceLocations_List",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "description": "The country of interest, in which the locations are to be present.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringServiceLocationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List peering service locations": {
+            "$ref": "./examples/ListPeeringServiceLocationsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/prefixes/{prefixName}": {
+      "get": {
+        "tags": [
+          "PeeringServicePrefixes"
+        ],
+        "description": "Gets an existing prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prefixName",
+            "in": "path",
+            "description": "The name of the prefix.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The properties to be expanded.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringServicePrefix"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a prefix associated with the peering service": {
+            "$ref": "./examples/GetPeeringServicePrefix.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PeeringServicePrefixes"
+        ],
+        "description": "Creates a new prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
+          },
+          {
+            "name": "prefixName",
+            "in": "path",
+            "description": "The name of the prefix.",
+            "required": true,
+            "type": "string",
+            "pattern": "[A-Za-z0-9_.-]{1,63}"
+          },
+          {
+            "name": "peeringServicePrefix",
+            "in": "body",
+            "description": "The properties needed to create a prefix.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PeeringServicePrefix"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringServicePrefix"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PeeringServicePrefix"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a prefix for the peering service": {
+            "$ref": "./examples/CreatePeeringServicePrefix.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PeeringServicePrefixes"
+        ],
+        "description": "Deletes an existing prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_Delete",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "prefixName",
+            "in": "path",
+            "description": "The name of the prefix.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a prefix associated with the peering service": {
+            "$ref": "./examples/DeletePeeringServicePrefix.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/prefixes": {
+      "get": {
+        "tags": [
+          "PeeringServicePrefixes"
+        ],
+        "description": "Lists all prefixes under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_ListByPeeringService",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The properties to be expanded.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringServicePrefixListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all the prefixes associated with the peering service": {
+            "$ref": "./examples/ListPrefixesByPeeringService.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceProviders": {
+      "get": {
+        "tags": [
+          "PeeringServiceProviders"
+        ],
+        "description": "Lists all of the available peering service locations for the specified kind of peering.",
+        "operationId": "PeeringServiceProviders_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringServiceProviderListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List peering service providers": {
+            "$ref": "./examples/ListPeeringServiceProviders.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}": {
+      "get": {
+        "tags": [
+          "PeeringServices"
+        ],
+        "description": "Gets an existing peering service with the specified name under the given subscription and resource group.",
+        "operationId": "PeeringServices_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredAsns": {
       "get": {
         "operationId": "RegisteredAsns_ListByPeering",
@@ -2030,10 +3835,22 @@
             "required": true,
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PeeringRegisteredAsnListResult"
@@ -2043,10 +3860,36 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "Get a peering service": {
+            "$ref": "./examples/GetPeeringService.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PeeringServices"
+        ],
+        "description": "Creates a new peering service or updates an existing peering with the specified name under the given subscription and resource group.",
+        "operationId": "PeeringServices_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+=======
           "List all the registered ASNs associated with the peering": {
             "$ref": "./examples/ListRegisteredAsnsByPeering.json"
           }
@@ -2077,21 +3920,55 @@
             "name": "peeringName",
             "in": "path",
             "description": "The name of the peering.",
+>>>>>>> upstream/main
             "required": true,
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
           },
           {
+<<<<<<< HEAD
+            "name": "peeringService",
+            "in": "body",
+            "description": "The properties needed to create or update a peering service.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PeeringService"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
             "name": "registeredAsnName",
             "in": "path",
             "description": "The name of the registered ASN.",
             "required": true,
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringService"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PeeringService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PeeringRegisteredAsn"
@@ -2101,10 +3978,15 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "Create a  peering service": {
+            "$ref": "./examples/CreatePeeringService.json"
+=======
           "Get a registered ASN associated with the peering": {
             "$ref": "./examples/GetRegisteredAsn.json"
           }
@@ -2175,10 +4057,38 @@
         "x-ms-examples": {
           "Create or update a registered ASN for the peering": {
             "$ref": "./examples/CreateRegisteredAsn.json"
+>>>>>>> upstream/main
           }
         }
       },
       "delete": {
+<<<<<<< HEAD
+        "tags": [
+          "PeeringServices"
+        ],
+        "description": "Deletes an existing peering service with the specified name under the given subscription and resource group.",
+        "operationId": "PeeringServices_Delete",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
         "operationId": "RegisteredAsns_Delete",
         "tags": [
           "PeeringRegisteredAsns"
@@ -2209,10 +4119,22 @@
             "required": true,
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "Resource deleted successfully."
           },
           "204": {
@@ -2222,10 +4144,53 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "Delete a peering service": {
+            "$ref": "./examples/DeletePeeringService.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PeeringServices"
+        ],
+        "description": "Updates tags for a peering service with the specified name under the given subscription and resource group.",
+        "operationId": "PeeringServices_Update",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringServiceName",
+            "in": "path",
+            "description": "The name of the peering service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "body",
+            "description": "The resource tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTags"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
           "Deletes a registered ASN associated with the peering": {
             "$ref": "./examples/DeleteRegisteredAsn.json"
           }
@@ -2376,10 +4341,22 @@
             "schema": {
               "$ref": "#/definitions/PeeringRegisteredPrefix"
             }
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "Resource 'PeeringRegisteredPrefix' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/PeeringRegisteredPrefix"
@@ -2395,10 +4372,39 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "Update peering service tags": {
+            "$ref": "./examples/UpdatePeeringServiceTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices": {
+      "get": {
+        "tags": [
+          "PeeringServices"
+        ],
+        "description": "Lists all of the peering services under the given subscription and resource group.",
+        "operationId": "PeeringServices_ListByResourceGroup",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
           "Create or update a registered prefix for the peering": {
             "$ref": "./examples/CreateRegisteredPrefix.json"
           }
@@ -2435,10 +4441,22 @@
             "required": true,
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "Resource deleted successfully."
           },
           "204": {
@@ -2448,10 +4466,74 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "List peering services in a resource group": {
+            "$ref": "./examples/ListPeeringServicesByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServices": {
+      "get": {
+        "tags": [
+          "PeeringServices"
+        ],
+        "description": "Lists all of the peerings under the given subscription.",
+        "operationId": "PeeringServices_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PeeringServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List peering services in a subscription": {
+            "$ref": "./examples/ListPeeringServicesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/initializeConnectionMonitor": {
+      "post": {
+        "tags": [
+          "PeeringServices"
+        ],
+        "description": "Initialize Peering Service for Connection Monitor functionality",
+        "operationId": "PeeringServices_InitializeConnectionMonitor",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
           "Deletes a registered prefix associated with the peering": {
             "$ref": "./examples/DeleteRegisteredPrefix.json"
           }
@@ -2490,10 +4572,19 @@
             "required": true,
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PeeringRegisteredPrefix"
@@ -2503,18 +4594,38 @@
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
         "x-ms-examples": {
+<<<<<<< HEAD
+          "Initialize Peering Service for Connection Monitor functionality": {
+            "$ref": "./examples/InitializeConnectionMonitor.json"
+=======
           "Validate a registered prefix associated with the peering": {
             "$ref": "./examples/ValidateRegisteredPrefix.json"
+>>>>>>> upstream/main
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/rpUnbilledPrefixes": {
       "get": {
+<<<<<<< HEAD
+        "tags": [
+          "RpUnbilledPrefixes"
+        ],
+        "description": "Lists all of the RP unbilled prefixes for the specified peering",
+        "operationId": "RpUnbilledPrefixes_List",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The Azure resource group name.",
+            "required": true,
+            "type": "string"
+=======
         "operationId": "RpUnbilledPrefixes_List",
         "tags": [
           "Peerings"
@@ -2529,14 +4640,21 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+>>>>>>> upstream/main
           },
           {
             "name": "peeringName",
             "in": "path",
+<<<<<<< HEAD
+            "description": "The peering name.",
+            "required": true,
+            "type": "string"
+=======
             "description": "The name of the peering.",
             "required": true,
             "type": "string",
             "pattern": "[A-Za-z0-9_.-]{1,63}"
+>>>>>>> upstream/main
           },
           {
             "name": "consolidate",
@@ -2544,19 +4662,38 @@
             "description": "Flag to enable consolidation prefixes",
             "required": false,
             "type": "boolean"
+<<<<<<< HEAD
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+=======
+>>>>>>> upstream/main
           }
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
+            "description": "OK",
+=======
             "description": "Azure operation completed successfully.",
+>>>>>>> upstream/main
             "schema": {
               "$ref": "#/definitions/RpUnbilledPrefixListResult"
             }
           },
           "default": {
+<<<<<<< HEAD
+            "description": "Error response describing why the operation has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+=======
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+>>>>>>> upstream/main
             }
           }
         },
@@ -2572,6 +4709,23 @@
     }
   },
   "definitions": {
+<<<<<<< HEAD
+    "CdnPeeringPrefixListResult": {
+      "description": "The paginated list of CDN peering prefixes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of CDN peering prefixes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CdnPeeringPrefix"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of CDN peering prefixes.",
+          "type": "string"
+=======
     "BgpSession": {
       "type": "object",
       "description": "The properties that define a BGP session.",
@@ -2623,18 +4777,60 @@
         "md5AuthenticationKey": {
           "type": "string",
           "description": "The MD5 authentication key of the session."
+>>>>>>> upstream/main
         }
       }
     },
     "CdnPeeringPrefix": {
+<<<<<<< HEAD
+      "description": "The CDN peering prefix",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+=======
       "type": "object",
       "description": "The CDN peering prefix",
+>>>>>>> upstream/main
       "properties": {
         "properties": {
           "$ref": "#/definitions/CdnPeeringPrefixProperties",
           "description": "The properties that define a cdn peering prefix.",
           "x-ms-client-flatten": true
         }
+<<<<<<< HEAD
+      }
+    },
+    "CdnPeeringPrefixProperties": {
+      "description": "The properties that define a CDN peering prefix",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "The prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureRegion": {
+          "description": "The Azure region.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureService": {
+          "description": "The Azure service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isPrimaryRegion": {
+          "description": "The flag that indicates whether or not this is the primary region.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "bgpCommunity": {
+          "description": "The BGP Community",
+          "type": "string",
+=======
       },
       "allOf": [
         {
@@ -2690,11 +4886,256 @@
         "bgpCommunity": {
           "type": "string",
           "description": "The BGP Community",
+>>>>>>> upstream/main
           "readOnly": true
         }
       }
     },
     "CheckServiceProviderAvailabilityInput": {
+<<<<<<< HEAD
+      "description": "Class for CheckServiceProviderAvailabilityInput",
+      "type": "object",
+      "properties": {
+        "peeringServiceLocation": {
+          "description": "Gets or sets the peering service location.",
+          "type": "string"
+        },
+        "peeringServiceProvider": {
+          "description": "Gets or sets the peering service provider.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringListResult": {
+      "description": "The paginated list of peerings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peerings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Peering"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peerings.",
+          "type": "string"
+        }
+      }
+    },
+    "Peering": {
+      "description": "Peering is a logical representation of a set of connections to the Microsoft Cloud Edge at a location.",
+      "required": [
+        "sku",
+        "kind",
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/PeeringSku",
+          "description": "The SKU that defines the tier and kind of the peering."
+        },
+        "kind": {
+          "description": "The kind of the peering.",
+          "enum": [
+            "Direct",
+            "Exchange"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PeeringProperties",
+          "description": "The properties that define a peering.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "The resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PeeringSku": {
+      "description": "The SKU that defines the tier and kind of the peering.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the peering SKU.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier of the peering SKU.",
+          "enum": [
+            "Basic",
+            "Premium"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "tier",
+            "modelAsString": true
+          }
+        },
+        "family": {
+          "description": "The family of the peering SKU.",
+          "enum": [
+            "Direct",
+            "Exchange"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "family",
+            "modelAsString": true
+          }
+        },
+        "size": {
+          "description": "The size of the peering SKU.",
+          "enum": [
+            "Free",
+            "Metered",
+            "Unlimited"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "size",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PeeringProperties": {
+      "description": "The properties that define connectivity to the Microsoft Cloud Edge.",
+      "type": "object",
+      "properties": {
+        "direct": {
+          "$ref": "#/definitions/PeeringPropertiesDirect",
+          "description": "The properties that define a direct peering."
+        },
+        "exchange": {
+          "$ref": "#/definitions/PeeringPropertiesExchange",
+          "description": "The properties that define an exchange peering."
+        },
+        "connectivityProbes": {
+          "description": "The connectivity probes associated with the peering.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectivityProbe"
+          },
+          "x-ms-identifiers": []
+        },
+        "peeringLocation": {
+          "description": "The location of the peering.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PeeringPropertiesDirect": {
+      "description": "The properties that define a direct peering.",
+      "type": "object",
+      "properties": {
+        "connections": {
+          "description": "The set of connections that constitute a direct peering.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirectConnection"
+          },
+          "x-ms-identifiers": []
+        },
+        "useForPeeringService": {
+          "description": "The flag that indicates whether or not the peering is used for peering service.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "peerAsn": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference of the peer ASN."
+        },
+        "directPeeringType": {
+          "description": "The type of direct peering.",
+          "enum": [
+            "Edge",
+            "Transit",
+            "Cdn",
+            "Internal",
+            "Ix",
+            "IxRs",
+            "Voice",
+            "EdgeZoneForOperators",
+            "PeerProp"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "directPeeringType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PeeringPropertiesExchange": {
+      "description": "The properties that define an exchange peering.",
+      "type": "object",
+      "properties": {
+        "connections": {
+          "description": "The set of connections that constitute an exchange peering.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExchangeConnection"
+          },
+          "x-ms-identifiers": []
+        },
+        "peerAsn": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference of the peer ASN."
+        }
+      }
+    },
+    "ConnectivityProbe": {
+      "description": "Represents a connectivity probe, a configuration peers can add to direct and exchange peerings to create ping tests. These ping\r\ntests will allow us to generate availability, jitter, and latency data for traffic (using ICMP or TCP) from Azure to an endpoint\r\nIP address given by the customer. This data will be emitted such that the peer can view these metrics in the Azure portal in the\r\nConnectivity probe blade of their peering.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint IP address where traffic will be sent to from Azure for the connectivity probe.",
+          "type": "string",
+=======
       "type": "object",
       "description": "Class for CheckServiceProviderAvailabilityInput",
       "properties": {
@@ -2912,20 +5353,48 @@
         "endpoint": {
           "type": "string",
           "description": "The endpoint IP address where traffic will be sent to from Azure for the connectivity probe.",
+>>>>>>> upstream/main
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "azureRegion": {
+<<<<<<< HEAD
+          "description": "The Azure region where traffic will originate from for the connectivity probe.",
+          "type": "string",
+=======
           "type": "string",
           "description": "The Azure region where traffic will originate from for the connectivity probe.",
+>>>>>>> upstream/main
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "protocol": {
+<<<<<<< HEAD
+          "description": "The protocol of the traffic that will be sent for the connectivity probe.",
+          "enum": [
+            "None",
+            "ICMP",
+            "TCP"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "protocol",
+            "modelAsString": true
+          }
+        },
+        "prefixesToAccesslist": {
+          "description": "Set to contain the prefixes that agents in Azure will send traffic from. For peers to allow into their\r\nnetwork the connectivity probe traffic can reach their endpoint for the connectivity probe.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+=======
           "$ref": "#/definitions/Protocol",
           "description": "The protocol of the traffic that will be sent for the connectivity probe."
         },
@@ -2954,10 +5423,74 @@
         "phone": {
           "type": "string",
           "description": "The phone number of the contact."
+>>>>>>> upstream/main
         }
       }
     },
     "DirectConnection": {
+<<<<<<< HEAD
+      "description": "The properties that define a direct connection.",
+      "type": "object",
+      "properties": {
+        "bandwidthInMbps": {
+          "format": "int32",
+          "description": "The bandwidth of the connection.",
+          "type": "integer"
+        },
+        "provisionedBandwidthInMbps": {
+          "format": "int32",
+          "description": "The bandwidth that is actually provisioned.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sessionAddressProvider": {
+          "description": "The field indicating if Microsoft provides session ip addresses.",
+          "enum": [
+            "Microsoft",
+            "Peer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "sessionAddressProvider",
+            "modelAsString": true
+          }
+        },
+        "useForPeeringService": {
+          "description": "The flag that indicates whether or not the connection is used for peering service.",
+          "type": "boolean"
+        },
+        "microsoftTrackingId": {
+          "description": "The ID used within Microsoft's peering provisioning system to track the connection",
+          "type": "string",
+          "readOnly": true
+        },
+        "peeringDBFacilityId": {
+          "format": "int32",
+          "description": "The PeeringDB.com ID of the facility at which the connection has to be set up.",
+          "type": "integer"
+        },
+        "connectionState": {
+          "description": "The state of the connection.",
+          "enum": [
+            "None",
+            "PendingApproval",
+            "Approved",
+            "ProvisioningStarted",
+            "ProvisioningFailed",
+            "ProvisioningCompleted",
+            "Validating",
+            "Active",
+            "TypeChangeRequested",
+            "TypeChangeInProgress",
+            "ExternalBlocker"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "connectionState",
+            "modelAsString": true
+          }
+=======
       "type": "object",
       "description": "The properties that define a direct connection.",
       "properties": {
@@ -2994,22 +5527,74 @@
           "$ref": "#/definitions/ConnectionState",
           "description": "The state of the connection.",
           "readOnly": true
+>>>>>>> upstream/main
         },
         "bgpSession": {
           "$ref": "#/definitions/BgpSession",
           "description": "The BGP session associated with the connection."
         },
         "connectionIdentifier": {
+<<<<<<< HEAD
+          "description": "The unique identifier (GUID) for the connection.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "The error message related to the connection state, if any.",
+          "type": "string",
+=======
           "type": "string",
           "description": "The unique identifier (GUID) for the connection."
         },
         "errorMessage": {
           "type": "string",
           "description": "The error message related to the connection state, if any.",
+>>>>>>> upstream/main
           "readOnly": true
         }
       }
     },
+<<<<<<< HEAD
+    "SubResource": {
+      "description": "The sub resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The identifier of the referenced resource.",
+          "type": "string"
+        }
+      }
+    },
+    "ExchangeConnection": {
+      "description": "The properties that define an exchange connection.",
+      "type": "object",
+      "properties": {
+        "peeringDBFacilityId": {
+          "format": "int32",
+          "description": "The PeeringDB.com ID of the facility at which the connection has to be set up.",
+          "type": "integer"
+        },
+        "connectionState": {
+          "description": "The state of the connection.",
+          "enum": [
+            "None",
+            "PendingApproval",
+            "Approved",
+            "ProvisioningStarted",
+            "ProvisioningFailed",
+            "ProvisioningCompleted",
+            "Validating",
+            "Active",
+            "TypeChangeRequested",
+            "TypeChangeInProgress",
+            "ExternalBlocker"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "connectionState",
+            "modelAsString": true
+          }
+=======
     "DirectPeeringFacility": {
       "type": "object",
       "description": "The properties that define a direct peering facility.",
@@ -3103,22 +5688,119 @@
           "$ref": "#/definitions/ConnectionState",
           "description": "The state of the connection.",
           "readOnly": true
+>>>>>>> upstream/main
         },
         "bgpSession": {
           "$ref": "#/definitions/BgpSession",
           "description": "The BGP session associated with the connection."
         },
         "connectionIdentifier": {
+<<<<<<< HEAD
+          "description": "The unique identifier (GUID) for the connection.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "The error message related to the connection state, if any.",
+          "type": "string",
+=======
           "type": "string",
           "description": "The unique identifier (GUID) for the connection."
         },
         "errorMessage": {
           "type": "string",
           "description": "The error message related to the connection state, if any.",
+>>>>>>> upstream/main
           "readOnly": true
         }
       }
     },
+<<<<<<< HEAD
+    "BgpSession": {
+      "description": "The properties that define a BGP session.",
+      "type": "object",
+      "properties": {
+        "sessionPrefixV4": {
+          "description": "The IPv4 prefix that contains both ends' IPv4 addresses.",
+          "type": "string"
+        },
+        "sessionPrefixV6": {
+          "description": "The IPv6 prefix that contains both ends' IPv6 addresses.",
+          "type": "string"
+        },
+        "microsoftSessionIPv4Address": {
+          "description": "The IPv4 session address on Microsoft's end.",
+          "type": "string"
+        },
+        "microsoftSessionIPv6Address": {
+          "description": "The IPv6 session address on Microsoft's end.",
+          "type": "string"
+        },
+        "peerSessionIPv4Address": {
+          "description": "The IPv4 session address on peer's end.",
+          "type": "string"
+        },
+        "peerSessionIPv6Address": {
+          "description": "The IPv6 session address on peer's end.",
+          "type": "string"
+        },
+        "sessionStateV4": {
+          "description": "The state of the IPv4 session.",
+          "enum": [
+            "None",
+            "Idle",
+            "Connect",
+            "Active",
+            "OpenSent",
+            "OpenConfirm",
+            "OpenReceived",
+            "Established",
+            "PendingAdd",
+            "PendingUpdate",
+            "PendingRemove"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "sessionStateV4",
+            "modelAsString": true
+          }
+        },
+        "sessionStateV6": {
+          "description": "The state of the IPv6 session.",
+          "enum": [
+            "None",
+            "Idle",
+            "Connect",
+            "Active",
+            "OpenSent",
+            "OpenConfirm",
+            "OpenReceived",
+            "Established",
+            "PendingAdd",
+            "PendingUpdate",
+            "PendingRemove"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "sessionStateV6",
+            "modelAsString": true
+          }
+        },
+        "maxPrefixesAdvertisedV4": {
+          "format": "int32",
+          "description": "The maximum number of prefixes advertised over the IPv4 session.",
+          "type": "integer"
+        },
+        "maxPrefixesAdvertisedV6": {
+          "format": "int32",
+          "description": "The maximum number of prefixes advertised over the IPv6 session.",
+          "type": "integer"
+        },
+        "md5AuthenticationKey": {
+          "description": "The MD5 authentication key of the session.",
+          "type": "string"
+=======
     "ExchangePeeringFacility": {
       "type": "object",
       "description": "The properties that define an exchange peering facility.",
@@ -3251,10 +5933,50 @@
             "type": "string"
           },
           "readOnly": true
+>>>>>>> upstream/main
         }
       }
     },
     "LookingGlassOutput": {
+<<<<<<< HEAD
+      "description": "Looking glass output model",
+      "type": "object",
+      "properties": {
+        "command": {
+          "description": "Invoked command",
+          "enum": [
+            "Traceroute",
+            "Ping",
+            "BgpRoute"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "command",
+            "modelAsString": true
+          }
+        },
+        "output": {
+          "description": "Output of the command",
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "The paginated list of peering API operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering API operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering API operations.",
+          "type": "string"
+=======
       "type": "object",
       "description": "Looking glass output model",
       "properties": {
@@ -3329,16 +6051,26 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+>>>>>>> upstream/main
         }
       }
     },
     "Operation": {
+<<<<<<< HEAD
+      "description": "The peering API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation.",
+          "type": "string",
+=======
       "type": "object",
       "description": "The peering API operation.",
       "properties": {
         "name": {
           "type": "string",
           "description": "The name of the operation.",
+>>>>>>> upstream/main
           "readOnly": true
         },
         "display": {
@@ -3347,8 +6079,13 @@
           "readOnly": true
         },
         "isDataAction": {
+<<<<<<< HEAD
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "type": "boolean",
+=======
           "type": "boolean",
           "description": "The flag that indicates whether the operation applies to data plane.",
+>>>>>>> upstream/main
           "readOnly": true
         },
         "properties": {
@@ -3360,6 +6097,29 @@
       }
     },
     "OperationDisplayInfo": {
+<<<<<<< HEAD
+      "description": "The information related to the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The name of the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string",
+=======
       "type": "object",
       "description": "The information related to the operation.",
       "properties": {
@@ -3399,13 +6159,19 @@
         "nextLink": {
           "type": "string",
           "description": "The link to fetch the next page of peering API operations.",
+>>>>>>> upstream/main
           "readOnly": true
         }
       }
     },
     "OperationProperties": {
+<<<<<<< HEAD
+      "description": "The properties of the operation.",
+      "type": "object",
+=======
       "type": "object",
       "description": "The properties of the operation.",
+>>>>>>> upstream/main
       "properties": {
         "serviceSpecification": {
           "$ref": "#/definitions/ServiceSpecification",
@@ -3414,15 +6180,122 @@
         }
       }
     },
+<<<<<<< HEAD
+    "ServiceSpecification": {
+      "description": "Service specification payload.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit that makes sense for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "description": "Aggregation type will be set to one of the values: Average, Minimum, Maximum, Total, Count.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedTimeGrainTypes": {
+          "description": "Supported time grain types for the metric.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "Dimensions of the metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the dimension.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PeerAsn": {
+      "description": "The essential information related to the peer's ASN.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+=======
     "PeerAsn": {
       "type": "object",
       "description": "The essential information related to the peer's ASN.",
+>>>>>>> upstream/main
       "properties": {
         "properties": {
           "$ref": "#/definitions/PeerAsnProperties",
           "description": "The properties that define a peer's ASN.",
           "x-ms-client-flatten": true
         }
+<<<<<<< HEAD
+      }
+    },
+    "PeerAsnProperties": {
+      "description": "The properties that define a peer's ASN.",
+      "type": "object",
+      "properties": {
+        "peerAsn": {
+          "format": "int32",
+          "description": "The Autonomous System Number (ASN) of the peer.",
+          "type": "integer"
+        },
+        "peerContactDetail": {
+          "description": "The contact details of the peer.",
+          "type": "array",
+=======
       },
       "allOf": [
         {
@@ -3463,12 +6336,36 @@
         "peerContactDetail": {
           "type": "array",
           "description": "The contact details of the peer.",
+>>>>>>> upstream/main
           "items": {
             "$ref": "#/definitions/ContactDetail"
           },
           "x-ms-identifiers": []
         },
         "peerName": {
+<<<<<<< HEAD
+          "description": "The name of the peer.",
+          "type": "string"
+        },
+        "validationState": {
+          "description": "The validation state of the ASN associated with the peer.",
+          "enum": [
+            "None",
+            "Pending",
+            "Approved",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "validationState",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "description": "The error message for the validation state",
+          "type": "string",
+=======
           "type": "string",
           "description": "The name of the peer."
         },
@@ -3480,10 +6377,99 @@
         "errorMessage": {
           "type": "string",
           "description": "The error message for the validation state",
+>>>>>>> upstream/main
           "readOnly": true
         }
       }
     },
+<<<<<<< HEAD
+    "ContactDetail": {
+      "description": "The contact detail class.",
+      "type": "object",
+      "properties": {
+        "role": {
+          "description": "The role of the contact.",
+          "enum": [
+            "Noc",
+            "Policy",
+            "Technical",
+            "Service",
+            "Escalation",
+            "Other"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "role",
+            "modelAsString": true
+          }
+        },
+        "email": {
+          "description": "The e-mail address of the contact.",
+          "type": "string"
+        },
+        "phone": {
+          "description": "The phone number of the contact.",
+          "type": "string"
+        }
+      }
+    },
+    "PeerAsnListResult": {
+      "description": "The paginated list of peer ASNs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peer ASNs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeerAsn"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peer ASNs.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringLocationListResult": {
+      "description": "The paginated list of peering locations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringLocation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering locations.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringLocation": {
+      "description": "Peering location is where connectivity could be established to the Microsoft Cloud Edge.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "The kind of peering that the peering location supports.",
+          "enum": [
+            "Direct",
+            "Exchange"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+=======
     "Peering": {
       "type": "object",
       "description": "Peering is a logical representation of a set of connections to the Microsoft Cloud Edge at a location.",
@@ -3555,12 +6541,20 @@
         "kind": {
           "$ref": "#/definitions/Kind",
           "description": "The kind of peering that the peering location supports."
+>>>>>>> upstream/main
         },
         "properties": {
           "$ref": "#/definitions/PeeringLocationProperties",
           "description": "The properties that define a peering location.",
           "x-ms-client-flatten": true
         }
+<<<<<<< HEAD
+      }
+    },
+    "PeeringLocationProperties": {
+      "description": "The properties that define a peering location.",
+      "type": "object",
+=======
       },
       "allOf": [
         {
@@ -3592,6 +6586,7 @@
     "PeeringLocationProperties": {
       "type": "object",
       "description": "The properties that define a peering location.",
+>>>>>>> upstream/main
       "properties": {
         "direct": {
           "$ref": "#/definitions/PeeringLocationPropertiesDirect",
@@ -3602,6 +6597,18 @@
           "description": "The properties that define an exchange peering location."
         },
         "peeringLocation": {
+<<<<<<< HEAD
+          "description": "The name of the peering location.",
+          "type": "string"
+        },
+        "country": {
+          "description": "The country in which the peering location exists.",
+          "type": "string"
+        },
+        "azureRegion": {
+          "description": "The Azure region associated with the peering location.",
+          "type": "string"
+=======
           "type": "string",
           "description": "The name of the peering location."
         },
@@ -3612,24 +6619,39 @@
         "azureRegion": {
           "type": "string",
           "description": "The Azure region associated with the peering location."
+>>>>>>> upstream/main
         }
       }
     },
     "PeeringLocationPropertiesDirect": {
+<<<<<<< HEAD
+      "description": "The properties that define a direct peering location.",
+      "type": "object",
+      "properties": {
+        "peeringFacilities": {
+          "description": "The list of direct peering facilities at the peering location.",
+          "type": "array",
+=======
       "type": "object",
       "description": "The properties that define a direct peering location.",
       "properties": {
         "peeringFacilities": {
           "type": "array",
           "description": "The list of direct peering facilities at the peering location.",
+>>>>>>> upstream/main
           "items": {
             "$ref": "#/definitions/DirectPeeringFacility"
           },
           "x-ms-identifiers": []
         },
         "bandwidthOffers": {
+<<<<<<< HEAD
+          "description": "The list of bandwidth offers available at the peering location.",
+          "type": "array",
+=======
           "type": "array",
           "description": "The list of bandwidth offers available at the peering location.",
+>>>>>>> upstream/main
           "items": {
             "$ref": "#/definitions/PeeringBandwidthOffer"
           },
@@ -3638,12 +6660,21 @@
       }
     },
     "PeeringLocationPropertiesExchange": {
+<<<<<<< HEAD
+      "description": "The properties that define an exchange peering location.",
+      "type": "object",
+      "properties": {
+        "peeringFacilities": {
+          "description": "The list of exchange peering facilities at the peering location.",
+          "type": "array",
+=======
       "type": "object",
       "description": "The properties that define an exchange peering location.",
       "properties": {
         "peeringFacilities": {
           "type": "array",
           "description": "The list of exchange peering facilities at the peering location.",
+>>>>>>> upstream/main
           "items": {
             "$ref": "#/definitions/ExchangePeeringFacility"
           },
@@ -3651,6 +6682,109 @@
         }
       }
     },
+<<<<<<< HEAD
+    "DirectPeeringFacility": {
+      "description": "The properties that define a direct peering facility.",
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "The address of the direct peering facility.",
+          "type": "string"
+        },
+        "directPeeringType": {
+          "description": "The type of the direct peering.",
+          "enum": [
+            "Edge",
+            "Transit",
+            "Cdn",
+            "Internal",
+            "Ix",
+            "IxRs",
+            "Voice",
+            "EdgeZoneForOperators",
+            "PeerProp"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "directPeeringType",
+            "modelAsString": true
+          }
+        },
+        "peeringDBFacilityId": {
+          "format": "int32",
+          "description": "The PeeringDB.com ID of the facility.",
+          "type": "integer"
+        },
+        "peeringDBFacilityLink": {
+          "description": "The PeeringDB.com URL of the facility.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringBandwidthOffer": {
+      "description": "The properties that define a peering bandwidth offer.",
+      "type": "object",
+      "properties": {
+        "offerName": {
+          "description": "The name of the bandwidth offer.",
+          "type": "string"
+        },
+        "valueInMbps": {
+          "format": "int32",
+          "description": "The value of the bandwidth offer in Mbps.",
+          "type": "integer"
+        }
+      }
+    },
+    "ExchangePeeringFacility": {
+      "description": "The properties that define an exchange peering facility.",
+      "type": "object",
+      "properties": {
+        "exchangeName": {
+          "description": "The name of the exchange peering facility.",
+          "type": "string"
+        },
+        "bandwidthInMbps": {
+          "format": "int32",
+          "description": "The bandwidth of the connection between Microsoft and the exchange peering facility.",
+          "type": "integer"
+        },
+        "microsoftIPv4Address": {
+          "description": "The IPv4 address of Microsoft at the exchange peering facility.",
+          "type": "string"
+        },
+        "microsoftIPv6Address": {
+          "description": "The IPv6 address of Microsoft at the exchange peering facility.",
+          "type": "string"
+        },
+        "facilityIPv4Prefix": {
+          "description": "The IPv4 prefixes associated with the exchange peering facility.",
+          "type": "string"
+        },
+        "facilityIPv6Prefix": {
+          "description": "The IPv6 prefixes associated with the exchange peering facility.",
+          "type": "string"
+        },
+        "peeringDBFacilityId": {
+          "format": "int32",
+          "description": "The PeeringDB.com ID of the facility.",
+          "type": "integer"
+        },
+        "peeringDBFacilityLink": {
+          "description": "The PeeringDB.com URL of the facility.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringRegisteredAsn": {
+      "description": "The customer's ASN that is registered by the peering service provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+=======
     "PeeringProperties": {
       "type": "object",
       "description": "The properties that define connectivity to the Microsoft Cloud Edge.",
@@ -3792,12 +6926,64 @@
     "PeeringRegisteredAsn": {
       "type": "object",
       "description": "The customer's ASN that is registered by the peering service provider.",
+>>>>>>> upstream/main
       "properties": {
         "properties": {
           "$ref": "#/definitions/PeeringRegisteredAsnProperties",
           "description": "The properties that define a registered ASN.",
           "x-ms-client-flatten": true
         }
+<<<<<<< HEAD
+      }
+    },
+    "PeeringRegisteredAsnProperties": {
+      "description": "The properties that define a registered ASN.",
+      "type": "object",
+      "properties": {
+        "asn": {
+          "format": "int32",
+          "description": "The customer's ASN from which traffic originates.",
+          "type": "integer"
+        },
+        "peeringServicePrefixKey": {
+          "description": "The peering service prefix key that is to be shared with the customer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PeeringRegisteredAsnListResult": {
+      "description": "The paginated list of peering registered ASNs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering registered ASNs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringRegisteredAsn"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering registered ASNs.",
+          "type": "string"
+=======
       },
       "allOf": [
         {
@@ -3844,18 +7030,173 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
+>>>>>>> upstream/main
         }
       }
     },
     "PeeringRegisteredPrefix": {
+<<<<<<< HEAD
+      "description": "The customer's prefix that is registered by the peering service provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+=======
       "type": "object",
       "description": "The customer's prefix that is registered by the peering service provider.",
+>>>>>>> upstream/main
       "properties": {
         "properties": {
           "$ref": "#/definitions/PeeringRegisteredPrefixProperties",
           "description": "The properties that define a registered prefix.",
           "x-ms-client-flatten": true
         }
+<<<<<<< HEAD
+      }
+    },
+    "PeeringRegisteredPrefixProperties": {
+      "description": "The properties that define a registered prefix.",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "The customer's prefix from which traffic originates.",
+          "type": "string"
+        },
+        "prefixValidationState": {
+          "description": "The prefix validation state.",
+          "enum": [
+            "None",
+            "Invalid",
+            "Verified",
+            "Failed",
+            "Pending",
+            "Warning",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "prefixValidationState",
+            "modelAsString": true
+          }
+        },
+        "peeringServicePrefixKey": {
+          "description": "The peering service prefix key that is to be shared with the customer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "The error message associated with the validation state, if any.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PeeringRegisteredPrefixListResult": {
+      "description": "The paginated list of peering registered prefixes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering registered prefixes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringRegisteredPrefix"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering registered prefixes.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceTags": {
+      "description": "The resource tags.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the tags, a dictionary of descriptors arm object",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PeeringReceivedRouteListResult": {
+      "description": "The paginated list of received routes for the peering.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of received routes for the peering.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringReceivedRoute"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of received routes for the peering.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringReceivedRoute": {
+      "description": "The properties that define a received route.",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "The prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nextHop": {
+          "description": "The next hop for the prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "asPath": {
+          "description": "The AS path for the prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "originAsValidationState": {
+          "description": "The origin AS change information for the prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rpkiValidationState": {
+          "description": "The RPKI validation state for the prefix and origin AS that's listed in the AS path.",
+          "type": "string",
+          "readOnly": true
+        },
+        "trustAnchor": {
+          "description": "The authority which holds the Route Origin Authorization record for the prefix, if any.",
+          "type": "string",
+          "readOnly": true
+        },
+        "receivedTimestamp": {
+          "description": "The received timestamp associated with the prefix.",
+          "type": "string",
+=======
       },
       "allOf": [
         {
@@ -3910,10 +7251,155 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
+>>>>>>> upstream/main
           "readOnly": true
         }
       }
     },
+<<<<<<< HEAD
+    "ConnectionMonitorTest": {
+      "description": "The Connection Monitor Test class.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionMonitorTestProperties",
+          "description": "The properties that define a Connection Monitor Test.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectionMonitorTestProperties": {
+      "description": "The properties that define a Connection Monitor Test.",
+      "type": "object",
+      "properties": {
+        "sourceAgent": {
+          "description": "The Connection Monitor test source agent",
+          "type": "string"
+        },
+        "destination": {
+          "description": "The Connection Monitor test destination",
+          "type": "string"
+        },
+        "destinationPort": {
+          "format": "int32",
+          "description": "The Connection Monitor test destination port",
+          "type": "integer"
+        },
+        "testFrequencyInSec": {
+          "format": "int32",
+          "description": "The Connection Monitor test frequency in seconds",
+          "type": "integer"
+        },
+        "isTestSuccessful": {
+          "description": "The flag that indicates if the Connection Monitor test is successful or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "path": {
+          "description": "The path representing the Connection Monitor test.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ConnectionMonitorTestListResult": {
+      "description": "The paginated list of Connection Monitor Tests.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of Connection Monitor Tests.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorTest"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of Connection Monitor Tests.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringServiceCountryListResult": {
+      "description": "The paginated list of peering service countries.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering service countries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringServiceCountry"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering service countries.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringServiceCountry": {
+      "description": "The peering service country.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "PeeringServiceLocationListResult": {
+      "description": "The paginated list of peering service locations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering service locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringServiceLocation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering service locations.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringServiceLocation": {
+      "description": "The peering service location.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+=======
     "PeeringService": {
       "type": "object",
       "description": "Peering Service",
@@ -3988,12 +7474,32 @@
     "PeeringServiceLocation": {
       "type": "object",
       "description": "The peering service location.",
+>>>>>>> upstream/main
       "properties": {
         "properties": {
           "$ref": "#/definitions/PeeringServiceLocationProperties",
           "description": "The properties that define a peering service location.",
           "x-ms-client-flatten": true
         }
+<<<<<<< HEAD
+      }
+    },
+    "PeeringServiceLocationProperties": {
+      "description": "The properties that define connectivity to the Peering Service Location.",
+      "type": "object",
+      "properties": {
+        "country": {
+          "description": "Country of the customer",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the customer",
+          "type": "string"
+        },
+        "azureRegion": {
+          "description": "Azure region for the location",
+          "type": "string"
+=======
       },
       "allOf": [
         {
@@ -4037,18 +7543,81 @@
         "azureRegion": {
           "type": "string",
           "description": "Azure region for the location"
+>>>>>>> upstream/main
         }
       }
     },
     "PeeringServicePrefix": {
+<<<<<<< HEAD
+      "description": "The peering service prefix class.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+=======
       "type": "object",
       "description": "The peering service prefix class.",
+>>>>>>> upstream/main
       "properties": {
         "properties": {
           "$ref": "#/definitions/PeeringServicePrefixProperties",
           "description": "Gets or sets the peering prefix properties.",
           "x-ms-client-flatten": true
         }
+<<<<<<< HEAD
+      }
+    },
+    "PeeringServicePrefixProperties": {
+      "description": "The peering service prefix properties class.",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "The prefix from which your traffic originates.",
+          "type": "string"
+        },
+        "prefixValidationState": {
+          "description": "The prefix validation state",
+          "enum": [
+            "None",
+            "Invalid",
+            "Verified",
+            "Failed",
+            "Pending",
+            "Warning",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "prefixValidationState",
+            "modelAsString": true
+          }
+        },
+        "learnedType": {
+          "description": "The prefix learned type",
+          "enum": [
+            "None",
+            "ViaServiceProvider",
+            "ViaSession"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "learnedType",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "description": "The error message for validation state",
+          "type": "string",
+          "readOnly": true
+        },
+        "events": {
+          "description": "The list of events for peering service prefix",
+          "type": "array",
+=======
       },
       "allOf": [
         {
@@ -4135,6 +7704,7 @@
         "events": {
           "type": "array",
           "description": "The list of events for peering service prefix",
+>>>>>>> upstream/main
           "items": {
             "$ref": "#/definitions/PeeringServicePrefixEvent"
           },
@@ -4142,6 +7712,176 @@
           "x-ms-identifiers": []
         },
         "peeringServicePrefixKey": {
+<<<<<<< HEAD
+          "description": "The peering service prefix key",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PeeringServicePrefixEvent": {
+      "description": "The details of the event associated with a prefix.",
+      "type": "object",
+      "properties": {
+        "eventTimestamp": {
+          "format": "date-time",
+          "description": "The timestamp of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventType": {
+          "description": "The type of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventSummary": {
+          "description": "The summary of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventLevel": {
+          "description": "The level of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventDescription": {
+          "description": "The description of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PeeringServicePrefixListResult": {
+      "description": "The paginated list of peering service prefixes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering service prefixes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringServicePrefix"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering service prefixes.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringServiceProviderListResult": {
+      "description": "The paginated list of peering service providers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering service providers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringServiceProvider"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering service providers.",
+          "type": "string"
+        }
+      }
+    },
+    "PeeringServiceProvider": {
+      "description": "PeeringService provider",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PeeringServiceProviderProperties",
+          "description": "The properties that define a peering service provider.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PeeringServiceProviderProperties": {
+      "description": "The properties that define connectivity to the Peering Service Provider.",
+      "type": "object",
+      "properties": {
+        "serviceProviderName": {
+          "description": "The name of the service provider.",
+          "type": "string"
+        },
+        "peeringLocations": {
+          "description": "The list of locations at which the service provider peers with Microsoft.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PeeringService": {
+      "description": "Peering Service",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/PeeringServiceSku",
+          "description": "The SKU that defines the type of the peering service."
+        },
+        "properties": {
+          "$ref": "#/definitions/PeeringServiceProperties",
+          "description": "The properties that define a peering service.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "description": "The location of the resource.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "The resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PeeringServiceSku": {
+      "description": "The SKU that defines the type of the peering service.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the peering service SKU.",
+          "type": "string"
+=======
           "type": "string",
           "description": "The peering service prefix key"
         },
@@ -4149,10 +7889,47 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
+>>>>>>> upstream/main
         }
       }
     },
     "PeeringServiceProperties": {
+<<<<<<< HEAD
+      "description": "The properties that define connectivity to the Peering Service.",
+      "type": "object",
+      "properties": {
+        "peeringServiceLocation": {
+          "description": "The location (state/province) of the customer.",
+          "type": "string"
+        },
+        "peeringServiceProvider": {
+          "description": "The name of the service provider.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "providerPrimaryPeeringLocation": {
+          "description": "The primary peering (Microsoft/service provider) location to be used for customer traffic.",
+          "type": "string"
+        },
+        "providerBackupPeeringLocation": {
+          "description": "The backup peering (Microsoft/service provider) location to be used for customer traffic.",
+          "type": "string"
+=======
       "type": "object",
       "description": "The properties that define connectivity to the Peering Service.",
       "properties": {
@@ -4176,6 +7953,7 @@
         "providerBackupPeeringLocation": {
           "type": "string",
           "description": "The backup peering (Microsoft/service provider) location to be used for customer traffic."
+>>>>>>> upstream/main
         },
         "logAnalyticsWorkspaceProperties": {
           "$ref": "#/definitions/LogAnalyticsWorkspaceProperties",
@@ -4183,6 +7961,27 @@
         }
       }
     },
+<<<<<<< HEAD
+    "LogAnalyticsWorkspaceProperties": {
+      "description": "The properties that define a Log Analytics Workspace.",
+      "type": "object",
+      "properties": {
+        "workspaceID": {
+          "description": "The Workspace ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "key": {
+          "description": "The Workspace Key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectedAgents": {
+          "description": "The list of connected agents.",
+          "type": "array",
+          "items": {
+            "type": "string"
+=======
     "PeeringServiceProvider": {
       "type": "object",
       "description": "PeeringService provider",
@@ -4490,12 +8289,156 @@
           "description": "Specifications of the Metrics for Azure Monitoring.",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
+>>>>>>> upstream/main
           },
           "readOnly": true,
           "x-ms-identifiers": []
         }
       }
     },
+<<<<<<< HEAD
+    "PeeringServiceListResult": {
+      "description": "The paginated list of peering services.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of peering services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringService"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of peering services.",
+          "type": "string"
+        }
+      }
+    },
+    "RpUnbilledPrefixListResult": {
+      "description": "The paginated list of RP unbilled prefixes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of RP unbilled prefixes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RpUnbilledPrefix"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of RP unbilled prefixes.",
+          "type": "string"
+        }
+      }
+    },
+    "RpUnbilledPrefix": {
+      "description": "The Routing Preference unbilled prefix",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "The prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureRegion": {
+          "description": "The Azure region.",
+          "type": "string",
+          "readOnly": true
+        },
+        "peerAsn": {
+          "format": "int32",
+          "description": "The peer ASN.",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response that indicates why an operation has failed.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error detail that describes why an operation has failed."
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "The error detail that describes why an operation has failed.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "The ARM resource class.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The ID of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+=======
     "SessionAddressProvider": {
       "type": "string",
       "description": "The field indicating if Microsoft provides session ip addresses.",
@@ -4745,4 +8688,5 @@
     }
   },
   "parameters": {}
+>>>>>>> upstream/main
 }

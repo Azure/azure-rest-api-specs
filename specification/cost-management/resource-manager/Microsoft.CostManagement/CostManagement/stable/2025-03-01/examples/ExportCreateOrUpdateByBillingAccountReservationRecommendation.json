@@ -2,6 +2,10 @@
   "parameters": {
     "api-version": "2025-03-01",
     "billingAccountId": "123456",
+<<<<<<< HEAD
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456",
+=======
+>>>>>>> upstream/main
     "exportName": "TestExport",
     "parameters": {
       "identity": {
@@ -9,11 +13,32 @@
       },
       "location": "centralus",
       "properties": {
+<<<<<<< HEAD
+        "schedule": {
+          "status": "Active",
+          "recurrence": "Daily",
+          "recurrencePeriod": {
+            "from": "2023-06-01T00:00:00Z",
+            "to": "2023-06-30T00:00:00Z"
+          }
+        },
+        "format": "Csv",
+        "deliveryInfo": {
+          "destination": {
+            "type": "AzureBlob",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+            "container": "exports",
+            "rootFolderPath": "ad-hoc"
+          }
+        },
+        "definition": {
+=======
         "format": "Csv",
         "compressionMode": "gzip",
         "dataOverwriteBehavior": "OverwritePreviousReport",
         "definition": {
           "type": "ReservationRecommendations",
+>>>>>>> upstream/main
           "dataSet": {
             "configuration": {
               "dataVersion": "2023-05-01",
@@ -33,6 +58,87 @@
               ]
             }
           },
+<<<<<<< HEAD
+          "timeframe": "MonthToDate",
+          "type": "ReservationRecommendations"
+        },
+        "partitionData": true,
+        "dataOverwriteBehavior": "OverwritePreviousReport",
+        "compressionMode": "gzip",
+        "exportDescription": "This is a test export."
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "centralus",
+        "properties": {
+          "schedule": {
+            "status": "Active",
+            "recurrence": "Daily",
+            "recurrencePeriod": {
+              "from": "2023-06-01T00:00:00Z",
+              "to": "2023-06-30T00:00:00Z"
+            }
+          },
+          "nextRunTimeEstimate": "2023-06-01T23:00:00Z",
+          "format": "Csv",
+          "deliveryInfo": {
+            "destination": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "container": "exports",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "definition": {
+            "type": "ReservationRecommendations",
+            "timeframe": "MonthToDate",
+            "dataSet": {
+              "configuration": {
+                "columns": [],
+                "dataVersion": "2023-05-01",
+                "filters": [
+                  {
+                    "name": "ReservationScope",
+                    "value": "Single"
+                  },
+                  {
+                    "name": "ResourceType",
+                    "value": "VirtualMachines"
+                  },
+                  {
+                    "name": "LookBackPeriod",
+                    "value": "Last7Days"
+                  }
+                ]
+              },
+              "granularity": null
+            }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+=======
           "timeframe": "MonthToDate"
         },
         "deliveryInfo": {
@@ -64,6 +170,7 @@
         "type": "Microsoft.CostManagement/exports",
         "eTag": "\"00000000-0000-0000-0000-000000000000\"",
         "id": "/providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
+>>>>>>> upstream/main
         "identity": {
           "type": "SystemAssigned",
           "principalId": "00000000-0000-0000-0000-000000000000",
@@ -71,11 +178,34 @@
         },
         "location": "centralus",
         "properties": {
+<<<<<<< HEAD
+          "schedule": {
+            "status": "Active",
+            "recurrence": "Daily",
+            "recurrencePeriod": {
+              "from": "2023-06-01T00:00:00Z",
+              "to": "2023-06-30T00:00:00Z"
+            }
+          },
+          "nextRunTimeEstimate": "2023-06-01T23:00:00Z",
+          "format": "Csv",
+          "deliveryInfo": {
+            "destination": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "container": "exports",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "definition": {
+            "type": "ReservationRecommendations",
+            "timeframe": "MonthToDate",
+=======
           "format": "Csv",
           "compressionMode": "gzip",
           "dataOverwriteBehavior": "OverwritePreviousReport",
           "definition": {
             "type": "ReservationRecommendations",
+>>>>>>> upstream/main
             "dataSet": {
               "configuration": {
                 "columns": [],
@@ -96,6 +226,18 @@
                 ]
               },
               "granularity": null
+<<<<<<< HEAD
+            }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
+        }
+      }
+    }
+  }
+=======
             },
             "timeframe": "MonthToDate"
           },
@@ -185,4 +327,5 @@
   },
   "operationId": "Exports_CreateOrUpdate",
   "title": "ExportCreateOrUpdateByBillingAccountReservationRecommendation"
+>>>>>>> upstream/main
 }

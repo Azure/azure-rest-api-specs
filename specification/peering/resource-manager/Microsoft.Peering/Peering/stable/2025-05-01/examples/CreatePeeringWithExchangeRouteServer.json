@@ -1,5 +1,17 @@
 {
   "parameters": {
+<<<<<<< HEAD
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "peeringName": "peeringName",
+    "api-version": "2025-05-01",
+    "peering": {
+      "sku": {
+        "name": "Premium_Direct_Free"
+      },
+      "kind": "Direct",
+      "properties": {
+=======
     "api-version": "2025-05-01",
     "peering": {
       "kind": "Direct",
@@ -12,10 +24,42 @@
             "protocol": "TCP"
           }
         ],
+>>>>>>> upstream/main
         "direct": {
           "connections": [
             {
               "bandwidthInMbps": 10000,
+<<<<<<< HEAD
+              "sessionAddressProvider": "Peer",
+              "useForPeeringService": true,
+              "peeringDBFacilityId": 99999,
+              "bgpSession": {
+                "sessionPrefixV4": "192.168.0.0/24",
+                "microsoftSessionIPv4Address": "192.168.0.123",
+                "peerSessionIPv4Address": "192.168.0.234",
+                "maxPrefixesAdvertisedV4": 1000,
+                "maxPrefixesAdvertisedV6": 100
+              },
+              "connectionIdentifier": "5F4CB5C7-6B43-4444-9338-9ABC72606C16"
+            }
+          ],
+          "peerAsn": {
+            "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/myAsn1"
+          },
+          "directPeeringType": "IxRs"
+        },
+        "connectivityProbes": [
+          {
+            "endpoint": "192.168.0.1",
+            "azureRegion": "eastus",
+            "protocol": "TCP"
+          }
+        ],
+        "peeringLocation": "peeringLocation0"
+      },
+      "location": "eastus"
+    }
+=======
               "bgpSession": {
                 "maxPrefixesAdvertisedV4": 1000,
                 "maxPrefixesAdvertisedV6": 100,
@@ -43,10 +87,21 @@
     "peeringName": "peeringName",
     "resourceGroupName": "rgName",
     "subscriptionId": "subId"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
+        "sku": {
+          "name": "Premium_Direct_Free",
+          "tier": "Premium",
+          "family": "Direct",
+          "size": "Free"
+        },
+        "kind": "Direct",
+        "properties": {
+=======
         "name": "peeringName",
         "type": "Microsoft.Peering/peerings",
         "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName",
@@ -60,10 +115,50 @@
               "protocol": "TCP"
             }
           ],
+>>>>>>> upstream/main
           "direct": {
             "connections": [
               {
                 "bandwidthInMbps": 10000,
+<<<<<<< HEAD
+                "provisionedBandwidthInMbps": 10000,
+                "sessionAddressProvider": "Peer",
+                "useForPeeringService": true,
+                "peeringDBFacilityId": 99999,
+                "connectionState": "Active",
+                "bgpSession": {
+                  "sessionPrefixV4": "192.168.0.0/24",
+                  "microsoftSessionIPv4Address": "192.168.0.123",
+                  "peerSessionIPv4Address": "192.168.0.234",
+                  "sessionStateV4": "Established",
+                  "sessionStateV6": "Established",
+                  "maxPrefixesAdvertisedV4": 1000,
+                  "maxPrefixesAdvertisedV6": 100
+                },
+                "connectionIdentifier": "5F4CB5C7-6B43-4444-9338-9ABC72606C16"
+              }
+            ],
+            "useForPeeringService": true,
+            "peerAsn": {
+              "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/myAsn1"
+            },
+            "directPeeringType": "IxRs"
+          },
+          "connectivityProbes": [
+            {
+              "endpoint": "192.168.0.1",
+              "azureRegion": "eastus",
+              "protocol": "TCP"
+            }
+          ],
+          "peeringLocation": "peeringLocation0",
+          "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "name": "peeringName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName",
+        "type": "Microsoft.Peering/peerings"
+=======
                 "bgpSession": {
                   "maxPrefixesAdvertisedV4": 1000,
                   "maxPrefixesAdvertisedV6": 100,
@@ -96,10 +191,21 @@
           "size": "Free",
           "tier": "Premium"
         }
+>>>>>>> upstream/main
       }
     },
     "201": {
       "body": {
+<<<<<<< HEAD
+        "sku": {
+          "name": "Premium_Direct_Free",
+          "tier": "Premium",
+          "family": "Direct",
+          "size": "Free"
+        },
+        "kind": "Direct",
+        "properties": {
+=======
         "name": "peeringName",
         "type": "Microsoft.Peering/peerings",
         "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName",
@@ -113,10 +219,53 @@
               "protocol": "TCP"
             }
           ],
+>>>>>>> upstream/main
           "direct": {
             "connections": [
               {
                 "bandwidthInMbps": 10000,
+<<<<<<< HEAD
+                "provisionedBandwidthInMbps": 0,
+                "sessionAddressProvider": "Peer",
+                "useForPeeringService": true,
+                "peeringDBFacilityId": 99999,
+                "connectionState": "PendingApproval",
+                "bgpSession": {
+                  "sessionPrefixV4": "192.168.0.0/24",
+                  "microsoftSessionIPv4Address": "192.168.0.123",
+                  "peerSessionIPv4Address": "192.168.0.234",
+                  "sessionStateV4": "PendingAdd",
+                  "sessionStateV6": "PendingAdd",
+                  "maxPrefixesAdvertisedV4": 1000,
+                  "maxPrefixesAdvertisedV6": 100
+                },
+                "connectionIdentifier": "5F4CB5C7-6B43-4444-9338-9ABC72606C16"
+              }
+            ],
+            "useForPeeringService": true,
+            "peerAsn": {
+              "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/myAsn1"
+            },
+            "directPeeringType": "IxRs"
+          },
+          "connectivityProbes": [
+            {
+              "endpoint": "192.168.0.1",
+              "azureRegion": "eastus",
+              "protocol": "TCP"
+            }
+          ],
+          "peeringLocation": "peeringLocation0",
+          "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "name": "peeringName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName",
+        "type": "Microsoft.Peering/peerings"
+      }
+    }
+  }
+=======
                 "bgpSession": {
                   "maxPrefixesAdvertisedV4": 1000,
                   "maxPrefixesAdvertisedV6": 100,
@@ -154,4 +303,5 @@
   },
   "operationId": "Peerings_CreateOrUpdate",
   "title": "Create a peering with exchange route server"
+>>>>>>> upstream/main
 }

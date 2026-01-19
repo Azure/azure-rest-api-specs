@@ -10,9 +10,15 @@
       "body": {
         "value": [
           {
+<<<<<<< HEAD
+            "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport1",
+            "name": "TestExport1",
+            "type": "Microsoft.CostManagement/exports",
+=======
             "name": "TestExport1",
             "type": "Microsoft.CostManagement/exports",
             "id": "/providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport1",
+>>>>>>> upstream/main
             "identity": {
               "type": "SystemAssigned",
               "principalId": "00000000-0000-0000-0000-000000000000",
@@ -21,6 +27,18 @@
             "location": "centralus",
             "properties": {
               "format": "Csv",
+<<<<<<< HEAD
+              "deliveryInfo": {
+                "destination": {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+                  "container": "exports",
+                  "rootFolderPath": "ad-hoc"
+                }
+              },
+              "definition": {
+                "type": "ActualCost",
+                "timeframe": "Custom",
+=======
               "compressionMode": "gzip",
               "dataOverwriteBehavior": "OverwritePreviousReport",
               "definition": {
@@ -31,10 +49,30 @@
                   },
                   "granularity": "Daily"
                 },
+>>>>>>> upstream/main
                 "timePeriod": {
                   "from": "2020-06-01T00:00:00Z",
                   "to": "2020-06-30T00:00:00Z"
                 },
+<<<<<<< HEAD
+                "dataSet": {
+                  "granularity": "Daily",
+                  "configuration": {
+                    "dataVersion": "2023-05-01"
+                  }
+                }
+              },
+              "partitionData": true,
+              "dataOverwriteBehavior": "OverwritePreviousReport",
+              "compressionMode": "gzip",
+              "exportDescription": "This is a test export."
+            }
+          },
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport2",
+            "name": "TestExport2",
+            "type": "Microsoft.CostManagement/exports",
+=======
                 "timeframe": "Custom"
               },
               "deliveryInfo": {
@@ -52,6 +90,7 @@
             "name": "TestExport2",
             "type": "Microsoft.CostManagement/exports",
             "id": "/providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456/providers/Microsoft.CostManagement/exports/TestExport2",
+>>>>>>> upstream/main
             "identity": {
               "type": "SystemAssigned",
               "principalId": "00000000-0000-0000-0000-000000000000",
@@ -59,6 +98,10 @@
             },
             "location": "centralus",
             "properties": {
+<<<<<<< HEAD
+              "schedule": {
+                "status": "Active",
+=======
               "format": "Csv",
               "compressionMode": "gzip",
               "dataOverwriteBehavior": "OverwritePreviousReport",
@@ -86,19 +129,55 @@
               "exportDescription": "This is a test export.",
               "partitionData": true,
               "schedule": {
+>>>>>>> upstream/main
                 "recurrence": "Weekly",
                 "recurrencePeriod": {
                   "from": "2020-06-01T00:00:00Z",
                   "to": "2020-06-30T00:00:00Z"
+<<<<<<< HEAD
+                }
+              },
+              "format": "Csv",
+              "deliveryInfo": {
+                "destination": {
+                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+                  "container": "exports",
+                  "rootFolderPath": "ad-hoc"
+                }
+              },
+              "definition": {
+                "type": "ActualCost",
+                "timeframe": "Custom",
+                "timePeriod": {
+                  "from": "2020-06-01T00:00:00Z",
+                  "to": "2020-06-30T00:00:00Z"
+                },
+                "dataSet": {
+                  "granularity": "Daily",
+                  "configuration": {
+                    "dataVersion": "2023-05-01"
+                  }
+                }
+              },
+              "partitionData": true,
+              "dataOverwriteBehavior": "OverwritePreviousReport",
+              "compressionMode": "gzip",
+              "exportDescription": "This is a test export."
+=======
                 },
                 "status": "Active"
               }
+>>>>>>> upstream/main
             }
           }
         ]
       }
     }
+<<<<<<< HEAD
+  }
+=======
   },
   "operationId": "Exports_List",
   "title": "ExportsGetByEnrollmentAccount"
+>>>>>>> upstream/main
 }

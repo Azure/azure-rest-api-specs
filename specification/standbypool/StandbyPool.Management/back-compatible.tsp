@@ -8,6 +8,23 @@ import "./standbyContainerGroupPoolRuntimeView.tsp";
 
 using Microsoft.StandbyPool;
 
+<<<<<<< HEAD
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StandbyContainerGroupPoolResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StandbyContainerGroupPoolRuntimeViewResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StandbyVirtualMachinePoolResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StandbyVirtualMachinePoolRuntimeViewResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StandbyVirtualMachineResource.properties,
+  "autorest"
+);
+=======
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(StandbyContainerGroupPoolResource.properties,
   "autorest"
@@ -29,6 +46,7 @@ using Microsoft.StandbyPool;
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

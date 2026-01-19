@@ -12,7 +12,10 @@ namespace Microsoft.RecoveryServices;
 /**
  * The base backup engine class. All workload specific backup engines derive from this class.
  */
+<<<<<<< HEAD
+=======
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+>>>>>>> upstream/main
 @parentResource(VaultResource)
 model BackupEngineBaseResource
   is TrackedResourceWithOptionalLocation<BackupEngineBase> {

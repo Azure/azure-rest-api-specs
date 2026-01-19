@@ -83,6 +83,8 @@ model BucketProperties {
    * Access permissions for the bucket. Either ReadOnly or ReadWrite. The default is ReadOnly if no value is provided during bucket creation.
    */
   permissions?: BucketPermissions = BucketPermissions.ReadOnly;
+<<<<<<< HEAD
+=======
 
   /**
    * Specifies the Azure Key Vault settings. These are used when
@@ -96,6 +98,7 @@ model BucketProperties {
    */
   @added(Versions.v2025_09_01_preview)
   akvDetails?: AzureKeyVaultDetails;
+>>>>>>> upstream/main
 }
 
 /**
@@ -191,6 +194,12 @@ model BucketServerProperties {
   /**
    * A base64-encoded PEM file, which includes both the bucket server's certificate and private key. It is used to authenticate the user and allows access to volume data in a read-only manner.
    */
+<<<<<<< HEAD
+  @maxLength(10240)
+  @minLength(1)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  certificateObject?: string;
+=======
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_09_01)
@@ -287,6 +296,7 @@ model CredentialsAkvDetails {
   @minLength(1)
   @pattern("^[a-zA-Z0-9-]{1,127}$")
   secretName?: string;
+>>>>>>> upstream/main
 }
 
 /**
@@ -339,6 +349,8 @@ model BucketPatchProperties {
    * Access permissions for the bucket. Either ReadOnly or ReadWrite.
    */
   permissions?: BucketPatchPermissions;
+<<<<<<< HEAD
+=======
 
   /**
    * Specifies the Azure Key Vault settings. These are used when
@@ -352,6 +364,7 @@ model BucketPatchProperties {
    */
   @added(Versions.v2025_09_01_preview)
   akvDetails?: AzureKeyVaultDetails;
+>>>>>>> upstream/main
 }
 
 /**
@@ -371,6 +384,12 @@ model BucketServerPatchProperties {
   /**
    * A base64-encoded PEM file, which includes both the bucket server's certificate and private key. It is used to authenticate the user and allows access to volume data in a read-only manner.
    */
+<<<<<<< HEAD
+  @maxLength(10240)
+  @minLength(1)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  certificateObject?: string;
+=======
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_09_01)
@@ -398,6 +417,7 @@ model BucketServerPatchProperties {
    */
   @added(Versions.v2025_09_01_preview)
   onCertificateConflictAction?: OnCertificateConflictAction;
+>>>>>>> upstream/main
 }
 
 /**
@@ -522,6 +542,8 @@ union BucketPatchPermissions {
   ReadWrite: "ReadWrite",
 }
 
+<<<<<<< HEAD
+=======
 /**
  * This action is triggered when a certificate conflict occurs. A conflict arises if you try to create a new bucket while one or more already exist on the server, or if you update a bucket when multiple buckets are present. This happens because a single certificate is shared among all buckets on the same server.
  *
@@ -542,6 +564,7 @@ union OnCertificateConflictAction {
   Fail: "Fail",
 }
 
+>>>>>>> upstream/main
 @added(Versions.v2025_07_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_08_01_preview)
@@ -593,6 +616,8 @@ interface Buckets {
     BucketCredentialsExpiry,
     ArmResponse<BucketGenerateCredentials>
   >;
+<<<<<<< HEAD
+=======
 
   /**
    * Generate the access key and secret key used for accessing the specified volume bucket and store in Azure Key Vault.
@@ -617,6 +642,7 @@ interface Buckets {
     LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
+>>>>>>> upstream/main
 }
 
 @@maxLength(Bucket.name, 63);

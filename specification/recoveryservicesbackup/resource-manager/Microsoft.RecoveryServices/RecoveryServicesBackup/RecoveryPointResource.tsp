@@ -14,7 +14,10 @@ namespace Microsoft.RecoveryServices;
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+<<<<<<< HEAD
+=======
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+>>>>>>> upstream/main
 @parentResource(ProtectedItemResource)
 model RecoveryPointResource
   is TrackedResourceWithOptionalLocation<RecoveryPoint> {

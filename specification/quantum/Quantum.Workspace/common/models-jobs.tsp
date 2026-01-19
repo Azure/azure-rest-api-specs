@@ -31,16 +31,21 @@ union JobType {
 union JobStatus {
   string,
 
+<<<<<<< HEAD
+=======
   /** The job has been queued. */
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   Queued: "Queued",
 
+>>>>>>> upstream/main
   /** The job is waiting in the queue to be executed. */
   Waiting: "Waiting",
 
   /** The job is being executed. */
   Executing: "Executing",
 
+<<<<<<< HEAD
+=======
   /** Cancellation of the job has been requested. */
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   CancellationRequested: "CancellationRequested",
@@ -57,6 +62,7 @@ union JobStatus {
   @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   Completed: "Completed",
 
+>>>>>>> upstream/main
   /** The job completed with success. */
   Succeeded: "Succeeded",
 

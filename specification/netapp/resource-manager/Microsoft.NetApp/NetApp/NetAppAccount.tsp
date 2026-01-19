@@ -23,7 +23,10 @@ model NetAppAccount
     SegmentName = "netAppAccounts",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
   >;
+<<<<<<< HEAD
+=======
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
+>>>>>>> upstream/main
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }

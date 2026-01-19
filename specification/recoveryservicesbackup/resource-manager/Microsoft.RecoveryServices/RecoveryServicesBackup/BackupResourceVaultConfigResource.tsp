@@ -12,7 +12,10 @@ namespace Microsoft.RecoveryServices;
 /**
  * Backup resource vault config details.
  */
+<<<<<<< HEAD
+=======
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+>>>>>>> upstream/main
 @singleton("vaultconfig")
 @parentResource(VaultResource)
 model BackupResourceVaultConfigResource

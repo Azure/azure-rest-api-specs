@@ -5,6 +5,14 @@ import "./typespec/pipelineGroup.tsp";
 
 using Microsoft.Monitor;
 
+<<<<<<< HEAD
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AzureMonitorWorkspace.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PipelineGroup.properties,
+  "autorest"
+);
+=======
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AzureMonitorWorkspace.properties,
   "autorest"
@@ -14,6 +22,7 @@ using Microsoft.Monitor;
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

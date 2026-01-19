@@ -10,7 +10,10 @@ This is the AutoRest configuration file for Databricks.
 
 ```yaml $(java) && $(multiapi)
 batch:
+<<<<<<< HEAD
+=======
   - tag: package-2026-01-01
+>>>>>>> upstream/main
   - tag: package-2025-10-01-preview
   - tag: package-2025-08-01-preview
   - tag: package-2025-03-01-preview
@@ -24,6 +27,8 @@ batch:
   - tag: package-2023-05-01
 ```
 
+<<<<<<< HEAD
+=======
 ### Tag: package-2026-01-01 and java
 
 These settings apply only when `--tag=package-2026-01-01 --java` is specified on the command line.
@@ -37,6 +42,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+>>>>>>> upstream/main
 ### Tag: package-2025-10-01-preview and java
 
 These settings apply only when `--tag=package-2025-10-01-preview --java` is specified on the command line.
@@ -202,7 +208,11 @@ These are the global settings for the Databricks API.
 title: AzureDatabricksManagementClient
 description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 openapi-type: arm
+<<<<<<< HEAD
+tag: package-2025-10-01-preview
+=======
 tag: package-2026-01-01
+>>>>>>> upstream/main
 ```
 
 ### Tag: package-2018-04-01
@@ -324,6 +334,8 @@ input-file:
   - preview/2025-10-01-preview/accessconnector.json
 ```
 
+<<<<<<< HEAD
+=======
 ### Tag: package-2026-01-01
 
 These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
@@ -335,6 +347,7 @@ input-file:
   - stable/2026-01-01/accessconnector.json
 ```
 
+>>>>>>> upstream/main
 ---
 
 # Suppressions

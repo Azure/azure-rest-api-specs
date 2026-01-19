@@ -9,15 +9,40 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+<<<<<<< HEAD
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ContainerRegistry;
+
+=======
 
 namespace Microsoft.ContainerRegistry;
 
 // we must have this legacy operations right now because there is a virtual resource `Package` between `Achieve` and `Registry`
+>>>>>>> upstream/main
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ArchiveVersionOperationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
+<<<<<<< HEAD
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the container registry.
+         */
+        @path
+        @segment("registries")
+        @pattern("^[a-zA-Z0-9]*$")
+        @minLength(5)
+        @maxLength(50)
+        @doc("The name of the container registry.")
+        registryName: string,
+=======
         ...ResourceInstanceParameters<Registry>,
+>>>>>>> upstream/main
 
         /**
          * The package type.
@@ -55,6 +80,53 @@ interface ArchiveVersionOperationOps
       }
     > {}
 
+<<<<<<< HEAD
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface ArchiveVersionListOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the container registry.
+         */
+        @path
+        @segment("registries")
+        @pattern("^[a-zA-Z0-9]*$")
+        @minLength(5)
+        @maxLength(50)
+        @doc("The name of the container registry.")
+        registryName: string,
+
+        /**
+         * The package type.
+         */
+        @path
+        @segment("packages")
+        @minLength(3)
+        @maxLength(50)
+        @pattern("^[a-zA-Z]*$")
+        @doc("The package type.")
+        packageType: string,
+
+        /**
+         * The name of the archive resource.
+         */
+        @path
+        @segment("archives")
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(5)
+        @maxLength(200)
+        @doc("The name of the archive resource.")
+        archiveName: string,
+      },
+      {}
+    > {}
+=======
+>>>>>>> upstream/main
 /**
  * An object that represents an export pipeline for a container registry.
  */
@@ -94,7 +166,13 @@ interface ArchiveVersions {
   /**
    * Lists all archive versions for the specified container registry, repository type and archive name.
    */
+<<<<<<< HEAD
+  @action("versions")
+  @list
+  list is ArchiveVersionListOps.Read<
+=======
   list is ArchiveVersionOperationOps.List<
+>>>>>>> upstream/main
     ArchiveVersion,
     Response = ArmResponse<ArchiveVersionListResult>
   >;

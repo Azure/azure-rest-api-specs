@@ -12,6 +12,10 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @doc("Represents a update content.")
 @parentResource(SubscriptionLocationResource)
 model UpdateContent
@@ -22,6 +26,10 @@ model UpdateContent
   >;
 }
 
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @armResourceOperations
 interface UpdateContents {
   @doc("Gets content for an update.")
@@ -35,6 +43,10 @@ interface UpdateContents {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @doc("Represents properties of a update content resource.")
 model UpdateContentProperties {
   @doc("Represents the payloads of a update content resource.")
@@ -42,6 +54,10 @@ model UpdateContentProperties {
   updatePayloads: Array<ContentPayload>;
 }
 
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @doc("Represents details of a specific update content payload.")
 model ContentPayload {
   @doc("Represents url of a update payload.")

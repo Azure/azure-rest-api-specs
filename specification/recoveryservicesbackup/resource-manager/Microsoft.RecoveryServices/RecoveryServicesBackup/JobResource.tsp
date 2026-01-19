@@ -12,7 +12,10 @@ namespace Microsoft.RecoveryServices;
 /**
  * Defines workload agnostic properties for a job.
  */
+<<<<<<< HEAD
+=======
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+>>>>>>> upstream/main
 @parentResource(VaultResource)
 model JobResource is TrackedResourceWithOptionalLocation<Job> {
   ...ResourceNameParameter<

@@ -12,6 +12,10 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @doc("Represents a kubernetes version resource.")
 @parentResource(SubscriptionLocationResource)
 model KubernetesVersion
@@ -22,6 +26,10 @@ model KubernetesVersion
   >;
 }
 
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @armResourceOperations
 interface KubernetesVersions {
   @doc("List all kubernetes versions.")
@@ -29,6 +37,10 @@ interface KubernetesVersions {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @doc("Represents properties of a kubernetes version.")
 model KubernetesVersionProperties {
   @doc("Represents kubernetes version.")

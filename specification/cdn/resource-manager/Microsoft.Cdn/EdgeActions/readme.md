@@ -28,6 +28,9 @@ These are the global settings for the EdgeActions API.
 title: EdgeActionsManagementClient
 description: Edge Actions Management Client
 openapi-type: arm
+<<<<<<< HEAD
+tag: package-2025-09-01-preview
+=======
 tag: package-2025-12-01-preview
 ```
 
@@ -53,14 +56,18 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
     reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
+>>>>>>> upstream/main
 ```
 
 ### Tag: package-2025-09-01-preview
 
 These settings apply only when `--tag=package-2025-09-01-preview` is specified on the command line.
 
+<<<<<<< HEAD
+=======
 This version includes the internal `addAttachment` and `deleteAttachment` operations.
 
+>>>>>>> upstream/main
 ```yaml $(tag) == 'package-2025-09-01-preview'
 input-file:
   - preview/2025-09-01-preview/openapi.json

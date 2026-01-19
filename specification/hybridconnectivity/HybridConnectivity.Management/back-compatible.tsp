@@ -5,6 +5,13 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.HybridConnectivity;
 
+<<<<<<< HEAD
+@@Legacy.flattenProperty(EndpointResource.properties, "autorest");
+@@Legacy.flattenProperty(InventoryResource.properties, "autorest");
+@@Legacy.flattenProperty(PublicCloudConnector.properties, "autorest");
+@@Legacy.flattenProperty(ServiceConfigurationResource.properties, "autorest");
+@@Legacy.flattenProperty(SolutionConfiguration.properties, "autorest");
+=======
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Legacy.flattenProperty(EndpointResource.properties, "autorest");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
@@ -17,4 +24,5 @@ using Microsoft.HybridConnectivity;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Legacy.flattenProperty(SolutionConfiguration.properties, "autorest");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Legacy.flattenProperty(SolutionTypeResource.properties, "autorest");

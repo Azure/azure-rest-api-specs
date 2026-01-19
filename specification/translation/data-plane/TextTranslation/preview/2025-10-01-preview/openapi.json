@@ -323,14 +323,28 @@
           "description": "Languages that support translate API.",
           "additionalProperties": {
             "$ref": "#/definitions/TranslationLanguage"
+<<<<<<< HEAD
+          }
+=======
           },
           "readOnly": true
+>>>>>>> upstream/main
         },
         "transliteration": {
           "type": "object",
           "description": "Languages that support transliteration API.",
           "additionalProperties": {
             "$ref": "#/definitions/TransliterationLanguage"
+<<<<<<< HEAD
+          }
+        },
+        "dictionary": {
+          "type": "object",
+          "description": "Languages that support dictionary API.",
+          "additionalProperties": {
+            "$ref": "#/definitions/SourceDictionaryLanguage"
+          }
+=======
           },
           "readOnly": true
         },
@@ -341,6 +355,7 @@
             "type": "string"
           },
           "readOnly": true
+>>>>>>> upstream/main
         }
       }
     },
@@ -463,9 +478,15 @@
         ]
       }
     },
+<<<<<<< HEAD
+    "ReferenceSentencePair": {
+      "type": "object",
+      "description": "Reference sentence pair.",
+=======
     "ReferenceTextPair": {
       "type": "object",
       "description": "Reference text pair to generate adaptive customized translation.",
+>>>>>>> upstream/main
       "properties": {
         "source": {
           "type": "string",
@@ -481,6 +502,68 @@
         "target"
       ]
     },
+<<<<<<< HEAD
+    "SourceDictionaryLanguage": {
+      "type": "object",
+      "description": "Properties ot the source dictionary language",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the language in the locale requested via Accept-Language header."
+        },
+        "nativeName": {
+          "type": "string",
+          "description": "Display name of the language in the locale native for this language."
+        },
+        "dir": {
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+        },
+        "translations": {
+          "type": "array",
+          "description": "List of languages with alterative translations and examples for the query expressed in the source language.",
+          "items": {
+            "$ref": "#/definitions/TargetDictionaryLanguage"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "nativeName",
+        "dir",
+        "translations"
+      ]
+    },
+    "TargetDictionaryLanguage": {
+      "type": "object",
+      "description": "Properties of the target dictionary language",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the language in the locale requested via Accept-Language header."
+        },
+        "nativeName": {
+          "type": "string",
+          "description": "Display name of the language in the locale native for this language."
+        },
+        "dir": {
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+        },
+        "code": {
+          "type": "string",
+          "description": "Language code identifying the target language."
+        }
+      },
+      "required": [
+        "name",
+        "nativeName",
+        "dir",
+        "code"
+      ]
+    },
+=======
+>>>>>>> upstream/main
     "TextType": {
       "type": "string",
       "description": "Translation text type",
@@ -507,7 +590,11 @@
     },
     "TranslateBody": {
       "type": "object",
+<<<<<<< HEAD
+      "description": "Request body for the translate API.",
+=======
       "description": "Request data for translate.",
+>>>>>>> upstream/main
       "properties": {
         "inputs": {
           "type": "array",
@@ -566,7 +653,11 @@
           "type": "array",
           "description": "Translation target parameters.",
           "items": {
+<<<<<<< HEAD
+            "$ref": "#/definitions/TranslateTarget"
+=======
             "$ref": "#/definitions/TranslationTarget"
+>>>>>>> upstream/main
           }
         }
       },
@@ -579,6 +670,11 @@
       "type": "object",
       "description": "Request parameters for the translate API."
     },
+<<<<<<< HEAD
+    "TranslateTarget": {
+      "type": "object",
+      "description": "Translate targets parameters",
+=======
     "TranslatedTextItem": {
       "type": "object",
       "description": "Element containing the translated text",
@@ -652,6 +748,7 @@
     "TranslationTarget": {
       "type": "object",
       "description": "Target language and translation configuration parameters.",
+>>>>>>> upstream/main
       "properties": {
         "language": {
           "type": "string",
@@ -719,7 +816,11 @@
         },
         "deploymentName": {
           "type": "string",
+<<<<<<< HEAD
+          "description": "Default is ‘general’, which uses NMT system.\n‘abc-inc-gpt-4o’, and ‘abc-inc-gpt-4o-mini’ are examples of deployment names which use GPT-4o uses or \nGPT-4o-mini model. ‘gpt-4o’ uses GPT-4o model. \n\n‘<custom model id>’ uses the custom NMT model tuned by customer.\n‘best’ system determines which is the best model to use for the request. This intelligence could be introduced\nin future. Customer should have deployed it in their resource.\n",
+=======
           "description": "Default is 'general', which uses NMT system.\n'abc-inc-gpt-4o', and 'abc-inc-gpt-4o-mini' are examples of deployment names which use GPT-4o uses or\nGPT-4o-mini model. 'gpt-4o' uses GPT-4o model.\n\n'<custom model id>' uses the custom NMT model tuned by customer.\n'best' system determines which is the best model to use for the request. This intelligence could be introduced\nin future. Customer should have deployed it in their resource.\n",
+>>>>>>> upstream/main
           "default": "general"
         },
         "allowFallback": {
@@ -746,10 +847,17 @@
         },
         "referenceTextPairs": {
           "type": "array",
+<<<<<<< HEAD
+          "description": "Reference sentence pairs to generate adaptive results.",
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/definitions/ReferenceSentencePair"
+=======
           "description": "Reference text pairs to generate adaptive customized translation.",
           "maxItems": 5,
           "items": {
             "$ref": "#/definitions/ReferenceTextPair"
+>>>>>>> upstream/main
           }
         }
       },
@@ -757,6 +865,68 @@
         "language"
       ]
     },
+<<<<<<< HEAD
+    "TranslatedTextItem": {
+      "type": "object",
+      "description": "Element containing the translated text",
+      "properties": {
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "The detectedLanguage property is only present in the result object when language auto-detection is requested."
+        },
+        "translations": {
+          "type": "array",
+          "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter.",
+          "items": {
+            "$ref": "#/definitions/TranslationText"
+          }
+        }
+      },
+      "required": [
+        "translations"
+      ]
+    },
+    "TranslationLanguage": {
+      "type": "object",
+      "description": "The value of the translation property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag.\nA key identifies a language for which text can be translated to or translated from.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the language in the locale requested via Accept-Language header."
+        },
+        "nativeName": {
+          "type": "string",
+          "description": "Display name of the language in the locale native for this language."
+        },
+        "dir": {
+          "$ref": "#/definitions/LanguageDirectionality",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+        }
+      },
+      "required": [
+        "name",
+        "nativeName",
+        "dir"
+      ]
+    },
+    "TranslationResult": {
+      "type": "object",
+      "description": "Response for the translation API.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of the translated text elements.",
+          "items": {
+            "$ref": "#/definitions/TranslatedTextItem"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+=======
+>>>>>>> upstream/main
     "TranslationText": {
       "type": "object",
       "description": "Translation result",
@@ -768,27 +938,47 @@
         "sourceCharacters": {
           "type": "integer",
           "format": "int32",
+<<<<<<< HEAD
+          "description": "An interger indicating the number of characters in the source text string"
+=======
           "description": "An integer indicating the number of characters in the source text string"
+>>>>>>> upstream/main
         },
         "instructionTokens": {
           "type": "integer",
           "format": "int32",
+<<<<<<< HEAD
+          "description": "An interger indicating the number of tokens used in generating the translated text"
+=======
           "description": "An integer indicating the number of tokens used in generating the translated text"
+>>>>>>> upstream/main
         },
         "sourceTokens": {
           "type": "integer",
           "format": "int32",
+<<<<<<< HEAD
+          "description": "An interger indicating the number of tokens used in the source sentence"
+=======
           "description": "An integer indicating the number of tokens used in the source sentence"
+>>>>>>> upstream/main
         },
         "responseTokens": {
           "type": "integer",
           "format": "int32",
+<<<<<<< HEAD
+          "description": "An interger indicating the number of tokens used in the translation response"
+=======
           "description": "An integer indicating the number of tokens used in the translation response"
+>>>>>>> upstream/main
         },
         "targetTokens": {
           "type": "integer",
           "format": "int32",
+<<<<<<< HEAD
+          "description": "An interger indicating the number of tokens used in the target sentence"
+=======
           "description": "An integer indicating the number of tokens used in the target sentence"
+>>>>>>> upstream/main
         },
         "text": {
           "type": "string",
@@ -823,7 +1013,11 @@
     },
     "TransliterateBody": {
       "type": "object",
+<<<<<<< HEAD
+      "description": "Request body for the transliterate API.",
+=======
       "description": "Request data for transliterate.",
+>>>>>>> upstream/main
       "properties": {
         "inputs": {
           "type": "array",
@@ -846,8 +1040,12 @@
           "description": "Array of transliterated texts",
           "items": {
             "$ref": "#/definitions/TransliteratedText"
+<<<<<<< HEAD
+          }
+=======
           },
           "readOnly": true
+>>>>>>> upstream/main
         }
       },
       "required": [
@@ -889,8 +1087,12 @@
           "description": "List of scripts to convert from.",
           "items": {
             "$ref": "#/definitions/TransliterableScript"
+<<<<<<< HEAD
+          }
+=======
           },
           "readOnly": true
+>>>>>>> upstream/main
         }
       },
       "required": [

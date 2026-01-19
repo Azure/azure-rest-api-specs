@@ -1,6 +1,16 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+<<<<<<< HEAD
+    "scope": "providers/Microsoft.Billing/departments/12345",
+    "parameters": {
+      "metric": "ActualCost",
+      "timePeriod": {
+        "start": "2020-03-01",
+        "end": "2020-03-15"
+      }
+    }
+=======
     "parameters": {
       "metric": "ActualCost",
       "timePeriod": {
@@ -9,19 +19,46 @@
       }
     },
     "scope": "providers/Microsoft.Billing/departments/12345"
+>>>>>>> upstream/main
   },
   "responses": {
     "200": {
       "body": {
+<<<<<<< HEAD
+        "id": "providers/Microsoft.Billing/departments/12345/providers/Microsoft.CostManagement/costDetailsOperationResults/00000000-0000-0000-0000-000000000000",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "status": "Completed",
+        "manifest": {
+          "manifestVersion": "2025-03-01",
+          "dataFormat": "Csv",
+          "blobCount": 1,
+          "byteCount": 32741,
+          "compressData": false,
+          "requestContext": {
+            "requestScope": "providers/Microsoft.Billing/departments/12345",
+            "requestBody": {
+              "metric": "ActualCost",
+              "timePeriod": {
+                "start": "2020-03-01",
+                "end": "2020-03-15"
+              }
+            }
+          },
+=======
         "name": "00000000-0000-0000-0000-000000000000",
         "id": "/providers/Microsoft.Billing/departments/12345/providers/Microsoft.CostManagement/costDetailsOperationResults/00000000-0000-0000-0000-000000000000",
         "manifest": {
           "blobCount": 1,
+>>>>>>> upstream/main
           "blobs": [
             {
               "blobLink": "https://ccmreportstorageeastus.blob.core.windows.net/armreports/00000/00000000-0000-0000-0000-000000000000?sv=2020-05-31&sr=b&sig=abcd",
               "byteCount": 32741
             }
+<<<<<<< HEAD
+          ]
+        },
+=======
           ],
           "byteCount": 32741,
           "compressData": false,
@@ -39,6 +76,7 @@
           }
         },
         "status": "Completed",
+>>>>>>> upstream/main
         "validTill": "2022-05-10T08:08:46.1973252Z"
       }
     },
@@ -49,7 +87,11 @@
       }
     },
     "204": {}
+<<<<<<< HEAD
+  }
+=======
   },
   "operationId": "GenerateCostDetailsReport_CreateOperation",
   "title": "GenerateCostDetailsReportByDepartmentsAndTimePeriod"
+>>>>>>> upstream/main
 }

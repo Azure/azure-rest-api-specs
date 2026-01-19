@@ -22,7 +22,10 @@ model SnapshotPolicy
     SegmentName = "snapshotPolicies",
     NamePattern = ""
   >;
+<<<<<<< HEAD
+=======
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
+>>>>>>> upstream/main
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 

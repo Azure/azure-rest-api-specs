@@ -5,6 +5,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.HealthBot;
 
 @@clientName(Microsoft.HealthBot, "HealthbotClient", "javascript");
+<<<<<<< HEAD
+=======
 @@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
 
 @@clientName(KeyVaultProperties, "HealthBotKeyVaultProperties", "csharp");

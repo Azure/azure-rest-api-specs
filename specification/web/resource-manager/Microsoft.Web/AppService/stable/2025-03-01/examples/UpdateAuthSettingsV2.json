@@ -1,5 +1,24 @@
 {
   "parameters": {
+<<<<<<< HEAD
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "sitef6141",
+    "api-version": "2025-03-01",
+    "siteAuthSettingsV2": {
+      "properties": {
+        "platform": {
+          "enabled": true,
+          "runtimeVersion": "~1",
+          "configFilePath": "/auth/config.json"
+        },
+        "globalValidation": {
+          "requireAuthentication": true,
+          "unauthenticatedClientAction": "Return403",
+          "excludedPaths": [
+            "/nosecrets/Path"
+          ]
+=======
     "name": "sitef6141",
     "api-version": "2025-03-01",
     "resourceGroupName": "testrg123",
@@ -22,19 +41,30 @@
           "routes": {
             "apiPrefix": "/authv2/"
           }
+>>>>>>> upstream/main
         },
         "identityProviders": {
           "google": {
             "enabled": true,
+<<<<<<< HEAD
+            "registration": {
+              "clientId": "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
+              "clientSecretSettingName": "ClientSecret"
+            },
+=======
+>>>>>>> upstream/main
             "login": {
               "scopes": [
                 "admin"
               ]
             },
+<<<<<<< HEAD
+=======
             "registration": {
               "clientId": "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
               "clientSecretSettingName": "ClientSecret"
             },
+>>>>>>> upstream/main
             "validation": {
               "allowedAudiences": [
                 "https://example.com"
@@ -43,6 +73,20 @@
           }
         },
         "login": {
+<<<<<<< HEAD
+          "routes": {
+            "logoutEndpoint": "https://app.com/logout"
+          },
+          "tokenStore": {
+            "enabled": true,
+            "tokenRefreshExtensionHours": 96,
+            "fileSystem": {
+              "directory": "/wwwroot/sites/example"
+            }
+          },
+          "preserveUrlFragmentsForLogins": true,
+=======
+>>>>>>> upstream/main
           "allowedExternalRedirectUrls": [
             "https://someurl.com"
           ],
@@ -52,6 +96,44 @@
           },
           "nonce": {
             "validateNonce": true
+<<<<<<< HEAD
+          }
+        },
+        "httpSettings": {
+          "requireHttps": true,
+          "routes": {
+            "apiPrefix": "/authv2/"
+          },
+          "forwardProxy": {
+            "convention": "Standard",
+            "customHostHeaderName": "authHeader",
+            "customProtoHeaderName": "customProtoHeader"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/config/authsettingsv2",
+        "name": "authsettingsv2",
+        "type": "Microsoft.Web/sites/authsettingsv2",
+        "kind": "app",
+        "properties": {
+          "platform": {
+            "enabled": true,
+            "runtimeVersion": "~1",
+            "configFilePath": "/auth/config.json"
+          },
+          "globalValidation": {
+            "requireAuthentication": true,
+            "unauthenticatedClientAction": "Return403",
+            "excludedPaths": [
+              "/nosecrets/Path"
+            ]
+=======
           },
           "preserveUrlFragmentsForLogins": true,
           "routes": {
@@ -99,19 +181,30 @@
             "routes": {
               "apiPrefix": "/authv2/"
             }
+>>>>>>> upstream/main
           },
           "identityProviders": {
             "google": {
               "enabled": true,
+<<<<<<< HEAD
+              "registration": {
+                "clientId": "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
+                "clientSecretSettingName": "ClientSecret"
+              },
+=======
+>>>>>>> upstream/main
               "login": {
                 "scopes": [
                   "admin"
                 ]
               },
+<<<<<<< HEAD
+=======
               "registration": {
                 "clientId": "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
                 "clientSecretSettingName": "ClientSecret"
               },
+>>>>>>> upstream/main
               "validation": {
                 "allowedAudiences": [
                   "https://example.com"
@@ -120,6 +213,20 @@
             }
           },
           "login": {
+<<<<<<< HEAD
+            "routes": {
+              "logoutEndpoint": "https://app.com/logout"
+            },
+            "tokenStore": {
+              "enabled": true,
+              "tokenRefreshExtensionHours": 96,
+              "fileSystem": {
+                "directory": "/wwwroot/sites/example"
+              }
+            },
+            "preserveUrlFragmentsForLogins": true,
+=======
+>>>>>>> upstream/main
             "allowedExternalRedirectUrls": [
               "https://someurl.com"
             ],
@@ -129,6 +236,25 @@
             },
             "nonce": {
               "validateNonce": true
+<<<<<<< HEAD
+            }
+          },
+          "httpSettings": {
+            "requireHttps": true,
+            "routes": {
+              "apiPrefix": "/authv2/"
+            },
+            "forwardProxy": {
+              "convention": "Standard",
+              "customHostHeaderName": "authHeader",
+              "customProtoHeaderName": "customProtoHeader"
+            }
+          }
+        }
+      }
+    }
+  }
+=======
             },
             "preserveUrlFragmentsForLogins": true,
             "routes": {
@@ -154,4 +280,5 @@
   },
   "operationId": "WebApps_UpdateAuthSettingsV2",
   "title": "Update Auth Settings V2"
+>>>>>>> upstream/main
 }

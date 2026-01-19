@@ -93,6 +93,9 @@ interface ContentUnderstandingClient {
   "getAnalyzers",
   "csharp"
 );
+<<<<<<< HEAD
+=======
 
 @@convenientAPI(ContentAnalyzers.update, false, "csharp");
 @@convenientAPI(ContentAnalyzers.updateDefaults, false, "csharp");
+>>>>>>> upstream/main

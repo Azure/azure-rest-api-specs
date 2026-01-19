@@ -12,6 +12,10 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @doc("Represents a os image resource.")
 @parentResource(SubscriptionLocationResource)
 model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
@@ -22,6 +26,10 @@ model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
 }
 
 @armResourceOperations
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 interface OsImages {
   @doc("Get a os image.")
   get is ArmResourceRead<OsImage>;
@@ -31,6 +39,10 @@ interface OsImages {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+<<<<<<< HEAD
+@added(Versions.v2025_11_01_preview)
+=======
+>>>>>>> upstream/main
 @doc("Represents properties of a os image resource.")
 model OsImageProperties {
   @doc("Represents validated solution recipe version of a os image.")

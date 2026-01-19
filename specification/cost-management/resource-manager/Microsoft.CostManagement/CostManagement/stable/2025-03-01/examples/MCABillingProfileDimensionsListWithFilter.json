@@ -1,11 +1,20 @@
 {
   "parameters": {
+<<<<<<< HEAD
+    "api-version": "2025-03-01",
+    "billingAccountId": "12345:6789",
+    "billingProfileId": "13579",
+    "$expand": "properties/data",
+    "$top": 5,
+    "$filter": "properties/category eq 'resourceId'",
+=======
     "$expand": "properties/data",
     "$filter": "properties/category eq 'resourceId'",
     "$top": 5,
     "api-version": "2025-03-01",
     "billingAccountId": "12345:6789",
     "billingProfileId": "13579",
+>>>>>>> upstream/main
     "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579"
   },
   "responses": {
@@ -13,12 +22,19 @@
       "body": {
         "value": [
           {
+<<<<<<< HEAD
+            "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/providers/microsoft.CostManagement/dimensions_ResourceId_2019-10-01_2019-10-31",
+            "name": "dimensions_ResourceId_2019-10-01_2019-10-31",
+            "type": "microsoft.CostManagement/dimensions",
+            "properties": {
+=======
             "name": "dimensions_ResourceId_2019-10-01_2019-10-31",
             "type": "microsoft.CostManagement/dimensions",
             "id": "/providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/providers/microsoft.CostManagement/dimensions_ResourceId_2019-10-01_2019-10-31",
             "properties": {
               "description": "Resource Id",
               "category": "ResourceId",
+>>>>>>> upstream/main
               "data": [
                 "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/urphealthaccount",
                 "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/srphytenaccount",
@@ -26,19 +42,34 @@
                 "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg-sql-ha/providers/microsoft.compute/virtualmachines/sql-4qqp1",
                 "/subscriptions/a98d6dc5-eb8f-46cf-8938-f1fb08f03706/resourcegroups/databricks-rg-testwsp-xijmsdubneexm/providers/microsoft.compute/disks/488cdb42bf74474a98075415be3f806c-containerrootvolume"
               ],
+<<<<<<< HEAD
+              "total": 1409,
+              "category": "ResourceId",
+              "usageStart": "2019-10-01T00:00:00-07:00",
+              "usageEnd": "2019-10-31T00:00:00-07:00",
+              "description": "Resource Id",
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "nextLink": "http://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/providers/Microsoft.CostManagement/Dimensions?$filter=properties/category eq 'resourceId'&$top=5&api-version=2019-10-01&$expand=properties/data&$skiptoken=AQAAAA%3D%3D"
+=======
               "filterEnabled": true,
               "groupingEnabled": true,
               "nextLink": "http://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/providers/Microsoft.CostManagement/Dimensions?$filter=properties/category eq 'resourceId'&$top=5&api-version=2019-10-01&$expand=properties/data&$skiptoken=AQAAAA%3D%3D",
               "total": 1409,
               "usageEnd": "2019-10-31T00:00:00-07:00",
               "usageStart": "2019-10-01T00:00:00-07:00"
+>>>>>>> upstream/main
             }
           }
         ]
       }
     },
     "204": {}
+<<<<<<< HEAD
+  }
+=======
   },
   "operationId": "Dimensions_List",
   "title": "BillingProfileDimensionsListWithFilter-MCA"
+>>>>>>> upstream/main
 }

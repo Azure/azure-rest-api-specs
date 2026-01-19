@@ -9,16 +9,41 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+<<<<<<< HEAD
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ContainerRegistry;
+
+=======
 
 namespace Microsoft.ContainerRegistry;
 
 // we must have this legacy operations right now because there is a virtual resource `Package` between `Achieve` and `Registry`
 // but we did not decide about how to represent such scenarios with "virtual resources" therefore we leave this legacy operations here for now.
+>>>>>>> upstream/main
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AchieveOperationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
+<<<<<<< HEAD
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the container registry.
+         */
+        @path
+        @segment("registries")
+        @pattern("^[a-zA-Z0-9]*$")
+        @minLength(5)
+        @maxLength(50)
+        @doc("The name of the container registry.")
+        registryName: string,
+=======
         ...ResourceInstanceParameters<Registry>,
+>>>>>>> upstream/main
 
         /**
          * The package type.
@@ -45,6 +70,43 @@ interface AchieveOperationOps
       }
     > {}
 
+<<<<<<< HEAD
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface AchieveOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the container registry.
+         */
+        @path
+        @segment("registries")
+        @pattern("^[a-zA-Z0-9]*$")
+        @minLength(5)
+        @maxLength(50)
+        @doc("The name of the container registry.")
+        registryName: string,
+
+        /**
+         * The package type.
+         */
+        @path
+        @minLength(3)
+        @maxLength(50)
+        @pattern("^[a-zA-Z]*$")
+        @segment("packages")
+        @doc("The package type.")
+        packageType: string,
+      },
+      {}
+    > {}
+
+=======
+>>>>>>> upstream/main
 /**
  * An object that represents a archive for a container registry.
  */
@@ -90,10 +152,16 @@ interface Archives {
   /**
    * Lists all archives for the specified container registry and package type.
    */
+<<<<<<< HEAD
+  @action("archives")
+  @list
+  list is AchieveOps.Read<Archive, Response = ArmResponse<ArchiveListResult>>;
+=======
   list is AchieveOperationOps.List<
     Archive,
     Response = ArmResponse<ArchiveListResult>
   >;
+>>>>>>> upstream/main
 }
 
 @@maxLength(Archive.name, 200);

@@ -4,6 +4,32 @@ import "./routes.tsp";
 
 using Microsoft.Mission;
 
+<<<<<<< HEAD
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApprovalResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityEndpointResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnclaveConnectionResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnclaveEndpointResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnclaveResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TransitHubResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadResource.properties,
+  "autorest"
+);
+=======
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApprovalResource.properties,
   "autorest"
@@ -37,6 +63,7 @@ using Microsoft.Mission;
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+>>>>>>> upstream/main
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

@@ -23,6 +23,7 @@ using TypeSpec.Versioning;
   "{endpoint}/datagovernance/catalog",
   "PurviewUnifiedCatalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments.",
   {
+    @doc("The endpoint of the Purview Unified Catalog service. Example: https://api.purview-service.microsoft.com/")
     endpoint: "https://api.purview-service.microsoft.com/",
   }
 )
