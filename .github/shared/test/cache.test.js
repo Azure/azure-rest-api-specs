@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { KeyedCache, KeyedPairCache, StringKeyCache, StringKeyPairCache } from "../src/cache.js";
+import { KeyedCache, KeyedPairCache } from "../src/cache.js";
 
 describe("KeyedCache", () => {
   it("createAndGetSync", () => {
@@ -75,7 +75,7 @@ describe("KeyedPairCache", () => {
   });
 
   it("keys are ordered", () => {
-    /** @type {KeyedPairCache<string, string, string>} */
+    /** @type {KeyedPairCache<number, number, string>} */
     const cache = new KeyedPairCache();
 
     const getOrCreateFooBar = () => cache.getOrCreate(42, 7, () => "42-7");
@@ -84,93 +84,6 @@ describe("KeyedPairCache", () => {
     for (let i = 0; i < 3; i++) {
       expect(getOrCreateFooBar()).toEqual("42-7");
       expect(getOrCreateBarFoo()).toEqual("7-42");
-    }
-  });
-});
-
-describe("StringKeyCache", () => {
-  it("createAndGetSync", () => {
-    /** @type {StringKeyCache<string>} */
-    const cache = new StringKeyCache();
-
-    let createdCount = 0;
-    const getOrCreate = () =>
-      cache.getOrCreate("foo", () => {
-        createdCount++;
-        return "bar";
-      });
-
-    for (let i = 0; i < 3; i++) {
-      expect(getOrCreate()).toEqual("bar");
-    }
-    expect(createdCount).toEqual(1);
-  });
-
-  it("createAndGetAsync", async () => {
-    /** @type {StringKeyCache<Promise<string>>} */
-    const cache = new StringKeyCache();
-
-    let createdCount = 0;
-    const getOrCreate = () =>
-      cache.getOrCreate("foo", async () => {
-        await Promise.resolve();
-        createdCount++;
-        return "bar";
-      });
-
-    for (let i = 0; i < 3; i++) {
-      await expect(getOrCreate()).resolves.toEqual("bar");
-    }
-    expect(createdCount).toEqual(1);
-  });
-});
-
-describe("StringKeyPairCache", () => {
-  it("createAndGetSync", () => {
-    /** @type {StringKeyPairCache<string>} */
-    const cache = new StringKeyPairCache();
-
-    let createdCount = 0;
-    const getOrCreate = () =>
-      cache.getOrCreate("foo", "bar", () => {
-        createdCount++;
-        return "baz";
-      });
-
-    for (let i = 0; i < 3; i++) {
-      expect(getOrCreate()).toEqual("baz");
-    }
-    expect(createdCount).toEqual(1);
-  });
-
-  it("createAndGetAsync", async () => {
-    /** @type {StringKeyPairCache<Promise<string>>} */
-    const cache = new StringKeyPairCache();
-
-    let createdCount = 0;
-    const getOrCreate = () =>
-      cache.getOrCreate("foo", "bar", async () => {
-        await Promise.resolve();
-        createdCount++;
-        return "baz";
-      });
-
-    for (let i = 0; i < 3; i++) {
-      await expect(getOrCreate()).resolves.toEqual("baz");
-    }
-    expect(createdCount).toEqual(1);
-  });
-
-  it("keys are ordered", () => {
-    /** @type {StringKeyPairCache<string>} */
-    const cache = new StringKeyPairCache();
-
-    const getOrCreateFooBar = () => cache.getOrCreate("foo", "bar", () => "foo-bar");
-    const getOrCreateBarFoo = () => cache.getOrCreate("bar", "foo", () => "bar-foo");
-
-    for (let i = 0; i < 3; i++) {
-      expect(getOrCreateFooBar()).toEqual("foo-bar");
-      expect(getOrCreateBarFoo()).toEqual("bar-foo");
     }
   });
 });
