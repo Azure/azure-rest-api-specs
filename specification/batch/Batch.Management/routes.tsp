@@ -12,6 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Batch;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@tag("Location")
 interface LocationOperationGroup {
   /**
    * Gets the Batch service quotas for the specified subscription at the given location.
