@@ -1493,10 +1493,7 @@ op DataBoxEdgeDevicesInstallUpdatesCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesGetNetworkSettingsCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1521,9 +1518,7 @@ op DataBoxEdgeDevicesGetNetworkSettingsCustomized(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesGenerateCertificateCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
