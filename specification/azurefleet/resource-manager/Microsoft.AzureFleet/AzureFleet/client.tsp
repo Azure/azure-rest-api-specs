@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.AzureFleet;
+using TypeSpec.Versioning;
 
 @@clientName(Microsoft.AzureFleet, "ComputeFleetMgmtClient", "python");
 @@clientName(Microsoft.AzureFleet, "ComputeFleetManagementClient", "java");
@@ -428,4 +429,27 @@ using Microsoft.AzureFleet;
   "csharp"
 );
 @@clientName(ListVirtualMachinesParameters.$skiptoken, "skipToken", "csharp");
-// @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(VirtualMachineScaleSet, Azure.ResourceManager.CommonTypes.Resource, "csharp");
+@@alternateType(VirtualMachineScaleSet,
+  ComputeFleetVmss,
+  "csharp"
+);
+
+// The following code is added to solve the problem that the `compute fleet vmss` class does not inherit the `resource data` class
+@doc("An AzureFleet's virtualMachineScaleSet")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ComputeFleetVmss extends Azure.ResourceManager.CommonTypes.Resource {
+  @removed(Versions.v2024_05_01_preview)
+  @doc("This represents the Provisioning State of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState: ProvisioningState;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("This represents the operationStatus of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
+  @visibility(Lifecycle.Read)
+  operationStatus: ProvisioningState;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("Error Information when `operationStatus` is `Failed`")
+  @visibility(Lifecycle.Read)
+  error?: ApiError;
+}
