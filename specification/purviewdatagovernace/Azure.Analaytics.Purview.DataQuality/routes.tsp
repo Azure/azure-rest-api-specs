@@ -390,17 +390,33 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @tag("ScheduleScan")
+  @route("/business-domains/{businessDomainId}/schedules/{scheduleId}:scans")
   @extension("x-ms-long-running-operation", true)
   @doc("Creates a scan under a specific business domain and schedule.")
   @post
-  op scans is DataQualityOperation.ResourceAction<
-    ScheduleEntity,
-    ScanDTO,
+  op scheduleScans is RpcOperation<
     {
+      @doc("Unique identifier for the business domain")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier for the schedule")
+      @path
+      scheduleId: string;
+
+      @doc("Scan request")
+      @body
+      body: ScanDTO;
+    },
+    {
+      @doc("HTTP status code indicating scan creation (202 Accepted)")
       @statusCode
       statusCode: 202;
+
+      doc: ("Status monitor for long-running operation");
 
       @body
       response: StatusMonitor;
@@ -420,7 +436,7 @@ namespace PurviewDataQuality {
   @doc("Cancels a specific scan under a given schedule within a business domain.")
   @extension("x-ms-long-running-operation", true)
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}:cancel")
-  op cancelScan is RpcOperation<
+  op cancelScheduleScan is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -455,7 +471,7 @@ namespace PurviewDataQuality {
   @doc("Retrieves details of a specific scan under a given schedule within a business domain.")
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}")
   @get
-  op scanByScanId is RpcOperation<
+  op scheduleScanByScanId is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -1206,7 +1222,7 @@ namespace PurviewDataQuality {
   @doc("Retrieves all runs associated with a specific scan under a given schedule.")
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/runs")
   @get
-  op getRuns is RpcOperation<
+  op getRunsForScheduleScan is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
