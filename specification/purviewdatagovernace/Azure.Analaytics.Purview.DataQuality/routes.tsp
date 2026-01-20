@@ -416,8 +416,7 @@ namespace PurviewDataQuality {
       @statusCode
       statusCode: 202;
 
-      doc: ("Status monitor for long-running operation");
-
+      @doc("Status monitor for long-running operation")
       @body
       response: StatusMonitor;
     }
