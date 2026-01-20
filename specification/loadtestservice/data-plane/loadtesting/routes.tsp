@@ -304,7 +304,7 @@ interface LoadTestRun {
   @added(APIVersions.v2025_11_01_preview)
   @route("/test-runs/{testRunId}/insights/latest")
   @patch(#{ implicitOptionality: true })
-  patchLatestInsights is Azure.Core.Foundations.Operation<
+  updateLatestInsights is Azure.Core.Foundations.Operation<
     {
       @header
       @doc("Content type.")
