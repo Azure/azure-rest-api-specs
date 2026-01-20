@@ -16,17 +16,17 @@ let args = process.argv.slice(2);
 const debug = args.includes("--debug");
 args = args.filter((a) => a != "--debug");
 
-const includeOperations = args.includes("--include-operations");
-args = args.filter((a) => a != "--include-operations");
+// const includeOperations = args.includes("--include-operations");
+// args = args.filter((a) => a != "--include-operations");
 
-const includeRefs = args.includes("--include-refs");
-args = args.filter((a) => a != "--include-refs");
+// const includeRefs = args.includes("--include-refs");
+// args = args.filter((a) => a != "--include-refs");
 
-const relativePaths = args.includes("--relative-paths");
-args = args.filter((a) => a != "--relative-paths");
+// const relativePaths = args.includes("--relative-paths");
+// args = args.filter((a) => a != "--relative-paths");
 
-const noEmbedErrors = args.includes("--no-embed-errors");
-args = args.filter((a) => a != "--no-embed-errors");
+// const noEmbedErrors = args.includes("--no-embed-errors");
+// args = args.filter((a) => a != "--no-embed-errors");
 
 if (args.length < 1) {
   console.error(USAGE);
