@@ -82,6 +82,13 @@ model BlobServiceClientParameters {
   "rust"
 );
 
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "javascript");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
+@@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
+@@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
+
+@@clientName(GeoReplication.lastSyncTime, "lastSyncOn", "javascript");
+
 @@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.blobContentLength, uint64, "rust");
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
