@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 
@@ -53,6 +54,26 @@ model Resource {
 model GeoPriorityReplicationStatus {
   /** Indicates whether Blob Geo Priority Replication is enabled for the storage account. */
   isBlobEnabled?: boolean;
+}
+
+/**
+ * The data collaboration policy properties for the storage account.
+ */
+model DataCollaborationPolicyProperties {
+  /**
+   * Indicates whether storage connectors are allowed to be created or managed on the storage account.
+   */
+  allowStorageConnectors?: boolean;
+
+  /**
+   * Indicates whether data shares are allowed to be created or managed on the storage account.
+   */
+  allowStorageDataShares?: boolean;
+
+  /**
+   * Indicates whether cross-entra tenant data sharing is allowed on the storage account.
+   */
+  allowCrossTenantDataSharing?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1065,6 +1086,123 @@ union TriggerType {
   OnSchedule: "OnSchedule",
 }
 
+/**
+ * The type of the backing data source for storage connector
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union StorageConnectorSourceType {
+  /**
+   * Source type - DataShare
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  DataShare: "DataShare",
+
+  string,
+}
+
+/**
+ * The state of the storage connector
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union StorageConnectorState {
+  /**
+   * Whether the connector is active
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Active: "Active",
+
+  /**
+   * Whether the connector is inactive
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Inactive: "Inactive",
+
+  string,
+}
+
+/**
+ * The auth type supported for bucket connection in storage connector.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union StorageConnectorAuthType {
+  /**
+   * Managed Identity auth type
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ManagedIdentity: "ManagedIdentity",
+
+  string,
+}
+
+/**
+ * The connection type for bucket connection in storage connector.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union StorageConnectorConnectionType {
+  /**
+   * DataShare connection type
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  DataShare: "DataShare",
+
+  string,
+}
+
+/**
+ * The type of the backing data source for storage connector
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union StorageConnectorDataSourceType {
+  /**
+   * Azure DataShare data source type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Azure_DataShare: "Azure_DataShare",
+
+  string,
+}
+
+/**
+ * The permissions supported in access policies for storage data share
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union StorageDataShareAccessPolicyPermission {
+  /**
+   * No permission
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  None: "None",
+
+  /**
+   * Read permission
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Read: "Read",
+
+  string,
+}
+
+/**
+ * Provisioning state of the resource at the time the operation was called.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union NativeDataSharingProvisioningState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Accepted: "Accepted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Failed: "Failed",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BlobServiceItems {
   /**
@@ -1422,6 +1560,12 @@ model ContainerProperties {
    * Enable NFSv3 all squash on blob container.
    */
   enableNfsV3AllSquash?: boolean;
+
+  /**
+   * The storage connector properties on the container
+   */
+  @added(Versions.v2025_08_01)
+  storageConnector: ContainerStorageConnectorProperties;
 }
 
 /**
@@ -1623,6 +1767,21 @@ model ImmutableStorageWithVersioning {
    */
   @visibility(Lifecycle.Read)
   migrationState?: MigrationState;
+}
+
+/**
+ * The storage connector properties on the container
+ */
+model ContainerStorageConnectorProperties {
+  /**
+   * The name of the storage connector associated with the container.
+   */
+  connectorName: string;
+
+  /**
+   * The ID of the storage connector associated with the container.
+   */
+  connectorUniqueId: string;
 }
 
 @minLength(3)
@@ -2988,6 +3147,12 @@ model StorageAccountPropertiesCreateParameters {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * The data collaboration policy properties for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: DataCollaborationPolicyProperties;
 }
 
 /**
@@ -3643,6 +3808,12 @@ model StorageAccountProperties {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * The data collaboration policy properties for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: DataCollaborationPolicyProperties;
 }
 
 /**
@@ -4184,6 +4355,12 @@ model StorageAccountPropertiesUpdateParameters {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * The data collaboration policy properties for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: DataCollaborationPolicyProperties;
 }
 
 /**
@@ -6048,3 +6225,262 @@ alias ETagHeader = {
   @header("ETag")
   eTag: string;
 };
+
+/**
+ * The storage connector properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model StorageConnectorProperties {
+  /**
+   * System-generated identifier for the Storage Connector. Not a valid input parameter when creating.
+   */
+  @visibility(Lifecycle.Read)
+  uniqueId?: string;
+
+  /**
+   * State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active)
+   * (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.
+   */
+  state?: StorageConnectorState = StorageConnectorState.Active;
+
+  /**
+   * System-generated creation time for the Storage Connector. Not a valid input parameter when creating.
+   */
+  @visibility(Lifecycle.Read)
+  creationTime?: string;
+
+  /**
+   * Arbitrary description of this Storage Connector. Max 250 characters.
+   */
+  @maxLength(250)
+  description?: string;
+
+  /**
+   * Test connection to backing data source before creating the storage connector.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  testConnection?: boolean = false;
+
+  /**
+   * The type of backing data source for this Storage Connector.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  dataSourceType: StorageConnectorDataSourceType;
+
+  /**
+   * Information about how to communicate with and authenticate to the backing data store.
+   */
+  source: StorageConnectorSource;
+
+  /**
+   * Represents the provisioning state of the storage connector.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NativeDataSharingProvisioningState;
+}
+
+/**
+ * The storage connector backing data source information
+ */
+@discriminator("type")
+model StorageConnectorSource {
+  /**
+   * Type of the Storage Connector. Not mutable once the Storage Connector is created."
+   */
+  type: StorageConnectorSourceType;
+}
+
+/**
+ * The properties of data share source
+ */
+model DataShareSource extends StorageConnectorSource {
+  /**
+   * The type for data share source
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorSourceType.DataShare;
+
+  /**
+   * Details for how to connect to the backing data store.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  connection: StorageConnectorConnection;
+
+  /**
+   * Details for how to authenticate to the backing data store.
+   */
+  authProperties: StorageConnectorAuthProperties;
+}
+
+/**
+ * The connection properties of the backing data source
+ */
+@discriminator("type")
+model StorageConnectorConnection {
+  /**
+   * Type of the connection. Controls the type of the connection object. Not mutable once the Storage Connector is created.
+   */
+  type: StorageConnectorConnectionType;
+}
+
+/**
+ * The connection details for Data Share source
+ */
+model DataShareConnection extends StorageConnectorConnection {
+  /**
+   * The type for data share connection
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorConnectionType.DataShare;
+
+  /**
+   * The URI of the backing DataShare. Must be in the format: azds://<region>:<DataShareName>:<DataShareIdentifier>
+   */
+  @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareUri: string;
+}
+
+/**
+ * The authentication properties of the backing data source
+ */
+@discriminator("type")
+model StorageConnectorAuthProperties {
+  /**
+   * Type of the authentication properties. Controls the type of the authProperties object
+   */
+  type: StorageConnectorAuthType;
+}
+
+/**
+ * The managed identity auth properties for dataShare connection.
+ */
+model ManagedIdentityAuthProperties extends StorageConnectorAuthProperties {
+  /**
+   * The type of managed identity auth
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorAuthType.ManagedIdentity;
+
+  /**
+   * ARM ResourceId of the managed identity that should be used to authenticate to the backing data source.
+   */
+  identityResourceId?: string;
+}
+
+/**
+ * Test existing connection request properties
+ */
+model TestExistingConnectionRequest {
+  /**
+   * The uniqueId of the storage connector as returned by the server.
+   */
+  uniqueId: string;
+}
+
+/**
+ * Test connection response properties
+ */
+model TestConnectionResponse {
+  /**
+   * Indicates the method used to validate the connection to the backing data store.
+   * Valid values are `GetBlob` and `ListBlobs` for failure, and `TestExistingConnection` for success.
+   */
+  @minLength(1)
+  storageConnectorMethodName: string;
+
+  /**
+   * A string representing the error received from the backing data store.
+   * Format will vary depending on the data store type and will be capped at 1 MB in size.
+   * The error message will be empty if the connection was successful.
+   */
+  storageConnectorErrorMessage?: string;
+
+  /**
+   * The request Id associated with the request sent to the backing data store for validation.
+   */
+  @minLength(1)
+  storageConnectorRequestId: string;
+}
+
+/**
+ * The storage datashare properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model StorageDataShareProperties {
+  /**
+   * System-generated identifier for the Storage DataShare. Not a valid input parameter when creating.
+   */
+  @visibility(Lifecycle.Read)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareIdentifier?: string;
+
+  /** Arbitrary description of this Data Share. Max 250 characters.
+   *
+   */
+  @maxLength(250)
+  description?: string;
+
+  /**
+   * The DataShare URI to be shared with the consumer.
+   * URI Format - 'azds://<location>:<dataShareName>:<dataShareIdentifier>'.
+   */
+  @visibility(Lifecycle.Read)
+  @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareUri?: string;
+
+  /**
+   * List of access policies that specify the permission allowed to a managed identity.
+   */
+  @identifiers(#[])
+  accessPolicies: StorageDataShareAccessPolicy[];
+
+  /**
+   * List of assets that specify the properties of the shared resources.
+   */
+  @identifiers(#[])
+  assets: StorageDataShareAsset[];
+
+  /**
+   * Represents the provisioning state of the storage datashare.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NativeDataSharingProvisioningState;
+}
+
+/**
+ * Policy that specify the permission allowed to a managed identity
+ */
+model StorageDataShareAccessPolicy {
+  /**
+   * The AAD principal ID of the Managed Identity.
+   */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  principalId: string;
+
+  /**
+   * The AAD tenant ID of the Managed Identity.
+   */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  tenantId: string;
+
+  /**
+   * Allowed permissions. Currently, only supported value is Read.
+   */
+  permission: StorageDataShareAccessPolicyPermission;
+}
+
+/**
+ * Properties of a shared resource.
+ */
+model StorageDataShareAsset {
+  /**
+   * Source Path to be shared. It can be a folder or a blob.
+   * The asset path should contain container name followed by path within the container, e.g. /container1/logs/external.
+   */
+  assetPath: string;
+
+  /**
+   * Consumer visible name of the original path.
+   */
+  displayName: string;
+}
