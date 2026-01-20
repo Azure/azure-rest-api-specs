@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "eventSubscriptionInfo": {
+      "properties": {
+        "destination": {
+          "endpointType": "WebHook",
+          "properties": {
+            "endpointUrl": "https://requestb.in/15ksip71"
+          }
+        },
+        "filter": {
+          "isSubjectCaseSensitive": false,
+          "subjectBeginsWith": "ExamplePrefix",
+          "subjectEndsWith": "ExampleSuffix"
+        }
+      }
+    },
+    "eventSubscriptionName": "exampleEventSubscriptionName1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "systemTopicName": "exampleSystemTopic1"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "exampleEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1/eventSubscriptions/exampleEventSubscriptionName1",
+        "properties": {
+          "destination": {
+            "endpointType": "WebHook",
+            "properties": {
+              "endpointBaseUrl": "https://requestb.in/15ksip71"
+            }
+          },
+          "eventDeliverySchema": "EventGridSchema",
+          "filter": {
+            "isSubjectCaseSensitive": false,
+            "subjectBeginsWith": "ExamplePrefix",
+            "subjectEndsWith": "ExampleSuffix"
+          },
+          "labels": null,
+          "provisioningState": "Succeeded",
+          "retryPolicy": {
+            "eventTimeToLiveInMinutes": 1440,
+            "maxDeliveryAttempts": 30
+          },
+          "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/systemTopics/exampleSystemTopic1"
+        }
+      }
+    }
+  },
+  "operationId": "SystemTopicEventSubscriptions_CreateOrUpdate",
+  "title": "SystemTopicEventSubscriptions_CreateOrUpdate"
+}

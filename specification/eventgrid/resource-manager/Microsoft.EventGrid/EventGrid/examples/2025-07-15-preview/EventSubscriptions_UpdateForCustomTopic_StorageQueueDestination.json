@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "eventSubscriptionName": "examplesubscription1",
+    "eventSubscriptionUpdateParameters": {
+      "deadLetterDestination": {
+        "endpointType": "StorageBlob",
+        "properties": {
+          "blobContainerName": "contosocontainer",
+          "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg"
+        }
+      },
+      "destination": {
+        "endpointType": "StorageQueue",
+        "properties": {
+          "queueMessageTimeToLiveInSeconds": 300,
+          "queueName": "queue1",
+          "resourceId": "/subscriptions/d33c5f7a-02ea-40f4-bf52-07f17e84d6a8/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg"
+        }
+      },
+      "filter": {
+        "isSubjectCaseSensitive": false,
+        "subjectBeginsWith": "ExamplePrefix",
+        "subjectEndsWith": "ExampleSuffix"
+      }
+    },
+    "scope": "subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "examplesubscription1",
+        "type": "Microsoft.EventGrid/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
+        "properties": {
+          "deadLetterDestination": {
+            "endpointType": "StorageBlob",
+            "properties": {
+              "blobContainerName": "contosocontainer",
+              "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg"
+            }
+          },
+          "destination": {
+            "endpointType": "StorageQueue",
+            "properties": {
+              "queueMessageTimeToLiveInSeconds": 300,
+              "queueName": "queue1",
+              "resourceId": "/subscriptions/d33c5f7a-02ea-40f4-bf52-07f17e84d6a8/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/contosostg"
+            }
+          },
+          "filter": {
+            "isSubjectCaseSensitive": false,
+            "subjectBeginsWith": "ExamplePrefix",
+            "subjectEndsWith": "ExampleSuffix"
+          },
+          "labels": null,
+          "provisioningState": "Creating",
+          "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1"
+        }
+      }
+    }
+  },
+  "operationId": "EventSubscriptions_Update",
+  "title": "EventSubscriptions_UpdateForCustomTopic_StorageQueueDestination"
+}

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "eventSubscriptionName": "examplesubscription1",
+    "eventSubscriptionUpdateParameters": {
+      "destination": {
+        "endpointType": "ServiceBusTopic",
+        "properties": {
+          "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.ServiceBus/namespaces/ContosoNamespace/topics/SBT"
+        }
+      },
+      "filter": {
+        "isSubjectCaseSensitive": true,
+        "subjectBeginsWith": "existingPrefix",
+        "subjectEndsWith": "newSuffix"
+      },
+      "labels": [
+        "label1",
+        "label2"
+      ]
+    },
+    "scope": "subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "examplesubscription1",
+        "type": "Microsoft.EventGrid/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
+        "properties": {
+          "destination": {
+            "endpointType": "ServiceBusTopic",
+            "properties": {
+              "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.ServiceBus/namespaces/ContosoNamespace/topics/SBT"
+            }
+          },
+          "filter": {
+            "isSubjectCaseSensitive": true,
+            "subjectBeginsWith": "existingPrefix",
+            "subjectEndsWith": "newSuffix"
+          },
+          "labels": [
+            "label1",
+            "label2"
+          ],
+          "provisioningState": "Succeeded",
+          "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/microsoft.eventgrid/topics/exampletopic2"
+        }
+      }
+    }
+  },
+  "operationId": "EventSubscriptions_Update",
+  "title": "EventSubscriptions_UpdateForCustomTopic_ServiceBusTopicDestination"
+}
