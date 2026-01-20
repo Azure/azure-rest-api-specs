@@ -64,7 +64,7 @@ model AppDeploymentProperties {
 
   /** The user assigned identity assigned to the app deployment */
   @visibility(Lifecycle.Read)
-  identity: UserAssignedIdentity;
+  identity: AppDeploymentUserAssignedIdentity;
 
   /** Observability properties for the app. */
   observability?: ObservabilityProperties;
