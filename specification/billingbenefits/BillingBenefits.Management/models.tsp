@@ -2954,7 +2954,22 @@ model Award {
   /**
    * Duration for which the benefit is active. Will be in format P{int}M or P{int}Y. Any values representing up to 12 years are valid. Upper limit examples: P144M, P12Y.
    */
-  duration?: string;
+  duration?: AwardDuration;
+}
+
+/**
+ * Duration for which the benefit is active
+ */
+union AwardDuration {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  P1M: "P1M",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  P1Y: "P1Y",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  P3Y: "P3Y",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  P5Y: "P5Y",
 }
 
 /**
@@ -3338,7 +3353,7 @@ model FreeServicesProperties {
   billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
     {
       scopes: ["Tenant"];
-      type: "Microsoft.Billing/billingAccounts/billingProfiles";
+      type: "Microsoft.Billing/billingAccounts";
     }
   ]>;
 

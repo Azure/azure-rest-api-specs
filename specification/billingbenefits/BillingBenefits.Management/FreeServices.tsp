@@ -79,8 +79,7 @@ interface FreeServicesOperations {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     FreeServices,
-    Response = (ArmResponse<FreeServices> &
-      ArmAsyncOperationHeader<FinalResult = FreeServices>) | (ArmResourceCreatedResponse<
+    Response = ArmResponse<FreeServices> | (ArmResourceCreatedResponse<
       FreeServices,
       LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices>
     > &

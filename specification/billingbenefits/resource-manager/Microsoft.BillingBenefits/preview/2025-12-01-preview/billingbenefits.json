@@ -3147,15 +3147,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FreeServices"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "URL for checking the ongoing status of the operation."
-              }
             }
           },
           "201": {
@@ -4245,9 +4239,41 @@
           "readOnly": true
         },
         "duration": {
-          "type": "string",
+          "$ref": "#/definitions/AwardDuration",
           "description": "Duration for which the benefit is active. Will be in format P{int}M or P{int}Y. Any values representing up to 12 years are valid. Upper limit examples: P144M, P12Y."
         }
+      }
+    },
+    "AwardDuration": {
+      "type": "string",
+      "description": "Duration for which the benefit is active",
+      "enum": [
+        "P1M",
+        "P1Y",
+        "P3Y",
+        "P5Y"
+      ],
+      "x-ms-enum": {
+        "name": "AwardDuration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "P1M",
+            "value": "P1M"
+          },
+          {
+            "name": "P1Y",
+            "value": "P1Y"
+          },
+          {
+            "name": "P3Y",
+            "value": "P3Y"
+          },
+          {
+            "name": "P5Y",
+            "value": "P5Y"
+          }
+        ]
       }
     },
     "Azure.Core.armResourceType": {
@@ -6404,7 +6430,7 @@
                 "scopes": [
                   "Tenant"
                 ],
-                "type": "Microsoft.Billing/billingAccounts/billingProfiles"
+                "type": "Microsoft.Billing/billingAccounts"
               }
             ]
           }
