@@ -171,7 +171,6 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseMcpCallFailed, Access.public, "csharp");
 @@access(VoiceLive.MCPApprovalResponseRequestItem, Access.internal, "csharp");
 
-
 @@clientName(VoiceLive.Modality, "InteractionModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
 @@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "csharp");
