@@ -52,7 +52,7 @@ enum Versions {
   v2023_03_01_preview: "2023-03-01-preview",
 
   /**
-   * The 2023-03-01-preview API version.
+   * The 2023-08-20-preview API version.
    */
   v2023_08_20_preview: "2023-08-20-preview",
 
