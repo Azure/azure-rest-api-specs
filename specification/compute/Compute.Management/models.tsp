@@ -5218,12 +5218,12 @@ model StorageProfile {
 }
 
 /**
- * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage. By default isEnabled is set to false i.e VM can't be moved from one zone to another.
+ * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.
  */
 @added(Versions.v2025_11_01)
 model ZoneMovement {
   /**
-   * Indicates if zone movement is enabled.
+   * Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another.
    */
   isEnabled?: boolean;
 }
