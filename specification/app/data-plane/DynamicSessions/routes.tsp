@@ -170,5 +170,5 @@ interface SessionPoolManagement {
   /** Stop a session in a session pool. */
   @route("/stopSession")
   @post
-  stopSession is RpcOperation<SessionIdentifier, OkResponse>;
+  stopSession is RpcOperation<SessionIdentifier, OkResponse & Body<string>>;
 }

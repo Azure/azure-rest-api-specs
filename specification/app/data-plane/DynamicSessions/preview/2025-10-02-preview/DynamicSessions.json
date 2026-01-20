@@ -56,6 +56,10 @@
       "post": {
         "operationId": "SessionPoolManagement_StopSession",
         "description": "Stop a session in a session pool.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -66,7 +70,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
