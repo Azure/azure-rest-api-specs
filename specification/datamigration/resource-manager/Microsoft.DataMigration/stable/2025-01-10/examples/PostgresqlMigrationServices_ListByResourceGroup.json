@@ -1,0 +1,29 @@
+{
+  "title": "List migration services by resource group",
+  "operationId": "PostgresqlMigrationServices_ListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-01-10"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.DataMigration/postgresqlMigrationServices/myMigrationService",
+            "name": "myMigrationService",
+            "type": "Microsoft.DataMigration/postgresqlMigrationServices",
+            "location": "eastus",
+            "tags": {
+              "environment": "production"
+            },
+            "properties": {
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
