@@ -560,6 +560,55 @@
           }
         }
       },
+      "patch": {
+        "operationId": "PartnerBusinesses_Update",
+        "tags": [
+          "PartnerBusinesses"
+        ],
+        "description": "Update a PartnerBusiness",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "partnerBusinessName",
+            "in": "path",
+            "description": "The name of the PartnerBusiness",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/V20260101Preview.PartnerBusinessUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/V20260101Preview.PartnerBusiness"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "operationId": "PartnerBusinesses_Delete",
         "tags": [
@@ -819,6 +868,19 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
+        }
+      }
+    },
+    "V20260101Preview.PartnerBusinessUpdate": {
+      "type": "object",
+      "description": "Represents the properties of a PartnerBusiness resource that can be updated.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

@@ -32,3 +32,9 @@ model PartnerBusinessProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
+
+@added(Versions.v2026_01_01_preview)
+@doc("Represents the properties of a PartnerBusiness resource that can be updated.")
+model PartnerBusinessUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}
