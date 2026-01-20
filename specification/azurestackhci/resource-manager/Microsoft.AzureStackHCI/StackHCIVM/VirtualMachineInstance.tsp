@@ -84,16 +84,16 @@ interface VirtualMachineInstances {
     Request = void
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing LRO pattern for VM power operations"
   @added(Versions.v2026_04_01_preview)
   @doc("The operation to power off a virtual machine instance.")
-  powerOff is ArmResourceActionNoResponseContentAsync<
+  powerOff is ArmResourceActionAsync<
     VirtualMachineInstance,
     {
       @doc("The content of the action request")
       @body
       @added(Versions.v2026_04_01_preview)
       body?: PowerOffVirtualMachineOptions;
-    }
+    },
+    Foundations.OperationStatusResult
   >;
 }
