@@ -222,7 +222,7 @@ model MonitoringPropertiesOfDrill {
       type: "Microsoft.Insights/datacollectionrules";
     }
   ]>;
-  
+
   @doc("Full ARM Id of the Data collection rule created by Resiliency service which will route data for Aggregate health data of service group.")
   serviceGroupMetricsDataCollectionRuleId: armResourceIdentifier<[
     {
