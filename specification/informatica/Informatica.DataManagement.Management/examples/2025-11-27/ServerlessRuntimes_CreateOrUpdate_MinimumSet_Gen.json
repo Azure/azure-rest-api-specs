@@ -1,0 +1,43 @@
+{
+  "title": "ServerlessRuntimes_CreateOrUpdate_Min",
+  "operationId": "ServerlessRuntimes_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-27",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization",
+    "serverlessRuntimeName": "myServerlessRuntime",
+    "resource": {
+      "properties": {
+        "serverlessAccountLocation": "westus"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "serverlessAccountLocation": "westus"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes/myServerlessRuntime",
+        "name": "myServerlessRuntime",
+        "type": "Informatica.DataManagement/organizations/serverlessRuntimes"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Informatica.DataManagement/locations/westus/operationStatuses/op-001?api-version=2025-11-27"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "serverlessAccountLocation": "westus"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes/myServerlessRuntime",
+        "name": "myServerlessRuntime",
+        "type": "Informatica.DataManagement/organizations/serverlessRuntimes"
+      }
+    }
+  }
+}

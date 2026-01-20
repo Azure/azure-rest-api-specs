@@ -1,0 +1,81 @@
+{
+  "title": "Organizations_GetServerlessMetadata",
+  "operationId": "Organizations_GetServerlessMetadata",
+  "parameters": {
+    "api-version": "2025-11-27",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "SERVERLESS",
+        "serverlessConfigProperties": {
+          "platform": "AZURE",
+          "applicationTypes": [
+            {
+              "name": "CDI",
+              "value": "Cloud Data Integration"
+            }
+          ],
+          "computeUnits": [
+            {
+              "name": "Standard",
+              "value": [
+                "4",
+                "8",
+                "16"
+              ]
+            }
+          ],
+          "executionTimeout": "3600",
+          "regions": [
+            {
+              "id": "westus",
+              "name": "West US"
+            },
+            {
+              "id": "eastus",
+              "name": "East US"
+            }
+          ]
+        },
+        "serverlessRuntimeConfigProperties": {
+          "cdiConfigProps": [
+            {
+              "engineName": "CDI Engine",
+              "engineVersion": "1.0",
+              "applicationConfigs": [
+                {
+                  "type": "string",
+                  "name": "configName",
+                  "value": "configValue",
+                  "platform": "AZURE",
+                  "customized": "false",
+                  "defaultValue": "default"
+                }
+              ]
+            }
+          ],
+          "cdieConfigProps": [
+            {
+              "engineName": "CDIE Engine",
+              "engineVersion": "1.0",
+              "applicationConfigs": [
+                {
+                  "type": "string",
+                  "name": "configName",
+                  "value": "configValue",
+                  "platform": "AZURE",
+                  "customized": "false",
+                  "defaultValue": "default"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
