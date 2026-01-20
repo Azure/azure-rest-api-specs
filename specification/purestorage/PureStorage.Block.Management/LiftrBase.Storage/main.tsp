@@ -13,7 +13,7 @@ using TypeSpec.Reflection;
 
 @versioned(LiftrBase.Storage.Versions)
 @armLibraryNamespace
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace LiftrBase.Storage;
 
 @doc("Supported versions for LiftrBase.Storage resource model")
