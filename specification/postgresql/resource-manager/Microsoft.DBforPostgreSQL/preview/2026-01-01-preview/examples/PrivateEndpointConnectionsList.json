@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateEndpointConnections",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateEndpointConnections/private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+            "properties": {
+              "groupIds": [
+                "postgresqlServer"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Auto-approved",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Ready"
+            }
+          },
+          {
+            "name": "private-endpoint-connection-name-2.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateEndpointConnections",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateEndpointConnections/private-endpoint-connection-name-2.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+            "properties": {
+              "groupIds": [
+                "postgresqlServer"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateEndpoints/private-endpoint-name-2"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Auto-approved",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_ListByServer",
+  "title": "List all private endpoint connections on a server."
+}
