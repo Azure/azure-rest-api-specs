@@ -154,6 +154,19 @@ using Microsoft.EdgeOrder;
   "ResourceProviderDetailsList",
   "csharp"
 );
+@@clientName(OrdersOperationGroup.listBySubscription,
+  "GetEdgeOrders",
+  "csharp"
+);
+// Add this to solve the naming conflict problem of the following operation
+@@clientLocation(OrdersOperationGroup.listBySubscription,
+  "OrdersOperationGroup2",
+  "csharp"
+);
+@@clientName(OrdersOperationGroup.listByResourceGroup,
+  "GetEdgeOrders",
+  "csharp"
+);
 @@alternateType(OrderItemProperties.orderId,
   Azure.Core.armResourceIdentifier,
   "csharp"
