@@ -93,8 +93,7 @@ interface FreeServicesOperations {
   update is ArmCustomPatchAsync<
     FreeServices,
     PatchModel = FreeServicesPatchRequest,
-    Response = (ArmResponse<FreeServices> &
-      ArmAsyncOperationHeader<FinalResult = FreeServices>) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices>> &
+    Response = ArmResponse<FreeServices> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices>> &
       Azure.Core.Foundations.RetryAfterHeader)
   >;
 
