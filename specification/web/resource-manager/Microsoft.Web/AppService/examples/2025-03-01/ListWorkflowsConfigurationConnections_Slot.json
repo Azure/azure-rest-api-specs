@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "name": "testsite2",
+    "api-version": "2025-03-01",
+    "configurationName": "connections",
+    "resourceGroupName": "testrg123",
+    "slot": "staging",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testsite2/connections",
+        "type": "Microsoft.Web/sites/workflowsconfiguration",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite2/workflowconfigurations/connections",
+        "location": "USAAnywhere",
+        "properties": {
+          "files": {
+            "connections.json": {
+              "managedApiConnections": {
+                "office365": {
+                  "api": {
+                    "id": "string"
+                  },
+                  "authentication": {
+                    "type": "Raw",
+                    "parameter": "@appsetting('office365-connectionKey')",
+                    "scheme": "Key"
+                  },
+                  "connection": {
+                    "id": "string"
+                  },
+                  "connectionRuntimeUrl": "string"
+                }
+              }
+            }
+          },
+          "health": {
+            "state": "Healthy"
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "WebApps_ListWorkflowsConnectionsSlot",
+  "title": "List the Instance Workflows Configuration Connections Slot"
+}
