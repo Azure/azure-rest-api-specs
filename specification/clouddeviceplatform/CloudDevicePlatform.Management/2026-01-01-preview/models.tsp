@@ -17,7 +17,7 @@ namespace Microsoft.CloudDevicePlatform.V20260101Preview;
 // --------------------------------------------
 @added(Versions.v2026_01_01_preview)
 @doc("Represents a CloudDevicePlatform partner business resource.")
-model PartnerBusiness is ProxyResource<PartnerBusinessProperties> {
+model PartnerBusiness is TrackedResource<PartnerBusinessProperties> {
   ...ResourceNameParameter<
     Resource = PartnerBusiness,
     NamePattern = "^[a-zA-Z0-9-]{3,128}$",
