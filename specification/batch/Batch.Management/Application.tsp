@@ -40,6 +40,7 @@ model Application
 }
 
 @armResourceOperations
+@tag("Application")
 interface Applications {
   /**
    * Gets information about the specified application.
