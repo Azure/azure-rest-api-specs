@@ -338,10 +338,7 @@ def resolve_external_common_types_refs(
 
         return None
 
-    # Track visited refs to detect circular references
-    visited_refs: Set[str] = set()
-
-    def resolve_ref(ref_obj: Any, context: str = "", depth: int = 0) -> Any:
+    def resolve_ref(ref_obj: Any, context: str = "", depth: int = 0, visited_path: Set[str] = None) -> Any:
         """
         Resolve a single $ref, handling both local and external common-types refs.
         Recursively resolves nested refs within the resolved object.
@@ -350,6 +347,7 @@ def resolve_external_common_types_refs(
             ref_obj: Object that may contain a $ref field
             context: Context for debugging (parameter/definition)
             depth: Current recursion depth to prevent infinite loops
+            visited_path: Set of refs in current resolution path (for circular detection)
 
         Returns:
             Resolved object with $ref inlined and nested refs resolved
@@ -360,17 +358,23 @@ def resolve_external_common_types_refs(
         ref = ref_obj.get("$ref", "")
         if not ref:
             # No $ref, but still need to recursively resolve any nested refs
-            return walk_and_resolve(ref_obj, context, depth)
+            return walk_and_resolve(ref_obj, context, depth, visited_path)
+
+        # Initialize visited path if not provided
+        if visited_path is None:
+            visited_path = set()
 
         # Prevent infinite recursion with circular refs
-        if depth > 50:
+        if depth > 100:
             print(f"Warning: Maximum recursion depth reached resolving {ref}")
             return {"$circular_ref": ref}
 
-        if ref in visited_refs:
+        # Check if this ref is already in our current resolution path (circular)
+        if ref in visited_path:
             return {"$circular_ref": ref}
 
-        visited_refs.add(ref)
+        # Add to visited path for this resolution chain
+        visited_path = visited_path | {ref}
 
         resolved_obj = None
 
@@ -400,7 +404,11 @@ def resolve_external_common_types_refs(
             if "definitions" in resolved and def_name in resolved["definitions"]:
                 resolved_obj = copy.deepcopy(resolved["definitions"][def_name])
 
-        visited_refs.discard(ref)
+        # Handle local references to parameters
+        elif ref.startswith("#/parameters/"):
+            param_name = ref.split("/")[-1]
+            if "parameters" in resolved and param_name in resolved["parameters"]:
+                resolved_obj = copy.deepcopy(resolved["parameters"][param_name])
 
         # If we resolved the ref, recursively resolve any nested refs within it
         if resolved_obj is not None:
@@ -409,27 +417,27 @@ def resolve_external_common_types_refs(
                 if key != "$ref" and key not in resolved_obj:
                     resolved_obj[key] = value
 
-            # Recursively resolve nested refs in the resolved object
-            return walk_and_resolve(resolved_obj, f"{context}→{ref}", depth + 1)
+            # Recursively resolve nested refs in the resolved object with updated path
+            return walk_and_resolve(resolved_obj, f"{context}→{ref}", depth + 1, visited_path)
 
         # If we couldn't resolve, return the ref as-is
         return ref_obj
 
-    def walk_and_resolve(obj: Any, context: str = "", depth: int = 0) -> Any:
+    def walk_and_resolve(obj: Any, context: str = "", depth: int = 0, visited_path: Set[str] = None) -> Any:
         """Recursively walk the swagger document and resolve all refs."""
         if isinstance(obj, dict):
             # Check if this dict has a $ref
             if "$ref" in obj:
-                return resolve_ref(obj, context, depth)
+                return resolve_ref(obj, context, depth, visited_path)
 
             # Recursively process all fields
             result = {}
             for key, value in obj.items():
-                result[key] = walk_and_resolve(value, f"{context}.{key}", depth)
+                result[key] = walk_and_resolve(value, f"{context}.{key}", depth, visited_path)
             return result
 
         elif isinstance(obj, list):
-            return [walk_and_resolve(item, f"{context}[]", depth) for item in obj]
+            return [walk_and_resolve(item, f"{context}[]", depth, visited_path) for item in obj]
 
         else:
             return obj
