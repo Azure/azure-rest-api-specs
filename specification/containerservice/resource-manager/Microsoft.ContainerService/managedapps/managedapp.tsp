@@ -378,7 +378,9 @@ interface Apps {
   get is ArmResourceRead<ManagedApp>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedApp>;
   delete is ArmResourceDeleteWithoutOkAsync<ManagedApp>;
+
   listByResourceGroup is ArmResourceListByParent<ManagedApp>;
+  @list
   listBySubscription is ArmListBySubscription<ManagedApp>;
   deployments is ListDeployments<ManagedApp>;
 }
@@ -386,9 +388,11 @@ interface Apps {
 @armResourceOperations
 interface Revisions {
   // App Revision Operations
+  @list
   list is ArmResourceListByParent<Revision>;
   get is ArmResourceRead<Revision>;
   /** List deployments for an app revision */
+  @list
   deployments is ListDeployments<Revision>;
   latestRevision is GetLatestRevision<Revision, Revision>;
 }
@@ -396,6 +400,7 @@ interface Revisions {
 @armResourceOperations
 interface FleetAppDeployments {
   // Fleet App Deployment Operations
+  @list
   list is ArmResourceListByParent<FleetAppDeployment>;
   get is ArmResourceRead<FleetAppDeployment>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -411,6 +416,7 @@ interface FleetAppDeployments {
 @armResourceOperations
 interface AppDeployments {
   // App Deployment Operations
+  @list
   list is ArmResourceListByParent<AppDeployment>;
   get is ArmResourceRead<AppDeployment>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -426,6 +432,7 @@ interface AppDeployments {
 @armResourceOperations
 interface TrafficRules {
   // Traffic Rule Operations
+  @list
   list is ArmResourceListByParent<TrafficRule>;
   get is ArmResourceRead<TrafficRule>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
