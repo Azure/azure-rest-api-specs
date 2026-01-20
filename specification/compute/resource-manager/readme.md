@@ -352,7 +352,8 @@ suppressions:
   - code: ParametersInPost
     reason: forceDeallocate added as query parameter for consistency with hibernation in Deallocate POST API.
     from: ComputeRP.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate"].post
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate"]
+    .post[parameters[?(@.name=="forceDeallocate" && @.in=="query")]]
 ```
 
 ### Tag: package-2025-11-01
