@@ -129,3 +129,7 @@ op replacePurge(
   "TagResourceContractProperties",
   "go"
 );
+@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
+  "Client",
+  "go"
+);
