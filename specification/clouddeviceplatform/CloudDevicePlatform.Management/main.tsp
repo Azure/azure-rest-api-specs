@@ -4,10 +4,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "./2024-06-01-preview/models.tsp";
-import "./2026-01-01-preview/models.tsp";
+import "./models.tsp";
 import "./operations.tsp";
-import "./2024-06-01-preview/operations.tsp";
+import "./2026-01-01-preview/models.tsp";
 import "./2026-01-01-preview/operations.tsp";
 
 using TypeSpec.Http;
