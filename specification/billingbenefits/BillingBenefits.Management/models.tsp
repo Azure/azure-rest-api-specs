@@ -14,6 +14,25 @@ using TypeSpec.Versioning;
 namespace Microsoft.BillingBenefits;
 
 /**
+ * Custom LRO headers without format to match legacy swagger output
+ */
+model CustomArmAsyncOperationHeader<FinalResult = void> {
+  @header("Azure-AsyncOperation")
+  @doc("URL for checking the ongoing status of the operation.")
+  azureAsyncOperation?: string;
+}
+
+model CustomArmCombinedLroHeaders<FinalResult = void> {
+  @header("Azure-AsyncOperation")
+  @doc("URL for checking the ongoing status of the operation.")
+  azureAsyncOperation?: string;
+
+  @header("Location")
+  @doc("Location URI to poll for result.")
+  location?: string;
+}
+
+/**
  * Represents the result of listing savings plan models
  */
 model SavingsPlanModelListResult {

@@ -81,7 +81,7 @@ interface FreeServicesOperations {
     FreeServices,
     Response = ArmResponse<FreeServices> | (ArmResourceCreatedResponse<
       FreeServices,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices>
+      LroHeaders = CustomArmAsyncOperationHeader<FinalResult = FreeServices>
     > &
       Azure.Core.Foundations.RetryAfterHeader)
   >;
@@ -94,7 +94,7 @@ interface FreeServicesOperations {
     FreeServices,
     PatchModel = FreeServicesPatchRequest,
     Response = (ArmResponse<FreeServices> &
-      ArmAsyncOperationHeader<FinalResult = FreeServices>) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices>> &
+      CustomArmAsyncOperationHeader<FinalResult = FreeServices>) | (ArmAcceptedLroResponse<LroHeaders = CustomArmCombinedLroHeaders<FinalResult = FreeServices>> &
       Azure.Core.Foundations.RetryAfterHeader)
   >;
 
@@ -103,9 +103,9 @@ interface FreeServicesOperations {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     FreeServices,
-    Response = (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> &
+    Response = (ArmAcceptedLroResponse<LroHeaders = CustomArmCombinedLroHeaders> &
       Azure.Core.Foundations.RetryAfterHeader) | (NoContentResponse &
-      ArmAsyncOperationHeader)
+      CustomArmAsyncOperationHeader)
   >;
 
   /**

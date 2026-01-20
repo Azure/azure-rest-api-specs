@@ -3160,12 +3160,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "URL for checking the ongoing status of the operation."
-              },
-              "Location": {
-                "type": "string",
-                "description": "Location URI to poll for result."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3185,12 +3180,7 @@
           "FreeServicesCreate": {
             "$ref": "./examples/FreeServicesCreate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FreeServices"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "FreeServices_Update",
@@ -3244,7 +3234,6 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "URL for checking the ongoing status of the operation."
               },
               "Location": {
@@ -3269,12 +3258,7 @@
           "FreeServicesUpdate": {
             "$ref": "./examples/FreeServicesUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FreeServices"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "FreeServices_Delete",
@@ -3307,7 +3291,6 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
-                "format": "uri",
                 "description": "URL for checking the ongoing status of the operation."
               },
               "Location": {
@@ -3341,11 +3324,7 @@
           "FreeServicesDelete": {
             "$ref": "./examples/FreeServicesDelete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs": {
