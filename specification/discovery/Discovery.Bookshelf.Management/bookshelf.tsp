@@ -23,22 +23,36 @@ model Bookshelf is TrackedResource<BookshelfProperties> {
   ...ResourceNameParameter<Bookshelf>;
 }
 
+@doc("Key Vault Properties with clientId selection")
+@added(Versions.v2026_02_01_preview)
+model BookshelfKeyVaultProperties is KeyVaultProperties {
+  @doc("The client ID of the identity to use for accessing the Key Vault. Must be a workload identity assigned to the Bookshelf resource.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  identityClientId: string;
+}
+
 @doc("Bookshelf properties")
 model BookshelfProperties {
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
+  @doc("User assigned identity IDs to be used by knowledgebase workloads.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_02_01_preview)
+  workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
+
   @doc("Whether or not to use a customer managed key when encrypting data at rest")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_02_01_preview)
   // Typically this would be something like "KeySource = 'Microsoft.KeyVault' or 'Microsoft.Discovery'". Encryption is all done by downstream services, so keeping this API simplified.
-  enableCustomerManagedKeys?: boolean = false;
+  customerManagedKeys?: CustomerManagedKeys;
 
   @doc("The key to use for encrypting data at rest when customer managed keys are enabled. Required if Customer Managed Keys is enabled.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @added(Versions.v2026_02_01_preview)
-  keyVaultProperties?: KeyVaultWithIdentityReferenceProperties;
+  keyVaultProperties?: BookshelfKeyVaultProperties;
 
   @doc("The Log Analytics Cluster to use for debug logs. This is required when Customer Managed Keys are enabled.")
   @visibility(Lifecycle.Read, Lifecycle.Create)

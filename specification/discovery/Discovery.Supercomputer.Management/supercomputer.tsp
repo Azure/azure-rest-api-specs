@@ -101,7 +101,7 @@ model SupercomputerProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_02_01_preview)
   // Typically this would be something like "KeySource = 'Microsoft.KeyVault' or 'Microsoft.Discovery'". Encryption is all done by downstream services, so keeping this API simplified.
-  enableCustomerManagedKeys?: boolean = false;
+  customerManagedKeys?: CustomerManagedKeys;
 
   @doc("Disk Encryption Set ID to use for Customer Managed Keys encryption. Required if Customer Managed Keys is enabled.")
   @visibility(Lifecycle.Read, Lifecycle.Create)

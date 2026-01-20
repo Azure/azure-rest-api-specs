@@ -4252,6 +4252,37 @@
       ],
       "x-ms-discriminator-value": "AzureNetApp"
     },
+    "AzureNetAppFilesStore": {
+      "type": "object",
+      "description": "The Azure NetApp Files properties.",
+      "properties": {
+        "netAppVolumeId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The associated Azure NetApp Files volume ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "netAppVolumeId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageStore"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureNetAppFiles"
+    },
     "AzureStorageBlobStore": {
       "type": "object",
       "description": "The Azure storage blob properties.",
@@ -4297,6 +4328,77 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "BookshelfKeyVaultProperties": {
+      "type": "object",
+      "description": "Key Vault Properties with clientId selection",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Key Vault URI",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The Key Name in Key Vault",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The Key Version in Key Vault",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "identityClientId": {
+          "type": "string",
+          "description": "The client ID of the identity to use for accessing the Key Vault. Must be a workload identity assigned to the Bookshelf resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "keyVaultUri",
+        "keyName",
+        "keyVersion",
+        "identityClientId"
+      ]
+    },
+    "BookshelfKeyVaultPropertiesUpdate": {
+      "type": "object",
+      "description": "Key Vault Properties with clientId selection",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The Key Name in Key Vault",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The Key Version in Key Vault",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "BookshelfListResult": {
       "type": "object",
@@ -4400,17 +4502,28 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "enableCustomerManagedKeys": {
-          "type": "boolean",
+        "workloadIdentities": {
+          "type": "object",
+          "description": "User assigned identity IDs to be used by knowledgebase workloads.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "customerManagedKeys": {
+          "$ref": "#/definitions/CustomerManagedKeys",
           "description": "Whether or not to use a customer managed key when encrypting data at rest",
-          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultWithIdentityReferenceProperties",
+          "$ref": "#/definitions/BookshelfKeyVaultProperties",
           "description": "The key to use for encrypting data at rest when customer managed keys are enabled. Required if Customer Managed Keys is enabled.",
           "x-ms-mutability": [
             "read",
@@ -4509,7 +4622,7 @@
       "description": "Bookshelf properties",
       "properties": {
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultWithIdentityReferencePropertiesUpdate",
+          "$ref": "#/definitions/BookshelfKeyVaultPropertiesUpdate",
           "description": "The key to use for encrypting data at rest when customer managed keys are enabled. Required if Customer Managed Keys is enabled.",
           "x-ms-mutability": [
             "read",
@@ -4628,6 +4741,30 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "CustomerManagedKeys": {
+      "type": "string",
+      "description": "State of customer managed key usage.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CustomerManagedKeys",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Customer managed keys are enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Customer managed keys are disabled."
+          }
+        ]
+      }
     },
     "DiscoveryResourceProperties": {
       "type": "object",
@@ -4796,30 +4933,6 @@
         "keyVersion",
         "identity"
       ]
-    },
-    "KeyVaultWithIdentityReferencePropertiesUpdate": {
-      "type": "object",
-      "description": "For Key Vault Key references with identity reference",
-      "properties": {
-        "keyName": {
-          "type": "string",
-          "description": "The Key Name in Key Vault",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The Key Version in Key Vault",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
     },
     "MoboConfigurationWithMrg": {
       "type": "object",
@@ -5103,6 +5216,15 @@
             "read",
             "create"
           ]
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "Settings for the project.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -5111,7 +5233,29 @@
     },
     "ProjectPropertiesUpdate": {
       "type": "object",
-      "description": "Project properties"
+      "description": "Project properties",
+      "properties": {
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "Settings for the project.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProjectSettings": {
+      "type": "object",
+      "description": "Settings schema for the project",
+      "properties": {
+        "behaviorPreferences": {
+          "type": "string",
+          "description": "Default preferences to guide AI behaviors in this project.",
+          "maxLength": 5000
+        }
+      }
     },
     "ProjectUpdate": {
       "type": "object",
@@ -5665,10 +5809,9 @@
             ]
           }
         },
-        "enableCustomerManagedKeys": {
-          "type": "boolean",
+        "customerManagedKeys": {
+          "$ref": "#/definitions/CustomerManagedKeys",
           "description": "Whether or not to use a customer managed key when encrypting data at rest",
-          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -5753,7 +5896,8 @@
       "type": "string",
       "description": "The kind of the backing storage store.",
       "enum": [
-        "AzureStorageBlob"
+        "AzureStorageBlob",
+        "AzureNetAppFiles"
       ],
       "x-ms-enum": {
         "name": "StorageStoreType",
@@ -5763,6 +5907,11 @@
             "name": "AzureStorageBlob",
             "value": "AzureStorageBlob",
             "description": "The Azure storage blob kind."
+          },
+          {
+            "name": "AzureNetAppFiles",
+            "value": "AzureNetAppFiles",
+            "description": "The Azure NetApp Files kind."
           }
         ]
       }
@@ -5997,10 +6146,9 @@
             "create"
           ]
         },
-        "enableCustomerManagedKeys": {
-          "type": "boolean",
+        "customerManagedKeys": {
+          "$ref": "#/definitions/CustomerManagedKeys",
           "description": "Whether or not to use a customer managed key when encrypting data at rest",
-          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -6377,6 +6525,31 @@
         }
       }
     },
+    "WithNetAppVolumeId": {
+      "type": "object",
+      "description": "For associated Azure NetApp Files volume ID",
+      "properties": {
+        "netAppVolumeId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The associated Azure NetApp Files volume ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "netAppVolumeId"
+      ]
+    },
     "WithProvisioningState": {
       "type": "object",
       "description": "For tracking he status of the last operation.",
@@ -6610,10 +6783,9 @@
             "create"
           ]
         },
-        "enableCustomerManagedKeys": {
-          "type": "boolean",
+        "customerManagedKeys": {
+          "$ref": "#/definitions/CustomerManagedKeys",
           "description": "Whether or not to use a customer managed key when encrypting data at rest",
-          "default": false,
           "x-ms-mutability": [
             "read",
             "create"

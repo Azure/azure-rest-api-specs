@@ -130,6 +130,18 @@ model ManagedIdentityCredential extends Credential {
   identityId?: Microsoft.Discovery.Shared.UserAssignedIdentityId;
 }
 
+/** For associated Azure NetApp Files volume ID */
+@added(Versions.v2026_02_01_preview)
+model WithNetAppVolumeId {
+  @doc("The associated Azure NetApp Files volume ID.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  netAppVolumeId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes";
+    }
+  ]>;
+}
+
 @doc("Secret credential properties")
 @removed(Versions.v2026_02_01_preview)
 model KeyVaultSecretCredential extends Credential {
@@ -165,6 +177,18 @@ interface DiscoveryResource<
   delete is ArmResourceDeleteWithoutOkAsync<T>;
   listByResourceGroup is ArmResourceListByParent<T>;
   listBySubscription is ArmListBySubscription<T>;
+}
+
+@doc("State of customer managed key usage.")
+@added(Versions.v2026_02_01_preview)
+union CustomerManagedKeys {
+  string,
+
+  @doc("Customer managed keys are enabled.")
+  Enabled: "Enabled",
+
+  @doc("Customer managed keys are disabled.")
+  Disabled: "Disabled",
 }
 
 @doc("For Key Vault Key references")

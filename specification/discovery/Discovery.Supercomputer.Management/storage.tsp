@@ -72,7 +72,7 @@ model StorageProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_02_01_preview)
   // Typically this would be something like "KeySource = 'Microsoft.KeyVault' or 'Microsoft.Discovery'". Encryption is all done by downstream services, so keeping this API simplified.
-  enableCustomerManagedKeys?: boolean = false;
+  customerManagedKeys?: CustomerManagedKeys;
 
   @doc("The key to use for encrypting data at rest when customer managed keys are enabled")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

@@ -28,6 +28,9 @@ union StorageStoreType {
   @doc("The Azure storage blob kind.")
   AzureStorageBlob: "AzureStorageBlob",
 
+  @doc("The Azure NetApp Files kind.")
+  AzureNetAppFiles: "AzureNetAppFiles",
+
   string,
 }
 
@@ -48,6 +51,16 @@ model AzureStorageBlobStore extends StorageStore {
   kind: StorageStoreType.AzureStorageBlob;
 
   ...WithStorageAccountId;
+}
+
+@doc("The Azure NetApp Files properties.")
+@added(Versions.v2026_02_01_preview)
+model AzureNetAppFilesStore extends StorageStore {
+  /** Azure NetApp Files */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  kind: StorageStoreType.AzureNetAppFiles;
+
+  ...WithNetAppVolumeId;
 }
 
 @doc("Storage Container properties")
