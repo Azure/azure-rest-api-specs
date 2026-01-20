@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 @doc("Microsoft Marketplace Discovery APIs")
 @service(#{ title: "Products" })
 @server("https://catalogapi.azure.com")
-@versioned(Products.Versions)
+@versioned(Versions)
 @useAuth(DiscoveryApiKey)
 namespace Products;
 
