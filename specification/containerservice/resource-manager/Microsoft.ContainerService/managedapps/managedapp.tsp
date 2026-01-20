@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./customoperations.tsp";
 import "./volumetypes.tsp";
+import "./helpers.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -40,6 +41,11 @@ model AppRevisionProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/** Patch model for ManagedApp */
+model ManagedAppPatch {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 /** Template for the app or app deployment */
@@ -378,6 +384,12 @@ interface Apps {
   get is ArmResourceRead<ManagedApp>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedApp>;
   delete is ArmResourceDeleteWithoutOkAsync<ManagedApp>;
+  patch is ArmCustomPatchSync<
+    ManagedApp,
+    ManagedAppPatch,
+    Azure.ResourceManager.Foundations.BaseParameters<ManagedAppPatch> &
+      IfMatchParameters<ManagedApp>
+  >;
 
   listByResourceGroup is ArmResourceListByParent<ManagedApp>;
   listBySubscription is ArmListBySubscription<ManagedApp>;
@@ -394,7 +406,6 @@ interface Revisions {
   /** List deployments for an app revision */
   @list
   deployments is ListDeployments<Revision>;
-  latestRevision is GetLatestRevision<Revision, Revision>;
 }
 
 @armResourceOperations

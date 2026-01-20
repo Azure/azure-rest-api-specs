@@ -70,16 +70,3 @@ op AdvanceRollout<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<RolloutStage> | ErrorResponse;
-
-/** Gets the latest revision for a managed app */
-@autoRoute
-@armResourceRead(TResource)
-@get
-@action("latest")
-op GetLatestRevision<
-  TResource extends Azure.ResourceManager.Foundations.Resource,
-  Revision,
-  TBaseParameters = BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<Revision> | ErrorResponse;
