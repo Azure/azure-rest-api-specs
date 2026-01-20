@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-11-10-preview",
+    "version": "2021-10-18-preview",
     "title": "vi",
     "description": "Microsoft Azure Video Analyzer for Media"
   },
@@ -48,7 +48,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -87,10 +87,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "checkNameAvailabilityParameters",
@@ -132,10 +132,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -171,13 +171,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -208,16 +208,16 @@
         "description": "Gets the properties of an Azure Video Analyzer for Media account.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -249,16 +249,16 @@
         "description": "Updates the properties of an existing Azure Video Analyzer for Media account.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -340,16 +340,16 @@
         "x-ms-long-running-operation": false,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -444,16 +444,16 @@
         "x-ms-long-running-operation": false,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -483,119 +483,6 @@
         "x-ms-examples": {
           "Delete account": {
             "$ref": "./examples/ViAccountDelete.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.VideoIndexer/locations/{location}/userClassicAccounts": {
-      "get": {
-        "tags": [
-          "Accounts"
-        ],
-        "operationId": "UserClassicAccounts_List",
-        "description": "Lists all Azure Video Analyzer for Media classic accounts",
-        "x-ms-examples": {
-          "List accounts": {
-            "$ref": "./examples/ViListUserClassicAccounts.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/UserClassicAccountList"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.VideoIndexer/locations/{location}/classicAccounts/{accountName}": {
-      "get": {
-        "tags": [
-          "Accounts"
-        ],
-        "operationId": "ClassicAccounts_GetDetails",
-        "description": "Gets the properties of an Azure Video Analyzer for Media Classic account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Azure Video Analyzer for Media account properties were retrieved successfully.",
-            "schema": {
-              "$ref": "#/definitions/ClassicAccount"
-            }
-          },
-          "400": {
-            "description": "Bad Request.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "401": {
-            "description": "User Not Allowed",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get account": {
-            "$ref": "./examples/ViClassicAccounts.json"
           }
         }
       }
@@ -641,16 +528,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AccountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -737,17 +624,17 @@
           "$ref": "#/definitions/AccountPropertiesForPutRequest"
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -762,7 +649,7 @@
           "$ref": "#/definitions/AccountPropertiesForPatchRequest"
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       },
       "allOf": [
@@ -797,12 +684,6 @@
           "description": "The media services details",
           "type": "object",
           "$ref": "#/definitions/MediaServicesForPutRequest"
-        },
-        "totalSecondsIndexed": {
-          "description": "An integer representing the total seconds that have been indexed on the account",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
         },
         "provisioningState": {
           "readOnly": true,
@@ -963,120 +844,6 @@
           "description": "The access token.",
           "x-ms-secret": true,
           "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjI0NDc3MzMsImV4cCI6MTY1Mzk4MzczMywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0"
-        }
-      }
-    },
-    "UserClassicAccountList": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassicAccountSlim"
-          },
-          "description": "List of classic account names and their location."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "example": "https://management.azure.com/{accountsOperation}?api-version={version}&%24skiptoken={token}"
-        }
-      },
-      "description": "The list of user classic accounts.",
-      "type": "object"
-    },
-    "ClassicAccountSlim": {
-      "description": "An Azure Video Analyzer for Media classic account.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The account's name",
-          "type": "string",
-          "readOnly": true,
-          "example": "contoso-videoanalyzer"
-        },
-        "location": {
-          "description": "The account's location",
-          "type": "string",
-          "readOnly": true,
-          "example": "westus"
-        }
-      }
-    },
-    "ClassicAccount": {
-      "description": "An Azure Video Analyzer for Media classic account.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The account's name",
-          "type": "string",
-          "readOnly": true,
-          "example": "contoso-videoanalyzer"
-        },
-        "location": {
-          "description": "The account's location",
-          "type": "string",
-          "example": "westus"
-        },
-        "properties": {
-          "description": "List of classic account properties",
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClassicAccountProperties"
-        }
-      }
-    },
-    "ClassicAccountProperties": {
-      "description": "Azure Video Analyzer for Media classic account properties",
-      "type": "object",
-      "properties": {
-        "mediaServices": {
-          "description": "The media services details",
-          "type": "object",
-          "$ref": "#/definitions/ClassicAccountMediaServices"
-        }
-      }
-    },
-    "ClassicAccountMediaServices": {
-      "description": "Azure Video Analyzer for Media classic account properties",
-      "type": "object",
-      "properties": {
-        "aadApplicationId": {
-          "type": "string",
-          "description": "The aad application id",
-          "example": "912f96dc-1ed3-4d7d-aa67-0adef4bb68ad"
-        },
-        "aadTenantId": {
-          "type": "string",
-          "description": "The aad tenant id",
-          "example": "72f988bf-86f1-41ag-91ab-2d7cd061db47"
-        },
-        "connected": {
-          "type": "boolean",
-          "description": "Represents wether the media services is connected or not"
-        },
-        "eventGridProviderRegistered": {
-          "type": "boolean",
-          "description": "Represents if the media services event grid is connected or not"
-        },
-        "name": {
-          "type": "string",
-          "description": "The media services name",
-          "example": "contosoVideoanalyzerMediaServices"
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "The resource group that the media services belong to",
-          "example": "contoso-videoanalyzer-rg"
-        },
-        "streamingEndpointStarted": {
-          "type": "boolean",
-          "description": "Represents wether the media services streaming endpoint has started"
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The media services subscriptionId",
-          "example": "586d4f48-8f08-4a4e-96b7-e1892d6dba9e"
         }
       }
     },
