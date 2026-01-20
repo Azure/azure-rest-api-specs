@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "migrationMode": "Offline",
+    "migrationName": "examplemigration",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "location": "eastus",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps"
+            },
+            "error": "",
+            "state": "InProgress"
+          },
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "overwriteDbsInTarget": "False",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "sourceDbServerMetadata": {
+            "location": "eastus",
+            "sku": {
+              "name": "B_Gen5_2",
+              "tier": "Basic"
+            },
+            "storageMb": 1024,
+            "version": "10"
+          },
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "startDataMigration": "False",
+          "targetDbServerMetadata": {
+            "location": "eastus",
+            "sku": {
+              "name": "Standard_D4ds_v5",
+              "tier": "GeneralPurpose"
+            },
+            "storageMb": 2048,
+            "version": "17"
+          },
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "triggerCutover": "False"
+        }
+      }
+    }
+  },
+  "operationId": "Migrations_Get",
+  "title": "Get information about a migration."
+}

@@ -12,5 +12,5 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.AppConfiguration,
   "AppConfigurationManagementClient",
-  "javascript"
+  "javascript,python"
 );
