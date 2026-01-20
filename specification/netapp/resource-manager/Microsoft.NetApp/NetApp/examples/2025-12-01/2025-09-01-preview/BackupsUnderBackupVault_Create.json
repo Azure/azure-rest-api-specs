@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-09-01-preview",
+    "backupName": "backup1",
+    "backupVaultName": "backupVault1",
+    "body": {
+      "properties": {
+        "label": "myLabel",
+        "volumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPool/pool1/volumes/volume1"
+      }
+    },
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "account1/backupVault1/backup1",
+        "type": "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1/backups/backup1",
+        "properties": {
+          "backupType": "Manual",
+          "creationDate": "2017-08-15T13:23:33Z",
+          "label": "myLabel",
+          "provisioningState": "Succeeded",
+          "size": 10011,
+          "snapshotName": "backup1",
+          "volumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPool/pool1/volumes/volume1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "account1/backupVault1/backup1",
+        "type": "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1/backups/backup1",
+        "properties": {
+          "backupType": "Manual",
+          "creationDate": "2017-08-15T13:23:33Z",
+          "label": "myLabel",
+          "provisioningState": "Succeeded",
+          "size": 10011,
+          "snapshotName": "backup1",
+          "volumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPool/pool1/volumes/volume1"
+        }
+      }
+    }
+  },
+  "operationId": "Backups_Create",
+  "title": "BackupsUnderBackupVault_Create"
+}
