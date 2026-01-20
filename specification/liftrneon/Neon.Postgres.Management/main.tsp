@@ -79,19 +79,20 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
-
+  
   @doc("Action to retrieve the PostgreSQL versions.")
   @added(Neon.Postgres.Versions.v2_preview)
-  getPostgresVersions is ArmResourceActionSync<
-    OrganizationResource,
-    PgVersion,
-    ArmResponse<PgVersionsResult>
-  >;
-}
+  @autoRoute
+  @armResourceAction(OrganizationResource)
+  @post
+  getPostgresVersions(
+    ...ResourceInstanceParameters<PgVersion>,
 
-@@doc(Organizations.getPostgresVersions::parameters.body,
-  "Post Action to retrieve the PostgreSQL versions."
-);
+    @doc("Post Action to retrieve the PostgreSQL versions.")
+    @body
+    parameters?: PgVersion,
+  ): ArmResponse<PgVersionsResult> | ErrorResponse;
+}
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
