@@ -611,60 +611,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "Apps_Update",
-        "tags": [
-          "Apps"
-        ],
-        "description": "Update a ManagedApp",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "managedAppName",
-            "in": "path",
-            "description": "The name of the ManagedApp",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ManagedAppUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ManagedApp"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a ManagedApp": {
-            "$ref": "./examples/Apps_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "Apps_Delete",
         "tags": [
@@ -728,7 +674,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/deployments": {
       "get": {
-        "operationId": "Apps_AppDeployments",
+        "operationId": "Apps_Deployments",
         "tags": [
           "Apps"
         ],
@@ -764,11 +710,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the deployments for a given App Revision or Managed App.": {
-            "$ref": "./examples/Apps_AppDeployments.json"
           }
         }
       }
@@ -880,7 +821,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/revisions/{revisionName}/deployments": {
       "get": {
-        "operationId": "Revisions_RevisionDeployments",
+        "operationId": "Revisions_Deployments",
         "tags": [
           "Revisions"
         ],
@@ -924,11 +865,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List deployments for an app revision": {
-            "$ref": "./examples/Revisions_RevisionDeployments.json"
           }
         }
       }
@@ -2792,7 +2728,7 @@
       "type": "object",
       "description": "Maps a string key to a path within a volume.",
       "properties": {
-        "key": {
+        "keyName": {
           "type": "string",
           "description": "The key to project."
         },
@@ -2807,7 +2743,7 @@
         }
       },
       "required": [
-        "key",
+        "keyName",
         "path"
       ]
     },
@@ -2831,7 +2767,7 @@
             "$ref": "#/definitions/ConfigMapKeyToPath"
           },
           "x-ms-identifiers": [
-            "key"
+            "keyName"
           ]
         },
         "optional": {
@@ -3443,33 +3379,6 @@
         "value"
       ]
     },
-    "ManagedAppUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the ManagedApp.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ManagedAppUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "ManagedAppUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the ManagedApp.",
-      "properties": {
-        "template": {
-          "$ref": "#/definitions/AppTemplate",
-          "description": "Template for the app"
-        }
-      }
-    },
     "ManagedCluster": {
       "type": "object",
       "description": "Represents a managed cluster. Just a placeholder until rest of aks is converted to typespec",
@@ -3523,14 +3432,14 @@
         },
         "resources": {
           "type": "array",
-          "description": "Resources",
+          "description": "Resources in the api groups",
           "items": {
             "type": "string"
           }
         },
         "verbs": {
           "type": "array",
-          "description": "Verbs",
+          "description": "Verbs that are allowed for these groups/resources. i.e. \"GET\", \"CREATE\", etc",
           "items": {
             "type": "string"
           }
@@ -3855,37 +3764,37 @@
           {
             "name": "Pending",
             "value": "pending",
-            "description": "Pending"
+            "description": "Stage is Pending"
           },
           {
             "name": "InProgress",
             "value": "inProgress",
-            "description": "InProgress"
+            "description": "Stage is InProgress"
           },
           {
             "name": "PassedHealthCheck",
             "value": "passedHealthCheck",
-            "description": "PassedHealthCheck"
+            "description": "Stage has passed the defined health checks on the app"
           },
           {
             "name": "Unhealthy",
             "value": "unhealthy",
-            "description": "Unhealthy"
+            "description": "Stage is Unhealthy"
           },
           {
             "name": "Baking",
             "value": "baking",
-            "description": "Baking"
+            "description": "Stage is Baking"
           },
           {
             "name": "Completed",
             "value": "completed",
-            "description": "Completed"
+            "description": "Stage is Completed"
           },
           {
             "name": "Canceled",
             "value": "canceled",
-            "description": "Canceled"
+            "description": "Stage is Canceled"
           }
         ]
       }
@@ -3955,7 +3864,7 @@
           {
             "name": "Autoscale",
             "value": "autoscale",
-            "description": "Autoscale"
+            "description": "Auto scale"
           },
           {
             "name": "Manual",
@@ -3969,7 +3878,7 @@
       "type": "object",
       "description": "Maps a string key to a path within a volume.",
       "properties": {
-        "key": {
+        "keyName": {
           "type": "string",
           "description": "The key to project."
         },
@@ -3984,7 +3893,7 @@
         }
       },
       "required": [
-        "key",
+        "keyName",
         "path"
       ]
     },
@@ -4008,7 +3917,7 @@
             "$ref": "#/definitions/SecretKeyToPath"
           },
           "x-ms-identifiers": [
-            "key"
+            "keyName"
           ]
         },
         "optional": {
@@ -4024,7 +3933,7 @@
       "type": "string",
       "description": "Storage medium type for EmptyDir volume.",
       "enum": [
-        "",
+        "Default",
         "Memory",
         "HugePages"
       ],
@@ -4034,7 +3943,7 @@
         "values": [
           {
             "name": "Default",
-            "value": "",
+            "value": "Default",
             "description": "Use default storage medium for the node"
           },
           {

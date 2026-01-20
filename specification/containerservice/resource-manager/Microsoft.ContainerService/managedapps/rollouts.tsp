@@ -99,25 +99,25 @@ model RolloutStage {
 
 /** State of the Rollout Stage */
 union RolloutStageState {
-  /** Pending */
+  /** Stage is Pending */
   Pending: "pending",
 
-  /** InProgress */
+  /** Stage is InProgress */
   InProgress: "inProgress",
 
-  /** PassedHealthCheck */
+  /** Stage has passed the defined health checks on the app */
   PassedHealthCheck: "passedHealthCheck",
 
-  /** Unhealthy */
+  /** Stage is Unhealthy */
   Unhealthy: "unhealthy",
 
-  /** Baking */
+  /** Stage is Baking */
   Baking: "baking",
 
-  /** Completed */
+  /** Stage is Completed */
   Completed: "completed",
 
-  /** Canceled */
+  /** Stage is Canceled */
   Canceled: "canceled",
 
   string,

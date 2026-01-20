@@ -23,7 +23,7 @@ model Volume {
 /** Storage medium type for EmptyDir volume. */
 union StorageMedium {
   /** Use default storage medium for the node */
-  Default: "",
+  Default: "Default",
 
   /** Use memory (e.g. tmpfs on linux) */
   Memory: "Memory",
@@ -52,7 +52,7 @@ model ConfigMapVolume {
   defaultMode?: int32;
 
   /** If unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file. */
-  @identifiers(#["key"])
+  @identifiers(#["keyName"])
   items?: ConfigMapKeyToPath[];
 
   /** Specify whether the ConfigMap or its keys must be defined. */
@@ -62,7 +62,7 @@ model ConfigMapVolume {
 /** Maps a string key to a path within a volume. */
 model ConfigMapKeyToPath {
   /** The key to project. */
-  key: string;
+  keyName: string;
 
   /** The relative path of the file to map the key to. */
   path: string;
@@ -80,7 +80,7 @@ model SecretVolume {
   defaultMode?: int32;
 
   /** If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file. */
-  @identifiers(#["key"])
+  @identifiers(#["keyName"])
   items?: SecretKeyToPath[];
 
   /** Specify whether the Secret or its keys must be defined. */
@@ -90,7 +90,7 @@ model SecretVolume {
 /** Maps a string key to a path within a volume. */
 model SecretKeyToPath {
   /** The key to project. */
-  key: string;
+  keyName: string;
 
   /** The relative path of the file to map the key to. */
   path: string;

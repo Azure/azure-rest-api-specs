@@ -228,7 +228,7 @@ model IngressProperties {
 
 /** Scaling type for the app */
 union ScalingType {
-  /** Autoscale */
+  /** Auto scale */
   Autoscale: "autoscale",
 
   /** Manual scale */
@@ -255,10 +255,10 @@ model Permissions {
   /** API groups */
   apiGroups?: string[];
 
-  /** Resources */
+  /** Resources in the api groups */
   resources?: string[];
 
-  /** Verbs */
+  /** Verbs that are allowed for these groups/resources. i.e. "GET", "CREATE", etc */
   verbs?: string[];
 }
 
@@ -377,17 +377,10 @@ interface Apps {
   // Managed App Operations
   get is ArmResourceRead<ManagedApp>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedApp>;
-  update is ArmCustomPatchSync<
-    ManagedApp,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      ManagedApp,
-      AppProperties
-    >
-  >;
   delete is ArmResourceDeleteWithoutOkAsync<ManagedApp>;
   listByResourceGroup is ArmResourceListByParent<ManagedApp>;
   listBySubscription is ArmListBySubscription<ManagedApp>;
-  appDeployments is ListDeployments<ManagedApp>;
+  deployments is ListDeployments<ManagedApp>;
 }
 
 @armResourceOperations
@@ -396,7 +389,7 @@ interface Revisions {
   list is ArmResourceListByParent<Revision>;
   get is ArmResourceRead<Revision>;
   /** List deployments for an app revision */
-  revisionDeployments is ListDeployments<Revision>;
+  deployments is ListDeployments<Revision>;
   latestRevision is GetLatestRevision<Revision, Revision>;
 }
 
