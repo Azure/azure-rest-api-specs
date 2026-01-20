@@ -50,34 +50,6 @@ model Investigation {
   ...WithTitle;
 }
 
-@doc("Enumeration for run cache.")
-union RunCacheMode {
-  /** Cache run results */
-  Cache: "Cache",
-
-  /** Don't cache run results' */
-  NoCache: "NoCache",
-
-  string,
-}
-
-@doc("Run parameters.")
-model RunParams {
-  @doc("Storage asset to which run results output will be written")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  @added(Versions.`2026-02-01-preview`)
-  outputStorageAssetId: StorageAssetId;
-
-  @doc("Data asset to which run results output will be written")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  @removed(Versions.`2026-02-01-preview`)
-  outputDataAssetId: DataAssetId;
-
-  @doc("Caching behavior")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  cacheMode: RunCacheMode;
-}
-
 @doc("Collection of data assets linked to an investigation.")
 @removed(Versions.`2026-02-01-preview`)
 model InvestigationDataAssets {

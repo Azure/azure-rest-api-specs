@@ -35,6 +35,16 @@ union IndexingStatus {
   string,
 }
 
+@doc("Reference to a storage asset with identity information.")
+@added(Versions.`2026-02-01-preview`)
+model StorageAssetReference {
+  @doc("The ARM resource ID of the storage asset.")
+  id: StorageAssetId;
+
+  @doc("The ARM resource ID of the User Assigned Managed Identity to access the storage asset.")
+  userAssignedIdentity: UserAssignedIdentityId;
+}
+
 @doc("A knowledgeBase.")
 model BaseKnowledgeBase {
   ...WithId;
@@ -47,10 +57,10 @@ model BaseKnowledgeBase {
   @visibility(Lifecycle.Read)
   bookshelfName: string;
 
-  @doc("Catalog storage assets to index.")
+  @doc("Storage asset references to index.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @added(Versions.`2026-02-01-preview`)
-  storageAssetIds: StorageAssetId[];
+  storageAssetReferences: StorageAssetReference[];
 
   @doc("Catalog data assets to index.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

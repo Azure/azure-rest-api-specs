@@ -255,6 +255,13 @@ alias DataAssetId = Azure.Core.armResourceIdentifier<[
   }
 ]>;
 
+/** ARM Resource ID for User Assigned Managed Identity. */
+alias UserAssignedIdentityId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+  }
+]>;
+
 /** ARM Resource ID for Discovery Storage resources. */
 alias DiscoveryStorageId = Azure.Core.armResourceIdentifier<[
   {
