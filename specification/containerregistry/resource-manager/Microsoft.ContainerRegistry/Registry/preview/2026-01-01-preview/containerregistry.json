@@ -6514,11 +6514,13 @@
         "values": [
           {
             "name": "IPv4",
-            "value": "IPv4"
+            "value": "IPv4",
+            "description": "IPv4 connectivity only"
           },
           {
             "name": "IPv4AndIPv6",
-            "value": "IPv4AndIPv6"
+            "value": "IPv4AndIPv6",
+            "description": "IPv4 and IPv6 (dual stack) connectivity"
           }
         ]
       }
@@ -8018,11 +8020,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Regional endpoints are enabled."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Regional endpoints are disabled."
           }
         ]
       }
@@ -8258,11 +8262,13 @@
             "values": [
               {
                 "name": "Enabled",
-                "value": "Enabled"
+                "value": "Enabled",
+                "description": "Regional endpoints are enabled."
               },
               {
                 "name": "Disabled",
-                "value": "Disabled"
+                "value": "Disabled",
+                "description": "Regional endpoints are disabled."
               }
             ]
           }
@@ -8553,12 +8559,12 @@
       "description": "The registry sync result of the connected registry.",
       "properties": {
         "syncTrigger": {
-          "type": "string",
+          "$ref": "#/definitions/SyncTrigger",
           "description": "The action that triggered the most recent registry sync.",
           "readOnly": true
         },
         "syncState": {
-          "type": "string",
+          "$ref": "#/definitions/SyncState",
           "description": "The status of the connected registry's most recent sync.",
           "readOnly": true
         },
@@ -9204,6 +9210,90 @@
         "tokenId",
         "messageTtl"
       ]
+    },
+    "SyncState": {
+      "type": "string",
+      "description": "The status of the connected registry's most recent sync.",
+      "enum": [
+        "SyncTokenUpdate",
+        "InitialSync",
+        "ManualResync",
+        "RecoveryService"
+      ],
+      "x-ms-enum": {
+        "name": "SyncState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SyncTokenUpdate",
+            "value": "SyncTokenUpdate",
+            "description": "Connected Registry sync was triggered by a sync token update"
+          },
+          {
+            "name": "InitialSync",
+            "value": "InitialSync",
+            "description": "Connected Registry sync was triggered by an initial sync during activation"
+          },
+          {
+            "name": "ManualResync",
+            "value": "ManualResync",
+            "description": "Connected Registry sync was triggered by a manual resync request"
+          },
+          {
+            "name": "RecoveryService",
+            "value": "RecoveryService",
+            "description": "Connected Registry sync was triggered by the Connected Registry's recovery service"
+          }
+        ]
+      }
+    },
+    "SyncTrigger": {
+      "type": "string",
+      "description": "The action that triggered the most recent registry sync.",
+      "enum": [
+        "NotActivated",
+        "Syncing",
+        "Failed",
+        "Succeeded",
+        "TimedOut",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "SyncTrigger",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotActivated",
+            "value": "NotActivated",
+            "description": "Connected Registry is not activated"
+          },
+          {
+            "name": "Syncing",
+            "value": "Syncing",
+            "description": "Connected Registry is syncing"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Connected Registry sync failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Connected Registry sync succeeded"
+          },
+          {
+            "name": "TimedOut",
+            "value": "TimedOut",
+            "description": "Connected Registry sync timed out"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Connected Registry sync is pending"
+          }
+        ]
+      }
     },
     "SyncUpdateProperties": {
       "type": "object",
