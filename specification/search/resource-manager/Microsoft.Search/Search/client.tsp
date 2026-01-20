@@ -664,95 +664,95 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(UsagesOperationGroup.listBySubscription,
   usagesListBySubscriptionCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(usageBySubscriptionSku,
   usageBySubscriptionSkuCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listBySubscription,
   searchServicesListBySubscriptionCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listByResourceGroup,
   searchServicesListByResourceGroupCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.get,
   searchGetCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.createOrUpdate,
   searchCreateOrUpdateCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.update,
   searchUpdateCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.delete,
   searchDeleteCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.create,
   queryKeysCreateCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.queryKeysDelete,
   queryKeysDeleteCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.adminKeysGet,
   adminKeysGetCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listBySearchService,
   queryKeysListBySearchServiceCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.listByService,
   privateEndpointConnectionsListByServiceCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.update,
   privateEndpointConnectionsUpdateCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listSupported,
   privateLinkResourcesListSupportedCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.regenerate,
   privateLinkResourcesRegenerateCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.listByService,
   SharedPrivateLinkResourcesListByServiceCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.get,
   SharedPrivateLinkResourcesGetCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.createOrUpdate,
   SharedPrivateLinkResourcesCreateOrUpdateCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.delete,
   SharedPrivateLinkResourcesDeleteCustomization,
-  "!java,!python"
+  "!java,!python,!javascript"
 );
 
 @@clientName(Microsoft.Search, "SearchManagementClient", "python, javascript");
@@ -858,7 +858,7 @@ model AccessRulePropertiesSubscriptionsItem {
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
-  "go,python"
+  "go,python,javascript"
 );
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
