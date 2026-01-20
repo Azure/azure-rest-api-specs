@@ -5106,17 +5106,26 @@
         "region": {
           "type": "string",
           "description": "Region where Drill's internal resources will be created."
-        },
-        "identity": {
-          "$ref": "#/definitions/AssociatedIdentity",
-          "description": "Identity to use for Drill operations."
         }
       },
       "required": [
         "subscription",
-        "region",
-        "identity"
+        "region"
       ]
+    },
+    "AssetPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Drill asset properties.",
+      "properties": {
+        "subscription": {
+          "type": "string",
+          "description": "Subscription where Drill's internal resources will be created."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region where Drill's internal resources will be created."
+        }
+      }
     },
     "AssociatedIdentity": {
       "type": "object",
@@ -5284,6 +5293,13 @@
         "missingRequiredResourceProviders": {
           "type": "array",
           "description": "List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rbacNeededForDrillOnDrillMonitoringResources": {
+          "type": "array",
+          "description": "Permissions needed by the Drill MSI to Upload service group health data for monitoring.",
           "items": {
             "type": "string"
           }
@@ -5970,6 +5986,10 @@
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
+        },
+        "drillAssetProperties": {
+          "$ref": "#/definitions/AssetPropertiesOfDrill",
+          "description": "Properties for internal resources that are created for the Drill."
         }
       }
     },
@@ -6061,6 +6081,11 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "monitoringProperties": {
+          "$ref": "#/definitions/MonitoringPropertiesOfDrill",
+          "description": "Monitoring properties of the Drill.",
+          "readOnly": true
         }
       },
       "discriminator": "drillType",
@@ -6881,6 +6906,10 @@
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
+        },
+        "drillAssetProperties": {
+          "$ref": "#/definitions/AssetPropertiesOfDrillUpdate",
+          "description": "Properties for internal resources that are created for the Drill."
         }
       }
     },
@@ -8609,6 +8638,71 @@
           "readOnly": true
         }
       }
+    },
+    "MonitoringPropertiesOfDrill": {
+      "type": "object",
+      "description": "Drill monitoring properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to use for Health Model operations."
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        },
+        "rawMetricsDataCollectionRuleId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Data collection rule created by Resiliency service which will route data for RAW health data for service group resources.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/datacollectionrules"
+              }
+            ]
+          }
+        },
+        "serviceGroupMetricsDataCollectionRuleId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Data collection rule created by Resiliency service which will route data for Aggregate health data of service group.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/datacollectionrules"
+              }
+            ]
+          }
+        },
+        "dataCollectionEndpointId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Data collection endpoint created by Resiliency service which will route data for service group and its resources.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/dataCollectionEndpoints"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identity",
+        "logAnalyticsWorkspaceId",
+        "rawMetricsDataCollectionRuleId",
+        "serviceGroupMetricsDataCollectionRuleId",
+        "dataCollectionEndpointId"
+      ]
     },
     "NotQualifiedReasons": {
       "type": "string",
