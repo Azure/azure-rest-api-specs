@@ -3021,6 +3021,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the transition occurred"
+        },
+        "reason": {
+          "$ref": "#/definitions/string4096",
+          "description": "Reason of the transition"
         }
       },
       "required": [
@@ -3775,6 +3779,10 @@
         "healthState": {
           "$ref": "#/definitions/HealthState",
           "description": "Health state at this point in time"
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/string4096",
+          "description": "Additional context as provided by the submitter"
         }
       },
       "required": [

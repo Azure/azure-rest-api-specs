@@ -1100,6 +1100,9 @@ model HealthStateTransition {
 
   @doc("Timestamp when the transition occurred")
   occurredAt: utcDateTime;
+
+  @doc("Reason of the transition")
+  reason?: string4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1140,6 +1143,9 @@ model SignalHistoryDataPoint {
 
   @doc("Health state at this point in time")
   healthState: HealthState;
+
+  @doc("Additional context as provided by the submitter")
+  additionalContext?: string4096;
 }
 
 @added(Versions.v2026_01_01_preview)
