@@ -934,7 +934,6 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientName(Search.IndexerStatus, "IndexerStatusEnum", "go");
 @@clientNamespace(Search.IndexerRuntime, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.IndexerRuntime,
   "com.azure.search.documents.indexes",
@@ -2911,16 +2910,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(DocumentExtractionSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(DocumentIntelligenceLayoutSkill.`@odata.type`, "odataType");
 @@clientName(DocumentIntelligenceLayoutSkill.`@odata.type`,
-  "odatatype",
-  "javascript"
-);
-@@clientName(ContentUnderstandingSkill.`@odata.type`, "odataType");
-@@clientName(ContentUnderstandingSkill.`@odata.type`,
-  "odatatype",
-  "javascript"
-);
-@@clientName(Search.ChatCompletionSkill.`@odata.type`, "odataType");
-@@clientName(Search.ChatCompletionSkill.`@odata.type`,
   "odatatype",
   "javascript"
 );
