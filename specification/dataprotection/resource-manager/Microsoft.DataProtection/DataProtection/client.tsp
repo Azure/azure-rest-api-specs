@@ -79,6 +79,17 @@ using Microsoft.DataProtection;
   "javascript"
 );
 
+// C# client conventions
+@@scope(BackupInstances.getBackupInstanceOperationResult, "!csharp");
+@@scope(BackupVaultResources.exportJobsOperationResultGet, "!csharp");
+@@scope(Operations.list, "!csharp");
+@@scope(BackupVaultOperationResults.get, "!csharp");
+@@scope(BackupVaultOperationResults.getInResourceGroup, "!csharp");
+@@scope(OperationStatusResourceGroupContextOperationGroup.get, "!csharp");
+@@scope(BackupVaultResources.operationStatusBackupVaultContextGet, "!csharp");
+@@scope(OperationStatusOperationGroup.get, "!csharp");
+@@scope(OperationResultOperationGroup.get, "!csharp");
+
 @@clientName(AbsoluteDeleteOption,
   "DataProtectionBackupAbsoluteDeleteSetting",
   "csharp"
@@ -234,7 +245,7 @@ using Microsoft.DataProtection;
   "DataProtectionBackupNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityRequest.type, "-", "csharp");
+@@alternateType(CheckNameAvailabilityRequest.type, armResourceType, "csharp");
 @@clientName(CheckNameAvailabilityResult,
   "DataProtectionBackupNameAvailabilityResult",
   "csharp"
@@ -285,13 +296,13 @@ using Microsoft.DataProtection;
 @@clientName(Datasource.datasourceType, "DataSourceType", "csharp");
 @@alternateType(Datasource.resourceID, armResourceIdentifier, "csharp");
 @@alternateType(Datasource.resourceLocation, azureLocation, "csharp");
-@@clientName(Datasource.resourceType, "-", "csharp");
+@@alternateType(Datasource.resourceType, armResourceType, "csharp");
 @@clientName(Datasource.resourceUri, "ResourceUriString", "csharp");
 @@clientName(DatasourceSet, "DataSourceSetInfo", "csharp");
 @@clientName(DatasourceSet.datasourceType, "DataSourceType", "csharp");
 @@alternateType(DatasourceSet.resourceID, armResourceIdentifier, "csharp");
 @@alternateType(DatasourceSet.resourceLocation, azureLocation, "csharp");
-@@clientName(DatasourceSet.resourceType, "-", "csharp");
+@@alternateType(DatasourceSet.resourceType, armResourceType, "csharp");
 @@clientName(DatasourceSet.resourceUri, "ResourceUriString", "csharp");
 @@clientName(DataStoreParameters, "DataStoreSettings", "csharp");
 @@clientName(Day, "DataProtectionBackupDay", "csharp");
@@ -442,7 +453,10 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(ResourceGuardOperation, "ResourceGuardOperationDetails", "csharp");
-@@clientName(ResourceGuardOperation.requestResourceType, "-", "csharp");
+@@alternateType(ResourceGuardOperation.requestResourceType,
+  armResourceType,
+  "csharp"
+);
 @@clientName(ResourceGuardResource, "ResourceGuard", "csharp");
 @@clientName(ResourceMoveDetails, "BackupVaultResourceMoveDetails", "csharp");
 @@alternateType(ResourceMoveDetails.completionTimeUtc, utcDateTime, "csharp");
