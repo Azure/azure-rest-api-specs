@@ -389,6 +389,10 @@ model StatusSummary {
   @doc("Total image scans failed")
   @added(Versions.v2024_11_01_preview)
   totalImageScansFailed?: int32;
+
+  @doc("Total images charged by the API")
+  @added(Versions.v2025_12_01_preview)
+  totalImageCharged?: int64;
 }
 
 @doc("Document Status Response")
@@ -436,6 +440,14 @@ model DocumentStatus {
   @doc("Total image scans failed")
   @added(Versions.v2024_11_01_preview)
   totalImageScansFailed?: int32;
+
+  @doc("Images charged by the API")
+  @added(Versions.v2025_12_01_preview)
+  imageCharged?: int32;
+
+  @doc("Characters detected within images")
+  @added(Versions.v2025_12_01_preview)
+  imageCharacterDetected?: int32;
 }
 
 @doc("Documents Status Response")
