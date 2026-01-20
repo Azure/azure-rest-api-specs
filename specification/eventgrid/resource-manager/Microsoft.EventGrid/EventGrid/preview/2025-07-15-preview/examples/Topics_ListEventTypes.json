@@ -1,38 +1,40 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-07-15-preview",
     "providerNamespace": "Microsoft.Storage",
-    "resourceTypeName": "storageAccounts",
+    "resourceGroupName": "examplerg",
     "resourceName": "ExampleStorageAccount",
-    "api-version": "2025-07-15-preview"
+    "resourceTypeName": "storageAccounts",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "name": "Microsoft.Storage.BlobCreated",
+            "type": "Microsoft.EventGrid/topicTypes/eventTypes",
+            "id": "providers/Microsoft.EventGrid/topicTypes/Microsoft.Storage.StorageAccounts/eventTypes/Microsoft.Storage.BlobCreated",
             "properties": {
               "description": "Raised when a blob is created.",
-              "schemaUrl": "tbd",
-              "displayName": "Blob Created"
-            },
-            "id": "providers/Microsoft.EventGrid/topicTypes/Microsoft.Storage.StorageAccounts/eventTypes/Microsoft.Storage.BlobCreated",
-            "name": "Microsoft.Storage.BlobCreated",
-            "type": "Microsoft.EventGrid/topicTypes/eventTypes"
+              "displayName": "Blob Created",
+              "schemaUrl": "tbd"
+            }
           },
           {
+            "name": "Microsoft.Storage.BlobDeleted",
+            "type": "Microsoft.EventGrid/topicTypes/eventTypes",
+            "id": "providers/Microsoft.EventGrid/topicTypes/Microsoft.Storage.StorageAccounts/eventTypes/Microsoft.Storage.BlobDeleted",
             "properties": {
               "description": "Raised when a blob is deleted.",
-              "schemaUrl": "tbd",
-              "displayName": "Blob Deleted"
-            },
-            "id": "providers/Microsoft.EventGrid/topicTypes/Microsoft.Storage.StorageAccounts/eventTypes/Microsoft.Storage.BlobDeleted",
-            "name": "Microsoft.Storage.BlobDeleted",
-            "type": "Microsoft.EventGrid/topicTypes/eventTypes"
+              "displayName": "Blob Deleted",
+              "schemaUrl": "tbd"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Topics_ListEventTypes",
+  "title": "Topics_ListEventTypes"
 }

@@ -1,8 +1,7 @@
 {
   "parameters": {
-    "scope": "subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1",
-    "eventSubscriptionName": "examplesubscription1",
     "api-version": "2025-07-15-preview",
+    "eventSubscriptionName": "examplesubscription1",
     "eventSubscriptionUpdateParameters": {
       "destination": {
         "endpointType": "WebHook",
@@ -19,17 +18,21 @@
         "label1",
         "label2"
       ]
-    }
+    },
+    "scope": "subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1"
   },
   "responses": {
     "201": {
       "body": {
+        "name": "examplesubscription1",
+        "type": "Microsoft.EventGrid/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
         "properties": {
           "destination": {
+            "endpointType": "WebHook",
             "properties": {
               "endpointBaseUrl": "https://requestb.in/15ksip71"
-            },
-            "endpointType": "WebHook"
+            }
           },
           "filter": {
             "isSubjectCaseSensitive": true,
@@ -39,11 +42,10 @@
           "labels": [],
           "provisioningState": "Succeeded",
           "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
-        "name": "examplesubscription1",
-        "type": "Microsoft.EventGrid/eventSubscriptions"
+        }
       }
     }
-  }
+  },
+  "operationId": "EventSubscriptions_Update",
+  "title": "EventSubscriptions_UpdateForResource"
 }

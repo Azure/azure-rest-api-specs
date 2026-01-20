@@ -1,47 +1,49 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
-    "topicName": "exampletopic1",
     "api-version": "2025-07-15-preview",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
     "topicInfo": {
-      "location": "westus2",
-      "tags": {
-        "tag1": "value1",
-        "tag2": "value2"
-      },
-      "kind": "AzureArc",
       "extendedLocation": {
         "name": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourcegroups/examplerg/providers/Microsoft.ExtendedLocation/CustomLocations/exampleCustomLocation",
         "type": "CustomLocation"
       },
+      "kind": "AzureArc",
+      "location": "westus2",
       "properties": {
         "inputSchema": "CloudEventSchemaV1_0"
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
       }
-    }
+    },
+    "topicName": "exampletopic1"
   },
   "responses": {
     "201": {
       "body": {
-        "properties": {
-          "endpoint": "https://exampletopic1.westus2-1.eventgrid.azure.net/api/events",
-          "provisioningState": "Succeeded",
-          "inputSchema": "CloudEventSchemaV1_0"
-        },
-        "kind": "AzureArc",
+        "name": "exampletopic1",
+        "type": "Microsoft.EventGrid/topics",
         "extendedLocation": {
           "name": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourcegroups/examplerg/providers/Microsoft.ExtendedLocation/CustomLocations/exampleCustomLocation",
           "type": "CustomLocation"
         },
         "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1",
+        "kind": "AzureArc",
         "location": "westus2",
-        "name": "exampletopic1",
+        "properties": {
+          "endpoint": "https://exampletopic1.westus2-1.eventgrid.azure.net/api/events",
+          "inputSchema": "CloudEventSchemaV1_0",
+          "provisioningState": "Succeeded"
+        },
         "tags": {
           "tag1": "value1",
           "tag2": "value2"
-        },
-        "type": "Microsoft.EventGrid/topics"
+        }
       }
     }
-  }
+  },
+  "operationId": "Topics_CreateOrUpdate",
+  "title": "Topics_CreateOrUpdateForAzureArc"
 }

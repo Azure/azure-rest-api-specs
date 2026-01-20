@@ -1,46 +1,48 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
-    "namespaceName": "examplenamespace2",
-    "topicName": "examplenamespacetopic2",
     "api-version": "2025-07-15-preview",
+    "namespaceName": "examplenamespace2",
     "namespaceTopicInfo": {
       "properties": {
-        "publisherType": "Custom",
+        "eventRetentionInDays": 1,
         "inputSchema": "CloudEventSchemaV1_0",
-        "eventRetentionInDays": 1
+        "publisherType": "Custom"
       }
-    }
+    },
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "topicName": "examplenamespacetopic2"
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "provisioningState": "Succeeded",
-          "publisherType": "Custom",
-          "inputSchema": "CloudEventSchemaV1_0",
-          "eventRetentionInDays": 1
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/examplenamespacetopic2",
         "name": "examplenamespacetopic2",
         "type": "Microsoft.EventGrid/namespaces/topics",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/examplenamespacetopic2",
+        "properties": {
+          "eventRetentionInDays": 1,
+          "inputSchema": "CloudEventSchemaV1_0",
+          "provisioningState": "Succeeded",
+          "publisherType": "Custom"
+        },
         "systemData": null
       }
     },
     "201": {
       "body": {
-        "properties": {
-          "provisioningState": "Creating",
-          "publisherType": "Custom",
-          "inputSchema": "CloudEventSchemaV1_0",
-          "eventRetentionInDays": 1
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/examplenamespacetopic2",
         "name": "examplenamespacetopic2",
         "type": "Microsoft.EventGrid/namespaces/topics",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/examplenamespacetopic2",
+        "properties": {
+          "eventRetentionInDays": 1,
+          "inputSchema": "CloudEventSchemaV1_0",
+          "provisioningState": "Creating",
+          "publisherType": "Custom"
+        },
         "systemData": null
       }
     }
-  }
+  },
+  "operationId": "NamespaceTopics_CreateOrUpdate",
+  "title": "NamespaceTopics_CreateOrUpdate"
 }

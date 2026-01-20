@@ -1,48 +1,50 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-07-15-preview",
     "domainName": "exampleDomain1",
-    "topicName": "exampleDomainTopic1",
     "eventSubscriptionName": "examplesubscription1",
-    "api-version": "2025-07-15-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "topicName": "exampleDomainTopic1"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "examplesubscription1",
+        "type": "Microsoft.EventGrid/domains/domainTopics/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1/eventSubscriptions/examplesubscription1",
         "properties": {
-          "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1",
-          "provisioningState": "Succeeded",
           "destination": {
+            "endpointType": "StorageQueue",
             "properties": {
-              "resourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.Storage/storageAccounts/testtrackedsource",
-              "queueName": "que"
-            },
-            "endpointType": "StorageQueue"
+              "queueName": "que",
+              "resourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.Storage/storageAccounts/testtrackedsource"
+            }
           },
+          "eventDeliverySchema": "EventGridSchema",
           "filter": {
-            "isSubjectCaseSensitive": false,
-            "subjectBeginsWith": "ExamplePrefix",
-            "subjectEndsWith": "ExampleSuffix",
             "includedEventTypes": [
               "Microsoft.Storage.BlobCreated",
               "Microsoft.Storage.BlobDeleted"
-            ]
+            ],
+            "isSubjectCaseSensitive": false,
+            "subjectBeginsWith": "ExamplePrefix",
+            "subjectEndsWith": "ExampleSuffix"
           },
           "labels": [
             "label1",
             "label2"
           ],
-          "eventDeliverySchema": "EventGridSchema",
+          "provisioningState": "Succeeded",
           "retryPolicy": {
-            "maxDeliveryAttempts": 30,
-            "eventTimeToLiveInMinutes": 1440
-          }
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1/eventSubscriptions/examplesubscription1",
-        "name": "examplesubscription1",
-        "type": "Microsoft.EventGrid/domains/domainTopics/eventSubscriptions"
+            "eventTimeToLiveInMinutes": 1440,
+            "maxDeliveryAttempts": 30
+          },
+          "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1"
+        }
       }
     }
-  }
+  },
+  "operationId": "DomainTopicEventSubscriptions_Get",
+  "title": "DomainTopicEventSubscriptions_Get"
 }
