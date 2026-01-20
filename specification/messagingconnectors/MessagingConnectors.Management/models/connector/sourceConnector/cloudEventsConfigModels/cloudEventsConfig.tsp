@@ -64,7 +64,7 @@ model CatalogMessageSelf {
   messageGroupId: string;
 
   @doc("Id of message.")
-  messageId: string;
+  messageId?: string;
 }
 
 @doc("EventSchemaSet cloud events transform config.")
@@ -80,20 +80,8 @@ model EventSchemaSetCloudEventsConfig extends CloudEventsConfig {
   authentication: Models.Auth.Authentication;
 }
 
-@doc("Types of register")
-union AutoRegisterType {
-  @doc("AutoRegister type")
-  CdcAutoRegister: "CdcAutoRegister",
-
-  string,
-}
-
 @doc("Base configuration for schema autoRegister.")
-@discriminator("type")
 model AutoRegisterConfig {
-  @doc("Type of register")
-  type: AutoRegisterType;
-
   @doc("The catalog endpoint  of auto register schema.")
   catalogEndpoint: string;
 
@@ -102,14 +90,8 @@ model AutoRegisterConfig {
 
   @doc("The schema group id of auto register schema.")
   schemaGroupId: string;
-}
 
-@doc("Configuration for CdcAutoRegister")
-model CdcAutoRegisterConfig extends AutoRegisterConfig {
-  @doc("Type of CdcAutoRegister.")
-  type: AutoRegisterType.CdcAutoRegister;
-
-  @doc("The source of auto register schema.")
+  @doc("The cloud event source of auto register schema.")
   cloudEventSource: string;
 }
 
@@ -126,5 +108,5 @@ model CdcEventSchemaSetCloudEventsConfig extends CloudEventsConfig {
   authentication: Models.Auth.Authentication;
 
   @doc("Configuration for register")
-  autoRegisterConfig: CdcAutoRegisterConfig;
+  autoRegisterConfig?: AutoRegisterConfig;
 }

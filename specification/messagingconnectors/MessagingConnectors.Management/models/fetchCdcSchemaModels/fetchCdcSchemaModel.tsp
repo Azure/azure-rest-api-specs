@@ -39,55 +39,6 @@ model SchemaRequestProperties {
   format: SchemaFormat;
 }
 
-@doc("Schema Properties Types")
-union SchemaPropertiesType {
-  @doc("change data capture(CDC) Schema Properties Types")
-  Cdc: "Cdc",
-
-  string,
-}
-
-@doc("special connector SchemaProperties")
-@discriminator("type")
-model SchemaProperties {
-  type: SchemaPropertiesType;
-}
-
-@doc("change data capture(cdc) event type")
-union CdcEventType {
-  @doc("DataChange type")
-  DataChange: "DataChange",
-
-  @doc("SchemaChange type")
-  SchemaChange: "SchemaChange",
-
-  string,
-}
-
-@doc("cdc table name")
-model TableId {
-  @doc("database name of table")
-  databaseName: string;
-
-  @doc("schema name of table")
-  schemaName: string;
-
-  @doc("table name of table")
-  tableName: string;
-}
-
-@doc("cdc connector SchemaProperties")
-model CdcSchemaProperties extends SchemaProperties {
-  @doc("cdc SchemaProperties type")
-  type: SchemaPropertiesType.Cdc;
-
-  @doc("cdc event type")
-  cdcEventType: CdcEventType;
-
-  @doc("table id")
-  tableId: TableId;
-}
-
 @doc("Response item of Schema")
 model Schema {
   @doc("Schema format")
