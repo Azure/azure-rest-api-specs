@@ -178,8 +178,7 @@ using Azure.Core;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op VaultsGetDeletedCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<DeletedVault>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -197,8 +196,7 @@ op VaultsGetDeletedCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op VaultsPurgeDeletedCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<DeletedVault>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
