@@ -88,7 +88,7 @@ model RolloutStage {
   desiredAppRevisionId: AppRevisionId;
 
   /** The app deployment to which this rollout stage applies */
-  deployment: AppDeployment;
+  deployment: AppDeploymentId;
 
   /** Time to bake after deployment before proceeding to the next stage, in minutes */
   bakeTimeInMinutes: int32 = 1440;

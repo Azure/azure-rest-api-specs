@@ -1,0 +1,36 @@
+{
+  "operationId": "Rollouts_Rollback",
+  "title": "Rollback the app deployment to the previous revision",
+  "parameters": {
+    "api-version": "2026-06-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "managedAppName": "app1",
+    "rolloutName": "rollout1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1/appDeployments/appdeployment1",
+        "name": "appdeployment1",
+        "type": "Microsoft.ContainerService/managedClusters/appDeployments",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "appRevisionId": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedApps/app1/revisions/revision1",
+          "namespace": "default",
+          "generatedServiceAccountName": "sa-appdeployment1-default",
+          "generatedKubernetesServiceName": "svc-appdeployment1-default",
+          "fqdn": "appdeployment1.example.com"
+        },
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2026-01-20T10:00:00.000Z",
+          "lastModifiedBy": "someUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-20T12:00:00.000Z"
+        }
+      }
+    }
+  }
+}

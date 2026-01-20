@@ -1,0 +1,39 @@
+{
+  "operationId": "Revisions_LatestRevision",
+  "title": "Gets the latest revision for a managed app",
+  "parameters": {
+    "api-version": "2026-06-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "managedAppName": "app1",
+    "revisionName": "revision1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedApps/app1/revisions/revision2",
+        "name": "revision2",
+        "type": "Microsoft.ContainerService/managedApps/revisions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "template": {
+            "template": {
+              "image": "mcr.microsoft.com/app:v2",
+              "command": [
+                "/app"
+              ]
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2026-01-20T11:00:00.000Z",
+          "lastModifiedBy": "someUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-20T11:00:00.000Z"
+        }
+      }
+    }
+  }
+}

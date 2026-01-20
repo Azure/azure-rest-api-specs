@@ -1,0 +1,35 @@
+{
+  "operationId": "Apps_AppDeployments",
+  "title": "Lists the deployments for a given App Revision or Managed App.",
+  "parameters": {
+    "api-version": "2026-06-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "managedAppName": "app1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1/appDeployments/deployment1",
+            "name": "deployment1",
+            "type": "Microsoft.ContainerService/appDeployments",
+            "properties": {
+              "appRevisionId": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedApps/app1/revisions/revision1",
+              "namespace": "default",
+              "identity": {
+                "userAssignedIdentityId": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
+                "clientId": "clientid1",
+                "principalId": "principalId"
+              },
+              "generatedServiceAccountName": "app1-deployment1-sa",
+              "generatedKubernetesServiceName": "app1-deployment1-svc",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

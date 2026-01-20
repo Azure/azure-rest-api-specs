@@ -1,0 +1,51 @@
+{
+  "operationId": "Apps_Update",
+  "title": "Update a ManagedApp",
+  "parameters": {
+    "api-version": "2026-06-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "managedAppName": "app1",
+    "properties": {
+      "properties": {
+        "template": {
+          "template": {
+            "image": "mcr.microsoft.com/app:v2",
+            "command": [
+              "/app"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.ContainerService/managedApps/app1",
+        "name": "app1",
+        "type": "Microsoft.ContainerService/managedApps",
+        "location": "eastus",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2026-01-20T10:00:00.000Z",
+          "lastModifiedBy": "someUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-20T10:05:00.000Z"
+        },
+        "properties": {
+          "template": {
+            "template": {
+              "image": "mcr.microsoft.com/app:v2",
+              "command": [
+                "/app"
+              ]
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
