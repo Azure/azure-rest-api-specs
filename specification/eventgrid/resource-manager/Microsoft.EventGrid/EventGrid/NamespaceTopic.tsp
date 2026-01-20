@@ -45,7 +45,7 @@ interface NamespaceTopics {
   update is ArmCustomPatchAsync<
     NamespaceTopic,
     PatchModel = NamespaceTopicUpdateParameters,
-    Response = ArmResponse<NamespaceTopic> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = NamespaceTopic> &
+    Response = ArmResponse<NamespaceTopic> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = NamespaceTopic> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: NamespaceTopic;

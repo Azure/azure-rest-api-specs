@@ -43,7 +43,7 @@ interface PartnerDestinations {
   update is ArmCustomPatchAsync<
     PartnerDestination,
     PatchModel = PartnerDestinationUpdateParameters,
-    Response = ArmResponse<PartnerDestination> | ArmResourceCreatedResponse<PartnerDestination> | (ArmAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = PartnerDestination> &
+    Response = ArmResponse<PartnerDestination> | ArmResourceCreatedResponse<PartnerDestination> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PartnerDestination> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: PartnerDestination;

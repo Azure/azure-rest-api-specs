@@ -394,8 +394,7 @@ interface EventSubscriptionOperationGroup {
   @patch(#{ implicitOptionality: false })
   update is EventSubscriptionOperationGroupOps.CustomPatchAsync<
     Extension.ScopeParameter,
-    EventSubscription,
-    PatchModel = EventSubscriptionUpdateParameters,
+    EventSubscriptionUpdateParameters,
     Response = ArmResourceCreatedResponse<EventSubscription>
   >;
 
@@ -418,7 +417,6 @@ interface EventSubscriptionOperationGroup {
   @operationId("EventSubscriptions_ListGlobalBySubscription")
   listGlobalBySubscription is EventSubscriptionOperationGroupOps.List<
     Extension.ScopeParameter,
-    EventSubscription,
     Parameters = {
       ...SubscriptionIdParameter;
 
@@ -445,7 +443,6 @@ interface EventSubscriptionOperationGroup {
   getDeliveryAttributes is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
     EventSubscription,
-    void,
     ArmResponse<DeliveryAttributeListResult>
   >;
 
@@ -457,7 +454,6 @@ interface EventSubscriptionOperationGroup {
   getFullUrl is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
     EventSubscription,
-    void,
     ArmResponse<EventSubscriptionFullUrl>
   >;
 }

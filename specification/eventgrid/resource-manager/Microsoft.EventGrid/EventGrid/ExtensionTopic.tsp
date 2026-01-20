@@ -14,7 +14,6 @@ namespace Microsoft.EventGrid;
  * Event grid Extension Topic. This is used for getting Event Grid related metrics for Azure resources.
  */
 @singleton("default")
-@extensionResource
 model ExtensionTopic
   is Azure.ResourceManager.ExtensionResource<ExtensionTopicProperties> {
   ...ResourceNameParameter<
