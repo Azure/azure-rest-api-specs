@@ -1,11 +1,12 @@
 import { basename, dirname, resolve } from "path";
-import { StringKeyCache, StringKeyPairCache } from "./cache.js";
 
-/** @type {StringKeyCache<string>} */
-const resolveCache = new StringKeyCache();
+import { KeyedCache, KeyedPairCache } from "./cache.js";
 
-/** @type {StringKeyPairCache<string>} */
-const resolvePairCache = new StringKeyPairCache();
+/** @type {KeyedCache<string, string>} */
+const resolveCache = new KeyedCache();
+
+/** @type {KeyedPairCache<string, string, string>} */
+const resolvePairCache = new KeyedPairCache();
 
 /**
  *

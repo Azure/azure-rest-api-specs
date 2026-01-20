@@ -4,7 +4,7 @@ import { dirname, relative } from "path";
 import { inspect } from "util";
 import { z } from "zod";
 import { mapAsync } from "./array.js";
-import { StringKeyCache } from "./cache.js";
+import { KeyedCache } from "./cache.js";
 import { example, preview } from "./changed-files.js";
 import { resolveCached, resolvePairCached } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
@@ -110,39 +110,39 @@ export class Swagger {
   /**
    * Caches the contents of files on disk, using the resolved path as the key.
    *
-   * @type {StringKeyCache<Promise<string>>}
+   * @type {KeyedCache<string, Promise<string>>}
    */
-  static #contentCache = new StringKeyCache();
+  static #contentCache = new KeyedCache();
 
   /**
    * Caches JSON objects parsed from text, using the resolved path (or content string itself) as the key.
    *
-   * @type {StringKeyCache<Promise<unknown>>}
+   * @type {KeyedCache<string, Promise<unknown>>}
    * */
-  static #contentJsonCache = new StringKeyCache();
+  static #contentJsonCache = new KeyedCache();
 
   /**
    * Caches SwaggerObject objects parsed from JSON objects, using the resolved path (or content string itself) as the key.
    *
-   * @type {StringKeyCache<Promise<SwaggerObject>>}
+   * @type {KeyedCache<string, Promise<SwaggerObject>>}
    */
-  static #contentObjectCache = new StringKeyCache();
+  static #contentObjectCache = new KeyedCache();
 
   /**
    * Caches operations extracted from a SwaggerObject, using the resolved path (or content string itself) as the key.
    *
-   * @type {StringKeyCache<Promise<Map<string, Operation>>>}
+   * @type {KeyedCache<string, Promise<Map<string, Operation>>>}
    */
-  static #operationsCache = new StringKeyCache();
+  static #operationsCache = new KeyedCache();
 
   /**
    * Caches reference paths extracted from a JSON object, using the resolved path (or content string itself) as the key.
    *
    * Swagger objects should not be cached statically, because they may belong to different Tags, Readmes, or SpecModels.
    *
-   * @type {StringKeyCache<Promise<string[]>>}
+   * @type {KeyedCache<string, Promise<string[]>>}
    */
-  static #refPathCache = new StringKeyCache();
+  static #refPathCache = new KeyedCache();
 
   /**
    * Optional content of swagger file, passed in via `options`.  If undefined, content is loaded from `#path`.

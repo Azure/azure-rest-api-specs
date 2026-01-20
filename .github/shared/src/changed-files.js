@@ -1,6 +1,6 @@
 import debug from "debug";
 import { simpleGit } from "simple-git";
-import { StringKeyCache } from "./cache.js";
+import { KeyedCache } from "./cache.js";
 import { includesSegment } from "./path.js";
 
 // Enable simple-git debug logging to improve console output
@@ -8,8 +8,8 @@ debug.enable("simple-git");
 
 // Cache results of the `example` filter, using the un-resolved path for maximum perf
 // The `example` filter is a hot path in spec-model for large specs like "network".
-/** @type {StringKeyCache<boolean>} */
-const exampleCache = new StringKeyCache();
+/** @type {KeyedCache<string, boolean>} */
+const exampleCache = new KeyedCache();
 
 /**
  * Get a list of changed files in a git repository
