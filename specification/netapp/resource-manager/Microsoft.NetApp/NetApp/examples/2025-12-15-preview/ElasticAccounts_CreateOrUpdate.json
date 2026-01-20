@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "api-version": "2025-12-15-preview",
+    "body": {
+      "location": "eastus",
+      "tags": {
+        "ac-tag1": "account1"
+      },
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/a0216c17-f9d6-4b99-9faf-9ebd4883d0e4?api-version=2025-12-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1",
+        "name": "account1",
+        "type": "Microsoft.NetApp/elasticAccounts",
+        "location": "eastus",
+        "tags": {
+          "ac-tag1": "account1"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "keySource": "NetApp",
+            "keyVaultProperties": {
+              "keyVaultUri": "https://myVault.vault.azure.net/",
+              "keyName": "string",
+              "keyVaultResourceId": "/subscriptions/a1b2c3d4-e5f6-7890-1234-567890abcdef/resourceGroups/my-keyvault-rg/providers/Microsoft.KeyVault/vaults/my-prod-keyvault",
+              "status": "Created"
+            },
+            "identity": {
+              "principalId": "70ab1774-1488-4f9c-a283-2db682f91b98",
+              "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/snaebjor-rotterdam-westcentralus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/snaebjor-wcu-identity"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/a0216c17-f9d6-4b99-9faf-9ebd4883d0e4?api-version=2025-12-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1",
+        "name": "account1",
+        "type": "Microsoft.NetApp/elasticAccounts",
+        "location": "eastus",
+        "tags": {
+          "ac-tag1": "account1"
+        },
+        "properties": {
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "ElasticAccounts_CreateOrUpdate",
+  "title": "ElasticAccounts_CreateOrUpdate"
+}

@@ -70,7 +70,10 @@ model VolumeProperties {
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @removed(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_12_01)
+  @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_09_01_preview, "usageThreshold")
+  @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -81,6 +84,8 @@ model VolumeProperties {
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -272,6 +277,8 @@ model VolumeProperties {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
@@ -416,6 +423,8 @@ model VolumeProperties {
    * delivering higher capacity limit with lower costs.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -441,6 +450,8 @@ model VolumeProperties {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   language?: VolumeLanguage;
 
@@ -448,6 +459,8 @@ model VolumeProperties {
    * Specifies whether the volume operates in Breakthrough Mode.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   breakthroughMode?: BreakthroughMode;
 }
 
@@ -476,6 +489,8 @@ union LdapServerType {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 union VolumeLanguage {
   string,
@@ -1063,6 +1078,8 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
@@ -1075,6 +1092,8 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
@@ -1087,6 +1106,8 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
@@ -1099,6 +1120,8 @@ model ReplicationObject {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
@@ -1112,6 +1135,8 @@ model ReplicationObject {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 union ExternalReplicationSetupStatus {
   string,
@@ -1285,7 +1310,10 @@ model VolumePatchProperties {
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @removed(Versions.v2025_09_01_preview)
+  @added(Versions.v2025_12_01)
+  @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_09_01_preview, "usageThreshold")
+  @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1296,6 +1324,8 @@ model VolumePatchProperties {
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -2106,6 +2136,8 @@ union LargeVolumeType {
  * is available only in regions where it’s been configured and first-time users must finish onboarding prior to using Breakthrough Mode.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union BreakthroughMode {
   string,
 
@@ -2121,6 +2153,29 @@ union BreakthroughMode {
 }
 
 /**
+ * Quota report filters. When filtering by quotaType or quotaTarget, both properties must be supplied together. This constraint is enforced by the service/API at runtime, and requests violating this rule will return a validation error. The usageThresholdPercentage filter is independent and can be used alone or in combination with quotaType and quotaTarget to further refine results.
+ */
+@added(Versions.v2025_12_15_preview)
+model QuotaReportFilterRequest {
+  /**
+   * Type of quota. If provided, quotaTarget must also be specified. The quotaType and quotaTarget properties are optional, but when filtering by quota type, quotaType and quotaTarget must be supplied together. Service/API will return an error if only one is provided.
+   */
+  quotaType?: Type;
+
+  /**
+   * UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running 'id' or 'getent' command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>. If provided, quotaType must also be specified. The quotaType and quotaTarget properties are optional, but when filtering by quota target, quotaType and quotaTarget must be supplied together. Service/API will return an error if only one is provided.
+   */
+  quotaTarget?: string;
+
+  /**
+   * The usageThresholdPercentage filter takes the usage threshold percentage and returns records where the usage is greater than or equal to the input value. This is an optional property.
+   */
+  @maxValue(100)
+  @minValue(1)
+  usageThresholdPercentage?: int32;
+}
+
+/**
  * Quota Report for volume
  */
 @added(Versions.v2025_07_01_preview)
@@ -2128,6 +2183,8 @@ union BreakthroughMode {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 model ListQuotaReportResponse {
   /**
@@ -2145,6 +2202,8 @@ model ListQuotaReportResponse {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 @removed(Versions.v2025_09_01)
 model QuotaReport {
   /**
@@ -2624,13 +2683,35 @@ interface Volumes {
   @added(Versions.v2025_08_01_preview)
   @removed(Versions.v2025_08_01)
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @removed(Versions.v2025_12_15_preview)
   @removed(Versions.v2025_09_01)
-  listQuotaReport is ArmResourceActionAsync<
+  @sharedRoute
+  @renamedFrom(Versions.v2025_12_01, "listQuotaReport")
+  listQuotaReportOld is ArmResourceActionAsync<
     Volume,
     void,
     ArmResponse<ListQuotaReportResponse>,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResponse> &
       Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Get quota report for volume (with filter support)
+   */
+  @added(Versions.v2025_12_15_preview)
+  @sharedRoute
+  listQuotaReport is ArmResourceActionAsync<
+    Volume,
+    /**
+     * The request body containing filter parameters for quota reports.
+     * This is optional and will be included in the body of the request.
+     */
+    QuotaReportFilterRequest,
+    ArmResponse<ListQuotaReportResponse>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ListQuotaReportResponse> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 }
 
