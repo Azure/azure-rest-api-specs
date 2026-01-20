@@ -1118,6 +1118,9 @@ model SignalHistoryRequest {
 @added(Versions.v2026_01_01_preview)
 @doc("Response containing signal history")
 model SignalHistoryResponse {
+  @doc("Name of the entity")
+  entityName: entityName;
+
   @doc("Name of the signal")
   signalName: signalName;
 

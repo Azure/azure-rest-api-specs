@@ -3809,6 +3809,10 @@
       "type": "object",
       "description": "Response containing signal history",
       "properties": {
+        "entityName": {
+          "$ref": "#/definitions/entityName",
+          "description": "Name of the entity"
+        },
         "signalName": {
           "$ref": "#/definitions/signalName",
           "description": "Name of the signal"
@@ -3825,6 +3829,7 @@
         }
       },
       "required": [
+        "entityName",
         "signalName",
         "history"
       ]
