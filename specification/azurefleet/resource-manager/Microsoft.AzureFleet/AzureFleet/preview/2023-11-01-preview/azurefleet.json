@@ -434,13 +434,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachineScaleSets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{fleetName}/virtualMachineScaleSets": {
       "get": {
         "operationId": "Fleets_ListVirtualMachineScaleSets",
         "tags": [
           "Fleets"
         ],
-        "description": "List VirtualMachineScaleSet resources by Fleet",
+        "description": "List VirtualMachineScaleSet resources of an instance Fleet.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -452,9 +452,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "fleetName",
             "in": "path",
-            "description": "The name of the Fleet",
+            "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
             "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
