@@ -33,21 +33,3 @@ These settings apply only when `--tag=package-2026-02-01-preview` is specified o
 input-file:
   - preview/2026-02-01-preview/discovery-bookshelf.json
 ```
-
-### Tag: package-2025-12-01-preview
-
-These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-12-01-preview'
-input-file:
-  - preview/2025-12-01-preview/discovery-bookshelf.json
-```
-
-### Tag: package-2025-07-01-preview
-
-These settings apply only when `--tag=package-2025-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-07-01-preview'
-input-file:
-  - preview/2025-07-01-preview/discovery-bookshelf.json
-```
