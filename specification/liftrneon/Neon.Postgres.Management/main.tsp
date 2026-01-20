@@ -89,7 +89,9 @@ interface Organizations {
   >;
 }
 
-@@doc(Organizations.getPostgresVersions::parameters.body, "Post Action to retrieve the PostgreSQL versions.");
+@@doc(Organizations.getPostgresVersions::parameters.body,
+  "Post Action to retrieve the PostgreSQL versions."
+);
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
@@ -107,8 +109,12 @@ interface Projects {
   >;
 }
 
-@@doc(Projects.getConnectionUri::parameters.body, "Additional parameters for retrieving the database connection URI.");
-@@clientName(Projects.getConnectionUri::parameters.body, "connectionUriParameters");
+@@doc(Projects.getConnectionUri::parameters.body,
+  "Additional parameters for retrieving the database connection URI."
+);
+@@clientName(Projects.getConnectionUri::parameters.body,
+  "connectionUriParameters"
+);
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
