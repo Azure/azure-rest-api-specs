@@ -141,6 +141,7 @@ using TypeSpec.Versioning;
 /**
  * APIs to manage web application firewall rules.
  */
+@Azure.ResourceManager.Legacy.features(Features)
 @armProviderNamespace
 @service(#{ title: "WebApplicationFirewallManagement" })
 @versioned(Versions)
@@ -155,6 +156,11 @@ enum Versions {
    * The 2025-03-01 API version.
    */
   v2025_03_01: "2025-03-01",
+}
+
+enum Features {
+  applicationGateway,
+  expressRoute,
 }
 
 interface Operations

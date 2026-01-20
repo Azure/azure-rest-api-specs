@@ -14,6 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Network;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available server variables.
