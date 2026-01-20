@@ -79,7 +79,6 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
-  
   @doc("Action to retrieve the PostgreSQL versions.")
   @added(Neon.Postgres.Versions.v2_preview)
   @autoRoute
@@ -135,7 +134,7 @@ interface Branches {
 }
 
 @@doc(Branches.preflight::parameters.body, "Parameters for preflight checks.");
-@@clientName(Branches.preflight::parameters.body, "PreflightCheckParameters");
+@@clientName(Branches.preflight::parameters.body, "parameters");
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
