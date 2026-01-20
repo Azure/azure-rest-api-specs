@@ -380,8 +380,8 @@ interface Apps {
   delete is ArmResourceDeleteWithoutOkAsync<ManagedApp>;
 
   listByResourceGroup is ArmResourceListByParent<ManagedApp>;
-  @list
   listBySubscription is ArmListBySubscription<ManagedApp>;
+  @list
   deployments is ListDeployments<ManagedApp>;
 }
 
