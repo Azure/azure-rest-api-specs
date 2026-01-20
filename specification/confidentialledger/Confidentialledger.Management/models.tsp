@@ -155,7 +155,7 @@ model ResourceProviderOperationList {
    * The list of operations.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @visibility(Lifecycle.Read)
   value?: ResourceProviderOperationDefinition[];
 
@@ -263,13 +263,13 @@ model LedgerProperties {
   /**
    * Array of all AAD based Security Principals.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["principalId"])
+  @identifiers(#["principalId"])
   aadBasedSecurityPrincipals?: AADBasedSecurityPrincipal[];
 
   /**
    * Array of all cert based Security Principals.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   certBasedSecurityPrincipals?: CertBasedSecurityPrincipal[];
 
   /**
@@ -306,6 +306,7 @@ model LedgerProperties {
   /**
    * Enclave platform of the Confidential Ledger.
    */
+  @visibility(Lifecycle.Read)
   enclavePlatform?: EnclavePlatform;
 
   /**
@@ -445,7 +446,7 @@ model ManagedCCFProperties {
   /**
    * List of member identity certificates for  Managed CCF
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   memberIdentityCertificates?: MemberIdentityCertificate[];
 
   /**
@@ -472,6 +473,7 @@ model ManagedCCFProperties {
   /**
    * Enclave platform of Managed CCF.
    */
+  @visibility(Lifecycle.Read)
   enclavePlatform?: EnclavePlatform;
 }
 
@@ -487,6 +489,7 @@ model MemberIdentityCertificate {
   /**
    * Member Identity Certificate Encryption Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   encryptionkey?: string;
 
   /**
