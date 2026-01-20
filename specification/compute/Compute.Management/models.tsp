@@ -8593,6 +8593,20 @@ model VirtualMachineRunCommandsListResult
 );
 
 /**
+ * The List diagnostic run command operation response
+ */
+@added(Versions.v2025_04_01)
+model VirtualMachineDiagnosticRunCommandsListResult
+  is Azure.Core.Page<VirtualMachineDiagnosticRunCommand>;
+
+@@doc(VirtualMachineDiagnosticRunCommandsListResult.value,
+  "The list of diagnostic run commands."
+);
+@@doc(VirtualMachineDiagnosticRunCommandsListResult.nextLink,
+  "The uri to fetch the next page of diagnostic run commands."
+);
+
+/**
  * Describes the properties of a Virtual Machine run command.
  */
 model VirtualMachineRunCommandProperties {

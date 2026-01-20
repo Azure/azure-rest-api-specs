@@ -329,12 +329,21 @@ suppressions:
   - code: PatchResponseCodes
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: ComputeRP.json
   - code: PatchBodyParametersSchema
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
   - code: LroPatch202
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: GalleryRP.json
+  - code: LroPatch202
+    from: ComputeRP.json
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+  - code: DeleteResponseCodes
+    from: ComputeRP.json
+    reason: Behavior is align with other existing API for this RP
   - code: AvoidAdditionalProperties
     reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: GalleryRP.json
@@ -349,6 +358,14 @@ suppressions:
     reason: ScaleOut operation returns both 200 and 202, but 200 will not return schema. This is a common pattern for VMSS action operations. 
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
+  - code: ParametersInPointGet
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/diagnosticRunCommands/{runCommandName}"].get.parameters
+    reason: Required query parameter for GET 
+  - code: ParametersInPointGet
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/diagnosticRunCommands/{runCommandName}"].get.parameters
+    reason: Required query parameter for GET 
 ```
 
 ### Tag: package-2025-03-03

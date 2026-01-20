@@ -31,6 +31,7 @@ import "./RestorePoint.tsp";
 import "./CapacityReservationGroup.tsp";
 import "./CapacityReservation.tsp";
 import "./VirtualMachineRunCommand.tsp";
+import "./VirtualMachineDiagnosticRunCommand.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
 

@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
+    "api-version": "2025-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myRunCommand",
+            "location": "westus",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
+            "properties": {
+              "source": {
+                "commandId": "FleetDiagnosticsWindows"
+              },
+              "parameters": [
+                {
+                  "name": "param1",
+                  "value": "value1"
+                },
+                {
+                  "name": "param2",
+                  "value": "value2"
+                }
+              ],
+              "asyncExecution": false,
+              "treatFailureAsDeploymentFailure": false,
+              "timeoutInSeconds": 0,
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_List",
+  "title": "List diagnostic run commands in Vmss instance."
+}
