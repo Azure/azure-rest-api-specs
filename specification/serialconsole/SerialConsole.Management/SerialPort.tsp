@@ -75,7 +75,7 @@ interface SerialPorts {
   /**
    * Lists all of the configured serial ports for a parent resource
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     SerialPort,
     BaseParameters = ParentResourceParameters,
     Response = ArmResponse<SerialPortListResult>,
