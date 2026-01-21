@@ -36,8 +36,8 @@ parameters:
     default: 0
 
 stages:
-- stage: Build
-  displayName: 'SDK Generation'
+- stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
+  displayName: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'SDK Generation', format('Batch SDK Generation for ({0})', parameters.SpecBatchTypes)) }}
   jobs:
   - job:
     timeoutInMinutes: 2400
