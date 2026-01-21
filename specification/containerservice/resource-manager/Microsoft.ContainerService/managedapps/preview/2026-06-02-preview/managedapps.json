@@ -3199,6 +3199,17 @@
           "type": "string",
           "description": "Name of the health check"
         },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port to fetch metrics. Default is 8080",
+          "default": 8080
+        },
+        "metricsPath": {
+          "type": "string",
+          "description": "Metrics path for Prometheus to scrape. Default is /metrics",
+          "default": "/metrics"
+        },
         "query": {
           "type": "string",
           "description": "Prometheus expression to evaluate. Expression must evaluate to true if the app is healthy"

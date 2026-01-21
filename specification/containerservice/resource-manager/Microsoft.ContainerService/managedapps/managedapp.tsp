@@ -331,6 +331,12 @@ model HealthCheck {
   /** Name of the health check */
   name: string;
 
+  /** Port to fetch metrics. Default is 8080 */
+  port?: int32 = 8080;
+
+  /** Metrics path for Prometheus to scrape. Default is /metrics */
+  metricsPath?: string = "/metrics";
+
   /** Prometheus expression to evaluate. Expression must evaluate to true if the app is healthy */
   query: string;
 
