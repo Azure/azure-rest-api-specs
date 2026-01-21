@@ -364,3 +364,68 @@ model GeoJsonFeatureCollectionData {
    */
   features: GeoJsonFeature[];
 }
+
+/**
+ * Common error response for all Azure Resource Manager APIs to return error
+ * details for failed operations. (This also follows the OData error response
+ * format.).
+ */
+@error
+model ErrorResponse {
+  /**
+   * The error object.
+   */
+  error?: ErrorDetail;
+}
+
+/**
+ * The error detail.
+ */
+model ErrorDetail {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  details?: ErrorDetail[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  @visibility(Lifecycle.Read)
+  info?: Record<unknown>;
+}
