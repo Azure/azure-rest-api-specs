@@ -50,6 +50,9 @@ suppressions:
     reason: Tags are mimicing the existing object structure from compute, bulkactions is a passthrough API and will deliver the object as is to compute.
     from: computebulkactions.json
     where: $.definitions.VirtualMachineExtensionProperties.properties.protectedSettings
+  - code: PostResponseCodes
+    reason: Long-running POST operations is currently using ArmResourceActionNoResponseContentAsync pattern.
+    from: computebulkactions.json
   - code: AvoidAdditionalProperties
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computebulkactions.json
