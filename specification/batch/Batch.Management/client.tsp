@@ -338,10 +338,10 @@ using Microsoft.Batch;
   "BatchSeverity",
   "csharp"
 );
-// @@clientName(NetworkSecurityPerimeterConfiguration,
-//   "NetworkSecurityPerimeterConfigurationResource",
-//   "csharp"
-// );
+@@clientName(NetworkSecurityPerimeterConfigurations,
+  "NetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
 @@clientName(Azure.ResourceManager.CommonTypes.AccessRule,
   "BatchAccessRule",
   "csharp"
@@ -380,8 +380,19 @@ using Microsoft.Batch;
   "BatchAccountCreateOrUpdateContent",
   "csharp"
 );
-// @@clientName(CertificateCreateOrUpdateParameters, "Foooooooooooooo", "csharp");
+@@clientName(CertificateCreateOrUpdateParameters,
+  "BatchAccountCertificateCreateOrUpdateContent",
+  "csharp"
+);
 @@clientName(BatchAccountRegenerateKeyParameters,
   "BatchAccountRegenerateKeyContent",
+  "csharp"
+);
+@@alternateType(BatchAccountCreateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(BatchAccount.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
