@@ -7403,6 +7403,702 @@
         ]
       }
     },
+    "/openai/v1/responses": {
+      "post": {
+        "operationId": "createResponseV1_createResponseStreamV1",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "explode": false
+          }
+        ],
+        "description": "Creates a model response. Creates a model response (streaming response).",
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.Response"
+                }
+              },
+              "text/event-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.CreateResponseStreamingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Responses"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "metadata": {
+                        "type": "object",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.Metadata"
+                          }
+                        ],
+                        "nullable": true
+                      },
+                      "top_logprobs": {
+                        "type": "integer",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.integer"
+                          }
+                        ],
+                        "nullable": true
+                      },
+                      "temperature": {
+                        "type": "number",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.numeric"
+                          }
+                        ],
+                        "nullable": true,
+                        "default": 1
+                      },
+                      "top_p": {
+                        "type": "number",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.numeric"
+                          }
+                        ],
+                        "nullable": true,
+                        "default": 1
+                      },
+                      "user": {
+                        "type": "string",
+                        "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).",
+                        "deprecated": true
+                      },
+                      "safety_identifier": {
+                        "type": "string",
+                        "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers)."
+                      },
+                      "prompt_cache_key": {
+                        "type": "string",
+                        "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching)."
+                      },
+                      "service_tier": {
+                        "$ref": "#/components/schemas/OpenAI.ServiceTier"
+                      },
+                      "prompt_cache_retention": {
+                        "type": "string",
+                        "enum": [
+                          "in-memory",
+                          "24h"
+                        ],
+                        "nullable": true
+                      },
+                      "previous_response_id": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "model": {
+                        "type": "string",
+                        "description": "The model deployment to use for the creation of this response."
+                      },
+                      "reasoning": {
+                        "type": "object",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.Reasoning"
+                          }
+                        ],
+                        "nullable": true
+                      },
+                      "background": {
+                        "type": "boolean",
+                        "nullable": true
+                      },
+                      "max_output_tokens": {
+                        "type": "integer",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.integer"
+                          }
+                        ],
+                        "nullable": true
+                      },
+                      "max_tool_calls": {
+                        "type": "integer",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.integer"
+                          }
+                        ],
+                        "nullable": true
+                      },
+                      "text": {
+                        "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
+                      },
+                      "tools": {
+                        "$ref": "#/components/schemas/OpenAI.ToolsArray"
+                      },
+                      "tool_choice": {
+                        "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                      },
+                      "prompt": {
+                        "$ref": "#/components/schemas/OpenAI.Prompt"
+                      },
+                      "truncation": {
+                        "type": "string",
+                        "enum": [
+                          "auto",
+                          "disabled"
+                        ],
+                        "nullable": true,
+                        "default": "disabled"
+                      },
+                      "input": {
+                        "$ref": "#/components/schemas/OpenAI.InputParam"
+                      },
+                      "include": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/OpenAI.IncludeEnum"
+                        },
+                        "nullable": true
+                      },
+                      "parallel_tool_calls": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "default": true
+                      },
+                      "store": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "default": true
+                      },
+                      "instructions": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "stream": {
+                        "type": "boolean",
+                        "nullable": true
+                      },
+                      "stream_options": {
+                        "type": "object",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ResponseStreamOptions"
+                          }
+                        ],
+                        "nullable": true
+                      },
+                      "conversation": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ConversationParam"
+                          }
+                        ],
+                        "nullable": true
+                      },
+                      "agent": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/AgentReference"
+                          }
+                        ],
+                        "description": "The agent to use for generating the response."
+                      },
+                      "structured_inputs": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/OpenAI.CreateResponse"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listResponsesV1",
+        "description": "Returns the list of all responses.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "agent_name",
+            "in": "query",
+            "required": false,
+            "description": "Filter by agent name. If provided, only items associated with the specified agent will be returned.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "agent_id",
+            "in": "query",
+            "required": false,
+            "description": "Filter by agent ID in the format `name:version`. If provided, only items associated with the specified agent ID will be returned.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "conversation_id",
+            "in": "query",
+            "required": false,
+            "description": "Filter by conversation ID. If provided, only responses associated with the specified conversation will be returned.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OpenAI.Response"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Responses"
+        ]
+      }
+    },
+    "/openai/v1/responses/{response_id}": {
+      "get": {
+        "operationId": "getResponseV1_getResponseStreamV1",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "explode": false
+          },
+          {
+            "name": "response_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include[]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/OpenAI.IncludeEnum"
+              },
+              "default": []
+            }
+          },
+          {
+            "name": "stream",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
+            "name": "starting_after",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "text/event-stream"
+              ]
+            }
+          }
+        ],
+        "description": "Retrieves a model response with the given ID. Retrieves a model response with the given ID (streaming response).",
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.Response"
+                }
+              },
+              "text/event-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.CreateResponseStreamingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Responses"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteResponseV1",
+        "description": "Deletes a model response.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "explode": false
+          },
+          {
+            "name": "response_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the response to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponseResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Responses"
+        ]
+      }
+    },
+    "/openai/v1/responses/{response_id}/cancel": {
+      "post": {
+        "operationId": "cancelResponseV1",
+        "description": "Cancels a model response.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "explode": false
+          },
+          {
+            "name": "response_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the response to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Responses"
+        ]
+      }
+    },
+    "/openai/v1/responses/{response_id}/input_items": {
+      "get": {
+        "operationId": "listInputItemsV1",
+        "description": "Returns a list of input items for a given response.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "response_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OpenAI.ItemResource"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Responses"
+        ]
+      }
+    },
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_list",
