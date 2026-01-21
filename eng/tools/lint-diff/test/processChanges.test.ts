@@ -15,7 +15,7 @@ import { resolve } from "node:path";
 import { isWindows } from "./test-util.js";
 
 declare module "vitest" {
-  interface Assertion<T = any> {
+  interface Assertion {
     // Asserts readmes for testing reconcileChangedFilesAndTags
     toBeReadmeWith(expected: Readme): Promise<void>;
   }
@@ -66,9 +66,9 @@ describe("getService", () => {
 
 function createMockReadme(path: string, defaultTag: string, existingTags: string[] = []): Readme {
   const mockReadme = new Readme(path);
-  mockReadme.getGlobalConfig = async () => ({ tag: defaultTag });
+  mockReadme.getGlobalConfig = async () => (Promise.resolve({ tag: defaultTag }));
   mockReadme.getTags = async () =>
-    new Map<string, Tag>(existingTags.map((tag) => [tag, {} as Tag]));
+    Promise.resolve(new Map<string, Tag>(existingTags.map((tag) => [tag, {} as Tag])));
   return mockReadme;
 }
 
@@ -85,7 +85,7 @@ describe("reconcileChangedFilesAndTags", () => {
         failMessages.push(String(e));
       }
       try {
-        const expectedDefaultTag = (await expected.getGlobalConfig()).tag;
+        const expectedDefaultTag = (await expected.getGlobalConfig()).tag as string;
         await expect(received.getGlobalConfig()).resolves.toEqual({ tag: expectedDefaultTag });
         passMessages.push(`default tag is ${expectedDefaultTag}`);
       } catch (e) {
@@ -446,7 +446,7 @@ describe("buildState", () => {
           "specification/edit-in-place/readme.md",
           {
             changedTags: new Set<string>([""]),
-            readme: expect.any(Readme) as unknown,
+            readme: expect.any(Readme) as Readme,
           },
         ],
       ]),
