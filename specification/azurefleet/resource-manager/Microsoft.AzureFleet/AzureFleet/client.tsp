@@ -429,14 +429,11 @@ using TypeSpec.Versioning;
   "csharp"
 );
 @@clientName(ListVirtualMachinesParameters.$skiptoken, "skipToken", "csharp");
-@@alternateType(VirtualMachineScaleSet,
-  ComputeFleetVmss,
-  "csharp"
-);
+@@alternateType(VirtualMachineScaleSet, ComputeFleetVmss, "csharp");
 
 // The following code is added to solve the problem that the `compute fleet vmss` class does not inherit the `resource data` class
-@doc("An AzureFleet's virtualMachineScaleSet")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("An AzureFleet's virtualMachineScaleSet")
 model ComputeFleetVmss extends Azure.ResourceManager.CommonTypes.Resource {
   @removed(Versions.v2024_05_01_preview)
   @doc("This represents the Provisioning State of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
