@@ -64,3 +64,11 @@
 - tool: TypeSpecRequirement
   path: ./stable/2024-05-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  reason: >
+    There is an example‑related error in the Go emitter, so this switch has been set to false.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-samples
+  paths:
+    - tspconfig.yaml
