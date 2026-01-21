@@ -19,27 +19,27 @@ namespace AlertSeverityCustomization {
     /**
      * 0
      */
-    `ZERO`: 0,
+    ZERO: 0,
 
     /**
      * 1
      */
-    `ONE`: 1,
+    ONE: 1,
 
     /**
      * 2
      */
-    `TWO`: 2,
+    TWO: 2,
 
     /**
      * 3
      */
-    `THREE`: 3,
+    THREE: 3,
 
     /**
      * 4
      */
-    `FOUR`: 4,
+    FOUR: 4,
   }
 }
 @@alternateType(AlertSeverity,
