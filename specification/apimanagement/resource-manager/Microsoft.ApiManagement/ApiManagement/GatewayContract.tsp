@@ -253,7 +253,7 @@ interface GatewayContracts {
   listTrace is ArmResourceActionSync<
     GatewayContract,
     GatewayListTraceContract,
-    ArmResponse<GatewayTraceContract>
+    ArmResponse<Record<unknown>>
   >;
 
   /**
