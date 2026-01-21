@@ -138,13 +138,13 @@ interface EdgeActionVersions {
     EdgeActionVersionProperties
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty body with Content-Type: application/json required by service"
   /** Get the version code for the edge action version. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty body with Content-Type: application/json required by service"
   getVersionCode is ArmResourceActionAsync<EdgeActionVersion, {}, VersionCode>;
 
+  /** Swap the default version for the edge action. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty body with Content-Type: application/json required by service"
-  /** Swap the default version for the edge action. */
   swapDefault is ArmResourceActionNoContentAsync<EdgeActionVersion, {}>;
 }
 

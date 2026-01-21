@@ -53,6 +53,16 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
     reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
+  # Delete operations return 200 for synchronous completion in addition to 202/204 for LRO pattern.
+  - code: DeleteResponseCodes
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/executionFilters/{executionFilter}"].delete
+    reason: >-
+      EdgeActions RP currently implements synchronous delete (returns 200). Adding 200 to the spec
+      enables SDK generation to accept 200 as a valid response. Transitioning to async delete (202)
+      while maintaining backward compatibility with existing clients from 2024-07-22-preview.
 ```
 
 ### Tag: package-2025-09-01-preview
@@ -78,6 +88,16 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/deleteAttachment"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
     reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
+  # Delete operations return 200 for synchronous completion in addition to 202/204 for LRO pattern.
+  - code: DeleteResponseCodes
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/executionFilters/{executionFilter}"].delete
+    reason: >-
+      EdgeActions RP currently implements synchronous delete (returns 200). Adding 200 to the spec
+      enables SDK generation to accept 200 as a valid response. Transitioning to async delete (202)
+      while maintaining backward compatibility with existing clients from 2024-07-22-preview.
 ```
 
 ---
