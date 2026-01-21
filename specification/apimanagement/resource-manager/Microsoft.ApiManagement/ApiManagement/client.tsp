@@ -129,7 +129,7 @@ op replacePurge(
   "TagResourceContractProperties",
   "go"
 );
-@@clientName(VersioningScheme,
-  "APIVersionSetContractDetailsVersioningScheme",
+@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
+  "Client",
   "go"
 );
