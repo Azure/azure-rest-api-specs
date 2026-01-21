@@ -56,3 +56,4 @@ using Neon.Postgres;
 @@clientName(Endpoints.delete, "DeleteNeonEndpoint", "csharp");
 @@clientName(Endpoints.list, "GetEndpoints", "csharp");
 @@clientName(NeonDatabases.list, "GetNeonDatabases", "csharp");
+@@clientName(Organizations.getPostgresVersions, "GetPostgresVersionsOrganization", "csharp");
