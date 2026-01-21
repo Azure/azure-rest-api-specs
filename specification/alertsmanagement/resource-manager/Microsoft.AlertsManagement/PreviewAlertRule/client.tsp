@@ -8,6 +8,7 @@ using Microsoft.AlertsManagement;
   "PreviewAlertRuleMgmtClient",
   "python"
 );
+
 namespace AlertSeverityCustomization {
   /**
    * Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert.
@@ -18,36 +19,30 @@ namespace AlertSeverityCustomization {
     /**
      * 0
      */
-    `0`: 0,
+    `ZERO`: 0,
 
     /**
      * 1
      */
-    `1`: 1,
+    `ONE`: 1,
 
     /**
      * 2
      */
-    `2`: 2,
+    `TWO`: 2,
 
     /**
      * 3
      */
-    `3`: 3,
+    `THREE`: 3,
 
     /**
      * 4
      */
-    `4`: 4,
+    `FOUR`: 4,
   }
 }
-@@clientName(AlertSeverityCustomization.AlertSeverity.`0`, "ZERO", "python");
-@@clientName(AlertSeverityCustomization.AlertSeverity.`1`, "ONE", "python");
-@@clientName(AlertSeverityCustomization.AlertSeverity.`2`, "TWO", "python");
-@@clientName(AlertSeverityCustomization.AlertSeverity.`3`, "THREE", "python");
-@@clientName(AlertSeverityCustomization.AlertSeverity.`4`, "FOUR", "python");
 @@alternateType(AlertSeverity,
   AlertSeverityCustomization.AlertSeverity,
   "python"
 );
-
