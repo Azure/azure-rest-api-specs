@@ -58,7 +58,7 @@ using Azure.Core;
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Vaults.update::parameters.properties, "parameters");
-@@clientName(Vaults.updateAccessPolicy::parameters.resource, "parameters");
+@@clientName(Vaults.updateAccessPolicy::parameters.body, "parameters");
 @@clientLocation(Vaults.listByVault, "PrivateLinkResources");
 
 @@clientLocation(DeletedVaults.getDeleted, Vaults);
