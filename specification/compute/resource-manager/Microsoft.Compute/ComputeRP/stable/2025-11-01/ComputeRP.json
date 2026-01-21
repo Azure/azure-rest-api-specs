@@ -10119,6 +10119,9 @@
           "Create a vm with premium storage.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPremiumStorage.json"
           },
+          "Create a vm with resiliency profile and zone movement enabled.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithZoneMovementEnabled.json"
+          },
           "Create a vm with ssh authentication.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSshAuthentication.json"
           },
@@ -16393,6 +16396,16 @@
         }
       }
     },
+    "ResiliencyProfile": {
+      "type": "object",
+      "description": "Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.",
+      "properties": {
+        "zoneMovement": {
+          "$ref": "#/definitions/ZoneMovement",
+          "description": "Zone movement configuration."
+        }
+      }
+    },
     "ResilientVMCreationPolicy": {
       "type": "object",
       "description": "The configuration parameters used while performing resilient VM creation.",
@@ -19820,6 +19833,10 @@
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.",
           "readOnly": true
+        },
+        "resiliencyProfile": {
+          "$ref": "#/definitions/ResiliencyProfile",
+          "description": "Resiliency profile for the virtual machine."
         }
       }
     },
@@ -23514,6 +23531,16 @@
         "maxInstancePercentPerZonePolicy": {
           "$ref": "#/definitions/MaxInstancePercentPerZonePolicy",
           "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set."
+        }
+      }
+    },
+    "ZoneMovement": {
+      "type": "object",
+      "description": "Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another."
         }
       }
     },

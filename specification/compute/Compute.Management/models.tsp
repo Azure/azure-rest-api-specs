@@ -5257,6 +5257,28 @@ model StorageProfile {
 }
 
 /**
+ * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.
+ */
+@added(Versions.v2025_11_01)
+model ZoneMovement {
+  /**
+   * Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another.
+   */
+  isEnabled?: boolean;
+}
+
+/**
+ * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.
+ */
+@added(Versions.v2025_11_01)
+model ResiliencyProfile {
+  /**
+   * Zone movement configuration.
+   */
+  zoneMovement?: ZoneMovement;
+}
+
+/**
  * Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
  */
 model OSDisk {
@@ -6267,6 +6289,12 @@ model VirtualMachineProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Resiliency profile for the virtual machine.
+   */
+  @added(Versions.v2025_11_01)
+  resiliencyProfile?: ResiliencyProfile;
 }
 
 /**
