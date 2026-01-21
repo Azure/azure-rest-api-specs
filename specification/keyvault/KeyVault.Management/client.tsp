@@ -301,7 +301,7 @@ using Azure.Core;
 @@markAsPageable(ManagedHsms.listByMHSMResource, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-@@markAsPageable(Vaults.listByVault);
+@@markAsPageable(Vaults.listByVault, "csharp");
 
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
