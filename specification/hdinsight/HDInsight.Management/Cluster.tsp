@@ -405,6 +405,7 @@ interface Clusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Extensions_Create")
   extensionsCreate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Cluster,
@@ -418,7 +419,7 @@ interface Clusters {
       @key
       extensionName: string;
     },
-    Response = ArmAcceptedLroResponse | ArmResourceUpdatedResponse<Cluster>,
+    Response = ArmAcceptedLroResponse | OkResponse,
     Error = ErrorResponse
   >;
 
