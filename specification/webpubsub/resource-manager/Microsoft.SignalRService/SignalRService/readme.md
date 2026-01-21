@@ -212,7 +212,7 @@ These settings apply only when `--tag=package-2025-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
-- Microsoft.SignalRService/preview/2025-08-01-preview/webpubsub.json
+- preview/2025-08-01-preview/webpubsub.json
 ```
 
 ---
