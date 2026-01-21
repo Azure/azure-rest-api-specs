@@ -49,7 +49,7 @@ union AttackStrategy {
   Jailbreak: "jailbreak",
 
   @doc("Utilizes ANSI escape sequences to manipulate text appearance and behavior.")
-  AnsiiAttack: "ansii_attack",
+  AnsiAttack: "ansi_attack",
 
   @doc("Swaps characters within text to create variations or obfuscate the original content.")
   CharacterSwap: "character_swap",
