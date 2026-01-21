@@ -303,6 +303,61 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}": {
+      "get": {
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "operationId": "AddressPrefixSets_Get",
+        "description": "Gets information about the specified address prefix set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application security group."
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the address prefix set."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the specified AddressPrefixSet resource.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get address prefix set": {
+            "$ref": "./examples/AddressPrefixSetGet.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "AddressPrefixSets"
