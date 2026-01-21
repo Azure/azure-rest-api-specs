@@ -182,6 +182,24 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
+  - code: TrackedResourcePatchOperation
+    reason: PrivateEndpointConnection does not support PATCH operation, consistent with previous API versions.
+    where:
+      - $.definitions.PrivateEndpointConnection
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: Existing API pagination patterns from TypeSpec conversion, consistent with previous versions.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/availableQuota"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys"].post.responses.200.schema
+  - code: XmsSecretPropertyMissing
+    reason: publicNetworkAccess is not a secret property, it controls network access policy.
+    where:
+      - $.definitions.WorkspaceProperties.properties.publicNetworkAccess
+      - $.definitions.RegistryProperties.properties.publicNetworkAccess
+      - $.definitions.ServerlessEndpointProperties.properties.publicNetworkAccess
+  - code: ResourceNameRestriction
+    reason: Parameter exists in previous API versions without pattern, cannot add now without breaking change.
+    from: openapi.json
 ```
 
 ### Tag: package-2025-09-01
