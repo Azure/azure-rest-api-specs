@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "exampleserver",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+            "location": "eastus",
+            "properties": {
+              "administratorLogin": "exampleadministratorlogin",
+              "authConfig": {
+                "activeDirectoryAuth": "Disabled",
+                "passwordAuth": "Enabled"
+              },
+              "availabilityZone": "2",
+              "backup": {
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2025-06-01T18:35:22.123456Z",
+                "geoRedundantBackup": "Disabled"
+              },
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "minorVersion": "5",
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "replica": {
+                "capacity": 0,
+                "replicationState": "Active",
+                "role": "AsyncReplica"
+              },
+              "replicaCapacity": 0,
+              "replicationRole": "AsyncReplica",
+              "state": "Ready",
+              "storage": {
+                "autoGrow": "Disabled",
+                "iops": 2300,
+                "storageSizeGB": 512,
+                "tier": "P20"
+              },
+              "version": "17"
+            },
+            "sku": {
+              "name": "Standard_D4ds_v5",
+              "tier": "GeneralPurpose"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Replicas_ListByServer",
+  "title": "List all read replicas of a server."
+}

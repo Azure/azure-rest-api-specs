@@ -388,7 +388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -444,7 +444,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -507,7 +507,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -599,7 +599,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -887,7 +887,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1117,7 +1117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1173,7 +1173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1256,7 +1256,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -1352,10 +1352,6 @@
       "get": {
         "operationId": "VirtualMachineRunCommands_List",
         "description": "Lists all available run commands for a subscription in a location.",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1395,10 +1391,6 @@
       "get": {
         "operationId": "VirtualMachineRunCommands_Get",
         "description": "Gets specific run command for a subscription in a location.",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -12294,7 +12286,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "type": "array",
               "items": {
@@ -13263,14 +13255,12 @@
         "diskIOPSReadWrite": {
           "type": "integer",
           "format": "int64",
-          "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.",
-          "readOnly": true
+          "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS."
         },
         "diskMBpsReadWrite": {
           "type": "integer",
           "format": "int64",
-          "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.",
-          "readOnly": true
+          "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS."
         },
         "detachOption": {
           "$ref": "#/definitions/DiskDetachOptionTypes",
@@ -17954,10 +17944,6 @@
           "$ref": "#/definitions/LogAnalyticsInputBase"
         }
       ]
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UefiSettings": {
       "type": "object",

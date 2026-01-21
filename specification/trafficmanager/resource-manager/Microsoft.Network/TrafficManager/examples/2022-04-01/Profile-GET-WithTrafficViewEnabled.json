@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01",
+    "profileName": "azuresdkfornetautoresttrafficmanager3880",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager1323",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azuresdkfornetautoresttrafficmanager3880",
+        "type": "Microsoft.Network/trafficManagerProfiles",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager1323/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3880",
+        "location": "global",
+        "properties": {
+          "dnsConfig": {
+            "fqdn": "azuresdkfornetautoresttrafficmanager3880.tmpreview.watmtest.azure-test.net",
+            "relativeName": "azuresdkfornetautoresttrafficmanager3880",
+            "ttl": 35
+          },
+          "endpoints": [
+            {
+              "name": "My external endpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/azuresdkfornetautoresttrafficmanager1323/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3880/externalEndpoints/My external endpoint",
+              "properties": {
+                "endpointLocation": "North Europe",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "endpointStatus": "Enabled",
+                "priority": 1,
+                "target": "foobar.contoso.com",
+                "weight": 1
+              }
+            }
+          ],
+          "monitorConfig": {
+            "path": "/testpath.aspx",
+            "intervalInSeconds": 30,
+            "port": 80,
+            "profileMonitorStatus": "CheckingEndpoints",
+            "timeoutInSeconds": 10,
+            "toleratedNumberOfFailures": 3,
+            "protocol": "HTTP"
+          },
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Performance",
+          "trafficViewEnrollmentStatus": "Enabled"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "Profiles_Get",
+  "title": "Profile-GET-WithTrafficViewEnabled"
+}

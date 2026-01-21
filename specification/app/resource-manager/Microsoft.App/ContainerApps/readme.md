@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-07-01
+tag: package-preview-2025-10-02-preview
 ```
 
 ### Suppression
@@ -41,6 +41,56 @@ directive:
     from: ManagedEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[3].schema.properties.identity
     reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+  - suppress: AvoidAdditionalProperties
+    from: CommonDefinitions.json    
+    where:
+      - $.definitions.DaprSubscription.properties.properties.properties.metadata
+      - $.definitions.ServiceBind.properties.customizedKeys
+    reason: |
+      Do not introduce breaking changes in GA services
+```
+
+### Tag: package-preview-2025-10-02-preview
+
+These settings apply only when `--tag=package-preview-2025-10-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-10-02-preview'
+input-file:
+  - preview/2025-10-02-preview/AppResiliency.json
+  - preview/2025-10-02-preview/AuthConfigs.json
+  - preview/2025-10-02-preview/AvailableWorkloadProfiles.json
+  - preview/2025-10-02-preview/BillingMeters.json
+  - preview/2025-10-02-preview/Builders.json
+  - preview/2025-10-02-preview/Builds.json
+  - preview/2025-10-02-preview/CommonDefinitions.json
+  - preview/2025-10-02-preview/ConnectedEnvironments.json
+  - preview/2025-10-02-preview/ConnectedEnvironmentsCertificates.json
+  - preview/2025-10-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - preview/2025-10-02-preview/ConnectedEnvironmentsStorages.json
+  - preview/2025-10-02-preview/ContainerApps.json
+  - preview/2025-10-02-preview/ContainerAppsBuilds.json
+  - preview/2025-10-02-preview/ContainerAppsFunctions.json
+  - preview/2025-10-02-preview/ContainerAppsLabelHistory.json
+  - preview/2025-10-02-preview/ContainerAppsPatches.json
+  - preview/2025-10-02-preview/ContainerAppsRevisions.json
+  - preview/2025-10-02-preview/Diagnostics.json
+  - preview/2025-10-02-preview/DotNetComponents.json
+  - preview/2025-10-02-preview/FunctionsExtension.json
+  - preview/2025-10-02-preview/Global.json
+  - preview/2025-10-02-preview/JavaComponents.json
+  - preview/2025-10-02-preview/Jobs.json
+  - preview/2025-10-02-preview/LogicAppsExtension.json
+  - preview/2025-10-02-preview/ManagedEnvironments.json
+  - preview/2025-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - preview/2025-10-02-preview/ManagedEnvironmentsDaprComponents.json
+  - preview/2025-10-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - preview/2025-10-02-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - preview/2025-10-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - preview/2025-10-02-preview/ManagedEnvironmentsStorages.json
+  - preview/2025-10-02-preview/SessionPools.json
+  - preview/2025-10-02-preview/SourceControls.json
+  - preview/2025-10-02-preview/Subscriptions.json
+  - preview/2025-10-02-preview/Usages.json
 ```
 
 ### Tag: package-2025-07-01
@@ -161,13 +211,6 @@ input-file:
   - preview/2025-02-02-preview/Subscriptions.json
   - preview/2025-02-02-preview/Usages.json
 directive:
-  - suppress: AvoidAdditionalProperties
-    from: CommonDefinitions.json    
-    where:
-      - $.definitions.DaprSubscription.properties.properties.properties.metadata
-      - $.definitions.ServiceBind.properties.customizedKeys
-    reason: |
-      Do not introduce breaking changes in GA services
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: LogicAppsExtension.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows/{workflowName}"].get

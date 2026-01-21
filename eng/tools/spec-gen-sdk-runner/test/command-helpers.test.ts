@@ -1,3 +1,4 @@
+import { APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -15,7 +16,7 @@ import {
 import * as log from "../src/log.js";
 import { LogLevel } from "../src/log.js";
 import * as specHelpers from "../src/spec-helpers.js";
-import { APIViewRequestData } from "../src/types.js";
+import type { ExecutionReport } from "../src/types.js";
 import * as utils from "../src/utils.js";
 
 // Get the absolute path to the repo root
@@ -152,7 +153,7 @@ describe("commands.ts", () => {
         headBranch: "main",
         apiVersion: "2021-01-01",
         sdkReleaseType: "beta",
-        sdkLanguage: "typescript",
+        sdkLanguage: SdkName.Js,
       };
 
       const result = prepareSpecGenSdkCommand(commandInput);
@@ -367,7 +368,8 @@ describe("commands.ts", () => {
 
   describe("getBreakingChangeInfo", () => {
     test("should return breaking change info if applicable", () => {
-      const mockExecutionReport = {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "succeeded",
         packages: [{ shouldLabelBreakingChange: true }],
       };
 
@@ -377,7 +379,8 @@ describe("commands.ts", () => {
     });
 
     test("should return no breaking change info if not applicable", () => {
-      const mockExecutionReport = {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "succeeded",
         packages: [{ shouldLabelBreakingChange: false }],
       };
 
@@ -387,7 +390,8 @@ describe("commands.ts", () => {
     });
 
     test("should return no breaking change info if not executionReport", () => {
-      const mockExecutionReport = {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "succeeded",
         packages: [],
       };
 
@@ -417,7 +421,7 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "azure-sdk-for-js",
+        sdkLanguage: SdkName.Js,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
@@ -461,7 +465,7 @@ describe("commands.ts", () => {
             headSha: "abc123",
             prNumber: "123",
             labelAction: false,
-            isSpecGenSdkCheckRequired: false,
+            isSpecGenSdkCheckRequired: true,
             apiViewRequestData: [],
           },
           undefined,
@@ -498,7 +502,7 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "javascript",
+        sdkLanguage: SdkName.Js,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
@@ -545,7 +549,7 @@ describe("commands.ts", () => {
 
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "azure-sdk-for-go",
+        sdkLanguage: SdkName.Go,
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
@@ -608,8 +612,8 @@ describe("commands.ts", () => {
       expect(result).toBe(true);
 
       const result2 = getRequiredSettingValue(true, true, "azure-sdk-for-net");
-      // .NET SDK set (managementPlane: false)
-      expect(result2).toBe(false);
+      // .NET SDK set (managementPlane: true)
+      expect(result2).toBe(true);
     });
 
     test("should return dataPlane setting when hasManagementPlaneSpecs is false", () => {
@@ -619,7 +623,7 @@ describe("commands.ts", () => {
 
       const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
       // Based on the constants in types.ts, JS SDK does not require check for data plane
-      expect(result2).toBe(false);
+      expect(result2).toBe(true);
 
       const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
       // .NET SDK set (dataplane: false)

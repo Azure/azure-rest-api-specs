@@ -604,7 +604,7 @@ model EntitySubtype extends BaseExtraInformation {
   value?: string;
 
   @doc("List of entity tags. Tags express similarities between entity categories for the extracted entity type.")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   tags?: Array<EntityTag>;
 }
 
@@ -632,7 +632,7 @@ model RegexKey extends BaseExtraInformation {
 
 /** The abstract base class for entity resolutions. */
 @doc("Tags express similarities between entity categories for the extracted entity type.")
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntityTag {
   @doc("The name of the tag.")
   name: string;

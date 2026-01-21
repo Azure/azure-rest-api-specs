@@ -6,6 +6,11 @@ on:
       - main
       - RPSaaSMaster
 
+  pull_request:
+    paths:
+      - "eng/common/spelling/**"
+      - "cspell.json"
+
   schedule:
     # Run every day at 12:06 UTC
     - cron: "6 12 * * *"
@@ -21,14 +26,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 1
 
       - name: Run spelling check
         run: |
+          $allFiles = Get-ChildItem -Path specification -Recurse -File
+          Write-Host "Found $($allFiles.Count) files to check"
           ./eng/common/spelling/Invoke-Cspell.ps1 `
-            -ScanGlobs '**' `
+            -FileList $allFiles.FullName `
             -CSpellConfigPath './cspell.json' `
             -SpellCheckRoot (Resolve-Path specification)
         shell: pwsh
