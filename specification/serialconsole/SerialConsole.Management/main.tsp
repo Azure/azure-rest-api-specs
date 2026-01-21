@@ -41,8 +41,15 @@ enum Versions {
   v2024_07_01: "2024-07-01",
 }
 
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<SerialConsoleOperations>,
-      CloudError
-    > {}
+interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<SerialConsoleOperations> | CloudError;
+}
