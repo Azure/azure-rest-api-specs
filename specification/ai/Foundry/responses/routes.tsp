@@ -13,6 +13,9 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
+/**
+ * Responses interface modelled on OpenAI Responses
+ */
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
 @route("openai/responses")
