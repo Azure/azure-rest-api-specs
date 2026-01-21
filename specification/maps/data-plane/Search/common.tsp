@@ -118,6 +118,12 @@ model GeoJsonObject {
    * GeometryCollection, Feature and FeatureCollection.
    */
   type: GeoJsonObjectType;
+
+  /**
+   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
+   * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
+   */
+  bbox?: float64[];
 }
 
 /**

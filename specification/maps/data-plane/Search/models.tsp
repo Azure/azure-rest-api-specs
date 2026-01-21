@@ -991,26 +991,6 @@ model GeocodePointsItem {
 }
 
 /**
- * A valid `GeoJSON` object. Please refer to [RFC
- * 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.
- */
-@discriminator("type")
-model GeoJsonObject {
-  /**
-   * Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object
-   * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
-   * GeometryCollection, Feature and FeatureCollection.
-   */
-  type: GeoJsonObjectType;
-
-  /**
-   * Bounding box. Projection used - EPSG:3857. Please refer to [RFC
-   * 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
-   */
-  bbox?: float64[];
-}
-
-/**
  * The list of address geocoding queries/requests to process. The list can contain
  * a max of 100 queries and must contain at least 1 query.
  */
