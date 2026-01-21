@@ -222,6 +222,7 @@ model AzureCustomVoice extends AzureVoice {
   temperature?: float32;
 
   custom_lexicon_url?: string;
+  custom_text_normalization_url?: string;
   prefer_locales?: string[];
   locale?: string;
   style?: string;
@@ -246,6 +247,7 @@ model AzureStandardVoice extends AzureVoice {
   temperature?: float32;
 
   custom_lexicon_url?: string;
+  custom_text_normalization_url?: string;
   prefer_locales?: string[];
   locale?: string;
   style?: string;
@@ -272,6 +274,7 @@ model AzurePersonalVoice extends AzureVoice {
   `model`: PersonalVoiceModels;
 
   custom_lexicon_url?: string;
+  custom_text_normalization_url?: string;
   prefer_locales?: string[];
   locale?: string;
   style?: string;
