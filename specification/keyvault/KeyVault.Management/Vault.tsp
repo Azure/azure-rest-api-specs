@@ -7,6 +7,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
 
 namespace Microsoft.KeyVault;
@@ -42,19 +43,15 @@ interface Vaults {
   /**
    * Create or update a key vault in the specified subscription.
    */
-  @armResourceCreateOrUpdate(Vault)
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    ResourceInstanceParameters<
-      Vault,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<Vault>
-    >,
+  createOrUpdate is CreateOrReplaceSync<
+    Vault,
     VaultCreateOrUpdateParameters,
-    Vault | ArmResourceCreatedResponse<
+    Response = Vault | ArmResourceCreatedResponse<
       Vault,
       LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    CloudError
+    Error = CloudError
   >;
 
   /**
@@ -106,7 +103,8 @@ interface Vaults {
   /**
    * Update access policies in a key vault in the specified subscription.
    */
-  @put
+  @put  
+  @armResourceCreateOrUpdate(Vault)
   updateAccessPolicy is Azure.ResourceManager.Foundations.ArmCreateOperation<
     {
       ...ApiVersionParameter;

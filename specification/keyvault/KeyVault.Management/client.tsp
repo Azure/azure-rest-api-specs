@@ -297,12 +297,11 @@ using Azure.Core;
 
 @@clientName(ManagedHsms.listByResource, "GetMHSMRegionsByResource", "csharp");
 
-// TODO: comment these for now since they are not working as expected
-// @@markAsPageable(ManagedHsms.listByMHSMResource, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(ManagedHsms.listByMHSMResource, "csharp");
 
-// @@markAsPageable(Vaults.listByVault);
-
-// @@markAsPageable(Vaults.updateAccessPolicy, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(Vaults.listByVault);
 
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
