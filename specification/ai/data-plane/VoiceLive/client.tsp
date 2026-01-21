@@ -149,6 +149,27 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.Response.voice, Access.internal, "csharp");
 @@access(VoiceLive.ToolChoiceFunctionObject, Access.internal, "csharp");
 @@access(VoiceLive.ToolChoiceObject, Access.internal, "csharp");
+@@access(VoiceLive.ServerEventMcpListToolsInProgress, Access.public, "csharp");
+@@access(VoiceLive.ServerEventMcpListToolsCompleted, Access.public, "csharp");
+@@access(VoiceLive.ServerEventMcpListToolsFailed, Access.public, "csharp");
+@@access(VoiceLive.ServerEventResponseMcpCallArgumentsDelta,
+  Access.public,
+  "csharp"
+);
+@@access(VoiceLive.ServerEventResponseMcpCallArgumentsDone,
+  Access.public,
+  "csharp"
+);
+@@access(VoiceLive.ServerEventResponseMcpCallInProgress,
+  Access.public,
+  "csharp"
+);
+@@access(VoiceLive.ServerEventResponseMcpCallCompleted,
+  Access.public,
+  "csharp"
+);
+@@access(VoiceLive.ServerEventResponseMcpCallFailed, Access.public, "csharp");
+@@access(VoiceLive.MCPApprovalResponseRequestItem, Access.internal, "csharp");
 
 @@clientName(VoiceLive.Modality, "InteractionModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
@@ -359,6 +380,56 @@ using Azure.ClientGenerator.Core;
   "AzureSemanticEouDetectionMultilingual",
   "csharp"
 );
+@@clientName(VoiceLive.ServerEventMcpListToolsInProgress,
+  "SessionUpdateMcpListToolsInProgress",
+  "csharp"
+);
+@@clientName(VoiceLive.ServerEventMcpListToolsCompleted,
+  "SessionUpdateMcpListToolsCompleted",
+  "csharp"
+);
+@@clientName(VoiceLive.ServerEventMcpListToolsFailed,
+  "SessionUpdateMcpListToolsFailed",
+  "csharp"
+);
+@@clientName(VoiceLive.ServerEventResponseMcpCallArgumentsDelta,
+  "SessionUpdateResponseMcpCallArgumentsDelta",
+  "csharp"
+);
+@@clientName(VoiceLive.ServerEventResponseMcpCallArgumentsDone,
+  "SessionUpdateResponseMcpCallArgumentsDone",
+  "csharp"
+);
+@@clientName(VoiceLive.ServerEventResponseMcpCallInProgress,
+  "SessionUpdateResponseMcpCallInProgress",
+  "csharp"
+);
+@@clientName(VoiceLive.ServerEventResponseMcpCallCompleted,
+  "SessionUpdateResponseMcpCallCompleted",
+  "csharp"
+);
+@@clientName(VoiceLive.ServerEventResponseMcpCallFailed,
+  "SessionUpdateResponseMcpCallFailed",
+  "csharp"
+);
+@@clientName(VoiceLive.ResponseMCPListToolItem,
+  "SessionResponseMcpListToolItem",
+  "csharp"
+);
+@@clientName(VoiceLive.ResponseMCPCallItem,
+  "SessionResponseMcpCallItem",
+  "csharp"
+);
+@@clientName(VoiceLive.ResponseMCPApprovalRequestItem,
+  "SessionResponseMcpApprovalRequestItem",
+  "csharp"
+);
+@@clientName(VoiceLive.ResponseMCPApprovalResponseItem,
+  "SessionResponseMcpApprovalResponseItem",
+  "csharp"
+);
+@@clientName(VoiceLive.MCPServer, "VoiceLiveMcpServerDefinition", "csharp");
+@@clientName(VoiceLive.MCPTool, "VoiceLiveMcpTool", "csharp");
 @@clientName(VoiceLive.Background, "VideoBackground", "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
 
