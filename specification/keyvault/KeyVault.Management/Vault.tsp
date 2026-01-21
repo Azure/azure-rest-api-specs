@@ -43,19 +43,15 @@ interface Vaults {
   /**
    * Create or update a key vault in the specified subscription.
    */
-  @armResourceCreateOrUpdate(Vault)
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    ResourceInstanceParameters<
-      Vault,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<Vault>
-    >,
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
+    Vault,
     VaultCreateOrUpdateParameters,
-    Vault | ArmResourceCreatedResponse<
+    Response = Vault | ArmResourceCreatedResponse<
       Vault,
       LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    CloudError
+    Error = CloudError
   >;
 
   /**
