@@ -1,4 +1,4 @@
-<#
+
 .SYNOPSIS
 Script used to generate the diff.json file for a PR. Explicitly intended to work in a PR context.
 
