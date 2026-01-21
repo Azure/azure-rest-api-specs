@@ -120,6 +120,92 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     });
   });
 
+  test("correlates before and after runs with matching readme and empty string tag", async () => {
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const beforeChecks: AutorestRunResult[] = [
+      {
+        rootPath: beforePath,
+        readme: new Readme(
+          resolve(beforePath, "specification/service1/resource-manager/readme.md"),
+        ),
+        tag: "",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
+        tag: "tag2",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, beforeChecks, afterChecks);
+    expect(result.size).toEqual(1);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag2")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[0],
+    });
+  });
+
+  test("correlates before and multiple after runs with matching readme and empty string tag", async () => {
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const beforeChecks: AutorestRunResult[] = [
+      {
+        rootPath: beforePath,
+        readme: new Readme(
+          resolve(beforePath, "specification/service1/resource-manager/readme.md"),
+        ),
+        tag: "",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
+        tag: "tag2",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+      {
+        rootPath: afterPath,
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
+        tag: "tag3",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, beforeChecks, afterChecks);
+    expect(result.size).toEqual(2);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag2")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[0],
+    });
+    expect(result.get("specification/service1/resource-manager/readme.md#tag3")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[1],
+    });
+  });
+
   test("uses no baseline if there are no matching before checks", async () => {
     const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
     const beforePath = resolve(fixtureRoot, "before");
@@ -297,7 +383,7 @@ describe("isSameSources", () => {
   });
 });
 
-describe("getLintDiffViolations", () => {
+describe("getLintDiffViolations", async () => {
   function createRunResult(stdout: string, stderr: string = ""): AutorestRunResult {
     return {
       rootPath: "string",
@@ -359,7 +445,7 @@ describe("getLintDiffViolations", () => {
 });
 
 describe("arrayIsEqual", () => {
-  test("returns true for equal arrays", () => {
+  test("returns true for equal arrays", async () => {
     const a = ["a", "b", "c"];
     const b = ["a", "b", "c"];
 
@@ -367,7 +453,7 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(true);
   });
 
-  test("returns false for different arrays", () => {
+  test("returns false for different arrays", async () => {
     const a = ["a", "b", "c"];
     const b = ["a", "b", "d"];
 
@@ -375,7 +461,7 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(false);
   });
 
-  test("returns false for different lengths", () => {
+  test("returns false for different lengths", async () => {
     const a = ["a", "b", "c"];
     const b = ["a", "b"];
 
@@ -383,7 +469,7 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(false);
   });
 
-  test("returns true for empty arrays", () => {
+  test("returns true for empty arrays", async () => {
     const a: string[] = [];
     const b: string[] = [];
 
@@ -391,7 +477,7 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(true);
   });
 
-  test("returns true for equal arrays with different types", () => {
+  test("returns true for equal arrays with different types", async () => {
     const a = ["a", 1, "c"];
     const b = ["a", 1, "c"];
 

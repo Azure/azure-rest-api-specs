@@ -31,7 +31,9 @@ export async function correlateRuns(
       });
       continue;
     } else if (beforeCandidates.length > 1) {
-      throw new Error(`Multiple before candidates found for key ${key}`);
+      throw new Error(
+        `Multiple before candidates found for key ${key}`,
+      );
     }
 
     // Look for candidates with a matching default tag from the baseline
@@ -40,10 +42,12 @@ export async function correlateRuns(
       const beforeReadme = new Readme(beforeReadmePath);
       const defaultTag = await getDefaultTag(beforeReadme);
       if (!defaultTag) {
-        throw new Error(`No default tag found for readme ${readme.toString()} in before state`);
+        throw new Error(`No default tag found for readme ${readme} in before state`);
       }
       const beforeDefaultTagCandidates = beforeChecks.filter(
-        (r) => relative(beforePath, r.readme.path) === readmePathRelative && r.tag === defaultTag,
+        (r) =>
+          relative(beforePath, r.readme.path) === readmePathRelative &&
+          (r.tag === defaultTag || r.tag == ""),
       );
 
       if (beforeDefaultTagCandidates.length === 1) {
@@ -69,9 +73,7 @@ export async function correlateRuns(
         });
         continue;
       } else if (beforeReadmeCandidate.length > 1) {
-        throw new Error(
-          `Multiple before candidates found for key ${key} using readme ${readme.toString()}`,
-        );
+        throw new Error(`Multiple before candidates found for key ${key} using readme ${readme}`);
       }
     }
 
@@ -150,7 +152,7 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
       continue;
     }
 
-    const result = JSON.parse(line.trim()) as { code: string };
+    const result = JSON.parse(line.trim());
     if (result.code == undefined) {
       // Results without a code can be assumed to be fatal errors. Set the code
       // to "FATAL"
@@ -215,7 +217,7 @@ export function isSameSources(a: Source[], b: Source[]) {
   return true;
 }
 
-export function arrayIsEqual(a: unknown[], b: unknown[]) {
+export function arrayIsEqual(a: any[], b: any[]) {
   if (a.length !== b.length) {
     return false;
   }

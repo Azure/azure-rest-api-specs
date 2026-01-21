@@ -49,6 +49,14 @@ export async function getRunList(
     [...beforeTagMap].map(([readme, tags]) => ({ readme, tags: [...tags.changedTags] })),
     ["readme", "tags"],
   );
+
+  for (const [k, v] of beforeTagMap) { 
+    console.log(`Readme: ${k}`);
+    for (const tag of v.changedTags) {
+      console.log(`  - ${tag}`);
+    }
+  }
+  
   console.log("\n");
 
   console.log("After readme and tags:");
@@ -56,6 +64,14 @@ export async function getRunList(
     [...afterTagMap].map(([readme, tags]) => ({ readme, tags: [...tags.changedTags] })),
     ["readme", "tags"],
   );
+
+    for (const [k, v] of beforeTagMap) { 
+    console.log(`Readme: ${k}`);
+    for (const tag of v.changedTags) {
+      console.log(`  - ${tag}`);
+    }
+  }
+  
   console.log("\n");
 
   console.log("Affected swaggers:");
@@ -170,7 +186,9 @@ export async function buildState(
 
 /**
  * Build mappings of changed readmes and tags to scan by examining state of the
- * repo before and after the change.
+ * repo before and after the change. This handles special cases where tags and
+ * readmes are added and deleted in ways that don't map directly to exact
+ * readme#tag matches.
  * @param before before the change
  * @param after after the change
  * @returns maps of readme files and tags to scan
@@ -190,7 +208,6 @@ export async function reconcileChangedFilesAndTags(
     afterFinal.set(readme, tags);
   }
 
-  // If a tag is deleted in after and exists in before, do NOT lint the tag
   for (const [readme, tags] of beforeFinal.entries()) {
     if (!afterFinal.has(readme)) {
       continue;
@@ -199,36 +216,42 @@ export async function reconcileChangedFilesAndTags(
     const afterTags = new Set([...afterFinal.get(readme)!.changedTags]);
     beforeFinal.set(readme, {
       readme: tags.readme,
+      // Don't lint deleted tags
       changedTags: new Set([...tags.changedTags].filter((t) => afterTags.has(t))),
     });
   }
 
-  // If a tag is edited in after and also exists in before (e.g. add a new file
-  // to a tag in the readme.md), make sure to lint the tag in before as well
+
   for (const [readme, afterTags] of afterFinal.entries()) {
     if (!beforeFinal.has(readme)) {
       continue;
     }
 
-    const beforeTagSet = await beforeFinal.get(readme)!.readme.getTags();
-    const beforeTags = beforeFinal.get(readme)!.changedTags;
+    const allBeforeTags = await beforeFinal.get(readme)!.readme.getTags();
+
+    // This reference enables modification of beforeFinal with respect to the
+    // current readme.
+    const beforeTagsRef = beforeFinal.get(readme)!.changedTags;
+    
     for (const tag of afterTags.changedTags) {
-      if (!beforeTagSet.has(tag)) {
+      if (!allBeforeTags.has(tag)) {
         continue;
       }
 
-      beforeTags.add(tag);
-      break;
+    // If a tag is edited in after and also exists in before (e.g. add a new 
+    // file to a tag in the readme.md), make sure to lint the tag in before as 
+    // well.
+      beforeTagsRef.add(tag);
     }
 
-  // If a tag exists in after but not in before, make sure that the the default
-  // tag from before is included in linting
+    // In the case of a new tag (not in before), lint the default tag from
+    // before (correlateRuns matches the "" to after's default tag).
     const beforeDefaultTag = await getDefaultTag(beforeFinal.get(readme)!.readme);
     for (const tag of afterTags.changedTags) {
-      // Only add "" if the default tag is not already in beforeTags (prevent
+      // Only add "" if the default tag is not already in beforeTagsRef (prevent
       // duplicate)
-      if (!beforeTags.has(tag) && !beforeTags.has(beforeDefaultTag)) {
-        beforeTags.add("");
+      if (!beforeTagsRef.has(tag) && !beforeTagsRef.has(beforeDefaultTag)) {
+        beforeTagsRef.add("");
         break;
       }
     }

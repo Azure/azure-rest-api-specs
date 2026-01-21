@@ -14,6 +14,13 @@ import { Tag } from "@azure-tools/specs-shared/tag";
 import { resolve } from "node:path";
 import { isWindows } from "./test-util.js";
 
+declare module "vitest" {
+  interface Assertion<T = any> {
+    // Asserts readmes for testing reconcileChangedFilesAndTags
+    toBeReadmeWith(expected: Readme): Promise<void>;
+  }
+}
+
 describe("getAffectedServices", () => {
   test.skipIf(isWindows())("returns single service with multiple files", async () => {
     const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
@@ -65,52 +72,46 @@ function createMockReadme(path: string, defaultTag: string, existingTags: string
   return mockReadme;
 }
 
-declare module "vitest" {
-  interface Assertion<T = any> {
-    toBeReadmeWith(expected: Readme): Promise<void>;
-  }
-}
-
-expect.extend({
-  async toBeReadmeWith(received: Readme, expected: Readme) {
-    const passMessages: string[] = [];
-    const failMessages: string[] = [];
-
-    try {
-      expect(received.path).toBe(resolve(expected.path));
-      passMessages.push(`path is ${expected.path}`);
-    } catch (e) {
-      failMessages.push(String(e));
-    }
-    try {
-      const expectedDefaultTag = (await expected.getGlobalConfig()).tag;
-      await expect(received.getGlobalConfig()).resolves.toEqual({ tag: expectedDefaultTag });
-      passMessages.push(`default tag is ${expectedDefaultTag}`);
-    } catch (e) {
-      failMessages.push(String(e));
-    }
-
-    try {
-      const expectedTags = [...(await expected.getTags()).keys()];
-      const actualTags = [...(await received.getTags()).keys()];
-      expect(actualTags).toEqual(expect.arrayContaining(expectedTags));
-      passMessages.push(`tags are ${expectedTags.join(", ")}`);
-    } catch (e) {
-      failMessages.push(String(e));
-    }
-
-    const pass = failMessages.length === 0;
-    return {
-      pass,
-      message: () =>
-        pass
-          ? `Readme matches expected values\nChecks: ${passMessages.join("; ")}`
-          : `Readme object checks failed:\n- ${failMessages.join("\n- ")}`,
-    };
-  },
-});
-
 describe("reconcileChangedFilesAndTags", () => {
+  expect.extend({
+    async toBeReadmeWith(received: Readme, expected: Readme) {
+      const passMessages: string[] = [];
+      const failMessages: string[] = [];
+
+      try {
+        expect(received.path).toBe(resolve(expected.path));
+        passMessages.push(`path is ${expected.path}`);
+      } catch (e) {
+        failMessages.push(String(e));
+      }
+      try {
+        const expectedDefaultTag = (await expected.getGlobalConfig()).tag;
+        await expect(received.getGlobalConfig()).resolves.toEqual({ tag: expectedDefaultTag });
+        passMessages.push(`default tag is ${expectedDefaultTag}`);
+      } catch (e) {
+        failMessages.push(String(e));
+      }
+
+      try {
+        const expectedTags = [...(await expected.getTags()).keys()];
+        const actualTags = [...(await received.getTags()).keys()];
+        expect(actualTags).toEqual(expect.arrayContaining(expectedTags));
+        passMessages.push(`tags are ${expectedTags.join(", ")}`);
+      } catch (e) {
+        failMessages.push(String(e));
+      }
+
+      const pass = failMessages.length === 0;
+      return {
+        pass,
+        message: () =>
+          pass
+            ? `Readme matches expected values\nChecks: ${passMessages.join("; ")}`
+            : `Readme object checks failed:\n- ${failMessages.join("\n- ")}`,
+      };
+    },
+  });
+
   // These tests assume that an existing readme.md at specification/1/readme.md
   // has 3 tags:
   // tag1 - default
@@ -118,6 +119,8 @@ describe("reconcileChangedFilesAndTags", () => {
   // tag3
   const beforeTags = ["tag1", "tag2", "tag3"];
 
+  // Mocks an output of buildState with values relevant to testing
+  // reconcileChangedFilesAndTags
   function createReadmeTags(
     tags: string[],
     defaultTag: string = "tag1",
@@ -137,9 +140,15 @@ describe("reconcileChangedFilesAndTags", () => {
   test.each([
     [
       "1. add a tag to an existing readme",
+      // Given this before state...
       createReadmeTags([]),
+      // ... and this after state
       createReadmeTags(["tag4"]),
+
+      // Modify the set of things to check in before to match:
       createReadmeTags([""]),
+
+      // And modify the set of things in after to match: 
       createReadmeTags(["tag4"]),
     ],
     [
@@ -186,11 +195,19 @@ describe("reconcileChangedFilesAndTags", () => {
     ],
     [
       "8. add a new file to an existing tag",
-      // TODO: Document why this happens
+      // TODO: Document why before tags is an empty array
       createReadmeTags([]),
       createReadmeTags(["tag2"]),
       createReadmeTags(["tag2"]),
       createReadmeTags(["tag2"]),
+    ],
+    [
+      // TODO: Re-number scenarios
+      "8.5 add new files to multiple existing tags",
+      createReadmeTags([]),
+      createReadmeTags(["tag2", "tag3"]),
+      createReadmeTags(["tag2", "tag3"]),
+      createReadmeTags(["tag2", "tag3"]),
     ],
     [
       "9. remove a tag",
@@ -217,8 +234,7 @@ describe("reconcileChangedFilesAndTags", () => {
       "12. delete default tag set new default",
       createReadmeTags(["tag1"]),
       createReadmeTags(["tag2"], "tag2"),
-      // Ensure this is correct
-      createReadmeTags(["tag2"]),
+      createReadmeTags(["tag2"]), // there's an asymmetry of expectations here
       createReadmeTags(["tag2"], "tag2"),
     ],
     [
@@ -256,6 +272,9 @@ describe("reconcileChangedFilesAndTags", () => {
       createReadmeTags(["tag1", "tag2", "tag3"]),
       new Map<string, ReadmeAffectedTags>([]),
     ],
+
+    // For this test case, the assumption that a readme exists at
+    // specification/1/readme.md is irrelevant, so use an empty map.
     [
       "17. add a new readme",
       new Map<string, ReadmeAffectedTags>([]),
@@ -281,7 +300,7 @@ describe("reconcileChangedFilesAndTags", () => {
       "20. add a file to the default tag",
       createReadmeTags([]),
       createReadmeTags(["tag1"]),
-      createReadmeTags(["tag1"]),
+      createReadmeTags(["tag1"]), // There's an asymmetry here
       createReadmeTags(["tag1"]),
     ],
   ])(
