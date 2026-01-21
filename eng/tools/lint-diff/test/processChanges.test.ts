@@ -112,13 +112,6 @@ describe("reconcileChangedFilesAndTags", () => {
     },
   });
 
-  // These tests assume that an existing readme.md at specification/1/readme.md
-  // has 3 tags:
-  // tag1 - default
-  // tag2
-  // tag3
-  const beforeTags = ["tag1", "tag2", "tag3"];
-
   // Mocks an output of buildState with values relevant to testing
   // reconcileChangedFilesAndTags
   function createReadmeTags(
@@ -129,8 +122,13 @@ describe("reconcileChangedFilesAndTags", () => {
     return new Map<string, ReadmeAffectedTags>([
       [
         readmePath,
-        {
-          readme: createMockReadme(readmePath, defaultTag, beforeTags),
+        {          
+          // Assume that an existing readme.md at specification/1/readme.md
+          // has 3 tags:
+          // tag1 - default
+          // tag2
+          // tag3
+          readme: createMockReadme(readmePath, defaultTag, ["tag1", "tag2", "tag3"]),
           changedTags: new Set<string>(tags),
         },
       ],
@@ -140,15 +138,15 @@ describe("reconcileChangedFilesAndTags", () => {
   test.each([
     [
       "1. add a tag to an existing readme",
-      // Given this before state...
+      // Given file changes mapping to tags in this before state...
       createReadmeTags([]),
       // ... and this after state
       createReadmeTags(["tag4"]),
 
-      // Modify the set of things to check in before to match:
+      // These tags should be scanned in the before state:
       createReadmeTags([""]),
 
-      // And modify the set of things in after to match: 
+      // These tags should be scanned in the after state: 
       createReadmeTags(["tag4"]),
     ],
     [
@@ -195,78 +193,87 @@ describe("reconcileChangedFilesAndTags", () => {
     ],
     [
       "8. add a new file to an existing tag",
-      // TODO: Document why before tags is an empty array
+      // New files are not in the before state; they do not map to any tags in
+      // before so the list is empty.
       createReadmeTags([]),
       createReadmeTags(["tag2"]),
       createReadmeTags(["tag2"]),
       createReadmeTags(["tag2"]),
     ],
     [
-      // TODO: Re-number scenarios
-      "8.5 add new files to multiple existing tags",
+      "9. add new files to multiple existing tags",
       createReadmeTags([]),
       createReadmeTags(["tag2", "tag3"]),
       createReadmeTags(["tag2", "tag3"]),
       createReadmeTags(["tag2", "tag3"]),
     ],
     [
-      "9. remove a tag",
+      "10. remove a tag",
       createReadmeTags(["tag2"]),
       createReadmeTags([]),
       createReadmeTags([]),
       createReadmeTags([]),
     ],
     [
-      "10. remove a tag and edit a tag",
+      "11. remove a tag and edit a tag",
       createReadmeTags(["tag2", "tag3"]),
       createReadmeTags(["tag3"]),
       createReadmeTags(["tag3"]),
       createReadmeTags(["tag3"]),
     ],
     [
-      "11. remove a tag add a new tag",
+      "12. remove a tag add a new tag",
       createReadmeTags(["tag2"]),
       createReadmeTags(["tag4"]),
       createReadmeTags([""]),
       createReadmeTags(["tag4"]),
     ],
     [
-      "12. delete default tag set new default",
+      "13. delete default tag set new default",
       createReadmeTags(["tag1"]),
       createReadmeTags(["tag2"], "tag2"),
-      createReadmeTags(["tag2"]), // there's an asymmetry of expectations here
+      // tag2 already exists in before, so it can be compared with tag2 in after
+      createReadmeTags(["tag2"]),
       createReadmeTags(["tag2"], "tag2"),
     ],
     [
-      "13. update muiltiple tags including default tag",
+      "14. default tag deleted, add new tag and make it default",
+      createReadmeTags(["tag1"]),
+      createReadmeTags(["tag4"], "tag4"),
+      // tag4 is a new tag, so compare it to the default tag from before
+      createReadmeTags([""]),
+      createReadmeTags(["tag4"], "tag4"),
+    ],
+    [
+      "15. update muiltiple tags including default tag",
       createReadmeTags(["tag1", "tag2"]),
       createReadmeTags(["tag1", "tag2"]),
       createReadmeTags(["tag1", "tag2"]),
       createReadmeTags(["tag1", "tag2"]),
     ],
     [
-      "14. update mulitple tags including default tag and add a new tag",
+      "16. update mulitple tags including default tag and add a new tag",
       createReadmeTags(["tag1", "tag2"]),
       createReadmeTags(["tag1", "tag2", "tag4", "tag5"]),
       createReadmeTags(["tag1", "tag2"]),
       createReadmeTags(["tag1", "tag2", "tag4", "tag5"]),
     ],
     [
-      "15. delete a readme",
+      "17. delete a readme",
       createReadmeTags([]),
       new Map<string, ReadmeAffectedTags>([]),
       createReadmeTags([]),
       new Map<string, ReadmeAffectedTags>([]),
     ],
     [
-      "15.1 delete a readme",
+      "18. delete a readme",
       createReadmeTags(["tag1", "tag2", "tag3"]),
       new Map<string, ReadmeAffectedTags>([]),
       createReadmeTags(["tag1", "tag2", "tag3"]),
       new Map<string, ReadmeAffectedTags>([]),
     ],
     [
-      "16. delete a readme and swagger files",
+      "19. delete a readme and swagger files",
       createReadmeTags(["tag1", "tag2", "tag3"]),
       new Map<string, ReadmeAffectedTags>([]),
       createReadmeTags(["tag1", "tag2", "tag3"]),
@@ -276,31 +283,31 @@ describe("reconcileChangedFilesAndTags", () => {
     // For this test case, the assumption that a readme exists at
     // specification/1/readme.md is irrelevant, so use an empty map.
     [
-      "17. add a new readme",
+      "20. add a new readme",
       new Map<string, ReadmeAffectedTags>([]),
       createReadmeTags(["tag1", "tag2"], "tag1", "specification/2/readme.md"),
       new Map<string, ReadmeAffectedTags>([]),
       createReadmeTags(["tag1", "tag2"], "tag1", "specification/2/readme.md"),
     ],
     [
-      "18. only change readme.md file",
+      "21. only change readme.md file",
       createReadmeTags([]),
       createReadmeTags([]),
       createReadmeTags([]),
       createReadmeTags([]),
     ],
     [
-      "19. only change readme.md file updating default tag",
+      "22. only change readme.md file updating default tag",
       createReadmeTags([]),
       createReadmeTags([], "tag2"),
       createReadmeTags([]),
       createReadmeTags([], "tag2"),
     ],
     [
-      "20. add a file to the default tag",
-      createReadmeTags([]),
+      "23. add a file to the default tag",
+      createReadmeTags([]), // No file associated with a tag in before state
       createReadmeTags(["tag1"]),
-      createReadmeTags(["tag1"]), // There's an asymmetry here
+      createReadmeTags(["tag1"]), // tag1 does exist in before state so it's used here
       createReadmeTags(["tag1"]),
     ],
   ])(
