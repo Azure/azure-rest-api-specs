@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.CloudHealth",
-    "version": "2025-05-01-preview",
+    "version": "2026-01-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -589,6 +589,17 @@
             "description": "Resource 'AuthenticationSetting' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/AuthenticationSetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -602,7 +613,11 @@
           "AuthenticationSettings_CreateOrUpdate": {
             "$ref": "./examples/AuthenticationSettings_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "AuthenticationSettings_Delete",
@@ -638,8 +653,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -655,7 +681,11 @@
           "AuthenticationSettings_Delete": {
             "$ref": "./examples/AuthenticationSettings_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/discoveryrules": {
@@ -823,6 +853,17 @@
             "description": "Resource 'DiscoveryRule' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/DiscoveryRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -836,7 +877,11 @@
           "DiscoveryRules_CreateOrUpdate": {
             "$ref": "./examples/DiscoveryRules_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DiscoveryRules_Delete",
@@ -872,8 +917,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -889,7 +945,11 @@
           "DiscoveryRules_Delete": {
             "$ref": "./examples/DiscoveryRules_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities": {
@@ -1057,6 +1117,17 @@
             "description": "Resource 'Entity' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Entity"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1070,7 +1141,11 @@
           "Entities_CreateOrUpdate": {
             "$ref": "./examples/Entities_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Entities_Delete",
@@ -1106,8 +1181,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1122,6 +1208,199 @@
         "x-ms-examples": {
           "Entities_Delete": {
             "$ref": "./examples/Entities_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getHistory": {
+      "post": {
+        "operationId": "Entities_GetHistory",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Retrieve the health state transition history for an entity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityHistoryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EntityHistoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_GetHistory": {
+            "$ref": "./examples/Entities_GetHistory.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getSignalHistory": {
+      "post": {
+        "operationId": "Entities_GetSignalHistory",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Retrieve the time series history for a signal on an entity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignalHistoryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SignalHistoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_GetSignalHistory": {
+            "$ref": "./examples/Entities_GetSignalHistory.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/ingestHealthReport": {
+      "post": {
+        "operationId": "Entities_IngestHealthReport",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Ingest a health report for a specific signal on an entity (the entity must already exist)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HealthReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_IngestHealthReport": {
+            "$ref": "./examples/Entities_IngestHealthReport.json"
           }
         }
       }
@@ -1291,6 +1570,17 @@
             "description": "Resource 'Relationship' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Relationship"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1304,7 +1594,11 @@
           "Relationships_CreateOrUpdate": {
             "$ref": "./examples/Relationships_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Relationships_Delete",
@@ -1340,8 +1634,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1357,7 +1662,11 @@
           "Relationships_Delete": {
             "$ref": "./examples/Relationships_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/signaldefinitions": {
@@ -1525,6 +1834,17 @@
             "description": "Resource 'SignalDefinition' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/SignalDefinition"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1538,7 +1858,11 @@
           "SignalDefinitions_CreateOrUpdate": {
             "$ref": "./examples/SignalDefinitions_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SignalDefinitions_Delete",
@@ -1574,8 +1898,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1591,7 +1926,11 @@
           "SignalDefinitions_Delete": {
             "$ref": "./examples/SignalDefinitions_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1674,6 +2013,33 @@
           }
         ]
       }
+    },
+    "ApplicationInsightsTopologySpecification": {
+      "type": "object",
+      "description": "Discovery rule specification for an Application Insights topology query",
+      "properties": {
+        "applicationInsightsResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Application Insights resource ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/components"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "applicationInsightsResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscoveryRuleSpecification"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplicationInsightsTopology"
     },
     "AuthenticationKind": {
       "type": "string",
@@ -1765,28 +2131,28 @@
         ]
       }
     },
-    "AzureMonitorWorkspaceSignalGroup": {
+    "AzureMonitorWorkspaceSignals": {
       "type": "object",
-      "description": "A grouping of signal assignments for a Azure Monitor Workspace",
+      "description": "A grouping of Azure Monitor workspace signals.",
       "properties": {
-        "signalAssignments": {
-          "type": "array",
-          "description": "Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SignalAssignment"
-          },
-          "x-ms-identifiers": [
-            "signalDefinitions"
-          ]
-        },
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
+          "description": "Reference to the name of the authentication setting which is used for querying the data source."
         },
         "azureMonitorWorkspaceResourceId": {
           "$ref": "#/definitions/AzureMonitorWorkspaceResourceId",
-          "description": "Azure Monitor workspace resource ID"
+          "description": "Azure Monitor workspace resource ID."
+        },
+        "signals": {
+          "type": "array",
+          "description": "Signals assigned to this signal group.",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/PrometheusMetricsSignal"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -1794,24 +2160,124 @@
         "azureMonitorWorkspaceResourceId"
       ]
     },
-    "AzureResourceSignalGroup": {
+    "AzureResourceSignal": {
       "type": "object",
-      "description": "A grouping of signal assignments for an Azure resource",
+      "description": "An Azure Resource Metric signal instance assigned to an entity.",
       "properties": {
-        "signalAssignments": {
-          "type": "array",
-          "description": "Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SignalAssignment"
-          },
-          "x-ms-identifiers": [
-            "signalDefinitions"
-          ]
+        "metricNamespace": {
+          "type": "string",
+          "description": "Metric namespace",
+          "minLength": 1,
+          "maxLength": 256
         },
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of signal. ISO duration format like PT10M.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "aggregationType": {
+          "$ref": "#/definitions/MetricAggregationType",
+          "description": "Type of aggregation to apply to the metric"
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Optional: Dimension to split by",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "dimensionFilter": {
+          "type": "string",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name",
+          "minLength": 1,
+          "maxLength": 260
+        },
+        "refreshInterval": {
+          "type": "string",
+          "description": "Interval in which the signal is being evaluated. Defaults to PT1M (1 minute).",
+          "default": "PT1M",
+          "enum": [
+            "PT1M",
+            "PT5M",
+            "PT10M",
+            "PT30M",
+            "PT1H",
+            "PT2H"
+          ],
+          "x-ms-enum": {
+            "name": "RefreshInterval",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PT1M",
+                "value": "PT1M",
+                "description": "One Minute"
+              },
+              {
+                "name": "PT5M",
+                "value": "PT5M",
+                "description": "Five Minutes"
+              },
+              {
+                "name": "PT10M",
+                "value": "PT10M",
+                "description": "Ten Minutes"
+              },
+              {
+                "name": "PT30M",
+                "value": "PT30M",
+                "description": "Thirty Minutes"
+              },
+              {
+                "name": "PT1H",
+                "value": "PT1H",
+                "description": "One Hour"
+              },
+              {
+                "name": "PT2H",
+                "value": "PT2H",
+                "description": "Two Hours"
+              }
+            ]
+          }
+        },
+        "dataUnit": {
+          "type": "string",
+          "description": "Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "evaluationRules": {
+          "$ref": "#/definitions/EvaluationRule",
+          "description": "Evaluation rules for the signal definition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignalInstanceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureResourceMetric"
+    },
+    "AzureResourceSignals": {
+      "type": "object",
+      "description": "A grouping of Azure resource signals",
+      "properties": {
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
+          "description": "Reference to the name of the authentication setting which is used for querying the data source."
         },
         "azureResourceId": {
           "type": "string",
@@ -1820,6 +2286,23 @@
           "x-ms-arm-id-details": {
             "allowedResources": []
           }
+        },
+        "azureResourceKind": {
+          "type": "string",
+          "description": "Azure resource kind (e.g., 'functionapp'). Populated by the UI for icon rendering. Can be null if not populated.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "signals": {
+          "type": "array",
+          "description": "Signals assigned to this group.",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/AzureResourceSignal"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -1869,6 +2352,28 @@
         "aggregationType"
       ]
     },
+    "DiscoveryError": {
+      "type": "object",
+      "description": "Error details for a failed discovery operation",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error message",
+          "readOnly": true
+        },
+        "context": {
+          "type": "array",
+          "description": "Additional context information, like resource IDs or query details",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
     "DiscoveryRule": {
       "type": "object",
       "description": "A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query",
@@ -1883,6 +2388,30 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "DiscoveryRuleKind": {
+      "type": "string",
+      "description": "Discovery rule specification kind discriminator",
+      "enum": [
+        "ResourceGraphQuery",
+        "ApplicationInsightsTopology"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryRuleKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceGraphQuery",
+            "value": "ResourceGraphQuery",
+            "description": "Azure Resource Graph query based discovery"
+          },
+          {
+            "name": "ApplicationInsightsTopology",
+            "value": "ApplicationInsightsTopology",
+            "description": "Application Insights topology based discovery"
+          }
+        ]
+      }
     },
     "DiscoveryRuleListResult": {
       "type": "object",
@@ -1920,12 +2449,6 @@
           "minLength": 1,
           "maxLength": 260
         },
-        "resourceGraphQuery": {
-          "type": "string",
-          "description": "Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.",
-          "minLength": 1,
-          "maxLength": 5000
-        },
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
           "description": "Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities."
@@ -1938,21 +2461,19 @@
           "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
           "description": "Whether to add all recommended signals to the discovered entities."
         },
+        "specification": {
+          "$ref": "#/definitions/DiscoveryRuleSpecification",
+          "description": "Specification of the discovery rule defining how entities are discovered."
+        },
         "deletionDate": {
           "type": "string",
           "format": "date-time",
           "description": "Date when the discovery rule was (soft-)deleted.",
           "readOnly": true
         },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message if the last discovery operation failed.",
-          "readOnly": true
-        },
-        "numberOfDiscoveredEntities": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of discovered entities in the last discovery operation.",
+        "error": {
+          "$ref": "#/definitions/DiscoveryError",
+          "description": "Error details if the last discovery operation failed.",
           "readOnly": true
         },
         "entityName": {
@@ -1962,10 +2483,10 @@
         }
       },
       "required": [
-        "resourceGraphQuery",
         "authenticationSetting",
         "discoverRelationships",
         "addRecommendedSignals",
+        "specification",
         "entityName"
       ]
     },
@@ -2017,84 +2538,19 @@
         ]
       }
     },
-    "DynamicDetectionRule": {
+    "DiscoveryRuleSpecification": {
       "type": "object",
-      "description": "ML-based evaluation rule for a signal definition",
+      "description": "Base model for discovery rule specifications",
       "properties": {
-        "dynamicThresholdModel": {
-          "$ref": "#/definitions/DynamicThresholdModel",
-          "description": "ML model to use for dynamic thresholds"
-        },
-        "modelSensitivity": {
-          "type": "number",
-          "format": "float",
-          "description": "ML model sensitivity. Lowest value = high sensitivity. Supported step size = 0.5",
-          "minimum": 0,
-          "maximum": 5
-        },
-        "dynamicThresholdDirection": {
-          "$ref": "#/definitions/DynamicThresholdDirection",
-          "description": "Threshold direction"
-        },
-        "trainingStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the training in UTC."
+        "kind": {
+          "$ref": "#/definitions/DiscoveryRuleKind",
+          "description": "Kind of the discovery rule specification"
         }
       },
+      "discriminator": "kind",
       "required": [
-        "dynamicThresholdModel",
-        "modelSensitivity",
-        "dynamicThresholdDirection"
+        "kind"
       ]
-    },
-    "DynamicThresholdDirection": {
-      "type": "string",
-      "description": "Threshold direction for dynamic thresholds",
-      "enum": [
-        "LowerThan",
-        "GreaterThan",
-        "GreaterOrLowerThan"
-      ],
-      "x-ms-enum": {
-        "name": "DynamicThresholdDirection",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LowerThan",
-            "value": "LowerThan",
-            "description": "Lower than"
-          },
-          {
-            "name": "GreaterThan",
-            "value": "GreaterThan",
-            "description": "Greater than"
-          },
-          {
-            "name": "GreaterOrLowerThan",
-            "value": "GreaterOrLowerThan",
-            "description": "Greater or Lower Than"
-          }
-        ]
-      }
-    },
-    "DynamicThresholdModel": {
-      "type": "string",
-      "description": "ML-based model variants",
-      "enum": [
-        "AnomalyDetection"
-      ],
-      "x-ms-enum": {
-        "name": "DynamicThresholdModel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AnomalyDetection",
-            "value": "AnomalyDetection",
-            "description": "Anomaly detection model"
-          }
-        ]
-      }
     },
     "Entity": {
       "type": "object",
@@ -2143,6 +2599,46 @@
       "required": [
         "x",
         "y"
+      ]
+    },
+    "EntityHistoryRequest": {
+      "type": "object",
+      "description": "Request body for getting entity health history",
+      "properties": {
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time for the history query. Defaults to 24 hours ago if not specified."
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time for the history query. Defaults to now if not specified."
+        }
+      }
+    },
+    "EntityHistoryResponse": {
+      "type": "object",
+      "description": "Response containing entity health state transitions",
+      "properties": {
+        "entityName": {
+          "$ref": "#/definitions/entityName",
+          "description": "Name of the entity"
+        },
+        "history": {
+          "type": "array",
+          "description": "List of health state transitions",
+          "items": {
+            "$ref": "#/definitions/HealthStateTransition"
+          },
+          "x-ms-identifiers": [
+            "occurredAt"
+          ]
+        }
+      },
+      "required": [
+        "entityName",
+        "history"
       ]
     },
     "EntityListResult": {
@@ -2234,15 +2730,15 @@
             ]
           }
         },
-        "labels": {
+        "tags": {
           "type": "object",
-          "description": "Optional set of labels (key-value pairs)",
+          "description": "Optional set of tags (key-value pairs)",
           "additionalProperties": {
             "$ref": "#/definitions/string4096"
           }
         },
-        "signals": {
-          "$ref": "#/definitions/SignalGroup",
+        "signalGroups": {
+          "$ref": "#/definitions/SignalGroups",
           "description": "Signal groups which are assigned to this entity"
         },
         "discoveredBy": {
@@ -2271,19 +2767,18 @@
       "type": "object",
       "description": "Evaluation rule for a signal definition",
       "properties": {
-        "dynamicDetectionRule": {
-          "$ref": "#/definitions/DynamicDetectionRule",
-          "description": "Configure to use ML-based dynamic thresholds. When used, degradedRule and unhealthyRule must not be set."
-        },
         "degradedRule": {
-          "$ref": "#/definitions/ThresholdRule",
+          "$ref": "#/definitions/ThresholdRuleV2",
           "description": "Degraded rule with static threshold."
         },
         "unhealthyRule": {
-          "$ref": "#/definitions/ThresholdRule",
+          "$ref": "#/definitions/ThresholdRuleV2",
           "description": "Unhealthy rule with static threshold."
         }
-      }
+      },
+      "required": [
+        "unhealthyRule"
+      ]
     },
     "HealthModel": {
       "type": "object",
@@ -2329,11 +2824,6 @@
       "type": "object",
       "description": "HealthModel properties",
       "properties": {
-        "dataplaneEndpoint": {
-          "type": "string",
-          "description": "The data plane endpoint for interacting with health data",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/HealthModelProvisioningState",
           "description": "The status of the last operation.",
@@ -2417,13 +2907,69 @@
         }
       }
     },
+    "HealthReportEvaluationRule": {
+      "type": "object",
+      "description": "Evaluation rules for the health report",
+      "properties": {
+        "degradedRule": {
+          "$ref": "#/definitions/ThresholdRuleV2",
+          "description": "Degraded rule with static threshold."
+        },
+        "unhealthyRule": {
+          "$ref": "#/definitions/ThresholdRuleV2",
+          "description": "Unhealthy rule with static threshold."
+        }
+      },
+      "required": [
+        "unhealthyRule"
+      ]
+    },
+    "HealthReportRequest": {
+      "type": "object",
+      "description": "Health report that's submitted for a specific signal",
+      "properties": {
+        "signalName": {
+          "$ref": "#/definitions/signalName",
+          "description": "Name of the entity signal to report health for"
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state to report for the signal"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Reported value of the signal"
+        },
+        "evaluationRules": {
+          "$ref": "#/definitions/HealthReportEvaluationRule",
+          "description": "Evaluation rules that were used to determine the reported health state"
+        },
+        "expiresIn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.",
+          "default": 60,
+          "minimum": 1,
+          "maximum": 10080
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/string4096",
+          "description": "Optional additional context or description for the health report"
+        }
+      },
+      "required": [
+        "signalName",
+        "healthState"
+      ]
+    },
     "HealthState": {
       "type": "string",
       "description": "Health state of an entity",
       "enum": [
         "Healthy",
         "Degraded",
-        "Error",
+        "Unhealthy",
         "Unknown",
         "Deleted"
       ],
@@ -2442,9 +2988,9 @@
             "description": "Degraded status"
           },
           {
-            "name": "Error",
-            "value": "Error",
-            "description": "Error status (Unhealthy)"
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Unhealthy status"
           },
           {
             "name": "Unknown",
@@ -2458,6 +3004,34 @@
           }
         ]
       }
+    },
+    "HealthStateTransition": {
+      "type": "object",
+      "description": "A health state transition record",
+      "properties": {
+        "previousState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Previous health state before the transition"
+        },
+        "newState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "New health state after the transition"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the transition occurred"
+        },
+        "reason": {
+          "$ref": "#/definitions/string4096",
+          "description": "Reason of the transition"
+        }
+      },
+      "required": [
+        "previousState",
+        "newState",
+        "occurredAt"
+      ]
     },
     "IconDefinition": {
       "type": "object",
@@ -2513,28 +3087,123 @@
       ],
       "x-ms-discriminator-value": "LogAnalyticsQuery"
     },
-    "LogAnalyticsSignalGroup": {
+    "LogAnalyticsSignal": {
       "type": "object",
-      "description": "A grouping of signal assignments for a Log Analytics Workspace",
+      "description": "A Log Analytics Query signal instance assigned to an entity.",
       "properties": {
-        "signalAssignments": {
-          "type": "array",
-          "description": "Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SignalAssignment"
-          },
-          "x-ms-identifiers": [
-            "signalDefinitions"
-          ]
+        "queryText": {
+          "type": "string",
+          "description": "Query text in KQL syntax",
+          "minLength": 1,
+          "maxLength": 5000
         },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of signal. ISO duration format like PT10M. If not specified, the KQL query must define a time range.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "valueColumnName": {
+          "type": "string",
+          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified. The column must be numeric.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name",
+          "minLength": 1,
+          "maxLength": 260
+        },
+        "refreshInterval": {
+          "type": "string",
+          "description": "Interval in which the signal is being evaluated. Defaults to PT1M (1 minute).",
+          "default": "PT1M",
+          "enum": [
+            "PT1M",
+            "PT5M",
+            "PT10M",
+            "PT30M",
+            "PT1H",
+            "PT2H"
+          ],
+          "x-ms-enum": {
+            "name": "RefreshInterval",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PT1M",
+                "value": "PT1M",
+                "description": "One Minute"
+              },
+              {
+                "name": "PT5M",
+                "value": "PT5M",
+                "description": "Five Minutes"
+              },
+              {
+                "name": "PT10M",
+                "value": "PT10M",
+                "description": "Ten Minutes"
+              },
+              {
+                "name": "PT30M",
+                "value": "PT30M",
+                "description": "Thirty Minutes"
+              },
+              {
+                "name": "PT1H",
+                "value": "PT1H",
+                "description": "One Hour"
+              },
+              {
+                "name": "PT2H",
+                "value": "PT2H",
+                "description": "Two Hours"
+              }
+            ]
+          }
+        },
+        "dataUnit": {
+          "type": "string",
+          "description": "Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "evaluationRules": {
+          "$ref": "#/definitions/EvaluationRule",
+          "description": "Evaluation rules for the signal definition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignalInstanceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "LogAnalyticsQuery"
+    },
+    "LogAnalyticsSignals": {
+      "type": "object",
+      "description": "A grouping of Log Analytics workspace signals.",
+      "properties": {
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
+          "description": "Reference to the name of the authentication setting which is used for querying the data source."
         },
         "logAnalyticsWorkspaceResourceId": {
           "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
-          "description": "Log Analytics Workspace resource ID"
+          "description": "Log Analytics workspace resource ID."
+        },
+        "signals": {
+          "type": "array",
+          "description": "Signals assigned to this group.",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsSignal"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -2657,6 +3326,95 @@
         }
       }
     },
+    "PrometheusMetricsSignal": {
+      "type": "object",
+      "description": "A Prometheus Metrics Query signal instance assigned to an entity.",
+      "properties": {
+        "queryText": {
+          "type": "string",
+          "description": "Query text in PromQL syntax",
+          "minLength": 1,
+          "maxLength": 5000
+        },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of signal. ISO duration format like PT10M.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name",
+          "minLength": 1,
+          "maxLength": 260
+        },
+        "refreshInterval": {
+          "type": "string",
+          "description": "Interval in which the signal is being evaluated. Defaults to PT1M (1 minute).",
+          "default": "PT1M",
+          "enum": [
+            "PT1M",
+            "PT5M",
+            "PT10M",
+            "PT30M",
+            "PT1H",
+            "PT2H"
+          ],
+          "x-ms-enum": {
+            "name": "RefreshInterval",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PT1M",
+                "value": "PT1M",
+                "description": "One Minute"
+              },
+              {
+                "name": "PT5M",
+                "value": "PT5M",
+                "description": "Five Minutes"
+              },
+              {
+                "name": "PT10M",
+                "value": "PT10M",
+                "description": "Ten Minutes"
+              },
+              {
+                "name": "PT30M",
+                "value": "PT30M",
+                "description": "Thirty Minutes"
+              },
+              {
+                "name": "PT1H",
+                "value": "PT1H",
+                "description": "One Hour"
+              },
+              {
+                "name": "PT2H",
+                "value": "PT2H",
+                "description": "Two Hours"
+              }
+            ]
+          }
+        },
+        "dataUnit": {
+          "type": "string",
+          "description": "Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "evaluationRules": {
+          "$ref": "#/definitions/EvaluationRule",
+          "description": "Evaluation rules for the signal definition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignalInstanceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "PrometheusMetricsQuery"
+    },
     "PrometheusMetricsSignalDefinitionProperties": {
       "type": "object",
       "description": "Prometheus Metrics Signal Definition properties",
@@ -2751,9 +3509,9 @@
             "create"
           ]
         },
-        "labels": {
+        "tags": {
           "type": "object",
-          "description": "Optional set of labels (key-value pairs)",
+          "description": "Optional set of tags (key-value pairs)",
           "additionalProperties": {
             "$ref": "#/definitions/string4096"
           }
@@ -2774,6 +3532,27 @@
         "parentEntityName",
         "childEntityName"
       ]
+    },
+    "ResourceGraphQuerySpecification": {
+      "type": "object",
+      "description": "Discovery rule specification for an Azure Resource Graph query",
+      "properties": {
+        "resourceGraphQuery": {
+          "type": "string",
+          "description": "Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.",
+          "minLength": 1,
+          "maxLength": 5000
+        }
+      },
+      "required": [
+        "resourceGraphQuery"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscoveryRuleSpecification"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGraphQuery"
     },
     "ResourceMetricSignalDefinitionProperties": {
       "type": "object",
@@ -2826,24 +3605,6 @@
         }
       ],
       "x-ms-discriminator-value": "AzureResourceMetric"
-    },
-    "SignalAssignment": {
-      "type": "object",
-      "description": "Group of signal definition assignments",
-      "properties": {
-        "signalDefinitions": {
-          "type": "array",
-          "description": "Signal definitions referenced by their names. All definitions are combined with an AND operator.",
-          "minItems": 1,
-          "maxItems": 1,
-          "items": {
-            "$ref": "#/definitions/signalDefinitionName"
-          }
-        }
-      },
-      "required": [
-        "signalDefinitions"
-      ]
     },
     "SignalDefinition": {
       "type": "object",
@@ -2949,9 +3710,9 @@
             ]
           }
         },
-        "labels": {
+        "tags": {
           "type": "object",
-          "description": "Optional set of labels (key-value pairs)",
+          "description": "Optional set of tags (key-value pairs)",
           "additionalProperties": {
             "$ref": "#/definitions/string4096"
           }
@@ -2979,20 +3740,20 @@
         "evaluationRules"
       ]
     },
-    "SignalGroup": {
+    "SignalGroups": {
       "type": "object",
       "description": "Contains various signal groups that can be assigned to an entity",
       "properties": {
         "azureResource": {
-          "$ref": "#/definitions/AzureResourceSignalGroup",
+          "$ref": "#/definitions/AzureResourceSignals",
           "description": "Azure Resource Signal Group"
         },
         "azureLogAnalytics": {
-          "$ref": "#/definitions/LogAnalyticsSignalGroup",
+          "$ref": "#/definitions/LogAnalyticsSignals",
           "description": "Log Analytics Signal Group"
         },
         "azureMonitorWorkspace": {
-          "$ref": "#/definitions/AzureMonitorWorkspaceSignalGroup",
+          "$ref": "#/definitions/AzureMonitorWorkspaceSignals",
           "description": "Azure Monitor Workspace Signal Group"
         },
         "dependencies": {
@@ -3000,6 +3761,114 @@
           "description": "Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity."
         }
       }
+    },
+    "SignalHistoryDataPoint": {
+      "type": "object",
+      "description": "A data point in the signal time series",
+      "properties": {
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the data point"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Signal value at this point in time"
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state at this point in time"
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/string4096",
+          "description": "Additional context as provided by the submitter"
+        }
+      },
+      "required": [
+        "occurredAt",
+        "healthState"
+      ]
+    },
+    "SignalHistoryRequest": {
+      "type": "object",
+      "description": "Request body for getting signal history",
+      "properties": {
+        "signalName": {
+          "$ref": "#/definitions/signalName",
+          "description": "Name of the signal to get history for"
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time for the history query. Defaults to 24 hours ago if not specified."
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time for the history query. Defaults to now if not specified."
+        }
+      },
+      "required": [
+        "signalName"
+      ]
+    },
+    "SignalHistoryResponse": {
+      "type": "object",
+      "description": "Response containing signal history",
+      "properties": {
+        "entityName": {
+          "$ref": "#/definitions/entityName",
+          "description": "Name of the entity"
+        },
+        "signalName": {
+          "$ref": "#/definitions/signalName",
+          "description": "Name of the signal"
+        },
+        "history": {
+          "type": "array",
+          "description": "Signal history data points",
+          "items": {
+            "$ref": "#/definitions/SignalHistoryDataPoint"
+          },
+          "x-ms-identifiers": [
+            "occurredAt"
+          ]
+        }
+      },
+      "required": [
+        "entityName",
+        "signalName",
+        "history"
+      ]
+    },
+    "SignalInstanceProperties": {
+      "type": "object",
+      "description": "Additional properties for signal instances assigned to an entity",
+      "properties": {
+        "signalKind": {
+          "$ref": "#/definitions/SignalKind",
+          "description": "Kind of the signal instance"
+        },
+        "name": {
+          "$ref": "#/definitions/signalName",
+          "description": "Unique name of the signal within the entity."
+        },
+        "signalDefinitionName": {
+          "$ref": "#/definitions/signalDefinitionName",
+          "description": "Optional reference to a signal definition that provides default values."
+        },
+        "status": {
+          "$ref": "#/definitions/SignalStatus",
+          "description": "Current status of the signal.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "signalKind",
+      "required": [
+        "signalKind",
+        "name"
+      ]
     },
     "SignalKind": {
       "type": "string",
@@ -3032,45 +3901,79 @@
       "type": "string",
       "description": "Signal operator",
       "enum": [
-        "LowerThan",
-        "LowerOrEquals",
         "GreaterThan",
-        "GreaterOrEquals",
-        "Equals"
+        "LessThan",
+        "LessThanOrEqual",
+        "GreaterThanOrEqual",
+        "Equal",
+        "NotEqual"
       ],
       "x-ms-enum": {
         "name": "SignalOperator",
         "modelAsString": true,
         "values": [
           {
-            "name": "LowerThan",
-            "value": "LowerThan",
-            "description": "Lower than"
-          },
-          {
-            "name": "LowerOrEquals",
-            "value": "LowerOrEquals",
-            "description": "Lower than or equal to"
-          },
-          {
             "name": "GreaterThan",
             "value": "GreaterThan",
             "description": "Greater than"
           },
           {
-            "name": "GreaterOrEquals",
-            "value": "GreaterOrEquals",
+            "name": "LessThan",
+            "value": "LessThan",
+            "description": "Less than"
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual",
+            "description": "Less than or equal to"
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual",
             "description": "Greater than or equal to"
           },
           {
-            "name": "Equals",
-            "value": "Equals",
+            "name": "Equal",
+            "value": "Equal",
             "description": "Equal to"
+          },
+          {
+            "name": "NotEqual",
+            "value": "NotEqual",
+            "description": "Not equal to"
           }
         ]
       }
     },
-    "ThresholdRule": {
+    "SignalStatus": {
+      "type": "object",
+      "description": "Status of a signal",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of this signal",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Reported value of the signal",
+          "readOnly": true
+        },
+        "reportedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the value was reported",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message if the signal status cannot be retrieved",
+          "readOnly": true
+        }
+      }
+    },
+    "ThresholdRuleV2": {
       "type": "object",
       "description": "Threshold-based evaluation rule for a signal definition",
       "properties": {
@@ -3079,10 +3982,9 @@
           "description": "Operator how to compare the signal value with the threshold"
         },
         "threshold": {
-          "type": "string",
-          "description": "Threshold value",
-          "minLength": 1,
-          "maxLength": 100
+          "type": "number",
+          "format": "double",
+          "description": "Threshold value"
         }
       },
       "required": [
@@ -3108,6 +4010,11 @@
     "signalDefinitionName": {
       "type": "string",
       "description": "Type for signal definition resource name.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "signalName": {
+      "type": "string",
+      "description": "Type for signal name.",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
     },
     "string4096": {
