@@ -388,6 +388,10 @@ using Microsoft.Batch;
   "BatchAccountRegenerateKeyContent",
   "csharp"
 );
+@@clientName(BatchAccount,
+  "BatchAccountRenamed",
+  "csharp"
+);
 @@alternateType(BatchAccountCreateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
@@ -396,26 +400,38 @@ using Microsoft.Batch;
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+@@alternateType(BatchAccount, BatchAccountData, "csharp");
 @@usage(BatchAccount, Usage.input, "csharp");
 
-// /**
-//  * Contains information about an Azure Batch account.
-//  */
-// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-// model BatchAccountData extends Azure.ResourceManager.CommonTypes.Resource {
-//   ...BatchAccountProperties;
-  
-//   /**
-//    * The identity of the Batch account.
-//    */
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   identity?: BatchAccountIdentity;
+// added to solve the problem that the c# resource class can inherit the `resource data` class
+namespace Microsoft.Batch {
+  /**
+   * Contains information about an Azure Batch account.
+   */
+  @clientName("BatchAccount", "csharp")
+  model BatchAccountData
+    is Azure.ResourceManager.ProxyResource<BatchAccountProperties> {
+    ...Azure.ResourceManager.ResourceNameParameter<
+      Resource = BatchAccount,
+      KeyName = "accountName",
+      SegmentName = "batchAccounts",
+      NamePattern = "^[a-zA-Z0-9]+$"
+    >;
 
-//   /** Resource tags. */
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   tags?: Record<string>;
+    /**
+     * The identity of the Batch account.
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    identity?: BatchAccountIdentity;
 
-//   /** The geo-location where the resource lives */
-//   @visibility(Lifecycle.Read, Lifecycle.Create)
-//   location: Azure.Core.azureLocation;
-// }
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    /** Resource tags. */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    tags?: Record<string>;
+
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    /** The geo-location where the resource lives */
+    @visibility(Lifecycle.Read, Lifecycle.Create)
+    location: Azure.Core.azureLocation;
+  }
+}
