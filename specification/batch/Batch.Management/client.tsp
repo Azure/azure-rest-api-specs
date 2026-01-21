@@ -396,3 +396,26 @@ using Microsoft.Batch;
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+@@usage(BatchAccount, Usage.input, "csharp");
+
+// /**
+//  * Contains information about an Azure Batch account.
+//  */
+// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// model BatchAccountData extends Azure.ResourceManager.CommonTypes.Resource {
+//   ...BatchAccountProperties;
+  
+//   /**
+//    * The identity of the Batch account.
+//    */
+//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+//   identity?: BatchAccountIdentity;
+
+//   /** Resource tags. */
+//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+//   tags?: Record<string>;
+
+//   /** The geo-location where the resource lives */
+//   @visibility(Lifecycle.Read, Lifecycle.Create)
+//   location: Azure.Core.azureLocation;
+// }
