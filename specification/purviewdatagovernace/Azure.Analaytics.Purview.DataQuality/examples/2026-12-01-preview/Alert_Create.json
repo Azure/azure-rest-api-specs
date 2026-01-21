@@ -1,0 +1,71 @@
+{
+  "operationId": "CreateAlert",
+  "parameters": {
+    "api-version": "2026-12-01-preview",
+    "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
+    "alertId": "newalert123",
+    "request": {
+      "id": "newalert123",
+      "name": "New Data Quality Alert",
+      "description": "Alert for monitoring data quality metrics",
+      "businessDomain": {
+        "type": "BusinessDomainReference",
+        "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+      },
+      "scopes": [
+        {
+          "dataProduct": {
+            "referenceId": "c4098e88-36ca-4cd0-8491-f80ef41b47fc",
+            "type": "DataProductReference"
+          },
+          "dataAsset": {
+            "referenceId": "f3a32ca8-8440-431c-84b7-eaeadb099b7b",
+            "type": "DataAssetReference"
+          }
+        }
+      ],
+      "status": "Enabled",
+      "condition": "score_threshold(GLOBAL_SCORE) < 90",
+      "receivers": [
+        "ca31eca9-668e-4933-82f8-69bdeecc6632"
+      ],
+      "enabledForFailedJobs": true
+    }
+  },
+  "title": "Alert_Create",
+  "responses": {
+    "201": {
+      "body": {
+        "id": "newalert123",
+        "name": "New Data Quality Alert",
+        "description": "Alert for monitoring data quality metrics",
+        "businessDomain": {
+          "type": "BusinessDomainReference",
+          "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+        },
+        "scopes": [
+          {
+            "dataProduct": {
+              "referenceId": "c4098e88-36ca-4cd0-8491-f80ef41b47fc",
+              "type": "DataProductReference"
+            },
+            "dataAsset": {
+              "referenceId": "f3a32ca8-8440-431c-84b7-eaeadb099b7b",
+              "type": "DataAssetReference"
+            }
+          }
+        ],
+        "status": "Enabled",
+        "condition": "score_threshold(GLOBAL_SCORE) < 90",
+        "receivers": [
+          "ca31eca9-668e-4933-82f8-69bdeecc6632"
+        ],
+        "enabledForFailedJobs": true,
+        "createdAt": "2025-12-02T10:30:00.0000000Z",
+        "createdBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+        "lastModifiedAt": "2025-12-02T10:30:00.0000000Z",
+        "lastModifiedBy": "ca31eca9-668e-4933-82f8-69bdeecc6632"
+      }
+    }
+  }
+}
