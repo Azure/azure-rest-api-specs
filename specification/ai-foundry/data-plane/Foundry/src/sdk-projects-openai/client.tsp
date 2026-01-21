@@ -71,7 +71,7 @@ namespace Azure.AI.Projects;
   "OAuthConsentRequestResponseItem"
 );
 @@clientName(OpenAI.ItemResourceType, "AgentResponseItemKind");
-@@clientName(OpenApiAgentTool, "OpenAPIAgentTool");
+@@clientName(OpenApiTool, "OpenAPITool");
 @@clientName(OpenApiAnonymousAuthDetails,
   "OpenAPIAnonymousAuthenticationDetails"
 );

@@ -15,7 +15,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");
 @@clientName(OpenAI.LocalShellExecAction.timeout_ms, "Duration");
 @@clientName(OpenAI.LogProb.logprob, "logProb");
-@@clientName(MicrosoftFabricAgentTool.fabric_dataagent_preview,
+@@clientName(MicrosoftFabricPreviewTool.fabric_dataagent_preview,
   "FabricDataAgentPreview"
 );
 
@@ -28,7 +28,7 @@ using Azure.AI.Projects;
 
 @@clientName(Agents.getAgentVersion, "getAgentVersionDetails");
 
-@@clientName(AzureAISearchAgentTool.azure_ai_search, "AzureAISearch");
+@@clientName(AzureAISearchTool.azure_ai_search, "AzureAISearch");
 
 @@clientName(OpenAI.FileSearchTool.max_num_results, "maxResults");
 @@clientName(OpenAI.MCPApprovalResponse.approve, "approved");

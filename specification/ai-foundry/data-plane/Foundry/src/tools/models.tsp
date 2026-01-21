@@ -14,16 +14,20 @@ namespace Azure.AI.Projects;
 //
 
 union _AgentToolType {
-  bing_grounding: "bing_grounding",
+
+  // Preview tools (must end with "_preview"):
+  a2a_preview: "a2a_preview",
+  bing_custom_search_preview: "bing_custom_search_preview",
   browser_automation_preview: "browser_automation_preview",
   fabric_dataagent_preview: "fabric_dataagent_preview",
   sharepoint_grounding_preview: "sharepoint_grounding_preview",
+
+  // General availability tools:
   azure_ai_search: "azure_ai_search",
-  openapi: "openapi",
-  bing_custom_search_preview: "bing_custom_search_preview",
-  capture_structured_outputs: "capture_structured_outputs",
-  a2a_preview: "a2a_preview",
   azure_function: "azure_function",
+  bing_grounding: "bing_grounding",
+  capture_structured_outputs: "capture_structured_outputs",
+  openapi: "openapi",
 
   @removed(Versions.v1)
   memory_search: "memory_search",
@@ -81,7 +85,7 @@ model WebSearchConfiguration {
 /**
  * The input definition information for a bing grounding search tool as used to configure an agent.
  */
-model BingGroundingAgentTool extends OpenAI.Tool {
+model BingGroundingTool extends OpenAI.Tool {
   /**
    * The object type, which is always 'bing_grounding'.
    */
@@ -108,9 +112,9 @@ model FabricDataAgentToolParameters {
 /**
  * The input definition information for a Microsoft Fabric tool as used to configure an agent.
  */
-model MicrosoftFabricAgentTool extends OpenAI.Tool {
+model MicrosoftFabricPreviewTool extends OpenAI.Tool {
   /**
-   * The object type, which is always 'fabric_dataagent'.
+   * The object type, which is always 'fabric_dataagent_preview'.
    */
   type: "fabric_dataagent_preview";
 
@@ -135,9 +139,9 @@ model SharepointGroundingToolParameters {
 /**
  * The input definition information for a sharepoint tool as used to configure an agent.
  */
-model SharepointAgentTool extends OpenAI.Tool {
+model SharepointPreviewTool extends OpenAI.Tool {
   /**
-   * The object type, which is always 'sharepoint_grounding'.
+   * The object type, which is always 'sharepoint_grounding_preview'.
    */
   type: "sharepoint_grounding_preview";
 
@@ -150,7 +154,7 @@ model SharepointAgentTool extends OpenAI.Tool {
 /**
  * The input definition information for an Azure AI search tool as used to configure an agent.
  */
-model AzureAISearchAgentTool extends OpenAI.Tool {
+model AzureAISearchTool extends OpenAI.Tool {
   /**
    * The object type, which is always 'azure_ai_search'.
    */
@@ -239,7 +243,7 @@ union AzureAISearchQueryType {
 /**
  * The input definition information for an OpenAPI tool as used to configure an agent.
  */
-model OpenApiAgentTool extends OpenAI.Tool {
+model OpenApiTool extends OpenAI.Tool {
   /**
    * The object type, which is always 'openapi'.
    */
@@ -254,9 +258,9 @@ model OpenApiAgentTool extends OpenAI.Tool {
 /**
  * The input definition information for a Bing custom search tool as used to configure an agent.
  */
-model BingCustomSearchAgentTool extends OpenAI.Tool {
+model BingCustomSearchPreviewTool extends OpenAI.Tool {
   /**
-   * The object type, which is always 'bing_custom_search'.
+   * The object type, which is always 'bing_custom_search_preview'.
    */
   type: "bing_custom_search_preview";
 
@@ -269,9 +273,9 @@ model BingCustomSearchAgentTool extends OpenAI.Tool {
 /**
  * The input definition information for a Browser Automation Tool, as used to configure an Agent.
  */
-model BrowserAutomationAgentTool extends OpenAI.Tool {
+model BrowserAutomationPreviewTool extends OpenAI.Tool {
   /**
-   * The object type, which is always 'browser_automation'.
+   * The object type, which is always 'browser_automation_preview'.
    */
   type: "browser_automation_preview";
 
@@ -304,7 +308,7 @@ model BrowserAutomationToolConnectionParameters {
 /**
  * The input definition information for an Azure Function Tool, as used to configure an Agent.
  */
-model AzureFunctionAgentTool extends OpenAI.Tool {
+model AzureFunctionTool extends OpenAI.Tool {
   /**
    * The object type, which is always 'browser_automation'.
    */
@@ -674,9 +678,9 @@ model CaptureStructuredOutputsTool extends OpenAI.Tool {
  * An agent implementing the A2A protocol.
  */
 @removed(Versions.v1)
-model A2ATool extends OpenAI.Tool {
+model A2APreviewTool extends OpenAI.Tool {
   /**
-   * The type of the tool. Always `a2a`.
+   * The type of the tool. Always `"a2a_preview`.
    */
   type: "a2a_preview";
 
