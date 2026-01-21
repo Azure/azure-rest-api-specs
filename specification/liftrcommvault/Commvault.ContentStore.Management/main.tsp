@@ -511,7 +511,7 @@ model ProtectionGroupProperties {
 
   @doc("The backup activity status indicating if backup is enabled or not on the protection group")
   @visibility(Lifecycle.Read)
-  backupActivityStatus: string;
+  backupActivityStatus?: string;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
