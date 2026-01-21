@@ -24,8 +24,7 @@ import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
+
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -50,8 +49,6 @@ enum Versions {
   /**
    * The 2025-08-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_08_01_preview: "2025-08-01-preview",
 }
 
