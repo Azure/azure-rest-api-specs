@@ -99,7 +99,7 @@ interface ConnectedRegistries {
     {
       @body body: void;
     }
->;
+  >;
 }
 
 @@maxLength(ConnectedRegistry.name, 50);

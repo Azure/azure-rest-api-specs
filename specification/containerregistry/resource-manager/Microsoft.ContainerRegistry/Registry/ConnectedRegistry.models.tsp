@@ -127,13 +127,13 @@ union SyncTrigger {
   /**
    * Connected Registry sync is pending
    */
-  Pending: "Pending"
+  Pending: "Pending",
 }
 
 /**
  * The status of the connected registry's most recent sync.
  */
-union SyncState{
+union SyncState {
   string,
 
   /**
@@ -154,7 +154,7 @@ union SyncState{
   /**
    * Connected Registry sync was triggered by the Connected Registry's recovery service
    */
-  RecoveryService: "RecoveryService"
+  RecoveryService: "RecoveryService",
 }
 
 /**
