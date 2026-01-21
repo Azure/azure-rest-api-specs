@@ -297,10 +297,10 @@ using Azure.Core;
 
 @@clientName(ManagedHsms.listByResource, "GetMHSMRegionsByResource", "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@markAsPageable(ManagedHsms.listByMHSMResource, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@markAsPageable(Vaults.listByVault, "csharp");
 
 // Java-specific client configurations
