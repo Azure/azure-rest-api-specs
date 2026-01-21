@@ -237,7 +237,6 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(SignalRResource, "ResourceInfo", "go");
 @@clientName(SignalRResourceList, "ResourceInfoList", "go");
 
-@@clientName(Operation, "SignalROperationInfo", "csharp");
 @@clientName(SignalRResource, "SignalR", "csharp");
 @@clientName(CustomCertificate, "SignalRCustomCertificate", "csharp");
 @@clientName(CustomDomain, "SignalRCustomDomain", "csharp");
@@ -250,7 +249,7 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   "csharp"
 );
 @@clientName(ProvisioningState, "SignalRProvisioningState", "csharp");
-@@clientName(FeatureFlags, "SignalRFeatureFlags", "csharp");
+@@clientName(FeatureFlags, "SignalRFeatureFlag", "csharp");
 @@clientName(KeyType, "SignalRKeyType", "csharp");
 @@clientName(LiveTraceCategory, "SignalRLiveTraceCategory", "csharp");
 @@clientName(LiveTraceConfiguration, "SignalRLiveTraceConfiguration", "csharp");
@@ -339,3 +338,18 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   "csharp"
 );
 @@usage(ShareablePrivateLinkResourceType, Usage.input | Usage.output, "csharp");
+@@clientName(Replica, "SignalRReplica", "csharp");
+@@clientName(SharedPrivateLinkResources,
+  "SignalRReplicaSharedPrivateLinkResources",
+  "csharp"
+);
+@@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
+@@alternateType(SignalRResource.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
+@@clientName(ApplicationFirewallSettings, "SignalRApplicationFirewallSettings", "csharp");
+@@clientName(ClientConnectionCountRule, "SignalRClientConnectionCountRule", "csharp");
+@@clientName(ApplicationFirewallSettings, "SignalRClientTrafficControlRule", "csharp");
+@@clientName(IPRule, "SignalRIPRule", "csharp");
+@@clientName(RouteSettings, "SignalRRouteSettings", "csharp");
+@@clientName(ServerlessSettings, "SignalRServerlessSettings", "csharp");
+@@markAsPageable(Replicas.listReplicaSkus, "csharp");
