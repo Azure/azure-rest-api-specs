@@ -7,6 +7,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ComputeBulkActions;
@@ -148,7 +149,8 @@ interface BulkActions {
     Parameters = LocationParameter
   >;
 
-  /** [PRIVATE PREVIEW]: VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @autoRoute
   virtualMachinesExecuteCreate is ArmProviderActionSync<
     Request = ExecuteCreateRequest,
@@ -157,7 +159,8 @@ interface BulkActions {
     Parameters = LocationParameter
   >;
 
-  /** [PRIVATE PREVIEW]: VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @autoRoute
   virtualMachinesExecuteDelete is ArmProviderActionSync<
     Request = ExecuteDeleteRequest,
