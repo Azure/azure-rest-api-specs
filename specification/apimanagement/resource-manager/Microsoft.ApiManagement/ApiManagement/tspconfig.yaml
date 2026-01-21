@@ -1,0 +1,94 @@
+parameters:
+  "service-dir":
+    default: "sdk/apimanagement"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ApiManagement"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.ApiManagement"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-apimanagement"
+    namespace: "azure.mgmt.apimanagement"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-apimanagement"
+    namespace: "com.azure.resourcemanager.apimanagement"
+    service-name: "ApiManagement"
+    flavor: azure
+    use-object-for-unknown: true
+    float32-as-double: false
+    resource-collection-associations:
+      - resource: ApiContract
+        collection: Apis
+      - resource: ApiReleaseContract
+        collection: ApiReleases
+      - resource: ApiVersionSetContract
+        collection: ApiVersionSets
+      - resource: BackendContract
+        collection: Backends
+      - resource: CertificateContract
+        collection: Certificates
+      - resource: DiagnosticContract
+        collection: ApiDiagnostics
+      - resource: GlobalSchemaContract
+        collection: GlobalSchemas
+      - resource: GroupContract
+        collection: Groups
+      - resource: LoggerContract
+        collection: Loggers
+      - resource: NamedValueContract
+        collection: NamedValues
+      - resource: OperationContract
+        collection: ApiOperations
+      - resource: PolicyContract
+        collection: ApiOperationPolicies
+      - resource: PolicyFragmentContract
+        collection: PolicyFragments
+      - resource: PortalRevisionContract
+        collection: PortalRevisions
+      - resource: ProductApiLinkContract
+        collection: ProductApiLinks
+      - resource: ProductContract
+        collection: Products
+      - resource: ProductGroupLinkContract
+        collection: ProductGroupLinks
+      - resource: SchemaContract
+        collection: ApiSchemas
+      - resource: TagApiLinkContract
+        collection: TagApiLinks
+      - resource: TagOperationLinkContract
+        collection: TagOperationLinks
+      - resource: TagProductLinkContract
+        collection: TagProductLinks
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-apimanagement"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-apimanagement"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/apimanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/armapimanagement"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armapimanagement"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: false
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
