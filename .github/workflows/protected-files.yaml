@@ -40,7 +40,7 @@ jobs:
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
 
-          $protectedFiles = @("cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", "eng/*")
+          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".vscode/*", "eng/*")
           $excludedFiles = @(".github/CODEOWNERS")
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
 

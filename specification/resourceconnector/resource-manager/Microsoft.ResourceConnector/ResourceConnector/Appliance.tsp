@@ -28,7 +28,7 @@ model Appliance is Azure.ResourceManager.TrackedResource<ApplianceProperties> {
   identity?: Identity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface Appliances {
   /**
    * Gets the details of an Appliance with a specified resource group and name.
@@ -115,7 +115,8 @@ interface Appliances {
    */
   @get
   @summary("Gets an Appliance upgrade graph.")
-  getUpgradeGraph is ArmResourceRead<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs/{upgradeGraph}")
+  getUpgradeGraph is ApplianceOps.ActionSync<
     Appliance,
     Parameters = {
       /**
@@ -126,9 +127,34 @@ interface Appliances {
       @segment("upgradeGraphs")
       upgradeGraph: string;
     },
+    Request = void,
     Response = ArmResponse<UpgradeGraph>
   >;
 }
+
+// This is needed to define the route for getUpgradeGraph operation since it does not follow standard ARM patterns.
+alias ApplianceOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /**
+     * Appliances name.
+     */
+    @path
+    @segment("appliances")
+    @key
+    @minLength(1)
+    @maxLength(63)
+    @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
+    resourceName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}",
+  }
+>;
 
 @@maxLength(Appliance.name, 63);
 @@minLength(Appliance.name, 1);
