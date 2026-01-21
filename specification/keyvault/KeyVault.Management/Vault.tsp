@@ -32,8 +32,38 @@ model Vault
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
+alias VaultsParentParameter = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
 
-@armResourceOperations
+  /**
+   * Name of the vault
+   */
+  @path
+  @segment("vaults")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  vaultName: string;
+};
+
+alias VaultsParameter = {
+  /**
+   * Name of the operation
+   */
+  @path
+  @segment("accessPolicies")
+  operationKind: AccessPolicyUpdateKind;
+};
+
+alias VaultsOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  VaultsParentParameter,
+  VaultsParameter,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface Vaults {
   /**
    * Gets the specified Azure key vault.
@@ -43,9 +73,9 @@ interface Vaults {
   /**
    * Create or update a key vault in the specified subscription.
    */
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Vault,
-    VaultCreateOrUpdateParameters,
+    Request = VaultCreateOrUpdateParameters,
     Response = Vault | ArmResourceCreatedResponse<
       Vault,
       LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
@@ -103,32 +133,13 @@ interface Vaults {
   /**
    * Update access policies in a key vault in the specified subscription.
    */
-  @put  
-  updateAccessPolicy is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-      ...Azure.ResourceManager.Legacy.Provider;
-
-      /**
-       * Name of the vault
-       */
-      @path
-      @segment("vaults")
-      @pattern("^[a-zA-Z0-9-]{3,24}$")
-      vaultName: string;
-
-      /**
-       * Name of the operation
-       */
-      @path
-      @segment("accessPolicies")
-      operationKind: AccessPolicyUpdateKind;
-    },
-    VaultAccessPolicyParameters,
-    ArmResponse<VaultAccessPolicyParameters> | ArmResourceCreatedSyncResponse<VaultAccessPolicyParameters>,
-    CloudError
+  @put
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}")
+  updateAccessPolicy is VaultsOps.ActionSync<
+    Vault,
+    Request = VaultAccessPolicyParameters,
+    Response = ArmResponse<VaultAccessPolicyParameters> | ArmResourceCreatedSyncResponse<VaultAccessPolicyParameters>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -150,6 +161,6 @@ interface Vaults {
   "Parameters to create or update the vault"
 );
 @@doc(Vaults.update::parameters.properties, "Parameters to patch the vault");
-@@doc(Vaults.updateAccessPolicy::parameters.resource,
+@@doc(Vaults.updateAccessPolicy::parameters.body,
   "Access policy to merge into the vault"
 );
