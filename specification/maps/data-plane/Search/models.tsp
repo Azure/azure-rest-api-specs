@@ -1312,6 +1312,7 @@ model AutocompleteResponse {
    */
   type?: FeatureCollectionEnum;
 
+  /** Features of the autocomplete result */
   features?: AutocompleteFeature[];
 
   /**
