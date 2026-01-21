@@ -1,16 +1,13 @@
 {
   "parameters": {
+    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
-    "query": "Muir Woods",
     "coordinates": "-122.581711,37.896980",
-    "resultTypes": "Park",
-    "AzureKey": "[subscription-key]"
+    "query": "Muir Woods",
+    "resultTypes": "Park"
   },
   "responses": {
     "200": {
-      "headers": {
-        "Content-Type": "application/geo+json"
-      },
       "body": {
         "type": "FeatureCollection",
         "features": [
@@ -18,7 +15,7 @@
             "type": "Feature",
             "geometry": null,
             "properties": {
-              "typeGroup": "Place",
+              "name": "Muir Woods National Monument",
               "type": "Park",
               "address": {
                 "adminDistricts": [
@@ -30,16 +27,21 @@
                   }
                 ],
                 "countryRegion": {
-                  "ISO": "US",
-                  "name": "United States"
+                  "name": "United States",
+                  "ISO": "US"
                 },
                 "formattedAddress": "California"
               },
-              "name": "Muir Woods National Monument"
+              "typeGroup": "Place"
             }
           }
         ]
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
       }
     }
-  }
+  },
+  "operationId": "Search_GetGeocodeAutocomplete",
+  "title": "Autocomplete API call to search for 'Muir Woods', filtered by park resultTypes"
 }

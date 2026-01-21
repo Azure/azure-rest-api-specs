@@ -1,21 +1,23 @@
 {
   "parameters": {
+    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
-    "query": "1 Microsoft Way, Redmond",
     "coordinates": "-113.301894,49.201888",
+    "query": "1 Microsoft Way, Redmond",
     "resultTypeGroups": "Place",
-    "resultTypes": "RoadBlock",
-    "AzureKey": "[subscription-key]"
+    "resultTypes": "RoadBlock"
   },
   "responses": {
     "200": {
-      "headers": {
-        "Content-Type": "application/geo+json"
-      },
       "body": {
         "type": "FeatureCollection",
         "features": []
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
       }
     }
-  }
+  },
+  "operationId": "Search_GetGeocodeAutocomplete",
+  "title": "Autocomplete API call to search for '1 Microsoft Way, Redmond', filtered by roadblock resultTypes, place resultTypeGroups, and return empty result"
 }

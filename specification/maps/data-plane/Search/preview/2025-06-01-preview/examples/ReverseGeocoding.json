@@ -1,27 +1,36 @@
 {
   "parameters": {
+    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
     "coordinates": [
       -122.138681,
       47.630358
-    ],
-    "AzureKey": "[subscription-key]"
+    ]
   },
   "responses": {
     "200": {
-      "headers": {
-        "Content-Type": "application/geo+json"
-      },
       "body": {
         "type": "FeatureCollection",
         "features": [
           {
             "type": "Feature",
+            "bbox": [
+              -122.14632282407,
+              47.626495282429325,
+              -122.13103917593001,
+              47.63422071757068
+            ],
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.138681,
+                47.630358
+              ]
+            },
             "properties": {
+              "type": "Address",
               "address": {
-                "countryRegion": {
-                  "name": "United States"
-                },
+                "addressLine": "15127 NE 24th St",
                 "adminDistricts": [
                   {
                     "name": "Washington",
@@ -32,20 +41,19 @@
                     "shortName": "King Co."
                   }
                 ],
+                "countryRegion": {
+                  "name": "United States"
+                },
                 "formattedAddress": "15127 NE 24th St, Redmond, Washington 98052",
-                "streetName": "NE 24th St",
-                "streetNumber": "15127",
                 "locality": "Redmond",
                 "postalCode": "98052",
-                "addressLine": "15127 NE 24th St"
+                "streetName": "NE 24th St",
+                "streetNumber": "15127"
               },
-              "type": "Address",
               "confidence": "Medium",
-              "matchCodes": [
-                "Good"
-              ],
               "geocodePoints": [
                 {
+                  "calculationMethod": "Rooftop",
                   "geometry": {
                     "type": "Point",
                     "coordinates": [
@@ -53,12 +61,12 @@
                       47.630358
                     ]
                   },
-                  "calculationMethod": "Rooftop",
                   "usageTypes": [
                     "Display"
                   ]
                 },
                 {
+                  "calculationMethod": "Rooftop",
                   "geometry": {
                     "type": "Point",
                     "coordinates": [
@@ -66,29 +74,23 @@
                       47.6302179
                     ]
                   },
-                  "calculationMethod": "Rooftop",
                   "usageTypes": [
                     "Route"
                   ]
                 }
+              ],
+              "matchCodes": [
+                "Good"
               ]
-            },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -122.138681,
-                47.630358
-              ]
-            },
-            "bbox": [
-              -122.14632282407,
-              47.626495282429325,
-              -122.13103917593001,
-              47.63422071757068
-            ]
+            }
           }
         ]
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
       }
     }
-  }
+  },
+  "operationId": "Search_GetReverseGeocoding",
+  "title": "Search point -122.138681, 47.630358"
 }

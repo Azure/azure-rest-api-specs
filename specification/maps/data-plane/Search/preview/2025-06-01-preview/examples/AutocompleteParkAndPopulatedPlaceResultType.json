@@ -1,17 +1,14 @@
 {
   "parameters": {
+    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
-    "query": "Muir Woods",
     "coordinates": "-122.581711,37.896980",
+    "query": "Muir Woods",
     "resultTypeGroups": "Place",
-    "resultTypes": "Park,PopulatedPlace",
-    "AzureKey": "[subscription-key]"
+    "resultTypes": "Park,PopulatedPlace"
   },
   "responses": {
     "200": {
-      "headers": {
-        "Content-Type": "application/geo+json"
-      },
       "body": {
         "type": "FeatureCollection",
         "features": [
@@ -19,10 +16,8 @@
             "type": "Feature",
             "geometry": null,
             "properties": {
-              "typeGroup": "Place",
               "type": "PopulatedPlace",
               "address": {
-                "locality": "Muir Woods",
                 "adminDistricts": [
                   {
                     "name": "Georgia"
@@ -32,19 +27,21 @@
                   }
                 ],
                 "countryRegion": {
-                  "ISO": "US",
-                  "name": "United States"
+                  "name": "United States",
+                  "ISO": "US"
                 },
-                "postalCode": "30349",
-                "formattedAddress": "Muir Woods, Georgia 30349, United States"
-              }
+                "formattedAddress": "Muir Woods, Georgia 30349, United States",
+                "locality": "Muir Woods",
+                "postalCode": "30349"
+              },
+              "typeGroup": "Place"
             }
           },
           {
             "type": "Feature",
             "geometry": null,
             "properties": {
-              "typeGroup": "Place",
+              "name": "Muir Woods National Park",
               "type": "Park",
               "address": {
                 "adminDistricts": [
@@ -56,16 +53,21 @@
                   }
                 ],
                 "countryRegion": {
-                  "ISO": "US",
-                  "name": "United States"
+                  "name": "United States",
+                  "ISO": "US"
                 },
                 "formattedAddress": "California"
               },
-              "name": "Muir Woods National Park"
+              "typeGroup": "Place"
             }
           }
         ]
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
       }
     }
-  }
+  },
+  "operationId": "Search_GetGeocodeAutocomplete",
+  "title": "Autocomplete API call to search for 'Muir Woods', filtered by park and populated place resultTypes, place resultTypeGroups"
 }
