@@ -69,6 +69,12 @@ suppressions:
     where:
       - $.definitions.SupercomputerIdentities.properties.workloadIdentities
       - $.definitions.SupercomputerIdentitiesUpdate.properties.workloadIdentities
+  - code: AvoidAdditionalProperties
+    reason: Workload identities are user-determined keys for managed identities.
+    from:
+      - discovery.json
+    where:
+      - $.definitions.BookshelfProperties.properties.workloadIdentities
   - code: GuidUsage
     reason: Need to match ARM managed identity schema.
     from:
@@ -86,14 +92,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
-  - code: ResourceNameRestriction
-    reason: Private link resource names come from common types.
-    from:
-      - discovery.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}/privateLinkResources/{privateLinkResourceName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}/privateLinkResources/{privateLinkResourceName}"]
-
 ```
 
 ---

@@ -44,3 +44,7 @@ interface WorkspacePrivateEndpointConnections {
    */
   listByWorkspace is ArmResourceListByParent<WorkspacePrivateEndpointConnection>;
 }
+
+@@pattern(PrivateEndpointConnectionParameter.name, "^[a-z][a-zA-Z0-9]*");
+@@minLength(PrivateEndpointConnectionParameter.name, 3);
+@@maxLength(PrivateEndpointConnectionParameter.name, 63);

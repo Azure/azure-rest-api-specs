@@ -34,3 +34,7 @@ interface BookshelfPrivateLinkResources {
    */
   listByBookshelf is ArmResourceListByParent<BookshelfPrivateLinkResource>;
 }
+
+@@pattern(PrivateLinkResourceParameter.name, "^[a-z][a-zA-Z0-9]*");
+@@minLength(PrivateLinkResourceParameter.name, 3);
+@@maxLength(PrivateLinkResourceParameter.name, 63);

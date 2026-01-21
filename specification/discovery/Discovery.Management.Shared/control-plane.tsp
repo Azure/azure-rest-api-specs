@@ -204,7 +204,7 @@ model KeyVaultProperties {
 
   @doc("The Key Version in Key Vault")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  keyVersion: string;
+  keyVersion?: string;
 }
 
 @doc("For Key Vault Key references with identity reference")

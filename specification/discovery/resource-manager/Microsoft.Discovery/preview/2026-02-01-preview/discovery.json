@@ -1023,7 +1023,10 @@
             "in": "path",
             "description": "The name of the private link associated with the Azure resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-zA-Z0-9]*"
           }
         ],
         "responses": {
@@ -3856,7 +3859,10 @@
             "in": "path",
             "description": "The name of the private link associated with the Azure resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-zA-Z0-9]*"
           }
         ],
         "responses": {
@@ -4372,7 +4378,6 @@
       "required": [
         "keyVaultUri",
         "keyName",
-        "keyVersion",
         "identityClientId"
       ]
     },
@@ -4859,8 +4864,7 @@
       },
       "required": [
         "keyVaultUri",
-        "keyName",
-        "keyVersion"
+        "keyName"
       ]
     },
     "KeyVaultPropertiesUpdate": {
@@ -4930,7 +4934,6 @@
       "required": [
         "keyVaultUri",
         "keyName",
-        "keyVersion",
         "identity"
       ]
     },
@@ -5707,7 +5710,6 @@
       "required": [
         "keyVaultUri",
         "keyName",
-        "keyVersion",
         "identity",
         "keyVaultPrivateEndpointResourceId"
       ]
