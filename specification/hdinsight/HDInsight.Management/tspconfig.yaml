@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/hdinsight"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,36 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/HDInsight/{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hdinsight"
+    namespace: "azure.mgmt.hdinsight"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-hdinsight"
+    namespace: "com.azure.resourcemanager.hdinsight"
+    service-name: "HDInsight"
+    premium: true
+    enable-sync-stack: true
+    client-side-validations: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hdinsight"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-hdinsight"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/hdinsight"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhdinsight"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhdinsight"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
