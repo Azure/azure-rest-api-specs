@@ -79,7 +79,7 @@ namespace Microsoft.ManagedServiceCommonTypes {
     /** The delegation id of the referral delegation (optional) - internal use only. */
     referralResource?: string;
 
-    /** he source resource location - internal use only. */
+    /** The source resource location - internal use only. */
     location?: string;
   }
 
