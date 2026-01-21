@@ -270,7 +270,6 @@ using Microsoft.MachineLearningServices;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
-@@clientName(Workspaces.createOrUpdate::parameters.resource, "parameters", "go");
 @@clientName(Workspaces.update::parameters.properties, "body");
 @@clientLocation(Workspaces.list, "WorkspaceFeatures");
 @@clientLocation(Workspaces.getAllModels, "Connection");
@@ -469,21 +468,3 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpoint, "FQDNEndpoint");
 @@clientName(FqdnEndpointDetail, "FQDNEndpointDetail");
 @@clientName(FqdnEndpoints, "FQDNEndpoints");
-
-namespace Microsoft.MachineLearningServices {
-  model WorkspaceConnection is WorkspaceConnectionPropertiesV2BasicResource;
-}
-
-@@alternateType(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
-  WorkspaceConnection,
-  "go"
-);
-@@clientName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
-  "parameters",
-  "go"
-);
-
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "properties",
-  "go"
-);
