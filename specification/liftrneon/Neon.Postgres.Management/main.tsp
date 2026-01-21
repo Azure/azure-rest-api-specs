@@ -79,6 +79,7 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
+  
   @doc("Action to retrieve the PostgreSQL versions.")
   @added(Neon.Postgres.Versions.v2_preview)
   @autoRoute
