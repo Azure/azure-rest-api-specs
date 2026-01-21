@@ -90,6 +90,7 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+#suppress "deprecated"
 @@changePropertyType(OpenAI.Eval.data_source_config,
 
     | OpenAI.CreateEvalCustomDataSourceConfig
@@ -134,6 +135,7 @@ model Eval is OpenAI.Eval {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+#suppress "deprecated"
 @@changePropertyType(OpenAI.CreateEvalRequest.data_source_config,
 
     | OpenAI.CreateEvalCustomDataSourceConfig

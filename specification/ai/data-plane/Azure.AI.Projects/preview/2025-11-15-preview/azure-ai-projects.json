@@ -12313,6 +12313,7 @@
     },
     "OpenAI.Annotation": {
       "type": "object",
+      "description": "An annotation that applies to a span of output text.",
       "properties": {
         "type": {
           "$ref": "#/definitions/OpenAI.AnnotationType"
@@ -12771,6 +12772,7 @@
         },
         "encrypted_content": {
           "type": "string",
+          "description": "The encrypted content of the compaction summary.",
           "maxLength": 10485760
         }
       },
@@ -13380,7 +13382,7 @@
     "OpenAI.ConversationItemFunctionShellCallOutput": {
       "type": "object",
       "title": "Shell call output",
-      "description": "The output of a shell tool call.",
+      "description": "The output of a shell tool call that was emitted.",
       "properties": {
         "id": {
           "type": "string",
@@ -13402,7 +13404,8 @@
           "x-nullable": true
         },
         "created_by": {
-          "type": "string"
+          "type": "string",
+          "description": "The identifier of the actor that created the item."
         }
       },
       "required": [
@@ -13983,11 +13986,11 @@
     "OpenAI.ConversationReference": {
       "type": "object",
       "title": "Conversation",
-      "description": "The conversation that this response belongs to. Input items and output items from this response are automatically added to this conversation.",
+      "description": "The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID of the conversation."
+          "description": "The unique ID of the conversation that this response was associated with."
         }
       },
       "required": [
@@ -15512,20 +15515,23 @@
     "OpenAI.FunctionShellCallOutputContent": {
       "type": "object",
       "title": "Shell call output content",
-      "description": "The content of a shell call output.",
+      "description": "The content of a shell tool call output that was emitted.",
       "properties": {
         "stdout": {
-          "type": "string"
+          "type": "string",
+          "description": "The standard output that was captured."
         },
         "stderr": {
-          "type": "string"
+          "type": "string",
+          "description": "The standard error output that was captured."
         },
         "outcome": {
           "$ref": "#/definitions/OpenAI.FunctionShellCallOutputOutcome",
           "description": "Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call output chunk."
         },
         "created_by": {
-          "type": "string"
+          "type": "string",
+          "description": "The identifier of the actor that created the item."
         }
       },
       "required": [
@@ -17140,7 +17146,7 @@
     "OpenAI.ItemResourceFunctionShellCallOutput": {
       "type": "object",
       "title": "Shell call output",
-      "description": "The output of a shell tool call.",
+      "description": "The output of a shell tool call that was emitted.",
       "properties": {
         "id": {
           "type": "string",
@@ -17162,7 +17168,8 @@
           "x-nullable": true
         },
         "created_by": {
-          "type": "string"
+          "type": "string",
+          "description": "The identifier of the actor that created the item."
         }
       },
       "required": [
@@ -18502,10 +18509,12 @@
           "description": "The unique ID of the compaction item."
         },
         "encrypted_content": {
-          "type": "string"
+          "type": "string",
+          "description": "The encrypted content that was produced by compaction."
         },
         "created_by": {
-          "type": "string"
+          "type": "string",
+          "description": "The identifier of the actor that created the item."
         }
       },
       "required": [
@@ -18695,7 +18704,7 @@
     "OpenAI.OutputItemFunctionShellCallOutput": {
       "type": "object",
       "title": "Shell call output",
-      "description": "The output of a shell tool call.",
+      "description": "The output of a shell tool call that was emitted.",
       "properties": {
         "id": {
           "type": "string",
@@ -18717,7 +18726,8 @@
           "x-nullable": true
         },
         "created_by": {
-          "type": "string"
+          "type": "string",
+          "description": "The identifier of the actor that created the item."
         }
       },
       "required": [
@@ -19477,6 +19487,11 @@
           "type": "integer",
           "format": "unixtime",
           "description": "Unix timestamp (in seconds) of when this Response was created."
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "x-nullable": true
         },
         "error": {
           "$ref": "#/definitions/OpenAI.ResponseError",

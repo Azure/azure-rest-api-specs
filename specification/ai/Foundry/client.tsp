@@ -167,7 +167,10 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.CreateResponse, "CreateResponseRequest", "javascript");
 
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
-@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>, "python");
+@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema,
+  Record<unknown>,
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
