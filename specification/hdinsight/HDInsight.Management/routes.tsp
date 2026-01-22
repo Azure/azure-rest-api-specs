@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.HDInsight;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface LocationsOperationGroup {
   /**
    * Gets the capabilities for the specified location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
   @action("capabilities")
@@ -31,7 +31,7 @@ interface LocationsOperationGroup {
   /**
    * Lists the usages for the specified location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
   @action("usages")
@@ -44,7 +44,7 @@ interface LocationsOperationGroup {
   /**
    * Lists the billingSpecs for the specified subscription and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
   @action("billingSpecs")
@@ -57,7 +57,7 @@ interface LocationsOperationGroup {
   /**
    * Get the async operation status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/azureasyncoperations/{operationId}")
   @get
   getAzureAsyncOperationStatus(
@@ -75,7 +75,7 @@ interface LocationsOperationGroup {
   /**
    * Check the cluster name is available or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = NameAvailabilityCheckRequestParameters,
@@ -87,7 +87,7 @@ interface LocationsOperationGroup {
   /**
    * Validate the cluster create request spec is valid or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @action("validateCreateRequest")
   validateClusterCreateRequest is ArmProviderActionSync<

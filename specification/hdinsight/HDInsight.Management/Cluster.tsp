@@ -24,7 +24,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterGetProperties> {
   /**
    * The ETag for the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
@@ -32,7 +32,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterGetProperties> {
   /**
    * The identity of the cluster, if configured.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ClusterIdentity;
 }
 
@@ -46,7 +46,7 @@ interface Clusters {
   /**
    * Creates a new HDInsight cluster with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Cluster,
     Request = ClusterCreateParametersExtended,
@@ -72,7 +72,7 @@ interface Clusters {
   /**
    * Deletes the specified HDInsight cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -211,7 +211,7 @@ interface Clusters {
   /**
    * Gets all configuration information for an HDI cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("configurations")
   configurationsList is ArmResourceActionSync<
     Cluster,
@@ -224,7 +224,7 @@ interface Clusters {
    * Configures the HTTP settings on the specified cluster. This API is deprecated, please use UpdateGatewaySettings in cluster endpoint instead.
    */
   #deprecated "This API is deprecated, please use UpdateGatewaySettings in cluster endpoint instead."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @post
   configurationsUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Cluster,
@@ -245,7 +245,7 @@ interface Clusters {
   /**
    * The configuration object for the specified cluster. This API is not recommended and might be removed in the future. Please consider using List configurations API instead.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   configurationsGet is ArmResourceRead<
     Cluster,
     Response = ArmResponse<ClusterConfiguration>,
@@ -266,7 +266,7 @@ interface Clusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("extensions/clustermonitoring")
   enableMonitoring is ArmResourceActionAsyncBase<
@@ -279,7 +279,7 @@ interface Clusters {
   /**
    * Gets the status of Operations Management Suite (OMS) on the HDInsight cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("extensions/clustermonitoring")
   getMonitoringStatus is ArmResourceActionSync<
@@ -292,7 +292,7 @@ interface Clusters {
   /**
    * Disables the Operations Management Suite (OMS) on the HDInsight cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @action("extensions/clustermonitoring")
   disableMonitoring is ArmResourceActionAsyncBase<
@@ -308,7 +308,7 @@ interface Clusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("extensions/azureMonitor")
   enableAzureMonitor is ArmResourceActionAsyncBase<
@@ -321,7 +321,7 @@ interface Clusters {
   /**
    * Gets the status of Azure Monitor on the HDInsight cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("extensions/azureMonitor")
   getAzureMonitorStatus is ArmResourceActionSync<
@@ -334,7 +334,7 @@ interface Clusters {
   /**
    * Disables the Azure Monitor on the HDInsight cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @action("extensions/azureMonitor")
   disableAzureMonitor is ArmResourceActionAsyncBase<
@@ -350,7 +350,7 @@ interface Clusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @action("extensions/azureMonitorAgent")
   enableAzureMonitorAgent is ArmResourceActionAsyncBase<
@@ -364,7 +364,7 @@ interface Clusters {
   /**
    * Gets the status of Azure Monitor Agent on the HDInsight cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("extensions/azureMonitorAgent")
   getAzureMonitorAgentStatus is ArmResourceActionSync<
@@ -377,7 +377,7 @@ interface Clusters {
   /**
    * Disables the Azure Monitor Agent on the HDInsight cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @action("extensions/azureMonitorAgent")
   disableAzureMonitorAgent is ArmResourceActionAsyncBase<
@@ -392,7 +392,7 @@ interface Clusters {
    * Creates an HDInsight cluster extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensionsCreate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Cluster,
@@ -413,7 +413,7 @@ interface Clusters {
   /**
    * Gets the extension properties for the specified HDInsight cluster extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensionsGet is ArmResourceRead<
     Cluster,
     Response = ArmResponse<ClusterMonitoringResponse>,
@@ -432,7 +432,7 @@ interface Clusters {
   /**
    * Deletes the specified extension for HDInsight cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensionsDelete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
     Response = OkResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -451,7 +451,7 @@ interface Clusters {
   /**
    * Gets the async operation status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensionsGetAzureAsyncOperationStatus is ArmResourceRead<
     Cluster,
     Response = ArmResponse<AsyncOperationResult>,
@@ -478,7 +478,7 @@ interface Clusters {
   /**
    * Deletes a specified persisted script action of the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scriptActionsDelete is ArmResourceDeleteSync<
     Cluster,
     Parameters = {
@@ -496,7 +496,7 @@ interface Clusters {
   /**
    * Lists all the persisted script actions for the specified cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
   @get
   @action("scriptActions")
@@ -510,7 +510,7 @@ interface Clusters {
   /**
    * Gets the script execution detail for the given script execution ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getExecutionDetail is ArmResourceRead<
     Cluster,
     Response = ArmResponse<RuntimeScriptActionDetail>,
@@ -529,7 +529,7 @@ interface Clusters {
   /**
    * Gets the async operation status of execution operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getExecutionAsyncOperationStatus is ArmResourceRead<
     Cluster,
     Response = ArmResponse<AsyncOperationResult>,
@@ -548,7 +548,7 @@ interface Clusters {
   /**
    * Lists all scripts' execution history for the specified cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
   @get
   @action("scriptExecutionHistory")
@@ -562,7 +562,7 @@ interface Clusters {
   /**
    * Promotes the specified ad-hoc script execution to a persisted script.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   promote is ArmResourceActionSync<
     Cluster,
     void,
@@ -582,7 +582,7 @@ interface Clusters {
   /**
    * Lists the HDInsight clusters hosts
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listHosts is ArmResourceActionSync<
     Cluster,
     void,
@@ -593,7 +593,7 @@ interface Clusters {
   /**
    * Restarts the specified HDInsight cluster hosts.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   restartHosts is ArmResourceActionAsyncBase<
     Cluster,
     string[],
@@ -605,7 +605,7 @@ interface Clusters {
   /**
    * Gets the async operation status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   getAsyncOperationStatus is ArmResourceRead<
     Cluster,

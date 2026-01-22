@@ -11,7 +11,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.HDInsight;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DaysOfWeek {
   string,
 
@@ -391,7 +391,7 @@ union PrivateEndpointConnectionProvisioningState {
   Deleting: "Deleting",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union RoleName {
   string,
 
@@ -464,7 +464,7 @@ model ApplicationProperties {
   /**
    * The provisioning state of the application.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1083,7 +1083,7 @@ model ClusterCreateParametersExtended {
   /**
    * The resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -1195,7 +1195,7 @@ model ClusterDefinition {
   /**
    * The versions of different services in the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   componentVersion?: Record<string>;
 
@@ -1221,7 +1221,7 @@ model KafkaRestProperties {
   /**
    * The configurations that need to be overriden.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   configurationOverride?: Record<string>;
 }
 
@@ -1488,7 +1488,7 @@ model ClusterIdentity {
   /**
    * The list of user identities associated with the cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -1765,7 +1765,7 @@ model ClusterPatchParameters {
    * The resource tags.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string> | null;
 
   /**
@@ -1929,7 +1929,7 @@ model ClusterConfigurations {
   /**
    * The configuration object for the specified configuration for the specified cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   configurations?: Record<ClusterConfiguration>;
 }
 
@@ -1995,7 +1995,7 @@ model AzureMonitorSelectedConfigurations {
   /**
    * The global configurations of selected configurations.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   globalConfigurations?: Record<string>;
 
   /**
@@ -2057,14 +2057,14 @@ model CapabilitiesResult {
   /**
    * The version capability.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   versions?: Record<VersionsCapability>;
 
   /**
    * The virtual machine size compatibility features.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   regions?: Record<RegionsCapability>;
 
   /**
@@ -2113,7 +2113,7 @@ model VersionSpec {
   /**
    * The component version property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   componentVersions?: Record<string>;
 }
 
@@ -2463,7 +2463,7 @@ model NameAvailabilityCheckResult {
 /**
  * The cluster create request specification.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterCreateRequestValidationParameters
   extends ClusterCreateParametersExtended {
   /**
@@ -2816,7 +2816,7 @@ model ScriptActionsList is Azure.Core.Page<RuntimeScriptActionDetail>;
 /**
  * The execution details of a script action.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RuntimeScriptActionDetail extends RuntimeScriptAction {
   /**
    * The execution id of the script action.
