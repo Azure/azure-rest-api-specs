@@ -89,11 +89,7 @@ export class CompileRule implements Rule {
           // Necessary to handle multi-project specs like keyvault.
           //
           // Globby only accepts patterns like posix paths.
-          const pattern = path.posix.join(
-            ...outputFolder.split(path.win32.sep),
-            "**",
-            outputFilename,
-          );
+          const pattern = path.posix.join(...outputFolder.split(path.sep), "**", outputFilename);
           const allSwaggers = (await globby(pattern, { ignore: ["**/examples/**"] })).map(
             // Globby always returns posix paths
             (p) => normalize(p),
@@ -163,19 +159,27 @@ export class CompileRule implements Rule {
 
           if (extraSwaggers.length > 0) {
             // Helper function to extract version from swagger path
+            // Normalize to POSIX path for consistent pattern matching
             const extractVersion = (swaggerPath: string): string | null => {
-              const match = swaggerPath.match(/\/(preview|stable)\/([^/]+)\//);
+              const posixPath = swaggerPath.split(path.sep).join(path.posix.sep);
+              const match = posixPath.match(/\/(preview|stable)\/([^/]+)\//);
               return match ? match[2] : null;
             };
 
             // Check if all extra swaggers are preview versions
-            const allArePreview = extraSwaggers.every((s) => s.includes("/preview/"));
+            const allArePreview = extraSwaggers.every((s) => {
+              const posixPath = s.split(path.sep).join(path.posix.sep);
+              return posixPath.includes("/preview/");
+            });
 
             let isOnlyOlderPreviews = false;
             if (allArePreview) {
               // Get all preview versions from tspGeneratedSwaggers
               const previewVersions = tspGeneratedSwaggers
-                .filter((s) => s.includes("/preview/"))
+                .filter((s) => {
+                  const posixPath = s.split(path.sep).join(path.posix.sep);
+                  return posixPath.includes("/preview/");
+                })
                 .map(extractVersion)
                 .filter((v): v is string => v !== null);
 

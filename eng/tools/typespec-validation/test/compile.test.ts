@@ -48,7 +48,7 @@ describe("compile", function () {
       // ensure paths are trimmed
       `\t${swaggerPath} \n` +
       // ensure paths are normalized
-      `${path.win32.normalize(swaggerPath)}\n` +
+      `${path.normalize(swaggerPath)}\n` +
       // ensure filtered to JSON files
       "data-plane/readme.md\n" +
       // ensure examples are skipped
@@ -143,7 +143,7 @@ describe("compile", function () {
 
     runNpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
-        Promise.resolve([null, path.normalize(latestPreviewPath), ""]),
+        Promise.resolve([null, latestPreviewPath, ""]),
     );
 
     // Simulate extra older preview swagger (globby always returns posix paths)
@@ -168,7 +168,7 @@ describe("compile", function () {
 
     runNpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
-        Promise.resolve([null, path.normalize(latestPreviewPath), ""]),
+        Promise.resolve([null, latestPreviewPath, ""]),
     );
 
     // Simulate extra swagger from the latest preview (globby always returns posix paths)
@@ -191,8 +191,7 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
     runNpmSpy.mockImplementation(
-      async (): Promise<[Error | null, string, string]> =>
-        Promise.resolve([null, path.normalize(previewPath), ""]),
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
     );
 
     // Simulate extra stable swagger (globby always returns posix paths)
@@ -215,7 +214,7 @@ describe("compile", function () {
 
     runNpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
-        Promise.resolve([null, path.normalize(latestPreviewPath), ""]),
+        Promise.resolve([null, latestPreviewPath, ""]),
     );
 
     // Simulate multiple extra older preview swaggers (globby always returns posix paths)
@@ -240,8 +239,7 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
     runNpmSpy.mockImplementation(
-      async (): Promise<[Error | null, string, string]> =>
-        Promise.resolve([null, path.normalize(previewPath), ""]),
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
     );
 
     // Simulate extra swaggers with mix of preview and stable (globby always returns posix paths)
