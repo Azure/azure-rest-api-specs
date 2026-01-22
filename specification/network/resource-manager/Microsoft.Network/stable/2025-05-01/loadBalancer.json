@@ -1726,6 +1726,16 @@
     },
     "FrontendIPConfigurationPropertiesFormat": {
       "properties": {
+        "ddosSettings": {
+          "type": "object",
+          "description": "The Ddos protection settings associated with the frontend IP configuration.",
+          "properties": {
+            "ddosCustomPolicy": {
+              "$ref": "./network.json#/definitions/SubResource",
+              "description": "The reference to the Ddos Custom Policy resource."
+            }
+          }
+        },
         "inboundNatRules": {
           "readOnly": true,
           "type": "array",
