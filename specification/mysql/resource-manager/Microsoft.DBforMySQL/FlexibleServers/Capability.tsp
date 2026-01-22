@@ -27,6 +27,7 @@ model Capability
   name: string = "default";
 }
 
+// Remove custom operations interface once https://github.com/Azure/typespec-azure/issues/3821 is resolved
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface LocationBasedCapabilityOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
