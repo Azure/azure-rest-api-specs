@@ -4,17 +4,23 @@
   "type": "module",
   "devDependencies": {
     "@azure-tools/specs-shared": "file:../../../.github/shared",
+    "@eslint/js": "^9.22.0",
     "@types/node": "^20.0.0",
-    "prettier": "~3.6.2",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.22.0",
+    "prettier": "3.8.0",
     "prettier-plugin-organize-imports": "^4.2.0",
     "typescript": "~5.9.2",
-    "vitest": "^3.2.4"
+    "typescript-eslint": "^8.45.0",
+    "vitest": "^4.0.15"
   },
   "scripts": {
     "build": "tsc --build",
+    "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
     "test": "vitest",
     "test:ci": "vitest run --reporter=verbose"
   },
