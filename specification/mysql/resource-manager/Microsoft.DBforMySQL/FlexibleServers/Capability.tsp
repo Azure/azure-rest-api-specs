@@ -27,58 +27,41 @@ model Capability
   name: string = "default";
 }
 
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-// interface LocationBasedCapabilityOps
-//   extends Azure.ResourceManager.Legacy.LegacyOperations<
-//       {
-//         ...ApiVersionParameter,
-//         ...SubscriptionIdParameter,
-//         ...Azure.ResourceManager.Legacy.Provider,
-//         ...LocationNameParameter,
-//       },
-//       {}
-//     > {}
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface LocationBasedCapabilityOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...LocationNameParameter,
+      },
+      {
+        /**
+         * Name of capability set
+         */
+        @key("capabilitySetName")
+        @path
+        @segment("capabilitySets")
+        @pattern("^[a-z0-9][-a-z0-9]*(?<!-)$")
+        capabilitySetName: string = "default",
+      }
+    > {}
 
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-// interface LocationBasedCapabilityOperationOps
-//   extends Azure.ResourceManager.Legacy.LegacyOperations<
-//       {
-//         ...ApiVersionParameter,
-//         ...SubscriptionIdParameter,
-//         ...Azure.ResourceManager.Legacy.Provider,
-//         ...LocationNameParameter,
-
-//         /**
-//          * Name of capability set
-//          */
-//         @path
-//         @segment("capabilitySets")
-//         @pattern("^[a-z0-9][-a-z0-9]*(?<!-)$")
-//         capabilitySetName: string = "default",
-//       },
-//       {}
-//     > {}
-
-// @armResourceOperations
-// interface LocationBasedCapabilitySet {
-//   /**
-//    * Get capabilities at specified location in a given subscription.
-//    */
-//   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   get is LocationBasedCapabilityOperationOps.Read<Capability>;
-
-//   /**
-//    * Get capabilities at specified location in a given subscription.
-//    */
-//   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   @action("capabilitySets")
-//   @get
-//   @list
-//   list is LocationBasedCapabilityOps.Read<
-//     Capability,
-//     Response = ArmResponse<CapabilitySetsList>
-//   >;
-// }
+@armResourceOperations
+interface LocationBasedCapabilitySet {
+  /**
+   * Get capabilities at specified location in a given subscription.
+   */
+  get is LocationBasedCapabilityOps.Read<Capability>;
+  /**
+   * Get capabilities at specified location in a given subscription.
+   */
+  list is LocationBasedCapabilityOps.List<
+    Capability,
+    Response = ArmResponse<CapabilitySetsList>
+  >;
+}
 
 @@doc(Capability.name, "Name of capability set");
 @@doc(Capability.properties, "The properties of a location capability set.");
