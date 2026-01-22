@@ -8,3 +8,5 @@ using Microsoft.ContainerRegistry;
   "ContainerRegistryManagementClient",
   "javascript"
 );
+
+@@clientName(IPRule, "IpRule", "java");
