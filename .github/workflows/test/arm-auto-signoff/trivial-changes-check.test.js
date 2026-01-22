@@ -30,10 +30,6 @@ describe("checkTrivialChanges", () => {
     vi.clearAllMocks();
   });
 
-  it("throws error when core and context are not provided", async () => {
-    await expect(checkTrivialChanges(/** @type {any} */ ({}))).rejects.toThrow();
-  });
-
   it("returns empty change flags when no files are changed", async () => {
     vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
       additions: [],
@@ -44,9 +40,8 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
 
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: false,
@@ -72,9 +67,8 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
 
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: false,
@@ -99,9 +93,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: false,
@@ -124,9 +116,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: true, // New spec files are functional
@@ -149,9 +139,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: true, // Deleted spec files are functional
@@ -175,9 +163,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: true, // Renamed spec files are functional
@@ -201,9 +187,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: false,
       rmFunctional: false,
@@ -227,9 +211,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: true,
       rmFunctional: false,
@@ -253,9 +235,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: false,
       rmFunctional: false,
@@ -303,9 +283,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: false,
@@ -354,9 +332,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: true,
@@ -405,10 +381,8 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
     // Should detect functional changes, so overall not trivial
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: true,
       rmFunctional: true,
@@ -442,10 +416,8 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
     // Should treat JSON parsing errors as non-trivial changes
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: true,
@@ -470,10 +442,8 @@ describe("checkTrivialChanges", () => {
     getMockGit().show.mockRejectedValue(new Error("Git operation failed"));
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
     // Should treat git errors as non-trivial changes
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: true,
@@ -537,9 +507,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: false,
@@ -598,9 +566,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
       rmFunctional: true,
@@ -625,12 +591,227 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = result.toJSON();
-
-    expect(parsed).toEqual({
+    expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: true,
       rmFunctional: false,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("ignores empty/invalid changed file entries", async () => {
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [""],
+      modifications: /** @type {any} */ ([null]),
+      deletions: /** @type {any} */ ([undefined]),
+      renames: [],
+      total: 0,
+    });
+
+    const result = await checkTrivialChanges(core);
+
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("treats missing base content for a modified spec file as functional", async () => {
+    const jsonFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/service.json",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: jsonFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    getMockGit().show.mockImplementation((args) => {
+      const ref = args[0];
+      if (typeof ref === "string" && ref.startsWith("HEAD^:")) {
+        return Promise.reject(new Error("does not exist"));
+      }
+      if (typeof ref === "string" && ref.startsWith("HEAD:")) {
+        return Promise.resolve(JSON.stringify({ openapi: "3.0.0", info: { title: "t" } }));
+      }
+      return Promise.reject(new Error("unexpected ref"));
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("treats missing head content for a modified spec file as functional", async () => {
+    const jsonFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/service.json",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: jsonFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    getMockGit().show.mockImplementation((args) => {
+      const ref = args[0];
+      if (typeof ref === "string" && ref.startsWith("HEAD^:")) {
+        return Promise.resolve(JSON.stringify({ openapi: "3.0.0", info: { title: "t" } }));
+      }
+      if (typeof ref === "string" && ref.startsWith("HEAD:")) {
+        return Promise.reject(new Error("does not exist"));
+      }
+      return Promise.reject(new Error("unexpected ref"));
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("treats array length changes under non-functional properties (tags) as non-functional", async () => {
+    const jsonFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/service.json",
+    ];
+
+    const oldJson = JSON.stringify({
+      openapi: "3.0.0",
+      info: { title: "Service API", version: "1.0" },
+      tags: ["a"],
+    });
+
+    const newJson = JSON.stringify({
+      openapi: "3.0.0",
+      info: { title: "Service API", version: "1.0" },
+      tags: ["a", "b"],
+    });
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: jsonFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    getMockGit().show.mockImplementation((args) => {
+      const ref = args[0];
+      if (typeof ref === "string" && ref.startsWith("HEAD^:")) {
+        return Promise.resolve(oldJson);
+      }
+      if (typeof ref === "string" && ref.startsWith("HEAD:")) {
+        return Promise.resolve(newJson);
+      }
+      return Promise.reject(new Error("does not exist"));
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("treats type changes under non-functional properties (description) as non-functional", async () => {
+    const jsonFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/service.json",
+    ];
+
+    const oldJson = JSON.stringify({
+      openapi: "3.0.0",
+      info: { title: "Service API", version: "1.0" },
+      description: "old",
+    });
+
+    const newJson = JSON.stringify({
+      openapi: "3.0.0",
+      info: { title: "Service API", version: "1.0" },
+      description: 123,
+    });
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: jsonFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    getMockGit().show.mockImplementation((args) => {
+      const ref = args[0];
+      if (typeof ref === "string" && ref.startsWith("HEAD^:")) {
+        return Promise.resolve(oldJson);
+      }
+      if (typeof ref === "string" && ref.startsWith("HEAD:")) {
+        return Promise.resolve(newJson);
+      }
+      return Promise.reject(new Error("does not exist"));
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("treats a root array length change as functional (conservative)", async () => {
+    const jsonFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/service.json",
+    ];
+
+    const oldJson = JSON.stringify([]);
+    const newJson = JSON.stringify([1]);
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: jsonFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    getMockGit().show.mockImplementation((args) => {
+      const ref = args[0];
+      if (typeof ref === "string" && ref.startsWith("HEAD^:")) {
+        return Promise.resolve(oldJson);
+      }
+      if (typeof ref === "string" && ref.startsWith("HEAD:")) {
+        return Promise.resolve(newJson);
+      }
+      return Promise.reject(new Error("does not exist"));
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true,
       rmOther: false,
       other: false,
     });
