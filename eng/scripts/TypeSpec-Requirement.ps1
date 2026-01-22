@@ -49,6 +49,18 @@ function Get-ValidatedSuppression {
   return $suppression
 }
 
+function LogWarningForFile($file, $warningString) {
+  if (Test-SupportsDevOpsLogging) {
+    Write-Host ("##vso[task.logissue type=warning;sourcepath=$file;linenumber=1;columnnumber=1;]$warningString" -replace "`n", "%0D%0A")
+  }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Host ("::warning file=$file,line=1,col=1::$warningString" -replace "`n", "%0D%0A")
+  }
+  else {
+    Write-Host "[Warning in file $file]$warningString" -ForegroundColor Yellow
+  }
+}
+
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
