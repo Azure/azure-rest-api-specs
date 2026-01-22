@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebPubSubManagementClient",
-    "version": "2025-01-01-preview",
+    "version": "2025-08-01-preview",
     "description": "REST API for Azure WebPubSub Service",
     "x-typespec-generated": [
       {
@@ -3126,6 +3126,10 @@
         "auth": {
           "$ref": "#/definitions/UpstreamAuthSettings",
           "description": "Upstream auth settings. If not set, no auth is used for upstream messages."
+        },
+        "groupPresenceEvents": {
+          "$ref": "#/definitions/GroupPresenceEventFilters",
+          "description": "The group presence events that this event handler is concerned with. Group presence events are triggered when connections join or leave groups in the hub. If the value is null, no presence events will be sent to this event handler."
         }
       },
       "required": [
@@ -3254,6 +3258,53 @@
         }
       ],
       "x-ms-discriminator-value": "EventName"
+    },
+    "GroupPresenceEventFilters": {
+      "type": "object",
+      "description": "Represents presence event filters for event handler configuration.",
+      "properties": {
+        "eventNames": {
+          "type": "array",
+          "description": "The concerning event names. Valid values are \"joined\", \"left\". If the value is null or empty, no presence events will be sent to the event handler.",
+          "items": {
+            "$ref": "#/definitions/GroupPresenceEventName"
+          }
+        },
+        "groupFilters": {
+          "type": "array",
+          "description": "The group filters. Only events from these groups will be sent to the event handler. Each element is a pattern that may match multiple groups. If null or empty, events from all groups will be sent (subject to eventNames).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "eventNames"
+      ]
+    },
+    "GroupPresenceEventName": {
+      "type": "string",
+      "description": "Allowed event names for group presence events.",
+      "enum": [
+        "joined",
+        "left"
+      ],
+      "x-ms-enum": {
+        "name": "GroupPresenceEventName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Joined",
+            "value": "joined",
+            "description": "Event triggered when a connection joins a group."
+          },
+          {
+            "name": "Left",
+            "value": "left",
+            "description": "Event triggered when a connection leaves a group."
+          }
+        ]
+      }
     },
     "IPRule": {
       "type": "object",
