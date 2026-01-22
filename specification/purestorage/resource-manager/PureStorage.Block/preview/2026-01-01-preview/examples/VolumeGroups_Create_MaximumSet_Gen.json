@@ -1,0 +1,96 @@
+{
+  "title": "VolumeGroups_Create",
+  "operationId": "VolumeGroups_Create",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "volumeGroupName": "volumegroup-01",
+    "resource": {
+      "properties": {
+        "performanceParameters": {
+          "bandwidthLimitMbPerSec": 500,
+          "iopsLimit": 10000
+        },
+        "protectionParameters": {
+          "retention": "7d",
+          "frequency": "1h"
+        }
+      },
+      "tags": {
+        "environment": "production"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storagePoolInternalId": "pool-abc123",
+          "volumeGroupInternalId": "vg-xyz789",
+          "performanceParameters": {
+            "bandwidthLimitMbPerSec": 500,
+            "iopsLimit": 10000
+          },
+          "protectionParameters": {
+            "retention": "7d",
+            "frequency": "1h"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01",
+        "name": "volumegroup-01",
+        "type": "PureStorage.Block/storagePools/volumeGroups",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-16T07:25:56.721Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-16T07:25:56.721Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/providers/PureStorage.Block/locations/eastus/operationStatuses/op-123456"
+      },
+      "body": {
+        "properties": {
+          "storagePoolInternalId": "pool-abc123",
+          "volumeGroupInternalId": "vg-xyz789",
+          "performanceParameters": {
+            "bandwidthLimitMbPerSec": 500,
+            "iopsLimit": 10000
+          },
+          "protectionParameters": {
+            "retention": "7d",
+            "frequency": "1h"
+          },
+          "provisioningState": "Creating"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01",
+        "name": "volumegroup-01",
+        "type": "PureStorage.Block/storagePools/volumeGroups",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-16T07:25:56.721Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-16T07:25:56.721Z"
+        }
+      }
+    }
+  }
+}
