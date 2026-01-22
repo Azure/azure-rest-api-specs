@@ -106,7 +106,6 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
-  - Microsoft.Insights/preview/2024-10-01-preview/scheduledQueryRule_API.json
 
 suppressions:
   - code: AvoidAdditionalProperties
