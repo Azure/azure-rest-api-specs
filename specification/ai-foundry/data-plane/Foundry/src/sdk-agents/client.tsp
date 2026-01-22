@@ -50,6 +50,9 @@ using Azure.AI.Projects;
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
 
+@@usage(OpenAI.IncludeEnum, Usage.input);
+@@access(OpenAI.IncludeEnum, Access.public);
+
 @@usage(OpenAI.ItemResource, Usage.json);
 @@usage(OpenAI.CreateResponseStreamingResponse, Usage.json);
 
