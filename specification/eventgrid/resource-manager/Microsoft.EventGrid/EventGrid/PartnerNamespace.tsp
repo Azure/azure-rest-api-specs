@@ -34,7 +34,7 @@ interface PartnerNamespaces {
   /**
    * Asynchronously creates a new partner namespace with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create a partner namespace.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PartnerNamespace,
@@ -63,7 +63,7 @@ interface PartnerNamespaces {
   /**
    * Delete existing partner namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a partner namespace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerNamespace,

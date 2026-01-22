@@ -24,13 +24,13 @@ model Domain is Azure.ResourceManager.TrackedResource<DomainProperties> {
   /**
    * The Sku pricing tier for the Event Grid Domain resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ResourceSku;
 
   /**
    * Identity information for the Event Grid Domain resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityInfo;
 }
 
@@ -45,7 +45,7 @@ interface Domains {
   /**
    * Asynchronously creates or updates a new domain with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update a domain.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Domain,
@@ -76,7 +76,7 @@ interface Domains {
   /**
    * Delete existing domain.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a domain.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Domain,

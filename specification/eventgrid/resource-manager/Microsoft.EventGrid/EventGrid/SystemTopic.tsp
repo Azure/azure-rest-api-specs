@@ -25,7 +25,7 @@ model SystemTopic
   /**
    * Identity information for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityInfo;
 }
 
@@ -64,7 +64,7 @@ interface SystemTopics {
   /**
    * Delete existing system topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a system topic.")
   @summary("Delete a system topic.")
   delete is ArmResourceDeleteWithoutOkAsync<

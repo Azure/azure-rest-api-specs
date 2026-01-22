@@ -24,13 +24,13 @@ model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
   /**
    * Represents available Sku pricing tiers.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: NamespaceSku;
 
   /**
    * Identity information for the Namespace resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityInfo;
 }
 
@@ -51,7 +51,7 @@ interface Namespaces {
   /**
    * Asynchronously updates a namespace with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @summary("Update a namespace.")
   @patch(#{ implicitOptionality: false })
@@ -68,7 +68,7 @@ interface Namespaces {
   /**
    * Delete existing namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a namespace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Namespace,

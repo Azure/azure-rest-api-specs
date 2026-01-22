@@ -40,7 +40,7 @@ interface PartnerDestinations {
   /**
    * Asynchronously updates a partner destination with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @summary("Update a partner destination.")
   @patch(#{ implicitOptionality: false })
@@ -57,7 +57,7 @@ interface PartnerDestinations {
   /**
    * Delete existing partner destination.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a partner destination.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerDestination,

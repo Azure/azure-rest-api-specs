@@ -42,7 +42,7 @@ interface ClientGroups {
   /**
    * Delete an existing client group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a client group.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ClientGroup,

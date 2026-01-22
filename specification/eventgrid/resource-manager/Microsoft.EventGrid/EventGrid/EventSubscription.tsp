@@ -144,7 +144,7 @@ interface EventSubscriptions {
   /**
    * Delete a nested existing event subscription for a domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a nested event subscription for a domain topic.")
   delete is EventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
@@ -296,7 +296,7 @@ interface TopicEventSubscriptions {
   /**
    * Delete an existing event subscription for a topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete an event subscription for a topic.")
   delete is TopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
@@ -403,7 +403,7 @@ interface DomainEventSubscriptions {
   /**
    * Delete an existing event subscription for a domain.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete an event subscription for a domain.")
   delete is DomainEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
@@ -490,7 +490,7 @@ interface EventSubscriptionOperationGroup {
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription based on the specified scope.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update an event subscription.")
   createOrUpdate is EventSubscriptionOperationGroupOps.CreateOrUpdateAsync<
     EventSubscription,
@@ -517,7 +517,7 @@ interface EventSubscriptionOperationGroup {
   /**
    * Delete an existing event subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete an event subscription.")
   delete is EventSubscriptionOperationGroupOps.DeleteWithoutOkAsync<
     EventSubscription,
@@ -622,7 +622,7 @@ interface SystemTopicEventSubscriptions {
   /**
    * Asynchronously creates or updates an event subscription with the specified parameters. Existing event subscriptions will be updated with this API.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update an event subscription for a system topic.")
   createOrUpdate is SystemTopicEventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
@@ -649,7 +649,7 @@ interface SystemTopicEventSubscriptions {
   /**
    * Delete an existing event subscription of a system topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete an event subscription of a system topic.")
   delete is SystemTopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
@@ -756,7 +756,7 @@ interface PartnerTopicEventSubscriptions {
   /**
    * Delete an existing event subscription of a partner topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete an event subscription of a partner topic.")
   delete is PartnerTopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,

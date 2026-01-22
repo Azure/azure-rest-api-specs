@@ -53,7 +53,7 @@ interface Channels {
   /**
    * Delete an existing channel.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a channel.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Channel,

@@ -1746,7 +1746,7 @@ union PartnerTopicActivationState {
   Deactivated: "Deactivated",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union NetworkSecurityPerimeterResourceType {
   string,
 
@@ -1950,7 +1950,7 @@ union PermissionBindingProvisioningState {
   Deleted: "Deleted",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PrivateEndpointConnectionsParentType {
   string,
 
@@ -2181,7 +2181,7 @@ union TopicTypeProvisioningState {
   Failed: "Failed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TopicTypeSourceScope {
   string,
 
@@ -2373,7 +2373,7 @@ model ChannelProperties {
   /**
    * Provisioning state of the channel.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ChannelProvisioningState;
 
   /**
@@ -2438,7 +2438,7 @@ model EventTypeInfo {
    * An example of a valid inline event name is "Contoso.OrderCreated".
    * The inline event type values are of type InlineEventProperties and will contain additional information for every inline event type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inlineEventTypes?: Record<InlineEventProperties>;
 }
 
@@ -2641,7 +2641,7 @@ model ClientProperties {
    * Example:
    * "attributes": { "room": "345", "floor": 12, "deviceTypes": ["Fan", "Light"] }
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   attributes?: Record<unknown>;
 
   /**
@@ -2782,7 +2782,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the Private Endpoint Connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -2827,7 +2827,7 @@ model InputSchemaMapping {
   inputSchemaMappingType: InputSchemaMappingType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InboundIpRule {
   /**
    * IP Address in CIDR notation e.g., 10.0.0.0/8.
@@ -2874,7 +2874,7 @@ model IdentityInfo {
    * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    * This property is currently not used and reserved for future usage.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserIdentityProperties>;
 }
 
@@ -2896,7 +2896,7 @@ model UserIdentityProperties {
 /**
  * Definition of a Tracked Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TrackedResource extends Resource {
   /**
    * Location of the resource.
@@ -2907,7 +2907,7 @@ model TrackedResource extends Resource {
   /**
    * Tags of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -2918,7 +2918,7 @@ model DomainUpdateParameters {
   /**
    * Tags of the domains resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -3093,7 +3093,7 @@ model SubscriptionProperties {
   /**
    * Tags relating to Event Subscription resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -3203,7 +3203,7 @@ model FederatedIdentityCredentialInfo {
   /**
    * The Multi-Tenant Microsoft Entra ID Application where the Federated Identity Credential (FIC) is associated with.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   federatedClientId: string;
 }
@@ -3367,7 +3367,7 @@ model SubscriptionUpdateParametersProperties {
   /**
    * Tags relating to Event Subscription resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -3743,13 +3743,13 @@ model TopicSpacesConfiguration {
   customDomains?: CustomDomainConfiguration[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RoutingEnrichments {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   static?: StaticRoutingEnrichment[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   dynamic?: DynamicRoutingEnrichment[];
 }
@@ -3771,7 +3771,7 @@ model StaticRoutingEnrichment {
   valueType: StaticRoutingEnrichmentType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DynamicRoutingEnrichment {
   /**
    * Dynamic routing enrichment key.
@@ -3933,7 +3933,7 @@ model RoutingIdentityInfo {
    */
   type?: RoutingIdentityType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentity?: string;
 }
 
@@ -3961,7 +3961,7 @@ model NamespaceUpdateParameters {
   /**
    * Tags of the namespace resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -4234,7 +4234,7 @@ model PartnerConfigurationProperties {
   /**
    * Provisioning state of the partner configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: PartnerConfigurationProvisioningState;
 }
 
@@ -4262,7 +4262,7 @@ model Partner {
   /**
    * The immutableId of the corresponding partner registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   partnerRegistrationImmutableId?: string;
 
@@ -4287,7 +4287,7 @@ model PartnerConfigurationUpdateParameters {
   /**
    * Tags of the partner configuration resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -4313,7 +4313,7 @@ model PartnerDestinationProperties {
   /**
    * The immutable Id of the corresponding partner registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   partnerRegistrationImmutableId?: string;
 
@@ -4358,7 +4358,7 @@ model PartnerDestinationUpdateParameters {
   /**
    * Tags of the Partner Destination resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -4426,7 +4426,7 @@ model PartnerNamespaceUpdateParameters {
   /**
    * Tags of the Partner Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -4501,7 +4501,7 @@ model PartnerRegistrationProperties {
    * The immutableId of the corresponding partner registration.
    * Note: This property is marked for deprecation and is not supported in any future GA API version
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   partnerRegistrationImmutableId?: string;
 }
@@ -4513,7 +4513,7 @@ model PartnerRegistrationUpdateParameters {
   /**
    * Tags of the partner registration resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -4524,7 +4524,7 @@ model PartnerTopicProperties {
   /**
    * The immutableId of the corresponding partner registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   partnerRegistrationImmutableId?: string;
 
@@ -4575,7 +4575,7 @@ model PartnerTopicUpdateParameters {
   /**
    * Tags of the Partner Topic resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -4591,7 +4591,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * Provisioning state to reflect configuration state and indicate status of nsp profile configuration retrieval.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: NetworkSecurityPerimeterConfigProvisioningState;
 
   /**
@@ -4841,16 +4841,16 @@ model PermissionBindingProperties {
   provisioningState?: PermissionBindingProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResourceProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   groupId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   displayName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requiredMembers?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requiredZoneNames?: string[];
 }
 
@@ -4936,7 +4936,7 @@ model CustomerManagedKeyEncryption {
   keyEncryptionKeyStatusFriendlyDescription?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model KeyEncryptionKeyIdentity {
   /**
    * The type of managed identity used. Only UserAssigned or SystemAssigned Identity are supported.
@@ -4984,7 +4984,7 @@ model SystemTopicUpdateParameters {
   /**
    * Tags of the system topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -5097,7 +5097,7 @@ model TopicUpdateParameters {
   /**
    * Tags of the Topic resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -5171,7 +5171,7 @@ model EventTypesListResult {
 /**
  * Event Type for a subject under a topic
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventType extends Resource {
   /**
    * Properties of the event type.
@@ -5207,7 +5207,7 @@ model EventTypeProperties {
 /**
  * Properties of the Extension Topic
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExtensionTopicProperties {
   /**
    * Description of the extension topic.
@@ -5287,7 +5287,7 @@ model TopicTypeProperties {
   /**
    * Provisioning state of the topic type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: TopicTypeProvisioningState;
 
   /**
@@ -5317,11 +5317,11 @@ model TopicTypeProperties {
   additionalEnforcedPermissions?: TopicTypeAdditionalEnforcedPermission[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TopicTypeAdditionalEnforcedPermission {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   permissionName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isDataAction?: boolean;
 }
 
@@ -5332,7 +5332,7 @@ model VerifiedPartnerProperties {
   /**
    * ImmutableId of the corresponding partner registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   partnerRegistrationImmutableId?: string;
 
@@ -5359,7 +5359,7 @@ model VerifiedPartnerProperties {
   /**
    * Provisioning state of the verified partner.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: VerifiedPartnerProvisioningState;
 }
 
@@ -6512,7 +6512,7 @@ model AzureFunctionEventSubscriptionDestination
   endpointType: "AzureFunction";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PartnerEventSubscriptionDestinationProperties {
   /**
    * The Azure Resource Id that represents the endpoint of a Partner Destination of an event subscription.
@@ -6520,7 +6520,7 @@ model PartnerEventSubscriptionDestinationProperties {
   resourceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PartnerEventSubscriptionDestination extends EventSubscriptionDestination {
   /**
    * Partner Destination Properties of the event subscription destination.
@@ -6607,7 +6607,7 @@ model NamespaceTopicEventSubscriptionDestination
   endpointType: "NamespaceTopic";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StaticStringRoutingEnrichment extends StaticRoutingEnrichment {
   /**
    * String type routing enrichment value.

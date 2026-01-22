@@ -42,7 +42,7 @@ interface Subscriptions {
   /**
    * Update an existing event subscription of a namespace topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Update event subscription of a namespace topic.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
@@ -59,7 +59,7 @@ interface Subscriptions {
   /**
    * Delete an existing event subscription of a namespace topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete an event subscription of a namespace topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Subscription,

@@ -25,7 +25,7 @@ model PartnerTopic
   /**
    * Identity information for the Partner Topic resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityInfo;
 }
 
@@ -59,7 +59,7 @@ interface PartnerTopics {
   /**
    * Delete existing partner topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a partner topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerTopic,

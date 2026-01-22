@@ -36,7 +36,7 @@ interface DomainTopics {
   /**
    * Asynchronously creates or updates a new domain topic with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update a domain topic.")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DomainTopic,
@@ -50,7 +50,7 @@ interface DomainTopics {
   /**
    * Delete existing domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a domain topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     DomainTopic,
