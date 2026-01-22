@@ -65,8 +65,7 @@ These settings apply only when `--tag=package-2023-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2023-11-preview'
 input-file:
-- preview/2023-11-01-preview/cluster.json
-- preview/2023-11-01-preview/application.json
+- preview/2023-11-01-preview/servicefabric.json
 ```
 
 ### Tag: package-2021-06
