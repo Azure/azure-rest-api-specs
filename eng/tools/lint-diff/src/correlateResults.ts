@@ -1,9 +1,9 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { basename, join, relative } from "path";
+import { isDeepStrictEqual } from "util";
 import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
 import { isFailure, isWarning, pathExists, relativizePath } from "./util.js";
-import { isDeepStrictEqual } from "util";
 
 export async function correlateRuns(
   beforePath: string,
