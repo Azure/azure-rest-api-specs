@@ -342,6 +342,7 @@ model ApplicationUserAssignedIdentity {
 /**
  * The application resource for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "servicefabric is a brownfield service with existing APIs that do not support all properties in patch"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ApplicationResourceUpdate
@@ -349,6 +350,8 @@ model ApplicationResourceUpdate
   /**
    * The application resource properties for patch operations.
    */
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
   properties?: ApplicationResourceUpdateProperties;
 }
 

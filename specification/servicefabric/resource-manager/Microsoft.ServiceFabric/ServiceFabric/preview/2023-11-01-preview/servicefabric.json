@@ -2152,9 +2152,15 @@
       "type": "object",
       "description": "The application resource for patch operations.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/ApplicationResourceUpdateProperties",
-          "description": "The application resource properties for patch operations."
+          "$ref": "#/definitions/ApplicationResourceUpdateProperties"
         }
       },
       "allOf": [
