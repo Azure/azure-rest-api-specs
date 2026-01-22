@@ -495,4 +495,69 @@ describe("getLabelActionImpl", () => {
       }),
     );
   });
+
+  it("adds trivial test label when PR qualifies only by trivial changes", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: true });
+
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMReview" }],
+    });
+
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        {
+          context: "Swagger LintDiff",
+          state: CommitStatusState.SUCCESS,
+        },
+        {
+          context: "Swagger Avocado",
+          state: CommitStatusState.SUCCESS,
+        },
+      ],
+    });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toEqual(
+      createSuccessResult({
+        headSha: "abc123",
+        issueNumber: 123,
+        incrementalTypeSpec: false,
+        isTrivial: true,
+      }),
+    );
+  });
+
+  it("removes label if analysis artifacts have invalid boolean value (fail closed)", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: true });
+
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }],
+    });
+
+    // Invalid boolean value should be treated as missing/invalid.
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "incremental-typespec=maybe" }, { name: "trivial-changes=false" }],
+      },
+    });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
+  });
 });

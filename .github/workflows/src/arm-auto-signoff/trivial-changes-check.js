@@ -70,7 +70,7 @@ export async function checkTrivialChanges(core) {
   if (hasNonRmChanges) {
     const nonRmFiles = changedFiles.filter((file) => !resourceManager(file));
     core.info(
-      `PR contains ${nonRmFiles.length} non-resource-manager changes - not eligible for ARM auto-signoff. Also, no further validation to resournce manger files is oe`,
+      `PR contains ${nonRmFiles.length} non-resource-manager changes - not eligible for ARM auto-signoff. Also, no further validation to resource manager files is performed.`,
     );
     core.info(
       `Non-RM files: ${nonRmFiles.slice(0, 5).join(", ")}${nonRmFiles.length > 5 ? ` ... and ${nonRmFiles.length - 5} more` : ""}`,
@@ -186,48 +186,38 @@ async function analyzeAndUpdatePullRequestChanges(changedFiles, git, core, chang
   if (specFiles.length > 0) {
     core.info(`Analyzing ${specFiles.length} spec files...`);
 
-    let hasFunctionalChanges = false;
-
     for (const file of specFiles) {
       core.info(`Analyzing file: ${file}`);
 
       try {
-        const hasOnlyNonFunctionalChanges = await hasOnlyNonFunctionalChangesInSpecFile(
-          file,
-          git,
-          core,
-        );
+        const hasFunctionalChanges = await hasFunctionalChangesInSpecFile(file, git, core);
 
-        if (hasOnlyNonFunctionalChanges) {
-          core.info(`File ${file} contains only non-functional changes`);
-          continue;
+        if (hasFunctionalChanges) {
+          changes.rmFunctional = true;
+          core.info(`File ${file} contains functional changes`);
+          return;
         }
 
-        hasFunctionalChanges = true;
-        core.info(`File ${file} contains functional changes`);
-        // Once we find functional changes, we can stop
-        break;
+        core.info(`File ${file} contains only non-functional changes`);
       } catch (error) {
         core.warning(`Failed to analyze ${file}: ${inspect(error)}`);
         // On error, treat as functional to be conservative
-        hasFunctionalChanges = true;
-        break;
+        changes.rmFunctional = true;
+        return;
       }
     }
-
-    changes.rmFunctional = hasFunctionalChanges;
   }
 }
 
 /**
- * Analyzes changes in a spec file to determine if they are only non-functional
- * Note: New files and deletions should already be filtered by hasSignificantFileOperations
- * @param {string} file - The file path
+ * Analyzes changes in a spec file to determine if they are functional.
+ * Note: New files and deletions should already be filtered by hasSignificantFileOperations.
+ * @param {string} file
  * @param {import('simple-git').SimpleGit} git - Git instance
  * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core - Core logger
- * @returns {Promise<boolean>} - True if changes are non-functional only, false if any functional changes detected
+ * @returns {Promise<boolean>} True if changes are functional, false if only non-functional changes are detected
  */
-async function hasOnlyNonFunctionalChangesInSpecFile(file, git, core) {
+async function hasFunctionalChangesInSpecFile(file, git, core) {
   let baseContent, headContent;
 
   try {
@@ -237,10 +227,9 @@ async function hasOnlyNonFunctionalChangesInSpecFile(file, git, core) {
     if (e instanceof Error && e.message.includes("does not exist")) {
       // New file - should have been caught earlier, but treat as functional to be safe
       core.info(`File ${file} is new - treating as functional`);
-      return false;
-    } else {
-      throw e;
+      return true;
     }
+    throw e;
   }
 
   try {
@@ -249,10 +238,9 @@ async function hasOnlyNonFunctionalChangesInSpecFile(file, git, core) {
     if (e instanceof Error && e.message.includes("does not exist")) {
       // File deleted - should have been caught earlier, but treat as functional to be safe
       core.info(`File ${file} was deleted - treating as functional`);
-      return false;
-    } else {
-      throw e;
+      return true;
     }
+    throw e;
   }
 
   /** @type {unknown} */
@@ -266,10 +254,11 @@ async function hasOnlyNonFunctionalChangesInSpecFile(file, git, core) {
     headJson = /** @type {unknown} */ (JSON.parse(headContent));
   } catch (error) {
     core.warning(`Failed to parse JSON for ${file}: ${inspect(error)}`);
-    return false;
+    // Be conservative: if we can't parse, assume functional changes.
+    return true;
   }
 
-  return !hasFunctionalDifferences(baseJson, headJson, "", core);
+  return hasFunctionalDifferences(baseJson, headJson, "", core);
 }
 
 /**
@@ -333,10 +322,7 @@ function hasFunctionalDifferences(baseObj, headObj, path, core) {
       core.info(`Array length change at ${arrayPath}: ${baseObj.length} -> ${headObj.length}`);
 
       // Special case: if arrays contain only strings and changes are in non-functional properties like tags
-      if (isNonFunctionalArrayChange(baseObj, headObj, path)) {
-        return false;
-      }
-      return true;
+      return isFunctionalPath(path);
     }
 
     // Check each element
@@ -370,7 +356,7 @@ function hasFunctionalDifferences(baseObj, headObj, path, core) {
     for (const key of baseKeys) {
       if (!headKeys.has(key)) {
         const fullPath = path ? `${path}.${key}` : key;
-        if (!NON_FUNCTIONAL_PROPERTIES.has(key)) {
+        if (isFunctionalPath(fullPath)) {
           core.info(`Property removed at ${fullPath} (functional)`);
           return true;
         }
@@ -381,7 +367,7 @@ function hasFunctionalDifferences(baseObj, headObj, path, core) {
     for (const key of headKeys) {
       if (!baseKeys.has(key)) {
         const fullPath = path ? `${path}.${key}` : key;
-        if (!NON_FUNCTIONAL_PROPERTIES.has(key)) {
+        if (isFunctionalPath(fullPath)) {
           core.info(`Property added at ${fullPath} (functional)`);
           return true;
         }
@@ -393,20 +379,20 @@ function hasFunctionalDifferences(baseObj, headObj, path, core) {
     for (const key of baseKeys) {
       if (headKeys.has(key)) {
         const fullPath = path ? `${path}.${key}` : key;
-        const childHasFunctional = hasFunctionalDifferences(
+        const childHasFunctionalDifferences = hasFunctionalDifferences(
           baseRecord[key],
           headRecord[key],
           fullPath,
           core,
         );
 
-        if (childHasFunctional) {
-          // If the change is in a non-functional property, treat as non-functional.
-          if (NON_FUNCTIONAL_PROPERTIES.has(key)) {
-            core.info(`Property changed at ${fullPath} (non-functional)`);
-            continue;
+        if (childHasFunctionalDifferences) {
+          // If the change is under a non-functional path, treat as non-functional.
+          if (isFunctionalPath(fullPath)) {
+            return true;
           }
-          return true;
+          core.info(`Property changed at ${fullPath} (non-functional)`);
+          continue;
         }
       }
     }
@@ -416,30 +402,34 @@ function hasFunctionalDifferences(baseObj, headObj, path, core) {
 
   // Handle primitive values
   if (baseObj !== headObj) {
-    const currentProperty = path.split(".").pop() || path.split("[")[0];
-    if (NON_FUNCTIONAL_PROPERTIES.has(currentProperty)) {
+    if (isFunctionalPath(path)) {
       core.info(
-        `Value changed at ${path || "root"} (non-functional): ${inspect(baseObj)} -> ${inspect(headObj)}`,
+        `Value changed at ${path || "root"} (functional): ${inspect(baseObj)} -> ${inspect(headObj)}`,
       );
-      return false;
+      return true;
     }
     core.info(
-      `Value changed at ${path || "root"} (functional): ${inspect(baseObj)} -> ${inspect(headObj)}`,
+      `Value changed at ${path || "root"} (non-functional): ${inspect(baseObj)} -> ${inspect(headObj)}`,
     );
-    return true;
+    return false;
   }
-
   return false;
 }
 
 /**
- * Checks if an array change is non-functional (e.g., tags, examples)
- * @param {any[]} baseArray - Base array
- * @param {any[]} headArray - Head array
- * @param {string} path - Current path
- * @returns {boolean} - True if non-functional
+ * Returns true if the current path is under a functional property.
+ * Handles array indices (e.g. `tags[0]` -> `tags`).
+ * @param {string} path
+ * @returns {boolean}
  */
-function isNonFunctionalArrayChange(baseArray, headArray, path) {
-  const currentProperty = path.split(".").pop() || path;
-  return NON_FUNCTIONAL_PROPERTIES.has(currentProperty);
+function isFunctionalPath(path) {
+  if (typeof path !== "string" || path.length === 0) return true;
+
+  for (const segment of path.split(".")) {
+    if (segment.length === 0) continue;
+    const key = segment.split("[")[0];
+    if (NON_FUNCTIONAL_PROPERTIES.has(key)) return false;
+  }
+
+  return true;
 }
