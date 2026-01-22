@@ -10,3 +10,4 @@ using Microsoft.ContainerRegistry;
 );
 
 @@clientName(IPRule, "IpRule", "java");
+@@clientName(IPRule.value, "ipAddressOrRange", "java");
