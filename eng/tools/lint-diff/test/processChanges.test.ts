@@ -22,20 +22,20 @@ declare module "vitest" {
 }
 
 describe("getAffectedServices", () => {
-  test.skipIf(isWindows())("returns single service with multiple files", async () => {
+  test.skipIf(isWindows())("returns single service with multiple files", () => {
     const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
-    const affectedServices = await getAffectedServices(changedFiles);
+    const affectedServices = getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(new Set<string>(["specification/service1"]));
   });
 
-  test.skipIf(isWindows())("returns multiple services", async () => {
+  test.skipIf(isWindows())("returns multiple services", () => {
     const changedFiles = [
       "specification/service1/file1.json",
       "specification/service1/file2.json",
       "specification/service2/file1.json",
     ];
-    const affectedServices = await getAffectedServices(changedFiles);
+    const affectedServices = getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(
       new Set<string>(["specification/service1", "specification/service2"]),

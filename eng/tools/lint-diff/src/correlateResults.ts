@@ -42,7 +42,7 @@ export async function correlateRuns(
       const beforeReadme = new Readme(beforeReadmePath);
       const defaultTag = await getDefaultTag(beforeReadme);
       if (!defaultTag) {
-        throw new Error(`No default tag found for readme ${readme} in before state`);
+        throw new Error(`No default tag found for readme ${readme.path} in before state`);
       }
       const beforeDefaultTagCandidates = beforeChecks.filter(
         (r) =>
@@ -73,7 +73,7 @@ export async function correlateRuns(
         });
         continue;
       } else if (beforeReadmeCandidate.length > 1) {
-        throw new Error(`Multiple before candidates found for key ${key} using readme ${readme}`);
+        throw new Error(`Multiple before candidates found for key ${key} using readme ${readme.path}`);
       }
     }
 
@@ -152,11 +152,11 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
       continue;
     }
 
-    const result = JSON.parse(line.trim());
-    if (result.code == undefined) {
+    const result = JSON.parse(line.trim()) as unknown;
+    if ((result as { code?: string }).code == undefined) {
       // Results without a code can be assumed to be fatal errors. Set the code
       // to "FATAL"
-      result.code = "FATAL";
+      (result as { code?: string }).code = "FATAL";
     }
     violations.push(result as LintDiffViolation);
   }
@@ -217,7 +217,7 @@ export function isSameSources(a: Source[], b: Source[]) {
   return true;
 }
 
-export function arrayIsEqual(a: any[], b: any[]) {
+export function arrayIsEqual<T>(a: T[], b: T[]) {
   if (a.length !== b.length) {
     return false;
   }
