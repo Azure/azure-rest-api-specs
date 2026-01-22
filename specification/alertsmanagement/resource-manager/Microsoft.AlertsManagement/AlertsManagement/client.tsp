@@ -14,3 +14,9 @@ model AlertsClientOptions {
     parameters: AlertsClientOptions,
   }
 );
+
+@@clientName(Microsoft.AlertsManagement, "AlertsManagementClient", "python");
+@@clientName(Azure.ResourceManager.CommonTypes.ProxyResource,
+  "ArmProxyResource",
+  "python"
+);
