@@ -63,13 +63,13 @@ input-file:
   - Azure.Analaytics.Purview.DataQuality/preview/2025-09-01-preview/purviewDataQuality.json
 ```
 
-### Tag: package-2026-12-01-preview
+### Tag: package-2026-01-12-preview
 
 These settings apply only when `--tag=package-2026-01-12-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-12-01-preview'
+```yaml $(tag) == 'package-2026-01-12-preview'
 input-file:
-  - Azure.Analaytics.Purview.DataQuality/preview/2026-12-01-preview/purviewDataQuality.json
+  - Azure.Analaytics.Purview.DataQuality/preview/2026-01-12-preview/purviewDataQuality.json
 ```
 
 ---
