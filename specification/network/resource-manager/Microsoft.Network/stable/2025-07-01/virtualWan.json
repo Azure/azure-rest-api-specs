@@ -6840,6 +6840,440 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverAllTestsDetails": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_GetFailoverAllTestsDetails",
+        "description": "This operation retrieves the details of all the failover tests performed on the Virtual Wan ExpressRoute gateways for different peering locations",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the vwan express route gateway."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The type of failover test"
+          },
+          {
+            "name": "fetchLatest",
+            "in": "query",
+            "required": true,
+            "type": "boolean",
+            "description": "Fetch only the latest tests for each peering location"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failover test details for the vwan expressRouteGateway.",
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayFailoverAllTestsDetails"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayFailoverAllTestsDetails": {
+            "$ref": "./examples/VwanExpressRouteGatewayFailoverAllTestsDetails.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverSingleTestDetails": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_GetFailoverSingleTestDetails",
+        "description": "This operation retrieves the details of a particular failover test performed on the vwan expressRouteGateway based on the test Guid",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the vwan express route gateway."
+          },
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Peering location of the test"
+          },
+          {
+            "name": "failoverTestId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The unique Guid value which identifies the test"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failover test details for the vwan expressRouteGateway.",
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayFailoverSingleTestDetailsObject"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayFailoverSingleTestDetails": {
+            "$ref": "./examples/VwanExpressRouteGatewayFailoverSingleTestDetails.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/startSiteFailoverTest": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_StartSiteFailoverTest",
+        "description": "This operation starts failover simulation on the vwan expressRouteGateway for the specified peering location",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the express route gateway."
+          },
+          {
+            "name": "peeringLocation",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Peering location of the test"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation start failover simulation started on vwan expressRouteGateway.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayStartLinkFailoverSimulation": {
+            "$ref": "./examples/VwanExpressRouteGatewayStartLinkFailoverSimulation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/stopSiteFailoverTest": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_StopSiteFailoverTest",
+        "description": "This operation stops an ongoing failover simulation on the vwan expressRouteGateway for the specified peering location",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteCircuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+",
+            "description": "The name of the express route circuit."
+          },
+          {
+            "name": "stopParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayFailoverStopApiParameters"
+            },
+            "description": "Vwan ExpressRoute Gateway stop simulation parameters supplied to stop failover simulation on vwan express route gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation stops failover simulation on vwan expressRouteGateway.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayStopLinkFailoverSimulation": {
+            "$ref": "./examples/VwanExpressRouteGatewayStopLinkFailoverSimulation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getResiliencyInformation": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_GetResiliencyInformation",
+        "description": "This operation retrieves the resiliency information for VWAN ExpressRoute Gateway, including the gateway's current resiliency score and recommendations to further improve the score",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vwan express route gateway."
+          },
+          {
+            "name": "attemptRefresh",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Attempt to recalculate the Resiliency Information for the gateway"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resiliency information for the gateway",
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayResiliencyInformation"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayGetResiliencyInformation": {
+            "$ref": "./examples/VwanExpressRouteGatewayGetResiliencyInformation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getRoutesInformation": {
+      "post": {
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "operationId": "ExpressRouteGateways_GetRoutesInformation",
+        "description": "This operation retrieves the route set information for Vwan Express Route Gateway based on their resiliency",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vwan express route gateway."
+          },
+          {
+            "name": "attemptRefresh",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Attempt to recalculate the Route Sets Information for the gateway"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of route sets learned by the gateway based on their resiliency",
+            "schema": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayRouteSetsInformation"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VwanExpressRouteGatewayGetRoutesInformation": {
+            "$ref": "./examples/VwanExpressRouteGatewayGetRoutesInformation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -10097,6 +10531,378 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "VwanExpressRouteGatewayFailoverAllTestsDetails": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VwanExpressRouteGatewayFailoverTestDetails"
+      },
+      "description": "Vwan Express Route Gateway Failover All Test Details"
+    },
+    "VwanExpressRouteGatewayFailoverTestDetails": {
+      "type": "object",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "circuits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverCircuitResourceDetails"
+          },
+          "description": "All circuits in the peering location"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the test",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Running",
+            "StartFailed",
+            "Stopping",
+            "Completed",
+            "StopFailed",
+            "Invalid",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverTestStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Time when the test was started"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Time when the test was completed"
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverConnectionResourceDetails"
+          },
+          "description": "All connections to the circuits in the peering location"
+        },
+        "testGuid": {
+          "type": "string",
+          "description": "The unique GUID associated with the test"
+        },
+        "testType": {
+          "type": "string",
+          "description": "The type of failover test",
+          "enum": [
+            "SingleSiteFailover",
+            "MultiSiteFailover",
+            "All",
+            "LinkFailover"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverTestType",
+            "modelAsString": true
+          }
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of all issues with the test"
+        }
+      },
+      "description": "Vwan ExpressRoute Gateway failover test details"
+    },
+    "ExpressRouteFailoverCircuitResourceDetails": {
+      "type": "object",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "Connection name associated with the circuit"
+        }
+      }
+    },
+    "ExpressRouteFailoverConnectionResourceDetails": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The current status of the connection",
+          "enum": [
+            "Connected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "Time when the connection was last updated"
+        }
+      }
+    },
+    "VwanExpressRouteGatewayFailoverSingleTestDetailsObject": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VwanExpressRouteGatewayFailoverSingleTestDetails"
+      },
+      "description": "Vwan Express Route Gateway Failover Single Test Details Object"
+    },
+    "VwanExpressRouteGatewayFailoverSingleTestDetails": {
+      "type": "object",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Time when the test was started"
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "Time when the test was completed"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the test",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Running",
+            "StartFailed",
+            "Stopping",
+            "Completed",
+            "StopFailed",
+            "Invalid",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverTestStatusForSingleTest",
+            "modelAsString": true
+          }
+        },
+        "Attestation": {
+          "type": "boolean",
+          "description": "Whether the attestation was provided or not"
+        },
+        "redundantRoutes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VwanExpressRouteGatewayFailoverRedundantRoute"
+          },
+          "description": "List of routes received from this peering as well as some other peering location"
+        },
+        "nonRedundantRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of al the routes that were received only from this peering location"
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not"
+        },
+        "failoverConnectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VwanExpressRouteGatewayFailoverConnectionDetails"
+          },
+          "description": "List of all the failover connections for this peering location"
+        }
+      },
+      "description": "ExpressRoute failover single test details"
+    },
+    "VwanExpressRouteGatewayFailoverRedundantRoute": {
+      "type": "object",
+      "properties": {
+        "peeringLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of all the peering locations for the redundant routes"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of all the redundant routes in the peering locations"
+        }
+      }
+    },
+    "VwanExpressRouteGatewayFailoverConnectionDetails": {
+      "type": "object",
+      "properties": {
+        "failoverConnectionName": {
+          "type": "string",
+          "description": "Name of the failover connection"
+        },
+        "failoverLocation": {
+          "type": "string",
+          "description": "Location of the failover connection"
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "Whether the customer was able to establish connectivity through this failover connection or not"
+        }
+      }
+    },
+    "VwanExpressRouteGatewayFailoverStopApiParameters": {
+      "type": "object",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VwanExpressRouteGatewayFailoverConnectionDetails"
+          },
+          "description": "List of all the failover connections for this peering location"
+        }
+      },
+      "description": "Start packet capture parameters on vwan express route gateway."
+    },
+    "VwanExpressRouteGatewayResiliencyInformation": {
+      "type": "object",
+      "properties": {
+        "overallScore": {
+          "type": "string",
+          "description": "Current Resiliency Score for the gateway"
+        },
+        "scoreChange": {
+          "type": "string",
+          "description": "Update in the Resiliency Score for the gateway from the last computed score"
+        },
+        "minScoreFromRecommendations": {
+          "type": "string",
+          "description": "Minimum increase expected in the score if the at least one of the recommendations is applied for the gateway"
+        },
+        "maxScoreFromRecommendations": {
+          "type": "string",
+          "description": "Maximum increase expected in the score if all of the recommendations are applied for the gateway"
+        },
+        "lastComputedTime": {
+          "type": "string",
+          "description": "Timestamp denoting the last time when the resiliency score was computed for the gateway"
+        },
+        "nextEligibleComputeTime": {
+          "type": "string",
+          "description": "Timestamp denoting the next eligible time to re-compute the resiliency score for the gateway"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResiliencyRecommendationComponents"
+          },
+          "description": "List of Resiliency based Recommendation Components for the gateway"
+        }
+      },
+      "description": "Gateway Resiliency Information"
+    },
+    "VwanExpressRouteGatewayRouteSetsInformation": {
+      "type": "object",
+      "properties": {
+        "lastComputedTime": {
+          "type": "string",
+          "description": "Timestamp denoting the last time when the route sets were computed for the gateway"
+        },
+        "nextEligibleComputeTime": {
+          "type": "string",
+          "description": "Timestamp denoting the next eligible time to re-compute the route sets for the gateway"
+        },
+        "routeSetVersion": {
+          "type": "string",
+          "description": "Version for the route set"
+        },
+        "routeSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VwanExpressRouteGatewayRouteSet"
+          },
+          "description": "List of Gateway Route Sets"
+        },
+        "circuitsMetadataMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CircuitMetadataMap"
+          },
+          "description": "Dictionary containing map of the circuit id and circuit details"
+        }
+      },
+      "description": "Gateway Route Sets Information"
+    },
+    "VwanExpressRouteGatewayRouteSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Route Set name"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of different locations from where the routes are learned"
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/VwanExpressRouteGatewayRouteSourceDetails"
+            }
+          },
+          "description": "List of different Route Sources"
+        }
+      }
+    },
+    "VwanExpressRouteGatewayRouteSourceDetails": {
+      "type": "object",
+      "properties": {
+        "circuit": {
+          "type": "string",
+          "description": "vwan Express Route gateway identifier"
+        },
+        "pri": {
+          "type": "string",
+          "description": "Flag to indicate if the route learned from the primary device is active or passive"
+        },
+        "sec": {
+          "type": "string",
+          "description": "Flag to indicate if the route learned from the secondary device is active or passive"
+        }
+      }
+    },
+    "CircuitMetadataMap": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Express Route Circuit Name"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link to the Express Route circuit"
+        },
+        "location": {
+          "type": "string",
+          "description": "Peering location of the Express Route Circuit"
         }
       }
     }

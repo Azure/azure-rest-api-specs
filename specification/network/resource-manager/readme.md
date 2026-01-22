@@ -4708,6 +4708,12 @@ directive:
     from: virtualNetworkGateway.json
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
   - suppress: AvoidAdditionalProperties
+    from: virtualWan.json
+    reason: We are using Dictionaries in the NRP APIs which are already rolled out. Suppress it since this is used by the Gateway Resiliency APIs.
+  - suppress: ParametersInPost
+    from: virtualWan.json
+    reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Express Route Gateway APIs.
+  - suppress: AvoidAdditionalProperties
     from: virtualNetworkGateway.json
     reason: We are using Dictionaries in the NRP APIs which are already rolled out. Suppress it since this is used by the Gateway Resiliency APIs.
     where:
