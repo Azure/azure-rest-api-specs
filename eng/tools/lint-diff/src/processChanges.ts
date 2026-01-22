@@ -50,13 +50,13 @@ export async function getRunList(
     ["readme", "tags"],
   );
 
-  for (const [k, v] of beforeTagMap) { 
+  for (const [k, v] of beforeTagMap) {
     console.log(`Readme: ${k}`);
     for (const tag of v.changedTags) {
       console.log(`  - ${tag}`);
     }
   }
-  
+
   console.log("\n");
 
   console.log("After readme and tags:");
@@ -65,13 +65,13 @@ export async function getRunList(
     ["readme", "tags"],
   );
 
-    for (const [k, v] of beforeTagMap) { 
+  for (const [k, v] of beforeTagMap) {
     console.log(`Readme: ${k}`);
     for (const tag of v.changedTags) {
       console.log(`  - ${tag}`);
     }
   }
-  
+
   console.log("\n");
 
   console.log("Affected swaggers:");
@@ -221,7 +221,6 @@ export async function reconcileChangedFilesAndTags(
     });
   }
 
-
   for (const [readme, afterTags] of afterFinal.entries()) {
     if (!beforeFinal.has(readme)) {
       continue;
@@ -232,15 +231,15 @@ export async function reconcileChangedFilesAndTags(
     // This reference enables modification of beforeFinal with respect to the
     // current readme.
     const beforeTagsRef = beforeFinal.get(readme)!.changedTags;
-    
+
     for (const tag of afterTags.changedTags) {
       if (!allBeforeTags.has(tag)) {
         continue;
       }
 
-    // If a tag is edited in after and also exists in before (e.g. add a new 
-    // file to a tag in the readme.md), make sure to lint the tag in before as 
-    // well.
+      // If a tag is edited in after and also exists in before (e.g. add a new
+      // file to a tag in the readme.md), make sure to lint the tag in before as
+      // well.
       beforeTagsRef.add(tag);
     }
 

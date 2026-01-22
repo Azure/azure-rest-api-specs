@@ -66,7 +66,7 @@ describe("getService", () => {
 
 function createMockReadme(path: string, defaultTag: string, existingTags: string[] = []): Readme {
   const mockReadme = new Readme(path);
-  mockReadme.getGlobalConfig = async () => (Promise.resolve({ tag: defaultTag }));
+  mockReadme.getGlobalConfig = async () => Promise.resolve({ tag: defaultTag });
   mockReadme.getTags = async () =>
     Promise.resolve(new Map<string, Tag>(existingTags.map((tag) => [tag, {} as Tag])));
   return mockReadme;
@@ -122,7 +122,7 @@ describe("reconcileChangedFilesAndTags", () => {
     return new Map<string, ReadmeAffectedTags>([
       [
         readmePath,
-        {          
+        {
           // Assume that an existing readme.md at specification/1/readme.md
           // has 3 tags:
           // tag1 - default
@@ -146,7 +146,7 @@ describe("reconcileChangedFilesAndTags", () => {
       // These tags should be scanned in the before state:
       createReadmeTags([""]),
 
-      // These tags should be scanned in the after state: 
+      // These tags should be scanned in the after state:
       createReadmeTags(["tag4"]),
     ],
     [

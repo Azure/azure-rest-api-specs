@@ -31,9 +31,7 @@ export async function correlateRuns(
       });
       continue;
     } else if (beforeCandidates.length > 1) {
-      throw new Error(
-        `Multiple before candidates found for key ${key}`,
-      );
+      throw new Error(`Multiple before candidates found for key ${key}`);
     }
 
     // Look for candidates with a matching default tag from the baseline
@@ -73,7 +71,9 @@ export async function correlateRuns(
         });
         continue;
       } else if (beforeReadmeCandidate.length > 1) {
-        throw new Error(`Multiple before candidates found for key ${key} using readme ${readme.path}`);
+        throw new Error(
+          `Multiple before candidates found for key ${key} using readme ${readme.path}`,
+        );
       }
     }
 
