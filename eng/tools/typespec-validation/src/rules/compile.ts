@@ -164,7 +164,7 @@ export class CompileRule implements Rule {
           if (extraSwaggers.length > 0) {
             // Helper function to extract version from swagger path
             const extractVersion = (swaggerPath: string): string | null => {
-              const match = swaggerPath.match(/\/(preview|stable)\/([^\/]+)\//);
+              const match = swaggerPath.match(/\/(preview|stable)\/([^/]+)\//);
               return match ? match[2] : null;
             };
 
