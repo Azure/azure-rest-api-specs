@@ -114,17 +114,13 @@ interface EventSubscriptions {
   /**
    * Get properties of a nested event subscription for a domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get a nested event subscription for domain topic.")
-  @operationId("DomainTopicEventSubscriptions_Get")
   get is EventSubscriptionOps.Read<EventSubscription>;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update a nested event subscription to a domain topic.")
-  @operationId("DomainTopicEventSubscriptions_CreateOrUpdate")
   createOrUpdate is EventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
@@ -134,9 +130,7 @@ interface EventSubscriptions {
   /**
    * Update an existing event subscription for a domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Update a nested event subscription for a domain topic.")
-  @operationId("DomainTopicEventSubscriptions_Update")
   @patch(#{ implicitOptionality: false })
   update is EventSubscriptionOps.CustomPatchAsync<
     EventSubscription,
@@ -150,10 +144,8 @@ interface EventSubscriptions {
   /**
    * Delete a nested existing event subscription for a domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @summary("Delete a nested event subscription for a domain topic.")
-  @operationId("DomainTopicEventSubscriptions_Delete")
   delete is EventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -162,9 +154,7 @@ interface EventSubscriptions {
   /**
    * List all event subscriptions that have been created for a specific domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all nested event subscriptions for a specific domain topic.")
-  @operationId("DomainTopicEventSubscriptions_List")
   list is EventSubscriptionOps.List<
     EventSubscription,
     Parameters = {
@@ -186,9 +176,7 @@ interface EventSubscriptions {
   /**
    * Get all delivery attributes for an event subscription for domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get delivery attributes for an event subscription for domain topic.")
-  @operationId("DomainTopicEventSubscriptions_GetDeliveryAttributes")
   @list
   getDeliveryAttributes is EventSubscriptionOps.ActionSync<
     EventSubscription,
@@ -199,9 +187,7 @@ interface EventSubscriptions {
   /**
    * Get the full endpoint URL for a nested event subscription for domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get full URL of a nested event subscription for domain topic.")
-  @operationId("DomainTopicEventSubscriptions_GetFullUrl")
   getFullUrl is EventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
@@ -211,9 +197,7 @@ interface EventSubscriptions {
   /**
    *List all global event subscriptions under a specific Azure subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all global event subscriptions under an Azure subscription and resource group.")
-  @operationId("EventSubscriptions_ListGlobalByResourceGroup")
   listGlobalByResourceGroup is Extension.ListByTarget<
     Extension.ResourceGroup,
     EventSubscription,
@@ -236,9 +220,7 @@ interface EventSubscriptions {
   /**
    * List all event subscriptions that have been created for a specific domain topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all event subscriptions for a specific domain topic.")
-  @operationId("EventSubscriptions_ListByDomainTopic")
   listByDomainTopic is EventSubScriptionListyByDomainExtensionOps.List<
     EventSubscription,
     Parameters = {
@@ -502,18 +484,14 @@ interface EventSubscriptionOperationGroup {
   /**
    * Get properties of an event subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get an event subscription.")
-  @operationId("EventSubscriptions_Get")
   get is EventSubscriptionOperationGroupOps.Read<EventSubscription>;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription based on the specified scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @summary("Create or update an event subscription.")
-  @operationId("EventSubscriptions_CreateOrUpdate")
   createOrUpdate is EventSubscriptionOperationGroupOps.CreateOrUpdateAsync<
     EventSubscription,
     Response = ArmResourceCreatedResponse<
@@ -525,9 +503,7 @@ interface EventSubscriptionOperationGroup {
   /**
    * Asynchronously updates an existing event subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Update an event subscription.")
-  @operationId("EventSubscriptions_Update")
   @patch(#{ implicitOptionality: false })
   update is EventSubscriptionOperationGroupOps.CustomPatchAsync<
     EventSubscription,
@@ -541,10 +517,8 @@ interface EventSubscriptionOperationGroup {
   /**
    * Delete an existing event subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @summary("Delete an event subscription.")
-  @operationId("EventSubscriptions_Delete")
   delete is EventSubscriptionOperationGroupOps.DeleteWithoutOkAsync<
     EventSubscription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -553,9 +527,7 @@ interface EventSubscriptionOperationGroup {
   /**
    * List all aggregated global event subscriptions under a specific Azure subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get an aggregated list of all global event subscriptions under an Azure subscription.")
-  @operationId("EventSubscriptions_ListGlobalBySubscription")
   listGlobalBySubscription is Extension.ListByTarget<
     Extension.Subscription,
     EventSubscription,
@@ -578,9 +550,7 @@ interface EventSubscriptionOperationGroup {
   /**
    * List all event subscriptions that have been created for a specific resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all event subscriptions.")
-  @operationId("EventSubscriptions_ListByResource")
   listByResource is EventSubScriptionExtensionOps.List<
     EventSubscription,
     Parameters = {
@@ -601,9 +571,7 @@ interface EventSubscriptionOperationGroup {
   /**
    * Get all delivery attributes for an event subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get delivery attributes for an event subscription.")
-  @operationId("EventSubscriptions_GetDeliveryAttributes")
   @list
   getDeliveryAttributes is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
@@ -614,9 +582,7 @@ interface EventSubscriptionOperationGroup {
   /**
    * Get the full endpoint URL for an event subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get full URL of an event subscription.")
-  @operationId("EventSubscriptions_GetFullUrl")
   getFullUrl is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
     void,

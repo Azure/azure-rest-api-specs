@@ -29,9 +29,7 @@ interface TopicTypeInfos {
   /**
    * Get information about a topic type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get a topic type.")
-  @operationId("TopicTypes_Get")
   get is ArmResourceRead<
     TopicTypeInfo,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -40,9 +38,7 @@ interface TopicTypeInfos {
   /**
    * List all registered topic types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List topic types.")
-  @operationId("TopicTypes_List")
   list is ArmResourceListByParent<
     TopicTypeInfo,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -52,9 +48,7 @@ interface TopicTypeInfos {
   /**
    * List event types for a topic type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List event types.")
-  @operationId("TopicTypes_ListEventTypes")
   @list
   @get
   @action("eventTypes")

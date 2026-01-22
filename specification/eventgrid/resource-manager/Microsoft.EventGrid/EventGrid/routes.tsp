@@ -40,9 +40,7 @@ interface EventSubscriptionsOperationGroup {
   /**
    * List all global event subscriptions under an Azure subscription for a topic type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all global event subscriptions for a topic type.")
-  @operationId("EventSubscriptions_ListGlobalBySubscriptionForTopicType")
   @autoRoute
   @get
   @list
@@ -74,9 +72,7 @@ interface EventSubscriptionsOperationGroup {
   /**
    * List all global event subscriptions under a resource group for a specific topic type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all global event subscriptions under a resource group for a topic type.")
-  @operationId("EventSubscriptions_ListGlobalByResourceGroupForTopicType")
   @autoRoute
   @get
   @list
@@ -108,9 +104,7 @@ interface EventSubscriptionsOperationGroup {
   /**
    * List all event subscriptions from the given location under a specific Azure subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all regional event subscriptions under an Azure subscription.")
-  @operationId("EventSubscriptions_ListRegionalBySubscription")
   @autoRoute
   @get
   @list
@@ -137,9 +131,7 @@ interface EventSubscriptionsOperationGroup {
   /**
    * List all event subscriptions from the given location under a specific Azure subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all regional event subscriptions under an Azure subscription and resource group.")
-  @operationId("EventSubscriptions_ListRegionalByResourceGroup")
   @autoRoute
   @get
   @list
@@ -166,9 +158,7 @@ interface EventSubscriptionsOperationGroup {
   /**
    * List all event subscriptions from the given location under a specific Azure subscription and topic type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all regional event subscriptions under an Azure subscription for a topic type.")
-  @operationId("EventSubscriptions_ListRegionalBySubscriptionForTopicType")
   @autoRoute
   @get
   @list
@@ -202,9 +192,7 @@ interface EventSubscriptionsOperationGroup {
   /**
    * List all event subscriptions from the given location under a specific Azure subscription and resource group and topic type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List all regional event subscriptions under an Azure subscription and resource group for a topic type.")
-  @operationId("EventSubscriptions_ListRegionalByResourceGroupForTopicType")
   @autoRoute
   @get
   @list
@@ -242,9 +230,7 @@ interface TopicsOperationGroup {
   /**
    * List event types for a topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List topic event types.")
-  @operationId("Topics_ListEventTypes")
   @action("eventTypes")
   @get
   listEventTypes is ExtensionOps.List<

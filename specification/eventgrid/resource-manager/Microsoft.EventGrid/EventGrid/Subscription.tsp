@@ -30,27 +30,21 @@ interface Subscriptions {
   /**
    * Get properties of an event subscription of a namespace topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get an event subscription of a namespace topic.")
-  @operationId("NamespaceTopicEventSubscriptions_Get")
   get is ArmResourceRead<Subscription>;
 
   /**
    * Asynchronously creates or updates an event subscription of a namespace topic with the specified parameters. Existing event subscriptions will be updated with this API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Create or update an event subscription of a namespace topic.")
-  @operationId("NamespaceTopicEventSubscriptions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Subscription>;
 
   /**
    * Update an existing event subscription of a namespace topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @summary("Update event subscription of a namespace topic.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @operationId("NamespaceTopicEventSubscriptions_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Subscription,
@@ -65,10 +59,8 @@ interface Subscriptions {
   /**
    * Delete an existing event subscription of a namespace topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @summary("Delete an event subscription of a namespace topic.")
-  @operationId("NamespaceTopicEventSubscriptions_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     Subscription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -77,9 +69,7 @@ interface Subscriptions {
   /**
    * List event subscriptions that belong to a specific namespace topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List event subscriptions of a namespace topic.")
-  @operationId("NamespaceTopicEventSubscriptions_ListByNamespaceTopic")
   listByNamespaceTopic is ArmResourceListByParent<
     Subscription,
     Parameters = {
@@ -101,9 +91,7 @@ interface Subscriptions {
   /**
    * Get all delivery attributes for an event subscription of a namespace topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get delivery attributes for an event subscription of a namespace topic.")
-  @operationId("NamespaceTopicEventSubscriptions_GetDeliveryAttributes")
   @list
   getDeliveryAttributes is ArmResourceActionSync<
     Subscription,
@@ -114,9 +102,7 @@ interface Subscriptions {
   /**
    * Get the full endpoint URL for an event subscription of a namespace topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get full URL of an event subscription of a namespace topic.")
-  @operationId("NamespaceTopicEventSubscriptions_GetFullUrl")
   getFullUrl is ArmResourceActionSync<
     Subscription,
     void,

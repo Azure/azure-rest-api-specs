@@ -360,3 +360,7 @@ using Microsoft.EventGrid;
 @@Legacy.flattenProperty(Operation.properties);
 
 @@visibility(DomainTopic.properties, Lifecycle.Read);
+
+@@clientLocation(EventSubscriptionOperationGroup.listByResource,
+  EventSubscriptions
+);
