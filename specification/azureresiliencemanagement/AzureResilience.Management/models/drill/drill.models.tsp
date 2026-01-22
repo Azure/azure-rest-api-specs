@@ -98,7 +98,6 @@ model DrillProperties {
   drillType: DrillType;
 
   @doc("Monitoring properties of the Drill.")
-  @visibility(Lifecycle.Read)
   monitoringProperties?: MonitoringPropertiesOfDrill;
 }
 
@@ -210,6 +209,7 @@ model MonitoringPropertiesOfDrill {
   identity: AssociatedIdentity;
 
   @doc("Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.")
+  @visibility(Lifecycle.Read)
   logAnalyticsWorkspaceId: armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces";
@@ -217,6 +217,7 @@ model MonitoringPropertiesOfDrill {
   ]>;
 
   @doc("Full ARM Id of the Data collection rule created by Resiliency service which will route data for RAW health data for service group resources.")
+  @visibility(Lifecycle.Read)
   rawMetricsDataCollectionRuleId: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/datacollectionrules";
@@ -224,6 +225,7 @@ model MonitoringPropertiesOfDrill {
   ]>;
 
   @doc("Full ARM Id of the Data collection rule created by Resiliency service which will route data for Aggregate health data of service group.")
+  @visibility(Lifecycle.Read)
   serviceGroupMetricsDataCollectionRuleId: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/datacollectionrules";
@@ -231,6 +233,7 @@ model MonitoringPropertiesOfDrill {
   ]>;
 
   @doc("Full ARM Id of the Data collection endpoint created by Resiliency service which will route data for service group and its resources.")
+  @visibility(Lifecycle.Read)
   dataCollectionEndpointId: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/dataCollectionEndpoints";
@@ -546,6 +549,9 @@ model DrillPatchProperties {
 
   @doc("Properties for internal resources that are created for the Drill.")
   drillAssetProperties?: AssetPropertiesOfDrill;
+
+  @doc("Monitoring properties of the Drill.")
+  monitoringProperties?: MonitoringPropertiesOfDrill;
 }
 
 @doc("Configuration of the managed on behalf of resource.")

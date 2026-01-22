@@ -5997,6 +5997,10 @@
         "drillAssetProperties": {
           "$ref": "#/definitions/AssetPropertiesOfDrill",
           "description": "Properties for internal resources that are created for the Drill."
+        },
+        "monitoringProperties": {
+          "$ref": "#/definitions/MonitoringPropertiesOfDrill",
+          "description": "Monitoring properties of the Drill."
         }
       }
     },
@@ -6091,8 +6095,7 @@
         },
         "monitoringProperties": {
           "$ref": "#/definitions/MonitoringPropertiesOfDrill",
-          "description": "Monitoring properties of the Drill.",
-          "readOnly": true
+          "description": "Monitoring properties of the Drill."
         }
       },
       "discriminator": "drillType",
@@ -6917,6 +6920,10 @@
         "drillAssetProperties": {
           "$ref": "#/definitions/AssetPropertiesOfDrillUpdate",
           "description": "Properties for internal resources that are created for the Drill."
+        },
+        "monitoringProperties": {
+          "$ref": "#/definitions/MonitoringPropertiesOfDrillUpdate",
+          "description": "Monitoring properties of the Drill."
         }
       }
     },
@@ -8658,6 +8665,7 @@
           "type": "string",
           "format": "arm-id",
           "description": "Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.",
+          "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -8670,6 +8678,7 @@
           "type": "string",
           "format": "arm-id",
           "description": "Full ARM Id of the Data collection rule created by Resiliency service which will route data for RAW health data for service group resources.",
+          "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -8682,6 +8691,7 @@
           "type": "string",
           "format": "arm-id",
           "description": "Full ARM Id of the Data collection rule created by Resiliency service which will route data for Aggregate health data of service group.",
+          "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -8694,6 +8704,7 @@
           "type": "string",
           "format": "arm-id",
           "description": "Full ARM Id of the Data collection endpoint created by Resiliency service which will route data for service group and its resources.",
+          "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -8710,6 +8721,16 @@
         "serviceGroupMetricsDataCollectionRuleId",
         "dataCollectionEndpointId"
       ]
+    },
+    "MonitoringPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Drill monitoring properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for Drill monitoring operations."
+        }
+      }
     },
     "NotQualifiedReasons": {
       "type": "string",

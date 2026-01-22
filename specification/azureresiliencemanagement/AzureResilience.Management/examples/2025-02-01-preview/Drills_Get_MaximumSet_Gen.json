@@ -68,18 +68,24 @@
               "yvtpfipqppawimvylrqq"
             ],
             "runbookFaultRbacOnTargets": "Set",
+            "drillRbacOnMonitoringResources": "Set",
+            "drillMonitoringResources": "Exists",
+            "monitoringRbacOnDrillResources": "Set",
             "includedResourceInDrill": "Exists",
-            "drillRbacOnMonitoringResources": "NotSet",
+            "missingRequiredResourceProviders": [
+              "Microsoft.Chaos"
+            ],
             "drillMonitoringErrors": [
               {
-                "code": "Microsoft.Chaos",
+                "code": "RHUBCloudInternalError",
                 "message": "Unable to assign Monitoring RBAC on target resource."
               }
             ],
-            "drillMonitoringResources": "Exists",
-            "monitoringRbacOnDrillResources": "Set",
-            "missingRequiredResourceProviders": [
-              "Microsoft.Chaos"
+            "rbacNeededForDrillOnDrillMonitoringResources": [
+              "dsccbwxjlrdbyspxosaabeu"
+            ],
+            "rbacNeededForDrillOnDrillResources": [
+              "dsccbwxjlrdbyspxosaabeu"
             ]
           },
           "systemMetadata": {
@@ -119,9 +125,6 @@
             "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
             "region": "westus"
           },
-          "provisioningState": "Succeeded",
-          "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
-          "lastSyncTime": "2025-05-05T05:36:37.151Z",
           "monitoringProperties": {
             "identity": {
               "type": "UserAssigned",
@@ -131,7 +134,10 @@
             "rawMetricsDataCollectionRuleId": "/subscriptions/2427679b-6638-48e5-8774-6096cd849451/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionRules/DataCollectionRuleHealthName",
             "serviceGroupMetricsDataCollectionRuleId": "/subscriptions/2427679b-6638-48e5-8774-6096cd849451/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionRules/DataCollectionRawRuleHealthName",
             "dataCollectionEndpointId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionEndpoints/DrillDataCollectionEndpoint"
-          }
+          },
+          "provisioningState": "Succeeded",
+          "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
+          "lastSyncTime": "2025-05-05T05:36:37.151Z"
         },
         "identity": {
           "type": "None",
