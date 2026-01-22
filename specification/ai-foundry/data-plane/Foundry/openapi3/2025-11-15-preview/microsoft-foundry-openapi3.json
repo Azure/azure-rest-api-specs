@@ -7969,7 +7969,7 @@
       }
     },
     "schemas": {
-      "A2ATool": {
+      "A2APreviewTool": {
         "type": "object",
         "required": [
           "type"
@@ -7980,7 +7980,7 @@
             "enum": [
               "a2a_preview"
             ],
-            "description": "The type of the tool. Always `a2a`."
+            "description": "The type of the tool. Always `\"a2a_preview`."
           },
           "base_url": {
             "type": "string",
@@ -8959,36 +8959,6 @@
         ],
         "description": "Represents a data source for evaluation runs that are specific to Continuous Evaluation scenarios."
       },
-      "AzureAISearchAgentTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "azure_ai_search"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_ai_search"
-            ],
-            "description": "The object type, which is always 'azure_ai_search'."
-          },
-          "azure_ai_search": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AzureAISearchToolResource"
-              }
-            ],
-            "description": "The azure ai search index resource."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for an Azure AI search tool as used to configure an agent."
-      },
       "AzureAISearchIndex": {
         "type": "object",
         "required": [
@@ -9049,6 +9019,36 @@
         ],
         "description": "Available query types for Azure AI Search tool."
       },
+      "AzureAISearchTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "azure_ai_search"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_search"
+            ],
+            "description": "The object type, which is always 'azure_ai_search'."
+          },
+          "azure_ai_search": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureAISearchToolResource"
+              }
+            ],
+            "description": "The azure ai search index resource."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for an Azure AI search tool as used to configure an agent."
+      },
       "AzureAISearchToolResource": {
         "type": "object",
         "required": [
@@ -9065,36 +9065,6 @@
           }
         },
         "description": "A set of index resources used by the `azure_ai_search` tool."
-      },
-      "AzureFunctionAgentTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "azure_function"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "azure_function"
-            ],
-            "description": "The object type, which is always 'browser_automation'."
-          },
-          "azure_function": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AzureFunctionDefinition"
-              }
-            ],
-            "description": "The Azure Function Tool definition."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for an Azure Function Tool, as used to configure an Agent."
       },
       "AzureFunctionBinding": {
         "type": "object",
@@ -9187,6 +9157,36 @@
         },
         "description": "The structure for keeping storage queue name and URI."
       },
+      "AzureFunctionTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "azure_function"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_function"
+            ],
+            "description": "The object type, which is always 'browser_automation'."
+          },
+          "azure_function": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureFunctionDefinition"
+              }
+            ],
+            "description": "The Azure Function Tool definition."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for an Azure Function Tool, as used to configure an Agent."
+      },
       "AzureOpenAIModelConfiguration": {
         "type": "object",
         "required": [
@@ -9241,36 +9241,6 @@
         },
         "description": "A base class for connection credentials"
       },
-      "BingCustomSearchAgentTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "bing_custom_search_preview"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "bing_custom_search_preview"
-            ],
-            "description": "The object type, which is always 'bing_custom_search'."
-          },
-          "bing_custom_search_preview": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BingCustomSearchToolParameters"
-              }
-            ],
-            "description": "The bing custom search tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a Bing custom search tool as used to configure an agent."
-      },
       "BingCustomSearchConfiguration": {
         "type": "object",
         "required": [
@@ -9306,6 +9276,36 @@
         },
         "description": "A bing custom search configuration."
       },
+      "BingCustomSearchPreviewTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "bing_custom_search_preview"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "bing_custom_search_preview"
+            ],
+            "description": "The object type, which is always 'bing_custom_search_preview'."
+          },
+          "bing_custom_search_preview": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BingCustomSearchToolParameters"
+              }
+            ],
+            "description": "The bing custom search tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for a Bing custom search tool as used to configure an agent."
+      },
       "BingCustomSearchToolParameters": {
         "type": "object",
         "required": [
@@ -9322,36 +9322,6 @@
           }
         },
         "description": "The bing custom search tool parameters."
-      },
-      "BingGroundingAgentTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "bing_grounding"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "bing_grounding"
-            ],
-            "description": "The object type, which is always 'bing_grounding'."
-          },
-          "bing_grounding": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BingGroundingSearchToolParameters"
-              }
-            ],
-            "description": "The bing grounding search tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for a bing grounding search tool as used to configure an agent."
       },
       "BingGroundingSearchConfiguration": {
         "type": "object",
@@ -9400,6 +9370,36 @@
         },
         "description": "The bing grounding search tool parameters."
       },
+      "BingGroundingTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "bing_grounding"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "bing_grounding"
+            ],
+            "description": "The object type, which is always 'bing_grounding'."
+          },
+          "bing_grounding": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BingGroundingSearchToolParameters"
+              }
+            ],
+            "description": "The bing grounding search tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for a bing grounding search tool as used to configure an agent."
+      },
       "BlobReference": {
         "type": "object",
         "required": [
@@ -9427,7 +9427,7 @@
         },
         "description": "Blob reference details."
       },
-      "BrowserAutomationAgentTool": {
+      "BrowserAutomationPreviewTool": {
         "type": "object",
         "required": [
           "type",
@@ -9439,7 +9439,7 @@
             "enum": [
               "browser_automation_preview"
             ],
-            "description": "The object type, which is always 'browser_automation'."
+            "description": "The object type, which is always 'browser_automation_preview'."
           },
           "browser_automation_preview": {
             "allOf": [
@@ -11025,6 +11025,7 @@
           },
           "report_url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL to the rendered evaluation run report on the UI dashboard."
           },
           "result_counts": {
@@ -13603,7 +13604,7 @@
         ],
         "description": "Status of a memory store update operation."
       },
-      "MicrosoftFabricAgentTool": {
+      "MicrosoftFabricPreviewTool": {
         "type": "object",
         "required": [
           "type",
@@ -13615,7 +13616,7 @@
             "enum": [
               "fabric_dataagent_preview"
             ],
-            "description": "The object type, which is always 'fabric_dataagent'."
+            "description": "The object type, which is always 'fabric_dataagent_preview'."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -14509,6 +14510,7 @@
           },
           "url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL of the image output from the code interpreter."
           }
         },
@@ -14854,6 +14856,7 @@
           },
           "image_url": {
             "type": "string",
+            "format": "uri",
             "nullable": true
           },
           "file_id": {
@@ -14881,6 +14884,7 @@
           },
           "image_url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL of the screenshot image."
           },
           "file_id": {
@@ -18292,6 +18296,7 @@
           },
           "image_url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL of the image input."
           },
           "detail": {
@@ -19620,6 +19625,7 @@
           },
           "file_url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL of the file to be sent to the model."
           },
           "file_data": {
@@ -19653,6 +19659,7 @@
           },
           "image_url": {
             "type": "string",
+            "format": "uri",
             "nullable": true
           },
           "file_id": {
@@ -20920,6 +20927,7 @@
           },
           "file_url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL of the file to be sent to the model."
           },
           "file_data": {
@@ -20953,6 +20961,7 @@
           },
           "image_url": {
             "type": "string",
+            "format": "uri",
             "nullable": true
           },
           "file_id": {
@@ -21053,6 +21062,7 @@
           },
           "file_url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL of the file to be sent to the model."
           },
           "file_data": {
@@ -21092,6 +21102,7 @@
           },
           "file_url": {
             "type": "string",
+            "format": "uri",
             "nullable": true
           }
         },
@@ -21116,6 +21127,7 @@
           },
           "image_url": {
             "type": "string",
+            "format": "uri",
             "nullable": true
           },
           "file_id": {
@@ -21151,6 +21163,7 @@
           },
           "image_url": {
             "type": "string",
+            "format": "uri",
             "nullable": true
           },
           "file_id": {
@@ -23655,6 +23668,7 @@
           },
           "server_url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL for the MCP server. One of `server_url` or `connector_id` must be\n  provided."
           },
           "connector_id": {
@@ -28822,16 +28836,16 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "bing_grounding": "#/components/schemas/BingGroundingAgentTool",
-            "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricAgentTool",
-            "sharepoint_grounding_preview": "#/components/schemas/SharepointAgentTool",
-            "azure_ai_search": "#/components/schemas/AzureAISearchAgentTool",
-            "openapi": "#/components/schemas/OpenApiAgentTool",
-            "bing_custom_search_preview": "#/components/schemas/BingCustomSearchAgentTool",
-            "browser_automation_preview": "#/components/schemas/BrowserAutomationAgentTool",
-            "azure_function": "#/components/schemas/AzureFunctionAgentTool",
+            "bing_grounding": "#/components/schemas/BingGroundingTool",
+            "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricPreviewTool",
+            "sharepoint_grounding_preview": "#/components/schemas/SharepointPreviewTool",
+            "azure_ai_search": "#/components/schemas/AzureAISearchTool",
+            "openapi": "#/components/schemas/OpenApiTool",
+            "bing_custom_search_preview": "#/components/schemas/BingCustomSearchPreviewTool",
+            "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewTool",
+            "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
-            "a2a_preview": "#/components/schemas/A2ATool",
+            "a2a_preview": "#/components/schemas/A2APreviewTool",
             "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
@@ -29171,16 +29185,16 @@
               "custom",
               "web_search_preview",
               "apply_patch",
-              "bing_grounding",
+              "a2a_preview",
+              "bing_custom_search_preview",
               "browser_automation_preview",
               "fabric_dataagent_preview",
               "sharepoint_grounding_preview",
               "azure_ai_search",
-              "openapi",
-              "bing_custom_search_preview",
-              "capture_structured_outputs",
-              "a2a_preview",
               "azure_function",
+              "bing_grounding",
+              "capture_structured_outputs",
+              "openapi",
               "memory_search"
             ]
           }
@@ -29285,6 +29299,7 @@
           },
           "url": {
             "type": "string",
+            "format": "uri",
             "description": "The URL of the web resource."
           },
           "start_index": {
@@ -29632,36 +29647,6 @@
         "type": "number",
         "format": "double"
       },
-      "OpenApiAgentTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "openapi"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "openapi"
-            ],
-            "description": "The object type, which is always 'openapi'."
-          },
-          "openapi": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenApiFunctionDefinition"
-              }
-            ],
-            "description": "The openapi function definition."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "The input definition information for an OpenAPI tool as used to configure an agent."
-      },
       "OpenApiAnonymousAuthDetails": {
         "type": "object",
         "required": [
@@ -29871,6 +29856,36 @@
           }
         },
         "description": "Security scheme for OpenApi managed_identity authentication"
+      },
+      "OpenApiTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "openapi"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "openapi"
+            ],
+            "description": "The object type, which is always 'openapi'."
+          },
+          "openapi": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenApiFunctionDefinition"
+              }
+            ],
+            "description": "The openapi function definition."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for an OpenAPI tool as used to configure an agent."
       },
       "PageOrder": {
         "type": "string",
@@ -30908,7 +30923,21 @@
         ],
         "description": "Type of the task."
       },
-      "SharepointAgentTool": {
+      "SharepointGroundingToolParameters": {
+        "type": "object",
+        "properties": {
+          "project_connections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToolProjectConnection"
+            },
+            "maxItems": 1,
+            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
+          }
+        },
+        "description": "The sharepoint grounding tool parameters."
+      },
+      "SharepointPreviewTool": {
         "type": "object",
         "required": [
           "type",
@@ -30920,7 +30949,7 @@
             "enum": [
               "sharepoint_grounding_preview"
             ],
-            "description": "The object type, which is always 'sharepoint_grounding'."
+            "description": "The object type, which is always 'sharepoint_grounding_preview'."
           },
           "sharepoint_grounding_preview": {
             "allOf": [
@@ -30937,20 +30966,6 @@
           }
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
-      },
-      "SharepointGroundingToolParameters": {
-        "type": "object",
-        "properties": {
-          "project_connections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ToolProjectConnection"
-            },
-            "maxItems": 1,
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
-          }
-        },
-        "description": "The sharepoint grounding tool parameters."
       },
       "Sku": {
         "type": "object",
