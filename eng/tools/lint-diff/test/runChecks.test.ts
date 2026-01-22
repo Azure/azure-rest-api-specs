@@ -64,10 +64,10 @@ describe("runChecks", () => {
 
   test("error path populates error, stdout, stderr", async () => {
     // Consturct an error object that will return true when passed to isExecError
-    const err = new Error();
-    (err as unknown as { stdout: string }).stdout = "s";
-    (err as unknown as { stderr: string }).stderr = "e";
-    (err as unknown as { code: number }).code = 1;
+    const err = new Error() as Error & { stdout: string; stderr: string; code: number };
+    err.stdout = "s";
+    err.stderr = "e";
+    err.code = 1;
 
     (execNpmExec as Mock).mockRejectedValue(err);
     const runList = new Map<string, ReadmeAffectedTags>([
