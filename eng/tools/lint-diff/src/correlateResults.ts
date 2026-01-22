@@ -45,7 +45,7 @@ export async function correlateRuns(
       const beforeDefaultTagCandidates = beforeChecks.filter(
         (r) =>
           relative(beforePath, r.readme.path) === readmePathRelative &&
-          (r.tag === defaultTag || r.tag == ""),
+          (r.tag === defaultTag || r.tag === ""),
       );
 
       if (beforeDefaultTagCandidates.length === 1) {
@@ -152,11 +152,11 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
       continue;
     }
 
-    const result = JSON.parse(line.trim()) as unknown;
-    if ((result as { code?: string }).code == undefined) {
+    const result = JSON.parse(line.trim()) as { code: string | undefined };
+    if (result.code === undefined) {
       // Results without a code can be assumed to be fatal errors. Set the code
       // to "FATAL"
-      (result as { code?: string }).code = "FATAL";
+      result.code = "FATAL";
     }
     violations.push(result as LintDiffViolation);
   }
