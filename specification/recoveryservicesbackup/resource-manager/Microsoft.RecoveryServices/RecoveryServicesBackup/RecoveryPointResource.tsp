@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.RecoveryServices;
 /**
@@ -70,6 +71,7 @@ interface RecoveryPoints {
   /**
    * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
    */
+  @added(Versions.v2026_01_01_preview)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-operation-group" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "This API does not support tags"
   @patch(#{implicitOptionality: true})
