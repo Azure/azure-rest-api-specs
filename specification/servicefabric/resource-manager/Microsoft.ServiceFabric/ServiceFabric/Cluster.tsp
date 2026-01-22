@@ -21,6 +21,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
     SegmentName = "clusters",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
@@ -34,6 +35,8 @@ interface Clusters {
   /**
    * Create or update a Service Fabric cluster resource with the specified name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "servicefabric is brownfield service with existing non-standard response codes"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
     Response = ArmResourceUpdatedResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
@@ -45,6 +48,7 @@ interface Clusters {
   /**
    * Update the configuration of a Service Fabric cluster resource with the specified name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Cluster,
@@ -104,6 +108,7 @@ model ClusterProperties {
   /**
    * The Service Fabric runtime versions available for this cluster.
    */
+  @identifiers(#["codeVersion", "environment"])
   @visibility(Lifecycle.Read)
   availableClusterVersions?: ClusterVersionDetails[];
 
@@ -125,11 +130,13 @@ model ClusterProperties {
   /**
    * The list of client certificates referenced by common name that are allowed to manage the cluster.
    */
+  @identifiers(#["certificateCommonName"])
   clientCertificateCommonNames?: ClientCertificateCommonName[];
 
   /**
    * The list of client certificates referenced by thumbprint that are allowed to manage the cluster.
    */
+  @identifiers(#["certificateThumbprint"])
   clientCertificateThumbprints?: ClientCertificateThumbprint[];
 
   /**
@@ -280,6 +287,7 @@ model ClusterProperties {
   /**
    * Indicates a list of notification channels for cluster events.
    */
+  @identifiers(#[])
   notifications?: Notification[];
 
   /**
@@ -681,6 +689,7 @@ model ServerCertificateCommonNames {
   /**
    * The list of server certificates referenced by common name that are used to secure the cluster.
    */
+  @identifiers(#["certificateCommonName"])
   commonNames?: ServerCertificateCommonName[];
 
   /**
@@ -716,6 +725,7 @@ model ClusterUpdateParameters {
   /**
    * Cluster update parameters
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   tags?: Record<string>;
 }
 
@@ -741,11 +751,13 @@ model ClusterPropertiesUpdateParameters {
   /**
    * The list of client certificates referenced by common name that are allowed to manage the cluster. This will overwrite the existing list.
    */
+  @identifiers(#["certificateCommonName"])
   clientCertificateCommonNames?: ClientCertificateCommonName[];
 
   /**
    * The list of client certificates referenced by thumbprint that are allowed to manage the cluster. This will overwrite the existing list.
    */
+  @identifiers(#["certificateThumbprint"])
   clientCertificateThumbprints?: ClientCertificateThumbprint[];
 
   /**
@@ -840,6 +852,7 @@ model ClusterPropertiesUpdateParameters {
   /**
    * Indicates a list of notification channels for cluster events.
    */
+  @identifiers(#[])
   notifications?: Notification[];
 
   /**
@@ -848,6 +861,9 @@ model ClusterPropertiesUpdateParameters {
   enableHttpGatewayExclusiveAuthMode?: boolean;
 }
 
+/**
+ * The upgrade path description with target version.
+ */
 model UpgradableVersionsDescription {
   /**
    * The target code version.
@@ -856,9 +872,12 @@ model UpgradableVersionsDescription {
 }
 
 /**
- * The list of intermediate cluster code versions for an upgrade or downgrade. Or minimum and maximum upgradable version if no target was given
+ * The list of intermediate cluster code versions for an upgrade or downgrade, or minimum and maximum upgradable version if no target was given.
  */
 model UpgradableVersionPathResult {
+  /**
+   * The list of intermediate cluster code versions for an upgrade or downgrade.
+   */
   supportedPath?: string[];
 }
 
@@ -968,7 +987,7 @@ model ClusterUpgradePolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
-  forceRestart?: boolean;
+  forceRestart?: boolean = false;
 
   /**
    * The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
@@ -1027,8 +1046,9 @@ model ClusterHealthPolicy {
    * In large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentUnhealthyNodes?: int32;
+  maxPercentUnhealthyNodes?: int32 = 0;
 
   /**
    * The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.
@@ -1039,12 +1059,14 @@ model ClusterHealthPolicy {
    * The computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentUnhealthyApplications?: int32;
+  maxPercentUnhealthyApplications?: int32 = 0;
 
   /**
    * Defines the application health policy map used to evaluate the health of an application or one of its children entities.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   applicationHealthPolicies?: Record<ApplicationHealthPolicy>;
 }
 
@@ -1061,6 +1083,7 @@ model ApplicationHealthPolicy {
   /**
    * The map with service type health policy per service type name. The map is empty by default.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   serviceTypeHealthPolicies?: Record<ServiceTypeHealthPolicy>;
 }
 
@@ -1073,6 +1096,7 @@ model ServiceTypeHealthPolicy {
    * The maximum percentage of services allowed to be unhealthy before your application is considered in error.
    *
    */
+  @minValue(0)
   @maxValue(100)
   maxPercentUnhealthyServices?: int32;
 }
@@ -1087,8 +1111,9 @@ model ClusterUpgradeDeltaHealthPolicy {
    * The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentDeltaUnhealthyNodes: int32;
+  maxPercentDeltaUnhealthyNodes: int32 = 0;
 
   /**
    * The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.
@@ -1096,8 +1121,9 @@ model ClusterUpgradeDeltaHealthPolicy {
    * The check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentUpgradeDomainDeltaUnhealthyNodes: int32;
+  maxPercentUpgradeDomainDeltaUnhealthyNodes: int32 = 0;
 
   /**
    * The maximum allowed percentage of applications health degradation allowed during cluster upgrades.
@@ -1105,12 +1131,14 @@ model ClusterUpgradeDeltaHealthPolicy {
    * The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentDeltaUnhealthyApplications: int32;
+  maxPercentDeltaUnhealthyApplications: int32 = 0;
 
   /**
    * Defines the application delta health policy map used to evaluate the health of an application or one of its child entities when upgrading the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   applicationDeltaHealthPolicies?: Record<ApplicationDeltaHealthPolicy>;
 }
 
@@ -1127,6 +1155,7 @@ model ApplicationDeltaHealthPolicy {
   /**
    * The map with service type delta health policy per service type name. The map is empty by default.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   serviceTypeDeltaHealthPolicies?: Record<ServiceTypeDeltaHealthPolicy>;
 }
 /**
@@ -1140,14 +1169,19 @@ model ServiceTypeDeltaHealthPolicy {
    * The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.
    *
    */
+  @minValue(0)
   @maxValue(100)
   maxPercentDeltaUnhealthyServices?: int32;
 }
 
+/**
+ * The policy used to clean up unused versions.
+ */
 model ApplicationTypeVersionsCleanupPolicy {
   /**
    * Number of unused versions per application type to keep.
    */
+  @minValue(0)
   maxUnusedVersionsToKeep: int64;
 }
 
@@ -1173,6 +1207,7 @@ model Notification {
   /**
    * List of targets that subscribe to the notification.
    */
+  @identifiers(#[])
   notificationTargets: NotificationTarget[];
 }
 

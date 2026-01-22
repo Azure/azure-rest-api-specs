@@ -2097,8 +2097,8 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "#/definitions/ManagedIdentity",
-          "description": "Describes the managed identities for an Azure resource."
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -2197,12 +2197,15 @@
         "minimumNodes": {
           "type": "integer",
           "format": "int64",
-          "description": "The minimum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. If this property is set to zero, no capacity will be reserved. The value of this property cannot be more than the value of the MaximumNodes property."
+          "description": "The minimum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. If this property is set to zero, no capacity will be reserved. The value of this property cannot be more than the value of the MaximumNodes property.",
+          "minimum": 0
         },
         "maximumNodes": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. By default, the value of this property is zero and it means that the services can be placed on any node."
+          "description": "The maximum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. By default, the value of this property is zero and it means that the services can be placed on any node.",
+          "default": 0,
+          "minimum": 0
         },
         "removeApplicationCapacity": {
           "type": "boolean",
@@ -2375,11 +2378,13 @@
     },
     "ApplicationTypeVersionsCleanupPolicy": {
       "type": "object",
+      "description": "The policy used to clean up unused versions.",
       "properties": {
         "maxUnusedVersionsToKeep": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of unused versions per application type to keep."
+          "description": "Number of unused versions per application type to keep.",
+          "minimum": 0
         }
       },
       "required": [
@@ -2396,7 +2401,8 @@
         },
         "forceRestart": {
           "type": "boolean",
-          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
+          "default": false
         },
         "rollingUpgradeMonitoringPolicy": {
           "$ref": "#/definitions/ArmRollingUpgradeMonitoringPolicy",
@@ -2451,6 +2457,7 @@
     },
     "ApplicationUserAssignedIdentity": {
       "type": "object",
+      "description": "Describes a user assigned identity for the application.",
       "properties": {
         "name": {
           "type": "string",
@@ -2472,12 +2479,14 @@
       "properties": {
         "considerWarningAsError": {
           "type": "boolean",
-          "description": "Indicates whether warnings are treated with the same severity as errors."
+          "description": "Indicates whether warnings are treated with the same severity as errors.",
+          "default": false
         },
         "maxPercentUnhealthyDeployedApplications": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero."
+          "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.",
+          "default": 0
         },
         "defaultServiceTypeHealthPolicy": {
           "$ref": "#/definitions/ArmServiceTypeHealthPolicy",
@@ -2559,18 +2568,24 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyPartitionsPerService": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyReplicasPerPartition": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 100
         }
       }
@@ -2774,12 +2789,16 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n\nIn large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyApplications": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.\nThe computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 100
         },
         "applicationHealthPolicies": {
@@ -2829,7 +2848,11 @@
           "items": {
             "$ref": "#/definitions/ClusterVersionDetails"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "codeVersion",
+            "environment"
+          ]
         },
         "azureActiveDirectory": {
           "$ref": "#/definitions/AzureActiveDirectory",
@@ -2848,14 +2871,20 @@
           "description": "The list of client certificates referenced by common name that are allowed to manage the cluster.",
           "items": {
             "$ref": "#/definitions/ClientCertificateCommonName"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
         },
         "clientCertificateThumbprints": {
           "type": "array",
           "description": "The list of client certificates referenced by thumbprint that are allowed to manage the cluster.",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateThumbprint"
+          ]
         },
         "clusterCodeVersion": {
           "type": "string",
@@ -2991,7 +3020,8 @@
           "description": "Indicates a list of notification channels for cluster events.",
           "items": {
             "$ref": "#/definitions/Notification"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "enableHttpGatewayExclusiveAuthMode": {
           "type": "boolean",
@@ -3027,14 +3057,20 @@
           "description": "The list of client certificates referenced by common name that are allowed to manage the cluster. This will overwrite the existing list.",
           "items": {
             "$ref": "#/definitions/ClientCertificateCommonName"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
         },
         "clientCertificateThumbprints": {
           "type": "array",
           "description": "The list of client certificates referenced by thumbprint that are allowed to manage the cluster. This will overwrite the existing list.",
           "items": {
             "$ref": "#/definitions/ClientCertificateThumbprint"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateThumbprint"
+          ]
         },
         "clusterCodeVersion": {
           "type": "string",
@@ -3134,7 +3170,8 @@
           "description": "Indicates a list of notification channels for cluster events.",
           "items": {
             "$ref": "#/definitions/Notification"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "enableHttpGatewayExclusiveAuthMode": {
           "type": "boolean",
@@ -3269,18 +3306,24 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 100
         },
         "maxPercentDeltaUnhealthyApplications": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of applications health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 100
         },
         "applicationDeltaHealthPolicies": {
@@ -3303,7 +3346,8 @@
       "properties": {
         "forceRestart": {
           "type": "boolean",
-          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
+          "default": false
         },
         "upgradeReplicaSetCheckTimeout": {
           "type": "string",
@@ -3453,69 +3497,6 @@
         "endPort"
       ]
     },
-    "ManagedIdentity": {
-      "type": "object",
-      "description": "Describes the managed identities for an Azure resource.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal id of the managed identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant id of the managed identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/ManagedIdentityType",
-          "description": "The type of managed identity for the resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          }
-        }
-      }
-    },
-    "ManagedIdentityType": {
-      "type": "string",
-      "description": "The type of managed identity for the resource.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned, UserAssigned",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedIdentityType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "Indicates that system assigned identity is associated with the resource."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "Indicates that user assigned identity is associated with the resource."
-          },
-          {
-            "name": "SystemAssigned, UserAssigned",
-            "value": "SystemAssigned, UserAssigned",
-            "description": "Indicates that both system assigned and user assigned identity are associated with the resource."
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "Indicates that no identity is associated with the resource."
-          }
-        ]
-      }
-    },
     "MoveCost": {
       "type": "string",
       "description": "Specifies the move cost for the service.",
@@ -3632,6 +3613,7 @@
           "type": "integer",
           "format": "int32",
           "description": "VMInstanceCount should be 1 to n, where n indicates the number of VM instances corresponding to this nodeType. VMInstanceCount = 0 can be done only in these scenarios: NodeType is a secondary nodeType. Durability = Bronze or Durability >= Bronze and InfrastructureServiceManager = true. If VMInstanceCount = 0, implies the VMs for this nodeType will not be used for the initial cluster size computation.",
+          "minimum": 0,
           "maximum": 2147483647
         },
         "reverseProxyEndpointPort": {
@@ -3682,7 +3664,8 @@
           "description": "List of targets that subscribe to the notification.",
           "items": {
             "$ref": "#/definitions/NotificationTarget"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3934,7 +3917,10 @@
           "description": "The list of server certificates referenced by common name that are used to secure the cluster.",
           "items": {
             "$ref": "#/definitions/ServerCertificateCommonName"
-          }
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
         },
         "x509StoreName": {
           "$ref": "#/definitions/StoreName",
@@ -4265,7 +4251,8 @@
           "description": "A list that describes the correlation of the service with other services.",
           "items": {
             "$ref": "#/definitions/ServiceCorrelationDescription"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "serviceLoadMetrics": {
           "type": "array",
@@ -4279,7 +4266,8 @@
           "description": "A list that describes the correlation of the service with other services.",
           "items": {
             "$ref": "#/definitions/ServicePlacementPolicyDescription"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "defaultMoveCost": {
           "$ref": "#/definitions/MoveCost",
@@ -4349,6 +4337,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of services health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the services at the beginning of upgrade and the state of the services at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.",
+          "minimum": 0,
           "maximum": 100
         }
       }
@@ -4361,6 +4350,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.",
+          "minimum": 0,
           "maximum": 100
         }
       }
@@ -4666,10 +4656,11 @@
     },
     "UpgradableVersionPathResult": {
       "type": "object",
-      "description": "The list of intermediate cluster code versions for an upgrade or downgrade. Or minimum and maximum upgradable version if no target was given",
+      "description": "The list of intermediate cluster code versions for an upgrade or downgrade, or minimum and maximum upgradable version if no target was given.",
       "properties": {
         "supportedPath": {
           "type": "array",
+          "description": "The list of intermediate cluster code versions for an upgrade or downgrade.",
           "items": {
             "type": "string"
           }
@@ -4678,6 +4669,7 @@
     },
     "UpgradableVersionsDescription": {
       "type": "object",
+      "description": "The upgrade path description with target version.",
       "properties": {
         "targetVersion": {
           "type": "string",
@@ -4687,21 +4679,6 @@
       "required": [
         "targetVersion"
       ]
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal id of user assigned identity.",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client id of user assigned identity.",
-          "readOnly": true
-        }
-      }
     },
     "VMSize": {
       "type": "object",

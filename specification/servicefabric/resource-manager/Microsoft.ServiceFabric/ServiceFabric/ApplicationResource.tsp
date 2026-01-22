@@ -14,6 +14,7 @@ namespace Microsoft.ServiceFabric;
 /**
  * The application resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(Cluster)
 model ApplicationResource
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ApplicationResourceProperties> {
@@ -24,11 +25,7 @@ model ApplicationResource
     NamePattern = ""
   >;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
-
-  /**
-   * Describes the managed identities for an Azure resource.
-   */
-  identity?: ManagedIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -43,8 +40,8 @@ interface ApplicationResources {
   /**
    * Create or update a Service Fabric application resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Applications_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "servicefabric is brownfield service with existing non-standard response codes"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApplicationResource,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
@@ -56,8 +53,7 @@ interface ApplicationResources {
   /**
    * Update a Service Fabric application resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Applications_Update")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ApplicationResource,
@@ -71,15 +67,11 @@ interface ApplicationResources {
   /**
    * Delete a Service Fabric application resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Applications_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<ApplicationResource>;
 
   /**
    * Gets all application resources created or in the process of being created in the Service Fabric cluster resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Applications_List")
   list is ArmResourceListByParent<
     ApplicationResource,
     Response = ArmResponse<ApplicationResourceList>
@@ -104,6 +96,7 @@ model ApplicationResourceProperties
   /**
    * The current deployment or provisioning state, which only appears in the response
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "servicefabric is a brownfield service with existing provisioning state property as string and not enum"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -125,6 +118,7 @@ model ApplicationResourceUpdateProperties {
   /**
    * List of application parameters with overridden values from their default values specified in the application manifest.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   parameters?: Record<string>;
 
   /**
@@ -135,12 +129,14 @@ model ApplicationResourceUpdateProperties {
   /**
    * The minimum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. If this property is set to zero, no capacity will be reserved. The value of this property cannot be more than the value of the MaximumNodes property.
    */
+  @minValue(0)
   minimumNodes?: int64;
 
   /**
    * The maximum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. By default, the value of this property is zero and it means that the services can be placed on any node.
    */
-  maximumNodes?: int64;
+  @minValue(0)
+  maximumNodes?: int64 = 0;
 
   /**
    * Remove the current application capacity settings.
@@ -170,7 +166,7 @@ model ApplicationUpgradePolicy {
   /**
    * If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).
    */
-  forceRestart?: boolean;
+  forceRestart?: boolean = false;
 
   /**
    * The policy used for monitoring the application upgrade
@@ -236,7 +232,7 @@ model ArmApplicationHealthPolicy {
   /**
    * Indicates whether warnings are treated with the same severity as errors.
    */
-  considerWarningAsError?: boolean;
+  considerWarningAsError?: boolean = false;
 
   /**
    * The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
@@ -245,7 +241,7 @@ model ArmApplicationHealthPolicy {
    * The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
    *
    */
-  maxPercentUnhealthyDeployedApplications?: int32;
+  maxPercentUnhealthyDeployedApplications?: int32 = 0;
 
   /**
    * The health policy used by default to evaluate the health of a service type.
@@ -255,6 +251,7 @@ model ArmApplicationHealthPolicy {
   /**
    * The map with service type health policy per service type name. The map is empty by default.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   serviceTypeHealthPolicyMap?: Record<ArmServiceTypeHealthPolicy>;
 }
 
@@ -267,22 +264,25 @@ model ArmServiceTypeHealthPolicy {
    * The maximum percentage of services allowed to be unhealthy before your application is considered in error.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentUnhealthyServices?: int32;
+  maxPercentUnhealthyServices?: int32 = 0;
 
   /**
    * The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentUnhealthyPartitionsPerService?: int32;
+  maxPercentUnhealthyPartitionsPerService?: int32 = 0;
 
   /**
    * The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.
    *
    */
+  @minValue(0)
   @maxValue(100)
-  maxPercentUnhealthyReplicasPerPartition?: int32;
+  maxPercentUnhealthyReplicasPerPartition?: int32 = 0;
 }
 
 /**
@@ -324,6 +324,9 @@ model ApplicationMetricDescription {
   totalApplicationCapacity?: int64;
 }
 
+/**
+ * Describes a user assigned identity for the application.
+ */
 model ApplicationUserAssignedIdentity {
   /**
    * The friendly name of user assigned identity.
@@ -339,6 +342,7 @@ model ApplicationUserAssignedIdentity {
 /**
  * The application resource for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "servicefabric is a brownfield service with existing APIs that do not support all properties in patch"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ApplicationResourceUpdate
   extends ProxyResource<ApplicationResourceUpdateProperties> {
@@ -380,49 +384,6 @@ union RollingUpgradeMode {
 }
 
 /**
- * Describes the managed identities for an Azure resource.
- */
-model ManagedIdentity {
-  /**
-   * The principal id of the managed identity. This property will only be provided for a system assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The tenant id of the managed identity. This property will only be provided for a system assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /**
-   * The type of managed identity for the resource.
-   */
-  type?: ManagedIdentityType;
-
-  /**
-   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:
-   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-   *
-   */
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
-}
-
-model UserAssignedIdentity {
-  /**
-   * The principal id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
-}
-
-/**
  * The activation Mode of the service package
  */
 union ArmUpgradeFailureAction {
@@ -437,29 +398,4 @@ union ArmUpgradeFailureAction {
    * Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically.
    */
   Manual: "Manual",
-}
-
-/**
- * The type of managed identity for the resource.
- */
-enum ManagedIdentityType {
-  /**
-   * Indicates that system assigned identity is associated with the resource.
-   */
-  SystemAssigned,
-
-  /**
-   * Indicates that user assigned identity is associated with the resource.
-   */
-  UserAssigned,
-
-  /**
-   * Indicates that both system assigned and user assigned identity are associated with the resource.
-   */
-  `SystemAssigned, UserAssigned`,
-
-  /**
-   * Indicates that no identity is associated with the resource.
-   */
-  None,
 }

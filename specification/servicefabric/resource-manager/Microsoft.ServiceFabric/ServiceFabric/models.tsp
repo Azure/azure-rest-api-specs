@@ -22,11 +22,13 @@ model NodeTypeDescription {
   /**
    * The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   placementProperties?: Record<string>;
 
   /**
    * The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
   capacities?: Record<string>;
 
   /**
@@ -67,6 +69,7 @@ model NodeTypeDescription {
   /**
    * VMInstanceCount should be 1 to n, where n indicates the number of VM instances corresponding to this nodeType. VMInstanceCount = 0 can be done only in these scenarios: NodeType is a secondary nodeType. Durability = Bronze or Durability >= Bronze and InfrastructureServiceManager = true. If VMInstanceCount = 0, implies the VMs for this nodeType will not be used for the initial cluster size computation.
    */
+  @minValue(0)
   @maxValue(2147483647)
   vmInstanceCount: int32;
 

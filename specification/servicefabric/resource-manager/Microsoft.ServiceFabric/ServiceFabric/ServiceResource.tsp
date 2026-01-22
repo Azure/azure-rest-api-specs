@@ -14,6 +14,7 @@ namespace Microsoft.ServiceFabric;
 /**
  * The service resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(ApplicationResource)
 model ServiceResource
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ServiceResourceProperties> {
@@ -31,15 +32,13 @@ interface ServiceResources {
   /**
    * Get a Service Fabric service resource created or in the process of being created in the Service Fabric application resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_Get")
   get is ArmResourceRead<ServiceResource>;
 
   /**
    * Create or update a Service Fabric service resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "servicefabric is brownfield service with existing non-standard response codes"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServiceResource,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServiceResource>> & {
@@ -51,8 +50,7 @@ interface ServiceResources {
   /**
    * Update a Service Fabric service resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_Update")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ServiceResource,
@@ -66,15 +64,11 @@ interface ServiceResources {
   /**
    * Delete a Service Fabric service resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<ServiceResource>;
 
   /**
    * Gets all service resources created or in the process of being created in the Service Fabric application resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Services_List")
   list is ArmResourceListByParent<
     ServiceResource,
     Response = ArmResponse<ServiceResourceList>
@@ -101,6 +95,7 @@ model ServiceResourceProperties extends ServiceResourcePropertiesBase {
   /**
    * The current deployment or provisioning state, which only appears in the response
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "servicefabric is a brownfield service with existing provisioning state property as string and not enum"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -156,6 +151,7 @@ model ServiceResourcePropertiesBase {
   /**
    * A list that describes the correlation of the service with other services.
    */
+  @identifiers(#[])
   correlationScheme?: ServiceCorrelationDescription[];
 
   /**
@@ -166,6 +162,7 @@ model ServiceResourcePropertiesBase {
   /**
    * A list that describes the correlation of the service with other services.
    */
+  @identifiers(#[])
   servicePlacementPolicies?: ServicePlacementPolicyDescription[];
 
   /**
@@ -234,6 +231,7 @@ model ServicePlacementPolicyDescription {
  * The service resource for patch operations.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 model ServiceResourceUpdate
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ServiceResourceUpdateProperties> {
   ...ResourceNameParameter<
@@ -249,6 +247,7 @@ model ServiceResourceUpdate
  * The service resource properties for patch operations.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "servicefabric is a brownfield service with existing api patterns where provisioning state is not included in patch envelope"
 @discriminator("serviceKind")
 model ServiceResourceUpdateProperties extends ServiceResourcePropertiesBase {
   /**
@@ -444,6 +443,7 @@ model UniformInt64RangePartitionSchemeDescription
    * should be split between the partition ‘count’
    *
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "key is not a secret, is public range for partitioning purposes"
   lowKey: string;
 
   /**
@@ -451,6 +451,7 @@ model UniformInt64RangePartitionSchemeDescription
    * should be split between the partition ‘count’
    *
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "key is not a secret, is public range for partitioning purposes"
   highKey: string;
 
   /**

@@ -19,9 +19,7 @@ interface ClusterVersionsOperationGroup {
    * Gets information about an available Service Fabric cluster code version.
    */
   @summary("Gets information about a Service Fabric cluster code version available in the specified location.")
-  @operationId("ClusterVersions_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}")
-  @get
   get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
@@ -38,7 +36,6 @@ interface ClusterVersionsOperationGroup {
    * Gets information about an available Service Fabric cluster code version by environment.
    */
   @summary("Gets information about a Service Fabric cluster code version available for the specified environment.")
-  @operationId("ClusterVersions_GetByEnvironment")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}")
   @get
   getByEnvironment(
@@ -64,7 +61,6 @@ interface ClusterVersionsOperationGroup {
    * Gets all available code versions for Service Fabric cluster resources by location.
    */
   @summary("Gets the list of Service Fabric cluster code versions available for the specified location.")
-  @operationId("ClusterVersions_List")
   @autoRoute
   @get
   @action("clusterVersions")
@@ -77,7 +73,6 @@ interface ClusterVersionsOperationGroup {
    * Gets all available code versions for Service Fabric cluster resources by environment.
    */
   @summary("Gets the list of Service Fabric cluster code versions available for the specified environment.")
-  @operationId("ClusterVersions_ListByEnvironment")
   @autoRoute
   @get
   @action("clusterVersions")
@@ -122,6 +117,9 @@ model ClusterCodeVersions {
   properties?: ClusterVersionDetails;
 }
 
+/**
+ * The operating system or environment of the cluster version.
+ */
 union ClusterVersionsEnvironment {
   string,
 
