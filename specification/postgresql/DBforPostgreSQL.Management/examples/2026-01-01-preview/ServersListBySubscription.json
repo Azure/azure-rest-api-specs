@@ -1,0 +1,283 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/flexibleServers?api-version=2025-06-01-preview&$skiptoken=skiptoken",
+        "value": [
+          {
+            "name": "exampleserver1",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup1/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver1",
+            "location": "eastus",
+            "properties": {
+              "administratorLogin": "exampleadministratorlogin",
+              "authConfig": {
+                "activeDirectoryAuth": "Enabled",
+                "passwordAuth": "Enabled",
+                "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
+              },
+              "availabilityZone": "1",
+              "backup": {
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2025-06-01T18:35:22.123456Z",
+                "geoRedundantBackup": "Enabled"
+              },
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "fullyQualifiedDomainName": "exampleserver1.postgres.database.azure.com",
+              "highAvailability": {
+                "mode": "ZoneRedundant",
+                "standbyAvailabilityZone": "2",
+                "state": "Healthy"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "minorVersion": "5",
+              "network": {
+                "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup1/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork1/subnets/examplesubnet1",
+                "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup1/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone1.postgres.database.azure.com",
+                "publicNetworkAccess": "Disabled"
+              },
+              "replica": {
+                "capacity": 5,
+                "role": "Primary"
+              },
+              "replicaCapacity": 5,
+              "replicationRole": "Primary",
+              "state": "Ready",
+              "storage": {
+                "type": "",
+                "autoGrow": "Disabled",
+                "iops": 2300,
+                "storageSizeGB": 512,
+                "tier": "P20"
+              },
+              "version": "17"
+            },
+            "sku": {
+              "name": "Standard_D4ds_v5",
+              "tier": "GeneralPurpose"
+            },
+            "systemData": {
+              "createdAt": "2025-06-01T18:30:22.123456Z"
+            },
+            "tags": {
+              "VnetServer": "1"
+            }
+          },
+          {
+            "name": "exampleserver2",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup2/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver2",
+            "location": "eastus",
+            "properties": {
+              "administratorLogin": "exampleadministratorlogin",
+              "authConfig": {
+                "activeDirectoryAuth": "Enabled",
+                "passwordAuth": "Enabled",
+                "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
+              },
+              "availabilityZone": "2",
+              "backup": {
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2025-06-01T19:35:22.123456Z",
+                "geoRedundantBackup": "Enabled"
+              },
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "fullyQualifiedDomainName": "exampleserver2.postgres.database.azure.com",
+              "highAvailability": {
+                "mode": "ZoneRedundant",
+                "standbyAvailabilityZone": "1",
+                "state": "Healthy"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "minorVersion": "5",
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "privateEndpointConnections": [],
+              "replica": {
+                "capacity": 5,
+                "role": "Primary"
+              },
+              "replicaCapacity": 5,
+              "replicationRole": "Primary",
+              "state": "Ready",
+              "storage": {
+                "type": "",
+                "autoGrow": "Disabled",
+                "iops": 500,
+                "storageSizeGB": 128,
+                "tier": "P10"
+              },
+              "version": "17"
+            },
+            "sku": {
+              "name": "Standard_D4ds_v5",
+              "tier": "GeneralPurpose"
+            },
+            "systemData": {
+              "createdAt": "2025-06-01T19:30:22.123456Z"
+            },
+            "tags": {}
+          },
+          {
+            "name": "exampleserver3",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup3/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver3",
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "rrrrrrrr-rrrr-rrrr-rrrr-rrrrrrrrrrrr",
+              "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt",
+              "userAssignedIdentities": {
+                "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup3/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity3": {
+                  "clientId": "tttttt-tttt-tttt-tttt-tttttttttttt",
+                  "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp"
+                }
+              }
+            },
+            "location": "eastus",
+            "properties": {
+              "administratorLogin": "exampleadministratorlogin",
+              "authConfig": {
+                "activeDirectoryAuth": "Enabled",
+                "passwordAuth": "Enabled",
+                "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
+              },
+              "availabilityZone": "1",
+              "backup": {
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2025-06-01T20:35:22.123456Z",
+                "geoRedundantBackup": "Disabled"
+              },
+              "dataEncryption": {
+                "type": "AzureKeyVault",
+                "primaryEncryptionKeyStatus": "Valid",
+                "primaryKeyURI": "https://examplekeyvault3.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup3/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity3"
+              },
+              "fullyQualifiedDomainName": "exampleserver3.postgres.database.azure.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "minorVersion": "5",
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "privateEndpointConnections": [],
+              "replica": {
+                "capacity": 5,
+                "role": "Primary"
+              },
+              "replicaCapacity": 5,
+              "replicationRole": "Primary",
+              "state": "Ready",
+              "storage": {
+                "type": "",
+                "autoGrow": "Disabled",
+                "iops": 500,
+                "storageSizeGB": 128,
+                "tier": "P10"
+              },
+              "version": "17"
+            },
+            "sku": {
+              "name": "Standard_D4ds_v5",
+              "tier": "GeneralPurpose"
+            },
+            "systemData": {
+              "createdAt": "2025-06-01T20:30:22.123456Z"
+            },
+            "tags": {}
+          },
+          {
+            "name": "exampleserver4",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup4/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver4",
+            "location": "eastus",
+            "properties": {
+              "administratorLogin": "exampleadministratorlogin",
+              "authConfig": {
+                "activeDirectoryAuth": "Disabled",
+                "passwordAuth": "Enabled"
+              },
+              "availabilityZone": "2",
+              "backup": {
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2025-06-01T21:35:22.123456Z",
+                "geoRedundantBackup": "Disabled"
+              },
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "fullyQualifiedDomainName": "exampleserver4.postgres.database.azure.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "minorVersion": "5",
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "privateEndpointConnections": [],
+              "replica": {
+                "capacity": 5,
+                "role": "Primary"
+              },
+              "replicaCapacity": 5,
+              "replicationRole": "Primary",
+              "state": "Ready",
+              "storage": {
+                "type": "PremiumV2_LRS",
+                "autoGrow": "Disabled",
+                "iops": 3000,
+                "storageSizeGB": 512,
+                "throughput": 125
+              },
+              "version": "17"
+            },
+            "sku": {
+              "name": "Standard_D4ds_v5",
+              "tier": "GeneralPurpose"
+            },
+            "systemData": {
+              "createdAt": "2025-06-01T21:30:22.123456Z"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Servers_ListBySubscription",
+  "title": "List all servers in a subscription."
+}
