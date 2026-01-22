@@ -268,8 +268,6 @@ using Azure.Core;
   "KeyVaultPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(DeletedVaults.getDeleted, "get", "csharp");
-@@clientName(DeletedManagedHsms.getDeleted, "get", "csharp");
 @@clientName(VaultCreateOrUpdateParameters,
   "KeyVaultCreateOrUpdateContent",
   "csharp"
