@@ -15,6 +15,7 @@ namespace Microsoft.SecurityInsights;
  * An Azure resource, which encapsulate the entire info requires to display a data connector page in Azure portal,
  * and the info required to define data connections.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @discriminator("kind")
 model DataConnectorDefinition
   is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<DataConnectorDefinitionKind> {

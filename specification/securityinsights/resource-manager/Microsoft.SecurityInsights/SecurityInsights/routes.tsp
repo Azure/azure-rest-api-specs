@@ -30,7 +30,6 @@ interface EntitiesOperationGroup {
   /**
    * Triggers playbook on a specific entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   runPlaybook is Extension.ActionSync<
     OperationalInsights,
@@ -48,8 +47,8 @@ interface SourceControlOperationGroup {
    * Gets a list of repositories metadata.
    */
   // Due to TypeSpec provider action limitation: https://github.com/Azure/typespec-azure/issues/3224#issuecomment-3257368342
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @list
   @post
@@ -101,7 +100,6 @@ interface ThreatIntelligenceIndicatorOperationGroup {
   /**
    * Create a new threat intelligence indicator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @autoRoute
   @action("createIndicator")
@@ -118,7 +116,6 @@ interface ThreatIntelligenceIndicatorOperationGroup {
   /**
    * Query threat intelligence indicators as per filtering criteria.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @action("queryIndicators")
   @list
@@ -136,7 +133,6 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
   /**
    * Get threat intelligence indicators metrics (Indicators counts by Type, Threat Type, Source).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @action("metrics")

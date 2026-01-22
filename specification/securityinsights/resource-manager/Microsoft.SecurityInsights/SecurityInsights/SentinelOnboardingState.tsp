@@ -30,6 +30,7 @@ model SentinelOnboardingState
   etag?: string;
 }
 
+@armResourceOperations
 interface SentinelOnboardingStatesOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {

@@ -30,6 +30,7 @@ model ProductTemplateModel
   etag?: string;
 }
 
+@armResourceOperations
 interface ProductTemplateModelsOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -75,7 +76,6 @@ interface ProductTemplateModels {
   /**
    * Gets a template by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ProductTemplateModelsOps.Read<
     ProductTemplateModel,
     ErrorType = CloudError
@@ -84,7 +84,6 @@ interface ProductTemplateModels {
   /**
    * Gets all templates in the catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   list is Extension.ListByTarget<
     OperationalInsights,
     ProductTemplateModel,

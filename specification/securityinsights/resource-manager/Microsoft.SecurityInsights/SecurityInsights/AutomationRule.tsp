@@ -91,6 +91,9 @@ interface AutomationRules {
   /**
    * Delete the automation rule.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "For backward compatibility"
   delete is Extension.DeleteSync<
     OperationalInsights,
     AutomationRule,

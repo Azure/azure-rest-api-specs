@@ -35,7 +35,6 @@ interface ActionResponses {
   /**
    * Gets the action of alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is Extension.Read<
     OperationalInsights,
     ActionResponse,
@@ -46,7 +45,6 @@ interface ActionResponses {
    * Creates or updates the action of alert rule.
    */
   // Customized resource creation, since request body isn't the resource itself
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @put
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
@@ -62,7 +60,6 @@ interface ActionResponses {
   /**
    * Delete the action of alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is Extension.DeleteSync<
     OperationalInsights,
     ActionResponse,
@@ -72,7 +69,6 @@ interface ActionResponses {
   /**
    * Gets all actions of alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByAlertRule is Extension.ListByTarget<
     OperationalInsights,
     ActionResponse,

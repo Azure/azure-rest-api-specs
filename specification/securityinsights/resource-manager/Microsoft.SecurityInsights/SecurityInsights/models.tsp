@@ -4628,6 +4628,7 @@ model ThreatIntelligenceParsedPattern {
   /**
    * Pattern type key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "For backward compatibility"
   patternTypeKey?: string;
 
   /**
@@ -4973,6 +4974,7 @@ model WatchlistProperties {
   /**
    * The search key is used to optimize query performance when using watchlists for joins with other data. For example, enable a column with IP addresses to be the designated SearchKey field, then use this field as the key field when joining to other event data by IP address.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "For backward compatibility"
   itemsSearchKey: string;
 
   /**
@@ -5084,6 +5086,7 @@ model AlertRuleTemplatePropertiesBase {
   /**
    * The time that this alert rule template has been added.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateUTC?: utcDateTime;
@@ -5101,6 +5104,7 @@ model AlertRuleTemplatePropertiesBase {
   /**
    * The last time that this alert rule template has been updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateUTC?: utcDateTime;
@@ -5108,7 +5112,7 @@ model AlertRuleTemplatePropertiesBase {
   /**
    * The required data sources for this template
    */
-  @OpenAPI.extension("x-ms-identifiers", #["connectorId"])
+  @identifiers(#["connectorId"])
   requiredDataConnectors?: AlertRuleTemplateDataSource[];
 
   /**
@@ -6428,6 +6432,7 @@ model DataConnectorDataTypeCommon {
 /**
  * Represents AATP (Azure Advanced Threat Protection) data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AATPDataConnector extends DataConnector {
   /**
    * AATP (Azure Advanced Threat Protection) data connector properties.
@@ -6443,6 +6448,7 @@ model AATPDataConnector extends DataConnector {
 /**
  * AATP (Azure Advanced Threat Protection) data connector properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AATPDataConnectorProperties {
   ...DataConnectorTenantId;
   ...DataConnectorWithAlertsProperties;
@@ -6614,11 +6620,13 @@ model RestApiPollerRequestConfig {
    * The Rate limit queries per second for the request..
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   rateLimitQPS?: int32 | null;
 
   /**
    * The query window in minutes for the request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   queryWindowInMin?: int32 | null;
 
   /**
@@ -6634,16 +6642,19 @@ model RestApiPollerRequestConfig {
   /**
    * The retry count.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   retryCount?: int32 | null;
 
   /**
    * The timeout in seconds.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   timeoutInSeconds?: int32 | null;
 
   /**
    * Flag to indicate if HTTP POST payload is in JSON format (vs form-urlencoded).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   isPostPayloadJson?: boolean | null;
 
   /**
@@ -6727,6 +6738,7 @@ model CcpResponseConfig {
   /**
    * The status value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   successStatusValue?: string | null;
 
   /**
@@ -6752,21 +6764,25 @@ model CcpResponseConfig {
   /**
    * The value indicating whether the response has CSV boundary in case the response in CSV format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   hasCsvBoundary?: boolean | null;
 
   /**
    * The value indicating whether the response has headers in case the response in CSV format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   hasCsvHeader?: boolean | null;
 
   /**
    * The value indicating whether the response isn't an array of events / logs.  By setting this flag to true it means the remote server will response with an object which each property has as a value an array of events / logs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   convertChildPropertiesToArray?: boolean | null;
 
   /**
    * The character used to escape characters in CSV.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(1)
   @minLength(1)
   csvEscape?: string | null = "\"";
@@ -7106,11 +7122,13 @@ model JwtAuthModel extends CcpAuthConfig {
   /**
    * Flag indicating whether we want to send the user name and password to token endpoint in the headers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   isCredentialsInHeaders?: boolean | null;
 
   /**
    * Flag indicating whether the body request is JSON (header Content-Type = application/json), meaning its a Form URL encoded request (header Content-Type = application/x-www-form-urlencoded).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   isJsonRequest?: boolean | null = false;
 
   /**
@@ -7150,6 +7168,7 @@ model OAuthModel extends CcpAuthConfig {
   /**
    * Indicating whether we want to send the clientId and clientSecret to token endpoint in the headers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   isCredentialsInHeaders?: boolean | null = false;
 
   /**
@@ -7273,6 +7292,7 @@ model SessionAuthModel extends CcpAuthConfig {
   /**
    * Indicating whether API key is set in HTTP POST payload.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   isPostPayloadJson?: boolean | null;
 
   /**
@@ -7284,6 +7304,7 @@ model SessionAuthModel extends CcpAuthConfig {
   /**
    * Session timeout in minutes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   sessionTimeoutInMinutes?: int32 | null;
 
   /**
@@ -7305,6 +7326,7 @@ model SessionAuthModel extends CcpAuthConfig {
 /**
  * Represents MCAS (Microsoft Cloud App Security) data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MCASDataConnector extends DataConnector {
   /**
    * MCAS (Microsoft Cloud App Security) data connector properties.
@@ -7321,6 +7343,7 @@ model MCASDataConnector extends DataConnector {
  * MCAS (Microsoft Cloud App Security) data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MCASDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
@@ -7359,6 +7382,7 @@ model MDATPDataConnector extends DataConnector {
 /**
  * MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MDATPDataConnectorProperties {
   ...DataConnectorTenantId;
   ...DataConnectorWithAlertsProperties;
@@ -7384,11 +7408,13 @@ model TIDataConnector extends DataConnector {
  * TI (Threat Intelligence) data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model TIDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The lookback period for the feed to be imported.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   tipLookbackPeriod?: utcDateTime | null;
 
   /**
@@ -7661,6 +7687,7 @@ model AnomalySecurityMLAnalyticsSettingsProperties {
   /**
    * The customizable observations of the AnomalySecurityMLAnalyticsSettings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   customizableObservations?: unknown;
 
   /**
@@ -8809,6 +8836,7 @@ model RegistryKeyEntityProperties extends EntityCommonProperties {
   /**
    * The registry key path.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "For backward compatibility"
   @visibility(Lifecycle.Read)
   key?: string;
 }

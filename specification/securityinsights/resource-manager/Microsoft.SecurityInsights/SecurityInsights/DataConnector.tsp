@@ -14,6 +14,7 @@ namespace Microsoft.SecurityInsights;
 /**
  * Data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 model DataConnector
   is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<DataConnectorKind> {
   ...ResourceNameParameter<
