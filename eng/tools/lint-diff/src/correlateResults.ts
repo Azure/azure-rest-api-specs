@@ -3,6 +3,7 @@ import { basename, join, relative } from "path";
 import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
 import { isFailure, isWarning, pathExists, relativizePath } from "./util.js";
+import { isDeepStrictEqual } from "util";
 
 export async function correlateRuns(
   beforePath: string,
@@ -191,7 +192,7 @@ export function getNewItems(
         beforeViolation.source?.length &&
         afterViolation.source?.length &&
         isSameSources(beforeViolation.source, afterViolation.source) &&
-        arrayIsEqual(beforeViolation.details?.jsonpath, afterViolation.details?.jsonpath)
+        isDeepStrictEqual(beforeViolation.details?.jsonpath, afterViolation.details?.jsonpath)
       ) {
         errorIsNew = false;
         existingItems.push(afterViolation);
@@ -213,18 +214,6 @@ export function getNewItems(
 export function isSameSources(a: Source[], b: Source[]) {
   if (a?.length && b?.length) {
     return basename(a?.[0]?.document) === basename(b?.[0]?.document);
-  }
-  return true;
-}
-
-export function arrayIsEqual<T>(a: T[], b: T[]) {
-  if (a.length !== b.length) {
-    return false;
-  }
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) {
-      return false;
-    }
   }
   return true;
 }

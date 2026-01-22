@@ -3,7 +3,6 @@ import { describe, expect, test } from "vitest";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { resolve } from "path";
 import {
-  arrayIsEqual,
   correlateRuns,
   getLintDiffViolations,
   getNewItems,
@@ -441,48 +440,6 @@ describe("getLintDiffViolations", () => {
     );
     const violations = getLintDiffViolations(runResult);
     expect(violations[0].code).toEqual("FATAL");
-  });
-});
-
-describe("arrayIsEqual", () => {
-  test("returns true for equal arrays", () => {
-    const a = ["a", "b", "c"];
-    const b = ["a", "b", "c"];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(true);
-  });
-
-  test("returns false for different arrays", () => {
-    const a = ["a", "b", "c"];
-    const b = ["a", "b", "d"];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(false);
-  });
-
-  test("returns false for different lengths", () => {
-    const a = ["a", "b", "c"];
-    const b = ["a", "b"];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(false);
-  });
-
-  test("returns true for empty arrays", () => {
-    const a: string[] = [];
-    const b: string[] = [];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(true);
-  });
-
-  test("returns true for equal arrays with different types", () => {
-    const a = ["a", 1, "c"];
-    const b = ["a", 1, "c"];
-
-    const result = arrayIsEqual(a, b);
-    expect(result).toEqual(true);
   });
 });
 
