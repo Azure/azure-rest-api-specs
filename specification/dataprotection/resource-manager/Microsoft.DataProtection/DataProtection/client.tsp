@@ -530,3 +530,21 @@ using Microsoft.DataProtection;
 );
 @@clientName(ValidationType, "BackupValidationType", "csharp");
 @@clientName(WeekNumber, "DataProtectionBackupWeekNumber", "csharp");
+@@clientName(ValidateForModifyBackupRequest,
+  "ValidateForModifyBackupContent",
+  "csharp"
+);
+@@clientName(CrossRegionRestoreJobRequest,
+  "CrossRegionRestoreJobContent",
+  "csharp"
+);
+@@clientName(FetchSecondaryRPsRequestParameters,
+  "FetchSecondaryRPsContent",
+  "csharp"
+);
+@@clientName(StopProtectionRequest, "StopProtectionContent", "csharp");
+@@clientName(SuspendBackupRequest, "SuspendBackupContent", "csharp");
+@@clientName(CrossRegionRestoreJobsRequest,
+  "CrossRegionRestoreJobsContent",
+  "csharp"
+);
