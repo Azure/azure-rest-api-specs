@@ -71,7 +71,7 @@ function LogErrorForFile($file, $errorString)
     Write-Host ("::error file=$file,line=1,col=1::$errorString" -replace "`n", "%0D%0A")
   }
   else {
-    Write-Host "[Error in file $file]$errorString" -ForegroundColor Red
+    Write-Host "[Error in file $file] $errorString" -ForegroundColor Red
   }
 }
 
