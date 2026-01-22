@@ -300,6 +300,10 @@ model IterationInput {
   enableEmotionalPlatformVoice?: EnableEmotionalPlatformVoice;
 
   @added(ApiVersions.v2026_03_01)
+  @doc("Specify whether to adjust webvtt alignment according to the synthesized audio for the translated text, if not specified, the default value is false.")
+  adjustWebvttAlignment?: boolean;
+
+  @added(ApiVersions.v2026_03_01)
   @doc("Specify whether to export adjusted prompt audio in webvtt, if not specified, the default value is false.")
   exportAdjustedPromptAudioInWebvtt?: boolean;
 
