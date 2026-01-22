@@ -1269,7 +1269,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Alerts")
-  @added(ApiVersions.v2026_12_01_preview)
+  @added(ApiVersions.v2026_01_12_preview)
   @extension(
     "x-ms-examples",
     #{ Alert_GetAlerts: #{ $ref: "./examples/Alert_GetAlerts.json" } }
@@ -1302,7 +1302,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   @tag("Alerts")
-  @added(ApiVersions.v2026_12_01_preview)
+  @added(ApiVersions.v2026_01_12_preview)
   @doc("Creates an alert scoped to the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts")
   @post
@@ -1334,7 +1334,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   @tag("Alerts")
-  @added(ApiVersions.v2026_12_01_preview)
+  @added(ApiVersions.v2026_01_12_preview)
   @doc("Retrieves a specific alert definition within a business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @get
@@ -1359,7 +1359,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   @tag("Alerts")
-  @added(ApiVersions.v2026_12_01_preview)
+  @added(ApiVersions.v2026_01_12_preview)
   @doc("Replaces an existing alert definition within the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @put
@@ -1388,7 +1388,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   @tag("Alerts")
-  @added(ApiVersions.v2026_12_01_preview)
+  @added(ApiVersions.v2026_01_12_preview)
   @doc("Deletes a specific alert within the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @delete
@@ -1416,7 +1416,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   @tag("Alerts")
-  @added(ApiVersions.v2026_12_01_preview)
+  @added(ApiVersions.v2026_01_12_preview)
   @doc("Updates the status of an alert within the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @patch(#{ implicitOptionality: true })
