@@ -221,20 +221,20 @@ model ResourcesWithContext {
 }
 
 @added(Versions.`2026-02-15-preview`)
-@doc("The fungible properties model")
+@doc("The fungible properties which the customers can use to specify multiple VM SKU options and allocation strategy, for greater flexibility and higher chances of successful VM creation")
 model FungibleProperties {
-  @doc("The VM size to create fungible VMs")
+  @doc("List of VM sizes supported for fungible VMs")
   @minItems(1)
   @maxItems(10)
   vmSizesProfile: Array<VmSizeProfile>;
 
   @doc("The OS type to create fungible VMs")
-  osType?: string;
+  osType: string;
 
-  @doc("The priority profile to create fungible VMs")
+  @doc("Configuration Options for Regular or Spot instances in fungible VMs")
   priorityProfile: PriorityProfile;
 
-  @doc("The zone allocation policy to create fungible VMs")
+  @doc("Zone Allocation Policy for launching instances.")
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 

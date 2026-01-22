@@ -2236,11 +2236,11 @@
     },
     "FungibleProperties": {
       "type": "object",
-      "description": "The fungible properties model",
+      "description": "The fungible properties which the customers can use to specify multiple VM SKU options and allocation strategy, for greater flexibility and higher chances of successful VM creation",
       "properties": {
         "vmSizesProfile": {
           "type": "array",
-          "description": "The VM size to create fungible VMs",
+          "description": "List of VM sizes supported for fungible VMs",
           "minItems": 1,
           "maxItems": 10,
           "items": {
@@ -2253,15 +2253,16 @@
         },
         "priorityProfile": {
           "$ref": "#/definitions/PriorityProfile",
-          "description": "The priority profile to create fungible VMs"
+          "description": "Configuration Options for Regular or Spot instances in fungible VMs"
         },
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
-          "description": "The zone allocation policy to create fungible VMs"
+          "description": "Zone Allocation Policy for launching instances."
         }
       },
       "required": [
         "vmSizesProfile",
+        "osType",
         "priorityProfile"
       ]
     },
