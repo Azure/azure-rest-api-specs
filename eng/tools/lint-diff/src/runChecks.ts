@@ -79,16 +79,15 @@ export async function runChecks(
           throw error;
         }
 
-        const execError = error;
         lintDiffResult = {
           autorestCommand,
           rootPath: path,
           readme: tags.readme,
           tag: tag,
           openApiType,
-          error: execError,
-          stdout: execError.stdout || "",
-          stderr: execError.stderr || "",
+          error: error,
+          stdout: error.stdout || "",
+          stderr: error.stderr || "",
         } as AutorestRunResult;
 
         logAutorestExecutionErrors(lintDiffResult);
