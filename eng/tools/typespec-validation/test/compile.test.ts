@@ -143,10 +143,10 @@ describe("compile", function () {
 
     runNpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
-        Promise.resolve([null, latestPreviewPath, ""]),
+        Promise.resolve([null, path.normalize(latestPreviewPath), ""]),
     );
 
-    // Simulate extra older preview swagger
+    // Simulate extra older preview swagger (globby always returns posix paths)
     vi.mocked(globby.globby).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, olderPreviewPath]),
     );
@@ -168,10 +168,10 @@ describe("compile", function () {
 
     runNpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
-        Promise.resolve([null, latestPreviewPath, ""]),
+        Promise.resolve([null, path.normalize(latestPreviewPath), ""]),
     );
 
-    // Simulate extra swagger from the latest preview
+    // Simulate extra swagger from the latest preview (globby always returns posix paths)
     vi.mocked(globby.globby).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, anotherLatestPreviewPath]),
     );
@@ -191,10 +191,11 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
     runNpmSpy.mockImplementation(
-      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
+      async (): Promise<[Error | null, string, string]> =>
+        Promise.resolve([null, path.normalize(previewPath), ""]),
     );
 
-    // Simulate extra stable swagger
+    // Simulate extra stable swagger (globby always returns posix paths)
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([previewPath, stablePath]));
 
     vi.mocked(fsPromises.readFile).mockImplementation(() =>
@@ -214,10 +215,10 @@ describe("compile", function () {
 
     runNpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
-        Promise.resolve([null, latestPreviewPath, ""]),
+        Promise.resolve([null, path.normalize(latestPreviewPath), ""]),
     );
 
-    // Simulate multiple extra older preview swaggers
+    // Simulate multiple extra older preview swaggers (globby always returns posix paths)
     vi.mocked(globby.globby).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, olderPreview1Path, olderPreview2Path]),
     );
@@ -239,10 +240,11 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
     runNpmSpy.mockImplementation(
-      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
+      async (): Promise<[Error | null, string, string]> =>
+        Promise.resolve([null, path.normalize(previewPath), ""]),
     );
 
-    // Simulate extra swaggers with mix of preview and stable
+    // Simulate extra swaggers with mix of preview and stable (globby always returns posix paths)
     vi.mocked(globby.globby).mockImplementation(() =>
       Promise.resolve([previewPath, olderPreviewPath, stablePath]),
     );
