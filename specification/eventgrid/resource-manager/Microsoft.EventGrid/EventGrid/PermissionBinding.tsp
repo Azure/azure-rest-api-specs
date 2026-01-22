@@ -30,17 +30,20 @@ interface PermissionBindings {
   /**
    * Get properties of a permission binding.
    */
+  @summary("Get a permission binding.")
   get is ArmResourceRead<PermissionBinding>;
 
   /**
    * Create or update a permission binding with the specified parameters.
    */
+  @summary("Create or update a permission binding.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PermissionBinding>;
 
   /**
    * Delete an existing permission binding.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a permission binding.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PermissionBinding,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -49,6 +52,7 @@ interface PermissionBindings {
   /**
    * Get all the permission bindings under a namespace.
    */
+  @summary("List all permission bindings under a namespace.")
   listByNamespace is ArmResourceListByParent<
     PermissionBinding,
     Parameters = {
@@ -63,7 +67,8 @@ interface PermissionBindings {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PermissionBindingsListResult>
   >;
 }
 

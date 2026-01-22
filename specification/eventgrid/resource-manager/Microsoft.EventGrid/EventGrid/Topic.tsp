@@ -51,12 +51,14 @@ interface Topics {
   /**
    * Get properties of a topic.
    */
+  @summary("Get a topic.")
   get is ArmResourceRead<Topic>;
 
   /**
    * Asynchronously creates a new topic with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Create a topic.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Topic,
     Response = ArmResourceCreatedResponse<
@@ -68,21 +70,27 @@ interface Topics {
   /**
    * Asynchronously updates a topic with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update a topic.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Topic,
     PatchModel = TopicUpdateParameters,
-    Response = OkResponse | ArmResourceCreatedResponse<Topic>
+    Response = {
+      @body body: void;
+    } | ArmResourceCreatedResponse<Topic, LroHeaders = ArmLroLocationHeader>
   >;
 
   /**
    * Delete existing topic.
    */
+  @summary("Delete a topic.")
   delete is ArmResourceDeleteWithoutOkAsync<Topic>;
 
   /**
    * List all the topics under a resource group.
    */
+  @summary("List topics under a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Topic,
     Parameters = {
@@ -97,12 +105,14 @@ interface Topics {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<TopicsListResult>
   >;
 
   /**
    * List all the topics under an Azure subscription.
    */
+  @summary("List topics under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     Topic,
     Parameters = {
@@ -117,26 +127,29 @@ interface Topics {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<TopicsListResult>
   >;
 
   /**
    * List the two keys used to publish to a topic.
    */
+  @summary("List keys for a topic.")
   @action("listKeys")
   listSharedAccessKeys is ArmResourceActionSync<
     Topic,
     void,
-    ArmResponse<TopicSharedAccessKeys>
+    TopicSharedAccessKeys
   >;
 
   /**
    * Regenerate a shared access key for a topic.
    */
+  @summary("Regenerate key for a topic.")
   regenerateKey is ArmResourceActionAsync<
     Topic,
     TopicRegenerateKeyRequest,
-    ArmResponse<TopicSharedAccessKeys>
+    TopicSharedAccessKeys
   >;
 }
 

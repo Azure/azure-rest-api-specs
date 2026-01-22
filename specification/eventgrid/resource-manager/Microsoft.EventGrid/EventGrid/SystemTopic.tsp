@@ -34,11 +34,13 @@ interface SystemTopics {
   /**
    * Get properties of a system topic.
    */
+  @summary("Get a system topic.")
   get is ArmResourceRead<SystemTopic>;
 
   /**
    * Asynchronously creates a new system topic with the specified parameters.
    */
+  @summary("Create a system topic.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SystemTopic,
     LroHeaders = ArmLroLocationHeader<FinalResult = SystemTopic> &
@@ -48,17 +50,23 @@ interface SystemTopics {
   /**
    * Asynchronously updates a system topic with the specified parameters.
    */
+  @summary("Update a system topic.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     SystemTopic,
     PatchModel = SystemTopicUpdateParameters,
-    Response = ArmResponse<SystemTopic> | ArmResourceCreatedResponse<SystemTopic>
+    Response = ArmResponse<SystemTopic> | ArmResourceCreatedResponse<
+      SystemTopic,
+      LroHeaders = ArmLroLocationHeader
+    >
   >;
 
   /**
    * Delete existing system topic.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a system topic.")
+  @summary("Delete a system topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     SystemTopic,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -67,6 +75,7 @@ interface SystemTopics {
   /**
    * List all the system topics under a resource group.
    */
+  @summary("List system topics under a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     SystemTopic,
     Parameters = {
@@ -81,12 +90,14 @@ interface SystemTopics {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<SystemTopicsListResult>
   >;
 
   /**
    * List all the system topics under an Azure subscription.
    */
+  @summary("List system topics under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     SystemTopic,
     Parameters = {
@@ -101,7 +112,8 @@ interface SystemTopics {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<SystemTopicsListResult>
   >;
 }
 

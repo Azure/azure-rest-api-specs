@@ -30,12 +30,14 @@ interface DomainTopics {
   /**
    * Get properties of a domain topic.
    */
+  @summary("Get a domain topic.")
   get is ArmResourceRead<DomainTopic>;
 
   /**
    * Asynchronously creates or updates a new domain topic with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Create or update a domain topic.")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DomainTopic,
     Request = void,
@@ -49,6 +51,7 @@ interface DomainTopics {
    * Delete existing domain topic.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a domain topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     DomainTopic,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -57,6 +60,7 @@ interface DomainTopics {
   /**
    * List all the topics in a domain.
    */
+  @summary("List domain topics.")
   listByDomain is ArmResourceListByParent<
     DomainTopic,
     Parameters = {
@@ -71,7 +75,8 @@ interface DomainTopics {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<DomainTopicsListResult>
   >;
 }
 

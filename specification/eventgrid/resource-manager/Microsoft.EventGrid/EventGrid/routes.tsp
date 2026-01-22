@@ -13,6 +13,28 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventGrid;
 
+alias ExtensionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: string;
+  },
+  {},
+  {
+    /** Name of the event type to be found. */
+    @path
+    @segment("eventTypes")
+    @key
+    eventTypeName: string;
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface EventSubscriptionsOperationGroup {
   /**
@@ -23,9 +45,10 @@ interface EventSubscriptionsOperationGroup {
   @operationId("EventSubscriptions_ListGlobalBySubscriptionForTopicType")
   @autoRoute
   @get
+  @list
   @action("eventSubscriptions")
   listGlobalBySubscriptionForTopicType is ArmProviderActionSync<
-    Response = ResourceListResult<EventSubscription>,
+    Response = ArmResponse<EventSubscriptionsListResult>,
     Scope = SubscriptionActionScope,
     Parameters = {
       /**
@@ -56,9 +79,10 @@ interface EventSubscriptionsOperationGroup {
   @operationId("EventSubscriptions_ListGlobalByResourceGroupForTopicType")
   @autoRoute
   @get
+  @list
   @action("eventSubscriptions")
   listGlobalByResourceGroupForTopicType is ArmProviderActionSync<
-    Response = ResourceListResult<EventSubscription>,
+    Response = ArmResponse<EventSubscriptionsListResult>,
     Scope = Extension.ResourceGroup,
     Parameters = {
       /**
@@ -89,9 +113,9 @@ interface EventSubscriptionsOperationGroup {
   @operationId("EventSubscriptions_ListRegionalBySubscription")
   @autoRoute
   @get
+  @list
   @action("eventSubscriptions")
   listRegionalBySubscription is ArmProviderActionSync<
-    Response = ResourceListResult<EventSubscription>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -107,7 +131,8 @@ interface EventSubscriptionsOperationGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
   /**
    * List all event subscriptions from the given location under a specific Azure subscription and resource group.
@@ -117,9 +142,9 @@ interface EventSubscriptionsOperationGroup {
   @operationId("EventSubscriptions_ListRegionalByResourceGroup")
   @autoRoute
   @get
+  @list
   @action("eventSubscriptions")
   listRegionalByResourceGroup is ArmProviderActionSync<
-    Response = ResourceListResult<EventSubscription>,
     Scope = Extension.ResourceGroup,
     Parameters = {
       ...LocationParameter;
@@ -135,7 +160,8 @@ interface EventSubscriptionsOperationGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
   /**
    * List all event subscriptions from the given location under a specific Azure subscription and topic type.
@@ -145,9 +171,10 @@ interface EventSubscriptionsOperationGroup {
   @operationId("EventSubscriptions_ListRegionalBySubscriptionForTopicType")
   @autoRoute
   @get
+  @list
   @action("eventSubscriptions")
   listRegionalBySubscriptionForTopicType is ArmProviderActionSync<
-    Response = ResourceListResult<EventSubscription>,
+    Response = ArmResponse<EventSubscriptionsListResult>,
     Scope = SubscriptionActionScope,
     Parameters = {
       ...LocationParameter;
@@ -180,9 +207,10 @@ interface EventSubscriptionsOperationGroup {
   @operationId("EventSubscriptions_ListRegionalByResourceGroupForTopicType")
   @autoRoute
   @get
+  @list
   @action("eventSubscriptions")
   listRegionalByResourceGroupForTopicType is ArmProviderActionSync<
-    Response = ResourceListResult<EventSubscription>,
+    Response = ArmResponse<EventSubscriptionsListResult>,
     Scope = Extension.ResourceGroup,
     Parameters = {
       ...LocationParameter;
@@ -217,33 +245,30 @@ interface TopicsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List topic event types.")
   @operationId("Topics_ListEventTypes")
-  @autoRoute
-  @get
   @action("eventTypes")
-  listEventTypes is ArmProviderActionSync<
-    Response = EventTypesListResult,
-    Scope = Extension.ResourceGroup,
+  @get
+  listEventTypes is ExtensionOps.List<
+    Azure.ResourceManager.Foundations.SimpleResource,
     Parameters = {
-      /**
-       * Namespace of the provider of the topic.
-       */
-      @path
-      @segment("providers")
-      providerNamespace: string;
-
       /**
        * Name of the topic type.
        */
       @path
-      @segment("{providerNamespace}")
       resourceTypeName: string;
 
       /**
        * Name of the topic.
        */
       @path
-      @segment("{resourceTypeName}")
       resourceName: string;
-    }
+
+      /**
+       * Namespace of the provider of the topic.
+       */
+      @path
+      @segment("providers")
+      extensionProviderNamespace: "microsoft.EventGrid";
+    },
+    Response = EventTypesListResult
   >;
 }

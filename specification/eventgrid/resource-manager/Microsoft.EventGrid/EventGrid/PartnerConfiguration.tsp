@@ -13,6 +13,7 @@ namespace Microsoft.EventGrid;
 /**
  * Partner configuration information
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 model PartnerConfiguration
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PartnerConfigurationProperties> {
@@ -29,11 +30,13 @@ interface PartnerConfigurations {
   /**
    * Get properties of a partner configuration.
    */
+  @summary("Get a partner configuration.")
   get is ArmResourceRead<PartnerConfiguration>;
 
   /**
    * Synchronously creates or updates a partner configuration with the specified parameters.
    */
+  @summary("Create or update a partner configuration.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PartnerConfiguration,
     LroHeaders = ArmLroLocationHeader<FinalResult = PartnerConfiguration> &
@@ -43,17 +46,19 @@ interface PartnerConfigurations {
   /**
    * Synchronously updates a partner configuration with the specified parameters.
    */
+  @summary("Update a partner configuration.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PartnerConfiguration,
     PatchModel = PartnerConfigurationUpdateParameters,
-    Response = ArmResponse<PartnerConfiguration> | ArmResourceCreatedResponse<PartnerConfiguration>
+    Response = PartnerConfiguration | ArmResourceCreatedResponse<PartnerConfiguration>
   >;
 
   /**
    * Delete existing partner configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a partner configuration.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerConfiguration,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -62,11 +67,16 @@ interface PartnerConfigurations {
   /**
    * List all the partner configurations under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<PartnerConfiguration>;
+  @summary("List partner configurations under a resource group.")
+  listByResourceGroup is ArmResourceListByParent<
+    PartnerConfiguration,
+    Response = ArmResponse<PartnerConfigurationsListResult>
+  >;
 
   /**
    * List all the partner configurations under an Azure subscription.
    */
+  @summary("List partner configurations under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     PartnerConfiguration,
     Parameters = {
@@ -81,25 +91,28 @@ interface PartnerConfigurations {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerConfigurationsListResult>
   >;
 
   /**
    * Authorize a single partner either by partner registration immutable Id or by partner name.
    */
+  @summary("Authorize a partner.")
   authorizePartner is ArmResourceActionSync<
     PartnerConfiguration,
     Partner,
-    ArmResponse<PartnerConfiguration>
+    PartnerConfiguration
   >;
 
   /**
    * Unauthorize a single partner either by partner registration immutable Id or by partner name.
    */
+  @summary("Unauthorize a partner.")
   unauthorizePartner is ArmResourceActionSync<
     PartnerConfiguration,
     Partner,
-    ArmResponse<PartnerConfiguration>
+    PartnerConfiguration
   >;
 }
 

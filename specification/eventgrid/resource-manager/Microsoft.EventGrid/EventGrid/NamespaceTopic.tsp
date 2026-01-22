@@ -30,22 +30,26 @@ interface NamespaceTopics {
   /**
    * Get properties of a namespace topic.
    */
+  @summary("Get a namespace topic.")
   get is ArmResourceRead<NamespaceTopic>;
 
   /**
    * Asynchronously creates a new namespace topic with the specified parameters.
    */
+  @summary("Create a namespace topic.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NamespaceTopic>;
 
   /**
    * Asynchronously updates a namespace topic with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Update a namespace topic.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     NamespaceTopic,
     PatchModel = NamespaceTopicUpdateParameters,
-    Response = ArmResponse<NamespaceTopic> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = NamespaceTopic> &
+    Response = ArmResponse<NamespaceTopic> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamespaceTopic> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: NamespaceTopic;
@@ -56,6 +60,7 @@ interface NamespaceTopics {
    * Delete existing namespace topic.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a namespace topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     NamespaceTopic,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -64,6 +69,7 @@ interface NamespaceTopics {
   /**
    * List all the namespace topics under a namespace.
    */
+  @summary("List namespace topics under a namespace.")
   listByNamespace is ArmResourceListByParent<
     NamespaceTopic,
     Parameters = {
@@ -78,26 +84,29 @@ interface NamespaceTopics {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<NamespaceTopicsListResult>
   >;
 
   /**
    * List the two keys used to publish to a namespace topic.
    */
+  @summary("List keys for a namespace topic.")
   @action("listKeys")
   listSharedAccessKeys is ArmResourceActionSync<
     NamespaceTopic,
     void,
-    ArmResponse<TopicSharedAccessKeys>
+    TopicSharedAccessKeys
   >;
 
   /**
    * Regenerate a shared access key for a namespace topic.
    */
+  @summary("Regenerate key for a namespace topic.")
   regenerateKey is ArmResourceActionAsync<
     NamespaceTopic,
     TopicRegenerateKeyRequest,
-    ArmResponse<TopicSharedAccessKeys>
+    TopicSharedAccessKeys
   >;
 }
 

@@ -12,6 +12,119 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.EventGrid;
 
 /**
+ * Result of the List Channels operation
+ */
+model ChannelsListResult is ResourceListResult<Channel>;
+/**
+ * Result of the List Operations operation
+ */
+model OperationsListResult is ResourceListResult<Operation>;
+
+/**
+ * Result of the List Topic Types operation
+ */
+model VerifiedPartnersListResult is ResourceListResult<VerifiedPartner>;
+
+/**
+ * Result of the List Domains operation.
+ */
+model DomainsListResult is ResourceListResult<Domain>;
+
+/**
+ * Result of the List EventSubscriptions operation
+ */
+model EventSubscriptionsListResult is ResourceListResult<EventSubscription>;
+
+/**
+ * Result of the List Namespaces operation.
+ */
+model NamespacesListResult is ResourceListResult<Namespace>;
+
+/**
+ * Result of the List Partner Destinations operation.
+ */
+model PartnerDestinationsListResult is ResourceListResult<PartnerDestination>;
+
+/**
+ * Result of the List Partner Namespaces operation
+ */
+model PartnerNamespacesListResult is ResourceListResult<PartnerNamespace>;
+/**
+ * Result of the List Partner Registrations operation.
+ */
+model PartnerRegistrationsListResult is ResourceListResult<PartnerRegistration>;
+
+/**
+ * Result of the List System topics operation.
+ */
+model SystemTopicsListResult is ResourceListResult<SystemTopic>;
+/**
+ * Result of the List Partner Topics operation.
+ */
+model PartnerTopicsListResult is ResourceListResult<PartnerTopic>;
+
+/**
+ * Result of the List Topics operation
+ */
+model TopicsListResult is ResourceListResult<Topic>;
+/**
+ * Result of the List partner configurations operation
+ */
+model PartnerConfigurationsListResult
+  is ResourceListResult<PartnerConfiguration>;
+
+/**
+ * Result of the list of all private endpoint connections operation.
+ */
+model PrivateEndpointConnectionListResult
+  is ResourceListResult<PrivateEndpointConnection>;
+
+/**
+ * Result of the List private link resources operation.
+ */
+model PrivateLinkResourcesListResult is ResourceListResult<PrivateLinkResource>;
+
+/**
+ * Result of the List Domain Topics operation.
+ */
+model DomainTopicsListResult is ResourceListResult<DomainTopic>;
+
+/**
+ * Result of the List CA Certificate operation.
+ */
+model CaCertificatesListResult is ResourceListResult<CaCertificate>;
+
+/**
+ * Result of the List Client Group operation.
+ */
+model ClientGroupsListResult is ResourceListResult<ClientGroup>;
+
+/**
+ * Result of the List Client operation.
+ */
+model ClientsListResult is ResourceListResult<Client>;
+
+/**
+ * Result of the List Permission Binding operation.
+ */
+model PermissionBindingsListResult is ResourceListResult<PermissionBinding>;
+
+/**
+ * Result of the List Topic Space operation.
+ */
+model TopicSpacesListResult is ResourceListResult<TopicSpace>;
+
+/**
+ * Result of the List namespace topics operation.
+ */
+model NamespaceTopicsListResult is ResourceListResult<NamespaceTopic>;
+
+/**
+ * Result of the List event subscriptions operation.
+ */
+model SubscriptionsListResult is ResourceListResult<Subscription>;
+
+/**
  * Provisioning state of the CA Certificate resource.
  */
 union CaCertificateProvisioningState {
@@ -2260,6 +2373,7 @@ model ChannelProperties {
   /**
    * Provisioning state of the channel.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ChannelProvisioningState;
 
   /**
@@ -2453,7 +2567,7 @@ model PartnerUpdateDestinationInfo {
   /**
    * Type of the endpoint for the partner destination
    */
-  endpointType: PartnerEndpointType;
+  endpointType: PartnerEndpointType = PartnerEndpointType.WebHook;
 }
 
 /**
@@ -2582,7 +2696,7 @@ model DomainProperties {
   /**
    * This determines the format that Event Grid should expect for incoming events published to the Event Grid Domain Resource.
    */
-  inputSchema?: InputSchema;
+  inputSchema?: InputSchema = InputSchema.EventGridSchema;
 
   /**
    * Event Type Information for the domain. This information is provided by the publisher and can be used by the
@@ -2605,7 +2719,7 @@ model DomainProperties {
    * This determines if traffic is allowed over public network. By default it is enabled.
    * You can further restrict to specific IPs by configuring <seealso cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainProperties.InboundIpRules" />
    */
-  publicNetworkAccess?: PublicNetworkAccess;
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
 
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
@@ -2616,7 +2730,7 @@ model DomainProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the domain.
    */
-  disableLocalAuth?: boolean;
+  disableLocalAuth?: boolean = false;
 
   /**
    * This Boolean is used to specify the creation mechanism for 'all' the Event Grid Domain Topics associated with this Event Grid Domain resource.
@@ -2668,6 +2782,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the Private Endpoint Connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -2830,7 +2945,7 @@ model DomainUpdateParameterProperties {
    * This determines if traffic is allowed over public network. By default it is enabled.
    * You can further restrict to specific IPs by configuring <seealso cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainUpdateParameterProperties.InboundIpRules" />
    */
-  publicNetworkAccess?: PublicNetworkAccess;
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
 
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
@@ -3210,6 +3325,7 @@ model Filter {
   /**
    * The field/property in the event based on which you want to filter.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 }
 
@@ -3302,7 +3418,7 @@ model EventSubscriptionProperties {
   /**
    * The event delivery schema for the event subscription.
    */
-  eventDeliverySchema?: EventDeliverySchema;
+  eventDeliverySchema?: EventDeliverySchema = EventDeliverySchema.EventGridSchema;
 
   /**
    * The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events.
@@ -3348,7 +3464,7 @@ model EventSubscriptionFilter {
    * Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter
    * should be compared in a case sensitive manner.
    */
-  isSubjectCaseSensitive?: boolean;
+  isSubjectCaseSensitive?: boolean = false;
 
   /**
    * Allows advanced filters to be evaluated against an array of values instead of expecting a singular value.
@@ -3375,6 +3491,7 @@ model AdvancedFilter {
   /**
    * The field/property in the event based on which you want to filter.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 }
 
@@ -3577,7 +3694,7 @@ model TopicSpacesConfiguration {
   /**
    * Indicate if Topic Spaces Configuration is enabled for the namespace. Default is Disabled.
    */
-  state?: TopicSpacesConfigurationState;
+  state?: TopicSpacesConfigurationState = TopicSpacesConfigurationState.Disabled;
 
   /**
    * Fully qualified Azure Resource Id for the Event Grid Topic to which events will be routed to from TopicSpaces under a namespace.
@@ -3645,6 +3762,7 @@ model StaticRoutingEnrichment {
   /**
    * Static routing enrichment key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 
   /**
@@ -3955,11 +4073,13 @@ model NamespaceSharedAccessKeys {
   /**
    * Shared access key1 for the namespace.
    */
+  @secret
   key1?: string;
 
   /**
    * Shared access key2 for the namespace.
    */
+  @secret
   key2?: string;
 }
 
@@ -4073,6 +4193,7 @@ model Operation {
   /**
    * Properties of the operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: unknown;
 }
 
@@ -4113,6 +4234,7 @@ model PartnerConfigurationProperties {
   /**
    * Provisioning state of the partner configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: PartnerConfigurationProvisioningState;
 }
 
@@ -4277,7 +4399,7 @@ model PartnerNamespaceProperties {
    * This determines if traffic is allowed over public network. By default it is enabled.
    * You can further restrict to specific IPs by configuring <seealso cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PartnerNamespaceProperties.InboundIpRules" />
    */
-  publicNetworkAccess?: PublicNetworkAccess;
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
 
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
@@ -4288,7 +4410,7 @@ model PartnerNamespaceProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the partner namespace.
    */
-  disableLocalAuth?: boolean;
+  disableLocalAuth?: boolean = false;
 
   /**
    * This determines if events published to this partner namespace should use the source attribute in the event payload
@@ -4321,7 +4443,7 @@ model PartnerNamespaceUpdateParameterProperties {
    * This determines if traffic is allowed over public network. By default it is enabled.
    * You can further restrict to specific IPs by configuring <seealso cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PartnerNamespaceUpdateParameterProperties.InboundIpRules" />
    */
-  publicNetworkAccess?: PublicNetworkAccess;
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
 
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
@@ -4469,6 +4591,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * Provisioning state to reflect configuration state and indicate status of nsp profile configuration retrieval.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: NetworkSecurityPerimeterConfigProvisioningState;
 
   /**
@@ -4775,6 +4898,7 @@ model KeyEncryption {
   /**
    * List of all customer-managed key encryption properties for the resource. However only one key is supported at a time.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customerManagedKeyEncryption: CustomerManagedKeyEncryption[];
 }
 
@@ -4905,7 +5029,7 @@ model TopicProperties {
   /**
    * This determines the format that Event Grid should expect for incoming events published to the topic.
    */
-  inputSchema?: InputSchema;
+  inputSchema?: InputSchema = InputSchema.EventGridSchema;
 
   /**
    * This enables publishing using custom event schemas. An InputSchemaMapping can be specified to map various properties of a source schema to various required properties of the EventGridEvent schema.
@@ -4922,7 +5046,7 @@ model TopicProperties {
    * This determines if traffic is allowed over public network. By default it is enabled.
    * You can further restrict to specific IPs by configuring <seealso cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicProperties.InboundIpRules" />
    */
-  publicNetworkAccess?: PublicNetworkAccess;
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
 
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
@@ -4933,7 +5057,7 @@ model TopicProperties {
   /**
    * This boolean is used to enable or disable local auth. Default value is false. When the property is set to true, only Microsoft Entra ID token will be used to authenticate if user is allowed to publish to the topic.
    */
-  disableLocalAuth?: boolean;
+  disableLocalAuth?: boolean = false;
 
   /**
    * Data Residency Boundary of the resource.
@@ -5000,7 +5124,7 @@ model TopicUpdateParameterProperties {
    * This determines if traffic is allowed over public network. By default it is enabled.
    * You can further restrict to specific IPs by configuring <seealso cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicUpdateParameterProperties.InboundIpRules" />
    */
-  publicNetworkAccess?: PublicNetworkAccess;
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
 
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
@@ -5038,6 +5162,10 @@ model EventTypesListResult {
    */
   @pageItems
   value?: EventType[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5126,6 +5254,10 @@ model TopicTypesListResult {
    */
   @pageItems
   value?: TopicTypeInfo[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5155,6 +5287,7 @@ model TopicTypeProperties {
   /**
    * Provisioning state of the topic type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: TopicTypeProvisioningState;
 
   /**
@@ -5226,6 +5359,7 @@ model VerifiedPartnerProperties {
   /**
    * Provisioning state of the verified partner.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: VerifiedPartnerProvisioningState;
 }
 
@@ -5311,6 +5445,8 @@ model PartnerClientAuthentication {
 /**
  * Properties of a Microsoft Entra ID Partner Client Authentication.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureADPartnerClientAuthenticationProperties {
   /**
    * The Microsoft Entra ID Tenant ID to get the access token that will be included as the bearer token in delivery requests.
@@ -5326,6 +5462,7 @@ model AzureADPartnerClientAuthenticationProperties {
 /**
  * Microsoft Entra ID Partner Client Authentication
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureADPartnerClientAuthentication extends PartnerClientAuthentication {
   /**
    * Microsoft Entra ID ClientAuthentication Properties
@@ -5346,6 +5483,12 @@ model WebhookPartnerDestinationInfo extends PartnerDestinationInfo {
    * WebHook Properties of the partner destination.
    */
   properties?: WebhookPartnerDestinationProperties;
+
+  /**
+   * Change history of the resource move.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  resourceMoveChangeHistory?: ResourceMoveChangeHistory[];
 
   /**
    * Type of the endpoint for the partner destination
@@ -5458,7 +5601,8 @@ model StaticDeliveryAttributeMappingProperties {
   /**
    * Boolean flag to tell if the attribute contains sensitive information .
    */
-  isSecret?: boolean;
+  @secret
+  isSecret?: boolean = false;
 }
 
 /**
@@ -5722,6 +5866,7 @@ model NumberInRangeFilter extends Filter {
   /**
    * The set of filter values.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   values?: float64[][];
 
   /**
@@ -5737,6 +5882,7 @@ model NumberNotInRangeFilter extends Filter {
   /**
    * The set of filter values.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   values?: float64[][];
 
   /**
@@ -5817,6 +5963,7 @@ model WebHookEventSubscriptionDestinationProperties {
   /**
    * The URL that represents the endpoint of the destination of an event subscription.
    */
+  @secret
   endpointUrl?: string;
 
   /**
@@ -6043,6 +6190,7 @@ model NumberInRangeAdvancedFilter extends AdvancedFilter {
   /**
    * The set of filter values.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   values?: float64[][];
 
   /**
@@ -6058,6 +6206,7 @@ model NumberNotInRangeAdvancedFilter extends AdvancedFilter {
   /**
    * The set of filter values.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   values?: float64[][];
 
   /**

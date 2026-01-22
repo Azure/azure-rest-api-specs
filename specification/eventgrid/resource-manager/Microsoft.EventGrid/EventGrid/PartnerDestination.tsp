@@ -28,22 +28,26 @@ interface PartnerDestinations {
   /**
    * Get properties of a partner destination.
    */
+  @summary("Get a partner destination.")
   get is ArmResourceRead<PartnerDestination>;
 
   /**
    * Asynchronously creates a new partner destination with the specified parameters.
    */
+  @summary("Create a partner destination.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PartnerDestination>;
 
   /**
    * Asynchronously updates a partner destination with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @summary("Update a partner destination.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PartnerDestination,
     PatchModel = PartnerDestinationUpdateParameters,
-    Response = ArmResponse<PartnerDestination> | ArmResourceCreatedResponse<PartnerDestination> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = PartnerDestination> &
+    Response = ArmResponse<PartnerDestination> | ArmResourceCreatedResponse<PartnerDestination> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PartnerDestination> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: PartnerDestination;
@@ -54,6 +58,7 @@ interface PartnerDestinations {
    * Delete existing partner destination.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a partner destination.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerDestination,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -62,6 +67,7 @@ interface PartnerDestinations {
   /**
    * List all the partner destinations under a resource group.
    */
+  @summary("List partner destinations under a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     PartnerDestination,
     Parameters = {
@@ -76,12 +82,14 @@ interface PartnerDestinations {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerDestinationsListResult>
   >;
 
   /**
    * List all the partner destinations under an Azure subscription.
    */
+  @summary("List partner destinations under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     PartnerDestination,
     Parameters = {
@@ -96,12 +104,14 @@ interface PartnerDestinations {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerDestinationsListResult>
   >;
 
   /**
    * Activate a newly created partner destination.
    */
+  @summary("Activate a partner destination.")
   activate is ArmResourceActionSync<
     PartnerDestination,
     void,

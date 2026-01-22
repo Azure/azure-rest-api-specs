@@ -29,6 +29,7 @@ interface VerifiedPartners {
   /**
    * Get properties of a verified partner.
    */
+  @summary("Get a verified partner.")
   get is ArmResourceRead<
     VerifiedPartner,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -37,6 +38,7 @@ interface VerifiedPartners {
   /**
    * Get a list of all verified partners.
    */
+  @summary("List all verified partners.")
   list is ArmResourceListByParent<
     VerifiedPartner,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -52,7 +54,8 @@ interface VerifiedPartners {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<VerifiedPartnersListResult>
   >;
 }
 

@@ -39,22 +39,26 @@ interface Namespaces {
   /**
    * Get properties of a namespace.
    */
+  @summary("Get a namespace.")
   get is ArmResourceRead<Namespace>;
 
   /**
    * Asynchronously creates or updates a new namespace with the specified parameters.
    */
+  @summary("Create or update a namespace.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
 
   /**
    * Asynchronously updates a namespace with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @summary("Update a namespace.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Namespace,
     PatchModel = NamespaceUpdateParameters,
-    Response = ArmResponse<Namespace> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Namespace> &
+    Response = ArmResponse<Namespace> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Namespace> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Namespace;
@@ -65,6 +69,7 @@ interface Namespaces {
    * Delete existing namespace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a namespace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Namespace,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -73,6 +78,7 @@ interface Namespaces {
   /**
    * List all the namespaces under a resource group.
    */
+  @summary("List namespaces under a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Namespace,
     Parameters = {
@@ -87,12 +93,14 @@ interface Namespaces {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<NamespacesListResult>
   >;
 
   /**
    * List all the namespaces under an Azure subscription.
    */
+  @summary("List namespaces under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     Namespace,
     Parameters = {
@@ -107,12 +115,14 @@ interface Namespaces {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<NamespacesListResult>
   >;
 
   /**
    * List the two keys used to publish to a namespace.
    */
+  @summary("List keys for a namespace.")
   @action("listKeys")
   listSharedAccessKeys is ArmResourceActionSync<
     Namespace,
@@ -123,19 +133,21 @@ interface Namespaces {
   /**
    * Regenerate a shared access key for a namespace.
    */
+  @summary("Regenerate key for a namespace.")
   regenerateKey is ArmResourceActionAsync<
     Namespace,
     NamespaceRegenerateKeyRequest,
-    ArmResponse<NamespaceSharedAccessKeys>
+    NamespaceSharedAccessKeys
   >;
 
   /**
    * Performs ownership validation via checking TXT records for all custom domains in a namespace.
    */
+  @summary("Validate ownership for all custom domains in a namespace.")
   validateCustomDomainOwnership is ArmResourceActionAsync<
     Namespace,
     void,
-    ArmResponse<CustomDomainOwnershipValidationResult>
+    CustomDomainOwnershipValidationResult
   >;
 }
 

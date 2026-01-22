@@ -30,17 +30,20 @@ interface CaCertificates {
   /**
    * Get properties of a CA certificate.
    */
+  @summary("Get a CA certificate.")
   get is ArmResourceRead<CaCertificate>;
 
   /**
    * Create or update a CA certificate with the specified parameters.
    */
+  @summary("Create or update a CA certificate.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CaCertificate>;
 
   /**
    * Delete an existing CA certificate.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a CA certificate.")
   delete is ArmResourceDeleteWithoutOkAsync<
     CaCertificate,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -49,6 +52,7 @@ interface CaCertificates {
   /**
    * Get all the CA certificates under a namespace.
    */
+  @summary("List all CA certificates under a namespace.")
   listByNamespace is ArmResourceListByParent<
     CaCertificate,
     Parameters = {
@@ -63,7 +67,8 @@ interface CaCertificates {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<CaCertificatesListResult>
   >;
 }
 

@@ -28,6 +28,7 @@ interface PartnerRegistrations {
   /**
    * Gets a partner registration with the specified parameters.
    */
+  @summary("Get a partner registration.")
   get is ArmResourceRead<PartnerRegistration>;
 
   /**
@@ -35,6 +36,7 @@ interface PartnerRegistrations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Create a partner registration.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PartnerRegistration,
     Response = ArmResourceUpdatedResponse<PartnerRegistration> | (ArmAcceptedLroResponse & {
@@ -48,17 +50,26 @@ interface PartnerRegistrations {
   /**
    * Updates a partner registration with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update a partner registration.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PartnerRegistration,
     PatchModel = PartnerRegistrationUpdateParameters,
-    Response = OkResponse | ArmResourceCreatedResponse<PartnerRegistration>
+    Response = {
+      @body body: void;
+    } | ArmResourceCreatedResponse<
+      PartnerRegistration,
+      LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
    * Deletes a partner registration with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a partner registration.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerRegistration,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -67,6 +78,7 @@ interface PartnerRegistrations {
   /**
    * List all the partner registrations under a resource group.
    */
+  @summary("List partner registrations under a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     PartnerRegistration,
     Parameters = {
@@ -81,12 +93,14 @@ interface PartnerRegistrations {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerRegistrationsListResult>
   >;
 
   /**
    * List all the partner registrations under an Azure subscription.
    */
+  @summary("List partner registrations under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     PartnerRegistration,
     Parameters = {
@@ -101,7 +115,8 @@ interface PartnerRegistrations {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerRegistrationsListResult>
   >;
 }
 

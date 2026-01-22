@@ -29,17 +29,20 @@ interface TopicSpaces {
   /**
    * Get properties of a topic space.
    */
+  @summary("Get a topic space.")
   get is ArmResourceRead<TopicSpace>;
 
   /**
    * Create or update a topic space with the specified parameters.
    */
+  @summary("Create or update a topic space.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TopicSpace>;
 
   /**
    * Delete an existing topic space.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a topic space.")
   delete is ArmResourceDeleteWithoutOkAsync<
     TopicSpace,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -48,6 +51,7 @@ interface TopicSpaces {
   /**
    * Get all the topic spaces under a namespace.
    */
+  @summary("List all topic spaces under a namespace.")
   listByNamespace is ArmResourceListByParent<
     TopicSpace,
     Parameters = {
@@ -62,7 +66,8 @@ interface TopicSpaces {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<TopicSpacesListResult>
   >;
 }
 

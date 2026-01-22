@@ -121,7 +121,7 @@ using Microsoft.EventGrid;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Domain.properties);
 
-@@clientName(PrivateEndpointConnections.update::parameters.resource,
+@@clientName(PrivateEndpointConnections.update::parameters.body,
   "privateEndpointConnection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -356,3 +356,7 @@ using Microsoft.EventGrid;
 );
 
 @@clientLocation(TopicsOperationGroup.listEventTypes, Topics);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(Operation.properties);
+
+@@visibility(DomainTopic.properties, Lifecycle.Read);

@@ -25,19 +25,47 @@ model NetworkSecurityPerimeterConfiguration
 }
 
 @armResourceOperations
+interface NetworkSecurityPerimeterConfigurationOps
+  extends Azure.ResourceManager.Legacy.RoutedOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /**
+         * The type of the resource. This can be either \\'topics\\', or \\'domains\\'.
+         */
+        @path
+        resourceType: NetworkSecurityPerimeterResourceType,
+
+        /**
+         * The name of the resource group within the user's subscription.
+         */
+        @path
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(3)
+        @maxLength(50)
+        resourceName: string,
+      },
+      {},
+      ResourceRoute = #{
+        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}",
+      }
+    > {}
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface NetworkSecurityPerimeterConfigurations {
   /**
    * Get a specific network security perimeter configuration with a topic or domain.
    */
-  get is ArmResourceRead<
+  @summary("Get a specific network security perimeter configuration.")
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}")
+  get is NetworkSecurityPerimeterConfigurationOps.ActionSync<
     NetworkSecurityPerimeterConfiguration,
+    Request = void,
+    Response = ArmResponse<NetworkSecurityPerimeterConfiguration>,
     Parameters = {
-      /**
-       * The type of the resource. This can be either \'topics\', or \'domains\'.
-       */
-      @path
-      resourceType: NetworkSecurityPerimeterResourceType;
-
       /**
        * Unique identifier for perimeter
        */
@@ -55,32 +83,26 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Get all network security perimeter configurations associated with a topic or domain.
    */
-  list is ArmResourceListByParent<
+  @summary("Get all network security perimeter configurations for resource.")
+  @get
+  @list
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations")
+  list is NetworkSecurityPerimeterConfigurationOps.ActionSync<
     NetworkSecurityPerimeterConfiguration,
-    Parameters = {
-      /**
-       * The type of the resource. This can be either \'topics\' or \'domains\'.
-       */
-      @path
-      resourceType: NetworkSecurityPerimeterResourceType;
-    },
+    Request = void,
     Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>
   >;
 
   /**
    * Reconcile a specific network security perimeter configuration for a given network security perimeter association with a topic or domain.
    */
-  reconcile is ArmResourceActionAsync<
+  @summary("Reconcile a specific network security perimeter configuration for a given network security perimeter association.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile")
+  reconcile is NetworkSecurityPerimeterConfigurationOps.ActionAsync<
     NetworkSecurityPerimeterConfiguration,
-    void,
-    ArmResponse<NetworkSecurityPerimeterConfiguration>,
+    Request = void,
+    Result = NetworkSecurityPerimeterConfiguration,
     Parameters = {
-      /**
-       * The type of the resource. This can be either \'topics\' or \'domains\'.
-       */
-      @path
-      resourceType: NetworkSecurityPerimeterResourceType;
-
       /**
        * Unique identifier for perimeter
        */

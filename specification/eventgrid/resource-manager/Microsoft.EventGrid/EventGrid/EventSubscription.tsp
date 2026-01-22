@@ -14,7 +14,6 @@ namespace Microsoft.EventGrid;
 /**
  * Event Subscription.
  */
-@parentResource(Domain)
 model EventSubscription
   is Azure.ResourceManager.ProxyResource<EventSubscriptionProperties> {
   ...ResourceNameParameter<
@@ -53,12 +52,70 @@ alias EventSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+alias EventSubScriptionExtensionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** Namespace of the provider of the topic. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: string;
+
+    /**
+     * Name of the resource type.
+     */
+    @path
+    resourceTypeName: string;
+
+    /**
+     * Name of the resource.
+     */
+    @path
+    resourceName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<EventSubscription>;
+  },
+  {}
+>;
+
+alias EventSubScriptionListyByDomainExtensionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the top level domain. */
+    @path
+    @segment("domains")
+    @key
+    domainName: string;
+
+    /**
+     * Name of the domain topic.
+     */
+    @path
+    @segment("topics")
+    @key
+    topicName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<EventSubscription>;
+  },
+  {}
+>;
+
 @armResourceOperations
 interface EventSubscriptions {
   /**
    * Get properties of a nested event subscription for a domain topic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get a nested event subscription for domain topic.")
   @operationId("DomainTopicEventSubscriptions_Get")
   get is EventSubscriptionOps.Read<EventSubscription>;
 
@@ -66,6 +123,7 @@ interface EventSubscriptions {
    * Asynchronously creates a new event subscription or updates an existing event subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Create or update a nested event subscription to a domain topic.")
   @operationId("DomainTopicEventSubscriptions_CreateOrUpdate")
   createOrUpdate is EventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
@@ -77,12 +135,16 @@ interface EventSubscriptions {
    * Update an existing event subscription for a domain topic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Update a nested event subscription for a domain topic.")
   @operationId("DomainTopicEventSubscriptions_Update")
   @patch(#{ implicitOptionality: false })
   update is EventSubscriptionOps.CustomPatchAsync<
     EventSubscription,
     PatchModel = EventSubscriptionUpdateParameters,
-    Response = ArmResourceCreatedResponse<EventSubscription>
+    Response = ArmResourceCreatedResponse<
+      EventSubscription,
+      LroHeaders = ArmLroLocationHeader
+    >
   >;
 
   /**
@@ -90,6 +152,7 @@ interface EventSubscriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a nested event subscription for a domain topic.")
   @operationId("DomainTopicEventSubscriptions_Delete")
   delete is EventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
@@ -100,6 +163,7 @@ interface EventSubscriptions {
    * List all event subscriptions that have been created for a specific domain topic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("List all nested event subscriptions for a specific domain topic.")
   @operationId("DomainTopicEventSubscriptions_List")
   list is EventSubscriptionOps.List<
     EventSubscription,
@@ -115,13 +179,15 @@ interface EventSubscriptions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
 
   /**
    * Get all delivery attributes for an event subscription for domain topic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get delivery attributes for an event subscription for domain topic.")
   @operationId("DomainTopicEventSubscriptions_GetDeliveryAttributes")
   @list
   getDeliveryAttributes is EventSubscriptionOps.ActionSync<
@@ -134,11 +200,61 @@ interface EventSubscriptions {
    * Get the full endpoint URL for a nested event subscription for domain topic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get full URL of a nested event subscription for domain topic.")
   @operationId("DomainTopicEventSubscriptions_GetFullUrl")
   getFullUrl is EventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
     ArmResponse<EventSubscriptionFullUrl>
+  >;
+
+  /**
+   *List all global event subscriptions under a specific Azure subscription and resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("List all global event subscriptions under an Azure subscription and resource group.")
+  @operationId("EventSubscriptions_ListGlobalByResourceGroup")
+  listGlobalByResourceGroup is Extension.ListByTarget<
+    Extension.ResourceGroup,
+    EventSubscription,
+    Parameters = {
+      /**
+       * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+       */
+      @query
+      $filter?: string;
+
+      /**
+       * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+       */
+      @query
+      $top?: int32;
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
+  >;
+
+  /**
+   * List all event subscriptions that have been created for a specific domain topic.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("List all event subscriptions for a specific domain topic.")
+  @operationId("EventSubscriptions_ListByDomainTopic")
+  listByDomainTopic is EventSubScriptionListyByDomainExtensionOps.List<
+    EventSubscription,
+    Parameters = {
+      /**
+       * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+       */
+      @query("$top")
+      $top?: int32;
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
 }
 alias TopicEventSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -168,11 +284,13 @@ interface TopicEventSubscriptions {
   /**
    * Get properties of an event subscription of a topic.
    */
+  @summary("Get an event subscription of a topic.")
   get is TopicEventSubscriptionOps.Read<EventSubscription>;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription.
    */
+  @summary("Create or update an event subscription to a topic.")
   createOrUpdate is TopicEventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
@@ -182,17 +300,22 @@ interface TopicEventSubscriptions {
   /**
    * Update an existing event subscription for a topic.
    */
+  @summary("Update an event subscription for a topic.")
   @patch(#{ implicitOptionality: false })
   update is TopicEventSubscriptionOps.CustomPatchAsync<
     EventSubscription,
     PatchModel = EventSubscriptionUpdateParameters,
-    Response = ArmResourceCreatedResponse<EventSubscription>
+    Response = ArmResourceCreatedResponse<
+      EventSubscription,
+      LroHeaders = ArmLroLocationHeader
+    >
   >;
 
   /**
    * Delete an existing event subscription for a topic.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete an event subscription for a topic.")
   delete is TopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -201,6 +324,7 @@ interface TopicEventSubscriptions {
   /**
    * List all event subscriptions that have been created for a specific topic.
    */
+  @summary("List all event subscriptions for a specific topic.")
   list is TopicEventSubscriptionOps.List<
     EventSubscription,
     Parameters = {
@@ -215,12 +339,14 @@ interface TopicEventSubscriptions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
 
   /**
    * Get all delivery attributes for an event subscription for topic.
    */
+  @summary("Get delivery attributes for an event subscription for topic.")
   @list
   getDeliveryAttributes is TopicEventSubscriptionOps.ActionSync<
     EventSubscription,
@@ -231,6 +357,7 @@ interface TopicEventSubscriptions {
   /**
    * Get the full endpoint URL for an event subscription for topic.
    */
+  @summary("Get full URL of an event subscription for topic.")
   getFullUrl is TopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
@@ -264,11 +391,13 @@ interface DomainEventSubscriptions {
   /**
    * Get properties of an event subscription of a domain.
    */
+  @summary("Get an event subscription of a domain.")
   get is DomainEventSubscriptionOps.Read<EventSubscription>;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription.
    */
+  @summary("Create or update an event subscription to a domain.")
   createOrUpdate is DomainEventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
@@ -278,17 +407,22 @@ interface DomainEventSubscriptions {
   /**
    * Update an existing event subscription for a topic.
    */
+  @summary("Update an event subscription for a domain.")
   @patch(#{ implicitOptionality: false })
   update is DomainEventSubscriptionOps.CustomPatchAsync<
     EventSubscription,
     PatchModel = EventSubscriptionUpdateParameters,
-    Response = ArmResourceCreatedResponse<EventSubscription>
+    Response = ArmResourceCreatedResponse<
+      EventSubscription,
+      LroHeaders = ArmLroLocationHeader
+    >
   >;
 
   /**
    * Delete an existing event subscription for a domain.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete an event subscription for a domain.")
   delete is DomainEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -297,6 +431,7 @@ interface DomainEventSubscriptions {
   /**
    * List all event subscriptions that have been created for a specific topic.
    */
+  @summary("List all event subscriptions for a specific domain.")
   list is DomainEventSubscriptionOps.List<
     EventSubscription,
     Parameters = {
@@ -311,12 +446,14 @@ interface DomainEventSubscriptions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
 
   /**
    * Get all delivery attributes for an event subscription for domain.
    */
+  @summary("Get delivery attributes for an event subscription for domain.")
   @list
   getDeliveryAttributes is DomainEventSubscriptionOps.ActionSync<
     EventSubscription,
@@ -327,6 +464,7 @@ interface DomainEventSubscriptions {
   /**
    * Get the full endpoint URL for an event subscription for domain.
    */
+  @summary("Get full URL of an event subscription for domain.")
   getFullUrl is DomainEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
@@ -365,20 +503,18 @@ interface EventSubscriptionOperationGroup {
    * Get properties of an event subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get an event subscription.")
   @operationId("EventSubscriptions_Get")
-  get is EventSubscriptionOperationGroupOps.Read<
-    Extension.ScopeParameter,
-    EventSubscription
-  >;
+  get is EventSubscriptionOperationGroupOps.Read<EventSubscription>;
 
   /**
    * Asynchronously creates a new event subscription or updates an existing event subscription based on the specified scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Create or update an event subscription.")
   @operationId("EventSubscriptions_CreateOrUpdate")
   createOrUpdate is EventSubscriptionOperationGroupOps.CreateOrUpdateAsync<
-    Extension.ScopeParameter,
     EventSubscription,
     Response = ArmResourceCreatedResponse<
       EventSubscription,
@@ -390,12 +526,16 @@ interface EventSubscriptionOperationGroup {
    * Asynchronously updates an existing event subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Update an event subscription.")
   @operationId("EventSubscriptions_Update")
   @patch(#{ implicitOptionality: false })
   update is EventSubscriptionOperationGroupOps.CustomPatchAsync<
-    Extension.ScopeParameter,
-    EventSubscriptionUpdateParameters,
-    Response = ArmResourceCreatedResponse<EventSubscription>
+    EventSubscription,
+    PatchModel = EventSubscriptionUpdateParameters,
+    Response = ArmResourceCreatedResponse<
+      EventSubscription,
+      LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription>
+    >
   >;
 
   /**
@@ -403,9 +543,9 @@ interface EventSubscriptionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete an event subscription.")
   @operationId("EventSubscriptions_Delete")
   delete is EventSubscriptionOperationGroupOps.DeleteWithoutOkAsync<
-    Extension.ScopeParameter,
     EventSubscription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -414,12 +554,12 @@ interface EventSubscriptionOperationGroup {
    * List all aggregated global event subscriptions under a specific Azure subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get an aggregated list of all global event subscriptions under an Azure subscription.")
   @operationId("EventSubscriptions_ListGlobalBySubscription")
-  listGlobalBySubscription is EventSubscriptionOperationGroupOps.List<
-    Extension.ScopeParameter,
+  listGlobalBySubscription is Extension.ListByTarget<
+    Extension.Subscription,
+    EventSubscription,
     Parameters = {
-      ...SubscriptionIdParameter;
-
       /**
        * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
        */
@@ -431,18 +571,43 @@ interface EventSubscriptionOperationGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
 
+  /**
+   * List all event subscriptions that have been created for a specific resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("List all event subscriptions.")
+  @operationId("EventSubscriptions_ListByResource")
+  listByResource is EventSubScriptionExtensionOps.List<
+    EventSubscription,
+    Parameters = {
+      /**
+       * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+       */
+      @query("$top")
+      $top?: int32;
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
+  >;
   /**
    * Get all delivery attributes for an event subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get delivery attributes for an event subscription.")
   @operationId("EventSubscriptions_GetDeliveryAttributes")
   @list
   getDeliveryAttributes is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
-    EventSubscription,
+    void,
     ArmResponse<DeliveryAttributeListResult>
   >;
 
@@ -450,10 +615,11 @@ interface EventSubscriptionOperationGroup {
    * Get the full endpoint URL for an event subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get full URL of an event subscription.")
   @operationId("EventSubscriptions_GetFullUrl")
   getFullUrl is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
-    EventSubscription,
+    void,
     ArmResponse<EventSubscriptionFullUrl>
   >;
 }
@@ -484,12 +650,14 @@ interface SystemTopicEventSubscriptions {
   /**
    * Get an event subscription.
    */
+  @summary("Get an event subscription of a system topic.")
   get is SystemTopicEventSubscriptionOps.Read<EventSubscription>;
 
   /**
    * Asynchronously creates or updates an event subscription with the specified parameters. Existing event subscriptions will be updated with this API.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Create or update an event subscription for a system topic.")
   createOrUpdate is SystemTopicEventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     Response = ArmResourceCreatedResponse<
@@ -501,17 +669,22 @@ interface SystemTopicEventSubscriptions {
   /**
    * Update an existing event subscription of a system topic.
    */
+  @summary("Update event subscription of a system topic.")
   @patch(#{ implicitOptionality: false })
   update is SystemTopicEventSubscriptionOps.CustomPatchAsync<
     EventSubscription,
     PatchModel = EventSubscriptionUpdateParameters,
-    Response = ArmResourceCreatedResponse<EventSubscription>
+    Response = ArmResourceCreatedResponse<
+      EventSubscription,
+      LroHeaders = ArmLroLocationHeader
+    >
   >;
 
   /**
    * Delete an existing event subscription of a system topic.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete an event subscription of a system topic.")
   delete is SystemTopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -520,6 +693,7 @@ interface SystemTopicEventSubscriptions {
   /**
    * List event subscriptions that belong to a specific system topic.
    */
+  @summary("List event subscriptions of a system topic.")
   listBySystemTopic is SystemTopicEventSubscriptionOps.List<
     EventSubscription,
     Parameters = {
@@ -534,12 +708,14 @@ interface SystemTopicEventSubscriptions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
 
   /**
    * Get all delivery attributes for an event subscription.
    */
+  @summary("Get delivery attributes for an event subscription.")
   @list
   getDeliveryAttributes is SystemTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
@@ -550,6 +726,7 @@ interface SystemTopicEventSubscriptions {
   /**
    * Get the full endpoint URL for an event subscription of a system topic.
    */
+  @summary("Get full URL of an event subscription of a system topic.")
   getFullUrl is SystemTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
@@ -583,11 +760,13 @@ interface PartnerTopicEventSubscriptions {
   /**
    * Get properties of an event subscription of a partner topic.
    */
+  @summary("Get an event subscription of a partner topic.")
   get is PartnerTopicEventSubscriptionOps.Read<EventSubscription>;
 
   /**
    * Asynchronously creates or updates an event subscription of a partner topic with the specified parameters. Existing event subscriptions will be updated with this API.
    */
+  @summary("Create or update an event subscription of a partner topic.")
   createOrUpdate is PartnerTopicEventSubscriptionOps.CreateOrUpdateAsync<
     EventSubscription,
     LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
@@ -597,17 +776,22 @@ interface PartnerTopicEventSubscriptions {
   /**
    * Update an existing event subscription of a partner topic.
    */
+  @summary("Update event subscription of a partner topic.")
   @patch(#{ implicitOptionality: false })
   update is PartnerTopicEventSubscriptionOps.CustomPatchAsync<
     EventSubscription,
     PatchModel = EventSubscriptionUpdateParameters,
-    Response = ArmResourceCreatedResponse<EventSubscription>
+    Response = ArmResourceCreatedResponse<
+      EventSubscription,
+      LroHeaders = ArmLroLocationHeader
+    >
   >;
 
   /**
    * Delete an existing event subscription of a partner topic.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete an event subscription of a partner topic.")
   delete is PartnerTopicEventSubscriptionOps.DeleteWithoutOkAsync<
     EventSubscription,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -616,6 +800,7 @@ interface PartnerTopicEventSubscriptions {
   /**
    * List event subscriptions that belong to a specific partner topic.
    */
+  @summary("List event subscriptions of a partner topic.")
   listByPartnerTopic is PartnerTopicEventSubscriptionOps.List<
     EventSubscription,
     Parameters = {
@@ -630,12 +815,14 @@ interface PartnerTopicEventSubscriptions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<EventSubscriptionsListResult>
   >;
 
   /**
    * Get the full endpoint URL for an event subscription of a partner topic.
    */
+  @summary("Get full URL of an event subscription of a partner topic.")
   getFullUrl is PartnerTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
@@ -645,6 +832,7 @@ interface PartnerTopicEventSubscriptions {
   /**
    * Get all delivery attributes for an event subscription of a partner topic.
    */
+  @summary("Get delivery attributes for an event subscription of a partner topic.")
   @list
   getDeliveryAttributes is PartnerTopicEventSubscriptionOps.ActionSync<
     EventSubscription,

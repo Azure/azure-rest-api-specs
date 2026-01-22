@@ -30,17 +30,20 @@ interface ClientGroups {
   /**
    * Get properties of a client group.
    */
+  @summary("Get a client group.")
   get is ArmResourceRead<ClientGroup>;
 
   /**
    * Create or update a client group with the specified parameters.
    */
+  @summary("Create or update a client group.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ClientGroup>;
 
   /**
    * Delete an existing client group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a client group.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ClientGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -49,6 +52,7 @@ interface ClientGroups {
   /**
    * Get all the client groups under a namespace.
    */
+  @summary("List all client groups under a namespace.")
   listByNamespace is ArmResourceListByParent<
     ClientGroup,
     Parameters = {
@@ -63,7 +67,8 @@ interface ClientGroups {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<ClientGroupsListResult>
   >;
 }
 

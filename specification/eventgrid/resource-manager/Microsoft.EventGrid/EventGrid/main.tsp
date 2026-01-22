@@ -65,4 +65,9 @@ enum Versions {
   v2025_07_15_preview: "2025-07-15-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<ArmResponse<OperationsListResult>> {}
+@@summary(Operations.list, "List available operations.");
+@@doc(Operations.list,
+  "List the available operations supported by the Microsoft.EventGrid resource provider."
+);

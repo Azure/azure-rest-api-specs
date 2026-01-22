@@ -29,6 +29,7 @@ interface ExtensionTopics {
   /**
    * Get the properties of an extension topic.
    */
+  @summary("Get properties of an extension topic.")
   get is Extension.Read<Extension.ScopeParameter, ExtensionTopic>;
 }
 

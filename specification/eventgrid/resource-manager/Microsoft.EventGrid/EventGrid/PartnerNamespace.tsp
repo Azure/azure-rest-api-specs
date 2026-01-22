@@ -28,12 +28,14 @@ interface PartnerNamespaces {
   /**
    * Get properties of a partner namespace.
    */
+  @summary("Get a partner namespace.")
   get is ArmResourceRead<PartnerNamespace>;
 
   /**
    * Asynchronously creates a new partner namespace with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Create a partner namespace.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PartnerNamespace,
     Response = ArmResourceCreatedResponse<
@@ -45,17 +47,24 @@ interface PartnerNamespaces {
   /**
    * Asynchronously updates a partner namespace with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update a partner namespace.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PartnerNamespace,
     PatchModel = PartnerNamespaceUpdateParameters,
-    Response = OkResponse | ArmResourceCreatedResponse<PartnerNamespace>
+    Response = OkResponse | ArmResourceCreatedResponse<
+      PartnerNamespace,
+      LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
    * Delete existing partner namespace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a partner namespace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerNamespace,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -64,6 +73,7 @@ interface PartnerNamespaces {
   /**
    * List all the partner namespaces under a resource group.
    */
+  @summary("List partner namespaces under a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     PartnerNamespace,
     Parameters = {
@@ -78,12 +88,14 @@ interface PartnerNamespaces {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerNamespacesListResult>
   >;
 
   /**
    * List all the partner namespaces under an Azure subscription.
    */
+  @summary("List partner namespaces under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     PartnerNamespace,
     Parameters = {
@@ -98,12 +110,14 @@ interface PartnerNamespaces {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerNamespacesListResult>
   >;
 
   /**
    * List the two keys used to publish to a partner namespace.
    */
+  @summary("List keys for a partner namespace.")
   @action("listKeys")
   listSharedAccessKeys is ArmResourceActionSync<
     PartnerNamespace,
@@ -114,6 +128,7 @@ interface PartnerNamespaces {
   /**
    * Regenerate a shared access key for a partner namespace.
    */
+  @summary("Regenerate key for a partner namespace.")
   regenerateKey is ArmResourceActionSync<
     PartnerNamespace,
     PartnerNamespaceRegenerateKeyRequest,

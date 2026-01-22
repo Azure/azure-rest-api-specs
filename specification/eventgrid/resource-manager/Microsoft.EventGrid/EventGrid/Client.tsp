@@ -29,17 +29,20 @@ interface Clients {
   /**
    * Get properties of a client.
    */
+  @summary("Get a client.")
   get is ArmResourceRead<Client>;
 
   /**
    * Create or update a client with the specified parameters.
    */
+  @summary("Create or update a client.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Client>;
 
   /**
    * Delete an existing client.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a client.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Client,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -48,6 +51,7 @@ interface Clients {
   /**
    * Get all the permission bindings under a namespace.
    */
+  @summary("List all permission bindings under a namespace.")
   listByNamespace is ArmResourceListByParent<
     Client,
     Parameters = {
@@ -62,7 +66,8 @@ interface Clients {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<ClientsListResult>
   >;
 }
 

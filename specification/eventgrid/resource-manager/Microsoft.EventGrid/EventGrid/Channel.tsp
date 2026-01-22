@@ -29,16 +29,20 @@ interface Channels {
   /**
    * Get properties of a channel.
    */
+  @summary("Get a channel.")
   get is ArmResourceRead<Channel>;
 
   /**
    * Synchronously creates or updates a new channel with the specified parameters.
    */
+  @summary("Create or update a channel.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Channel>;
 
   /**
    * Synchronously updates a channel with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update a Channel.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Channel,
@@ -50,6 +54,7 @@ interface Channels {
    * Delete an existing channel.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a channel.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Channel,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -58,6 +63,7 @@ interface Channels {
   /**
    * List all the channels in a partner namespace.
    */
+  @summary("List channels.")
   listByPartnerNamespace is ArmResourceListByParent<
     Channel,
     Parameters = {
@@ -72,12 +78,14 @@ interface Channels {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<ChannelsListResult>
   >;
 
   /**
    * Get the full endpoint URL of a partner destination channel.
    */
+  @summary("Get full URL of partner destination channel.")
   getFullUrl is ArmResourceActionSync<
     Channel,
     void,

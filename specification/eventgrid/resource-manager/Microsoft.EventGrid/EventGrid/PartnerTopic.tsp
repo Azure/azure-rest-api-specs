@@ -34,16 +34,21 @@ interface PartnerTopics {
   /**
    * Get properties of a partner topic.
    */
+  @summary("Get a partner topic.")
   get is ArmResourceRead<PartnerTopic>;
 
   /**
    * Asynchronously creates a new partner topic with the specified parameters.
    */
+  @summary("Create a partner topic.")
+  @summary("Create a partner topic.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<PartnerTopic>;
 
   /**
    * Asynchronously updates a partner topic with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update a partner topic.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     PartnerTopic,
@@ -55,6 +60,7 @@ interface PartnerTopics {
    * Delete existing partner topic.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a partner topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerTopic,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -63,6 +69,7 @@ interface PartnerTopics {
   /**
    * List all the partner topics under a resource group.
    */
+  @summary("List partner topics under a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     PartnerTopic,
     Parameters = {
@@ -77,12 +84,14 @@ interface PartnerTopics {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerTopicsListResult>
   >;
 
   /**
    * List all the partner topics under an Azure subscription.
    */
+  @summary("List partner topics under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     PartnerTopic,
     Parameters = {
@@ -97,12 +106,14 @@ interface PartnerTopics {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<PartnerTopicsListResult>
   >;
 
   /**
    * Activate a newly created partner topic.
    */
+  @summary("Activate a partner topic.")
   activate is ArmResourceActionSync<
     PartnerTopic,
     void,
@@ -112,6 +123,7 @@ interface PartnerTopics {
   /**
    * Deactivate specific partner topic.
    */
+  @summary("Deactivate a partner topic.")
   deactivate is ArmResourceActionSync<
     PartnerTopic,
     void,

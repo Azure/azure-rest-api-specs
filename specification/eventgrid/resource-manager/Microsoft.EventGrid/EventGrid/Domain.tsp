@@ -39,12 +39,14 @@ interface Domains {
   /**
    * Get properties of a domain.
    */
+  @summary("Get a domain.")
   get is ArmResourceRead<Domain>;
 
   /**
    * Asynchronously creates or updates a new domain with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Create or update a domain.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Domain,
     Response = ArmResourceCreatedResponse<
@@ -56,17 +58,26 @@ interface Domains {
   /**
    * Asynchronously updates a domain with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update a domain.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Domain,
     PatchModel = DomainUpdateParameters,
-    Response = OkResponse | ArmResourceCreatedResponse<Domain>
+    Response = {
+      @body body: void;
+    } | ArmResourceCreatedResponse<
+      Domain,
+      LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
    * Delete existing domain.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a domain.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Domain,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -75,6 +86,7 @@ interface Domains {
   /**
    * List all the domains under a resource group.
    */
+  @summary("List domains under a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Domain,
     Parameters = {
@@ -89,12 +101,14 @@ interface Domains {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<DomainsListResult>
   >;
 
   /**
    * List all the domains under an Azure subscription.
    */
+  @summary("List domains under an Azure subscription.")
   listBySubscription is ArmListBySubscription<
     Domain,
     Parameters = {
@@ -109,12 +123,14 @@ interface Domains {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ArmResponse<DomainsListResult>
   >;
 
   /**
    * List the two keys used to publish to a domain.
    */
+  @summary("List keys for a domain.")
   @action("listKeys")
   listSharedAccessKeys is ArmResourceActionSync<
     Domain,
@@ -125,6 +141,7 @@ interface Domains {
   /**
    * Regenerate a shared access key for a domain.
    */
+  @summary("Regenerate key for a domain.")
   regenerateKey is ArmResourceActionSync<
     Domain,
     DomainRegenerateKeyRequest,
