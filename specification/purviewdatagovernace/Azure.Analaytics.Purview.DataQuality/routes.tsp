@@ -602,10 +602,6 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:observations")
   @tag("DQ Assessment Observations")
   @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-examples",
-    #{ Observation_Create: #{ $ref: "./examples/Observation_Create.json" } }
-  )
   @doc("Triggers a long-running observation job for a specific data asset.")
   @post
   op observations is RpcOperation<
@@ -1415,8 +1411,13 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Alerts")
   @added(ApiVersions.v2026_01_12_preview)
+  @extension(
+    "x-ms-examples",
+    #{ Alert_UpdateStatus: #{ $ref: "./examples/Alert_UpdateStatus.json" } }
+  )
   @doc("Updates the status of an alert within the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @patch(#{ implicitOptionality: true })
