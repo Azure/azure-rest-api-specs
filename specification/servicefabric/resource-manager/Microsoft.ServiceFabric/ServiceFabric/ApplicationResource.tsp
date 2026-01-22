@@ -47,11 +47,10 @@ interface ApplicationResources {
   @operationId("Applications_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApplicationResource,
-    Response = ArmAcceptedLroResponse & {
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
       @bodyRoot
       _: ApplicationResource;
-    },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    }
   >;
 
   /**

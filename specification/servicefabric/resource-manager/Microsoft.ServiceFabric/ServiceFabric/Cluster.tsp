@@ -36,12 +36,10 @@ interface Clusters {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
       @bodyRoot
       _: Cluster;
-    }),
-    LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-      Azure.Core.Foundations.RetryAfterHeader
+    })
   >;
 
   /**
@@ -54,7 +52,8 @@ interface Clusters {
     Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Cluster;
-    })
+    }),
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>
   >;
 
   /**

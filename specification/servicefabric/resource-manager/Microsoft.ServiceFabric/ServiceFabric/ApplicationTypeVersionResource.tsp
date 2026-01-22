@@ -42,11 +42,10 @@ interface ApplicationTypeVersionResources {
   @operationId("ApplicationTypeVersions_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApplicationTypeVersionResource,
-    Response = ArmAcceptedLroResponse & {
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationTypeVersionResource>> & {
       @bodyRoot
       _: ApplicationTypeVersionResource;
-    },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    }
   >;
 
   /**

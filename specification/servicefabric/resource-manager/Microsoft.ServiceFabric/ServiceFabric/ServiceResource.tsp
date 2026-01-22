@@ -42,11 +42,10 @@ interface ServiceResources {
   @operationId("Services_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServiceResource,
-    Response = ArmAcceptedLroResponse & {
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServiceResource>> & {
       @bodyRoot
       _: ServiceResource;
-    },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    }
   >;
 
   /**
