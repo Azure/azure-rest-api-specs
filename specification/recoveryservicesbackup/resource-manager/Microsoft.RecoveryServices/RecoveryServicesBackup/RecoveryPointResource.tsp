@@ -66,6 +66,23 @@ interface RecoveryPoints {
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPointResource>
   >;
+
+  /**
+   * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-operation-group" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "This API does not support tags"
+  @patch(#{implicitOptionality: true})
+  @armResourceUpdate(RecoveryPointResource)
+  update(
+    ...ResourceInstanceParameters<RecoveryPointResource>,
+
+    /**
+     * Request body for operation
+     */
+    @bodyRoot
+    parameters: UpdateRecoveryPointRequest,
+  ): ArmResponse<RecoveryPointResource> | ErrorResponse;
 }
 
 @armResourceOperations
@@ -126,6 +143,7 @@ interface ItemLevelRecoveryConnections {
 @@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
 );
+@@doc(RecoveryPoints.update::parameters.parameters, "Request body for operation");
 @@doc(Restores.trigger::parameters.body, "resource restore request");
 @@doc(ItemLevelRecoveryConnections.provision::parameters.body,
   "resource ILR request"

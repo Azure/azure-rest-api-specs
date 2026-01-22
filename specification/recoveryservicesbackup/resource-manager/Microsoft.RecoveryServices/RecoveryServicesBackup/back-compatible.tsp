@@ -129,6 +129,11 @@ using Microsoft.RecoveryServices;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@hierarchyBuilding(AzureVmWorkloadSQLInstanceProtectedItem,
+  AzureVmWorkloadProtectedItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@hierarchyBuilding(AzureWorkloadSAPHanaRecoveryPoint,
   AzureWorkloadRecoveryPoint
 );
@@ -240,6 +245,11 @@ using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@hierarchyBuilding(AzureVmWorkloadSAPHanaHSRProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@hierarchyBuilding(AzureVmWorkloadSAPHanaScaleoutProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 

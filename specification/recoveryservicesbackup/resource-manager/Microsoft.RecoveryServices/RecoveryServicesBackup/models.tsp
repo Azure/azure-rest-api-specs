@@ -264,6 +264,148 @@ union SoftDeleteFeatureState {
 }
 
 /**
+ * Threat status of the container
+ */
+union SourceSideScanStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Configured: "Configured",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NotConfigured: "NotConfigured",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NotApplicable: "NotApplicable",
+}
+
+/**
+ * Threat summary for the container
+ */
+union SourceSideScanSummary {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NotApplicable: "NotApplicable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Suspicious: "Suspicious",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Healthy: "Healthy",
+}
+
+/**
+ * Source side threat information
+ */
+model SourceSideScanInfo {
+  /**
+   * Threat status of the container
+   */
+  sourceSideScanStatus?: SourceSideScanStatus;
+
+  /**
+   * Threat summary for the container
+   */
+  sourceSideScanSummary?: SourceSideScanSummary;
+}
+
+/**
+ * Threat status of the recovery point
+ */
+union ThreatStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Healthy: "Healthy",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  UnHealthy: "UnHealthy",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Warning: "Warning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  NotAvailable: "NotAvailable",
+}
+
+/**
+ * Threat Status Types
+ */
+union ThreatState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  InProgress: "InProgress",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Ignored: "Ignored",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Resolved: "Resolved",
+}
+
+/**
+ * Threat Severity Types
+ */
+union ThreatSeverity {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Critical: "Critical",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  High: "High",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Warning: "Warning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Informational: "Informational",
+}
+
+/**
+ * Recovery Point Threat information
+ */
+model ThreatInfo {
+  /**
+   * Threat Subject
+   */
+  @visibility(Lifecycle.Read)
+  threatTitle?: string;
+
+  /**
+   * Threat Description
+   */
+  @visibility(Lifecycle.Read)
+  threatDescription?: string;
+
+  /**
+   * Timestamp when the last (latest)threat information was sent
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdatedTime?: utcDateTime;
+
+  /**
+   * Threat Status Types
+   */
+  threatState?: ThreatState;
+
+  /**
+   * Start timestamp of the threat
+   */
+  @visibility(Lifecycle.Read)
+  threatStartTime?: utcDateTime;
+
+  /**
+   * End timestamp of the threat
+   */
+  @visibility(Lifecycle.Read)
+  threatEndTime?: utcDateTime;
+
+  /**
+   * threat details link
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses threatURI"
+  @visibility(Lifecycle.Read)
+  threatURI?: url;
+
+  /**
+   * Threat Severity Types
+   */
+  threatSeverity?: ThreatSeverity;
+}
+
+/**
  * Encryption At Rest Type
  */
 union EncryptionAtRestType {
@@ -558,6 +700,21 @@ union PolicyType {
 }
 
 /**
+ * Type of the protection policy
+ */
+union VMWorkloadPolicyType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Invalid: "Invalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SnapshotV1: "SnapshotV1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SnapshotV2: "SnapshotV2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Streaming: "Streaming",
+}
+
+/**
  * Tiering Mode to control automatic tiering of recovery points. Supported values are:
  * 1. TierRecommended: Tier all recovery points recommended to be tiered
  * 2. TierAfter: Tier all recovery points after a fixed period, as specified in duration + durationType below.
@@ -644,6 +801,34 @@ union ProtectedItemState {
   ProtectionPaused: "ProtectionPaused",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BackupsSuspended: "BackupsSuspended",
+}
+
+/**
+ * Protection type in case protected as part of a parent.
+ */
+union ProtectionLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Database: "Database",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  DatabaseUnderInstance: "DatabaseUnderInstance",
+}
+
+/**
+ * The state of instance protection.
+ */
+union InstanceProtectionReadiness {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Ready: "Ready",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ScheduleDisabled: "ScheduleDisabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  PartialProtection: "PartialProtection",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectionError: "ProtectionError",
 }
 
 /**
@@ -767,6 +952,10 @@ union RestorePointQueryType {
   SnapshotFull: "SnapshotFull",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SnapshotCopyOnlyFull: "SnapshotCopyOnlyFull",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Snapshot: "Snapshot",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
 /**
@@ -1049,6 +1238,8 @@ union ContainerType {
   GenericContainer: "GenericContainer",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HanaHSRContainer: "HanaHSRContainer",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
 /**
@@ -2128,6 +2319,11 @@ model ProtectedItem {
    */
   @visibility(Lifecycle.Read)
   vaultId?: string;
+
+  /**
+   * Source side threat information
+   */
+  sourceSideScanInfo?: SourceSideScanInfo;
 }
 
 /**
@@ -2153,6 +2349,17 @@ model RecoveryPoint {
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
+
+  /**
+   * Threat status of the recovery point
+   */
+  threatStatus?: ThreatStatus;
+
+  /**
+   * Recovery point threat information.
+   */
+  @identifiers(#[])
+  threatInfo?: ThreatInfo[];
 }
 
 alias ResourceProperties = {
@@ -2952,6 +3159,36 @@ model UnlockDeleteResponse {
 }
 
 /**
+ * Patch Request content to update recovery point for given RecoveryPointId
+ */
+model UpdateRecoveryPointRequest {
+  /**
+   * Resource properties.
+   */
+  properties?: PatchRecoveryPointInput;
+}
+
+/**
+ * Recovery Point Contract for Update Recovery Point API.
+ */
+model PatchRecoveryPointInput {
+  /**
+   * Properties of Recovery Point
+   */
+  recoveryPointProperties?: PatchRecoveryPointPropertiesInput;
+}
+
+/**
+ * Recovery Point Properties Contract for Update Recovery Point API.
+ */
+model PatchRecoveryPointPropertiesInput {
+  /**
+   * Expiry time of Recovery Point in UTC.
+   */
+  expiryTime?: utcDateTime;
+}
+
+/**
  * Base class for tiering cost request.
  * Specific cost request types are derived from this class.
  */
@@ -3278,6 +3515,11 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
    * Type of workload for the backup management
    */
   workLoadType?: WorkloadType;
+
+  /**
+   * Type of the protection policy
+   */
+  vmWorkloadPolicyType?: VMWorkloadPolicyType;
 
   /**
    * Common settings for the backup management
@@ -4316,6 +4558,39 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   protectedItemType: "AzureVmWorkloadSQLDatabase";
 
   ...AzureVmWorkloadProtectedItemProperties;
+
+  /**
+   * Parent Protected item in case protected as part of a parent.
+   */
+  parentProtectedItem?: string;
+
+  /**
+   * Protection type in case protected as part of a parent.
+   */
+  protectionLevel?: ProtectionLevel;
+}
+
+/**
+ * Azure VM workload-specific protected item representing SQL Instance.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  protectedItemType: "AzureVmWorkloadSQLInstance";
+
+  ...AzureVmWorkloadProtectedItemProperties;
+
+  /**
+   * Name of Child Dbs protected under this parent.
+   */
+  childDBNames?: string[];
+
+  /**
+   * The state of instance protection.
+   */
+  instanceProtectionReadiness?: InstanceProtectionReadiness;
 }
 
 /**
@@ -4817,6 +5092,12 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
    */
   @identifiers(#[])
   dataDirectoryPaths?: SQLDataDirectory[];
+
+  /**
+   * List of databases included in recovery point.
+   */
+  @identifiers(#[])
+  includedDatabases?: DatabaseInRP[];
 }
 
 /**
@@ -4976,6 +5257,24 @@ model BmsrpQueryObject {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   includeSoftDeletedRP?: boolean;
+
+  /**
+   * Id of the base snapshot recovery point.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  baseSnapshotRPId?: string;
+
+  /**
+   * Id of the datasource of the base snapshot recovery point.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  baseRPDatasourceId?: string;
+
+  /**
+   * Flag to indicate whether to get only the latest recovery point.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  getLatestRPOnly?: boolean;
 }
 
 /**
@@ -5384,6 +5683,22 @@ model DailySchedule {
    * List of times of day this schedule has to be run.
    */
   scheduleRunTimes?: utcDateTime[];
+}
+
+/**
+ * Database included in RP.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original API naming convention"
+model DatabaseInRP {
+  /**
+   * Datasource Id for the database.
+   */
+  datasourceId?: string;
+
+  /**
+   * Datasource name for the database.
+   */
+  datasourceName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -7307,6 +7622,19 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
    * Type of the backup item.
    */
   protectableItemType: "HanaHSRContainer";
+
+  ...AzureVmWorkloadProtectableItemProperties;
+}
+
+/**
+ * Azure VM workload-specific protectable item representing HANA scale out.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AzureVmWorkloadSAPHanaScaleoutProtectableItem extends WorkloadProtectableItem {
+  /**
+   * Type of the backup item.
+   */
+  protectableItemType: "HanaScaleoutContainer";
 
   ...AzureVmWorkloadProtectableItemProperties;
 }
