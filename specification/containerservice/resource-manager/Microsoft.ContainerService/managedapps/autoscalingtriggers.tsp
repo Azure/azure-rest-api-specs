@@ -9,6 +9,113 @@ using TypeSpec.Rest;
 
 namespace Microsoft.ContainerService;
 
+/** Scaling configuration */
+model ScalingConfiguration {
+  /** Scaling type for the app. Default is manual scaling */
+  type?: ScalingType;
+
+  /** Minimum number of replicas for the app when using autoscaling */
+  minReplicas?: int32;
+
+  /** Maximum number of replicas for the app when using autoscaling */
+  maxReplicas?: int32;
+
+  /** List of autoscaling triggers for the app */
+  @identifiers(#["type"])
+  autoscalingTriggers?: AutoscalingTrigger[];
+}
+
+/** Scaling type for the app */
+union ScalingType {
+  /** Auto scale */
+  Autoscale: "autoscale",
+
+  /** Manual scale */
+  Manual: "manual",
+
+  string,
+}
+
+/** KEDA Autoscaling Trigger */
+model AutoscalingTrigger {
+  /** Type of the autoscaling trigger */
+  type: AutoscalingTriggerType;
+
+  /** Configuration for GitHub Runner trigger. Only required when type is 'github-runner'. */
+  gitHubRunner?: GitHubRunnerTriggerMetadata;
+
+  /** Configuration for Azure App Insights trigger. Only required when type is 'azure-app-insights'. */
+  azureAppInsights?: AzureAppInsightsTriggerMetadata;
+
+  /** Configuration for Azure Pipelines trigger. Only required when type is 'azure-pipelines'. */
+  azurePipelines?: AzurePipelinesTriggerMetadata;
+
+  /** Configuration for Azure Blob trigger. Only required when type is 'azure-blob'. */
+  azureBlob?: AzureBlobTriggerMetadata;
+
+  /** Configuration for Azure Data Explorer trigger. Only required when type is 'azure-data-explorer'. */
+  azureDataExplorer?: AzureDataExplorerTriggerMetadata;
+
+  /** Configuration for Azure Event Hub trigger. Only required when type is 'azure-eventhub'. */
+  azureEventHub?: AzureEventHubTriggerMetadata;
+
+  /** Configuration for Azure Log Analytics trigger. Only required when type is 'azure-log-analytics'. */
+  azureLogAnalytics?: AzureLogAnalyticsTriggerMetadata;
+
+  /** Configuration for Azure Monitor trigger. Only required when type is 'azure-monitor'. */
+  azureMonitor?: AzureMonitorTriggerMetadata;
+
+  /** Configuration for Azure Service Bus trigger. Only required when type is 'azure-servicebus'. */
+  azureServiceBus?: AzureServiceBusTriggerMetadata;
+
+  /** Configuration for Azure Storage Queue trigger. Only required when type is 'azure-storage-queue'. */
+  azureStorageQueue?: AzureStorageQueueTriggerMetadata;
+}
+
+/** KEDA Autoscaling Trigger Types */
+union AutoscalingTriggerType {
+  /** CPU based autoscaling */
+  Cpu: "cpu",
+
+  /** Memory based autoscaling */
+  Memory: "memory",
+
+  /** Keda Cron trigger */
+  Cron: "cron",
+
+  /** Keda GitHub Runner trigger */
+  GitHubRunner: "github-runner",
+
+  /** Keda Azure App Insights trigger */
+  AzureAppInsights: "azure-app-insights",
+
+  /** Keda Azure Blob trigger */
+  AzureBlob: "azure-blob",
+
+  /** Keda Azure Data Explorer trigger */
+  AzureDataExplorer: "azure-data-explorer",
+
+  /** Keda Azure Event Hub trigger */
+  AzureEventHub: "azure-eventhub",
+
+  /** Keda Azure Log Analytics trigger */
+  AzureLogAnalytics: "azure-log-analytics",
+
+  /** Keda Azure Monitor trigger */
+  AzureMonitor: "azure-monitor",
+
+  /** Keda Azure Pipelines Trigger */
+  AzurePipelines: "azure-pipelines",
+
+  /** Keda Azure Service Bus Trigger */
+  AzureServiceBus: "azure-servicebus",
+
+  /** Keda Azure Storage Queue Trigger */
+  AzureStorageQueue: "azure-storage-queue",
+
+  string,
+}
+
 /** GitHub Runner Trigger Configuration */
 model GitHubRunnerTriggerMetadata {
   /** The URL of the GitHub API (Default: https://api.github.com) */

@@ -2,9 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./customoperations.tsp";
 import "./volumetypes.tsp";
 import "./helpers.tsp";
+import "./autoscalingtriggers.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -13,43 +13,39 @@ using TypeSpec.Rest;
 
 namespace Microsoft.ContainerService;
 
-/** App resource */
-model ManagedApp is Azure.ResourceManager.TrackedResource<AppProperties> {
-  ...ResourceNameParameter<ManagedApp>;
+/** Represents a managed cluster. Just a placeholder until rest of aks is converted to typespec */
+model ManagedCluster is TrackedResource<ManagedClusterProperties> {
+  ...ResourceNameParameter<ManagedCluster>;
 }
 
-@parentResource(ManagedApp)
-model Revision is Azure.ResourceManager.ProxyResource<AppRevisionProperties> {
-  ...ResourceNameParameter<Revision>;
+/** Managed Cluster properties. Just a placeholder */
+model ManagedClusterProperties {
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** Managed Namespace resource. Just a placeholder for now */
+@parentResource(ManagedCluster)
+model ManagedNamespace is ProxyResource<ManagedNamespaceProperties> {
+  ...ResourceNameParameter<ManagedNamespace>;
+}
+
+/** Managed Namespace properties. Just a placeholder */
+model ManagedNamespaceProperties {
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** App resource */
+@parentResource(ManagedNamespace)
+model ManagedApp is Azure.ResourceManager.ProxyResource<AppProperties> {
+  ...ResourceNameParameter<ManagedApp>;
 }
 
 /** App properties */
 model AppProperties {
-  /** Template for the app */
-  template: AppTemplate;
-
-  /** The status of the last operation. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-/** Properties of the App Revision */
-model AppRevisionProperties {
-  /** Template for the app. This represents a point in time snapshot of the app template */
-  template: AppTemplate;
-
-  /** The status of the last operation. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-/** Patch model for ManagedApp */
-model ManagedAppPatch {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-}
-
-/** Template for the app or app deployment */
-model AppTemplate {
   /** Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace */
   @identifiers(#["apiGroups", "resources", "verbs"])
   namespacedPermissions?: Permissions[];
@@ -66,14 +62,33 @@ model AppTemplate {
   @identifiers(#["name"])
   healthChecks?: HealthCheck[];
 
+  /** Observability configuration for the app */
+  observability?: ObservabilityProperties;
+
   /** Scaling type for the app. Default is manual scaling */
-  scaling?: ScalingType;
+  scaling?: ScalingConfiguration;
 
   /** Ingress configuration for the app */
   ingressConfiguration?: IngressProperties;
 
+  /** User assigned identity for the app deployment to use */
+  @visibility(Lifecycle.Read)
+  identity?: AppDeploymentUserAssignedIdentity;
+
   /** Deployment Template for the app. Specify any configuration that will be needed or used for every deployment */
   template: DeploymentTemplate;
+
+  /** The name of the generated service account. This is generated from the app deployment name, and namespace name */
+  @visibility(Lifecycle.Read)
+  generatedServiceAccountName: string;
+
+  /** The name of the generated kubernetes service. This is generated from the app deployment name and namespace name */
+  @visibility(Lifecycle.Read)
+  generatedKubernetesServiceName: string;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 /** Deployment template for the app */
@@ -120,6 +135,38 @@ model DeploymentTemplate {
   /** Volumes for the app */
   @identifiers(#["name"])
   volumes?: Volume[];
+
+  /** Volume mounts for the app */
+  @identifiers(#["name"])
+  volumeMounts?: VolumeMount[];
+}
+
+/** Observability properties for the app */
+model ObservabilityProperties {
+  /** Log Analytics Workspace ID */
+  logAnalyticsWorkspaceId?: logAnalyticsWorkspaceId;
+
+  /** Azure Managed Prometheus Workspace ID */
+  azureMonitorAccount?: azureManagedPrometheusWorkspaceId;
+}
+
+scalar UserAssignedIdentity
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities",
+    }
+  ]>;
+
+/** App Deployment User Assigned Identity */
+model AppDeploymentUserAssignedIdentity {
+  /** The resource id of the user assigned identity */
+  userAssignedIdentityId?: UserAssignedIdentity;
+
+  /** The client id of the user assigned identity */
+  clientId?: string;
+
+  /** The principal id of the user assigned identity */
+  principalId?: string;
 }
 
 /** Represents an exposed port on a container */
@@ -128,10 +175,10 @@ model ContainerPort {
   name: string;
 
   /** Port number */
-  port: int32;
+  port?: int32 = 8080;
 
   /** Protocol for the port. Defaults to TCP */
-  protocol?: string;
+  protocol?: string = "TCP";
 }
 
 /** Key Value Pair for labels/annotations */
@@ -169,9 +216,9 @@ model Container {
   /** Arguments to the command */
   arguments: string[];
 
-  /** An array of health checks for the container */
+  /** An array of probes for the container */
   @identifiers(#["type"])
-  healthChecks: ContainerProbes[];
+  probes: ContainerProbes[];
 
   /** Container Resource Requirements. If not specified, defaults will be applied */
   resources?: ResourceRequirements;
@@ -181,13 +228,25 @@ model Container {
   volumeMounts?: VolumeMount[];
 }
 
+/** Volume mount definition */
+model VolumeMount {
+  /** Name of the volume */
+  name: string;
+
+  /** Mount path for the volume */
+  mountPath: string;
+
+  /** Volume is ReadOnly or not */
+  readOnly: boolean;
+}
+
 /** Resource requirements for a container */
 model ResourceRequirements {
   /** CPU resource request and limit */
-  cpu: string;
+  cpu?: string = "2";
 
   /** Memory resource request and limit */
-  memory: string;
+  memory?: string = "2Gi";
 }
 
 /** Ingress configuration for the app */
@@ -230,17 +289,6 @@ model IngressProperties {
 
   /** Ingress type needed. I.e. http, grpc, */
   ingressType: IngressType;
-}
-
-/** Scaling type for the app */
-union ScalingType {
-  /** Auto scale */
-  Autoscale: "autoscale",
-
-  /** Manual scale */
-  Manual: "manual",
-
-  string,
 }
 
 scalar logAnalyticsWorkspaceId
@@ -382,79 +430,4 @@ union ProvisioningState {
   Accepted: "Accepted",
 
   string,
-}
-
-@armResourceOperations
-interface Apps {
-  // Managed App Operations
-  get is ArmResourceRead<ManagedApp>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedApp>;
-  delete is ArmResourceDeleteWithoutOkAsync<ManagedApp>;
-  patch is ArmCustomPatchSync<
-    ManagedApp,
-    ManagedAppPatch,
-    Azure.ResourceManager.Foundations.BaseParameters<ManagedAppPatch> &
-      IfMatchParameters<ManagedApp>
-  >;
-
-  listByResourceGroup is ArmResourceListByParent<ManagedApp>;
-  listBySubscription is ArmListBySubscription<ManagedApp>;
-  @list
-  deployments is ListDeployments<ManagedApp>;
-}
-
-@armResourceOperations
-interface Revisions {
-  // App Revision Operations
-  @list
-  list is ArmResourceListByParent<Revision>;
-  get is ArmResourceRead<Revision>;
-  /** List deployments for an app revision */
-  @list
-  deployments is ListDeployments<Revision>;
-}
-
-@armResourceOperations
-interface FleetAppDeployments {
-  // Fleet App Deployment Operations
-  @list
-  list is ArmResourceListByParent<FleetAppDeployment>;
-  get is ArmResourceRead<FleetAppDeployment>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    FleetAppDeployment,
-    Azure.ResourceManager.Foundations.BaseParameters<FleetAppDeployment>
-  >;
-  delete is ArmResourceDeleteWithoutOkAsync<FleetAppDeployment>;
-
-  /** Renders the app deployment kubernetes manifests */
-  render is RenderManifests<FleetAppDeployment, RenderResponse>;
-}
-
-@armResourceOperations
-interface AppDeployments {
-  // App Deployment Operations
-  @list
-  list is ArmResourceListByParent<AppDeployment>;
-  get is ArmResourceRead<AppDeployment>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    AppDeployment,
-    Azure.ResourceManager.Foundations.BaseParameters<AppDeployment>
-  >;
-  delete is ArmResourceDeleteWithoutOkAsync<AppDeployment>;
-
-  /** Renders the app deployment kubernetes manifests */
-  render is RenderManifests<AppDeployment, RenderResponse>;
-}
-
-@armResourceOperations
-interface TrafficRules {
-  // Traffic Rule Operations
-  @list
-  list is ArmResourceListByParent<TrafficRule>;
-  get is ArmResourceRead<TrafficRule>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    TrafficRule,
-    Azure.ResourceManager.Foundations.BaseParameters<TrafficRule>
-  >;
-  delete is ArmResourceDeleteWithoutOkAsync<TrafficRule>;
 }
