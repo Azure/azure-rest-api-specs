@@ -118,6 +118,7 @@ using Microsoft.Batch;
   "csharp"
 );
 @@clientName(VirtualMachineConfiguration, "BatchVmConfiguration", "csharp");
+@@clientName(VirtualMachineConfiguration.osDisk, "OSDisk", "csharp");
 @@clientName(DataDisk, "BatchVmDataDisk", "csharp");
 @@clientName(DataDisk.diskSizeGB, "DiskSizeInGB", "csharp");
 @@clientName(VMExtension, "BatchVmExtension", "csharp");
@@ -201,13 +202,15 @@ using Microsoft.Batch;
 );
 @@clientName(KeySource, "BatchAccountKeySource", "csharp");
 @@clientName(IPRule, "BatchIPRule", "csharp");
-@@clientName(ResourceFile.identityReference, "Identity", "csharp");
 @@clientName(VirtualMachineFamilyCoreQuota, "BatchVmFamilyCoreQuota", "csharp");
 @@clientName(ScaleSettings, "BatchAccountPoolScaleSettings", "csharp");
 @@clientName(AutoScaleSettings, "BatchAccountAutoScaleSettings", "csharp");
 @@clientName(FixedScaleSettings, "BatchAccountFixedScaleSettings", "csharp");
 @@clientName(StartTask, "BatchAccountPoolStartTask", "csharp");
+@@clientName(ResourceFile.identityReference, "Identity", "csharp");
 @@clientName(ResourceFile, "BatchResourceFile", "csharp");
+@@alternateType(ResourceFile.httpUrl, url, "csharp");
+@@alternateType(ResourceFile.storageContainerUrl, url, "csharp");
 @@clientName(EnvironmentSetting, "BatchEnvironmentSetting", "csharp");
 @@clientName(TaskContainerSettings, "BatchTaskContainerSettings", "csharp");
 @@clientName(ComputeNodeFillType, "BatchNodeFillType", "csharp");
@@ -234,6 +237,7 @@ using Microsoft.Batch;
   "BatchNameAvailabilityContent",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityParameters.type, "ResourceType", "csharp");
 @@alternateType(CheckNameAvailabilityParameters.type,
   Azure.Core.armResourceType,
   "csharp"
@@ -249,7 +253,7 @@ using Microsoft.Batch;
 @@clientName(NameAvailabilityReason, "BatchNameUnavailableReason", "csharp");
 @@clientName(CifsMountConfiguration, "BatchCifsMountConfiguration", "csharp");
 @@clientName(CifsMountConfiguration.userName, "username", "csharp");
-@@clientName(NFSMountConfiguration, "BatchNFSMountConfiguration", "csharp");
+@@clientName(NFSMountConfiguration, "BatchNfsMountConfiguration", "csharp");
 @@clientName(ContainerWorkingDirectory,
   "BatchContainerWorkingDirectory",
   "csharp"
@@ -294,6 +298,14 @@ using Microsoft.Batch;
   "BatchPublicIPAddressConfiguration",
   "csharp"
 );
+@@clientName(PublicIPAddressConfiguration.ipAddressIds,
+  "IPAddressIds",
+  "csharp"
+);
+@@alternateType(PublicIPAddressConfiguration.ipAddressIds,
+  Azure.Core.armResourceIdentifier[],
+  "csharp"
+);
 @@clientName(SkuCapability, "BatchSkuCapability", "csharp");
 @@clientName(UserIdentity, "BatchUserIdentity", "csharp");
 @@clientName(ImageReference, "BatchImageReference", "csharp");
@@ -330,10 +342,17 @@ using Microsoft.Batch;
 @@clientName(UefiSettings, "BatchUefiSettings", "csharp");
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVTpmEnabled", "csharp");
+@@clientName(SecurityTypes.confidentialVM, "ConfidentialVm", "csharp");
 @@clientName(SecurityTypes, "BatchSecurityType", "csharp");
+@@clientName(StorageAccountType.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(StorageAccountType.Premium_LRS, "PremiumLrs", "csharp");
 @@clientName(StorageAccountType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
 @@clientName(StorageAccountType, "BatchStorageAccountType", "csharp");
-@@clientName(ProvisioningState, "BatchProvisioningState", "csharp");
+@@alternateType(ProvisioningState, BatchProvisioningState, "csharp");
+@@alternateType(PrivateEndpointConnectionProvisioningState,
+  BatchPrivateEndpointConnectionProvisioningState,
+  "csharp"
+);
 @@clientName(Azure.ResourceManager.CommonTypes.Severity,
   "BatchSeverity",
   "csharp"
@@ -370,6 +389,10 @@ using Microsoft.Batch;
   "BatchResourceAssociation",
   "csharp"
 );
+@@clientName(SecurityEncryptionTypes.VMGuestStateOnly,
+  "VmGuestStateOnly",
+  "csharp"
+);
 @@clientName(SecurityEncryptionTypes, "BatchSecurityEncryptionType", "csharp");
 @@clientName(PrivateEndpointConnection,
   "BatchPrivateEndpointConnection",
@@ -388,26 +411,27 @@ using Microsoft.Batch;
   "BatchAccountRegenerateKeyContent",
   "csharp"
 );
-@@clientName(BatchAccount,
-  "BatchAccountRenamed",
-  "csharp"
-);
+@@clientName(BatchAccount, "BatchAccountRenamed", "csharp");
 @@alternateType(BatchAccountCreateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(BatchAccount.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+@@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ServiceArtifactReference.id,
+  Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(BatchAccount, BatchAccountData, "csharp");
-@@usage(BatchAccount, Usage.input, "csharp");
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
 namespace Microsoft.Batch {
   /**
    * Contains information about an Azure Batch account.
    */
+  @usage(Usage.input, "csharp")
   @clientName("BatchAccount", "csharp")
   model BatchAccountData
     is Azure.ResourceManager.ProxyResource<BatchAccountProperties> {
@@ -422,16 +446,90 @@ namespace Microsoft.Batch {
      * The identity of the Batch account.
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    identity?: BatchAccountIdentity;
+    identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     /** Resource tags. */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     tags?: Record<string>;
 
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     /** The geo-location where the resource lives */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @visibility(Lifecycle.Read, Lifecycle.Create)
-    location: Azure.Core.azureLocation;
+    location?: Azure.Core.azureLocation;
+  }
+
+  /**
+   * The provisioned state of the resource
+   */
+  union BatchProvisioningState {
+    string,
+
+    /**
+     * The account is in an invalid state.
+     */
+    Invalid: "Invalid",
+
+    /**
+     * The account is being created.
+     */
+    Creating: "Creating",
+
+    /**
+     * The account is being deleted.
+     */
+    Deleting: "Deleting",
+
+    /**
+     * The account has been created and is ready for use.
+     */
+    Succeeded: "Succeeded",
+
+    /**
+     * The last operation for the account is failed.
+     */
+    Failed: "Failed",
+
+    /**
+     * The last operation for the account is cancelled.
+     */
+    Cancelled: "Cancelled",
+  }
+
+  /**
+   * The provisioning state of the private endpoint connection.
+   */
+  union BatchPrivateEndpointConnectionProvisioningState {
+    string,
+
+    /**
+     * The connection is creating.
+     */
+    Creating: "Creating",
+
+    /**
+     * The user has requested that the connection status be updated, but the update operation has not yet completed. You may not reference the connection when connecting the Batch account.
+     */
+    Updating: "Updating",
+
+    /**
+     * The connection is deleting.
+     */
+    Deleting: "Deleting",
+
+    /**
+     * The connection status is final and is ready for use if Status is Approved.
+     */
+    Succeeded: "Succeeded",
+
+    /**
+     * The user requested that the connection be updated and it failed. You may retry the update operation.
+     */
+    Failed: "Failed",
+
+    /**
+     * The user has cancelled the connection creation.
+     */
+    Cancelled: "Cancelled",
   }
 }
