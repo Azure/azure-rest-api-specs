@@ -3,7 +3,8 @@ import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { equals } from "../../../shared/src/set.js";
 import { byDate, invert } from "../../../shared/src/sort.js";
 import { extractInputs } from "../context.js";
-import { ArmAutoSignoffLabel, LabelAction } from "../label.js";
+import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.js";
+import { LabelAction } from "../label.js";
 
 /** @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes */
 /** @typedef {RestEndpointMethodTypes["issues"]["listLabelsOnIssue"]["response"]["data"][number]} IssueLabel */
@@ -54,7 +55,7 @@ function readBooleanArtifactValue(artifactNames, key) {
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{headSha: string, issueNumber: number, labelActions: ManagedLabelActions}>}
  */
-export async function getLabelAction({ github, context, core }) {
+export default async function getLabelAction({ github, context, core }) {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   return await getLabelActionImpl({
@@ -101,7 +102,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
   // Check if any auto sign-off labels are currently present
   // Only proceed with auto sign-off logic if auto labels exist or we're about to add them
   const hasAutoSignedOffLabels =
-    labelNames.includes(ArmAutoSignoffLabel.ArmSignedOff) ||
+    labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOff) ||
     labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP) ||
     labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest);
   core.info(`Labels: ${inspect(labelNames)}`);
