@@ -479,31 +479,29 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
    */
   @added(Versions.v2025_11_01)
   @removed(Versions.v2025_05_15_preview)
-  assignedResourceIds?: string[];
+  @added(Versions.v2025_11_15_preview)
+  @typeChangedFrom(
+    Versions.v2025_11_15_preview,
+    string[]
+  )
+  azureResourceIds?: AnalyzeConversationAuthoringProjectResourceInfo[];
 
   /**
    * Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_15_preview)
   assignedResources?: AnalyzeConversationAuthoringDeploymentResource[];
 }
 
 /**
  * Represents the payload for deleting a project deployment.
  */
-@renamedFrom(
-  Versions.v2025_05_15_preview,
-  "AnalyzeConversationAuthoringProjectAzureResourceIds"
-)
-@renamedFrom(
-  Versions.v2025_11_15_preview,
-  "AnalyzeConversationAuthoringAssignedDeploymentResources"
-)
 model AnalyzeConversationAuthoringProjectAzureResourceIds {
   /**
    * Represents the Language or AIService resource IDs to unassign from the project or delete the deployment from.
    */
-  assignedResourceIds?: string[];
+  azureResourceIds?: string[];
 }
 
 /**
@@ -1066,13 +1064,19 @@ model AnalyzeConversationAuthoringProjectResourceInfo {
    * The Azure resource ID of the language or AI resource.
    */
   @key
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   azureResourceId: string;
 
   /**
    * The Azure resource region.
    */
   region: string;
+
+  /**
+   * Represents the AOAI resource assigned for data generation.
+   */
+  @added(Versions.v2025_11_15_preview)
+  assignedAoaiResource?: AnalyzeConversationAuthoringDataGenerationConnectionInfo;
 }
 
 /**

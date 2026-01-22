@@ -142,7 +142,6 @@ interface ConversationAuthoringDeployment {
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
   @put
   @pollingOperation(ConversationAuthoringDeployment.getDeploymentStatus)
-  @access(Access.internal, "python")
   deployProject is Foundations.LongRunningOperation<
     {
       /**
@@ -177,7 +176,6 @@ interface ConversationAuthoringDeployment {
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
   @delete
   @pollingOperation(ConversationAuthoringDeployment.getDeploymentStatus)
-  @access(Access.internal, "python")
   deleteDeployment is Foundations.LongRunningOperation<
     {
       /**
@@ -207,7 +205,6 @@ interface ConversationAuthoringDeployment {
   @pollingOperation(
     ConversationAuthoringDeployment.getDeploymentDeleteFromResourcesStatus
   )
-  @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
@@ -266,7 +263,6 @@ interface ConversationAuthoringProject {
   @pollingOperation(
     ConversationAuthoringProject.getAssignProjectResourcesStatus
   )
-  @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
   @renamedFrom(Versions.v2025_05_15_preview, "assignProjectResources")
   @renamedFrom(Versions.v2025_11_15_preview, "AssignDeploymentResources")
@@ -300,7 +296,6 @@ interface ConversationAuthoringProject {
   @pollingOperation(
     ConversationAuthoringProject.getUnassignProjectResourcesStatus
   )
-  @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
   @renamedFrom(Versions.v2025_05_15_preview, "unassignProjectResources")
   @renamedFrom(Versions.v2025_11_15_preview, "unassignDeploymentResources")
@@ -386,7 +381,6 @@ interface ConversationAuthoringProject {
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
   @post
   @pollingOperation(ConversationAuthoringProject.getSwapDeploymentsStatus)
-  @access(Access.internal, "python")
   swapDeployments is Foundations.LongRunningOperation<
     {
       /**
@@ -486,7 +480,6 @@ interface ConversationAuthoringProject {
   @route("/authoring/analyze-conversations/projects/{projectName}/:export")
   @post
   @pollingOperation(ConversationAuthoringProject.getExportStatus)
-  @access(Access.internal, "python")
   export is Foundations.LongRunningOperation<
     {
       /**
@@ -547,6 +540,7 @@ interface ConversationAuthoringProject {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
       @query("format")
+      @clientName("projectFormat", "csharp")
       ExportedProjectFormat?: ExportedProjectFormat;
 
       /**
@@ -592,7 +586,6 @@ interface ConversationAuthoringProject {
   @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
   @post
   @pollingOperation(ConversationAuthoringProject.getCopyProjectStatus)
-  @access(Access.internal, "python")
   @added(Versions.v2025_05_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
@@ -699,7 +692,6 @@ interface ConversationAuthoringExportedModel {
     ConversationAuthoringExportedModel.getExportedModelJobStatus
   )
   @added(Versions.v2025_05_15_preview)
-  @access(Access.internal, "python")
   deleteExportedModel is Foundations.LongRunningOperation<
     {
       /**
@@ -728,7 +720,6 @@ interface ConversationAuthoringExportedModel {
     ConversationAuthoringExportedModel.getExportedModelJobStatus
   )
   @added(Versions.v2025_05_15_preview)
-  @access(Access.internal, "python")
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
       /**
@@ -813,7 +804,6 @@ interface ConversationAuthoringTrainedModel {
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
   @pollingOperation(ConversationAuthoringTrainedModel.getLoadSnapshotStatus)
-  @access(Access.internal, "python")
   loadSnapshot is Foundations.LongRunningOperation<
     {
       /**
