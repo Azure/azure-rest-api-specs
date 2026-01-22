@@ -45,7 +45,7 @@ jobs:
         with:
           result-encoding: json
           script: |
-            const { armAutoSignoffCode } =
+            const { default: armAutoSignoffCode } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-code.js');
             return await armAutoSignoffCode({ github, context, core });
 
