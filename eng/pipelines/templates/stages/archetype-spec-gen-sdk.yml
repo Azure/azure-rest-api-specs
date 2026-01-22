@@ -38,6 +38,8 @@ parameters:
 stages:
 - stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
   displayName: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'SDK Generation', format('Batch SDK Generation for ({0})', parameters.SpecBatchTypes)) }}
+  # Explicitly set to no dependencies so multiple instances of this template can run in parallel when called in a loop
+  dependsOn: []
   jobs:
   - job:
     timeoutInMinutes: 2400
