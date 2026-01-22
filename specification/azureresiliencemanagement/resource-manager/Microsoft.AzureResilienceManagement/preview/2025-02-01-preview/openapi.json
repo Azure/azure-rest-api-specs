@@ -5303,6 +5303,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "rbacNeededForDrillOnDrillResources": {
+          "type": "array",
+          "description": "Permissions needed by the Drill MSI to read health metrics data for resources in service group.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -8645,7 +8652,7 @@
       "properties": {
         "identity": {
           "$ref": "#/definitions/AssociatedIdentity",
-          "description": "Identity to use for Health Model operations."
+          "description": "Identity to use for Drill monitoring operations."
         },
         "logAnalyticsWorkspaceId": {
           "type": "string",

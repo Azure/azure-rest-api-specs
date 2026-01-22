@@ -202,11 +202,11 @@ model HealthModelPropertiesOfDrill {
 }
 
 /**
- * Model that represents the Health Model properties
+ * Model that represents the Monitoring properties of Drill
  */
 @doc("Drill monitoring properties.")
 model MonitoringPropertiesOfDrill {
-  @doc("Identity to use for Health Model operations.")
+  @doc("Identity to use for Drill monitoring operations.")
   identity: AssociatedIdentity;
 
   @doc("Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.")
@@ -404,6 +404,9 @@ model AttentionReason {
 
   @doc("Permissions needed by the Drill MSI to Upload service group health data for monitoring.")
   rbacNeededForDrillOnDrillMonitoringResources?: string[];
+
+  @doc("Permissions needed by the Drill MSI to read health metrics data for resources in service group.")
+  rbacNeededForDrillOnDrillResources?: string[];
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")
