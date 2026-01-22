@@ -17,6 +17,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetwork extends Resource {
   properties?: VirtualNetworkPropertiesFormat;
 
@@ -40,6 +41,7 @@ model VirtualNetwork extends Resource {
   etag?: string;
 }
 
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @armResourceOperations
 interface VirtualNetworks {
   /**
@@ -94,50 +96,6 @@ interface VirtualNetworks {
    * Gets all virtual networks in a subscription.
    */
   listAll is ArmListBySubscription<VirtualNetwork, Error = CloudError>;
-
-  /**
-   * List all effective connectivity configurations applied on a virtual network.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ListNetworkManagerEffectiveConnectivityConfigurations")
-  @list
-  listNetworkManagerEffectiveConnectivityConfigurations is ArmResourceActionSync<
-    VirtualNetwork,
-    QueryRequestOptions,
-    ArmResponse<NetworkManagerEffectiveConnectivityConfigurationListResult>,
-    Parameters = {
-      /**
-       * An optional query parameter which specifies the maximum number of records to be returned by the server.
-       */
-      @maxValue(20)
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
-    },
-    Error = CloudError
-  >;
-
-  /**
-   * List all effective security admin rules applied on a virtual network.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ListNetworkManagerEffectiveSecurityAdminRules")
-  @list
-  listNetworkManagerEffectiveSecurityAdminRules is ArmResourceActionSync<
-    VirtualNetwork,
-    QueryRequestOptions,
-    ArmResponse<NetworkManagerEffectiveSecurityAdminRulesListResult>,
-    Parameters = {
-      /**
-       * An optional query parameter which specifies the maximum number of records to be returned by the server.
-       */
-      @maxValue(20)
-      @minValue(1)
-      @query("$top")
-      $top?: int32;
-    },
-    Error = CloudError
-  >;
 
   /**
    * Checks whether a private IP address is available for use.
@@ -198,6 +156,54 @@ interface VirtualNetworks {
   >;
 }
 
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@armResourceOperations
+interface EffectiveConfigurations {
+  /**
+   * List all effective connectivity configurations applied on a virtual network.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ListNetworkManagerEffectiveConnectivityConfigurations")
+  @list
+  listNetworkManagerEffectiveConnectivityConfigurations is ArmResourceActionSync<
+    VirtualNetwork,
+    QueryRequestOptions,
+    ArmResponse<NetworkManagerEffectiveConnectivityConfigurationListResult>,
+    Parameters = {
+      /**
+       * An optional query parameter which specifies the maximum number of records to be returned by the server.
+       */
+      @maxValue(20)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+    },
+    Error = CloudError
+  >;
+
+  /**
+   * List all effective security admin rules applied on a virtual network.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ListNetworkManagerEffectiveSecurityAdminRules")
+  @list
+  listNetworkManagerEffectiveSecurityAdminRules is ArmResourceActionSync<
+    VirtualNetwork,
+    QueryRequestOptions,
+    ArmResponse<NetworkManagerEffectiveSecurityAdminRulesListResult>,
+    Parameters = {
+      /**
+       * An optional query parameter which specifies the maximum number of records to be returned by the server.
+       */
+      @maxValue(20)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+    },
+    Error = CloudError
+  >;
+}
+
 @@doc(VirtualNetwork.name, "The name of the virtual network.");
 @@doc(VirtualNetwork.properties, "Properties of the virtual network.");
 @@doc(VirtualNetworks.createOrUpdate::parameters.resource,
@@ -206,9 +212,9 @@ interface VirtualNetworks {
 @@doc(VirtualNetworks.updateTags::parameters.properties,
   "Parameters supplied to update virtual network tags."
 );
-@@doc(VirtualNetworks.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
+@@doc(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
   "Parameters supplied to list correct page."
 );
-@@doc(VirtualNetworks.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
+@@doc(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
   "Parameters supplied to list correct page."
 );

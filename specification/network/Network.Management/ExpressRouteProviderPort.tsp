@@ -17,6 +17,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ExpressRouteProviderPort extends ResourceWithReadOnlyNameAndID {
   properties?: ExpressRouteProviderPortProperties;
@@ -33,6 +34,7 @@ model ExpressRouteProviderPort extends ResourceWithReadOnlyNameAndID {
   etag?: string;
 }
 
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @armResourceOperations
 interface ExpressRouteProviderPorts {
   /**

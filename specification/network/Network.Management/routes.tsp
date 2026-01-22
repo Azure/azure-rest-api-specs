@@ -74,6 +74,7 @@ interface ApplicationGatewaysOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 interface AvailableDelegationsOperationGroup {
   /**
    * Gets all of the available subnet delegations for this subscription in this region.
@@ -112,6 +113,7 @@ interface AvailableResourceGroupDelegationsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 interface AvailableServiceAliasesOperationGroup {
   /**
    * Gets all available service aliases for this subscription in this region.
@@ -147,6 +149,7 @@ interface AvailableServiceAliasesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 interface AzureFirewallFqdnTagsOperationGroup {
   /**
    * Gets all the Azure Firewall FQDN Tags in a subscription.
@@ -164,27 +167,32 @@ interface AzureFirewallFqdnTagsOperationGroup {
   >;
 }
 
-/**
- * Checks whether a domain name in the cloudapp.azure.com zone is available for use.
- */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@autoRoute
-@get
-@action("CheckDnsNameAvailability")
-op checkDnsNameAvailability is ArmProviderActionSync<
-  Response = DnsNameAvailabilityResult,
-  Scope = SubscriptionActionScope,
-  Parameters = {
-    ...LocationParameter;
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+interface checkDnsNameAvailability {
+  /**
+   * Checks whether a domain name in the cloudapp.azure.com zone is available for use.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
+  @get
+  @operationId("CheckDnsNameAvailability")
+  @action("CheckDnsNameAvailability")
+  checkDnsNameAvailability is ArmProviderActionSync<
+    Response = DnsNameAvailabilityResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      ...LocationParameter;
 
-    /**
-     * The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
-     */
-    @query("domainNameLabel")
-    domainNameLabel: string;
-  },
-  Error = CloudError
->;
+      /**
+       * The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
+       */
+      @query("domainNameLabel")
+      domainNameLabel: string;
+    },
+    Error = CloudError
+  >;
+}
 
 alias RoutesNetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -239,6 +247,7 @@ alias CloudServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 interface NetworkInterfacesOperationGroup {
   /**
    * Gets all network interfaces in a cloud service.
@@ -256,6 +265,7 @@ interface NetworkInterfacesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 interface PublicIPAddressesOperationGroup {
   /**
    * Gets information about all public IP addresses on a cloud service level.
@@ -273,6 +283,7 @@ interface PublicIPAddressesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 interface AvailableEndpointServicesOperationGroup {
   /**
    * List what values of endpoint services are available for use.
@@ -483,6 +494,7 @@ interface PrivateLinkServicesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 interface BgpServiceCommunitiesOperationGroup {
   /**
    * Gets all the available bgp service communities.
@@ -501,6 +513,7 @@ interface BgpServiceCommunitiesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 interface ServiceTagsOperationGroup {
   /**
    * Gets a list of service tag information resources.
@@ -519,6 +532,7 @@ interface ServiceTagsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 interface ServiceTagInformationOperationGroup {
   /**
    * Gets a list of service tag information resources with pagination.
@@ -552,6 +566,7 @@ interface ServiceTagInformationOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 interface UsagesOperationGroup {
   /**
    * List network usages for a subscription.

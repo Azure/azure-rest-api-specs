@@ -39,6 +39,7 @@ model PrivateEndpointConnection extends SubResourceModel {
   etag?: string;
 }
 
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**

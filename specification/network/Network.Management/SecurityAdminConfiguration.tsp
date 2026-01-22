@@ -19,6 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NetworkManager)
 @Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model SecurityAdminConfiguration extends ChildResource {
   properties?: SecurityAdminConfigurationPropertiesFormat;
 
@@ -35,6 +36,7 @@ model SecurityAdminConfiguration extends ChildResource {
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @armResourceOperations
 interface SecurityAdminConfigurations {
   /**

@@ -17,6 +17,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualAppliance extends Resource {
   properties?: NetworkVirtualAppliancePropertiesFormat;
 
@@ -62,6 +63,7 @@ alias NetworkVirtualApplianceNetworkVirtualApplianceOps = Azure.ResourceManager.
   }
 >;
 
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface NetworkVirtualAppliances {
   /**

@@ -161,8 +161,18 @@ enum Versions {
 enum Features {
   applicationGateway,
   expressRoute,
+  firewall,
+  loadBalancer,
+  networkGateway,
+  networkManager,
+  networkSecurityPerimeter,
+  networkWatcher,
+  networkingOperations,
+  virtualNetwork,
+  VirtualWAN,
 }
 
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
       ArmResponse<OperationListResult>,

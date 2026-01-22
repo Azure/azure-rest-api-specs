@@ -56,6 +56,7 @@ alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ExpressRouteGateways {
   /**

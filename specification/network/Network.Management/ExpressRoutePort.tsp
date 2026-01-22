@@ -17,6 +17,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("ExpressRoute Port")
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ExpressRoutePort extends Resource {
   properties?: ExpressRoutePortPropertiesFormat;
@@ -63,6 +64,7 @@ alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ExpressRoutePorts {
   /**
