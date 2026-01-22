@@ -649,77 +649,113 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   | NotFoundResponse
   | CloudError;
 
-@@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
-  servicesCheckNameAvailabilityCustomization
+@@clientName(privateEndpointConnectionsUpdateCustomization::parameters.resource,
+  "privateEndpointConnection",
+  "go"
 );
-@@Azure.ClientGenerator.Core.override(UsagesOperationGroup.listBySubscription,
-  usagesListBySubscriptionCustomization
+@@clientName(SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.resource,
+  "sharedPrivateLinkResource",
+  "go"
 );
-@@Azure.ClientGenerator.Core.override(usageBySubscriptionSku,
-  usageBySubscriptionSkuCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.listBySubscription,
-  searchServicesListBySubscriptionCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.listByResourceGroup,
-  searchServicesListByResourceGroupCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.get,
-  searchGetCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.createOrUpdate,
-  searchCreateOrUpdateCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.update,
-  searchUpdateCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.delete,
-  searchDeleteCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.create,
-  queryKeysCreateCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.queryKeysDelete,
-  queryKeysDeleteCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.adminKeysGet,
-  adminKeysGetCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.listBySearchService,
-  queryKeysListBySearchServiceCustomization
-);
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.listByService,
-  privateEndpointConnectionsListByServiceCustomization
-);
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
-  privateEndpointConnectionsGetCustomization
-);
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.update,
-  privateEndpointConnectionsUpdateCustomization
-);
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
-  privateEndpointConnectionsDeleteCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.listSupported,
-  privateLinkResourcesListSupportedCustomization
-);
-@@Azure.ClientGenerator.Core.override(SearchServices.regenerate,
-  privateLinkResourcesRegenerateCustomization
-);
-@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.listByService,
-  SharedPrivateLinkResourcesListByServiceCustomization
-);
-@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.get,
-  SharedPrivateLinkResourcesGetCustomization
-);
-@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.createOrUpdate,
-  SharedPrivateLinkResourcesCreateOrUpdateCustomization
-);
-@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.delete,
-  SharedPrivateLinkResourcesDeleteCustomization
+@@clientName(servicesCheckNameAvailabilityCustomization::parameters.body,
+  "checkNameAvailabilityInput",
+  "go"
 );
 
-@@clientName(Microsoft.Search, "SearchManagementClient", "python");
+@@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
+  servicesCheckNameAvailabilityCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(UsagesOperationGroup.listBySubscription,
+  usagesListBySubscriptionCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(usageBySubscriptionSku,
+  usageBySubscriptionSkuCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.listBySubscription,
+  searchServicesListBySubscriptionCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.listByResourceGroup,
+  searchServicesListByResourceGroupCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.get,
+  searchGetCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.createOrUpdate,
+  searchCreateOrUpdateCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.update,
+  searchUpdateCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.delete,
+  searchDeleteCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.create,
+  queryKeysCreateCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.queryKeysDelete,
+  queryKeysDeleteCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.adminKeysGet,
+  adminKeysGetCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.listBySearchService,
+  queryKeysListBySearchServiceCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.listByService,
+  privateEndpointConnectionsListByServiceCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
+  privateEndpointConnectionsGetCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.update,
+  privateEndpointConnectionsUpdateCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
+  privateEndpointConnectionsDeleteCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.listSupported,
+  privateLinkResourcesListSupportedCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SearchServices.regenerate,
+  privateLinkResourcesRegenerateCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.listByService,
+  SharedPrivateLinkResourcesListByServiceCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.get,
+  SharedPrivateLinkResourcesGetCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.createOrUpdate,
+  SharedPrivateLinkResourcesCreateOrUpdateCustomization,
+  "!java,!python,!javascript"
+);
+@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.delete,
+  SharedPrivateLinkResourcesDeleteCustomization,
+  "!java,!python,!javascript"
+);
+
+@@clientName(Microsoft.Search, "SearchManagementClient", "python, javascript");
 
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
@@ -822,5 +858,7 @@ model AccessRulePropertiesSubscriptionsItem {
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
-  "go"
+  "go,python,javascript"
 );
+
+@@clientName(SearchServiceProperties.eTag, "etag", "java");

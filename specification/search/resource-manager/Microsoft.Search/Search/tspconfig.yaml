@@ -29,9 +29,14 @@ options:
     service-name: "Search"
     flavor: azure
     use-object-for-unknown: true
+    premium: true
+    enable-sync-stack: false
+    remove-inner: CheckNameAvailabilityOutput
+    client-side-validations: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-search"
     flavor: azure
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-search"
