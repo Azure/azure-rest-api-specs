@@ -52,23 +52,33 @@ using Microsoft.Chaos;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Experiment.properties);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecution.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Experiment.properties,
+  "!javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TargetType.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecution.properties,
+  "!javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Capability.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TargetType.properties,
+  "!javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapabilityType.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Capability.properties,
+  "!javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecutionDetails.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapabilityType.properties,
+  "!javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecutionDetails.properties,
+  "!javascript"
 );
 
 @@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript,python");
