@@ -545,10 +545,7 @@ describe("getLabelActionImpl", () => {
     // Invalid boolean value should be treated as missing/invalid.
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
-        artifacts: [
-          { name: "incremental-typespec=maybe" },
-          { name: "trivial-changes=false" },
-        ],
+        artifacts: [{ name: "incremental-typespec=maybe" }, { name: "trivial-changes=false" }],
       },
     });
 

@@ -14,9 +14,7 @@ import { checkTrivialChanges } from "./trivial-changes-check.js";
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
  * @returns {Promise<{ incremental: boolean, trivial: boolean }>}
  */
-export default async function armAutoSignoffCode({core}) {
- 
-
+export default async function armAutoSignoffCode({ core }) {
   core.info("Starting ARM Auto Signoff Code analysis.");
 
   // Run incremental TypeSpec check

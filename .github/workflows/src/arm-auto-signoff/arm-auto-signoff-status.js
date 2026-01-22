@@ -3,8 +3,8 @@ import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { equals } from "../../../shared/src/set.js";
 import { byDate, invert } from "../../../shared/src/sort.js";
 import { extractInputs } from "../context.js";
-import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.js";
 import { LabelAction } from "../label.js";
+import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.js";
 
 /** @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes */
 /** @typedef {RestEndpointMethodTypes["issues"]["listLabelsOnIssue"]["response"]["data"][number]} IssueLabel */
