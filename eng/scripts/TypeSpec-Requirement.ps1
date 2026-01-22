@@ -57,7 +57,7 @@ function LogWarningForFile($file, $warningString) {
     Write-Host ("::warning file=$file,line=1,col=1::$warningString" -replace "`n", "%0D%0A")
   }
   else {
-    Write-Host "[Warning in file $file]$warningString" -ForegroundColor Yellow
+    Write-Host "[Warning in file $file] $warningString" -ForegroundColor Yellow
   }
 }
 
