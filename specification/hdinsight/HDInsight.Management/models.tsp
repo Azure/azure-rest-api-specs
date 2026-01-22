@@ -1274,7 +1274,9 @@ model SecurityProfile {
   /**
    * The domain admin password.
    */
-  @secret
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @format("password")
   domainUserPassword?: string;
 
   /**

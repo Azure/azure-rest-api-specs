@@ -19,7 +19,6 @@ interface LocationsOperationGroup {
    * Gets the capabilities for the specified location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Locations_GetCapabilities")
   @autoRoute
   @get
   @action("capabilities")
@@ -33,7 +32,6 @@ interface LocationsOperationGroup {
    * Lists the usages for the specified location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Locations_ListUsages")
   @autoRoute
   @get
   @action("usages")
@@ -47,7 +45,6 @@ interface LocationsOperationGroup {
    * Lists the billingSpecs for the specified subscription and location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Locations_ListBillingSpecs")
   @autoRoute
   @get
   @action("billingSpecs")
@@ -61,7 +58,6 @@ interface LocationsOperationGroup {
    * Get the async operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Locations_GetAzureAsyncOperationStatus")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/azureasyncoperations/{operationId}")
   @get
   getAzureAsyncOperationStatus(
@@ -80,7 +76,6 @@ interface LocationsOperationGroup {
    * Check the cluster name is available or not.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Locations_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = NameAvailabilityCheckRequestParameters,
@@ -93,7 +88,6 @@ interface LocationsOperationGroup {
    * Validate the cluster create request spec is valid or not.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Locations_ValidateClusterCreateRequest")
   @autoRoute
   @action("validateCreateRequest")
   validateClusterCreateRequest is ArmProviderActionSync<

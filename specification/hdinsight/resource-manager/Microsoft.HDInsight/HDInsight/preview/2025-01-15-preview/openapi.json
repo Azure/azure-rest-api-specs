@@ -2397,10 +2397,6 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2425,7 +2421,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/PrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -6160,8 +6157,7 @@
         "domainUserPassword": {
           "type": "string",
           "format": "password",
-          "description": "The domain admin password.",
-          "x-ms-secret": true
+          "description": "The domain admin password."
         },
         "clusterUsersGroupDNs": {
           "type": "array",

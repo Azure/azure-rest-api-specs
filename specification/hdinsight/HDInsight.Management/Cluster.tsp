@@ -212,7 +212,6 @@ interface Clusters {
    * Gets all configuration information for an HDI cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_List")
   @action("configurations")
   configurationsList is ArmResourceActionSync<
     Cluster,
@@ -226,7 +225,6 @@ interface Clusters {
    */
   #deprecated "This API is deprecated, please use UpdateGatewaySettings in cluster endpoint instead."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_Update")
   @post
   configurationsUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Cluster,
@@ -248,7 +246,6 @@ interface Clusters {
    * The configuration object for the specified cluster. This API is not recommended and might be removed in the future. Please consider using List configurations API instead.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_Get")
   configurationsGet is ArmResourceRead<
     Cluster,
     Response = ArmResponse<ClusterConfiguration>,
@@ -270,7 +267,6 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_EnableMonitoring")
   @put
   @action("extensions/clustermonitoring")
   enableMonitoring is ArmResourceActionAsyncBase<
@@ -284,7 +280,6 @@ interface Clusters {
    * Gets the status of Operations Management Suite (OMS) on the HDInsight cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_GetMonitoringStatus")
   @get
   @action("extensions/clustermonitoring")
   getMonitoringStatus is ArmResourceActionSync<
@@ -298,7 +293,6 @@ interface Clusters {
    * Disables the Operations Management Suite (OMS) on the HDInsight cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_DisableMonitoring")
   @delete
   @action("extensions/clustermonitoring")
   disableMonitoring is ArmResourceActionAsyncBase<
@@ -315,7 +309,6 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_EnableAzureMonitor")
   @put
   @action("extensions/azureMonitor")
   enableAzureMonitor is ArmResourceActionAsyncBase<
@@ -329,7 +322,6 @@ interface Clusters {
    * Gets the status of Azure Monitor on the HDInsight cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_GetAzureMonitorStatus")
   @get
   @action("extensions/azureMonitor")
   getAzureMonitorStatus is ArmResourceActionSync<
@@ -343,7 +335,6 @@ interface Clusters {
    * Disables the Azure Monitor on the HDInsight cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_DisableAzureMonitor")
   @delete
   @action("extensions/azureMonitor")
   disableAzureMonitor is ArmResourceActionAsyncBase<
@@ -360,7 +351,6 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_EnableAzureMonitorAgent")
   @put
   @action("extensions/azureMonitorAgent")
   enableAzureMonitorAgent is ArmResourceActionAsyncBase<
@@ -375,7 +365,6 @@ interface Clusters {
    * Gets the status of Azure Monitor Agent on the HDInsight cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_GetAzureMonitorAgentStatus")
   @get
   @action("extensions/azureMonitorAgent")
   getAzureMonitorAgentStatus is ArmResourceActionSync<
@@ -389,7 +378,6 @@ interface Clusters {
    * Disables the Azure Monitor Agent on the HDInsight cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_DisableAzureMonitorAgent")
   @delete
   @action("extensions/azureMonitorAgent")
   disableAzureMonitorAgent is ArmResourceActionAsyncBase<
@@ -406,7 +394,6 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Extensions_Create")
   extensionsCreate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Cluster,
     Request = Extension,
@@ -427,7 +414,6 @@ interface Clusters {
    * Gets the extension properties for the specified HDInsight cluster extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_Get")
   extensionsGet is ArmResourceRead<
     Cluster,
     Response = ArmResponse<ClusterMonitoringResponse>,
@@ -447,7 +433,6 @@ interface Clusters {
    * Deletes the specified extension for HDInsight cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_Delete")
   extensionsDelete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
     Response = OkResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -467,7 +452,6 @@ interface Clusters {
    * Gets the async operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Extensions_GetAzureAsyncOperationStatus")
   extensionsGetAzureAsyncOperationStatus is ArmResourceRead<
     Cluster,
     Response = ArmResponse<AsyncOperationResult>,
@@ -495,7 +479,6 @@ interface Clusters {
    * Deletes a specified persisted script action of the cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScriptActions_Delete")
   scriptActionsDelete is ArmResourceDeleteSync<
     Cluster,
     Parameters = {
@@ -514,7 +497,6 @@ interface Clusters {
    * Lists all the persisted script actions for the specified cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScriptActions_ListByCluster")
   @list
   @get
   @action("scriptActions")
@@ -529,7 +511,6 @@ interface Clusters {
    * Gets the script execution detail for the given script execution ID.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScriptActions_GetExecutionDetail")
   getExecutionDetail is ArmResourceRead<
     Cluster,
     Response = ArmResponse<RuntimeScriptActionDetail>,
@@ -549,7 +530,6 @@ interface Clusters {
    * Gets the async operation status of execution operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScriptActions_GetExecutionAsyncOperationStatus")
   getExecutionAsyncOperationStatus is ArmResourceRead<
     Cluster,
     Response = ArmResponse<AsyncOperationResult>,
@@ -569,7 +549,6 @@ interface Clusters {
    * Lists all scripts' execution history for the specified cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScriptExecutionHistory_ListByCluster")
   @list
   @get
   @action("scriptExecutionHistory")
@@ -584,7 +563,6 @@ interface Clusters {
    * Promotes the specified ad-hoc script execution to a persisted script.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ScriptExecutionHistory_Promote")
   promote is ArmResourceActionSync<
     Cluster,
     void,
@@ -605,7 +583,6 @@ interface Clusters {
    * Lists the HDInsight clusters hosts
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_ListHosts")
   listHosts is ArmResourceActionSync<
     Cluster,
     void,
@@ -617,7 +594,6 @@ interface Clusters {
    * Restarts the specified HDInsight cluster hosts.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_RestartHosts")
   restartHosts is ArmResourceActionAsyncBase<
     Cluster,
     string[],
@@ -630,7 +606,6 @@ interface Clusters {
    * Gets the async operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_GetAsyncOperationStatus")
   @get
   getAsyncOperationStatus is ArmResourceRead<
     Cluster,

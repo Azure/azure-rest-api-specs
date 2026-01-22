@@ -38,11 +38,11 @@ interface PrivateEndpointConnections {
   /**
    * Approve or reject a private endpoint connection manually.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = ErrorResponse
   >;
