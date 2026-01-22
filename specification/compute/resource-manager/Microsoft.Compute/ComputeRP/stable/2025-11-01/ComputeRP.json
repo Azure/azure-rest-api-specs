@@ -52,6 +52,9 @@
       "name": "VirtualMachineScaleSetExtensions"
     },
     {
+      "name": "VirtualMachineScaleSetLifeCycleHookEvents"
+    },
+    {
       "name": "VirtualMachineScaleSetVMS"
     },
     {
@@ -5619,6 +5622,9 @@
           "Create a scale set with zonalPlatformFaultDomainAlignMode as Aligned": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithZonalPlatformFaultDomainAlignMode.json"
           },
+          "Create a virtual machine scale set with LifecycleHooksProfile.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithLifecycleHooksProfile.json"
+          },
           "Create a virtual machine scale set with high-speed interconnect placement.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithHighSpeedInterconnectPlacement.json"
           },
@@ -6605,6 +6611,107 @@
           },
           "VirtualMachineScaleSet_GetInstanceView_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_GetInstanceView_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_List",
+        "tags": [
+          "VirtualMachineScaleSetLifeCycleHookEvents"
+        ],
+        "description": "Gets a list of all lifecycle hook in a VMScaleSet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEventListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents/{lifecycleHookEventName}": {
+      "patch": {
+        "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Update",
+        "tags": [
+          "VirtualMachineScaleSetLifeCycleHookEvents"
+        ],
+        "description": "The operation to update an VMScaleSet lifecycle hook event.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lifecycleHookEventName",
+            "in": "path",
+            "description": "The name of the VMScaleSetLifecycleHookEvent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Parameters supplied to the Update VMScaleSet lifecycle hook event.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
           }
         }
       }
@@ -12328,125 +12435,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents/{lifeCycleHookEventName}": {
-      "patch": {
-        "tags": [
-          "VirtualMachineScaleSetLifeCycleHookEvents"
-        ],
-        "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Update",
-        "description": "The operation to update an VMScaleSet lifecycle hook event.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "vmScaleSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the VMScaleSet."
-          },
-          {
-            "name": "lifeCycleHookEventName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the VMScaleSet lifecycle hook event."
-          },
-          {
-            "name": "vmssLchEvent",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
-            },
-            "description": "Parameters supplied to the Update VMScaleSet lifecycle hook event."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "virtualMachineScaleSetLifeCycleHookEvent_Update_Gen": {
-            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Update_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents": {
-      "get": {
-        "tags": [
-          "VirtualMachineScaleSetLifeCycleHookEvents"
-        ],
-        "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_List",
-        "description": "Gets a list of all lifecycle hook in a VMScaleSet.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "vmScaleSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the VM scale set containing the lifecycle hook events."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VMScaleSetLifecycleHookEventListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "VirtualMachineScaleSetLifeCycleHookEvent_List_Gen.json": {
-            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_List_Gen.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -14915,21 +14903,9 @@
         }
       }
     },
-    "LifecycleHooksProfile": {
-      "type": "object",
-      "properties": {
-        "lifecycleHooks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LifecycleHook"
-          },
-          "description": "Specifies the lifecycle hooks configured for the virtual machine scale set."
-        }
-      },
-      "description": "Specifies the lifecycle hooks profile for the virtual machine scale set."
-    },
     "LifecycleHook": {
       "type": "object",
+      "description": "Describes a lifecycle hook.",
       "properties": {
         "type": {
           "type": "string",
@@ -14944,8 +14920,7 @@
           "$ref": "#/definitions/LifecycleHookAction",
           "description": "Specifies the default action for the lifecycle hook. This action will be applied on the the target resources if the customer does not take any action for the target resource before waitUntil."
         }
-      },
-      "description": "Describes a lifecycle hook."
+      }
     },
     "LifecycleHookAction": {
       "type": "string",
@@ -14958,10 +14933,51 @@
         "modelAsString": true,
         "values": [
           {
+            "name": "Approve",
             "value": "Approve",
             "description": "The lifecycle hook of a target resource in a lifecycle hook event will be approved."
           }
         ]
+      }
+    },
+    "LifecycleHookActionState": {
+      "type": "string",
+      "description": "Approval status of a target resource in a VMScaleSet lifecycle hook event.",
+      "enum": [
+        "Approved",
+        "Waiting"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleHookActionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The lifecycle hook for the target resource is approved."
+          },
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The lifecycle hook for the target resource is waiting for approval."
+          }
+        ]
+      }
+    },
+    "LifecycleHooksProfile": {
+      "type": "object",
+      "description": "Specifies the lifecycle hooks profile for the virtual machine scale set.",
+      "properties": {
+        "lifecycleHooks": {
+          "type": "array",
+          "description": "Specifies the lifecycle hooks configured for the virtual machine scale set.",
+          "items": {
+            "$ref": "#/definitions/LifecycleHook"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
       }
     },
     "LinuxConfiguration": {
@@ -18684,6 +18700,138 @@
         }
       }
     },
+    "VMScaleSetLifecycleHookEvent": {
+      "type": "object",
+      "description": "Defines a VMScaleSet lifecycle hook event.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventProperties",
+          "description": "Defines the VMScaleSet lifecycle hook event properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VMScaleSetLifecycleHookEventListResult": {
+      "type": "object",
+      "description": "The List VMScaleSet lifecycle hook events operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of VMScaleSet lifecycle hook events.",
+          "items": {
+            "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The uri to fetch the next page of VMScaleSet lifecycle hook events. Call ListNext() with this to fetch the next page of VMScaleSet lifecycle hook events."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VMScaleSetLifecycleHookEventProperties": {
+      "type": "object",
+      "description": "Defines the VMScaleSet lifecycle hook event properties.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Defines the type or scenario for sending a lifecycle hook notification to the customer."
+        },
+        "waitUntil": {
+          "type": "string",
+          "description": "Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the DefaultAction for the event."
+        },
+        "maxWaitUntil": {
+          "type": "string",
+          "description": "Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this time."
+        },
+        "timeCreated": {
+          "type": "string",
+          "description": "The UTC timestamp in ISO 8601 format at which the platform creates the VMScaleSet lifecycle hook event entity."
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/LifecycleHookAction",
+          "description": "Specify the action that will be aplied on the a target resource in the VMScaleSet lifecycle hook event, if the platform does not get a response from the customer for the target resource before waitUntil."
+        },
+        "targetResources": {
+          "type": "array",
+          "description": "List of resources which are getting processed in the lifecycle hook event.",
+          "items": {
+            "$ref": "#/definitions/VMScaleSetLifecycleHookEventTargetResource"
+          },
+          "x-ms-identifiers": [
+            "resource"
+          ]
+        },
+        "additionalContext": {
+          "type": "object",
+          "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventState",
+          "description": "Specifies the state of the lifecycle hook event."
+        }
+      }
+    },
+    "VMScaleSetLifecycleHookEventState": {
+      "type": "string",
+      "description": "The states that a VMScaleSet lifecycle hook event can be in. This is not settable by the customer. It is set only by the VMSS platform.",
+      "enum": [
+        "Active",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "VMScaleSetLifecycleHookEventState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The lifecycle hook event is active. E.g., waiting on a response from the customer."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state."
+          }
+        ]
+      }
+    },
+    "VMScaleSetLifecycleHookEventTargetResource": {
+      "type": "object",
+      "description": "Define a single target resource in a lifecycle hook event. Currently, the resource can either be a VMSS or a VMSS VM.",
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Specifies the target ARM resource. Currently, can be a VMSS resource or an individual VM resource in a VMSS."
+        },
+        "actionState": {
+          "$ref": "#/definitions/LifecycleHookActionState",
+          "description": "State of the lifecycle hook for the target resource. The customer can patch this property to move the lifecycle hook to a terminal state."
+        },
+        "additionalContext": {
+          "type": "object",
+          "description": "Additional key-value pairs set for the target resource that gives customer some useful context/data.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "VMScaleSetScaleOutInput": {
       "type": "object",
       "description": "The input for ScaleOut",
@@ -21197,7 +21345,7 @@
         "lifecycleHooksProfile": {
           "$ref": "#/definitions/LifecycleHooksProfile",
           "description": "Specifies the lifecycle hooks profile for the virtual machine scale set."
-        }        
+        }
       }
     },
     "VirtualMachineScaleSetPublicIPAddressConfiguration": {
@@ -21755,7 +21903,7 @@
         "lifecycleHooksProfile": {
           "$ref": "#/definitions/LifecycleHooksProfile",
           "description": "Specifies the lifecycle hooks profile for the virtual machine scale set."
-        }        
+        }
       }
     },
     "VirtualMachineScaleSetUpdatePublicIPAddressConfiguration": {
@@ -23712,148 +23860,6 @@
             "name": "Auto",
             "value": "Auto",
             "description": "Automatic zone placement in a Virtual Machine Scale Set."
-          }
-        ]
-      }
-    },
-    "VMScaleSetLifecycleHookEvent": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VMScaleSetLifecycleHookEventProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Defines a VMScaleSet lifecycle hook event."
-    },
-    "VMScaleSetLifecycleHookEventProperties": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Defines the type or scenario for sending a lifecycle hook notification to the customer."
-        },
-        "waitUntil": {
-          "type": "string",
-          "description": "Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the DefaultAction for the event."
-        },
-        "maxWaitUntil": {
-          "type": "string",
-          "description": "Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this time."
-        },
-        "timeCreated": {
-          "type": "string",
-          "description": "The UTC timestamp in ISO 8601 format at which the platform creates the VMScaleSet lifecycle hook event entity."
-        },
-        "defaultAction": {
-          "$ref": "#/definitions/LifecycleHookAction",
-          "description": "Specify the action that will be aplied on the a target resource in the VMScaleSet lifecycle hook event, if the platform does not get a response from the customer for the target resource before waitUntil."
-        },
-        "targetResources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VMScaleSetLifecycleHookEventTargetResource"
-          },
-          "description": "List of resources which are getting processed in the lifecycle hook event."
-        },
-        "additionalContext": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data."
-        },
-        "state": {
-          "$ref": "#/definitions/VMScaleSetLifecycleHookEventState",
-          "description": "Specifies the state of the lifecycle hook event."
-        }
-      },
-      "description": "Defines the VMScaleSet lifecycle hook event properties."
-    },
-    "VMScaleSetLifecycleHookEventTargetResource": {
-      "properties": {
-        "resource": {
-          "$ref": "#/definitions/ApiEntityReference",
-          "description": "Specifies the target ARM resource. Currently, can be a VMSS resource or an individual VM resource in a VMSS."
-        },
-        "actionState": {
-          "$ref": "#/definitions/LifecycleHookActionState",
-          "description": "State of the lifecycle hook for the target resource. The customer can patch this property to move the lifecycle hook to a terminal state."
-        },
-        "additionalContext": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Additional key-value pairs set for the target resource that gives customer some useful context/data."
-        }
-      },
-      "description": "Define a single target resource in a lifecycle hook event. Currently, the resource can either be a VMSS or a VMSS VM."
-    },
-    "LifecycleHookActionState": {
-      "type": "string",
-      "description": "Approval status of a target resource in a VMScaleSet lifecycle hook event.",
-      "enum": [
-        "Approved",
-        "Waiting"
-      ],
-      "x-ms-enum": {
-        "name": "LifecycleHookActionState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Approved",
-            "description": "The lifecycle hook for the target resource is approved."
-          },
-          {
-            "value": "Waiting",
-            "description": "The lifecycle hook for the target resource is waiting for approval."
-          }
-        ]
-      }
-    },
-    "VMScaleSetLifecycleHookEventListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
-          },
-          "description": "The list of VMScaleSet lifecycle hook events."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of VMScaleSet lifecycle hook events. Call ListNext() with this to fetch the next page of VMScaleSet lifecycle hook events."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List VMScaleSet lifecycle hook events operation response."
-    },
-    "VMScaleSetLifecycleHookEventState": {
-      "type": "string",
-      "description": "The states that a VMScaleSet lifecycle hook event can be in. This is not settable by the customer. It is set only by the VMSS platform.",
-      "enum": [
-        "Approved",
-        "Waiting"
-      ],
-      "x-ms-enum": {
-        "name": "VMScaleSetLifecycleHookEventState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Active",
-            "description": "The lifecycle hook event is active. E.g., waiting on a response from the customer."
-          },
-          {
-            "value": "Completed",
-            "description": "The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state."
           }
         ]
       }

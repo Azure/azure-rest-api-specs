@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./VirtualMachineScaleSet.tsp";
 import "./RollingUpgradeStatusInfo.tsp";
 import "./VirtualMachineScaleSetExtension.tsp";
+import "./VirtualMachineScaleSetLifecycleHookEvent.tsp";
 import "./VirtualMachineScaleSetVM.tsp";
 import "./VirtualMachineScaleSetVMExtension.tsp";
 import "./VirtualMachine.tsp";

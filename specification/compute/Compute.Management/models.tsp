@@ -1148,6 +1148,143 @@ union HighSpeedInterconnectPlacement {
 }
 
 /**
+ * The action that will be taken on a target resource in a lifecycle hook event.
+ */
+union LifecycleHookAction {
+  string,
+
+  /** The lifecycle hook of a target resource in a lifecycle hook event will be approved. */
+  Approve: "Approve",
+}
+
+/**
+ * Describes a lifecycle hook.
+ */
+model LifecycleHook {
+  /**
+   * Specifies the type of the lifecycle hook.
+   */
+  type?: string;
+
+  /**
+   * Specifies the time duration an LCH event (that is sent to the customer) waits for a response from the customer. It should be in ISO 8601 format.
+   */
+  waitDuration?: duration;
+
+  /**
+   * Specifies the default action for the lifecycle hook. This action will be applied on the the target resources if the customer does not take any action for the target resource before waitUntil.
+   */
+  defaultAction?: LifecycleHookAction;
+}
+
+/**
+ * Specifies the lifecycle hooks profile for the virtual machine scale set.
+ */
+model LifecycleHooksProfile {
+  /**
+   * Specifies the lifecycle hooks configured for the virtual machine scale set.
+   */
+  @identifiers(#["type"])
+  lifecycleHooks?: LifecycleHook[];
+}
+
+/**
+ * Approval status of a target resource in a VMScaleSet lifecycle hook event.
+ */
+union LifecycleHookActionState {
+  string,
+
+  /** The lifecycle hook for the target resource is approved. */
+  Approved: "Approved",
+
+  /** The lifecycle hook for the target resource is waiting for approval. */
+  Waiting: "Waiting",
+}
+
+/**
+ * The states that a VMScaleSet lifecycle hook event can be in. This is not settable by the customer. It is set only by the VMSS platform.
+ */
+union VMScaleSetLifecycleHookEventState {
+  string,
+
+  /** The lifecycle hook event is active. E.g., waiting on a response from the customer. */
+  Active: "Active",
+
+  /** The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state. */
+  Completed: "Completed",
+}
+
+/**
+ * Define a single target resource in a lifecycle hook event. Currently, the resource can either be a VMSS or a VMSS VM.
+ */
+model VMScaleSetLifecycleHookEventTargetResource {
+  /**
+   * Specifies the target ARM resource. Currently, can be a VMSS resource or an individual VM resource in a VMSS.
+   */
+  resource?: ApiEntityReference;
+
+  /**
+   * State of the lifecycle hook for the target resource. The customer can patch this property to move the lifecycle hook to a terminal state.
+   */
+  actionState?: LifecycleHookActionState;
+
+  /**
+   * Additional key-value pairs set for the target resource that gives customer some useful context/data.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  additionalContext?: Record<string>;
+}
+
+/**
+ * Defines the VMScaleSet lifecycle hook event properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model VMScaleSetLifecycleHookEventProperties {
+  /**
+   * Defines the type or scenario for sending a lifecycle hook notification to the customer.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
+  type?: string;
+
+  /**
+   * Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the DefaultAction for the event.
+   */
+  waitUntil?: string;
+
+  /**
+   * Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this time.
+   */
+  maxWaitUntil?: string;
+
+  /**
+   * The UTC timestamp in ISO 8601 format at which the platform creates the VMScaleSet lifecycle hook event entity.
+   */
+  timeCreated?: string;
+
+  /**
+   * Specify the action that will be aplied on the a target resource in the VMScaleSet lifecycle hook event, if the platform does not get a response from the customer for the target resource before waitUntil.
+   */
+  defaultAction?: LifecycleHookAction;
+
+  /**
+   * List of resources which are getting processed in the lifecycle hook event.
+   */
+  @identifiers(#["resource"])
+  targetResources?: VMScaleSetLifecycleHookEventTargetResource[];
+
+  /**
+   * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  additionalContext?: Record<string>;
+
+  /**
+   * Specifies the state of the lifecycle hook event.
+   */
+  state?: VMScaleSetLifecycleHookEventState;
+}
+
+/**
  * VM disk types which are disallowed.
  */
 union VmDiskTypes {
@@ -1812,6 +1949,12 @@ model VirtualMachineScaleSetProperties {
    */
   @added(Versions.v2025_04_01)
   highSpeedInterconnectPlacement?: HighSpeedInterconnectPlacement;
+
+  /**
+   * Specifies the lifecycle hooks profile for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  lifecycleHooksProfile?: LifecycleHooksProfile;
 }
 
 /**
@@ -3784,6 +3927,12 @@ model VirtualMachineScaleSetUpdateProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
+
+  /**
+   * Specifies the lifecycle hooks profile for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  lifecycleHooksProfile?: LifecycleHooksProfile;
 }
 
 /**
