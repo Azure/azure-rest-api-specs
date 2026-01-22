@@ -798,6 +798,80 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+  /agents/{agent_name}/versions/{agent_version}/containers/default:logstream:
+    post:
+      operationId: Agents_streamAgentContainerLogs
+      description: |-
+        Container log entry streamed from the container as text chunks.
+        Each chunk is a UTF-8 string that may be either a plain text log line
+        or a JSON-formatted log entry, depending on the type of container log being streamed.
+        Clients should treat each chunk as opaque text and, if needed, attempt
+        to parse it as JSON based on their logging requirements.
+
+        For system logs, the format is JSON with the following structure:
+        {"TimeStamp":"2025-12-15T16:51:33Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Connecting to the events collector...","Reason":"StartingGettingEvents","EventSource":"ContainerAppController","Count":1}
+        {"TimeStamp":"2025-12-15T16:51:34Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Successfully connected to events server","Reason":"ConnectedToEventsServer","EventSource":"ContainerAppController","Count":1}
+
+        For console logs, the format is plain text as emitted by the container's stdout/stderr.
+        2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...
+        2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']
+        2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - "GET /readiness HTTP/1.1" 200 OK
+        2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
+        2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+            minLength: 1
+          explode: false
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent.
+          schema:
+            type: string
+        - name: kind
+          in: query
+          required: false
+          description: console returns container stdout/stderr, system returns container app event stream. defaults to console
+          schema:
+            $ref: '#/components/schemas/ContainerLogKind'
+          explode: false
+        - name: replica_name
+          in: query
+          required: false
+          description: When omitted, the server chooses the first replica for console logs. Required to target a specific replica.
+          schema:
+            type: string
+          explode: false
+        - name: tail
+          in: query
+          required: false
+          description: Number of trailing lines returned. Enforced to 1-300. Defaults to 20
+          schema:
+            type: integer
+            format: int32
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
   /agents/{agent_name}/versions/{agent_version}/containers/default:start:
     post:
       operationId: Agents_startAgentContainer
@@ -2955,7 +3029,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.Conversation'
+                $ref: '#/components/schemas/OpenAI.ConversationResource'
         default:
           description: An unexpected error response.
           content:
@@ -3050,7 +3124,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/OpenAI.Conversation'
+                      $ref: '#/components/schemas/OpenAI.ConversationResource'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -3095,7 +3169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.Conversation'
+                $ref: '#/components/schemas/OpenAI.ConversationResource'
         default:
           description: An unexpected error response.
           content:
@@ -3134,7 +3208,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.Conversation'
+                $ref: '#/components/schemas/OpenAI.ConversationResource'
         default:
           description: An unexpected error response.
           content:
@@ -3407,7 +3481,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.Conversation'
+                $ref: '#/components/schemas/OpenAI.ConversationResource'
         default:
           description: An unexpected error response.
           content:
@@ -5291,6 +5365,10 @@ components:
             - agent.container
           description: The object type, which is always 'agent.container'.
           readOnly: true
+        id:
+          type: string
+          description: The identifier of the container.
+          readOnly: true
         status:
           allOf:
             - $ref: '#/components/schemas/AgentContainerStatus'
@@ -5319,6 +5397,11 @@ components:
           type: string
           format: date-time
           description: The last update time of the container.
+          readOnly: true
+        container:
+          allOf:
+            - $ref: '#/components/schemas/ContainerDetails'
+          description: The detailed container information.
           readOnly: true
       description: The details of the container of a specific version of an agent.
     AgentContainerOperationError:
@@ -6445,6 +6528,60 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The container app agent definition.
+    ContainerDetails:
+      type: object
+      required:
+        - provisioning_state
+        - state
+        - health_state
+        - replicas
+        - updated_on
+      properties:
+        provisioning_state:
+          type: string
+          description: The provisioning state of the container.
+        provisioning_error:
+          type: string
+          description: The provisioning error of the container, if any.
+        state:
+          type: string
+          description: The state of the container.
+        health_state:
+          type: string
+          description: The health state of the container.
+        replicas:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerReplica'
+          description: The list of replicas in the container.
+        updated_on:
+          type: string
+          format: date-time
+          description: The last update time of the container.
+      description: Detailed information about the container.
+    ContainerLogKind:
+      type: string
+      enum:
+        - console
+        - system
+      description: The type of logs to stream from a container.
+    ContainerReplica:
+      type: object
+      required:
+        - name
+        - state
+        - container_state
+      properties:
+        name:
+          type: string
+          description: The name of the replica.
+        state:
+          type: string
+          description: The state of the replica.
+        container_state:
+          type: string
+          description: The container state of the replica.
+      description: Information about a container replica.
     ContinuousEvalItemGenerationParams:
       type: object
       required:
@@ -10203,36 +10340,6 @@ components:
         - 4g
         - 16g
         - 64g
-    OpenAI.Conversation:
-      type: object
-      required:
-        - id
-        - object
-        - metadata
-        - created_at
-      properties:
-        id:
-          type: string
-          description: The unique ID of the conversation.
-        object:
-          type: string
-          enum:
-            - conversation
-          description: The object type, which is always `conversation`.
-          x-stainless-const: true
-          default: conversation
-        metadata:
-          description: |-
-            Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.
-              Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters.
-        created_at:
-          type: integer
-          format: unixtime
-          description: The time at which the conversation was created, measured in seconds since the Unix epoch.
-      title: The conversation object
-      x-oaiMeta:
-        name: The conversation object
-        group: conversations
     OpenAI.ConversationItem:
       type: object
       required:
@@ -11180,6 +11287,32 @@ components:
           description: The unique ID of the conversation that this response was associated with.
       description: The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.
       title: Conversation
+    OpenAI.ConversationResource:
+      type: object
+      required:
+        - id
+        - object
+        - metadata
+        - created_at
+      properties:
+        id:
+          type: string
+          description: The unique ID of the conversation.
+        object:
+          type: string
+          enum:
+            - conversation
+          description: The object type, which is always `conversation`.
+          x-stainless-const: true
+          default: conversation
+        metadata:
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.
+              Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The time at which the conversation was created, measured in seconds since the Unix epoch.
     OpenAI.CreateChatCompletionRequestResponseFormat:
       type: object
       required:
