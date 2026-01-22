@@ -602,6 +602,10 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}:observations")
   @tag("DQ Assessment Observations")
   @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-examples",
+    #{ Observation_Create: #{ $ref: "./examples/Observation_Create.json" } }
+  )
   @doc("Triggers a long-running observation job for a specific data asset.")
   @post
   op observations is RpcOperation<
