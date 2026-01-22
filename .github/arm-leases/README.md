@@ -2,15 +2,15 @@
 
 ## Overview
 
-This directory contains lease files that establish a time-limited design discussion period for Resource Providers (RPs) in the Azure REST API specifications repository. ARM leases provide a structured timeframe for Program Managers (PMs) and RP owners to collaborate on API design, review specifications.
+This directory contains lease files that establish a time-limited design discussion period for Resource Providers (RPs) in the Azure REST API specifications repository. ARM leases provide a structured timeframe for Product Managers (PMs) and RP owners to collaborate on API design, review specifications.
 
-**Important**: Only Program Managers (PMs) are authorized to add lease.yaml files to this directory. Lease files should be added after conducting office hours discussions with RP owners. The reviewer field in the lease file must also be a PM who has reviewed and approved the lease.
+**Important**: Only Product Managers (PMs) are authorized to add lease.yaml files to this directory. Lease files should be added after conducting office hours discussions with RP owners. The reviewer field in the lease file must also be a PM who has reviewed and approved the lease.
 
 ## Code Owners and Contribution Guidelines
 
 This directory is protected by CODEOWNERS to ensure proper governance:
 
-- **Program Managers (PMs)**: Can add and modify `lease.yaml` files after office hours discussions with RP owners
+- **Product Managers (PMs)**: Can add and modify `lease.yaml` files after office hours discussions with RP owners
 - **Engineers**: Can enhance and improve the validation workflow and related automation
 - **Approvals**: All changes require approval from code owners (PMs and engineers listed in CODEOWNERS)
 
