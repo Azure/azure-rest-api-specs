@@ -6,5 +6,5 @@ using Microsoft.ContainerRegistry;
 
 @@clientName(Microsoft.ContainerRegistry,
   "ContainerRegistryManagementClient",
-  "javascript"
+  "javascript,python"
 );
