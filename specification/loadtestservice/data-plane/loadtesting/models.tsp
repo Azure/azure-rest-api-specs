@@ -891,7 +891,6 @@ model TestRun {
   @visibility(Lifecycle.Read)
   endDateTime?: utcDateTime;
 
-  @removed(APIVersions.v2025_11_01_preview)
   @doc("Test run initiated time.")
   @visibility(Lifecycle.Read)
   executedDateTime?: utcDateTime;
@@ -1384,8 +1383,8 @@ model OldTestRunIdQueryParam {
 @doc("Parameters for list test run operation")
 model ListTestRunQueryParams {
   @doc("""
-    Sort on the supported fields in (field asc/desc) format. eg: createdDateTime
-    asc. Supported fields - createdDateTime
+    Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
+    asc. Supported fields - executedDateTime
     """)
   @query
   orderby?: string;

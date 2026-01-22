@@ -6136,6 +6136,12 @@
           "description": "The test run end DateTime(RFC 3339 literal format).",
           "readOnly": true
         },
+        "executedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Test run initiated time.",
+          "readOnly": true
+        },
         "portalUrl": {
           "type": "string",
           "description": "Portal url.",
@@ -7668,7 +7674,7 @@
     "ListTestRunQueryParams.orderby": {
       "name": "orderby",
       "in": "query",
-      "description": "Sort on the supported fields in (field asc/desc) format. eg: createdDateTime\nasc. Supported fields - createdDateTime",
+      "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime\nasc. Supported fields - executedDateTime",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
