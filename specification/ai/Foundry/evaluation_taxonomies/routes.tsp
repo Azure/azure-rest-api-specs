@@ -3,6 +3,9 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "../datasets/models.tsp";
+import "../evaluators/models.tsp";
+import "../openai-evaluations/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -72,5 +75,53 @@ interface EvaluationTaxonomies {
       body: EvaluationTaxonomy;
     },
     OkResponse<EvaluationTaxonomy>
+  >;
+
+  @doc("List datasets generated from this taxonomy.")
+  @get
+  @route("/evaluationtaxonomies/{name}/datasets")
+  listDatasets is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the evaluation taxonomy.")
+      @path
+      name: string;
+
+      @doc("Filter by taxonomy version.")
+      @query
+      version?: string;
+    },
+    Azure.Core.Page<DatasetVersion>
+  >;
+
+  @doc("List evaluation runs that used this taxonomy.")
+  @get
+  @route("/evaluationtaxonomies/{name}/runs")
+  listRuns is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the evaluation taxonomy.")
+      @path
+      name: string;
+
+      @doc("Filter by taxonomy version.")
+      @query
+      version?: string;
+    },
+    AgentsPagedResult<EvalRun>
+  >;
+
+  @doc("List evaluators referencing this taxonomy.")
+  @get
+  @route("/evaluationtaxonomies/{name}/evaluators")
+  listEvaluators is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the evaluation taxonomy.")
+      @path
+      name: string;
+
+      @doc("Filter by taxonomy version.")
+      @query
+      version?: string;
+    },
+    Azure.Core.Page<EvaluatorVersion>
   >;
 }
