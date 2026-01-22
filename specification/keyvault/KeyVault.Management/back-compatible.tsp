@@ -58,7 +58,7 @@ using Azure.Core;
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Vaults.update::parameters.properties, "parameters");
-@@clientName(Vaults.updateAccessPolicy::parameters.resource, "parameters");
+@@clientName(Vaults.updateAccessPolicy::parameters.body, "parameters");
 @@clientLocation(Vaults.listByVault, "PrivateLinkResources");
 
 @@clientLocation(DeletedVaults.getDeleted, Vaults);
@@ -178,8 +178,7 @@ using Azure.Core;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op VaultsGetDeletedCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<DeletedVault>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -197,8 +196,7 @@ op VaultsGetDeletedCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op VaultsPurgeDeletedCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<DeletedVault>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -218,9 +216,7 @@ op VaultsPurgeDeletedCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op ManagedHsmsGetDeletedCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<DeletedManagedHsm>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -243,9 +239,7 @@ op ManagedHsmsGetDeletedCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op ManagedHsmsPurgeDeletedCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<DeletedManagedHsm>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
