@@ -10,13 +10,9 @@ using TypeSpec.Http;
 namespace Microsoft.EdgeMarketplace;
 @doc("A publisher who provides offers.")
 model Publisher is ExtensionResource<PublisherProperties> {
-  @doc("Name of the publisher")
-  @pattern("^.*$")
-  @path
-  @key("publisherName")
-  @segment("publishers")
-  name: string;
+  ...ResourceNameParameter<Publisher, NamePattern = "^.*$">;
 }
+@@doc(Publisher.name, "Name of the publisher");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "backcompat, ARM reviewed"
 @armResourceOperations
