@@ -220,6 +220,24 @@ model ResourcesWithContext {
   ids: Array<ResourceWithContext>;
 }
 
+@added(Versions.`2026-02-15-preview`)
+@doc("The fungible properties model")
+model FungibleProperties {
+  @doc("The VM size to create fungible VMs")
+  @minItems(1)
+  @maxItems(10)
+  vmSizesProfile: Array<VmSizeProfile>;
+
+  @doc("The OS type to create fungible VMs")
+  osType?: string;
+
+  @doc("The priority profile to create fungible VMs")
+  priorityProfile: PriorityProfile;
+
+  @doc("The zone allocation policy to create fungible VMs")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
+}
+
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
@@ -235,6 +253,10 @@ model ResourceProvisionPayload {
 
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
   resourcePrefix?: string;
+
+  @added(Versions.`2026-02-15-preview`)
+  @doc("Fungible properties tag to create Vms based on size, zone and allocation strategy")
+  fungibleProperties?: FungibleProperties;
 }
 
 @doc("The retry policy for the user request")
