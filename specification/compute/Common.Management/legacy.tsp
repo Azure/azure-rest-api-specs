@@ -17,18 +17,13 @@ namespace Azure.ResourceManager.Legacy {
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
     @tag("Operations")
     @autoRoute
-    @Azure.ResourceManager.Private.armUpdateProviderNamespace
     @doc("List the operations for the provider")
     @segment("operations")
     @get
     @list
     list(
       ...ApiVersionParameter,
-
-      @path
-      @segment("providers")
-      @doc("The provider namespace (this parameter will not show up in operations).")
-      provider: "Microsoft.ThisWillBeReplaced",
+      ...Azure.ResourceManager.Legacy.Provider,
     ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Microsoft.Compute.CloudError;
   }
 
