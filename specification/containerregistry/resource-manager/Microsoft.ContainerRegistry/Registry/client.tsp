@@ -6,7 +6,7 @@ using Microsoft.ContainerRegistry;
 
 @@clientName(Microsoft.ContainerRegistry,
   "ContainerRegistryManagementClient",
-  "javascript"
+  "javascript,python"
 );
 
 @@clientName(IPRule, "IpRule", "java");
