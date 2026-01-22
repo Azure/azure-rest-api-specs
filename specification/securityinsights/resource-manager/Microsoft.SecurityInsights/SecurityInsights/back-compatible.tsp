@@ -338,6 +338,7 @@ using Azure.ClientGenerator.Core.Legacy;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(Watchlist.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@clientName(WatchlistItems.createOrUpdate::parameters.resource,
   "watchlistItem"
 );
@@ -368,4 +369,49 @@ using Azure.ClientGenerator.Core.Legacy;
 
 @@clientLocation(ThreatIntelligenceIndicatorMetricsOperationGroup.list,
   "ThreatIntelligenceIndicatorMetrics"
+);
+@@clientName(PackageList, "packageList");
+@@clientName(PackageModel, "packageModel");
+@@clientName(ProductPackageList, "productPackageList");
+@@clientName(ProductPackageModel, "productPackageModel");
+@@clientName(ProductTemplateList, "productTemplateList");
+@@clientName(ProductTemplateModel, "productTemplateModel");
+@@clientName(ProductTemplateProperties, "productTemplateProperties");
+@@clientName(MetadataPatch, "metadataPatch");
+@@clientName(MetadataPropertiesPatch, "metadataPropertiesPatch");
+@@clientName(TemplateList, "templateList");
+@@clientName(TemplateModel, "templateModel");
+@@clientName(TemplateProperties, "templateProperties");
+@@clientName(ThreatIntelligence, "threatIntelligence");
+@@clientName(TemplateAdditionalProperties, "templateAdditionalProperties");
+@@clientName(MetadataSource, "metadataSource");
+@@clientName(MetadataAuthor, "metadataAuthor");
+@@clientName(MetadataSupport, "metadataSupport");
+@@clientName(MetadataDependencies, "metadataDependencies");
+@@clientName(MetadataCategories, "metadataCategories");
+@@clientName(MetadataProperties, "metadataProperties");
+@@clientName(PackageBaseProperties, "packageBaseProperties");
+@@clientName(ProductPackageProperties, "productPackageProperties");
+@@clientName(PackageProperties, "packageProperties");
+@@clientName(ProductPackageAdditionalProperties,
+  "productPackageAdditionalProperties"
+);
+
+@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+  Lifecycle.Read
+);
+@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+  Lifecycle.Create
+);
+@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+  Lifecycle.Update
+);
+@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+  Lifecycle.Delete
+);
+@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+  Lifecycle.Query
+);
+@@pattern(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+  ""
 );

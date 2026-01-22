@@ -55,7 +55,8 @@ interface MetadataModels {
   update is Extension.CustomPatchSync<
     OperationalInsights,
     MetadataModel,
-    PatchModel = MetadataPatch
+    PatchModel = MetadataPatch,
+    Error = CloudError
   >;
 
   /**

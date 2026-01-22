@@ -30,6 +30,46 @@ model SentinelOnboardingState
   etag?: string;
 }
 
+interface SentinelOnboardingStatesOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /** the provider namespace */
+        @path
+        @segment("providers")
+        @key
+        providerNamespace: "Microsoft.OperationalInsights",
+
+        /**
+         * The name of the workspace.
+         */
+        @segment("workspaces")
+        @key
+        @path
+        @minLength(1)
+        @maxLength(90)
+        @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+        workspaceName: string,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<SentinelOnboardingState>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<SentinelOnboardingState>,
+
+        /**
+         * The Sentinel onboarding state name. Supports - default
+         */
+        @path
+        @key
+        @segment("onboardingStates")
+        sentinelOnboardingStateName: string,
+      }
+    > {}
+
 @armResourceOperations
 interface SentinelOnboardingStates {
   /**
@@ -44,10 +84,10 @@ interface SentinelOnboardingStates {
   /**
    * Create Sentinel onboarding state
    */
-  create is Extension.CreateOrReplaceSync<
-    OperationalInsights,
+  create is SentinelOnboardingStatesOps.CreateOrUpdateSync<
     SentinelOnboardingState,
-    Error = CloudError
+    ErrorType = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**

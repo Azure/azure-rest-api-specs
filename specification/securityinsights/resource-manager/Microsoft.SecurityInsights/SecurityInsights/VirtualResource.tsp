@@ -24,3 +24,6 @@ model ThreatIntelligenceMain {
     NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
   >;
 }
+
+@@minLength(Extension.ExternalResource.name, 1);
+@@maxLength(Extension.ExternalResource.name, 90);

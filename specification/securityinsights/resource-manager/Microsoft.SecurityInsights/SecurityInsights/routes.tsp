@@ -53,6 +53,7 @@ interface SourceControlOperationGroup {
   @autoRoute
   @list
   @post
+  @operationId("SourceControl_listRepositories")
   listRepositories(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -143,6 +144,7 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
     OperationalInsights,
     ThreatIntelligenceMain,
     Request = void,
-    Response = ThreatIntelligenceMetricsList
+    Response = ThreatIntelligenceMetricsList,
+    Error = CloudError
   >;
 }

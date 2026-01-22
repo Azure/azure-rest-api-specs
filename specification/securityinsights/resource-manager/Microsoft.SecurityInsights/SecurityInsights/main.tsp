@@ -62,4 +62,5 @@ enum Versions {
   v2025_09_01: "2025-09-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<OperationsList, CloudError> {}

@@ -42,7 +42,7 @@ interface Watchlists {
   createOrUpdate is Extension.CreateOrReplaceAsync<
     OperationalInsights,
     Watchlist,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -55,7 +55,7 @@ interface Watchlists {
     Watchlist,
     LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**

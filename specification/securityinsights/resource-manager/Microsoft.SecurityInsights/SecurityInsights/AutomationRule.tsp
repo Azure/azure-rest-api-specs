@@ -47,6 +47,9 @@ alias AutomationRuleOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @segment("workspaces")
     @key
     @path
+    @minLength(1)
+    @maxLength(90)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
     workspaceName: string;
   },
   {
@@ -91,6 +94,9 @@ interface AutomationRules {
   delete is Extension.DeleteSync<
     OperationalInsights,
     AutomationRule,
+    Response = ArmResponse<{}> | (NoContentResponse & {
+      @body body: {};
+    }),
     Error = CloudError
   >;
 

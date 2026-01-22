@@ -124,15 +124,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationsList"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -169,6 +169,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -219,6 +221,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -273,6 +277,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -323,6 +329,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -381,6 +389,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -454,6 +464,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -508,6 +520,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -565,6 +579,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -624,6 +640,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -705,6 +723,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -766,6 +786,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -816,6 +838,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -867,7 +891,10 @@
             "in": "path",
             "description": "The name of the workspace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
             "name": "automationRuleId",
@@ -934,6 +961,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -946,10 +975,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "object"
+            }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "schema": {
+              "type": "object"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -988,6 +1023,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -1038,6 +1075,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1090,6 +1129,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1157,6 +1198,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1211,6 +1254,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1269,7 +1314,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PackageList"
+              "$ref": "#/definitions/packageList"
             }
           },
           "default": {
@@ -1312,6 +1357,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1326,7 +1373,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PackageModel"
+              "$ref": "#/definitions/packageModel"
             }
           },
           "default": {
@@ -1364,6 +1411,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1379,7 +1428,7 @@
             "description": "Package installation properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PackageModel"
+              "$ref": "#/definitions/packageModel"
             }
           }
         ],
@@ -1387,13 +1436,13 @@
           "200": {
             "description": "Resource 'PackageModel' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PackageModel"
+              "$ref": "#/definitions/packageModel"
             }
           },
           "201": {
             "description": "Resource 'PackageModel' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PackageModel"
+              "$ref": "#/definitions/packageModel"
             }
           },
           "default": {
@@ -1431,6 +1480,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1485,6 +1536,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1528,7 +1581,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProductPackageList"
+              "$ref": "#/definitions/productPackageList"
             }
           },
           "default": {
@@ -1571,6 +1624,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1585,7 +1640,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProductPackageModel"
+              "$ref": "#/definitions/productPackageModel"
             }
           },
           "default": {
@@ -1599,6 +1654,109 @@
           "Get a package.": {
             "$ref": "./examples/contentPackages/GetProductPackageById.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentProductTemplates": {
+      "get": {
+        "operationId": "ProductTemplates_List",
+        "tags": [
+          "ProductTemplateModels"
+        ],
+        "description": "Gets all templates in the catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the monitor workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results, based on a Boolean condition. Optional.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results. Optional.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "description": "Searches for a substring in the response. Optional.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "Instructs the server to return only object count without actual body. Optional.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Returns only the first n results. Optional.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "Used to skip n elements in the OData query (offset). Returns a nextLink to the next page of results if there are any left.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/productTemplateList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all installed templates.": {
+            "$ref": "./examples/contentTemplates/GetProductTemplates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1625,6 +1783,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1690,7 +1850,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TemplateList"
+              "$ref": "#/definitions/templateList"
             }
           },
           "default": {
@@ -1733,6 +1893,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1747,7 +1909,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TemplateModel"
+              "$ref": "#/definitions/templateModel"
             }
           },
           "default": {
@@ -1785,6 +1947,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1800,7 +1964,7 @@
             "description": "Template installation properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TemplateModel"
+              "$ref": "#/definitions/templateModel"
             }
           }
         ],
@@ -1808,13 +1972,13 @@
           "200": {
             "description": "Resource 'TemplateModel' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/TemplateModel"
+              "$ref": "#/definitions/templateModel"
             }
           },
           "201": {
             "description": "Resource 'TemplateModel' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/TemplateModel"
+              "$ref": "#/definitions/templateModel"
             }
           },
           "default": {
@@ -1852,6 +2016,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -1883,107 +2049,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproducttemplates": {
-      "get": {
-        "operationId": "ProductTemplates_List",
-        "tags": [
-          "ProductTemplateModels"
-        ],
-        "description": "Gets all templates in the catalog.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the monitor workspace.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results, based on a Boolean condition. Optional.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Sorts the results. Optional.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$search",
-            "in": "query",
-            "description": "Searches for a substring in the response. Optional.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$count",
-            "in": "query",
-            "description": "Instructs the server to return only object count without actual body. Optional.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns only the first n results. Optional.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Used to skip n elements in the OData query (offset). Returns a nextLink to the next page of results if there are any left.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProductTemplateList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get all installed templates.": {
-            "$ref": "./examples/contentTemplates/GetProductTemplates.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproducttemplates/{templateId}": {
       "get": {
         "operationId": "ProductTemplate_Get",
@@ -2004,9 +2069,11 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the monitor workspace.",
+            "description": "The name of the workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2021,7 +2088,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProductTemplateModel"
+              "$ref": "#/definitions/productTemplateModel"
             }
           },
           "default": {
@@ -2061,6 +2128,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -2111,6 +2180,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2164,6 +2235,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2232,6 +2305,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2287,6 +2362,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -2337,6 +2414,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2419,6 +2498,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2495,6 +2576,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2552,6 +2635,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2612,6 +2697,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2692,6 +2779,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2744,6 +2833,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2811,6 +2902,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2865,6 +2958,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2919,6 +3014,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -2973,6 +3070,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3059,6 +3158,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3118,6 +3219,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3192,6 +3295,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3253,6 +3358,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3307,6 +3414,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3393,6 +3502,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3455,6 +3566,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3532,6 +3645,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3595,7 +3710,10 @@
             "in": "path",
             "description": "The name of the workspace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
             "name": "incidentIdentifier",
@@ -3655,6 +3773,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3712,6 +3832,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3771,6 +3893,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3845,6 +3969,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -3885,7 +4011,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/listRepositories": {
       "post": {
-        "operationId": "SourceControl_ListRepositories",
+        "operationId": "SourceControl_listRepositories",
         "description": "Gets a list of repositories metadata.",
         "parameters": [
           {
@@ -3931,6 +4057,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get repository list.": {
+            "$ref": "./examples/repositories/GetRepositories.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3959,6 +4090,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4042,6 +4175,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4095,6 +4230,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4166,6 +4303,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4182,7 +4321,7 @@
             "description": "Partial metadata request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MetadataPatch"
+              "$ref": "#/definitions/metadataPatch"
             }
           }
         ],
@@ -4196,7 +4335,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -4228,6 +4367,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4283,6 +4424,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -4330,6 +4473,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4379,9 +4524,11 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the monitor workspace.",
+            "description": "The name of the workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4395,7 +4542,7 @@
             "name": "sentinelOnboardingStateParameter",
             "in": "body",
             "description": "The Sentinel onboarding state parameter",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SentinelOnboardingState"
             }
@@ -4449,6 +4596,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4503,6 +4652,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -4553,6 +4704,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4605,6 +4758,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4672,6 +4827,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4726,6 +4883,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -4776,6 +4935,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4828,6 +4989,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4897,6 +5060,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -4957,6 +5122,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5019,6 +5186,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5098,6 +5267,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5150,6 +5321,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5217,6 +5390,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5271,6 +5446,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5331,6 +5508,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5391,6 +5570,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           }
         ],
@@ -5404,7 +5585,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5435,6 +5616,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5494,6 +5677,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5551,6 +5736,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5603,6 +5790,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5649,7 +5838,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5689,6 +5878,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5725,7 +5916,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5763,6 +5954,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5827,6 +6020,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5886,6 +6081,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -5960,6 +6157,8 @@
             "description": "The name of the monitor workspace.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
           },
           {
@@ -6002,11 +6201,11 @@
   "definitions": {
     "AADDataConnector": {
       "type": "object",
-      "description": "Represents AAD (Azure Active Directory) data connector.",
+      "description": "Represents Microsoft Entra ID data connector.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AADDataConnectorProperties",
-          "description": "AAD (Azure Active Directory) data connector properties.",
+          "description": "Microsoft Entra ID data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -6019,7 +6218,7 @@
     },
     "AADDataConnectorProperties": {
       "type": "object",
-      "description": "AAD (Azure Active Directory) data connector properties.",
+      "description": "Microsoft Entra ID data connector properties.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -6029,7 +6228,10 @@
           "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
           "description": "The available data types for the connector."
         }
-      }
+      },
+      "required": [
+        "tenantId"
+      ]
     },
     "AATPDataConnector": {
       "type": "object",
@@ -6060,7 +6262,10 @@
           "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
           "description": "The available data types for the connector."
         }
-      }
+      },
+      "required": [
+        "tenantId"
+      ]
     },
     "ASCDataConnector": {
       "type": "object",
@@ -6241,7 +6446,9 @@
       "properties": {
         "triggerUri": {
           "type": "string",
-          "description": "Logic App Callback URL for this specific workflow."
+          "format": "password",
+          "description": "Logic App Callback URL for this specific workflow.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -6496,11 +6703,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/AlertRuleKind",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
         },
         "etag": {
           "type": "string",
@@ -6550,11 +6753,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/AlertRuleKind",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
         }
       },
       "discriminator": "kind",
@@ -6580,8 +6779,52 @@
           "description": "The data types used by the alert rule template",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "AlertRuleTemplatePropertiesBase": {
+      "type": "object",
+      "description": "Base alert rule template property bag.",
+      "properties": {
+        "alertRulesCreatedByTemplateCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of alert rules that were created by this template"
+        },
+        "createdDateUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that this alert rule template has been added.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the alert rule template."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for alert rule template."
+        },
+        "lastUpdatedDateUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time that this alert rule template has been updated.",
+          "readOnly": true
+        },
+        "requiredDataConnectors": {
+          "type": "array",
+          "description": "The required data sources for this template",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "connectorId"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/TemplateStatus",
+          "description": "The alert rule template status."
         }
       }
     },
@@ -6713,7 +6956,10 @@
           "$ref": "#/definitions/DataConnectorDataTypeCommon",
           "description": "Alerts data type connection."
         }
-      }
+      },
+      "required": [
+        "alerts"
+      ]
     },
     "AnomalySecurityMLAnalyticsSettings": {
       "type": "object",
@@ -6860,7 +7106,9 @@
       "properties": {
         "apiKey": {
           "type": "string",
-          "description": "API Key for the user secret key credential"
+          "format": "password",
+          "description": "API Key for the user secret key credential",
+          "x-ms-secret": true
         },
         "apiKeyName": {
           "type": "string",
@@ -7051,6 +7299,8 @@
         },
         "innerConditions": {
           "type": "array",
+          "minItems": 2,
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
           },
@@ -7133,6 +7383,7 @@
         "actions": {
           "type": "array",
           "description": "The actions to execute when the automation rule is triggered.",
+          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/AutomationRuleAction"
           },
@@ -7250,7 +7501,7 @@
           {
             "name": "AllItems",
             "value": "AllItems",
-            "description": "Evaluate the condition as true if all items fulfill it"
+            "description": "Evaluate the condition as true if all the items fulfill it"
           }
         ]
       }
@@ -7293,6 +7544,7 @@
         },
         "itemConditions": {
           "type": "array",
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
           },
@@ -7846,6 +8098,7 @@
         "conditions": {
           "type": "array",
           "description": "The conditions to evaluate to determine if the automation rule should be triggered on a given object.",
+          "maxItems": 50,
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
           },
@@ -7906,7 +8159,10 @@
           "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypesLogs",
           "description": "Logs data type."
         }
-      }
+      },
+      "required": [
+        "logs"
+      ]
     },
     "AwsCloudTrailDataConnectorDataTypesLogs": {
       "type": "object",
@@ -7929,7 +8185,10 @@
           "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes",
           "description": "The available data types for the connector."
         }
-      }
+      },
+      "required": [
+        "dataTypes"
+      ]
     },
     "AzureDevOpsResourceInfo": {
       "type": "object",
@@ -7993,7 +8252,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password"
+          "format": "password",
+          "description": "The password",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -8232,7 +8493,8 @@
         },
         "successStatusValue": {
           "type": "string",
-          "description": "The status value."
+          "description": "The status value.",
+          "x-nullable": true
         },
         "isGzipCompressed": {
           "type": "boolean",
@@ -8254,22 +8516,26 @@
         },
         "hasCsvBoundary": {
           "type": "boolean",
-          "description": "The value indicating whether the response has CSV boundary in case the response in CSV format."
+          "description": "The value indicating whether the response has CSV boundary in case the response in CSV format.",
+          "x-nullable": true
         },
         "hasCsvHeader": {
           "type": "boolean",
-          "description": "The value indicating whether the response has headers in case the response in CSV format."
+          "description": "The value indicating whether the response has headers in case the response in CSV format.",
+          "x-nullable": true
         },
         "convertChildPropertiesToArray": {
           "type": "boolean",
-          "description": "The value indicating whether the response isn't an array of events / logs.  By setting this flag to true it means the remote server will response with an object which each property has as a value an array of events / logs."
+          "description": "The value indicating whether the response isn't an array of events / logs.  By setting this flag to true it means the remote server will response with an object which each property has as a value an array of events / logs.",
+          "x-nullable": true
         },
         "csvEscape": {
           "type": "string",
           "description": "The character used to escape characters in CSV.",
-          "default": "",
+          "default": "\"",
           "minLength": 1,
-          "maxLength": 1
+          "maxLength": 1,
+          "x-nullable": true
         }
       },
       "required": [
@@ -8829,11 +9095,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/DataConnectorKind",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
         },
         "etag": {
           "type": "string",
@@ -8858,7 +9120,10 @@
           "$ref": "#/definitions/DataTypeState",
           "description": "Describe whether this data type connection is enabled or not."
         }
-      }
+      },
+      "required": [
+        "state"
+      ]
     },
     "DataConnectorDefinition": {
       "type": "object",
@@ -8866,11 +9131,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/DataConnectorDefinitionKind",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
         },
         "etag": {
           "type": "string",
@@ -9021,7 +9282,10 @@
           "type": "string",
           "description": "The tenant id to connect to, and get the data from."
         }
-      }
+      },
+      "required": [
+        "tenantId"
+      ]
     },
     "DataConnectorWithAlertsProperties": {
       "type": "object",
@@ -9336,8 +9600,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "allOf": [
@@ -9561,10 +9824,10 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.SecurityInsights/incidents",
                 "scopes": [
                   "Extension"
-                ]
+                ],
+                "type": "Microsoft.SecurityInsights/incidents"
               }
             ]
           }
@@ -9810,8 +10073,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "fileName": {
           "type": "string",
@@ -9988,8 +10250,7 @@
           "items": {
             "$ref": "#/definitions/AttackTactic"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "techniques": {
           "type": "array",
@@ -10072,8 +10333,7 @@
           "description": "The tactics of the alert rule template",
           "items": {
             "$ref": "#/definitions/AttackTactic"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "techniques": {
           "type": "array",
@@ -10258,24 +10518,21 @@
           "description": "A list of entity types to group by (when matchingMethod is Selected). Only entities defined in the current alert rule may be used.",
           "items": {
             "$ref": "#/definitions/EntityMappingType"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "groupByAlertDetails": {
           "type": "array",
           "description": "A list of alert details to group by (when matchingMethod is Selected)",
           "items": {
             "$ref": "#/definitions/AlertDetail"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "groupByCustomDetails": {
           "type": "array",
           "description": "A list of custom details keys to group by (when matchingMethod is Selected). Only keys defined in the current alert rule may be used.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -10433,8 +10690,7 @@
           "description": "List of labels relevant to this bookmark",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "notes": {
           "type": "string",
@@ -10520,8 +10776,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "tactics": {
           "type": "array",
@@ -10529,8 +10784,7 @@
           "items": {
             "$ref": "#/definitions/AttackTactic"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "providerIncidentUrl": {
           "type": "string",
@@ -10976,16 +11230,15 @@
             "x-ms-arm-id-details": {
               "allowedResources": [
                 {
-                  "type": "Microsoft.SecurityInsights/alertRules",
                   "scopes": [
                     "Extension"
-                  ]
+                  ],
+                  "type": "Microsoft.SecurityInsights/alertRules"
                 }
               ]
             }
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "severity": {
           "$ref": "#/definitions/IncidentSeverity",
@@ -11369,7 +11622,7 @@
           "type": "array",
           "description": "A list of TI contexts attached to the IoTDevice entity.",
           "items": {
-            "$ref": "#/definitions/ThreatIntelligence"
+            "$ref": "#/definitions/threatIntelligence"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -11380,8 +11633,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "allOf": [
@@ -11425,7 +11677,7 @@
           "type": "array",
           "description": "A list of TI contexts attached to the ip entity.",
           "items": {
-            "$ref": "#/definitions/ThreatIntelligence"
+            "$ref": "#/definitions/threatIntelligence"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -11454,10 +11706,12 @@
         },
         "password": {
           "type": "object",
+          "format": "password",
           "description": "The password",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "queryParameters": {
           "type": "object",
@@ -11475,11 +11729,14 @@
         },
         "isCredentialsInHeaders": {
           "type": "boolean",
-          "description": "Flag indicating whether we want to send the user name and password to token endpoint in the headers."
+          "description": "Flag indicating whether we want to send the user name and password to token endpoint in the headers.",
+          "x-nullable": true
         },
         "isJsonRequest": {
           "type": "boolean",
-          "description": "Flag indicating whether the body request is JSON (header Content-Type = application/json), meaning its a Form URL encoded request (header Content-Type = application/x-www-form-urlencoded)."
+          "description": "Flag indicating whether the body request is JSON (header Content-Type = application/json), meaning its a Form URL encoded request (header Content-Type = application/x-www-form-urlencoded).",
+          "default": false,
+          "x-nullable": true
         },
         "requestTimeoutInSeconds": {
           "type": "integer",
@@ -11739,10 +11996,6 @@
       "type": "object",
       "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
       "properties": {
-        "alerts": {
-          "$ref": "#/definitions/DataConnectorDataTypeCommon",
-          "description": "Alerts log data type connection."
-        },
         "discoveryLogs": {
           "$ref": "#/definitions/DataConnectorDataTypeCommon",
           "description": "Discovery log data type connection."
@@ -11758,15 +12011,19 @@
       "type": "object",
       "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
       "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant id to connect to, and get the data from."
-        },
         "dataTypes": {
           "$ref": "#/definitions/MCASDataConnectorDataTypes",
           "description": "The available data types for the connector."
         }
-      }
+      },
+      "required": [
+        "dataTypes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ]
     },
     "MDATPDataConnector": {
       "type": "object",
@@ -11797,7 +12054,10 @@
           "$ref": "#/definitions/AlertsDataTypeOfDataConnector",
           "description": "The available data types for the connector."
         }
-      }
+      },
+      "required": [
+        "tenantId"
+      ]
     },
     "MSTIDataConnector": {
       "type": "object",
@@ -11893,8 +12153,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "countByDeliveryStatus": {
           "description": "Count of mail messages by DeliveryStatus string representation",
@@ -11914,8 +12173,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "query": {
           "type": "string",
@@ -12005,8 +12263,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "recipient": {
           "type": "string",
@@ -12019,8 +12276,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "threats": {
           "type": "array",
@@ -12028,8 +12284,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "p1Sender": {
           "type": "string",
@@ -12099,8 +12354,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "bodyFingerprintBin1": {
           "type": "integer",
@@ -12227,8 +12481,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "malwareName": {
           "type": "string",
@@ -12241,8 +12494,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "allOf": [
@@ -12310,80 +12562,6 @@
         ]
       }
     },
-    "MetadataAuthor": {
-      "type": "object",
-      "description": "Publisher or creator of the content item.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the author. Company or person."
-        },
-        "email": {
-          "type": "string",
-          "description": "Email of author contact"
-        },
-        "link": {
-          "type": "string",
-          "description": "Link for author/vendor page"
-        }
-      }
-    },
-    "MetadataCategories": {
-      "type": "object",
-      "description": "ies for the solution content item",
-      "properties": {
-        "domains": {
-          "type": "array",
-          "description": "domain for the solution content item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "verticals": {
-          "type": "array",
-          "description": "Industry verticals for the solution content item",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MetadataDependencies": {
-      "type": "object",
-      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "Id of the content item we depend on"
-        },
-        "kind": {
-          "$ref": "#/definitions/Kind",
-          "description": "Type of the content item we depend on"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the content item"
-        },
-        "operator": {
-          "$ref": "#/definitions/Operator",
-          "description": "Operator used for list of dependencies in criteria array."
-        },
-        "criteria": {
-          "type": "array",
-          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
-          "items": {
-            "$ref": "#/definitions/MetadataDependencies"
-          },
-          "x-ms-identifiers": [
-            "contentId"
-          ]
-        }
-      }
-    },
     "MetadataList": {
       "type": "object",
       "description": "List of all the metadata.",
@@ -12410,7 +12588,7 @@
       "description": "Metadata resource definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MetadataProperties",
+          "$ref": "#/definitions/metadataProperties",
           "description": "Metadata properties",
           "x-ms-client-flatten": true
         },
@@ -12423,265 +12601,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "MetadataPatch": {
-      "type": "object",
-      "description": "Metadata patch request body.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MetadataPropertiesPatch",
-          "description": "Metadata patch request body",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "MetadataProperties": {
-      "type": "object",
-      "description": "Metadata property bag.",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
-        },
-        "parentId": {
-          "type": "string",
-          "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of content the metadata is for."
-        },
-        "source": {
-          "$ref": "#/definitions/MetadataSource",
-          "description": "Source of the content.  This is where/how it was created."
-        },
-        "author": {
-          "$ref": "#/definitions/MetadataAuthor",
-          "description": "The creator of the content item."
-        },
-        "support": {
-          "$ref": "#/definitions/MetadataSupport",
-          "description": "Support information for the metadata - type, name, contact information"
-        },
-        "dependencies": {
-          "$ref": "#/definitions/MetadataDependencies",
-          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
-        },
-        "categories": {
-          "$ref": "#/definitions/MetadataCategories",
-          "description": "Categories for the solution content item"
-        },
-        "providers": {
-          "type": "array",
-          "description": "Providers for the solution content item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "firstPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "first publish date solution content item"
-        },
-        "lastPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "last publish date for the solution content item"
-        },
-        "customVersion": {
-          "type": "string",
-          "description": "The custom version of the content. A optional free text"
-        },
-        "contentSchemaVersion": {
-          "type": "string",
-          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
-        },
-        "icon": {
-          "type": "string",
-          "description": "the icon identifier. this id can later be fetched from the solution template"
-        },
-        "threatAnalysisTactics": {
-          "type": "array",
-          "description": "the tactics the resource covers",
-          "items": {
-            "type": "string"
-          }
-        },
-        "threatAnalysisTechniques": {
-          "type": "array",
-          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
-          "items": {
-            "type": "string"
-          }
-        },
-        "previewImages": {
-          "type": "array",
-          "description": "preview image file names. These will be taken from the solution artifacts",
-          "items": {
-            "type": "string"
-          }
-        },
-        "previewImagesDark": {
-          "type": "array",
-          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "parentId",
-        "kind"
-      ]
-    },
-    "MetadataPropertiesPatch": {
-      "type": "object",
-      "description": "Metadata property bag for patch requests.  This is the same as the MetadataProperties, but with nothing required",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
-        },
-        "parentId": {
-          "type": "string",
-          "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of content the metadata is for."
-        },
-        "source": {
-          "$ref": "#/definitions/MetadataSource",
-          "description": "Source of the content.  This is where/how it was created."
-        },
-        "author": {
-          "$ref": "#/definitions/MetadataAuthor",
-          "description": "The creator of the content item."
-        },
-        "support": {
-          "$ref": "#/definitions/MetadataSupport",
-          "description": "Support information for the metadata - type, name, contact information"
-        },
-        "dependencies": {
-          "$ref": "#/definitions/MetadataDependencies",
-          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
-        },
-        "categories": {
-          "$ref": "#/definitions/MetadataCategories",
-          "description": "Categories for the solution content item"
-        },
-        "providers": {
-          "type": "array",
-          "description": "Providers for the solution content item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "firstPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "first publish date solution content item"
-        },
-        "lastPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "last publish date for the solution content item"
-        },
-        "customVersion": {
-          "type": "string",
-          "description": "The custom version of the content. A optional free text"
-        },
-        "contentSchemaVersion": {
-          "type": "string",
-          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
-        },
-        "icon": {
-          "type": "string",
-          "description": "the icon identifier. this id can later be fetched from the solution template"
-        },
-        "threatAnalysisTactics": {
-          "type": "array",
-          "description": "the tactics the resource covers",
-          "items": {
-            "type": "string"
-          }
-        },
-        "threatAnalysisTechniques": {
-          "type": "array",
-          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
-          "items": {
-            "type": "string"
-          }
-        },
-        "previewImages": {
-          "type": "array",
-          "description": "preview image file names. These will be taken from the solution artifacts",
-          "items": {
-            "type": "string"
-          }
-        },
-        "previewImagesDark": {
-          "type": "array",
-          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MetadataSource": {
-      "type": "object",
-      "description": "The original source of the content item, where it comes from.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/SourceKind",
-          "description": "Source type of the content"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the content source.  The repo name, solution name, LA workspace name etc."
-        },
-        "sourceId": {
-          "type": "string",
-          "description": "ID of the content source.  The solution ID, workspace ID, etc"
-        }
-      },
-      "required": [
-        "kind"
-      ]
-    },
-    "MetadataSupport": {
-      "type": "object",
-      "description": "Support information for the content item.",
-      "properties": {
-        "tier": {
-          "$ref": "#/definitions/SupportTier",
-          "description": "Type of support for content item"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the support contact. Company or person."
-        },
-        "email": {
-          "type": "string",
-          "description": "Email of support contact"
-        },
-        "link": {
-          "type": "string",
-          "description": "Link for support help, like to support page to open a ticket etc."
-        }
-      },
-      "required": [
-        "tier"
       ]
     },
     "MicrosoftSecurityIncidentCreationAlertRule": {
@@ -12710,16 +12629,14 @@
           "description": "the alerts' displayNames on which the cases will be generated",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "displayNamesExcludeFilter": {
           "type": "array",
           "description": "the alerts' displayNames on which the cases will not be generated",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "productFilter": {
           "$ref": "#/definitions/MicrosoftSecurityProductName",
@@ -12730,8 +12647,7 @@
           "description": "the alerts' severities on which the cases will be generated",
           "items": {
             "$ref": "#/definitions/AlertSeverity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -12796,58 +12712,19 @@
       "type": "object",
       "description": "MicrosoftSecurityIncidentCreation rule template properties",
       "properties": {
-        "alertRulesCreatedByTemplateCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "the number of alert rules that were created by this template"
-        },
-        "createdDateUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time that this alert rule template has been added.",
-          "readOnly": true
-        },
-        "lastUpdatedDateUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time that this alert rule template was last updated.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the alert rule template."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name for alert rule template."
-        },
-        "requiredDataConnectors": {
-          "type": "array",
-          "description": "The required data connectors for this template",
-          "items": {
-            "$ref": "#/definitions/AlertRuleTemplateDataSource"
-          },
-          "x-ms-identifiers": []
-        },
-        "status": {
-          "$ref": "#/definitions/TemplateStatus",
-          "description": "The alert rule template status."
-        },
         "displayNamesFilter": {
           "type": "array",
           "description": "the alerts' displayNames on which the cases will be generated",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "displayNamesExcludeFilter": {
           "type": "array",
           "description": "the alerts' displayNames on which the cases will not be generated",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "productFilter": {
           "$ref": "#/definitions/MicrosoftSecurityProductName",
@@ -12858,10 +12735,14 @@
           "description": "the alerts' severities on which the cases will be generated",
           "items": {
             "$ref": "#/definitions/AlertSeverity"
-          },
-          "x-ms-identifiers": []
+          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ]
     },
     "MicrosoftSecurityProductName": {
       "type": "string",
@@ -12916,11 +12797,15 @@
       "properties": {
         "authorizationCode": {
           "type": "string",
-          "description": "The user's authorization code."
+          "format": "password",
+          "description": "The user's authorization code.",
+          "x-ms-secret": true
         },
         "clientSecret": {
           "type": "string",
-          "description": "The Application (client) secret that the OAuth provider assigned to your app."
+          "format": "password",
+          "description": "The Application (client) secret that the OAuth provider assigned to your app.",
+          "x-ms-secret": true
         },
         "clientId": {
           "type": "string",
@@ -12928,7 +12813,9 @@
         },
         "isCredentialsInHeaders": {
           "type": "boolean",
-          "description": "Indicating whether we want to send the clientId and clientSecret to token endpoint in the headers."
+          "description": "Indicating whether we want to send the clientId and clientSecret to token endpoint in the headers.",
+          "default": false,
+          "x-nullable": true
         },
         "scope": {
           "type": "string",
@@ -13076,7 +12963,12 @@
           "$ref": "#/definitions/OfficeDataConnectorDataTypesTeams",
           "description": "Teams data type connection."
         }
-      }
+      },
+      "required": [
+        "exchange",
+        "sharePoint",
+        "teams"
+      ]
     },
     "OfficeDataConnectorDataTypesExchange": {
       "type": "object",
@@ -13109,15 +13001,85 @@
       "type": "object",
       "description": "Office data connector properties.",
       "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant id to connect to, and get the data from."
-        },
         "dataTypes": {
           "$ref": "#/definitions/OfficeDataConnectorDataTypes",
           "description": "The available data types for the connector."
         }
+      },
+      "required": [
+        "dataTypes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ]
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Operation provided by provider",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Properties of the operation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of the operation"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        }
       }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Properties of the operation",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the operation"
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation name"
+        },
+        "provider": {
+          "type": "string",
+          "description": "Provider name"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource name"
+        }
+      }
+    },
+    "OperationsList": {
+      "type": "object",
+      "description": "Lists the operations available in the SecurityInsights RP.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "URL to fetch the next set of operations.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "description": "Array of operations",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Operator": {
       "type": "string",
@@ -13205,115 +13167,6 @@
         ]
       }
     },
-    "PackageBaseProperties": {
-      "type": "object",
-      "description": "Describes package properties",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "The content id of the package"
-        },
-        "contentProductId": {
-          "type": "string",
-          "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/PackageKind",
-          "description": "The package kind"
-        },
-        "contentSchemaVersion": {
-          "type": "string",
-          "description": "The version of the content schema."
-        },
-        "isNew": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this is a newly published package."
-        },
-        "isPreview": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this package is in preview."
-        },
-        "isFeatured": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this package is among the featured list."
-        },
-        "isDeprecated": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this template is deprecated"
-        },
-        "version": {
-          "type": "string",
-          "description": "the latest version number of the package"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the package"
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the package"
-        },
-        "publisherDisplayName": {
-          "type": "string",
-          "description": "The publisher display name of the package"
-        },
-        "source": {
-          "$ref": "#/definitions/MetadataSource",
-          "description": "The source of the package"
-        },
-        "author": {
-          "$ref": "#/definitions/MetadataAuthor",
-          "description": "The author of the package"
-        },
-        "support": {
-          "$ref": "#/definitions/MetadataSupport",
-          "description": "The support tier of the package"
-        },
-        "dependencies": {
-          "$ref": "#/definitions/MetadataDependencies",
-          "description": "The support tier of the package"
-        },
-        "providers": {
-          "type": "array",
-          "description": "Providers for the package item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "firstPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "first publish date package item"
-        },
-        "lastPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "last publish date for the package item"
-        },
-        "categories": {
-          "$ref": "#/definitions/MetadataCategories",
-          "description": "The categories of the package"
-        },
-        "threatAnalysisTactics": {
-          "type": "array",
-          "description": "the tactics the resource covers",
-          "items": {
-            "type": "string"
-          }
-        },
-        "threatAnalysisTechniques": {
-          "type": "array",
-          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
-          "items": {
-            "type": "string"
-          }
-        },
-        "icon": {
-          "type": "string",
-          "description": "the icon identifier. this id can later be fetched from the content metadata"
-        }
-      }
-    },
     "PackageKind": {
       "type": "string",
       "description": "The package kind",
@@ -13335,56 +13188,6 @@
           }
         ]
       }
-    },
-    "PackageList": {
-      "type": "object",
-      "description": "List available packages.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PackageModel items on this page",
-          "items": {
-            "$ref": "#/definitions/PackageModel"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PackageModel": {
-      "type": "object",
-      "description": "Represents a Package in Azure Security Insights.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PackageProperties",
-          "description": "package properties",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag of the azure resource"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PackageProperties": {
-      "type": "object",
-      "description": "Describes package properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PackageBaseProperties"
-        }
-      ]
     },
     "PlaybookActionProperties": {
       "type": "object",
@@ -13416,11 +13219,11 @@
     },
     "PremiumMdtiDataConnectorDataTypes": {
       "type": "object",
-      "description": "The available data types for Premium Microsoft Defender for Threat Intelligence data connector.",
+      "description": "The available data types for Microsoft Defender for Threat Intelligence Premium data connector.",
       "properties": {
         "connector": {
           "$ref": "#/definitions/PremiumMdtiDataConnectorDataTypesConnector",
-          "description": "Data type for Premium Microsoft Defender for Threat Intelligence data connector."
+          "description": "Data type for Microsoft Defender for Threat Intelligence Premium data connector."
         }
       },
       "required": [
@@ -13429,7 +13232,7 @@
     },
     "PremiumMdtiDataConnectorDataTypesConnector": {
       "type": "object",
-      "description": "Data type for Premium Microsoft Defender for Threat Intelligence data connector.",
+      "description": "Data type for Microsoft Defender for Threat Intelligence Premium data connector.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorDataTypeCommon"
@@ -13438,7 +13241,7 @@
     },
     "PremiumMdtiDataConnectorProperties": {
       "type": "object",
-      "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+      "description": "Microsoft Defender for Threat Intelligence Premium data connector properties.",
       "properties": {
         "lookbackPeriod": {
           "type": "string",
@@ -13466,11 +13269,11 @@
     },
     "PremiumMicrosoftDefenderForThreatIntelligence": {
       "type": "object",
-      "description": "Represents Premium Microsoft Defender for Threat Intelligence data connector.",
+      "description": "Represents Microsoft Defender for Threat Intelligence Premium data connector.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PremiumMdtiDataConnectorProperties",
-          "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+          "description": "Microsoft Defender for Threat Intelligence Premium data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -13553,336 +13356,6 @@
           "$ref": "#/definitions/EntityCommonProperties"
         }
       ]
-    },
-    "ProductPackageList": {
-      "type": "object",
-      "description": "List available packages.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProductPackageModel items on this page",
-          "items": {
-            "$ref": "#/definitions/ProductPackageModel"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ProductPackageModel": {
-      "type": "object",
-      "description": "Represents a Package in Azure Security Insights.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProductPackageProperties",
-          "description": "package properties",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag of the azure resource"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ProductPackageProperties": {
-      "type": "object",
-      "description": "Describes package properties",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "The content id of the package"
-        },
-        "contentProductId": {
-          "type": "string",
-          "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/PackageKind",
-          "description": "The package kind"
-        },
-        "contentSchemaVersion": {
-          "type": "string",
-          "description": "The version of the content schema."
-        },
-        "isNew": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this is a newly published package."
-        },
-        "isPreview": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this package is in preview."
-        },
-        "isFeatured": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this package is among the featured list."
-        },
-        "isDeprecated": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this template is deprecated"
-        },
-        "version": {
-          "type": "string",
-          "description": "the latest version number of the package"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the package"
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the package"
-        },
-        "publisherDisplayName": {
-          "type": "string",
-          "description": "The publisher display name of the package"
-        },
-        "source": {
-          "$ref": "#/definitions/MetadataSource",
-          "description": "The source of the package"
-        },
-        "author": {
-          "$ref": "#/definitions/MetadataAuthor",
-          "description": "The author of the package"
-        },
-        "support": {
-          "$ref": "#/definitions/MetadataSupport",
-          "description": "The support tier of the package"
-        },
-        "dependencies": {
-          "$ref": "#/definitions/MetadataDependencies",
-          "description": "The support tier of the package"
-        },
-        "providers": {
-          "type": "array",
-          "description": "Providers for the package item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "firstPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "first publish date package item"
-        },
-        "lastPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "last publish date for the package item"
-        },
-        "categories": {
-          "$ref": "#/definitions/MetadataCategories",
-          "description": "The categories of the package"
-        },
-        "threatAnalysisTactics": {
-          "type": "array",
-          "description": "the tactics the resource covers",
-          "items": {
-            "type": "string"
-          }
-        },
-        "threatAnalysisTechniques": {
-          "type": "array",
-          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
-          "items": {
-            "type": "string"
-          }
-        },
-        "icon": {
-          "type": "string",
-          "description": "the icon identifier. this id can later be fetched from the content metadata"
-        },
-        "installedVersion": {
-          "type": "string",
-          "description": "The version of the installed package, null or absent means not installed."
-        },
-        "metadataResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The metadata resource id."
-        },
-        "packagedContent": {
-          "description": "The json of the ARM template to deploy. Expandable."
-        }
-      }
-    },
-    "ProductTemplateList": {
-      "type": "object",
-      "description": "List of all the template.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProductTemplateModel items on this page",
-          "items": {
-            "$ref": "#/definitions/ProductTemplateModel"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ProductTemplateModel": {
-      "type": "object",
-      "description": "Template resource definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProductTemplateProperties",
-          "description": "template properties",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag of the azure resource"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ProductTemplateProperties": {
-      "type": "object",
-      "description": "Template property bag.",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
-        },
-        "contentProductId": {
-          "type": "string",
-          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
-        },
-        "packageVersion": {
-          "type": "string",
-          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the template"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/Kind",
-          "description": "The kind of content the template is for."
-        },
-        "source": {
-          "$ref": "#/definitions/MetadataSource",
-          "description": "Source of the content.  This is where/how it was created."
-        },
-        "author": {
-          "$ref": "#/definitions/MetadataAuthor",
-          "description": "The creator of the content item."
-        },
-        "support": {
-          "$ref": "#/definitions/MetadataSupport",
-          "description": "Support information for the template - type, name, contact information"
-        },
-        "dependencies": {
-          "$ref": "#/definitions/MetadataDependencies",
-          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
-        },
-        "categories": {
-          "$ref": "#/definitions/MetadataCategories",
-          "description": "Categories for the item"
-        },
-        "providers": {
-          "type": "array",
-          "description": "Providers for the content item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "firstPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "first publish date content item"
-        },
-        "lastPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "last publish date for the content item"
-        },
-        "customVersion": {
-          "type": "string",
-          "description": "The custom version of the content. A optional free text"
-        },
-        "contentSchemaVersion": {
-          "type": "string",
-          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
-        },
-        "icon": {
-          "type": "string",
-          "description": "the icon identifier. this id can later be fetched from the content metadata"
-        },
-        "threatAnalysisTactics": {
-          "type": "array",
-          "description": "the tactics the resource covers",
-          "items": {
-            "type": "string"
-          }
-        },
-        "threatAnalysisTechniques": {
-          "type": "array",
-          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
-          "items": {
-            "type": "string"
-          }
-        },
-        "previewImages": {
-          "type": "array",
-          "description": "preview image file names. These will be taken from the solution artifacts",
-          "items": {
-            "type": "string"
-          }
-        },
-        "previewImagesDark": {
-          "type": "array",
-          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
-          "items": {
-            "type": "string"
-          }
-        },
-        "packageId": {
-          "type": "string",
-          "description": "the package Id contains this template"
-        },
-        "packageKind": {
-          "$ref": "#/definitions/PackageKind",
-          "description": "the packageKind of the package contains this template"
-        },
-        "packageName": {
-          "type": "string",
-          "description": "the name of the package contains this template"
-        },
-        "isDeprecated": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this template is deprecated",
-          "readOnly": true
-        },
-        "packagedContent": {
-          "description": "The json of the ARM template to deploy"
-        }
-      }
     },
     "PropertyArrayChangedConditionProperties": {
       "type": "object",
@@ -14435,11 +13908,15 @@
         },
         "code": {
           "type": "string",
-          "description": "OAuth Code. Required when `kind` is `OAuth`"
+          "format": "password",
+          "description": "OAuth Code. Required when `kind` is `OAuth`",
+          "x-ms-secret": true
         },
         "state": {
           "type": "string",
-          "description": "OAuth State. Required when `kind` is `OAuth`"
+          "format": "password",
+          "description": "OAuth State. Required when `kind` is `OAuth`",
+          "x-ms-secret": true
         },
         "clientId": {
           "type": "string",
@@ -14447,7 +13924,9 @@
         },
         "token": {
           "type": "string",
-          "description": "Personal Access Token. Required when `kind` is `PAT`"
+          "format": "password",
+          "description": "Personal Access Token. Required when `kind` is `PAT`",
+          "x-ms-secret": true
         },
         "installationId": {
           "type": "string",
@@ -14648,12 +14127,14 @@
         "rateLimitQPS": {
           "type": "integer",
           "format": "int32",
-          "description": "The Rate limit queries per second for the request.."
+          "description": "The Rate limit queries per second for the request..",
+          "x-nullable": true
         },
         "queryWindowInMin": {
           "type": "integer",
           "format": "int32",
-          "description": "The query window in minutes for the request."
+          "description": "The query window in minutes for the request.",
+          "x-nullable": true
         },
         "httpMethod": {
           "$ref": "#/definitions/HttpMethodVerb",
@@ -14666,16 +14147,19 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The retry count."
+          "description": "The retry count.",
+          "x-nullable": true
         },
         "timeoutInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "The timeout in seconds."
+          "description": "The timeout in seconds.",
+          "x-nullable": true
         },
         "isPostPayloadJson": {
           "type": "boolean",
-          "description": "Flag to indicate if HTTP POST payload is in JSON format (vs form-urlencoded)."
+          "description": "Flag to indicate if HTTP POST payload is in JSON format (vs form-urlencoded).",
+          "x-nullable": true
         },
         "headers": {
           "type": "object",
@@ -15037,8 +14521,7 @@
           "description": "The tactics of the alert rule",
           "items": {
             "$ref": "#/definitions/AttackTactic"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "techniques": {
           "type": "array",
@@ -15154,8 +14637,7 @@
           "description": "The tactics of the alert rule template",
           "items": {
             "$ref": "#/definitions/AttackTactic"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "techniques": {
           "type": "array",
@@ -15301,8 +14783,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "severity": {
           "$ref": "#/definitions/AlertSeverity",
@@ -15330,8 +14811,7 @@
           "items": {
             "$ref": "#/definitions/AttackTactic"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "timeGenerated": {
           "type": "string",
@@ -15353,8 +14833,7 @@
           "type": "array",
           "description": "The list of resource identifiers of the alert.",
           "items": {},
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "allOf": [
@@ -15429,11 +14908,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/SecurityMLAnalyticsSettingsKind",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
         },
         "etag": {
           "type": "string",
@@ -15590,10 +15065,12 @@
         },
         "password": {
           "type": "object",
+          "format": "password",
           "description": "The password attribute name.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "queryParameters": {
           "type": "object",
@@ -15602,7 +15079,8 @@
         },
         "isPostPayloadJson": {
           "type": "boolean",
-          "description": "Indicating whether API key is set in HTTP POST payload."
+          "description": "Indicating whether API key is set in HTTP POST payload.",
+          "x-nullable": true
         },
         "headers": {
           "type": "object",
@@ -15614,7 +15092,8 @@
         "sessionTimeoutInMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Session timeout in minutes."
+          "description": "Session timeout in minutes.",
+          "x-nullable": true
         },
         "sessionIdName": {
           "type": "string",
@@ -15992,7 +15471,10 @@
           "$ref": "#/definitions/TIDataConnectorDataTypesIndicators",
           "description": "Data type for indicators connection."
         }
-      }
+      },
+      "required": [
+        "indicators"
+      ]
     },
     "TIDataConnectorDataTypesIndicators": {
       "type": "object",
@@ -16007,199 +15489,25 @@
       "type": "object",
       "description": "TI (Threat Intelligence) data connector properties.",
       "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant id to connect to, and get the data from."
-        },
         "tipLookbackPeriod": {
           "type": "string",
           "format": "date-time",
-          "description": "The lookback period for the feed to be imported."
+          "description": "The lookback period for the feed to be imported.",
+          "x-nullable": true
         },
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
           "description": "The available data types for the connector."
         }
-      }
-    },
-    "TemplateList": {
-      "type": "object",
-      "description": "List of all the template.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TemplateModel items on this page",
-          "items": {
-            "$ref": "#/definitions/TemplateModel"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
       },
       "required": [
-        "value"
-      ]
-    },
-    "TemplateModel": {
-      "type": "object",
-      "description": "Template resource definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TemplateProperties",
-          "description": "template properties",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag of the azure resource"
-        }
-      },
+        "dataTypes"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/DataConnectorTenantId"
         }
       ]
-    },
-    "TemplateProperties": {
-      "type": "object",
-      "description": "Template property bag.",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
-        },
-        "contentProductId": {
-          "type": "string",
-          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
-        },
-        "packageVersion": {
-          "type": "string",
-          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the template"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/Kind",
-          "description": "The kind of content the template is for."
-        },
-        "source": {
-          "$ref": "#/definitions/MetadataSource",
-          "description": "Source of the content.  This is where/how it was created."
-        },
-        "author": {
-          "$ref": "#/definitions/MetadataAuthor",
-          "description": "The creator of the content item."
-        },
-        "support": {
-          "$ref": "#/definitions/MetadataSupport",
-          "description": "Support information for the template - type, name, contact information"
-        },
-        "dependencies": {
-          "$ref": "#/definitions/MetadataDependencies",
-          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
-        },
-        "categories": {
-          "$ref": "#/definitions/MetadataCategories",
-          "description": "Categories for the item"
-        },
-        "providers": {
-          "type": "array",
-          "description": "Providers for the content item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "firstPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "first publish date content item"
-        },
-        "lastPublishDate": {
-          "type": "string",
-          "format": "date",
-          "description": "last publish date for the content item"
-        },
-        "customVersion": {
-          "type": "string",
-          "description": "The custom version of the content. A optional free text"
-        },
-        "contentSchemaVersion": {
-          "type": "string",
-          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
-        },
-        "icon": {
-          "type": "string",
-          "description": "the icon identifier. this id can later be fetched from the content metadata"
-        },
-        "threatAnalysisTactics": {
-          "type": "array",
-          "description": "the tactics the resource covers",
-          "items": {
-            "type": "string"
-          }
-        },
-        "threatAnalysisTechniques": {
-          "type": "array",
-          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
-          "items": {
-            "type": "string"
-          }
-        },
-        "previewImages": {
-          "type": "array",
-          "description": "preview image file names. These will be taken from the solution artifacts",
-          "items": {
-            "type": "string"
-          }
-        },
-        "previewImagesDark": {
-          "type": "array",
-          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
-          "items": {
-            "type": "string"
-          }
-        },
-        "packageId": {
-          "type": "string",
-          "description": "the package Id contains this template"
-        },
-        "packageKind": {
-          "$ref": "#/definitions/PackageKind",
-          "description": "the packageKind of the package contains this template"
-        },
-        "packageName": {
-          "type": "string",
-          "description": "the name of the package contains this template"
-        },
-        "isDeprecated": {
-          "$ref": "#/definitions/Flag",
-          "description": "Flag indicates if this template is deprecated",
-          "readOnly": true
-        },
-        "mainTemplate": {
-          "description": "The JSON of the ARM template to deploy active content. Expandable."
-        },
-        "dependantTemplates": {
-          "type": "array",
-          "description": "Dependant templates. Expandable.",
-          "items": {
-            "$ref": "#/definitions/TemplateProperties"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "contentId"
-          ]
-        }
-      }
     },
     "TemplateStatus": {
       "type": "string",
@@ -16231,43 +15539,6 @@
         ]
       }
     },
-    "ThreatIntelligence": {
-      "type": "object",
-      "description": "ThreatIntelligence property bag.",
-      "properties": {
-        "confidence": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence (must be between 0 and 1)",
-          "readOnly": true
-        },
-        "providerName": {
-          "type": "string",
-          "description": "Name of the provider from whom this Threat Intelligence information was received",
-          "readOnly": true
-        },
-        "reportLink": {
-          "type": "string",
-          "description": "Report link",
-          "readOnly": true
-        },
-        "threatDescription": {
-          "type": "string",
-          "description": "Threat description (free text)",
-          "readOnly": true
-        },
-        "threatName": {
-          "type": "string",
-          "description": "Threat name (e.g. \"Jedobot malware\")",
-          "readOnly": true
-        },
-        "threatType": {
-          "type": "string",
-          "description": "Threat type (e.g. \"Botnet\")",
-          "readOnly": true
-        }
-      }
-    },
     "ThreatIntelligenceAppendTags": {
       "type": "object",
       "description": "Array of tags to be appended to the threat intelligence indicator.",
@@ -16277,8 +15548,7 @@
           "description": "List of tags to be appended.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -16355,40 +15625,35 @@
           "description": "Sources of threat intelligence indicators",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "patternTypes": {
           "type": "array",
           "description": "Pattern types",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "threatTypes": {
           "type": "array",
           "description": "Threat types of threat intelligence indicators",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "ids": {
           "type": "array",
           "description": "Ids of threat intelligence indicators",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "keywords": {
           "type": "array",
           "description": "Keywords for searching threat intelligence indicators",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "skipToken": {
           "type": "string",
@@ -16414,8 +15679,7 @@
           "description": "granular marking model selectors",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -16445,8 +15709,7 @@
           "description": "List of tags",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "lastUpdatedTimeUtc": {
           "type": "string",
@@ -16469,8 +15732,7 @@
           "description": "Indicator types of threat intelligence entities",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "pattern": {
           "type": "string",
@@ -16537,8 +15799,7 @@
           "description": "Labels  of threat intelligence entity",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "revoked": {
           "type": "boolean",
@@ -16554,8 +15815,7 @@
           "description": "Threat intelligence entity object marking references",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "language": {
           "type": "string",
@@ -16566,8 +15826,7 @@
           "description": "Threat types",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "validFrom": {
           "type": "string",
@@ -16603,11 +15862,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/ThreatIntelligenceResourceInnerKind",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
         },
         "etag": {
           "type": "string",
@@ -16968,7 +16223,8 @@
       "properties": {
         "warning": {
           "$ref": "#/definitions/WarningBody",
-          "description": "Warning data."
+          "description": "Warning data.",
+          "readOnly": true
         }
       }
     },
@@ -17324,6 +16580,1049 @@
         "issuer": {
           "type": "string",
           "description": "Issuer of Workload Identity Federation.",
+          "readOnly": true
+        }
+      }
+    },
+    "metadataAuthor": {
+      "type": "object",
+      "description": "Publisher or creator of the content item.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the author. Company or person."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of author contact"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link for author/vendor page"
+        }
+      }
+    },
+    "metadataCategories": {
+      "type": "object",
+      "description": "ies for the solution content item",
+      "properties": {
+        "domains": {
+          "type": "array",
+          "description": "domain for the solution content item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verticals": {
+          "type": "array",
+          "description": "Industry verticals for the solution content item",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metadataDependencies": {
+      "type": "object",
+      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
+      "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Id of the content item we depend on"
+        },
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "Type of the content item we depend on"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the content item"
+        },
+        "operator": {
+          "$ref": "#/definitions/Operator",
+          "description": "Operator used for list of dependencies in criteria array."
+        },
+        "criteria": {
+          "type": "array",
+          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
+          "items": {
+            "$ref": "#/definitions/metadataDependencies"
+          },
+          "x-ms-identifiers": [
+            "contentId"
+          ]
+        }
+      }
+    },
+    "metadataPatch": {
+      "type": "object",
+      "description": "Metadata patch request body.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/metadataPropertiesPatch",
+          "description": "Metadata patch request body",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ]
+    },
+    "metadataProperties": {
+      "type": "object",
+      "description": "Metadata property bag.",
+      "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "parentId": {
+          "type": "string",
+          "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of content the metadata is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
+        "author": {
+          "$ref": "#/definitions/metadataAuthor",
+          "description": "The creator of the content item."
+        },
+        "support": {
+          "$ref": "#/definitions/metadataSupport",
+          "description": "Support information for the metadata - type, name, contact information"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/metadataDependencies",
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the solution content item"
+        },
+        "providers": {
+          "type": "array",
+          "description": "Providers for the solution content item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "firstPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "first publish date solution content item"
+        },
+        "lastPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "last publish date for the solution content item"
+        },
+        "customVersion": {
+          "type": "string",
+          "description": "The custom version of the content. A optional free text"
+        },
+        "contentSchemaVersion": {
+          "type": "string",
+          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
+        },
+        "icon": {
+          "type": "string",
+          "description": "the icon identifier. this id can later be fetched from the solution template"
+        },
+        "threatAnalysisTactics": {
+          "type": "array",
+          "description": "the tactics the resource covers",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threatAnalysisTechniques": {
+          "type": "array",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
+          "items": {
+            "type": "string"
+          }
+        },
+        "previewImages": {
+          "type": "array",
+          "description": "preview image file names. These will be taken from the solution artifacts",
+          "items": {
+            "type": "string"
+          }
+        },
+        "previewImagesDark": {
+          "type": "array",
+          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "parentId",
+        "kind"
+      ]
+    },
+    "metadataPropertiesPatch": {
+      "type": "object",
+      "description": "Metadata property bag for patch requests.  This is the same as the MetadataProperties, but with nothing required",
+      "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "parentId": {
+          "type": "string",
+          "description": "Full parent resource ID of the content item the metadata is for.  This is the full resource ID including the scope (subscription and resource group)"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM template best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of content the metadata is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
+        "author": {
+          "$ref": "#/definitions/metadataAuthor",
+          "description": "The creator of the content item."
+        },
+        "support": {
+          "$ref": "#/definitions/metadataSupport",
+          "description": "Support information for the metadata - type, name, contact information"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/metadataDependencies",
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the solution content item"
+        },
+        "providers": {
+          "type": "array",
+          "description": "Providers for the solution content item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "firstPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "first publish date solution content item"
+        },
+        "lastPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "last publish date for the solution content item"
+        },
+        "customVersion": {
+          "type": "string",
+          "description": "The custom version of the content. A optional free text"
+        },
+        "contentSchemaVersion": {
+          "type": "string",
+          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
+        },
+        "icon": {
+          "type": "string",
+          "description": "the icon identifier. this id can later be fetched from the solution template"
+        },
+        "threatAnalysisTactics": {
+          "type": "array",
+          "description": "the tactics the resource covers",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threatAnalysisTechniques": {
+          "type": "array",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
+          "items": {
+            "type": "string"
+          }
+        },
+        "previewImages": {
+          "type": "array",
+          "description": "preview image file names. These will be taken from the solution artifacts",
+          "items": {
+            "type": "string"
+          }
+        },
+        "previewImagesDark": {
+          "type": "array",
+          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metadataSource": {
+      "type": "object",
+      "description": "The original source of the content item, where it comes from.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SourceKind",
+          "description": "Source type of the content"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the content source.  The repo name, solution name, LA workspace name etc."
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "ID of the content source.  The solution ID, workspace ID, etc"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "metadataSupport": {
+      "type": "object",
+      "description": "Support information for the content item.",
+      "properties": {
+        "tier": {
+          "$ref": "#/definitions/SupportTier",
+          "description": "Type of support for content item"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the support contact. Company or person."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of support contact"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link for support help, like to support page to open a ticket etc."
+        }
+      },
+      "required": [
+        "tier"
+      ]
+    },
+    "packageBaseProperties": {
+      "type": "object",
+      "description": "Describes package properties",
+      "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "The content id of the package"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/PackageKind",
+          "description": "The package kind"
+        },
+        "contentSchemaVersion": {
+          "type": "string",
+          "description": "The version of the content schema."
+        },
+        "isNew": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this is a newly published package."
+        },
+        "isPreview": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this package is in preview."
+        },
+        "isFeatured": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this package is among the featured list."
+        },
+        "isDeprecated": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this template is deprecated"
+        },
+        "version": {
+          "type": "string",
+          "description": "the latest version number of the package"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the package"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the package"
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The publisher display name of the package"
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "The source of the package"
+        },
+        "author": {
+          "$ref": "#/definitions/metadataAuthor",
+          "description": "The author of the package"
+        },
+        "support": {
+          "$ref": "#/definitions/metadataSupport",
+          "description": "The support tier of the package"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/metadataDependencies",
+          "description": "The support tier of the package"
+        },
+        "providers": {
+          "type": "array",
+          "description": "Providers for the package item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "firstPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "first publish date package item"
+        },
+        "lastPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "last publish date for the package item"
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "The categories of the package"
+        },
+        "threatAnalysisTactics": {
+          "type": "array",
+          "description": "the tactics the resource covers",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threatAnalysisTechniques": {
+          "type": "array",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
+          "items": {
+            "type": "string"
+          }
+        },
+        "icon": {
+          "type": "string",
+          "description": "the icon identifier. this id can later be fetched from the content metadata"
+        }
+      }
+    },
+    "packageList": {
+      "type": "object",
+      "description": "List available packages.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PackageModel items on this page",
+          "items": {
+            "$ref": "#/definitions/packageModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "packageModel": {
+      "type": "object",
+      "description": "Represents a Package in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/packageProperties",
+          "description": "package properties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag of the azure resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "packageProperties": {
+      "type": "object",
+      "description": "Describes package properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/packageBaseProperties"
+        }
+      ]
+    },
+    "productPackageList": {
+      "type": "object",
+      "description": "List available packages.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProductPackageModel items on this page",
+          "items": {
+            "$ref": "#/definitions/productPackageModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "productPackageModel": {
+      "type": "object",
+      "description": "Represents a Package in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/productPackageProperties",
+          "description": "package properties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag of the azure resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "productPackageProperties": {
+      "type": "object",
+      "description": "Describes package properties",
+      "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "The content id of the package"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/PackageKind",
+          "description": "The package kind"
+        },
+        "contentSchemaVersion": {
+          "type": "string",
+          "description": "The version of the content schema."
+        },
+        "isNew": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this is a newly published package."
+        },
+        "isPreview": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this package is in preview."
+        },
+        "isFeatured": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this package is among the featured list."
+        },
+        "isDeprecated": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this template is deprecated"
+        },
+        "version": {
+          "type": "string",
+          "description": "the latest version number of the package"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the package"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the package"
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The publisher display name of the package"
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "The source of the package"
+        },
+        "author": {
+          "$ref": "#/definitions/metadataAuthor",
+          "description": "The author of the package"
+        },
+        "support": {
+          "$ref": "#/definitions/metadataSupport",
+          "description": "The support tier of the package"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/metadataDependencies",
+          "description": "The support tier of the package"
+        },
+        "providers": {
+          "type": "array",
+          "description": "Providers for the package item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "firstPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "first publish date package item"
+        },
+        "lastPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "last publish date for the package item"
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "The categories of the package"
+        },
+        "threatAnalysisTactics": {
+          "type": "array",
+          "description": "the tactics the resource covers",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threatAnalysisTechniques": {
+          "type": "array",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
+          "items": {
+            "type": "string"
+          }
+        },
+        "icon": {
+          "type": "string",
+          "description": "the icon identifier. this id can later be fetched from the content metadata"
+        },
+        "installedVersion": {
+          "type": "string",
+          "description": "The version of the installed package, null or absent means not installed."
+        },
+        "metadataResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The metadata resource id."
+        },
+        "packagedContent": {
+          "description": "The json of the ARM template to deploy. Expandable."
+        }
+      }
+    },
+    "productTemplateList": {
+      "type": "object",
+      "description": "List of all the template.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProductTemplateModel items on this page",
+          "items": {
+            "$ref": "#/definitions/productTemplateModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "productTemplateModel": {
+      "type": "object",
+      "description": "Template resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/productTemplateProperties",
+          "description": "template properties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag of the azure resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "productTemplateProperties": {
+      "type": "object",
+      "description": "Template property bag.",
+      "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
+        },
+        "packageVersion": {
+          "type": "string",
+          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the template"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/Kind",
+          "description": "The kind of content the template is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
+        "author": {
+          "$ref": "#/definitions/metadataAuthor",
+          "description": "The creator of the content item."
+        },
+        "support": {
+          "$ref": "#/definitions/metadataSupport",
+          "description": "Support information for the template - type, name, contact information"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/metadataDependencies",
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the item"
+        },
+        "providers": {
+          "type": "array",
+          "description": "Providers for the content item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "firstPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "first publish date content item"
+        },
+        "lastPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "last publish date for the content item"
+        },
+        "customVersion": {
+          "type": "string",
+          "description": "The custom version of the content. A optional free text"
+        },
+        "contentSchemaVersion": {
+          "type": "string",
+          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
+        },
+        "icon": {
+          "type": "string",
+          "description": "the icon identifier. this id can later be fetched from the content metadata"
+        },
+        "threatAnalysisTactics": {
+          "type": "array",
+          "description": "the tactics the resource covers",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threatAnalysisTechniques": {
+          "type": "array",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
+          "items": {
+            "type": "string"
+          }
+        },
+        "previewImages": {
+          "type": "array",
+          "description": "preview image file names. These will be taken from the solution artifacts",
+          "items": {
+            "type": "string"
+          }
+        },
+        "previewImagesDark": {
+          "type": "array",
+          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageId": {
+          "type": "string",
+          "description": "the package Id contains this template"
+        },
+        "packageKind": {
+          "$ref": "#/definitions/PackageKind",
+          "description": "the packageKind of the package contains this template"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "the name of the package contains this template"
+        },
+        "isDeprecated": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this template is deprecated",
+          "readOnly": true
+        },
+        "packagedContent": {
+          "description": "The json of the ARM template to deploy"
+        }
+      }
+    },
+    "templateList": {
+      "type": "object",
+      "description": "List of all the template.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TemplateModel items on this page",
+          "items": {
+            "$ref": "#/definitions/templateModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "templateModel": {
+      "type": "object",
+      "description": "Template resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/templateProperties",
+          "description": "template properties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag of the azure resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "templateProperties": {
+      "type": "object",
+      "description": "Template property bag.",
+      "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
+        },
+        "packageVersion": {
+          "type": "string",
+          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the template"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/Kind",
+          "description": "The kind of content the template is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
+        "author": {
+          "$ref": "#/definitions/metadataAuthor",
+          "description": "The creator of the content item."
+        },
+        "support": {
+          "$ref": "#/definitions/metadataSupport",
+          "description": "Support information for the template - type, name, contact information"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/metadataDependencies",
+          "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+        },
+        "categories": {
+          "$ref": "#/definitions/metadataCategories",
+          "description": "Categories for the item"
+        },
+        "providers": {
+          "type": "array",
+          "description": "Providers for the content item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "firstPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "first publish date content item"
+        },
+        "lastPublishDate": {
+          "type": "string",
+          "format": "date",
+          "description": "last publish date for the content item"
+        },
+        "customVersion": {
+          "type": "string",
+          "description": "The custom version of the content. A optional free text"
+        },
+        "contentSchemaVersion": {
+          "type": "string",
+          "description": "Schema version of the content. Can be used to distinguish between different flow based on the schema version"
+        },
+        "icon": {
+          "type": "string",
+          "description": "the icon identifier. this id can later be fetched from the content metadata"
+        },
+        "threatAnalysisTactics": {
+          "type": "array",
+          "description": "the tactics the resource covers",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threatAnalysisTechniques": {
+          "type": "array",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used",
+          "items": {
+            "type": "string"
+          }
+        },
+        "previewImages": {
+          "type": "array",
+          "description": "preview image file names. These will be taken from the solution artifacts",
+          "items": {
+            "type": "string"
+          }
+        },
+        "previewImagesDark": {
+          "type": "array",
+          "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageId": {
+          "type": "string",
+          "description": "the package Id contains this template"
+        },
+        "packageKind": {
+          "$ref": "#/definitions/PackageKind",
+          "description": "the packageKind of the package contains this template"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "the name of the package contains this template"
+        },
+        "isDeprecated": {
+          "$ref": "#/definitions/Flag",
+          "description": "Flag indicates if this template is deprecated",
+          "readOnly": true
+        },
+        "mainTemplate": {
+          "description": "The JSON of the ARM template to deploy active content. Expandable."
+        },
+        "dependantTemplates": {
+          "type": "array",
+          "description": "Dependant templates. Expandable.",
+          "items": {
+            "$ref": "#/definitions/templateProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "contentId"
+          ]
+        }
+      }
+    },
+    "threatIntelligence": {
+      "type": "object",
+      "description": "ThreatIntelligence property bag.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence (must be between 0 and 1)",
+          "readOnly": true
+        },
+        "providerName": {
+          "type": "string",
+          "description": "Name of the provider from whom this Threat Intelligence information was received",
+          "readOnly": true
+        },
+        "reportLink": {
+          "type": "string",
+          "description": "Report link",
+          "readOnly": true
+        },
+        "threatDescription": {
+          "type": "string",
+          "description": "Threat description (free text)",
+          "readOnly": true
+        },
+        "threatName": {
+          "type": "string",
+          "description": "Threat name (e.g. \"Jedobot malware\")",
+          "readOnly": true
+        },
+        "threatType": {
+          "type": "string",
+          "description": "Threat type (e.g. \"Botnet\")",
           "readOnly": true
         }
       }

@@ -47,6 +47,9 @@ alias IncidentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @segment("workspaces")
     @key
     @path
+    @minLength(1)
+    @maxLength(90)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
     workspaceName: string;
   },
   {

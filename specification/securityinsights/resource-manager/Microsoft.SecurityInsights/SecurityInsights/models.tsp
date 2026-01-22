@@ -1313,7 +1313,7 @@ union AutomationRulePropertyArrayConditionSupportedArrayConditionType {
   AnyItem: "AnyItem",
 
   /**
-   * Evaluate the condition as true if all items fulfill it
+   * Evaluate the condition as true if all the items fulfill it
    */
   AllItems: "AllItems",
 }
@@ -2188,8 +2188,6 @@ model ActionRequest extends ResourceWithEtag {
   /**
    * Action properties for put request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ActionRequestProperties;
 }
 
@@ -2201,6 +2199,7 @@ model ActionRequestProperties extends ActionPropertiesBase {
   /**
    * Logic App Callback URL for this specific workflow.
    */
+  @secret
   triggerUri: string;
 }
 
@@ -2235,7 +2234,8 @@ model AutomationRuleProperties {
   /**
    * The actions to execute when the automation rule is triggered.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
+  @maxItems(20)
   actions: AutomationRuleAction[];
 
   /**
@@ -2288,7 +2288,8 @@ model AutomationRuleTriggeringLogic {
   /**
    * The conditions to evaluate to determine if the automation rule should be triggered on a given object.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["conditionType"])
+  @identifiers(#["conditionType"])
+  @maxItems(50)
   conditions?: AutomationRuleCondition[];
 }
 
@@ -2354,8 +2355,8 @@ model EntityManualTriggerRequestBody {
    */
   incidentArmId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.SecurityInsights/incidents";
       scopes: ["Extension"];
+      type: "Microsoft.SecurityInsights/incidents";
     }
   ]>;
 
@@ -2763,7 +2764,7 @@ model MetadataDependencies {
   /**
    * This is the list of dependencies we must fulfill, according to the AND/OR operator
    */
-  @OpenAPI.extension("x-ms-identifiers", #["contentId"])
+  @identifiers(#["contentId"])
   criteria?: MetadataDependencies[];
 }
 
@@ -3001,7 +3002,7 @@ model TemplateAdditionalProperties {
    * Dependant templates. Expandable.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["contentId"])
+  @identifiers(#["contentId"])
   dependantTemplates?: TemplateProperties[];
 }
 
@@ -3092,7 +3093,7 @@ model IncidentProperties {
   /**
    * List of labels relevant to this incident
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labels?: IncidentLabel[];
 
   /**
@@ -3117,11 +3118,10 @@ model IncidentProperties {
    * List of resource ids of Analytic rules related to the incident
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   relatedAnalyticRuleIds?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.SecurityInsights/alertRules";
       scopes: ["Extension"];
+      type: "Microsoft.SecurityInsights/alertRules";
     }
   ]>[];
 
@@ -3167,14 +3167,12 @@ model IncidentAdditionalData {
    * List of product names of alerts in the incident
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   alertProductNames?: string[];
 
   /**
    * The tactics associated with incident
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   tactics?: AttackTactic[];
 
   /**
@@ -3240,7 +3238,7 @@ model IncidentAlertList {
    * Array of incident alerts.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: SecurityAlert[];
 }
 
@@ -3251,8 +3249,6 @@ model SecurityAlert extends Entity {
   /**
    * SecurityAlert entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SecurityAlertProperties;
 
   /**
@@ -3294,7 +3290,7 @@ model SecurityAlertProperties extends EntityCommonProperties {
    * The confidence reasons
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   confidenceReasons?: SecurityAlertPropertiesConfidenceReasonsItem[];
 
   /**
@@ -3363,7 +3359,6 @@ model SecurityAlertProperties extends EntityCommonProperties {
    * Manual action items to take to remediate the alert.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   remediationSteps?: string[];
 
   /**
@@ -3394,7 +3389,6 @@ model SecurityAlertProperties extends EntityCommonProperties {
    * The tactics of the alert
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   tactics?: AttackTactic[];
 
   /**
@@ -3420,7 +3414,6 @@ model SecurityAlertProperties extends EntityCommonProperties {
    * The list of resource identifiers of the alert.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   resourceIdentifiers?: unknown[];
 }
 
@@ -3479,7 +3472,7 @@ model IncidentBookmarkList {
    * Array of incident bookmarks.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: HuntingBookmark[];
 }
 
@@ -3490,8 +3483,6 @@ model HuntingBookmark extends Entity {
   /**
    * HuntingBookmark entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: HuntingBookmarkProperties;
 
   /**
@@ -3530,7 +3521,6 @@ model HuntingBookmarkProperties extends EntityCommonProperties {
   /**
    * List of labels relevant to this bookmark
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   labels?: string[];
 
   /**
@@ -3608,13 +3598,13 @@ model IncidentEntitiesResponse {
   /**
    * Array of the incident related entities.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   entities?: Entity[];
 
   /**
    * The metadata from the incident related entities results.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metaData?: IncidentEntitiesResultsMetadata[];
 }
 
@@ -3826,12 +3816,11 @@ model MetadataProperties {
 /**
  * Metadata patch request body.
  */
-model MetadataPatch {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model MetadataPatch extends ResourceWithEtag {
   /**
    * Metadata patch request body
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MetadataPropertiesPatch;
 }
 
@@ -4021,8 +4010,6 @@ model RepositoryAccessProperties {
   /**
    * RepositoryAccess properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: RepositoryAccessObject;
 }
 
@@ -4033,8 +4020,6 @@ model RepositoryAccessObject {
   /**
    * RepositoryAccess properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   repositoryAccess: RepositoryAccess;
 }
 
@@ -4050,11 +4035,13 @@ model RepositoryAccess {
   /**
    * OAuth Code. Required when `kind` is `OAuth`
    */
+  @secret
   code?: string;
 
   /**
    * OAuth State. Required when `kind` is `OAuth`
    */
+  @secret
   state?: string;
 
   /**
@@ -4065,6 +4052,7 @@ model RepositoryAccess {
   /**
    * Personal Access Token. Required when `kind` is `PAT`
    */
+  @secret
   token?: string;
 
   /**
@@ -4428,6 +4416,7 @@ model Warning {
    * Warning data.
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
+  @visibility(Lifecycle.Read)
   warning?: WarningBody;
 }
 
@@ -4449,7 +4438,7 @@ model WarningBody {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: WarningBody[];
 }
 
@@ -4461,8 +4450,6 @@ model ThreatIntelligenceIndicatorModel extends ThreatIntelligenceInformation {
   /**
    * Threat Intelligence Entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ThreatIntelligenceIndicatorProperties;
 
   kind: ThreatIntelligenceResourceInnerKind.indicator;
@@ -4476,7 +4463,6 @@ model ThreatIntelligenceIndicatorProperties extends EntityCommonProperties {
   /**
    * List of tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   threatIntelligenceTags?: string[];
 
   /**
@@ -4502,7 +4488,6 @@ model ThreatIntelligenceIndicatorProperties extends EntityCommonProperties {
   /**
    * Indicator types of threat intelligence entities
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   indicatorTypes?: string[];
 
   /**
@@ -4523,13 +4508,13 @@ model ThreatIntelligenceIndicatorProperties extends EntityCommonProperties {
   /**
    * Kill chain phases
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   killChainPhases?: ThreatIntelligenceKillChainPhase[];
 
   /**
    * Parsed patterns
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   parsedPattern?: ThreatIntelligenceParsedPattern[];
 
   /**
@@ -4555,19 +4540,18 @@ model ThreatIntelligenceIndicatorProperties extends EntityCommonProperties {
   /**
    * External References
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   externalReferences?: ThreatIntelligenceExternalReference[];
 
   /**
    * Granular Markings
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   granularMarkings?: ThreatIntelligenceGranularMarkingModel[];
 
   /**
    * Labels  of threat intelligence entity
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   labels?: string[];
 
   /**
@@ -4583,7 +4567,6 @@ model ThreatIntelligenceIndicatorProperties extends EntityCommonProperties {
   /**
    * Threat intelligence entity object marking references
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   objectMarkingRefs?: string[];
 
   /**
@@ -4594,7 +4577,6 @@ model ThreatIntelligenceIndicatorProperties extends EntityCommonProperties {
   /**
    * Threat types
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   threatTypes?: string[];
 
   /**
@@ -4651,7 +4633,7 @@ model ThreatIntelligenceParsedPattern {
   /**
    * Pattern type keys
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   patternTypeValues?: ThreatIntelligenceParsedPatternTypeValue[];
 }
 
@@ -4718,7 +4700,6 @@ model ThreatIntelligenceGranularMarkingModel {
   /**
    * granular marking model selectors
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   selectors?: string[];
 }
 
@@ -4765,37 +4746,32 @@ model ThreatIntelligenceFilteringCriteria {
   /**
    * Columns to sort by and sorting order
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sortBy?: ThreatIntelligenceSortingCriteria[];
 
   /**
    * Sources of threat intelligence indicators
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   sources?: string[];
 
   /**
    * Pattern types
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   patternTypes?: string[];
 
   /**
    * Threat types of threat intelligence indicators
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   threatTypes?: string[];
 
   /**
    * Ids of threat intelligence indicators
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   ids?: string[];
 
   /**
    * Keywords for searching threat intelligence indicators
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   keywords?: string[];
 
   /**
@@ -4826,7 +4802,7 @@ model ThreatIntelligenceMetricsList {
   /**
    * Array of threat intelligence metric fields (type/threat type/source).
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: ThreatIntelligenceMetrics[];
 }
 
@@ -4852,19 +4828,19 @@ model ThreatIntelligenceMetric {
   /**
    * Threat type metrics
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   threatTypeMetrics?: ThreatIntelligenceMetricEntity[];
 
   /**
    * Pattern type metrics
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   patternTypeMetrics?: ThreatIntelligenceMetricEntity[];
 
   /**
    * Source metrics
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sourceMetrics?: ThreatIntelligenceMetricEntity[];
 }
 
@@ -4890,7 +4866,6 @@ model ThreatIntelligenceAppendTags {
   /**
    * List of tags to be appended.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   threatIntelligenceTags?: string[];
 }
 
@@ -5094,8 +5069,52 @@ model AlertRuleTemplateDataSource {
   /**
    * The data types used by the alert rule template
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dataTypes?: string[];
+}
+
+/**
+ * Base alert rule template property bag.
+ */
+model AlertRuleTemplatePropertiesBase {
+  /**
+   * The number of alert rules that were created by this template
+   */
+  alertRulesCreatedByTemplateCount?: int32;
+
+  /**
+   * The time that this alert rule template has been added.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdDateUTC?: utcDateTime;
+
+  /**
+   * The description of the alert rule template.
+   */
+  description?: string;
+
+  /**
+   * The display name for alert rule template.
+   */
+  displayName?: string;
+
+  /**
+   * The last time that this alert rule template has been updated.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdatedDateUTC?: utcDateTime;
+
+  /**
+   * The required data sources for this template
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["connectorId"])
+  requiredDataConnectors?: AlertRuleTemplateDataSource[];
+
+  /**
+   * The alert rule template status.
+   */
+  status?: TemplateStatus;
 }
 
 /**
@@ -5105,8 +5124,6 @@ model FusionAlertRule extends AlertRule {
   /**
    * Fusion alert rule properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FusionAlertRuleProperties;
 
   /**
@@ -5158,7 +5175,6 @@ model FusionAlertRuleProperties {
    * The tactics of the alert rule
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   tactics?: AttackTactic[];
 
   /**
@@ -5175,8 +5191,6 @@ model FusionAlertRuleTemplate extends AlertRuleTemplate {
   /**
    * Fusion alert rule template properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FusionAlertRuleTemplateProperties;
 
   /**
@@ -5223,7 +5237,7 @@ model FusionAlertRuleTemplateProperties {
   /**
    * The required data connectors for this template
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   requiredDataConnectors?: AlertRuleTemplateDataSource[];
 
   /**
@@ -5239,7 +5253,6 @@ model FusionAlertRuleTemplateProperties {
   /**
    * The tactics of the alert rule template
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   tactics?: AttackTactic[];
 
   /**
@@ -5255,8 +5268,6 @@ model MicrosoftSecurityIncidentCreationAlertRule extends AlertRule {
   /**
    * MicrosoftSecurityIncidentCreation rule properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MicrosoftSecurityIncidentCreationAlertRuleProperties;
 
   /**
@@ -5306,13 +5317,11 @@ model MicrosoftSecurityIncidentCreationAlertRuleCommonProperties {
   /**
    * the alerts' displayNames on which the cases will be generated
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   displayNamesFilter?: string[];
 
   /**
    * the alerts' displayNames on which the cases will not be generated
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   displayNamesExcludeFilter?: string[];
 
   /**
@@ -5323,7 +5332,6 @@ model MicrosoftSecurityIncidentCreationAlertRuleCommonProperties {
   /**
    * the alerts' severities on which the cases will be generated
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   severitiesFilter?: AlertSeverity[];
 }
 
@@ -5335,8 +5343,6 @@ model MicrosoftSecurityIncidentCreationAlertRuleTemplate
   /**
    * MicrosoftSecurityIncidentCreation rule template properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties;
 
   /**
@@ -5348,59 +5354,17 @@ model MicrosoftSecurityIncidentCreationAlertRuleTemplate
 /**
  * MicrosoftSecurityIncidentCreation rule template properties
  */
-model MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties {
-  /**
-   * the number of alert rules that were created by this template
-   */
-  alertRulesCreatedByTemplateCount?: int32;
-
-  /**
-   * The time that this alert rule template has been added.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdDateUTC?: utcDateTime;
-
-  /**
-   * The time that this alert rule template was last updated.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastUpdatedDateUTC?: utcDateTime;
-
-  /**
-   * The description of the alert rule template.
-   */
-  description?: string;
-
-  /**
-   * The display name for alert rule template.
-   */
-  displayName?: string;
-
-  /**
-   * The required data connectors for this template
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  requiredDataConnectors?: AlertRuleTemplateDataSource[];
-
-  /**
-   * The alert rule template status.
-   */
-  status?: TemplateStatus;
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties
+  extends AlertRuleTemplatePropertiesBase {
   /**
    * the alerts' displayNames on which the cases will be generated
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   displayNamesFilter?: string[];
 
   /**
    * the alerts' displayNames on which the cases will not be generated
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   displayNamesExcludeFilter?: string[];
 
   /**
@@ -5411,7 +5375,6 @@ model MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties {
   /**
    * the alerts' severities on which the cases will be generated
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   severitiesFilter?: AlertSeverity[];
 }
 
@@ -5422,8 +5385,6 @@ model ScheduledAlertRule extends AlertRule {
   /**
    * Scheduled alert rule properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ScheduledAlertRuleProperties;
 
   /**
@@ -5482,7 +5443,6 @@ model ScheduledAlertRuleProperties extends ScheduledAlertRuleCommonProperties {
   /**
    * The tactics of the alert rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   tactics?: AttackTactic[];
 
   /**
@@ -5538,19 +5498,16 @@ model GroupingConfiguration {
   /**
    * A list of entity types to group by (when matchingMethod is Selected). Only entities defined in the current alert rule may be used.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   groupByEntities?: EntityMappingType[];
 
   /**
    * A list of alert details to group by (when matchingMethod is Selected)
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   groupByAlertDetails?: AlertDetail[];
 
   /**
    * A list of custom details keys to group by (when matchingMethod is Selected). Only keys defined in the current alert rule may be used.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   groupByCustomDetails?: string[];
 }
 
@@ -5633,7 +5590,7 @@ model EntityMapping {
   /**
    * array of field mappings for the given entity mapping
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   fieldMappings?: FieldMapping[];
 }
 
@@ -5679,7 +5636,7 @@ model AlertDetailsOverride {
   /**
    * List of additional dynamic properties to override
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   alertDynamicProperties?: AlertPropertyMapping[];
 }
 
@@ -5736,7 +5693,7 @@ model ScheduledAlertRuleTemplateProperties {
   /**
    * The required data connectors for this template
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   requiredDataConnectors?: AlertRuleTemplateDataSource[];
 
   /**
@@ -5777,7 +5734,6 @@ model ScheduledAlertRuleTemplateProperties {
   /**
    * The tactics of the alert rule template
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   tactics?: AttackTactic[];
 
   /**
@@ -5820,8 +5776,6 @@ model ScheduledAlertRuleTemplate extends AlertRuleTemplate {
   /**
    * Scheduled alert rule template properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ScheduledAlertRuleTemplateProperties;
 
   /**
@@ -5870,7 +5824,9 @@ model AutomationRuleBooleanCondition {
   operator?: AutomationRuleBooleanConditionSupportedOperator;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
+  @minItems(2)
+  @maxItems(10)
   innerConditions?: AutomationRuleCondition[];
 }
 
@@ -5922,7 +5878,7 @@ model IncidentPropertiesAction {
   /**
    * List of labels to add to the incident.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["labelName"])
+  @identifiers(#["labelName"])
   labels?: IncidentLabel[];
 }
 
@@ -5949,7 +5905,8 @@ model AutomationRulePropertyArrayValuesCondition {
   arrayConditionType?: AutomationRulePropertyArrayConditionSupportedArrayConditionType;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
+  @maxItems(10)
   itemConditions?: AutomationRuleCondition[];
 }
 
@@ -6118,8 +6075,6 @@ model CustomizableConnectorDefinition extends DataConnectorDefinition {
   /**
    * Customizable properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CustomizableConnectorDefinitionProperties;
 
   /**
@@ -6182,19 +6137,19 @@ model CustomizableConnectorUiConfig {
   /**
    * Gets or sets the graph queries to show the current data volume over time.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   graphQueries: GraphQuery[];
 
   /**
    * Gets or sets the data types to check for last data received.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataTypes: ConnectorDataType[];
 
   /**
    * Gets or sets the way the connector checks whether the connector is connected.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   connectivityCriteria: ConnectivityCriterion[];
 
   /**
@@ -6210,7 +6165,7 @@ model CustomizableConnectorUiConfig {
   /**
    * Gets or sets the instruction steps to enable the connector.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   instructionSteps: InstructionStep[];
 
   /**
@@ -6263,13 +6218,13 @@ model ConnectorDefinitionsPermissions {
   /**
    * Gets or sets the resource provider permissions required for the user to create connections.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceProvider?: ConnectorDefinitionsResourceProvider[];
 
   /**
    * Gets or sets the customs permissions required for the user to create connections.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   customs?: CustomPermissionDetails[];
 }
 
@@ -6363,14 +6318,14 @@ model InstructionStep {
   /**
    * Gets or sets the instruction step details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   instructions?: InstructionStepDetails[];
 
   /**
    * Gets or sets the inner instruction steps details.
    * For Example: instruction step 1 might contain inner instruction steps: [instruction step 1.1, instruction step 1.2].
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   innerSteps?: InstructionStep[];
 }
 
@@ -6406,15 +6361,13 @@ model CustomizableConnectionsConfig {
 }
 
 /**
- * Represents AAD (Azure Active Directory) data connector.
+ * Represents Microsoft Entra ID data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AADDataConnector extends DataConnector {
   /**
-   * AAD (Azure Active Directory) data connector properties.
+   * Microsoft Entra ID data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AADDataConnectorProperties;
 
   /**
@@ -6424,15 +6377,28 @@ model AADDataConnector extends DataConnector {
 }
 
 /**
- * AAD (Azure Active Directory) data connector properties.
+ * Microsoft Entra ID data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AADDataConnectorProperties {
+  ...DataConnectorTenantId;
+  ...DataConnectorWithAlertsProperties;
+}
+
+/**
+ * Properties data connector on tenant level.
+ */
+model DataConnectorTenantId {
   /**
    * The tenant id to connect to, and get the data from.
    */
-  tenantId?: string;
+  tenantId: string;
+}
 
+/**
+ * Data connector properties.
+ */
+model DataConnectorWithAlertsProperties {
   /**
    * The available data types for the connector.
    */
@@ -6446,7 +6412,7 @@ model AlertsDataTypeOfDataConnector {
   /**
    * Alerts data type connection.
    */
-  alerts?: DataConnectorDataTypeCommon;
+  alerts: DataConnectorDataTypeCommon;
 }
 
 /**
@@ -6456,19 +6422,16 @@ model DataConnectorDataTypeCommon {
   /**
    * Describe whether this data type connection is enabled or not.
    */
-  state?: DataTypeState;
+  state: DataTypeState;
 }
 
 /**
  * Represents AATP (Azure Advanced Threat Protection) data connector.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AATPDataConnector extends DataConnector {
   /**
    * AATP (Azure Advanced Threat Protection) data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AATPDataConnectorProperties;
 
   /**
@@ -6480,17 +6443,9 @@ model AATPDataConnector extends DataConnector {
 /**
  * AATP (Azure Advanced Threat Protection) data connector properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AATPDataConnectorProperties {
-  /**
-   * The tenant id to connect to, and get the data from.
-   */
-  tenantId?: string;
-
-  /**
-   * The available data types for the connector.
-   */
-  dataTypes?: AlertsDataTypeOfDataConnector;
+  ...DataConnectorTenantId;
+  ...DataConnectorWithAlertsProperties;
 }
 
 /**
@@ -6501,8 +6456,6 @@ model ASCDataConnector extends DataConnector {
   /**
    * ASC (Azure Security Center) data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ASCDataConnectorProperties;
 
   /**
@@ -6524,24 +6477,12 @@ model ASCDataConnectorProperties extends DataConnectorWithAlertsProperties {
 }
 
 /**
- * Data connector properties.
- */
-model DataConnectorWithAlertsProperties {
-  /**
-   * The available data types for the connector.
-   */
-  dataTypes?: AlertsDataTypeOfDataConnector;
-}
-
-/**
  * Represents Amazon Web Services CloudTrail data connector.
  */
 model AwsCloudTrailDataConnector extends DataConnector {
   /**
    * Amazon Web Services CloudTrail data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AwsCloudTrailDataConnectorProperties;
 
   /**
@@ -6562,7 +6503,7 @@ model AwsCloudTrailDataConnectorProperties {
   /**
    * The available data types for the connector.
    */
-  dataTypes?: AwsCloudTrailDataConnectorDataTypes;
+  dataTypes: AwsCloudTrailDataConnectorDataTypes;
 }
 
 /**
@@ -6572,7 +6513,7 @@ model AwsCloudTrailDataConnectorDataTypes {
   /**
    * Logs data type.
    */
-  logs?: AwsCloudTrailDataConnectorDataTypesLogs;
+  logs: AwsCloudTrailDataConnectorDataTypesLogs;
 }
 
 /**
@@ -6590,8 +6531,6 @@ model RestApiPollerDataConnector extends DataConnector {
   /**
    * Rest Api Poller data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RestApiPollerDataConnectorProperties;
 
   /**
@@ -6675,12 +6614,12 @@ model RestApiPollerRequestConfig {
    * The Rate limit queries per second for the request..
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  rateLimitQPS?: int32;
+  rateLimitQPS?: int32 | null;
 
   /**
    * The query window in minutes for the request.
    */
-  queryWindowInMin?: int32;
+  queryWindowInMin?: int32 | null;
 
   /**
    * The HTTP method, default value GET.
@@ -6695,17 +6634,17 @@ model RestApiPollerRequestConfig {
   /**
    * The retry count.
    */
-  retryCount?: int32;
+  retryCount?: int32 | null;
 
   /**
    * The timeout in seconds.
    */
-  timeoutInSeconds?: int32;
+  timeoutInSeconds?: int32 | null;
 
   /**
    * Flag to indicate if HTTP POST payload is in JSON format (vs form-urlencoded).
    */
-  isPostPayloadJson?: boolean;
+  isPostPayloadJson?: boolean | null;
 
   /**
    * The header for the request for the remote server.
@@ -6788,7 +6727,7 @@ model CcpResponseConfig {
   /**
    * The status value.
    */
-  successStatusValue?: string;
+  successStatusValue?: string | null;
 
   /**
    * The value indicating whether the remote server support Gzip and we should expect Gzip response.
@@ -6813,24 +6752,24 @@ model CcpResponseConfig {
   /**
    * The value indicating whether the response has CSV boundary in case the response in CSV format.
    */
-  hasCsvBoundary?: boolean;
+  hasCsvBoundary?: boolean | null;
 
   /**
    * The value indicating whether the response has headers in case the response in CSV format.
    */
-  hasCsvHeader?: boolean;
+  hasCsvHeader?: boolean | null;
 
   /**
    * The value indicating whether the response isn't an array of events / logs.  By setting this flag to true it means the remote server will response with an object which each property has as a value an array of events / logs.
    */
-  convertChildPropertiesToArray?: boolean;
+  convertChildPropertiesToArray?: boolean | null;
 
   /**
    * The character used to escape characters in CSV.
    */
   @maxLength(1)
   @minLength(1)
-  csvEscape?: string = "";
+  csvEscape?: string | null = "\"";
 }
 
 /**
@@ -6991,6 +6930,7 @@ model ApiKeyAuthModel extends CcpAuthConfig {
   /**
    * API Key for the user secret key credential
    */
+  @secret
   apiKey: string;
 
   /**
@@ -7047,6 +6987,7 @@ model BasicAuthModel extends CcpAuthConfig {
   /**
    * The password
    */
+  @secret
   password: string;
 
   /**
@@ -7147,6 +7088,7 @@ model JwtAuthModel extends CcpAuthConfig {
    * The password
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @secret
   password: Record<string>;
 
   /**
@@ -7164,12 +7106,12 @@ model JwtAuthModel extends CcpAuthConfig {
   /**
    * Flag indicating whether we want to send the user name and password to token endpoint in the headers.
    */
-  isCredentialsInHeaders?: boolean;
+  isCredentialsInHeaders?: boolean | null;
 
   /**
    * Flag indicating whether the body request is JSON (header Content-Type = application/json), meaning its a Form URL encoded request (header Content-Type = application/x-www-form-urlencoded).
    */
-  isJsonRequest?: boolean;
+  isJsonRequest?: boolean | null = false;
 
   /**
    * Request timeout in seconds.
@@ -7191,11 +7133,13 @@ model OAuthModel extends CcpAuthConfig {
   /**
    * The user's authorization code.
    */
+  @secret
   authorizationCode?: string;
 
   /**
    * The Application (client) secret that the OAuth provider assigned to your app.
    */
+  @secret
   clientSecret: string;
 
   /**
@@ -7206,7 +7150,7 @@ model OAuthModel extends CcpAuthConfig {
   /**
    * Indicating whether we want to send the clientId and clientSecret to token endpoint in the headers.
    */
-  isCredentialsInHeaders?: boolean;
+  isCredentialsInHeaders?: boolean | null = false;
 
   /**
    * The Application (client) Scope that the OAuth provider assigned to your app.
@@ -7317,6 +7261,7 @@ model SessionAuthModel extends CcpAuthConfig {
    * The password attribute name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @secret
   password: Record<string>;
 
   /**
@@ -7328,7 +7273,7 @@ model SessionAuthModel extends CcpAuthConfig {
   /**
    * Indicating whether API key is set in HTTP POST payload.
    */
-  isPostPayloadJson?: boolean;
+  isPostPayloadJson?: boolean | null;
 
   /**
    * HTTP request headers to session service endpoint.
@@ -7339,7 +7284,7 @@ model SessionAuthModel extends CcpAuthConfig {
   /**
    * Session timeout in minutes.
    */
-  sessionTimeoutInMinutes?: int32;
+  sessionTimeoutInMinutes?: int32 | null;
 
   /**
    * Session id attribute name from HTTP response header.
@@ -7358,25 +7303,12 @@ model SessionAuthModel extends CcpAuthConfig {
 }
 
 /**
- * Properties data connector on tenant level.
- */
-model DataConnectorTenantId {
-  /**
-   * The tenant id to connect to, and get the data from.
-   */
-  tenantId?: string;
-}
-
-/**
  * Represents MCAS (Microsoft Cloud App Security) data connector.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MCASDataConnector extends DataConnector {
   /**
    * MCAS (Microsoft Cloud App Security) data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MCASDataConnectorProperties;
 
   /**
@@ -7388,17 +7320,12 @@ model MCASDataConnector extends DataConnector {
 /**
  * MCAS (Microsoft Cloud App Security) data connector properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-model MCASDataConnectorProperties {
-  /**
-   * The tenant id to connect to, and get the data from.
-   */
-  tenantId?: string;
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model MCASDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
    */
-  dataTypes?: MCASDataConnectorDataTypes;
+  dataTypes: MCASDataConnectorDataTypes;
 }
 
 /**
@@ -7407,11 +7334,6 @@ model MCASDataConnectorProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MCASDataConnectorDataTypes extends AlertsDataTypeOfDataConnector {
-  /**
-   * Alerts log data type connection.
-   */
-  alerts?: DataConnectorDataTypeCommon;
-
   /**
    * Discovery log data type connection.
    */
@@ -7426,8 +7348,6 @@ model MDATPDataConnector extends DataConnector {
   /**
    * MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MDATPDataConnectorProperties;
 
   /**
@@ -7439,17 +7359,9 @@ model MDATPDataConnector extends DataConnector {
 /**
  * MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MDATPDataConnectorProperties {
-  /**
-   * The tenant id to connect to, and get the data from.
-   */
-  tenantId?: string;
-
-  /**
-   * The available data types for the connector.
-   */
-  dataTypes?: AlertsDataTypeOfDataConnector;
+  ...DataConnectorTenantId;
+  ...DataConnectorWithAlertsProperties;
 }
 
 /**
@@ -7460,8 +7372,6 @@ model TIDataConnector extends DataConnector {
   /**
    * TI (Threat Intelligence) data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TIDataConnectorProperties;
 
   /**
@@ -7473,23 +7383,18 @@ model TIDataConnector extends DataConnector {
 /**
  * TI (Threat Intelligence) data connector properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-model TIDataConnectorProperties {
-  /**
-   * The tenant id to connect to, and get the data from.
-   */
-  tenantId?: string;
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model TIDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The lookback period for the feed to be imported.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  tipLookbackPeriod?: utcDateTime;
+  tipLookbackPeriod?: utcDateTime | null;
 
   /**
    * The available data types for the connector.
    */
-  dataTypes?: TIDataConnectorDataTypes;
+  dataTypes: TIDataConnectorDataTypes;
 }
 
 /**
@@ -7500,7 +7405,7 @@ model TIDataConnectorDataTypes {
   /**
    * Data type for indicators connection.
    */
-  indicators?: TIDataConnectorDataTypesIndicators;
+  indicators: TIDataConnectorDataTypesIndicators;
 }
 
 /**
@@ -7519,8 +7424,6 @@ model MSTIDataConnector extends DataConnector {
   /**
    * Microsoft Threat Intelligence data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MSTIDataConnectorProperties;
 
   /**
@@ -7567,14 +7470,12 @@ model MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed
 }
 
 /**
- * Represents Premium Microsoft Defender for Threat Intelligence data connector.
+ * Represents Microsoft Defender for Threat Intelligence Premium data connector.
  */
 model PremiumMicrosoftDefenderForThreatIntelligence extends DataConnector {
   /**
-   * Premium Microsoft Defender for Threat Intelligence data connector properties.
+   * Microsoft Defender for Threat Intelligence Premium data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PremiumMdtiDataConnectorProperties;
 
   /**
@@ -7584,7 +7485,7 @@ model PremiumMicrosoftDefenderForThreatIntelligence extends DataConnector {
 }
 
 /**
- * Premium Microsoft Defender for Threat Intelligence data connector properties.
+ * Microsoft Defender for Threat Intelligence Premium data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PremiumMdtiDataConnectorProperties extends DataConnectorTenantId {
@@ -7607,17 +7508,17 @@ model PremiumMdtiDataConnectorProperties extends DataConnectorTenantId {
 }
 
 /**
- * The available data types for Premium Microsoft Defender for Threat Intelligence data connector.
+ * The available data types for Microsoft Defender for Threat Intelligence Premium data connector.
  */
 model PremiumMdtiDataConnectorDataTypes {
   /**
-   * Data type for Premium Microsoft Defender for Threat Intelligence data connector.
+   * Data type for Microsoft Defender for Threat Intelligence Premium data connector.
    */
   connector: PremiumMdtiDataConnectorDataTypesConnector;
 }
 
 /**
- * Data type for Premium Microsoft Defender for Threat Intelligence data connector.
+ * Data type for Microsoft Defender for Threat Intelligence Premium data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
@@ -7631,8 +7532,6 @@ model OfficeDataConnector extends DataConnector {
   /**
    * Office data connector properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OfficeDataConnectorProperties;
 
   /**
@@ -7644,16 +7543,12 @@ model OfficeDataConnector extends DataConnector {
 /**
  * Office data connector properties.
  */
-model OfficeDataConnectorProperties {
-  /**
-   * The tenant id to connect to, and get the data from.
-   */
-  tenantId?: string;
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model OfficeDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
    */
-  dataTypes?: OfficeDataConnectorDataTypes;
+  dataTypes: OfficeDataConnectorDataTypes;
 }
 
 /**
@@ -7663,17 +7558,17 @@ model OfficeDataConnectorDataTypes {
   /**
    * Exchange data type connection.
    */
-  exchange?: OfficeDataConnectorDataTypesExchange;
+  exchange: OfficeDataConnectorDataTypesExchange;
 
   /**
    * SharePoint data type connection.
    */
-  sharePoint?: OfficeDataConnectorDataTypesSharePoint;
+  sharePoint: OfficeDataConnectorDataTypesSharePoint;
 
   /**
    * Teams data type connection.
    */
-  teams?: OfficeDataConnectorDataTypesTeams;
+  teams: OfficeDataConnectorDataTypesTeams;
 }
 
 /**
@@ -7707,8 +7602,6 @@ model AnomalySecurityMLAnalyticsSettings extends SecurityMLAnalyticsSetting {
   /**
    * Anomaly Security ML Analytics Settings properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AnomalySecurityMLAnalyticsSettingsProperties;
 
   /**
@@ -7747,7 +7640,7 @@ model AnomalySecurityMLAnalyticsSettingsProperties {
   /**
    * The required data sources for this SecurityMLAnalyticsSettings
    */
-  @OpenAPI.extension("x-ms-identifiers", #["connectorId"])
+  @identifiers(#["connectorId"])
   requiredDataConnectors?: SecurityMLAnalyticsSettingsDataSource[];
 
   /**
@@ -7768,7 +7661,6 @@ model AnomalySecurityMLAnalyticsSettingsProperties {
   /**
    * The customizable observations of the AnomalySecurityMLAnalyticsSettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   customizableObservations?: unknown;
 
   /**
@@ -7822,8 +7714,6 @@ model AccountEntity extends Entity {
   /**
    * Account entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AccountEntityProperties;
 
   /**
@@ -7919,8 +7809,6 @@ model AzureResourceEntity extends Entity {
   /**
    * AzureResource entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AzureResourceEntityProperties;
 
   /**
@@ -7954,8 +7842,6 @@ model CloudApplicationEntity extends Entity {
   /**
    * CloudApplication entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CloudApplicationEntityProperties;
 
   /**
@@ -7995,8 +7881,6 @@ model DnsEntity extends Entity {
   /**
    * Dns entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DnsEntityProperties;
 
   /**
@@ -8032,7 +7916,6 @@ model DnsEntityProperties extends EntityCommonProperties {
    * Ip entity identifiers for the resolved ip address.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   ipAddressEntityIds?: string[];
 }
 
@@ -8043,8 +7926,6 @@ model FileEntity extends Entity {
   /**
    * File entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FileEntityProperties;
 
   /**
@@ -8068,7 +7949,6 @@ model FileEntityProperties extends EntityCommonProperties {
    * The file hash entity identifiers associated with this file
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   fileHashEntityIds?: string[];
 
   /**
@@ -8091,8 +7971,6 @@ model FileHashEntity extends Entity {
   /**
    * FileHash entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: FileHashEntityProperties;
 
   /**
@@ -8173,8 +8051,6 @@ model HostEntity extends Entity {
   /**
    * Host entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: HostEntityProperties;
 
   /**
@@ -8252,8 +8128,6 @@ model IoTDeviceEntity extends Entity {
   /**
    * IoTDevice entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IoTDeviceEntityProperties;
 
   /**
@@ -8364,14 +8238,13 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
    * A list of TI contexts attached to the IoTDevice entity.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   threatIntelligence?: ThreatIntelligence[];
 
   /**
    * A list of protocols of the IoTDevice entity.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   protocols?: string[];
 }
 
@@ -8423,8 +8296,6 @@ model IpEntity extends Entity {
   /**
    * Ip entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IpEntityProperties;
 
   /**
@@ -8454,7 +8325,7 @@ model IpEntityProperties extends EntityCommonProperties {
    * A list of TI contexts attached to the ip entity.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   threatIntelligence?: ThreatIntelligence[];
 }
 
@@ -8465,8 +8336,6 @@ model MailboxEntity extends Entity {
   /**
    * Mailbox entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MailboxEntityProperties;
 
   /**
@@ -8514,8 +8383,6 @@ model MailClusterEntity extends Entity {
   /**
    * Mail cluster entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MailClusterEntityProperties;
 
   /**
@@ -8533,7 +8400,6 @@ model MailClusterEntityProperties extends EntityCommonProperties {
    * The mail message IDs that are part of the mail cluster
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   networkMessageIds?: string[];
 
   /**
@@ -8561,7 +8427,6 @@ model MailClusterEntityProperties extends EntityCommonProperties {
    * The threats of mail messages that are part of the mail cluster
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   threats?: string[];
 
   /**
@@ -8635,8 +8500,6 @@ model MailMessageEntity extends Entity {
   /**
    * Mail message entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MailMessageEntityProperties;
 
   /**
@@ -8654,7 +8517,6 @@ model MailMessageEntityProperties extends EntityCommonProperties {
    * The File entity ids of this mail message's attachments
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   fileEntityIds?: string[];
 
   /**
@@ -8667,14 +8529,12 @@ model MailMessageEntityProperties extends EntityCommonProperties {
    * The Urls contained in this mail message
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   urls?: string[];
 
   /**
    * The threats of this mail message
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   threats?: string[];
 
   /**
@@ -8757,7 +8617,6 @@ model MailMessageEntityProperties extends EntityCommonProperties {
    * The threat detection methods
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   threatDetectionMethods?: string[];
 
   /**
@@ -8808,8 +8667,6 @@ model MalwareEntity extends Entity {
   /**
    * File entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MalwareEntityProperties;
 
   /**
@@ -8833,7 +8690,6 @@ model MalwareEntityProperties extends EntityCommonProperties {
    * List of linked file entity identifiers on which the malware was found
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   fileEntityIds?: string[];
 
   /**
@@ -8846,7 +8702,6 @@ model MalwareEntityProperties extends EntityCommonProperties {
    * List of linked process entity identifiers on which the malware was found.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   processEntityIds?: string[];
 }
 
@@ -8857,8 +8712,6 @@ model ProcessEntity extends Entity {
   /**
    * Process entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProcessEntityProperties;
 
   /**
@@ -8934,8 +8787,6 @@ model RegistryKeyEntity extends Entity {
   /**
    * RegistryKey entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RegistryKeyEntityProperties;
 
   /**
@@ -8969,8 +8820,6 @@ model RegistryValueEntity extends Entity {
   /**
    * RegistryKey entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RegistryValueEntityProperties;
 
   /**
@@ -9016,8 +8865,6 @@ model SecurityGroupEntity extends Entity {
   /**
    * SecurityGroup entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SecurityGroupEntityProperties;
 
   /**
@@ -9059,8 +8906,6 @@ model SubmissionMailEntity extends Entity {
   /**
    * Submission mail entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SubmissionMailEntityProperties;
 
   /**
@@ -9148,8 +8993,6 @@ model UrlEntity extends Entity {
   /**
    * Url entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UrlEntityProperties;
 
   /**
@@ -9168,4 +9011,23 @@ model UrlEntityProperties extends EntityCommonProperties {
    */
   @visibility(Lifecycle.Read)
   url?: string;
+}
+
+/**
+ * Lists the operations available in the SecurityInsights RP.
+ */
+model OperationsList {
+  /**
+   * URL to fetch the next set of operations.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Array of operations
+   */
+  @identifiers(#[])
+  @pageItems
+  value: Operation[];
 }

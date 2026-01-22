@@ -19,7 +19,7 @@ model ProductTemplateModel
   ...ResourceNameParameter<
     Resource = ProductTemplateModel,
     KeyName = "templateId",
-    SegmentName = "contentproducttemplates",
+    SegmentName = "contentProductTemplates",
     NamePattern = ""
   >;
 
@@ -30,16 +30,55 @@ model ProductTemplateModel
   etag?: string;
 }
 
+interface ProductTemplateModelsOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+
+        /** the provider namespace */
+        @path
+        @segment("providers")
+        @key
+        providerNamespace: "Microsoft.OperationalInsights",
+
+        /**
+         * The name of the workspace.
+         */
+        @segment("workspaces")
+        @key
+        @path
+        @minLength(1)
+        @maxLength(90)
+        @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+        workspaceName: string,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<ProductTemplateModel>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<ProductTemplateModel>,
+
+        /**
+         * template Id
+         */
+        @path
+        @key
+        @segment("contentproducttemplates")
+        templateId: string,
+      }
+    > {}
+
 @armResourceOperations
 interface ProductTemplateModels {
   /**
    * Gets a template by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is Extension.Read<
-    OperationalInsights,
+  get is ProductTemplateModelsOps.Read<
     ProductTemplateModel,
-    Error = CloudError
+    ErrorType = CloudError
   >;
 
   /**
