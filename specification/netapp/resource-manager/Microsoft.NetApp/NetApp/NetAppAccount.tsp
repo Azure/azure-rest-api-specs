@@ -247,7 +247,8 @@ model LdapConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  certificateCNHost?: CertificateCNHost | null;
+  @maxLength(255)
+  certificateCNHost?: string | null;
 
   /**
    * List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.
@@ -325,7 +326,8 @@ model LdapConfigurationPatch {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  certificateCNHost?: CertificateCNHost | null;
+  @maxLength(255)
+  certificateCNHost?: string | null;
 
   /**
    * List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.
@@ -369,9 +371,6 @@ model LdapConfigurationPatch {
 @maxLength(255)
 @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
 scalar VfsV4IDDomain extends string;
-
-@maxLength(255)
-scalar CertificateCNHost extends string;
 
 /**
  * Active Directory

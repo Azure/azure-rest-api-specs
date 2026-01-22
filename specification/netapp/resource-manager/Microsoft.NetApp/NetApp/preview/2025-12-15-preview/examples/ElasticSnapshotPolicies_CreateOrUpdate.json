@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "snapshotPolicyName": "snapshotPolicyName",
+    "api-version": "2025-12-15-preview",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "policyStatus": "Enabled",
+        "hourlySchedule": {
+          "snapshotsToKeep": 2,
+          "minute": 50
+        },
+        "dailySchedule": {
+          "snapshotsToKeep": 4,
+          "hour": 14,
+          "minute": 30
+        },
+        "weeklySchedule": {
+          "snapshotsToKeep": 3,
+          "days": [
+            "Wednesday"
+          ],
+          "hour": 14,
+          "minute": 45
+        },
+        "monthlySchedule": {
+          "snapshotsToKeep": 5,
+          "daysOfMonth": [
+            10,
+            11,
+            12
+          ],
+          "hour": 14,
+          "minute": 15
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticSnapshotPolicies/snapshotPolicy1",
+        "name": "account1/snapshotPolicy1",
+        "type": "Microsoft.NetApp/elasticAccounts/elasticSnapshotPolicies",
+        "properties": {
+          "policyStatus": "Enabled",
+          "hourlySchedule": {
+            "snapshotsToKeep": 2,
+            "minute": 50
+          },
+          "dailySchedule": {
+            "snapshotsToKeep": 4,
+            "hour": 14,
+            "minute": 30
+          },
+          "weeklySchedule": {
+            "snapshotsToKeep": 3,
+            "days": [
+              "Wednesday"
+            ],
+            "hour": 14,
+            "minute": 45
+          },
+          "monthlySchedule": {
+            "snapshotsToKeep": 5,
+            "daysOfMonth": [
+              10,
+              11,
+              12
+            ],
+            "hour": 14,
+            "minute": 15
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticSnapshotPolicies/snapshotPolicy1",
+        "name": "account1/snapshotPolicy1",
+        "type": "Microsoft.NetApp/elasticAccounts/elasticSnapshotPolicies",
+        "properties": {
+          "policyStatus": "Enabled",
+          "hourlySchedule": {
+            "snapshotsToKeep": 2,
+            "minute": 50
+          },
+          "dailySchedule": {
+            "snapshotsToKeep": 4,
+            "hour": 14,
+            "minute": 30
+          },
+          "weeklySchedule": {
+            "snapshotsToKeep": 3,
+            "days": [
+              "Wednesday"
+            ],
+            "hour": 14,
+            "minute": 45
+          },
+          "monthlySchedule": {
+            "snapshotsToKeep": 5,
+            "daysOfMonth": [
+              10,
+              11,
+              12
+            ],
+            "hour": 14,
+            "minute": 15
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "ElasticSnapshotPolicies_CreateOrUpdate",
+  "title": "ElasticSnapshotPolicies_CreateOrUpdate"
+}

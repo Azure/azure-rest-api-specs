@@ -1,0 +1,153 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "activeDirectoryConfigName": "adconfig1",
+    "api-version": "2025-12-15-preview",
+    "body": {
+      "location": "eastus",
+      "tags": {
+        "ac-tag1": "activeDirectoryConfig1"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userAssignedIdentity1": {}
+        }
+      },
+      "properties": {
+        "userName": "admin1",
+        "secretPassword": {
+          "keyVaultProperties": {
+            "keyVaultUri": "https://example.vault.azure.net/",
+            "secretName": "activeDirectoryPassword"
+          },
+          "identity": {
+            "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userAssignedIdentity1"
+          }
+        },
+        "domain": "example.net",
+        "dns": [
+          "10.10.10.4",
+          "10.10.10.5"
+        ],
+        "smbServerName": "smbServer",
+        "organizationalUnit": "OU=Computers,DC=corp,DC=contoso,DC=com",
+        "site": "Default-First-Site-Name",
+        "backupOperators": [
+          "backupOp1"
+        ],
+        "administrators": [
+          "admin1"
+        ],
+        "securityOperators": [
+          "secOp1"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/a0216c17-f9d6-4b99-9faf-9ebd4883d0e4?api-version=2025-12-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/activeDirectoryConfigs/adconfig1",
+        "name": "adconfig1",
+        "type": "Microsoft.NetApp/activeDirectoryConfigs",
+        "location": "eastus",
+        "tags": {
+          "ac-tag1": "adconfig1"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userAssignedIdentity1": {
+              "principalId": "abdb541c-5355-4c0b-be43-abab330dd983",
+              "clientId": "9e0b65a1-4132-466a-a7fb-d69a83eea08a"
+            }
+          }
+        },
+        "properties": {
+          "userName": "admin1",
+          "secretPassword": {
+            "keyVaultProperties": {
+              "keyVaultUri": "https://example.vault.azure.net/",
+              "secretName": "activeDirectoryPassword"
+            },
+            "identity": {
+              "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userAssignedIdentity1",
+              "principalId": "abdb541c-5355-4c0b-be43-abab330dd983"
+            }
+          },
+          "domain": "example.net",
+          "dns": [
+            "10.10.10.4",
+            "10.10.10.5"
+          ],
+          "smbServerName": "smbServer",
+          "organizationalUnit": "OU=Computers,DC=corp,DC=contoso,DC=com",
+          "site": "Default-First-Site-Name",
+          "backupOperators": [
+            "backupOp1"
+          ],
+          "administrators": [
+            "admin1"
+          ],
+          "securityOperators": [
+            "secOp1"
+          ],
+          "activeDirectoryStatus": "Creating",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/a0216c17-f9d6-4b99-9faf-9ebd4883d0e4?api-version=2025-12-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/activeDirectoryConfigs/adconfig1",
+        "name": "adconfig1",
+        "type": "Microsoft.NetApp/activeDirectoryConfigs",
+        "location": "eastus",
+        "tags": {
+          "ac-tag1": "adconfig1"
+        },
+        "properties": {
+          "userName": "admin1",
+          "secretPassword": {
+            "keyVaultProperties": {
+              "keyVaultUri": "https://example.vault.azure.net/",
+              "secretName": "activeDirectoryPassword"
+            },
+            "identity": {
+              "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userAssignedIdentity1"
+            }
+          },
+          "domain": "example.net",
+          "dns": [
+            "10.10.10.4",
+            "10.10.10.5"
+          ],
+          "smbServerName": "smbServer",
+          "organizationalUnit": "OU=Computers,DC=corp,DC=contoso,DC=com",
+          "site": "Default-First-Site-Name",
+          "backupOperators": [
+            "backupOp1"
+          ],
+          "administrators": [
+            "admin1"
+          ],
+          "securityOperators": [
+            "secOp1"
+          ],
+          "activeDirectoryStatus": "Creating",
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "ActiveDirectoryConfigs_CreateOrUpdate",
+  "title": "ActiveDirectoryConfigs_CreateOrUpdate"
+}
