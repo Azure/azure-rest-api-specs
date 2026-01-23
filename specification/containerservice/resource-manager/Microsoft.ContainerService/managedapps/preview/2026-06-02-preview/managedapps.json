@@ -311,17 +311,23 @@
           "type": "string",
           "description": "The principal id of the user assigned identity"
         }
-      },
-      "required": [
-        "userAssignedIdentityId",
-        "clientId",
-        "principalId"
-      ]
+      }
     },
     "AppProperties": {
       "type": "object",
       "description": "App properties",
       "properties": {
+        "applicationType": {
+          "$ref": "#/definitions/ApplicationType",
+          "description": "Determines the application type. This influences the base set of kubernetes manifests that will be used"
+        },
+        "additionalK8sResources": {
+          "type": "array",
+          "description": "Additional k8s resources (in yaml format) to deploy along with the app",
+          "items": {
+            "type": "string"
+          }
+        },
         "namespacedPermissions": {
           "type": "array",
           "description": "Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace",
@@ -344,16 +350,6 @@
             "apiGroups",
             "resources",
             "verbs"
-          ]
-        },
-        "containerProbes": {
-          "type": "array",
-          "description": "An array of container probes for the app. If not specified, the default is an http request to /healthz",
-          "items": {
-            "$ref": "#/definitions/ContainerProbes"
-          },
-          "x-ms-identifiers": [
-            "type"
           ]
         },
         "healthChecks": {
@@ -404,10 +400,47 @@
         }
       },
       "required": [
+        "applicationType",
         "template",
         "generatedServiceAccountName",
         "generatedKubernetesServiceName"
       ]
+    },
+    "ApplicationType": {
+      "type": "string",
+      "description": "Type of application",
+      "enum": [
+        "webApp",
+        "aiTraining",
+        "aiInference",
+        "backgroundWorker"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WebApp",
+            "value": "webApp",
+            "description": "Web application"
+          },
+          {
+            "name": "AITraining",
+            "value": "aiTraining",
+            "description": "AI training application"
+          },
+          {
+            "name": "AIInference",
+            "value": "aiInference",
+            "description": "AI inference application"
+          },
+          {
+            "name": "BackgroundWorker",
+            "value": "backgroundWorker",
+            "description": "Background worker application"
+          }
+        ]
+      }
     },
     "AutoscalingTrigger": {
       "type": "object",
@@ -1158,16 +1191,17 @@
         "port": {
           "type": "integer",
           "format": "int32",
-          "description": "Port number"
+          "description": "Port number",
+          "default": 8080
         },
         "protocol": {
           "type": "string",
-          "description": "Protocol for the port. Defaults to TCP"
+          "description": "Protocol for the port. Defaults to TCP",
+          "default": "TCP"
         }
       },
       "required": [
-        "name",
-        "port"
+        "name"
       ]
     },
     "ContainerProbes": {
@@ -1254,6 +1288,16 @@
         "primaryPort": {
           "$ref": "#/definitions/ContainerPort",
           "description": "The primary port your application listens on, where it receives traffic. Required if ingress configuration is set"
+        },
+        "containerProbes": {
+          "type": "array",
+          "description": "An array of container probes for the app. If not specified, the default is an http request to /healthz",
+          "items": {
+            "$ref": "#/definitions/ContainerProbes"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         },
         "additionalPorts": {
           "type": "array",
@@ -1449,7 +1493,7 @@
         },
         "query": {
           "type": "string",
-          "description": "Prometheus expression to evaluate. Expression must evaluate to true if the app is healthy"
+          "description": "Prometheus expression to evaluate. Expression must return no results if the app is healthy"
         },
         "durationSeconds": {
           "type": "integer",

@@ -49,6 +49,9 @@ model AppProperties {
   /** Determines the application type. This influences the base set of kubernetes manifests that will be used */
   applicationType: ApplicationType;
 
+  /** Additional k8s resources (in yaml format) to deploy along with the app */
+  additionalK8sResources?: string[];
+
   /** Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace */
   @identifiers(#["apiGroups", "resources", "verbs"])
   namespacedPermissions?: Permissions[];
@@ -56,10 +59,6 @@ model AppProperties {
   /** Represents the permissions for k8s resources that this app has, cluster wide. Do not set this field if the app is not supposed to read resources outside of the namespace it is deployed in. This will create kubernetes ClusterRoles and ClusterRoleBindings for the app when it is deployed into a managed namespace */
   @identifiers(#["apiGroups", "resources", "verbs"])
   clusterWidePermissions?: Permissions[];
-
-  /** An array of container probes for the app. If not specified, the default is an http request to /healthz */
-  @identifiers(#["type"])
-  containerProbes?: ContainerProbes[];
 
   /** An array of prometheus expressions to evaluate to determine if the app is healthy. Multiple expressions in this list are logically AND-ed together, so all must return true in order for the app to be considered healthy */
   @identifiers(#["name"])
@@ -110,6 +109,10 @@ model DeploymentTemplate {
 
   /** The primary port your application listens on, where it receives traffic. Required if ingress configuration is set */
   primaryPort?: ContainerPort;
+
+  /** An array of container probes for the app. If not specified, the default is an http request to /healthz */
+  @identifiers(#["type"])
+  containerProbes?: ContainerProbes[];
 
   /** Additional ports your application listens on */
   @identifiers(#["port", "name"])
@@ -388,7 +391,7 @@ model HealthCheck {
   /** Metrics path for Prometheus to scrape. Default is /metrics */
   metricsPath?: string = "/metrics";
 
-  /** Prometheus expression to evaluate. Expression must evaluate to true if the app is healthy */
+  /** Prometheus expression to evaluate. Expression must return no results if the app is healthy */
   query: string;
 
   /** Duration in seconds for which the query must be true to consider the app healthy */
