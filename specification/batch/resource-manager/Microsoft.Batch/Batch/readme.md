@@ -38,6 +38,10 @@ These settings apply only when `--tag=package-2025-06` is specified on the comma
 ```yaml $(tag) == 'package-2025-06'
 input-file:
   - stable/2025-06-01/openapi.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    reason:  Legacy API, can not change
 ```
 
 ### Tag: package-2024-07
