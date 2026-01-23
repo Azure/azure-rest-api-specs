@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2025-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "snapshot1",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "key1": "val1",
+        "key2": "val2"
+      },
+      "properties": {
+        "creationData": {
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "snapshot1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedclustersnapshots/snapshot1",
+        "type": "Microsoft.ContainerService/ManagedClusterSnapshots",
+        "location": "westus",
+        "tags": {
+          "key1": "val1",
+          "key2": "val2"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-08-09T20:13:23.298420761Z"
+        },
+        "properties": {
+          "creationData": {
+            "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+          },
+          "snapshotType": "ManagedCluster",
+          "managedClusterPropertiesReadOnly": {
+            "kubernetesVersion": "1.20.5",
+            "sku": {
+              "name": "Basic",
+              "tier": "Free"
+            },
+            "enableRbac": true,
+            "networkProfile": {
+              "networkPlugin": "kubenet",
+              "networkPolicy": "calico",
+              "networkMode": "bridge",
+              "loadBalancerSku": "standard"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "snapshot1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedclustersnapshots/snapshot1",
+        "type": "Microsoft.ContainerService/ManagedClusterSnapshots",
+        "location": "westus",
+        "tags": {
+          "key1": "val1",
+          "key2": "val2"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-08-09T20:13:23.298420761Z"
+        },
+        "properties": {
+          "creationData": {
+            "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+          },
+          "snapshotType": "ManagedCluster",
+          "managedClusterPropertiesReadOnly": {
+            "kubernetesVersion": "1.20.5",
+            "sku": {
+              "name": "Basic",
+              "tier": "Free"
+            },
+            "enableRbac": true,
+            "networkProfile": {
+              "networkPlugin": "kubenet",
+              "networkPolicy": "calico",
+              "networkMode": "bridge",
+              "loadBalancerSku": "standard"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -15,7 +15,9 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["Swagger LintDiff - Analyze Code"]
+    # Trigger on both old and new names, to handle the rename more gracefully
+    workflows:
+      ["Swagger LintDiff - Analyze Code", "\\[TEST-IGNORE\\] Swagger LintDiff - Analyze Code"]
     types: [completed]
 
 permissions:

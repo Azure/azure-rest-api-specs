@@ -6,7 +6,7 @@ import "./ArmModels/Cluster/AKSCluster.tsp";
 import "./ArmModels/CostDetails/AKSCostDetails.tsp";
 import "./ArmModels/Options/AKSAssessmentOptions.tsp";
 import "./ArmModels/Summary/AKSSummary.tsp";
-import "../Common/DataModels/DownloadUrl.tsp";
+import "./Common/DataModels/DownloadUrl.tsp";
 
 import "./AKSApiVersions.tsp";
 

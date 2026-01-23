@@ -46,6 +46,12 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Messages.getMessage, "get", "python");
 @@clientName(Azure.AI.Agents.Messages.updateMessage, "update", "python");
 
+@@access(Azure.AI.Agents.Messages.delete, Access.internal, "csharp, python");
+@@clientName(Azure.AI.Agents.Messages.delete,
+  "InternalDeleteMessage",
+  "csharp"
+);
+
 // --------------------------------------------------------------------------------
 // Threads sub-client
 // --------------------------------------------------------------------------------
@@ -394,6 +400,7 @@ using Azure.AI.Agents;
   "UriCitation",
   "csharp"
 );
+@@usage(MessageDeltaTextUrlCitationDetails, Usage.json);
 @@clientName(MessageDeltaTextUrlCitationDetails,
   "MessageDeltaTextUriCitationDetails",
   "csharp"

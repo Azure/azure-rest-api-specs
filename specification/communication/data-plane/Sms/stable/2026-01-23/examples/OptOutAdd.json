@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2026-01-23",
+    "body": {
+      "from": "+18001234567",
+      "recipients": [
+        {
+          "to": "+15555555551"
+        },
+        {
+          "to": "+123"
+        },
+        {
+          "to": "+15555555552"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "to": "+15555555551",
+            "httpStatusCode": 200
+          },
+          {
+            "to": "+123",
+            "httpStatusCode": 400,
+            "errorMessage": "Invalid recipient phone number format"
+          },
+          {
+            "to": "+15555555552",
+            "httpStatusCode": 500,
+            "errorMessage": "Internal Server Error"
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "errors": {
+          "From": [
+            "Invalid from phone number format."
+          ]
+        },
+        "traceId": "00-1f0b7b2e5b264548956278a8749c59a4-7d37d031f6f52879-00"
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Denied",
+          "message": "Request 'x-ms-content-sha256' differs from generated content hash."
+        }
+      }
+    }
+  }
+}

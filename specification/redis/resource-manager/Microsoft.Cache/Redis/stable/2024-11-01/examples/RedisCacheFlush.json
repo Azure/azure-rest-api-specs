@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "cacheName": "cache-name",
+    "resourceGroupName": "resource-group-name",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Cache/...pathToOperationResult...",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  },
+  "operationId": "Redis_FlushCache",
+  "title": "RedisCacheFlush"
+}

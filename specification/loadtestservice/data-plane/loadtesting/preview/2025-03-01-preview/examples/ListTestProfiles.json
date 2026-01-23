@@ -1,0 +1,45 @@
+{
+  "operationId": "TestProfileAdministration_ListTestProfiles",
+  "title": "Get all test profiles for the specified filters.",
+  "parameters": {
+    "maxPageSize": 30,
+    "lastModifiedStartTime": "2024-05-01T16:00:46.072Z",
+    "lastModifiedEndTime": "2024-05-01T16:50:46.072Z",
+    "testProfileIds": "12345678-1234-1234-1234-123456789012",
+    "testIds": "12346-abcd-6789",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "testProfileId": "12345678-1234-1234-1234-123456789012",
+            "description": "sample description",
+            "displayName": "Performance_TestProfile",
+            "testId": "12346-abcd-6789",
+            "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplerg/providers/Microsoft.Web/sites/myfunctionapp",
+            "targetResourceConfigurations": {
+              "kind": "FunctionsFlexConsumption",
+              "configurations": {
+                "config1": {
+                  "instanceMemoryMB": 2048,
+                  "httpConcurrency": 16
+                },
+                "config2": {
+                  "instanceMemoryMB": 4096,
+                  "httpConcurrency": 16
+                }
+              }
+            },
+            "createdDateTime": "2024-05-01T16:43:46.072Z",
+            "createdBy": "user@contoso.com",
+            "lastModifiedDateTime": "2024-05-01T16:43:46.072Z",
+            "lastModifiedBy": "user@contoso.com"
+          }
+        ],
+        "nextLink": "https://00000000-0000-0000-aaaa-00aa00aa00aa.eastus.cnt-prod.loadtesting.azure.com/test-profiles?orderby=lastModifiedDateTime%20desc&continuationToken=some-value&search=Performance_TestProfile&&lastModifiedStartTime=&lastModifiedEndTime=&maxPageSize=50&api-version=2024-05-01-preview"
+      }
+    }
+  }
+}

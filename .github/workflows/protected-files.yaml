@@ -1,6 +1,14 @@
 name: Protected Files
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
 
 permissions:
   contents: read
@@ -21,7 +29,7 @@ jobs:
         if: ${{ env.user-allowed == 'true' }}
         run: echo "Account '${{ github.event.pull_request.user.login }}' is allowed to update protected files"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         if: ${{ env.user-allowed != 'true' }}
         with:
           # Required since "HEAD^" is passed to Get-ChangedFiles
@@ -32,10 +40,17 @@ jobs:
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
 
-          $protectedFiles = @("cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", "eng/*")
+          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".vscode/*", "eng/*")
+          $excludedFiles = @(".github/CODEOWNERS")
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
 
-          $matchedFiles = @($changedFiles | Where-Object { $changedFile = $_; $protectedFiles | Where-Object { $changedFile -like $_ } })
+          $matchedFiles = @(
+            $changedFiles | Where-Object {
+              $changedFile = $_; 
+              ($protectedFiles | Where-Object { $changedFile -like $_ }) -and
+              -not ($excludedFiles | Where-Object { $changedFile -like $_ })
+            }
+          )
 
           if ($matchedFiles.Count -gt 0) {
             foreach ($file in $matchedFiles) {

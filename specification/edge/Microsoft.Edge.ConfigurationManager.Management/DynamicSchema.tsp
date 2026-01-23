@@ -20,6 +20,11 @@ namespace Microsoft.Edge;
 
 @doc("DynamicSchema Properties")
 model DynamicSchemaProperties {
+  @added(Versions.v2025_08_01)
+  @doc("Display name of the dynamic schema")
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
   @doc("Type of configuration")
   @visibility(Lifecycle.Read)
   configurationType?: ConfigurationType;

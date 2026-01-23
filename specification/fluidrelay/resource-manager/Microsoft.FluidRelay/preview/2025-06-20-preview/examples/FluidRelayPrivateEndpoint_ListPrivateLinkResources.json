@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroup": "myResourceGroup",
+    "fluidRelayServerName": "myFluidRelayServer",
+    "api-version": "2025-06-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer/privateLinkResources/fluidRelayServers",
+            "name": "fluidRelayServers",
+            "type": "Microsoft.FluidRelay/fluidRelayServers/privateLinkResources",
+            "properties": {
+              "groupId": "FluidRelayServers",
+              "requiredMembers": [
+                "xxxx-xxxx-xxxx-xxxx-alfred",
+                "xxxx-xxxx-xxxx-xxxx-nexus",
+                "xxxx-xxxx-xxxx-xxxx-historian"
+              ],
+              "requiredZoneNames": [
+                "privatelink.fluidrelay.azure.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

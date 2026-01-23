@@ -7,8 +7,11 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Versioning;
 
+@versioned(Versions)
 namespace Microsoft.IoTFirmwareDefense;
+
 /**
  * Firmware analysis workspace.
  */
@@ -41,6 +44,7 @@ interface Workspaces {
   /**
    * The operation to update a firmware analysis workspaces.
    */
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Workspace,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -52,7 +56,16 @@ interface Workspaces {
   /**
    * The operation to delete a firmware analysis workspace.
    */
-  delete is ArmResourceDeleteSync<Workspace>;
+  @sharedRoute
+  @added(Versions.v2025_08_02)
+  @doc("The operation to delete a firmware analysis workspace.")
+  delete is ArmResourceDeleteWithoutOkAsync<Workspace>;
+
+  @removed(Versions.v2025_08_02)
+  @renamedFrom(Versions.v2025_08_02, "delete")
+  @sharedRoute
+  @doc("The operation to delete a firmware analysis workspace.")
+  deleteSync is ArmResourceDeleteSync<Workspace>;
 
   /**
    * Lists all of the firmware analysis workspaces in the specified resource group.

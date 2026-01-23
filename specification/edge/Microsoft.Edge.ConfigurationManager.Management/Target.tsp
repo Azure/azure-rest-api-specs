@@ -181,7 +181,13 @@ interface Targets {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Target>;
 
   @doc("update a Target Resource")
-  update is ArmResourcePatchAsync<Target, TargetProperties>;
+  update is ArmCustomPatchAsync<
+    Target,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Target,
+      TargetProperties
+    >
+  >;
 
   @doc("Delete a Target Resource")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -241,6 +247,14 @@ interface Targets {
   updateExternalValidationStatus is ArmResourceActionAsync<
     Target,
     UpdateExternalValidationStatusParameter,
+    SolutionVersion
+  >;
+
+  @added(Versions.v2025_08_01)
+  @doc("Post request to unstage solution version")
+  unstageSolutionVersion is ArmResourceActionAsync<
+    Target,
+    SolutionVersionParameter,
     SolutionVersion
   >;
 }

@@ -10,21 +10,35 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/monitors/{version-status}/{version}/monitors.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-sapmonitors"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sapmonitors"
     flavor: azure
     package-details:
       name: "@azure/arm-sapmonitors"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-sapmonitors"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sapmonitors"
     namespace: "azure.mgmt.sapmonitors"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-workloadssapmonitors"
+    service-dir: "sdk/workloadssapmonitors"
+    namespace: "com.azure.resourcemanager.workloadssapmonitors"
+    service-name: "Sap Monitors"
+    flavor: "azure"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/sapmonitors"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsapmonitors"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsapmonitors"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

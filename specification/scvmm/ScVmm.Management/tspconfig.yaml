@@ -10,21 +10,34 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/scvmm.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-scvmm"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-scvmm"
     flavor: azure
     package-details:
       name: "@azure/arm-scvmm"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-scvmm"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-scvmm"
     namespace: "azure.mgmt.scvmm"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-scvmm"
+    namespace: "com.azure.resourcemanager.scvmm"
+    service-name: "Scvmm"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/scvmm"
+    emitter-output-dir: "{output-dir}/{service-dir}/armscvmm"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armscvmm"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   disable:
   extends:

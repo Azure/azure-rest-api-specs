@@ -1,0 +1,179 @@
+{
+  "operationId": "Skillsets_Get",
+  "title": "SearchServiceGetSkillset",
+  "parameters": {
+    "endpoint": "https://stableexampleservice.search.windows.net",
+    "skillsetName": "myskillset",
+    "api-version": "2025-09-01",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "myskillset",
+        "description": "Skillset for extracting entities and more",
+        "skills": [
+          {
+            "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
+            "name": "skill2",
+            "context": "/document",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "countryHint",
+                "source": "/document/countryHint",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "languageCode",
+                "targetName": "languageCode"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+            "name": "skill3",
+            "context": "/document",
+            "defaultLanguageCode": "en",
+            "textSplitMode": "pages",
+            "maximumPageLength": 4000,
+            "pageOverlapLength": 0,
+            "maximumPagesToTake": 0,
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "textItems",
+                "targetName": "pages"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+            "name": "skill4",
+            "context": "/document/pages/*",
+            "defaultLanguageCode": "en",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "keyPhrases",
+                "targetName": "keyPhrases"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+            "name": "skill5",
+            "context": "/document",
+            "uri": "https://contoso.example.org/",
+            "httpMethod": "POST",
+            "timeout": "PT5S",
+            "batchSize": 1000,
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "customresult",
+                "targetName": "result"
+              }
+            ],
+            "httpHeaders": {}
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "markdownHeaderDepth": "h3",
+            "outputFormat": "markdown",
+            "extractionOptions": [],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "markdown_document",
+                "targetName": "markdown_document"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill#2",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "outputFormat": "text",
+            "extractionOptions": [
+              "images",
+              "locationMetadata"
+            ],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "text_sections",
+                "targetName": "text_sections"
+              },
+              {
+                "name": "normalized_images",
+                "targetName": "normalized_images"
+              }
+            ],
+            "chunkingProperties": {
+              "unit": "characters",
+              "maximumLength": 500,
+              "overlapLength": 50
+            }
+          }
+        ]
+      }
+    }
+  }
+}

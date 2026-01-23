@@ -122,5 +122,28 @@ namespace Azure.AI.Agents {
       },
       ThreadMessage
     >;
+
+    /**
+     * Deletes an existing message on an existing thread.
+     *
+     */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "not standard operations"
+    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+    @delete
+    @added(Versions.v1)
+    @route("/{messageId}")
+    delete is AgentOperation<
+      {
+        @doc("Identifier of the thread.")
+        @path
+        threadId: string;
+
+        @doc("Identifier of the message.")
+        @path
+        messageId: string;
+      },
+      MessageDeletionStatus
+    >;
   }
 }

@@ -33,9 +33,12 @@ enum Versions {
   /**
    * The 2025-03-21-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2_preview: "2025-03-21-preview",
+  v2025_03_21_preview: "2025-03-21-preview",
+
+  /**
+   * The 2025-03-21 API version.
+   */
+  v2025_03_21: "2025-03-21",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

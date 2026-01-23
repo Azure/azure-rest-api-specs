@@ -443,6 +443,17 @@ interface DevBoxes {
     DevBoxActionsDelayMultipleResult
   >;
 
+  @doc("Creates an action to schedule the deletion of a Dev Box")
+  @added(APIVersions.v2025_08_01_preview)
+  @action("scheduleDelete")
+  scheduleDeleteAction is StandardResourceOperations.ResourceAction<
+    DevBox,
+    {
+      ...DeleteAtQueryParameter;
+    },
+    NoContentResponse
+  >;
+
   @doc("Lists operations on the Dev Box which have occurred within the past 90 days.")
   @added(APIVersions.v2024_02_01)
   listOperations is StandardResourceOperations.ResourceList<DevBoxOperation>;
@@ -460,6 +471,27 @@ interface DevBoxes {
     {
       ...ProjectNameParameter;
 
+      @doc("An imaging build log id.")
+      @path
+      imageBuildLogId: uuid;
+    },
+    {
+      @doc("Set producer to text/plain")
+      @header
+      contentType: "text/plain";
+
+      @body
+      body: string;
+    }
+  >;
+
+  /** Gets the log for a dev center catalog image definition imaging build task. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No model for this."
+  @route("/imageBuildLogs/{imageBuildLogId}")
+  @get
+  @added(APIVersions.v2026_01_01_preview)
+  getDevCenterImagingTaskLog is Azure.Core.Foundations.Operation<
+    {
       @doc("An imaging build log id.")
       @path
       imageBuildLogId: uuid;

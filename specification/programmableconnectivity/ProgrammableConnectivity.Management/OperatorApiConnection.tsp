@@ -145,7 +145,7 @@ model OperatorApiConnectionProperties {
    * List of ways the data returned on this API is processed.
    */
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
-  @OpenAPI.extension("x-ms-identifiers", #["processingOperation"])
+  @identifiers(#["processingOperation"])
   dataProcessingList: DataProcessing[];
 }
 
@@ -195,13 +195,13 @@ model DataProcessing {
   /**
    * The countries/regions the data transits through.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["countryCode"])
+  @identifiers(#["countryCode"])
   transitRegions: DataRegions[];
 
   /**
    * The countries/regions the data is stored in.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["countryCode"])
+  @identifiers(#["countryCode"])
   storageRegions: DataRegions[];
 }
 

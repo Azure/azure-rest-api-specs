@@ -43,10 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "Connections"
+      "name": "Pipelines"
     },
     {
-      "name": "Pipelines"
+      "name": "Connections"
     },
     {
       "name": "Flows"
@@ -56,7 +56,7 @@
     "/providers/Microsoft.AzureDataTransfer/listApprovedSchemas": {
       "post": {
         "operationId": "AzureDataTransfer_listApprovedSchemas",
-        "description": "Lists approved schemas for Azure Data Transfer.",
+        "description": "Retrieves the list of approved schemas available for Azure Data Transfer. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -64,7 +64,7 @@
           {
             "name": "pipeline",
             "in": "body",
-            "description": "The request to list approved schemas.",
+            "description": "The request payload for listing approved schemas.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ListApprovedSchemasRequest"
@@ -131,7 +131,7 @@
     "/providers/Microsoft.AzureDataTransfer/validateSchema": {
       "post": {
         "operationId": "AzureDataTransfer_validateSchema",
-        "description": "Validates a schema for Azure Data Transfer.",
+        "description": "Validates the structure and content of a schema for use in Azure Data Transfer. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -212,7 +212,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Gets pipelines in a subscription.",
+        "description": "Lists all Pipeline resources within the current subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2003,7 +2003,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Gets pipelines in a resource group.",
+        "description": "Lists all Pipeline resources within the specified resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2045,7 +2045,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Gets pipeline resource.",
+        "description": "Retrieves the specified Pipeline resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2059,7 +2059,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2092,7 +2092,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Creates or updates the pipeline resource.",
+        "description": "Creates a new Pipeline resource or updates an existing one. This operation is asynchronous and returns the resulting Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2106,7 +2106,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2116,7 +2116,7 @@
           {
             "name": "pipeline",
             "in": "body",
-            "description": "Pipeline body",
+            "description": "The request body containing the Pipeline definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Pipeline"
@@ -2170,7 +2170,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Updates the pipeline resource.",
+        "description": "Applies partial updates to an existing Pipeline resource. This operation supports patch semantics and returns the updated Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2184,7 +2184,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2194,7 +2194,7 @@
           {
             "name": "pipeline",
             "in": "body",
-            "description": "Pipeline body",
+            "description": "The request body containing the updated Pipeline properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PipelinesPatch"
@@ -2247,7 +2247,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Deletes the pipeline resource.",
+        "description": "Deletes the specified Pipeline resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2261,7 +2261,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2311,7 +2311,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Approves the specified connection request in a pipeline.",
+        "description": "Approves a pending connection request associated with the specified Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2325,7 +2325,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2335,7 +2335,7 @@
           {
             "name": "connection",
             "in": "body",
-            "description": "Connection body",
+            "description": "The request body containing the connection to approve.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceBody"
@@ -2388,7 +2388,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Executes a privileged action for a pipeline.",
+        "description": "Executes a privileged or administrative action on the specified Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2402,7 +2402,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2412,7 +2412,7 @@
           {
             "name": "action",
             "in": "body",
-            "description": "Action to execute",
+            "description": "The action to be executed on the Pipeline.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Action"
@@ -2465,7 +2465,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Lists the flows in a pipeline.",
+        "description": "Lists all Flows associated with the specified Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2479,7 +2479,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2489,7 +2489,7 @@
           {
             "name": "connections",
             "in": "body",
-            "description": "Connection(s) to retrieve flows of",
+            "description": "A list of connection identifiers used to filter the Flows to be retrieved.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ConnectionIdList"
@@ -2523,7 +2523,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Lists the schemas for the specified connection in a pipeline.",
+        "description": "Lists the schemas associated with a specific connection in the Pipeline. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2537,7 +2537,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2547,7 +2547,7 @@
           {
             "name": "schema",
             "in": "body",
-            "description": "Schema(s) to retrieve",
+            "description": "The schema(s) to retrieve for the specified connection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Schema"
@@ -2581,7 +2581,7 @@
         "tags": [
           "Pipelines"
         ],
-        "description": "Rejects the specified connection request in a pipeline.",
+        "description": "Rejects a pending connection request associated with the specified Pipeline.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2595,7 +2595,7 @@
           {
             "name": "pipelineName",
             "in": "path",
-            "description": "The name for the pipeline to perform the operation on.",
+            "description": "The name of the pipeline on which to operate.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2605,7 +2605,7 @@
           {
             "name": "connection",
             "in": "body",
-            "description": "Connection body",
+            "description": "The request body containing the connection to reject.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceBody"
@@ -2714,7 +2714,7 @@
       "properties": {
         "remoteEndpoint": {
           "type": "string",
-          "description": "Remote host to which communication needs to be made. Deprecated starting 2025-05-30-preview."
+          "description": "Remote host to which communication needs to be made. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings.endpoint property instead."
         },
         "cname": {
           "type": "string",
@@ -2726,19 +2726,19 @@
         },
         "identityTranslation": {
           "$ref": "#/definitions/IdentityTranslation",
-          "description": "Determines which identity to use for extracting the user token for Azure Data Transfer API Flow. Deprecated starting 2025-05-30-preview."
+          "description": "Determines which identity to use for extracting the user token for Azure Data Transfer API Flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead."
         },
         "senderClientId": {
           "type": "string",
-          "description": "Sender's app user assigned Manage Identity client ID. Deprecated starting 2025-05-30-preview."
+          "description": "Sender's app user assigned Manage Identity client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead."
         },
         "remoteCallingModeClientId": {
           "type": "string",
-          "description": "Remote stub app registration Client ID. Deprecated starting 2025-05-30-preview."
+          "description": "Remote stub app registration Client ID. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead."
         },
         "audienceOverride": {
           "type": "string",
-          "description": "Optional field to override the audience of the remote endpoint. Deprecated starting 2025-05-30-preview."
+          "description": "Optional field to override the audience of the remote endpoint. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the authentication property instead."
         }
       }
     },
@@ -2908,7 +2908,7 @@
         },
         "flowTypes": {
           "type": "array",
-          "description": "The flow types being requested for this connection. This FlowType property is deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.",
+          "description": "The flow types being requested for this connection. This FlowType property has reached end of life support starting version 2025-05-30-preview. Please create a FlowProfile resource instead.",
           "items": {
             "$ref": "#/definitions/FlowType"
           }
@@ -2954,21 +2954,21 @@
         },
         "policies": {
           "type": "array",
-          "description": "The policies for this connection",
+          "description": "The policies for this connection. The policies property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "type": "string"
           }
         },
         "schemas": {
           "type": "array",
-          "description": "The schemas for this connection",
+          "description": "The schemas for this connection. The schemas property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "$ref": "#/definitions/Schema"
           }
         },
         "schemaUris": {
           "type": "array",
-          "description": "The schema URIs for this connection",
+          "description": "The schema URIs for this connection. The schemaUris property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "type": "string",
             "format": "uri"
@@ -3231,11 +3231,11 @@
         },
         "flowType": {
           "$ref": "#/definitions/FlowType",
-          "description": "The flow type for this flow"
+          "description": "The flow type for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
         },
         "dataType": {
           "$ref": "#/definitions/DataType",
-          "description": "Type of data to transfer via the flow."
+          "description": "Type of data to transfer via the flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3244,14 +3244,14 @@
         },
         "policies": {
           "type": "array",
-          "description": "The policies for this flow",
+          "description": "The policies for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "type": "string"
           }
         },
         "schema": {
           "$ref": "#/definitions/Schema",
-          "description": "The selected schema for this flow"
+          "description": "The selected schema for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
         },
         "messagingOptions": {
           "$ref": "#/definitions/MessagingOptions",
@@ -3585,7 +3585,7 @@
     },
     "ListApprovedSchemasRequest": {
       "type": "object",
-      "description": "The request used to list approved schemas within the resource provider. ListApprovedSchemaRequest will be deprecated after from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.",
+      "description": "The request used to list approved schemas within the resource provider. ListApprovedSchemaRequest has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.",
       "properties": {
         "pipeline": {
           "type": "string",
@@ -3737,7 +3737,7 @@
         },
         "flowTypes": {
           "type": "array",
-          "description": "The flow types being requested for this connection. This FlowType property is deprecated starting from version 2025_05_30_preview - please create a FlowProfile resource instead.",
+          "description": "The flow types being requested for this connection. This FlowType property has reached end of life support starting version 2025-05-30-preview. Please create a FlowProfile resource instead.",
           "items": {
             "$ref": "#/definitions/FlowType"
           }
@@ -3783,21 +3783,21 @@
         },
         "policies": {
           "type": "array",
-          "description": "The policies for this connection",
+          "description": "The policies for this connection. The policies property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "type": "string"
           }
         },
         "schemas": {
           "type": "array",
-          "description": "The schemas for this connection",
+          "description": "The schemas for this connection. The schemas property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "$ref": "#/definitions/Schema"
           }
         },
         "schemaUris": {
           "type": "array",
-          "description": "The schema URIs for this connection",
+          "description": "The schema URIs for this connection. The schemaUris property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "type": "string",
             "format": "uri"
@@ -3952,11 +3952,11 @@
         },
         "flowType": {
           "$ref": "#/definitions/FlowType",
-          "description": "The flow type for this flow"
+          "description": "The flow type for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
         },
         "dataType": {
           "$ref": "#/definitions/DataType",
-          "description": "Type of data to transfer via the flow."
+          "description": "Type of data to transfer via the flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3965,14 +3965,14 @@
         },
         "policies": {
           "type": "array",
-          "description": "The policies for this flow",
+          "description": "The policies for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "type": "string"
           }
         },
         "schema": {
           "$ref": "#/definitions/Schema",
-          "description": "The selected schema for this flow"
+          "description": "The selected schema for this flow. The property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead."
         },
         "messagingOptions": {
           "$ref": "#/definitions/MessagingOptions",
@@ -4102,11 +4102,11 @@
     },
     "Pipeline": {
       "type": "object",
-      "description": "The pipeline resource definition.",
+      "description": "The pipeline resource definition. A Pipeline defines the scope and identity under which data replication scenarios are managed.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PipelineProperties",
-          "description": "Properties of pipeline"
+          "description": "The set of configurable properties for the Pipeline resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -4190,14 +4190,14 @@
         },
         "policies": {
           "type": "array",
-          "description": "The policies for this pipeline",
+          "description": "The policies for this pipeline. The policies property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "type": "string"
           }
         },
         "flowTypes": {
           "type": "array",
-          "description": "The flow type for this flow",
+          "description": "The flow type for this flow. The flowTypes property has reached end of life support starting version 2025-05-30-preview. Please create and use a FlowProfile resource instead.",
           "items": {
             "$ref": "#/definitions/FlowType"
           }
@@ -4273,11 +4273,11 @@
     },
     "PipelinesPatchProperties": {
       "type": "object",
-      "description": "Properties of pipelines patch body.",
+      "description": "Properties of pipelines patch body. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the FlowProfile resource instead.",
       "properties": {
         "flowTypes": {
           "type": "array",
-          "description": "The flow types allowed for this pipeline",
+          "description": "The flow types allowed for this pipeline. FlowTypes has reached end of life support starting version 2025-05-30-preview. Please create and use the FlowProfile property instead.",
           "items": {
             "$ref": "#/definitions/FlowType"
           }
@@ -4378,7 +4378,7 @@
     },
     "Schema": {
       "type": "object",
-      "description": "The schema object. Schemas will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.",
+      "description": "The schema object. Schemas has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.",
       "properties": {
         "id": {
           "type": "string",
@@ -4465,7 +4465,7 @@
     },
     "SchemasListResult": {
       "type": "object",
-      "description": "The schemas list result. SchemaListResults will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.",
+      "description": "The schemas list result. SchemaListResults has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.",
       "properties": {
         "value": {
           "type": "array",
@@ -4645,7 +4645,7 @@
     },
     "ValidateSchemaResult": {
       "type": "object",
-      "description": "Result of the schema validation. ValidateSchemaResult will be deprecated starting from version 2025_05_30_preview - please manage schemas with a FlowProfile resource instead.",
+      "description": "Result of the schema validation. ValidateSchemaResult has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.",
       "properties": {
         "status": {
           "$ref": "#/definitions/ValidateSchemaStatus",

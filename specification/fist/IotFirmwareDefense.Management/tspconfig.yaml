@@ -11,7 +11,7 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/iotfirmwaredefense.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-iotfirmwaredefense"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-iotfirmwaredefense"
     namespace: "azure.mgmt.iotfirmwaredefense"
     flavor: "azure"
     generate-test: true
@@ -19,18 +19,18 @@ options:
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-iotfirmwaredefense"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-iotfirmwaredefense"
     package-details:
       name: "@azure/arm-iotfirmwaredefense"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-iotfirmwaredefense"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-iotfirmwaredefense"
     namespace: "com.azure.resourcemanager.iotfirmwaredefense"
     flavor: "azure"
     service-name: "IoT Firmware Defense"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/iotfirmwaredefense"
-    package-dir: "armiotfirmwaredefense"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armiotfirmwaredefense"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armiotfirmwaredefense/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
