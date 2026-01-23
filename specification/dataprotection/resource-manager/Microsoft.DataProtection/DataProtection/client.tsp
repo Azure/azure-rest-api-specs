@@ -147,16 +147,19 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(AzureBackupJob, "DataProtectionBackupJobProperties", "csharp");
+@@alternateType(AzureBackupJob.etag, Azure.Core.eTag, "csharp");
 @@alternateType(AzureBackupJob.backupInstanceId,
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(AzureBackupJob.progressUrl, url, "csharp");
 @@alternateType(AzureBackupJob.dataSourceId, armResourceIdentifier, "csharp");
 @@alternateType(AzureBackupJob.dataSourceLocation, azureLocation, "csharp");
 @@alternateType(AzureBackupJob.duration, duration, "csharp");
 @@alternateType(AzureBackupJob.policyId, armResourceIdentifier, "csharp");
 @@clientName(AzureBackupJob.progressEnabled, "IsProgressEnabled", "csharp");
 @@clientName(AzureBackupJobResource, "DataProtectionBackupJob", "csharp");
+@@usage(AzureBackupJobResource, Usage.input | Usage.output, "csharp");
 @@clientName(AzureBackupParams, "DataProtectionBackupSettings", "csharp");
 @@clientName(AzureBackupRecoveryPoint,
   "DataProtectionBackupRecoveryPointProperties",
@@ -228,8 +231,20 @@ using Microsoft.DataProtection;
 @@clientName(BackupPolicy, "RuleBasedBackupPolicy", "csharp");
 @@clientName(BackupSchedule, "DataProtectionBackupSchedule", "csharp");
 @@clientName(BackupVault, "DataProtectionBackupVaultProperties", "csharp");
-@@alternateType(BackupVault.replicatedRegions, azureLocation, "csharp");
+@@alternateType(BackupVault.replicatedRegions, azureLocation[], "csharp");
 @@clientName(BackupVaultResource, "DataProtectionBackupVault", "csharp");
+@@alternateType(BackupVaultResource.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(BackupVaultResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(DppBaseTrackedResource.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(RetentionTag.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(ResourceGuardResource.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(PatchResourceRequestInput.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@clientName(BaseBackupPolicy,
   "DataProtectionBackupPolicyPropertiesBase",
   "csharp"
@@ -539,7 +554,7 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(FetchSecondaryRPsRequestParameters,
-  "FetchSecondaryRPsContent",
+  "FetchSecondaryRPsRequestContent",
   "csharp"
 );
 @@clientName(StopProtectionRequest, "StopProtectionContent", "csharp");
@@ -548,3 +563,105 @@ using Microsoft.DataProtection;
   "CrossRegionRestoreJobsContent",
   "csharp"
 );
+@@clientName(DataProtectionOperationGroup.checkFeatureSupport,
+  "CheckDataProtectionBackupFeatureSupport",
+  "csharp"
+);
+@@clientName(DataProtectionOperationGroup.checkFeatureSupport::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupVaultsOperationGroup.checkNameAvailability,
+  "CheckDataProtectionBackupVaultNameAvailability",
+  "csharp"
+);
+@@clientName(BackupVaultsOperationGroup.checkNameAvailability::parameters.parameters,
+  "content",
+  "csharp"
+);
+@@clientName(FetchCrossRegionRestoreJobOperationGroup.get,
+  "GetCrossRegionRestoreJob",
+  "csharp"
+);
+@@clientName(FetchCrossRegionRestoreJobOperationGroup.get::parameters.parameters,
+  "content",
+  "csharp"
+);
+@@clientName(FetchCrossRegionRestoreJobsOperationGroup.list,
+  "GetCrossRegionRestoreJobs",
+  "csharp"
+);
+@@clientName(FetchCrossRegionRestoreJobsOperationGroup.list::parameters.parameters,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstancesExtensionRoutingOperationGroup.list,
+  "GetDataProtectionBackupInstances",
+  "csharp"
+);
+@@alternateType(BackupInstancesExtensionRoutingOperationGroup.list::parameters.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(BackupInstancesExtensionRoutingOperationGroup.list::parameters.resourceId,
+  "scope",
+  "csharp"
+);
+@@clientName(FetchSecondaryRecoveryPointsOperationGroup.list,
+  "GetSecondaryRecoveryPoints",
+  "csharp"
+);
+@@clientName(FetchSecondaryRecoveryPointsOperationGroup.list::parameters.parameters,
+  "content",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getDefaultBackupSecurityPINRequestsObject,
+  "GetDefaultBackupSecurityPinRequestsObject",
+  "csharp"
+);
+@@clientName(DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
+  "GetBackupSecurityPinRequestsObjects",
+  "csharp"
+);
+@@clientName(BackupInstancesOperationGroup.triggerCrossRegionRestore,
+  "TriggerCrossRegionRestoreBackupInstance",
+  "csharp"
+);
+@@clientName(BackupInstancesOperationGroup.validateCrossRegionRestore,
+  "ValidateCrossRegionRestoreBackupInstance",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.find, "FindRestorableTimeRange", "csharp");
+@@clientName(BackupInstanceResources.find::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.stopProtection::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.suspendBackups::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.syncBackupInstance::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.triggerRehydrate::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.triggerRestore::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.validateForModifyBackup::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.validateForRestore::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "csharp");
