@@ -213,7 +213,7 @@ directive:
 
     where:
 
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateLinkResources/{privateLinkResourceName}"].get.parameters[3]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateLinkResources/{privateLinkResourceName}"].get.parameters[4]
 
     reason: privateLinkResourceName follows the same pattern as other resource name parameters in this API.
 
