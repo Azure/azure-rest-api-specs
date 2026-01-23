@@ -11,10 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/elastic.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Elastic"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
@@ -40,7 +37,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/elastic"
     emitter-output-dir: "{output-dir}/{service-dir}/armelastic"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armelastic"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armelastic/v2"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "properties": {
+          "allocationState": "Steady",
+          "allocationStateTransitionTime": "2023-04-28T02:33:40.82831Z",
+          "creationTime": "2023-04-28T02:32:32.8696419Z",
+          "currentDedicatedNodes": 1,
+          "currentLowPriorityNodes": 0,
+          "currentNodeCommunicationMode": "Classic",
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "2016-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64"
+            }
+          },
+          "interNodeCommunication": "Disabled",
+          "lastModified": "2023-04-28T02:32:32.8696419Z",
+          "networkConfiguration": {
+            "dynamicVnetAssignmentScope": "none",
+            "enableAcceleratedNetworking": true
+          },
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-04-28T02:32:32.8696419Z",
+          "resizeOperationStatus": {
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2023-04-28T02:32:32.8696419Z",
+            "targetDedicatedNodes": 1
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "resizeTimeout": "PT15M",
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0
+            }
+          },
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "taskSlotsPerNode": 1,
+          "vmSize": "STANDARD_D1_V2"
+        }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      }
+    }
+  },
+  "operationId": "Pool_Get",
+  "title": "GetPool - AcceleratedNetworking"
+}

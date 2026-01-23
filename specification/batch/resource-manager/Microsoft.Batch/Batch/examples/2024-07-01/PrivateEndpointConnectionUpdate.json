@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "parameters": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by xyz.abc@company.com",
+          "status": "Approved"
+        }
+      }
+    },
+    "privateEndpointConnectionName": "testprivateEndpointConnection5.24d6b4b5-e65c-4330-bbe9-3a290d62f8e0",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testprivateEndpointConnection5.24d6b4b5-e65c-4330-bbe9-3a290d62f8e0",
+        "type": "Microsoft.Batch/batchAccounts/privateEndpointConnections",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/privateEndpointConnections/testprivateEndpointConnection5.24d6b4b5-e65c-4330-bbe9-3a290d62f8e0",
+        "properties": {
+          "groupIds": [
+            "batchAccount"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Network/privateEndpoints/testprivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by xyz.abc@company.com",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/privateEndpointConnectionProxyResults/Updating$testprivateEndpointConnection5.24d6b4b5$e65c-4330-bbe9-3a290d62f8e0-8D4EDFF164A11C9?api-version=2024-07-01",
+        "Retry-After": "15"
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnection_Update",
+  "title": "UpdatePrivateEndpointConnection"
+}
