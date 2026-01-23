@@ -2136,6 +2136,7 @@ model MarkParameter {
 @doc("Specify the response type.")
 @Versioning.added(Versions.v2024_03_01_preview)
 model ResponseTypeParameter {
+  @Versioning.added(Versions.v2024_03_01_preview)
   @doc("Specify the response type. The possible values are: ID, STANDARD, FULL, REDUCED")
   @query("responseType")
   responseType?: AssetResponseType;
