@@ -231,6 +231,9 @@ model FungibleProperties {
   @doc("The OS type to create fungible VMs")
   osType: string;
 
+  @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
+  capacityType?: CapacityType;
+
   @doc("Configuration Options for Regular or Spot instances in fungible VMs")
   priorityProfile: PriorityProfile;
 
