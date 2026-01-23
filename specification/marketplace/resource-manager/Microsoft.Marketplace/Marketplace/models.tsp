@@ -1648,5 +1648,6 @@ model OperationListResult {
    * URL to get the next set of operation list results if there are any.
    */
   @visibility(Lifecycle.Read)
+  @nextLink
   nextLink?: string;
 }
