@@ -2,7 +2,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 
 import "../common/service.tsp";
-import "../responses/models.tsp";
+import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

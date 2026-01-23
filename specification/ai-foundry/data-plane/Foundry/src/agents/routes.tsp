@@ -10,12 +10,11 @@ using TypeSpec.Streams;
 
 namespace Azure.AI.Projects;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 interface Agents {
   /**
    * Retrieves the agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @route("/agents/{agent_name}")
   @tag("Agents")
@@ -30,8 +29,6 @@ interface Agents {
   /**
    * Creates the agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents")
@@ -46,8 +43,6 @@ interface Agents {
    * Updates the agent by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}")
@@ -66,8 +61,6 @@ interface Agents {
   /**
    * Creates an agent from a manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents:import")
@@ -82,8 +75,6 @@ interface Agents {
    * Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/import")
@@ -102,8 +93,6 @@ interface Agents {
   /**
    * Deletes an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}")
@@ -120,8 +109,6 @@ interface Agents {
   /**
    * Returns the list of all agents.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @route("/agents")
   @tag("Agents")
@@ -136,9 +123,6 @@ interface Agents {
   /**
    * Create a new agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions")
@@ -164,8 +148,6 @@ interface Agents {
   /**
    * Create a new agent version from a manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions:import")
@@ -191,8 +173,6 @@ interface Agents {
   /**
    * Retrieves a specific version of an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @route("/agents/{agent_name}/versions/{agent_version}")
   @tag("Agents")
@@ -210,8 +190,6 @@ interface Agents {
   /**
    * Deletes a specific version of an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
@@ -231,8 +209,6 @@ interface Agents {
   /**
    * Returns the list of versions of an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @route("/agents/{agent_name}/versions")
   @list
@@ -252,8 +228,7 @@ interface Agents {
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No polling operation yet"
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:start")
   @tag("Agents")
@@ -280,8 +255,7 @@ interface Agents {
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No polling operation yet"
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:update")
   @tag("Agents")
@@ -308,8 +282,7 @@ interface Agents {
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No polling operation yet"
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:stop")
   @tag("Agents")
@@ -330,8 +303,7 @@ interface Agents {
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No polling operation yet"
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:delete")
   @tag("Agents")
@@ -350,7 +322,6 @@ interface Agents {
   /**
    * Get a container for a specific version of an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default")
   @tag("Agents")
@@ -369,8 +340,7 @@ interface Agents {
   /**
    * Stream logs from a container for a specific version of an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Streaming responses have a body but the linter doesn't recognize it"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:logstream")
   @tag("Agents")
@@ -426,7 +396,6 @@ interface Agents {
   /**
    * Get the status of a container operation for an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @get
   @route("/agents/{agent_name}/operations/{operation_id}")
   @tag("Agents")
@@ -445,7 +414,6 @@ interface Agents {
   /**
    * List container operations for an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @get
   @route("/agents/{agent_name}/operations")
   @tag("Agents")
@@ -464,7 +432,6 @@ interface Agents {
   /**
    * List container operations for a specific version of an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default/operations")
   @tag("Agents")

@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 import "./models.tsp";
 import "../common/models.tsp";
-import "../responses/models.tsp";
+import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -106,7 +106,6 @@ interface Conversations {
       @query include?: string[];
 
       /** The items to add to the conversation. You may add up to 20 items at a time. */
-      #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
       @maxItems(20)
       items: (OpenAI.Item | OpenAI.EasyInputMessage)[];

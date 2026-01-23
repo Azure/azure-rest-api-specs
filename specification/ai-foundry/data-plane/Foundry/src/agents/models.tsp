@@ -2,7 +2,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 
-import "../responses/models.tsp";
+import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
 
@@ -139,13 +139,54 @@ model AgentDefinition {
   rai_config?: RaiConfig;
 }
 
-@doc("A record mapping for a single protocol and its version.")
-model ProtocolVersionRecord {
-  @doc("The protocol type.")
-  protocol: AgentProtocol;
+@doc("The prompt agent definition")
+model PromptAgentDefinition extends AgentDefinition {
+  kind: AgentKind.prompt;
 
-  @doc("The version string for the protocol, e.g. 'v0.1.1'.")
-  version: string;
+  @doc("The model deployment to use for this agent.")
+  `model`: string;
+
+  @doc("A system (or developer) message inserted into the model's context.")
+  instructions?: string | null;
+
+  @doc("""
+    What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+    We generally recommend altering this or `top_p` but not both.
+    """)
+  @minValue(0)
+  @maxValue(2)
+  temperature?: float32 | null = 1;
+
+  @doc("""
+    An alternative to sampling with temperature, called nucleus sampling,
+    where the model considers the results of the tokens with top_p probability
+    mass. So 0.1 means only the tokens comprising the top 10% probability mass
+    are considered.
+    
+    We generally recommend altering this or `temperature` but not both.
+    """)
+  @minValue(0)
+  @maxValue(1)
+  top_p?: float32 | null = 1;
+
+  reasoning?: OpenAI.Reasoning | null;
+
+  @doc("""
+    An array of tools the model may call while generating a response. You
+    can specify which tool to use by setting the `tool_choice` parameter.
+    """)
+  tools?: OpenAI.Tool[];
+
+  /**
+   * Configuration options for a text response from the model. Can be plain text or structured JSON data.
+   */
+  text?: {
+    // Tool customization: Employ discriminated type base
+    format?: OpenAI.TextResponseFormatConfiguration;
+  };
+
+  @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
+  structured_inputs?: Record<StructuredInputDefinition>;
 }
 
 @doc("The workflow agent definition.")
@@ -223,54 +264,13 @@ model ContainerAppAgentPreviewDefinition extends AgentDefinition {
   ingress_subdomain_suffix: string;
 }
 
-@doc("The prompt agent definition")
-model PromptAgentDefinition extends AgentDefinition {
-  kind: AgentKind.prompt;
+@doc("A record mapping for a single protocol and its version.")
+model ProtocolVersionRecord {
+  @doc("The protocol type.")
+  protocol: AgentProtocol;
 
-  @doc("The model deployment to use for this agent.")
-  `model`: string;
-
-  @doc("A system (or developer) message inserted into the model's context.")
-  instructions?: string | null;
-
-  @doc("""
-    What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
-    We generally recommend altering this or `top_p` but not both.
-    """)
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null = 1;
-
-  @doc("""
-    An alternative to sampling with temperature, called nucleus sampling,
-    where the model considers the results of the tokens with top_p probability
-    mass. So 0.1 means only the tokens comprising the top 10% probability mass
-    are considered.
-    
-    We generally recommend altering this or `temperature` but not both.
-    """)
-  @minValue(0)
-  @maxValue(1)
-  top_p?: float32 | null = 1;
-
-  reasoning?: OpenAI.Reasoning | null;
-
-  @doc("""
-    An array of tools the model may call while generating a response. You
-    can specify which tool to use by setting the `tool_choice` parameter.
-    """)
-  tools?: OpenAI.Tool[];
-
-  /**
-   * Configuration options for a text response from the model. Can be plain text or structured JSON data.
-   */
-  text?: {
-    // Tool customization: Employ discriminated type base
-    format?: OpenAI.TextResponseFormatConfiguration;
-  };
-
-  @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
-  structured_inputs?: Record<StructuredInputDefinition>;
+  @doc("The version string for the protocol, e.g. 'v0.1.1'.")
+  version: string;
 }
 
 alias ListAgentQueryParameters = {

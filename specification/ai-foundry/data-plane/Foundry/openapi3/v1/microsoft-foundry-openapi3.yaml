@@ -2621,8 +2621,8 @@ paths:
           in: query
           required: false
           description: |-
-            Evals can be ordered by creation time or last updated time. Use
-            `created_at` for creation time or `updated_at` for last updated time.
+            Evals can be ordered by creation time or last updated time.
+            Use `created_at` for creation time or `updated_at` for last updated time.
           schema:
             type: string
             enum:
@@ -3975,10 +3975,10 @@ components:
       discriminator:
         propertyName: kind
         mapping:
+          prompt: '#/components/schemas/PromptAgentDefinition'
           workflow_preview: '#/components/schemas/WorkflowAgentPreviewDefinition'
           hosted_preview: '#/components/schemas/HostedAgentPreviewDefinition'
           container_app_preview: '#/components/schemas/ContainerAppAgentPreviewDefinition'
-          prompt: '#/components/schemas/PromptAgentDefinition'
     AgentId:
       type: object
       required:
