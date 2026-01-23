@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "name": "testStaticSite0",
+    "api-version": "2025-05-01",
+    "environmentName": "default",
+    "linkedBackendName": "testBackend",
+    "resourceGroupName": "rg",
+    "staticSiteLinkedBackendEnvelope": {
+      "properties": {
+        "backendResourceId": "/subscription/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/backendRg/providers/Microsoft.Web/sites/testBackend",
+        "region": "West US 2"
+      }
+    },
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testBackend",
+        "type": "Microsoft.Web/staticSites/builds/linkedBackends",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0/builds/default/linkedBackends/testBackend",
+        "properties": {
+          "backendResourceId": "/subscription/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/backendRg/providers/Microsoft.Web/sites/testBackend",
+          "createdOn": "2021-12-24T17:33:11.641Z",
+          "provisioningState": "Succeeded",
+          "region": "West US 2"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "StaticSites_LinkBackendToBuild",
+  "title": "Link a backend to a static site build"
+}
