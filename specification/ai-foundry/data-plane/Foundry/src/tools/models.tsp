@@ -706,7 +706,7 @@ model A2APreviewTool extends OpenAI.Tool {
  * A tool for integrating memories into the agent.
  */
 @removed(Versions.v1)
-model MemorySearchTool extends OpenAI.Tool {
+model MemorySearchPreviewTool extends OpenAI.Tool {
   /**
    * The type of the tool. Always `memory_search`.
    */
