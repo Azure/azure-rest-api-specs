@@ -1217,16 +1217,16 @@ using Microsoft.Network;
 
 @@clientName(VirtualNetworks.createOrUpdate::parameters.resource, "parameters");
 @@clientName(VirtualNetworks.updateTags::parameters.properties, "parameters");
-@@clientLocation(VirtualNetworks.listNetworkManagerEffectiveConnectivityConfigurations,
+@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
   ""
 );
-@@clientName(VirtualNetworks.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
+@@clientName(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
   "parameters"
 );
-@@clientLocation(VirtualNetworks.listNetworkManagerEffectiveSecurityAdminRules,
+@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
   ""
 );
-@@clientName(VirtualNetworks.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
+@@clientName(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

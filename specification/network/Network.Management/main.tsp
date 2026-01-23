@@ -169,7 +169,7 @@ enum Features {
   networkWatcher,
   networkingOperations,
   virtualNetwork,
-  VirtualWAN,
+  virtualWAN,
 }
 
 @Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
