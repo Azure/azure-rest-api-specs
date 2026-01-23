@@ -6,8 +6,20 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
+using Azure.Core.Foundations;
 
 namespace ContainerRegistryService;
+
+/**
+ * Custom operation template that uses AcrErrors for error responses
+ * instead of Azure.Core.Foundations.ErrorResponse
+ */
+op AcrOperation<
+  TParams extends TypeSpec.Reflection.Model = {},
+  TResponse extends TypeSpec.Reflection.Model | void = void,
+  TTraits extends TypeSpec.Reflection.Model = {}
+> is Foundations.Operation<TParams, TResponse, TTraits, AcrErrors>;
 
 interface ContainerRegistry {
   /**
@@ -17,7 +29,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/")
   @get
-  checkDockerV2Support is Azure.Core.Foundations.Operation<
+  checkDockerV2Support is AcrOperation<
     {},
     {
       @statusCode statusCode: 200;
@@ -31,7 +43,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/{name}/manifests/{reference}")
   @get
-  getManifest is Azure.Core.Foundations.Operation<
+  getManifest is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -62,7 +74,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/{name}/manifests/{reference}")
   @put
-  createManifest is Azure.Core.Foundations.Operation<
+  createManifest is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -97,7 +109,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/{name}/manifests/{reference}")
   @delete
-  deleteManifest is Azure.Core.Foundations.Operation<
+  deleteManifest is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -123,7 +135,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @route("/acr/v1/_catalog")
   @list
-  getRepositories is Azure.Core.Foundations.Operation<
+  getRepositories is AcrOperation<
     {
       /** Query parameter for the last item in previous query. Result set will include values lexically after last. */
       @query("last")
@@ -142,7 +154,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}")
   @get
-  getProperties is Azure.Core.Foundations.Operation<
+  getProperties is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -159,7 +171,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}")
   @delete
-  deleteRepository is Azure.Core.Foundations.Operation<
+  deleteRepository is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -183,7 +195,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}")
   @patch(#{ implicitOptionality: true })
-  updateProperties is Azure.Core.Foundations.Operation<
+  updateProperties is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -206,7 +218,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags")
   @get
-  getTags is Azure.Core.Foundations.Operation<
+  getTags is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -248,7 +260,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags/{reference}")
   @get
-  getTagProperties is Azure.Core.Foundations.Operation<
+  getTagProperties is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -271,7 +283,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags/{reference}")
   @patch(#{ implicitOptionality: true })
-  updateTagAttributes is Azure.Core.Foundations.Operation<
+  updateTagAttributes is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -300,7 +312,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags/{reference}")
   @delete
-  deleteTag is Azure.Core.Foundations.Operation<
+  deleteTag is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -325,7 +337,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_manifests")
   @get
-  getManifests is Azure.Core.Foundations.Operation<
+  getManifests is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -361,7 +373,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_manifests/{digest}")
   @get
-  getManifestProperties is Azure.Core.Foundations.Operation<
+  getManifestProperties is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -384,7 +396,7 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_manifests/{digest}")
   @patch(#{ implicitOptionality: true })
-  updateManifestProperties is Azure.Core.Foundations.Operation<
+  updateManifestProperties is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -416,7 +428,7 @@ interface ContainerRegistryBlob {
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @get
-  getBlob is Azure.Core.Foundations.Operation<
+  getBlob is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -458,7 +470,7 @@ interface ContainerRegistryBlob {
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @head
-  checkBlobExists is Azure.Core.Foundations.Operation<
+  checkBlobExists is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -496,7 +508,7 @@ interface ContainerRegistryBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/{name}/blobs/{digest}")
   @delete
-  deleteBlob is Azure.Core.Foundations.Operation<
+  deleteBlob is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -526,7 +538,7 @@ interface ContainerRegistryBlob {
   @sharedRoute
   @route("/v2/{name}/blobs/uploads/")
   @post
-  mountBlob is Azure.Core.Foundations.Operation<
+  mountBlob is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -568,7 +580,7 @@ interface ContainerRegistryBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/{+nextBlobUuidLink}")
   @get
-  getUploadStatus is Azure.Core.Foundations.Operation<
+  getUploadStatus is AcrOperation<
     {
       /**
        * Link acquired from upload start or previous chunk. Note, do not include initial
@@ -595,7 +607,7 @@ interface ContainerRegistryBlob {
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @route("/{+nextBlobUuidLink}")
   @patch(#{ implicitOptionality: true })
-  uploadChunk is Azure.Core.Foundations.Operation<
+  uploadChunk is AcrOperation<
     {
       /**
        * Link acquired from upload start or previous chunk. Note, do not include initial
@@ -635,7 +647,7 @@ interface ContainerRegistryBlob {
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @route("/{+nextBlobUuidLink}")
   @put
-  completeUpload is Azure.Core.Foundations.Operation<
+  completeUpload is AcrOperation<
     {
       /**
        * Digest of a BLOB
@@ -679,7 +691,7 @@ interface ContainerRegistryBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/{+nextBlobUuidLink}")
   @delete
-  cancelUpload is Azure.Core.Foundations.Operation<
+  cancelUpload is AcrOperation<
     {
       /**
        * Link acquired from upload start or previous chunk. Note, do not include initial
@@ -698,7 +710,7 @@ interface ContainerRegistryBlob {
   @sharedRoute
   @route("/v2/{name}/blobs/uploads/")
   @post
-  startUpload is Azure.Core.Foundations.Operation<
+  startUpload is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -731,7 +743,7 @@ interface ContainerRegistryBlob {
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @get
-  getChunk is Azure.Core.Foundations.Operation<
+  getChunk is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -773,7 +785,7 @@ interface ContainerRegistryBlob {
   @sharedRoute
   @route("/v2/{name}/blobs/{digest}")
   @head
-  checkChunkExists is Azure.Core.Foundations.Operation<
+  checkChunkExists is AcrOperation<
     {
       /**
        * Name of the image (including the namespace)
@@ -848,7 +860,7 @@ interface Authentication {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/oauth2/token")
   @get
-  getAcrAccessTokenFromLogin is Azure.Core.Foundations.Operation<
+  getAcrAccessTokenFromLogin is AcrOperation<
     {
       /**
        * Indicates the name of your Azure container registry.
