@@ -1980,10 +1980,6 @@ model MhsmPrivateLinkResource
  * Properties of a private link resource.
  */
 model MhsmPrivateLinkResourceProperties {
-  @doc("The provisioned state of the resource")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /**
    * Group identifier of private link resource.
    */

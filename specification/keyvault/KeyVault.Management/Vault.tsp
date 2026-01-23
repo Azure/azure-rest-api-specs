@@ -14,7 +14,7 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
-model Vault is Azure.ResourceManager.ProxyResource<VaultProperties> {
+model Vault is Azure.ResourceManager.ProxyResource<VaultProperties, false> {
   ...ResourceNameParameter<
     Resource = Vault,
     KeyName = "vaultName",
