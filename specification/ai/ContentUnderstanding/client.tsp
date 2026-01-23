@@ -90,6 +90,9 @@ interface ContentUnderstandingClient {
 @@access(ContentUnderstandingClient.getResult, Access.internal);
 @@access(ContentUnderstandingClient.getOperationStatus, Access.internal);
 
+// Suppress convenient method generation for updateDefaults in Java only
+@@convenientAPI(ContentUnderstandingClient.updateDefaults, false, "java");
+
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
 @@clientDoc(AnalyzeInput.data,
   "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
