@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -66,6 +67,15 @@ interface UpdateSummariesOperationGroup {
   list is ArmResourceListByParent<
     UpdateSummaries,
     Response = ArmResponse<UpdateSummariesList>
+  >;
+
+  /**
+   * Check for updates
+   */
+  @removed(Versions.v2025_12_01_preview)
+  checkUpdates is ArmResourceActionNoResponseContentAsync<
+    UpdateSummaries,
+    void
   >;
 }
 

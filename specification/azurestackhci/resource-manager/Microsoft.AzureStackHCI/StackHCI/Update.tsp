@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -74,6 +75,12 @@ interface Updates {
     OkResponse,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Prepare Update
+   */
+  @removed(Versions.v2025_12_01_preview)
+  prepare is ArmResourceActionNoResponseContentAsync<Update, void>;
 }
 
 @@doc(Update.name, "The name of the Update");
