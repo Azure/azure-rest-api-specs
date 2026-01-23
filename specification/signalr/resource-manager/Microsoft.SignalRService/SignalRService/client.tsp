@@ -4,6 +4,7 @@ import "./main.tsp";
 using Http;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.SignalRService;
 
 @TypeSpec.Versioning.useDependency(
@@ -352,4 +353,6 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(IPRule, "SignalRIPRule", "csharp");
 @@clientName(RouteSettings, "SignalRRouteSettings", "csharp");
 @@clientName(ServerlessSettings, "SignalRServerlessSettings", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@markAsPageable(Replicas.listReplicaSkus, "csharp");
