@@ -82,12 +82,31 @@ model BlobServiceClientParameters {
   "rust"
 );
 
+@@clientName(AccessPolicy.start, "startsOn", "javascript");
+@@clientName(AccessPolicy.expiry, "expiresOn", "javascript");
+@@clientName(AccessPolicy.permission, "permissions", "javascript");
+@@clientName(BlobPropertiesInternal.accessTierChangeTime,
+  "accessTierChangedOn",
+  "javascript"
+);
+@@clientName(BlobPropertiesInternal.creationTime, "createdOn", "javascript");
+@@clientName(BlobPropertiesInternal.copyCompletionTime,
+  "copyCompletedOn",
+  "javascript"
+);
+@@clientName(BlobPropertiesInternal.deletedTime, "deletedOn", "javascript");
+@@clientName(ContainerProperties.deletedTime, "deletedOn", "javascript");
+@@clientName(GeoReplication.lastSyncTime, "lastSyncOn", "javascript");
+@@clientName(KeyInfo.start, "startsOn", "javascript");
+@@clientName(KeyInfo.expiry, "expiresOn", "javascript");
+@@clientName(StorageServiceProperties.logging,
+  "blobAnalyticsLogging",
+  "javascript"
+);
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "javascript");
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
 @@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
 @@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
-
-@@clientName(GeoReplication.lastSyncTime, "lastSyncOn", "javascript");
 
 @@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.blobContentLength, uint64, "rust");
