@@ -17,7 +17,12 @@ interface ContainerRegistry {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/v2/")
   @get
-  checkDockerV2Support is Azure.Core.Foundations.Operation<{}, void>;
+  checkDockerV2Support is Azure.Core.Foundations.Operation<
+    {},
+    {
+      @statusCode statusCode: 200;
+    }
+  >;
 
   /**
    * Get the manifest identified by `name` and `reference` where `reference` can be
