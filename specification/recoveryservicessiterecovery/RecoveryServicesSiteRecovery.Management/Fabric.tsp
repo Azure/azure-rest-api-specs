@@ -1,0 +1,175 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.RecoveryServices;
+/**
+ * Fabric definition.
+ */
+@parentResource(Vault)
+model Fabric is Azure.ResourceManager.ProxyResource<FabricProperties> {
+  ...ResourceNameParameter<
+    Resource = Fabric,
+    KeyName = "fabricName",
+    SegmentName = "replicationFabrics",
+    NamePattern = ""
+  >;
+
+  /**
+   * Resource Location
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+}
+
+@armResourceOperations
+interface Fabrics {
+  /**
+   * Gets the details of an Azure Site Recovery fabric.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_Get")
+  @summary("Gets the details of an ASR fabric.")
+  get is ArmResourceRead<
+    Fabric,
+    Parameters = {
+      /**
+       * OData filter options.
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Error = never
+  >;
+
+  /**
+   * The operation to create an Azure Site Recovery fabric (for e.g. Hyper-V site).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("ReplicationFabrics_Create")
+  @summary("Creates an Azure Site Recovery fabric.")
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+    Fabric,
+    Request = FabricCreationInput,
+    Response = ArmResourceUpdatedResponse<Fabric> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = never
+  >;
+
+  /**
+   * The operation to purge(force delete) an Azure Site Recovery fabric.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_Purge")
+  @summary("Purges the site.")
+  purge is ArmResourceDeleteWithoutOkAsync<Fabric, Error = never>;
+
+  /**
+   * Gets a list of the Azure Site Recovery fabrics in the vault.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_List")
+  @summary("Gets the list of ASR fabrics.")
+  list is ArmResourceListByParent<
+    Fabric,
+    Response = ArmResponse<FabricCollection>,
+    Error = never
+  >;
+
+  /**
+   * The operation to perform a consistency check on the fabric.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_CheckConsistency")
+  @summary("Checks the consistency of the ASR fabric.")
+  checkConsistency is ArmResourceActionAsync<
+    Fabric,
+    void,
+    ArmResponse<Fabric>,
+    Error = never
+  >;
+
+  /**
+   * The operation to migrate an Azure Site Recovery fabric to AAD.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_MigrateToAad")
+  @action("migratetoaad")
+  @summary("Migrates the site to AAD.")
+  migrateToAad is ArmResourceActionAsync<
+    Fabric,
+    void,
+    NoContentResponse,
+    Error = never
+  >;
+
+  /**
+   * The operation to move replications from a process server to another process server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_ReassociateGateway")
+  @summary("Perform failover of the process server.")
+  reassociateGateway is ArmResourceActionAsync<
+    Fabric,
+    FailoverProcessServerRequest,
+    ArmResponse<Fabric>,
+    Error = never
+  >;
+
+  /**
+   * The operation to delete or remove an Azure Site Recovery fabric.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_Delete")
+  @action("remove")
+  @summary("Deletes the site.")
+  delete is ArmResourceActionAsync<
+    Fabric,
+    void,
+    NoContentResponse,
+    Error = never
+  >;
+
+  /**
+   * Renews the connection certificate for the ASR replication fabric.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_RenewCertificate")
+  @summary("Renews certificate for the fabric.")
+  renewCertificate is ArmResourceActionAsync<
+    Fabric,
+    RenewCertificateInput,
+    ArmResponse<Fabric>,
+    Error = never
+  >;
+
+  /**
+   * Removes the appliance's infrastructure under the fabric.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ReplicationFabrics_RemoveInfra")
+  @summary("Removes the appliance's infrastructure under the fabric.")
+  removeInfra is ArmResourceActionAsyncBase<
+    Fabric,
+    void,
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>
+  >;
+}
+
+@@doc(Fabric.name, "Fabric name.");
+@@doc(Fabric.properties, "Fabric related data.");
+@@doc(Fabrics.create::parameters.resource, "Fabric creation input.");
+@@doc(Fabrics.reassociateGateway::parameters.body,
+  "The input to the failover process server operation."
+);
+@@doc(Fabrics.renewCertificate::parameters.body, "Renew certificate input.");
