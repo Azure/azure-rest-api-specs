@@ -16558,6 +16558,7 @@
           "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
@@ -16737,8 +16738,23 @@
           "description": "Name of the partner destination associated with the channel."
         },
         "endpointType": {
-          "$ref": "#/definitions/PartnerEndpointType",
-          "description": "Type of the endpoint for the partner destination"
+          "type": "string",
+          "description": "Type of the endpoint for the partner destination",
+          "default": "WebHook",
+          "enum": [
+            "WebHook"
+          ],
+          "x-ms-enum": {
+            "name": "PartnerEndpointType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "WebHook",
+                "value": "WebHook",
+                "description": "WebHook"
+              }
+            ]
+          }
         },
         "endpointServiceContext": {
           "type": "string",
@@ -16900,24 +16916,6 @@
           "type": "string",
           "description": "URI of the partner website that can be used by Azure customers to setup Event Grid\nintegration on an event source."
         }
-      }
-    },
-    "PartnerEndpointType": {
-      "type": "string",
-      "description": "Type of the endpoint for the partner destination",
-      "enum": [
-        "WebHook"
-      ],
-      "x-ms-enum": {
-        "name": "PartnerEndpointType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "WebHook",
-            "value": "WebHook",
-            "description": "WebHook"
-          }
-        ]
       }
     },
     "PartnerEventSubscriptionDestination": {

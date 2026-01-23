@@ -364,3 +364,8 @@ using Microsoft.EventGrid;
 @@clientLocation(EventSubscriptionOperationGroup.listByResource,
   EventSubscriptions
 );
+@@visibility(PartnerConfiguration.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);

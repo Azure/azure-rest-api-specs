@@ -2492,7 +2492,7 @@ model PartnerDestinationInfo {
   /**
    * Type of the endpoint for the partner destination
    */
-  endpointType: PartnerEndpointType;
+  endpointType: PartnerEndpointType = PartnerEndpointType.WebHook;
 
   /**
    * Additional context of the partner destination endpoint.
