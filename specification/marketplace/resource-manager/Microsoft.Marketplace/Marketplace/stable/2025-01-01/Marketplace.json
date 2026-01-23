@@ -2727,16 +2727,12 @@
       "description": "A map of collections subscriptions details",
       "properties": {
         "details": {
-          "$ref": "#/definitions/CollectionsToSubscriptionsMappingResponseProperties",
-          "description": "The map of collections subscriptions"
+          "type": "object",
+          "description": "The map of collections subscriptions",
+          "additionalProperties": {
+            "$ref": "#/definitions/collectionsSubscriptionsMappingDetails"
+          }
         }
-      }
-    },
-    "CollectionsToSubscriptionsMappingResponseProperties": {
-      "type": "object",
-      "description": "Collections - subscriptions mapping details, map key is collectionId. In case subscriptions list is null or empty: no subscription from the list is related to that collection.",
-      "additionalProperties": {
-        "$ref": "#/definitions/collectionsSubscriptionsMappingDetails"
       }
     },
     "ContextAndPlansDetails": {
@@ -4192,8 +4188,6 @@
           "readOnly": true
         },
         "requestDate": {
-          "type": "string",
-          "format": "date-time",
           "description": "Gets request date",
           "readOnly": true
         },

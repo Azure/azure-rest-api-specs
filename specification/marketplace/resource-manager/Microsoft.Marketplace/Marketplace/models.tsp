@@ -559,15 +559,8 @@ model CollectionsToSubscriptionsMappingResponse {
    * The map of collections subscriptions
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  details?: CollectionsToSubscriptionsMappingResponseProperties;
+  details?: Record<CollectionsSubscriptionsMappingDetails>;
 }
-
-/**
- * Collections - subscriptions mapping details, map key is collectionId. In case subscriptions list is null or empty: no subscription from the list is related to that collection.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model CollectionsToSubscriptionsMappingResponseProperties
-  is Record<CollectionsSubscriptionsMappingDetails>;
 
 /**
  * Collection name and related subscriptions list
@@ -1019,8 +1012,10 @@ model PlanDetails {
   /**
    * Gets request date
    */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  requestDate?: utcDateTime;
+  requestDate?: unknown;
 
   /**
    * Gets or sets user's justification for the plan's request
