@@ -448,9 +448,9 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.list,
   "ManagedNetworkSettings"
 );
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.post,
-  "OutboundRules"
-);
+// @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.post,
+//   "OutboundRules"
+// );
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
 

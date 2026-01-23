@@ -63,18 +63,18 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
     Response = ManagedNetworkListResult
   >;
 
-  /**
-   * The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.
-   */
-  @summary("The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.")
-  @action("batchOutboundRules")
-  @list
-  @post
-  post is ArmResourceActionAsync<
-    ManagedNetworkSettingsPropertiesBasicResource,
-    ManagedNetworkSettingsBasicResource,
-    OutboundRuleListResult
-  >;
+  // /**
+  //  * The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.
+  //  */
+  // @summary("The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.")
+  // @action("batchOutboundRules")
+  // @list
+  // @post
+  // post is ArmResourceActionAsync<
+  //   ManagedNetworkSettingsPropertiesBasicResource,
+  //   ManagedNetworkSettingsBasicResource,
+  //   OutboundRuleListResult
+  // >;
 }
 
 @@doc(ManagedNetworkSettingsPropertiesBasicResource.name,
@@ -89,6 +89,6 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
 @@doc(ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
   "The Managed Network Settings object of the workspace."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResources.post::parameters.body,
-  "The Managed Network Settings object of the workspace."
-);
+// @@doc(ManagedNetworkSettingsPropertiesBasicResources.post::parameters.body,
+//   "The Managed Network Settings object of the workspace."
+// );
