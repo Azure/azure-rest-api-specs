@@ -10,20 +10,28 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/verifiedid.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-verifiedid"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-verifiedid"
     flavor: azure
     package-details:
       name: "@azure/arm-verifiedid"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-verifiedid"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-verifiedid"
     namespace: "azure.mgmt.verifiedid"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/verifiedid"
+    emitter-output-dir: "{output-dir}/{service-dir}/armverifiedid"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armverifiedid"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true

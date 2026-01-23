@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "loggerId": "loggerId",
+    "parameters": {
+      "properties": {
+        "description": "adding a new logger",
+        "credentials": {
+          "instrumentationKey": "11................a1"
+        },
+        "loggerType": "applicationInsights"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "loggerId",
+        "type": "Microsoft.ApiManagement/service/workspaces/loggers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/loggers/loggerId",
+        "properties": {
+          "description": null,
+          "credentials": {
+            "instrumentationKey": "{{5a.......2a}}"
+          },
+          "isBuffered": false,
+          "loggerType": "applicationInsights"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "loggerId",
+        "type": "Microsoft.ApiManagement/service/workspaces/loggers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/loggers/loggerId",
+        "properties": {
+          "description": null,
+          "credentials": {
+            "instrumentationKey": "{{5a.......2a}}"
+          },
+          "isBuffered": false,
+          "loggerType": "applicationInsights",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/microsoft.insights/components/airesource"
+        }
+      }
+    }
+  },
+  "operationId": "WorkspaceLogger_CreateOrUpdate",
+  "title": "ApiManagementCreateWorkspaceAILogger"
+}

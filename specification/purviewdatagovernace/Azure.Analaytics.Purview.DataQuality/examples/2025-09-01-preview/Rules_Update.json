@@ -1,0 +1,98 @@
+{
+  "operationId": "UpdateRule",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "request": {
+      "id": "06dda07d-126b-43c1-aade-2484b265a271",
+      "name": "Custom",
+      "description": "",
+      "type": "CustomTruth",
+      "status": "Active",
+      "typeProperties": {
+        "condition": "{REVENUE} > 50000",
+        "filterCriteria": "{REGION} == 'India'",
+        "emptyCriteria": "{REVENUE_TARGET} < 100000",
+        "columns": [
+          {
+            "value": "REVENUE",
+            "type": "Column"
+          },
+          {
+            "value": "REGION",
+            "type": "Column"
+          },
+          {
+            "value": "REVENUE_TARGET",
+            "type": "Column"
+          }
+        ]
+      },
+      "dimension": "Accuracy",
+      "businessDomain": {
+        "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
+        "type": "BusinessDomainReference"
+      },
+      "dataProduct": {
+        "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf",
+        "type": "DataProductReference"
+      },
+      "dataAsset": {
+        "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869",
+        "type": "DataAssetReference"
+      }
+    },
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataAssetId": "abcd1234-5678-abcd-1234-abcd5678ef00",
+    "dataProductId": "12345678-abcd-1234-ef00-123456abcdef",
+    "ruleId": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  "title": "Rules_Update",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Custom",
+        "description": "",
+        "type": "CustomTruth",
+        "status": "Active",
+        "typeProperties": {
+          "condition": "{REVENUE} > 50000",
+          "filterCriteria": "{REGION} == 'India'",
+          "emptyCriteria": "{REVENUE_TARGET} < 100000",
+          "columns": [
+            {
+              "value": "REVENUE",
+              "type": "Column"
+            },
+            {
+              "value": "REGION",
+              "type": "Column"
+            },
+            {
+              "value": "REVENUE_TARGET",
+              "type": "Column"
+            }
+          ]
+        },
+        "dimension": "Accuracy",
+        "id": "06dda07d-126b-43c1-aade-2484b265a271",
+        "businessDomain": {
+          "type": "BusinessDomainReference",
+          "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+        },
+        "dataProduct": {
+          "type": "DataProductReference",
+          "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf"
+        },
+        "dataAsset": {
+          "type": "DataAssetReference",
+          "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869"
+        },
+        "score": -1.0,
+        "createdAt": "2025-11-13T09:08:28.1798306Z",
+        "lastModifiedAt": "2025-11-13T09:08:29.1508867Z",
+        "createdBy": "6f19d772-4716-4523-9910-cb1575512ce6",
+        "lastModifiedBy": "6f19d772-4716-4523-9910-cb1575512ce6"
+      }
+    }
+  }
+}

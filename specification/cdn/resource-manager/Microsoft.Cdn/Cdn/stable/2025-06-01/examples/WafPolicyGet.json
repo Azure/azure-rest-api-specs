@@ -1,0 +1,141 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "policyName": "MicrosoftCdnWafPolicy",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MicrosoftCdnWafPolicy",
+        "type": "Microsoft.Cdn/cdnwebapplicationfirewallpolicies",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/MicrosoftCdnWafPolicy",
+        "location": "WestUs",
+        "properties": {
+          "customRules": {
+            "rules": [
+              {
+                "name": "CustomRule1",
+                "action": "Block",
+                "enabledState": "Enabled",
+                "matchConditions": [
+                  {
+                    "matchValue": [
+                      "CH"
+                    ],
+                    "matchVariable": "RemoteAddr",
+                    "negateCondition": false,
+                    "operator": "GeoMatch",
+                    "selector": null,
+                    "transforms": []
+                  },
+                  {
+                    "matchValue": [
+                      "windows"
+                    ],
+                    "matchVariable": "RequestHeader",
+                    "negateCondition": false,
+                    "operator": "Contains",
+                    "selector": "UserAgent",
+                    "transforms": []
+                  },
+                  {
+                    "matchValue": [
+                      "<?php",
+                      "?>"
+                    ],
+                    "matchVariable": "QueryString",
+                    "negateCondition": false,
+                    "operator": "Contains",
+                    "selector": "search",
+                    "transforms": [
+                      "UrlDecode",
+                      "Lowercase"
+                    ]
+                  }
+                ],
+                "priority": 2
+              }
+            ]
+          },
+          "endpointLinks": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint2"
+            }
+          ],
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "Group1",
+                    "rules": [
+                      {
+                        "action": "Redirect",
+                        "enabledState": "Enabled",
+                        "ruleId": "GROUP1-0001"
+                      },
+                      {
+                        "enabledState": "Disabled",
+                        "ruleId": "GROUP1-0002"
+                      }
+                    ]
+                  }
+                ],
+                "ruleSetType": "DefaultRuleSet",
+                "ruleSetVersion": "preview-1.0"
+              }
+            ]
+          },
+          "policySettings": {
+            "defaultCustomBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
+            "defaultCustomBlockResponseStatusCode": 429,
+            "defaultRedirectUrl": "http://www.bing.com",
+            "enabledState": "Enabled",
+            "mode": "Prevention"
+          },
+          "provisioningState": "Succeeded",
+          "rateLimitRules": {
+            "rules": [
+              {
+                "name": "RateLimitRule1",
+                "action": "Block",
+                "enabledState": "Enabled",
+                "matchConditions": [
+                  {
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ],
+                    "matchVariable": "RemoteAddr",
+                    "negateCondition": false,
+                    "operator": "IPMatch",
+                    "selector": null,
+                    "transforms": []
+                  }
+                ],
+                "priority": 1,
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 1000
+              }
+            ]
+          },
+          "resourceState": "Enabled"
+        },
+        "sku": {
+          "name": "Standard_Microsoft"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "Policies_Get",
+  "title": "Get Policy"
+}

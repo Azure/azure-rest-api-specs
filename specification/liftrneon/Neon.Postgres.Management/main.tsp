@@ -12,9 +12,11 @@ import "./LiftrBase.Data/main.tsp";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using LiftrBase.Data;
@@ -28,25 +30,21 @@ namespace Neon.Postgres;
 @doc("Supported API versions for the Neon.Postgres resource provider.")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v1_preview)
   v1_preview: "2024-12-22-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
   v2_preview: "2025-03-01-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
   v2025_03_01: "2025-03-01",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
   v3_preview: "2025-06-23-preview",
@@ -70,7 +68,14 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OrganizationResource>;
-  update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    OrganizationResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      OrganizationResource,
+      OrganizationProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
@@ -98,17 +103,19 @@ interface Projects {
   list is ArmResourceListByParent<Project>;
 
   @doc("Action to retrieve the connection URI for the Neon Database.")
-  @autoRoute
-  @armResourceAction(ConnectionUriProperties)
-  @post
-  getConnectionUri(
-    ...ResourceInstanceParameters<Project>,
-
-    @doc("Additional parameters for retrieving the database connection URI.")
-    @body
-    connectionUriParameters: ConnectionUriProperties,
-  ): ArmResponse<ConnectionUriProperties> | ErrorResponse;
+  getConnectionUri is ArmResourceActionSync<
+    Project,
+    ConnectionUriProperties,
+    ArmResponse<ConnectionUriProperties>
+  >;
 }
+
+@@doc(Projects.getConnectionUri::parameters.body,
+  "Additional parameters for retrieving the database connection URI."
+);
+@@clientName(Projects.getConnectionUri::parameters.body,
+  "connectionUriParameters"
+);
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
@@ -120,17 +127,15 @@ interface Branches {
 
   @added(Neon.Postgres.Versions.v3_preview)
   @doc("Action to validate preflight checks.")
-  @autoRoute
-  @armResourceAction(PreflightCheckParameters)
-  @post
-  preflight(
-    ...ResourceInstanceParameters<Branch>,
-
-    @doc("Parameters for preflight checks.")
-    @body
-    parameters: PreflightCheckParameters,
-  ): ArmResponse<PreflightCheckResult> | ErrorResponse;
+  preflight is ArmResourceActionSync<
+    Branch,
+    PreflightCheckParameters,
+    ArmResponse<PreflightCheckResult>
+  >;
 }
+
+@@doc(Branches.preflight::parameters.body, "Parameters for preflight checks.");
+@@clientName(Branches.preflight::parameters.body, "parameters");
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)

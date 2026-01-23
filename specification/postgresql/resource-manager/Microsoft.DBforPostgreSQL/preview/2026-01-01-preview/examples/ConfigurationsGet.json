@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "configurationName": "array_nulls",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "array_nulls",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/configurations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/configurations/array_nulls",
+        "properties": {
+          "description": "Enables input of NULL (case insensitive) to be considered as NULL value rather than the literal String 'NULL'.",
+          "allowedValues": "on,off",
+          "dataType": "Boolean",
+          "defaultValue": "on",
+          "documentationLink": "https://www.postgresql.org/docs/13/runtime-config-compatible.html#GUC-ARRAY-NULLS",
+          "isConfigPendingRestart": false,
+          "isDynamicConfig": true,
+          "isReadOnly": false,
+          "source": "system-default",
+          "value": "on"
+        }
+      }
+    }
+  },
+  "operationId": "Configurations_Get",
+  "title": "Get information about a specific configuration (also known as server parameter) of a server."
+}

@@ -19,12 +19,9 @@ using Microsoft.PortalServices;
   "csharp"
 );
 
-@@clientName(CopilotSettingsResource,
-  "PortalServicesCopilotSettings",
-  "csharp"
-);
+@@clientName(CopilotSettingsResource, "PortalServicesCopilotSetting", "csharp");
 
 @@clientName(CopilotSettingsProperties,
-  "PortalServicesCopilotSettingsProperties ",
+  "PortalServicesCopilotSettingsProperties",
   "csharp"
 );

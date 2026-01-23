@@ -202,7 +202,7 @@ union AntivirusSolutions {
 }
 
 /**
- * Rules for regulating supported archive files (BZip2, Cpio, Deb, GZip, Iso9660, Rpm, Tar, Zip) during data replication. All properties are optional and only the configured options will be applied against archives. As an example, suppose minimumSizeForExpansion is 10 MiB and maximumExpansionSizeLimit is 1 GiB. Then all archives smaller than 10 MiB will be treated as though the archive ruleset is disabled, although other rulesets will apply as usual. Furthermore, all archives at least 10 MiB in size but with a decompressed size greater than 1 GiB will fail the ruleset. All other archives will have their contents extracted and each extracted element will be applied to all rulesets.
+ * Rules for regulating supported archive files (BZip2, Cpio, Deb, GZip, Rpm, Tar, Zip) during data replication. All properties are optional and only the configured options will be applied against archives. As an example, suppose minimumSizeForExpansion is 10 MiB and maximumExpansionSizeLimit is 1 GiB. Then all archives smaller than 10 MiB will be treated as though the archive ruleset is disabled, although other rulesets will apply as usual. Furthermore, all archives at least 10 MiB in size but with a decompressed size greater than 1 GiB will fail the ruleset. All other archives will have their contents extracted and each extracted element will be applied to all rulesets.
  */
 @added(Versions.v2025_05_30_preview)
 model ArchiveRuleset {
@@ -262,7 +262,8 @@ model MimeFilterRuleset {
   /**
    * Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model.
    */
-  filters?: MimeTypeFilter;
+  @identifiers(#["media", "extensions"])
+  filters?: MimeTypeFilter[];
 }
 
 /**
@@ -345,10 +346,7 @@ model TextMatchingRuleset {
   /**
    * A list of text patterns to block, each with matching rules and case sensitivity options.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["text", "matchType", "caseSensitivity"]
-  )
+  @identifiers(#["text", "matchType", "caseSensitivity"])
   deny?: {
     ...TextMatch;
   }[];
@@ -410,4 +408,15 @@ union Casing {
    * Requires exact casing for the pattern match. For example, "Hello World" would NOT not be found in "hello world".
    */
   Sensitive: "Sensitive",
+}
+
+/**
+ * The flow profiles list result
+ */
+@added(Versions.v2025_05_30_preview)
+model FlowProfilesListResult {
+  /**
+   * FlowProfileMetadata array.
+   */
+  value?: FlowProfileMetadata[];
 }

@@ -1,0 +1,53 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  service-dir:
+    default: "sdk/computelimit"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/ComputeLimit.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-java":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-computelimit"
+    package-dir: "azure-resourcemanager-computelimit"
+    namespace: "com.azure.resourcemanager.computelimit"
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computelimit"
+    package-dir: "arm-computelimit"
+    package-details:
+      name: "@azure/arm-computelimit"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/computelimit"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcomputelimit"
+    package-dir: "armcomputelimit"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computelimit"
+    package-dir: "azure-mgmt-computelimit"
+    namespace: "azure.mgmt.computelimit"
+    generate-sample: true
+    generate-test: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.ComputeLimit"
+    namespace: "{package-name}"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "https://github.com/Azure/typespec-azure/issues/1845"
+    "@azure-tools/typespec-azure-resource-manager/arm-resource-operation": "https://github.com/Azure/typespec-azure/issues/2081"
+    "@azure-tools/typespec-azure-resource-manager/lro-location-header": "https://github.com/Azure/typespec-azure/issues/1785"
+    "@azure-tools/typespec-azure-resource-manager/no-response-body": "https://github.com/Azure/typespec-azure/issues/1785"

@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Storage.Blob;
@@ -549,6 +550,18 @@ enum SkuName {
 
   /** The premium LRS SKU. */
   PremiumLRS: "Premium_LRS",
+
+  /** The standard GZRS SKU. */
+  @added(Versions.v2026_04_06)
+  StandardGZRS: "Standard_GZRS",
+
+  /** The premium ZRS SKU. */
+  @added(Versions.v2026_04_06)
+  PremiumZRS: "Premium_ZRS",
+
+  /** The standard RAGZRS SKU. */
+  @added(Versions.v2026_04_06)
+  StandardRAGZRS: "Standard_RAGZRS",
 }
 
 /** The list container segment response */
@@ -690,6 +703,11 @@ model KeyInfo {
 
   /** The date-time the key expires. */
   @Xml.name("Expiry") expiry: string;
+
+  /** The delegated user tenant id in Azure AD. */
+  @Xml.name("DelegatedUserTid")
+  @added(Versions.v2026_04_06)
+  delegatedUserTid?: uuid;
 }
 
 /** A user delegation key. */
@@ -711,6 +729,11 @@ model UserDelegationKey {
 
   /** The service version that created the key. */
   @Xml.name("SignedVersion") signedVersion: string;
+
+  /** The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified. */
+  @Xml.name("SignedDelegatedUserTid")
+  @added(Versions.v2026_04_06)
+  signedDelegatedUserTid?: uuid;
 
   /** The key as a base64 string. */
   @Xml.name("Value")
@@ -2023,6 +2046,27 @@ alias EtagResponseHeaderPrivate = {
   eTag: string;
 };
 
+alias SourceEncryptionKeyParameter = {
+  /** Optional. Specifies the source encryption key to use to encrypt the source data provided in the request. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-key")
+  sourceEncryptionKey?: string;
+};
+
+alias SourceEncryptionKeySha256Parameter = {
+  /** The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-key-sha256")
+  sourceEncryptionKeySha256?: string;
+};
+
+alias SourceEncryptionAlgorithmParameter = {
+  /** The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-source-encryption-key is provided. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-algorithm")
+  sourceEncryptionAlgorithm?: EncryptionAlgorithmType;
+};
+
 /** The copy source tags header parameter. */
 alias CopySourceTagsParameter = {
   /** Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags. */
@@ -2045,6 +2089,27 @@ alias CopySourceAuthorizationParameter = {
   /** Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source. */
   @header("x-ms-copy-source-authorization")
   copySourceAuthorization?: string;
+};
+
+alias SourceEncryptionKeyParameter = {
+  /** Optional. Specifies the source encryption key to use to encrypt the source data provided in the request. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-key")
+  sourceEncryptionKey?: string;
+};
+
+alias SourceEncryptionKeySha256Parameter = {
+  /** The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-key-sha256")
+  sourceEncryptionKeySha256?: string;
+};
+
+alias SourceEncryptionAlgorithmParameter = {
+  /** The algorithm used to produce the source encryption key hash. Currently, the only accepted value is "AES256". Must be provided if the x-ms-source-encryption-key is provided. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-source-encryption-algorithm")
+  sourceEncryptionAlgorithm?: EncryptionAlgorithmType;
 };
 
 /** The copy source blob properties parameter. */
@@ -2329,6 +2394,22 @@ alias EncryptionKeyParameter = {
   /** Optional.  Version 2019-07-07 and later.  Specifies the encryption key to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key. */
   @header("x-ms-encryption-key")
   encryptionKey?: string;
+};
+
+alias AccessTierIfModifiedSinceParameter = {
+  /** Specify this header value to operate only on a blob if the access-tier has been modified since the specified date/time. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-access-tier-if-modified-since")
+  @encode("rfc7231")
+  accessTierIfModifiedSince?: utcDateTime;
+};
+
+alias AccessTierIfUnmodifiedSinceParameter = {
+  /** Specify this header value to operate only on a blob if the access-tier has not been modified since the specified date/time. */
+  @added(Versions.v2026_04_06)
+  @header("x-ms-access-tier-if-unmodified-since")
+  @encode("rfc7231")
+  accessTierIfUnmodifiedSince?: utcDateTime;
 };
 
 /** The If-Tags parameters. */
@@ -2689,4 +2770,41 @@ alias PageWriteParameter<TPageWrite extends string> = {
   /** Required. You may specify one of the following options:\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size. */
   @header("x-ms-page-write")
   pageWrite: TPageWrite;
+};
+
+alias IfBlobMatchHeader = {
+  /** Specify an ETag value to operate only on blobs with a matching value. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-match")
+  ifMatch?: string;
+};
+
+alias IfBlobModifiedSinceHeader = {
+  /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-modified-since")
+  @encode("rfc7231")
+  ifModifiedSince?: utcDateTime;
+};
+
+alias IfBlobNoneMatchHeader = {
+  /** Specify an ETag value to operate only on blobs without a matching value. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-none-match")
+  ifNoneMatch?: string;
+};
+
+alias IfBlobUnmodifiedSinceHeader = {
+  /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  @added(Versions.v2026_02_06)
+  @header("x-ms-blob-if-unmodified-since")
+  @encode("rfc7231")
+  ifUnmodifiedSince?: utcDateTime;
+};
+
+alias ListBlobsStartFrom = {
+  /** Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive) */
+  @added(Versions.v2026_02_06)
+  @query
+  startFrom?: string;
 };

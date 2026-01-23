@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "gatewayId": "gw1",
+    "parameters": {
+      "traceId": "CrDvXXXXXXXXXXXXXVU3ZA2-1"
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "serviceName": "apimService1",
+        "traceEntries": {
+          "inbound": [
+            {
+              "data": {
+                "request": {
+                  "method": "GET",
+                  "headers": [
+                    {
+                      "name": "Host",
+                      "value": "proxy.msitesting.net"
+                    }
+                  ],
+                  "url": "https://proxy.msitesting.net/6452XXXXXXXXXXXX9c2facb1/64524dXXXXXXXXXXXX2facb3?subscription-key=117313e70XXXXXXXXXXXX38ba4658ca3"
+                }
+              },
+              "elapsed": "00:00:00.2983315",
+              "source": "api-inspector",
+              "timestamp": "2023-05-03T12:03:04.6899436Z"
+            },
+            {
+              "data": {
+                "configuration": {
+                  "api": {
+                    "from": "/6452XXXXXXXXXXXX9c2facb1",
+                    "revision": "1",
+                    "to": {
+                      "path": "/",
+                      "host": "msitesting.net",
+                      "isDefaultPort": true,
+                      "port": 80,
+                      "query": {},
+                      "queryString": "",
+                      "scheme": "http"
+                    },
+                    "version": null
+                  },
+                  "operation": {
+                    "method": "GET",
+                    "uriTemplate": "/64524dXXXXXXXXXXXX2facb3"
+                  },
+                  "product": "-",
+                  "user": "-"
+                }
+              },
+              "elapsed": "00:00:00.3046329",
+              "source": "api-inspector",
+              "timestamp": "2023-05-03T12:03:04.6969650Z"
+            },
+            {
+              "data": "Origin header was missing or empty and the request was classified as not cross-domain. CORS policy was not applied.",
+              "elapsed": "00:00:00.5972352",
+              "source": "cors",
+              "timestamp": "2023-05-03T12:03:04.9901631Z"
+            },
+            {
+              "data": {
+                "message": [
+                  "Response status code was set to 200",
+                  "Response status reason was set to 'OK'"
+                ]
+              },
+              "elapsed": "00:00:00.6107970",
+              "source": "set-status",
+              "timestamp": "2023-05-03T12:03:05.0031202Z"
+            },
+            {
+              "data": {
+                "message": "Return response was applied",
+                "response": {
+                  "headers": [],
+                  "status": {
+                    "code": "OK",
+                    "reason": "OK"
+                  }
+                }
+              },
+              "elapsed": "00:00:00.6164228",
+              "source": "return-response",
+              "timestamp": "2023-05-03T12:03:05.0086543Z"
+            }
+          ],
+          "outbound": [
+            {
+              "data": {
+                "message": "Response has been sent to the caller in full"
+              },
+              "elapsed": "00:00:00.6510195",
+              "source": "transfer-response",
+              "timestamp": "2023-05-03T12:03:05.0438287Z"
+            }
+          ]
+        },
+        "traceId": "1e0447d4-XXXX-XXXX-XXXX-dbdb8098a0d3"
+      }
+    }
+  },
+  "operationId": "Gateway_ListTrace",
+  "title": "ApiManagementGatewayListTrace"
+}

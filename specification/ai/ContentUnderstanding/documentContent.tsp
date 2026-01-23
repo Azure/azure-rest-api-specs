@@ -42,9 +42,22 @@ model DocumentContent extends MediaContent {
   @doc("List of figures in the document.  Only if enableLayout and returnDetails are true.")
   figures?: DocumentFigure[];
 
-  @added(Versions.v2025_05_01_preview)
-  @doc("List of detected persons in the document.  Only if enableFace and returnDetails are true.")
-  persons?: DetectedPerson[];
+  // @added(Versions.v2025_05_01_preview)
+  // @removed(Versions.v2025_11_01)
+  // @doc("List of detected persons in the document.  Only if enableFace and returnDetails are true.")
+  // persons?: DetectedPerson[];
+
+  @added(Versions.v2025_11_01)
+  @doc("List of annotations in the document.  Only if enableAnnotations and returnDetails are true.")
+  annotations?: DocumentAnnotation[];
+
+  @added(Versions.v2025_11_01)
+  @doc("List of hyperlinks in the document.  Only if returnDetails are true.")
+  hyperlinks?: DocumentHyperlink[];
+
+  @added(Versions.v2025_11_01)
+  @doc("List of detected content segments.  Only if enableSegment is true.")
+  segments?: DocumentContentSegment[];
 }
 
 @doc("Length unit used by the width, height, and source properties.")
@@ -174,7 +187,7 @@ model DocumentFormula {
   """)
 model DocumentParagraph {
   @doc("Semantic role of the paragraph.")
-  role?: ParagraphRole;
+  role?: SemanticRole;
 
   @doc("Paragraph text.")
   content: string;
@@ -210,6 +223,10 @@ model DocumentTable {
 
   @doc("List of table footnotes.")
   footnotes?: DocumentFootnote[];
+
+  @added(Versions.v2025_11_01)
+  @doc("Semantic role of the table.")
+  role?: SemanticRole;
 }
 
 @doc("Table cell in a document table.")
@@ -244,8 +261,28 @@ model DocumentTableCell {
   elements?: DocumentElement[];
 }
 
+@added(Versions.v2025_11_01)
+@doc("Figure kind.")
+union DocumentFigureKind {
+  string,
+
+  @doc("Unknown figure kind.")
+  `unknown`: "unknown",
+
+  @doc("Figure containing a chart, such as a bar chart, line chart, or pie chart.")
+  chart: "chart",
+
+  @doc("Figure containing a diagram, such as a flowchart or network diagram.")
+  mermaid: "mermaid",
+}
+
 @doc("Figure in a document.")
+@discriminator("kind")
 model DocumentFigure {
+  @added(Versions.v2025_11_01)
+  @doc("Figure kind.")
+  kind: DocumentFigureKind = DocumentFigureKind.`unknown`;
+
   @doc("Figure identifier.")
   id: string;
 
@@ -263,6 +300,35 @@ model DocumentFigure {
 
   @doc("List of figure footnotes.")
   footnotes?: DocumentFootnote[];
+
+  @added(Versions.v2025_11_01)
+  @doc("Description of the figure.")
+  description?: string;
+
+  @added(Versions.v2025_11_01)
+  @doc("Semantic role of the figure.")
+  role?: SemanticRole;
+}
+
+@added(Versions.v2025_11_01)
+@doc("Figure containing a chart, such as a bar chart, line chart, or pie chart.")
+model DocumentChartFigure extends DocumentFigure {
+  @doc("Figure kind.")
+  kind: DocumentFigureKind.chart;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "External API shape takes an arbitrary json"
+  @doc("Chart content represented using [Chart.js config](https://www.chartjs.org/docs/latest/configuration/).")
+  content: Record<unknown>;
+}
+
+@added(Versions.v2025_11_01)
+@doc("Figure containing a diagram, such as a flowchart or network diagram.")
+model DocumentMermaidFigure extends DocumentFigure {
+  @doc("Figure kind.")
+  kind: DocumentFigureKind.mermaid;
+
+  @doc("Diagram content represented using [Mermaid syntax](https://mermaid.js.org/intro/).")
+  content: string;
 }
 
 @doc("Section in a document.")
@@ -378,7 +444,7 @@ union DocumentFormulaKind {
 }
 
 @doc("Semantic role of the paragraph.")
-union ParagraphRole {
+union SemanticRole {
   string,
 
   @doc("Text near the top edge of the page.")
@@ -423,15 +489,127 @@ union DocumentTableCellKind {
   description: "description",
 }
 
-@removed(Versions.v2025_05_01_preview)
-@doc("Face in an image.")
-model ImageFace {
-  @doc("Face identifier.")
-  faceId?: string;
+// @removed(Versions.v2025_05_01_preview)
+// @doc("Face in an image.")
+// model ImageFace {
+//   @doc("Face identifier.")
+//   faceId?: string;
 
-  @doc("Confidence of predicting the face.")
-  confidence?: float32;
+//   @doc("Confidence of predicting the face.")
+//   confidence?: float32;
 
-  @doc("Encoded source that identifies the position of the face in the content.")
+//   @doc("Encoded source that identifies the position of the face in the content.")
+//   source?: SourceExpression;
+// }
+
+@added(Versions.v2025_11_01)
+@doc("Annotation in a document, such as a strikethrough or a comment.")
+model DocumentAnnotation {
+  @doc("Annotation identifier.")
+  id: string;
+
+  @doc("Annotation kind.")
+  kind: DocumentAnnotationKind;
+
+  @doc("Spans of the content associated with the annotation.")
+  spans?: ContentSpan[];
+
+  @doc("Position of the annotation.")
   source?: SourceExpression;
+
+  @doc("Comments associated with the annotation.")
+  comments?: DocumentAnnotationComment[];
+
+  @doc("Annotation author.")
+  author?: string;
+
+  @doc("Date and time when the annotation was created.")
+  createdAt?: utcDateTime;
+
+  @doc("Date and time when the annotation was last modified.")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Tags associated with the annotation.")
+  tags?: string[];
+}
+
+@added(Versions.v2025_11_01)
+@doc("Document annotation kind.")
+union DocumentAnnotationKind {
+  string,
+
+  @doc("Highlight annotation.")
+  highlight: "highlight",
+
+  @doc("Strikethrough annotation.")
+  strikethrough: "strikethrough",
+
+  @doc("Underline annotation.")
+  underline: "underline",
+
+  @doc("Italic annotation.")
+  italic: "italic",
+
+  @doc("Bold annotation.")
+  bold: "bold",
+
+  @doc("Circle annotation.")
+  circle: "circle",
+
+  @doc("Note annotation.")
+  note: "note",
+}
+
+@added(Versions.v2025_11_01)
+@doc("Comment associated with a document annotation.")
+model DocumentAnnotationComment {
+  @doc("Comment message in Markdown.")
+  message: string;
+
+  @doc("Author of the comment.")
+  author?: string;
+
+  @doc("Date and time when the comment was created.")
+  createdAt?: utcDateTime;
+
+  @doc("Date and time when the comment was last modified.")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Tags associated with the comment.")
+  tags?: string[];
+}
+
+@added(Versions.v2025_11_01)
+@doc("Hyperlink in a document, such as a link to a web page or an email address.")
+model DocumentHyperlink {
+  @doc("Hyperlinked content.")
+  content: string;
+
+  @doc("URL of the hyperlink.")
+  url: string;
+
+  @doc("Span of the hyperlink in the markdown content.")
+  span?: ContentSpan;
+
+  @doc("Position of the hyperlink.")
+  source?: SourceExpression;
+}
+
+@added(Versions.v2025_11_01)
+@doc("Detected document content segment.")
+model DocumentContentSegment {
+  @doc("Segment identifier.")
+  segmentId: string;
+
+  @doc("Classified content category.")
+  category: string;
+
+  @doc("Span of the segment in the markdown content.")
+  span: ContentSpan;
+
+  @doc("Start page number (1-indexed) of the segment.")
+  startPageNumber: int32;
+
+  @doc("End page number (1-indexed) of the segment.")
+  endPageNumber: int32;
 }

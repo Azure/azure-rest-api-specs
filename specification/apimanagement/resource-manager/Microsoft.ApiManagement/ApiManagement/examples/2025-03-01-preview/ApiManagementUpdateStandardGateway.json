@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "gatewayName": "apimGateway1",
+    "parameters": {
+      "properties": {},
+      "sku": {
+        "name": "Standard",
+        "capacity": 10
+      },
+      "tags": {
+        "Name": "Contoso",
+        "Test": "User"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimGateway1",
+        "type": "Microsoft.ApiManagement/gateways",
+        "etag": "AAAAAAAmREI=",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1",
+        "location": "East US",
+        "properties": {
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
+            }
+          },
+          "configurationApi": {
+            "hostname": "apimGateway1.eastus.configuration.gateway.azure-api.net"
+          },
+          "createdAtUtc": "2022-07-11T18:41:01.2506031Z",
+          "frontend": {
+            "defaultHostname": "apimGateway1.eastus.gateway.azure-api.net"
+          },
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": ""
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdAt": "2022-07-11T18:41:00.9390609Z",
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-07-11T18:41:00.9390609Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "api-version": "2025-03-01-preview"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2025-03-01-preview&asyncResponse",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2025-03-01-preview&asyncResponse"
+      }
+    }
+  },
+  "operationId": "ApiGateway_Update",
+  "title": "ApiManagementUpdateStandardGateway"
+}

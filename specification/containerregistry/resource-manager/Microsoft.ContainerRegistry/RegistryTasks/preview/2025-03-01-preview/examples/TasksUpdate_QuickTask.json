@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "registryName": "myRegistry",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "taskName": "quicktask",
+    "taskUpdateParameters": {
+      "properties": {
+        "logTemplate": "acr/tasks:{{.Run.OS}}",
+        "status": "Enabled"
+      },
+      "tags": {
+        "testkey": "value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myTask",
+        "type": "Microsoft.ContainerRegistry/registries/tasks",
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
+        "identity": null,
+        "location": "eastus",
+        "properties": {
+          "agentConfiguration": null,
+          "creationDate": "2018-01-25T06:54:23.536Z",
+          "logTemplate": "acr/tasks:{{.Run.OS}}",
+          "platform": null,
+          "provisioningState": "Succeeded",
+          "status": "Enabled",
+          "trigger": null
+        },
+        "tags": {
+          "testkey": "value"
+        }
+      }
+    }
+  },
+  "operationId": "Tasks_Update",
+  "title": "Tasks_Update_QuickTask"
+}

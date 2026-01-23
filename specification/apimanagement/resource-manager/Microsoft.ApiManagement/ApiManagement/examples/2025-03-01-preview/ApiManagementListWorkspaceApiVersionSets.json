@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "vs1",
+            "type": "Microsoft.ApiManagement/service/workspaces/api-version-sets",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/apiVersionSets/vs1",
+            "properties": {
+              "description": "Version configuration",
+              "displayName": "api set 1",
+              "versioningScheme": "Segment"
+            }
+          },
+          {
+            "name": "vs2",
+            "type": "Microsoft.ApiManagement/service/workspaces/api-version-sets",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/apiVersionSets/vs2",
+            "properties": {
+              "description": "Version configuration 2",
+              "displayName": "api set 2",
+              "versioningScheme": "Query"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WorkspaceApiVersionSet_ListByService",
+  "title": "ApiManagementListWorkspaceApiVersionSets"
+}

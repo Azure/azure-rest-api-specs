@@ -1,0 +1,208 @@
+{
+  "title": "Lists publically available skus in the marketplace.",
+  "operationId": "ListSkus",
+  "parameters": {
+    "serviceFamily": "Compute",
+    "service": "Virtual Machines",
+    "language": "en",
+    "api-version": "2025-05-01",
+    "locations": [
+      "eastus2",
+      "westus2"
+    ],
+    "$filter": "productType eq 'VirtualMachine'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "productId": "canonical-0001-ubuntu-server-22-04-lts",
+            "productDisplayName": "Ubuntu Server 22.04 LTS",
+            "productDescription": "Ubuntu Server 22.04 LTS (Jammy Jellyfish) virtual machine images with regular security updates and patches. Optimized for cloud-native applications and enterprise workloads.",
+            "serviceFamily": "Compute",
+            "service": "Virtual Machines",
+            "publisherId": "Canonical",
+            "publisherType": "ThirdParty",
+            "productType": "VirtualMachine",
+            "productSubType": "LinuxServer",
+            "productAttributes": [
+              {
+                "key": "osType",
+                "value": "Linux"
+              },
+              {
+                "key": "osDistro",
+                "value": "Ubuntu"
+              },
+              {
+                "key": "osVersion",
+                "value": "22.04-LTS"
+              }
+            ],
+            "summary": "High-performance Ubuntu 22.04 LTS server optimized for cloud workloads",
+            "cspState": "OptIn",
+            "hasRi": true,
+            "skuName": "Standard_D8s_v5",
+            "skuId": "d8sv5-ubuntu2204",
+            "skuType": "OnDemand",
+            "language": "en",
+            "skuDescription": "General purpose compute optimized virtual machine with 8 vCPUs and 32 GiB memory. Supports Premium SSD disks and accelerated networking.",
+            "skuTitle": "D8s v5 Ubuntu 22.04 LTS",
+            "lastModifiedDateTime": "2025-05-01T10:00:00.0000000Z",
+            "location": "US East 2",
+            "armRegionName": "eastus2",
+            "cloud": "Global",
+            "locationType": "Region",
+            "region": "US East 2",
+            "skuGroupId": "Dsv5-series",
+            "zone": "1,2,3",
+            "feature": "Spot",
+            "serviceType": "ComputeOptimized",
+            "skuAttributes": [
+              {
+                "key": "architecture",
+                "value": "x86_64"
+              },
+              {
+                "key": "generation",
+                "value": "v5"
+              },
+              {
+                "key": "hyperVGeneration",
+                "value": "V2"
+              },
+              {
+                "key": "maxDataDiskCount",
+                "value": "8"
+              },
+              {
+                "key": "maxNetworkInterfaces",
+                "value": "4"
+              },
+              {
+                "key": "acceleratedNetworking",
+                "value": "true"
+              }
+            ],
+            "skuProperties": {
+              "category": "General purpose",
+              "dataDiskType": "Premium_SSD",
+              "diskType": "Premium_SSD",
+              "numberOfCores": "8",
+              "ram": "32",
+              "vCpu": "8",
+              "armSkuName": "Standard_D8s_v5",
+              "accessTier": "Standard"
+            },
+            "offeringProperties": [
+              {
+                "productCode": "CANONICAL-UBUNTU-22-04-LTS",
+                "termId": "payg",
+                "meterType": "Compute",
+                "billingMeterId": "d8sv5-ubuntu-consumption",
+                "offeringId": "d8sv5-ubuntu2204-offering",
+                "type": "Consumption"
+              }
+            ]
+          },
+          {
+            "productId": "microsoft-0001-windows-server-2022",
+            "productDisplayName": "Windows Server 2022 Datacenter",
+            "productDescription": "Windows Server 2022 Datacenter edition enables hybrid capabilities with Azure and comes with advanced multi-layer security. Ideal for highly virtualized enterprise workloads.",
+            "serviceFamily": "Compute",
+            "service": "Virtual Machines",
+            "publisherId": "Microsoft",
+            "publisherType": "Microsoft",
+            "productType": "VirtualMachine",
+            "productSubType": "WindowsServer",
+            "productAttributes": [
+              {
+                "key": "osType",
+                "value": "Windows"
+              },
+              {
+                "key": "osVersion",
+                "value": "2022-Datacenter"
+              },
+              {
+                "key": "windowsEdition",
+                "value": "Datacenter"
+              }
+            ],
+            "summary": "Enterprise-grade Windows Server 2022 Datacenter optimized for memory-intensive workloads",
+            "cspState": "OptIn",
+            "hasRi": true,
+            "skuName": "Standard_E16s_v5",
+            "skuId": "e16sv5-win2022",
+            "skuType": "OnDemand",
+            "language": "en",
+            "skuDescription": "Memory optimized virtual machine with 16 vCPUs and 128 GiB memory. Features Premium SSD support, accelerated networking, and enhanced security.",
+            "skuTitle": "E16s v5 Windows Server 2022",
+            "lastModifiedDateTime": "2025-05-01T10:00:00.0000000Z",
+            "location": "US East 2",
+            "armRegionName": "eastus2",
+            "cloud": "Global",
+            "locationType": "Region",
+            "region": "US East 2",
+            "skuGroupId": "Esv5-series",
+            "zone": "1,2,3",
+            "feature": "Spot",
+            "serviceType": "MemoryOptimized",
+            "skuAttributes": [
+              {
+                "key": "architecture",
+                "value": "x86_64"
+              },
+              {
+                "key": "generation",
+                "value": "v5"
+              },
+              {
+                "key": "hyperVGeneration",
+                "value": "V2"
+              },
+              {
+                "key": "maxDataDiskCount",
+                "value": "32"
+              },
+              {
+                "key": "maxNetworkInterfaces",
+                "value": "8"
+              },
+              {
+                "key": "acceleratedNetworking",
+                "value": "true"
+              },
+              {
+                "key": "securityType",
+                "value": "TrustedLaunch"
+              }
+            ],
+            "skuProperties": {
+              "category": "Memory optimized",
+              "dataDiskType": "Premium_SSD",
+              "diskType": "Premium_SSD",
+              "numberOfCores": "16",
+              "ram": "128",
+              "vCpu": "16",
+              "armSkuName": "Standard_E16s_v5",
+              "accessTier": "Standard"
+            },
+            "offeringProperties": [
+              {
+                "productCode": "MS-WIN-SERVER-2022-DC",
+                "termId": "payg",
+                "meterType": "Compute",
+                "billingMeterId": "e16sv5-win2022-consumption",
+                "offeringId": "e16sv5-win2022-offering",
+                "type": "Consumption"
+              }
+            ]
+          }
+        ],
+        "nextLink": "https://catalogapi.azure.com/skus?serviceFamily=Compute&service=Virtual%20Machines&language=en&api-version=2025-05-01&locations=eastus2,westus2&$filter=productType%20eq%20%27VirtualMachine%27&$skiptoken=W3s..."
+      }
+    }
+  }
+}

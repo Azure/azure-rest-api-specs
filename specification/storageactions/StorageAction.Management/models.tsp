@@ -116,7 +116,6 @@ model StorageTaskPreviewAction {
   /**
    * Properties of the storage task preview.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: StorageTaskPreviewActionProperties;
 }
 
@@ -132,7 +131,7 @@ model StorageTaskPreviewActionProperties {
   /**
    * Properties of some sample blobs in the container to test for matches with the preview action.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   blobs: StorageTaskPreviewBlobProperties[];
 
   /**
@@ -153,7 +152,7 @@ model StorageTaskPreviewContainerProperties {
   /**
    * metadata key value pairs to be tested for a match against the provided condition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metadata?: StorageTaskPreviewKeyValueProperties[];
 }
 
@@ -184,19 +183,19 @@ model StorageTaskPreviewBlobProperties {
   /**
    * properties key value pairs to be tested for a match against the provided condition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   properties?: StorageTaskPreviewKeyValueProperties[];
 
   /**
    * metadata key value pairs to be tested for a match against the provided condition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metadata?: StorageTaskPreviewKeyValueProperties[];
 
   /**
    * tags key value pairs to be tested for a match against the provided condition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: StorageTaskPreviewKeyValueProperties[];
 
   /**
@@ -299,7 +298,7 @@ model IfCondition {
   /**
    * List of operations to execute when the condition predicate satisfies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operations: StorageTaskOperation[];
 }
 
@@ -336,7 +335,7 @@ model ElseCondition {
   /**
    * List of operations to execute in the else block
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operations: StorageTaskOperation[];
 }
 
@@ -387,7 +386,6 @@ model StorageTaskUpdateParameters {
   /**
    * Properties of the storage task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: StorageTaskUpdateProperties;
 }
 
@@ -575,19 +573,16 @@ model StorageTasksListResult is Azure.Core.Page<StorageTask>;
 @@doc(StorageTaskReportInstance.properties,
   "Storage task execution report for a run instance."
 );
-@@OpenAPI.extension(StorageTaskAssignmentsListResult.value,
-  "x-ms-identifiers",
-  #[]
-);
+@@identifiers(StorageTaskAssignmentsListResult.value, #[]);
 @@doc(StorageTaskReportSummary.value, "Gets storage tasks run result summary.");
-@@OpenAPI.extension(StorageTaskReportSummary.value, "x-ms-identifiers", #[]);
+@@identifiers(StorageTaskReportSummary.value, #[]);
 @@doc(StorageTasksListResult,
   "The response from the List Storage Task operation."
 );
 @@doc(StorageTasksListResult.value,
   "Gets the list of storage tasks and their properties."
 );
-@@OpenAPI.extension(StorageTasksListResult.value, "x-ms-identifiers", #[]);
+@@identifiers(StorageTasksListResult.value, #[]);
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
 @@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
 @@visibility(StorageTaskPreviewBlobProperties.matchedBlock, Lifecycle.Read);

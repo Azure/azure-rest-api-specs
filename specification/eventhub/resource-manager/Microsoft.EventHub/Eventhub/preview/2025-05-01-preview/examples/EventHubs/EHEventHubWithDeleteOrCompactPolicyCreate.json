@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "eventHubName": "sdk-EventHub-6547",
+    "namespaceName": "sdk-Namespace-5357",
+    "parameters": {
+      "properties": {
+        "captureDescription": {
+          "destination": {
+            "name": "EventHubArchive.AzureBlockBlob",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2"
+            },
+            "properties": {
+              "archiveNameFormat": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}",
+              "blobContainer": "container",
+              "storageAccountResourceId": "/subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-Storage-SouthCentralUS/providers/Microsoft.ClassicStorage/storageAccounts/arjunteststorage"
+            }
+          },
+          "enabled": true,
+          "encoding": "Avro",
+          "intervalInSeconds": 120,
+          "sizeLimitInBytes": 10485763
+        },
+        "messageRetentionInDays": 4,
+        "messageTimestampDescription": {
+          "timestampType": "LogAppend"
+        },
+        "partitionCount": 4,
+        "retentionDescription": {
+          "cleanupPolicy": "DeleteOrCompact",
+          "retentionTimeInHours": 24
+        },
+        "status": "Active",
+        "userMetadata": "key"
+      }
+    },
+    "resourceGroupName": "Default-NotificationHubs-AustraliaEast",
+    "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sdk-EventHub-10",
+        "type": "Microsoft.EventHub/Namespaces/EventHubs",
+        "id": "/subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-NotificationHubs-AustraliaEast/providers/Microsoft.EventHub/namespaces/sdk-Namespace-716/eventhubs/sdk-EventHub-10",
+        "properties": {
+          "captureDescription": {
+            "destination": {
+              "name": "EventHubArchive.AzureBlockBlob",
+              "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud2"
+              },
+              "properties": {
+                "archiveNameFormat": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}",
+                "blobContainer": "container",
+                "storageAccountResourceId": "/subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-Storage-SouthCentralUS/providers/Microsoft.ClassicStorage/storageAccounts/arjunteststorage"
+              }
+            },
+            "enabled": true,
+            "encoding": "Avro",
+            "intervalInSeconds": 120,
+            "sizeLimitInBytes": 10485763
+          },
+          "createdAt": "2017-06-28T02:45:55.877Z",
+          "identifier": "identifierIDGUID",
+          "messageRetentionInDays": 4,
+          "messageTimestampDescription": {
+            "timestampType": "LogAppend"
+          },
+          "partitionCount": 4,
+          "partitionIds": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "retentionDescription": {
+            "cleanupPolicy": "DeleteOrCompact",
+            "retentionTimeInHours": 24
+          },
+          "status": "Active",
+          "updatedAt": "2017-06-28T02:46:05.877Z",
+          "userMetadata": "key"
+        }
+      }
+    }
+  },
+  "operationId": "EventHubs_CreateOrUpdate",
+  "title": "EHEventHubWithDeleteOrCompactPolicyCreate"
+}

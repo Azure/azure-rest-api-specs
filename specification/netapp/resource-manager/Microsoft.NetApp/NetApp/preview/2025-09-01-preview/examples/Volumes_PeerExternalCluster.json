@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-09-01-preview",
+    "body": {
+      "peerIpAddresses": [
+        "0.0.0.1",
+        "0.0.0.2",
+        "0.0.0.3",
+        "0.0.0.4",
+        "0.0.0.5",
+        "0.0.0.6"
+      ]
+    },
+    "poolName": "pool1",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "volumeName": "volume1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "peerAcceptCommand": "cluster peer create -ipspace replication -encryption-protocol-proposed tls-psk -passphrase passphraseString -peer-addrs 1.1.1.1,1.1.1.2,1.1.1.3,1.1.1.4,1.1.1.5,1.1.1.6"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2025-09-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2025-09-01-preview&operationResultResponseType=Location"
+      }
+    }
+  },
+  "operationId": "Volumes_PeerExternalCluster",
+  "title": "Volumes_PeerExternalCluster"
+}

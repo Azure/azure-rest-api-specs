@@ -17,3 +17,24 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/network/azure-mgmt-frontdoor/azure/mgmt/frontdoor
 ```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $.definitions.RulesEngineRule.properties.matchProcessingBehavior
+    transform: >
+         $['x-ms-enum'] = {
+            "name": "MatchProcessingBehavior",
+            "modelAsString": true,
+            "values": [
+                {
+                  'name': 'CONTINUE_ENUM',
+                  'value': 'Continue'
+                },
+                {
+                  'name': 'STOP',
+                  'value': 'Stop'
+                }
+            ]
+         }
+```

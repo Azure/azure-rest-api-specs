@@ -559,6 +559,7 @@ interface Container {
       ...MaxResultsParameter;
       ...ListBlobsIncludeParameter;
       ...TimeoutParameter;
+      ...ListBlobsStartFrom;
     },
     {
       /** The list of blobs in the container */
@@ -583,6 +584,7 @@ interface Container {
       ...MaxResultsParameter;
       ...ListBlobsIncludeParameter;
       ...TimeoutParameter;
+      ...ListBlobsStartFrom;
     },
     {
       /** The list of blobs in the container */
@@ -862,6 +864,9 @@ interface Blob {
       @query
       @clientName("blobDeleteType")
       deletetype?: BlobDeleteType;
+
+      ...AccessTierIfModifiedSinceParameter;
+      ...AccessTierIfUnmodifiedSinceParameter;
     },
     {
       @statusCode statusCode: 202;
@@ -1351,6 +1356,10 @@ interface Blob {
       ...VersionIdParameter;
       ...LeaseIdOptionalParameter;
       ...IfTagsParameter;
+      ...IfBlobModifiedSinceHeader;
+      ...IfBlobUnmodifiedSinceHeader;
+      ...IfBlobMatchHeader;
+      ...IfBlobNoneMatchHeader;
     },
     {
       /** The blob tags. */
@@ -1375,6 +1384,11 @@ interface Blob {
       /** The blob tags. */
       @body
       tags: BlobTags;
+
+      ...IfBlobModifiedSinceHeader;
+      ...IfBlobUnmodifiedSinceHeader;
+      ...IfBlobMatchHeader;
+      ...IfBlobNoneMatchHeader;
     },
     {
       @statusCode statusCode: 204;
@@ -1584,6 +1598,9 @@ interface PageBlob {
       ...CopySourceAuthorizationParameter;
       ...FileRequestIntentParameter;
       ...PageWriteParameter<"update">;
+      ...SourceEncryptionKeyParameter;
+      ...SourceEncryptionKeySha256Parameter;
+      ...SourceEncryptionAlgorithmParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -1875,6 +1892,9 @@ interface AppendBlob {
       ...SourceIfNoneMatchParameter;
       ...CopySourceAuthorizationParameter;
       ...FileRequestIntentParameter;
+      ...SourceEncryptionKeyParameter;
+      ...SourceEncryptionKeySha256Parameter;
+      ...SourceEncryptionAlgorithmParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -2026,6 +2046,9 @@ interface BlockBlob {
       blobType: "BlockBlob";
 
       ...FileRequestIntentParameter;
+      ...SourceEncryptionKeyParameter;
+      ...SourceEncryptionKeySha256Parameter;
+      ...SourceEncryptionAlgorithmParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -2102,6 +2125,9 @@ interface BlockBlob {
       ...SourceIfNoneMatchParameter;
       ...CopySourceAuthorizationParameter;
       ...FileRequestIntentParameter;
+      ...SourceEncryptionKeyParameter;
+      ...SourceEncryptionKeySha256Parameter;
+      ...SourceEncryptionAlgorithmParameter;
     },
     {
       @statusCode statusCode: 201;

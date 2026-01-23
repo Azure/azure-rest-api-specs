@@ -30,6 +30,23 @@ using Microsoft.DependencyMap;
   "DependencyMapProcessNameFilterOperator",
   "csharp"
 );
+@@clientName(ExportDependenciesRequest, "ExportDependenciesContent", "csharp");
+@@clientName(GetDependencyViewForFocusedMachineRequest,
+  "GetDependencyViewForFocusedMachineContent",
+  "csharp"
+);
+@@clientName(GetConnectionsForProcessOnFocusedMachineRequest,
+  "GetConnectionsForProcessOnFocusedMachineContent",
+  "csharp"
+);
+@@clientName(GetConnectionsWithConnectedMachineForFocusedMachineRequest,
+  "GetConnectionsWithConnectedMachineForFocusedMachineContent",
+  "csharp"
+);
+@@clientName(GetDependencyViewForAllMachinesRequest,
+  "GetDependencyViewForAllMachinesContent",
+  "csharp"
+);
 @@alternateType(GetDependencyViewForFocusedMachineRequest.focusedMachineId,
   armResourceIdentifier,
   "csharp"
@@ -51,6 +68,10 @@ using Microsoft.DependencyMap;
   "csharp"
 );
 @@alternateType(DiscoverySourceResourceProperties.sourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
