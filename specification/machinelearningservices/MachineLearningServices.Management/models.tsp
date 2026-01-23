@@ -10869,8 +10869,7 @@ model ComputeInstanceContainer {
    * services of this containers.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  services?: Record<unknown>[];
+  services?: unknown[];
 }
 
 /**
@@ -15026,7 +15025,7 @@ model PipelineJob extends JobBaseProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  settings?: Record<unknown> | null;
+  settings?: unknown | null;
 
   /**
    * ARM resource ID of source job.
@@ -15561,7 +15560,8 @@ model SweepJob extends JobBaseProperties {
    * [Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  searchSpace: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  searchSpace: unknown;
 
   /**
    * [Required] Trial component definition.

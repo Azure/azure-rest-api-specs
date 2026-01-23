@@ -25255,12 +25255,8 @@
         "services": {
           "type": "array",
           "description": "services of this containers.",
-          "items": {
-            "type": "object",
-            "additionalProperties": {}
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "items": {},
+          "readOnly": true
         }
       }
     },
@@ -38214,10 +38210,8 @@
           ]
         },
         "settings": {
-          "type": "object",
           "description": "Pipeline settings, for things like ContinueRunOnStepFailure etc.",
           "x-nullable": true,
-          "additionalProperties": {},
           "x-ms-mutability": [
             "read",
             "create"
@@ -42196,9 +42190,7 @@
           "description": "[Required] The hyperparameter sampling algorithm"
         },
         "searchSpace": {
-          "type": "object",
-          "description": "[Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
-          "additionalProperties": {}
+          "description": "[Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter"
         },
         "trial": {
           "$ref": "#/definitions/TrialComponent",
