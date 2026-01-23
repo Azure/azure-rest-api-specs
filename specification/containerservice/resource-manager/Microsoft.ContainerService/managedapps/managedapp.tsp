@@ -46,6 +46,9 @@ model ManagedApp is Azure.ResourceManager.ProxyResource<AppProperties> {
 
 /** App properties */
 model AppProperties {
+  /** Determines the application type. This influences the base set of kubernetes manifests that will be used */
+  applicationType: ApplicationType;
+
   /** Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace */
   @identifiers(#["apiGroups", "resources", "verbs"])
   namespacedPermissions?: Permissions[];
@@ -408,6 +411,23 @@ union HealthCheckState {
 
   /** Health check is unknown */
   Unknown: "unknown",
+
+  string,
+}
+
+/** Type of application */
+union ApplicationType {
+  /** Web application */
+  WebApp: "webApp",
+
+  /** AI training application */
+  AITraining: "aiTraining",
+
+  /** AI inference application */
+  AIInference: "aiInference",
+
+  /** Background worker application */
+  BackgroundWorker: "backgroundWorker",
 
   string,
 }
