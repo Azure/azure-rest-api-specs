@@ -2181,15 +2181,7 @@ paths:
     post:
       operationId: createConversation
       description: Create a conversation.
-      parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
+      parameters: []
       responses:
         '200':
           description: The request has succeeded.
@@ -2215,14 +2207,6 @@ paths:
       operationId: listConversations
       description: Returns the list of all conversations.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: limit
           in: query
           required: false
@@ -2316,14 +2300,6 @@ paths:
       operationId: updateConversation
       description: Update a conversation.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: conversation_id
           in: path
           required: true
@@ -2355,14 +2331,6 @@ paths:
       operationId: getConversation
       description: Retrieves a conversation.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: conversation_id
           in: path
           required: true
@@ -2388,14 +2356,6 @@ paths:
       operationId: deleteConversation
       description: Deletes a conversation.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: conversation_id
           in: path
           required: true
@@ -2422,14 +2382,6 @@ paths:
       operationId: createConversationItems
       description: Create items in a conversation with the given ID.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: conversation_id
           in: path
           required: true
@@ -2483,14 +2435,6 @@ paths:
       operationId: listConversationItems
       description: List all items for a conversation with the given ID.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: conversation_id
           in: path
           required: true
@@ -2583,14 +2527,6 @@ paths:
       operationId: getConversationItem
       description: Get a single item from a conversation with the given IDs.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: conversation_id
           in: path
           required: true
@@ -2622,14 +2558,6 @@ paths:
       operationId: deleteConversationItem
       description: Delete an item from a conversation with the given IDs.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: conversation_id
           in: path
           required: true
@@ -2663,14 +2591,6 @@ paths:
       summary: List all evaluations
       description: List evaluations for a project.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: after
           in: query
           required: false
@@ -2750,15 +2670,7 @@ paths:
         Create the structure of an evaluation that can be used to test a model's performance.
         An evaluation is a set of testing criteria and the config for a data source, which dictates the schema of the data used in the evaluation. After creating an evaluation, you can run it on different models and model parameters. We support several types of graders and datasources.
         For more information, see the [Evals guide](https://platform.openai.com/docs/guides/evals).
-      parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
+      parameters: []
       responses:
         '200':
           description: The request has succeeded.
@@ -2786,14 +2698,6 @@ paths:
       summary: Delete an evaluation
       description: Delete an evaluation.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -2820,14 +2724,6 @@ paths:
       summary: Get an evaluation
       description: Get an evaluation by ID.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -2854,14 +2750,6 @@ paths:
       summary: Update an evaluation
       description: Update certain properties of an evaluation.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -2895,14 +2783,6 @@ paths:
       summary: Get a list of runs for an evaluation
       description: Get a list of runs for an evaluation.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -2986,14 +2866,6 @@ paths:
       operationId: OpenAIEvals_createEvalRun
       summary: Create evaluation run
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -3027,14 +2899,6 @@ paths:
       summary: Delete evaluation run
       description: Delete an eval run.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -3067,14 +2931,6 @@ paths:
       summary: Get an evaluation run
       description: Get an evaluation run by ID.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -3107,14 +2963,6 @@ paths:
       summary: Cancel evaluation run
       description: Cancel an ongoing evaluation run.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -3148,14 +2996,6 @@ paths:
       summary: Get evaluation run output items
       description: Get a list of output items for an evaluation run.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -3244,14 +3084,6 @@ paths:
       summary: Get an output item of an evaluation run
       description: Get an evaluation run output item by ID.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: eval_id
           in: path
           required: true
@@ -3288,15 +3120,7 @@ paths:
   /openai/v1/responses:
     post:
       operationId: createResponse_createResponseStream
-      parameters:
-        - name: api-version
-          in: query
-          required: false
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
+      parameters: []
       description: Creates a model response. Creates a model response (streaming response).
       responses:
         '200':
@@ -3446,12 +3270,134 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
-                - $ref: '#/components/schemas/OpenAI.CreateResponse'
+                - type: object
+                  properties:
+                    metadata:
+                      type: object
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.Metadata'
+                      nullable: true
+                    top_logprobs:
+                      type: integer
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                      nullable: true
+                    temperature:
+                      type: number
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.numeric'
+                      nullable: true
+                      default: 1
+                    top_p:
+                      type: number
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.numeric'
+                      nullable: true
+                      default: 1
+                    user:
+                      type: string
+                      description: |-
+                        This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.
+                          A stable identifier for your end-users.
+                          Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+                      deprecated: true
+                    safety_identifier:
+                      type: string
+                      description: |-
+                        A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
+                          The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
+                    prompt_cache_key:
+                      type: string
+                      description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
+                    service_tier:
+                      $ref: '#/components/schemas/OpenAI.ServiceTier'
+                    prompt_cache_retention:
+                      type: string
+                      enum:
+                        - in-memory
+                        - 24h
+                      nullable: true
+                    previous_response_id:
+                      type: string
+                      nullable: true
+                    model:
+                      type: string
+                      description: The model deployment to use for the creation of this response.
+                    reasoning:
+                      type: object
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.Reasoning'
+                      nullable: true
+                    background:
+                      type: boolean
+                      nullable: true
+                    max_output_tokens:
+                      type: integer
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                      nullable: true
+                    max_tool_calls:
+                      type: integer
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                      nullable: true
+                    text:
+                      $ref: '#/components/schemas/OpenAI.ResponseTextParam'
+                    tools:
+                      $ref: '#/components/schemas/OpenAI.ToolsArray'
+                    tool_choice:
+                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                    prompt:
+                      $ref: '#/components/schemas/OpenAI.Prompt'
+                    truncation:
+                      type: string
+                      enum:
+                        - auto
+                        - disabled
+                      nullable: true
+                      default: disabled
+                    input:
+                      $ref: '#/components/schemas/OpenAI.InputParam'
+                    include:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/OpenAI.IncludeEnum'
+                      nullable: true
+                    parallel_tool_calls:
+                      type: boolean
+                      nullable: true
+                      default: true
+                    store:
+                      type: boolean
+                      nullable: true
+                      default: true
+                    instructions:
+                      type: string
+                      nullable: true
+                    stream:
+                      type: boolean
+                      nullable: true
+                    stream_options:
+                      type: object
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.ResponseStreamOptions'
+                      nullable: true
+                    conversation:
+                      allOf:
+                        - $ref: '#/components/schemas/OpenAI.ConversationParam'
+                      nullable: true
+                    agent:
+                      allOf:
+                        - $ref: '#/components/schemas/AgentReference'
+                      description: The agent to use for generating the response.
+                    structured_inputs:
+                      type: object
+                      additionalProperties: {}
+                      description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
     get:
       operationId: listResponses
       description: Returns the list of all responses.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: limit
           in: query
           required: false
@@ -3551,14 +3497,6 @@ paths:
     get:
       operationId: getResponse_getResponseStream
       parameters:
-        - name: api-version
-          in: query
-          required: false
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: response_id
           in: path
           required: true
@@ -3616,14 +3554,6 @@ paths:
       operationId: deleteResponse
       description: Deletes a model response.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: response_id
           in: path
           required: true
@@ -3650,14 +3580,6 @@ paths:
       operationId: cancelResponse
       description: Cancels a model response.
       parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
         - name: response_id
           in: path
           required: true
@@ -3684,7 +3606,6 @@ paths:
       operationId: listInputItems
       description: Returns a list of input items for a given response.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: response_id
           in: path
           required: true
@@ -8885,131 +8806,6 @@ components:
               "use_case": "customer_support_agent"
             }
           }
-    OpenAI.CreateResponse:
-      type: object
-      properties:
-        metadata:
-          type: object
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
-        top_logprobs:
-          type: integer
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
-        temperature:
-          type: number
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.numeric'
-          nullable: true
-          default: 1
-        top_p:
-          type: number
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.numeric'
-          nullable: true
-          default: 1
-        user:
-          type: string
-          description: |-
-            This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.
-              A stable identifier for your end-users.
-              Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
-          deprecated: true
-        safety_identifier:
-          type: string
-          description: |-
-            A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
-              The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
-        prompt_cache_key:
-          type: string
-          description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching).
-        service_tier:
-          $ref: '#/components/schemas/OpenAI.ServiceTier'
-        prompt_cache_retention:
-          type: string
-          enum:
-            - in-memory
-            - 24h
-          nullable: true
-        previous_response_id:
-          type: string
-          nullable: true
-        model:
-          type: string
-          description: The model deployment to use for the creation of this response.
-        reasoning:
-          type: object
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.Reasoning'
-          nullable: true
-        background:
-          type: boolean
-          nullable: true
-        max_output_tokens:
-          type: integer
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
-        max_tool_calls:
-          type: integer
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
-        text:
-          $ref: '#/components/schemas/OpenAI.ResponseTextParam'
-        tools:
-          $ref: '#/components/schemas/OpenAI.ToolsArray'
-        tool_choice:
-          $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
-        prompt:
-          $ref: '#/components/schemas/OpenAI.Prompt'
-        truncation:
-          type: string
-          enum:
-            - auto
-            - disabled
-          nullable: true
-          default: disabled
-        input:
-          $ref: '#/components/schemas/OpenAI.InputParam'
-        include:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.IncludeEnum'
-          nullable: true
-        parallel_tool_calls:
-          type: boolean
-          nullable: true
-          default: true
-        store:
-          type: boolean
-          nullable: true
-          default: true
-        instructions:
-          type: string
-          nullable: true
-        stream:
-          type: boolean
-          nullable: true
-        stream_options:
-          type: object
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.ResponseStreamOptions'
-          nullable: true
-        conversation:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.ConversationParam'
-          nullable: true
-        agent:
-          allOf:
-            - $ref: '#/components/schemas/AgentReference'
-          description: The agent to use for generating the response.
-        structured_inputs:
-          type: object
-          additionalProperties: {}
-          description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
     OpenAI.CreateResponseStreamingResponse:
       anyOf:
         - $ref: '#/components/schemas/OpenAI.ResponseAudioDeltaEvent'

@@ -11,17 +11,17 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @route("openai/v1/conversations")
 @tag("Conversations")
 interface Conversations {
   /**
    * Create a conversation.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @post
   @operationId("createConversation")
-  createConversation is FoundryDataPlaneOperation<
+  createConversation is OpenAIOperation<
     OpenAI.CreateConversationBody,
     OpenAI.ConversationResource
   >;
@@ -29,11 +29,10 @@ interface Conversations {
   /**
    * Update a conversation.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @route("{conversation_id}")
   @post
   @operationId("updateConversation")
-  updateConversation is FoundryDataPlaneOperation<
+  updateConversation is OpenAIOperation<
     {
       /** The id of the conversation to update. */
       @path conversation_id: string;
@@ -46,12 +45,10 @@ interface Conversations {
   /**
    * Retrieves a conversation.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}")
   @get
   @operationId("getConversation")
-  getConversation is FoundryDataPlaneOperation<
+  getConversation is OpenAIOperation<
     {
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
@@ -62,12 +59,10 @@ interface Conversations {
   /**
    * Deletes a conversation.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}")
   @delete
   @operationId("deleteConversation")
-  deleteConversation is FoundryDataPlaneOperation<
+  deleteConversation is OpenAIOperation<
     {
       /** The id of the conversation to delete. */
       @path conversation_id: string;
@@ -81,12 +76,10 @@ interface Conversations {
   /**
    * Returns the list of all conversations.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @operationId("listConversations")
   @list
-  listConversations is FoundryDataPlaneOperation<
+  listConversations is OpenAIOperation<
     {
       ...CommonPageQueryParameters;
       ...AgentNameQueryParam;
@@ -98,12 +91,10 @@ interface Conversations {
   /**
    * Create items in a conversation with the given ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}/items")
   @post
   @operationId("createConversationItems")
-  createConversationItems is FoundryDataPlaneOperation<
+  createConversationItems is OpenAIOperation<
     {
       /** The id of the conversation on which the item needs to be created. */
       @path conversation_id: string;
@@ -126,12 +117,10 @@ interface Conversations {
   /**
    * Get a single item from a conversation with the given IDs.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}/items/{item_id}")
   @get
   @operationId("getConversationItem")
-  getConversationItem is FoundryDataPlaneOperation<
+  getConversationItem is OpenAIOperation<
     {
       /** The ID of the conversation that contains the item. */
       @path conversation_id: string;
@@ -145,12 +134,10 @@ interface Conversations {
   /**
    * Delete an item from a conversation with the given IDs.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}/items/{item_id}")
   @delete
   @operationId("deleteConversationItem")
-  deleteConversationItem is FoundryDataPlaneOperation<
+  deleteConversationItem is OpenAIOperation<
     {
       /** The id of the conversation on which the item needs to be deleted from. */
       @path conversation_id: string;
@@ -164,13 +151,11 @@ interface Conversations {
   /**
    * List all items for a conversation with the given ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}/items")
   @get
   @operationId("listConversationItems")
   @list
-  listConversationItems is FoundryDataPlaneOperation<
+  listConversationItems is OpenAIOperation<
     {
       /** The id of the conversation on which the items needs to be listed. */
       @path conversation_id: string;

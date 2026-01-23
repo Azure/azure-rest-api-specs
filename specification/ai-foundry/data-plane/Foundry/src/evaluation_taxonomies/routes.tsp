@@ -44,7 +44,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
     {
-      ...FoundryBetaOptInHeader<FoundryPreviewOptInKeys.evaluations_v1>,
+      ...FoundryBetaOptInHeader<FoundryPreviewOptInKeys.evaluations_v1>;
 
       @doc("The name of the evaluation taxonomy.")
       @path
@@ -62,7 +62,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<
     {
-      ...FoundryBetaOptInHeader<FoundryPreviewOptInKeys.evaluations_v1>,
+      ...FoundryBetaOptInHeader<FoundryPreviewOptInKeys.evaluations_v1>;
 
       @doc("The name of the evaluation taxonomy.")
       @path

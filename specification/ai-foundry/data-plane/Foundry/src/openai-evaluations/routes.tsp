@@ -1,10 +1,9 @@
 import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/openai-typespec/models/evals";
+
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -57,16 +56,16 @@ items or `pass` to filter by passed output items.*/
   status?: "fail" | "pass";
 };
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @route("openai/v1/evals")
 @tag("Evals")
 interface OpenAIEvals {
   /** List evaluations for a project. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("List all evaluations")
   @list
-  listEvals is FoundryDataPlaneOperation<
+  listEvals is OpenAIOperation<
     {
       ...EvalListQueryParameters;
     },
@@ -76,11 +75,9 @@ interface OpenAIEvals {
   /**Create the structure of an evaluation that can be used to test a model's performance.
 An evaluation is a set of testing criteria and the config for a data source, which dictates the schema of the data used in the evaluation. After creating an evaluation, you can run it on different models and model parameters. We support several types of graders and datasources.
 For more information, see the [Evals guide](https://platform.openai.com/docs/guides/evals).*/
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create evaluation")
   @post
-  createEval is FoundryDataPlaneOperation<
+  createEval is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       ...CreateEvalRequest;
@@ -89,13 +86,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Delete an evaluation. */
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Delete an evaluation")
   @delete
   @route("{eval_id}")
-  deleteEval is FoundryDataPlaneOperation<
+  deleteEval is OpenAIOperation<
     {
       /** The ID of the evaluation to delete. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -106,12 +100,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Get an evaluation by ID. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get an evaluation")
   @get
   @route("{eval_id}")
-  getEval is FoundryDataPlaneOperation<
+  getEval is OpenAIOperation<
     {
       /** The ID of the evaluation to retrieve. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -122,12 +114,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Update certain properties of an evaluation. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Update an evaluation")
   @post
   @route("{eval_id}")
-  updateEval is FoundryDataPlaneOperation<
+  updateEval is OpenAIOperation<
     {
       /** The ID of the evaluation to update. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -140,12 +130,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Get a list of runs for an evaluation. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @summary("Get a list of runs for an evaluation")
   @list
   @route("{eval_id}/runs")
-  listRuns is FoundryDataPlaneOperation<
+  listRuns is OpenAIOperation<
     {
       /** The ID of the evaluation to retrieve runs for. */
       @path eval_id: string;
@@ -155,13 +143,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
     AgentsPagedResult<EvalRun>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create evaluation run")
   @post
   @route("{eval_id}/runs")
-  createEvalRun is FoundryDataPlaneOperation<
+  createEvalRun is OpenAIOperation<
     {
       /** The ID of the evaluation to create a run for. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -174,13 +159,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Delete an eval run. */
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Delete evaluation run")
   @delete
   @route("{eval_id}/runs/{run_id}")
-  deleteEvalRun is FoundryDataPlaneOperation<
+  deleteEvalRun is OpenAIOperation<
     {
       /** The ID of the evaluation to delete the run from. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -196,12 +178,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Get an evaluation run by ID. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get an evaluation run")
   @get
   @route("{eval_id}/runs/{run_id}")
-  getEvalRun is FoundryDataPlaneOperation<
+  getEvalRun is OpenAIOperation<
     {
       /** The ID of the evaluation to retrieve runs for. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -217,12 +197,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Cancel an ongoing evaluation run. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Cancel evaluation run")
   @post
   @route("{eval_id}/runs/{run_id}")
-  cancelEvalRun is FoundryDataPlaneOperation<
+  cancelEvalRun is OpenAIOperation<
     {
       /** The ID of the evaluation whose run you want to cancel. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -238,12 +216,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Get a list of output items for an evaluation run. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get evaluation run output items")
   @list
   @route("{eval_id}/runs/{run_id}/output_items")
-  getEvalRunOutputItems is FoundryDataPlaneOperation<
+  getEvalRunOutputItems is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
@@ -260,12 +236,10 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   >;
 
   /** Get an evaluation run output item by ID. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get an output item of an evaluation run")
   @get
   @route("{eval_id}/runs/{run_id}/output_items/{output_item_id}")
-  getEvalRunOutputItem is FoundryDataPlaneOperation<
+  getEvalRunOutputItem is OpenAIOperation<
     {
       /** The ID of the evaluation to retrieve runs for. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."

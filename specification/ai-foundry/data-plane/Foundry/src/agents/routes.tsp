@@ -38,7 +38,9 @@ interface Agents {
   @tag("Agents")
   createAgent is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
-    CreateAgentRequest, AgentObject>;
+    CreateAgentRequest,
+    AgentObject
+  >;
 
   /**
    * Updates the agent by adding a new version if there are any changes to the agent definition.
@@ -126,7 +128,7 @@ interface Agents {
   @list
   listAgents is FoundryDataPlaneOperation<
     {
-    ...ListAgentQueryParameters;
+      ...ListAgentQueryParameters;
     },
     AgentsPagedResult<AgentObject>
   >;
@@ -238,9 +240,9 @@ interface Agents {
   listAgentVersions is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve versions for. */
-      @path agent_name: string,
+      @path agent_name: string;
 
-      ...CommonPageQueryParameters,
+      ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentVersionObject>
   >;
@@ -452,9 +454,9 @@ interface Agents {
     FoundryPreviewOptInKeys.container_agents_v1,
     {
       /** The name of the agent. */
-      @path agent_name: string,
+      @path agent_name: string;
 
-      ...CommonPageQueryParameters,
+      ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentContainerOperationPreviewObject>
   >;

@@ -193,7 +193,8 @@ model HostedAgentPreviewDefinition extends AgentDefinition {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The image-based deployment definition for a hosted agent.")
-model ImageBasedHostedAgentPreviewDefinition extends HostedAgentPreviewDefinition {
+model ImageBasedHostedAgentPreviewDefinition
+  extends HostedAgentPreviewDefinition {
   kind: AgentKind.hosted_preview;
 
   @doc("The image for the hosted agent.")

@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 import "./models.tsp";
@@ -8,35 +7,32 @@ import "../common/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
-using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @route("openai/v1/responses")
 @tag("Responses")
 interface Responses {
   /**
    * Creates a model response.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @operationId("createResponse")
   @post
   @sharedRoute
-  createResponse is FoundryDataPlaneOperation<OpenAI.CreateResponse, OpenAI.Response>;
+  createResponse is OpenAIOperation<OpenAI.CreateResponse, OpenAI.Response>;
 
   /**
    * Creates a model response (streaming response).
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @operationId("createResponseStream")
   @post
   @sharedRoute
-  createResponseStream(
-    @body request: OpenAI.CreateResponse,
-  ): SseResponseOf<OpenAI.CreateResponseStreamingResponse>;
+  createResponseStream is OpenAIOperation<
+    OpenAI.CreateResponse,
+    SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+  >;
 
   /**
    * Retrieves a model response with the given ID.
@@ -46,13 +42,11 @@ interface Responses {
    * @param stream If set to true, model response data will be streamed to the client as it is generated using server-sent events.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @operationId("getResponse")
   @get
   @route("{response_id}")
   @sharedRoute
-  getResponse is FoundryDataPlaneOperation<
+  getResponse is OpenAIOperation<
     {
       @path
       @example("resp_677efb5139a88190b512bc3fef8e535d")
@@ -74,33 +68,32 @@ interface Responses {
    * @param include Specifies additional output data to include in the model response.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @operationId("getResponseStream")
   @get
   @route("{response_id}")
   @sharedRoute
-  getResponseStream(
-    @path
-    @example("resp_677efb5139a88190b512bc3fef8e535d")
-    response_id: string,
+  getResponseStream is OpenAIOperation<
+    {
+      @path
+      @example("resp_677efb5139a88190b512bc3fef8e535d")
+      response_id: string;
 
-    @query(#{ name: "include[]", explode: true })
-    includables?: OpenAI.IncludeEnum[] = #[],
+      @query(#{ name: "include[]", explode: true })
+      includables?: OpenAI.IncludeEnum[] = #[];
 
-    @header accept: "text/event-stream",
-    @query starting_after?: int32,
-  ): SseResponseOf<OpenAI.CreateResponseStreamingResponse>;
+      @header accept: "text/event-stream";
+      @query starting_after?: int32;
+    },
+    SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+  >;
 
   /**
    * Deletes a model response.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @delete
   @route("{response_id}")
   @operationId("deleteResponse")
-  deleteResponse is FoundryDataPlaneOperation<
+  deleteResponse is OpenAIOperation<
     {
       /**
        * The ID of the response to delete.
@@ -115,12 +108,10 @@ interface Responses {
   /**
    * Cancels a model response.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @post
   @route("{response_id}/cancel")
   @operationId("cancelResponse")
-  cancelResponse is FoundryDataPlaneOperation<
+  cancelResponse is OpenAIOperation<
     {
       /**
        * The ID of the response to cancel.
@@ -135,35 +126,34 @@ interface Responses {
   /**
    * Returns a list of input items for a given response.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @operationId("listInputItems")
   @get
   @route("{response_id}/input_items")
   @list
-  listInputItems(
-    ...ApiVersionParameter,
+  listInputItems is OpenAIOperation<
+    {
+      @path
+      @example("resp_677efb5139a88190b512bc3fef8e535d")
+      response_id: string;
 
-    @path
-    @example("resp_677efb5139a88190b512bc3fef8e535d")
-    response_id: string,
-
-    ...CommonPageQueryParameters,
-  ): AgentsPagedResult<OpenAI.ItemResource> | ApiErrorResponse;
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<OpenAI.ItemResource>
+  >;
 
   /**
    * Returns the list of all responses.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @operationId("listResponses")
   @list
-  listResponses(
-    ...ApiVersionParameter,
-    ...CommonPageQueryParameters,
-    ...AgentNameQueryParam,
-    ...AgentIdQueryParam,
-    ...ConversationIdQueryParam,
-  ): AgentsPagedResult<OpenAI.Response> | ApiErrorResponse;
+  listResponses is OpenAIOperation<
+    {
+      ...CommonPageQueryParameters;
+      ...AgentNameQueryParam;
+      ...AgentIdQueryParam;
+      ...ConversationIdQueryParam;
+    },
+    AgentsPagedResult<OpenAI.Response>
+  >;
 }

@@ -41,7 +41,10 @@ interface MemoryStores {
   @operationId("getMemoryStore")
   @get
   @route("/memory_stores/{name}")
-  getMemoryStore is FoundryDataPlaneOperation<GetMemoryStoreRequest, MemoryStoreObject>;
+  getMemoryStore is FoundryDataPlaneOperation<
+    GetMemoryStoreRequest,
+    MemoryStoreObject
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("List all memory stores.")

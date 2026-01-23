@@ -198,7 +198,8 @@ model RedTeamPreviewItemGenerationParams extends ItemGenerationParams {
 }
 
 /** Represents the parameters for red team seed prompts item generation. */
-model RedTeamSeedPromptsPreviewItemGenerationParams extends ItemGenerationParams {
+model RedTeamSeedPromptsPreviewItemGenerationParams
+  extends ItemGenerationParams {
   /** The type of item generation parameters, always `red_team_seed_prompts`. */
   type: ItemGenerationParamsType.redTeamSeedPromptsPreview;
 
