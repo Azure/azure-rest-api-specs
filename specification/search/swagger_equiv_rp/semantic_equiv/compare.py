@@ -1064,6 +1064,24 @@ class ApiComparator:
         if ref1 == ref2:
             return True
 
+        # Check if both refs point to common-types with the same fragment
+        # Example: "common-types/resource-management/v5/types.json#/definitions/Resource"
+        #      vs  "common-types/resource-management/v6/types.json#/definitions/Resource"
+        common_types_patterns = [
+            "common-types/resource-management/v5/types.json",
+            "common-types/resource-management/v6/types.json"
+        ]
+
+        ref1_is_common_types = any(pattern in ref1 for pattern in common_types_patterns)
+        ref2_is_common_types = any(pattern in ref2 for pattern in common_types_patterns)
+
+        if ref1_is_common_types and ref2_is_common_types:
+            # Extract the fragment after .json (e.g., "#/definitions/Resource")
+            fragment1 = ref1.split(".json", 1)[1] if ".json" in ref1 else ""
+            fragment2 = ref2.split(".json", 1)[1] if ".json" in ref2 else ""
+            if fragment1 and fragment2 and fragment1 == fragment2:
+                return True
+
         # Extract definition names
         def1 = ref1.split("/")[-1] if "/" in ref1 else ref1
         def2 = ref2.split("/")[-1] if "/" in ref2 else ref2
@@ -1235,6 +1253,35 @@ class ApiComparator:
         if self._schemas_reference_same_definitions(schema1, schema2):
             return []  # Same underlying definitions, no differences
 
+        # Special case: Empty object equivalence
+        # A schema with type="object" and no properties is equivalent to
+        # a schema with no type and no properties (both represent empty objects)
+        def _is_empty_object_schema(schema: CanonicalSchema) -> bool:
+            """Check if schema represents an empty object (explicit or implicit)."""
+            # Explicit empty object: type="object" with no properties
+            if schema.type == "object" and not schema.properties:
+                return True
+            # Implicit empty object: no type, no properties, no ref, no all_of/one_of/any_of
+            # Also check that items, constraints, format are all None/empty
+            if (not schema.type and not schema.properties and not schema.ref and
+                not schema.all_of and not schema.one_of and not schema.any_of and
+                not schema.items and not schema.format):
+                # Additional check: if it has any meaningful constraints, it's not empty
+                if schema.constraints and (
+                    schema.constraints.enum or
+                    schema.constraints.minimum is not None or
+                    schema.constraints.maximum is not None or
+                    schema.constraints.min_length is not None or
+                    schema.constraints.max_length is not None or
+                    schema.constraints.pattern
+                ):
+                    return False
+                return True
+            return False
+
+        if _is_empty_object_schema(schema1) and _is_empty_object_schema(schema2):
+            return []  # Both are empty objects, no differences
+
         differences = []
 
         # Check for inline vs ref pattern (one has ref, other is inline)
@@ -1257,7 +1304,18 @@ class ApiComparator:
         if type1 != type2:
             # Don't report type difference if it's explained by inline vs ref
             if not inline_vs_ref_info:
-                differences.append(f"type: {schema1.type} vs {schema2.type}")
+                # Check if this is an empty object equivalence case
+                is_schema1_empty = _is_empty_object_schema(schema1)
+                is_schema2_empty = _is_empty_object_schema(schema2)
+                if is_schema1_empty and is_schema2_empty:
+                    # Both are empty objects but with different representations
+                    differences.append(
+                        f"type: {schema1.type} vs {schema2.type} (both represent empty objects: "
+                        f"first is {'explicit (type=object, no properties)' if schema1.type == 'object' else 'implicit (no type, no properties)'}, "
+                        f"second is {'explicit (type=object, no properties)' if schema2.type == 'object' else 'implicit (no type, no properties)'})"
+                    )
+                else:
+                    differences.append(f"type: {schema1.type} vs {schema2.type}")
 
         # Check format with tolerance for numeric types
         if schema1.format != schema2.format:
@@ -2005,6 +2063,40 @@ class ApiComparator:
             return True
         if schema1 is None or schema2 is None:
             return False
+
+        # Early exit: If schemas reference the same or known renamed definitions,
+        # they are equal - no need to unfold and compare
+        if self._schemas_reference_same_definitions(schema1, schema2):
+            return True
+
+        # Special case: Empty object equivalence
+        # A schema with type="object" and no properties is equivalent to
+        # a schema with no type and no properties (both represent empty objects)
+        def _is_empty_object_schema(schema: CanonicalSchema) -> bool:
+            """Check if schema represents an empty object (explicit or implicit)."""
+            # Explicit empty object: type="object" with no properties
+            if schema.type == "object" and not schema.properties:
+                return True
+            # Implicit empty object: no type, no properties, no ref, no all_of/one_of/any_of
+            # Also check that items, constraints, format are all None/empty
+            if (not schema.type and not schema.properties and not schema.ref and
+                not schema.all_of and not schema.one_of and not schema.any_of and
+                not schema.items and not schema.format):
+                # Additional check: if it has any meaningful constraints, it's not empty
+                if schema.constraints and (
+                    schema.constraints.enum or
+                    schema.constraints.minimum is not None or
+                    schema.constraints.maximum is not None or
+                    schema.constraints.min_length is not None or
+                    schema.constraints.max_length is not None or
+                    schema.constraints.pattern
+                ):
+                    return False
+                return True
+            return False
+
+        if _is_empty_object_schema(schema1) and _is_empty_object_schema(schema2):
+            return True
 
         # 4.1 Core Schema Fields - type and format must match exactly (no coercion)
         # Special case: type None with properties is implicitly "object" in OpenAPI
