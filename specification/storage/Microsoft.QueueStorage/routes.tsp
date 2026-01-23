@@ -61,9 +61,7 @@ namespace Storage.Queues {
       @body
       queueServiceProperties: QueueServiceProperties;
     },
-    {
-      @statusCode statusCode: 202;
-    }
+    AcceptedResponse
   >;
 
   /** Retrieves properties of a storage account's Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
@@ -134,9 +132,7 @@ namespace Storage.Queues {
         ...TimeoutParameter;
         ...MetadataHeaders;
       },
-      {
-        @statusCode statusCode: 201;
-      }
+      CreatedResponse
     >;
 
     /** returns all user-defined metadata and system properties for the specified queue. */
@@ -164,9 +160,7 @@ namespace Storage.Queues {
         ...TimeoutParameter;
         ...MetadataHeaders;
       },
-      {
-        @statusCode statusCode: 204;
-      }
+      NoContentResponse
     >;
 
     /** operation sets one or more user-defined name-value pairs for the specified queue. */
@@ -184,9 +178,7 @@ namespace Storage.Queues {
         @header("x-ms-meta")
         metadata: string;
       },
-      {
-        @statusCode statusCode: 204;
-      }
+      NoContentResponse
     >;
 
     /** gets the permissions for the specified queue. The permissions indicate whether queue data may be accessed publicly. */
