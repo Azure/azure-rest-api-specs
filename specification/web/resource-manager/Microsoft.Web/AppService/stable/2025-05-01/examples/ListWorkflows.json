@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "name": "testsite2",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "testrg123",
+    "slot": "staging",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "testsite2/a1",
+            "type": "Microsoft.Web/sites/workflows",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite2/workflows/a1",
+            "kind": "Stateful",
+            "location": "USAAnywhere",
+            "properties": {
+              "flowState": "Enabled",
+              "health": {
+                "state": "Healthy"
+              }
+            }
+          },
+          {
+            "name": "testsite2/stateful2",
+            "type": "Microsoft.Web/sites/workflows",
+            "id": "/subscriptions/testsub/resourceGroups/testrg/providers/Microsoft.Web/sites/testsite2/workflows/stateful2",
+            "kind": "Stateful",
+            "location": "USAAnywhere",
+            "properties": {
+              "flowState": "Enabled",
+              "health": {
+                "error": {
+                  "code": "InvalidWorkflowJson",
+                  "message": "Invalid character after parsing property name. Expected ':' but got: \". Path '', line 2, position 2."
+                },
+                "state": "Unhealthy"
+              }
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "WebApps_ListWorkflows",
+  "title": "List the workflows"
+}
