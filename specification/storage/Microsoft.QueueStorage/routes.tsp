@@ -259,9 +259,7 @@ namespace Storage.Queues {
       {
         ...QueueNamePathParameter;
       },
-      {
-        @statusCode statusCode: 204;
-      }
+      NoContentResponse
     >;
 
     /**
