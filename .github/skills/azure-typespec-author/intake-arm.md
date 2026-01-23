@@ -1,8 +1,8 @@
-# TypeSpec ARM Authoring - Intake and Clarification Skill
 
-## Skill Overview
+# TypeSpec ARM Authoring - Intake and Clarification
 
-This skill specializes in Step 1: Intake and Clarification for TypeSpec ARM authoring scenarios. It ensures all required information is gathered before proceeding with implementation.
+
+This document focuses on Step 1: Intake and Clarification for TypeSpec ARM authoring workflows. It collects all necessary information before moving forward with implementation.
 
 ## Universal Intake Requirement (All Cases)
 
@@ -82,9 +82,6 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
    Format: YYYY-MM-DD-preview
    Example: 2025-03-01-preview
 
-2. Will you add features to this version immediately, or start with an empty version?
-   □ Add features immediately (proceed to feature selection)
-   □ Start empty (just add version enum entry)
 ```
 
 **Validation**:
@@ -99,8 +96,7 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
   "namespace": "[from analysis]",
   "projectPath": "[from analysis]",
   "currentLatestVersion": "[from analysis]",
-  "newVersion": "[user input]",
-  "addFeaturesNow": true/false
+  "newVersion": "[user input]"
 }
 ```
 
@@ -120,9 +116,6 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
    □ Yes - Which preview version? [show available preview versions]
    □ No - This is a new stable version
 
-3. Are there any breaking changes from the previous stable version?
-   □ Yes - Please describe
-   □ No
 ```
 
 **Validation**:
@@ -139,7 +132,6 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
   "currentLatestVersion": "[from analysis]",
   "newVersion": "[user input]",
   "sourcePreviewVersion": "[if applicable]",
-  "hasBreakingChanges": true/false
 }
 ```
 
@@ -166,28 +158,13 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
    
    If nested, what is the parent resource? [show existing resources]
 
-4. What operations should this resource support?
-   □ GET (read)
-   □ PUT (create or replace)
-   □ PATCH (update)
-   □ DELETE
-   □ List by subscription
-   □ List by resource group
-   □ List by parent (if nested)
-   
-5. For PUT and DELETE operations, should they be:
-   □ Synchronous (immediate completion)
-   □ Long-running (LRO - returns 202 Accepted)
-
-6. What properties should this resource have?
+4. What properties should this resource have?
    (Provide property name, type, required/optional, description)
 ```
 
 **Validation**:
 - Resource name is PascalCase
-- At least GET operation is selected
 - If nested, parent resource exists
-- If LRO selected, appropriate operations are chosen
 
 **Information Collected**:
 ```json

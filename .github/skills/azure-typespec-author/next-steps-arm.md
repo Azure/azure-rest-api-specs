@@ -1,8 +1,8 @@
-# TypeSpec ARM Authoring - Follow-up Actions Skill
 
-## Skill Overview
+# TypeSpec ARM Authoring - Next Steps
 
-This skill specializes in Step 6: Follow-up Actions after completing TypeSpec ARM authoring tasks. It helps identify next steps and guides users through additional related changes.
+
+This skill focuses on Step 6: Follow-up Actions that occur after TypeSpec ARM authoring tasks are complete. It determines next steps and provides guidance through related changes.
 
 
 **After completing any TypeSpec authoring case, ALWAYS perform these checks:**
@@ -66,8 +66,6 @@ What would you like to add to this preview version? For example:
 Type your request, or "done" if no additional changes needed:
 ```
 
-**Next Step**: If user type a new request, run the Workflow (Steps 1-6) again. If done, exit the process.
-
 ---
 
 ### Case: Add New Stable Version
@@ -90,8 +88,6 @@ What would you like to add to this stable version? For example:
 
 Type your request, or "done" if no additional changes needed:
 ```
-
-**Next Step**: If user type a new request, run the Workflow (Steps 1-6) again. If done, exit the process.
 
 ---
 
