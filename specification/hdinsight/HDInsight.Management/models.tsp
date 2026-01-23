@@ -2886,13 +2886,6 @@ model ScriptActionExecutionHistoryList
   is Azure.Core.Page<RuntimeScriptActionDetail>;
 
 /**
- * Result of the request to list cluster hosts
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@identifiers(#["fqdn"])
-model HostInfoListResult is HostInfo[];
-
-/**
  * The cluster host information.
  */
 model HostInfo {

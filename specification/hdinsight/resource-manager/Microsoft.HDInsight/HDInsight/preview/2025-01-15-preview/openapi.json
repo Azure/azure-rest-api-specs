@@ -2226,7 +2226,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HostInfoListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostInfo"
+              }
             }
           },
           "default": {
@@ -4956,13 +4959,6 @@
           "type": "string",
           "description": "The effective disk encryption key URL used by the host"
         }
-      }
-    },
-    "HostInfoListResult": {
-      "type": "array",
-      "description": "Result of the request to list cluster hosts",
-      "items": {
-        "$ref": "#/definitions/HostInfo"
       }
     },
     "IPConfiguration": {

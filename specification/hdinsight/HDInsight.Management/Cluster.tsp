@@ -586,7 +586,7 @@ interface Clusters {
   listHosts is ArmResourceActionSync<
     Cluster,
     void,
-    ArmResponse<HostInfoListResult>,
+    ArmResponse<HostInfo[]>,
     Error = ErrorResponse
   >;
 
