@@ -282,7 +282,7 @@ model NamedPartitionSchemeDescription extends PartitionSchemeDescription {
 }
 
 /**
- * SingletonPartitionSchemeDescription
+ * Describes the partition scheme of a singleton-partitioned, or non-partitioned service.
  */
 model SingletonPartitionSchemeDescription extends PartitionSchemeDescription {
   /**

@@ -347,42 +347,42 @@ union StoreName {
   string,
 
   /**
-   * AddressBook
+   * Static value for AddressBook
    */
   AddressBook: "AddressBook",
 
   /**
-   * AuthRoot
+   * Static value for AuthRoot
    */
   AuthRoot: "AuthRoot",
 
   /**
-   * CertificateAuthority
+   * Static value for CertificateAuthority
    */
   CertificateAuthority: "CertificateAuthority",
 
   /**
-   * Disallowed
+   * Static value for Disallowed
    */
   Disallowed: "Disallowed",
 
   /**
-   * My
+   * Static value for My
    */
   My: "My",
 
   /**
-   * Root
+   * Static value for Root
    */
   Root: "Root",
 
   /**
-   * TrustedPeople
+   * Static value for TrustedPeople
    */
   TrustedPeople: "TrustedPeople",
 
   /**
-   * TrustedPublisher
+   * Static value for TrustedPublisher
    */
   TrustedPublisher: "TrustedPublisher",
 }
