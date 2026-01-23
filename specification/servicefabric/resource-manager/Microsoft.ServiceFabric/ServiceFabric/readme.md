@@ -195,7 +195,6 @@ suppressions:
 
   - code: PutResponseCodes
     reason: Existing response codes are non-standard and changing would be a breaking change.
-    from: servicefabric.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}"].put
@@ -205,7 +204,6 @@ suppressions:
 
   - code: PatchResponseCodes
     reason: Cluster, application, and schema PATCH LRO 202 have had response body schema since day 0. Removing would be a breaking change.
-    from: servicefabric.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].patch
@@ -213,13 +211,12 @@ suppressions:
   
   - code: PatchBodyParametersSchema
     reason: The existing API has these properties marked as required.
-    from: servicefabric.json
     where: 
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].patch.parameters[5].schema.properties.properties
   
   - code: ProvisioningStateSpecifiedForLROPut
     reason: No existing operatoins have 201 response code.
-    from: servicefabric.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].put
@@ -228,7 +225,6 @@ suppressions:
   
   - code: AvoidAdditionalProperties
     reason: Existing API use additional properties, removing would be breaking change
-    from: servicefabric.json
     where: 
       - $.definitions.ApplicationDeltaHealthPolicy.properties.serviceTypeDeltaHealthPolicies
       - $.definitions.ApplicationHealthPolicy.properties.serviceTypeHealthPolicies
@@ -239,6 +235,14 @@ suppressions:
       - $.definitions.ClusterUpgradeDeltaHealthPolicy.properties.applicationDeltaHealthPolicies
       - $.definitions.NodeTypeDescription.properties.placementProperties
       - $.definitions.NodeTypeDescription.properties.capacities
+  
+  - code: TrackedResourcesMustHavePut
+    reason: Resources do have Put operation, but the operations do not seem to be properly detected.
+    where:
+    - $.definitions.ApplicationTypeVersionResource
+    - $.definitions.ApplicationResource
+    - $.definitions.ServiceResource
+    
 ```
 
 ---
