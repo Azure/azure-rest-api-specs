@@ -199,6 +199,8 @@ directive:
 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateLinkResources/{privateLinkResourceName}"]
 
+    from: fileshares.json
+
     reason: New paths added for private endpoint connections and private link resources in this API version.
 
   - suppress: DeleteResponseCodes
