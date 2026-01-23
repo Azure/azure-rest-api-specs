@@ -930,6 +930,11 @@ model SharedPrivateLinkResourceProperties {
   /**
    * Optional. Can be used to specify the Azure Resource Manager location of the resource for which a shared private link is being created. This is only required for those resources whose DNS configuration are regional (such as Azure Kubernetes Service).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs(
+    "https://docs.microsoft.com/azure/private-link/private-endpoint-dns",
+    "List of all Azure resources which have a regional DNS configuration requirement can be found here."
+  )
   resourceRegion?: string;
 
   /**
@@ -998,12 +1003,16 @@ model SearchServiceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("https://azure.microsoft.com/documentation/articles/search-sku-tier/")
   sku?: Sku;
 
   /**
    * The geographic location of the resource. This must be one of the supported and registered Azure geo regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @OpenAPI.externalDocs("https://aka.ms/search-rp-info")
   location?: string;
 
   /**

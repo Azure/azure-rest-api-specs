@@ -82,13 +82,6 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 }
 
-//@@maxLength(NetworkSecurityPerimeterConfiguration.name, 100);
-//@@minLength(NetworkSecurityPerimeterConfiguration.name, 38);
-/*
-@@doc(NetworkSecurityPerimeterConfiguration.name,
-  "The network security perimeter configuration name."
-);
-*/
 @@doc(NetworkSecurityPerimeterConfiguration.properties,
   "Network security configuration properties."
 );

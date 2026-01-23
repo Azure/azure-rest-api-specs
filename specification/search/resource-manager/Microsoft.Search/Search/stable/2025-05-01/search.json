@@ -687,6 +687,141 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}": {
+      "post": {
+        "operationId": "QueryKeys_Create",
+        "tags": [
+          "SearchServices"
+        ],
+        "description": "Generates a new query key for the specified search service. You can create up to 50 query keys per service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure AI Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the new query API key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchCreateQueryKey": {
+            "$ref": "./examples/SearchCreateQueryKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/deleteQueryKey/{key}": {
+      "delete": {
+        "operationId": "QueryKeys_Delete",
+        "tags": [
+          "SearchServices"
+        ],
+        "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure AI Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "The query key to be deleted. Query keys are identified by value, not by name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchDeleteQueryKey": {
+            "$ref": "./examples/SearchDeleteQueryKey.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys": {
       "post": {
         "operationId": "AdminKeys_Get",
@@ -1309,6 +1444,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}": {
+      "post": {
+        "operationId": "AdminKeys_Regenerate",
+        "tags": [
+          "SearchServices"
+        ],
+        "description": "Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure AI Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          {
+            "name": "keyKind",
+            "in": "path",
+            "description": "Specifies which key to regenerate. Valid values include 'primary' and 'secondary'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary"
+            ],
+            "x-ms-enum": {
+              "name": "AdminKeyKind",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "Primary",
+                  "value": "primary",
+                  "description": "The primary API key for the search service."
+                },
+                {
+                  "name": "Secondary",
+                  "value": "secondary",
+                  "description": "The secondary API key for the search service."
+                }
+              ]
+            }
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdminKeyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchRegenerateAdminKey": {
+            "$ref": "./examples/SearchRegenerateAdminKey.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/sharedPrivateLinkResources": {
       "get": {
         "operationId": "SharedPrivateLinkResources_ListByService",
@@ -1670,227 +1891,6 @@
           "final-state-schema": "#/definitions/SearchService"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}": {
-      "post": {
-        "operationId": "QueryKeys_Create",
-        "tags": [
-          "SearchServices"
-        ],
-        "description": "Generates a new query key for the specified search service. You can create up to 50 query keys per service.",
-        "externalDocs": {
-          "url": "https://aka.ms/search-manage"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "searchServiceName",
-            "in": "path",
-            "description": "The name of the Azure AI Search service associated with the specified resource group.",
-            "required": true,
-            "type": "string",
-            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the new query API key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/QueryKey"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SearchCreateQueryKey": {
-            "$ref": "./examples/SearchCreateQueryKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/deleteQueryKey/{key}": {
-      "delete": {
-        "operationId": "QueryKeys_Delete",
-        "tags": [
-          "SearchServices"
-        ],
-        "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.",
-        "externalDocs": {
-          "url": "https://aka.ms/search-manage"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "searchServiceName",
-            "in": "path",
-            "description": "The name of the Azure AI Search service associated with the specified resource group.",
-            "required": true,
-            "type": "string",
-            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
-          },
-          {
-            "name": "key",
-            "in": "path",
-            "description": "The query key to be deleted. Query keys are identified by value, not by name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "404": {
-            "description": "The server cannot find the requested resource."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SearchDeleteQueryKey": {
-            "$ref": "./examples/SearchDeleteQueryKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}": {
-      "post": {
-        "operationId": "AdminKeys_Regenerate",
-        "tags": [
-          "SearchServices"
-        ],
-        "description": "Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.",
-        "externalDocs": {
-          "url": "https://aka.ms/search-manage"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "searchServiceName",
-            "in": "path",
-            "description": "The name of the Azure AI Search service associated with the specified resource group.",
-            "required": true,
-            "type": "string",
-            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
-          },
-          {
-            "name": "keyKind",
-            "in": "path",
-            "description": "Specifies which key to regenerate. Valid values include 'primary' and 'secondary'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "primary",
-              "secondary"
-            ],
-            "x-ms-enum": {
-              "name": "AdminKeyKind",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "Primary",
-                  "value": "primary",
-                  "description": "The primary API key for the search service."
-                },
-                {
-                  "name": "Secondary",
-                  "value": "secondary",
-                  "description": "The secondary API key for the search service."
-                }
-              ]
-            }
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AdminKeyResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SearchRegenerateAdminKey": {
-            "$ref": "./examples/SearchRegenerateAdminKey.json"
-          }
-        }
       }
     }
   },
@@ -3185,11 +3185,17 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service."
+          "description": "The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
+          }
         },
         "location": {
           "type": "string",
           "description": "The geographic location of the resource. This must be one of the supported and registered Azure geo regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-rp-info"
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -3351,7 +3357,11 @@
         },
         "resourceRegion": {
           "type": "string",
-          "description": "Optional. Can be used to specify the Azure Resource Manager location of the resource for which a shared private link is being created. This is only required for those resources whose DNS configuration are regional (such as Azure Kubernetes Service)."
+          "description": "Optional. Can be used to specify the Azure Resource Manager location of the resource for which a shared private link is being created. This is only required for those resources whose DNS configuration are regional (such as Azure Kubernetes Service).",
+          "externalDocs": {
+            "description": "List of all Azure resources which have a regional DNS configuration requirement can be found here.",
+            "url": "https://docs.microsoft.com/azure/private-link/private-endpoint-dns"
+          }
         },
         "status": {
           "$ref": "#/definitions/SharedPrivateLinkResourceStatus",
