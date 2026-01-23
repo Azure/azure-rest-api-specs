@@ -210,6 +210,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @route("/data-assets/{dataAssetId}/asset-metadata")
   @patch(#{ implicitOptionality: true })
@@ -259,6 +260,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("Schedules")
   @doc("Creates a new scheduled job under a business domain for selected data assets.")
@@ -388,18 +390,33 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @tag("ScheduleScan")
+  @route("/business-domains/{businessDomainId}/schedules/{scheduleId}:scans")
   @extension("x-ms-long-running-operation", true)
   @doc("Creates a scan under a specific business domain and schedule.")
   @post
-  op scans is DataQualityOperation.ResourceAction<
-    ScheduleEntity,
-    ScanDTO,
+  op scheduleScans is RpcOperation<
     {
+      @doc("Unique identifier for the business domain")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier for the schedule")
+      @path
+      scheduleId: string;
+
+      @doc("Scan request")
+      @body
+      body: ScanDTO;
+    },
+    {
+      @doc("HTTP status code indicating scan creation (202 Accepted)")
       @statusCode
       statusCode: 202;
 
+      @doc("Status monitor for long-running operation")
       @body
       response: StatusMonitor;
     }
@@ -418,7 +435,7 @@ namespace PurviewDataQuality {
   @doc("Cancels a specific scan under a given schedule within a business domain.")
   @extension("x-ms-long-running-operation", true)
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}:cancel")
-  op cancelScan is RpcOperation<
+  op cancelScheduleScan is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -453,7 +470,7 @@ namespace PurviewDataQuality {
   @doc("Retrieves details of a specific scan under a given schedule within a business domain.")
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}")
   @get
-  op scanByScanId is RpcOperation<
+  op scheduleScanByScanId is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path
@@ -629,6 +646,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @tag("DataSources")
   @doc("Retrieves all data source connections for a given business domain, with optional name filtering and pagination.")
@@ -827,6 +845,173 @@ namespace PurviewDataQuality {
       @doc("Created data source entity with complete configuration and metadata")
       @body
       response: DataSourceEntity;
+    }
+  >;
+
+  /**
+   * Enumerate alerts within a business domain.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  @tag("Alerts")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_GetAlerts: #{ $ref: "./examples/Alert_GetAlerts.json" } }
+  )
+  @doc("Retrieves alerts defined under a business domain with optional name filter and pagination.")
+  @route("/business-domains/{businessDomainId}/alerts")
+  @get
+  op getAlerts is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the alerts")
+      @path
+      businessDomainId: string;
+
+      @doc("Optional alert name filter")
+      @query("name")
+      name?: string;
+
+      @doc("Continuation token for paged alert results")
+      @query("$skipToken")
+      skipToken?: string;
+    },
+    AlertListResult
+  >;
+
+  /**
+   * Get a specific alert by identifier.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  @tag("Alerts")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_GetAlert: #{ $ref: "./examples/Alert_GetAlert.json" } }
+  )
+  @doc("Retrieves a specific alert definition within a business domain.")
+  @route("/business-domains/{businessDomainId}/alerts/{alertId}")
+  @get
+  op getAlert is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the alerts")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier of the alert")
+      @path
+      alertId: string;
+    },
+    Alert
+  >;
+
+  /**
+   * Create or update an alert (upsert operation).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  @tag("Alerts")
+  @doc("Creates a new alert or updates an existing alert within the specified business domain. Returns 201 Created if the alert was created, or 200 OK if it was updated.")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_Update: #{ $ref: "./examples/Alert_Update.json" } }
+  )
+  @route("/business-domains/{businessDomainId}/alerts/{alertId}")
+  @put
+  op updateAlert is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the alerts")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier of the alert to create or update")
+      @path
+      alertId: string;
+
+      @doc("Alert payload to create or update")
+      @body
+      request: Alert;
+    },
+    {
+      @doc("Alert entity (returns 201 Created if alert was created, 200 OK if updated)")
+      @body
+      response: Alert;
+    }
+  >;
+
+  /**
+   * Delete an alert.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  @tag("Alerts")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_Delete: #{ $ref: "./examples/Alert_Delete.json" } }
+  )
+  @doc("Deletes a specific alert within the specified business domain.")
+  @route("/business-domains/{businessDomainId}/alerts/{alertId}")
+  @delete
+  op deleteAlert is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the alerts")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier of the alert to delete")
+      @path
+      alertId: string;
+    },
+    {
+      @statusCode
+      statusCode: 204;
+    }
+  >;
+
+  /**
+   * Update alert status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  @tag("Alerts")
+  @extension(
+    "x-ms-examples",
+    #{ Alert_Patch: #{ $ref: "./examples/Alert_Patch.json" } }
+  )
+  @doc("Updates the status of an alert within the specified business domain.")
+  @route("/business-domains/{businessDomainId}/alerts/{alertId}")
+  @patch(#{ implicitOptionality: true })
+  op updateAlertStatus is RpcOperation<
+    {
+      @doc("Unique identifier for the business domain containing the alerts")
+      @path
+      businessDomainId: string;
+
+      @doc("Unique identifier of the alert to update")
+      @path
+      alertId: string;
+
+      @doc("Alert status update payload")
+      @body
+      request: AlertStatusUpdateRequest;
+    },
+    {
+      @statusCode
+      statusCode: 204;
     }
   >;
 
@@ -1036,7 +1221,7 @@ namespace PurviewDataQuality {
   @doc("Retrieves all runs associated with a specific scan under a given schedule.")
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/runs")
   @get
-  op getRuns is RpcOperation<
+  op getRunsForScheduleScan is RpcOperation<
     {
       @doc("Unique identifier for the business domain containing the data product")
       @path

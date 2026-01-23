@@ -1,0 +1,43 @@
+{
+  "operationId": "GetAlert",
+  "parameters": {
+    "businessDomainId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c",
+    "alertId": "alert123"
+  },
+  "title": "Alert_GetAlert",
+  "responses": {
+    "200": {
+      "body": {
+        "id": "alert123",
+        "name": "alert123",
+        "description": "",
+        "businessDomain": {
+          "type": "BusinessDomainReference",
+          "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+        },
+        "scopes": [
+          {
+            "dataProduct": {
+              "referenceId": "c4098e88-36ca-4cd0-8491-f80ef41b47fc",
+              "type": "DataProductReference"
+            },
+            "dataAsset": {
+              "referenceId": "f3a32ca8-8440-431c-84b7-eaeadb099b7b",
+              "type": "DataAssetReference"
+            }
+          }
+        ],
+        "status": "Enabled",
+        "condition": "score_threshold(GLOBAL_SCORE) < 98",
+        "receivers": [
+          "ca31eca9-668e-4933-82f8-69bdeecc6632"
+        ],
+        "enabledForFailedJobs": true,
+        "createdAt": "2025-04-15T05:51:08.5237430Z",
+        "createdBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+        "lastModifiedAt": "2025-04-15T05:51:27.4751749Z",
+        "lastModifiedBy": "ca31eca9-668e-4933-82f8-69bdeecc6632"
+      }
+    }
+  }
+}
