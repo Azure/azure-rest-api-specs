@@ -82,6 +82,7 @@ input-file:
   - Microsoft.App/preview/2025-05-01-preview/SessionPools.json
   - Microsoft.App/preview/2025-05-01-preview/SourceControls.json
   - Microsoft.App/preview/2025-05-01-preview/Subscriptions.json
+  - Microsoft.App/preview/2025-05-01-preview/SupportedModels.json
   - Microsoft.App/preview/2025-05-01-preview/Usages.json
 directive:
   - suppress: PatchBodyParametersSchema
