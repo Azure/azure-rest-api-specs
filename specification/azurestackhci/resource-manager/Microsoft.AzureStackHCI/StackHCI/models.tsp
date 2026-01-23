@@ -409,6 +409,7 @@ union ConnectivityStatus {
 /**
  * Indicates whether the cluster is under support.
  */
+@removed(Versions.v2026_02_01)
 union SupportStatus {
   string,
 
@@ -1877,6 +1878,7 @@ model ClusterProperties {
    * Indicates whether the cluster is under support.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_02_01)
   supportStatus?: SupportStatus;
 
   /**
@@ -1889,6 +1891,7 @@ model ClusterProperties {
    * The ring to which this cluster belongs to.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_02_01)
   ring?: string;
 
   /**

@@ -4699,15 +4699,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource.",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
       "allOf": [
@@ -4977,19 +4968,9 @@
           "description": "Overall connectivity status for the cluster resource. Indicates whether the cluster is connected to Azure, partially connected, or has not recently communicated.",
           "readOnly": true
         },
-        "supportStatus": {
-          "$ref": "#/definitions/SupportStatus",
-          "description": "Indicates whether the cluster is under support.",
-          "readOnly": true
-        },
         "cloudId": {
           "type": "string",
           "description": "Unique, immutable resource id.",
-          "readOnly": true
-        },
-        "ring": {
-          "type": "string",
-          "description": "The ring to which this cluster belongs to.",
           "readOnly": true
         },
         "cloudManagementEndpoint": {
@@ -10332,36 +10313,6 @@
           "description": "By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'",
           "default": "Express"
         }
-      }
-    },
-    "SupportStatus": {
-      "type": "string",
-      "description": "Indicates whether the cluster is under support.",
-      "enum": [
-        "InSupport",
-        "OutOfSupport",
-        "NotSpecified"
-      ],
-      "x-ms-enum": {
-        "name": "SupportStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InSupport",
-            "value": "InSupport",
-            "description": "The cluster is under support."
-          },
-          {
-            "name": "OutOfSupport",
-            "value": "OutOfSupport",
-            "description": "The cluster is out of support."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The support status is not specified."
-          }
-        ]
       }
     },
     "SwitchDetail": {
