@@ -49,7 +49,10 @@ model AppProperties {
   /** Determines the application type. This influences the base set of kubernetes manifests that will be used */
   applicationType: ApplicationType;
 
-  /** Additional k8s resources (in yaml format) to deploy along with the app */
+  /** Additional k8s resources (in yaml format) to deploy along with the app
+   * This can include things like ConfigMaps, Secrets, PersistentVolumeClaims, etc.
+   * Do we split this out into separate fields? Easier to maintain as raw yaml, but harder to validate
+   */
   additionalK8sResources?: string[];
 
   /** Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace */
