@@ -3,7 +3,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Discovery.Management.Shared/all.tsp";
-import "../Discovery.Shared/shared.tsp";
 import "./supercomputer.tsp";
 
 using TypeSpec.Rest;
@@ -11,6 +10,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Microsoft.Discovery.Shared;
 
 @armProviderNamespace
 @versioned(Microsoft.Discovery.Versions)
@@ -63,6 +63,18 @@ union VmSize {
   string,
 }
 
+@doc("Supported Virtual Machine Scale Set priorities.")
+@added(Versions.v2026_02_01_preview)
+union ScaleSetPriority {
+  @doc("Regular priority Virtual Machine Scale Set.")
+  Regular: "Regular",
+
+  @doc("Spot priority Virtual Machine Scale Set.")
+  Spot: "Spot",
+
+  string,
+}
+
 @doc("NodePool tracked resource")
 @parentResource(Supercomputer)
 model NodePool is TrackedResource<NodePoolProperties> {
@@ -92,6 +104,11 @@ model NodePoolProperties {
   @minValue(0)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   minNodeCount?: int32 = 0;
+
+  @doc("The Virtual Machine Scale Set priority. If not specified, the default is 'Regular'.")
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  scaleSetPriority?: ScaleSetPriority = ScaleSetPriority.Regular;
 }
 
 @armResourceOperations
@@ -101,5 +118,7 @@ interface NodePools {
   update is ArmResourcePatchAsync<NodePool, NodePoolProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<NodePool>;
   listBySupercomputer is ArmResourceListByParent<NodePool>;
+
+  @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
   listBySubscription is ArmListBySubscription<NodePool>;
 }
