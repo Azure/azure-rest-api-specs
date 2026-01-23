@@ -963,9 +963,11 @@ union RestorePointQueryType {
   SnapshotFull: "SnapshotFull",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SnapshotCopyOnlyFull: "SnapshotCopyOnlyFull",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_01_01_preview)
   Snapshot: "Snapshot",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_01_01_preview)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
@@ -1251,6 +1253,7 @@ union ContainerType {
   GenericContainer: "GenericContainer",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HanaHSRContainer: "HanaHSRContainer",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_01_01_preview)
   HanaScaleoutContainer: "HanaScaleoutContainer",
@@ -4596,8 +4599,8 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
 /**
  * Azure VM workload-specific protected item representing SQL Instance.
  */
-@added(Versions.v2026_01_01_preview)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_01_01_preview)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5286,22 +5289,22 @@ model BmsrpQueryObject {
   /**
    * Id of the base snapshot recovery point.
    */
-  @added(Versions.v2026_01_01_preview)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_01_01_preview)
   baseSnapshotRPId?: string;
 
   /**
    * Id of the datasource of the base snapshot recovery point.
    */
-  @added(Versions.v2026_01_01_preview)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_01_01_preview)
   baseRPDatasourceId?: string;
 
   /**
    * Flag to indicate whether to get only the latest recovery point.
    */
-  @added(Versions.v2026_01_01_preview)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_01_01_preview)
   getLatestRPOnly?: boolean;
 }
 
@@ -5716,8 +5719,8 @@ model DailySchedule {
 /**
  * Database included in RP.
  */
-@added(Versions.v2026_01_01_preview)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original API naming convention"
+@added(Versions.v2026_01_01_preview)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -7658,9 +7661,10 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 /**
  * Azure VM workload-specific protectable item representing HANA scale out.
  */
-@added(Versions.v2026_01_01_preview)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AzureVmWorkloadSAPHanaScaleoutProtectableItem extends WorkloadProtectableItem {
+@added(Versions.v2026_01_01_preview)
+model AzureVmWorkloadSAPHanaScaleoutProtectableItem
+  extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
    */
