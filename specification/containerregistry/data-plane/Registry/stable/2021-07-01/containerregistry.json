@@ -35,7 +35,9 @@
   ],
   "security": [
     {
-      "OAuth2Auth": []
+      "OAuth2Auth": [
+        "https://containerregistry.azure.net/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -43,7 +45,9 @@
       "type": "oauth2",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {}
+      "scopes": {
+        "https://containerregistry.azure.net/.default": ""
+      }
     }
   },
   "tags": [],
@@ -1573,8 +1577,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
