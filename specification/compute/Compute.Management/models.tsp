@@ -5225,7 +5225,7 @@ model HardwareProfile {
   vmSizeProperties?: VMSizeProperties;
 
   /**
-   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified, but not both.
+   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified in the request, but not both. When vmSizePolicy is used, the allocated VM size will be returned in the vmSize property in the response.
    */
   @added(Versions.v2025_11_01)
   vmSizePolicy?: VMSizePolicy;
