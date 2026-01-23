@@ -678,7 +678,7 @@ model VirtualMachineScaleSetOSDisk {
   /**
    * Specifies the caching requirements. Possible values are: **None,**
    * **ReadOnly,** **ReadWrite.** The default values are: **None for Standard
-   * storage. ReadOnly for Premium storage.**
+   * storage, Premium SSD v2, and Ultra Disk. ReadOnly for Premium SSD.**
    */
   caching?: CachingTypes;
 
@@ -851,7 +851,7 @@ model VirtualMachineScaleSetDataDisk {
   /**
    * Specifies the caching requirements. Possible values are: **None,**
    * **ReadOnly,** **ReadWrite.** The default values are: **None for Standard
-   * storage. ReadOnly for Premium storage.**
+   * storage, Premium SSD v2, and Ultra Disk. ReadOnly for Premium SSD.**
    */
   caching?: CachingTypes;
 
@@ -1874,12 +1874,12 @@ union CachingTypes {
   string,
 
   /**
-   * 'None' is default for Standard Storage
+   * 'None' is default for Standard Storage, Premium SSD v2, and Ultra Disk
    */
   None: "None",
 
   /**
-   * 'ReadOnly' is default for Premium Storage
+   * 'ReadOnly' is default for Premium SSD
    */
   ReadOnly: "ReadOnly",
 
