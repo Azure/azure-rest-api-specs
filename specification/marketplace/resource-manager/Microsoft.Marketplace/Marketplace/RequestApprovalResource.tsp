@@ -49,7 +49,7 @@ interface RequestApprovalResources {
   /**
    * Get all open approval requests of current user
    */
-  getApprovalRequestsList is ArmResourceListByParent<
+  getApprovalRequestsList is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     RequestApprovalResource,
     Response = ArmResponse<RequestApprovalsList>,
     Error = ErrorResponse

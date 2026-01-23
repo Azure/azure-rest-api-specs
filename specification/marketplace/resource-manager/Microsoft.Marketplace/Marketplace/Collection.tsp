@@ -50,7 +50,7 @@ interface Collections {
   /**
    * Gets private store collections list
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     Collection,
     Response = ArmResponse<CollectionsList>,
     Error = ErrorResponse

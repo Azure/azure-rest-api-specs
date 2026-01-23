@@ -593,6 +593,7 @@ model CollectionsList {
   /**
    * URL to get the next set of offer list results if there are any.
    */
+  @nextLink
   nextLink?: string;
 }
 
@@ -860,6 +861,7 @@ model CollectionOffersByContextList {
   /**
    * URL to get the next set of offer list per context results if there are any.
    */
+  @nextLink
   nextLink?: string;
 }
 
@@ -956,6 +958,7 @@ model RequestApprovalsList {
    * URL to get the next set of notifications list results if there are any.
    */
   @visibility(Lifecycle.Read)
+  @nextLink
   nextLink?: string;
 }
 
@@ -1103,6 +1106,7 @@ model AdminRequestApprovalsList {
    * URL to get the next set of notifications list results if there are any.
    */
   @visibility(Lifecycle.Read)
+  @nextLink
   nextLink?: string;
 }
 

@@ -57,7 +57,7 @@ interface AdminRequestApprovalsResources {
   /**
    * Get list of admin request approvals
    */
-  adminRequestApprovalsList is ArmResourceListByParent<
+  adminRequestApprovalsList is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     AdminRequestApprovalsResource,
     Response = ArmResponse<AdminRequestApprovalsList>,
     Error = ErrorResponse
