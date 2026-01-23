@@ -268,7 +268,7 @@ model AcrErrorInfo {
   /**
    * Error details
    */
-  detail?: Record<string>;
+  detail?: {};
 }
 
 /**
