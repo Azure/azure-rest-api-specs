@@ -217,6 +217,20 @@ directive:
 
     reason: privateLinkResourceName follows the same pattern as other resource name parameters in this API.
 
+  - suppress: XMSSecretInResponse
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}"].get.responses.200
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}"].put.responses.200
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}"].put.responses.201
+
+    from: fileshares.json
+
+    reason: publicNetworkAccess is not a secret - it's a configuration property that controls whether public network access is enabled or disabled. This is a false positive from the validation rule.
+
 ```
 
 
