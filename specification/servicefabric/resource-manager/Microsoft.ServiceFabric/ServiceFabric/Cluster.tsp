@@ -389,96 +389,79 @@ union StoreName {
 
 /**
  * The current state of the cluster.
- *
- *   - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.
- *   - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.
- *   - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.
- *   - UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.
- *   - UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.
- *   - UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.
- *   - EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.
- *   - UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.
- *   - AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.
- *   - Ready - Indicates that the cluster is in a stable state.
- *
  */
 union ClusterState {
   string,
 
   /**
-   * WaitingForNodes
+   * Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.
    */
   WaitingForNodes: "WaitingForNodes",
 
   /**
-   * Deploying
+   * Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.
    */
   Deploying: "Deploying",
 
   /**
-   * BaselineUpgrade
+   * Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.
    */
   BaselineUpgrade: "BaselineUpgrade",
 
   /**
-   * UpdatingUserConfiguration
+   * Indicates that the cluster is being upgraded with the user provided configuration.
    */
   UpdatingUserConfiguration: "UpdatingUserConfiguration",
 
   /**
-   * UpdatingUserCertificate
+   * Indicates that the cluster is being upgraded with the user provided certificate.
    */
   UpdatingUserCertificate: "UpdatingUserCertificate",
 
   /**
-   * UpdatingInfrastructure
+   * Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.
    */
   UpdatingInfrastructure: "UpdatingInfrastructure",
 
   /**
-   * EnforcingClusterVersion
+   * Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.
    */
   EnforcingClusterVersion: "EnforcingClusterVersion",
 
   /**
-   * UpgradeServiceUnreachable
+   * Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.
    */
   UpgradeServiceUnreachable: "UpgradeServiceUnreachable",
 
   /**
-   * AutoScale
+   * Indicates that the ReliabilityLevel of the cluster is being adjusted.
    */
   AutoScale: "AutoScale",
 
   /**
-   * Ready
+   * Indicates that the cluster is in a stable state.
    */
   Ready: "Ready",
 }
 
 /**
  * The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
- *
- *   - Bronze - No privileges. This is the default.
- *   - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
- *   - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
- *
  */
 union DurabilityLevel {
   string,
 
   /**
-   * Bronze
+   *  No privileges. This is the default.
    */
   Bronze: "Bronze",
 
   /**
-   * Silver
+   * The infrastructure jobs can be paused for a duration of 10 minutes per UD.
    */
   Silver: "Silver",
 
   /**
-   * Gold
+   * The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
    */
   Gold: "Gold",
 }
@@ -490,61 +473,54 @@ union ProvisioningState {
   string,
 
   /**
-   * Updating
+   * Cluster is updating.
    */
   Updating: "Updating",
 
   /**
-   * Succeeded
+   * Cluster provisioning succeeded.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * Cluster provisioning failed.
    */
   Failed: "Failed",
 
   /**
-   * Canceled
+   * Cluster provisioning was canceled.
    */
   Canceled: "Canceled",
 }
 
 /**
  * The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
- *
- *   - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.
- *   - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.
- *   - Silver - Run the System services with a target replica set count of 5.
- *   - Gold - Run the System services with a target replica set count of 7.
- *   - Platinum - Run the System services with a target replica set count of 9.
- *
  */
 union ReliabilityLevel {
   string,
 
   /**
-   * None
+   * Run the System services with a target replica set count of 1. This should only be used for test clusters.
    */
   None: "None",
 
   /**
-   * Bronze
+   * Run the System services with a target replica set count of 3. This should only be used for test clusters.
    */
   Bronze: "Bronze",
 
   /**
-   * Silver
+   * Run the System services with a target replica set count of 5.
    */
   Silver: "Silver",
 
   /**
-   * Gold
+   * Run the System services with a target replica set count of 7.
    */
   Gold: "Gold",
 
   /**
-   * Platinum
+   * Run the System services with a target replica set count of 9.
    */
   Platinum: "Platinum",
 }

@@ -3188,7 +3188,7 @@
     },
     "ClusterState": {
       "type": "string",
-      "description": "The current state of the cluster.\n\n- WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.\n- Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.\n- BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.\n- UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.\n- UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.\n- UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.\n- EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.\n- UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.\n- AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.\n- Ready - Indicates that the cluster is in a stable state.",
+      "description": "The current state of the cluster.",
       "enum": [
         "WaitingForNodes",
         "Deploying",
@@ -3208,52 +3208,52 @@
           {
             "name": "WaitingForNodes",
             "value": "WaitingForNodes",
-            "description": "WaitingForNodes"
+            "description": "Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it."
           },
           {
             "name": "Deploying",
             "value": "Deploying",
-            "description": "Deploying"
+            "description": "Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up."
           },
           {
             "name": "BaselineUpgrade",
             "value": "BaselineUpgrade",
-            "description": "BaselineUpgrade"
+            "description": "Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time."
           },
           {
             "name": "UpdatingUserConfiguration",
             "value": "UpdatingUserConfiguration",
-            "description": "UpdatingUserConfiguration"
+            "description": "Indicates that the cluster is being upgraded with the user provided configuration."
           },
           {
             "name": "UpdatingUserCertificate",
             "value": "UpdatingUserCertificate",
-            "description": "UpdatingUserCertificate"
+            "description": "Indicates that the cluster is being upgraded with the user provided certificate."
           },
           {
             "name": "UpdatingInfrastructure",
             "value": "UpdatingInfrastructure",
-            "description": "UpdatingInfrastructure"
+            "description": "Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'."
           },
           {
             "name": "EnforcingClusterVersion",
             "value": "EnforcingClusterVersion",
-            "description": "EnforcingClusterVersion"
+            "description": "Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version."
           },
           {
             "name": "UpgradeServiceUnreachable",
             "value": "UpgradeServiceUnreachable",
-            "description": "UpgradeServiceUnreachable"
+            "description": "Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider."
           },
           {
             "name": "AutoScale",
             "value": "AutoScale",
-            "description": "AutoScale"
+            "description": "Indicates that the ReliabilityLevel of the cluster is being adjusted."
           },
           {
             "name": "Ready",
             "value": "Ready",
-            "description": "Ready"
+            "description": "Indicates that the cluster is in a stable state."
           }
         ]
       }
@@ -3456,7 +3456,7 @@
     },
     "DurabilityLevel": {
       "type": "string",
-      "description": "The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n- Bronze - No privileges. This is the default.\n- Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.\n- Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.",
+      "description": "The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).",
       "enum": [
         "Bronze",
         "Silver",
@@ -3469,17 +3469,17 @@
           {
             "name": "Bronze",
             "value": "Bronze",
-            "description": "Bronze"
+            "description": "No privileges. This is the default."
           },
           {
             "name": "Silver",
             "value": "Silver",
-            "description": "Silver"
+            "description": "The infrastructure jobs can be paused for a duration of 10 minutes per UD."
           },
           {
             "name": "Gold",
             "value": "Gold",
-            "description": "Gold"
+            "description": "The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc."
           }
         ]
       }
@@ -3835,22 +3835,22 @@
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Updating"
+            "description": "Cluster is updating."
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "Cluster provisioning succeeded."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "Cluster provisioning failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled"
+            "description": "Cluster provisioning was canceled."
           }
         ]
       },
@@ -3858,7 +3858,7 @@
     },
     "ReliabilityLevel": {
       "type": "string",
-      "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n- None - Run the System services with a target replica set count of 1. This should only be used for test clusters.\n- Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.\n- Silver - Run the System services with a target replica set count of 5.\n- Gold - Run the System services with a target replica set count of 7.\n- Platinum - Run the System services with a target replica set count of 9.",
+      "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).",
       "enum": [
         "None",
         "Bronze",
@@ -3873,27 +3873,27 @@
           {
             "name": "None",
             "value": "None",
-            "description": "None"
+            "description": "Run the System services with a target replica set count of 1. This should only be used for test clusters."
           },
           {
             "name": "Bronze",
             "value": "Bronze",
-            "description": "Bronze"
+            "description": "Run the System services with a target replica set count of 3. This should only be used for test clusters."
           },
           {
             "name": "Silver",
             "value": "Silver",
-            "description": "Silver"
+            "description": "Run the System services with a target replica set count of 5."
           },
           {
             "name": "Gold",
             "value": "Gold",
-            "description": "Gold"
+            "description": "Run the System services with a target replica set count of 7."
           },
           {
             "name": "Platinum",
             "value": "Platinum",
-            "description": "Platinum"
+            "description": "Run the System services with a target replica set count of 9."
           }
         ]
       }
