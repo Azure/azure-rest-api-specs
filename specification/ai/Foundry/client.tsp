@@ -269,3 +269,8 @@ using Azure.AI.Projects;
 // input parameter that calls either on these two.
 @@access(Connections.get, Access.internal);
 @@access(Connections.getWithCredentials, Access.internal);
+
+@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema,
+  Record<unknown>,
+  "python"
+);
