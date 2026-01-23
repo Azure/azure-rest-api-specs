@@ -9,12 +9,15 @@ using Microsoft.ContainerRegistry;
   "javascript,python"
 );
 
-@@clientName(IPRule, "IpRule", "java");
-@@clientName(IPRule.value, "ipAddressOrRange", "java");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "java,python"
 );
+
+@@clientName(IPRule, "IpRule", "java");
+@@clientName(IPRule.value, "ipAddressOrRange", "java");
+@@clientName(Source.instanceID, "instanceId", "java");
+
+@@alternateType(RegistryNameCheckRequest.type, string, "java");
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
