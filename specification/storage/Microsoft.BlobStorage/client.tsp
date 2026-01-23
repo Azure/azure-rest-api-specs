@@ -59,7 +59,7 @@ namespace Customizations;
 @@clientName(GeoReplication.lastSyncTime, "lastSyncOn", "javascript");
 @@clientName(KeyInfo.start, "startsOn", "javascript");
 @@clientName(KeyInfo.expiry, "expiresOn", "javascript");
-@@clientName(StorageServiceProperties.logging,
+@@clientName(BlobServiceProperties.logging,
   "blobAnalyticsLogging",
   "javascript"
 );
