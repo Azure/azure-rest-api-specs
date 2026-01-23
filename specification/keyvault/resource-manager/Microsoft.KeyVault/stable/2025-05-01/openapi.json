@@ -4080,11 +4080,6 @@
       "type": "object",
       "description": "Properties of a private link resource.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioned state of the resource",
-          "readOnly": true
-        },
         "groupId": {
           "type": "string",
           "description": "Group identifier of private link resource.",
@@ -5705,6 +5700,9 @@
           }
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
