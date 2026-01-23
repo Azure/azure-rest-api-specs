@@ -57,24 +57,24 @@ jobs:
             
             if (fs.existsSync(outputFile)) {
               const data = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
-              const rpList = data.newResourceProviders.map(rp => `- \`${rp}\``).join('\n');
+              const rpList = data.newResourceProviders.map(rp => \`- \\\`\${rp}\\\`\`).join('\\n');
               
-              const body = `## 🆕 New Resource Provider Detected
+              const body = \`## 🆕 New Resource Provider Detected
 
-The following new resource provider namespace(s) were detected in this PR:
+            The following new resource provider namespace(s) were detected in this PR:
 
-${rpList}
+            \${rpList}
 
-### ⚠️ Action Required
+            ### ⚠️ Action Required
 
-New resource provider namespaces require attending **ARM API Modeling Office Hours** before merging.
+            New resource provider namespaces require attending **ARM API Modeling Office Hours** before merging.
 
-📅 **Please schedule here:** https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true
+            📅 **Please schedule here:** https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true
 
-During the office hours, the ARM team will review:
-- Resource provider namespace naming conventions
-- API design patterns and best practices
-- Registration requirements for Azure environments`;
+            During the office hours, the ARM team will review:
+            - Resource provider namespace naming conventions
+            - API design patterns and best practices
+            - Registration requirements for Azure environments\`;
 
               github.rest.issues.createComment({
                 owner: context.repo.owner,
