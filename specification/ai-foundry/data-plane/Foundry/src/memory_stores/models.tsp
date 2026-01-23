@@ -333,7 +333,7 @@ alias MemoryStoreSearchRequest = {
   scope: string;
 
   @doc("Items for which to search for relevant memories.")
-  items?: OpenAI.Item[];
+  items?: OpenAI.InputItem[];
 
   @doc("The unique ID of the previous search request, enabling incremental memory search from where the last operation left off.")
   previous_search_id?: string;
