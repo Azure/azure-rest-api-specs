@@ -1,0 +1,135 @@
+{
+  "parameters": {
+    "name": "SampleAppServiceEnvironment",
+    "api-version": "2025-05-01",
+    "detectorName": "runtimeavailability",
+    "resourceGroupName": "Sample-WestUSResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "runtimeavailability",
+        "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/hostingEnvironments/SampleAppServiceEnvironment/detectors/runtimeavailability",
+        "properties": {
+          "dataset": [
+            {
+              "renderingProperties": {
+                "description": "This detector breaks down the number of requests that your apps on this app service environment received for each status code.",
+                "title": "Requests by Status Code"
+              },
+              "table": {
+                "columns": [
+                  {
+                    "columnName": "PreciseTimeStamp",
+                    "columnType": "datetime",
+                    "dataType": "DateTime"
+                  },
+                  {
+                    "columnName": "count_Http2xx",
+                    "columnType": "long",
+                    "dataType": "Int64"
+                  },
+                  {
+                    "columnName": "count_Http3xx",
+                    "columnType": "long",
+                    "dataType": "Int64"
+                  },
+                  {
+                    "columnName": "count_Http4xx",
+                    "columnType": "long",
+                    "dataType": "Int64"
+                  },
+                  {
+                    "columnName": "count_Http5xx",
+                    "columnType": "long",
+                    "dataType": "Int64"
+                  }
+                ],
+                "rows": [
+                  [
+                    "2018-03-27T00:25:00Z",
+                    "772705",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:30:00Z",
+                    "787069",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:35:00Z",
+                    "781627",
+                    "0",
+                    "1",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:40:00Z",
+                    "785017",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:45:00Z",
+                    "783518",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:50:00Z",
+                    "785783",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T00:55:00Z",
+                    "772874",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T01:00:00Z",
+                    "787162",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T01:05:00Z",
+                    "782036",
+                    "0",
+                    "0",
+                    "0"
+                  ],
+                  [
+                    "2018-03-27T01:10:00Z",
+                    "784642",
+                    "0",
+                    "0",
+                    "0"
+                  ]
+                ],
+                "tableName": "Table_0"
+              }
+            }
+          ],
+          "metadata": {
+            "description": "This detector analyzes all the requests to all applications running on this app service environment.",
+            "category": "Availability and Performance"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Diagnostics_GetHostingEnvironmentDetectorResponse",
+  "title": "Get App Service Environment Detector Responses"
+}
