@@ -124,12 +124,12 @@ union ClusterVersionsEnvironment {
   string,
 
   /**
-   * Windows
+   * Windows operating system
    */
   Windows: "Windows",
 
   /**
-   * Linux
+   * Linux operating system
    */
   Linux: "Linux",
 }
