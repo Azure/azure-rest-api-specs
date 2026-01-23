@@ -851,16 +851,14 @@ model CollectionOffersByAllContextsProperties {
  * List of objects which describes offers per context. An empty GUID is a public context.
  */
 model CollectionOffersByContextList {
-  /**
-   * aaaaaaaaaaaaaaaaaaaaaaaa
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["context"])
   @visibility(Lifecycle.Read)
   @pageItems
   value?: CollectionOffersByContext[];
 
   /**
-   * aaaaaaaaaaaaaaaaaaaaaaa
+   * URL to get the next set of offer list per context results if there are any.
    */
   nextLink?: string;
 }
@@ -1637,18 +1635,18 @@ model SingleOperationDisplay {
 }
 
 /**
- * aaaaaaaaaaaaaaaaaaaaa
+ * Result of the request to list Marketplace operations. It contains a list of operations and a URL link to get the next set of results.
  */
 model OperationListResult {
   /**
-   * aaaaaaaaaaaaaaaaaaaaaaa
+   * List of Microsoft.Marketplace operations supported by the Microsoft.Marketplace resource provider.
    */
   @pageItems
   @identifiers(#["name"])
   value?: SingleOperation[];
 
   /**
-   * aaaaaaaaaaaaaaaaaaaaa
+   * URL to get the next set of operation list results if there are any.
    */
   @visibility(Lifecycle.Read)
   nextLink?: string;
