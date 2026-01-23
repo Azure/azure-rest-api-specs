@@ -56,6 +56,7 @@ using Azure.Core;
   "ManagedHsmPrivateLinkResourceData",
   "csharp"
 );
+@@usage(MhsmPrivateLinkResource, Usage.input | Usage.output, "csharp");
 
 @@clientName(MhsmPrivateEndpointConnection,
   "ManagedHsmPrivateEndpointConnection",
