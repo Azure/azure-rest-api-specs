@@ -120,9 +120,9 @@ union AgentProtocol {
 union AgentKind {
   string,
   prompt: "prompt",
-  hosted: "hosted",
-  container_app: "container_app",
-  workflow: "workflow",
+  hosted_preview: "hosted_preview",
+  container_app_preview: "container_app_preview",
+  workflow_preview: "workflow_preview",
 }
 
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
@@ -149,8 +149,8 @@ model ProtocolVersionRecord {
 }
 
 @doc("The workflow agent definition.")
-model WorkflowAgentDefinition extends AgentDefinition {
-  kind: AgentKind.workflow;
+model WorkflowAgentPreviewDefinition extends AgentDefinition {
+  kind: AgentKind.workflow_preview;
 
   @doc("The CSDL YAML definition of the workflow.")
   workflow?: string;
@@ -158,8 +158,8 @@ model WorkflowAgentDefinition extends AgentDefinition {
 
 @doc("The hosted agent definition.")
 @discriminator("kind")
-model HostedAgentDefinition extends AgentDefinition {
-  kind: AgentKind.hosted;
+model HostedAgentPreviewDefinition extends AgentDefinition {
+  kind: AgentKind.hosted_preview;
 
   @doc("""
     An array of tools the hosted agent's model may call while generating a response. You
@@ -193,8 +193,8 @@ model HostedAgentDefinition extends AgentDefinition {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The image-based deployment definition for a hosted agent.")
-model ImageBasedHostedAgentDefinition extends HostedAgentDefinition {
-  kind: AgentKind.hosted;
+model ImageBasedHostedAgentPreviewDefinition extends HostedAgentPreviewDefinition {
+  kind: AgentKind.hosted_preview;
 
   @doc("The image for the hosted agent.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
@@ -202,8 +202,8 @@ model ImageBasedHostedAgentDefinition extends HostedAgentDefinition {
 }
 
 @doc("The container app agent definition.")
-model ContainerAppAgentDefinition extends AgentDefinition {
-  kind: AgentKind.container_app;
+model ContainerAppAgentPreviewDefinition extends AgentDefinition {
+  kind: AgentKind.container_app_preview;
 
   @doc("The protocols that the agent supports for ingress communication of the containers.")
   @example(#[
@@ -331,10 +331,10 @@ model ToolArgumentBinding {
 }
 
 @doc("The details of the container of a specific version of an agent.")
-model AgentContainerObject {
-  @doc("The object type, which is always 'agent.container'.")
+model AgentContainerPreviewObject {
+  @doc("The object type, which is always 'agent.container_preview'.")
   @visibility(Lifecycle.Read)
-  object: "agent.container";
+  object: "agent.container_preview";
 
   @doc("The identifier of the container.")
   @visibility(Lifecycle.Read)
@@ -342,7 +342,7 @@ model AgentContainerObject {
 
   @doc("The status of the container of a specific version of an agent.")
   @visibility(Lifecycle.Read)
-  status: AgentContainerStatus;
+  status: AgentContainerPreviewStatus;
 
   @doc("The maximum number of replicas for the container. Default is 1.")
   @example(10)
@@ -366,11 +366,11 @@ model AgentContainerObject {
 
   @doc("The detailed container information.")
   @visibility(Lifecycle.Read)
-  container?: ContainerDetails;
+  container?: ContainerPreviewDetails;
 }
 
 @doc("Detailed information about the container.")
-model ContainerDetails {
+model ContainerPreviewDetails {
   @doc("The provisioning state of the container.")
   provisioning_state: string;
 
@@ -384,14 +384,14 @@ model ContainerDetails {
   health_state: string;
 
   @doc("The list of replicas in the container.")
-  replicas: ContainerReplica[];
+  replicas: ContainerPreviewReplica[];
 
   @doc("The last update time of the container.")
   updated_on: utcDateTime;
 }
 
 @doc("Information about a container replica.")
-model ContainerReplica {
+model ContainerPreviewReplica {
   @doc("The name of the replica.")
   name: string;
 
@@ -403,7 +403,7 @@ model ContainerReplica {
 }
 
 @doc("Status of the container of a specific version of an agent.")
-union AgentContainerStatus {
+union AgentContainerPreviewStatus {
   @doc("The container is starting.")
   Starting: "Starting",
 
@@ -430,7 +430,7 @@ union AgentContainerStatus {
 }
 
 @doc("The container operation for a specific version of an agent.")
-model AgentContainerOperationObject {
+model AgentContainerOperationPreviewObject {
   @doc("The ID of the container operation. This id is unique identifier across the system.")
   id: string;
 
@@ -441,17 +441,17 @@ model AgentContainerOperationObject {
   agent_version_id: string;
 
   @doc("The status of the container operation.")
-  status: AgentContainerOperationStatus;
+  status: AgentContainerOperationPreviewStatus;
 
   @doc("The error of the container operation, if any.")
-  error?: AgentContainerOperationError;
+  error?: AgentContainerOperationPreviewError;
 
   @doc("The container of the specific version of an agent.")
-  container?: AgentContainerObject;
+  container?: AgentContainerPreviewObject;
 }
 
 @doc("The error details of the container operation, if any.")
-model AgentContainerOperationError {
+model AgentContainerOperationPreviewError {
   @doc("The error code of the container operation, if any.")
   code: string;
 
@@ -463,7 +463,7 @@ model AgentContainerOperationError {
 }
 
 @doc("Status of the container operation for a specific version of an agent.")
-union AgentContainerOperationStatus {
+union AgentContainerOperationPreviewStatus {
   @doc("The container operation is not started.")
   NotStarted: "NotStarted",
 
@@ -477,7 +477,7 @@ union AgentContainerOperationStatus {
   Failed: "Failed",
 }
 
-model AcceptedAgentContainerOperation {
+model AcceptedAgentContainerPreviewOperation {
   @statusCode
   code: 202;
 
@@ -485,11 +485,11 @@ model AcceptedAgentContainerOperation {
   location: url;
 
   @body
-  body: AgentContainerOperationObject;
+  body: AgentContainerOperationPreviewObject;
 }
 
 /** The type of logs to stream from a container. */
-union ContainerLogKind {
+union ContainerLogPreviewKind {
   /** Console logs from the container. */
   console: "console",
 

@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/streams";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 import "../common/models.tsp";
@@ -8,12 +7,9 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Streams;
-using TypeSpec.Versioning;
-using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
 interface Agents {
   /**
    * Retrieves the agent.
@@ -23,7 +19,7 @@ interface Agents {
   @get
   @route("/agents/{agent_name}")
   @tag("Agents")
-  getAgent is AgentOperation<
+  getAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -36,10 +32,13 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents")
   @tag("Agents")
-  createAgent is AgentOperation<CreateAgentRequest, AgentObject>;
+  createAgent is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
+    CreateAgentRequest, AgentObject>;
 
   /**
    * Updates the agent by adding a new version if there are any changes to the agent definition.
@@ -47,10 +46,12 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}")
   @tag("Agents")
-  updateAgent is AgentOperation<
+  updateAgent is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -65,10 +66,12 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents:import")
   @tag("Agents")
-  createAgentFromManifest is AgentOperation<
+  createAgentFromManifest is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     CreateAgentFromManifestRequest,
     AgentObject
   >;
@@ -79,10 +82,12 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/import")
   @tag("Agents")
-  updateAgentFromManifest is AgentOperation<
+  updateAgentFromManifest is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     {
       /** The name of the agent to update. */
       @path agent_name: string;
@@ -97,10 +102,12 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}")
   @tag("Agents")
-  deleteAgent is AgentOperation<
+  deleteAgent is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     {
       /** The name of the agent to delete. */
       @path agent_name: string;
@@ -117,20 +124,25 @@ interface Agents {
   @route("/agents")
   @tag("Agents")
   @list
-  listAgents(
-    ...ApiVersionParameter,
-    ...ListAgentQueryParameters,
-  ): AgentsPagedResult<AgentObject> | ApiErrorResponse;
+  listAgents is FoundryDataPlaneOperation<
+    {
+    ...ListAgentQueryParameters;
+    },
+    AgentsPagedResult<AgentObject>
+  >;
 
   /**
    * Create a new agent version.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions")
   @tag("Agents")
-  createAgentVersion is AgentOperation<
+  createAgentVersion is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -152,10 +164,12 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions:import")
   @tag("Agents")
-  createAgentVersionFromManifest is AgentOperation<
+  createAgentVersionFromManifest is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -180,7 +194,7 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/versions/{agent_version}")
   @tag("Agents")
-  getAgentVersion is AgentOperation<
+  getAgentVersion is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -196,10 +210,12 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
   @tag("Agents")
-  deleteAgentVersion is AgentOperation<
+  deleteAgentVersion is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     {
       /** The name of the agent to delete. */
       @path agent_name: string;
@@ -219,14 +235,15 @@ interface Agents {
   @route("/agents/{agent_name}/versions")
   @list
   @tag("Agents")
-  listAgentVersions(
-    ...ApiVersionParameter,
+  listAgentVersions is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent to retrieve versions for. */
+      @path agent_name: string,
 
-    /** The name of the agent to retrieve versions for. */
-    @path agent_name: string,
-
-    ...CommonPageQueryParameters,
-  ): AgentsPagedResult<AgentVersionObject> | ApiErrorResponse;
+      ...CommonPageQueryParameters,
+    },
+    AgentsPagedResult<AgentVersionObject>
+  >;
 
   /**
    * Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.
@@ -238,7 +255,8 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:start")
   @tag("Agents")
-  startAgentContainer is AgentOperation<
+  startAgentContainer is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -252,7 +270,7 @@ interface Agents {
       /** The maximum number of replicas. Defaults to 1. */
       max_replicas?: int32 = 1;
     },
-    AcceptedAgentContainerOperation
+    AcceptedAgentContainerPreviewOperation
   >;
 
   /**
@@ -265,7 +283,8 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:update")
   @tag("Agents")
-  updateAgentContainer is AgentOperation<
+  updateAgentContainer is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -279,7 +298,7 @@ interface Agents {
       /** The maximum number of replicas. */
       max_replicas?: int32;
     },
-    AcceptedAgentContainerOperation
+    AcceptedAgentContainerPreviewOperation
   >;
 
   /**
@@ -292,7 +311,8 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:stop")
   @tag("Agents")
-  stopAgentContainer is AgentOperation<
+  stopAgentContainer is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -300,7 +320,7 @@ interface Agents {
       /** The version of the agent. */
       @path agent_version: string;
     },
-    AcceptedAgentContainerOperation | ApiErrorResponse
+    AcceptedAgentContainerPreviewOperation
   >;
 
   /**
@@ -313,7 +333,8 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:delete")
   @tag("Agents")
-  deleteAgentContainer is AgentOperation<
+  deleteAgentContainer is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -321,7 +342,7 @@ interface Agents {
       /** The version of the agent. */
       @path agent_version: string;
     },
-    AcceptedAgentContainerOperation
+    AcceptedAgentContainerPreviewOperation
   >;
 
   /**
@@ -331,7 +352,8 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default")
   @tag("Agents")
-  getAgentContainer is AgentOperation<
+  getAgentContainer is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -339,7 +361,7 @@ interface Agents {
       /** The version of the agent. */
       @path agent_version: string;
     },
-    AgentContainerObject
+    AgentContainerPreviewObject
   >;
 
   /**
@@ -368,7 +390,8 @@ interface Agents {
     2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
     2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
     """)
-  streamAgentContainerLogs is AgentOperation<
+  streamAgentContainerLogs is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -379,7 +402,7 @@ interface Agents {
       /** The type of logs to stream. */
       @doc("console returns container stdout/stderr, system returns container app event stream. defaults to console")
       @query
-      kind?: ContainerLogKind;
+      kind?: ContainerLogPreviewKind;
 
       /** The name of the replica to stream logs from. */
       @doc("When omitted, the server chooses the first replica for console logs. Required to target a specific replica.")
@@ -405,7 +428,8 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/operations/{operation_id}")
   @tag("Agents")
-  getAgentContainerOperation is AgentOperation<
+  getAgentContainerOperation is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -413,7 +437,7 @@ interface Agents {
       /** The operation ID. */
       @path operation_id: string;
     },
-    AgentContainerOperationObject | ApiErrorResponse
+    AgentContainerOperationPreviewObject
   >;
 
   /**
@@ -424,14 +448,16 @@ interface Agents {
   @route("/agents/{agent_name}/operations")
   @tag("Agents")
   @list
-  listAgentContainerOperations(
-    ...ApiVersionParameter,
+  listAgentContainerOperations is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
+    {
+      /** The name of the agent. */
+      @path agent_name: string,
 
-    /** The name of the agent. */
-    @path agent_name: string,
-
-    ...CommonPageQueryParameters,
-  ): AgentsPagedResult<AgentContainerOperationObject> | ApiErrorResponse;
+      ...CommonPageQueryParameters,
+    },
+    AgentsPagedResult<AgentContainerOperationPreviewObject>
+  >;
 
   /**
    * List container operations for a specific version of an agent.
@@ -441,15 +467,17 @@ interface Agents {
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default/operations")
   @tag("Agents")
   @list
-  listAgentVersionContainerOperations(
-    ...ApiVersionParameter,
+  listAgentVersionContainerOperations is FoundryDataPlanePreviewOperation<
+    FoundryPreviewOptInKeys.container_agents_v1,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
 
-    /** The name of the agent. */
-    @path agent_name: string,
+      /** The version of the agent. */
+      @path agent_version: string;
 
-    /** The version of the agent. */
-    @path agent_version: string,
-
-    ...CommonPageQueryParameters,
-  ): AgentsPagedResult<AgentContainerOperationObject> | ApiErrorResponse;
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<AgentContainerOperationPreviewObject>
+  >;
 }

@@ -1,13 +1,12 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
+
 import "../common/models.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -101,8 +100,7 @@ union AttackStrategy {
 }
 
 @doc("Risk category for the attack objective.")
-@removed(Versions.v1)
-union RiskCategory {
+union RiskPreviewCategory {
   string,
 
   @doc("Represents content related to hate or unfairness.")
@@ -137,26 +135,23 @@ union RiskCategory {
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
-@removed(Versions.v1)
-model AzureOpenAIModelConfiguration extends TargetConfig {
-  type: "AzureOpenAIModel";
+model AzureOpenAIModelPreviewConfiguration extends TargetPreviewConfig {
+  type: "AzureOpenAIModel_Preview";
 
   @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).")
   modelDeploymentName: string;
 }
 
 @doc("Abstract class for target configuration.")
-@removed(Versions.v1)
 @discriminator("type")
-model TargetConfig {
+model TargetPreviewConfig {
   @doc("Type of the model configuration.")
   type: string;
 }
 
 @doc("Red team details.")
 @resource("runs")
-@removed(Versions.v1)
-model RedTeam {
+model RedTeamPreview {
   @doc("Identifier of the red team run.")
   @key("name")
   @encodedName("application/json", "id")
@@ -176,7 +171,7 @@ model RedTeam {
   simulationOnly?: boolean = false;
 
   @doc("List of risk categories to generate attack objectives for.")
-  riskCategories?: RiskCategory[];
+  riskCategories?: RiskPreviewCategory[];
 
   @doc("Application scenario for the red team operation, to generate scenario specific attacks.")
   applicationScenario?: string;
@@ -192,5 +187,5 @@ model RedTeam {
   status?: string;
 
   @doc("Target configuration for the red-team run.")
-  target: TargetConfig;
+  target: TargetPreviewConfig;
 }

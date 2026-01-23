@@ -28,7 +28,7 @@ model ApiErrorResponse {
 
 alias ApiError = OpenAI.Error;
 
-alias AgentApiVersionParameter = {
+alias FoundryDataPlaneApiVersionParameter = {
   @query("api-version")
   @minLength(1)
   @doc("The API version to use for this operation.")
@@ -41,11 +41,43 @@ alias AcceptJsonHeader = {
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Streaming responses have a body but the linter doesn't recognize it"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No polling operation yet"
-op AgentOperation<
+op FoundryDataPlaneOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...AgentApiVersionParameter, ...Params): Response | ErrorResponse;
+>(...FoundryDataPlaneApiVersionParameter, ...Params): Response | ErrorResponse;
+
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Streaming responses have a body but the linter doesn't recognize it"
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No polling operation yet"
+op FoundryDataPlanePreviewOperation<
+  AreaPreviewLabel,
+  Params extends Reflection.Model,
+  Response,
+  ErrorResponse = ApiErrorResponse
+> is FoundryDataPlaneOperation<
+  {
+    ...FoundryBetaOptInHeader<AreaPreviewLabel>;
+    ...Params;
+  },
+  Response,
+  ErrorResponse
+>;
+
+enum FoundryPreviewOptInKeys {
+  container_agents_v1: "ContainerAgents=v1",
+  hosted_agents_v1: "HostedAgents=v1",
+  evaluations_v1: "Evaluations=v1",
+  red_teams_v1: "RedTeams=v1",
+  insights_v1: "Insights=v1",
+};
+
+alias FoundryBetaOptInHeader<AreaLabel> = {
+    /**
+     * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+     */
+    @header("Foundry-Beta")
+    foundry_beta?: AreaLabel;
+};
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @doc("The response data for a requested list of items.")

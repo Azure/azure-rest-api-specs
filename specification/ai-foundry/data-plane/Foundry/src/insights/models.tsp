@@ -1,21 +1,19 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../common/models.tsp";
-import "@typespec/openapi";
 
-using TypeSpec.Versioning;
+import "../common/models.tsp";
+
 using TypeSpec.Rest;
 using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
 @doc("The response body for cluster insights.")
-@removed(Versions.v1)
 @resource("insights")
-model Insight {
+model InsightPreview {
   @doc("The unique identifier for the insights report.")
   @key("id")
   @visibility(Lifecycle.Read)
@@ -23,7 +21,7 @@ model Insight {
 
   @doc("Metadata about the insights report.")
   @visibility(Lifecycle.Read)
-  metadata: InsightsMetadata;
+  metadata: InsightsPreviewMetadata;
 
   @doc("The current state of the insights.")
   @visibility(Lifecycle.Read)
@@ -41,14 +39,12 @@ model Insight {
 }
 
 @doc("Configuration of the model used in the insight generation.")
-@removed(Versions.v1)
 model InsightModelConfiguration {
   @doc("The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.")
   modelDeploymentName: string;
 }
 
 @doc("The request of the insights report.")
-@removed(Versions.v1)
 @discriminator("type")
 model InsightRequest {
   @doc("The type of request.")
@@ -56,10 +52,9 @@ model InsightRequest {
 }
 
 @doc("Insights on set of Evaluation Results")
-@removed(Versions.v1)
-model EvaluationRunClusterInsightsRequest extends InsightRequest {
+model EvaluationRunClusterPreviewInsightRequest extends InsightRequest {
   @doc("The type of insights request.")
-  type: InsightType.EvaluationRunClusterInsight;
+  type: InsightType.EvaluationRunClusterInsightPreview;
 
   @doc("Evaluation Id for the insights.")
   evalId: string;
@@ -72,10 +67,9 @@ model EvaluationRunClusterInsightsRequest extends InsightRequest {
 }
 
 @doc("Insights on set of Agent Evaluation Results")
-@removed(Versions.v1)
-model AgentClusterInsightsRequest extends InsightRequest {
+model AgentClusterPreviewInsightRequest extends InsightRequest {
   @doc("The type of request.")
-  type: InsightType.AgentClusterInsight;
+  type: InsightType.AgentClusterInsightPreview;
 
   @doc("Identifier for the agent.")
   agentName: string;
@@ -85,10 +79,9 @@ model AgentClusterInsightsRequest extends InsightRequest {
 }
 
 @doc("Evaluation Comparison Request")
-@removed(Versions.v1)
-model EvaluationComparisonRequest extends InsightRequest {
+model EvaluationComparisonPreviewInsightRequest extends InsightRequest {
   @doc("The type of request.")
-  type: InsightType.EvaluationComparison;
+  type: InsightType.EvaluationComparisonPreview;
 
   @doc("Identifier for the evaluation.")
   evalId: string;
@@ -101,23 +94,21 @@ model EvaluationComparisonRequest extends InsightRequest {
 }
 
 @doc("The request of the insights.")
-@removed(Versions.v1)
 union InsightType {
+  string,
+
   @doc("Insights on an Evaluation run result.")
-  EvaluationRunClusterInsight: "EvaluationRunClusterInsight",
+  EvaluationRunClusterInsightPreview: "EvaluationRunClusterInsightPreview",
 
   @doc("Cluster Insight on an Agent.")
-  AgentClusterInsight: "AgentClusterInsight",
+  AgentClusterInsightPreview: "AgentClusterInsightPreview",
 
   @doc("Evaluation Comparison.")
-  EvaluationComparison: "EvaluationComparison",
-
-  string,
+  EvaluationComparisonPreview: "EvaluationComparisonPreview",
 }
 
 @doc("Metadata about the insights.")
-@removed(Versions.v1)
-model InsightsMetadata {
+model InsightsPreviewMetadata {
   @doc("The timestamp when the insights were created.")
   createdAt: utcDateTime;
 
@@ -126,7 +117,6 @@ model InsightsMetadata {
 }
 
 @doc("The result of the insights.")
-@removed(Versions.v1)
 @discriminator("type")
 model InsightResult {
   @doc("The type of insights result.")
@@ -134,21 +124,19 @@ model InsightResult {
 }
 
 @doc("Insights from the evaluation comparison.")
-@removed(Versions.v1)
-model EvalCompareReport extends InsightResult {
+model EvaluationComparisonPreviewInsightResult extends InsightResult {
   @doc("The type of insights result.")
-  type: InsightType.EvaluationComparison;
+  type: InsightType.EvaluationComparisonPreview;
 
   @doc("Comparison results for each treatment run against the baseline.")
-  comparisons: EvalRunResultComparison[];
+  comparisons: EvalRunResultPreviewComparison[];
 
   @doc("The statistical method used for comparison.")
   method: string;
 }
 
 @doc("Comparison results for treatment runs against the baseline.")
-@removed(Versions.v1)
-model EvalRunResultComparison {
+model EvalRunResultPreviewComparison {
   @doc("Name of the testing criteria.")
   testingCriteria: string;
 
@@ -159,15 +147,14 @@ model EvalRunResultComparison {
   evaluator: string;
 
   @doc("Summary statistics of the baseline run.")
-  baselineRunSummary: EvalRunResultSummary;
+  baselineRunSummary: EvalRunResultPreviewSummary;
 
   @doc("List of comparison results for each treatment run.")
-  compareItems: EvalRunResultCompareItem[];
+  compareItems: EvalRunResultComparePreviewItem[];
 }
 
 @doc("Summary statistics of a metric in an evaluation run.")
-@removed(Versions.v1)
-model EvalRunResultSummary {
+model EvalRunResultPreviewSummary {
   @doc("The evaluation run ID.")
   runId: string;
 
@@ -182,13 +169,12 @@ model EvalRunResultSummary {
 }
 
 @doc("Metric comparison for a treatment against the baseline.")
-@removed(Versions.v1)
-model EvalRunResultCompareItem {
+model EvalRunResultComparePreviewItem {
   @doc("The treatment run ID.")
   treatmentRunId: string;
 
   @doc("Summary statistics of the treatment run.")
-  treatmentRunSummary: EvalRunResultSummary;
+  treatmentRunSummary: EvalRunResultPreviewSummary;
 
   @doc("Estimated difference between treatment and baseline.")
   deltaEstimate: float32;
@@ -201,34 +187,32 @@ model EvalRunResultCompareItem {
 }
 
 @doc("Treatment Effect Type.")
-@removed(Versions.v1)
 union TreatmentEffectType {
   @doc("Not enough samples to determine treatment effect.")
-  TooFewSamples: "TooFewSamples",
+  TooFewSamplesPreview: "TooFewSamplesPreview",
 
   @doc("No significant difference between treatment and baseline.")
-  Inconclusive: "Inconclusive",
+  InconclusivePreview: "InconclusivePreview",
 
   @doc("Indicates the metric changed with statistical significance, but the direction is neutral.")
-  Changed: "Changed",
+  ChangedPreview: "ChangedPreview",
 
   @doc("Indicates the treatment significantly improved the metric compared to baseline.")
-  Improved: "Improved",
+  ImprovedPreview: "ImprovedPreview",
 
   @doc("Indicates the treatment significantly degraded the metric compared to baseline.")
-  Degraded: "Degraded",
+  DegradedPreview: "DegradedPreview",
 
   string,
 }
 
 @doc("Insights from the cluster analysis.")
-@removed(Versions.v1)
-model ClusterInsightResult {
+model ClusterInsightPreviewResult {
   @doc("Summary of the insights report.")
   summary: InsightSummary;
 
   @doc("List of clusters identified in the insights.")
-  clusters: InsightCluster[];
+  clusters: InsightPreviewCluster[];
 
   @doc("""
       Optional mapping of IDs to 2D coordinates used by the UX for visualization.
@@ -250,29 +234,26 @@ model ClusterInsightResult {
       Coordinates are intended only for client-side visualization and do not
       modify the canonical insights results.
     """)
-  coordinates?: Record<ChartCoordinate>;
+  coordinates?: Record<ChartPreviewCoordinate>;
 }
 
 @doc("Insights from the evaluation run cluster analysis.")
-@removed(Versions.v1)
-model EvaluationRunClusterInsightResult extends InsightResult {
+model EvaluationRunClusterPreviewInsightResult extends InsightResult {
   @doc("The type of insights result.")
-  type: InsightType.EvaluationRunClusterInsight;
+  type: InsightType.EvaluationRunClusterInsightPreview;
 
-  clusterInsight: ClusterInsightResult;
+  clusterInsight: ClusterInsightPreviewResult;
 }
 
 @doc("Insights from the agent cluster analysis.")
-@removed(Versions.v1)
-model AgentClusterInsightResult extends InsightResult {
+model AgentClusterPreviewInsightResult extends InsightResult {
   @doc("The type of insights result.")
-  type: InsightType.AgentClusterInsight;
+  type: InsightType.AgentClusterInsightPreview;
 
-  clusterInsight: ClusterInsightResult;
+  clusterInsight: ClusterInsightPreviewResult;
 }
 
 @doc("Summary of the error cluster analysis.")
-@removed(Versions.v1)
 model InsightSummary {
   @doc("Total number of samples analyzed.")
   sampleCount: int32;
@@ -287,12 +268,11 @@ model InsightSummary {
   method: string;
 
   @doc("Token usage while performing clustering analysis")
-  usage: ClusterTokenUsage;
+  usage: ClusterTokenPreviewUsage;
 }
 
 @doc("Token usage for cluster analysis")
-@removed(Versions.v1)
-model ClusterTokenUsage {
+model ClusterTokenPreviewUsage {
   @doc("input token usage")
   inputTokenUsage: int32;
 
@@ -304,8 +284,7 @@ model ClusterTokenUsage {
 }
 
 @doc("Coordinates for the analysis chart.")
-@removed(Versions.v1)
-model ChartCoordinate {
+model ChartPreviewCoordinate {
   @doc("X-axis coordinate.")
   x: int32;
 
@@ -317,18 +296,16 @@ model ChartCoordinate {
 }
 
 @doc("The type of sample used in the analysis.")
-@removed(Versions.v1)
 union SampleType {
   @doc("A sample from the evaluation result.")
-  EvaluationResultSample: "EvaluationResultSample",
+  EvaluationResultSamplePreview: "EvaluationResultSamplePreview",
 
   string,
 }
 
 @doc("A sample from the analysis.")
-@removed(Versions.v1)
 @discriminator("type")
-model InsightSample {
+model InsightPreviewSample {
   @doc("The unique identifier for the analysis sample.")
   id: string;
 
@@ -343,18 +320,16 @@ model InsightSample {
 }
 
 @doc("A sample from the evaluation result.")
-@removed(Versions.v1)
-model EvaluationResultSample extends InsightSample {
+model EvaluationResultPreviewSample extends InsightPreviewSample {
   @doc("Evaluation Result Sample Type")
-  type: SampleType.EvaluationResultSample;
+  type: SampleType.EvaluationResultSamplePreview;
 
   @doc("Evaluation result for the analysis sample.")
-  evaluationResult: EvalResult;
+  evaluationResult: EvalPreviewResult;
 }
 
 @doc("Result of the evaluation.")
-@removed(Versions.v1)
-model EvalResult {
+model EvalPreviewResult {
   @doc("name of the check")
   name: string;
 
@@ -369,8 +344,7 @@ model EvalResult {
 }
 
 @doc("A cluster of analysis samples.")
-@removed(Versions.v1)
-model InsightCluster {
+model InsightPreviewCluster {
   @doc("The id of the analysis cluster.")
   id: string;
 
@@ -390,8 +364,8 @@ model InsightCluster {
   weight: int32;
 
   @doc("List of subclusters within this cluster. Empty if no subclusters exist.")
-  subClusters?: InsightCluster[];
+  subClusters?: InsightPreviewCluster[];
 
   @doc("List of samples that belong to this cluster. Empty if samples are part of subclusters.")
-  samples?: InsightSample[];
+  samples?: InsightPreviewSample[];
 }

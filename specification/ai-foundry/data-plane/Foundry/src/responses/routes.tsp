@@ -13,8 +13,7 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
-@route("openai/responses")
+@route("openai/v1/responses")
 @tag("Responses")
 interface Responses {
   /**
@@ -25,7 +24,7 @@ interface Responses {
   @operationId("createResponse")
   @post
   @sharedRoute
-  createResponse is AgentOperation<OpenAI.CreateResponse, OpenAI.Response>;
+  createResponse is FoundryDataPlaneOperation<OpenAI.CreateResponse, OpenAI.Response>;
 
   /**
    * Creates a model response (streaming response).
@@ -53,7 +52,7 @@ interface Responses {
   @get
   @route("{response_id}")
   @sharedRoute
-  getResponse is AgentOperation<
+  getResponse is FoundryDataPlaneOperation<
     {
       @path
       @example("resp_677efb5139a88190b512bc3fef8e535d")
@@ -101,7 +100,7 @@ interface Responses {
   @delete
   @route("{response_id}")
   @operationId("deleteResponse")
-  deleteResponse is AgentOperation<
+  deleteResponse is FoundryDataPlaneOperation<
     {
       /**
        * The ID of the response to delete.
@@ -121,7 +120,7 @@ interface Responses {
   @post
   @route("{response_id}/cancel")
   @operationId("cancelResponse")
-  cancelResponse is AgentOperation<
+  cancelResponse is FoundryDataPlaneOperation<
     {
       /**
        * The ID of the response to cancel.

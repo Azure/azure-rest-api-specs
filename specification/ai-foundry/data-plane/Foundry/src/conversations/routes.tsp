@@ -1,20 +1,17 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-import "../common/models.tsp";
 import "./models.tsp";
+import "../common/models.tsp";
 import "../responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
-@route("openai/conversations")
+@route("openai/v1/conversations")
 @tag("Conversations")
 interface Conversations {
   /**
@@ -24,7 +21,7 @@ interface Conversations {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @post
   @operationId("createConversation")
-  createConversation is AgentOperation<
+  createConversation is FoundryDataPlaneOperation<
     OpenAI.CreateConversationBody,
     OpenAI.ConversationResource
   >;
@@ -36,7 +33,7 @@ interface Conversations {
   @route("{conversation_id}")
   @post
   @operationId("updateConversation")
-  updateConversation is AgentOperation<
+  updateConversation is FoundryDataPlaneOperation<
     {
       /** The id of the conversation to update. */
       @path conversation_id: string;
@@ -54,7 +51,7 @@ interface Conversations {
   @route("{conversation_id}")
   @get
   @operationId("getConversation")
-  getConversation is AgentOperation<
+  getConversation is FoundryDataPlaneOperation<
     {
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
@@ -70,7 +67,7 @@ interface Conversations {
   @route("{conversation_id}")
   @delete
   @operationId("deleteConversation")
-  deleteConversation is AgentOperation<
+  deleteConversation is FoundryDataPlaneOperation<
     {
       /** The id of the conversation to delete. */
       @path conversation_id: string;
@@ -89,7 +86,7 @@ interface Conversations {
   @get
   @operationId("listConversations")
   @list
-  listConversations is AgentOperation<
+  listConversations is FoundryDataPlaneOperation<
     {
       ...CommonPageQueryParameters;
       ...AgentNameQueryParam;
@@ -106,7 +103,7 @@ interface Conversations {
   @route("{conversation_id}/items")
   @post
   @operationId("createConversationItems")
-  createConversationItems is AgentOperation<
+  createConversationItems is FoundryDataPlaneOperation<
     {
       /** The id of the conversation on which the item needs to be created. */
       @path conversation_id: string;
@@ -134,7 +131,7 @@ interface Conversations {
   @route("{conversation_id}/items/{item_id}")
   @get
   @operationId("getConversationItem")
-  getConversationItem is AgentOperation<
+  getConversationItem is FoundryDataPlaneOperation<
     {
       /** The ID of the conversation that contains the item. */
       @path conversation_id: string;
@@ -153,7 +150,7 @@ interface Conversations {
   @route("{conversation_id}/items/{item_id}")
   @delete
   @operationId("deleteConversationItem")
-  deleteConversationItem is AgentOperation<
+  deleteConversationItem is FoundryDataPlaneOperation<
     {
       /** The id of the conversation on which the item needs to be deleted from. */
       @path conversation_id: string;
@@ -173,7 +170,7 @@ interface Conversations {
   @get
   @operationId("listConversationItems")
   @list
-  listConversationItems is AgentOperation<
+  listConversationItems is FoundryDataPlaneOperation<
     {
       /** The id of the conversation on which the items needs to be listed. */
       @path conversation_id: string;

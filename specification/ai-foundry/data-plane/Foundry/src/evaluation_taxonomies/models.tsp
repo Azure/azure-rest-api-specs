@@ -1,46 +1,42 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+
 import "../common/models.tsp";
 import "../openai-evaluations/models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 @doc("Evaluation Taxonomy Definition")
-@removed(Versions.v1)
 @resource("evaluationtaxonomies")
-model EvaluationTaxonomy {
+model EvaluationPreviewTaxonomy {
   ...AssetBase;
 
   @doc("Input configuration for the evaluation taxonomy.")
   taxonomyInput: EvaluationTaxonomyInput;
 
   @doc("List of taxonomy categories.")
-  taxonomyCategories?: TaxonomyCategory[];
+  taxonomyCategories?: TaxonomyPreviewCategory[];
 
   @doc("Additional properties for the evaluation taxonomy.")
   properties?: Record<string>;
 }
 
-@removed(Versions.v1)
 @doc("Type of the evaluation taxonomy input.")
 union EvaluationTaxonomyInputType {
   string,
 
   @doc("Agent")
-  agent: "agent",
+  agent_preview: "agent_preview",
 
-  @doc("Policy.")
-  policy: "policy",
+  @doc("Policy")
+  policy_preview: "policy_preview",
 }
 
-@removed(Versions.v1)
 @discriminator("type")
 @doc("Input configuration for the evaluation taxonomy.")
 model EvaluationTaxonomyInput {
@@ -48,22 +44,20 @@ model EvaluationTaxonomyInput {
   type: EvaluationTaxonomyInputType;
 }
 
-@removed(Versions.v1)
 @doc("Input configuration for the evaluation taxonomy when the input type is agent.")
-model AgentTaxonomyInput extends EvaluationTaxonomyInput {
+model AgentTaxonomyPreviewInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
-  type: EvaluationTaxonomyInputType.agent;
+  type: EvaluationTaxonomyInputType.agent_preview;
 
   @doc("Target configuration for the agent.")
-  target: AzureAIAgentTarget;
+  target: AzureAIAgentPreviewTarget;
 
   @doc("List of risk categories to evaluate against.")
-  riskCategories: RiskCategory[];
+  riskCategories: RiskPreviewCategory[];
 }
 
-@removed(Versions.v1)
 @doc("Taxonomy category definition.")
-model TaxonomyCategory {
+model TaxonomyPreviewCategory {
   @doc("Unique identifier of the taxonomy category.")
   id: string;
 
@@ -74,18 +68,17 @@ model TaxonomyCategory {
   description?: string;
 
   @doc("Risk category associated with this taxonomy category.")
-  riskCategory: RiskCategory;
+  riskCategory: RiskPreviewCategory;
 
   @doc("List of taxonomy sub categories.")
-  subCategories: TaxonomySubCategory[];
+  subCategories: TaxonomyPreviewSubCategory[];
 
   @doc("Additional properties for the taxonomy category.")
   properties?: Record<string>;
 }
 
-@removed(Versions.v1)
 @doc("Taxonomy sub-category definition.")
-model TaxonomySubCategory {
+model TaxonomyPreviewSubCategory {
   @doc("Unique identifier of the taxonomy sub-category.")
   id: string;
 

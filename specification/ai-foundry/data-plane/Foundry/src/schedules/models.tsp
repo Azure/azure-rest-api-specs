@@ -238,7 +238,7 @@ model InsightScheduleTask extends ScheduleTask {
   type: ScheduleTaskType.Insight;
 
   @doc("The insight payload.")
-  insight: Insight;
+  insight: InsightPreview;
 }
 
 @resource("schedules")

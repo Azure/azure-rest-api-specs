@@ -21,7 +21,7 @@ interface MemoryStores {
   @operationId("createMemoryStore")
   @post
   @route("/memory_stores")
-  createMemoryStore is AgentOperation<
+  createMemoryStore is FoundryDataPlaneOperation<
     CreateMemoryStoreRequest,
     MemoryStoreObject
   >;
@@ -31,7 +31,7 @@ interface MemoryStores {
   @operationId("updateMemoryStore")
   @post
   @route("/memory_stores/{name}")
-  updateMemoryStore is AgentOperation<
+  updateMemoryStore is FoundryDataPlaneOperation<
     UpdateMemoryStoreRequest,
     MemoryStoreObject
   >;
@@ -41,14 +41,14 @@ interface MemoryStores {
   @operationId("getMemoryStore")
   @get
   @route("/memory_stores/{name}")
-  getMemoryStore is AgentOperation<GetMemoryStoreRequest, MemoryStoreObject>;
+  getMemoryStore is FoundryDataPlaneOperation<GetMemoryStoreRequest, MemoryStoreObject>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("List all memory stores.")
   @operationId("listMemoryStores")
   @list
   @route("/memory_stores")
-  listMemoryStores is AgentOperation<
+  listMemoryStores is FoundryDataPlaneOperation<
     ListMemoryStoresRequest,
     AgentsPagedResult<MemoryStoreObject>
   >;
@@ -58,7 +58,7 @@ interface MemoryStores {
   @operationId("deleteMemoryStore")
   @delete
   @route("/memory_stores/{name}")
-  deleteMemoryStore is AgentOperation<
+  deleteMemoryStore is FoundryDataPlaneOperation<
     DeleteMemoryStoreRequest,
     DeleteMemoryStoreResponse
   >;
@@ -68,7 +68,7 @@ interface MemoryStores {
   @operationId("searchMemories")
   @post
   @route("/memory_stores/{name}:search_memories")
-  searchMemories is AgentOperation<
+  searchMemories is FoundryDataPlaneOperation<
     MemoryStoreSearchRequest,
     MemoryStoreSearchResponse
   >;
@@ -79,7 +79,7 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}:update_memories")
   @pollingOperation(MemoryStores.getUpdateResult)
-  updateMemories is AgentOperation<
+  updateMemories is FoundryDataPlaneOperation<
     MemoryStoreUpdateRequest,
     Foundations.AcceptedResponse &
       MemoryStoreUpdateResponse &
@@ -91,7 +91,7 @@ interface MemoryStores {
   @operationId("getUpdateResult")
   @get
   @route("/memory_stores/{name}/updates/{update_id}")
-  getUpdateResult is AgentOperation<
+  getUpdateResult is FoundryDataPlaneOperation<
     MemoryStoreGetUpdateResultRequest,
     MemoryStoreUpdateResponse
   >;
@@ -101,7 +101,7 @@ interface MemoryStores {
   @operationId("deleteScopeMemories")
   @post
   @route("/memory_stores/{name}:delete_scope")
-  deleteScope is AgentOperation<
+  deleteScope is FoundryDataPlaneOperation<
     MemoryStoreDeleteScopeRequest,
     MemoryStoreDeleteScopeResponse
   >;

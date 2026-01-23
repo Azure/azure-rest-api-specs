@@ -57,7 +57,7 @@ items or `pass` to filter by passed output items.*/
   status?: "fail" | "pass";
 };
 
-@route("openai/evals")
+@route("openai/v1/evals")
 @tag("Evals")
 interface OpenAIEvals {
   /** List evaluations for a project. */
@@ -66,7 +66,7 @@ interface OpenAIEvals {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("List all evaluations")
   @list
-  listEvals is AgentOperation<
+  listEvals is FoundryDataPlaneOperation<
     {
       ...EvalListQueryParameters;
     },
@@ -80,7 +80,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create evaluation")
   @post
-  createEval is AgentOperation<
+  createEval is FoundryDataPlaneOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       ...CreateEvalRequest;
@@ -95,7 +95,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Delete an evaluation")
   @delete
   @route("{eval_id}")
-  deleteEval is AgentOperation<
+  deleteEval is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation to delete. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -111,7 +111,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Get an evaluation")
   @get
   @route("{eval_id}")
-  getEval is AgentOperation<
+  getEval is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation to retrieve. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -127,7 +127,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Update an evaluation")
   @post
   @route("{eval_id}")
-  updateEval is AgentOperation<
+  updateEval is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation to update. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -145,7 +145,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Get a list of runs for an evaluation")
   @list
   @route("{eval_id}/runs")
-  listRuns is AgentOperation<
+  listRuns is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation to retrieve runs for. */
       @path eval_id: string;
@@ -161,7 +161,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Create evaluation run")
   @post
   @route("{eval_id}/runs")
-  createEvalRun is AgentOperation<
+  createEvalRun is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation to create a run for. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -180,7 +180,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Delete evaluation run")
   @delete
   @route("{eval_id}/runs/{run_id}")
-  deleteEvalRun is AgentOperation<
+  deleteEvalRun is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation to delete the run from. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -201,7 +201,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Get an evaluation run")
   @get
   @route("{eval_id}/runs/{run_id}")
-  getEvalRun is AgentOperation<
+  getEvalRun is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation to retrieve runs for. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -222,7 +222,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Cancel evaluation run")
   @post
   @route("{eval_id}/runs/{run_id}")
-  cancelEvalRun is AgentOperation<
+  cancelEvalRun is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation whose run you want to cancel. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -243,7 +243,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Get evaluation run output items")
   @list
   @route("{eval_id}/runs/{run_id}/output_items")
-  getEvalRunOutputItems is AgentOperation<
+  getEvalRunOutputItems is FoundryDataPlaneOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
@@ -265,7 +265,7 @@ For more information, see the [Evals guide](https://platform.openai.com/docs/gui
   @summary("Get an output item of an evaluation run")
   @get
   @route("{eval_id}/runs/{run_id}/output_items/{output_item_id}")
-  getEvalRunOutputItem is AgentOperation<
+  getEvalRunOutputItem is FoundryDataPlaneOperation<
     {
       /** The ID of the evaluation to retrieve runs for. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."

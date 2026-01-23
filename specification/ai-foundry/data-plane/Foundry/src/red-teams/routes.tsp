@@ -1,11 +1,10 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
@@ -17,13 +16,12 @@ alias RedTeamServiceTraits = SupportsClientRequestId &
 alias RedTeamOperations = Azure.Core.ResourceOperations<RedTeamServiceTraits>;
 
 @route("redTeams")
-@removed(Versions.v1)
 interface RedTeams {
   @doc("Get a redteam by name.")
-  get is RedTeamOperations.ResourceRead<RedTeam>;
+  get is RedTeamOperations.ResourceRead<RedTeamPreview>;
 
   @doc("List a redteam by name.")
-  list is RedTeamOperations.ResourceList<RedTeam>;
+  list is RedTeamOperations.ResourceList<RedTeamPreview>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a redteam run.")
@@ -31,10 +29,12 @@ interface RedTeams {
   @post
   create is Azure.Core.Foundations.Operation<
     {
+      ...FoundryBetaOptInHeader<FoundryPreviewOptInKeys.red_teams_v1>;
+
       @doc("Redteam to be run")
       @body
-      RedTeam: RedTeam;
+      RedTeam: RedTeamPreview;
     },
-    ResourceCreatedResponse<RedTeam>
+    ResourceCreatedResponse<RedTeamPreview>
   >;
 }
