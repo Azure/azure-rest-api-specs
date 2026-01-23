@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "name": "sitef6141",
+    "api-version": "2025-05-01",
+    "azureStorageAccounts": {
+      "properties": {
+        "account1": {
+          "type": "AzureFiles",
+          "accessKey": "26515^%@#*",
+          "accountName": "testsa",
+          "mountPath": "/mounts/a/files",
+          "shareName": "web"
+        }
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "web",
+        "type": "Microsoft.Web/sites/config",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/config/web",
+        "kind": "app",
+        "properties": {
+          "account1": {
+            "type": "AzureFiles",
+            "accountName": "testsa",
+            "mountPath": "/mounts/a/files",
+            "shareName": "web",
+            "state": "Ok"
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "WebApps_UpdateAzureStorageAccounts",
+  "title": "Update Azure Storage Accounts"
+}
