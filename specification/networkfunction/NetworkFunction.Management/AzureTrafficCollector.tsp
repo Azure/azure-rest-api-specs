@@ -47,7 +47,6 @@ model AzureTrafficCollector
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
@@ -92,14 +91,12 @@ interface AzureTrafficCollectors {
    * Return list of Azure Traffic Collectors in a Resource Group
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AzureTrafficCollectorsByResourceGroup_List")
   list is ArmResourceListByParent<AzureTrafficCollector, Error = CloudError>;
 
   /**
    * Return list of Azure Traffic Collectors in a subscription
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AzureTrafficCollectorsBySubscription_List")
   azureTrafficCollectorsBySubscriptionList is ArmListBySubscription<
     AzureTrafficCollector,
     Error = CloudError

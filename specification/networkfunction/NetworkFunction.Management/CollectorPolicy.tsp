@@ -42,7 +42,6 @@ model CollectorPolicy
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
@@ -94,4 +93,7 @@ interface CollectorPolicies {
 @@doc(CollectorPolicy.properties, "Properties of the Collector Policy.");
 @@doc(CollectorPolicies.createOrUpdate::parameters.resource,
   "The parameters to provide for the created Collector Policy."
+);
+@@Azure.ClientGenerator.Core.clientName(CollectorPolicies.updateTags::parameters.properties,
+  "parameters"
 );
