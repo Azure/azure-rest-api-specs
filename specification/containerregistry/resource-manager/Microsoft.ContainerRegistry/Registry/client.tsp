@@ -18,6 +18,9 @@ using Microsoft.ContainerRegistry;
 @@clientName(IPRule.value, "ipAddressOrRange", "java");
 @@clientName(Source.instanceID, "instanceId", "java");
 
-@@alternateType(RegistryNameCheckRequest.type, string, "java");
+@@alternateType(RegistryNameCheckRequest.type,
+  "Microsoft.ContainerRegistry/registries",
+  "java"
+);
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
