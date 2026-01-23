@@ -216,7 +216,6 @@ suppressions:
     from: servicefabric.json
     where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch
-      - 
   
   - code: ProvisioningStateSpecifiedForLROPut
     reason: No existing operatoins have 201 response code.
@@ -231,15 +230,15 @@ suppressions:
     reason: Existing API use additional properties, removing would be breaking change
     from: servicefabric.json
     where: 
-    - $.definitions.ApplicationDeltaHealthPolicy.properties.serviceTypeDeltaHealthPolicies
-    - $.definitions.ApplicationHealthPolicy.properties.serviceTypeHealthPolicies
-    - $.definitions.ApplicationResourceUpdateProperties.properties.parameters
-    - $.definitions.ApplicationTypeVersionResourceProperties.properties.defaultParameterList
-    - $.definitions.ArmApplicationHealthPolicy.properties.serviceTypeHealthPolicyMap
-    - $.definitions.ClusterHealthPolicy.properties.applicationHealthPolicies
-    - $.definitions.ClusterUpgradeDeltaHealthPolicy.properties.applicationDeltaHealthPolicies
-    - $.definitions.NodeTypeDescription.properties.placementProperties
-    - $.definitions.NodeTypeDescription.properties.capacities
+      - $.definitions.ApplicationDeltaHealthPolicy.properties.serviceTypeDeltaHealthPolicies
+      - $.definitions.ApplicationHealthPolicy.properties.serviceTypeHealthPolicies
+      - $.definitions.ApplicationResourceUpdateProperties.properties.parameters
+      - $.definitions.ApplicationTypeVersionResourceProperties.properties.defaultParameterList
+      - $.definitions.ArmApplicationHealthPolicy.properties.serviceTypeHealthPolicyMap
+      - $.definitions.ClusterHealthPolicy.properties.applicationHealthPolicies
+      - $.definitions.ClusterUpgradeDeltaHealthPolicy.properties.applicationDeltaHealthPolicies
+      - $.definitions.NodeTypeDescription.properties.placementProperties
+      - $.definitions.NodeTypeDescription.properties.capacities
 ```
 
 ---
