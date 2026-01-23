@@ -5215,7 +5215,7 @@ model BootDiagnosticsInstanceView {
  */
 model HardwareProfile {
   /**
-   * Specifies the size of the virtual machine. The enum data type is currently deprecated and will be removed by December 23rd 2023. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region]( https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes). The available VM sizes depend on region and availability set.
+   * Specifies the size of the virtual machine. The enum data type is currently deprecated and will be removed by December 23rd 2023. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region]( https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes). The available VM sizes depend on region and availability set. When vmSizePolicy is specified, this property will be returned in the response with the allocated VM size.
    */
   vmSize?: VirtualMachineSizeTypes;
 
@@ -5225,7 +5225,7 @@ model HardwareProfile {
   vmSizeProperties?: VMSizeProperties;
 
   /**
-   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified, but not both.
+   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified in the request, but not both. When vmSizePolicy is used, the allocated VM size will be returned in the vmSize property in the response.
    */
   @added(Versions.v2025_11_01)
   vmSizePolicy?: VMSizePolicy;
