@@ -120,7 +120,6 @@ interface PrivateEndpointConnections {
   @summary("Lists all private endpoint connections under a resource.")
   @get
   @list
-  // @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections")
   listByResource is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>,
