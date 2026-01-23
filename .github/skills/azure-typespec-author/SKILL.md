@@ -45,10 +45,6 @@ Return:
 - References from RETRIEVED_CONTEXT used to justify important decisions
 
 ### Step 6 - Next steps
-- Follow `next-steps-arm.md` to identify and suggest any relevant next steps based on the completed case. If the case not mentioned in the `next-steps-arm.md`, just exit.
+- Follow `next-steps-arm.md` to identify and suggest any relevant next steps based on the completed case. 
 
-## Supported Cases
-- Add New Preview Version
-- Add New Stable Version
-- Add New Resource Type
 ---
