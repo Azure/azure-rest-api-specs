@@ -84,22 +84,22 @@ union AssignmentType {
   string,
 
   /**
-   * NotSpecified
+   * The not specified assignment type.
    */
   NotSpecified: "NotSpecified",
 
   /**
-   * System
+   * The system assignment type.
    */
   System: "System",
 
   /**
-   * SystemHidden
+   * The system hidden assignment type.
    */
   SystemHidden: "SystemHidden",
 
   /**
-   * Custom
+   * The custom assignment type.
    */
   Custom: "Custom",
 }
@@ -138,22 +138,22 @@ union PolicyType {
   string,
 
   /**
-   * NotSpecified
+   * The not specified policy definition type.
    */
   NotSpecified: "NotSpecified",
 
   /**
-   * BuiltIn
+   * The built in policy definition type.
    */
   BuiltIn: "BuiltIn",
 
   /**
-   * Custom
+   * The custom policy definition type.
    */
   Custom: "Custom",
 
   /**
-   * Static
+   * The static policy definition type.
    */
   Static: "Static",
 }
@@ -165,37 +165,37 @@ union ParameterType {
   string,
 
   /**
-   * String
+   * The string parameter type.
    */
   String: "String",
 
   /**
-   * Array
+   * The array parameter type.
    */
   Array: "Array",
 
   /**
-   * Object
+   * The object parameter type.
    */
   Object: "Object",
 
   /**
-   * Boolean
+   * The boolean parameter type.
    */
   Boolean: "Boolean",
 
   /**
-   * Integer
+   * The integer parameter type.
    */
   Integer: "Integer",
 
   /**
-   * Float
+   * The float parameter type.
    */
   Float: "Float",
 
   /**
-   * DateTime
+   * The date-time parameter type.
    */
   DateTime: "DateTime",
 }
@@ -207,12 +207,12 @@ union PolicyTokenResult {
   string,
 
   /**
-   * Succeeded
+   * The token acquisition succeeded.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The token acquisition failed.
    */
   Failed: "Failed",
 }
@@ -224,12 +224,12 @@ union ExternalEndpointResult {
   string,
 
   /**
-   * Succeeded
+   * The external endpoint succeeded.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The external endpoint failed.
    */
   Failed: "Failed",
 }
@@ -242,29 +242,28 @@ union PolicyAction {
   string,
 
   /**
-   * Unknown
+   * The effective outcome of policy evaluation is unknown.
    */
   Unknown: "Unknown",
 
   /**
-   * Allow
-   */
+   * The effective outcome of policy evaluation is to allow the request.
   Allow: "Allow",
 
   /**
-   * Audit
+   * The effective outcome of policy evaluation is to audit the request.
    */
   Audit: "Audit",
-  
+
   /**
-   * Deny
+   * The effective outcome of policy evaluation is to deny the request.
    */
   Deny: "Deny",
-  
+
   /**
-   * Error
+   * The policy evaluation resulted in an error.
    */
-  Error: "Error"
+  Error: "Error",
 }
 
 /**
@@ -1097,7 +1096,7 @@ model PolicyTokenEvaluatedRequestDetails {
    * The request URI of the resource operation that is targeted by the issued token.
    */
   uri: string;
-  
+
   /**
    * The resource Id of the resource operation that is targeted by the issued token.
    */

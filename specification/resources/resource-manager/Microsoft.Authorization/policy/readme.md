@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: PolicyClient
 description: Policy Client
 openapi-type: arm
-tag: package-policy-2025-03-stable
+tag: package-policy-2025-11-stable
 ```
 
 ### Tag: package-policy-2025-11-stable
