@@ -4,6 +4,7 @@ import { globby } from "globby";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
+import { inspect } from "util";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
@@ -84,6 +85,46 @@ export class CompileRule implements Rule {
 
           stdOutput += "\nOutput folder:\n";
           stdOutput += outputFolder + "\n";
+
+          // Compare versions with TSP and handwritten swagger
+
+          const versionsWithHandwrittenSwagger: string[] = [];
+          const versionsWithTspGeneratedSwagger: string[] = [];
+
+          const allPattern = path.posix.join(...outputFolder.split(path.win32.sep), "**", "*.json");
+          const allAllSwaggers = (
+            await globby(allPattern, { ignore: ["**/examples/**", "**/scenarios/**"] })
+          ).map(
+            // Globby always returns posix paths
+            (p) => normalize(p),
+          );
+
+          for (const swagger of allAllSwaggers) {
+            const version = basename(dirname(swagger));
+            const swaggerText = await readFile(swagger, { encoding: "utf8" });
+            const swaggerObj = JSON.parse(swaggerText) as {
+              info?: Record<string, unknown>;
+            };
+
+            if (swaggerObj["info"]?.["x-typespec-generated"] !== undefined) {
+              versionsWithTspGeneratedSwagger.push(version);
+            } else {
+              versionsWithHandwrittenSwagger.push(version);
+            }
+          }
+
+          versionsWithHandwrittenSwagger.sort().reverse();
+          versionsWithTspGeneratedSwagger.sort().reverse();
+
+          stdOutput += `\nVersions with hand-written swagger: ${inspect(versionsWithHandwrittenSwagger)}\n`;
+          stdOutput += `Versions with tsp-generated swagger: ${inspect(versionsWithTspGeneratedSwagger)}\n`;
+
+          if (versionsWithHandwrittenSwagger[0] > versionsWithTspGeneratedSwagger[0]) {
+            success = false;
+            errorOutput += pc.red(
+              `Version ${versionsWithHandwrittenSwagger[0]} was not generated from TypeSpec, but is later than ${versionsWithTspGeneratedSwagger[0]} which was.`,
+            );
+          }
 
           // Filter to only specs matching the folder and filename extracted from the first output-file.
           // Necessary to handle multi-project specs like keyvault.
