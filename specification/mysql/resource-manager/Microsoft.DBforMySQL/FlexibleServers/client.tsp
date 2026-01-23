@@ -364,5 +364,5 @@ using Microsoft.DBforMySQL;
 );
 @@clientName(Maintenances.update::parameters.properties, "patch", "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@markAsPageable(PrivateEndpointConnections.listByServer, "csharp");
