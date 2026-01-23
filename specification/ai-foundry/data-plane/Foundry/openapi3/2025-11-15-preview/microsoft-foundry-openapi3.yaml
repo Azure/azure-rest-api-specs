@@ -4673,26 +4673,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OpenAI.Response'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/ResponsesPagedResult'
         default:
           description: An unexpected error response.
           content:
@@ -22167,6 +22148,32 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team taxonomy item generation.
+    ResponsesPagedResult:
+      type: object
+      required:
+        - data
+        - has_more
+        - total
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Response'
+          description: The requested list of items.
+        first_id:
+          type: string
+          description: The first ID represented in this list.
+        last_id:
+          type: string
+          description: The last ID represented in this list.
+        has_more:
+          type: boolean
+          description: A value indicating whether there are additional values available not captured in this list.
+        total:
+          type: integer
+          format: int32
+          description: Total number of items available.
+      description: The response data for a requested list of items.
     RiskCategory:
       anyOf:
         - type: string

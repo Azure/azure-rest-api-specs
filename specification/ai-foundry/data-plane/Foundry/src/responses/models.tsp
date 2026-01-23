@@ -62,23 +62,24 @@ alias ConversationIdQueryParam = {
   conversation_id?: string;
 };
 
-model ResponseList {
-  @doc("""
-    The type of object returned, must be `list`.
-    """)
-  object: "list";
-
-  /** A list of items used to generate this response. */
+@doc("The response data for a requested list of items.")
+model ResponsesPagedResult {
+  /** The requested list of items. */
+  @pageItems
   data: OpenAI.Response[];
 
-  /** Whether there are more items available. */
+  /** The first ID represented in this list. */
+  first_id?: string;
+
+  /** The last ID represented in this list. */
+  @continuationToken
+  last_id?: string;
+
+  /** A value indicating whether there are additional values available not captured in this list. */
   has_more: boolean;
 
-  /** The ID of the first item in the list. */
-  first_id: string;
-
-  /** The ID of the last item in the list. */
-  last_id: string;
+  /** Total number of items available. */
+  total: int32;
 }
 
 model AgentReference {

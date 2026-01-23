@@ -166,5 +166,5 @@ interface Responses {
     ...AgentNameQueryParam,
     ...AgentIdQueryParam,
     ...ConversationIdQueryParam,
-  ): AgentsPagedResult<OpenAI.Response> | ApiErrorResponse;
+  ): ResponsesPagedResult | ApiErrorResponse;
 }
