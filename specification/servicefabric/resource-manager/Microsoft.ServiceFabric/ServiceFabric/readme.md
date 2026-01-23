@@ -245,15 +245,15 @@ suppressions:
     - $.definitions.ServiceResource
     
   - code: GetCollectionResponseSchema
-    reason: Exisitng ClusterVersions APIs returns list for all list and get. Changing right now would break the API.
+    reason: Existing ClusterVersions APIs returns list for all list and get. Changing right now would break the API.
     where:
-    - $.path["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"]
-    - $.path["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"]
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"]
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"]
   
   - code: PatchIdentityProperty
     reason: Existing application patch has Identity property in properties bad. Would be a breaking change to move it.
     where:
-    - $.path["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].patch.paramters[5]
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].patch.paramters[5]
   
   - code: RequiredPropertiesMissingInResourceModel
     reason: Backwards compatability with previously approved specs. Models did not change. Results are not of type resource. Validation may be incorrectly marking as violation
@@ -264,10 +264,10 @@ suppressions:
   - code: XmsPageableForListCalls
     reason: Backwards compability with previously approved specs. API modeling did not change.
     where:
-    - $.path["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusters"].get
-    - $.path["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters"].get
-    - $.path["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"]
-    - $.path["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"]
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusters"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters"].get
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"]
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"]
 ```
 
 ---
