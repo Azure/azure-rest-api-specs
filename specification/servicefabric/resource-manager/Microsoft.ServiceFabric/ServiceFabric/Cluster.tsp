@@ -303,22 +303,22 @@ union AddOnFeatures {
   string,
 
   /**
-   * RepairManager
+   * Add on RepairManager
    */
   RepairManager: "RepairManager",
 
   /**
-   * DnsService
+   * Add on DnsService
    */
   DnsService: "DnsService",
 
   /**
-   * BackupRestoreService
+   * Add on BackupRestoreService
    */
   BackupRestoreService: "BackupRestoreService",
 
   /**
-   * ResourceMonitorService
+   * Add on ResourceMonitorService
    */
   ResourceMonitorService: "ResourceMonitorService",
 }

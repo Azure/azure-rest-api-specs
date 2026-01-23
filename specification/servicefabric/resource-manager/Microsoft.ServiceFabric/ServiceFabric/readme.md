@@ -185,20 +185,35 @@ input-file:
 - stable/2018-02-01/cluster.json
 ```
 
-### AutoRest v3 Supressions
+### AutoRest v3 Suppressions
 
 ```yaml
 suppressions:
 
   - code: ResourceNameRestriction
-    reason: Resource names didn't have a pattern initially, adding the constraint now will cause a breaking change
+    reason: Resource names didn't have a pattern initially, adding the constraint now will cause a breaking change.
 
-  - code: PatchResponseCodes
-    reason: Cluster and application PATCH LRO 202 have had response body schema since day 0. Removing would be a breaking change.
+  - code: PutResponseCodes
+    reason: Existing response codes are non-standard and changing would be a breaking change.
     from: servicefabric.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].patch
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].put
+
+  - code: PatchResponseCodes
+    reason: Cluster, application, and schema PATCH LRO 202 have had response body schema since day 0. Removing would be a breaking change.
+    from: servicefabric.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].patch
+  
+  - code: PatchBodyParametersSchema
+    reason: The existing API has these properties marked as required.
+    from: servicefabric.json
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters.4.schema.properties.properties
 ```
 
 ---
