@@ -37,7 +37,7 @@ namespace Azure.AI.Projects;
 @@copyProperties(OpenAI.Response,
   {
     /** The agent used for this response */
-    agent?: AgentId,
+    agent_reference?: AgentReference,
 
     /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
     structured_inputs?: Record<unknown>,
@@ -123,24 +123,16 @@ union _AgentItemType {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyVariants(OpenAI.ItemResourceType, _AgentItemType);
 
-/* created_by conflicts with the property in OpenAI.FunctionShellCall, ApplyPatchToolCall, and ApplyPatchToolCallOutput, to work around it we use a union type here */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.ItemResource,
   {
-    /** The information about the creator of the item */
-    #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "This is required due to a conflict with the service."
-    created_by?: CreatedBy | string,
+    @doc("The agent that created the item.")
+    agent_reference?: AgentReference,
+
+    @doc("The response on which the item is created.")
+    response_id?: string,
   }
 );
-
-model CreatedBy {
-  @doc("The agent that created the item.")
-  agent?: AgentId;
-
-  @doc("The response on which the item is created.")
-  response_id?: string;
-}
 
 model StructuredOutputsItemResource extends OpenAI.ItemResource {
   type: "structured_outputs";
