@@ -213,7 +213,35 @@ suppressions:
     reason: The existing API has these properties marked as required.
     from: servicefabric.json
     where: 
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters.4.schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters.4.schema.properties.properties.healthCheckWaitDuration
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters.4.schema.properties.properties.healthCheckRetryTimeout
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters.4.schema.properties.properties.healthCheckWaitDuration
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters.4.schema.properties.properties.upgradeTimeout
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters.4.schema.properties.properties.upgradeDomainTimeout
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters.4.schema.properties.properties.upgradeMode
+  
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: No existing operatoins have 201 response code.
+    from: servicefabric.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}//applicationTypes/{applicationTypeName}/versions/{version}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].put
+  
+  - code: AvoidAdditionalProperties
+    reason: Existing API use additional properties, removing would be breaking change
+    from: servicefabric.json
+    where: 
+    - $.definitions.ApplicationDeltaHealthPolicy.properties.serviceTypeDeltaHealthPolicies
+    - $.definitions.ApplicationHealthPolicy.properties.serviceTypeHealthPolicies
+    - $.definitions.ApplicationResourceUpdateProperties.properties.parameters
+    - $.definitions.ApplicationTypeVersionResourceProperties.properties.defaultParameterList
+    - $.definitions.ArmApplicationHealthPolicy.properties.serviceTypeHealthPolicyMap
+    - $.definitions.ClusterHealthPolicy.properties.applicationHealthPolicies
+    - $.definitions.ClusterUpgradeDeltaHealthPolicy.properties.applicationDeltaHealthPolicies
+    - $.definitions.NodeTypeDescription.properties.placementProperties
+    - $.definitions.NodeTypeDescription.properties.capacities
 ```
 
 ---
