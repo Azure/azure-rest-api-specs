@@ -31,15 +31,16 @@ When encountering a TypeSpec-related task, you will execute either a **Scenario 
 
 ---
 
-## Case Workflow (Steps 1-5)
+## Workflow (Steps 1-6)
 
-Every individual case follows these 5 steps:
+Every individual case follows these 6 steps:
 
 ### Step 1 — Intake & Clarification (no file edits)
 - Read the user request or current context
 - Analyze the codebase to understand current structure (namespace, versions, existing resources)
 - Extract any provided values for the Required Inputs Checklist
 - If missing, ask concise questions and wait for the user reply
+- For resource manager service cases, refer to `.github/skills/typespec-arm-intake.md`
 
 ### Step 2 — Retrieve Solution
 Call the `azure-sdk-mcp/azsdk_typespec_retrieve_solution` tool:
@@ -68,6 +69,8 @@ Return:
 - Validation results (pass/fail + key output)
 - References from RETRIEVED_CONTEXT used to justify important decisions
 
+### Step 6 - Follow up Actions (only for specific cases)
+- - For resource manager service cases, refer to `.github/skills/typespec-arm-follow-up-actions.md`
 ---
 
 ## Scenario Workflows
