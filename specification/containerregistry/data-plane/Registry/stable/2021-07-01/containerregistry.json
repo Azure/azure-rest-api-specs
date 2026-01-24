@@ -312,7 +312,7 @@
             "description": "Repository attribute value",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/RepositoryWriteableProperties"
+              "$ref": "#/definitions/RepositoryChangeableAttributes"
             }
           }
         ],
@@ -441,6 +441,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AcrManifests"
+            },
+            "headers": {
+              "Link": {
+                "type": "string",
+                "description": "next paginated result"
+              }
             }
           },
           "default": {
@@ -527,7 +533,7 @@
             "description": "Manifest attribute value",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ManifestWriteableProperties"
+              "$ref": "#/definitions/ManifestChangeableAttributes"
             }
           }
         ],
@@ -628,6 +634,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/TagList"
+            },
+            "headers": {
+              "Link": {
+                "type": "string",
+                "description": "next paginated result"
+              }
             }
           },
           "default": {
@@ -714,7 +726,7 @@
             "description": "Tag attribute value",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/TagWriteableProperties"
+              "$ref": "#/definitions/TagChangeableAttributes"
             }
           }
         ],
@@ -810,6 +822,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Repositories"
+            },
+            "headers": {
+              "Link": {
+                "type": "string",
+                "description": "next paginated result"
+              }
             }
           },
           "default": {
@@ -905,6 +923,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AcrRefreshToken"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
             }
           }
         },
@@ -1032,6 +1056,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AcrAccessToken"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
             }
           }
         },
@@ -2154,7 +2184,7 @@
           "readOnly": true
         },
         "changeableAttributes": {
-          "$ref": "#/definitions/RepositoryWriteableProperties",
+          "$ref": "#/definitions/RepositoryChangeableAttributes",
           "description": "Writeable properties of the resource"
         }
       },
@@ -2374,7 +2404,7 @@
           "readOnly": true
         },
         "changeableAttributes": {
-          "$ref": "#/definitions/ManifestWriteableProperties",
+          "$ref": "#/definitions/ManifestChangeableAttributes",
           "description": "Writeable properties of the resource"
         }
       },
@@ -2394,6 +2424,32 @@
           "items": {
             "$ref": "#/definitions/ArtifactManifestPlatform"
           }
+        }
+      }
+    },
+    "ManifestChangeableAttributes": {
+      "type": "object",
+      "description": "Changeable attributes",
+      "properties": {
+        "deleteEnabled": {
+          "type": "boolean",
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
+        },
+        "writeEnabled": {
+          "type": "boolean",
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
+        },
+        "listEnabled": {
+          "type": "boolean",
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
+        },
+        "readEnabled": {
+          "type": "boolean",
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         }
       }
     },
@@ -2511,32 +2567,6 @@
           "$ref": "#/definitions/Manifest"
         }
       ]
-    },
-    "ManifestWriteableProperties": {
-      "type": "object",
-      "description": "Changeable attributes",
-      "properties": {
-        "deleteEnabled": {
-          "type": "boolean",
-          "description": "Delete enabled",
-          "x-ms-client-name": "canDelete"
-        },
-        "writeEnabled": {
-          "type": "boolean",
-          "description": "Write enabled",
-          "x-ms-client-name": "canWrite"
-        },
-        "listEnabled": {
-          "type": "boolean",
-          "description": "List enabled",
-          "x-ms-client-name": "canList"
-        },
-        "readEnabled": {
-          "type": "boolean",
-          "description": "Read enabled",
-          "x-ms-client-name": "canRead"
-        }
-      }
     },
     "OCIIndex": {
       "type": "object",
@@ -2729,24 +2759,7 @@
         }
       }
     },
-    "RepositoryTags": {
-      "type": "object",
-      "description": "Result of the request to list tags of the image",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the image"
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "RepositoryWriteableProperties": {
+    "RepositoryChangeableAttributes": {
       "type": "object",
       "description": "Changeable attributes for Repository",
       "properties": {
@@ -2769,6 +2782,23 @@
           "type": "boolean",
           "description": "Read enabled",
           "x-ms-client-name": "canRead"
+        }
+      }
+    },
+    "RepositoryTags": {
+      "type": "object",
+      "description": "Result of the request to list tags of the image",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the image"
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2805,7 +2835,7 @@
           "description": "Is signed"
         },
         "changeableAttributes": {
-          "$ref": "#/definitions/TagWriteableProperties",
+          "$ref": "#/definitions/TagChangeableAttributes",
           "description": "Writeable properties of the resource"
         }
       },
@@ -2824,6 +2854,32 @@
         "signatureRecord": {
           "type": "string",
           "description": "SignatureRecord value"
+        }
+      }
+    },
+    "TagChangeableAttributes": {
+      "type": "object",
+      "description": "Changeable attributes",
+      "properties": {
+        "deleteEnabled": {
+          "type": "boolean",
+          "description": "Delete enabled",
+          "x-ms-client-name": "canDelete"
+        },
+        "writeEnabled": {
+          "type": "boolean",
+          "description": "Write enabled",
+          "x-ms-client-name": "canWrite"
+        },
+        "listEnabled": {
+          "type": "boolean",
+          "description": "List enabled",
+          "x-ms-client-name": "canList"
+        },
+        "readEnabled": {
+          "type": "boolean",
+          "description": "Read enabled",
+          "x-ms-client-name": "canRead"
         }
       }
     },
@@ -2859,32 +2915,6 @@
         "imageName",
         "tags"
       ]
-    },
-    "TagWriteableProperties": {
-      "type": "object",
-      "description": "Changeable attributes",
-      "properties": {
-        "deleteEnabled": {
-          "type": "boolean",
-          "description": "Delete enabled",
-          "x-ms-client-name": "canDelete"
-        },
-        "writeEnabled": {
-          "type": "boolean",
-          "description": "Write enabled",
-          "x-ms-client-name": "canWrite"
-        },
-        "listEnabled": {
-          "type": "boolean",
-          "description": "List enabled",
-          "x-ms-client-name": "canList"
-        },
-        "readEnabled": {
-          "type": "boolean",
-          "description": "Read enabled",
-          "x-ms-client-name": "canRead"
-        }
-      }
     },
     "TokenGrantType": {
       "type": "string",
