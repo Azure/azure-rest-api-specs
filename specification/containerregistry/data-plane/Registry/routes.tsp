@@ -77,6 +77,12 @@ interface ContainerRegistry {
   createManifest is AcrOperation<
     {
       /**
+       * Content type for the manifest
+       */
+      @header("Content-Type")
+      contentType: "application/vnd.docker.distribution.manifest.v2+json";
+
+      /**
        * Name of the image (including the namespace)
        */
       @path
