@@ -1359,6 +1359,9 @@
       "put": {
         "operationId": "ContainerRegistry_CreateManifest",
         "description": "Put the manifest identified by `name` and `reference` where `reference` can be\na tag or digest.",
+        "consumes": [
+          "application/vnd.docker.distribution.manifest.v2+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
