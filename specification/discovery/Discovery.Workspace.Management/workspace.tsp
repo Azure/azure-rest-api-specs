@@ -31,6 +31,7 @@ model WorkspaceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  @removed(Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("List of linked Storages.")
   storageIds?: Array<Microsoft.Discovery.Shared.DiscoveryStorageId>;
