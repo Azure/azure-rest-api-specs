@@ -107,7 +107,7 @@ model AgentId {
 }
 
 /**
- * Runtime tool resources to provide when creating a response with a agent that has tools configured.
+ * Runtime tool resources to provide when creating a response with an agent that has tools configured.
  */
 @doc("Runtime tool resources for an agent's tools.")
 model AgentToolResources {
