@@ -30265,7 +30265,7 @@
                 "$ref": "#/components/schemas/ToolChoiceMode"
               }
             ],
-            "description": "Controls how the model selects which tool (or tools) to use when generating a response.\nOnly applicable when `tools` are specified.\n`auto` (default): The model can choose between generating a message or calling one or more tools.\n`required`: The model must call at least one tool before responding."
+            "description": "Controls how the model selects which tool (or tools) to use when generating a response.\nOnly applicable when `tools` are specified."
           },
           "text": {
             "type": "object",
@@ -31294,7 +31294,8 @@
         "enum": [
           "auto",
           "required"
-        ]
+        ],
+        "description": "Controls tool selection of the model.\n`auto` (default): The model can choose between generating a message or calling one or more tools.\n`required`: The model must call at least one tool before responding."
       },
       "ToolDescription": {
         "type": "object",

@@ -263,8 +263,6 @@ model PromptAgentDefinition extends AgentDefinition {
   @doc("""
     Controls how the model selects which tool (or tools) to use when generating a response.
     Only applicable when `tools` are specified.
-    `auto` (default): The model can choose between generating a message or calling one or more tools.
-    `required`: The model must call at least one tool before responding.
     """)
   tool_choice_mode?: ToolChoiceMode;
 
@@ -280,6 +278,9 @@ model PromptAgentDefinition extends AgentDefinition {
   structured_inputs?: Record<StructuredInputDefinition>;
 }
 
+/**Controls tool selection of the model.
+`auto` (default): The model can choose between generating a message or calling one or more tools.
+`required`: The model must call at least one tool before responding.*/
 union ToolChoiceMode {
   auto: "auto",
   required: "required",

@@ -21912,8 +21912,6 @@ components:
           description: |-
             Controls how the model selects which tool (or tools) to use when generating a response.
             Only applicable when `tools` are specified.
-            `auto` (default): The model can choose between generating a message or calling one or more tools.
-            `required`: The model must call at least one tool before responding.
         text:
           type: object
           properties:
@@ -22604,6 +22602,10 @@ components:
       enum:
         - auto
         - required
+      description: |-
+        Controls tool selection of the model.
+        `auto` (default): The model can choose between generating a message or calling one or more tools.
+        `required`: The model must call at least one tool before responding.
     ToolDescription:
       type: object
       properties:
