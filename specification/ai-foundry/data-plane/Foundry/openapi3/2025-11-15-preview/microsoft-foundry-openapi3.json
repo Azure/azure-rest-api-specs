@@ -6868,7 +6868,7 @@
                         "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
                       },
                       "tools": {
-                        "$ref": "#/components/schemas/OpenAI.ToolsArray"
+                        "$ref": "#/components/schemas/OpenAI.ToolsArrayCreate"
                       },
                       "tool_choice": {
                         "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
@@ -6942,14 +6942,6 @@
                         "type": "object",
                         "additionalProperties": {},
                         "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
-                      },
-                      "agent_tool_resources": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/AgentToolResources"
-                          }
-                        ],
-                        "description": "Runtime tool resources for the agent's tools. Only applicable when an agent with tools is specified."
                       }
                     }
                   },
@@ -8105,23 +8097,6 @@
         ],
         "description": "Insights on set of Agent Evaluation Results"
       },
-      "AgentCodeInterpreterToolResources": {
-        "type": "object",
-        "required": [
-          "file_ids"
-        ],
-        "properties": {
-          "file_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "maxItems": 50,
-            "description": "The file IDs to merge with the agent's configured files."
-          }
-        },
-        "description": "Code interpreter tool resources for an agent."
-      },
       "AgentContainerObject": {
         "type": "object",
         "required": [
@@ -8317,22 +8292,6 @@
           }
         }
       },
-      "AgentFileSearchToolResources": {
-        "type": "object",
-        "required": [
-          "vector_store_ids"
-        ],
-        "properties": {
-          "vector_store_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The vector store IDs to merge with the agent's configured vector stores."
-          }
-        },
-        "description": "File search tool resources for an agent."
-      },
       "AgentId": {
         "type": "object",
         "required": [
@@ -8373,27 +8332,6 @@
             ]
           }
         ]
-      },
-      "AgentMCPToolResources": {
-        "type": "object",
-        "required": [
-          "server_label",
-          "headers"
-        ],
-        "properties": {
-          "server_label": {
-            "type": "string",
-            "description": "The server label that identifies the MCP tool in the agent."
-          },
-          "headers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "HTTP headers as key-value pairs."
-          }
-        },
-        "description": "MCP tool resources for an agent."
       },
       "AgentObject": {
         "type": "object",
@@ -8469,6 +8407,13 @@
           "version": {
             "type": "string",
             "description": "The version identifier of the agent."
+          },
+          "variables": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AgentVariableResolution"
+            },
+            "description": "A request-only dictionary that maps preconfigured variable names to override or modify\nagent configuration for the request."
           }
         }
       },
@@ -8543,34 +8488,170 @@
         ],
         "description": "Input configuration for the evaluation taxonomy when the input type is agent."
       },
-      "AgentToolResources": {
+      "AgentVariableCodeInterpreterContainerIdResolution": {
         "type": "object",
+        "required": [
+          "type",
+          "container_id"
+        ],
         "properties": {
-          "file_search": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentFileSearchToolResources"
-              }
-            ],
-            "description": "File search tool resources for the agent's file_search tool.\nOnly applicable if the agent has a file_search tool configured."
+          "type": {
+            "type": "string",
+            "enum": [
+              "code_interpreter_container_id"
+            ]
           },
-          "code_interpreter": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentCodeInterpreterToolResources"
-              }
-            ],
-            "description": "Code interpreter tool resources for the agent's code_interpreter tool.\nOnly applicable if the agent has a code_interpreter tool configured."
-          },
-          "mcp": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentMCPToolResources"
-            },
-            "description": "MCP tool resources for the agent's MCP tools.\nOnly applicable if the agent has MCP tools configured."
+          "container_id": {
+            "type": "string",
+            "description": "The specific, existing container ID that the code interpreter should use."
           }
         },
-        "description": "Runtime tool resources for an agent's tools."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentVariableResolution"
+          }
+        ],
+        "description": "Code interpreter tool resources for an agent."
+      },
+      "AgentVariableCodeInterpreterFileIdsResolution": {
+        "type": "object",
+        "required": [
+          "type",
+          "file_ids"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "code_interpreter_file_ids"
+            ]
+          },
+          "file_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "description": "The file IDs to merge with the agent's configured files."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentVariableResolution"
+          }
+        ],
+        "description": "Code interpreter tool resources for an agent's code_interpreter tool."
+      },
+      "AgentVariableFileSearchVectorStoreIdsResolution": {
+        "type": "object",
+        "required": [
+          "type",
+          "vector_store_ids"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "file_search_vector_store_ids"
+            ]
+          },
+          "vector_store_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The vector store IDs to merge with the agent's configured vector stores."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentVariableResolution"
+          }
+        ],
+        "description": "File search tool resources for an agent."
+      },
+      "AgentVariableMcpHeadersLabelResolution": {
+        "type": "object",
+        "required": [
+          "type",
+          "headers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_headers"
+            ]
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentVariableResolution"
+          }
+        ],
+        "description": "Per-request agent variable resolution information that adds additional key/value pairs to\nan MCP tool's headers. This cannot replace the values of existing headers, only add new ones."
+      },
+      "AgentVariableMcpServerLabelResolution": {
+        "type": "object",
+        "required": [
+          "type",
+          "server_label"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_server_label"
+            ]
+          },
+          "server_label": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentVariableResolution"
+          }
+        ],
+        "description": "Per-request agent variable resolution information for an MCP tool's server_label."
+      },
+      "AgentVariableResolution": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AgentVariableResolutionType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "mcp_server_label": "#/components/schemas/AgentVariableMcpServerLabelResolution",
+            "mcp_headers": "#/components/schemas/AgentVariableMcpHeadersLabelResolution",
+            "file_search_vector_store_ids": "#/components/schemas/AgentVariableFileSearchVectorStoreIdsResolution",
+            "code_interpreter_container_id": "#/components/schemas/AgentVariableCodeInterpreterContainerIdResolution",
+            "code_interpreter_file_ids": "#/components/schemas/AgentVariableCodeInterpreterFileIdsResolution"
+          }
+        },
+        "description": "The base type describing override or modification data provided to an agent request."
+      },
+      "AgentVariableResolutionType": {
+        "type": "string",
+        "enum": [
+          "mcp_server_label",
+          "mcp_headers",
+          "file_search_vector_store_ids",
+          "code_interpreter_container_id",
+          "code_interpreter_file_ids"
+        ]
       },
       "AgentVersionObject": {
         "type": "object",
@@ -17283,7 +17364,7 @@
             "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
           },
           "tools": {
-            "$ref": "#/components/schemas/OpenAI.ToolsArray"
+            "$ref": "#/components/schemas/OpenAI.ToolsArrayCreate"
           },
           "tool_choice": {
             "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
@@ -17357,14 +17438,6 @@
             "type": "object",
             "additionalProperties": {},
             "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
-          },
-          "agent_tool_resources": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentToolResources"
-              }
-            ],
-            "description": "Runtime tool resources for the agent's tools. Only applicable when an agent with tools is specified."
           }
         }
       },
@@ -29300,6 +29373,13 @@
         ]
       },
       "OpenAI.ToolsArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OpenAI.Tool"
+        },
+        "description": "An array of tools the model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter.\nWe support the following categories of tools:\n- **Built-in tools**: Tools that are provided by OpenAI that extend the\nmodel's capabilities, like [web search](https://platform.openai.com/docs/guides/tools-web-search)\nor [file search](https://platform.openai.com/docs/guides/tools-file-search). Learn more about\n[built-in tools](https://platform.openai.com/docs/guides/tools).\n- **MCP Tools**: Integrations with third-party systems via custom MCP servers\nor predefined connectors such as Google Drive and SharePoint. Learn more about\n[MCP Tools](https://platform.openai.com/docs/guides/tools-connectors-mcp).\n- **Function calls (custom tools)**: Functions that are defined by you,\nenabling the model to call your own code with strongly typed arguments\nand outputs. Learn more about\n[function calling](https://platform.openai.com/docs/guides/function-calling). You can also use\ncustom tools to call your own code."
+      },
+      "OpenAI.ToolsArrayCreate": {
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/OpenAI.Tool"

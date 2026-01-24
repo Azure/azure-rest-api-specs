@@ -30,9 +30,6 @@ namespace Azure.AI.Projects;
 
     /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
     structured_inputs?: Record<unknown>,
-
-    /** Runtime tool resources for the agent's tools. Only applicable when an agent with tools is specified. */
-    agent_tool_resources?: AgentToolResources,
   }
 );
 
@@ -93,6 +90,13 @@ model AgentReference {
 
   @doc("The version identifier of the agent.")
   version?: string;
+
+  /**
+   * A request-only dictionary that maps preconfigured variable names to override or modify
+   * agent configuration for the request.
+   */
+  @visibility(Lifecycle.Create)
+  variables?: Record<AgentVariableResolution>;
 }
 
 model AgentId {
@@ -104,73 +108,6 @@ model AgentId {
 
   @doc("The version identifier of the agent.")
   version: string;
-}
-
-/**
- * Runtime tool resources to provide when creating a response with an agent that has tools configured.
- */
-@doc("Runtime tool resources for an agent's tools.")
-model AgentToolResources {
-  /**
-   * File search tool resources for the agent's file_search tool.
-   * Only applicable if the agent has a file_search tool configured.
-   */
-  file_search?: AgentFileSearchToolResources;
-
-  /**
-   * Code interpreter tool resources for the agent's code_interpreter tool.
-   * Only applicable if the agent has a code_interpreter tool configured.
-   */
-  code_interpreter?: AgentCodeInterpreterToolResources;
-
-  /**
-   * MCP tool resources for the agent's MCP tools.
-   * Only applicable if the agent has MCP tools configured.
-   */
-  mcp?: AgentMCPToolResources[];
-}
-
-/** File search tool resources for an agent's file_search tool. */
-@doc("File search tool resources for an agent.")
-model AgentFileSearchToolResources {
-  /**
-   * Vector store IDs to use for file search with the agent's file_search tool.
-   * These are merged with any vector store IDs defined in the agent's file_search tool.
-   */
-  @doc("The vector store IDs to merge with the agent's configured vector stores.")
-  vector_store_ids: string[];
-}
-
-/** Code interpreter tool resources for an agent's code_interpreter tool. */
-@doc("Code interpreter tool resources for an agent.")
-model AgentCodeInterpreterToolResources {
-  /**
-   * File IDs to make available to the agent's code interpreter.
-   * These are merged with any file IDs defined in the agent's code_interpreter tool.
-   * The combined total of agent-level and runtime file IDs cannot exceed 50.
-   */
-  @doc("The file IDs to merge with the agent's configured files.")
-  @maxItems(50)
-  file_ids: string[];
-}
-
-/** MCP tool resources for an agent's MCP tools. */
-@doc("MCP tool resources for an agent.")
-model AgentMCPToolResources {
-  /**
-   * The server label identifying which MCP tool in the agent this applies to.
-   * Must match a server_label from one of the agent's MCP tool definitions.
-   */
-  @doc("The server label that identifies the MCP tool in the agent.")
-  server_label: string;
-
-  /**
-   * HTTP headers to send to the agent's MCP server.
-   * These are merged with the agent's configured headers for the same server_label.
-   * If a header key exists at both levels, the runtime value takes precedence.
-   */
-  @doc("HTTP headers as key-value pairs.")
-  headers: Record<string>;
 }
 
 // We add to OpenAI's existing Response Item types.
@@ -261,4 +198,78 @@ model OAuthConsentRequestItemResource extends OpenAI.ItemResource {
 
   @doc("The server label for the OAuth consent request.")
   server_label: string;
+}
+
+union AgentVariableResolutionType {
+  mcp_server_label: "mcp_server_label",
+  mcp_headers: "mcp_headers",
+  file_search_vector_store_ids: "file_search_vector_store_ids",
+  code_interpreter_container_id: "code_interpreter_container_id",
+  code_interpreter_file_ids: "code_interpreter_file_ids",
+}
+
+/**
+ * The base type describing override or modification data provided to an agent request.
+ */
+@discriminator("type")
+model AgentVariableResolution {
+  type: AgentVariableResolutionType;
+}
+
+/**
+ * Per-request agent variable resolution information for an MCP tool's server_label.
+ */
+model AgentVariableMcpServerLabelResolution extends AgentVariableResolution {
+  type: AgentVariableResolutionType.mcp_server_label;
+  server_label: string;
+}
+
+/**
+ * Per-request agent variable resolution information that adds additional key/value pairs to
+ * an MCP tool's headers. This cannot replace the values of existing headers, only add new ones.
+ */
+model AgentVariableMcpHeadersLabelResolution extends AgentVariableResolution {
+  type: AgentVariableResolutionType.mcp_headers;
+  headers: Record<string>;
+}
+
+/** File search tool resources for an agent's file_search tool. */
+@doc("File search tool resources for an agent.")
+model AgentVariableFileSearchVectorStoreIdsResolution
+  extends AgentVariableResolution {
+  type: AgentVariableResolutionType.file_search_vector_store_ids;
+
+  /**
+   * Vector store IDs to use for file search with the agent's file_search tool.
+   * These are merged with any vector store IDs defined in the agent's file_search tool.
+   */
+  @doc("The vector store IDs to merge with the agent's configured vector stores.")
+  vector_store_ids: string[];
+}
+
+/** Code interpreter tool resources for an agent's code_interpreter tool. */
+@doc("Code interpreter tool resources for an agent.")
+model AgentVariableCodeInterpreterContainerIdResolution
+  extends AgentVariableResolution {
+  type: AgentVariableResolutionType.code_interpreter_container_id;
+
+  /**
+   * The specific, existing container ID that the code interpreter should use.
+   */
+  container_id: string;
+}
+
+/** Code interpreter tool resources for an agent's code_interpreter tool. */
+model AgentVariableCodeInterpreterFileIdsResolution
+  extends AgentVariableResolution {
+  type: AgentVariableResolutionType.code_interpreter_file_ids;
+
+  /**
+   * File IDs to make available to the agent's code interpreter.
+   * These are merged with any file IDs defined in the agent's code_interpreter tool.
+   * The combined total of agent-level and runtime file IDs cannot exceed 50.
+   */
+  @doc("The file IDs to merge with the agent's configured files.")
+  @maxItems(50)
+  file_ids: string[];
 }

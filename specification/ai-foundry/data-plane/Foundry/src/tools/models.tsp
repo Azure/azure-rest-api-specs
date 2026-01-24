@@ -14,9 +14,9 @@ namespace Azure.AI.Projects;
 //
 
 union _AgentToolType {
-
   // Preview tools (must end with "_preview"):
   a2a_preview: "a2a_preview",
+
   bing_custom_search_preview: "bing_custom_search_preview",
   browser_automation_preview: "browser_automation_preview",
   fabric_dataagent_preview: "fabric_dataagent_preview",
@@ -24,6 +24,7 @@ union _AgentToolType {
 
   // General availability tools:
   azure_ai_search: "azure_ai_search",
+
   azure_function: "azure_function",
   bing_grounding: "bing_grounding",
   capture_structured_outputs: "capture_structured_outputs",
@@ -52,6 +53,31 @@ union _AgentIncludable {
      */
     @removed(Versions.v1)
     project_connection_id?: string,
+
+    /**
+     * Used by agents. An optional set of variable name assignments that allow an invocation of the agent
+     * to change or supplement the configuration of the tool on a per-request basis.
+     */
+    @visibility(Lifecycle.Create)
+    tool_resource_variable_names: {
+      /**
+       * If supplied, requests can use this variable name to replace the server_label value of the tool for a single request.
+       */
+      override_service_label?: string,
+
+      /**
+       * If supplied, requests can use this variable name to add additional headers to the tool.
+       * Only key/value pairs with new keys will be added.
+       * If both an override and additional value are provided, override will happen first.
+       */
+      additional_headers?: string,
+
+      /**
+       * If supplied, requests can use this variable name to replace all headers for the tool.
+       * If both an override and additional value are provided, override will happen first.
+       */
+      override_headers?: string,
+    },
   }
 );
 
@@ -64,6 +90,60 @@ union _AgentIncludable {
      */
     @removed(Versions.v1)
     custom_search_configuration?: WebSearchConfiguration,
+  }
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.CodeInterpreterTool,
+  {
+    /**
+     * Used by agents. An optional set of variable name assignments that allow an invocation of the agent
+     * to change or supplement the configuration of the tool on a per-request basis.
+     */
+    @visibility(Lifecycle.Create)
+    tool_resource_variable_names?: {
+      /**
+       * If supplied, requests can use this variable name to supply an existing container ID for
+       * the code interpreter tool to use.
+       */
+      override_container_id: string,
+
+      /**
+       * If supplied, requests can use this variable name to supply additional file IDs that
+       * this code interpreter tool will include in its automatic container.
+       */
+      additional_file_ids: string,
+
+      /**
+       * If supplied, requests can use this variable name to replace the collection of file IDs
+       * that this code interpreter tool will include in its automatic container.
+       */
+      override_file_ids: string,
+    },
+  }
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.FileSearchTool,
+  {
+    /**
+     * Used by agents. An optional set of variable name assignments that allow an invocation of the agent
+     * to change or supplement the configuration of the tool on a per-request basis.
+     */
+    @visibility(Lifecycle.Create)
+    tool_resource_variable_names?: {
+      /**
+       * If supplied, requests can use this variable name to supply additional vector store IDs to
+       * use with this file search tool.
+       */
+      additional_vector_store_ids: string,
+
+      /**
+       * If supplied, requests can provide a set of vector store IDs that will replace the default
+       * set defined in this file search tool.
+       */
+      override_vector_store_ids: string,
+    },
   }
 );
 
