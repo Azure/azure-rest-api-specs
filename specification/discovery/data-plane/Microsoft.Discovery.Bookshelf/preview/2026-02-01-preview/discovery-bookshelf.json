@@ -24,27 +24,6 @@
         "type": "string",
         "format": "uri",
         "x-ms-skip-url-encoding": true
-      },
-      {
-        "name": "apiVersion",
-        "in": "path",
-        "description": "API Version",
-        "required": true,
-        "type": "string",
-        "enum": [
-          "2026-02-01-preview"
-        ],
-        "x-ms-enum": {
-          "name": "Versions",
-          "modelAsString": true,
-          "values": [
-            {
-              "name": "2026-02-01-preview",
-              "value": "2026-02-01-preview",
-              "description": "The 2026-02-01-preview version of the Microsoft.Discovery.Bookshelf service data plane."
-            }
-          ]
-        }
       }
     ]
   },
@@ -1083,7 +1062,6 @@
       "required": [
         "version",
         "bookshelfName",
-        "storageAssetReferences",
         "description",
         "copilotInstruction"
       ]
@@ -1249,7 +1227,6 @@
         "name",
         "version",
         "bookshelfName",
-        "storageAssetReferences",
         "description",
         "copilotInstruction"
       ]
@@ -1449,7 +1426,6 @@
         "name",
         "version",
         "bookshelfName",
-        "storageAssetReferences",
         "description",
         "copilotInstruction"
       ]
@@ -1758,8 +1734,7 @@
         }
       },
       "required": [
-        "id",
-        "userAssignedIdentity"
+        "id"
       ]
     },
     "WithNodePool": {

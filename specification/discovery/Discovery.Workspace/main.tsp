@@ -37,10 +37,6 @@ using TypeSpec.Versioning;
       Supported Discovery Workspace Services endpoints (protocol and hostname, for example: https://{workspaceName}.discovery.azure.com).
       """)
     endpoint: url,
-
-    @doc("API Version")
-    @path
-    apiVersion: Versions,
   }
 )
 namespace Microsoft.Discovery.Workspace;

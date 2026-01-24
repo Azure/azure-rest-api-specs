@@ -31,10 +31,6 @@ using TypeSpec.Versioning;
       Supported Microsoft Bookshelf Services endpoints (protocol and hostname, for example: https://{bookshelfName}.discovery.azure.com).
       """)
     endpoint: url,
-
-    @doc("API Version")
-    @path
-    apiVersion: Versions,
   }
 )
 namespace Microsoft.Discovery.Bookshelf;

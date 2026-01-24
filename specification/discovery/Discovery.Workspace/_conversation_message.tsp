@@ -4,8 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-core/experimental";
 import "./common.tsp";
 import "./_conversation.tsp";
-// Import vendored Foundry responses (transitively imports OpenAI types)
-import "./.external-foundry/Azure.AI.Projects/responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -14,18 +12,18 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Experimental;
 using Microsoft.Discovery.DataPlane.Shared;
-// Access OpenAI types for copyProperties
-using OpenAI;
 
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
 
+/*
 @doc("The type of the message asset.")
 @added(Versions.`2026-02-01-preview`)
 union MessageAssetKind {
   StorageAsset: "StorageAsset",
   string,
 }
+*/
 
 @doc("Data asset")
 @removed(Versions.`2026-02-01-preview`)
@@ -61,6 +59,7 @@ model MessageListItem {
   name: string;
 }
 
+/*
 @doc("Resource for response operations. Routes to /conversations/{conversationName}/openai/responses/{responseId}")
 @added(Versions.`2026-02-01-preview`)
 @resource("openai/responses")
@@ -71,6 +70,7 @@ model ConversationResponseResource {
   @visibility(Lifecycle.Read)
   id: string;
 }
+*/
 
 @doc("For adding DataAsset ID")
 @removed(Versions.`2026-02-01-preview`)
@@ -81,14 +81,16 @@ model WithDataAssetId {
   dataAssetId: DataAssetId;
 }
 
+/*
 @doc("For adding StorageAsset ID")
 @added(Versions.`2026-02-01-preview`)
 model WithStorageAssetId {
-  /** ID of the related storage asset */
+  // ID of the related storage asset
   @visibility(Lifecycle.Read)
   @added(Versions.`2026-02-01-preview`)
   storageAssetId: StorageAssetId;
 }
+*/
 
 @doc("For adding key")
 model WithKey {
@@ -102,7 +104,6 @@ model WithKey {
 model Citation {
   ...WithKey;
   ...WithDataAssetId;
-  ...WithStorageAssetId;
 
   /** URI from where citation originated */
   @visibility(Lifecycle.Read)
@@ -160,32 +161,32 @@ union MessageStatus {
   string,
 }
 
-@doc("Expected input type when status is WorkflowAskQuestion.")
-@added(Versions.`2026-02-01-preview`)
-union NextInputType {
-  /** Boolean input expected */
-  boolean: "boolean",
+// @doc("Expected input type when status is WorkflowAskQuestion.")
+// @added(Versions.`2026-02-01-preview`)
+// union NextInputType {
+//   /** Boolean input expected */
+//   boolean: "boolean",
 
-  /** Numeric input expected */
-  number: "number",
+//   /** Numeric input expected */
+//   number: "number",
 
-  /** String input expected */
-  string: "string",
+//   /** String input expected */
+//   string: "string",
 
-  /** File input expected */
-  file: "file",
+//   /** File input expected */
+//   file: "file",
 
-  /** Data input expected */
-  data: "data",
+//   /** Data input expected */
+//   data: "data",
 
-  /** DateTime input expected */
-  datetime: "datetime",
+//   /** DateTime input expected */
+//   datetime: "datetime",
 
-  /** URL input expected */
-  url: "url",
+//   /** URL input expected */
+//   url: "url",
 
-  string,
-}
+//   string,
+// }
 
 @doc("A message.")
 @resource("messages")
@@ -306,14 +307,58 @@ alias ConversationPathContent = {
   conversationName: string;
 };
 
-// TODO: Remove un-needed route prefix!
-//@route("copilot")
 interface ConversationMessages {
   @doc("Fetch a Message by name.")
   @sharedRoute
   @removed(Versions.`2026-02-01-preview`)
   getMessageLegacy is ResourceRead<ConversationMessage>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need custom body type MessageCreateBody"
+  @doc("Creates a Message.")
+  @post
+  @createsResource(ConversationMessage)
+  @sharedRoute
+  @removed(Versions.`2026-02-01-preview`)
+  createMessageLegacy is Foundations.ResourceCollectionOperation<
+    ConversationMessage,
+    MessageCreateBody,
+    TypeSpec.Http.Response<201> &
+      TypeSpec.Http.LocationHeader &
+      ConversationMessage
+  >;
+
+  @doc("List Messages in specified conversation. Returns full message objects.")
+  @sharedRoute
+  @removed(Versions.`2026-02-01-preview`)
+  listMessagesLegacy is ResourceList<
+    ConversationMessage,
+    QueryParametersTrait<WithQueryCreatedSince>
+  >;
+
+  @doc("Cancel current copilot operation.")
+  @sharedRoute
+  @action("cancel")
+  @removed(Versions.`2026-02-01-preview`)
+  cancelLegacy is Operations.ResourceAction<
+    ConversationMessage,
+    {},
+    ConversationMessage
+  >;
+
+  @doc("Submit user input in response to AwaitingUserInput status.")
+  @sharedRoute
+  @action("submitUserInput")
+  @removed(Versions.`2026-02-01-preview`)
+  submitUserInputLegacy is Operations.ResourceAction<
+    ConversationMessage,
+    MessageConfirmationStatus,
+    {}
+  >;
+
+  // NOTE: These APIs are actually what the service exposes, but we need to collaborate with the API
+  // specs owners and SDK archboard to determine the ideal way to consume these models. For now, they will
+  // be excluded from our specs and SDKs, but still exposed by the service.
+  /*
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need OpenAI.Response return type"
   @doc("Fetch a Response by name. Returns the OpenAI Response with Discovery extensions.")
   @get
@@ -338,20 +383,6 @@ interface ConversationMessages {
     responseId: string,
   ): OpenAI.ResponseItemList;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need custom body type MessageCreateBody"
-  @doc("Creates a Message.")
-  @post
-  @createsResource(ConversationMessage)
-  @sharedRoute
-  @removed(Versions.`2026-02-01-preview`)
-  createMessageLegacy is Foundations.ResourceCollectionOperation<
-    ConversationMessage,
-    MessageCreateBody,
-    TypeSpec.Http.Response<201> &
-      TypeSpec.Http.LocationHeader &
-      ConversationMessage
-  >;
-
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need custom body type and OpenAI.Response return"
   @doc("Creates a Response. Returns the OpenAI Response with Discovery extensions.")
   @post
@@ -361,14 +392,6 @@ interface ConversationMessages {
     ConversationResponseResource,
     OpenAI.CreateResponse,
     TypeSpec.Http.Response<201> & TypeSpec.Http.LocationHeader & OpenAI.Response
-  >;
-
-  @doc("List Messages in specified conversation. Returns full message objects.")
-  @sharedRoute
-  @removed(Versions.`2026-02-01-preview`)
-  listMessagesLegacy is ResourceList<
-    ConversationMessage,
-    QueryParametersTrait<WithQueryCreatedSince>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need ResponseList return type"
@@ -382,16 +405,6 @@ interface ConversationMessages {
     ...ConversationPathContent,
     ...WithQueryCreatedSince,
   ): Azure.AI.Projects.ResponseList;
-
-  @doc("Cancel current copilot operation.")
-  @sharedRoute
-  @action("cancel")
-  @removed(Versions.`2026-02-01-preview`)
-  cancelLegacy is Operations.ResourceAction<
-    ConversationMessage,
-    {},
-    ConversationMessage
-  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need custom route and OpenAI.Response return type"
   @doc("Cancel current copilot operation. Returns the OpenAI Response with Discovery extensions.")
@@ -409,16 +422,6 @@ interface ConversationMessages {
     OpenAI.Response
   >;
 
-  @doc("Submit user input in response to AwaitingUserInput status.")
-  @sharedRoute
-  @action("submitUserInput")
-  @removed(Versions.`2026-02-01-preview`)
-  submitUserInputLegacy is Operations.ResourceAction<
-    ConversationMessage,
-    MessageConfirmationStatus,
-    {}
-  >;
-
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need OpenAI.Response return type"
   @doc("Submit user input in response for tool confirmations. Returns the OpenAI Response with Discovery extensions.")
   @action("submitUserInput")
@@ -428,21 +431,13 @@ interface ConversationMessages {
     MessageConfirmationStatus,
     OpenAI.Response
   >;
+  */
 }
 
-// ================================================================================
-// SECTION: DISCOVERY EXTENSIONS FOR OpenAI TYPES (Added in 2026-02-01-preview)
-// ================================================================================
-// These extensions add a `discoveryProperties` property to OpenAI.CreateResponse,
-// Response, and ResponseItemList using the copyProperties decorator pattern.
-// ================================================================================
-
-/**
- * Discovery-specific extensions for OpenAI types.
- *
- * These properties are added to OpenAI types via copyProperties.
- * Lifecycle visibility controls which properties appear in requests vs responses.
- */
+// NOTE: These APIs are actually what the service exposes, but we need to collaborate with the API
+// specs owners and SDK archboard to determine the ideal way to consume these models. For now, they will
+// be excluded from our specs and SDKs, but still exposed by the service.
+/*
 @doc("Discovery-specific extensions.")
 @added(Versions.`2026-02-01-preview`)
 model DiscoveryProperties {
@@ -470,44 +465,24 @@ model DiscoveryProperties {
   ...WithCreatedByType;
 }
 
-/**
- * Extend OpenAI.CreateResponse with Discovery-specific properties.
- *
- * This adds a `discoveryProperties` property to the OpenAI CreateResponse type,
- * allowing clients to pass Discovery-specific context when creating responses.
- */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental copyProperties"
 @@copyProperties(OpenAI.CreateResponse,
   {
-    /** Discovery-specific extensions for this create request. */
     discoveryProperties?: DiscoveryProperties,
   }
 );
 
-/**
- * Extend OpenAI.Response with Discovery-specific properties.
- *
- * This adds a `discoveryProperties` property to the OpenAI Response type,
- * allowing Discovery to include its metadata alongside the standard response.
- */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental copyProperties"
 @@copyProperties(OpenAI.Response,
   {
-    /** Discovery-specific extensions for this response. */
     discoveryProperties?: DiscoveryProperties,
   }
 );
 
-/**
- * Extend OpenAI.ResponseItemList with Discovery-specific properties.
- *
- * This adds a `discoveryProperties` property to the OpenAI ResponseItemList type,
- * allowing Discovery to include storage assets alongside the input items.
- */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental copyProperties"
 @@copyProperties(OpenAI.ResponseItemList,
   {
-    /** Discovery-specific extensions for these input items. */
     discoveryProperties?: DiscoveryProperties,
   }
 );
+*/

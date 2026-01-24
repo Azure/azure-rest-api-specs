@@ -42,7 +42,7 @@ model StorageAssetReference {
   id: StorageAssetId;
 
   @doc("The ARM resource ID of the User Assigned Managed Identity to access the storage asset.")
-  userAssignedIdentity: UserAssignedIdentityId;
+  userAssignedIdentity?: UserAssignedIdentityId;
 }
 
 @doc("A knowledgeBase.")
@@ -60,7 +60,7 @@ model BaseKnowledgeBase {
   @doc("Storage asset references to index.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @added(Versions.`2026-02-01-preview`)
-  storageAssetReferences: StorageAssetReference[];
+  storageAssetReferences?: StorageAssetReference[];
 
   @doc("Catalog data assets to index.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

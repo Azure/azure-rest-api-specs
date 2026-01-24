@@ -4,25 +4,9 @@ parameters:
     default: "sdk/discovery"
 emit:
   - "@azure-tools/typespec-autorest"
-  - "@typespec/openapi3"
-#  - "@azure-tools/typespec-ts"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-  disable:
-    # Disable linting rules for external vendored Foundry/OpenAI models in .external-foundry/
-    # See .external-foundry/tspconfig.yaml for documentation of why each rule is suppressed
-    "@azure-tools/typespec-azure-core/documentation-required": "External Foundry models"
-    "@azure-tools/typespec-azure-core/no-nullable": "External Foundry models"
-    "@azure-tools/typespec-azure-core/no-closed-literal-union": "External Foundry models"
-    "@azure-tools/typespec-azure-core/casing-style": "External Foundry models"
-    "@azure-tools/typespec-azure-core/no-openapi": "External Foundry models"
-    "@azure-tools/typespec-azure-core/bad-record-type": "External Foundry models"
-    "@azure-tools/typespec-azure-core/no-unknown": "External Foundry models"
-    "@azure-tools/typespec-azure-core/no-multiple-discriminator": "External Foundry models"
-    "@azure-tools/typespec-azure-core/no-string-discriminator": "External Foundry models"
-    "@azure-tools/typespec-client-generator-core/property-name-conflict": "External Foundry models"
-    "@azure-tools/typespec-azure-core/no-unnamed-union": "External Foundry models"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."

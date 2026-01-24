@@ -3,7 +3,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 import "./_project.tsp";
-import "./.external-foundry/Azure.AI.Projects/agents/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -11,15 +10,15 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Microsoft.Discovery.DataPlane.Shared;
-using Azure.AI.Projects;
 
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
 
-// ============================================================================
-// Agent Models
-// ============================================================================
+// NOTE: These APIs are actually what the service exposes, but we need to collaborate with the API
+// specs owners and SDK archboard to determine the ideal way to consume these models. For now, they will
+// be excluded from our specs and SDKs, but still exposed by the service.
 
+/*
 @doc("Common properties for Discovery agents.")
 @added(Versions.`2026-02-01-preview`)
 model AgentBase {
@@ -91,10 +90,10 @@ model Agent {
 @doc("Confirmation state for tool execution.")
 @added(Versions.`2026-02-01-preview`)
 union ConfirmationState {
-  /** Confirmation is enabled */
+  // Confirmation is enabled
   Enabled: "Enabled",
 
-  /** Confirmation is disabled */
+  // Confirmation is disabled
   Disabled: "Disabled",
 
   string,
@@ -147,3 +146,4 @@ interface Agents {
   @doc("List discovery agents in a project.")
   listAgents is ResourceList<Agent>;
 }
+*/
