@@ -1,0 +1,38 @@
+{
+  "title": "Detect Groundedness",
+  "operationId": "TextOperations_DetectGroundednessOptions",
+  "parameters": {
+    "api-version": "2024-09-15-preview",
+    "body": {
+      "domain": "Generic",
+      "task": "Summarization",
+      "text": "The Sun rises in the west.",
+      "groundingSources": [
+        "The Sun rises in the east because the Earth rotates on its axis from west to east, causing the Sun to appear in the eastern sky as the planet spins. This daily rotation makes the Sun seem to travel across the sky from east to west."
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ungroundedDetected": true,
+        "ungroundedPercentage": 1,
+        "ungroundedDetails": [
+          {
+            "text": "The Sun rises in the west.",
+            "offset": {
+              "utf8": 0,
+              "utf16": 0,
+              "codePoint": 0
+            },
+            "length": {
+              "utf8": 26,
+              "utf16": 26,
+              "codePoint": 26
+            }
+          }
+        ]
+      }
+    }
+  }
+}
