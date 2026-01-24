@@ -681,13 +681,13 @@ model ContainerRepositoryProperties {
   /**
    * Writeable properties of the resource
    */
-  changeableAttributes: RepositoryWriteableProperties;
+  changeableAttributes: RepositoryChangeableAttributes;
 }
 
 /**
  * Changeable attributes for Repository
  */
-model RepositoryWriteableProperties {
+model RepositoryChangeableAttributes {
   /**
    * Delete enabled
    */
@@ -803,13 +803,13 @@ model TagAttributesBase {
   /**
    * Writeable properties of the resource
    */
-  changeableAttributes: TagWriteableProperties;
+  changeableAttributes: TagChangeableAttributes;
 }
 
 /**
  * Changeable attributes
  */
-model TagWriteableProperties {
+model TagChangeableAttributes {
   /**
    * Delete enabled
    */
@@ -960,7 +960,7 @@ model ManifestAttributesBase {
   /**
    * Writeable properties of the resource
    */
-  changeableAttributes?: ManifestWriteableProperties;
+  changeableAttributes?: ManifestChangeableAttributes;
 }
 
 /**
@@ -990,7 +990,7 @@ model ArtifactManifestPlatform {
 /**
  * Changeable attributes
  */
-model ManifestWriteableProperties {
+model ManifestChangeableAttributes {
   /**
    * Delete enabled
    */

@@ -145,7 +145,14 @@ interface ContainerRegistry {
       @query("n")
       n?: int32;
     },
-    Repositories
+    {
+      /** next paginated result */
+      @header("Link")
+      link?: string;
+
+      @bodyRoot
+      body: Repositories;
+    }
   >;
 
   /**
@@ -207,7 +214,7 @@ interface ContainerRegistry {
        * Repository attribute value
        */
       @bodyRoot
-      value?: RepositoryWriteableProperties;
+      value?: RepositoryChangeableAttributes;
     },
     ContainerRepositoryProperties
   >;
@@ -251,7 +258,14 @@ interface ContainerRegistry {
       @query("digest")
       digest?: string;
     },
-    TagList
+    {
+      /** next paginated result */
+      @header("Link")
+      link?: string;
+
+      @bodyRoot
+      body: TagList;
+    }
   >;
 
   /**
@@ -301,7 +315,7 @@ interface ContainerRegistry {
        * Tag attribute value
        */
       @bodyRoot
-      value?: TagWriteableProperties;
+      value?: TagChangeableAttributes;
     },
     ArtifactTagProperties
   >;
@@ -364,7 +378,14 @@ interface ContainerRegistry {
       @query("orderby")
       orderby?: ArtifactManifestOrder;
     },
-    AcrManifests
+    {
+      /** next paginated result */
+      @header("Link")
+      link?: string;
+
+      @bodyRoot
+      body: AcrManifests;
+    }
   >;
 
   /**
@@ -414,7 +435,7 @@ interface ContainerRegistry {
        * Manifest attribute value
        */
       @bodyRoot
-      value?: ManifestWriteableProperties;
+      value?: ManifestChangeableAttributes;
     },
     ArtifactManifestProperties
   >;
@@ -835,7 +856,7 @@ interface Authentication {
 
     /** The body of the request */
     @multipartBody body: MultipartBodyParameter,
-  ): AcrRefreshToken;
+  ): AcrRefreshToken | AcrErrors;
 
   /**
    * Exchange ACR Refresh token for an ACR Access Token
@@ -852,7 +873,7 @@ interface Authentication {
 
     /** The body of the request */
     @multipartBody body: MultipartBodyParameter,
-  ): AcrAccessToken;
+  ): AcrAccessToken | AcrErrors;
 
   /**
    * Exchange Username, Password and Scope for an ACR Access Token
