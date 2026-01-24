@@ -1,21 +1,36 @@
 # Swagger GA vs Preview Discrepancy Checker
 
-A standalone CLI tool for comparing GA (stable) and Preview swagger files to identify breaking changes and discrepancies in Azure Search Data Plane API specifications.
+Two standalone CLI tools for comparing GA (stable) and Preview swagger files for Azure Search Data Plane API specifications.
 
 ## Overview
 
-This tool compares GA (stable) swagger files against Preview swagger files to detect:
-- **Breaking changes**: Removed or incompatibly changed operations, parameters, or schemas in preview
-- **Non-breaking additions**: New operations, parameters, or relaxed constraints in preview
-- **Schema differences**: Type, format, required field, and constraint changes
+This directory contains two complementary tools:
 
-The comparison logic is based on the semantic equivalency checker in `../swagger_equiv/semantic_equiv` but reimplemented as a standalone tool without shared dependencies.
+1. **`compare_ga_preview.py`** - Schema-level discrepancy checker
+   - Identifies breaking changes and discrepancies at schema/operation/parameter level
+   - Focuses on what changed between GA and Preview
+
+2. **`generate_operation_surface.py`** - Operation-centric API surface report
+   - Lists all operations from Preview as the baseline
+   - Annotates each operation with differences vs GA
+   - Provides guidance for 2026-04-01 GA decisions
 
 ## Prerequisites
 
 ```bash
 pip install -r requirements.txt
 ```
+
+## Tool 1: Schema-Level Discrepancy Checker (`compare_ga_preview.py`)
+
+### Overview
+
+Compares GA (stable) swagger files against Preview swagger files to detect:
+- **Breaking changes**: Removed or incompatibly changed operations, parameters, or schemas in preview
+- **Non-breaking additions**: New operations, parameters, or relaxed constraints in preview
+- **Schema differences**: Type, format, required field, and constraint changes
+
+The comparison logic is based on the semantic equivalency checker in `../swagger_equiv/semantic_equiv` but reimplemented as a standalone tool without shared dependencies.
 
 ## Usage
 
@@ -229,3 +244,260 @@ The tool compares these file pairs by default:
 - All comparisons use deterministic ordering for stable output across runs
 - Reference fields ($ref) are normalized for cross-file comparison
 - Excel formatting makes it easy to review and add comments directly in the spreadsheet
+---
+
+## Tool 2: Operation Surface Report Generator (`generate_operation_surface.py`)
+
+### Overview
+
+Generates an operation-centric API surface Excel report using **Preview (2025-11-01-preview) as the source of truth**. Each row represents an operation with detailed parameter and response information, annotated with differences vs GA (2025-09-01) to guide 2026-04-01 GA decisions.
+
+**Key differences from `compare_ga_preview.py`:**
+- **Baseline**: Preview is the baseline (not GA)
+- **Focus**: Operations are the primary unit (not schemas)
+- **Output**: Detailed parameter/response lists in bullet format
+- **Purpose**: Planning guide for next GA version
+
+### Usage
+
+#### Generate Report (Always Creates 3 Sheets)
+
+```bash
+python generate_operation_surface.py
+```
+
+This creates **`operation_surface_YYYYMMDD_HHMMSS.xlsx`** with **3 sheets** in a single workbook:
+- **searchservice** - All operations from searchservice.json (sorted by path, method)
+- **searchindex** - All operations from searchindex.json (sorted by path, method)
+- **knowledgebase** - All operations from knowledgebase.json (sorted by path, method)
+
+**Note**: The tool always processes all 3 files and generates one workbook with 3 sheets. This ensures a complete API surface view.
+
+#### Custom Output Directory
+
+```bash
+python generate_operation_surface.py --output-dir ./reports
+```
+
+#### Custom File Paths (Rarely Needed)
+
+```bash
+python generate_operation_surface.py \
+  --preview-index /path/to/preview/searchindex.json \
+  --ga-index /path/to/ga/searchindex.json \
+  --preview-service /path/to/preview/searchservice.json \
+  --ga-service /path/to/ga/searchservice.json \
+  --preview-knowledgebase /path/to/preview/knowledgebase.json
+```
+python generate_operation_surface.py --output-dir ./my-reports
+```
+
+### Output Format
+
+#### Excel Structure
+
+| Column | Description | Example |
+|--------|-------------|---------|
+| **2025-11-01-preview Path** | API endpoint path from Preview | `/indexes/{indexName}/docs/search.post.search` |
+| **Method** | HTTP method | `POST` |
+| **OperationId** | Operation identifier | `Documents_SearchPost` |
+| **Parameters** | Bullet list of all parameters | • query: api-version (required) string<br>• path: indexName (required) string<br>• body: request (required) SearchRequest<br>• ref: ClientRequestIdParameter (optional) |
+| **Responses** | Bullet list of all responses | • 200: SearchDocumentsResult (application/json)<br>• 400: SearchError (application/json) |
+| **2025-09-01 GA Presence** | Whether operation exists in GA | `present` or `missing` |
+| **Detail Diff** | Structured multi-section diff vs GA | See below for format |
+| **2026-04-01 Decision** | Manual review field | (blank for user input) |
+| **TSP Action** | Manual review field | (blank for user input) |
+
+#### Parameter Format
+
+Each parameter is formatted as a single-line bullet:
+
+```
+{in}: {name} ({required/optional}) {type} [additional details]
+```
+
+**Examples:**
+- `query: queryLanguage (optional) string (enum: simple, full)`
+- `path: indexName (required) string`
+- `header: api-version (required) string`
+- `body: request (required) SearchRequest`
+- `ref: ClientRequestIdParameter (optional)` - For $ref parameters (resolved when possible)
+
+**Note:** The tool automatically resolves `$ref` parameters (e.g., `"$ref": "#/parameters/ClientRequestIdParameter"`) to show actual parameter details. If resolution fails, it displays the reference name.
+
+#### Response Format
+
+Each response is formatted as a single-line bullet:
+
+```
+{status_code}: {schema_name} ({content_type})
+```
+
+**Examples:**
+- `200: SearchDocumentsResult (application/json)`
+- `400: SearchError (application/json)`
+- `201: (no content) (application/json)`
+
+#### Detail Diff Format
+
+The **Detail Diff** column contains a structured multi-section diff with the following sections:
+
+**Path/Method/Operation:**
+- GA presence status: `present in 2025-09-01` or `new in 2025-11-01-preview`
+- OperationId comparison (GA vs Preview)
+
+**Parameters:**
+- `+ {param}` - Parameter added in Preview
+- `- {param}` - Parameter removed in Preview
+- `~ {param} ({change})` - Parameter changed (type, required status, etc.)
+- `(no changes)` - No parameter differences
+- `(new operation)` - For operations not in GA
+
+**Responses:**
+- `+ {code}` - Response code added in Preview
+- `- {code}` - Response code removed in Preview
+- `~ {code} schema changed: {old} → {new}` - Response schema changed
+- `(no changes)` - No response differences
+- `(new operation)` - For operations not in GA
+
+**Example Detail Diff (new operation):**
+```
+Path/Method/Operation
+• GA presence: new in 2025-11-01-preview
+• operationId: GA=n/a, Preview=Aliases_Create
+
+Parameters
+• (new operation)
+
+Responses
+• (new operation)
+```
+
+**Example Detail Diff (existing operation with changes):**
+```
+Path/Method/Operation
+• GA presence: present in 2025-09-01
+• operationId: Documents_Search
+
+Parameters
+• + query: speller (optional) string
+• + query: semanticFields (optional) string
+• ~ query: top (optional→required)
+
+Responses
+• + 202
+• ~ 200 schema changed: SearchResult → SearchDocumentsResult
+```
+
+### Operation Matching Logic
+
+Operations are matched between Preview and GA using:
+- **Primary key**: Normalized path + HTTP method
+- If operationId differs but path+method match → same operation (recorded as operationId change)
+- If path+method doesn't exist in GA → marked as "new in 2025-11-01-preview"
+
+### Excel Formatting
+
+- **Single workbook with 3 sheets**: searchservice, searchindex, knowledgebase (in that order)
+- **Header row**: Blue background, white bold text, centered
+- **Data cells**: Top-aligned with text wrapping for multi-line content
+- **New operations**: Yellow background highlight (`ga_presence = "new in 2025-11-01-preview"`)
+- **Row ordering**: Sorted by path then method within each sheet for stable ordering
+- **Column widths**: Auto-adjusted for readability
+- **Row heights**: Auto-sized for multi-line parameter/response lists
+
+### Output Structure
+
+Each sheet contains:
+| Column | Description | Example |
+|--------|-------------|---------|
+| **2025-11-01-preview Path** | API path from Preview | `/indexes('{indexName}')` |
+| **Method** | HTTP method | `GET`, `POST`, `PUT`, `DELETE` |
+| **OperationId** | Operation identifier | `Indexes_Get` |
+| **Parameters** | Formatted parameter list | `• path: indexName (required) string`<br>`• header: api-version (required) string` |
+| **Responses** | Formatted response list | `• 200: SearchIndex (application/json)`<br>`• 404: ErrorResponse (application/json)` |
+| **2025-09-01 GA Presence** | Comparison status | `present in 2025-09-01` or `new in 2025-11-01-preview` |
+| **Detail Diff** | Structured multi-section diff | See Detail Diff Format above |
+| **2026-04-01 Decision** | Manual review column | (blank for manual input) |
+| **TSP Action** | Manual review column | (blank for manual input) |
+
+### Default File Paths
+
+Preview (baseline):
+- `specification/search/data-plane/Search/preview/2025-11-01-preview_unmigrated/searchindex.json`
+- `specification/search/data-plane/Search/preview/2025-11-01-preview_unmigrated/searchservice.json`
+- `specification/search/data-plane/Search/preview/2025-11-01-preview_unmigrated/knowledgebase.json`
+
+GA (comparison):
+- `specification/search/data-plane/Search/stable/2025-09-01/searchindex.json`
+- `specification/search/data-plane/Search/stable/2025-09-01/searchservice.json`
+- *(knowledgebase.json - no GA version, all operations marked as "new in 2025-11-01-preview")*
+
+### Example Output
+
+Console output:
+```
+Processing searchservice.json...
+  Preview operations: 51
+  GA operations: 31
+  Annotated operations: 51
+
+Processing searchindex.json...
+  Preview operations: 9
+  GA operations: 9
+  Annotated operations: 9
+
+Processing knowledgebase.json...
+  Preview operations: 1
+  No GA file provided, treating as empty
+  Annotated operations: 1
+
+Generating Excel report...
+✓ Excel report saved: output/operation_surface_20260123_170110.xlsx
+
+============================================================
+Operation Surface Report Summary
+============================================================
+
+searchservice.json:
+  Total operations: 51
+  Present in 2025-09-01: 31
+  New in 2025-11-01-preview: 20
+
+searchindex.json:
+  Total operations: 9
+  Present in 2025-09-01: 9
+  New in 2025-11-01-preview: 0
+
+knowledgebase.json:
+  Total operations: 1
+  Present in 2025-09-01: 0
+  New in 2025-11-01-preview: 1
+
+============================================================
+Report saved to: output/operation_surface_20260123_143022.xlsx
+============================================================
+```
+
+### When to Use This Tool
+
+Use `generate_operation_surface.py` when you need to:
+- **Plan the next GA version** based on Preview operations
+- **Review all operations** in Preview with their parameters and responses
+- **Identify new operations** not present in GA
+- **Compare API surface** at operation level (not schema level)
+- **Make decisions** about what to include in 2026-04-01 GA
+
+Use `compare_ga_preview.py` when you need to:
+- **Identify breaking changes** for migration impact
+- **Review schema-level changes** in models and definitions
+- **Track severity** of all changes (breaking vs non-breaking)
+- **Detailed diff analysis** of parameters, responses, and constraints
+
+### Notes
+
+- This tool prioritizes **operation surface** over deep schema comparisons
+- Parameter/response type comparisons are **best-effort** (shallow comparison by name/$ref)
+- Both Swagger 2.0 and OpenAPI 3.0 are supported
+- Multi-line bullet lists render properly in Excel with wrapped text
+- Operations sorted by path then method for stable ordering
