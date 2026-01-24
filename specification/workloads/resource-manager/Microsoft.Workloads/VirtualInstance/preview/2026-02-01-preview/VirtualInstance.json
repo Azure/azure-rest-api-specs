@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Workloads Client",
-    "version": "2024-12-01-preview",
+    "version": "2026-02-01-preview",
     "description": "Workloads client provides access to various workload operations.",
     "x-typespec-generated": [
       {
@@ -56,10 +56,10 @@
         "description": "Gets all Virtual Instance resources in a Subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -72,7 +72,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -95,13 +95,13 @@
         "description": "Gets all Virtual Instance resources in a Resource Group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -114,7 +114,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -137,13 +137,13 @@
         "description": "Gets a Virtual Instance resource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -164,7 +164,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -182,13 +182,13 @@
         "description": "Creates a Virtual Instance resource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -235,11 +235,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Discover a virtual instance - sample 1": {
+            "$ref": "./examples/VirtualInstances_DiscoveryUsingSAPAPI.json"
+          },
           "Register a virtual instance - sample 1": {
             "$ref": "./examples/VirtualInstances_Create.json"
           }
@@ -257,13 +260,13 @@
         "description": "Updates a Virtual Instance resource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -307,11 +310,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Update a virtual instance - Disable change detection": {
+            "$ref": "./examples/VirtualInstances_DisableChangeDetection.json"
+          },
           "Update a virtual instance - sample 1": {
             "$ref": "./examples/VirtualInstances_Update.json"
           }
@@ -329,13 +335,13 @@
         "description": "Deletes a Virtual Instance resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -367,7 +373,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -391,13 +397,13 @@
         "description": "List all the workload components corresponding to the Virtual Instance resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -418,7 +424,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -441,13 +447,13 @@
         "description": "Gets the workload component corresponding to the Virtual Instance resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -476,7 +482,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -494,13 +500,13 @@
         "description": "Creates a workload component corresponding to the Virtual Instance resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -555,7 +561,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -577,13 +583,13 @@
         "description": "Updates a workload component corresponding to the Virtual Instance resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -635,11 +641,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Update a workload component - Update SAP Central Services instance number": {
+            "$ref": "./examples/WorkloadComponents_UpdateSapCentralServicesProfile.json"
+          },
           "Update a workload component - sample 1": {
             "$ref": "./examples/WorkloadComponents_Update.json"
           }
@@ -657,13 +666,13 @@
         "description": "Deletes the workload component corresponding to the Virtual Instance resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualInstanceName",
@@ -703,7 +712,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -720,6 +729,223 @@
     }
   },
   "definitions": {
+    "AuxiliaryResourceConfiguration": {
+      "type": "object",
+      "description": "Defines the configuration for auxiliary resources required by workload platform services.\nUse 'Manual' to explicitly specify resource IDs.",
+      "properties": {
+        "configurationType": {
+          "$ref": "#/definitions/AuxiliaryResourceConfigurationType",
+          "description": "The type of auxiliary resource configuration."
+        }
+      },
+      "discriminator": "configurationType",
+      "required": [
+        "configurationType"
+      ]
+    },
+    "AuxiliaryResourceConfigurationType": {
+      "type": "string",
+      "description": "The type of auxiliary resource configuration. Determines how auxiliary resources\nare specified for workload operations.",
+      "enum": [
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "AuxiliaryResourceConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "User provides all required auxiliary resource IDs explicitly."
+          }
+        ]
+      }
+    },
+    "AuxiliaryStorageAccountConfiguration": {
+      "type": "object",
+      "description": "Defines the storage account configuration for auxiliary resources.",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the storage account.\nRequired on create, optional on update.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ChangeDetection": {
+      "type": "object",
+      "description": "Defines the change detection information including configuration and errors.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/ChangeDetectionConfiguration",
+          "description": "The configuration settings for change detection functionality.\nIf not provided, the service automatically enables change detection with default settings\n(state: Enabled, frequency: PT1H) and returns the configuration in the response."
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any change detection related errors on the Virtual Instance resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ChangeDetectionConfiguration": {
+      "type": "object",
+      "description": "Defines the configuration settings for change detection functionality.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ChangeDetectionState",
+          "description": "The state of the Change Detection (CD) functionality.\nWhen set to 'Enabled', the system will execute CD based on the configured frequency.\nWhen set to 'Disabled', CD processing will be skipped entirely.\nRequired on create, optional on update. Defaults to 'Disabled' if not provided on create.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "frequency": {
+          "type": "string",
+          "description": "Specifies how frequently the Change Detection (CD) process should run.\nThe value must be an ISO 8601 duration string between 1 hour (PT1H) and 1 day (P1D).\nExamples: \"PT1H\" (1 hour), \"PT6H\" (6 hours), \"P1D\" (1 day).\nDefaults to \"PT1H\" if not provided."
+        }
+      }
+    },
+    "ChangeDetectionState": {
+      "type": "string",
+      "description": "Defines the state of change detection functionality.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeDetectionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Change detection is enabled and will run based on the configured frequency."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Change detection is disabled and will not run."
+          }
+        ]
+      }
+    },
+    "ComponentProfile": {
+      "type": "object",
+      "description": "Defines the base component profile. The profile type determines the specific\nconfiguration properties available for each workload component type.",
+      "properties": {
+        "profileType": {
+          "$ref": "#/definitions/ComponentProfileType",
+          "description": "The type of the component profile. This value determines the expected structure\nof the profile properties and must be compatible with the componentType."
+        }
+      },
+      "discriminator": "profileType",
+      "required": [
+        "profileType"
+      ]
+    },
+    "ComponentProfileType": {
+      "type": "string",
+      "description": "Defines the type of component profile.",
+      "enum": [
+        "SAP-CentralServices-Default",
+        "SAP-ApplicationServer-Default",
+        "SAP-DatabaseServer-Default"
+      ],
+      "x-ms-enum": {
+        "name": "ComponentProfileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SAP_CentralServices_Default",
+            "value": "SAP-CentralServices-Default",
+            "description": "SAP Central Services component profile."
+          },
+          {
+            "name": "SAP_ApplicationServer_Default",
+            "value": "SAP-ApplicationServer-Default",
+            "description": "SAP Application Server component profile."
+          },
+          {
+            "name": "SAP_DatabaseServer_Default",
+            "value": "SAP-DatabaseServer-Default",
+            "description": "SAP Database Server component profile."
+          }
+        ]
+      }
+    },
+    "DiscoveryConfiguration": {
+      "type": "object",
+      "description": "Defines the base configuration for automated discovery. The discovery type determines\nthe specific configuration properties available for each discovery workflow.",
+      "properties": {
+        "discoveryType": {
+          "$ref": "#/definitions/DiscoveryConfigurationType",
+          "description": "The type of discovery to execute. This value determines the expected structure\nof the configuration and must be compatible with the workloadType specified in workloadInfo."
+        },
+        "mode": {
+          "$ref": "#/definitions/DiscoveryExecutionMode",
+          "description": "The execution mode for the discovery process.\nWhen set to 'Execute', the discovery process will be executed as part of this request.\nWhen set to 'Skip', only the configuration is updated without running discovery.\nDefaults to 'Execute' if not provided."
+        }
+      },
+      "discriminator": "discoveryType",
+      "required": [
+        "discoveryType"
+      ]
+    },
+    "DiscoveryConfigurationType": {
+      "type": "string",
+      "description": "Defines the type of discovery configuration.",
+      "enum": [
+        "SAPAPI"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SAPAPI",
+            "value": "SAPAPI",
+            "description": "SAP API discovery type for discovering SAP systems via API calls."
+          }
+        ]
+      }
+    },
+    "DiscoveryExecutionMode": {
+      "type": "string",
+      "description": "Defines the execution mode for discovery operations.",
+      "enum": [
+        "Execute",
+        "Skip"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryExecutionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Execute",
+            "value": "Execute",
+            "description": "Execute the discovery process as part of this request."
+          },
+          {
+            "name": "Skip",
+            "value": "Skip",
+            "description": "Skip the discovery process; only update configuration without running discovery."
+          }
+        ]
+      }
+    },
     "EnvironmentType": {
       "type": "string",
       "description": "Defines the environment type.",
@@ -749,6 +975,92 @@
           }
         ]
       }
+    },
+    "HanaDbProperties": {
+      "type": "object",
+      "description": "Defines the HANA database specific properties.",
+      "properties": {
+        "instanceNumber": {
+          "type": "string",
+          "description": "The SAP HANA instance number. Must be a two-digit number from 00 to 99.",
+          "pattern": "^[0-9]{2}$"
+        },
+        "architecture": {
+          "type": "string",
+          "description": "The database architecture (e.g., Scale-Out, Scale-Up)."
+        },
+        "databases": {
+          "type": "array",
+          "description": "The list of HANA database instances.",
+          "items": {
+            "$ref": "#/definitions/SapDatabaseInstanceConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LinkType": {
+      "type": "string",
+      "description": "Defines the link type applicable for the linked resources.",
+      "enum": [
+        "Dependency",
+        "DisasterRecovery"
+      ],
+      "x-ms-enum": {
+        "name": "LinkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dependency",
+            "value": "Dependency",
+            "description": "Indicates the Dependency link type."
+          },
+          {
+            "name": "DisasterRecovery",
+            "value": "DisasterRecovery",
+            "description": "Indicates the Disaster Recovery link type."
+          }
+        ]
+      }
+    },
+    "LinkedResource": {
+      "type": "object",
+      "description": "Defines the linked Resource class.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/WorkloadResourceId",
+          "description": "ARM ID of the linked resource. The ARM IDs must belong to the resources of type 'Microsoft.Workloads/virtualInstances'."
+        },
+        "linkType": {
+          "$ref": "#/definitions/LinkType",
+          "description": "The type of the link."
+        }
+      },
+      "required": [
+        "resourceId",
+        "linkType"
+      ]
+    },
+    "ManualAuxiliaryResourceConfiguration": {
+      "type": "object",
+      "description": "Defines the manual auxiliary resource configuration where the user explicitly\nprovides all required resource IDs such as storage accounts.",
+      "properties": {
+        "storageAccount": {
+          "$ref": "#/definitions/AuxiliaryStorageAccountConfiguration",
+          "description": "The storage account to use for workload operations such as discovery and change detection.\nRequired on create, optional on update.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuxiliaryResourceConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Manual"
     },
     "ResourceConfiguration": {
       "type": "object",
@@ -813,6 +1125,273 @@
       },
       "readOnly": true
     },
+    "SapApiDiscoveryConfiguration": {
+      "type": "object",
+      "description": "Defines the SAP API discovery configuration for discovering SAP systems via API calls.",
+      "properties": {
+        "vmResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the virtual machine to use for SAP API discovery.\nRequired on create, optional on update.\nOnly application server or central server Vm Resource Id supported as input.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiscoveryConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPAPI"
+    },
+    "SapApplicationServerDefaultComponentProfile": {
+      "type": "object",
+      "description": "Defines the SAP Application Server default component profile.",
+      "properties": {
+        "instanceNumber": {
+          "type": "string",
+          "description": "The SAP instance number. Must be a two-digit number from 00 to 99.",
+          "pattern": "^[0-9]{2}$"
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "The SAP kernel version."
+        },
+        "kernelPatch": {
+          "type": "string",
+          "description": "The SAP kernel patch level."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname of the SAP instance."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address of the SAP instance."
+        },
+        "dispatcher": {
+          "$ref": "#/definitions/SapDispatcherConfiguration",
+          "description": "The dispatcher configuration."
+        },
+        "gateway": {
+          "$ref": "#/definitions/SapGatewayConfiguration",
+          "description": "The gateway configuration."
+        },
+        "icm": {
+          "$ref": "#/definitions/SapIcmConfiguration",
+          "description": "The ICM (Internet Communication Manager) configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComponentProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "SAP-ApplicationServer-Default"
+    },
+    "SapCentralServicesDefaultComponentProfile": {
+      "type": "object",
+      "description": "Defines the SAP Central Services default component profile.",
+      "properties": {
+        "instanceNumber": {
+          "type": "string",
+          "description": "The SAP instance number. Must be a two-digit number from 00 to 99.",
+          "pattern": "^[0-9]{2}$"
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "The SAP kernel version."
+        },
+        "kernelPatch": {
+          "type": "string",
+          "description": "The SAP kernel patch level."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname of the SAP instance."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address of the SAP instance."
+        },
+        "highAvailability": {
+          "$ref": "#/definitions/SapHighAvailabilityConfiguration",
+          "description": "The high availability configuration."
+        },
+        "messageServer": {
+          "$ref": "#/definitions/SapMessageServerConfiguration",
+          "description": "The message server configuration."
+        },
+        "enqueueServer": {
+          "$ref": "#/definitions/SapEnqueueServerConfiguration",
+          "description": "The enqueue server configuration."
+        },
+        "gateway": {
+          "$ref": "#/definitions/SapGatewayConfiguration",
+          "description": "The gateway configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComponentProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "SAP-CentralServices-Default"
+    },
+    "SapDatabaseInstanceConfiguration": {
+      "type": "object",
+      "description": "Defines the database instance configuration for SAP Database Server.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database."
+        },
+        "databasePort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port of the database."
+        }
+      }
+    },
+    "SapDatabaseServerDefaultComponentProfile": {
+      "type": "object",
+      "description": "Defines the SAP Database Server default component profile.",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "The hostname of the database server."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address of the database server."
+        },
+        "version": {
+          "type": "string",
+          "description": "The database version."
+        },
+        "hanaDbProperties": {
+          "$ref": "#/definitions/HanaDbProperties",
+          "description": "The HANA database specific properties."
+        },
+        "highAvailability": {
+          "$ref": "#/definitions/SapHighAvailabilityConfiguration",
+          "description": "The high availability configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComponentProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "SAP-DatabaseServer-Default"
+    },
+    "SapDispatcherConfiguration": {
+      "type": "object",
+      "description": "Defines the dispatcher configuration for SAP Application Server.",
+      "properties": {
+        "dispPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The dispatcher port."
+        }
+      }
+    },
+    "SapEnqueueServerConfiguration": {
+      "type": "object",
+      "description": "Defines the enqueue server configuration for SAP Central Services.",
+      "properties": {
+        "esPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The enqueue server port."
+        }
+      }
+    },
+    "SapGatewayConfiguration": {
+      "type": "object",
+      "description": "Defines the gateway configuration for SAP components.",
+      "properties": {
+        "gwPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The gateway port."
+        }
+      }
+    },
+    "SapHighAvailabilityConfiguration": {
+      "type": "object",
+      "description": "Defines the high availability configuration for SAP components.",
+      "properties": {
+        "isHaActive": {
+          "type": "boolean",
+          "description": "Indicates whether high availability is active."
+        },
+        "haNodes": {
+          "type": "array",
+          "description": "The list of high availability node names.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SapIcmConfiguration": {
+      "type": "object",
+      "description": "Defines the ICM (Internet Communication Manager) configuration for SAP Application Server.",
+      "properties": {
+        "httpPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP port for ICM."
+        },
+        "httpsPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTPS port for ICM."
+        },
+        "smtpPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The SMTP port for ICM."
+        }
+      }
+    },
+    "SapMessageServerConfiguration": {
+      "type": "object",
+      "description": "Defines the message server configuration for SAP Central Services.",
+      "properties": {
+        "msPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The message server port."
+        },
+        "internalPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The internal port for the message server."
+        },
+        "httpPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP port for the message server."
+        },
+        "httpsPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTPS port for the message server."
+        }
+      }
+    },
     "SystemLifecycleStage": {
       "type": "string",
       "description": "Defines the possible values for system lifecycle stage.",
@@ -852,7 +1431,7 @@
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "kind": {
@@ -867,7 +1446,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -896,9 +1475,14 @@
       "type": "object",
       "description": "Defines the Virtual Instance resource properties.",
       "properties": {
-        "architectureId": {
-          "type": "string",
-          "description": "The ID corresponding to the deployment architecture of the system.\nThe workload specific information including the workload type, definition ID and version."
+        "workloadInfo": {
+          "$ref": "#/definitions/WorkloadInfo",
+          "description": "The workload specific information including the workload type, definition ID and version.\nRequired on create, optional on update.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "environmentType": {
           "$ref": "#/definitions/EnvironmentType",
@@ -936,16 +1520,39 @@
             "type": "string"
           }
         },
-        "dependencies": {
+        "linkedResources": {
           "type": "array",
-          "description": "The list of ARM IDs of the virtual instances that the system is dependent on. The ARM IDs must belong to the resources of type 'Microsoft.Workloads/virtualInstances'.",
+          "description": "The list of the linked resource objects.",
           "items": {
-            "$ref": "#/definitions/WorkloadResourceId"
-          }
+            "$ref": "#/definitions/LinkedResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "discoveryConfiguration": {
+          "$ref": "#/definitions/DiscoveryConfiguration",
+          "description": "Defines the automated discovery input configuration."
+        },
+        "changeDetection": {
+          "$ref": "#/definitions/ChangeDetection",
+          "description": "Defines the change detection information including configuration and errors."
+        },
+        "auxiliaryResourceConfiguration": {
+          "$ref": "#/definitions/AuxiliaryResourceConfiguration",
+          "description": "Defines the configuration for auxiliary resource that will be used for mission critical workload platform services."
         },
         "complianceState": {
           "$ref": "#/definitions/WorkloadComplianceState",
           "description": "Defines the compliance state of the virtual instance, as per the corresponding workload definition and architecture.",
+          "readOnly": true
+        },
+        "enrollmentState": {
+          "$ref": "#/definitions/WorkloadEnrollmentState",
+          "description": "Defines the enrollment state of the virtual instance, as per the corresponding workload definition.",
+          "readOnly": true
+        },
+        "enrollmentErrors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any enrollment related errors on the Virtual Instance resource.",
           "readOnly": true
         },
         "provisioningState": {
@@ -954,14 +1561,11 @@
           "readOnly": true
         },
         "errors": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "Indicates any errors on the Virtual Instance resource.",
           "readOnly": true
         }
-      },
-      "required": [
-        "architectureId"
-      ]
+      }
     },
     "VirtualInstanceUpdate": {
       "type": "object",
@@ -975,7 +1579,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed service identity (user assigned identities)"
         },
         "properties": {
@@ -1019,7 +1623,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1089,9 +1693,28 @@
             "create"
           ]
         },
+        "componentProfile": {
+          "$ref": "#/definitions/ComponentProfile",
+          "description": "The component profile containing workload-specific configuration details.\nThe profile type varies based on the workload and component type.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "complianceState": {
           "$ref": "#/definitions/WorkloadComplianceState",
           "description": "Defines the compliance state of the workload component, as per the corresponding workload definition and architecture.",
+          "readOnly": true
+        },
+        "enrollmentState": {
+          "$ref": "#/definitions/WorkloadEnrollmentState",
+          "description": "Defines the enrollment state of the workload component, as per the corresponding workload definition.",
+          "readOnly": true
+        },
+        "enrollmentErrors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any enrollment related errors on the workload component resource.",
           "readOnly": true
         },
         "provisioningState": {
@@ -1100,7 +1723,7 @@
           "readOnly": true
         },
         "errors": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "Indicates any errors on the workload component resource.",
           "readOnly": true
         }
@@ -1145,6 +1768,37 @@
             "description": "Indicates the state where the VI / Component is fully following the workload definition and thus, enrollment being complete."
           }
         ]
+      }
+    },
+    "WorkloadInfo": {
+      "type": "object",
+      "description": "Defines the workload information object.",
+      "properties": {
+        "workloadType": {
+          "type": "string",
+          "description": "The type of the workload. Required on create, read-only thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workloadDefinitionName": {
+          "type": "string",
+          "description": "The name of the corresponding workload definition. Required on create, read-only thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workloadDefinitionVersion": {
+          "type": "string",
+          "description": "The version selected for the corresponding workload definition. Can be updated.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
       }
     },
     "WorkloadResourceId": {
