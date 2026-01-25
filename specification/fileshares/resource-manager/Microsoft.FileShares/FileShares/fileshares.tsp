@@ -23,6 +23,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2025-06-01-preview")
   v2025_06_01_preview: "2025-06-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("Version 2025-09-01-preview")
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 @doc("File share resource")
@@ -456,6 +460,16 @@ model FileShareProvisioningConstants {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("Scalar throughput in MiB per second.")
   scalarThroughputMiBPerSec: float64;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @doc("Guardrail scalar IO per second.")
+  @added(Versions.v2025_09_01_preview)
+  guardrailIOPerSecScalar: float64;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @doc("Guardrail scalar throughput in MiB per second.")
+  @added(Versions.v2025_09_01_preview)
+  guardrailThroughputScalar: float64;
 }
 
 @doc("Response structure for file share limits API.")
