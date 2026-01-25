@@ -10,4 +10,8 @@ enum WACAApiVersions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2024-03-03-preview API Version.")
   v2024_03_03_preview: "2024-03-03-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2025-09-09-preview API Version.")
+  v2025_09_09_preview: "2025-09-09-preview",
 }

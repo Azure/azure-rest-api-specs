@@ -1,9 +1,9 @@
 import "./CommonModels.tsp";
 import "./CommonAssessmentPropertiesEnums.tsp";
 import "../Enums/Enums.tsp";
+import "../../WACAApiVersions.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -29,6 +29,7 @@ model AssessedWorkloadProperties<TLinkages, TRecommendations> {
 }
 
 @doc("Linkages details")
+@added(WACAApiVersions.v2025_09_09_preview)
 model Linkages {
   @doc("The workload name")
   @visibility(Lifecycle.Read)
@@ -95,6 +96,7 @@ model Recommendations<TMigrationIssues, TMigrationSuitability, TSkus> {
 }
 
 @doc("The security suitability.")
+@added(WACAApiVersions.v2025_09_09_preview)
 model SecuritySuitability {
   @doc("The security suitability.")
   @visibility(Lifecycle.Read)
@@ -102,6 +104,7 @@ model SecuritySuitability {
 }
 
 @doc("The migration suitability.")
+@added(WACAApiVersions.v2025_09_09_preview)
 model MigrationSuitability {
   @doc("The migration suitability.")
   @visibility(Lifecycle.Read)
@@ -109,6 +112,7 @@ model MigrationSuitability {
 }
 
 @doc("Configuration details.")
+@added(WACAApiVersions.v2025_09_09_preview)
 model Configuration {
   @doc("The azure target.")
   @visibility(Lifecycle.Read)
@@ -120,14 +124,15 @@ model Configuration {
 }
 
 @doc("The recommended details.")
+@added(WACAApiVersions.v2025_09_09_preview)
 model RecommendedFor {
   @doc("The list of strategy type.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   strategies?: StrategyType[];
 }
 
 @doc("Migration issues.")
+@added(WACAApiVersions.v2025_09_09_preview)
 model MigrationIssues {
   @doc("The issue id.")
   @visibility(Lifecycle.Read)
@@ -147,7 +152,6 @@ model MigrationIssues {
 
   @doc("The recommended action.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   recommendedActions?: string[];
 
   @doc("The more information list.")
@@ -157,6 +161,7 @@ model MigrationIssues {
 }
 
 @doc("Skus details.")
+@added(WACAApiVersions.v2025_09_09_preview)
 model Skus<TMigrationSuitability> {
   @doc("The Sku kind.")
   @visibility(Lifecycle.Read)
@@ -189,6 +194,7 @@ model Skus<TMigrationSuitability> {
 }
 
 @doc("Source recommendation details.")
+@added(WACAApiVersions.v2025_09_09_preview)
 model SourceRecommendation<TMigrationSuitability> {
   @doc("The sku name.")
   @visibility(Lifecycle.Read)
@@ -200,6 +206,7 @@ model SourceRecommendation<TMigrationSuitability> {
 }
 
 @doc("Sku details.")
+@added(WACAApiVersions.v2025_09_09_preview)
 model SkuDetails {
   @doc("The sku type.")
   @visibility(Lifecycle.Read)

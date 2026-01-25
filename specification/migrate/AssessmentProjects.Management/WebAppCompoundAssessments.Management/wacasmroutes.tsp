@@ -1,6 +1,7 @@
 import "./Common/DataModels/DownloadUrl.tsp";
 import "./WebModels/WebAppCompoundAssessments.tsp";
 import "./WebModels/WacaSummary.tsp";
+import "./WebModels/AssessedWebApps.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -33,4 +34,13 @@ interface CompoundAssessmentSummaryOperations {
 
   @added(WACAApiVersions.v2024_03_03_preview)
   listByParent is ArmResourceListByParent<WebAppCompoundAssessmentSummary>;
+}
+
+@armResourceOperations
+interface AssessedWebAppOperations {
+  @added(WACAApiVersions.v2025_09_09_preview)
+  get is ArmResourceRead<AssessedWebApps>;
+
+  @added(WACAApiVersions.v2025_09_09_preview)
+  listByParent is ArmResourceListByParent<AssessedWebApps>;
 }

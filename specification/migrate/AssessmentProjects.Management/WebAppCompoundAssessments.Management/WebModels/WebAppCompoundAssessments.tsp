@@ -1,7 +1,9 @@
 import "../Common/ArmModels/AssessmentProjectV2.tsp";
+import "../Common/Enums/Enums.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
@@ -26,6 +28,10 @@ model CompoundAssessmentProperties is AzureResourceProperties {
   @doc("Fallback machine assessment ARM ID.")
   fallbackMachineAssessmentArmId?: string;
 
+  @doc("Settings of the compound assessment.")
+  @added(WACAApiVersions.v2025_09_09_preview)
+  settings?: CompoundAssessmentSettings;
+
   @doc("Details of the compound assessment.")
   @visibility(Lifecycle.Read)
   details?: CompoundAssessmentDetails;
@@ -43,6 +49,16 @@ model TargetAssessmentArmIds {
   azureAppServiceContainer?: string;
 }
 
+@doc("Settings of the compound assessment.")
+@added(WACAApiVersions.v2025_09_09_preview)
+model CompoundAssessmentSettings {
+  @doc("Azure location for the assessment.")
+  azureLocation?: string;
+
+  @doc("Sizing criterion for the assessment.")
+  sizingCriterion?: AssessmentSizingCriterion;
+}
+
 @doc("Details of the compound assessment.")
 model CompoundAssessmentDetails {
   @doc("Timestamp when the assessment was created.")
@@ -53,4 +69,8 @@ model CompoundAssessmentDetails {
 
   @doc("Status of the assessment.")
   status: AssessmentStatus;
+
+  @doc("Confidence rating in percentage.")
+  @added(WACAApiVersions.v2025_09_09_preview)
+  confidenceRatingInPercentage?: float64;
 }
