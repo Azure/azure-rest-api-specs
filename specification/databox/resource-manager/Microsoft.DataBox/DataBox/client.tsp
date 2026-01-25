@@ -347,3 +347,16 @@ using Microsoft.DataBox;
 @@clientName(ShareCredentialDetails.userName, "username", "java");
 @@alternateType(AdditionalErrorInfo.info, unknown, "java");
 @@alternateType(JobStages.jobStageDetails, unknown, "java");
+
+@@clientName(KeyEncryptionKey.kekVaultResourceID,
+  "kekVaultResourceId",
+  "csharp"
+);
+@@alternateType(JobResource.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(JobResourceUpdateParameter.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
