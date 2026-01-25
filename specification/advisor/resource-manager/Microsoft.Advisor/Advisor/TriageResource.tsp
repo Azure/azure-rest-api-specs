@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
@@ -26,6 +27,8 @@ model TriageResource
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_05_01_preview)
+@removed(Versions.v2026_02_01)
 interface TriageResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -42,6 +45,8 @@ interface TriageResourceOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_05_01_preview)
+@removed(Versions.v2026_02_01)
 interface TriageResources {
   /**
    * Get a triage resource for a given review and recommendation.
@@ -73,6 +78,8 @@ interface TriageResources {
    * List all triage resources that belong to a review and recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_05_01_preview)
+  @removed(Versions.v2026_02_01)
   @summary("List triage resources based on a review and recommendation.")
   @segment("providers/Microsoft.Advisor/triageResources")
   @operationId("triageResources_List")
