@@ -12,7 +12,6 @@ using Microsoft.Network;
 @@clientName(ValidateCustomDomainInput.hostName, "hostname", "java");
 @@clientName(FrontendEndpointUpdateParameters.hostName, "hostname", "java");
 @@clientName(FrontendEndpointProperties.hostName, "hostname", "java");
-@@clientName(LatencyMetric.startDateTimeUTC, "startDateTimeUtc", "java");
 @@clientName(LatencyMetric.endDateTimeUTC, "endDateTimeUtc", "java");
 @@clientName(LatencyScorecardProperties.startDateTimeUTC,
   "startDateTimeUtc",
