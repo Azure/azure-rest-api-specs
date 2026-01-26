@@ -29,7 +29,7 @@ using Microsoft.DBforMySQL;
   "SupportedMemoryPerVCoreInMB",
   "csharp"
 );
-@@clientName(ConfigurationListForBatchUpdate.value, "Values", "csharp");
+@@clientName(ConfigurationListForBatchUpdate.value, "Value", "csharp");
 @@clientName(Configuration, "MySqlFlexibleServerConfiguration", "csharp");
 @@clientName(Database, "MySqlFlexibleServerDatabase", "csharp");
 @@clientName(FirewallRule, "MySqlFlexibleServerFirewallRule", "csharp");
