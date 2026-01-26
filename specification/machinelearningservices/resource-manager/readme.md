@@ -184,6 +184,15 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
 ```
 
+### Tag: package-2025-12-01
+
+These settings apply only when `--tag=package-2025-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2025-12-01/openapi.json
+```
+
 ### Tag: package-2025-09-01
 
 These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
