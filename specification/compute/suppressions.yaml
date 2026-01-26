@@ -1,44 +1,17 @@
 - tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-csharp.*
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
-  paths: [/resource-manager/Microsoft.Compute/Compute/Compute/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.*
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-csharp.*
-    - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-  paths: [/resource-manager/Microsoft.Compute/Compute/Disk/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.*
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-csharp.*
-    - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-  paths: [/resource-manager/Microsoft.Compute/Compute/Gallery/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.*
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-csharp.*
-    - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-  paths: [/resource-manager/Microsoft.Compute/Compute/Sku/tspconfig.yaml]
+  paths: 
+    - resource-manager/Microsoft.Compute/Compute/Compute/tspconfig.yaml
+    - resource-manager/Microsoft.Compute/Compute/ComputeDisk/tspconfig.yaml
+    - resource-manager/Microsoft.Compute/Compute/ComputeGallery/tspconfig.yaml
+    - resource-manager/Microsoft.Compute/Compute/ComputeSku/tspconfig.yaml
