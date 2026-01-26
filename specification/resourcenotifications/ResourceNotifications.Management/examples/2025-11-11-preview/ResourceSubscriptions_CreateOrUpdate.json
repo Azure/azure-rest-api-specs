@@ -1,0 +1,55 @@
+{
+  "operationId": "ResourceSubscriptions_CreateOrUpdate",
+  "title": "Create or update a resource subscription with tenant scope",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "example-rg",
+    "subscriptionRuleName": "example-subscription",
+    "api-version": "2025-11-11-preview",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "query": "resources",
+        "scope": {
+          "kind": "tenant"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription",
+        "name": "example-subscription",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions",
+        "location": "eastus",
+        "properties": {
+          "query": "resources",
+          "scope": {
+            "kind": "tenant",
+            "tenantId": "12345678-1234-1234-1234-123456789012",
+            "servicePrincipal": "app-service-principal-id"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/example-rg/providers/Microsoft.ResourceNotifications/resourceSubscriptions/example-subscription",
+        "name": "example-subscription",
+        "type": "Microsoft.ResourceNotifications/resourceSubscriptions",
+        "location": "eastus",
+        "properties": {
+          "query": "resources",
+          "scope": {
+            "kind": "tenant",
+            "tenantId": "12345678-1234-1234-1234-123456789012",
+            "servicePrincipal": "app-service-principal-id"
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}
