@@ -5,7 +5,10 @@
     "accountName": "account1",
     "poolName": "pool1",
     "cacheName": "cache1",
-    "api-version": "2025-12-15-preview"
+    "api-version": "2025-12-15-preview",
+    "body": {
+      "clientIp": "192.0.2.10"
+    }
   },
   "responses": {
     "200": {
@@ -15,32 +18,30 @@
         "type": "Microsoft.NetApp/netAppAccounts/capacityPools/caches",
         "location": "eastus",
         "properties": {
-          "filepath": "cache-west-us2-01",
+          "filepath": "cache1",
           "size": 107374182400,
           "provisioningState": "Succeeded",
           "cacheState": "Succeeded",
-          "cacheSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/cacheVnet/subnets/cacheSubnet1",
-          "peeringSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/icLifVnet/subnets/peeringSubnet1",
+          "cacheSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/cacheSubnet",
+          "peeringSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/peeringSubnet",
           "encryptionKeySource": "Microsoft.NetApp",
           "originClusterInformation": {
             "peerClusterName": "cluster1",
             "peerAddresses": [
-              "192.0.2.10",
-              "192.0.2.11"
+              "10.0.0.5"
             ],
             "peerVserverName": "vserver1",
-            "peerVolumeName": "originvol1"
-          },
-          "cifsChangeNotifications": "Disabled",
-          "globalFileLocking": "Disabled",
-          "writeBack": "Disabled",
-          "ldap": "Enabled",
-          "ldapServerType": "OpenLDAP",
-          "fileAccessLogs": "Disabled"
+            "peerVolumeName": "volume1"
+          }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/a1b2c3d4-5678-90ab-cdef-1234567890ab?api-version=2025-12-15-preview"
       }
     }
   },
-  "operationId": "Caches_Get",
-  "title": "Caches_Get"
+  "operationId": "Caches_BreakFileLocks",
+  "title": "Caches_BreakFileLocks"
 }
