@@ -516,7 +516,7 @@ op getAssetStatisticsCustomized(
  * Per Asset statistics with grouped parameters.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getAssetStatisticsCustomizedForCsharp(
+op getAssetStatisticsCustomizedForCSharp(
   /**
    * API version
    */
@@ -528,7 +528,7 @@ op getAssetStatisticsCustomizedForCsharp(
 ): Record<unknown>;
 
 @@override(TilerAssetStatistics.getAll,
-  getAssetStatisticsCustomizedForCsharp,
+  getAssetStatisticsCustomizedForCSharp,
   "csharp"
 );
 
@@ -824,71 +824,4 @@ op getMosaicsWmtsCapabilitiesCustomized(
 @@override(MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
   getMosaicsWmtsCapabilitiesCustomized,
   "!python,!csharp,!javascript"
-);
-
-/**
- * WMTS Capabilities XML Response for JavaScript SDK.
- * Returns string instead of bytes to prevent incorrect base64 decoding of XML text content.
- */
-model WmtsCapabilitiesXmlResponseForJavaScript {
-  /**
-   * status code for WMTSCapabilitiesXmlResponse
-   */
-  @statusCode statusCode: 200;
-
-  /**
-   * body for WMTSCapabilitiesXmlResponse - returned as string for JavaScript SDK
-   */
-  @body body: string;
-
-  /**
-   * content type for WMTSCapabilitiesXmlResponse
-   */
-  @header contentType: "application/xml";
-}
-
-/**
- * OGC WMTS endpoint with grouped parameters for JavaScript SDK.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getWmtsCapabilitiesCustomizedForJavaScript(
-  ...getWmtsCapabilitiesCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for WMTS capabilities including asset selection, terrain algorithms, and tile formatting
-   */
-  options: GetWmtsCapabilitiesOptions,
-): WmtsCapabilitiesXmlResponseForJavaScript;
-
-@@override(TilerWmtsTileMatrixSets.getCapabilitiesXml,
-  getWmtsCapabilitiesCustomizedForJavaScript,
-  "javascript"
-);
-
-/**
- * OGC WMTS endpoint for mosaics with grouped parameters for JavaScript SDK.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getMosaicsWmtsCapabilitiesCustomizedForJavaScript(
-  ...getMosaicsWmtsCapabilitiesCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for mosaic WMTS capabilities including asset selection, terrain algorithms, and tile formatting
-   */
-  options: GetMosaicWmtsCapabilitiesOptions,
-): WmtsCapabilitiesXmlResponseForJavaScript;
-
-@@override(MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
-  getMosaicsWmtsCapabilitiesCustomizedForJavaScript,
-  "javascript"
 );
