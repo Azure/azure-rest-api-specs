@@ -41,6 +41,7 @@ interface AzureADAdministrators {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AzureADAdministrator,
     Response = ArmResourceUpdatedResponse<AzureADAdministrator> | ArmResourceCreatedResponse<
