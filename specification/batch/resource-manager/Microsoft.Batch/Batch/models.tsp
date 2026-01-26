@@ -2516,19 +2516,7 @@ model DiskCustomerManagedKey {
   /**
    * The reference of one of the pool identities to encrypt Disk. This identity will be used to access the KeyVault.
    */
-  identityReference?: PoolIdentityReference;
-}
-
-/**
- * The reference of one of the pool identities to encrypt Disk. This identity will be used to access the key vault.
- */
-@added(Versions.v2025_06_01)
-model PoolIdentityReference {
-  /**
-   * The ARM resource id of the user assigned identity. This reference must be included in the pool identities.
-   */
-  @summary("The resource identifier of the user assigned identity.")
-  resourceId: string;
+  identityReference?: ComputeNodeIdentityReference;
 }
 
 /**

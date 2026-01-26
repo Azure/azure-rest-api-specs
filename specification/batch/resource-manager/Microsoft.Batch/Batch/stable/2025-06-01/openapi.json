@@ -4295,7 +4295,7 @@
           "description": "Set this flag to true to enable auto-updating of the Disk Encryption to the latest key version. Default is false."
         },
         "identityReference": {
-          "$ref": "#/definitions/PoolIdentityReference",
+          "$ref": "#/definitions/ComputeNodeIdentityReference",
           "description": "The reference of one of the pool identities to encrypt Disk. This identity will be used to access the KeyVault."
         }
       }
@@ -5608,20 +5608,6 @@
       },
       "required": [
         "inboundNatPools"
-      ]
-    },
-    "PoolIdentityReference": {
-      "type": "object",
-      "description": "The reference of one of the pool identities to encrypt Disk. This identity will be used to access the key vault.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "title": "The resource identifier of the user assigned identity.",
-          "description": "The ARM resource id of the user assigned identity. This reference must be included in the pool identities."
-        }
-      },
-      "required": [
-        "resourceId"
       ]
     },
     "PoolIdentityType": {
