@@ -17,23 +17,24 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Migrate"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Migrate"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-migrate"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-migrate"
+    namespace: "azure.mgmt.migrate"
+    package-name: "azure-mgmt-migrate"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-migrate"
     namespace: "com.azure.resourcemanager.migrate"
     service-name: "migrate"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-migrate"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
