@@ -26,7 +26,19 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-preview-2025-12
+```
+
+### Tag: package-preview-2025-12
+
+These settings apply only when `--tag=package-preview-2025-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-12'
+input-file:
+  - Microsoft.OffAzure/preview/2025-12-12-preview/migrate.json
+suppressions:
+  - code: BodyTopLevelProperties
+    reason: Legacy model structure maintained for backward compatibility with existing clients
 ```
 
 ### Tag: package-preview-2024-05
