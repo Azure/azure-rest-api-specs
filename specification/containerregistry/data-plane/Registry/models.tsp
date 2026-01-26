@@ -640,31 +640,27 @@ model ContainerRepositoryProperties {
    * {registry-name}.azurecr.io.
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "registry")
-  registryLoginServer: string;
+  registry: string;
 
   /**
    * Image name
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "imageName")
-  name: string;
+  imageName: string;
 
   /**
    * Image created time
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @encodedName("application/json", "createdTime")
-  createdOn: utcDateTime;
+  createdTime: utcDateTime;
 
   /**
    * Image last update time
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @encodedName("application/json", "lastUpdateTime")
-  lastUpdatedOn: utcDateTime;
+  lastUpdateTime: utcDateTime;
 
   /**
    * Number of the manifests
@@ -691,26 +687,22 @@ model RepositoryChangeableAttributes {
   /**
    * Delete enabled
    */
-  @encodedName("application/json", "deleteEnabled")
-  canDelete?: boolean;
+  deleteEnabled?: boolean;
 
   /**
    * Write enabled
    */
-  @encodedName("application/json", "writeEnabled")
-  canWrite?: boolean;
+  writeEnabled?: boolean;
 
   /**
    * List enabled
    */
-  @encodedName("application/json", "listEnabled")
-  canList?: boolean;
+  listEnabled?: boolean;
 
   /**
    * Read enabled
    */
-  @encodedName("application/json", "readEnabled")
-  canRead?: boolean;
+  readEnabled?: boolean;
 }
 
 /**
@@ -721,15 +713,13 @@ model DeleteRepositoryResult {
    * SHA of the deleted image
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "manifestsDeleted")
-  deletedManifests?: string[];
+  manifestsDeleted?: string[];
 
   /**
    * Tag of the deleted image
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "tagsDeleted")
-  deletedTags?: string[];
+  tagsDeleted?: string[];
 }
 
 /**
@@ -740,21 +730,18 @@ model TagList {
    * Registry login server name. This is likely to be similar to
    * {registry-name}.azurecr.io.
    */
-  @encodedName("application/json", "registry")
-  registryLoginServer: string;
+  registry: string;
 
   /**
    * Image name
    */
-  @encodedName("application/json", "imageName")
-  repository: string;
+  imageName: string;
 
   /**
    * List of tag attribute details
    */
-  @encodedName("application/json", "tags")
   @pageItems
-  tagAttributeBases: TagAttributesBase[];
+  tags: TagAttributesBase[];
 
   /**
    * Link to the next page of results
@@ -784,16 +771,14 @@ model TagAttributesBase {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @encodedName("application/json", "createdTime")
-  createdOn: utcDateTime;
+  createdTime: utcDateTime;
 
   /**
    * Tag last update time
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @encodedName("application/json", "lastUpdateTime")
-  lastUpdatedOn: utcDateTime;
+  lastUpdateTime: utcDateTime;
 
   /**
    * Is signed
@@ -813,26 +798,22 @@ model TagChangeableAttributes {
   /**
    * Delete enabled
    */
-  @encodedName("application/json", "deleteEnabled")
-  canDelete?: boolean;
+  deleteEnabled?: boolean;
 
   /**
    * Write enabled
    */
-  @encodedName("application/json", "writeEnabled")
-  canWrite?: boolean;
+  writeEnabled?: boolean;
 
   /**
    * List enabled
    */
-  @encodedName("application/json", "listEnabled")
-  canList?: boolean;
+  listEnabled?: boolean;
 
   /**
    * Read enabled
    */
-  @encodedName("application/json", "readEnabled")
-  canRead?: boolean;
+  readEnabled?: boolean;
 }
 
 /**
@@ -844,15 +825,13 @@ model ArtifactTagProperties {
    * {registry-name}.azurecr.io.
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "registry")
-  registryLoginServer: string;
+  registry: string;
 
   /**
    * Image name
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "imageName")
-  repositoryName: string;
+  imageName: string;
 
   /**
    * List of tag attribute details
@@ -869,14 +848,12 @@ model AcrManifests {
    * Registry login server name. This is likely to be similar to
    * {registry-name}.azurecr.io.
    */
-  @encodedName("application/json", "registry")
-  registryLoginServer?: string;
+  registry?: string;
 
   /**
    * Image name
    */
-  @encodedName("application/json", "imageName")
-  repository?: string;
+  imageName?: string;
 
   /**
    * List of manifests
@@ -905,24 +882,21 @@ model ManifestAttributesBase {
    * Image size
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "imageSize")
-  size?: int64;
+  imageSize?: int64;
 
   /**
    * Created time
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @encodedName("application/json", "createdTime")
-  createdOn: utcDateTime;
+  createdTime: utcDateTime;
 
   /**
    * Last update time
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @encodedName("application/json", "lastUpdateTime")
-  lastUpdatedOn: utcDateTime;
+  lastUpdateTime: utcDateTime;
 
   /**
    * CPU architecture
@@ -934,8 +908,7 @@ model ManifestAttributesBase {
    * Operating system
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "os")
-  operatingSystem?: ArtifactOperatingSystem;
+  os?: ArtifactOperatingSystem;
 
   /**
    * List of artifacts that are referenced by this manifest list, with information
@@ -943,8 +916,7 @@ model ManifestAttributesBase {
    * manifest and not a manifest list.
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "references")
-  relatedArtifacts?: ArtifactManifestPlatform[];
+  references?: ArtifactManifestPlatform[];
 
   /**
    * Config blob media type
@@ -983,8 +955,7 @@ model ArtifactManifestPlatform {
    * Operating system
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "os")
-  operatingSystem?: ArtifactOperatingSystem;
+  os?: ArtifactOperatingSystem;
 }
 
 /**
@@ -994,26 +965,22 @@ model ManifestChangeableAttributes {
   /**
    * Delete enabled
    */
-  @encodedName("application/json", "deleteEnabled")
-  canDelete?: boolean;
+  deleteEnabled?: boolean;
 
   /**
    * Write enabled
    */
-  @encodedName("application/json", "writeEnabled")
-  canWrite?: boolean;
+  writeEnabled?: boolean;
 
   /**
    * List enabled
    */
-  @encodedName("application/json", "listEnabled")
-  canList?: boolean;
+  listEnabled?: boolean;
 
   /**
    * Read enabled
    */
-  @encodedName("application/json", "readEnabled")
-  canRead?: boolean;
+  readEnabled?: boolean;
 }
 
 /**
@@ -1025,15 +992,13 @@ model ArtifactManifestProperties {
    * {registry-name}.azurecr.io.
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "registry")
-  registryLoginServer?: string;
+  registry?: string;
 
   /**
    * Repository name
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "imageName")
-  repositoryName?: string;
+  imageName?: string;
 
   /**
    * Manifest attributes
