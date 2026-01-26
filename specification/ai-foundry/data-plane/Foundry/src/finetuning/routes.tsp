@@ -14,7 +14,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
 @route("openai/fine-tuning")
 @tag("Fine-tuning")
 interface FineTuning {

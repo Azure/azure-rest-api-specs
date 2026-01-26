@@ -10,7 +10,9 @@ tags:
   - name: EvaluationTaxonomies
   - name: EvaluationRules
   - name: Evaluators
+  - name: Fine-tuning
   - name: Indexes
+  - name: Insights
   - name: Memory Stores
   - name: Conversations
   - name: Evals
@@ -2689,6 +2691,176 @@ paths:
             schema:
               $ref: '#/components/schemas/IndexUpdate'
         description: The Index to create or update.
+  /insights:
+    post:
+      operationId: Insights_generate
+      description: Generate Insights
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Beta
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Insights=v1
+        - name: Repeatability-Request-ID
+          in: header
+          required: false
+          description: Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.
+          schema:
+            type: string
+        - name: Repeatability-First-Sent
+          in: header
+          required: false
+          description: Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.
+          schema:
+            type: string
+            format: http-date
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Insight'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Insights
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Insight'
+        description: Complete evaluation configuration including data source, evaluators, and result settings
+    get:
+      operationId: Insights_list
+      description: List all insights in reverse chronological order (newest first).
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: type
+          in: query
+          required: false
+          description: Filter by the type of analysis.
+          schema:
+            $ref: '#/components/schemas/InsightType'
+          explode: false
+        - name: evalId
+          in: query
+          required: false
+          description: Filter by the evaluation ID.
+          schema:
+            type: string
+          explode: false
+        - name: runId
+          in: query
+          required: false
+          description: Filter by the evaluation run ID.
+          schema:
+            type: string
+          explode: false
+        - name: agentName
+          in: query
+          required: false
+          description: Filter by the agent name.
+          schema:
+            type: string
+          explode: false
+        - name: includeCoordinates
+          in: query
+          required: false
+          description: Whether to include coordinates for visualization in the response. Defaults to false.
+          schema:
+            type: boolean
+          explode: false
+        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-ms-client-request-id:
+              required: false
+              description: An opaque, globally-unique, client-generated string identifier for the request.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.uuid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedInsight'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Insights
+  /insights/{id}:
+    get:
+      operationId: Insights_get
+      description: Get a specific insight by Id.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier for the insights report.
+          schema:
+            type: string
+        - name: includeCoordinates
+          in: query
+          required: false
+          description: Whether to include coordinates for visualization in the response. Defaults to false.
+          schema:
+            type: boolean
+          explode: false
+        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-ms-client-request-id:
+              required: false
+              description: An opaque, globally-unique, client-generated string identifier for the request.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.uuid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Insight'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Insights
   /memory_stores:
     post:
       operationId: createMemoryStore
@@ -3223,6 +3395,319 @@ paths:
                   default: 300
               required:
                 - scope
+  /openai/fine-tuning/jobs:
+    post:
+      operationId: createFineTuningJob
+      description: |-
+        Creates a fine-tuning job which begins the process of creating a new model from a given dataset.
+
+        Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
+
+        [Learn more about fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Fine-tuning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequest'
+    get:
+      operationId: listPaginatedFineTuningJobs
+      description: List your organization's fine-tuning jobs
+      parameters:
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last job from the previous pagination request.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: Number of fine-tuning jobs to retrieve.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListPaginatedFineTuningJobsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Fine-tuning
+  /openai/fine-tuning/jobs/{fine_tuning_job_id}:
+    get:
+      operationId: retrieveFineTuningJob
+      description: |-
+        Get info about a fine-tuning job.
+
+        [Learn more about fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)
+      parameters:
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Fine-tuning
+  /openai/fine-tuning/jobs/{fine_tuning_job_id}/cancel:
+    post:
+      operationId: cancelFineTuningJob
+      description: Immediately cancel a fine-tune job.
+      parameters:
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to cancel.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Fine-tuning
+  /openai/fine-tuning/jobs/{fine_tuning_job_id}/checkpoints:
+    get:
+      operationId: listFineTuningJobCheckpoints
+      description: List checkpoints for a fine-tuning job.
+      parameters:
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to get checkpoints for.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last checkpoint ID from the previous pagination request.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: Number of checkpoints to retrieve.
+          schema:
+            type: integer
+            format: int32
+            default: 10
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListFineTuningJobCheckpointsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Fine-tuning
+  /openai/fine-tuning/jobs/{fine_tuning_job_id}/events:
+    get:
+      operationId: listFineTuningJobEvents
+      description: Get fine-grained status updates for a fine-tuning job.
+      parameters:
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to get events for.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last event from the previous pagination request.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: Number of events to retrieve.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ListFineTuningJobEventsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Fine-tuning
+  /openai/fine-tuning/jobs/{fine_tuning_job_id}/pause:
+    post:
+      operationId: pauseFineTuningJob
+      description: Pause a running fine-tune job.
+      parameters:
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to pause.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Fine-tuning
+  /openai/fine-tuning/jobs/{fine_tuning_job_id}/resume:
+    post:
+      operationId: resumeFineTuningJob
+      description: Resume a paused fine-tune job.
+      parameters:
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          description: The ID of the fine-tuning job to resume.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Fine-tuning
   /openai/v1/conversations:
     post:
       operationId: createConversation
@@ -11500,6 +11985,135 @@ components:
               "use_case": "customer_support_agent"
             }
           }
+    OpenAI.CreateFineTuningJobRequest:
+      type: object
+      required:
+        - model
+        - training_file
+      properties:
+        model:
+          anyOf:
+            - type: string
+            - type: string
+              enum:
+                - babbage-002
+                - davinci-002
+                - gpt-3.5-turbo
+                - gpt-4o-mini
+          description: |-
+            The name of the model to fine-tune. You can select one of the
+              [supported models](https://platform.openai.com/docs/guides/fine-tuning#which-models-can-be-fine-tuned).
+          x-oaiTypeLabel: string
+        training_file:
+          type: string
+          description: |-
+            The ID of an uploaded file that contains training data.
+              See [upload file](https://platform.openai.com/docs/api-reference/files/create) for how to upload a file.
+              Your dataset must be formatted as a JSONL file. Additionally, you must upload your file with the purpose `fine-tune`.
+              The contents of the file should differ depending on if the model uses the [chat](https://platform.openai.com/docs/api-reference/fine-tuning/chat-input), [completions](https://platform.openai.com/docs/api-reference/fine-tuning/completions-input) format, or if the fine-tuning method uses the [preference](https://platform.openai.com/docs/api-reference/fine-tuning/preference-input) format.
+              See the [fine-tuning guide](https://platform.openai.com/docs/guides/model-optimization) for more details.
+        hyperparameters:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequestHyperparameters'
+          description: |-
+            The hyperparameters used for the fine-tuning job.
+              This value is now deprecated in favor of `method`, and should be passed in under the `method` parameter.
+          deprecated: true
+        suffix:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 64
+          description: |-
+            A string of up to 64 characters that will be added to your fine-tuned model name.
+              For example, a `suffix` of "custom-model-name" would produce a model name like `ft:gpt-4o-mini:openai:custom-model-name:7p4lURel`.
+        validation_file:
+          type: string
+          nullable: true
+          description: |-
+            The ID of an uploaded file that contains validation data.
+              If you provide this file, the data is used to generate validation
+              metrics periodically during fine-tuning. These metrics can be viewed in
+              the fine-tuning results file.
+              The same data should not be present in both train and validation files.
+              Your dataset must be formatted as a JSONL file. You must upload your file with the purpose `fine-tune`.
+              See the [fine-tuning guide](https://platform.openai.com/docs/guides/model-optimization) for more details.
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequestIntegrations'
+          nullable: true
+          description: A list of integrations to enable for your fine-tuning job.
+        seed:
+          type: integer
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
+          minimum: 0
+          maximum: 2147483647
+          description: |-
+            The seed controls the reproducibility of the job. Passing in the same seed and job parameters should produce the same results, but may differ in rare cases.
+              If a seed is not specified, one will be generated for you.
+        method:
+          $ref: '#/components/schemas/OpenAI.FineTuneMethod'
+        metadata:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Metadata'
+          nullable: true
+    OpenAI.CreateFineTuningJobRequestHyperparameters:
+      type: object
+      properties:
+        batch_size:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          default: auto
+        learning_rate_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.numeric'
+        n_epochs:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          default: auto
+    OpenAI.CreateFineTuningJobRequestIntegrations:
+      type: object
+      required:
+        - type
+        - wandb
+      properties:
+        type:
+          type: string
+          enum:
+            - wandb
+          x-stainless-const: true
+        wandb:
+          $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequestIntegrationsWandb'
+    OpenAI.CreateFineTuningJobRequestIntegrationsWandb:
+      type: object
+      required:
+        - project
+      properties:
+        project:
+          type: string
+        name:
+          type: string
+          nullable: true
+        entity:
+          type: string
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
     OpenAI.CreateResponseStreamingResponse:
       anyOf:
         - $ref: '#/components/schemas/OpenAI.ResponseAudioDeltaEvent'
@@ -12569,6 +13183,527 @@ components:
       anyOf:
         - $ref: '#/components/schemas/OpenAI.ComparisonFilter'
         - $ref: '#/components/schemas/OpenAI.CompoundFilter'
+    OpenAI.FineTuneDPOHyperparameters:
+      type: object
+      properties:
+        beta:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          description: The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model.
+        batch_size:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+          default: auto
+        learning_rate_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          description: Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+        n_epochs:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+          default: auto
+      description: The hyperparameters used for the DPO fine-tuning job.
+    OpenAI.FineTuneDPOMethod:
+      type: object
+      properties:
+        hyperparameters:
+          $ref: '#/components/schemas/OpenAI.FineTuneDPOHyperparameters'
+      description: Configuration for the DPO fine-tuning method.
+    OpenAI.FineTuneMethod:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - supervised
+            - dpo
+            - reinforcement
+          description: The type of method. Is either `supervised`, `dpo`, or `reinforcement`.
+        supervised:
+          $ref: '#/components/schemas/OpenAI.FineTuneSupervisedMethod'
+        dpo:
+          $ref: '#/components/schemas/OpenAI.FineTuneDPOMethod'
+        reinforcement:
+          $ref: '#/components/schemas/OpenAI.FineTuneReinforcementMethod'
+      description: The method used for fine-tuning.
+    OpenAI.FineTuneReinforcementHyperparameters:
+      type: object
+      properties:
+        batch_size:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+          default: auto
+        learning_rate_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          description: Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+        n_epochs:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+          default: auto
+        reasoning_effort:
+          type: string
+          enum:
+            - default
+            - low
+            - medium
+            - high
+          description: Level of reasoning effort.
+          default: default
+        compute_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          description: Multiplier on amount of compute used for exploring search space during training.
+        eval_interval:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of training steps between evaluation runs.
+          default: auto
+        eval_samples:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: Number of evaluation samples to generate per training step.
+          default: auto
+      description: The hyperparameters used for the reinforcement fine-tuning job.
+    OpenAI.FineTuneReinforcementMethod:
+      type: object
+      required:
+        - grader
+      properties:
+        grader:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.GraderStringCheck'
+            - $ref: '#/components/schemas/OpenAI.GraderTextSimilarity'
+            - $ref: '#/components/schemas/OpenAI.GraderPython'
+            - $ref: '#/components/schemas/OpenAI.GraderScoreModel'
+            - $ref: '#/components/schemas/OpenAI.GraderMulti'
+          description: The grader used for the fine-tuning job.
+        hyperparameters:
+          $ref: '#/components/schemas/OpenAI.FineTuneReinforcementHyperparameters'
+      description: Configuration for the reinforcement fine-tuning method.
+    OpenAI.FineTuneSupervisedHyperparameters:
+      type: object
+      properties:
+        batch_size:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
+          default: auto
+        learning_rate_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          description: Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.
+        n_epochs:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
+          default: auto
+      description: The hyperparameters used for the fine-tuning job.
+    OpenAI.FineTuneSupervisedMethod:
+      type: object
+      properties:
+        hyperparameters:
+          $ref: '#/components/schemas/OpenAI.FineTuneSupervisedHyperparameters'
+      description: Configuration for the supervised fine-tuning method.
+    OpenAI.FineTuningIntegration:
+      type: object
+      required:
+        - type
+        - wandb
+      properties:
+        type:
+          type: string
+          enum:
+            - wandb
+          description: The type of the integration being enabled for the fine-tuning job
+          x-stainless-const: true
+        wandb:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FineTuningIntegrationWandb'
+          description: |-
+            The settings for your integration with Weights and Biases. This payload specifies the project that
+              metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags
+              to your run, and set a default entity (team, username, etc) to be associated with your run.
+      title: Fine-Tuning Job Integration
+    OpenAI.FineTuningIntegrationWandb:
+      type: object
+      required:
+        - project
+      properties:
+        project:
+          type: string
+        name:
+          type: string
+          nullable: true
+        entity:
+          type: string
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+    OpenAI.FineTuningJob:
+      type: object
+      required:
+        - id
+        - created_at
+        - error
+        - fine_tuned_model
+        - finished_at
+        - hyperparameters
+        - model
+        - object
+        - organization_id
+        - result_files
+        - status
+        - trained_tokens
+        - training_file
+        - validation_file
+        - seed
+      properties:
+        id:
+          type: string
+          description: The object identifier, which can be referenced in the API endpoints.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the fine-tuning job was created.
+        error:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FineTuningJobError'
+          nullable: true
+        fine_tuned_model:
+          type: string
+          nullable: true
+        finished_at:
+          type: integer
+          format: unixtime
+          nullable: true
+        hyperparameters:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FineTuningJobHyperparameters'
+          description: The hyperparameters used for the fine-tuning job. This value will only be returned when running `supervised` jobs.
+        model:
+          type: string
+          description: The base model that is being fine-tuned.
+        object:
+          type: string
+          enum:
+            - fine_tuning.job
+          description: The object type, which is always "fine_tuning.job".
+          x-stainless-const: true
+        organization_id:
+          type: string
+          description: The organization that owns the fine-tuning job.
+        result_files:
+          type: array
+          items:
+            type: string
+          description: The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the [Files API](https://platform.openai.com/docs/api-reference/files/retrieve-contents).
+        status:
+          type: string
+          enum:
+            - validating_files
+            - queued
+            - running
+            - succeeded
+            - failed
+            - cancelled
+          description: The current status of the fine-tuning job, which can be either `validating_files`, `queued`, `running`, `succeeded`, `failed`, or `cancelled`.
+        trained_tokens:
+          type: integer
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
+        training_file:
+          type: string
+          description: The file ID used for training. You can retrieve the training data with the [Files API](https://platform.openai.com/docs/api-reference/files/retrieve-contents).
+        validation_file:
+          type: string
+          nullable: true
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FineTuningIntegration'
+          nullable: true
+        seed:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: The seed used for the fine-tuning job.
+        estimated_finish:
+          type: integer
+          format: unixtime
+          nullable: true
+        method:
+          $ref: '#/components/schemas/OpenAI.FineTuneMethod'
+        metadata:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Metadata'
+          nullable: true
+      description: The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
+      title: FineTuningJob
+      x-oaiMeta:
+        name: The fine-tuning job object
+        example: |
+          {
+            "object": "fine_tuning.job",
+            "id": "ftjob-abc123",
+            "model": "davinci-002",
+            "created_at": 1692661014,
+            "finished_at": 1692661190,
+            "fine_tuned_model": "ft:davinci-002:my-org:custom_suffix:7q8mpxmy",
+            "organization_id": "org-123",
+            "result_files": [
+                "file-abc123"
+            ],
+            "status": "succeeded",
+            "validation_file": null,
+            "training_file": "file-abc123",
+            "hyperparameters": {
+                "n_epochs": 4,
+                "batch_size": 1,
+                "learning_rate_multiplier": 1.0
+            },
+            "trained_tokens": 5768,
+            "integrations": [],
+            "seed": 0,
+            "estimated_finish": 0,
+            "method": {
+              "type": "supervised",
+              "supervised": {
+                "hyperparameters": {
+                  "n_epochs": 4,
+                  "batch_size": 1,
+                  "learning_rate_multiplier": 1.0
+                }
+              }
+            },
+            "metadata": {
+              "key": "value"
+            }
+          }
+    OpenAI.FineTuningJobCheckpoint:
+      type: object
+      required:
+        - id
+        - created_at
+        - fine_tuned_model_checkpoint
+        - step_number
+        - metrics
+        - fine_tuning_job_id
+        - object
+      properties:
+        id:
+          type: string
+          description: The checkpoint identifier, which can be referenced in the API endpoints.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the checkpoint was created.
+        fine_tuned_model_checkpoint:
+          type: string
+          description: The name of the fine-tuned checkpoint model that is created.
+        step_number:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: The step number that the checkpoint was created at.
+        metrics:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FineTuningJobCheckpointMetrics'
+          description: Metrics at the step number during the fine-tuning job.
+        fine_tuning_job_id:
+          type: string
+          description: The name of the fine-tuning job that this checkpoint was created from.
+        object:
+          type: string
+          enum:
+            - fine_tuning.job.checkpoint
+          description: The object type, which is always "fine_tuning.job.checkpoint".
+          x-stainless-const: true
+      description: The `fine_tuning.job.checkpoint` object represents a model checkpoint for a fine-tuning job that is ready to use.
+      title: FineTuningJobCheckpoint
+      x-oaiMeta:
+        name: The fine-tuning job checkpoint object
+        example: |
+          {
+            "object": "fine_tuning.job.checkpoint",
+            "id": "ftckpt_qtZ5Gyk4BLq1SfLFWp3RtO3P",
+            "created_at": 1712211699,
+            "fine_tuned_model_checkpoint": "ft:gpt-4o-mini-2024-07-18:my-org:custom_suffix:9ABel2dg:ckpt-step-88",
+            "fine_tuning_job_id": "ftjob-fpbNQ3H1GrMehXRf8cO97xTN",
+            "metrics": {
+              "step": 88,
+              "train_loss": 0.478,
+              "train_mean_token_accuracy": 0.924,
+              "valid_loss": 10.112,
+              "valid_mean_token_accuracy": 0.145,
+              "full_valid_loss": 0.567,
+              "full_valid_mean_token_accuracy": 0.944
+            },
+            "step_number": 88
+          }
+    OpenAI.FineTuningJobCheckpointMetrics:
+      type: object
+      properties:
+        step:
+          $ref: '#/components/schemas/OpenAI.numeric'
+        train_loss:
+          $ref: '#/components/schemas/OpenAI.numeric'
+        train_mean_token_accuracy:
+          $ref: '#/components/schemas/OpenAI.numeric'
+        valid_loss:
+          $ref: '#/components/schemas/OpenAI.numeric'
+        valid_mean_token_accuracy:
+          $ref: '#/components/schemas/OpenAI.numeric'
+        full_valid_loss:
+          $ref: '#/components/schemas/OpenAI.numeric'
+        full_valid_mean_token_accuracy:
+          $ref: '#/components/schemas/OpenAI.numeric'
+    OpenAI.FineTuningJobError:
+      type: object
+      required:
+        - code
+        - message
+        - param
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        param:
+          type: string
+          nullable: true
+    OpenAI.FineTuningJobEvent:
+      type: object
+      required:
+        - object
+        - id
+        - created_at
+        - level
+        - message
+      properties:
+        object:
+          type: string
+          enum:
+            - fine_tuning.job.event
+          description: The object type, which is always "fine_tuning.job.event".
+          x-stainless-const: true
+        id:
+          type: string
+          description: The object identifier.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the fine-tuning job was created.
+        level:
+          type: string
+          enum:
+            - info
+            - warn
+            - error
+          description: The log level of the event.
+        message:
+          type: string
+          description: The message of the event.
+        type:
+          type: string
+          enum:
+            - message
+            - metrics
+          description: The type of event.
+        data:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FineTuningJobEventData'
+          description: The data associated with the event.
+      description: Fine-tuning job event object
+      x-oaiMeta:
+        name: The fine-tuning job event object
+        example: |
+          {
+            "object": "fine_tuning.job.event",
+            "id": "ftevent-abc123"
+            "created_at": 1677610602,
+            "level": "info",
+            "message": "Created fine-tuning job",
+            "data": {},
+            "type": "message"
+          }
+    OpenAI.FineTuningJobEventData:
+      type: object
+    OpenAI.FineTuningJobHyperparameters:
+      type: object
+      properties:
+        batch_size:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+              nullable: true
+            - type: integer
+              allOf:
+                - $ref: '#/components/schemas/OpenAI.integer'
+              nullable: true
+          default: auto
+        learning_rate_multiplier:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.numeric'
+        n_epochs:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+            - $ref: '#/components/schemas/OpenAI.integer'
+          default: auto
     OpenAI.FunctionAndCustomToolCallOutput:
       type: object
       required:
@@ -13065,6 +14200,357 @@ components:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).
       title: Function
+    OpenAI.GraderLabelModel:
+      type: object
+      required:
+        - type
+        - name
+        - model
+        - input
+        - labels
+        - passing_labels
+      properties:
+        type:
+          type: string
+          enum:
+            - label_model
+          description: The object type, which is always `label_model`.
+          x-stainless-const: true
+        name:
+          type: string
+          description: The name of the grader.
+        model:
+          type: string
+          description: The model to use for the evaluation. Must support structured outputs.
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalItem'
+        labels:
+          type: array
+          items:
+            type: string
+          description: The labels to assign to each item in the evaluation.
+        passing_labels:
+          type: array
+          items:
+            type: string
+          description: The labels that indicate a passing result. Must be a subset of labels.
+      description: |-
+        A LabelModelGrader object which uses a model to assign labels to each item
+        in the evaluation.
+      title: LabelModelGrader
+      x-oaiMeta:
+        name: Label Model Grader
+        group: graders
+        example: |
+          {
+            "name": "First label grader",
+            "type": "label_model",
+            "model": "gpt-4o-2024-08-06",
+            "input": [
+              {
+                "type": "message",
+                "role": "system",
+                "content": {
+                  "type": "input_text",
+                  "text": "Classify the sentiment of the following statement as one of positive, neutral, or negative"
+                }
+              },
+              {
+                "type": "message",
+                "role": "user",
+                "content": {
+                  "type": "input_text",
+                  "text": "Statement: {{item.response}}"
+                }
+              }
+            ],
+            "passing_labels": [
+              "positive"
+            ],
+            "labels": [
+              "positive",
+              "neutral",
+              "negative"
+            ]
+          }
+    OpenAI.GraderMulti:
+      type: object
+      required:
+        - type
+        - name
+        - graders
+        - calculate_output
+      properties:
+        type:
+          type: string
+          enum:
+            - multi
+          description: The object type, which is always `multi`.
+          x-stainless-const: true
+          default: multi
+        name:
+          type: string
+          description: The name of the grader.
+        graders:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.GraderStringCheck'
+            - $ref: '#/components/schemas/OpenAI.GraderTextSimilarity'
+            - $ref: '#/components/schemas/OpenAI.GraderPython'
+            - $ref: '#/components/schemas/OpenAI.GraderScoreModel'
+            - $ref: '#/components/schemas/OpenAI.GraderLabelModel'
+        calculate_output:
+          type: string
+          description: A formula to calculate the output based on grader results.
+      description: A MultiGrader object combines the output of multiple graders to produce a single score.
+      title: MultiGrader
+      x-oaiMeta:
+        name: Multi Grader
+        group: graders
+        example: |
+          {
+            "type": "multi",
+            "name": "example multi grader",
+            "graders": [
+              {
+                "type": "text_similarity",
+                "name": "example text similarity grader",
+                "input": "The graded text",
+                "reference": "The reference text",
+                "evaluation_metric": "fuzzy_match"
+              },
+              {
+                "type": "string_check",
+                "name": "Example string check grader",
+                "input": "{{sample.output_text}}",
+                "reference": "{{item.label}}",
+                "operation": "eq"
+              }
+            ],
+            "calculate_output": "0.5 * text_similarity_score +  0.5 * string_check_score)"
+          }
+    OpenAI.GraderPython:
+      type: object
+      required:
+        - type
+        - name
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - python
+          description: The object type, which is always `python`.
+          x-stainless-const: true
+        name:
+          type: string
+          description: The name of the grader.
+        source:
+          type: string
+          description: The source code of the python script.
+        image_tag:
+          type: string
+          description: The image tag to use for the python script.
+      description: A PythonGrader object that runs a python script on the input.
+      title: PythonGrader
+      x-oaiMeta:
+        name: Python Grader
+        group: graders
+        example: |
+          {
+            "type": "python",
+            "name": "Example python grader",
+            "image_tag": "2025-05-08",
+            "source": """
+          def grade(sample: dict, item: dict) -> float:
+              """
+              Returns 1.0 if `output_text` equals `label`, otherwise 0.0.
+              """
+              output = sample.get("output_text")
+              label = item.get("label")
+              return 1.0 if output == label else 0.0
+          """,
+          }
+    OpenAI.GraderScoreModel:
+      type: object
+      required:
+        - type
+        - name
+        - model
+        - input
+      properties:
+        type:
+          type: string
+          enum:
+            - score_model
+          description: The object type, which is always `score_model`.
+          x-stainless-const: true
+        name:
+          type: string
+          description: The name of the grader.
+        model:
+          type: string
+          description: The model to use for the evaluation.
+        sampling_params:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModelSamplingParams'
+          description: The sampling parameters for the model.
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.EvalItem'
+          description: The input messages evaluated by the grader. Supports text, output text, input image, and input audio content blocks, and may include template strings.
+        range:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.numeric'
+          description: The range of the score. Defaults to `[0, 1]`.
+      description: A ScoreModelGrader object that uses a model to assign a score to the input.
+      title: ScoreModelGrader
+      x-oaiMeta:
+        name: Score Model Grader
+        group: graders
+        example: |
+          {
+              "type": "score_model",
+              "name": "Example score model grader",
+              "input": [
+                  {
+                      "role": "user",
+                      "content": [
+                          {
+                              "type": "input_text",
+                              "text": (
+                                  "Score how close the reference answer is to the model answer. Score 1.0 if they are the same and 0.0 if they are different."
+                                  " Return just a floating point score
+
+          "
+                                  " Reference answer: {{item.label}}
+
+          "
+                                  " Model answer: {{sample.output_text}}"
+                              )
+                          },
+                          {
+                              "type": "input_image",
+                              "image_url": "https://example.com/reference.png",
+                              "file_id": null,
+                              "detail": "auto"
+                          }
+                      ],
+                  }
+              ],
+              "model": "gpt-5-mini",
+              "sampling_params": {
+                  "temperature": 1,
+                  "top_p": 1,
+                  "seed": 42,
+                  "max_completions_tokens": 32768,
+                  "reasoning_effort": "medium"
+              },
+          }
+    OpenAI.GraderStringCheck:
+      type: object
+      required:
+        - type
+        - name
+        - input
+        - reference
+        - operation
+      properties:
+        type:
+          type: string
+          enum:
+            - string_check
+          description: The object type, which is always `string_check`.
+          x-stainless-const: true
+        name:
+          type: string
+          description: The name of the grader.
+        input:
+          type: string
+          description: The input text. This may include template strings.
+        reference:
+          type: string
+          description: The reference text. This may include template strings.
+        operation:
+          type: string
+          enum:
+            - eq
+            - ne
+            - like
+            - ilike
+          description: The string check operation to perform. One of `eq`, `ne`, `like`, or `ilike`.
+      description: A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.
+      title: StringCheckGrader
+      x-oaiMeta:
+        name: String Check Grader
+        group: graders
+        example: |
+          {
+            "type": "string_check",
+            "name": "Example string check grader",
+            "input": "{{sample.output_text}}",
+            "reference": "{{item.label}}",
+            "operation": "eq"
+          }
+    OpenAI.GraderTextSimilarity:
+      type: object
+      required:
+        - type
+        - name
+        - input
+        - reference
+        - evaluation_metric
+      properties:
+        type:
+          type: string
+          enum:
+            - text_similarity
+          description: The type of grader.
+          x-stainless-const: true
+          default: text_similarity
+        name:
+          type: string
+          description: The name of the grader.
+        input:
+          type: string
+          description: The text being graded.
+        reference:
+          type: string
+          description: The text being graded against.
+        evaluation_metric:
+          type: string
+          enum:
+            - cosine
+            - fuzzy_match
+            - bleu
+            - gleu
+            - meteor
+            - rouge_1
+            - rouge_2
+            - rouge_3
+            - rouge_4
+            - rouge_5
+            - rouge_l
+          description: |-
+            The evaluation metric to use. One of `cosine`, `fuzzy_match`, `bleu`,
+              `gleu`, `meteor`, `rouge_1`, `rouge_2`, `rouge_3`, `rouge_4`, `rouge_5`,
+              or `rouge_l`.
+      description: A TextSimilarityGrader object which grades text based on similarity metrics.
+      title: TextSimilarityGrader
+      x-oaiMeta:
+        name: Text Similarity Grader
+        group: graders
+        example: |
+          {
+            "type": "text_similarity",
+            "name": "Example text similarity grader",
+            "input": "{{sample.output_text}}",
+            "reference": "{{item.label}}",
+            "evaluation_metric": "fuzzy_match"
+          }
     OpenAI.GrammarSyntax1:
       type: string
       enum:
@@ -13206,7 +14692,7 @@ components:
             - code_interpreter_call.outputs
             - reasoning.encrypted_content
             - message.output_text.logprobs
-            - memory_search_call.results
+            - memory_search_call_preview.results
       description: |-
         Specify additional output data to include in the model response. Currently supported values are:
         - `web_search_call.action.sources`: Include the sources of the web search tool call.
@@ -15070,6 +16556,66 @@ components:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A collection of keypresses the model would like to perform.
       title: KeyPress
+    OpenAI.ListFineTuningJobCheckpointsResponse:
+      type: object
+      required:
+        - data
+        - object
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FineTuningJobCheckpoint'
+        object:
+          type: string
+          enum:
+            - list
+          x-stainless-const: true
+        first_id:
+          type: string
+          nullable: true
+        last_id:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
+    OpenAI.ListFineTuningJobEventsResponse:
+      type: object
+      required:
+        - data
+        - object
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FineTuningJobEvent'
+        object:
+          type: string
+          enum:
+            - list
+          x-stainless-const: true
+        has_more:
+          type: boolean
+    OpenAI.ListPaginatedFineTuningJobsResponse:
+      type: object
+      required:
+        - data
+        - has_more
+        - object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FineTuningJob'
+        has_more:
+          type: boolean
+        object:
+          type: string
+          enum:
+            - list
+          x-stainless-const: true
     OpenAI.LocalShellCallStatus:
       type: string
       enum:
@@ -19699,6 +21245,7 @@ components:
             - bing_grounding
             - capture_structured_outputs
             - openapi
+            - memory_search_preview
     OpenAI.ToolsArray:
       type: array
       items:
@@ -20297,6 +21844,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of Index items
+    PagedInsight:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Insight'
+          description: The Insight items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of Insight items
     PagedRedTeam:
       type: object
       required:

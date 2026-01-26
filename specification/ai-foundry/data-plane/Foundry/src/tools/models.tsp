@@ -29,9 +29,7 @@ union _AgentToolType {
   bing_grounding: "bing_grounding",
   capture_structured_outputs: "capture_structured_outputs",
   openapi: "openapi",
-
-  @removed(Versions.v1)
-  memory_search: "memory_search",
+  memory_search_preview: "memory_search_preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -39,7 +37,7 @@ union _AgentToolType {
 
 @removed(Versions.v1)
 union _AgentIncludable {
-  "memory_search_call.results",
+  "memory_search_call_preview.results",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
