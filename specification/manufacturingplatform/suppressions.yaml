@@ -1,11 +1,3 @@
-- tool: TypeSpecRequirement
-  path: resource-manager/Microsoft.AzureStackHCI/StackHCI/stable/2024-04-01/**/*.json
-  reason: Part of brownfield service group
-
-- tool: TypeSpecRequirement
-  path: resource-manager/Microsoft.AzureStackHCI/operations/stable/2024-04-01/**/*.json
-  reason: Part of brownfield service group
-
 - tool: TypeSpecValidation
   reason: >
     TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
@@ -13,10 +5,9 @@
     More info: https://aka.ms/azsdk/spec-gen-sdk-config.
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
   paths:
-    - Operations.Management/tspconfig.yaml
+    - Manufacturingplatform.Management/tspconfig.yaml
