@@ -3,6 +3,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "./PrivateEndpointConnection.tsp";
+import "./PrivateLinkResource.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -504,6 +506,35 @@ model FileShareProvisioningRecommendationOutput {
 
   @doc("Redundancy options for the share.")
   availableRedundancyOptions: Redundancy[];
+}
+
+/**
+ * A list of private link resources.
+ */
+model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;
+
+/**
+ * Properties of a private link resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "PrivateLinkResource is a read-only resource and does not require provisioning state"
+model PrivateLinkResourceProperties {
+  /**
+   * The private link resource group id.
+   */
+  @visibility(Lifecycle.Read)
+  groupId?: string;
+
+  /**
+   * The private link resource required member names.
+   */
+  @visibility(Lifecycle.Read)
+  requiredMembers?: string[];
+
+  /**
+   * The private link resource private link DNS zone name.
+   */
+  @visibility(Lifecycle.Read)
+  requiredZoneNames?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
