@@ -33,6 +33,9 @@ namespace Customizations;
 // Workaround errors CS0019 and CS0019
 @@alternateType(StacCollectionTemporalExtent.interval, string[][], "csharp");
 
+// Change the WmtsCapabilitiesXmlResponse body type from bytes to string for JavaScript
+@@alternateType(WmtsCapabilitiesXmlResponse.body, string, "javascript");
+
 // Address naming convention violations for C# SDK
 @@clientName(TilerMosaicSearchRegistrationResponse,
   "TilerMosaicSearchRegistrationResult",
