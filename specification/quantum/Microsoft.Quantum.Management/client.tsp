@@ -62,6 +62,10 @@ using Azure.ResourceManager.Foundations;
 @@clientName(QuotaDimension, "QuantumQuotaDimension", "csharp");
 @@clientName(WorkspaceKind, "QuantumWorkspaceKind", "csharp");
 @@clientName(QuotaAllocations, "QuantumQuotaAllocations", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.MoboBrokerResource,
+  "MoboBrokerInfo",
+  "csharp"
+);
 @@alternateType(ProviderPropertiesAad.tenantId, uuid, "csharp");
 @@alternateType(WorkspaceResourceProperties.endpointUri, url, "csharp");
 @@alternateType(QuantumSuiteOfferProperties.quotas, azureLocation, "csharp");
