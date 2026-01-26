@@ -32,4 +32,16 @@ interface Apps {
   get is ArmResourceRead<ManagedApp>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedApp>;
   delete is ArmResourceDeleteWithoutOkAsync<ManagedApp>;
+  rollback is ArmResourceActionAsync<
+    ManagedApp,
+    ManagedAppRollbackPostParameters,
+    ManagedApp
+  >;
+}
+
+@armResourceOperations
+// Managed App Revision Operations
+interface ManagedAppRevisions {
+  get is ArmResourceRead<ManagedAppRevision>;
+  listByManagedApp is ArmResourceListByParent<ManagedAppRevision>;
 }

@@ -42,6 +42,26 @@ model ManagedNamespaceProperties {
 @parentResource(ManagedNamespace)
 model ManagedApp is Azure.ResourceManager.ProxyResource<AppProperties> {
   ...ResourceNameParameter<ManagedApp>;
+  ...EntityTagProperty;
+}
+
+model ManagedAppRevision
+  is Azure.ResourceManager.ExtensionResource<AppProperties> {
+  @key("managedAppRevisionName")
+  @doc("The name of the managed app revision resource.")
+  @segment("managedAppRevisions")
+  @visibility(Lifecycle.Read)
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @path
+  name: string;
+
+  ...EntityTagProperty;
+}
+
+/** Parameters for rolling back a managed app to a previous revision */
+model ManagedAppRollbackPostParameters {
+  /** The name of the managed app revision to rollback to */
+  managedAppRevisionName: string;
 }
 
 /** App properties */
