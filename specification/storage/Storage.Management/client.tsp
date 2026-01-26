@@ -65,7 +65,7 @@ op getDeletedAccountCustomized(
   apiVersion: string,
   deletedAccountName: string,
   location: Azure.Core.azureLocation,
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<Microsoft.Storage.DeletedAccount>,
   subscriptionId: Azure.Core.uuid,
 ): Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount> | Microsoft.Storage.ErrorResponse;
 @@override(DeletedAccounts.get, getDeletedAccountCustomized, "java,go,python");

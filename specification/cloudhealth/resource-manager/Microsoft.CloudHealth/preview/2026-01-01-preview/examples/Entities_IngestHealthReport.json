@@ -1,0 +1,31 @@
+{
+  "title": "Entities_IngestHealthReport",
+  "operationId": "Entities_IngestHealthReport",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "healthModelName": "myHealthModel",
+    "entityName": "entity1",
+    "body": {
+      "signalName": "uniqueSignalName1",
+      "value": 85.5,
+      "healthState": "Degraded",
+      "evaluationRules": {
+        "degradedRule": {
+          "operator": "GreaterThan",
+          "threshold": 70
+        },
+        "unhealthyRule": {
+          "operator": "GreaterThan",
+          "threshold": 90
+        }
+      },
+      "expiresIn": 60,
+      "additionalContext": "CPU usage elevated due to batch processing job"
+    }
+  },
+  "responses": {
+    "204": {}
+  }
+}
