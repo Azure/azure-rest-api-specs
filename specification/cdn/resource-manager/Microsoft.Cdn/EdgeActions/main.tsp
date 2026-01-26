@@ -140,11 +140,26 @@ interface EdgeActionVersions {
 
   /** Get the version code for the edge action version. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Explicitly set content type for POST operations - expected by service"
-  getVersionCode is ArmResourceActionAsync<EdgeActionVersion, void, VersionCode, Parameters={/** Content type */ @header contentType: "application/json";}>;
+  getVersionCode is ArmResourceActionAsync<
+    EdgeActionVersion,
+    void,
+    VersionCode,
+    Parameters = {
+      /** Content type */
+      @header contentType: "application/json";
+    }
+  >;
 
   /** Swap the default version for the edge action. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Explicitly set content type for POST operations - expected by service"
-  swapDefault is ArmResourceActionNoContentAsync<EdgeActionVersion, void, Parameters={/** Content type */ @header contentType: "application/json";}>;
+  swapDefault is ArmResourceActionNoContentAsync<
+    EdgeActionVersion,
+    void,
+    Parameters = {
+      /** Content type */
+      @header contentType: "application/json";
+    }
+  >;
 }
 
 @armResourceOperations
