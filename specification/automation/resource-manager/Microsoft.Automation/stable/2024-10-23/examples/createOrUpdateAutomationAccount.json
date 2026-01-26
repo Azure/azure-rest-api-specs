@@ -1,57 +1,59 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "automationAccountName": "myAutomationAccount9",
     "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount9",
     "parameters": {
+      "name": "myAutomationAccount9",
+      "location": "East US 2",
       "properties": {
         "sku": {
           "name": "Free"
         }
-      },
-      "name": "myAutomationAccount9",
-      "location": "East US 2"
-    }
-  },
-  "responses": {
-    "201": {
-      "headers": {},
-      "body": {
-        "name": "myAutomationAccount9",
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9",
-        "type": "Microsoft.Automation/AutomationAccounts",
-        "location": "East US 2",
-        "tags": {},
-        "properties": {
-          "sku": {
-            "name": "Free"
-          },
-          "state": "Ok",
-          "creationTime": "2017-03-26T01:13:43.267+00:00",
-          "lastModifiedBy": "myEmailId@microsoft.com",
-          "lastModifiedTime": "2017-03-26T01:13:43.267+00:00"
-        }
       }
     },
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
     "200": {
-      "headers": {},
       "body": {
         "name": "ContoseAutomationAccount",
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9",
         "type": "Microsoft.Automation/AutomationAccounts",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9",
         "location": "East US 2",
-        "tags": {},
         "properties": {
+          "creationTime": "2017-03-28T18:21:15.187+00:00",
+          "lastModifiedBy": "myEmaild@microsoft.com",
+          "lastModifiedTime": "2017-03-28T18:21:15.187+00:00",
           "sku": {
             "name": "Free"
           },
-          "state": "Ok",
-          "creationTime": "2017-03-28T18:21:15.187+00:00",
-          "lastModifiedBy": "myEmaild@microsoft.com",
-          "lastModifiedTime": "2017-03-28T18:21:15.187+00:00"
-        }
-      }
+          "state": "Ok"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "myAutomationAccount9",
+        "type": "Microsoft.Automation/AutomationAccounts",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9",
+        "location": "East US 2",
+        "properties": {
+          "creationTime": "2017-03-26T01:13:43.267+00:00",
+          "lastModifiedBy": "myEmailId@microsoft.com",
+          "lastModifiedTime": "2017-03-26T01:13:43.267+00:00",
+          "sku": {
+            "name": "Free"
+          },
+          "state": "Ok"
+        },
+        "tags": {}
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AutomationAccount_CreateOrUpdate",
+  "title": "Create or update automation account"
 }

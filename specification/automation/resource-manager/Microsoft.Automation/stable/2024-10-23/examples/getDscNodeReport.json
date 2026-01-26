@@ -1,51 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "api-version": "2024-10-23",
     "automationAccountName": "myAutomationAccount33",
     "nodeId": "nodeId",
     "reportId": "903a5ead-140c-11e7-a943-000d3a6140c9",
-    "api-version": "2024-10-23"
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/nodeId/reports/903a5ead-140c-11e7-a943-000d3a6140c9",
-        "reportId": "903a5ead-140c-11e7-a943-000d3a6140c9",
         "type": "Consistency",
-        "startTime": "2017-03-28T23:16:27.587+00:00",
-        "endTime": "2017-03-28T23:16:27.587+00:00",
-        "lastModifiedTime": "2017-03-28T23:16:29.4440401+00:00",
-        "status": "Compliant",
-        "refreshMode": "Pull",
-        "rebootRequested": "False",
-        "reportFormatVersion": "2.0",
         "configurationVersion": "2.0.0",
+        "endTime": "2017-03-28T23:16:27.587+00:00",
         "errors": [],
-        "resources": [
-          {
-            "resourceId": "[WindowsFeature]IIS",
-            "sourceInfo": "::4::32::WindowsFeature",
-            "dependsOn": [],
-            "moduleName": "PsDesiredStateConfiguration",
-            "moduleVersion": "1.1",
-            "resourceName": "WindowsFeature",
-            "error": null,
-            "status": "Compliant",
-            "durationInSeconds": 0.25,
-            "startDate": "2017-03-28T23:16:28.181+00:00"
-          }
-        ],
-        "metaConfiguration": {
-          "configurationModeFrequencyMins": 15,
-          "rebootNodeIfNeeded": false,
-          "configurationMode": "ApplyAndMonitor",
-          "actionAfterReboot": "ContinueConfiguration",
-          "certificateId": "certId",
-          "refreshFrequencyMins": 30,
-          "allowModuleOverwrite": false
-        },
         "hostName": "DSCCOMP",
         "iPV4Addresses": [
           "172.16.2.5",
@@ -59,9 +27,43 @@
           "2001:0:9d38:78cf:106b:130a:53ef:fdfa",
           "fe80::106b:130a:53ef:fdfa%7"
         ],
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/nodeId/reports/903a5ead-140c-11e7-a943-000d3a6140c9",
+        "lastModifiedTime": "2017-03-28T23:16:29.4440401+00:00",
+        "metaConfiguration": {
+          "actionAfterReboot": "ContinueConfiguration",
+          "allowModuleOverwrite": false,
+          "certificateId": "certId",
+          "configurationMode": "ApplyAndMonitor",
+          "configurationModeFrequencyMins": 15,
+          "rebootNodeIfNeeded": false,
+          "refreshFrequencyMins": 30
+        },
         "numberOfResources": 1,
-        "rawErrors": null
-      }
+        "rawErrors": null,
+        "rebootRequested": "False",
+        "refreshMode": "Pull",
+        "reportFormatVersion": "2.0",
+        "reportId": "903a5ead-140c-11e7-a943-000d3a6140c9",
+        "resources": [
+          {
+            "dependsOn": [],
+            "durationInSeconds": 0.25,
+            "error": null,
+            "moduleName": "PsDesiredStateConfiguration",
+            "moduleVersion": "1.1",
+            "resourceId": "[WindowsFeature]IIS",
+            "resourceName": "WindowsFeature",
+            "sourceInfo": "::4::32::WindowsFeature",
+            "startDate": "2017-03-28T23:16:28.181+00:00",
+            "status": "Compliant"
+          }
+        ],
+        "startTime": "2017-03-28T23:16:27.587+00:00",
+        "status": "Compliant"
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "NodeReports_Get",
+  "title": "Get Dsc node report data by node id and report id. "
 }

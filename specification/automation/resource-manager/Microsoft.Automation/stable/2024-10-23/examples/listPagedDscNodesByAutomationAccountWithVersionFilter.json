@@ -1,96 +1,98 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "automationAccountName": "myAutomationAccount33",
-    "api-version": "2024-10-23",
+    "$filter": "properties/extensionHandler/any(eh: eh/version le '2.70')",
+    "$inlinecount": "allpages",
     "$skip": 0,
     "$top": 4,
-    "$inlinecount": "allpages",
-    "$filter": "properties/extensionHandler/any(eh: eh/version le '2.70')"
+    "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount33",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "totalCount": 7,
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node62",
             "name": "Node62",
             "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node62",
             "properties": {
-              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
-              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "extensionHandler": null,
               "ip": "ip",
-              "nodeId": "01D64CDE-85DD-4C9B-B8F1-2F725348FDEC",
-              "status": "Compliant",
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
               "nodeConfiguration": {
                 "name": "SetupServer.localhost"
               },
-              "extensionHandler": null
+              "nodeId": "01D64CDE-85DD-4C9B-B8F1-2F725348FDEC",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "status": "Compliant"
             }
           },
           {
-            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node63",
             "name": "Node63",
             "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node63",
             "properties": {
-              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
-              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
-              "ip": "ip",
-              "nodeId": "E13076D7-A959-4067-B02F-4F014AAD22D7",
-              "status": "Compliant",
-              "nodeConfiguration": {
-                "name": "SetupServer.localhost"
-              },
               "extensionHandler": [
                 {
                   "name": "Microsoft.Powershell.DSC",
                   "version": "2.70.0.0"
                 }
-              ]
+              ],
+              "ip": "ip",
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "nodeId": "E13076D7-A959-4067-B02F-4F014AAD22D7",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "status": "Compliant"
             }
           },
           {
-            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node64",
             "name": "Node64",
             "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node64",
             "properties": {
-              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
-              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
-              "ip": "ip",
-              "nodeId": "4289B441-B9A0-4309-93FC-0C5100CFBE46",
-              "status": "Compliant",
-              "nodeConfiguration": {
-                "name": "SetupServer.localhost"
-              },
               "extensionHandler": [
                 {
                   "name": "Microsoft.Powershell.DSC",
                   "version": "2.70.0.0"
                 }
-              ]
-            }
-          },
-          {
-            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node65",
-            "name": "Node65",
-            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
-            "properties": {
-              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
-              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              ],
               "ip": "ip",
-              "nodeId": "CBD2212B-8F4C-4049-98E7-1DBCBED7343B",
-              "status": "NotCompliant",
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
               "nodeConfiguration": {
                 "name": "SetupServer.localhost"
               },
-              "extensionHandler": null
+              "nodeId": "4289B441-B9A0-4309-93FC-0C5100CFBE46",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "status": "Compliant"
+            }
+          },
+          {
+            "name": "Node65",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node65",
+            "properties": {
+              "extensionHandler": null,
+              "ip": "ip",
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "nodeId": "CBD2212B-8F4C-4049-98E7-1DBCBED7343B",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "status": "NotCompliant"
             }
           }
-        ],
-        "totalCount": 7
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "DscNode_ListByAutomationAccount",
+  "title": "List Paged DSC nodes by Automation Account with version filter"
 }

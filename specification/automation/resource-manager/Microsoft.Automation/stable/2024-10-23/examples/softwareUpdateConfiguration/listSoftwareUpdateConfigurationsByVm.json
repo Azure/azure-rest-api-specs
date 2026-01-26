@@ -1,11 +1,11 @@
 {
   "parameters": {
-    "subscriptionId": "1a7d4044-286c-4acb-969a-96639265bf2e",
-    "resourceGroupName": "mygroup",
-    "automationAccountName": "myaccount",
     "$filter": "properties/updateConfiguration/azureVirtualMachines/any(m: m eq '/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01')",
     "api-version": "2024-10-23",
-    "body": {}
+    "automationAccountName": "myaccount",
+    "body": {},
+    "resourceGroupName": "mygroup",
+    "subscriptionId": "1a7d4044-286c-4acb-969a-96639265bf2e"
   },
   "responses": {
     "200": {
@@ -15,82 +15,84 @@
             "name": "testpatch-01",
             "id": "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-01",
             "properties": {
-              "updateConfiguration": {
-                "operatingSystem": "Windows",
-                "windows": {
-                  "includedUpdateClassifications": "Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates",
-                  "excludedKbNumbers": null
+              "creationTime": "2017-10-19T18:54:50.5233333+00:00",
+              "frequency": "Week",
+              "lastModifiedTime": "2017-10-19T18:54:50.68+00:00",
+              "nextRun": "2017-10-23T12:22:00-07:00",
+              "provisioningState": "Succeeded",
+              "startTime": "2017-10-19T12:22:00-07:00",
+              "tasks": {
+                "postTask": {
+                  "parameters": null,
+                  "source": "GetCache"
                 },
-                "linux": null,
-                "duration": "PT2H",
+                "preTask": {
+                  "parameters": {
+                    "COMPUTERNAME": "Computer1"
+                  },
+                  "source": "HelloWorld"
+                }
+              },
+              "updateConfiguration": {
                 "azureVirtualMachines": [
                   "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
                   "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-02",
                   "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-03"
                 ],
-                "nonAzureComputerNames": null
-              },
-              "tasks": {
-                "preTask": {
-                  "source": "HelloWorld",
-                  "parameters": {
-                    "COMPUTERNAME": "Computer1"
-                  }
-                },
-                "postTask": {
-                  "source": "GetCache",
-                  "parameters": null
+                "duration": "PT2H",
+                "linux": null,
+                "nonAzureComputerNames": null,
+                "operatingSystem": "Windows",
+                "windows": {
+                  "excludedKbNumbers": null,
+                  "includedUpdateClassifications": "Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates"
                 }
-              },
-              "frequency": "Week",
-              "startTime": "2017-10-19T12:22:00-07:00",
-              "creationTime": "2017-10-19T18:54:50.5233333+00:00",
-              "lastModifiedTime": "2017-10-19T18:54:50.68+00:00",
-              "provisioningState": "Succeeded",
-              "nextRun": "2017-10-23T12:22:00-07:00"
+              }
             }
           },
           {
             "name": "testpatch-02",
             "id": "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/Mo-Resources-WCUS/providers/Microsoft.Automation/automationAccounts/Mo-AAA-WCUS/softwareUpdateConfigurations/testpatch-02",
             "properties": {
-              "updateConfiguration": {
-                "operatingSystem": "Windows",
-                "windows": {
-                  "includedUpdateClassifications": "Critical, FeaturePack",
-                  "excludedKbNumbers": null
+              "creationTime": "2017-08-11T21:52:02.7733333+00:00",
+              "frequency": "Hour",
+              "lastModifiedTime": "2017-08-11T21:52:22.88+00:00",
+              "nextRun": "2018-05-05T12:26:00-07:00",
+              "provisioningState": "Succeeded",
+              "startTime": "2018-05-05T12:26:00-07:00",
+              "tasks": {
+                "postTask": {
+                  "parameters": null,
+                  "source": "GetCache"
                 },
-                "linux": null,
-                "duration": "PT2H30M",
+                "preTask": {
+                  "parameters": {
+                    "COMPUTERNAME": "Computer1"
+                  },
+                  "source": "HelloWorld"
+                }
+              },
+              "updateConfiguration": {
                 "azureVirtualMachines": [
                   "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01",
                   "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-05",
                   "/subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-06"
                 ],
-                "nonAzureComputerNames": null
-              },
-              "tasks": {
-                "preTask": {
-                  "source": "HelloWorld",
-                  "parameters": {
-                    "COMPUTERNAME": "Computer1"
-                  }
-                },
-                "postTask": {
-                  "source": "GetCache",
-                  "parameters": null
+                "duration": "PT2H30M",
+                "linux": null,
+                "nonAzureComputerNames": null,
+                "operatingSystem": "Windows",
+                "windows": {
+                  "excludedKbNumbers": null,
+                  "includedUpdateClassifications": "Critical, FeaturePack"
                 }
-              },
-              "frequency": "Hour",
-              "startTime": "2018-05-05T12:26:00-07:00",
-              "creationTime": "2017-08-11T21:52:02.7733333+00:00",
-              "lastModifiedTime": "2017-08-11T21:52:22.88+00:00",
-              "provisioningState": "Succeeded",
-              "nextRun": "2018-05-05T12:26:00-07:00"
+              }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "SoftwareUpdateConfigurations_List",
+  "title": "List software update configurations Targeting a specific azure virtual machine"
 }

@@ -1,41 +1,43 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "api-version": "2024-10-23",
     "automationAccountName": "ContoseAutomationAccount",
+    "resourceGroupName": "rg",
     "runbookName": "Get-AzureVMTutorial",
-    "api-version": "2024-10-23"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/runbooks/Get-AzureVMTutorial",
         "name": "Get-AzureVMTutorial",
         "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
+        "etag": "\"636263335437500000\"",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/runbooks/Get-AzureVMTutorial",
         "location": "East US 2",
+        "properties": {
+          "description": "Description of the Runbook",
+          "creationTime": "2017-03-28T21:32:23.75+00:00",
+          "jobCount": 0,
+          "lastModifiedBy": "myEmaild@microsoft.com",
+          "lastModifiedTime": "2017-03-28T21:32:23.75+00:00",
+          "logActivityTrace": 1,
+          "logProgress": true,
+          "logVerbose": false,
+          "outputTypes": [],
+          "parameters": {},
+          "provisioningState": "Succeeded",
+          "runbookType": "PowerShellWorkflow",
+          "runtimeEnvironment": "environmentName",
+          "state": "Published"
+        },
         "tags": {
           "tag01": "value01",
           "tag02": "value02"
-        },
-        "etag": "\"636263335437500000\"",
-        "properties": {
-          "description": "Description of the Runbook",
-          "logVerbose": false,
-          "logProgress": true,
-          "logActivityTrace": 1,
-          "runbookType": "PowerShellWorkflow",
-          "runtimeEnvironment": "environmentName",
-          "parameters": {},
-          "state": "Published",
-          "jobCount": 0,
-          "provisioningState": "Succeeded",
-          "outputTypes": [],
-          "creationTime": "2017-03-28T21:32:23.75+00:00",
-          "lastModifiedBy": "myEmaild@microsoft.com",
-          "lastModifiedTime": "2017-03-28T21:32:23.75+00:00"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Runbook_Get",
+  "title": "Get runbook"
 }

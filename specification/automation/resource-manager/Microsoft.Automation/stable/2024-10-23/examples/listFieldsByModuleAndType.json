@@ -1,15 +1,14 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "api-version": "2024-10-23",
     "automationAccountName": "MyAutomationAccount",
     "moduleName": "MyModule",
-    "typeName": "MyCustomType",
-    "api-version": "2024-10-23"
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid",
+    "typeName": "MyCustomType"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
@@ -25,7 +24,10 @@
             "type": "MyModule.AnotherCustomType"
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Fields_ListByType",
+  "title": "Get a list of fields of a given type"
 }

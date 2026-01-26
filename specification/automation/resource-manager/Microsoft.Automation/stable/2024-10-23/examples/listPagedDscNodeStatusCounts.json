@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
-    "automationAccountName": "myAutomationAccount33",
-    "api-version": "2024-10-23",
+    "$inlinecount": "allpages",
     "$skip": 0,
     "$top": 20,
-    "$inlinecount": "allpages",
-    "countType": "status"
+    "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount33",
+    "countType": "status",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "totalCount": 6,
         "value": [
           {
             "name": "Compliant",
@@ -50,9 +50,11 @@
               "count": 4
             }
           }
-        ],
-        "totalCount": 6
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "NodeCountInformation_Get",
+  "title": "Get node's status counts"
 }

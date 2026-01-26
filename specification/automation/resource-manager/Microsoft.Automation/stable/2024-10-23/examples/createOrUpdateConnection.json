@@ -1,10 +1,8 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "api-version": "2024-10-23",
     "automationAccountName": "myAutomationAccount28",
     "connectionName": "mysConnection",
-    "api-version": "2024-10-23",
     "parameters": {
       "name": "mysConnection",
       "properties": {
@@ -17,46 +15,50 @@
           "SubscriptionID": "subid"
         }
       }
-    }
+    },
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
-    "201": {
-      "headers": {},
-      "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount28/connections/mysConnection",
-        "name": "mysConnection",
-        "properties": {
-          "creationTime": "2017-03-27T07:52:29.29+00:00",
-          "lastModifiedTime": "2017-03-27T07:52:29.29+00:00",
-          "description": "my description goes here",
-          "fieldDefinitionValues": {
-            "AutomationCertificateName": "mysCertificateName",
-            "SubscriptionID": "subid"
-          },
-          "connectionType": {
-            "name": "Azure"
-          }
-        }
-      }
-    },
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount28/connections/mysConnection",
         "name": "mysConnection",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount28/connections/mysConnection",
         "properties": {
-          "creationTime": "2017-03-27T07:52:29.29+00:00",
-          "lastModifiedTime": "2017-03-27T07:52:29.29+00:00",
           "description": "my description goes here",
+          "connectionType": {
+            "name": "Azure"
+          },
+          "creationTime": "2017-03-27T07:52:29.29+00:00",
           "fieldDefinitionValues": {
             "AutomationCertificateName": "mysCertificateName",
             "SubscriptionID": "subid"
           },
+          "lastModifiedTime": "2017-03-27T07:52:29.29+00:00"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "mysConnection",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount28/connections/mysConnection",
+        "properties": {
+          "description": "my description goes here",
           "connectionType": {
             "name": "Azure"
-          }
+          },
+          "creationTime": "2017-03-27T07:52:29.29+00:00",
+          "fieldDefinitionValues": {
+            "AutomationCertificateName": "mysCertificateName",
+            "SubscriptionID": "subid"
+          },
+          "lastModifiedTime": "2017-03-27T07:52:29.29+00:00"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Connection_CreateOrUpdate",
+  "title": "Create or update connection"
 }

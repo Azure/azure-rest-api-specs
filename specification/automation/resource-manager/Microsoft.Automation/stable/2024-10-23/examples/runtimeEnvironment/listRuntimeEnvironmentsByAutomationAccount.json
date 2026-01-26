@@ -1,80 +1,82 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "api-version": "2024-10-23",
     "automationAccountName": "ContoseAutomationAccount",
-    "api-version": "2024-10-23"
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
             "name": "myRuntimeEnvironmentName",
-            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9/runtimeEnvironments/myRuntimeEnvironmentName",
             "type": "Microsoft.Automation/automationAccounts/runtimeEnvironments",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9/runtimeEnvironments/myRuntimeEnvironmentName",
             "location": "East US 2",
-            "tags": {},
+            "properties": {
+              "description": "Description of the Runtime Environment",
+              "defaultPackages": {
+                "Az": "8.3.0"
+              },
+              "runtime": {
+                "version": "5.1",
+                "language": "PowerShell"
+              }
+            },
             "systemData": {
               "createdAt": "2023-07-05T07:32:41.4389914+00:00",
               "lastModifiedAt": "2023-07-05T07:33:07.5597465+00:00"
             },
-            "properties": {
-              "runtime": {
-                "language": "PowerShell",
-                "version": "5.1"
-              },
-              "defaultPackages": {
-                "Az": "8.3.0"
-              },
-              "description": "Description of the Runtime Environment"
-            }
+            "tags": {}
           },
           {
             "name": "myRuntimeEnvironmentName2",
-            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9/runtimeEnvironments/myRuntimeEnvironmentName2",
             "type": "Microsoft.Automation/automationAccounts/runtimeEnvironments",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9/runtimeEnvironments/myRuntimeEnvironmentName2",
             "location": "East US 2",
-            "tags": {},
+            "properties": {
+              "description": "Description of the Runtime Environment",
+              "defaultPackages": {
+                "Az": "8.3.0"
+              },
+              "runtime": {
+                "version": "7.1",
+                "language": "PowerShell"
+              }
+            },
             "systemData": {
               "createdAt": "2023-07-05T07:32:41.4389914+00:00",
               "lastModifiedAt": "2023-07-05T07:33:07.5597465+00:00"
             },
-            "properties": {
-              "runtime": {
-                "language": "PowerShell",
-                "version": "7.1"
-              },
-              "defaultPackages": {
-                "Az": "8.3.0"
-              },
-              "description": "Description of the Runtime Environment"
-            }
+            "tags": {}
           },
           {
             "name": "myRuntimeEnvironmentName3",
-            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9/runtimeEnvironments/myRuntimeEnvironmentName3",
             "type": "Microsoft.Automation/automationAccounts/runtimeEnvironments",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9/runtimeEnvironments/myRuntimeEnvironmentName3",
             "location": "East US 2",
-            "tags": {},
+            "properties": {
+              "description": "Description of the Runtime Environment",
+              "defaultPackages": {
+                "Az": "8.3.0"
+              },
+              "runtime": {
+                "version": "7.2",
+                "language": "PowerShell"
+              }
+            },
             "systemData": {
               "createdAt": "2023-07-05T07:32:41.4389914+00:00",
               "lastModifiedAt": "2023-07-05T07:33:07.5597465+00:00"
             },
-            "properties": {
-              "runtime": {
-                "language": "PowerShell",
-                "version": "7.2"
-              },
-              "defaultPackages": {
-                "Az": "8.3.0"
-              },
-              "description": "Description of the Runtime Environment"
-            }
+            "tags": {}
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "RuntimeEnvironments_ListByAutomationAccount",
+  "title": "List runbooks by automation account"
 }

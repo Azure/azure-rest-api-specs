@@ -1,39 +1,41 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "api-version": "2024-10-23",
     "automationAccountName": "MyAutomationAccount",
     "packageName": "MyPython3Package",
-    "api-version": "2024-10-23",
     "parameters": {
       "tags": {}
-    }
+    },
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyAutomationAccount/python3Packages/MyPython3Package",
         "name": "MyPython3Package",
         "type": "Microsoft.Automation/AutomationAccounts/python3Packages",
-        "location": "East US 2",
-        "tags": {},
         "etag": null,
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/MyAutomationAccount/python3Packages/MyPython3Package",
+        "location": "East US 2",
         "properties": {
-          "isGlobal": false,
-          "version": null,
-          "sizeInBytes": 0,
           "activityCount": 0,
           "creationTime": "2017-03-29T15:41:47.003+00:00",
-          "lastModifiedTime": "2017-03-29T15:42:10.567+00:00",
           "error": {
             "code": null,
             "message": null
           },
+          "isComposite": false,
+          "isGlobal": false,
+          "lastModifiedTime": "2017-03-29T15:42:10.567+00:00",
           "provisioningState": "Creating",
-          "isComposite": false
-        }
-      }
+          "sizeInBytes": 0,
+          "version": null
+        },
+        "tags": {}
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Python3Package_Update",
+  "title": "Update a module"
 }

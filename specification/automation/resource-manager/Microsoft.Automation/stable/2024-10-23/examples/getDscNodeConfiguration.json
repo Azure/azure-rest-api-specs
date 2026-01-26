@@ -1,29 +1,31 @@
 {
   "parameters": {
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg",
+    "api-version": "2024-10-23",
     "automationAccountName": "myAutomationAccount33",
     "nodeConfigurationName": "SetupServer.localhost",
-    "api-version": "2024-10-23"
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupServer.localhost",
-        "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
         "name": "SetupServer.localhost",
+        "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodeConfigurations/SetupServer.localhost",
         "properties": {
           "configuration": {
             "name": "SetupServer"
           },
           "creationTime": "2017-03-28T23:17:06.8901968+00:00",
+          "incrementNodeConfigurationBuild": false,
           "lastModifiedTime": "2017-03-28T23:17:06.8901968+00:00",
-          "source": null,
           "nodeCount": 0,
-          "incrementNodeConfigurationBuild": false
+          "source": null
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "DscNodeConfiguration_Get",
+  "title": "Get a DSC node configuration"
 }
