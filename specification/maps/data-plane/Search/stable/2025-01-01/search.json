@@ -1,129 +1,868 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Search Service",
+    "title": "Maps Search",
     "version": "2025-01-01",
-    "description": "Azure Maps Search REST APIs"
+    "description": "Azure Maps Search REST APIs",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "atlas.microsoft.com",
   "schemes": [
     "https"
   ],
-  "consumes": [],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "https://atlas.microsoft.com"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
-  "securityDefinitions": {
-    "AADToken": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "These are the [Microsoft Entra OAuth 2.0](/entra/identity-platform/v2-overview) Flows. When paired with [Azure role-based access](/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n> [!NOTE]\n> * This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n> * The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n> * The Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n> * Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n> *  For more information on Microsoft identity platform, see [Microsoft identity platform overview](/entra/identity-platform/v2-overview).\n\n",
-      "scopes": {
-        "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
-      }
-    },
-    "AzureKey": {
-      "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
-      "name": "subscription-key",
-      "in": "header"
-    },
-    "SasToken": {
-      "type": "apiKey",
-      "description": "This is a shared access signature token is created from the List SAS operation on the [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this token, any application is authorized to access with Azure role-based access controls and fine-grain control to the expiration, rate, and region(s) of use for the particular token. In other words, the SAS Token can be used to allow applications to control access in a more secured way than the shared key.\n\n For publicly exposed applications, our recommendation is to configure a specific list of allowed origins on the [Map account resource](https://aka.ms/amauth) to limit rendering abuse and regularly renew the SAS Token.",
-      "name": "SAS Token",
-      "in": "header"
-    }
-  },
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "AADToken": [
+      "AadOauth2Auth": [
         "https://atlas.microsoft.com/.default"
       ]
     },
     {
-      "AzureKey": []
+      "SharedKeyAuth": []
     },
     {
-      "SasToken": []
+      "SasTokenAuth": []
     }
   ],
-  "responses": {},
-  "parameters": {
-    "ApiVersion": {
-      "name": "api-version",
-      "description": "Version number of Azure Maps API.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "client"
-    },
-    "Top": {
-      "name": "top",
-      "in": "query",
-      "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 5,
-      "minimum": 1,
-      "maximum": 20,
-      "x-ms-parameter-location": "method"
-    },
-    "Accept-Language": {
-      "name": "Accept-Language",
-      "in": "header",
-      "description": "Language in which search results should be returned. \n\nPlease refer to [Supported Languages](/azure/azure-maps/supported-languages) for details.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "Coordinates": {
-      "name": "coordinates",
-      "in": "query",
-      "description": "A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "double"
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://atlas.microsoft.com/.default": ""
       },
-      "minItems": 2,
-      "maxItems": 2,
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method"
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     },
-    "Bbox": {
-      "name": "bbox",
-      "in": "query",
-      "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "double"
+    "SasTokenAuth": {
+      "type": "apiKey",
+      "description": "SAS Token Authentication",
+      "name": "SAS Token",
+      "in": "header"
+    },
+    "SharedKeyAuth": {
+      "type": "apiKey",
+      "description": "Shared Key Authentication",
+      "name": "subscription-key",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/geocode": {
+      "get": {
+        "operationId": "Search_GetGeocoding",
+        "summary": "Use to get longitude and latitude coordinates of a street address or name of a\nplace.",
+        "description": "The `Get Geocoding` API is an HTTP `GET` request that returns the longitude and\nlatitude coordinates of the location being searched.\n\nIn many cases, the complete search service might be too much, for instance if\nyou are only interested in traditional geocoding. Search can also be accessed\nfor address look up exclusively. The geocoding is performed by hitting the\ngeocoding endpoint with just the address or partial address in question. The\ngeocoding search index will be queried for everything above the street level\ndata. No Point of Interest (POIs) will be returned. Note that the geocoder is\nvery tolerant of typos and incomplete addresses. It will also handle everything\nfrom exact street addresses or street or intersections as well as higher level\ngeographies such as city centers, counties and states. The response also\nreturns detailed address properties such as street, postal code, municipality,\nand country/region information.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more\ninformation, see [Preview Supplemental\nTerms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).",
+        "produces": [
+          "application/geo+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accept-language",
+            "in": "header",
+            "description": "Language in which search results should be returned.\n\nPlease refer to [Supported\nLanguages](/azure/azure-maps/supported-languages?pivots=service-latest) for\ndetails.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Accept-Language"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and\nmaximum: 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 5,
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "A string that contains information about a location, such as an address or\nlandmark name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "addressLine",
+            "in": "query",
+            "description": "The official street line of an address relative to the area, as specified by\nthe locality, or postalCode, properties. Typical use of this element would be\nto provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countryRegion",
+            "in": "query",
+            "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g.\nFR.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "bbox",
+            "in": "query",
+            "description": "A rectangular area on the earth defined as a bounding box object. The sides of\nthe rectangle are defined by longitude and latitude values. When you specify\nthis parameter, the geographical area is taken into account when computing the\nresults of a location query.\n\nExample: lon1,lat1,lon2,lat2.\n\nMinimum size: approximately 0.00001 degrees (~0.01 meters).\n\nMaximum size: up to the full global extent (-180,-90 to 180,90)",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter\nGeopolitical disputed borders and labels to align with the specified user\nregion. By default, the View parameter is set to “Auto” even if you haven’t\ndefined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews)\nfor details and to see the available Views.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "coordinates",
+            "in": "query",
+            "description": "A point on the earth specified as a longitude and latitude. When you specify\nthis parameter, the user’s location is taken into account and the results\nreturned may be more relevant to the user. Example: &coordinates=lon,lat",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "adminDistrict",
+            "in": "query",
+            "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "adminDistrict2",
+            "in": "query",
+            "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "adminDistrict3",
+            "in": "query",
+            "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locality",
+            "in": "query",
+            "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "postalCode",
+            "in": "query",
+            "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client-id",
+            "in": "header",
+            "description": "Specifies which account is intended for usage in conjunction with the Azure AD\nsecurity model.  It represents a unique ID for the Azure Maps account and can\nbe retrieved from the Azure Maps management plane Account API. For more\ninformation on using Microsoft Entra ID security in Azure Maps, see [Manage\nauthentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GeocodingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geocode:batch": {
+      "post": {
+        "operationId": "Search_GetGeocodingBatch",
+        "summary": "Use to send a batch of queries to the\n[Geocoding](/rest/api/maps/search/get-geocoding) API in a single request.",
+        "description": "The `Get Geocoding Batch` API is an HTTP `POST` request that sends batches of\nup to **100** queries to the [Geocoding](/rest/api/maps/search/get-geocoding)\nAPI in a single request.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more\ninformation, see [Preview Supplemental\nTerms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the\nservice receives a request, it will respond as soon as the batch items are\ncalculated and there will be no possibility to retrieve the results later. The\nSynchronous API will return a timeout error (a 408 response) if the request\ntakes longer than 60 seconds. The number of batch items is limited to **100**\nfor this API.\n```\nPOST https://atlas.microsoft.com/geocode:batch?api-version=2023-06-01\n```\n### POST Body for Batch Request\nTo send the _geocoding_ queries you will use a `POST` request where the request\nbody will contain the `batchItems` array in `json` format and the\n`Content-Type` header will be set to `application/json`. Here's a sample\nrequest body containing 2 _geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"addressLine\": \"One, Microsoft Way, Redmond, WA 98052\",\n      \"top\": 2\n    },\n    {\n      \"addressLine\": \"Pike Pl\",\n      \"adminDistrict\": \"WA\",\n      \"locality\": \"Seattle\",\n      \"top\": 3\n    }\n  ]\n}\n```\n\nA _geocoding_ batchItem object can accept any of the supported _geocoding_ [URI\nparameters](/rest/api/maps/search/get-geocoding#uri-parameters).\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the\n`totalRequests` that were part of the original batch request and\n`successfulRequests` i.e. queries which were executed successfully. The batch\nresponse also includes a `batchItems` array which contains a response for each\nand every query in the batch request. The `batchItems` will contain the results\nin the exact same order the original queries were sent in the batch request.\nEach item is of one of the following types:\n\n-\n[`GeocodingResponse`](/rest/api/maps/search/get-geocoding#geocodingresponse) -\nIf the query completed successfully.\n\n- `Error` - If the query failed. The response will contain a `code` and a\n`message` in this case.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "client-id",
+            "in": "header",
+            "description": "Specifies which account is intended for usage in conjunction with the Azure AD\nsecurity model.  It represents a unique ID for the Azure Maps account and can\nbe retrieved from the Azure Maps management plane Account API. For more\ninformation on using Microsoft Entra ID security in Azure Maps, see [Manage\nauthentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "accept-language",
+            "in": "header",
+            "description": "Language in which search results should be returned.\n\nPlease refer to [Supported\nLanguages](/azure/azure-maps/supported-languages?pivots=service-latest) for\ndetails.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Accept-Language"
+          },
+          {
+            "name": "geocodingBatchRequestBody",
+            "in": "body",
+            "description": "The list of address geocoding queries/requests to process. The list can contain\na max of 100 queries and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GeocodingBatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GeocodingBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reverseGeocode": {
+      "get": {
+        "operationId": "Search_GetReverseGeocoding",
+        "summary": "Use to get a street address and location info from longitude and latitude\ncoordinates.",
+        "description": "The `Get Reverse Geocoding` API is an HTTP `GET` request used to translate a\ncoordinate (example: 37.786505, -122.3862) into a human understandable street\naddress. Useful in tracking applications where you receive a GPS feed from the\ndevice or asset and wish to know the address associated with the coordinates.\nThis endpoint will return address information for a given coordinate.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more\ninformation, see [Preview Supplemental\nTerms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).",
+        "produces": [
+          "application/geo+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "client-id",
+            "in": "header",
+            "description": "Specifies which account is intended for usage in conjunction with the Azure AD\nsecurity model.  It represents a unique ID for the Azure Maps account and can\nbe retrieved from the Azure Maps management plane Account API. For more\ninformation on using Microsoft Entra ID security in Azure Maps, see [Manage\nauthentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "accept-language",
+            "in": "header",
+            "description": "Language in which search results should be returned.\n\nPlease refer to [Supported\nLanguages](/azure/azure-maps/supported-languages?pivots=service-latest) for\ndetails.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Accept-Language"
+          },
+          {
+            "name": "coordinates",
+            "in": "query",
+            "description": "The coordinates of the location that you want to reverse geocode. Example:\n&coordinates=lon,lat",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "resultTypes",
+            "in": "query",
+            "description": "Specify entity types that you want in the response. Only the types you specify\nwill be returned. If the point cannot be mapped to the entity types you\nspecify, no location information is returned in the response.\nDefault value is all possible entities.\nA comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least\nspecific entity. When entities of more than one entity type are found, only the\nmost specific entity is returned. For example, if you specify Address and\nAdminDistrict1 as entity types and entities were found for both types, only the\nAddress entity information is returned in the response.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Address",
+                "Neighborhood",
+                "PopulatedPlace",
+                "Postcode1",
+                "AdminDivision1",
+                "AdminDivision2",
+                "CountryRegion"
+              ],
+              "x-ms-enum": {
+                "name": "ReverseGeocodingResultTypeEnum",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "Address",
+                    "value": "Address",
+                    "description": "Address"
+                  },
+                  {
+                    "name": "Neighborhood",
+                    "value": "Neighborhood",
+                    "description": "Neighborhood"
+                  },
+                  {
+                    "name": "PopulatedPlace",
+                    "value": "PopulatedPlace",
+                    "description": "PopulatedPlace"
+                  },
+                  {
+                    "name": "Postcode1",
+                    "value": "Postcode1",
+                    "description": "Postcode1"
+                  },
+                  {
+                    "name": "AdminDivision1",
+                    "value": "AdminDivision1",
+                    "description": "AdminDivision1"
+                  },
+                  {
+                    "name": "AdminDivision2",
+                    "value": "AdminDivision2",
+                    "description": "AdminDivision2"
+                  },
+                  {
+                    "name": "CountryRegion",
+                    "value": "CountryRegion",
+                    "description": "CountryRegion"
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter\nGeopolitical disputed borders and labels to align with the specified user\nregion. By default, the View parameter is set to “Auto” even if you haven’t\ndefined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews)\nfor details and to see the available Views.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GeocodingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reverseGeocode:batch": {
+      "post": {
+        "operationId": "Search_GetReverseGeocodingBatch",
+        "summary": "Use to send a batch of queries to the [Reverse\nGeocoding](/rest/api/maps/search/get-reverse-geocoding) API in a single\nrequest.",
+        "description": "The `Get Reverse Geocoding Batch` API is an HTTP `POST` request that sends\nbatches of up to **100** queries to [Reverse\nGeocoding](/rest/api/maps/search/get-reverse-geocoding) API using a single\nrequest.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more\ninformation, see [Preview Supplemental\nTerms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the\nservice receives a request, it will respond as soon as the batch items are\ncalculated and there will be no possibility to retrieve the results later. The\nSynchronous API will return a timeout error (a 408 response) if the request\ntakes longer than 60 seconds. The number of batch items is limited to **100**\nfor this API.\n```\nPOST https://atlas.microsoft.com/reverseGeocode:batch?api-version=2023-06-01\n```\n### POST Body for Batch Request\nTo send the _reverse geocoding_ queries you will use a `POST` request where the\nrequest body will contain the `batchItems` array in `json` format and the\n`Content-Type` header will be set to `application/json`. Here's a sample\nrequest body containing 2 _reverse geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"coordinates\": [-122.128275, 47.639429],\n      \"resultTypes\": [\"Address\", \"PopulatedPlace\"]\n    },\n    {\n      \"coordinates\": [-122.341979399674, 47.6095253501216]\n    }\n  ]\n}\n```\n\nA _reverse geocoding_ batchItem object can accept any of the supported _reverse\ngeocoding_ [URI\nparameters](/rest/api/maps/search/get-reverse-geocoding#uri-parameters).\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the\n`totalRequests` that were part of the original batch request and\n`successfulRequests` i.e. queries which were executed successfully. The batch\nresponse also includes a `batchItems` array which contains a response for each\nand every query in the batch request. The `batchItems` will contain the results\nin the exact same order the original queries were sent in the batch request.\nEach item is of one of the following types:\n\n-\n[`GeocodingResponse`](/rest/api/maps/search/get-reverse-geocoding#geocodingresponse)\n- If the query completed successfully.\n\n- `Error` - If the query failed. The response will contain a `code` and a\n`message` in this case.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "client-id",
+            "in": "header",
+            "description": "Specifies which account is intended for usage in conjunction with the Azure AD\nsecurity model.  It represents a unique ID for the Azure Maps account and can\nbe retrieved from the Azure Maps management plane Account API. For more\ninformation on using Microsoft Entra ID security in Azure Maps, see [Manage\nauthentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "accept-language",
+            "in": "header",
+            "description": "Language in which search results should be returned.\n\nPlease refer to [Supported\nLanguages](/azure/azure-maps/supported-languages?pivots=service-latest) for\ndetails.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Accept-Language"
+          },
+          {
+            "name": "reverseGeocodingBatchRequestBody",
+            "in": "body",
+            "description": "The list of reverse geocoding queries/requests to process. The list can contain\na max of 100 queries and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReverseGeocodingBatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GeocodingBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/polygon": {
+      "get": {
+        "operationId": "Search_GetPolygon",
+        "summary": "Use to get polygon data of a geographical area shape such as a city or a\ncountry region.",
+        "description": "The `Get Polygon` API is an HTTP `GET` request that supplies polygon data of a\ngeographical area outline such as a city or a country region.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more\ninformation, see [Preview Supplemental\nTerms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).",
+        "produces": [
+          "application/geo+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "client-id",
+            "in": "header",
+            "description": "Specifies which account is intended for usage in conjunction with the Azure AD\nsecurity model.  It represents a unique ID for the Azure Maps account and can\nbe retrieved from the Azure Maps management plane Account API. For more\ninformation on using Microsoft Entra ID security in Azure Maps, see [Manage\nauthentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientId"
+          },
+          {
+            "name": "accept-language",
+            "in": "header",
+            "description": "Language in which search results should be returned.\n\nPlease refer to [Supported\nLanguages](/azure/azure-maps/supported-languages?pivots=service-latest) for\ndetails.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "Accept-Language"
+          },
+          {
+            "name": "coordinates",
+            "in": "query",
+            "description": "A point on the earth specified as a longitude and latitude. Example:\n&coordinates=lon,lat",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter\nGeopolitical disputed borders and labels to align with the specified user\nregion. By default, the View parameter is set to “Auto” even if you haven’t\ndefined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews)\nfor details and to see the available Views.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "resultType",
+            "in": "query",
+            "description": "The geopolitical concept to return a boundary for. If not specified, the\ndefault is `countryRegion` result type.",
+            "required": false,
+            "type": "string",
+            "default": "countryRegion",
+            "enum": [
+              "countryRegion",
+              "adminDistrict",
+              "adminDistrict2",
+              "postalCode",
+              "postalCode2",
+              "postalCode3",
+              "postalCode4",
+              "neighborhood",
+              "locality"
+            ],
+            "x-ms-enum": {
+              "name": "BoundaryResultTypeEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "countryRegion",
+                  "value": "countryRegion",
+                  "description": "Country or region."
+                },
+                {
+                  "name": "adminDistrict",
+                  "value": "adminDistrict",
+                  "description": "First administrative level within the country/region level, such as a state or\na province."
+                },
+                {
+                  "name": "adminDistrict2",
+                  "value": "adminDistrict2",
+                  "description": "Second administrative level within the country/region level, such as a county."
+                },
+                {
+                  "name": "postalCode",
+                  "value": "postalCode",
+                  "description": "The smallest post code category, such as a zip code."
+                },
+                {
+                  "name": "postalCode2",
+                  "value": "postalCode2",
+                  "description": "The next largest post code category after postalCode that is created by\naggregating postalCode areas."
+                },
+                {
+                  "name": "postalCode3",
+                  "value": "postalCode3",
+                  "description": "The next largest post code category after postalCode2 that is created by\naggregating postalCode2 areas."
+                },
+                {
+                  "name": "postalCode4",
+                  "value": "postalCode4",
+                  "description": "The next largest post code category after postalCode3 that is created by\naggregating postalCode3 areas."
+                },
+                {
+                  "name": "neighborhood",
+                  "value": "neighborhood",
+                  "description": "A section of a populated place that is typically well-known, but often with\nindistinct boundaries."
+                },
+                {
+                  "name": "locality",
+                  "value": "locality",
+                  "description": "A concentrated area of human settlement, such as a city, town or village."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resolution",
+            "in": "query",
+            "description": "Resolution determines the amount of points to send back. If not specified, the\ndefault is medium resolution.",
+            "required": false,
+            "type": "string",
+            "default": "medium",
+            "enum": [
+              "small",
+              "medium",
+              "large",
+              "huge"
+            ],
+            "x-ms-enum": {
+              "name": "ResolutionEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "small",
+                  "value": "small",
+                  "description": "Return the boundary geometry with the least amount of points."
+                },
+                {
+                  "name": "medium",
+                  "value": "medium",
+                  "description": "Return the boundary geometry with more or the same amount of points as small."
+                },
+                {
+                  "name": "large",
+                  "value": "large",
+                  "description": "Return the boundary geometry with more or the same amount of points as medium."
+                },
+                {
+                  "name": "huge",
+                  "value": "huge",
+                  "description": "Return the boundary geometry with more or the same amount of points as large."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Boundary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "type": "object",
+      "description": "The address of the result",
+      "properties": {
+        "addressLine": {
+          "type": "string",
+          "description": "AddressLine that includes street name and number"
+        },
+        "locality": {
+          "type": "string",
+          "description": "Locality property"
+        },
+        "neighborhood": {
+          "type": "string",
+          "description": "Neighborhood property"
+        },
+        "adminDistricts": {
+          "type": "array",
+          "description": "The subdivision name in the country or region for an address. This element is\ntypically treated as the first order administrative subdivision, but in some\ncases it also contains the second, third, or fourth order subdivision in a\ncountry, dependency, or region.",
+          "items": {
+            "$ref": "#/definitions/AddressAdminDistrictsItem"
+          }
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code property"
+        },
+        "countryRegion": {
+          "$ref": "#/definitions/AddressCountryRegion",
+          "description": "Country or region with its name and ISO code."
+        },
+        "formattedAddress": {
+          "type": "string",
+          "description": "Formatted address property"
+        },
+        "streetName": {
+          "type": "string",
+          "description": "The name of the street from formattedAddress"
+        },
+        "streetNumber": {
+          "type": "string",
+          "description": "The number in the street, if available, from formattedAddress"
+        },
+        "intersection": {
+          "$ref": "#/definitions/Intersection",
+          "description": "The address of the result."
+        }
+      }
+    },
+    "AddressAdminDistrictsItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for the corresponding adminDistrict field,\nFor adminDistrict[0], this could be full name of state such as Washington,\nFor adminDistrict[1], this could be the full name of the county"
+        },
+        "shortName": {
+          "type": "string",
+          "description": "The short name for the corresponding adminDistrict field,\nFor adminDistrict[0], this could be short name of state such as WA,\nFor adminDistrict[1], this could be the short name of the county"
+        }
+      }
+    },
+    "AddressCountryRegion": {
+      "type": "object",
+      "description": "Country or region with its name and ISO code.",
+      "properties": {
+        "ISO": {
+          "type": "string",
+          "description": "ISO of country/region"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of country/region"
+        }
+      }
+    },
+    "AutocompleteResultTypeGroupsEnum": {
+      "type": "string",
+      "description": "Address or Place",
+      "enum": [
+        "Address",
+        "Place"
+      ],
+      "x-ms-enum": {
+        "name": "AutocompleteResultTypeGroupsEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Address",
+            "value": "Address",
+            "description": "A specific address location. Supported types are:\n\n- Address\n- RoadBlock"
+          },
+          {
+            "name": "Place",
+            "value": "Place",
+            "description": "All other types belong to the Place type group. These may include entities such\nas AdminDivision1, Neighborhood, PopulatedPlace, and more."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
       },
-      "collectionFormat": "csv",
-      "minItems": 4,
-      "maxItems": 4,
-      "x-ms-parameter-location": "method"
+      "required": [
+        "code",
+        "message"
+      ]
     },
-    "View": {
-      "name": "view",
-      "in": "query",
-      "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
-    "BoundaryResultType": {
-      "name": "resultType",
-      "in": "query",
-      "description": "The geopolitical concept to return a boundary for. If not specified, the default is `countryRegion` result type.",
-      "required": false,
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Boundary": {
+      "type": "object",
+      "description": "`GeoJSON GeocodingFeature` object that describe the boundaries of a\ngeographical area. Geometry of the feature is described with\n`GeoJSON GeometryCollection`.\n\nPlease note, the service typically returns a GeometryCollection with Polygon or\nMultiPolygon sub-types.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum",
+          "description": "The type of a feature must be Feature."
+        },
+        "geometry": {
+          "$ref": "#/definitions/GeoJsonGeometryCollection",
+          "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details."
+        },
+        "properties": {
+          "$ref": "#/definitions/BoundaryProperties",
+          "description": "Properties of a Boundary object."
+        }
+      },
+      "required": [
+        "geometry"
+      ]
+    },
+    "BoundaryProperties": {
+      "type": "object",
+      "description": "Properties of a Boundary object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name associated with the geographical area."
+        },
+        "copyright": {
+          "type": "string",
+          "description": "The copyright string."
+        },
+        "copyrightURL": {
+          "type": "string",
+          "description": "A URL that lists many of the data providers for Azure Maps and their related\ncopyright information."
+        },
+        "geometriesCopyright": {
+          "type": "array",
+          "description": "A collection of copyright information for each geometry of the Boundary object\nin the same order they appear.",
+          "items": {
+            "$ref": "#/definitions/GeometryCopyright"
+          }
+        }
+      }
+    },
+    "BoundaryResultTypeEnum": {
       "type": "string",
-      "default": "countryRegion",
       "enum": [
         "countryRegion",
         "adminDistrict",
@@ -147,7 +886,7 @@
           {
             "name": "adminDistrict",
             "value": "adminDistrict",
-            "description": "First administrative level within the country/region level, such as a state or a province."
+            "description": "First administrative level within the country/region level, such as a state or\na province."
           },
           {
             "name": "adminDistrict2",
@@ -162,22 +901,22 @@
           {
             "name": "postalCode2",
             "value": "postalCode2",
-            "description": "The next largest post code category after postalCode that is created by aggregating postalCode areas."
+            "description": "The next largest post code category after postalCode that is created by\naggregating postalCode areas."
           },
           {
             "name": "postalCode3",
             "value": "postalCode3",
-            "description": "The next largest post code category after postalCode2 that is created by aggregating postalCode2 areas."
+            "description": "The next largest post code category after postalCode2 that is created by\naggregating postalCode2 areas."
           },
           {
             "name": "postalCode4",
             "value": "postalCode4",
-            "description": "The next largest post code category after postalCode3 that is created by aggregating postalCode3 areas."
+            "description": "The next largest post code category after postalCode3 that is created by\naggregating postalCode3 areas."
           },
           {
             "name": "neighborhood",
             "value": "neighborhood",
-            "description": "A section of a populated place that is typically well-known, but often with indistinct boundaries."
+            "description": "A section of a populated place that is typically well-known, but often with\nindistinct boundaries."
           },
           {
             "name": "locality",
@@ -185,16 +924,1089 @@
             "description": "A concentrated area of human settlement, such as a city, town or village."
           }
         ]
-      },
-      "x-ms-parameter-location": "method"
+      }
     },
-    "Resolution": {
-      "name": "resolution",
-      "in": "query",
-      "description": "Resolution determines the amount of points to send back. If not specified, the default is medium resolution.",
-      "required": false,
+    "CalculationMethodEnum": {
       "type": "string",
-      "default": "medium",
+      "description": "The method that was used to compute the geocode point.",
+      "enum": [
+        "Interpolation",
+        "InterpolationOffset",
+        "Parcel",
+        "Rooftop"
+      ],
+      "x-ms-enum": {
+        "name": "CalculationMethodEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Interpolation",
+            "value": "Interpolation",
+            "description": "The geocode point was matched to a point on a road using interpolation."
+          },
+          {
+            "name": "InterpolationOffset",
+            "value": "InterpolationOffset",
+            "description": "The geocode point was matched to a point on a road using interpolation with an\nadditional offset to shift the point to the side of the street."
+          },
+          {
+            "name": "Parcel",
+            "value": "Parcel",
+            "description": "The geocode point was matched to the center of a parcel."
+          },
+          {
+            "name": "Rooftop",
+            "value": "Rooftop",
+            "description": "The geocode point was matched to the rooftop of a building."
+          }
+        ]
+      }
+    },
+    "ConfidenceEnum": {
+      "type": "string",
+      "description": "The level of confidence that the geocoded location result is a match. Use this\nvalue with the match code to determine for more complete information about the\nmatch.\n\nThe confidence of a geocoded location is based on many factors including the\nrelative importance of the geocoded location and the user’s location, if\nspecified.",
+      "enum": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidenceEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "High",
+            "description": "If the confidence is set to `High`, one or more strong matches were found.\nMultiple `High` confidence matches are sorted in ranked order by importance\nwhen applicable. For example, landmarks have importance but addresses do not.\n\nIf a request includes a location or a view, then the ranking may change\nappropriately. For example, a location query for \"Paris\" returns \"Paris,\nFrance\" and \"Paris, TX\" both with `High` confidence. \"Paris, France\" is always\nranked first due to importance unless a user location indicates that the user\nis in or very close to Paris, TX or the map view indicates that the user is\nsearching in that area."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "In some situations, the returned match may not be at the same level as the\ninformation provided in the request. For example, a request may specify address\ninformation and the geocode service may only be able to match a postal code. In\nthis case, if the geocode service has a confidence that the postal code matches\nthe data, the confidence is set to `Medium` and the match code is set to\n`UpHierarchy` to specify that it could not match all of the information and had\nto search up-hierarchy.\n\nIf the location information in the query is ambiguous, and there is no\nadditional information to rank the locations (such as user location or the\nrelative importance of the location), the confidence is set to `Medium`. For\nexample, a location query for \"148th Ave, Bellevue\" may return \"148th Ave SE\"\nand \"148th Ave NE\" both with `Medium` confidence.\n\nIf the location information in the query does not provide enough information to\ngeocode a specific location, a less precise location value may be returned and\nthe confidence is set to `Medium`. For example, if an address is provided, but\na match is not found for the house number, the geocode result with a Roadblock\nentity type may be returned."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low"
+          }
+        ]
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "type": "object",
+          "description": "The additional info.",
+          "additionalProperties": {},
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error\ndetails for failed operations. (This also follows the OData error response\nformat.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      }
+    },
+    "FeatureCollectionEnum": {
+      "type": "string",
+      "description": "Specifies the `GeoJSON` type. The only supported object type is\n`FeatureCollection`. For more information, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946).",
+      "enum": [
+        "FeatureCollection"
+      ],
+      "x-ms-enum": {
+        "name": "FeatureCollectionEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FeatureCollection",
+            "value": "FeatureCollection",
+            "description": "Specifies the `GeoJSON` `FeatureCollection` object type."
+          }
+        ]
+      }
+    },
+    "FeatureTypeEnum": {
+      "type": "string",
+      "description": "The type of a feature must be Feature.",
+      "enum": [
+        "Feature"
+      ],
+      "x-ms-enum": {
+        "name": "FeatureTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Feature",
+            "value": "Feature",
+            "description": "Specifies the `GeoJSON` Feature object type."
+          }
+        ]
+      }
+    },
+    "FeaturesItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum",
+          "description": "The type of a feature must be Feature."
+        },
+        "id": {
+          "type": "string",
+          "description": "ID for feature returned"
+        },
+        "properties": {
+          "$ref": "#/definitions/FeaturesItemProperties"
+        },
+        "geometry": {
+          "$ref": "#/definitions/GeoJsonPoint",
+          "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details."
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC\n7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "required": [
+        "geometry"
+      ]
+    },
+    "FeaturesItemProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "One of:\n* Address\n* RoadBlock\n* RoadIntersection\n* Neighborhood\n* PopulatedPlace\n* Postcode1\n* AdminDivision1\n* AdminDivision2\n* CountryRegion"
+        },
+        "confidence": {
+          "$ref": "#/definitions/ConfidenceEnum",
+          "description": "The level of confidence that the geocoded location result is a match. Use this\nvalue with the match code to determine for more complete information about the\nmatch.\n\nThe confidence of a geocoded location is based on many factors including the\nrelative importance of the geocoded location and the user’s location, if\nspecified."
+        },
+        "matchCodes": {
+          "type": "array",
+          "description": "One or more match code values that represent the geocoding level for each\nlocation in the response.\n\nFor example, a geocoded location with match codes of `Good` and `Ambiguous`\nmeans that more than one geocode location was found for the location\ninformation and that the geocode service did not have search up-hierarchy to\nfind a match.\n\nSimilarly, a geocoded location with match codes of `Ambiguous` and\n`UpHierarchy` implies that a geocode location could not be found that matched\nall the provided location information, so the geocode service had to search\nup-hierarchy and found multiple matches at that level. An example of up an\n`Ambiguous` and `UpHierarchy` result is when you provide complete address\ninformation, but the geocode service cannot locate a match for the street\naddress and instead returns information for more than one RoadBlock value.\n\nThe possible values are:\n\n`Good`: The location has only one match or all returned matches are considered\nstrong matches. For example, a query for New York returns several Good matches.\n\n`Ambiguous`: The location is one of a set of possible matches. For example,\nwhen you query for the street address 128 Main St., the response may return two\nlocations for 128 North Main St. and 128 South Main St. because there is not\nenough information to determine which option to choose.\n\n`UpHierarchy`: The location represents a move up the geographic hierarchy. This\noccurs when a match for the location request was not found, so a less precise\nresult is returned. For example, if a match for the requested address cannot be\nfound, then a match code of `UpHierarchy` with a RoadBlock entity type may be\nreturned.",
+          "items": {
+            "$ref": "#/definitions/MatchCodesEnum"
+          }
+        },
+        "address": {
+          "$ref": "#/definitions/Address",
+          "description": "The address of the result"
+        },
+        "geocodePoints": {
+          "type": "array",
+          "description": "A collection of geocode points that differ in how they were calculated and\ntheir suggested use.",
+          "items": {
+            "$ref": "#/definitions/GeocodePointsItem"
+          }
+        }
+      }
+    },
+    "GeoJsonFeature": {
+      "type": "object",
+      "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/GeoJsonGeometry",
+          "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value",
+          "x-nullable": true,
+          "additionalProperties": {}
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier for the feature."
+        },
+        "featureType": {
+          "type": "string",
+          "description": "The type of the feature. The value depends on the data model the current\nfeature is part of. Some data models may have an empty value."
+        }
+      },
+      "required": [
+        "geometry"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonObject"
+        }
+      ],
+      "x-ms-discriminator-value": "Feature"
+    },
+    "GeoJsonFeatureCollection": {
+      "type": "object",
+      "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
+      "properties": {
+        "features": {
+          "type": "array",
+          "description": "Contains a list of valid `GeoJSON Feature` objects.",
+          "items": {
+            "$ref": "#/definitions/GeoJsonFeature"
+          }
+        }
+      },
+      "required": [
+        "features"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonObject"
+        }
+      ],
+      "x-ms-discriminator-value": "FeatureCollection"
+    },
+    "GeoJsonFeatureCollectionData": {
+      "type": "object",
+      "description": "GeoJson FeatureCollection data.",
+      "properties": {
+        "features": {
+          "type": "array",
+          "description": "Contains a list of valid `GeoJSON Feature` objects.",
+          "items": {
+            "$ref": "#/definitions/GeoJsonFeature"
+          }
+        }
+      },
+      "required": [
+        "features"
+      ]
+    },
+    "GeoJsonFeatureData": {
+      "type": "object",
+      "description": "GeoJson Feature data.",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/GeoJsonGeometry",
+          "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value",
+          "x-nullable": true,
+          "additionalProperties": {}
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier for the feature."
+        },
+        "featureType": {
+          "type": "string",
+          "description": "The type of the feature. The value depends on the data model the current\nfeature is part of. Some data models may have an empty value."
+        }
+      },
+      "required": [
+        "geometry"
+      ]
+    },
+    "GeoJsonGeometry": {
+      "type": "object",
+      "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJsonObjectType",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection."
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC\n7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "GeoJsonGeometryCollection": {
+      "type": "object",
+      "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.",
+      "properties": {
+        "geometries": {
+          "type": "array",
+          "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates\nin GeoJSON are in x, y order (longitude, latitude).",
+          "items": {
+            "$ref": "#/definitions/GeoJsonGeometry"
+          }
+        }
+      },
+      "required": [
+        "geometries"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        }
+      ],
+      "x-ms-discriminator-value": "GeometryCollection"
+    },
+    "GeoJsonGeometryCollectionData": {
+      "type": "object",
+      "description": "GeoJson GeometryCollection data.",
+      "properties": {
+        "geometries": {
+          "type": "array",
+          "description": "Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates\nin GeoJSON are in x, y order (longitude, latitude).",
+          "items": {
+            "$ref": "#/definitions/GeoJsonGeometry"
+          }
+        }
+      },
+      "required": [
+        "geometries"
+      ]
+    },
+    "GeoJsonGeometryObjectType": {
+      "type": "string",
+      "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+      "enum": [
+        "Point",
+        "MultiPoint",
+        "LineString",
+        "MultiLineString",
+        "Polygon",
+        "MultiPolygon",
+        "GeometryCollection"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonGeometryObjectType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "GeoJsonPoint",
+            "value": "Point",
+            "description": "`GeoJSON Point` geometry."
+          },
+          {
+            "name": "GeoJsonMultiPoint",
+            "value": "MultiPoint",
+            "description": "`GeoJSON MultiPoint` geometry."
+          },
+          {
+            "name": "GeoJsonLineString",
+            "value": "LineString",
+            "description": "`GeoJSON LineString` geometry."
+          },
+          {
+            "name": "GeoJsonMultiLineString",
+            "value": "MultiLineString",
+            "description": "`GeoJSON MultiLineString` geometry."
+          },
+          {
+            "name": "GeoJsonPolygon",
+            "value": "Polygon",
+            "description": "`GeoJSON Polygon` geometry."
+          },
+          {
+            "name": "GeoJsonMultiPolygon",
+            "value": "MultiPolygon",
+            "description": "`GeoJSON MultiPolygon` geometry."
+          },
+          {
+            "name": "GeoJsonGeometryCollection",
+            "value": "GeometryCollection",
+            "description": "`GeoJSON GeometryCollection` geometry."
+          }
+        ]
+      }
+    },
+    "GeoJsonLineString": {
+      "type": "object",
+      "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates for the `GeoJson LineString` geometry.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        }
+      ],
+      "x-ms-discriminator-value": "LineString"
+    },
+    "GeoJsonLineStringData": {
+      "type": "object",
+      "description": "GeoJson LineString data",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates for the `GeoJson LineString` geometry.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonMultiLineString": {
+      "type": "object",
+      "description": "A valid `GeoJSON MultiLineString` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.5) for details.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates for the `GeoJson MultiLineString` geometry.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        }
+      ],
+      "x-ms-discriminator-value": "MultiLineString"
+    },
+    "GeoJsonMultiLineStringData": {
+      "type": "object",
+      "description": "GeoJson MultiLineString data",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates for the `GeoJson MultiLineString` geometry.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonMultiPoint": {
+      "type": "object",
+      "description": "A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates for the `GeoJson MultiPoint` geometry.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        }
+      ],
+      "x-ms-discriminator-value": "MultiPoint"
+    },
+    "GeoJsonMultiPointData": {
+      "type": "object",
+      "description": "Data contained by a `GeoJson MultiPoint`.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates for the `GeoJson MultiPoint` geometry.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonMultiPolygon": {
+      "type": "object",
+      "description": "A valid `GeoJSON MultiPolygon` object type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.7) for details.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Contains a list of valid `GeoJSON Polygon` objects. **Note** that coordinates\nin GeoJSON are in x, y order (longitude, latitude).",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        }
+      ],
+      "x-ms-discriminator-value": "MultiPolygon"
+    },
+    "GeoJsonMultiPolygonData": {
+      "type": "object",
+      "description": "GeoJson MultiPolygon data",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Contains a list of valid `GeoJSON Polygon` objects. **Note** that coordinates\nin GeoJSON are in x, y order (longitude, latitude).",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonObject": {
+      "type": "object",
+      "description": "A valid `GeoJSON` object. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3) for details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJsonObjectType",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection."
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box. Projection used - EPSG:3857. Please refer to [RFC\n7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "GeoJsonObjectType": {
+      "type": "string",
+      "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+      "enum": [
+        "Point",
+        "MultiPoint",
+        "LineString",
+        "MultiLineString",
+        "Polygon",
+        "MultiPolygon",
+        "GeometryCollection",
+        "Feature",
+        "FeatureCollection"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonObjectType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "GeoJsonPoint",
+            "value": "Point",
+            "description": "`GeoJSON Point` geometry."
+          },
+          {
+            "name": "GeoJsonMultiPoint",
+            "value": "MultiPoint",
+            "description": "`GeoJSON MultiPoint` geometry."
+          },
+          {
+            "name": "GeoJsonLineString",
+            "value": "LineString",
+            "description": "`GeoJSON LineString` geometry."
+          },
+          {
+            "name": "GeoJsonMultiLineString",
+            "value": "MultiLineString",
+            "description": "`GeoJSON MultiLineString` geometry."
+          },
+          {
+            "name": "GeoJsonPolygon",
+            "value": "Polygon",
+            "description": "`GeoJSON Polygon` geometry."
+          },
+          {
+            "name": "GeoJsonMultiPolygon",
+            "value": "MultiPolygon",
+            "description": "`GeoJSON MultiPolygon` geometry."
+          },
+          {
+            "name": "GeoJsonGeometryCollection",
+            "value": "GeometryCollection",
+            "description": "`GeoJSON GeometryCollection` geometry."
+          },
+          {
+            "name": "GeoJsonFeature",
+            "value": "Feature",
+            "description": "`GeoJSON Feature` object."
+          },
+          {
+            "name": "GeoJsonFeatureCollection",
+            "value": "FeatureCollection",
+            "description": "`GeoJSON FeatureCollection` object."
+          }
+        ]
+      }
+    },
+    "GeoJsonPoint": {
+      "type": "object",
+      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "A `Position` is an array of numbers with two or more elements. The first two\nelements are _longitude_ and _latitude_, precisely in that order.\n_Altitude/Elevation_ is an optional third element. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        }
+      ],
+      "x-ms-discriminator-value": "Point"
+    },
+    "GeoJsonPointData": {
+      "type": "object",
+      "description": "Data contained by a `GeoJson Point`.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "A `Position` is an array of numbers with two or more elements. The first two\nelements are _longitude_ and _latitude_, precisely in that order.\n_Altitude/Elevation_ is an optional third element. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeoJsonPolygon": {
+      "type": "object",
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates for the `GeoJson Polygon` geometry type.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJsonGeometry"
+        }
+      ],
+      "x-ms-discriminator-value": "Polygon"
+    },
+    "GeoJsonPolygonData": {
+      "type": "object",
+      "description": "GeoJson Polygon data",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates for the `GeoJson Polygon` geometry type.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "coordinates"
+      ]
+    },
+    "GeocodePointsItem": {
+      "type": "object",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/GeoJsonPoint",
+          "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details."
+        },
+        "calculationMethod": {
+          "$ref": "#/definitions/CalculationMethodEnum",
+          "description": "The method that was used to compute the geocode point."
+        },
+        "usageTypes": {
+          "type": "array",
+          "description": "The best use for the geocode point.\nEach geocode point is defined as a `Route` point, a `Display` point or both.\nUse `Route` points if you are creating a route to the location. Use `Display`\npoints if you are showing the location on a map. For example, if the location\nis a park, a `Route` point may specify an entrance to the park where you can\nenter with a car, and a `Display` point may be a point that specifies the\ncenter of the park.",
+          "items": {
+            "$ref": "#/definitions/UsageTypeEnum"
+          }
+        }
+      }
+    },
+    "GeocodingBatchRequestBody": {
+      "type": "object",
+      "description": "The list of address geocoding queries/requests to process. The list can contain\na max of 100 queries and must contain at least 1 query.",
+      "properties": {
+        "batchItems": {
+          "type": "array",
+          "description": "The list of queries to process.",
+          "items": {
+            "$ref": "#/definitions/GeocodingBatchRequestItem"
+          }
+        }
+      }
+    },
+    "GeocodingBatchRequestItem": {
+      "type": "object",
+      "description": "Batch Query object",
+      "properties": {
+        "optionalId": {
+          "type": "string",
+          "description": "id of the request which would show in corresponding batchItem"
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and\nmaximum: 20.",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 20
+        },
+        "query": {
+          "type": "string",
+          "description": "A string that contains information about a location, such as an address or\nlandmark name."
+        },
+        "addressLine": {
+          "type": "string",
+          "description": "The official street line of an address relative to the area, as specified by\nthe locality, or postalCode, properties. Typical use of this element would be\nto provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+        },
+        "countryRegion": {
+          "type": "string",
+          "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g.\nFR.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+        },
+        "bbox": {
+          "type": "array",
+          "description": "A rectangular area on the earth defined as a bounding box object. The sides of\nthe rectangles are defined by longitude and latitude values. For more\ninformation, see Location and Area Types. When you specify this parameter, the\ngeographical area is taken into account when computing the results of a\nlocation query.\n\nExample: [lon1, lat1, lon2, lat2]",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "view": {
+          "type": "string",
+          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter\nGeopolitical disputed borders and labels to align with the specified user\nregion.",
+          "default": "auto"
+        },
+        "coordinates": {
+          "type": "array",
+          "description": "A point on the earth specified as a longitude and latitude. When you specify\nthis parameter, the user’s location is taken into account and the results\nreturned may be more relevant to the user. Example: [lon, lat]",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "adminDistrict": {
+          "type": "string",
+          "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+        },
+        "adminDistrict2": {
+          "type": "string",
+          "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+        },
+        "adminDistrict3": {
+          "type": "string",
+          "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+        },
+        "locality": {
+          "type": "string",
+          "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the\nrequest."
+        }
+      }
+    },
+    "GeocodingBatchResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Geocoding Batch service call.",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/GeocodingBatchResponseSummary",
+          "description": "Summary for the batch request"
+        },
+        "batchItems": {
+          "type": "array",
+          "description": "Array containing the batch results.",
+          "items": {
+            "$ref": "#/definitions/GeocodingBatchResponseItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The is the link to the next page of the features returned. If it's the last\npage, no this field."
+        }
+      }
+    },
+    "GeocodingBatchResponseItem": {
+      "type": "object",
+      "properties": {
+        "optionalId": {
+          "type": "string",
+          "description": "id of the batchItem which would be the same as the id in the request"
+        },
+        "type": {
+          "$ref": "#/definitions/FeatureCollectionEnum",
+          "description": "Specifies the `GeoJSON` type. The only supported object type is\n`FeatureCollection`. For more information, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946)."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeaturesItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The is the link to the next page of the features returned. If it's the last\npage, no this field."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error detail."
+        }
+      }
+    },
+    "GeocodingBatchResponseSummary": {
+      "type": "object",
+      "description": "Summary for the batch request",
+      "properties": {
+        "successfulRequests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of successful requests in the batch"
+        },
+        "totalRequests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of requests in the batch"
+        }
+      }
+    },
+    "GeocodingResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful Geocoding call",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureCollectionEnum",
+          "description": "Specifies the `GeoJSON` type. The only supported object type is\n`FeatureCollection`. For more information, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946)."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeaturesItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The is the link to the next page of the features returned. If it's the last\npage, no this field."
+        }
+      }
+    },
+    "GeometryCopyright": {
+      "type": "object",
+      "description": "Copyright information of a geometry of a Boundary object.",
+      "properties": {
+        "sourceName": {
+          "type": "string",
+          "description": "The name of the data provider"
+        },
+        "copyright": {
+          "type": "string",
+          "description": "The copyright string for the data provider"
+        }
+      }
+    },
+    "Intersection": {
+      "type": "object",
+      "description": "The address of the result.",
+      "properties": {
+        "baseStreet": {
+          "type": "string",
+          "description": "Primary street for the location."
+        },
+        "secondaryStreet1": {
+          "type": "string",
+          "description": "The first intersecting street."
+        },
+        "secondaryStreet2": {
+          "type": "string",
+          "description": "If any, the second intersecting street."
+        },
+        "intersectionType": {
+          "type": "string",
+          "description": "Type of intersection."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Complete name of the intersection."
+        }
+      }
+    },
+    "MatchCodesEnum": {
+      "type": "string",
+      "enum": [
+        "Good",
+        "Ambiguous",
+        "UpHierarchy"
+      ],
+      "x-ms-enum": {
+        "name": "MatchCodesEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Good",
+            "value": "Good",
+            "description": "Good"
+          },
+          {
+            "name": "Ambiguous",
+            "value": "Ambiguous",
+            "description": "Ambiguous"
+          },
+          {
+            "name": "UpHierarchy",
+            "value": "UpHierarchy",
+            "description": "UpHierarchy"
+          }
+        ]
+      }
+    },
+    "ResolutionEnum": {
+      "type": "string",
       "enum": [
         "small",
         "medium",
@@ -226,393 +2038,157 @@
             "description": "Return the boundary geometry with more or the same amount of points as large."
           }
         ]
-      },
-      "x-ms-parameter-location": "method"
+      }
     },
-    "ReverseGeocodingResultTypes": {
-      "name": "resultTypes",
-      "in": "query",
-      "description": "Specify entity types that you want in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response.\nDefault value is all possible entities.\nA comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least specific entity. When entities of more than one entity type are found, only the most specific entity is returned. For example, if you specify Address and AdminDistrict1 as entity types and entities were found for both types, only the Address entity information is returned in the response.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "Address",
-          "Neighborhood",
-          "PopulatedPlace",
-          "Postcode1",
-          "AdminDivision1",
-          "AdminDivision2",
-          "CountryRegion"
-        ],
-        "x-ms-enum": {
-          "name": "ReverseGeocodingResultTypeEnum",
-          "modelAsString": true,
-          "values": [
-            {
-              "name": "Address",
-              "value": "Address"
-            },
-            {
-              "name": "Neighborhood",
-              "value": "Neighborhood"
-            },
-            {
-              "name": "PopulatedPlace",
-              "value": "PopulatedPlace"
-            },
-            {
-              "name": "Postcode1",
-              "value": "Postcode1"
-            },
-            {
-              "name": "AdminDivision1",
-              "value": "AdminDivision1"
-            },
-            {
-              "name": "AdminDivision2",
-              "value": "AdminDivision2"
-            },
-            {
-              "name": "CountryRegion",
-              "value": "CountryRegion"
-            }
-          ]
-        }
-      },
-      "x-ms-parameter-location": "method"
-    }
-  },
-  "paths": {
-    "/geocode": {
-      "get": {
-        "summary": "Use to get longitude and latitude coordinates of a street address or name of a place.",
-        "description": "\n\nThe `Get Geocoding` API is an HTTP `GET` request that returns the longitude and latitude coordinates of the location being searched.\n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocoding endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No Point of Interest (POIs) will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties and states. The response also returns detailed address properties such as street, postal code, municipality, and country/region information.",
-        "operationId": "Search_GetGeocoding",
-        "produces": [
-          "application/geo+json"
-        ],
-        "x-ms-examples": {
-          "Search detail address 15127 NE 24th Street, Redmond, WA": {
-            "$ref": "./examples/ForwardGeocoding.json"
+    "ResultTypeEnum": {
+      "type": "string",
+      "enum": [
+        "Address",
+        "Neighborhood",
+        "PopulatedPlace",
+        "Postcode1",
+        "AdminDivision1",
+        "AdminDivision2",
+        "CountryRegion"
+      ],
+      "x-ms-enum": {
+        "name": "ResultTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Address",
+            "value": "Address",
+            "description": "Address"
           },
-          "Search detail address 15127 NE 24th Street, Redmond, WA by addressLine": {
-            "$ref": "./examples/ForwardGeocodingByAddressLine.json"
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
           },
-          "Search detail address 15127 NE 24th Street, Redmond, WA by query": {
-            "$ref": "./examples/ForwardGeocodingByQuery.json"
+          {
+            "name": "PopulatedPlace",
+            "value": "PopulatedPlace",
+            "description": "PopulatedPlace"
           },
-          "Search landmark Empire State Building by query": {
-            "$ref": "./examples/ForwardGeocodingFindLandmarkByQuery.json"
+          {
+            "name": "Postcode1",
+            "value": "Postcode1",
+            "description": "Postcode1"
+          },
+          {
+            "name": "AdminDivision1",
+            "value": "AdminDivision1",
+            "description": "AdminDivision1"
+          },
+          {
+            "name": "AdminDivision2",
+            "value": "AdminDivision2",
+            "description": "AdminDivision2"
+          },
+          {
+            "name": "CountryRegion",
+            "value": "CountryRegion",
+            "description": "CountryRegion"
           }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
-            "$ref": "#/parameters/Top"
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "description": "A string that contains information about a location, such as an address or landmark name.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "addressLine",
-            "in": "query",
-            "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "countryRegion",
-            "in": "query",
-            "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR./\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Bbox"
-          },
-          {
-            "$ref": "#/parameters/View"
-          },
-          {
-            "$ref": "#/parameters/Coordinates"
-          },
-          {
-            "name": "adminDistrict",
-            "in": "query",
-            "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "adminDistrict2",
-            "in": "query",
-            "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "adminDistrict3",
-            "in": "query",
-            "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "locality",
-            "in": "query",
-            "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "postalCode",
-            "in": "query",
-            "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GeocodingResponse"
-            },
-            "headers": {
-              "x-ms-request-id": {
-                "description": "request id.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
+        ]
+      }
+    },
+    "ReverseGeocodingBatchRequestBody": {
+      "type": "object",
+      "description": "The list of reverse geocoding queries/requests to process. The list can contain\na max of 100 queries and must contain at least 1 query.",
+      "properties": {
+        "batchItems": {
+          "type": "array",
+          "description": "The list of queries to process.",
+          "items": {
+            "$ref": "#/definitions/ReverseGeocodingBatchRequestItem"
           }
         }
       }
     },
-    "/geocode:batch": {
-      "post": {
-        "summary": "Use to send a batch of queries to the [Geocoding](/rest/api/maps/search/get-geocoding) API in a single request.",
-        "description": "\n\nThe `Get Geocoding Batch` API is an HTTP `POST` request that sends batches of up to **100** queries to the [Geocoding](/rest/api/maps/search/get-geocoding) API in a single request. \n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/geocode:batch?api-version=2023-06-01\n```\n### POST Body for Batch Request\nTo send the _geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"addressLine\": \"One, Microsoft Way, Redmond, WA 98052\",\n      \"top\": 2\n    },\n    {\n      \"addressLine\": \"Pike Pl\",\n      \"adminDistrict\": \"WA\",\n      \"locality\": \"Seattle\",\n      \"top\": 3\n    }\n  ]\n}\n```\n\nA _geocoding_ batchItem object can accept any of the supported _geocoding_ [URI parameters](/rest/api/maps/search/get-geocoding#uri-parameters).\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](/rest/api/maps/search/get-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
-        "operationId": "Search_GetGeocodingBatch",
-        "x-ms-examples": {
-          "A Geocoding Batch API call containing 2 Geocoding queries": {
-            "$ref": "./examples/ForwardGeocodingBatch.json"
+    "ReverseGeocodingBatchRequestItem": {
+      "type": "object",
+      "description": "Batch Query object",
+      "properties": {
+        "optionalId": {
+          "type": "string",
+          "description": "id of the request which would show in corresponding batchItem"
+        },
+        "coordinates": {
+          "type": "array",
+          "description": "The coordinates of the location that you want to reverse geocode. Example:\n[lon,lat]",
+          "items": {
+            "type": "number",
+            "format": "double"
           }
         },
-        "parameters": [
-          {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
-            "name": "geocodingBatchRequestBody",
-            "in": "body",
-            "description": "The list of address geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GeocodingBatchRequestBody"
-            }
+        "resultTypes": {
+          "type": "array",
+          "description": "Specify entity types that you want in the response. Only the types you specify\nwill be returned. If the point cannot be mapped to the entity types you\nspecify, no location information is returned in the response.\nDefault value is all possible entities.\nA comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least\nspecific entity. When entities of more than one entity type are found, only the\nmost specific entity is returned. For example, if you specify Address and\nAdminDistrict1 as entity types and entities were found for both types, only the\nAddress entity information is returned in the response.",
+          "items": {
+            "$ref": "#/definitions/ResultTypeEnum"
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GeocodingBatchResponse"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
-          }
+        },
+        "view": {
+          "type": "string",
+          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country\ncode](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter\nGeopolitical disputed borders and labels to align with the specified user\nregion."
         }
       }
     },
-    "/search/polygon": {
-      "get": {
-        "summary": "Use to get polygon data of a geographical area shape such as a city or a country region.",
-        "description": "\n\nThe `Get Polygon` API is an HTTP `GET` request that supplies polygon data of a geographical area outline such as a city or a country region.",
-        "operationId": "Search_GetPolygon",
-        "produces": [
-          "application/geo+json"
-        ],
-        "x-ms-examples": {
-          "Get polygon for a city at coordinates -122.204141,47.612560": {
-            "$ref": "./examples/GetPolygon.json"
+    "ReverseGeocodingResultTypeEnum": {
+      "type": "string",
+      "enum": [
+        "Address",
+        "Neighborhood",
+        "PopulatedPlace",
+        "Postcode1",
+        "AdminDivision1",
+        "AdminDivision2",
+        "CountryRegion"
+      ],
+      "x-ms-enum": {
+        "name": "ReverseGeocodingResultTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Address",
+            "value": "Address",
+            "description": "Address"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "PopulatedPlace",
+            "value": "PopulatedPlace",
+            "description": "PopulatedPlace"
+          },
+          {
+            "name": "Postcode1",
+            "value": "Postcode1",
+            "description": "Postcode1"
+          },
+          {
+            "name": "AdminDivision1",
+            "value": "AdminDivision1",
+            "description": "AdminDivision1"
+          },
+          {
+            "name": "AdminDivision2",
+            "value": "AdminDivision2",
+            "description": "AdminDivision2"
+          },
+          {
+            "name": "CountryRegion",
+            "value": "CountryRegion",
+            "description": "CountryRegion"
           }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
-            "name": "coordinates",
-            "in": "query",
-            "description": "A point on the earth specified as a longitude and latitude. Example: &coordinates=lon,lat",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            },
-            "minItems": 2,
-            "maxItems": 2,
-            "collectionFormat": "csv",
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "$ref": "#/parameters/View"
-          },
-          {
-            "$ref": "#/parameters/BoundaryResultType"
-          },
-          {
-            "$ref": "#/parameters/Resolution"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Boundary"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
-          }
-        }
+        ]
       }
     },
-    "/reverseGeocode": {
-      "get": {
-        "summary": "Use to get a street address and location info from longitude and latitude coordinates.",
-        "description": "\n\nThe `Get Reverse Geocoding` API is an HTTP `GET` request used to translate a coordinate (example: 37.786505, -122.3862) into a human understandable street address. Useful in tracking applications where you receive a GPS feed from the device or asset and wish to know the address associated with the coordinates. This endpoint will return address information for a given coordinate.",
-        "operationId": "Search_GetReverseGeocoding",
-        "produces": [
-          "application/geo+json"
-        ],
-        "x-ms-examples": {
-          "Search point -122.138681, 47.630358": {
-            "$ref": "./examples/ReverseGeocoding.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
-            "name": "coordinates",
-            "in": "query",
-            "description": "The coordinates of the location that you want to reverse geocode. Example: &coordinates=lon,lat",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            },
-            "minItems": 2,
-            "maxItems": 2,
-            "collectionFormat": "csv",
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "$ref": "#/parameters/ReverseGeocodingResultTypes"
-          },
-          {
-            "$ref": "#/parameters/View"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GeocodingResponse"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
-          }
-        }
-      }
-    },
-    "/reverseGeocode:batch": {
-      "post": {
-        "summary": "Use to send a batch of queries to the [Reverse Geocoding](/rest/api/maps/search/get-reverse-geocoding) API in a single request.",
-        "description": "\n\nThe `Get Reverse Geocoding Batch` API is an HTTP `POST` request that sends batches of up to **100** queries to [Reverse Geocoding](/rest/api/maps/search/get-reverse-geocoding) API using a single request.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/reverseGeocode:batch?api-version=2023-06-01\n```\n### POST Body for Batch Request\nTo send the _reverse geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _reverse geocoding_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"coordinates\": [-122.128275, 47.639429],\n      \"resultTypes\": [\"Address\", \"PopulatedPlace\"]\n    },\n    {\n      \"coordinates\": [-122.341979399674, 47.6095253501216]\n    }\n  ]\n}\n```\n\nA _reverse geocoding_ batchItem object can accept any of the supported _reverse geocoding_ [URI parameters](/rest/api/maps/search/get-reverse-geocoding#uri-parameters).\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`GeocodingResponse`](/rest/api/maps/search/get-reverse-geocoding#geocodingresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
-        "operationId": "Search_GetReverseGeocodingBatch",
-        "x-ms-examples": {
-          "A Reverse Geocoding Batch API call containing 2 Reverse Geocoding queries": {
-            "$ref": "./examples/ReverseGeocodingBatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
-            "name": "reverseGeocodingBatchRequestBody",
-            "in": "body",
-            "description": "The list of reverse geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReverseGeocodingBatchRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GeocodingBatchResponse"
-            }
-          },
-          "default": {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "UsageType": {
+    "UsageTypeEnum": {
       "type": "string",
       "enum": [
         "Display",
@@ -623,604 +2199,29 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Display"
+            "name": "Display",
+            "value": "Display",
+            "description": "Display"
           },
           {
-            "value": "Route"
+            "name": "Route",
+            "value": "Route",
+            "description": "Route"
           }
         ]
       }
-    },
-    "GeocodePoints": {
-      "description": "A collection of geocode points that differ in how they were calculated and their suggested use.",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "geometry": {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonPoint"
-          },
-          "calculationMethod": {
-            "description": "The method that was used to compute the geocode point.",
-            "type": "string",
-            "enum": [
-              "Interpolation",
-              "InterpolationOffset",
-              "Parcel",
-              "Rooftop"
-            ],
-            "x-ms-enum": {
-              "name": "CalculationMethodEnum",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Interpolation",
-                  "description": "The geocode point was matched to a point on a road using interpolation."
-                },
-                {
-                  "value": "InterpolationOffset",
-                  "description": "The geocode point was matched to a point on a road using interpolation with an additional offset to shift the point to the side of the street."
-                },
-                {
-                  "value": "Parcel",
-                  "description": "The geocode point was matched to the center of a parcel."
-                },
-                {
-                  "value": "Rooftop",
-                  "description": "The geocode point was matched to the rooftop of a building."
-                }
-              ]
-            }
-          },
-          "usageTypes": {
-            "description": "The best use for the geocode point.\nEach geocode point is defined as a `Route` point, a `Display` point or both.\nUse `Route` points if you are creating a route to the location. Use `Display` points if you are showing the location on a map. For example, if the location is a park, a `Route` point may specify an entrance to the park where you can enter with a car, and a `Display` point may be a point that specifies the center of the park.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/UsageType"
-            }
-          }
-        }
-      }
-    },
-    "GeocodingBatchRequestItem": {
-      "description": "Batch Query object",
-      "type": "object",
-      "properties": {
-        "optionalId": {
-          "description": "id of the request which would show in corresponding batchItem",
-          "type": "string"
-        },
-        "top": {
-          "description": "Maximum number of responses that will be returned. Default: 5, minimum: 1 and maximum: 20.",
-          "type": "integer",
-          "format": "int32",
-          "default": 5,
-          "minimum": 1,
-          "maximum": 20
-        },
-        "query": {
-          "description": "A string that contains information about a location, such as an address or landmark name.",
-          "type": "string"
-        },
-        "addressLine": {
-          "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-          "type": "string"
-        },
-        "countryRegion": {
-          "description": "Signal for the geocoding result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR./\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-          "type": "string"
-        },
-        "bbox": {
-          "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by longitude and latitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: [lon1, lat1, lon2, lat2]",
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "double"
-          },
-          "minItems": 4,
-          "maxItems": 4
-        },
-        "view": {
-          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
-          "type": "string",
-          "default": "auto"
-        },
-        "coordinates": {
-          "description": "A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: [lon, lat]",
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "double"
-          },
-          "minItems": 2,
-          "maxItems": 2
-        },
-        "adminDistrict": {
-          "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-          "type": "string"
-        },
-        "adminDistrict2": {
-          "description": "The county for the structured address, such as King.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-          "type": "string"
-        },
-        "adminDistrict3": {
-          "description": "The named area for the structured address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-          "type": "string"
-        },
-        "locality": {
-          "description": "The locality portion of an address, such as Seattle.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-          "type": "string"
-        },
-        "postalCode": {
-          "description": "The postal code portion of an address.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
-          "type": "string"
-        }
-      }
-    },
-    "GeocodingBatchRequestBody": {
-      "description": "The list of address geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
-      "type": "object",
-      "properties": {
-        "batchItems": {
-          "description": "The list of queries to process.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeocodingBatchRequestItem"
-          }
-        }
-      }
-    },
-    "ReverseGeocodingBatchRequestItem": {
-      "description": "Batch Query object",
-      "type": "object",
-      "properties": {
-        "optionalId": {
-          "description": "id of the request which would show in corresponding batchItem",
-          "type": "string"
-        },
-        "coordinates": {
-          "description": "The coordinates of the location that you want to reverse geocode. Example: [lon,lat]",
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "double"
-          },
-          "minItems": 2,
-          "maxItems": 2
-        },
-        "resultTypes": {
-          "description": "Specify entity types that you want in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response.\nDefault value is all possible entities.\nA comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least specific entity. When entities of more than one entity type are found, only the most specific entity is returned. For example, if you specify Address and AdminDistrict1 as entity types and entities were found for both types, only the Address entity information is returned in the response.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Address",
-              "Neighborhood",
-              "PopulatedPlace",
-              "Postcode1",
-              "AdminDivision1",
-              "AdminDivision2",
-              "CountryRegion"
-            ],
-            "x-ms-enum": {
-              "name": "ResultTypeEnum",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Address",
-                  "value": "Address"
-                },
-                {
-                  "name": "Neighborhood",
-                  "value": "Neighborhood"
-                },
-                {
-                  "name": "PopulatedPlace",
-                  "value": "PopulatedPlace"
-                },
-                {
-                  "name": "Postcode1",
-                  "value": "Postcode1"
-                },
-                {
-                  "name": "AdminDivision1",
-                  "value": "AdminDivision1"
-                },
-                {
-                  "name": "AdminDivision2",
-                  "value": "AdminDivision2"
-                },
-                {
-                  "name": "CountryRegion",
-                  "value": "CountryRegion"
-                }
-              ]
-            }
-          }
-        },
-        "view": {
-          "description": "A string that specifies an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region.",
-          "type": "string"
-        }
-      }
-    },
-    "ReverseGeocodingBatchRequestBody": {
-      "description": "The list of reverse geocoding queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
-      "type": "object",
-      "properties": {
-        "batchItems": {
-          "description": "The list of queries to process.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReverseGeocodingBatchRequestItem"
-          }
-        }
-      }
-    },
-    "GeocodingBatchResponseItem": {
-      "type": "object",
-      "properties": {
-        "optionalId": {
-          "description": "id of the batchItem which would be the same as the id in the request",
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/FeatureCollectionType"
-        },
-        "features": {
-          "$ref": "#/definitions/Features"
-        },
-        "nextLink": {
-          "$ref": "#/definitions/NextLink"
-        },
-        "error": {
-          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
-        }
-      }
-    },
-    "GeocodingBatchResponse": {
-      "description": "This object is returned from a successful Geocoding Batch service call.",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "description": "Summary for the batch request",
-          "type": "object",
-          "properties": {
-            "successfulRequests": {
-              "description": "Number of successful requests in the batch",
-              "type": "integer",
-              "format": "int32"
-            },
-            "totalRequests": {
-              "description": "Total number of requests in the batch",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        },
-        "batchItems": {
-          "description": "Array containing the batch results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeocodingBatchResponseItem"
-          }
-        },
-        "nextLink": {
-          "$ref": "#/definitions/NextLink"
-        }
-      }
-    },
-    "Features": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/FeaturesItem"
-      }
-    },
-    "FeaturesItem": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of a feature must be Feature.",
-          "enum": [
-            "Feature"
-          ],
-          "x-ms-enum": {
-            "name": "FeatureTypeEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Feature"
-              }
-            ]
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "ID for feature returned"
-        },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "One of: \n* Address\n* RoadBlock\n* RoadIntersection\n* Neighborhood\n* PopulatedPlace\n* Postcode1\n* AdminDivision1\n* AdminDivision2\n* CountryRegion"
-            },
-            "confidence": {
-              "$ref": "#/definitions/Confidence"
-            },
-            "matchCodes": {
-              "$ref": "#/definitions/MatchCodes"
-            },
-            "address": {
-              "$ref": "#/definitions/Address"
-            },
-            "geocodePoints": {
-              "$ref": "#/definitions/GeocodePoints"
-            }
-          }
-        },
-        "geometry": {
-          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonPoint"
-        },
-        "bbox": {
-          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/BoundingBox"
-        }
-      },
-      "required": [
-        "geometry"
-      ]
-    },
-    "GeocodingResponse": {
-      "description": "This object is returned from a successful Geocoding call",
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/FeatureCollectionType"
-        },
-        "features": {
-          "$ref": "#/definitions/Features"
-        },
-        "nextLink": {
-          "$ref": "#/definitions/NextLink"
-        }
-      }
-    },
-    "Address": {
-      "description": "The address of the result",
-      "type": "object",
-      "properties": {
-        "addressLine": {
-          "description": "AddressLine that includes Street Name and Number",
-          "type": "string"
-        },
-        "locality": {
-          "description": "locality property",
-          "type": "string"
-        },
-        "neighborhood": {
-          "description": "neighborhood property",
-          "type": "string"
-        },
-        "adminDistricts": {
-          "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "The name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be full name of state such as Washington, \nFor adminDistrict[1], this could be the full name of the county"
-              },
-              "shortName": {
-                "type": "string",
-                "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA, \nFor adminDistrict[1], this could be the short name of the county"
-              }
-            }
-          }
-        },
-        "postalCode": {
-          "description": "Postal Code property",
-          "type": "string"
-        },
-        "countryRegion": {
-          "type": "object",
-          "properties": {
-            "ISO": {
-              "description": "ISO of country/region",
-              "type": "string"
-            },
-            "name": {
-              "description": "name of country/region",
-              "type": "string"
-            }
-          }
-        },
-        "formattedAddress": {
-          "description": "Formatted Address property",
-          "type": "string"
-        },
-        "streetName": {
-          "description": "The name of the street from formattedAddress",
-          "type": "string"
-        },
-        "streetNumber": {
-          "description": "The number in the street, if available, from formattedAddress",
-          "type": "string"
-        },
-        "intersection": {
-          "$ref": "#/definitions/Intersection"
-        }
-      }
-    },
-    "Intersection": {
-      "description": "The address of the result.",
-      "type": "object",
-      "properties": {
-        "baseStreet": {
-          "description": "Primary street for the location.",
-          "type": "string"
-        },
-        "secondaryStreet1": {
-          "description": "The first intersecting street.",
-          "type": "string"
-        },
-        "secondaryStreet2": {
-          "description": "If any, the second intersecting street.",
-          "type": "string"
-        },
-        "intersectionType": {
-          "description": "Type of intersection.",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Complete name of the intersection.",
-          "type": "string"
-        }
-      }
-    },
-    "MatchCodes": {
-      "description": "One or more match code values that represent the geocoding level for each location in the response.\n\nFor example, a geocoded location with match codes of `Good` and `Ambiguous` means that more than one geocode location was found for the location information and that the geocode service did not have search up-hierarchy to find a match.\n\nSimilarly, a geocoded location with match codes of `Ambiguous` and `UpHierarchy` implies that a geocode location could not be found that matched all the provided location information, so the geocode service had to search up-hierarchy and found multiple matches at that level. An example of up an `Ambiguous` and `UpHierarchy` result is when you provide complete address information, but the geocode service cannot locate a match for the street address and instead returns information for more than one RoadBlock value.\n\nThe possible values are:\n\n`Good`: The location has only one match or all returned matches are considered strong matches. For example, a query for New York returns several Good matches.\n\n`Ambiguous`: The location is one of a set of possible matches. For example, when you query for the street address 128 Main St., the response may return two locations for 128 North Main St. and 128 South Main St. because there is not enough information to determine which option to choose.\n\n`UpHierarchy`: The location represents a move up the geographic hierarchy. This occurs when a match for the location request was not found, so a less precise result is returned. For example, if a match for the requested address cannot be found, then a match code of `UpHierarchy` with a RoadBlock entity type may be returned.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "Good",
-          "Ambiguous",
-          "UpHierarchy"
-        ],
-        "x-ms-enum": {
-          "name": "MatchCodesEnum",
-          "modelAsString": true,
-          "values": [
-            {
-              "value": "Good"
-            },
-            {
-              "value": "Ambiguous"
-            },
-            {
-              "value": "UpHierarchy"
-            }
-          ]
-        }
-      }
-    },
-    "Confidence": {
-      "description": "The level of confidence that the geocoded location result is a match. Use this value with the match code to determine for more complete information about the match.\n\nThe confidence of a geocoded location is based on many factors including the relative importance of the geocoded location and the user’s location, if specified.",
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
       "type": "string",
-      "enum": [
-        "High",
-        "Medium",
-        "Low"
-      ],
-      "x-ms-enum": {
-        "name": "ConfidenceEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "High",
-            "description": "If the confidence is set to `High`, one or more strong matches were found. Multiple `High` confidence matches are sorted in ranked order by importance when applicable. For example, landmarks have importance but addresses do not.\n\nIf a request includes a location or a view, then the ranking may change appropriately. For example, a location query for \"Paris\" returns \"Paris, France\" and \"Paris, TX\" both with `High` confidence. \"Paris, France\" is always ranked first due to importance unless a user location indicates that the user is in or very close to Paris, TX or the map view indicates that the user is searching in that area."
-          },
-          {
-            "value": "Medium",
-            "description": "In some situations, the returned match may not be at the same level as the information provided in the request. For example, a request may specify address information and the geocode service may only be able to match a postal code. In this case, if the geocode service has a confidence that the postal code matches the data, the confidence is set to `Medium` and the match code is set to `UpHierarchy` to specify that it could not match all of the information and had to search up-hierarchy.\n\nIf the location information in the query is ambiguous, and there is no additional information to rank the locations (such as user location or the relative importance of the location), the confidence is set to `Medium`. For example, a location query for \"148th Ave, Bellevue\" may return \"148th Ave SE\" and \"148th Ave NE\" both with `Medium` confidence.\n\nIf the location information in the query does not provide enough information to geocode a specific location, a less precise location value may be returned and the confidence is set to `Medium`. For example, if an address is provided, but a match is not found for the house number, the geocode result with a Roadblock entity type may be returned."
-          },
-          {
-            "value": "Low"
-          }
-        ]
-      }
-    },
-    "NextLink": {
-      "type": "string",
-      "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
-    },
-    "FeatureCollectionType": {
-      "type": "string",
-      "description": "The type of a FeatureCollection object must be FeatureCollection.",
-      "enum": [
-        "FeatureCollection"
-      ],
-      "x-ms-enum": {
-        "name": "FeatureCollectionEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "FeatureCollection"
-          }
-        ]
-      }
-    },
-    "Boundary": {
-      "description": "`GeoJSON GeocodingFeature` object that describe the boundaries of a geographical area. Geometry of the feature is described with `GeoJSON GeometryCollection`.\n\nPlease note, the service typically returns a GeometryCollection with Polygon or MultiPolygon sub-types.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of a feature must be Feature.",
-          "enum": [
-            "Feature"
-          ],
-          "x-ms-enum": {
-            "name": "FeatureTypeEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Feature"
-              }
-            ]
-          }
-        },
-        "geometry": {
-          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/GeoJsonGeometryCollection"
-        },
-        "properties": {
-          "$ref": "#/definitions/BoundaryProperties"
-        }
-      },
-      "required": [
-        "geometry"
-      ]
-    },
-    "BoundaryProperties": {
-      "description": "Properties of a Boundary object.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name associated with the geographical area.",
-          "type": "string"
-        },
-        "copyright": {
-          "description": "The copyright string.",
-          "type": "string"
-        },
-        "copyrightURL": {
-          "description": "A URL that lists many of the data providers for Azure Maps and their related copyright information.",
-          "type": "string"
-        },
-        "geometriesCopyright": {
-          "description": "A collection of copyright information for each geometry of the Boundary object in the same order they appear.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeometryCopyright"
-          }
-        }
-      }
-    },
-    "GeometryCopyright": {
-      "description": "Copyright information of a geometry of a Boundary object.",
-      "type": "object",
-      "properties": {
-        "sourceName": {
-          "description": "The name of the data provider",
-          "type": "string"
-        },
-        "copyright": {
-          "description": "The copyright string for the data provider",
-          "type": "string"
-        }
-      }
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
