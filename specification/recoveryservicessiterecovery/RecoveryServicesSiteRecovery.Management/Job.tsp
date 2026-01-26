@@ -25,7 +25,7 @@ model Job is Azure.ResourceManager.ProxyResource<JobProperties> {
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -37,7 +37,7 @@ interface Jobs {
   /**
    * Get the details of an Azure Site Recovery job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationJobs_Get")
   @summary("Gets the job details.")
   get is ArmResourceRead<Job, Error = never>;
@@ -45,7 +45,7 @@ interface Jobs {
   /**
    * Gets the list of Azure Site Recovery Jobs for the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationJobs_List")
   @summary("Gets the list of jobs.")
   list is ArmResourceListByParent<
@@ -63,7 +63,8 @@ interface Jobs {
   /**
    * The operation to cancel an Azure Site Recovery job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationJobs_Cancel")
   @summary("Cancels the specified job.")
   cancel is ArmResourceActionAsyncBase<
@@ -77,7 +78,8 @@ interface Jobs {
   /**
    * The operation to restart an Azure Site Recovery job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationJobs_Restart")
   @summary("Restarts the specified job.")
   restart is ArmResourceActionAsyncBase<
@@ -91,7 +93,8 @@ interface Jobs {
   /**
    * The operation to resume an Azure Site Recovery job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationJobs_Resume")
   @summary("Resumes the specified job.")
   resume is ArmResourceActionAsyncBase<

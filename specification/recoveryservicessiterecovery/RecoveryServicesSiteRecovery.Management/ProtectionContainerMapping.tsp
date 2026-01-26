@@ -27,7 +27,7 @@ model ProtectionContainerMapping
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -36,7 +36,7 @@ interface ProtectionContainerMappings {
   /**
    * Gets the details of a protection container mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationProtectionContainerMappings_Get")
   @summary("Gets a protection container mapping.")
   get is ArmResourceRead<ProtectionContainerMapping, Error = never>;
@@ -44,8 +44,8 @@ interface ProtectionContainerMappings {
   /**
    * The operation to create a protection container mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationProtectionContainerMappings_Create")
   @summary("Create protection container mapping.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -60,7 +60,7 @@ interface ProtectionContainerMappings {
   /**
    * The operation to update protection container mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationProtectionContainerMappings_Update")
   @patch(#{ implicitOptionality: false })
   @summary("Update protection container mapping.")
@@ -73,7 +73,8 @@ interface ProtectionContainerMappings {
   /**
    * The operation to purge(force delete) a protection container mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationProtectionContainerMappings_Purge")
   @summary("Purge protection container mapping.")
   purge is ArmResourceDeleteWithoutOkAsync<
@@ -84,7 +85,7 @@ interface ProtectionContainerMappings {
   /**
    * Lists the protection container mappings for a protection container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationProtectionContainerMappings_ListByReplicationProtectionContainers")
   @summary("Gets the list of protection container mappings for a protection container.")
   listByReplicationProtectionContainers is ArmResourceListByParent<
@@ -96,7 +97,8 @@ interface ProtectionContainerMappings {
   /**
    * The operation to delete or remove a protection container mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationProtectionContainerMappings_Delete")
   @action("remove")
   @summary("Remove protection container mapping.")

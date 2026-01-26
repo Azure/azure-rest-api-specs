@@ -25,16 +25,17 @@ model Alert is Azure.ResourceManager.ProxyResource<AlertProperties> {
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface Alerts {
   /**
    * Gets the details of the specified email notification(alert) configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationAlertSettings_Get")
   @summary("Gets an email notification(alert) configuration.")
   get is ArmResourceRead<Alert, Error = never>;
@@ -42,8 +43,8 @@ interface Alerts {
   /**
    * Create or update an email notification(alert) configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationAlertSettings_Create")
   @summary("Configures email notifications for this vault.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -56,7 +57,7 @@ interface Alerts {
   /**
    * Gets the list of email notification(alert) configurations for the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationAlertSettings_List")
   @summary("Gets the list of configured email notification(alert) configurations.")
   list is ArmResourceListByParent<

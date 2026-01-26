@@ -27,7 +27,7 @@ model StorageClassificationMapping
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -36,7 +36,7 @@ interface StorageClassificationMappings {
   /**
    * Gets the details of the specified storage classification mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationStorageClassificationMappings_Get")
   @summary("Gets the details of a storage classification mapping.")
   get is ArmResourceRead<StorageClassificationMapping, Error = never>;
@@ -44,8 +44,8 @@ interface StorageClassificationMappings {
   /**
    * The operation to create a storage classification mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationStorageClassificationMappings_Create")
   @summary("Create storage classification mapping.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -60,7 +60,8 @@ interface StorageClassificationMappings {
   /**
    * The operation to delete a storage classification mapping.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationStorageClassificationMappings_Delete")
   @summary("Delete a storage classification mapping.")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -71,7 +72,7 @@ interface StorageClassificationMappings {
   /**
    * Lists the storage classification mappings for the fabric.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationStorageClassificationMappings_ListByReplicationStorageClassifications")
   @summary("Gets the list of storage classification mappings objects under a storage.")
   listByReplicationStorageClassifications is ArmResourceListByParent<

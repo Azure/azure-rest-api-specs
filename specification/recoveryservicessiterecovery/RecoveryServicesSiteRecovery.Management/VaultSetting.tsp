@@ -26,7 +26,7 @@ model VaultSetting
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -47,12 +47,13 @@ alias VaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ErrorType = never
 >;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface VaultSettings {
   /**
    * Gets the vault setting. This includes the Migration Hub connection settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationVaultSetting_Get")
   @summary("Gets the vault setting.")
   get is ArmResourceRead<VaultSetting, Error = never>;
@@ -60,8 +61,8 @@ interface VaultSettings {
   /**
    * The operation to configure vault setting.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationVaultSetting_Create")
   @summary("Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -77,7 +78,7 @@ interface VaultSettings {
   /**
    * Gets the list of vault setting. This includes the Migration Hub connection settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationVaultSetting_List")
   @summary("Gets the list of vault setting.")
   @action("replicationVaultSettings")

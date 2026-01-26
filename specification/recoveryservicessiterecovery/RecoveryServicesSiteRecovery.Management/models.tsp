@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -189,7 +189,7 @@ union ProtectionHealth {
   Critical: "Critical",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MigrationItemOperation {
   string,
 
@@ -405,7 +405,7 @@ union RecoveryPlanGroupType {
   Failover: "Failover",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ReplicationProtectedItemOperation {
   string,
 
@@ -480,7 +480,7 @@ union ReplicationProtectedItemOperation {
   CompleteMigration: "CompleteMigration",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PossibleOperationsDirections {
   string,
 
@@ -977,7 +977,7 @@ union RcmComponentStatus {
   Unknown: "Unknown",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AgentUpgradeBlockedReason {
   string,
 
@@ -1182,7 +1182,7 @@ union PlannedFailoverStatus {
   Unknown: "Unknown",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MobilityAgentReinstallType {
   string,
 
@@ -1197,7 +1197,7 @@ union MobilityAgentReinstallType {
   AutoTriggered: "AutoTriggered",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AgentReinstallBlockedReason {
   string,
 
@@ -1536,7 +1536,7 @@ model OperationsDiscovery {
 /**
  * ClientDiscovery properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationsDiscoveryProperties {}
 
 /**
@@ -1572,7 +1572,7 @@ model AlertCollection is Azure.Core.Page<Alert>;
 /**
  * The properties of an alert.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertProperties {
   /**
    * A value indicating whether to send email to subscription administrator.
@@ -1681,6 +1681,7 @@ model ApplianceSpecificDetails {
   /**
    * Gets the class type. Overridden in derived classes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -1698,7 +1699,7 @@ model ReplicationEligibilityResultsCollection {
 /**
  * Properties model for replication eligibility results API.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReplicationEligibilityResultsProperties {
   /**
    * The client request Id.
@@ -1709,6 +1710,7 @@ model ReplicationEligibilityResultsProperties {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errors?: ReplicationEligibilityResultsErrorInfo[];
 }
 
@@ -1751,7 +1753,7 @@ model EventCollection is Azure.Core.Page<Event>;
 /**
  * The properties of a monitoring event.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventProperties {
   /**
    * The Id of the monitoring event.
@@ -1807,6 +1809,7 @@ model EventProperties {
   /**
    * The list of errors / warnings capturing details associated with the issue(s).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrors?: HealthError[];
 }
 
@@ -1818,6 +1821,7 @@ model EventProviderSpecificDetails {
   /**
    * Gets the class type. Overridden in derived classes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -1829,6 +1833,7 @@ model EventSpecificDetails {
   /**
    * Gets the class type. Overridden in derived classes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -1839,6 +1844,7 @@ model HealthError {
   /**
    * The inner health errors. HealthError having a list of HealthError as child errors is problematic. InnerHealthError is used because this will prevent an infinite loop of structures when Hydra tries to auto-generate the contract. We are exposing the related health errors as inner health errors and all API consumers can utilize this in the same fashion as Exception -&gt; InnerException.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   innerHealthErrors?: InnerHealthError[];
 
   /**
@@ -1997,7 +2003,7 @@ model FabricCollection is Azure.Core.Page<Fabric>;
 /**
  * Fabric properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FabricProperties {
   /**
    * Friendly name of the fabric.
@@ -2032,6 +2038,7 @@ model FabricProperties {
   /**
    * Fabric health error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrorDetails?: HealthError[];
 
   /**
@@ -2069,6 +2076,7 @@ model FabricSpecificDetails {
   /**
    * Gets the class type. Overridden in derived classes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2100,6 +2108,7 @@ model FabricSpecificCreationInput {
   /**
    * Gets the class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2171,7 +2180,7 @@ model LogicalNetworkCollection is Azure.Core.Page<LogicalNetwork>;
 /**
  * Logical Network Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LogicalNetworkProperties {
   /**
    * The Friendly Name.
@@ -2202,7 +2211,7 @@ model NetworkCollection is Azure.Core.Page<Network>;
 /**
  * Network Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkProperties {
   /**
    * The Fabric Type.
@@ -2253,7 +2262,7 @@ model NetworkMappingCollection is Azure.Core.Page<NetworkMapping>;
 /**
  * Network Mapping Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkMappingProperties {
   /**
    * The pairing state for network mapping.
@@ -2309,6 +2318,7 @@ model NetworkMappingFabricSpecificSettings {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2350,6 +2360,7 @@ model FabricSpecificCreateNetworkMappingInput {
   /**
    * The instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2391,6 +2402,7 @@ model FabricSpecificUpdateNetworkMappingInput {
   /**
    * The instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2402,7 +2414,7 @@ model ProtectionContainerCollection is Azure.Core.Page<ProtectionContainer>;
 /**
  * Protection profile custom data details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProtectionContainerProperties {
   /**
    * Fabric friendly name.
@@ -2468,6 +2480,7 @@ model CreateProtectionContainerInputProperties {
   /**
    * Provider specific inputs for container creation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   providerSpecificInput?: ReplicationProviderSpecificContainerCreationInput[];
 }
 
@@ -2479,6 +2492,7 @@ model ReplicationProviderSpecificContainerCreationInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2520,7 +2534,7 @@ model MigrationItemCollection is Azure.Core.Page<MigrationItem>;
 /**
  * Migration item properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrationItemProperties {
   /**
    * The on-premise virtual machine name.
@@ -2611,6 +2625,7 @@ model MigrationItemProperties {
   /**
    * The list of health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   healthErrors?: HealthError[];
 
@@ -2707,6 +2722,7 @@ model MigrationProviderSpecificSettings {
   /**
    * Gets the instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2743,6 +2759,7 @@ model EnableMigrationProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2774,6 +2791,7 @@ model UpdateMigrationItemProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2805,6 +2823,7 @@ model MigrateProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2817,7 +2836,7 @@ model MigrationRecoveryPointCollection
 /**
  * Migration item recovery point properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrationRecoveryPointProperties {
   /**
    * The recovery point time.
@@ -2850,6 +2869,7 @@ model PauseReplicationInputProperties {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2881,6 +2901,7 @@ model ResumeReplicationProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2912,6 +2933,7 @@ model ResyncProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2943,6 +2965,7 @@ model TestMigrateProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -2975,7 +2998,7 @@ model ProtectableItemCollection is Azure.Core.Page<ProtectableItem>;
 /**
  * Replication protected item custom data details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProtectableItemProperties {
   /**
    * The name.
@@ -3021,6 +3044,7 @@ model ConfigurationSettings {
   /**
    * Gets the class type. Overridden in derived classes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3033,7 +3057,7 @@ model ReplicationProtectedItemCollection
 /**
  * Replication protected item custom data details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReplicationProtectedItemProperties {
   /**
    * The name.
@@ -3138,6 +3162,7 @@ model ReplicationProtectedItemProperties {
   /**
    * List of health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrors?: HealthError[];
 
   /**
@@ -3217,6 +3242,7 @@ model ReplicationProviderSpecificSettings {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3258,6 +3284,7 @@ model EnableProtectionProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3278,11 +3305,13 @@ model UpdateReplicationProtectedItemInputProperties {
   /**
    * Target Azure VM name given by the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMName?: string;
 
   /**
    * Target Azure VM size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMSize?: string;
 
   /**
@@ -3308,6 +3337,7 @@ model UpdateReplicationProtectedItemInputProperties {
   /**
    * The list of VM nic details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicInputDetails[];
 
   /**
@@ -3329,6 +3359,7 @@ model UpdateReplicationProtectedItemInputProperties {
 /**
  * Hyper V VM network input details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMNicInputDetails {
   /**
    * The nic Id.
@@ -3338,6 +3369,7 @@ model VMNicInputDetails {
   /**
    * The IP configurations to be used by NIC during test failover and failover.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipConfigs?: IPConfigInputDetails[];
 
   /**
@@ -3401,29 +3433,36 @@ model VMNicInputDetails {
   targetNicName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPConfigInputDetails {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipConfigName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isPrimary?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isSeletedForFailover?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoverySubnetName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryStaticIPAddress?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryPublicIPAddressId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryLBBackendAddressPoolIds?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoSubnetName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoStaticIPAddress?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoPublicIPAddressId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoLBBackendAddressPoolIds?: string[];
 }
 
@@ -3435,6 +3474,7 @@ model UpdateReplicationProtectedItemProviderInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3466,6 +3506,7 @@ model AddDisksProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3502,6 +3543,7 @@ model ApplyRecoveryPointProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3538,6 +3580,7 @@ model PlannedFailoverProviderSpecificFailoverInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3549,7 +3592,7 @@ model RecoveryPointCollection is Azure.Core.Page<RecoveryPoint>;
 /**
  * Recovery point properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryPointProperties {
   /**
    * The recovery point time.
@@ -3576,6 +3619,7 @@ model ProviderSpecificRecoveryPointDetails {
   /**
    * Gets the provider type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3612,6 +3656,7 @@ model DisableProtectionProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3643,6 +3688,7 @@ model RemoveDisksProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3679,6 +3725,7 @@ model ReverseReplicationProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3699,6 +3746,7 @@ model ResolveHealthInputProperties {
   /**
    * Health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrors?: ResolveHealthError[];
 }
 
@@ -3745,6 +3793,7 @@ model SwitchProviderProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3800,12 +3849,14 @@ model TargetComputeSizeProperties {
   /**
    * The Available vCPUs supported by target compute size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   vCPUsAvailable?: int32;
 
   /**
    * The maximum memory in GB supported by target compute size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memoryInGB?: float64;
 
   /**
@@ -3821,6 +3872,7 @@ model TargetComputeSizeProperties {
   /**
    * The reasons why the target compute size is not applicable for the protected item.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errors?: ComputeSizeErrorDetails[];
 
   /**
@@ -3831,6 +3883,7 @@ model TargetComputeSizeProperties {
   /**
    * The supported HyperV Generations.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hyperVGenerations?: string[];
 }
 
@@ -3892,6 +3945,7 @@ model TestFailoverProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3954,6 +4008,7 @@ model UnplannedFailoverProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -3990,6 +4045,7 @@ model UpdateApplianceForReplicationProtectedItemProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4181,7 +4237,7 @@ model ReplicationProtectionClusterProperties {
   /**
    * The provisioning state of the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -4249,6 +4305,7 @@ model ReplicationClusterProviderSpecificSettings {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4306,6 +4363,7 @@ model SharedDiskReplicationProviderSpecificSettings {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4355,6 +4413,7 @@ model ApplyClusterRecoveryPointProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4366,7 +4425,7 @@ model ClusterRecoveryPointCollection is Azure.Core.Page<ClusterRecoveryPoint>;
 /**
  * Cluster recovery point properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterRecoveryPointProperties {
   /**
    * The recovery point time.
@@ -4393,8 +4452,8 @@ model ClusterProviderSpecificRecoveryPointDetails {
   /**
    * Gets the provider type.
    */
-  @visibility(Lifecycle.Read)
-  instanceType: string;
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read) instanceType: string;
 }
 
 /**
@@ -4444,6 +4503,7 @@ model ClusterTestFailoverProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4506,6 +4566,7 @@ model ClusterUnplannedFailoverProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4518,7 +4579,7 @@ model ProtectionContainerMappingCollection
 /**
  * Protection container mapping properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProtectionContainerMappingProperties {
   /**
    * Paired protection container ARM ID.
@@ -4543,6 +4604,7 @@ model ProtectionContainerMappingProperties {
   /**
    * Health error.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrorDetails?: HealthError[];
 
   /**
@@ -4584,6 +4646,7 @@ model ProtectionContainerMappingProviderSpecificDetails {
   /**
    * Gets the class type. Overridden in derived classes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4625,6 +4688,7 @@ model ReplicationProviderSpecificContainerMappingInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4656,6 +4720,7 @@ model ReplicationProviderSpecificUpdateContainerMappingInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4722,6 +4787,7 @@ model SwitchClusterProtectionProviderSpecificInput {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4758,6 +4824,7 @@ model SwitchProtectionProviderSpecificInput {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -4770,7 +4837,7 @@ model RecoveryServicesProviderCollection
 /**
  * Recovery services provider properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryServicesProviderProperties {
   /**
    * Type of the site.
@@ -4832,6 +4899,7 @@ model RecoveryServicesProviderProperties {
   /**
    * The recovery services provider health error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrorDetails?: HealthError[];
 
   /**
@@ -5009,7 +5077,7 @@ model StorageClassificationCollection is Azure.Core.Page<StorageClassification>;
 /**
  * Storage object properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageClassificationProperties {
   /**
    * Friendly name of the Storage classification.
@@ -5026,7 +5094,7 @@ model StorageClassificationMappingCollection
 /**
  * Storage mapping properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageClassificationMappingProperties {
   /**
    * Target storage object Id.
@@ -5057,12 +5125,14 @@ model StorageMappingInputProperties {
 /**
  * Collection of vCenter details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VCenterCollection is Azure.Core.Page<VCenter>;
 
 /**
  * vCenter properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VCenterProperties {
   /**
    * Friendly name of the vCenter.
@@ -5118,12 +5188,14 @@ model VCenterProperties {
   /**
    * The health errors for this VCenter.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrors?: HealthError[];
 }
 
 /**
  * Input required to add vCenter.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AddVCenterRequest {
   /**
    * The properties of an add vCenter request.
@@ -5134,6 +5206,7 @@ model AddVCenterRequest {
 /**
  * The properties of an add vCenter request.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AddVCenterRequestProperties {
   /**
    * The friendly name of the vCenter.
@@ -5164,6 +5237,7 @@ model AddVCenterRequestProperties {
 /**
  * Input required to update vCenter.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpdateVCenterRequest {
   /**
    * The update VCenter Request Properties.
@@ -5174,6 +5248,7 @@ model UpdateVCenterRequest {
 /**
  * The properties of an update vCenter request.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpdateVCenterRequestProperties {
   /**
    * The friendly name of the vCenter.
@@ -5209,7 +5284,7 @@ model JobCollection is Azure.Core.Page<Job>;
 /**
  * Job custom data details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobProperties {
   /**
    * The activity id.
@@ -5244,6 +5319,7 @@ model JobProperties {
   /**
    * The errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errors?: JobErrorDetails[];
 
   /**
@@ -5287,6 +5363,7 @@ model JobProperties {
 /**
  * Task of the Job.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ASRTask {
   /**
    * The Id.
@@ -5348,6 +5425,7 @@ model ASRTask {
   /**
    * The task error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errors?: JobErrorDetails[];
 }
 
@@ -5359,6 +5437,7 @@ model TaskTypeDetails {
   /**
    * The type of task details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -5370,6 +5449,7 @@ model GroupTaskDetails {
   /**
    * The type of task details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 
   /**
@@ -5477,12 +5557,13 @@ model JobDetails {
   /**
    * Gets the type of job details (see JobDetailsTypes enum for possible values).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 
   /**
    * The affected object properties like source server, source cloud, target server, target cloud etc. based on the workflow object details.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   affectedObjectDetails?: Record<string>;
 }
 
@@ -5559,7 +5640,7 @@ model PolicyCollection is Azure.Core.Page<Policy>;
 /**
  * Protection profile custom data details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PolicyProperties {
   /**
    * The FriendlyName.
@@ -5580,6 +5661,7 @@ model PolicyProviderSpecificDetails {
   /**
    * Gets the class type. Overridden in derived classes.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -5611,6 +5693,7 @@ model PolicyProviderSpecificInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -5643,7 +5726,7 @@ model ReplicationProtectionIntentCollection
 /**
  * Replication protection intent custom data details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReplicationProtectionIntentProperties {
   /**
    * The name.
@@ -5671,6 +5754,7 @@ model ReplicationProtectionIntentProperties {
   /**
    * The creation time in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   creationTimeUTC?: string;
 
@@ -5688,6 +5772,7 @@ model ReplicationProtectionIntentProviderSpecificSettings {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -5719,6 +5804,7 @@ model CreateProtectionIntentProviderSpecificDetails {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -5730,7 +5816,7 @@ model RecoveryPlanCollection is Azure.Core.Page<RecoveryPlan>;
 /**
  * Recovery plan properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryPlanProperties {
   /**
    * The friendly name.
@@ -5808,11 +5894,13 @@ model RecoveryPlanProperties {
   /**
    * The recovery plan groups.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   groups?: RecoveryPlanGroup[];
 
   /**
    * The provider id and provider specific details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   providerSpecificDetails?: RecoveryPlanProviderSpecificDetails[];
 }
 
@@ -5833,11 +5921,13 @@ model RecoveryPlanGroup {
   /**
    * The start group actions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startGroupActions?: RecoveryPlanAction[];
 
   /**
    * The end group actions.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endGroupActions?: RecoveryPlanAction[];
 }
 
@@ -5889,6 +5979,7 @@ model RecoveryPlanActionDetails {
   /**
    * Gets the type of action details (see RecoveryPlanActionDetailsTypes enum for possible values).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -5900,6 +5991,7 @@ model RecoveryPlanProviderSpecificDetails {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -5935,11 +6027,13 @@ model CreateRecoveryPlanInputProperties {
   /**
    * The recovery plan groups.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   groups: RecoveryPlanGroup[];
 
   /**
    * The provider specific input.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   providerSpecificInput?: RecoveryPlanProviderSpecificInput[];
 }
 
@@ -5951,6 +6045,7 @@ model RecoveryPlanProviderSpecificInput {
   /**
    * Gets the Instance type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -5971,6 +6066,7 @@ model UpdateRecoveryPlanInputProperties {
   /**
    * The recovery plan groups.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   groups?: RecoveryPlanGroup[];
 }
 
@@ -5996,6 +6092,7 @@ model RecoveryPlanPlannedFailoverInputProperties {
   /**
    * The provider specific properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   providerSpecificDetails?: RecoveryPlanProviderSpecificFailoverInput[];
 }
 
@@ -6007,6 +6104,7 @@ model RecoveryPlanProviderSpecificFailoverInput {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   instanceType: string;
 }
 
@@ -6042,6 +6140,7 @@ model RecoveryPlanTestFailoverInputProperties {
   /**
    * The provider specific properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   providerSpecificDetails?: RecoveryPlanProviderSpecificFailoverInput[];
 }
 
@@ -6093,13 +6192,14 @@ model RecoveryPlanUnplannedFailoverInputProperties {
   /**
    * The provider specific properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   providerSpecificDetails?: RecoveryPlanProviderSpecificFailoverInput[];
 }
 
 /**
  * Supported operating systems.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SupportedOperatingSystems extends Resource {
   /**
    * The supported operating systems properties.
@@ -6114,6 +6214,7 @@ model SupportedOSProperties {
   /**
    * The supported operating systems property list.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   supportedOsList?: SupportedOSProperty[];
 }
 
@@ -6129,6 +6230,7 @@ model SupportedOSProperty {
   /**
    * The list of supported operating systems.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   supportedOs?: SupportedOSDetails[];
 }
 
@@ -6149,12 +6251,14 @@ model SupportedOSDetails {
   /**
    * The list of version for operating system.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   osVersions?: OSVersionWrapper[];
 }
 
 /**
  * Wrapper model for OSVersion to include version and service pack info.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OSVersionWrapper {
   /**
    * The version.
@@ -6170,7 +6274,7 @@ model OSVersionWrapper {
 /**
  * Vault health details definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VaultHealthDetails extends Resource {
   /**
    * The vault health related data.
@@ -6185,6 +6289,7 @@ model VaultHealthProperties {
   /**
    * The list of errors on the vault.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vaultErrors?: HealthError[];
 
   /**
@@ -6215,12 +6320,13 @@ model ResourceHealthSummary {
   /**
    * The list of summary of health errors across the resources under the container.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issues?: HealthErrorSummary[];
 
   /**
    * The categorized resource counts.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   categorizedResourceCounts?: Record<int32>;
 }
 
@@ -6272,7 +6378,7 @@ model VaultSettingCollection is Azure.Core.Page<VaultSetting>;
 /**
  * Vault setting properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VaultSettingProperties {
   /**
    * The migration solution ARM Id.
@@ -6313,6 +6419,7 @@ model VaultSettingCreationInputProperties {
 /**
  * A2A source agent reinstall blocking error details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AAgentReinstallBlockingErrorDetails {
   /**
    * error code.
@@ -6337,28 +6444,31 @@ model A2AAgentReinstallBlockingErrorDetails {
   /**
    * error message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errorMessageParameters?: Record<string>;
 
   /**
    * error tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errorTags?: Record<string>;
 }
 
 /**
  * A2A add disk(s) input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AAddDisksInput extends AddDisksProviderSpecificInput {
   /**
    * The list of vm disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: A2AVmDiskInputDetails[];
 
   /**
    * The list of vm managed disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmManagedDisks?: A2AVmManagedDiskInputDetails[];
 
   /**
@@ -6370,6 +6480,7 @@ model A2AAddDisksInput extends AddDisksProviderSpecificInput {
 /**
  * A2A disk input details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AVmDiskInputDetails {
   /**
    * The disk Uri.
@@ -6390,6 +6501,7 @@ model A2AVmDiskInputDetails {
 /**
  * A2A managed disk input details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AVmManagedDiskInputDetails {
   /**
    * The disk Id.
@@ -6475,6 +6587,7 @@ model KeyEncryptionKeyInfo {
 /**
  * A2A provider specific input for apply cluster recovery point.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AApplyClusterRecoveryPointInput
   extends ApplyClusterRecoveryPointProviderSpecificInput {
   /**
@@ -6486,6 +6599,7 @@ model A2AApplyClusterRecoveryPointInput
 /**
  * A2A provider specific cluster recovery point details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AClusterRecoveryPointDetails
   extends ClusterProviderSpecificRecoveryPointDetails {
   /**
@@ -6511,6 +6625,7 @@ model A2AClusterRecoveryPointDetails
 /**
  * ApplyRecoveryPoint input specific to A2A provider.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AApplyRecoveryPointInput
   extends ApplyRecoveryPointProviderSpecificInput {
   /**
@@ -6522,6 +6637,7 @@ model A2AApplyRecoveryPointInput
 /**
  * A2A provider specific input for test cluster failover.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AClusterTestFailoverInput
   extends ClusterTestFailoverProviderSpecificInput {
   /**
@@ -6551,6 +6667,7 @@ model A2AClusterTestFailoverInput
 /**
  * A2A provider specific input for unplanned cluster failover.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AClusterUnplannedFailoverInput
   extends ClusterUnplannedFailoverProviderSpecificInput {
   /**
@@ -6572,6 +6689,7 @@ model A2AClusterUnplannedFailoverInput
 /**
  * A2A cloud creation input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AContainerCreationInput
   extends ReplicationProviderSpecificContainerCreationInput {
   /**
@@ -6583,6 +6701,7 @@ model A2AContainerCreationInput
 /**
  * A2A container mapping input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AContainerMappingInput
   extends ReplicationProviderSpecificContainerMappingInput {
   /**
@@ -6609,6 +6728,7 @@ model A2AContainerMappingInput
 /**
  * A2A create protection intent input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ACreateProtectionIntentInput
   extends CreateProtectionIntentProviderSpecificDetails {
   /**
@@ -6674,11 +6794,13 @@ model A2ACreateProtectionIntentInput
   /**
    * The list of vm disk inputs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: A2AProtectionIntentDiskInputDetails[];
 
   /**
    * The list of vm managed disk inputs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmManagedDisks?: A2AProtectionIntentManagedDiskInputDetails[];
 
   /**
@@ -6735,6 +6857,7 @@ model ProtectionProfileCustomDetails {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceType: string;
 }
 
@@ -6746,6 +6869,7 @@ model StorageAccountCustomDetails {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceType: string;
 }
 
@@ -6757,6 +6881,7 @@ model RecoveryAvailabilitySetCustomDetails {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceType: string;
 }
 
@@ -6768,6 +6893,7 @@ model RecoveryVirtualNetworkCustomDetails {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceType: string;
 }
 
@@ -6779,12 +6905,14 @@ model RecoveryProximityPlacementGroupCustomDetails {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceType: string;
 }
 
 /**
  * Azure VM unmanaged disk input details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AProtectionIntentDiskInputDetails {
   /**
    * The disk Uri.
@@ -6805,6 +6933,7 @@ model A2AProtectionIntentDiskInputDetails {
 /**
  * Azure VM managed disk input details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AProtectionIntentManagedDiskInputDetails {
   /**
    * The disk Id.
@@ -6850,12 +6979,14 @@ model RecoveryResourceGroupCustomDetails {
   /**
    * The class type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceType: string;
 }
 
 /**
  * ApplyRecoveryPoint input specific to A2ACrossClusterMigration provider.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ACrossClusterMigrationApplyRecoveryPointInput
   extends ApplyRecoveryPointProviderSpecificInput {
   /**
@@ -6867,6 +6998,7 @@ model A2ACrossClusterMigrationApplyRecoveryPointInput
 /**
  * A2ACrossClusterMigration cloud creation input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ACrossClusterMigrationContainerCreationInput
   extends ReplicationProviderSpecificContainerCreationInput {
   /**
@@ -6878,6 +7010,7 @@ model A2ACrossClusterMigrationContainerCreationInput
 /**
  * A2A Cross-Cluster Migration enable protection input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ACrossClusterMigrationEnableProtectionInput
   extends EnableProtectionProviderSpecificInput {
   /**
@@ -6899,6 +7032,7 @@ model A2ACrossClusterMigrationEnableProtectionInput
 /**
  * A2A Cross-Cluster Migration Policy creation input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ACrossClusterMigrationPolicyCreationInput
   extends PolicyProviderSpecificInput {
   /**
@@ -6910,6 +7044,7 @@ model A2ACrossClusterMigrationPolicyCreationInput
 /**
  * A2A provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ACrossClusterMigrationReplicationDetails
   extends ReplicationProviderSpecificSettings {
   /**
@@ -6951,6 +7086,7 @@ model A2ACrossClusterMigrationReplicationDetails
 /**
  * A2A enable protection input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AEnableProtectionInput extends EnableProtectionProviderSpecificInput {
   /**
    * The fabric specific object Id of the virtual machine.
@@ -6985,11 +7121,13 @@ model A2AEnableProtectionInput extends EnableProtectionProviderSpecificInput {
   /**
    * The list of vm disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: A2AVmDiskInputDetails[];
 
   /**
    * The list of vm managed disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmManagedDisks?: A2AVmManagedDiskInputDetails[];
 
   /**
@@ -7085,6 +7223,7 @@ model ExtendedLocation {
 /**
  * Model class for event details of a A2A event.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AEventDetails extends EventProviderSpecificDetails {
   /**
    * The protected item arm name.
@@ -7125,6 +7264,7 @@ model A2AEventDetails extends EventProviderSpecificDetails {
 /**
  * ExtendedLocation details data.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AExtendedLocationDetails {
   /**
    * The primary ExtendedLocation.
@@ -7140,6 +7280,7 @@ model A2AExtendedLocationDetails {
 /**
  * ExtendedLocation details data.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AFabricSpecificLocationDetails {
   /**
    * The initial source zone info.
@@ -7205,6 +7346,7 @@ model A2AFabricSpecificLocationDetails {
 /**
  * A2A Policy creation input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2APolicyCreationInput extends PolicyProviderSpecificInput {
   /**
    * The duration in minutes until which the recovery points need to be stored.
@@ -7235,6 +7377,7 @@ model A2APolicyCreationInput extends PolicyProviderSpecificInput {
 /**
  * A2A specific policy details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2APolicyDetails extends PolicyProviderSpecificDetails {
   /**
    * The recovery point threshold in minutes.
@@ -7270,6 +7413,7 @@ model A2APolicyDetails extends PolicyProviderSpecificDetails {
 /**
  * A2A protected disk details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AProtectedDiskDetails {
   /**
    * The disk uri.
@@ -7334,6 +7478,7 @@ model A2AProtectedDiskDetails {
   /**
    * The data pending at source virtual machine in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataPendingAtSourceAgentInMB?: float64;
 
   /**
@@ -7390,10 +7535,12 @@ model A2AProtectedDiskDetails {
 /**
  * A2A specific switch cluster protection input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AProtectedItemDetail {
   /**
    * The list of vm managed disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmManagedDisks?: A2AVmManagedDiskInputDetails[];
 
   /**
@@ -7445,6 +7592,7 @@ model A2AProtectedItemDetail {
 /**
  * A2A protected managed disk details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AProtectedManagedDiskDetails {
   /**
    * The managed disk Arm id.
@@ -7534,6 +7682,7 @@ model A2AProtectedManagedDiskDetails {
   /**
    * The data pending at source virtual machine in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataPendingAtSourceAgentInMB?: float64;
 
   /**
@@ -7590,7 +7739,7 @@ model A2AProtectedManagedDiskDetails {
 /**
  * A2A provider specific settings.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AProtectionContainerMappingDetails
   extends ProtectionContainerMappingProviderSpecificDetails {
   /**
@@ -7627,6 +7776,7 @@ model A2AProtectionContainerMappingDetails
 /**
  * A2A provider specific recovery point details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ARecoveryPointDetails extends ProviderSpecificRecoveryPointDetails {
   /**
    * A value indicating whether the recovery point is multi VM consistent.
@@ -7647,6 +7797,7 @@ model A2ARecoveryPointDetails extends ProviderSpecificRecoveryPointDetails {
 /**
  * A2A remove disk(s) input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ARemoveDisksInput extends RemoveDisksProviderSpecificInput {
   /**
    * The list of vm disk vhd URIs.
@@ -7667,6 +7818,7 @@ model A2ARemoveDisksInput extends RemoveDisksProviderSpecificInput {
 /**
  * A2A provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The fabric specific object Id of the virtual machine.
@@ -7740,16 +7892,19 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The list of protected disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedDisks?: A2AProtectedDiskDetails[];
 
   /**
    * The list of unprotected disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   unprotectedDisks?: A2AUnprotectedDiskDetails[];
 
   /**
    * The list of protected managed disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedManagedDisks?: A2AProtectedManagedDiskDetails[];
 
   /**
@@ -7775,11 +7930,13 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The size of recovery virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMSize?: string;
 
   /**
    * The name of recovery virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMName?: string;
 
   /**
@@ -7810,6 +7967,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The virtual machine nic details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicDetails[];
 
   /**
@@ -7998,6 +8156,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * whether reinstall is possible or not.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reasonsBlockingReinstallDetails?: A2AAgentReinstallBlockingErrorDetails[];
 
   /**
@@ -8029,6 +8188,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
 /**
  * A2A unprotected disk details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AUnprotectedDiskDetails {
   /**
    * The source lun Id for the data disk.
@@ -8044,6 +8204,7 @@ model A2AUnprotectedDiskDetails {
 /**
  * Hyper V VM network details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMNicDetails {
   /**
    * The nic Id.
@@ -8141,37 +8302,38 @@ model VMNicDetails {
   targetNicName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPConfigDetails {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isPrimary?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subnetName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   staticIPAddress?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipAddressType?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isSeletedForFailover?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoverySubnetName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryStaticIPAddress?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryIPAddressType?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryPublicIPAddressId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryLBBackendAddressPoolIds?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoSubnetName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoStaticIPAddress?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoPublicIPAddressId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoLBBackendAddressPoolIds?: string[];
 }
 
@@ -8182,30 +8344,32 @@ model AzureToAzureVmSyncedConfigDetails {
   /**
    * The Azure VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
    * The Azure VM input endpoints.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inputEndpoints?: InputEndpoint[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InputEndpoint {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpointName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privatePort?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicPort?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protocol?: string;
 }
 
 /**
  * A2A provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AReplicationIntentDetails
   extends ReplicationProtectionIntentProviderSpecificSettings {
   /**
@@ -8231,11 +8395,13 @@ model A2AReplicationIntentDetails
   /**
    * The list of vm disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: A2AProtectionIntentDiskInputDetails[];
 
   /**
    * The list of vm managed disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmManagedDisks?: A2AProtectionIntentManagedDiskInputDetails[];
 
   /**
@@ -8327,6 +8493,7 @@ model A2AReplicationIntentDetails
 /**
  * A2A provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AReplicationProtectionClusterDetails
   extends ReplicationClusterProviderSpecificSettings {
   /**
@@ -8439,6 +8606,7 @@ model A2AReplicationProtectionClusterDetails
 /**
  * Azure specific reprotect input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AReprotectInput extends ReverseReplicationProviderSpecificInput {
   /**
    * The recovery container Id.
@@ -8448,6 +8616,7 @@ model A2AReprotectInput extends ReverseReplicationProviderSpecificInput {
   /**
    * The list of vm disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: A2AVmDiskInputDetails[];
 
   /**
@@ -8479,6 +8648,7 @@ model A2AReprotectInput extends ReverseReplicationProviderSpecificInput {
 /**
  * Extended location of the resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ASharedDiskIRErrorDetails {
   /**
    * The error code.
@@ -8514,6 +8684,7 @@ model A2ASharedDiskIRErrorDetails {
 /**
  * A2A provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ASharedDiskReplicationDetails
   extends SharedDiskReplicationProviderSpecificSettings {
   /**
@@ -8584,6 +8755,7 @@ model A2ASharedDiskReplicationDetails
 /**
  * A2A specific switch cluster protection input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ASwitchClusterProtectionInput
   extends SwitchClusterProtectionProviderSpecificInput {
   /**
@@ -8596,7 +8768,7 @@ model A2ASwitchClusterProtectionInput
    */
   policyId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["replicationProtectedItemName"])
   protectedItemsDetail?: A2AProtectedItemDetail[];
 
@@ -8609,6 +8781,7 @@ model A2ASwitchClusterProtectionInput
 /**
  * A2A specific switch protection input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ASwitchProtectionInput extends SwitchProtectionProviderSpecificInput {
   /**
    * The recovery container Id.
@@ -8618,11 +8791,13 @@ model A2ASwitchProtectionInput extends SwitchProtectionProviderSpecificInput {
   /**
    * The list of vm disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: A2AVmDiskInputDetails[];
 
   /**
    * The list of vm managed disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmManagedDisks?: A2AVmManagedDiskInputDetails[];
 
   /**
@@ -8689,6 +8864,7 @@ model A2ASwitchProtectionInput extends SwitchProtectionProviderSpecificInput {
 /**
  * A2A provider specific input for test failover.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2ATestFailoverInput extends TestFailoverProviderSpecificInput {
   /**
    * The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.
@@ -8709,6 +8885,7 @@ model A2ATestFailoverInput extends TestFailoverProviderSpecificInput {
 /**
  * A2A provider specific input for unplanned failover.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AUnplannedFailoverInput extends UnplannedFailoverProviderSpecificInput {
   /**
    * The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.
@@ -8729,6 +8906,7 @@ model A2AUnplannedFailoverInput extends UnplannedFailoverProviderSpecificInput {
 /**
  * A2A update protection container mapping.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AUpdateContainerMappingInput
   extends ReplicationProviderSpecificUpdateContainerMappingInput {
   /**
@@ -8755,6 +8933,7 @@ model A2AUpdateContainerMappingInput
 /**
  * InMage Azure V2 input to update replication protected item.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AUpdateReplicationProtectedItemInput
   extends UpdateReplicationProtectedItemProviderInput {
   /**
@@ -8770,6 +8949,7 @@ model A2AUpdateReplicationProtectedItemInput
   /**
    * Managed disk update details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedDiskUpdateDetails?: A2AVmManagedDiskUpdateDetails[];
 
   /**
@@ -8821,6 +9001,7 @@ model A2AUpdateReplicationProtectedItemInput
 /**
  * A2A Vm managed disk update details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AVmManagedDiskUpdateDetails {
   /**
    * The disk Id.
@@ -8856,6 +9037,7 @@ model A2AVmManagedDiskUpdateDetails {
 /**
  * Zone details data.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model A2AZoneDetails {
   /**
    * Source zone info.
@@ -8899,6 +9081,7 @@ model AgentDetails {
   /**
    * The disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   disks?: AgentDiskDetails[];
 }
@@ -8922,6 +9105,7 @@ model AgentDiskDetails {
   /**
    * A value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   isOSDisk?: string;
 
@@ -9139,6 +9323,7 @@ model AzureFabricSpecificDetails extends FabricSpecificDetails {
   /**
    * The zones.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: A2AZoneDetails[];
 
   /**
@@ -9239,6 +9424,7 @@ model AzureVmDiskDetails {
   /**
    * Max side in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxSizeMB?: string;
 
   /**
@@ -9396,6 +9582,7 @@ model ConsistencyCheckTaskDetails extends TaskTypeDetails {
   /**
    * The list of inconsistent Vm details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDetails?: InconsistentVmDetails[];
 
   /**
@@ -9466,6 +9653,7 @@ model DiskDetails {
   /**
    * The hard disk max size in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxSizeMB?: int64;
 
   /**
@@ -9543,6 +9731,7 @@ model DraDetails {
   /**
    * The health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   healthErrors?: HealthError[];
 
@@ -9717,6 +9906,7 @@ model ExportJobDetails extends JobDetails {
   /**
    * The sas token to access blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sasToken?: string;
 
   /**
@@ -9913,6 +10103,7 @@ model GatewayOperationDetails {
 /**
  * Hyper-V host details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVHostDetails {
   /**
    * The Hyper-V host Id.
@@ -9936,6 +10127,7 @@ model HyperVHostDetails {
 /**
  * Model class for event details of a HyperVReplica E2E event.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplica2012EventDetails extends EventProviderSpecificDetails {
   /**
    * The container friendly name.
@@ -9966,6 +10158,7 @@ model HyperVReplica2012EventDetails extends EventProviderSpecificDetails {
 /**
  * Model class for event details of a HyperVReplica blue E2E event.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplica2012R2EventDetails extends EventProviderSpecificDetails {
   /**
    * The container friendly name.
@@ -9996,6 +10189,7 @@ model HyperVReplica2012R2EventDetails extends EventProviderSpecificDetails {
 /**
  * ApplyRecoveryPoint input specific to HyperVReplicaAzure provider.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureApplyRecoveryPointInput
   extends ApplyRecoveryPointProviderSpecificInput {
   /**
@@ -10017,6 +10211,7 @@ model HyperVReplicaAzureApplyRecoveryPointInput
 /**
  * Disk input details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureDiskInputDetails {
   /**
    * The DiskId.
@@ -10056,6 +10251,7 @@ model HyperVReplicaAzureDiskInputDetails {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
@@ -10083,6 +10279,7 @@ model HyperVReplicaAzureEnableProtectionInput
   /**
    * The OS name selected by user.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userSelectedOSName?: string;
 
   /**
@@ -10193,6 +10390,7 @@ model HyperVReplicaAzureEnableProtectionInput
   /**
    * The disks to include list for managed disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disksToIncludeForManagedDisks?: HyperVReplicaAzureDiskInputDetails[];
 
   /**
@@ -10203,25 +10401,25 @@ model HyperVReplicaAzureEnableProtectionInput
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The tags for the seed managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   seedManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
@@ -10268,6 +10466,7 @@ model SecurityProfileProperties {
 /**
  * Model class for event details of a HyperVReplica E2A event.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureEventDetails extends EventProviderSpecificDetails {
   /**
    * The container friendly name.
@@ -10293,6 +10492,7 @@ model HyperVReplicaAzureEventDetails extends EventProviderSpecificDetails {
 /**
  * HyperVReplicaAzureFailback specific planned failover input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureFailbackProviderInput
   extends PlannedFailoverProviderSpecificFailoverInput {
   /**
@@ -10319,6 +10519,7 @@ model HyperVReplicaAzureFailbackProviderInput
 /**
  * Hyper-V Managed disk details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureManagedDiskDetails {
   /**
    * The disk Id.
@@ -10363,12 +10564,14 @@ model HyperVReplicaAzureManagedDiskDetails {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
 /**
  * HyperVReplicaAzure specific planned failover input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzurePlannedFailoverProviderInput
   extends PlannedFailoverProviderSpecificFailoverInput {
   /**
@@ -10405,6 +10608,7 @@ model HyperVReplicaAzurePlannedFailoverProviderInput
 /**
  * Hyper-V Replica Azure specific protection profile details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzurePolicyDetails extends PolicyProviderSpecificDetails {
   /**
    * The duration (in hours) to which point the recovery history needs to be maintained.
@@ -10445,6 +10649,7 @@ model HyperVReplicaAzurePolicyDetails extends PolicyProviderSpecificDetails {
 /**
  * Hyper-V Replica Azure specific input for creating a protection profile.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzurePolicyInput extends PolicyProviderSpecificInput {
   /**
    * The duration (in hours) to which point the recovery history needs to be maintained.
@@ -10480,21 +10685,25 @@ model HyperVReplicaAzurePolicyInput extends PolicyProviderSpecificInput {
 /**
  * Hyper V Replica Azure provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureReplicationDetails
   extends ReplicationProviderSpecificSettings {
   /**
    * Azure VM Disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureVmDiskDetails?: AzureVmDiskDetails[];
 
   /**
    * Recovery Azure given name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVmName?: string;
 
   /**
    * The Recovery Azure VM size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMSize?: string;
 
   /**
@@ -10547,6 +10756,7 @@ model HyperVReplicaAzureReplicationDetails
   /**
    * The PE Network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicDetails[];
 
   /**
@@ -10572,6 +10782,7 @@ model HyperVReplicaAzureReplicationDetails
   /**
    * The RAM size of the VM on the primary side.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceVmRamSizeInMB?: int32;
 
   /**
@@ -10634,25 +10845,25 @@ model HyperVReplicaAzureReplicationDetails
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The tags for the seed managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   seedManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
@@ -10664,6 +10875,7 @@ model HyperVReplicaAzureReplicationDetails
   /**
    * A value indicating all available inplace OS Upgrade configurations.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   allAvailableOSUpgradeConfigurations?: OSUpgradeSupportedVersions[];
 
@@ -10720,27 +10932,32 @@ model OSDetails {
   /**
    * The OS Version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   oSVersion?: string;
 
   /**
    * The OS Major Version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   oSMajorVersion?: string;
 
   /**
    * The OS Minor Version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   oSMinorVersion?: string;
 
   /**
    * The OS name selected by user.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userSelectedOSName?: string;
 }
 
 /**
  * Supported OS upgrade versions.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OSUpgradeSupportedVersions {
   /**
    * The source OS version name.
@@ -10758,6 +10975,7 @@ model OSUpgradeSupportedVersions {
 /**
  * Azure specific reprotect input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureReprotectInput
   extends ReverseReplicationProviderSpecificInput {
   /**
@@ -10799,6 +11017,7 @@ model HyperVReplicaAzureReprotectInput
 /**
  * HvrA provider specific input for test failover.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureTestFailoverInput
   extends TestFailoverProviderSpecificInput {
   /**
@@ -10830,6 +11049,7 @@ model HyperVReplicaAzureTestFailoverInput
 /**
  * HvrA provider specific input for unplanned failover.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureUnplannedFailoverInput
   extends UnplannedFailoverProviderSpecificInput {
   /**
@@ -10856,6 +11076,7 @@ model HyperVReplicaAzureUnplannedFailoverInput
 /**
  * HyperV replica Azure input to update replication protected item.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaAzureUpdateReplicationProtectedItemInput
   extends UpdateReplicationProtectedItemProviderInput {
   /**
@@ -10876,7 +11097,7 @@ model HyperVReplicaAzureUpdateReplicationProtectedItemInput
   /**
    * The dictionary of disk resource Id to disk encryption set ARM Id.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskIdToDiskEncryptionMap?: Record<string>;
 
   /**
@@ -10892,19 +11113,19 @@ model HyperVReplicaAzureUpdateReplicationProtectedItemInput
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The tags for the target managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
@@ -10920,11 +11141,13 @@ model HyperVReplicaAzureUpdateReplicationProtectedItemInput
   /**
    * The OS name selected by user.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userSelectedOSName?: string;
 
   /**
    * The list of disk update properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: UpdateDiskInput[];
 
   /**
@@ -10965,12 +11188,14 @@ model UpdateDiskInput {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
 /**
  * Abstract model class for event details of a HyperVReplica E2E event.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaBaseEventDetails extends EventProviderSpecificDetails {
   /**
    * The container friendly name.
@@ -11001,6 +11226,7 @@ model HyperVReplicaBaseEventDetails extends EventProviderSpecificDetails {
 /**
  * Base class for HyperVReplica policy details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaBasePolicyDetails extends PolicyProviderSpecificDetails {
   /**
    * A value indicating the number of recovery points.
@@ -11061,6 +11287,7 @@ model HyperVReplicaBasePolicyDetails extends PolicyProviderSpecificDetails {
 /**
  * Hyper V replica provider specific settings base class.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaBaseReplicationDetails
   extends ReplicationProviderSpecificSettings {
   /**
@@ -11072,6 +11299,7 @@ model HyperVReplicaBaseReplicationDetails
   /**
    * The PE Network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicDetails[];
 
   /**
@@ -11097,6 +11325,7 @@ model HyperVReplicaBaseReplicationDetails
   /**
    * VM disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vMDiskDetails?: DiskDetails[];
 
   /**
@@ -11108,6 +11337,7 @@ model HyperVReplicaBaseReplicationDetails
 /**
  * Hyper-V Replica Blue specific protection profile details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaBluePolicyDetails extends PolicyProviderSpecificDetails {
   /**
    * A value indicating the replication interval.
@@ -11173,6 +11403,7 @@ model HyperVReplicaBluePolicyDetails extends PolicyProviderSpecificDetails {
 /**
  * HyperV Replica Blue policy input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaBluePolicyInput extends PolicyProviderSpecificInput {
   /**
    * A value indicating the replication interval.
@@ -11238,7 +11469,7 @@ model HyperVReplicaBluePolicyInput extends PolicyProviderSpecificInput {
 /**
  * Hyper-V Replica specific policy Input.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaPolicyInput extends PolicyProviderSpecificInput {
   /**
    * The class type.
@@ -11299,6 +11530,7 @@ model HyperVReplicaPolicyInput extends PolicyProviderSpecificInput {
 /**
  * HyperV replica 2012 R2 (Blue) replication details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaBlueReplicationDetails
   extends ReplicationProviderSpecificSettings {
   /**
@@ -11310,6 +11542,7 @@ model HyperVReplicaBlueReplicationDetails
   /**
    * The PE Network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicDetails[];
 
   /**
@@ -11335,6 +11568,7 @@ model HyperVReplicaBlueReplicationDetails
   /**
    * VM disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vMDiskDetails?: DiskDetails[];
 
   /**
@@ -11346,6 +11580,7 @@ model HyperVReplicaBlueReplicationDetails
 /**
  * Hyper-V Replica Blue specific protection profile details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaPolicyDetails extends PolicyProviderSpecificDetails {
   /**
    * A value indicating the number of recovery points.
@@ -11406,6 +11641,7 @@ model HyperVReplicaPolicyDetails extends PolicyProviderSpecificDetails {
 /**
  * HyperV replica 2012 replication details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVReplicaReplicationDetails
   extends ReplicationProviderSpecificSettings {
   /**
@@ -11417,6 +11653,7 @@ model HyperVReplicaReplicationDetails
   /**
    * The PE Network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicDetails[];
 
   /**
@@ -11442,6 +11679,7 @@ model HyperVReplicaReplicationDetails
   /**
    * VM disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vMDiskDetails?: DiskDetails[];
 
   /**
@@ -11453,6 +11691,7 @@ model HyperVReplicaReplicationDetails
 /**
  * HyperVSite fabric specific details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVSiteDetails extends FabricSpecificDetails {
   /**
    * The list of Hyper-V hosts associated with the fabric.
@@ -11468,6 +11707,7 @@ model HyperVSiteDetails extends FabricSpecificDetails {
 /**
  * Single Host fabric provider specific VM settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HyperVVirtualMachineDetails extends ConfigurationSettings {
   /**
    * The source id of the object.
@@ -11487,6 +11727,7 @@ model HyperVVirtualMachineDetails extends ConfigurationSettings {
   /**
    * The Last successful failover time.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskDetails?: DiskDetails[];
 
   /**
@@ -11507,6 +11748,7 @@ model HyperVVirtualMachineDetails extends ConfigurationSettings {
   /**
    * The Id of the hyper-v host in fabric.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hyperVHostId?: string;
 
   instanceType: "HyperVVirtualMachine";
@@ -11627,6 +11869,7 @@ model InMageAzureV2EnableProtectionInput
   /**
    * The disks to include list.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disksToInclude?: InMageAzureV2DiskInputDetails[];
 
   /**
@@ -11707,25 +11950,25 @@ model InMageAzureV2EnableProtectionInput
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The tags for the seed managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   seedManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
@@ -11977,6 +12220,7 @@ model InMageAzureV2ProtectedDiskDetails {
   /**
    * The last data transfer time in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resyncLastDataTransferTimeUTC?: utcDateTime;
 
@@ -12066,11 +12310,13 @@ model InMageAzureV2ReplicationDetails
   /**
    * The compressed data change rate in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   compressedDataRateInMB?: float64;
 
   /**
    * The uncompressed data change rate in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   uncompressedDataRateInMB?: float64;
 
   /**
@@ -12133,6 +12379,7 @@ model InMageAzureV2ReplicationDetails
   /**
    * The list of protected disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedDisks?: InMageAzureV2ProtectedDiskDetails[];
 
   /**
@@ -12153,6 +12400,7 @@ model InMageAzureV2ReplicationDetails
   /**
    * The RAM size of the VM on the primary side.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceVmRamSizeInMB?: int32;
 
   /**
@@ -12173,16 +12421,20 @@ model InMageAzureV2ReplicationDetails
   /**
    * Azure VM Disk details.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureVMDiskDetails?: AzureVmDiskDetails[];
 
   /**
    * Recovery Azure given name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMName?: string;
 
   /**
    * The Recovery Azure VM size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMSize?: string;
 
   /**
@@ -12198,6 +12450,7 @@ model InMageAzureV2ReplicationDetails
   /**
    * The PE Network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicDetails[];
 
   /**
@@ -12273,6 +12526,7 @@ model InMageAzureV2ReplicationDetails
   /**
    * The validation errors of the on-premise machine Value can be list of validation errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationErrors?: HealthError[];
 
   /**
@@ -12300,6 +12554,7 @@ model InMageAzureV2ReplicationDetails
   /**
    * The list of protected managed disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedManagedDisks?: InMageAzureV2ManagedDiskDetails[];
 
   /**
@@ -12337,30 +12592,31 @@ model InMageAzureV2ReplicationDetails
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The tags for the seed managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   seedManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
    * The switch provider blocking error information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   switchProviderBlockingErrorDetails?: InMageAzureV2SwitchProviderBlockingErrorDetails[];
 
   /**
@@ -12371,11 +12627,13 @@ model InMageAzureV2ReplicationDetails
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   supportedOSVersions?: string[];
 
   /**
    * A value indicating all available inplace OS Upgrade configurations.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   allAvailableOSUpgradeConfigurations?: OSUpgradeSupportedVersions[];
 
@@ -12422,14 +12680,14 @@ model InMageAzureV2SwitchProviderBlockingErrorDetails {
   /**
    * The error message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorMessageParameters?: Record<string>;
 
   /**
    * The error tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorTags?: Record<string>;
 }
@@ -12517,16 +12775,19 @@ model InMageAzureV2SwitchProviderProviderInput
   /**
    * The target vault Id.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVaultID: string;
 
   /**
    * The target fabric Id.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetFabricID: string;
 
   /**
    * The target appliance Id.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetApplianceID: string;
 
   /**
@@ -12609,19 +12870,19 @@ model InMageAzureV2UpdateReplicationProtectedItemInput
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The tags for the target managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetManagedDiskTags?: Record<string>;
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
@@ -12632,6 +12893,7 @@ model InMageAzureV2UpdateReplicationProtectedItemInput
   /**
    * The list of disk update properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: UpdateDiskInput[];
 
   /**
@@ -12703,6 +12965,7 @@ model InMageDiskDetails {
   /**
    * The disk size in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInMB?: string;
 
   /**
@@ -12728,11 +12991,13 @@ model InMageDiskExclusionInput {
   /**
    * The volume label based option for disk exclusion.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   volumeOptions?: InMageVolumeExclusionOptions[];
 
   /**
    * The guest disk signature based option for disk exclusion.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSignatureOptions?: InMageDiskSignatureExclusionOptions[];
 }
 
@@ -12853,14 +13118,14 @@ model InMageFabricSwitchProviderBlockingErrorDetails {
   /**
    * The error message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorMessageParameters?: Record<string>;
 
   /**
    * The error tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorTags?: Record<string>;
 }
@@ -12982,16 +13247,19 @@ model InMageProtectedDiskDetails {
   /**
    * The source data transit in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceDataInMB?: float64;
 
   /**
    * The PS data transit in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   psDataInMB?: float64;
 
   /**
    * The target data transit in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetDataInMB?: float64;
 
   /**
@@ -13023,6 +13291,7 @@ model InMageProtectedDiskDetails {
   /**
    * The last data transfer time in UTC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resyncLastDataTransferTimeUTC?: utcDateTime;
 
@@ -13101,6 +13370,7 @@ model InMageRcmDiskInput {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
@@ -13131,13 +13401,13 @@ model InMageRcmAgentReinstallBlockingErrorDetails {
   /**
    * error message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errorMessageParameters?: Record<string>;
 
   /**
    * error tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errorTags?: Record<string>;
 }
 
@@ -13172,14 +13442,14 @@ model InMageRcmAgentUpgradeBlockingErrorDetails {
   /**
    * The error message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorMessageParameters?: Record<string>;
 
   /**
    * The error tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorTags?: Record<string>;
 }
@@ -13251,6 +13521,7 @@ model InMageRcmApplianceDetails {
   /**
    * The switch provider blocking error information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   switchProviderBlockingErrorDetails?: InMageRcmFabricSwitchProviderBlockingErrorDetails[];
 }
@@ -13419,6 +13690,7 @@ model ProcessServerDetails {
   /**
    * The health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   healthErrors?: HealthError[];
 
@@ -13497,6 +13769,7 @@ model RcmProxyDetails {
   /**
    * The health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   healthErrors?: HealthError[];
 }
@@ -13557,6 +13830,7 @@ model PushInstallerDetails {
   /**
    * The health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   healthErrors?: HealthError[];
 }
@@ -13617,6 +13891,7 @@ model ReplicationAgentDetails {
   /**
    * The health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   healthErrors?: HealthError[];
 }
@@ -13763,6 +14038,7 @@ model MarsAgentDetails {
   /**
    * The health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   healthErrors?: HealthError[];
 }
@@ -13798,14 +14074,14 @@ model InMageRcmFabricSwitchProviderBlockingErrorDetails {
   /**
    * The error message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorMessageParameters?: Record<string>;
 
   /**
    * The error tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorTags?: Record<string>;
 }
@@ -13959,6 +14235,7 @@ model InMageRcmDisksDefaultInput {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
@@ -13975,6 +14252,7 @@ model InMageRcmEnableProtectionInput
   /**
    * The disks to include list.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disksToInclude?: InMageRcmDiskInput[];
 
   /**
@@ -14094,6 +14372,7 @@ model InMageRcmEnableProtectionInput
   /**
    * The OS name selected by user.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userSelectedOSName?: string;
 
   /**
@@ -14308,6 +14587,7 @@ model InMageRcmFabricSpecificDetails extends FabricSpecificDetails {
   /**
    * The list of agent details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   agentDetails?: AgentDetails[];
 
@@ -14603,6 +14883,7 @@ model InMageRcmFailbackProtectedDiskDetails {
   /**
    * A value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   isOSDisk?: string;
 
@@ -14621,12 +14902,14 @@ model InMageRcmFailbackProtectedDiskDetails {
   /**
    * The data pending in log data store in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   dataPendingInLogDataStoreInMB?: float64;
 
   /**
    * The data pending at source agent in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   dataPendingAtSourceAgentInMB?: float64;
 
@@ -14835,6 +15118,7 @@ model InMageRcmFailbackReplicationDetails
   /**
    * The list of protected disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedDisks?: InMageRcmFailbackProtectedDiskDetails[];
 
   /**
@@ -14845,6 +15129,7 @@ model InMageRcmFailbackReplicationDetails
   /**
    * The network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: InMageRcmFailbackNicDetails[];
 
   /**
@@ -14942,13 +15227,13 @@ model InMageRcmLastAgentReinstallErrorDetails {
   /**
    * error message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errorMessageParameters?: Record<string>;
 
   /**
    * error tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errorTags?: Record<string>;
 }
 
@@ -14983,14 +15268,14 @@ model InMageRcmLastAgentUpgradeErrorDetails {
   /**
    * The error message parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorMessageParameters?: Record<string>;
 
   /**
    * The error tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorTags?: Record<string>;
 }
@@ -15125,6 +15410,7 @@ model InMageRcmMobilityAgentDetails {
   /**
    * whether reinstall is possible or not.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   reasonsBlockingReinstallDetails?: InMageRcmAgentReinstallBlockingErrorDetails[];
 }
@@ -15152,12 +15438,14 @@ model InMageRcmNicDetails {
   /**
    * The source IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sourceIPAddress?: string;
 
   /**
    * The source IP address type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sourceIPAddressType?: EthernetAddressType;
 
@@ -15176,11 +15464,13 @@ model InMageRcmNicDetails {
   /**
    * The target IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetIPAddress?: string;
 
   /**
    * The target IP address type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetIPAddressType?: EthernetAddressType;
 
   /**
@@ -15196,11 +15486,13 @@ model InMageRcmNicDetails {
   /**
    * The test IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   testIPAddress?: string;
 
   /**
    * The test IP address type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   testIPAddressType?: EthernetAddressType;
 
   /**
@@ -15236,6 +15528,7 @@ model InMageRcmNicInput {
   /**
    * The target static IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetStaticIPAddress?: string;
 
   /**
@@ -15246,6 +15539,7 @@ model InMageRcmNicInput {
   /**
    * The test static IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   testStaticIPAddress?: string;
 
   /**
@@ -15333,6 +15627,7 @@ model InMageRcmProtectedDiskDetails {
   /**
    * A value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   isOSDisk?: string;
 
@@ -15386,12 +15681,14 @@ model InMageRcmProtectedDiskDetails {
   /**
    * The data pending in log data store in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   dataPendingInLogDataStoreInMB?: float64;
 
   /**
    * The data pending at source agent in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   dataPendingAtSourceAgentInMB?: float64;
 
@@ -15434,6 +15731,7 @@ model InMageRcmProtectedDiskDetails {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
@@ -15590,6 +15888,7 @@ model InMageRcmReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The allocated memory in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   allocatedMemoryInMB?: float64;
 
@@ -15814,6 +16113,7 @@ model InMageRcmReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The list of protected disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedDisks?: InMageRcmProtectedDiskDetails[];
 
   /**
@@ -15842,16 +16142,19 @@ model InMageRcmReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The last agent upgrade error information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lastAgentUpgradeErrorDetails?: InMageRcmLastAgentUpgradeErrorDetails[];
 
   /**
    * The agent upgrade blocking error information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agentUpgradeBlockingErrorDetails?: InMageRcmAgentUpgradeBlockingErrorDetails[];
 
   /**
    * The network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: InMageRcmNicDetails[];
 
   /**
@@ -15891,6 +16194,7 @@ model InMageRcmReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   supportedOSVersions?: string[];
 
   /**
@@ -16085,6 +16389,7 @@ model InMageRcmUpdateReplicationProtectedItemInput
   /**
    * The list of NIC details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: InMageRcmNicInput[];
 
   /**
@@ -16105,6 +16410,7 @@ model InMageRcmUpdateReplicationProtectedItemInput
   /**
    * The OS name selected by user.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userSelectedOSName?: string;
 
   /**
@@ -16128,6 +16434,7 @@ model InMageRcmUpdateReplicationProtectedItemInput
   /**
    * The list of disk update properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: UpdateDiskInput[];
 
   /**
@@ -16158,6 +16465,7 @@ model InMageReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The RAM size of the VM on the primary side.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceVmRamSizeInMB?: int32;
 
   /**
@@ -16205,11 +16513,13 @@ model InMageReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The compressed data change rate in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   compressedDataRateInMB?: float64;
 
   /**
    * The uncompressed data change rate in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   uncompressedDataRateInMB?: float64;
 
   /**
@@ -16220,6 +16530,7 @@ model InMageReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The list of protected disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedDisks?: InMageProtectedDiskDetails[];
 
   /**
@@ -16246,7 +16557,7 @@ model InMageReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The collection of Consistency points.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   consistencyPoints?: Record<utcDateTime>;
 
   /**
@@ -16292,6 +16603,7 @@ model InMageReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The PE Network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicDetails[];
 
   /**
@@ -16312,6 +16624,7 @@ model InMageReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The validation errors of the on-premise machine Value can be list of validation errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationErrors?: HealthError[];
 
   /**
@@ -16360,6 +16673,7 @@ model InMageReplicationDetails extends ReplicationProviderSpecificSettings {
 /**
  * Details of the OS Disk.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OSDiskDetails {
   /**
    * The id of the disk containing the OS.
@@ -16586,21 +16900,25 @@ model MasterTargetServer {
   /**
    * The retention volumes of Master target Server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   retentionVolumes?: RetentionVolume[];
 
   /**
    * The list of data stores in the fabric.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataStores?: DataStore[];
 
   /**
    * Validation errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationErrors?: HealthError[];
 
   /**
    * Health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrors?: HealthError[];
 
   /**
@@ -16804,6 +17122,7 @@ model ProcessServer {
   /**
    * The list of the mobility service updates available on the Process Server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   mobilityServiceUpdates?: MobilityServiceUpdate[];
 
   /**
@@ -16895,6 +17214,7 @@ model ProcessServer {
   /**
    * Health errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthErrors?: HealthError[];
 
   /**
@@ -16930,6 +17250,7 @@ model ProcessServer {
   /**
    * The throughput in MBps.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   throughputInMBps?: int64;
 
@@ -17016,6 +17337,7 @@ model ProtectedItemsQueryParameter {
 /**
  * Recovery plan A2A specific details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryPlanA2ADetails extends RecoveryPlanProviderSpecificDetails {
   /**
    * The primary zone.
@@ -17046,6 +17368,7 @@ model RecoveryPlanA2ADetails extends RecoveryPlanProviderSpecificDetails {
 /**
  * Recovery plan A2A failover input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryPlanA2AFailoverInput
   extends RecoveryPlanProviderSpecificFailoverInput {
   /**
@@ -17072,6 +17395,7 @@ model RecoveryPlanA2AFailoverInput
 /**
  * Recovery plan A2A input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryPlanA2AInput extends RecoveryPlanProviderSpecificInput {
   /**
    * The primary zone.
@@ -17150,6 +17474,7 @@ model RecoveryPlanGroupTaskDetails extends GroupTaskDetails {
 /**
  * Recovery plan HVR Azure failback input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryPlanHyperVReplicaAzureFailbackInput
   extends RecoveryPlanProviderSpecificFailoverInput {
   /**
@@ -17171,6 +17496,7 @@ model RecoveryPlanHyperVReplicaAzureFailbackInput
 /**
  * Recovery plan HVR Azure failover input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecoveryPlanHyperVReplicaAzureFailoverInput
   extends RecoveryPlanProviderSpecificFailoverInput {
   /**
@@ -17621,6 +17947,7 @@ model VmmVirtualMachineDetails extends ConfigurationSettings {
   /**
    * The Last successful failover time.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskDetails?: DiskDetails[];
 
   /**
@@ -17641,6 +17968,7 @@ model VmmVirtualMachineDetails extends ConfigurationSettings {
   /**
    * The Id of the hyper-v host in fabric.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hyperVHostId?: string;
 
   /**
@@ -17677,6 +18005,7 @@ model VmNicUpdatesTaskDetails extends TaskTypeDetails {
 /**
  * VMwareCbt container creation input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtContainerCreationInput
   extends ReplicationProviderSpecificContainerCreationInput {
   /**
@@ -17688,6 +18017,7 @@ model VMwareCbtContainerCreationInput
 /**
  * VMwareCbt container mapping input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtContainerMappingInput
   extends ReplicationProviderSpecificContainerMappingInput {
   /**
@@ -17729,6 +18059,7 @@ model VMwareCbtContainerMappingInput
 /**
  * VMwareCbt disk input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtDiskInput {
   /**
    * The disk Id.
@@ -17778,12 +18109,14 @@ model VMwareCbtDiskInput {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
 /**
  * VMwareCbt specific enable migration input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtEnableMigrationInput
   extends EnableMigrationProviderSpecificInput {
   /**
@@ -17794,6 +18127,7 @@ model VMwareCbtEnableMigrationInput
   /**
    * The disks to include list.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disksToInclude: VMwareCbtDiskInput[];
 
   /**
@@ -17899,30 +18233,31 @@ model VMwareCbtEnableMigrationInput
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The tags for the seed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   seedDiskTags?: Record<string>;
 
   /**
    * The tags for the target disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetDiskTags?: Record<string>;
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
    * The OS name selected by user.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userSelectedOSName?: string;
 
   /**
@@ -17939,6 +18274,7 @@ model VMwareCbtEnableMigrationInput
 /**
  * VMwareCbt security profile input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtSecurityProfileProperties {
   /**
    * The target VM security type.
@@ -17969,6 +18305,7 @@ model VMwareCbtSecurityProfileProperties {
 /**
  * Event details for VMwareCbt provider.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtEventDetails extends EventProviderSpecificDetails {
   /**
    * The migration item name.
@@ -17985,6 +18322,7 @@ model VMwareCbtEventDetails extends EventProviderSpecificDetails {
 /**
  * VMwareCbt specific migrate input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtMigrateInput extends MigrateProviderSpecificInput {
   /**
    * A value indicating whether VM is to be shutdown.
@@ -18016,6 +18354,7 @@ model VMwareCbtMigrateInput extends MigrateProviderSpecificInput {
 /**
  * VMwareCbt provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings {
   /**
    * The ARM Id of the VM discovered in VMware.
@@ -18134,12 +18473,13 @@ model VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings {
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The list of protected disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedDisks?: VMwareCbtProtectedDiskDetails[];
 
   /**
@@ -18155,12 +18495,13 @@ model VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings {
   /**
    * The network details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMwareCbtNicDetails[];
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
@@ -18262,18 +18603,19 @@ model VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings {
   /**
    * The tags for the seed disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   seedDiskTags?: Record<string>;
 
   /**
    * The tags for the target disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetDiskTags?: Record<string>;
 
   /**
    * A value indicating the inplace OS Upgrade version.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   supportedOSVersions?: string[];
 
   /**
@@ -18308,6 +18650,7 @@ model VMwareCbtMigrationDetails extends MigrationProviderSpecificSettings {
 /**
  * VMwareCbt protected disk details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtProtectedDiskDetails {
   /**
    * The disk id.
@@ -18335,6 +18678,7 @@ model VMwareCbtProtectedDiskDetails {
   /**
    * A value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   isOSDisk?: string;
 
@@ -18415,12 +18759,14 @@ model VMwareCbtProtectedDiskDetails {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
 /**
  * VMwareCbt NIC details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtNicDetails {
   /**
    * The NIC Id.
@@ -18436,12 +18782,14 @@ model VMwareCbtNicDetails {
   /**
    * The source IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sourceIPAddress?: string;
 
   /**
    * The source IP address type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sourceIPAddressType?: EthernetAddressType;
 
@@ -18454,11 +18802,13 @@ model VMwareCbtNicDetails {
   /**
    * The target IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetIPAddress?: string;
 
   /**
    * The target IP address type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetIPAddressType?: EthernetAddressType;
 
   /**
@@ -18479,11 +18829,13 @@ model VMwareCbtNicDetails {
   /**
    * The test IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   testIPAddress?: string;
 
   /**
    * The test IP address type.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   testIPAddressType?: EthernetAddressType;
 
   /**
@@ -18500,6 +18852,7 @@ model VMwareCbtNicDetails {
 /**
  * VMwareCbt NIC input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtNicInput {
   /**
    * The NIC Id.
@@ -18519,6 +18872,7 @@ model VMwareCbtNicInput {
   /**
    * The static IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetStaticIPAddress?: string;
 
   /**
@@ -18539,12 +18893,14 @@ model VMwareCbtNicInput {
   /**
    * The test static IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   testStaticIPAddress?: string;
 }
 
 /**
  * VMware Cbt policy creation input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtPolicyCreationInput extends PolicyProviderSpecificInput {
   /**
    * The duration in minutes until which the recovery points need to be stored.
@@ -18595,6 +18951,7 @@ model VmwareCbtPolicyDetails extends PolicyProviderSpecificDetails {
 /**
  * VMwareCbt provider specific container mapping details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtProtectionContainerMappingDetails
   extends ProtectionContainerMappingProviderSpecificDetails {
   /**
@@ -18636,7 +18993,7 @@ model VMwareCbtProtectionContainerMappingDetails
   /**
    * The role size to NIC count map.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   roleSizeToNicCountMap?: Record<int32>;
 
@@ -18654,6 +19011,7 @@ model VMwareCbtProtectionContainerMappingDetails
 /**
  * VMwareCbt specific resume replication input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtResumeReplicationInput
   extends ResumeReplicationProviderSpecificInput {
   /**
@@ -18670,6 +19028,7 @@ model VMwareCbtResumeReplicationInput
 /**
  * VMwareCbt specific resync input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtResyncInput extends ResyncProviderSpecificInput {
   /**
    * A value indicating whether CBT is to be reset.
@@ -18685,6 +19044,7 @@ model VMwareCbtResyncInput extends ResyncProviderSpecificInput {
 /**
  * VMwareCbt specific test migrate input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtTestMigrateInput extends TestMigrateProviderSpecificInput {
   /**
    * The recovery point Id.
@@ -18722,6 +19082,7 @@ model VMwareCbtTestMigrateInput extends TestMigrateProviderSpecificInput {
 /**
  * VMwareCbt disk input for update.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtUpdateDiskInput {
   /**
    * The disk Id.
@@ -18736,6 +19097,7 @@ model VMwareCbtUpdateDiskInput {
   /**
    * A value indicating whether the disk is the OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isOSDisk?: string;
 
   /**
@@ -18751,12 +19113,14 @@ model VMwareCbtUpdateDiskInput {
   /**
    * The target disk size in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeInGB?: int64;
 }
 
 /**
  * VMwareCbt specific update migration item input.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareCbtUpdateMigrationItemInput
   extends UpdateMigrationItemProviderSpecificInput {
   /**
@@ -18807,11 +19171,13 @@ model VMwareCbtUpdateMigrationItemInput
   /**
    * The list of NIC details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMwareCbtNicInput[];
 
   /**
    * The list of disk update properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmDisks?: VMwareCbtUpdateDiskInput[];
 
   /**
@@ -18832,6 +19198,7 @@ model VMwareCbtUpdateMigrationItemInput
   /**
    * The OS name selected by user.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userSelectedOSName?: string;
 
   /**
@@ -18842,19 +19209,19 @@ model VMwareCbtUpdateMigrationItemInput
   /**
    * The target VM tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetVmTags?: Record<string>;
 
   /**
    * The tags for the target disks.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetDiskTags?: Record<string>;
 
   /**
    * The tags for the target NICs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetNicTags?: Record<string>;
 
   /**
@@ -18871,6 +19238,7 @@ model VMwareCbtUpdateMigrationItemInput
 /**
  * Store the fabric details specific to the VMware fabric.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareDetails extends FabricSpecificDetails {
   /**
    * The list of Process Servers associated with the fabric.
@@ -18885,6 +19253,7 @@ model VMwareDetails extends FabricSpecificDetails {
   /**
    * The list of run as accounts created on the server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runAsAccounts?: RunAsAccount[];
 
   /**
@@ -19038,6 +19407,7 @@ model VMwareDetails extends FabricSpecificDetails {
   /**
    * The switch provider blocking error information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   switchProviderBlockingErrorDetails?: InMageFabricSwitchProviderBlockingErrorDetails[];
 
   /**
@@ -19049,6 +19419,7 @@ model VMwareDetails extends FabricSpecificDetails {
 /**
  * VMwareV2 fabric provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareV2FabricCreationInput extends FabricSpecificCreationInput {
   /**
    * The ARM Id of the VMware site.
@@ -19074,6 +19445,7 @@ model VMwareV2FabricCreationInput extends FabricSpecificCreationInput {
 /**
  * VMwareV2 fabric specific details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareV2FabricSpecificDetails extends FabricSpecificDetails {
   /**
    * The ARM Id of the VMware site.
@@ -19126,6 +19498,7 @@ model VMwareV2FabricSpecificDetails extends FabricSpecificDetails {
 /**
  * VMware provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VMwareVirtualMachineDetails extends ConfigurationSettings {
   /**
    * The ID generated by the InMage agent after it gets installed on guest. This is the ID to be used during InMage CreateProtection.
@@ -19170,11 +19543,13 @@ model VMwareVirtualMachineDetails extends ConfigurationSettings {
   /**
    * The disk details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskDetails?: InMageDiskDetails[];
 
   /**
    * The validation errors.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationErrors?: HealthError[];
 
   /**
@@ -19183,6 +19558,8 @@ model VMwareVirtualMachineDetails extends ConfigurationSettings {
   instanceType: "VMwareVirtualMachine";
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Vault is Azure.ResourceManager.TrackedResource<{}, true> {
   ...ResourceNameParameter<
     Resource = Vault,

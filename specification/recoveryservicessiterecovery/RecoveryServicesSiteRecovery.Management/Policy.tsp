@@ -25,7 +25,7 @@ model Policy is Azure.ResourceManager.ProxyResource<PolicyProperties> {
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -34,7 +34,7 @@ interface Policies {
   /**
    * Gets the details of a replication policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationPolicies_Get")
   @summary("Gets the requested policy.")
   get is ArmResourceRead<Policy, Error = never>;
@@ -42,8 +42,8 @@ interface Policies {
   /**
    * The operation to create a replication policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationPolicies_Create")
   @summary("Creates the policy.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -58,7 +58,7 @@ interface Policies {
   /**
    * The operation to update a replication policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationPolicies_Update")
   @patch(#{ implicitOptionality: false })
   @summary("Updates the policy.")
@@ -71,7 +71,8 @@ interface Policies {
   /**
    * The operation to delete a replication policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationPolicies_Delete")
   @summary("Delete the policy.")
   delete is ArmResourceDeleteWithoutOkAsync<Policy, Error = never>;
@@ -79,7 +80,7 @@ interface Policies {
   /**
    * Lists the replication policies for a vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationPolicies_List")
   @summary("Gets the list of replication policies.")
   list is ArmResourceListByParent<

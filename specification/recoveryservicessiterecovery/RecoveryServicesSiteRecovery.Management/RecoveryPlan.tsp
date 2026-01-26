@@ -26,7 +26,7 @@ model RecoveryPlan
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -38,7 +38,7 @@ interface RecoveryPlans {
   /**
    * Gets the details of the recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_Get")
   @summary("Gets the requested recovery plan.")
   get is ArmResourceRead<RecoveryPlan, Error = never>;
@@ -46,8 +46,8 @@ interface RecoveryPlans {
   /**
    * The operation to create a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_Create")
   @summary("Creates a recovery plan with the given details.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -62,7 +62,7 @@ interface RecoveryPlans {
   /**
    * The operation to update a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_Update")
   @patch(#{ implicitOptionality: false })
   @summary("Updates the given recovery plan.")
@@ -75,7 +75,8 @@ interface RecoveryPlans {
   /**
    * Delete a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_Delete")
   @summary("Deletes the specified recovery plan.")
   delete is ArmResourceDeleteWithoutOkAsync<RecoveryPlan, Error = never>;
@@ -83,7 +84,7 @@ interface RecoveryPlans {
   /**
    * Lists the recovery plans in the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_List")
   @summary("Gets the list of recovery plans.")
   list is ArmResourceListByParent<
@@ -95,7 +96,8 @@ interface RecoveryPlans {
   /**
    * The operation to cancel the failover of a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_FailoverCancel")
   @summary("Execute cancel failover of the recovery plan.")
   failoverCancel is ArmResourceActionAsyncBase<
@@ -109,7 +111,8 @@ interface RecoveryPlans {
   /**
    * The operation to commit the failover of a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_FailoverCommit")
   @summary("Execute commit failover of the recovery plan.")
   failoverCommit is ArmResourceActionAsyncBase<
@@ -123,7 +126,8 @@ interface RecoveryPlans {
   /**
    * The operation to start the planned failover of a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_PlannedFailover")
   @summary("Execute planned failover of the recovery plan.")
   plannedFailover is ArmResourceActionAsyncBase<
@@ -137,7 +141,8 @@ interface RecoveryPlans {
   /**
    * The operation to reprotect(reverse replicate) a recovery plan. This api is for deprecated scenarios and no longer works.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_Reprotect")
   @action("reProtect")
   @summary("Execute reprotect of the recovery plan.")
@@ -152,7 +157,8 @@ interface RecoveryPlans {
   /**
    * The operation to start the test failover of a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_TestFailover")
   @summary("Execute test failover of the recovery plan.")
   testFailover is ArmResourceActionAsyncBase<
@@ -166,7 +172,8 @@ interface RecoveryPlans {
   /**
    * The operation to cleanup test failover of a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_TestFailoverCleanup")
   @summary("Execute test failover cleanup of the recovery plan.")
   testFailoverCleanup is ArmResourceActionAsyncBase<
@@ -180,7 +187,8 @@ interface RecoveryPlans {
   /**
    * The operation to start the unplanned failover of a recovery plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryPlans_UnplannedFailover")
   @summary("Execute unplanned failover of the recovery plan.")
   unplannedFailover is ArmResourceActionAsyncBase<

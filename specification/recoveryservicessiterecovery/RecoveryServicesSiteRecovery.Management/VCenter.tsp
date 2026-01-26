@@ -14,6 +14,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * vCenter definition.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Fabric)
 model VCenter is Azure.ResourceManager.ProxyResource<VCenterProperties> {
   ...ResourceNameParameter<
@@ -26,16 +27,17 @@ model VCenter is Azure.ResourceManager.ProxyResource<VCenterProperties> {
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface VCenters {
   /**
    * Gets the details of a registered vCenter server(Add vCenter server).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationvCenters_Get")
   @summary("Gets the details of a vCenter.")
   get is ArmResourceRead<VCenter, Error = never>;
@@ -43,8 +45,8 @@ interface VCenters {
   /**
    * The operation to create a vCenter object..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationvCenters_Create")
   @summary("Add vCenter.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -59,7 +61,7 @@ interface VCenters {
   /**
    * The operation to update a registered vCenter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationvCenters_Update")
   @patch(#{ implicitOptionality: false })
   @summary("Update vCenter operation.")
@@ -72,7 +74,8 @@ interface VCenters {
   /**
    * The operation to remove(unregister) a registered vCenter server from the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationvCenters_Delete")
   @summary("Remove vcenter operation.")
   delete is ArmResourceDeleteWithoutOkAsync<VCenter, Error = never>;
@@ -80,7 +83,7 @@ interface VCenters {
   /**
    * Lists the vCenter servers registered in a fabric.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationvCenters_ListByReplicationFabrics")
   @summary("Gets the list of vCenter registered under a fabric.")
   listByReplicationFabrics is ArmResourceListByParent<

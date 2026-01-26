@@ -25,7 +25,7 @@ model Event is Azure.ResourceManager.ProxyResource<EventProperties> {
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -34,7 +34,7 @@ interface Events {
   /**
    * The operation to get the details of an Azure Site recovery event.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationEvents_Get")
   @summary("Get the details of an Azure Site recovery event.")
   get is ArmResourceRead<Event, Error = never>;
@@ -42,7 +42,7 @@ interface Events {
   /**
    * Gets the list of Azure Site Recovery events for the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationEvents_List")
   @summary("Gets the list of Azure Site Recovery events.")
   list is ArmResourceListByParent<

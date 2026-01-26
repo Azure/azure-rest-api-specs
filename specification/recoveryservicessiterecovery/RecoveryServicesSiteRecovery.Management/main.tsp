@@ -49,6 +49,7 @@ using TypeSpec.Versioning;
 /**
  * // (missing-service-description) Add service description
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "SiteRecoveryManagementClient" })
 @versioned(Versions)

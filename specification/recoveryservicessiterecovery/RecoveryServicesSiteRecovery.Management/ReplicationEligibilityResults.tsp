@@ -35,7 +35,7 @@ interface ReplicationEligibilityResultsOperationGroup {
   /**
    * Validates whether a given VM can be protected or not in which case returns list of errors.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationEligibilityResults_Get")
   @summary("Validates whether a given VM can be protected or not in which case returns list of errors.")
   get is ArmResourceRead<ReplicationEligibilityResults>;

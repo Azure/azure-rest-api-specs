@@ -27,7 +27,7 @@ model ProtectableItem
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -36,7 +36,7 @@ interface ProtectableItems {
   /**
    * The operation to get the details of a protectable item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationProtectableItems_Get")
   @summary("Gets the details of a protectable item.")
   get is ArmResourceRead<ProtectableItem, Error = never>;
@@ -44,7 +44,7 @@ interface ProtectableItems {
   /**
    * Lists the protectable items in a protection container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationProtectableItems_ListByReplicationProtectionContainers")
   @summary("Gets the list of protectable items.")
   listByReplicationProtectionContainers is ArmResourceListByParent<

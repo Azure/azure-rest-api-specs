@@ -27,7 +27,7 @@ model RecoveryServicesProvider
   /**
    * Resource Location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -39,7 +39,7 @@ interface RecoveryServicesProviders {
   /**
    * Gets the details of registered recovery services provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryServicesProviders_Get")
   @summary("Gets the details of a recovery services provider.")
   get is ArmResourceRead<RecoveryServicesProvider, Error = never>;
@@ -47,8 +47,8 @@ interface RecoveryServicesProviders {
   /**
    * The operation to add a recovery services provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryServicesProviders_Create")
   @summary("Adds a recovery services provider.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -63,7 +63,8 @@ interface RecoveryServicesProviders {
   /**
    * The operation to purge(force delete) a recovery services provider from the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryServicesProviders_Purge")
   @summary("Purges recovery service provider from fabric.")
   purge is ArmResourceDeleteWithoutOkAsync<
@@ -74,7 +75,7 @@ interface RecoveryServicesProviders {
   /**
    * Lists the registered recovery services providers for the specified fabric.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryServicesProviders_ListByReplicationFabrics")
   @summary("Gets the list of registered recovery services providers for the fabric.")
   listByReplicationFabrics is ArmResourceListByParent<
@@ -86,7 +87,8 @@ interface RecoveryServicesProviders {
   /**
    * The operation to refresh the information from the recovery services provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryServicesProviders_RefreshProvider")
   @summary("Refresh details from the recovery services provider.")
   refreshProvider is ArmResourceActionAsyncBase<
@@ -100,7 +102,8 @@ interface RecoveryServicesProviders {
   /**
    * The operation to removes/delete(unregister) a recovery services provider from the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationRecoveryServicesProviders_Delete")
   @action("remove")
   @summary("Deletes provider from fabric. Note: Deleting provider for any fabric other than SingleHost is unsupported. To maintain backward compatibility for released clients the object \"deleteRspInput\" is used (if the object is empty we assume that it is old client and continue the old behavior).")
