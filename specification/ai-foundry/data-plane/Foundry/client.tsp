@@ -169,7 +169,7 @@ using Azure.AI.Projects;
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema,
   Record<unknown>,
-  "python"
+  "python, javascript"
 );
 
 // --------------------------------------------------------------------------------

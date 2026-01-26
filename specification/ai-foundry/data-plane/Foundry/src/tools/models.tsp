@@ -5,7 +5,6 @@ import "@azure-tools/openai-typespec/models/responses";
 import "../memory_stores/models.tsp";
 
 using Azure.Core.Experimental;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -16,28 +15,25 @@ namespace Azure.AI.Projects;
 union _AgentToolType {
   // Preview tools (must end with "_preview"):
   a2a_preview: "a2a_preview",
-
   bing_custom_search_preview: "bing_custom_search_preview",
   browser_automation_preview: "browser_automation_preview",
   fabric_dataagent_preview: "fabric_dataagent_preview",
   sharepoint_grounding_preview: "sharepoint_grounding_preview",
+  memory_search_preview: "memory_search_preview",
 
   // General availability tools:
   azure_ai_search: "azure_ai_search",
-
   azure_function: "azure_function",
   bing_grounding: "bing_grounding",
   capture_structured_outputs: "capture_structured_outputs",
   openapi: "openapi",
-  memory_search_preview: "memory_search_preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
 
-@removed(Versions.v1)
 union _AgentIncludable {
-  "memory_search_call_preview.results",
+  "memory_search_preview_call.results",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -49,7 +45,6 @@ union _AgentIncludable {
     /**
      * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
      */
-    @removed(Versions.v1)
     project_connection_id?: string,
   }
 );
@@ -61,7 +56,6 @@ union _AgentIncludable {
      * The project connections attached to this tool. There can be a maximum of 1 connection
      * resource attached to the tool.
      */
-    @removed(Versions.v1)
     custom_search_configuration?: WebSearchConfiguration,
   }
 );
@@ -676,7 +670,6 @@ model CaptureStructuredOutputsTool extends OpenAI.Tool {
 /**
  * An agent implementing the A2A protocol.
  */
-@removed(Versions.v1)
 model A2APreviewTool extends OpenAI.Tool {
   /**
    * The type of the tool. Always `"a2a_preview`.
@@ -704,12 +697,11 @@ model A2APreviewTool extends OpenAI.Tool {
 /**
  * A tool for integrating memories into the agent.
  */
-@removed(Versions.v1)
 model MemorySearchPreviewTool extends OpenAI.Tool {
   /**
-   * The type of the tool. Always `memory_search`.
+   * The type of the tool. Always `memory_search_preview`.
    */
-  type: "memory_search";
+  type: "memory_search_preview";
 
   /**
    * The name of the memory store to use.
@@ -734,20 +726,18 @@ model MemorySearchPreviewTool extends OpenAI.Tool {
   update_delay?: int32 = 300;
 }
 
-alias MemorySearchToolCallItemBase = {
+alias MemorySearchPreviewToolCallItemBase = {
   @doc("The results returned from the memory search.")
   results?: MemorySearchItem[] | null;
 };
 
-@removed(Versions.v1)
-model MemorySearchToolCallItemParam extends OpenAI.Item {
-  type: "memory_search_call";
-  ...MemorySearchToolCallItemBase;
+model MemorySearchPreviewToolCallItemParam extends OpenAI.Item {
+  type: "memory_search_preview_call";
+  ...MemorySearchPreviewToolCallItemBase;
 }
 
-@removed(Versions.v1)
-model MemorySearchToolCallItemResource extends OpenAI.ItemResource {
-  type: "memory_search_call";
+model MemorySearchPreviewToolCallItemResource extends OpenAI.ItemResource {
+  type: "memory_search_preview_call";
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
   @doc("""
@@ -756,5 +746,5 @@ model MemorySearchToolCallItemResource extends OpenAI.ItemResource {
     """)
   status: "in_progress" | "searching" | "completed" | "incomplete" | "failed";
 
-  ...MemorySearchToolCallItemBase;
+  ...MemorySearchPreviewToolCallItemBase;
 }

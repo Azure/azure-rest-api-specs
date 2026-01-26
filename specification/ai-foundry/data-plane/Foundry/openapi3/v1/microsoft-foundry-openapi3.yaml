@@ -3307,7 +3307,7 @@ paths:
                 items:
                   type: array
                   items:
-                    $ref: '#/components/schemas/OpenAI.Item'
+                    $ref: '#/components/schemas/OpenAI.InputItem'
                   description: Items for which to search for relevant memories.
                 previous_search_id:
                   type: string
@@ -3379,7 +3379,7 @@ paths:
                 items:
                   type: array
                   items:
-                    $ref: '#/components/schemas/OpenAI.Item'
+                    $ref: '#/components/schemas/OpenAI.InputItem'
                   description: Conversation items from which to extract memories.
                 previous_update_id:
                   type: string
@@ -5608,6 +5608,33 @@ components:
         minLength: 1
       explode: false
   schemas:
+    A2APreviewTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - a2a_preview
+          description: The type of the tool. Always `"a2a_preview`.
+        base_url:
+          type: string
+          format: uri
+          description: Base URL of the agent.
+        agent_card_path:
+          type: string
+          description: |-
+            The path to the agent card relative to the `base_url`.
+            If not provided, defaults to  `/.well-known/agent-card.json`
+        project_connection_id:
+          type: string
+          description: |-
+            The connection ID in the project for the A2A server.
+            The connection stores authentication and other connection details needed to connect to the A2A server.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: An agent implementing the A2A protocol.
     AISearchIndexResource:
       type: object
       properties:
@@ -9369,6 +9396,85 @@ components:
           format: int32
           description: Maximum number of memory items to return.
       description: Memory search options.
+    MemorySearchPreviewTool:
+      type: object
+      required:
+        - type
+        - memory_store_name
+        - scope
+      properties:
+        type:
+          type: string
+          enum:
+            - memory_search_preview
+          description: The type of the tool. Always `memory_search_preview`.
+        memory_store_name:
+          type: string
+          description: The name of the memory store to use.
+        scope:
+          type: string
+          description: |-
+            The namespace used to group and isolate memories, such as a user ID.
+            Limits which memories can be retrieved or updated.
+            Use special variable `{{$userId}}` to scope memories to the current signed-in user.
+        search_options:
+          allOf:
+            - $ref: '#/components/schemas/MemorySearchOptions'
+          description: Options for searching the memory store.
+        update_delay:
+          type: integer
+          format: int32
+          description: Time to wait before updating memories after inactivity (seconds). Default 300.
+          default: 300
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool for integrating memories into the agent.
+    MemorySearchPreviewToolCallItemParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - memory_search_preview_call
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemorySearchItem'
+          nullable: true
+          description: The results returned from the memory search.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+    MemorySearchPreviewToolCallItemResource:
+      type: object
+      required:
+        - type
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - memory_search_preview_call
+        status:
+          type: string
+          enum:
+            - in_progress
+            - searching
+            - completed
+            - incomplete
+            - failed
+          description: |-
+            The status of the memory search tool call. One of `in_progress`,
+            `searching`, `completed`, `incomplete` or `failed`,
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemorySearchItem'
+          nullable: true
+          description: The results returned from the memory search.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
     MemoryStoreDefaultDefinition:
       type: object
       required:
@@ -14692,7 +14798,7 @@ components:
             - code_interpreter_call.outputs
             - reasoning.encrypted_content
             - message.output_text.logprobs
-            - memory_search_call_preview.results
+            - memory_search_preview_call.results
       description: |-
         Specify additional output data to include in the model response. Currently supported values are:
         - `web_search_call.action.sources`: Include the sources of the web search tool call.
@@ -15105,6 +15211,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          memory_search_preview_call: '#/components/schemas/MemorySearchPreviewToolCallItemParam'
           message: '#/components/schemas/OpenAI.InputMessage'
           computer_call_output: '#/components/schemas/OpenAI.ComputerCallOutputItemParam'
           function_call_output: '#/components/schemas/OpenAI.FunctionCallOutputItemParam'
@@ -15695,8 +15802,9 @@ components:
         propertyName: type
         mapping:
           structured_outputs: '#/components/schemas/StructuredOutputsItemResource'
-          workflow_action: '#/components/schemas/WorkflowActionOutputItemResource'
+          workflow_preview_action: '#/components/schemas/WorkflowPreviewActionOutputItemResource'
           oauth_consent_request: '#/components/schemas/OAuthConsentRequestItemResource'
+          memory_search_preview_call: '#/components/schemas/MemorySearchPreviewToolCallItemResource'
           message: '#/components/schemas/OpenAI.InputMessageResource'
           output_message: '#/components/schemas/OpenAI.ItemResourceOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.ItemResourceFileSearchToolCall'
@@ -16420,9 +16528,9 @@ components:
             - mcp_approval_response
             - mcp_call
             - structured_outputs
-            - workflow_action
-            - memory_search_call
             - oauth_consent_request
+            - memory_search_preview_call
+            - workflow_preview_action
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -16492,9 +16600,9 @@ components:
             - custom_tool_call_output
             - custom_tool_call
             - structured_outputs
-            - workflow_action
-            - memory_search_call
             - oauth_consent_request
+            - memory_search_preview_call
+            - workflow_preview_action
     OpenAI.ItemWebSearchToolCall:
       type: object
       required:
@@ -16835,6 +16943,9 @@ components:
                 - never
               nullable: true
           default: always
+        project_connection_id:
+          type: string
+          description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -20976,6 +21087,8 @@ components:
           browser_automation_preview: '#/components/schemas/BrowserAutomationPreviewTool'
           azure_function: '#/components/schemas/AzureFunctionTool'
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
+          a2a_preview: '#/components/schemas/A2APreviewTool'
+          memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           function: '#/components/schemas/OpenAI.FunctionTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
@@ -21240,12 +21353,12 @@ components:
             - browser_automation_preview
             - fabric_dataagent_preview
             - sharepoint_grounding_preview
+            - memory_search_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
             - capture_structured_outputs
             - openapi
-            - memory_search_preview
     OpenAI.ToolsArray:
       type: array
       items:
@@ -21557,6 +21670,12 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        custom_search_configuration:
+          allOf:
+            - $ref: '#/components/schemas/WebSearchConfiguration'
+          description: |-
+            The project connections attached to this tool. There can be a maximum of 1 connection
+            resource attached to the tool.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -22867,6 +22986,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/MemoryItem'
       description: A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.
+    WebSearchConfiguration:
+      type: object
+      required:
+        - project_connection_id
+        - instance_name
+      properties:
+        project_connection_id:
+          type: string
+          description: Project connection id for grounding with bing custom search
+        instance_name:
+          type: string
+          description: Name of the custom configuration instance given to config.
+      description: A web search configuration for bing custom search
     WeeklyRecurrenceSchedule:
       type: object
       required:
@@ -22886,7 +23018,22 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Weekly recurrence schedule.
-    WorkflowActionOutputItemResource:
+    WorkflowAgentPreviewDefinition:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - workflow_preview
+        workflow:
+          type: string
+          description: The CSDL YAML definition of the workflow.
+      allOf:
+        - $ref: '#/components/schemas/AgentDefinition'
+      description: The workflow agent definition.
+    WorkflowPreviewActionOutputItemResource:
       type: object
       required:
         - type
@@ -22897,7 +23044,7 @@ components:
         type:
           type: string
           enum:
-            - workflow_action
+            - workflow_preview_action
         kind:
           type: string
           description: The kind of CSDL action (e.g., 'SetVariable', 'InvokeAzureAgent').
@@ -22920,21 +23067,6 @@ components:
           description: Status of the action (e.g., 'in_progress', 'completed', 'failed', 'cancelled').
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
-    WorkflowAgentPreviewDefinition:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          type: string
-          enum:
-            - workflow_preview
-        workflow:
-          type: string
-          description: The CSDL YAML definition of the workflow.
-      allOf:
-        - $ref: '#/components/schemas/AgentDefinition'
-      description: The workflow agent definition.
     integer:
       type: integer
       format: int64
