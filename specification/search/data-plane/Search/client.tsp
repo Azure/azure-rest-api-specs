@@ -2630,7 +2630,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(AzureOpenAIVectorizerParameters.resourceUri, "resourceUrl");
 @@clientName(AzureOpenAIVectorizerParameters.deploymentId, "deploymentName");
 @@clientName(WebApiVectorizer.customWebApiParameters, "webApiParameters");
-@@clientName(WebApiVectorizerParameters.uri, "url");
+@@clientName(WebApiVectorizerParameters.uri, "url", "python");
+@@clientName(WebApiVectorizerParameters.uri, "url", "java");
 @@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
   "resourceId"
 );
@@ -2900,7 +2901,9 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odatatype", "javascript");
 @@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
+@@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "csharp");
 @@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "javascript");
+@@clientName(Search.ClassicSimilarityAlgorithm, "ClassicSimilarity", "csharp");
 @@clientName(Search.ClassicSimilarityAlgorithm,
   "ClassicSimilarity",
   "javascript"
