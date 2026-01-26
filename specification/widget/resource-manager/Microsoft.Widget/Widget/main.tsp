@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Widget Resource Provider management API. */
 @armProviderNamespace
-@service(#{ title: "Widget" })
+@service(#{ title: "Widget 2" })
 @versioned(Microsoft.Widget.Versions)
 namespace Microsoft.Widget;
 
