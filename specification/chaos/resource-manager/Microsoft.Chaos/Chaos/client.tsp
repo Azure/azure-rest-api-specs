@@ -32,7 +32,10 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@scope(Microsoft.Chaos.OperationStatuses.get, "!csharp");
-@@scope(Microsoft.Chaos.Experiments.listAll, "!csharp");
+@@clientName(Microsoft.Chaos.Experiments.listAll, "getExperiments", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExperimentExecutionDetails, Azure.ResourceManager.Foundations.ProxyResource, "csharp");
 
 // typescript
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "javascript");
