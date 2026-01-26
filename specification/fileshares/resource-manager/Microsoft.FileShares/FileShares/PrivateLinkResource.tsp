@@ -21,7 +21,7 @@ model PrivateLinkResource
     Resource = PrivateLinkResource,
     KeyName = "privateLinkResourceName",
     SegmentName = "privateLinkResources",
-    NamePattern = ""
+    NamePattern = "^[a-z][a-z0-9]*$"
   >;
 }
 
