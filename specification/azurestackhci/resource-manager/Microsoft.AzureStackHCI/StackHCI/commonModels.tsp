@@ -15,6 +15,7 @@ namespace Microsoft.AzureStackHCI;
  * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model ConfidentialVmProperties {
   /**
    * Captures the customer's intent to enable or disable CVM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
@@ -39,6 +40,7 @@ model ConfidentialVmProperties {
  * Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 union ConfidentialVmIntent {
   string,
 
@@ -57,6 +59,7 @@ union ConfidentialVmIntent {
  * Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 union ConfidentialVmStatus {
   string,
 
@@ -80,6 +83,7 @@ union ConfidentialVmStatus {
  * Represents the Confidential Virtual Machine (CVM) configuration status for an edge device. It includes the current IGVM support state and detailed component-level status information.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model ConfidentialVmProfile {
   /**
    * Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports CVMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.
@@ -98,6 +102,7 @@ model ConfidentialVmProfile {
  * Provides component-level status information related to IGVM enablement on the device.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model IgvmStatusDetail {
   /**
    * A machine-readable status code indicating the result or condition of a specific IGVM-related check or operation.
@@ -116,6 +121,7 @@ model IgvmStatusDetail {
  * Represents the IGVM support status for the device.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 union IgvmStatus {
   string,
 
@@ -140,6 +146,7 @@ union IgvmStatus {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model ClusterSdnProperties extends SdnProperties {
   /**
    * Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.
@@ -152,6 +159,7 @@ model ClusterSdnProperties extends SdnProperties {
  * Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 union SdnIntegrationIntent {
   string,
 
@@ -170,6 +178,7 @@ union SdnIntegrationIntent {
  * Represents the Software Defined Networking (SDN) configuration state.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model SdnProperties {
   /**
    * Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.
@@ -194,6 +203,7 @@ model SdnProperties {
  * Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 union SdnStatus {
   string,
 
