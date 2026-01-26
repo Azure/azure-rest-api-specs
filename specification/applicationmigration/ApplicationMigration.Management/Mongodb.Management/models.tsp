@@ -299,6 +299,56 @@ model MongoHostMachineProperties {
    *  IOPS
    */
   maxIops?: int64;
+
+  /**
+   * The network node host name for mongo.
+   */
+  csName?: string;
+
+  /**
+   * The operating system type for mongo.
+   */
+  osType?: string;
+
+  /**
+   * The operating system name for mongo.
+   */
+  osName?: string;
+
+  /**
+   * The operating system version for mongo.
+   */
+  osVersion?: string;
+
+  /**
+   * The operating system edition for mongo.
+   */
+  osEdition?: string;
+
+  /**
+   * The operating system architecture for mongo.
+   */
+  osArch?: string;
+
+  /**
+   * The processor name for mongo.
+   */
+  procName?: string;
+
+  /**
+   * The processor architecture for mongo.
+   */
+  procArch?: string;
+
+  /**
+   * The processor max clock speed.
+   */
+  procMaxClockSpeedMhz?: string;
+
+  /**
+   * The sockets count.
+   */
+  sockets?: int64;
 }
 
 /**
@@ -376,6 +426,11 @@ model MongoInstanceProperties is AzureResourceProperties {
    * The mongo server version.
    */
   version?: string;
+
+  /**
+   * The home directory of mongo installation.
+   */
+  home?: string;
 
   /**
    * The mongo server region.

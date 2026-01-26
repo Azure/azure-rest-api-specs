@@ -1,0 +1,96 @@
+{
+  "operationId": "Settings_CreateOrUpdate",
+  "title": "Create a new tenant-level Azure Portal settings resource or update an existing one",
+  "parameters": {
+    "name": "default",
+    "api-version": "2025-11-01",
+    "resource": {
+      "properties": {
+        "feedbackControlPolicy": {
+          "connectedExperiences": "Disabled",
+          "policyAllowFeedback": "Disabled",
+          "policyAllowSurvey": "Disabled",
+          "policyAllowScreenshot": "Enabled",
+          "policyAllowContact": "Disabled",
+          "policyEmailCollectionDefault": "Enabled",
+          "policyScreenshotDefault": "Disabled",
+          "policyContentSamplesDefault": "Enabled"
+        },
+        "multiFactorAuthentication": {
+          "portalEnforcement": "Required",
+          "portalJustification": "Security compliance requirement",
+          "portalEnforcementDate": "2025-01-01T00:00:00Z",
+          "armEnforcementDate": "2025-10-15T00:00:00Z",
+          "armJustification": "Justification for postponing MFA enforcement"
+        },
+        "ops360Settings": {
+          "status": "Pending"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "feedbackControlPolicy": {
+            "connectedExperiences": "Disabled",
+            "policyAllowFeedback": "Disabled",
+            "policyAllowSurvey": "Disabled",
+            "policyAllowScreenshot": "Enabled",
+            "policyAllowContact": "Disabled",
+            "policyAllowContent": "Disabled",
+            "policyEmailCollectionDefault": "Enabled",
+            "policyScreenshotDefault": "Disabled",
+            "policyContentSamplesDefault": "Enabled"
+          },
+          "multiFactorAuthentication": {
+            "portalEnforcement": "Required",
+            "portalJustification": "Security compliance requirement",
+            "portalEnforcementDate": "2025-01-01T00:00:00Z",
+            "armEnforcementDate": "2025-10-15T00:00:00Z",
+            "armJustification": "Justification for postponing MFA enforcement"
+          },
+          "ops360Settings": {
+            "status": "Pending"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/providers/Microsoft.PortalServices/settings/default",
+        "name": "default",
+        "type": "Microsoft.PortalServices/settings"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "feedbackControlPolicy": {
+            "connectedExperiences": "Disabled",
+            "policyAllowFeedback": "Disabled",
+            "policyAllowSurvey": "Disabled",
+            "policyAllowScreenshot": "Enabled",
+            "policyAllowContact": "Disabled",
+            "policyAllowContent": "Disabled",
+            "policyEmailCollectionDefault": "Enabled",
+            "policyScreenshotDefault": "Disabled",
+            "policyContentSamplesDefault": "Enabled"
+          },
+          "multiFactorAuthentication": {
+            "portalEnforcement": "Required",
+            "portalJustification": "Security compliance requirement",
+            "portalEnforcementDate": "2025-01-01T00:00:00Z",
+            "armEnforcementDate": "2025-10-15T00:00:00Z",
+            "armJustification": "Justification for postponing MFA enforcement"
+          },
+          "ops360Settings": {
+            "status": "Pending"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/providers/Microsoft.PortalServices/settings/default",
+        "name": "default",
+        "type": "Microsoft.PortalServices/settings"
+      }
+    }
+  }
+}
