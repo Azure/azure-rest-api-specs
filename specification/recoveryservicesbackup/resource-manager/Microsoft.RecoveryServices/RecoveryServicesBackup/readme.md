@@ -37,7 +37,7 @@ license-header: MICROSOFT_MIT
 ```
 
 ```yaml $(package-passivestamp)
-tag: package-passivestamp-2023-01-15
+tag: package-preview-2025-03-15
 ```
 
 ```yaml $(package-activestamp)
@@ -62,6 +62,15 @@ These settings apply only when `--tag=package-2025-08-01` is specified on the co
 ```yaml $(tag) == 'package-2025-08-01'
 input-file:
   - stable/2025-08-01/bms.json
+```
+
+### Tag: package-preview-2025-03-15-preview
+
+These settings apply only when `--tag=package-preview-2025-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03-15-preview'
+input-file:
+  - preview/2025-03-15-preview/bms.json
 ```
 
 ### Tag: package-preview-2025-02-28-preview
