@@ -265,6 +265,11 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 
     let actualValue = option as unknown as undefined | string | boolean;
 
+    // First try to validate directly
+    if (this.validateValue(actualValue, this.expectedValue)) {
+      return { success: true };
+    }
+
     // Resolve variables if the value is a string
     if (typeof actualValue === "string" && actualValue.includes("{")) {
       const { resolved, error } = this.resolveVariables(actualValue, config);

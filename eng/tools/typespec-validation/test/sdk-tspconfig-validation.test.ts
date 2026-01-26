@@ -35,6 +35,7 @@ import {
   TspConfigPythonMgmtPackageGenerateSampleTrueSubRule,
   TspConfigPythonMgmtPackageGenerateTestTrueSubRule,
   TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule,
+  TspConfigRustAzEmitterOutputDirSubRule,
   TspconfigSubRuleBase,
   TspConfigTsDpEmitterOutputDirSubRule,
   TspConfigTsMgmtModularEmitterOutputDirSubRule,
@@ -850,6 +851,15 @@ options:
   },
 ];
 
+const rushEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-rust",
+  managementTspconfigFolder,
+  "emitter-output-dir",
+  "{output-dir}/{service-dir}/{crate-name}",
+  "{output-dir}/{service-dir}/aaa-bbb",
+  [new TspConfigRustAzEmitterOutputDirSubRule()],
+);
+
 describe("tspconfig", function () {
   let fileExistsSpy: MockInstance;
   let readTspConfigSpy: MockInstance;
@@ -914,6 +924,8 @@ describe("tspconfig", function () {
     ...goDpServiceDirTestCases,
     ...goDpModuleTestCases,
     ...goDpContainingModuleTestCases,
+    // rust
+    ...rushEmitterOutputDirTestCases,
   ];
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {
