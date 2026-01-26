@@ -2,8 +2,9 @@ import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 using Http;
-using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
+using Azure.Core;
 using Microsoft.Devices;
 
 @@clientName(Microsoft.Devices, "IotDpsClient", "javascript");
@@ -72,7 +73,11 @@ using Microsoft.Devices;
   "csharp"
 );
 @@alternateType(VerificationCodeResponse.etag, eTag, "csharp");
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(VerificationCodeResponse,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
 @@alternateType(VerificationCodeResponseProperties.certificate,
   unknown,
   "csharp"
@@ -116,7 +121,7 @@ using Microsoft.Devices;
   "ConnectionState",
   "csharp"
 );
-
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@clientName(GroupIdInformation,
   "DeviceProvisioningServicesPrivateLinkResource",
   "csharp"
@@ -137,6 +142,10 @@ using Microsoft.Devices;
 
 @@clientName(IotDpsPropertiesDescription,
   "DeviceProvisioningServiceProperties",
+  "csharp"
+);
+@@clientName(IotDpsPropertiesDescription.ipFilterRules,
+  "IPFilterRules",
   "csharp"
 );
 @@clientName(IotDpsPropertiesDescription.enableDataResidency,
@@ -179,6 +188,7 @@ using Microsoft.Devices;
   "csharp"
 );
 @@clientName(IpFilterRule, "DeviceProvisioningServicesIPFilterRule", "csharp");
+@@clientName(IpFilterRule.ipMask, "IPMask", "csharp");
 @@clientName(IpFilterActionType,
   "DeviceProvisioningServicesIPFilterActionType",
   "csharp"
@@ -230,6 +240,17 @@ op IotDpsResourceDeleteCustomized(
 @@override(ProvisioningServiceDescriptions.delete,
   IotDpsResourceDeleteCustomized,
   "python,go,java"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(CertificateResponses.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp");
+
+// Codegen issue https://github.com/Azure/azure-sdk-for-net/pull/55244
+@@clientName(PrivateEndpointConnections.listPrivateEndpointConnections,
+  "GetAll",
+  "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
