@@ -36,6 +36,7 @@ interface FirewallRules {
    * Creates a new firewall rule or updates an existing firewall rule.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
     Response = ArmResourceUpdatedResponse<FirewallRule> | ArmResourceCreatedResponse<
