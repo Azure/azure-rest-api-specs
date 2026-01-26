@@ -63,7 +63,7 @@ The complete workflow includes:
 Use this prompt with GitHub Copilot to implement the proposed changes. The Azure SDK MCP tools will guide you through the complete process.
 
 ```
-This is a demo environment. Any pull requests opened should have their title prefixed with "DO NOT MERGE" before the actual title.
+This is a demo environment. Any pull requests opened should have their title prefixed with "DO NOT MERGE" before the actual title. Since this is a demo of the local development experience, do not create a release plan.
 
 Add SKU support to the HealthDataAIServices DeidService with a new API version "2026-02-01-preview".
 
@@ -73,7 +73,7 @@ I need:
 - The sku property added to DeidService (marked as added in the new version)
 - The sku property added to DeidUpdate for PATCH operations
 
-After making the TypeSpec changes, guide me through creating the API spec PR and generating SDKs. Use separate subagents for each SDK language.
+After making the TypeSpec changes, guide me through creating the API spec PR and generating SDKs locally. Stay in the current branch (ronniegeraghty/azsdktoolsagent-demo) for the API spec changes. All SDK language repositories (azure-sdk-for-net, azure-sdk-for-python, azure-sdk-for-java, azure-sdk-for-js, azure-sdk-for-go) are already cloned locally in the same parent directory as the azure-rest-api-specs repo. Create a branch named "ronniegeraghty/azsdktoolsagent-demo" in each SDK repo to work on the new library generations. Use separate subagents for each SDK language.
 
 Create a markdown file to track the progress of each step throughout this process.
 ```
