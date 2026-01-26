@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Help;
 
-@@clientName(Solutions, "SolutionMetadatas", "csharp");
+@@clientName(Solutions, "SelfhelpSolutions", "csharp");
 @@clientName(ValidationScope.IpAddressFormat, "IPAddressFormat", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "required for pageable"
