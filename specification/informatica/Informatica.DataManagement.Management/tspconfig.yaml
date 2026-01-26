@@ -23,8 +23,11 @@ options:
     namespace: "Azure.ResourceManager.InformaticaDataManagement"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
+    typespec-title-map:
+      DataManagementClient: InformaticaDataManagement
     service-dir: "sdk/informatica"
     experimental-extensible-enums: true
+    compatibility-lro: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-informaticadatamanagement"
     flavor: azure
     package-details:
