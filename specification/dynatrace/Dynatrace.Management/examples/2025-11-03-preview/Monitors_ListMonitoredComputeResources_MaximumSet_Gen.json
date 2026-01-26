@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-11-03-preview",
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "body": {
+      "resourceType": "managedClusters"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceType": "managedClusters",
+        "value": [
+          {
+            "monitoredResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myAKSCluster",
+            "isMonitored": true,
+            "reasonForMonitoringStatus": ""
+          },
+          {
+            "monitoredResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myAKSCluster2",
+            "isMonitored": false,
+            "reasonForMonitoringStatus": "Resource monitoring is disabled"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/listManagedComputeResources?api-version=2025-11-03-preview&$skiptoken=abc123"
+      }
+    }
+  },
+  "operationId": "Monitors_ListMonitoredComputeResources",
+  "title": "Monitors_ListMonitoredComputeResources_MaximumSet_Gen"
+}
