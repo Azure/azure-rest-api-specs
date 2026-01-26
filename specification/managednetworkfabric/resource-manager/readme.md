@@ -27,7 +27,25 @@ These are the global settings for the Managed Network Fabric.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-06-15-preview
+tag: package-2025-07-15
+```
+
+### Tag: package-2025-07-15
+
+These settings apply only when `--tag=package-2025-07-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-15'
+input-file:
+  - Microsoft.ManagedNetworkFabric/stable/2025-07-15/managednetworkfabric.json
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing errors to conform to the existing published API
+    from: managednetworkfabric.json
+    where: $.definitions["InternetGateway"]
+  - code: ArmResourcePropertiesBag
+    from: managednetworkfabric.json
+    reason: Suppressing errors to conform to the existing published API
+    where: $.definitions["NetworkFabricSku"]
 ```
 
 ### Tag: package-2024-06-15-preview

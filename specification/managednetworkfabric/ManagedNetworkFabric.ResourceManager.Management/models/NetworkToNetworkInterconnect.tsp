@@ -3,6 +3,7 @@ import "./common.tsp";
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -257,6 +258,14 @@ model OptionBLayer3ConfigurationPatchProperties {
   @added(Versions.v2024_06_15_preview)
   @minItems(1)
   @Azure.ResourceManager.identifiers(#[])
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "prefixLimits")
+  prefixLimitsDeprecated?: OptionBLayer3PrefixLimitPatchProperties[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("OptionB Layer3 prefix limit configuration.")
+  @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2025_07_15)
   prefixLimits?: OptionBLayer3PrefixLimitPatchProperties[];
 }
 
@@ -321,11 +330,25 @@ model NpbStaticRouteConfigurationPatch {
   @doc("List of IPv4 Routes.")
   @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "ipv4Routes")
+  ipv4RoutesDeprecated?: StaticRoutePatchProperties[];
+
+  @doc("List of IPv4 Routes.")
+  @Azure.ResourceManager.identifiers(#["prefix"])
+  @added(Versions.v2025_07_15)
   ipv4Routes?: StaticRoutePatchProperties[];
 
   @doc("List of IPv6 Routes.")
   @minItems(1)
   @Azure.ResourceManager.identifiers(#["prefix"])
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "ipv6Routes")
+  ipv6RoutesDeprecated?: StaticRoutePatchProperties[];
+
+  @doc("List of IPv6 Routes.")
+  @Azure.ResourceManager.identifiers(#["prefix"])
+  @added(Versions.v2025_07_15)
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 
@@ -467,3 +490,32 @@ model OptionBLayer3PrefixLimitProperties {
 @added(Versions.v2024_06_15_preview)
 model OptionBLayer3PrefixLimitPatchProperties
   is OptionBLayer3PrefixLimitProperties;
+
+@doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State request.")
+@added(Versions.v2025_07_15)
+model NniUpdateBfdAdministrativeStateRequest {
+  @doc("Route Type. Choose either Static or OptionA.")
+  routeType?: RouteType;
+
+  @doc("State. Select either enable or disable.")
+  administrativeState?: BfdAdministrativeState;
+}
+
+@doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State response.")
+@added(Versions.v2025_07_15)
+model NniUpdateBfdAdministrativeStateResponse {
+  ...OperationStatusResult;
+
+  @doc("Properties of the NNI BFD Administrative State response.")
+  properties?: NniUpdateBfdAdministrativeStateResponseProperties;
+}
+
+@doc("NNI Bidirectional Forwarding Detection (BFD) Update Administrative State response.")
+@added(Versions.v2025_07_15)
+model NniUpdateBfdAdministrativeStateResponseProperties {
+  @doc("Route Type. Choose either Static or OptionA.")
+  routeType?: RouteType;
+
+  @doc("State. Select either enable or disable.")
+  administrativeState?: BfdAdministrativeState;
+}

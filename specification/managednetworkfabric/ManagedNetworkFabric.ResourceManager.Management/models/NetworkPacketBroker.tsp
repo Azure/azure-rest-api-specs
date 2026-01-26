@@ -53,7 +53,18 @@ model NetworkPacketBrokerProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2025_07_15)
+  @doc("Configuration state of the resource.")
+  @visibility(Lifecycle.Read)
+  configurationState?: ConfigurationState;
 }
 
 @doc("The NetworkPacketBroker patch resource definition.")
-model NetworkPacketBrokerPatch is TagsUpdate;
+model NetworkPacketBrokerPatch {
+  ...TagsUpdate;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
+}
