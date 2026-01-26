@@ -1,12 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Edge;
 
@@ -73,76 +68,39 @@ model SiteUpdate {
   properties?: SiteUpdateProperties;
 }
 
-@doc("Site as ARM Resource")
-model Site is ProxyResource<SiteProperties> {
-  #suppress "@typespec/http/metadata-ignored" ""
-  @doc("Name of Site resource")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  @path
-  @key("siteName")
-  @segment("sites")
-  @visibility(Lifecycle.Read)
-  name: string;
+@doc("Site as Extension Resource")
+model Site is ExtensionResource<SiteProperties> {
+  ...ResourceNameParameter<
+    Resource = Site,
+    KeyName = "siteName",
+    SegmentName = "sites",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+  >;
+}
+
+@doc("Site operations as base operations which will be extended for each scopes")
+interface SiteOps<Scope extends Azure.ResourceManager.Foundations.SimpleResource> {
+  list is Extension.ListByTarget<Scope, Site>;
+  get is Extension.Read<Scope, Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<Scope, Site>;
+  update is Extension.CustomPatchSync<Scope, Site, SiteUpdate>;
+  delete is Extension.DeleteSync<Scope, Site>;
 }
 
 @armResourceOperations
-interface Sites {
-  get is ArmResourceRead<Site>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
-  update is ArmCustomPatchSync<Site, SiteUpdate>;
-  delete is ArmResourceDeleteSync<Site>;
-  listByResourceGroup is ArmResourceListByParent<Site>;
-}
+interface Sites extends SiteOps<Extension.ResourceGroup> {}
 
-alias SubscriptionParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
-interface SitesBySubscription {
-  list is ArmListBySubscription<Site>;
-  get is ArmResourceRead<Site, BaseParameters = SubscriptionParameters>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Site,
-    BaseParameters = SubscriptionParameters
-  >;
-  update is ArmCustomPatchSync<
-    Site,
-    SiteUpdate,
-    BaseParameters = SubscriptionParameters
-  >;
+@armResourceOperations
+interface SitesBySubscription extends SiteOps<Extension.Subscription> {}
 
-  delete is ArmResourceDeleteSync<
-    Site,
-    BaseParameters = SubscriptionParameters
-  >;
-}
+alias ServiceGroup = Extension.ExternalResource<
+  TargetNamespace = "Microsoft.Management",
+  ResourceType = "serviceGroups",
+  ResourceParameterName = "servicegroupName",
+  NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$",
+  Description = "The name of the service group",
+  ParentType = "Tenant"
+>;
 
-@doc("ServiceGroup as parameter")
-model ServiceGroupParameters {
-  @path
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  @doc("The name of the service group.")
-  servicegroupName: string;
-
-  ...ApiVersionParameter;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of Tenant"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operation for tenant scope"
-@route("/providers/Microsoft.Management/serviceGroups")
-interface SitesByServiceGroup {
-  @doc("list Site at SG scope")
-  @operationId("SitesByServiceGroup_ListByServiceGroup")
-  list is ArmResourceListByParent<Site, ServiceGroupParameters>;
-
-  @doc("Get Site at SG scope")
-  get is ArmResourceRead<Site, ServiceGroupParameters>;
-
-  @doc("create or update Site at SG scope")
-  @operationId("SitesByServiceGroup_CreateOrUpdate")
-  put is ArmResourceCreateOrUpdateAsync<Site, ServiceGroupParameters>;
-
-  @doc("delete Site at SG scope")
-  delete is ArmResourceDeleteSync<Site, ServiceGroupParameters>;
-
-  @doc("update Site at SG scope")
-  update is ArmCustomPatchSync<Site, SiteUpdate, ServiceGroupParameters>;
-}
+@armResourceOperations
+interface SitesByServiceGroup extends SiteOps<ServiceGroup> {}

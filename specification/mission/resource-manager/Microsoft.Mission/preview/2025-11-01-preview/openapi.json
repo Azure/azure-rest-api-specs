@@ -4090,15 +4090,8 @@
       "description": "Request body for calling post-action",
       "properties": {
         "approvalStatus": {
-          "type": "string",
-          "description": "Approval status indicating 'Approved' or 'Rejected'",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PostActionApprovalStatus",
+          "description": "Approval status indicating 'Approved' or 'Rejected'"
         }
       },
       "required": [
@@ -4123,28 +4116,12 @@
       "description": "Request body for calling post-action",
       "properties": {
         "resourceRequestAction": {
-          "type": "string",
-          "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action",
-          "enum": [
-            "Create",
-            "Delete",
-            "Update",
-            "Reset"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApprovalCallbackResourceRequestAction",
+          "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action"
         },
         "approvalStatus": {
-          "type": "string",
-          "description": "Approval status indicating 'Approved' or 'Rejected'",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PostActionApprovalStatus",
+          "description": "Approval status indicating 'Approved' or 'Rejected'"
         },
         "approvalCallbackPayload": {
           "type": "string",
@@ -4156,26 +4133,84 @@
         "approvalStatus"
       ]
     },
+    "ApprovalCallbackResourceRequestAction": {
+      "type": "string",
+      "description": "Resource Request Action",
+      "enum": [
+        "Create",
+        "Delete",
+        "Update",
+        "Reset"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalCallbackResourceRequestAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "ApprovalCallbackResourceRequestAction Create"
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "ApprovalCallbackResourceRequestAction Delete"
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "ApprovalCallbackResourceRequestAction Update"
+          },
+          {
+            "name": "Reset",
+            "value": "Reset",
+            "description": "ApprovalCallbackResourceRequestAction Reset"
+          }
+        ]
+      }
+    },
     "ApprovalDeletionCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
       "properties": {
         "resourceRequestAction": {
-          "type": "string",
-          "description": "Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action",
-          "enum": [
-            "Create",
-            "Delete",
-            "Update"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ApprovalDeletionCallbackResourceRequestAction",
+          "description": "Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action"
         }
       },
       "required": [
         "resourceRequestAction"
       ]
+    },
+    "ApprovalDeletionCallbackResourceRequestAction": {
+      "type": "string",
+      "description": "Resource Request Action",
+      "enum": [
+        "Create",
+        "Delete",
+        "Update"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalDeletionCallbackResourceRequestAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "ApprovalDeletionCallbackResourceRequestAction Create"
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "ApprovalDeletionCallbackResourceRequestAction Delete"
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "ApprovalDeletionCallbackResourceRequestAction Update"
+          }
+        ]
+      }
     },
     "ApprovalPatchModel": {
       "type": "object",
@@ -4793,15 +4828,8 @@
           "x-ms-identifiers": []
         },
         "policyOverride": {
-          "type": "string",
-          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.",
-          "enum": [
-            "Enclave",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PolicyOverride",
+          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement."
         },
         "communityRoleAssignments": {
           "type": "array",
@@ -4823,14 +4851,6 @@
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
           "description": "Maintenance Mode configuration."
-        },
-        "dedicatedHubList": {
-          "type": "array",
-          "description": "DedicatedHub List.",
-          "items": {
-            "$ref": "#/definitions/DedicatedHubBaseModel"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -4887,15 +4907,8 @@
           "x-ms-identifiers": []
         },
         "policyOverride": {
-          "type": "string",
-          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.",
-          "enum": [
-            "Enclave",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PolicyOverride",
+          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement."
         },
         "communityRoleAssignments": {
           "type": "array",
@@ -4951,6 +4964,7 @@
           "items": {
             "$ref": "#/definitions/DedicatedHubResource"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       }
@@ -5008,40 +5022,6 @@
         "value"
       ]
     },
-    "DedicatedHubBaseModel": {
-      "type": "object",
-      "description": "Dedicated Hub Base Properties",
-      "properties": {
-        "vHubResourceId": {
-          "$ref": "#/definitions/VirtualHubResourceId",
-          "description": "Virtual Hub Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "firewallResourceId": {
-          "$ref": "#/definitions/FirewallResourceId",
-          "description": "Firewall Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "firewallPolicyResourceId": {
-          "$ref": "#/definitions/FirewallPolicyResourceId",
-          "description": "Firewall Policy Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "designation": {
-          "$ref": "#/definitions/Designation",
-          "description": "Designation of hub resource allocation (Communal or Allocated)"
-        }
-      }
-    },
     "DedicatedHubPatchModel": {
       "type": "object",
       "description": "Dedicated Hub Patch Resource",
@@ -5065,7 +5045,7 @@
       "properties": {
         "designation": {
           "$ref": "#/definitions/Designation",
-          "description": "Designation of hub resource allocation (Communal or Allocated)"
+          "description": "Designation of hub resource allocation (Pooled or Reserved)"
         }
       }
     },
@@ -5076,30 +5056,21 @@
         "vHubResourceId": {
           "$ref": "#/definitions/VirtualHubResourceId",
           "description": "Virtual Hub Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "firewallResourceId": {
           "$ref": "#/definitions/FirewallResourceId",
           "description": "Firewall Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "firewallPolicyResourceId": {
           "$ref": "#/definitions/FirewallPolicyResourceId",
           "description": "Firewall Policy Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "designation": {
           "$ref": "#/definitions/Designation",
-          "description": "Designation of hub resource allocation (Communal or Allocated)"
+          "description": "Designation of hub resource allocation (Pooled or Reserved)"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -5160,22 +5131,22 @@
       "type": "string",
       "description": "Specifies the designation of the dedicated hub.",
       "enum": [
-        "Communal",
-        "Allocated"
+        "Pooled",
+        "Reserved"
       ],
       "x-ms-enum": {
         "name": "Designation",
         "modelAsString": true,
         "values": [
           {
-            "name": "Communal",
-            "value": "Communal",
-            "description": "Designation Type Communal"
+            "name": "Pooled",
+            "value": "Pooled",
+            "description": "Designation Type Pooled"
           },
           {
-            "name": "Allocated",
-            "value": "Allocated",
-            "description": "Designation Type Allocated"
+            "name": "Reserved",
+            "value": "Reserved",
+            "description": "Designation Type Reserved"
           }
         ]
       }
@@ -5243,7 +5214,8 @@
       "enum": [
         "CommunityOnly",
         "EnclaveOnly",
-        "Both"
+        "Both",
+        "Unspecified"
       ],
       "x-ms-enum": {
         "name": "DiagnosticDestination",
@@ -5263,6 +5235,11 @@
             "name": "Both",
             "value": "Both",
             "description": "DiagnosticDestination Type Both"
+          },
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "DiagnosticDestination Type Unspecified"
           }
         ]
       }
@@ -5507,7 +5484,8 @@
           "enum": [
             "CommunityOnly",
             "EnclaveOnly",
-            "Both"
+            "Both",
+            "Unspecified"
           ],
           "x-ms-enum": {
             "name": "DiagnosticDestination",
@@ -5527,6 +5505,11 @@
                 "name": "Both",
                 "value": "Both",
                 "description": "DiagnosticDestination Type Both"
+              },
+              {
+                "name": "Unspecified",
+                "value": "Unspecified",
+                "description": "DiagnosticDestination Type Unspecified"
               }
             ]
           }
@@ -5876,40 +5859,16 @@
           "readOnly": true
         },
         "option": {
-          "type": "string",
-          "description": "Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).",
-          "enum": [
-            "Allow",
-            "Deny",
-            "ExceptionOnly",
-            "NotApplicable"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GovernedServiceItemOption",
+          "description": "Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable)."
         },
         "enforcement": {
-          "type": "string",
-          "description": "Initiative enforcement (Enabled or Disabled).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/GovernedServiceItemEnforcement",
+          "description": "Initiative enforcement (Enabled or Disabled)."
         },
         "policyAction": {
-          "type": "string",
-          "description": "Enforcement mode for policy. AuditOnly, Enforce, or None.",
-          "enum": [
-            "AuditOnly",
-            "Enforce",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PolicyAction",
+          "description": "Enforcement mode for policy. AuditOnly, Enforce, or None."
         },
         "initiatives": {
           "type": "array",
@@ -5923,6 +5882,66 @@
       "required": [
         "serviceId"
       ]
+    },
+    "GovernedServiceItemEnforcement": {
+      "type": "string",
+      "description": "Governed Service Item Enforcement",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "GovernedServiceItemEnforcement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "GovernedServiceItemEnforcement Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "GovernedServiceItemEnforcement Disabled"
+          }
+        ]
+      }
+    },
+    "GovernedServiceItemOption": {
+      "type": "string",
+      "description": "Governed Service Item Option",
+      "enum": [
+        "Allow",
+        "Deny",
+        "ExceptionOnly",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "GovernedServiceItemOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "GovernedServiceItemOption Allow"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "GovernedServiceItemOption Deny"
+          },
+          {
+            "name": "ExceptionOnly",
+            "value": "ExceptionOnly",
+            "description": "GovernedServiceItemOption ExceptionOnly"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "GovernedServiceItemOption NotApplicable"
+          }
+        ]
+      }
     },
     "KeyVaultResourceId": {
       "type": "string",
@@ -5948,6 +5967,48 @@
         ]
       }
     },
+    "MaintenanceModeConfiguration": {
+      "type": "string",
+      "description": "Maintenance Mode Configuration",
+      "enum": [
+        "On",
+        "CanNotDelete",
+        "Off",
+        "General",
+        "Advanced"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceModeConfiguration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "On",
+            "value": "On",
+            "description": "MaintenanceModeConfiguration On"
+          },
+          {
+            "name": "CanNotDelete",
+            "value": "CanNotDelete",
+            "description": "MaintenanceModeConfiguration CanNotDelete"
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "MaintenanceModeConfiguration Off"
+          },
+          {
+            "name": "General",
+            "value": "General",
+            "description": "MaintenanceModeConfiguration General"
+          },
+          {
+            "name": "Advanced",
+            "value": "Advanced",
+            "description": "MaintenanceModeConfiguration Advanced"
+          }
+        ]
+      }
+    },
     "MaintenanceModeConfigurationModel": {
       "type": "object",
       "description": "Maintenance Mode",
@@ -5964,7 +6025,35 @@
             "Advanced"
           ],
           "x-ms-enum": {
-            "modelAsString": true
+            "name": "MaintenanceModeConfiguration",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "On",
+                "value": "On",
+                "description": "MaintenanceModeConfiguration On"
+              },
+              {
+                "name": "CanNotDelete",
+                "value": "CanNotDelete",
+                "description": "MaintenanceModeConfiguration CanNotDelete"
+              },
+              {
+                "name": "Off",
+                "value": "Off",
+                "description": "MaintenanceModeConfiguration Off"
+              },
+              {
+                "name": "General",
+                "value": "General",
+                "description": "MaintenanceModeConfiguration General"
+              },
+              {
+                "name": "Advanced",
+                "value": "Advanced",
+                "description": "MaintenanceModeConfiguration Advanced"
+              }
+            ]
           }
         },
         "principals": {
@@ -5985,7 +6074,25 @@
             "Off"
           ],
           "x-ms-enum": {
-            "modelAsString": true
+            "name": "MaintenanceModeJustification",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Networking",
+                "value": "Networking",
+                "description": "MaintenanceModeJustification Networking"
+              },
+              {
+                "name": "Governance",
+                "value": "Governance",
+                "description": "MaintenanceModeJustification Governance"
+              },
+              {
+                "name": "Off",
+                "value": "Off",
+                "description": "MaintenanceModeJustification Off"
+              }
+            ]
           }
         }
       },
@@ -5998,18 +6105,8 @@
       "description": "Maintenance Mode Patch Model",
       "properties": {
         "mode": {
-          "type": "string",
-          "description": "Current mode of Maintenance Mode Configuration",
-          "enum": [
-            "On",
-            "CanNotDelete",
-            "Off",
-            "General",
-            "Advanced"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MaintenanceModeConfiguration",
+          "description": "Current mode of Maintenance Mode Configuration"
         },
         "principals": {
           "type": "array",
@@ -6019,17 +6116,39 @@
           }
         },
         "justification": {
-          "type": "string",
-          "description": "Justification for entering or exiting Maintenance Mode",
-          "enum": [
-            "Networking",
-            "Governance",
-            "Off"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MaintenanceModeJustification",
+          "description": "Justification for entering or exiting Maintenance Mode"
         }
+      }
+    },
+    "MaintenanceModeJustification": {
+      "type": "string",
+      "description": "Maintenance Mode Justification",
+      "enum": [
+        "Networking",
+        "Governance",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceModeJustification",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Networking",
+            "value": "Networking",
+            "description": "MaintenanceModeJustification Networking"
+          },
+          {
+            "name": "Governance",
+            "value": "Governance",
+            "description": "MaintenanceModeJustification Governance"
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "MaintenanceModeJustification Off"
+          }
+        ]
       }
     },
     "MandatoryApprover": {
@@ -6057,6 +6176,84 @@
         ]
       }
     },
+    "PolicyAction": {
+      "type": "string",
+      "description": "Policy Action",
+      "enum": [
+        "AuditOnly",
+        "Enforce",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AuditOnly",
+            "value": "AuditOnly",
+            "description": "PolicyAction AuditOnly"
+          },
+          {
+            "name": "Enforce",
+            "value": "Enforce",
+            "description": "PolicyAction Enforce"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "PolicyAction None"
+          }
+        ]
+      }
+    },
+    "PolicyOverride": {
+      "type": "string",
+      "description": "Policy Override",
+      "enum": [
+        "Enclave",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyOverride",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enclave",
+            "value": "Enclave",
+            "description": "PolicyOverride Enclave."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "PolicyOverride None."
+          }
+        ]
+      }
+    },
+    "PostActionApprovalStatus": {
+      "type": "string",
+      "description": "Approval Status",
+      "enum": [
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "PostActionApprovalStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "PostActionApprovalStatus Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "PostActionApprovalStatus Rejected"
+          }
+        ]
+      }
+    },
     "Principal": {
       "type": "object",
       "description": "Principal for maintenance mode or role assignments",
@@ -6066,22 +6263,44 @@
           "description": "The object id associated with the principal"
         },
         "type": {
-          "type": "string",
-          "description": "The type of the object id. We currently allow users, groups, and service principals",
-          "enum": [
-            "User",
-            "Group",
-            "ServicePrincipal"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The type of the object id. We currently allow users, groups, and service principals"
         }
       },
       "required": [
         "id",
         "type"
       ]
+    },
+    "PrincipalType": {
+      "type": "string",
+      "description": "Principal Type",
+      "enum": [
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "PrincipalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "PrincipalType User"
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "PrincipalType Group"
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "PrincipalType ServicePrincipal"
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",

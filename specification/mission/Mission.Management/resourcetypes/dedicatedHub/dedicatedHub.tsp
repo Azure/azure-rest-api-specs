@@ -10,29 +10,29 @@ namespace Microsoft.Mission;
 union Designation {
   string,
 
-  @doc("Designation Type Communal")
-  Communal: "Communal",
+  @doc("Designation Type Pooled")
+  Pooled: "Pooled",
 
-  @doc("Designation Type Allocated")
-  Allocated: "Allocated",
+  @doc("Designation Type Reserved")
+  Reserved: "Reserved",
 }
 
 @added(Microsoft.Mission.Versions.v2025_11_01_preview)
 @doc("Dedicated Hub Base Properties")
 model DedicatedHubBaseModel {
   @doc("Virtual Hub Resource ID")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   vHubResourceId?: VirtualHubResourceId;
 
   @doc("Firewall Resource ID")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   firewallResourceId?: FirewallResourceId;
 
   @doc("Firewall Policy Resource ID")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   firewallPolicyResourceId?: FirewallPolicyResourceId;
 
-  @doc("Designation of hub resource allocation (Communal or Allocated)")
+  @doc("Designation of hub resource allocation (Pooled or Reserved)")
   designation?: Designation;
 }
 

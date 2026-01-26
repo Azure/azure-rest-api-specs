@@ -8,15 +8,13 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.EdgeMarketplace;
+
 @doc("An offer.")
 model Offer is ExtensionResource<OfferProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Legacy"
-  @doc("Id of the offer")
-  @path
-  @key("offerId")
-  @segment("offers")
-  name: string;
+  ...ResourceNameParameter<Offer, KeyName = "offerId", NamePattern = "">;
 }
+
+@@doc(Offer.name, "Id of the offer");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "backcompat, ARM reviewed"
 @armResourceOperations

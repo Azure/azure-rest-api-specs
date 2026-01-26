@@ -303,33 +303,6 @@ union NodeArcState {
 }
 
 /**
- * The type of identity that created the resource.
- */
-union CreatedByType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Application
-   */
-  Application: "Application",
-
-  /**
-   * ManagedIdentity
-   */
-  ManagedIdentity: "ManagedIdentity",
-
-  /**
-   * Key
-   */
-  Key: "Key",
-}
-
-/**
  * Status of the cluster agent. Indicates the current connectivity, validation, and deployment state of the agent within the cluster.
  */
 union Status {
@@ -1804,6 +1777,10 @@ model ArcSettingsPatch {
    * ArcSettings properties.
    */
   properties?: ArcSettingsPatchProperties;
+
+  @removed(Versions.v2025_12_01_preview)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 /**
@@ -2037,6 +2014,20 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   clusterPattern?: ClusterPattern;
+
+  /**
+   * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
+   */
+  @added(Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  confidentialVmProperties?: ConfidentialVmProperties;
+
+  /**
+   * Software Defined Networking Properties of the cluster
+   */
+  @added(Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  sdnProperties?: ClusterSdnProperties;
 
   /**
    * Local Availability Zone information for HCI cluster
@@ -5417,9 +5408,9 @@ model HciNetworkProfile {
   /** 
     oftware Defined Networking Properties of the cluster
    */
-  // @visibility(Lifecycle.Read)
-  // @added(Versions.v2025_12_01_preview)
-  // sdnProperties?: SdnProperties;
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_12_01_preview)
+  sdnProperties?: SdnProperties;
 }
 
 /**
@@ -5860,14 +5851,14 @@ model ReportedProperties {
   /**
    * Most recent edge device sync timestamp in UTC.
    */
-  // @added(Versions.v2025_12_01_preview)
-  // @visibility(Lifecycle.Read)
-  // lastSyncTimestamp?: utcDateTime;
+  @added(Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  lastSyncTimestamp?: utcDateTime;
 
-  // /**
-  //  * CVM support details for edge device.
-  //  */
-  // @added(Versions.v2025_12_01_preview)
-  // @visibility(Lifecycle.Read)
-  // confidentialVmProfile?: ConfidentialVmProfile;
+  /**
+   * CVM support details for edge device.
+   */
+  @added(Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  confidentialVmProfile?: ConfidentialVmProfile;
 }

@@ -59,6 +59,48 @@ union ServiceIdentifier {
   Storage: "Storage",
 }
 
+@doc("Governed Service Item Option")
+union GovernedServiceItemOption {
+  string,
+
+  @doc("GovernedServiceItemOption Allow")
+  Allow: "Allow",
+
+  @doc("GovernedServiceItemOption Deny")
+  Deny: "Deny",
+
+  @doc("GovernedServiceItemOption ExceptionOnly")
+  ExceptionOnly: "ExceptionOnly",
+
+  @doc("GovernedServiceItemOption NotApplicable")
+  NotApplicable: "NotApplicable",
+}
+
+@doc("Governed Service Item Enforcement")
+union GovernedServiceItemEnforcement {
+  string,
+
+  @doc("GovernedServiceItemEnforcement Enabled")
+  Enabled: "Enabled",
+
+  @doc("GovernedServiceItemEnforcement Disabled")
+  Disabled: "Disabled",
+}
+
+@doc("Policy Action")
+union PolicyAction {
+  string,
+
+  @doc("PolicyAction AuditOnly")
+  AuditOnly: "AuditOnly",
+
+  @doc("PolicyAction Enforce")
+  Enforce: "Enforce",
+
+  @doc("PolicyAction None")
+  None: "None",
+}
+
 @doc("GovernedServiceItem Properties")
 model GovernedServiceItem {
   @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "id")
@@ -70,22 +112,19 @@ model GovernedServiceItem {
   @visibility(Lifecycle.Read)
   serviceName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).")
-  option?: "Allow" | "Deny" | "ExceptionOnly" | "NotApplicable" | string;
+  option?: GovernedServiceItemOption;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Initiative enforcement (Enabled or Disabled).")
-  enforcement?: "Enabled" | "Disabled" | string;
+  enforcement?: GovernedServiceItemEnforcement;
 
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policies set to auditOnly (True or False).")
   auditOnly?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Enforcement mode for policy. AuditOnly, Enforce, or None.")
-  policyAction?: "AuditOnly" | "Enforce" | "None" | string;
+  policyAction?: PolicyAction;
 
   @doc("Initiatives associated with this service.")
   @visibility(Lifecycle.Read)

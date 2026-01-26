@@ -1,0 +1,37 @@
+{
+  "operationId": "SegmentationManagers_SetWorkloadSegments",
+  "title": "Set segments for workloads",
+  "parameters": {
+    "body": {
+      "workloadSegments": [
+        {
+          "workloadId": "/subscriptions/44e3caee-c793-4ab4-9a54-86cc90fb911d/resourceGroups/CCG-AVNM-ZTS-CENTUS/providers/Microsoft.Compute/virtualMachineScaleSets/Vmss1",
+          "environment": "development"
+        },
+        {
+          "workloadId": "/subscriptions/44e3caee-c793-4ab4-9a54-86cc90fb911d/resourceGroups/CCG-AVNM-ZTS-CENTUS/providers/Microsoft.Compute/virtualMachines/Vm1",
+          "environment": "development",
+          "application": "AzureSQL"
+        },
+        {
+          "workloadId": "/subscriptions/44e3caee-c793-4ab4-9a54-86cc90fb911d/resourceGroups/CCG-AVNM-ZTS-CENTUS/providers/Microsoft.Compute/virtualMachines/Vm2",
+          "environment": "development",
+          "application": "AzureSQL",
+          "role": "role1"
+        }
+      ]
+    },
+    "resourceGroupName": "sample-rg",
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426614174000",
+    "segmentationManagerName": "sample-segmentationManager"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      }
+    },
+    "204": {}
+  }
+}

@@ -2704,6 +2704,12 @@
           "description": "The PrivateEndpointName associated with the connection.",
           "readOnly": true
         },
+        "privateEndpointResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The privateEndpoint resource Id",
+          "readOnly": true
+        },
         "jobList": {
           "type": "array",
           "description": "List of job definitions associated with this connection.",
@@ -3062,7 +3068,8 @@
         "Weekly",
         "Daily",
         "Onetime",
-        "Custom"
+        "Custom",
+        "None"
       ],
       "x-ms-enum": {
         "name": "Frequency",
@@ -3087,6 +3094,10 @@
           {
             "name": "Custom",
             "value": "Custom"
+          },
+          {
+            "name": "None",
+            "value": "None"
           }
         ]
       }
@@ -3292,6 +3303,11 @@
               }
             ]
           }
+        },
+        "preservePermissions": {
+          "type": "boolean",
+          "description": "Boolean to preserve permissions or not.",
+          "default": true
         }
       },
       "required": [
@@ -3337,6 +3353,10 @@
         "dataIntegrityValidation": {
           "$ref": "#/definitions/DataIntegrityValidation",
           "description": "Data Integrity validation to be updated"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduleInfo",
+          "description": "Schedule information for the Job Definition."
         }
       }
     },
@@ -4017,7 +4037,7 @@
           "description": "Whether the schedule is currently active"
         },
         "executionTime": {
-          "$ref": "#/definitions/Time",
+          "$ref": "#/definitions/SchedulerTime",
           "description": "Time of day to execute (hours and minutes)"
         },
         "startDate": {
@@ -4049,11 +4069,43 @@
           "format": "date-time",
           "description": "End time of the schedule (in UTC)"
         }
-      },
-      "required": [
-        "frequency",
-        "isActive"
-      ]
+      }
+    },
+    "SchedulerTime": {
+      "type": "object",
+      "description": "The time of day.",
+      "properties": {
+        "hour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The hour element of the time. Allowed values range from 0 (start of the selected day) to 24 (end of the selected day). Hour value 24 cannot be combined with any other minute value but 0.",
+          "minimum": 0,
+          "maximum": 24
+        },
+        "minute": {
+          "type": "number",
+          "description": "The minute element of the time. Allowed values are 0 and 30. If not specified, its value defaults to 0.",
+          "default": 0,
+          "enum": [
+            0,
+            30
+          ],
+          "x-ms-enum": {
+            "name": "Minute",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "0",
+                "value": 0
+              },
+              {
+                "name": "30",
+                "value": 30
+              }
+            ]
+          }
+        }
+      }
     },
     "SmbMountEndpointProperties": {
       "type": "object",

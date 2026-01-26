@@ -4,8 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
@@ -19,6 +17,9 @@ namespace Microsoft.Impact;
 enum Versions {
   @doc("January 01, 2025 Preview API Version")
   v2025_01_01_preview: "2025-01-01-preview",
+
+  @doc("January 01, 2026 Preview API Version")
+  v2026_01_01_preview: "2026-01-01-preview",
 }
 
 @doc("A successful response from getUploadToken will contain an 'uploadUrl' field. This uploadUrl field's value should follow the format: https://[storage-account-name].blob.core.windows.net/[container-name]/[your-blob.extension]?[SAS-token]")

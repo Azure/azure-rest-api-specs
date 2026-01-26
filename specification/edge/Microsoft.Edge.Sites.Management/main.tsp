@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./Site.tsp";
 import "./SiteAwareResourceTypes.tsp";
+import "./backward-compatibles.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

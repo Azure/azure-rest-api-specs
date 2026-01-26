@@ -552,6 +552,13 @@ model MonitorProperties {
   liftrResourcePreference?: int32;
 
   /**
+   * SaaS details
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  saaSData?: SaaSData;
+
+  /**
    * SRE Agent configuration to connect to MCP server of Datadog for given organization.
    */
   @identifiers(#["mcpConnectorResourceId"])
@@ -718,6 +725,13 @@ model MonitorUpdateProperties {
   monitoringStatus?: MonitoringStatus = MonitoringStatus.Enabled;
 
   /**
+   * SaaS details
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  saaSData?: SaaSData;
+
+  /**
    * The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.
    */
   cspm?: boolean;
@@ -802,6 +816,12 @@ model MarketplaceSaaSInfo {
    * The Azure Subscription ID to which the Marketplace Subscription belongs and gets billed into.
    */
   billedAzureSubscriptionId?: string;
+
+  /**
+   * Offer Id of the Marketplace offer
+   */
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  offerId?: string;
 
   /**
    * Flag specifying if the Marketplace status is subscribed or not.
@@ -1036,4 +1056,74 @@ model ResubscribeProperties {
    * Newly selected Azure resource group in which the new Marketplace subscription will be created for Resubscribe
    */
   resourceGroup?: string;
+}
+
+/**
+ * SaaS guid for Activate and Validate SaaS Resource
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model ActivateSaaSParameterRequest {
+  /**
+   * SaaS guid of marketplace saas subscription to be activated.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSGuid: string;
+
+  /**
+   * User information of the person activating the SaaS resource.
+   */
+  userInfo?: UserInfo;
+
+  /**
+   * Datadog organization properties to link the Saas resource to.
+   */
+  datadogOrganizationProperties?: DatadogOrganizationProperties;
+}
+
+/**
+ * Response of get latest linked SaaS resource operation
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model LatestLinkedSaaSResponse {
+  /**
+   * Flag indicating if the SaaS resource is hidden
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  isHiddenSaaS?: boolean;
+
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSResourceId?: string;
+}
+
+/**
+ * SaaS details
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model SaaSData {
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSResourceId?: string;
+}
+
+/**
+ * Marketplace SaaS resource details.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Using extends for proxy resource model"
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model SaaSResourceDetailsResponse
+  extends Azure.ResourceManager.Foundations.ProxyResource {
+  /**
+   * Id of the Marketplace SaaS Resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSId?: string;
 }

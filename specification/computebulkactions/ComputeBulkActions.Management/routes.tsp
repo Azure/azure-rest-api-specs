@@ -39,7 +39,7 @@ interface BulkActions {
   @doc("Deletes LaunchBulkInstancesOperations.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Resource = LocationBasedLaunchBulkInstancesOperation,
-    Parameters = LaunchBulkInstancesOperationId
+    Parameters = LaunchBulkInstancesOperationId & DeleteInstancesParameter
   >;
 
   @doc("Cancels LaunchBulkInstancesOperation instances that have not yet launched.")

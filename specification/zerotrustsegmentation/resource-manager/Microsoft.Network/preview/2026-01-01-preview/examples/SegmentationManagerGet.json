@@ -1,0 +1,41 @@
+{
+  "operationId": "SegmentationManagers_Get",
+  "title": "Get a SegmentationManager",
+  "parameters": {
+    "segmentationManagerName": "sample-segmentationManager",
+    "resourceGroupName": "sample-rg",
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-rg/providers/Microsoft.Network/segmentationManagers/sample-segmentationManager",
+        "name": "sample-segmentationManager",
+        "type": "Microsoft.Network/segmentationManagers",
+        "location": "westeurope",
+        "managedBy": "subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.Network/networkManagers/{resource-name}",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identity-name}": {}
+          }
+        },
+        "properties": {
+          "scope": [
+            "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/{resource-provider}/{resource-type}/{resource-name}"
+          ],
+          "targetLogAnalyticsWorkspaceId": "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.OperationalInsights/workspaces/{resource-name}",
+          "managedOnBehalfOfConfiguration": {
+            "moboBrokerResources": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.Network/networkManagers/{resource-name}/moboBrokers/{mobo-broker-name}"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

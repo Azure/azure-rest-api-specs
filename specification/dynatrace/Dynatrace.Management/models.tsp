@@ -753,6 +753,13 @@ model MonitorProperties {
   provisioningState?: ProvisioningState;
 
   /**
+   * SaaS details
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+  saaSData?: SaaSData;
+
+  /**
    * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
    */
   @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
@@ -1313,4 +1320,116 @@ model LinkableEnvironmentResponse {
    * Billing plan information.
    */
   planData?: PlanData;
+}
+
+/**
+ * SaaS guid for activate and Validate SaaS Resource
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model ActivateSaaSParameterRequest {
+  /**
+   * SaaS guid of marketplace SaaS subscription to be activated.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSGuid?: string;
+
+  /**
+   * Admin user details
+   */
+  adminUserDetails: AdminUserDetails;
+}
+
+/**
+ * Dynatrace Account Admin user details
+ */
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model AdminUserDetails {
+  /**
+   * First name of the admin user
+   */
+  firstName: string;
+
+  /**
+   * Last name of the admin user
+   */
+  lastName: string;
+
+  /**
+   * Email of the user used by Dynatrace for contacting them if needed
+   */
+  @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
+  emailAddress: string;
+
+  /**
+   * Phone number of the user used by Dynatrace for contacting them if needed
+   */
+  @maxLength(40)
+  phoneNumber: string;
+
+  /**
+   * Company name of the admin user
+   */
+  company: string;
+
+  /**
+   * Country of the admin user
+   */
+  country: string;
+
+  /**
+   * State of the admin user
+   */
+  state: string;
+
+  /**
+   * Job title of the admin user
+   */
+  jobTitle: string;
+}
+
+/**
+ * Response of get latest linked SaaS resource operation
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model LatestLinkedSaaSResponse {
+  /**
+   * Flag indicating if the SaaS resource is hidden
+   */
+  isHiddenSaaS?: boolean;
+
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSResourceId?: string;
+}
+
+/**
+ * SaaS details
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model SaaSData {
+  /**
+   * SaaS resource id
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSResourceId?: string;
+}
+
+/**
+ * Marketplace SaaS resource details.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Using extends for proxy resource model"
+@added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+model SaaSResourceDetailsResponse
+  extends Azure.ResourceManager.Foundations.ProxyResource {
+  /**
+   * Id of the Marketplace SaaS Resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+  saaSGuid?: string;
 }

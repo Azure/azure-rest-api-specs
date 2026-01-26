@@ -1,0 +1,531 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Hypernet service",
+    "version": "2024-12-01-preview",
+    "description": "Microsoft.Hypernet Resource Provider API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "EapVirtualNetworks"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Hypernet/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Hypernet/eapVirtualNetworks": {
+      "get": {
+        "operationId": "EapVirtualNetworks_ListByResourceGroup",
+        "tags": [
+          "EapVirtualNetworks"
+        ],
+        "description": "List all EAP Hypernet Virtual Networks in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EapVirtualNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List EapVirtualNetworks resource by ResourceGroup": {
+            "$ref": "./examples/EapVirtualNetworks_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Hypernet/eapVirtualNetworks/{eapVirtualNetworkName}": {
+      "get": {
+        "operationId": "EapVirtualNetworks_Get",
+        "tags": [
+          "EapVirtualNetworks"
+        ],
+        "description": "Get details of an EAP Hypernet Virtual Network resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "eapVirtualNetworkName",
+            "in": "path",
+            "description": "The name of the EAP Virtual Network",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EapVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get EapVirtualNetworks resource": {
+            "$ref": "./examples/EapVirtualNetworks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EapVirtualNetworks_CreateOrUpdate",
+        "tags": [
+          "EapVirtualNetworks"
+        ],
+        "description": "Create or update an EAP Hypernet Virtual Network with subscription onboarding and network deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "eapVirtualNetworkName",
+            "in": "path",
+            "description": "The name of the EAP Virtual Network",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EapVirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EapVirtualNetwork' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EapVirtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Resource 'EapVirtualNetwork' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EapVirtualNetwork"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update EapVirtualNetworks resource": {
+            "$ref": "./examples/EapVirtualNetworks_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "BackendEnvironment": {
+      "type": "string",
+      "description": "Available backend environment types for EAP Hypernet Virtual Network deployment.",
+      "enum": [
+        "Autopilot",
+        "Pilotfish"
+      ],
+      "x-ms-enum": {
+        "name": "BackendEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Autopilot",
+            "value": "Autopilot",
+            "description": "Autopilot backend environment for standard deployments."
+          },
+          {
+            "name": "Pilotfish",
+            "value": "Pilotfish",
+            "description": "Pilotfish backend environment for specialized deployments."
+          }
+        ]
+      }
+    },
+    "EapVirtualNetwork": {
+      "type": "object",
+      "description": "EAP Hypernet Virtual Network resource for managing eap virtual network infrastructure with subscription onboarding and IP reservation capabilities.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EapVirtualNetworkProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EapVirtualNetworkListResult": {
+      "type": "object",
+      "description": "The response of a EapVirtualNetwork list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EapVirtualNetwork items on this page",
+          "items": {
+            "$ref": "#/definitions/EapVirtualNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EapVirtualNetworkProperties": {
+      "type": "object",
+      "description": "Properties of EAP Hypernet Virtual Network including subscription management, network configuration, and subnet definitions.",
+      "properties": {
+        "subscriptionTenantId": {
+          "type": "string",
+          "description": "Microsoft Entra tenant ID associated with the subscription."
+        },
+        "distributionList": {
+          "type": "string",
+          "description": "Comma-separated list of distribution lists for notifications and communications."
+        },
+        "securityGroups": {
+          "type": "string",
+          "description": "Comma-separated list of security groups with access permissions."
+        },
+        "backendEnvironment": {
+          "$ref": "#/definitions/BackendEnvironment",
+          "description": "Backend environment type for the virtual network deployment (Autopilot or Pilotfish)."
+        },
+        "virtualNetworkName": {
+          "type": "string",
+          "description": "Name of the virtual network to be created or managed."
+        },
+        "businessCategory": {
+          "type": "string",
+          "description": "Business category classification for the virtual network deployment. If the business category is shared, use 'EapNetworkProvision'. Otherwise, use the business category specific to your service or organization."
+        },
+        "manatreeOwners": {
+          "type": "string",
+          "description": "Comma-separated list of Manatree owners responsible for network management."
+        },
+        "region": {
+          "type": "string",
+          "description": "Azure region where the virtual network will be deployed (e.g., westus, eastus)."
+        },
+        "virtualNetworkSubnets": {
+          "type": "array",
+          "description": "List of subnet configurations within the virtual network, including IP reservations.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkSubnet"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "ownerAliasList": {
+          "type": "string",
+          "description": "Comma-separated list of owner aliases responsible for the virtual network."
+        },
+        "subscriptionTags": {
+          "type": "string",
+          "description": "Comma-separated list of tags applied to the subscription for categorization and billing."
+        },
+        "allowTestClusterApplications": {
+          "type": "boolean",
+          "description": "Flag indicating whether test cluster applications are allowed in this virtual network."
+        },
+        "tags": {
+          "type": "string",
+          "description": "Comma-separated list of tags to be applied to the virtual network for organization and billing."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "subscriptionTenantId",
+        "distributionList",
+        "securityGroups",
+        "backendEnvironment",
+        "virtualNetworkName",
+        "businessCategory",
+        "manatreeOwners",
+        "region",
+        "virtualNetworkSubnets"
+      ]
+    },
+    "IpReservation": {
+      "type": "object",
+      "description": "Configuration for IP address reservation within a subnet, supporting both subnet size and prefix-based allocation.",
+      "properties": {
+        "subnetSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the subnet in terms of the number of available IP addresses (CIDR notation)."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "IP prefix for bring-your-own IP address configurations when using custom IP ranges."
+        },
+        "tags": {
+          "type": "string",
+          "description": "Tags associated with the IP reservation for categorization and tracking."
+        },
+        "justification": {
+          "type": "string",
+          "description": "Business justification or reason for the IP address reservation request."
+        }
+      }
+    },
+    "IpType": {
+      "type": "string",
+      "description": "Available IP addressing types for subnet configuration.",
+      "enum": [
+        "UniqueIPv4",
+        "IPv4RegionalReuse",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IpType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UniqueIPv4",
+            "value": "UniqueIPv4",
+            "description": "Unique IPv4 address allocation for exclusive use."
+          },
+          {
+            "name": "IPv4RegionalReuse",
+            "value": "IPv4RegionalReuse",
+            "description": "IPv4 address allocation that allows regional reuse for optimization."
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6 address allocation for next-generation networking."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Current state of the EAP Hypernet Virtual Network resource provisioning process.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The virtual network resource is currently being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The virtual network resource is being updated with new configuration."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The virtual network creation request has been accepted and queued for processing."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "VirtualNetworkSubnet": {
+      "type": "object",
+      "description": "Configuration for a subnet within the virtual network, including IP allocation and reservation settings.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the subnet within the virtual network."
+        },
+        "ipType": {
+          "$ref": "#/definitions/IpType",
+          "description": "Type of IP addressing scheme for the subnet (IPv4, IPv6, or regional reuse)."
+        },
+        "isBringYourOwnIp": {
+          "type": "boolean",
+          "description": "Flag indicating whether to use bring-your-own IP addresses for this subnet."
+        },
+        "ips": {
+          "type": "array",
+          "description": "List of IP reservation configurations for this subnet, including size and justification.",
+          "items": {
+            "$ref": "#/definitions/IpReservation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "ipType",
+        "ips"
+      ]
+    }
+  },
+  "parameters": {}
+}

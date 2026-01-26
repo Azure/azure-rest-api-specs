@@ -229,4 +229,7 @@ model PostgreSqlSourceConnectorProperties extends DataSourceProperties {
 
   @doc("Time, date, and timestamps can be represented with different kinds of precision.")
   timePrecisionMode?: PostgreSqlTimePrecisionMode;
+
+  @doc("A Boolean value that specifies whether the connector enable delta flow feature.")
+  isDeltaFlowEnabled?: boolean;
 }
