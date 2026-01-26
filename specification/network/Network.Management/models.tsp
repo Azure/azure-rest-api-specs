@@ -6791,6 +6791,8 @@ model CloudErrorBody {
 /**
  * Properties of the application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPropertiesFormat {
   /**
    * SKU of the application gateway resource.
@@ -6990,6 +6992,8 @@ model ApplicationGatewayPropertiesFormat {
 /**
  * SKU of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewaySku {
   /**
    * Name of an application gateway SKU.
@@ -7015,6 +7019,8 @@ model ApplicationGatewaySku {
 /**
  * Application Gateway Ssl policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewaySslPolicy {
   /**
    * Ssl protocols to be disabled on application gateway.
@@ -7046,6 +7052,8 @@ model ApplicationGatewaySslPolicy {
  * IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayIPConfiguration extends SubResource {
   /**
    * Properties of the application gateway IP configuration.
@@ -7074,6 +7082,8 @@ model ApplicationGatewayIPConfiguration extends SubResource {
  * Properties of IP configuration of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayIPConfigurationPropertiesFormat {
   /**
    * Reference to the subnet resource. A subnet from where application gateway gets its private address.
@@ -7283,6 +7293,8 @@ model TrackedResourcewithOptionalLocation {
  * Authentication certificates of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayAuthenticationCertificate extends SubResource {
   /**
    * Properties of the application gateway authentication certificate.
@@ -7310,6 +7322,8 @@ model ApplicationGatewayAuthenticationCertificate extends SubResource {
 /**
  * Authentication certificates properties of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayAuthenticationCertificatePropertiesFormat {
   /**
    * Certificate public data.
@@ -7327,6 +7341,8 @@ model ApplicationGatewayAuthenticationCertificatePropertiesFormat {
  * Trusted Root certificates of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayTrustedRootCertificate extends SubResource {
   /**
    * Properties of the application gateway trusted root certificate.
@@ -7354,6 +7370,8 @@ model ApplicationGatewayTrustedRootCertificate extends SubResource {
 /**
  * Trusted Root certificates properties of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayTrustedRootCertificatePropertiesFormat {
   /**
    * Certificate public data.
@@ -7376,6 +7394,8 @@ model ApplicationGatewayTrustedRootCertificatePropertiesFormat {
  * Trusted client certificates of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayTrustedClientCertificate extends SubResource {
   /**
    * Properties of the application gateway trusted client certificate.
@@ -7403,6 +7423,8 @@ model ApplicationGatewayTrustedClientCertificate extends SubResource {
 /**
  * Trusted client certificates properties of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayTrustedClientCertificatePropertiesFormat {
   /**
    * Certificate public data.
@@ -7433,6 +7455,8 @@ model ApplicationGatewayTrustedClientCertificatePropertiesFormat {
  * SSL certificates of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewaySslCertificate extends SubResource {
   /**
    * Properties of the application gateway SSL certificate.
@@ -7460,6 +7484,8 @@ model ApplicationGatewaySslCertificate extends SubResource {
 /**
  * Properties of SSL certificates of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewaySslCertificatePropertiesFormat {
   /**
    * Base-64 encoded pfx certificate. Only applicable in PUT Request.
@@ -7494,6 +7520,8 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
  * Frontend IP configuration of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFrontendIPConfiguration extends SubResource {
   /**
    * Properties of the application gateway frontend IP configuration.
@@ -7522,6 +7550,8 @@ model ApplicationGatewayFrontendIPConfiguration extends SubResource {
  * Properties of Frontend IP configuration of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFrontendIPConfigurationPropertiesFormat {
   /**
    * PrivateIPAddress of the network interface IP Configuration.
@@ -7562,6 +7592,8 @@ model ApplicationGatewayFrontendIPConfigurationPropertiesFormat {
  * Frontend port of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFrontendPort extends SubResource {
   /**
    * Properties of the application gateway frontend port.
@@ -7589,6 +7621,8 @@ model ApplicationGatewayFrontendPort extends SubResource {
 /**
  * Properties of Frontend port of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFrontendPortPropertiesFormat {
   /**
    * Frontend port.
@@ -7606,6 +7640,8 @@ model ApplicationGatewayFrontendPortPropertiesFormat {
  * Probe of the application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayProbe extends SubResource {
   /**
    * Properties of the application gateway probe.
@@ -7633,6 +7669,8 @@ model ApplicationGatewayProbe extends SubResource {
 /**
  * Properties of probe of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayProbePropertiesFormat {
   /**
    * The protocol used for the probe.
@@ -7706,6 +7744,8 @@ model ApplicationGatewayProbePropertiesFormat {
 /**
  * Application gateway probe health response match.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayProbeHealthResponseMatch {
   /**
    * Body that must be contained in the health response. Default value is empty.
@@ -7722,6 +7762,8 @@ model ApplicationGatewayProbeHealthResponseMatch {
  * Backend Address Pool of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendAddressPool extends SubResource {
   /**
    * Properties of the application gateway backend address pool.
@@ -7749,6 +7791,8 @@ model ApplicationGatewayBackendAddressPool extends SubResource {
 /**
  * Properties of Backend Address Pool of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendAddressPoolPropertiesFormat {
   /**
    * Collection of references to IPs defined in network interfaces.
@@ -9972,6 +10016,8 @@ model NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties {
 /**
  * Backend address of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendAddress {
   /**
    * Fully qualified domain name (FQDN).
@@ -9988,6 +10034,8 @@ model ApplicationGatewayBackendAddress {
  * Backend address pool settings of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendHttpSettings extends SubResource {
   /**
    * Properties of the application gateway backend HTTP settings.
@@ -10015,6 +10063,8 @@ model ApplicationGatewayBackendHttpSettings extends SubResource {
 /**
  * Properties of Backend address pool settings of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendHttpSettingsPropertiesFormat {
   /**
    * The destination port on the backend.
@@ -10112,6 +10162,8 @@ model ApplicationGatewayBackendHttpSettingsPropertiesFormat {
 /**
  * Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayConnectionDraining {
   /**
    * Whether connection draining is enabled or not.
@@ -10130,6 +10182,8 @@ model ApplicationGatewayConnectionDraining {
  * Backend address pool settings of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendSettings extends SubResource {
   /**
    * Properties of the application gateway backend settings.
@@ -10157,6 +10211,8 @@ model ApplicationGatewayBackendSettings extends SubResource {
 /**
  * Properties of Backend address pool settings of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendSettingsPropertiesFormat {
   /**
    * The destination port on the backend.
@@ -10209,6 +10265,8 @@ model ApplicationGatewayBackendSettingsPropertiesFormat {
  * Http listener of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayHttpListener extends SubResource {
   /**
    * Properties of the application gateway HTTP listener.
@@ -10236,6 +10294,8 @@ model ApplicationGatewayHttpListener extends SubResource {
 /**
  * Properties of HTTP listener of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayHttpListenerPropertiesFormat {
   /**
    * Frontend IP configuration resource of an application gateway.
@@ -10299,6 +10359,8 @@ model ApplicationGatewayHttpListenerPropertiesFormat {
 /**
  * Custom error of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayCustomError {
   /**
    * Status code of the application gateway custom error.
@@ -10315,6 +10377,8 @@ model ApplicationGatewayCustomError {
  * Listener of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayListener extends SubResource {
   /**
    * Properties of the application gateway listener.
@@ -10342,6 +10406,8 @@ model ApplicationGatewayListener extends SubResource {
 /**
  * Properties of listener of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayListenerPropertiesFormat {
   /**
    * Frontend IP configuration resource of an application gateway.
@@ -10385,6 +10451,8 @@ model ApplicationGatewayListenerPropertiesFormat {
  * SSL profile of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewaySslProfile extends SubResource {
   /**
    * Properties of the application gateway SSL profile.
@@ -10412,6 +10480,8 @@ model ApplicationGatewaySslProfile extends SubResource {
 /**
  * Properties of SSL profile of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewaySslProfilePropertiesFormat {
   /**
    * Array of references to application gateway trusted client certificates.
@@ -10438,6 +10508,8 @@ model ApplicationGatewaySslProfilePropertiesFormat {
 /**
  * Application gateway client authentication configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayClientAuthConfiguration {
   /**
    * Verify client certificate issuer name on the application gateway.
@@ -10460,6 +10532,8 @@ model ApplicationGatewayClientAuthConfiguration {
  * UrlPathMaps give a url path to the backend mapping information for PathBasedRouting.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayUrlPathMap extends SubResource {
   /**
    * Properties of the application gateway URL path map.
@@ -10487,6 +10561,8 @@ model ApplicationGatewayUrlPathMap extends SubResource {
 /**
  * Properties of UrlPathMap of the application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayUrlPathMapPropertiesFormat {
   /**
    * Default backend address pool resource of URL path map.
@@ -10529,6 +10605,8 @@ model ApplicationGatewayUrlPathMapPropertiesFormat {
  * Path rule of URL path map of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPathRule extends SubResource {
   /**
    * Properties of the application gateway path rule.
@@ -10556,6 +10634,8 @@ model ApplicationGatewayPathRule extends SubResource {
 /**
  * Properties of path rule of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPathRulePropertiesFormat {
   /**
    * Path rules of URL path map.
@@ -10603,6 +10683,8 @@ model ApplicationGatewayPathRulePropertiesFormat {
  * Request routing rule of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRequestRoutingRule extends SubResource {
   /**
    * Properties of the application gateway request routing rule.
@@ -10630,6 +10712,8 @@ model ApplicationGatewayRequestRoutingRule extends SubResource {
 /**
  * Properties of request routing rule of the application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   /**
    * Rule type.
@@ -10695,6 +10779,8 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
  * Routing rule of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRoutingRule extends SubResource {
   /**
    * Properties of the application gateway routing rule.
@@ -10722,6 +10808,8 @@ model ApplicationGatewayRoutingRule extends SubResource {
 /**
  * Properties of routing rule of the application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRoutingRulePropertiesFormat {
   /**
    * Rule type.
@@ -10761,6 +10849,8 @@ model ApplicationGatewayRoutingRulePropertiesFormat {
  * Rewrite rule set of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRewriteRuleSet extends SubResource {
   /**
    * Properties of the application gateway rewrite rule set.
@@ -10782,6 +10872,8 @@ model ApplicationGatewayRewriteRuleSet extends SubResource {
 /**
  * Properties of rewrite rule set of the application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRewriteRuleSetPropertiesFormat {
   /**
    * Rewrite rules in the rewrite rule set.
@@ -10798,6 +10890,8 @@ model ApplicationGatewayRewriteRuleSetPropertiesFormat {
 /**
  * Rewrite rule of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRewriteRule {
   /**
    * Name of the rewrite rule that is unique within an Application Gateway.
@@ -10824,6 +10918,8 @@ model ApplicationGatewayRewriteRule {
 /**
  * Set of conditions in the Rewrite Rule in Application Gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRewriteRuleCondition {
   /**
    * The condition parameter of the RewriteRuleCondition.
@@ -10849,6 +10945,8 @@ model ApplicationGatewayRewriteRuleCondition {
 /**
  * Set of actions in the Rewrite Rule in Application Gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRewriteRuleActionSet {
   /**
    * Request Header Actions in the Action Set.
@@ -10871,6 +10969,8 @@ model ApplicationGatewayRewriteRuleActionSet {
 /**
  * Header configuration of the Actions set in Application Gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayHeaderConfiguration {
   /**
    * Header name of the header configuration.
@@ -10911,6 +11011,8 @@ model HeaderValueMatcher {
 /**
  * Url configuration of the Actions set in Application Gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayUrlConfiguration {
   /**
    * Url path which user has provided for url rewrite. Null means no path will be updated. Default value is null.
@@ -10932,6 +11034,8 @@ model ApplicationGatewayUrlConfiguration {
  * Redirect configuration of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRedirectConfiguration extends SubResource {
   /**
    * Properties of the application gateway redirect configuration.
@@ -10959,6 +11063,8 @@ model ApplicationGatewayRedirectConfiguration extends SubResource {
 /**
  * Properties of redirect configuration of the application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayRedirectConfigurationPropertiesFormat {
   /**
    * HTTP redirection type.
@@ -11004,6 +11110,8 @@ model ApplicationGatewayRedirectConfigurationPropertiesFormat {
 /**
  * Application gateway web application firewall configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayWebApplicationFirewallConfiguration {
   /**
    * Whether the web application firewall is enabled or not.
@@ -11066,6 +11174,8 @@ model ApplicationGatewayWebApplicationFirewallConfiguration {
 /**
  * Allows to disable rules within a rule group or an entire rule group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFirewallDisabledRuleGroup {
   /**
    * The name of the rule group that will be disabled.
@@ -11081,6 +11191,8 @@ model ApplicationGatewayFirewallDisabledRuleGroup {
 /**
  * Allow to exclude some variable satisfy the condition for the WAF check.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFirewallExclusion {
   /**
    * The variable to be excluded.
@@ -11101,6 +11213,8 @@ model ApplicationGatewayFirewallExclusion {
 /**
  * Application Gateway autoscale configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayAutoscaleConfiguration {
   /**
    * Lower bound on number of Application Gateway capacity.
@@ -11119,6 +11233,8 @@ model ApplicationGatewayAutoscaleConfiguration {
  * Private Link Configuration on an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPrivateLinkConfiguration extends SubResource {
   /**
    * Properties of the application gateway private link configuration.
@@ -11146,6 +11262,8 @@ model ApplicationGatewayPrivateLinkConfiguration extends SubResource {
 /**
  * Properties of private link configuration on an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPrivateLinkConfigurationProperties {
   /**
    * An array of application gateway private link ip configurations.
@@ -11163,6 +11281,8 @@ model ApplicationGatewayPrivateLinkConfigurationProperties {
  * The application gateway private link ip configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPrivateLinkIpConfiguration extends SubResource {
   /**
    * Properties of an application gateway private link ip configuration.
@@ -11190,6 +11310,8 @@ model ApplicationGatewayPrivateLinkIpConfiguration extends SubResource {
 /**
  * Properties of an application gateway private link IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPrivateLinkIpConfigurationProperties {
   /**
    * The private IP address of the IP configuration.
@@ -11223,6 +11345,8 @@ model ApplicationGatewayPrivateLinkIpConfigurationProperties {
 /**
  * Properties of Private Link Resource of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPrivateEndpointConnectionProperties {
   /**
    * The resource of private end point.
@@ -11252,6 +11376,8 @@ model ApplicationGatewayPrivateEndpointConnectionProperties {
  * Load Distribution Policy of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayLoadDistributionPolicy extends SubResource {
   /**
    * Properties of the application gateway load distribution policy.
@@ -11279,6 +11405,8 @@ model ApplicationGatewayLoadDistributionPolicy extends SubResource {
 /**
  * Properties of Load Distribution Policy of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayLoadDistributionPolicyPropertiesFormat {
   /**
    * Load Distribution Targets resource of an application gateway.
@@ -11301,6 +11429,8 @@ model ApplicationGatewayLoadDistributionPolicyPropertiesFormat {
  * Load Distribution Target of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayLoadDistributionTarget extends SubResource {
   /**
    * Properties of the application gateway load distribution target.
@@ -11326,6 +11456,8 @@ model ApplicationGatewayLoadDistributionTarget extends SubResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayLoadDistributionTargetPropertiesFormat {
   /**
    * Weight per server. Range between 1 and 100.
@@ -11345,6 +11477,8 @@ model ApplicationGatewayLoadDistributionTargetPropertiesFormat {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayEntraJWTValidationConfig extends SubResource {
   /**
    * Properties of the application gateway entra jwt validation configuration.
@@ -11367,6 +11501,8 @@ model ApplicationGatewayEntraJWTValidationConfig extends SubResource {
  * Properties of entra jwt validation configuration of the application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
   /**
    * Unauthorized request action.
@@ -11398,6 +11534,8 @@ model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
 /**
  * Application Gateway global configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayGlobalConfiguration {
   /**
    * Enable request buffering.
@@ -11425,6 +11563,8 @@ model TagsObject {
 /**
  * Response for ApplicationGatewayBackendHealth API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendHealth {
   /**
    * A list of ApplicationGatewayBackendHealthPool resources.
@@ -11436,6 +11576,8 @@ model ApplicationGatewayBackendHealth {
 /**
  * Application gateway BackendHealth pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendHealthPool {
   /**
    * Reference to an ApplicationGatewayBackendAddressPool resource.
@@ -11452,6 +11594,8 @@ model ApplicationGatewayBackendHealthPool {
 /**
  * Application gateway BackendHealthHttp settings.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendHealthHttpSettings {
   /**
    * Reference to an ApplicationGatewayBackendHttpSettings resource.
@@ -11468,6 +11612,8 @@ model ApplicationGatewayBackendHealthHttpSettings {
 /**
  * Application gateway backendhealth http settings.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendHealthServer {
   /**
    * IP address or FQDN of backend server.
@@ -11493,6 +11639,8 @@ model ApplicationGatewayBackendHealthServer {
 /**
  * Details of on demand test probe request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayOnDemandProbe {
   /**
    * The protocol used for the probe.
@@ -11543,6 +11691,8 @@ model ApplicationGatewayOnDemandProbe {
 /**
  * Result of on demand test probe.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayBackendHealthOnDemand {
   /**
    * Reference to an ApplicationGatewayBackendAddressPool resource.
@@ -11559,6 +11709,8 @@ model ApplicationGatewayBackendHealthOnDemand {
  * PrivateLink Resource of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPrivateLinkResource extends SubResource {
   /**
    * Properties of the application gateway private link resource.
@@ -11586,6 +11738,8 @@ model ApplicationGatewayPrivateLinkResource extends SubResource {
 /**
  * Properties of a private link resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayPrivateLinkResourceProperties {
   /**
    * Group identifier of private link resource.
@@ -11660,6 +11814,8 @@ model ErrorDetails {
 /**
  * Response for ApplicationGatewayAvailableWafRuleSets API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayAvailableWafRuleSetsResult {
   /**
    * The list of application gateway rule sets.
@@ -11673,6 +11829,8 @@ model ApplicationGatewayAvailableWafRuleSetsResult {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFirewallRuleSet extends Resource {
   /**
    * Properties of the application gateway firewall rule set.
@@ -11683,6 +11841,8 @@ model ApplicationGatewayFirewallRuleSet extends Resource {
 /**
  * Properties of the web application firewall rule set.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFirewallRuleSetPropertiesFormat {
   /**
    * The provisioning state of the web application firewall rule set.
@@ -11715,6 +11875,8 @@ model ApplicationGatewayFirewallRuleSetPropertiesFormat {
 /**
  * A web application firewall rule group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFirewallRuleGroup {
   /**
    * The name of the web application firewall rule group.
@@ -11736,6 +11898,8 @@ model ApplicationGatewayFirewallRuleGroup {
 /**
  * A web application firewall rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFirewallRule {
   /**
    * The identifier of the web application firewall rule.
@@ -11772,6 +11936,8 @@ model ApplicationGatewayFirewallRule {
  * Properties of ApplicationGatewayAvailableSslOptions.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayAvailableSslOptionsPropertiesFormat {
   /**
    * List of available Ssl predefined policy.
@@ -11797,6 +11963,8 @@ model ApplicationGatewayAvailableSslOptionsPropertiesFormat {
 /**
  * Response for ApplicationGatewayAvailableSslOptions API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayAvailableSslPredefinedPolicies
   is Azure.Core.Page<ApplicationGatewaySslPredefinedPolicy>;
 
@@ -11804,6 +11972,8 @@ model ApplicationGatewayAvailableSslPredefinedPolicies
  * An Ssl predefined policy.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewaySslPredefinedPolicy extends SubResource {
   /**
    * Name of the Ssl predefined policy.
@@ -11819,6 +11989,8 @@ model ApplicationGatewaySslPredefinedPolicy extends SubResource {
 /**
  * Properties of ApplicationGatewaySslPredefinedPolicy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewaySslPredefinedPolicyPropertiesFormat {
   /**
    * Ssl cipher suites to be enabled in the specified order for application gateway.
@@ -11835,6 +12007,8 @@ model ApplicationGatewaySslPredefinedPolicyPropertiesFormat {
  * Properties of ApplicationGatewayWafDynamicManifest.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayWafDynamicManifestPropertiesResult {
   /**
    * The default ruleset.
@@ -11866,6 +12040,8 @@ model DefaultRuleSetPropertyFormat {
 /**
  * Properties of the web application firewall rule set.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayFirewallManifestRuleSet {
   /**
    * The type of the web application firewall rule set.
@@ -11897,6 +12073,8 @@ model ApplicationGatewayFirewallManifestRuleSet {
 /**
  * Response for ApplicationGatewayWafDynamicManifests API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayWafDynamicManifestResultList
   is Azure.Core.Page<ApplicationGatewayWafDynamicManifestResult>;
 
@@ -27108,6 +27286,8 @@ model ManagedRuleSetRuleGroup {
 /**
  * Defines an application gateway for containers reference.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 model ApplicationGatewayForContainersReferenceDefinition {
   /**
    * Resource Id of the application gateway for containers.
