@@ -58,3 +58,15 @@ namespace Customizations;
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
 
 @@access(Storage.Blob.Service.getUserDelegationKey, Access.internal);
+@@access(Storage.Blob.Container.listBlobHierarchySegment, Access.internal);
+@@access(Storage.Blob.Container.rename, Access.internal);
+@@access(Storage.Blob.Container.restore, Access.internal);
+@@access(Storage.Blob.Blob.abortCopyFromUrl, Access.internal);
+@@access(Storage.Blob.Blob.copyFromUrl, Access.internal);
+@@access(Storage.Blob.Blob.setExpiry, Access.internal);
+@@access(Storage.Blob.Blob.startCopyFromUrl, Access.internal);
+@@access(Storage.Blob.BlockBlob.query, Access.internal);
+@@access(Storage.Blob.BlockBlob.stageBlockFromUrl, Access.internal);
+@@access(Storage.Blob.BlockBlob.upload, Access.internal);
+@@access(Storage.Blob.PageBlob.copyIncremental, Access.internal);
+@@access(Storage.Blob.PageBlob.getPageRangesDiff, Access.internal);
