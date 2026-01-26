@@ -148,6 +148,7 @@ interface Modules {
        * The name of type.
        */
       @path
+      @segment("objectDataTypes")
       typeName: string;
     }
   >;
@@ -169,6 +170,7 @@ interface Modules {
        * The name of type.
        */
       @path
+      @segment("types")
       typeName: string;
     }
   >;

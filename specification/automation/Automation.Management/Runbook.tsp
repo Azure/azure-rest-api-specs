@@ -77,7 +77,7 @@ interface Runbooks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RunbookDraft_GetContent")
   @get
-  @action("content")
+  @action("draft/content")
   getContent is ArmResourceActionSync<
     Runbook,
     void,
