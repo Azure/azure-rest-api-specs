@@ -19,6 +19,7 @@ model Project {
   @doc("The project name.")
   @visibility(Lifecycle.Read)
   @key("projectName")
+  @maxLength(24)
   @pattern(resourceNamePattern)
   name: string;
 }

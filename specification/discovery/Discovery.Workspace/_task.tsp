@@ -23,6 +23,12 @@ model TaskAssignee {
   type: ByType;
 }
 
+@doc("Request body for starting a task.")
+model StartTaskRequest {
+  @doc("Assignee that will execute the task. Optional.")
+  assignee?: TaskAssignee;
+}
+
 @doc("Task execution result.")
 model TaskResult {
   @doc("The text content of the task result.")
@@ -130,6 +136,7 @@ model Task {
   @doc("The unique identifier of the task.")
   @visibility(Lifecycle.Read)
   @key("taskName")
+  @maxLength(38)
   name: string;
 
   @doc("The title of the task.")
@@ -275,10 +282,10 @@ model TaskUpdate {
 
 interface Tasks {
   @doc("Get a task by ID.")
-  getTask is ResourceRead<Task>;
+  get is ResourceRead<Task>;
 
   @doc("List tasks with optional OData filters.")
-  listTasks is Azure.Core.ResourceList<
+  list is Azure.Core.ResourceList<
     Task,
     QueryParametersTrait<{
       @doc("OData filter expression. Supported fields: investigationId, status, createdByType, priority, createdAt, lastModifiedAt. Example: status eq 'new' or status eq 'executing'")
@@ -291,7 +298,7 @@ interface Tasks {
   @doc("Create a new task.")
   @route("/projects/{projectName}/investigations/{investigationName}/tasks")
   @post
-  createTask is Azure.Core.Foundations.Operation<
+  create is Azure.Core.Foundations.Operation<
     {
       @doc("The project name.")
       @path
@@ -311,16 +318,16 @@ interface Tasks {
   >;
 
   @doc("Patch (partial update) a task (e.g. status, description, validation requirements, dependencies, result).")
-  updateTask is StandardResourceOperations.ResourceCreateOrUpdate<Task>;
+  update is StandardResourceOperations.ResourceCreateOrUpdate<Task>;
 
   @doc("Delete a task by ID.")
-  deleteTask is ResourceDelete<Task>;
+  delete is ResourceDelete<Task>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Start execution of a task.")
   @route("/projects/{projectName}/investigations/{investigationName}/tasks/{taskName}:start")
   @post
-  startTask is Azure.Core.Foundations.Operation<
+  start is Azure.Core.Foundations.Operation<
     {
       @doc("The project name.")
       @path
@@ -339,10 +346,7 @@ interface Tasks {
 
       @doc("Start task request body.")
       @body
-      body?: {
-        @doc("Assignee that will execute the task. Optional.")
-        assignee?: TaskAssignee;
-      };
+      body?: StartTaskRequest;
     },
     Task
   >;

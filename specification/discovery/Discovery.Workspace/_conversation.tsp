@@ -19,6 +19,7 @@ model Conversation {
   @doc("The conversation name.")
   @visibility(Lifecycle.Read)
   @key("conversationName")
+  @maxLength(24)
   @pattern(resourceNamePattern)
   name: string;
 
@@ -28,27 +29,33 @@ model Conversation {
   ...WithProjectNameOptional;
 }
 
+@doc("Request body for creating a conversation.")
+model CreateConversationRequest {
+  ...WithProjectName;
+  ...WithInvestigationNameOptional;
+}
+
 // TODO: Remove un-needed route prefix!
 //@route("copilot")
 interface Conversations {
   @doc("Fetch a Conversation by name.")
-  getConversation is ResourceRead<Conversation>;
+  get is ResourceRead<Conversation>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a Conversation.")
   @createsOrReplacesResource(Conversation)
   @route("/conversations")
   @post
-  createConversation is Azure.Core.Foundations.Operation<
-    WithProjectName & WithInvestigationNameOptional,
+  create is Azure.Core.Foundations.Operation<
+    CreateConversationRequest,
     Conversation
   >;
 
   @doc("Updates a Conversation.")
-  updateConversation is StandardResourceOperations.ResourceCreateOrUpdate<Conversation>;
+  update is StandardResourceOperations.ResourceCreateOrUpdate<Conversation>;
 
   @doc("List Conversation resources")
-  listConversations is ResourceList<
+  list is ResourceList<
     Conversation,
     QueryParametersTrait<WithQueryInvestigationName & WithQueryCreatedSince>
   >;

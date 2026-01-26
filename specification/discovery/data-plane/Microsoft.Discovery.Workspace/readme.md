@@ -32,4 +32,18 @@ These settings apply only when `--tag=package-2026-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-02-01-preview'
 input-file:
   - preview/2026-02-01-preview/discovery-workspace.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    reason: LRO status response uses inline OperationStatus model from Azure.Core templates
+    from: discovery-workspace.json
+    where:
+      - $.paths["/projects/{projectName}/investigations/{investigationName}"].delete.responses["202"].schema
+      - $.paths["/projects/{projectName}/investigations/{investigationName}/operations/{operationId}"].get.responses["200"].schema
+      - $.paths["/tools/projects/{projectName}:run"].post.responses["202"].schema
+      - $.paths["/tools/projects/{projectName}/operations/{operationId}"].get.responses["200"].schema
+  - code: LroExtension
+    reason: cancelRun Does not expose polling semantics.
+    from: discovery-workspace.json
+    where:
+      - $.paths["/tools/projects/{projectName}/operations/{operationId}:cancel"].post
 ```

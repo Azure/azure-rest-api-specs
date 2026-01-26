@@ -32,4 +32,13 @@ These settings apply only when `--tag=package-2026-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-02-01-preview'
 input-file:
   - preview/2026-02-01-preview/discovery-bookshelf.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    reason: LRO status response uses inline OperationStatus model from Azure.Core templates
+    from: discovery-bookshelf.json
+    where:
+      - $.paths["/knowledgeBases/{knowledgeBaseName}"].delete.responses["202"].schema
+      - $.paths["/knowledgeBases/{knowledgeBaseName}/versions/{versionName}"].delete.responses["202"].schema
+      - $.paths["/knowledgeBases/{knowledgeBaseName}/versions/{versionName}:startIndexing"].post.responses["202"].schema
+      - $.paths["/knowledgeBases/{knowledgeBaseName}/versions/{versionName}:cancelIndexing"].post.responses["202"].schema
 ```

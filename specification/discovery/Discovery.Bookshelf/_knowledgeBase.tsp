@@ -89,6 +89,7 @@ model KnowledgeBase {
   @doc("The knowledgeBase name.")
   @visibility(Lifecycle.Read)
   @key("knowledgeBaseName")
+  @maxLength(24)
   @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
   name: string;
 
@@ -97,9 +98,9 @@ model KnowledgeBase {
 
 interface KnowledgeBases {
   @doc("List KnowledgeBase resources")
-  listKnowledgeBases is ResourceList<KnowledgeBase>;
+  list is ResourceList<KnowledgeBase>;
 
   @doc("Delete a KnowledgeBase.")
   @pollingOperation(KnowledgeBaseVersions.getOperationStatus)
-  deleteKnowledgeBase is LongRunningResourceDelete<KnowledgeBase>;
+  delete is LongRunningResourceDelete<KnowledgeBase>;
 }

@@ -35,11 +35,13 @@ model Investigation {
   @doc("The investigation name.")
   @visibility(Lifecycle.Read)
   @key("investigationName")
+  @maxLength(24)
   @pattern(resourceNamePattern)
   name: string;
 
   @doc("The parent project name.")
   @visibility(Lifecycle.Read)
+  @maxLength(24)
   @pattern(resourceNamePattern)
   projectName: string;
 
@@ -170,14 +172,14 @@ model DiscoveryEngineUpdate {
 
 interface Investigations {
   @doc("Fetch a Investigation by name.")
-  getInvestigation is ResourceRead<Investigation>;
+  get is ResourceRead<Investigation>;
 
   @doc("Get the status of a long-running operation.")
   @added(Versions.`2026-02-01-preview`)
   getOperationStatus is Operations.GetResourceOperationStatus<Investigation>;
 
   @doc("Creates or updates Investigation.")
-  createOrUpdateInvestigation is StandardResourceOperations.ResourceCreateOrUpdate<Investigation>;
+  createOrUpdate is StandardResourceOperations.ResourceCreateOrUpdate<Investigation>;
 
   @doc("Delete a Investigation.")
   @sharedRoute
@@ -188,10 +190,10 @@ interface Investigations {
   @sharedRoute
   @pollingOperation(Investigations.getOperationStatus)
   @added(Versions.`2026-02-01-preview`)
-  deleteInvestigation is LongRunningResourceDelete<Investigation>;
+  delete is LongRunningResourceDelete<Investigation>;
 
   @doc("List Investigation resources")
-  listInvestigations is ResourceList<
+  list is ResourceList<
     Investigation,
     QueryParametersTrait<WithQueryCreatedSince>
   >;
@@ -201,15 +203,17 @@ interface Investigations {
   @route("/projects/{projectName}/investigations/{investigationName}/storageAssets")
   @get
   @added(Versions.`2026-02-01-preview`)
-  getInvestigationStorageAssets is Azure.Core.Foundations.Operation<
+  getStorageAssets is Azure.Core.Foundations.Operation<
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
     },
@@ -225,11 +229,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
     },
@@ -245,11 +251,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
 
@@ -269,11 +277,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
 
@@ -293,11 +303,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
 
@@ -317,11 +329,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
 
@@ -340,11 +354,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
     },
@@ -360,11 +376,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
     } & GetDiscoveryEngineMemoryParameters,
@@ -380,11 +398,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
     },
@@ -400,11 +420,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
     },
@@ -421,11 +443,13 @@ interface Investigations {
     {
       @doc("The project name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       projectName: string;
 
       @doc("The investigation name.")
       @path
+      @maxLength(24)
       @pattern(resourceNamePattern)
       investigationName: string;
 

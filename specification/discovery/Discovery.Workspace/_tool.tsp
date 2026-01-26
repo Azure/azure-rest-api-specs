@@ -284,7 +284,7 @@ model RunResult {
   @doc("Details provided by the tool (rather than the platform).")
   toolReport?: {
     /** Percentage compete */
-    percentageComplete: int8;
+    percentageComplete: int32;
 
     statusInformation?: {};
 
@@ -351,6 +351,7 @@ model RunResult {
 model WithProjectNamePath {
   /** Name of the associated Project. */
   @path
+  @maxLength(24)
   @pattern(resourceNamePattern)
   projectName: string;
 }
@@ -359,6 +360,7 @@ model WithProjectNamePath {
 model WithOperationId {
   /** ID of the operation to cancel. */
   @path
+  @maxLength(38)
   operationId: string;
 }
 

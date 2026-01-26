@@ -21,6 +21,7 @@ model KnowledgeBaseVersion {
   @doc("The version name.")
   @visibility(Lifecycle.Read)
   @key("versionName")
+  @maxLength(24)
   @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
   name: string;
 
@@ -174,10 +175,10 @@ op GetResourceOperationStatus<
 
 interface KnowledgeBaseVersions {
   @doc("Creates or updates a KnowledgeBaseVersion.")
-  createOrUpdateKnowledgeBaseVersion is StandardResourceOperations.ResourceCreateOrUpdate<KnowledgeBaseVersion>;
+  createOrUpdate is StandardResourceOperations.ResourceCreateOrUpdate<KnowledgeBaseVersion>;
 
   @doc("Fetch a KnowledgeBaseVersion by name.")
-  getKnowledgeBaseVersion is ResourceRead<KnowledgeBaseVersion>;
+  get is ResourceRead<KnowledgeBaseVersion>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get the most recent version of KnowledgeBase.")
@@ -187,13 +188,14 @@ interface KnowledgeBaseVersions {
     {
       /** Name of the KnowledgeBase */
       @path
+      @maxLength(24)
       knowledgeBaseName: string;
     },
     KnowledgeBaseVersion
   >;
 
   @doc("List KnowledgeBaseVersion resources")
-  listKnowledgeBaseVersions is ResourceList<
+  list is ResourceList<
     KnowledgeBaseVersion,
     QueryParametersTrait<WithQueryCreatedSince>
   >;
@@ -224,16 +226,19 @@ interface KnowledgeBaseVersions {
 
     @doc("The knowledgeBase name.")
     @path
+    @maxLength(24)
     @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
     knowledgeBaseName: string,
 
     @doc("The version name.")
     @path
+    @maxLength(24)
     @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
     versionName: string,
 
     @doc("The unique ID of the operation.")
     @path
+    @maxLength(38)
     operationId: string,
   ): KnowledgeBaseOperationStatus | Azure.Core.Foundations.ErrorResponse;
 
@@ -255,7 +260,7 @@ interface KnowledgeBaseVersions {
 
   @doc("Delete a KnowledgeBaseVersion.")
   @pollingOperation(KnowledgeBaseVersions.getOperationStatus)
-  deleteKnowledgeBaseVersion is LongRunningResourceDelete<KnowledgeBaseVersion>;
+  delete is LongRunningResourceDelete<KnowledgeBaseVersion>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operation to return named response model for LRO"
   @added(Versions.`2026-02-01-preview`)
@@ -268,11 +273,13 @@ interface KnowledgeBaseVersions {
 
     @doc("The knowledgeBase name.")
     @path
+    @maxLength(24)
     @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
     knowledgeBaseName: string,
 
     @doc("The version name.")
     @path
+    @maxLength(24)
     @pattern(Microsoft.Discovery.DataPlane.Shared.resourceNamePattern)
     versionName: string,
 

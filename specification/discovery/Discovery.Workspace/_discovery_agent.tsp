@@ -50,6 +50,7 @@ model FoundryAgentCreateRequest {
 @added(Versions.`2026-02-01-preview`)
 model AgentCreateOrUpdate {
   @doc("The agent name.")
+  @maxLength(24)
   @pattern(resourceNamePattern)
   name: string;
 
@@ -68,6 +69,7 @@ model Agent {
   @doc("The agent name.")
   @key("agentName")
   @visibility(Lifecycle.Read)
+  @maxLength(24)
   @pattern(resourceNamePattern)
   name: string;
 
