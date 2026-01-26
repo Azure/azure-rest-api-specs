@@ -7,13 +7,32 @@ This document demonstrates how to use handlebar templates inline within tool def
 
 Handlebar templates enable flexible, runtime-configurable agent tools by:
 
-1. **Using templates in existing tool properties** - Handlebar templates are supported directly
-   on existing properties like `vector_store_ids`, `file_ids`, and `headers`.
-2. **Supporting optional inputs** - For `file_ids` and `vector_store_ids`, empty string values
-   are automatically stripped at runtime, allowing developers to define multiple placeholder
-   inputs while users provide fewer values.
-3. **Adapting to different contexts** - Runtime configuration allows the same agent definition
-   to work with different resources, credentials, and data sources.
+1. **Using templates in existing tool properties** - Templates are supported directly on
+   properties like `vector_store_ids`, `file_ids`, `headers`, `container`, and MCP server
+   configuration.
+2. **Supporting optional inputs** - Empty string values in `file_ids` and `vector_store_ids`
+   are automatically stripped at runtime, enabling flexible input counts.
+3. **Adapting to different contexts** - The same agent definition works with different
+   resources, credentials, and data sources via runtime configuration.
+
+---
+
+## Supported Properties
+
+The following tool properties support handlebar templates:
+
+| Tool Type | Property | Type | Description |
+|-----------|----------|------|-------------|
+| `file_search` | `vector_store_ids` | `string[]` | Array of vector store IDs. Templates apply to individual array items. Empty values are automatically stripped. |
+| `code_interpreter` | `container` | `string \| object` | Container ID (as string) or container configuration object. When using object form, `file_ids` within the container can be templated. |
+| `code_interpreter` | `container.file_ids` | `string[]` | Array of file IDs when `container.type` is `"auto"`. Templates apply to individual array items. Empty values are automatically stripped. |
+| `mcp` | `server_label` | `string` | Label for the MCP server. |
+| `mcp` | `server_url` | `string` | URL for the MCP server. |
+| `mcp` | `headers` | `object` | HTTP headers as key-value pairs. Templates apply to individual header values. |
+
+**Note**: Templates work on individual string values within arrays and objects. For arrays
+like `vector_store_ids` and `file_ids`, each item can contain a template. For objects like
+`headers`, each property value can contain a template.
 
 ---
 
@@ -71,7 +90,7 @@ Handlebar templates enable flexible, runtime-configurable agent tools by:
 
 ---
 
-### 2. Code Interpreter - Flexible File Loading
+### 2. Code Interpreter - Auto Container with flexible File Loading
 
 **Scenario**: Financial reporting agent that processes variable number of data files.
 
@@ -157,11 +176,63 @@ Handlebar templates enable flexible, runtime-configurable agent tools by:
 ```
 
 **Note**: Empty `data_file_4` and `data_file_5` are automatically stripped, resulting in only
-4 files being loaded.
+4 files loaded at runtime.
 
 ---
 
-### 3. MCP - Dynamic Server Configuration
+### 3. Code Interpreter - Container ID Template
+
+**Scenario**: Data analysis agent with runtime container selection.
+
+**Agent Definition:**
+
+```json
+{
+  "description": "Data analysis agent with runtime container selection",
+  "definition": {
+    "kind": "prompt",
+    "model": "gpt-4o",
+    "instructions": "You are a data analyst for {{environment}}.",
+    "tools": [
+      {
+        "type": "code_interpreter",
+        "container": "{{container_id}}"
+      }
+    ],
+    "structured_inputs": {
+      "environment": {
+        "description": "Environment name",
+        "required": true
+      },
+      "container_id": {
+        "description": "Pre-configured container ID",
+        "required": true,
+        "schema": {"type": "string"}
+      }
+    }
+  }
+}
+```
+
+**Runtime Usage:**
+
+```json
+{
+  "agent": {"type": "agent_reference", "name": "data-analyst", "version": "1"},
+  "input": [{"type": "text", "text": "Analyze the dataset"}],
+  "structured_inputs": {
+    "environment": "Production",
+    "container_id": "container_prod_py311_v2"
+  }
+}
+```
+
+**Note**: Enables runtime selection of pre-configured containers with different Python
+environments and pre-loaded file sets.
+
+---
+
+### 4. MCP - Dynamic Server Configuration
 
 **Scenario**: Development agent with runtime-configurable MCP server and authentication.
 
@@ -234,7 +305,7 @@ Handlebar templates enable flexible, runtime-configurable agent tools by:
 
 ---
 
-### 4. Multi-Tool Agent
+### 5. Multi-Tool Agent
 
 **Scenario**: Research analyst combining file search, code interpreter, and MCP tools with
 dynamic configuration.
