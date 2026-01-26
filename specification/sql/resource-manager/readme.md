@@ -3578,7 +3578,7 @@ directive:
 
 ``` yaml
 suppressions:
-    - code: MissingSegmentsInNestedResourceListOperation
+  - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
   - code: ResourceNameRestriction
