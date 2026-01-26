@@ -20,23 +20,35 @@ interface RegistryPrivateEndpointConnections {
    * Get a private endpoint connection.
    */
   @summary("Get a private endpoint connection")
-  get is ArmChildResourceRead<RegistryPrivateEndpointConnection, ParentResource = Registry>;
+  get is ArmChildResourceRead<
+    RegistryPrivateEndpointConnection,
+    ParentResource = Registry
+  >;
 
   /**
    * Create or update a private endpoint connection.
    */
   @summary("Create or update a private endpoint connection")
-  createOrUpdate is ArmChildResourceCreateOrReplaceAsync<RegistryPrivateEndpointConnection, ParentResource = Registry>;
+  createOrUpdate is ArmChildResourceCreateOrReplaceAsync<
+    RegistryPrivateEndpointConnection,
+    ParentResource = Registry
+  >;
 
   /**
    * Delete a private endpoint connection.
    */
   @summary("Delete a private endpoint connection")
-  delete is ArmChildResourceDeleteWithoutOkAsync<RegistryPrivateEndpointConnection, ParentResource = Registry>;
+  delete is ArmChildResourceDeleteWithoutOkAsync<
+    RegistryPrivateEndpointConnection,
+    ParentResource = Registry
+  >;
 
   /**
    * List private endpoint connections for a registry.
    */
   @summary("List private endpoint connections for a registry")
-  listByRegistry is ArmChildResourceListByParent<RegistryPrivateEndpointConnection, ParentResource = Registry>;
+  listByRegistry is ArmChildResourceListByParent<
+    RegistryPrivateEndpointConnection,
+    ParentResource = Registry
+  >;
 }
