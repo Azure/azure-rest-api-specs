@@ -1,0 +1,147 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.App SreAgent management service",
+    "version": "2025-05-01-preview",
+    "description": "Microsoft.App Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SupportedModels"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedModels": {
+      "get": {
+        "operationId": "SupportedModels_ListByLocation",
+        "tags": [
+          "SupportedModels"
+        ],
+        "description": "List SupportedModel resources by SubscriptionLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SupportedModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SupportedModels_ListByLocation": {
+            "$ref": "./examples/SupportedModels_ListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SupportedModel": {
+      "type": "object",
+      "description": "Collection of supported AI models",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupportedModelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SupportedModelListResult": {
+      "type": "object",
+      "description": "The response of a SupportedModel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SupportedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/SupportedModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SupportedModelProperties": {
+      "type": "object",
+      "description": "Supported AI model properties",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider name (e.g., MicrosoftFoundry, Anthropic)"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name (e.g., gpt-5.2, claude-sonnet-4-5)"
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Indicates whether this is the default model"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
