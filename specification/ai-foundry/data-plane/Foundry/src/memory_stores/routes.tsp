@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 import "../common/models.tsp";
@@ -8,13 +7,11 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
-@tag("Memory stores")
+@tag("Memory Stores")
 interface MemoryStores {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("Create a memory store.")
@@ -22,7 +19,8 @@ interface MemoryStores {
   @post
   @route("/memory_stores")
   createMemoryStore is FoundryDataPlaneOperation<
-    CreateMemoryStoreRequest,
+    CreateMemoryStoreRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     MemoryStoreObject
   >;
 
@@ -32,7 +30,8 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}")
   updateMemoryStore is FoundryDataPlaneOperation<
-    UpdateMemoryStoreRequest,
+    UpdateMemoryStoreRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     MemoryStoreObject
   >;
 
@@ -42,17 +41,20 @@ interface MemoryStores {
   @get
   @route("/memory_stores/{name}")
   getMemoryStore is FoundryDataPlaneOperation<
-    GetMemoryStoreRequest,
+    GetMemoryStoreRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     MemoryStoreObject
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("List all memory stores.")
   @operationId("listMemoryStores")
+  @get
   @list
   @route("/memory_stores")
   listMemoryStores is FoundryDataPlaneOperation<
-    ListMemoryStoresRequest,
+    ListMemoryStoresRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     AgentsPagedResult<MemoryStoreObject>
   >;
 
@@ -62,7 +64,8 @@ interface MemoryStores {
   @delete
   @route("/memory_stores/{name}")
   deleteMemoryStore is FoundryDataPlaneOperation<
-    DeleteMemoryStoreRequest,
+    DeleteMemoryStoreRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     DeleteMemoryStoreResponse
   >;
 
@@ -72,7 +75,8 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}:search_memories")
   searchMemories is FoundryDataPlaneOperation<
-    MemoryStoreSearchRequest,
+    MemoryStoreSearchRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     MemoryStoreSearchResponse
   >;
 
@@ -83,7 +87,8 @@ interface MemoryStores {
   @route("/memory_stores/{name}:update_memories")
   @pollingOperation(MemoryStores.getUpdateResult)
   updateMemories is FoundryDataPlaneOperation<
-    MemoryStoreUpdateRequest,
+    MemoryStoreUpdateRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     Foundations.AcceptedResponse &
       MemoryStoreUpdateResponse &
       Foundations.LongRunningStatusLocation<MemoryStoreUpdateCompletedResult>
@@ -95,7 +100,8 @@ interface MemoryStores {
   @get
   @route("/memory_stores/{name}/updates/{update_id}")
   getUpdateResult is FoundryDataPlaneOperation<
-    MemoryStoreGetUpdateResultRequest,
+    MemoryStoreGetUpdateResultRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     MemoryStoreUpdateResponse
   >;
 
@@ -105,7 +111,8 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}:delete_scope")
   deleteScope is FoundryDataPlaneOperation<
-    MemoryStoreDeleteScopeRequest,
+    MemoryStoreDeleteScopeRequest &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.memory_stores_v1>,
     MemoryStoreDeleteScopeResponse
   >;
 }

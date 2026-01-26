@@ -14,7 +14,7 @@ alias InsightsServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
   NoConditionalRequests;
 
-alias InsightsOperations = Azure.Core.ResourceOperations<InsightsServiceTraits>;
+alias InsightsOperations = FoundryAzureOperations<WithConditionalFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>>;
 
 alias IncludeCoordinatesTrait = {
   @query("includeCoordinates")
@@ -50,6 +50,7 @@ alias IncludeCoordinatesQueryTrait = {
 };
 
 @removed(Versions.v1)
+@tag("Insights")
 interface Insights {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Generate Insights")
@@ -57,8 +58,6 @@ interface Insights {
   @route("insights")
   generate is Azure.Core.Foundations.Operation<
     {
-      ...FoundryBetaOptInHeader<FoundryPreviewOptInKeys.insights_v1>;
-
       @header("Repeatability-Request-ID")
       @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
       repeatabilityRequestId?: string;
@@ -69,22 +68,22 @@ interface Insights {
 
       @doc("Complete evaluation configuration including data source, evaluators, and result settings")
       @body
-      insight: InsightPreview;
+      insight: Insight;
     },
-    ResourceCreatedResponse<InsightPreview>
+    ResourceCreatedResponse<Insight>
   >;
 
   @doc("Get a specific insight by Id.")
   @get
   get is InsightsOperations.ResourceRead<
-    InsightPreview,
+    Insight,
     QueryParametersTrait<IncludeCoordinatesTrait, TraitContext.Read>
   >;
 
   @doc("List all insights in reverse chronological order (newest first).")
   @get
   list is InsightsOperations.ResourceList<
-    InsightPreview,
+    Insight,
     ListQueryParametersTrait<FilterQueryParamsTraits>
   >;
 }

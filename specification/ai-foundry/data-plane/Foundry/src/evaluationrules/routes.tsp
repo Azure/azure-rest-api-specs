@@ -1,25 +1,20 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+
 import "../common/models.tsp";
 import "../servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias EvaluationRuleTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests; // NoRetryRequests suppresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
+alias EvaluationRuleOperations = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>>;
 
-alias EvaluationRuleOperations = Azure.Core.ResourceOperations<EvaluationRuleTraits>;
-
-@removed(Versions.v1)
+@tag("EvaluationRules")
 interface EvaluationRules {
   // GET /evaluationrules/{id}
   @doc("Get an evaluation rule.")

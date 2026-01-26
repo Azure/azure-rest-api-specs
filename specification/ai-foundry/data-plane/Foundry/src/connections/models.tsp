@@ -164,3 +164,14 @@ union CredentialType {
   @doc("Agentic identity credential")
   agenticIdentityPreview: "AgenticIdentityToken_Preview",
 }
+
+@doc("SAS Credential definition")
+model SasCredential {
+  @doc("SAS uri")
+  @visibility(Lifecycle.Read)
+  sasUri: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Type of credential")
+  type: "SAS";
+}

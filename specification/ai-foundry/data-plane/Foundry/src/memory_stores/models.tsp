@@ -9,7 +9,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
 @doc("A memory store that can store and retrieve user memories.")
 model MemoryStoreObject {
   @doc("The object type, which is always 'memory_store'.")
@@ -41,7 +40,6 @@ model MemoryStoreObject {
   definition: MemoryStoreDefinition;
 }
 
-@removed(Versions.v1)
 model DeleteMemoryStoreResponse {
   @doc("The object type. Always 'memory_store.deleted'.")
   object: "memory_store.deleted";
@@ -53,7 +51,6 @@ model DeleteMemoryStoreResponse {
   deleted: boolean;
 }
 
-@removed(Versions.v1)
 @doc("The type of memory store implementation to use.")
 union MemoryStoreKind {
   string,
@@ -62,7 +59,6 @@ union MemoryStoreKind {
   default: "default",
 }
 
-@removed(Versions.v1)
 @doc("Base definition for memory store configurations.")
 @discriminator("kind")
 model MemoryStoreDefinition {
@@ -70,7 +66,6 @@ model MemoryStoreDefinition {
   kind: MemoryStoreKind;
 }
 
-@removed(Versions.v1)
 @doc("Default memory store implementation.")
 model MemoryStoreDefaultDefinition extends MemoryStoreDefinition {
   @doc("The kind of the memory store.")
@@ -89,7 +84,6 @@ model MemoryStoreDefaultDefinition extends MemoryStoreDefinition {
   options?: MemoryStoreDefaultOptions;
 }
 
-@removed(Versions.v1)
 @doc("Default memory store configurations.")
 model MemoryStoreDefaultOptions {
   @doc("Whether to enable user profile extraction and storage. Default is true.")
@@ -102,7 +96,6 @@ model MemoryStoreDefaultOptions {
   chat_summary_enabled: boolean = true;
 }
 
-@removed(Versions.v1)
 @doc("Usage statistics of a memory store operation.")
 model MemoryStoreOperationUsage {
   @doc("The number of embedding tokens.")
@@ -111,7 +104,6 @@ model MemoryStoreOperationUsage {
   ...OpenAI.ResponseUsage;
 }
 
-@removed(Versions.v1)
 @doc("Status of a memory store update operation.")
 union MemoryStoreUpdateStatus {
   queued: "queued",
@@ -127,7 +119,6 @@ union MemoryStoreUpdateStatus {
   superseded: "superseded",
 }
 
-@removed(Versions.v1)
 @doc("Provides the status of a memory store update operation.")
 model MemoryStoreUpdateResponse {
   @doc("The unique ID of this update request. Use this value as previous_update_id in subsequent requests to perform incremental updates.")
@@ -137,7 +128,6 @@ model MemoryStoreUpdateResponse {
     The status of the memory update operation. One of "queued", "in_progress", "completed", "failed", or "superseded".
     """)
   @Azure.Core.lroStatus
-  @removed(Versions.v1)
   status: MemoryStoreUpdateStatus;
 
   @doc("The update_id the operation was superseded by when status is \"superseded\".")
@@ -145,7 +135,6 @@ model MemoryStoreUpdateResponse {
 
   @doc("The result of memory store update operation when status is \"completed\".")
   @Azure.Core.lroResult
-  @removed(Versions.v1)
   result?: MemoryStoreUpdateCompletedResult;
 
   @doc("Error object that describes the error when status is \"failed\".")
@@ -153,7 +142,6 @@ model MemoryStoreUpdateResponse {
   error?: ApiError;
 }
 
-@removed(Versions.v1)
 @doc("Memory update result.")
 model MemoryStoreUpdateCompletedResult {
   @doc("A list of individual memory operations that were performed during the update.")
@@ -163,7 +151,6 @@ model MemoryStoreUpdateCompletedResult {
   usage: MemoryStoreOperationUsage;
 }
 
-@removed(Versions.v1)
 @doc("Represents a single memory operation (create, update, or delete) performed on a memory item.")
 model MemoryOperation {
   @doc("The type of memory operation being performed.")
@@ -173,7 +160,6 @@ model MemoryOperation {
   memory_item: MemoryItem;
 }
 
-@removed(Versions.v1)
 @doc("Memory operation kind.")
 union MemoryOperationKind {
   string,
@@ -188,14 +174,12 @@ union MemoryOperationKind {
   delete: "delete",
 }
 
-@removed(Versions.v1)
 @doc("Memory search options.")
 model MemorySearchOptions {
   @doc("Maximum number of memory items to return.")
   max_memories?: int32;
 }
 
-@removed(Versions.v1)
 @doc("Memory search response.")
 model MemoryStoreSearchResponse {
   @doc("The unique ID of this search request. Use this value as previous_search_id in subsequent requests to perform incremental searches.")
@@ -208,14 +192,12 @@ model MemoryStoreSearchResponse {
   usage: MemoryStoreOperationUsage;
 }
 
-@removed(Versions.v1)
 @doc("A retrieved memory item from memory search.")
 model MemorySearchItem {
   @doc("Retrieved memory item.")
   memory_item: MemoryItem;
 }
 
-@removed(Versions.v1)
 @doc("Memory item kind.")
 union MemoryItemKind {
   string,
@@ -227,7 +209,6 @@ union MemoryItemKind {
   chat_summary: "chat_summary",
 }
 
-@removed(Versions.v1)
 @doc("A single memory item stored in the memory store, containing content and metadata.")
 @discriminator("kind")
 model MemoryItem {
@@ -248,21 +229,18 @@ model MemoryItem {
   kind: MemoryItemKind;
 }
 
-@removed(Versions.v1)
 @doc("A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.")
 model UserProfileMemoryItem extends MemoryItem {
   @doc("The kind of the memory item.")
   kind: MemoryItemKind.user_profile;
 }
 
-@removed(Versions.v1)
 @doc("A memory item containing a summary extracted from conversations.")
 model ChatSummaryMemoryItem extends MemoryItem {
   @doc("The kind of the memory item.")
   kind: MemoryItemKind.chat_summary;
 }
 
-@removed(Versions.v1)
 @doc("Response for deleting memories from a scope.")
 model MemoryStoreDeleteScopeResponse {
   @doc("The object type. Always 'memory_store.scope.deleted'.")

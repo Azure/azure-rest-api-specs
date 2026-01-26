@@ -15,6 +15,7 @@ namespace Azure.AI.Projects;
 alias ListDatasetVersionsParameters = {};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
+@tag("Datasets")
 interface Datasets
   extends VersionedOperations<
       DatasetVersion,

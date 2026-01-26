@@ -15,6 +15,7 @@ alias DeploymentServiceTraits = SupportsClientRequestId &
 
 alias DeploymentOperations = Azure.Core.ResourceOperations<DeploymentServiceTraits>;
 
+@tag("Deployments")
 interface Deployments {
   @doc("Get a deployed model.")
   get is DeploymentOperations.ResourceRead<Deployment>;

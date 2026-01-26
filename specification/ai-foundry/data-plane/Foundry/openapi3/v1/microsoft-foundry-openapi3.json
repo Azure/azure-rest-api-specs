@@ -9,13 +9,43 @@
       "name": "Agents"
     },
     {
+      "name": "Connections"
+    },
+    {
+      "name": "Datasets"
+    },
+    {
+      "name": "Deployments"
+    },
+    {
+      "name": "EvaluationTaxonomies"
+    },
+    {
+      "name": "EvaluationRules"
+    },
+    {
+      "name": "Evaluators"
+    },
+    {
+      "name": "Indexes"
+    },
+    {
+      "name": "Memory Stores"
+    },
+    {
       "name": "Conversations"
+    },
+    {
+      "name": "Evals"
     },
     {
       "name": "Responses"
     },
     {
-      "name": "Evals"
+      "name": "Redteams"
+    },
+    {
+      "name": "Schedules"
     }
   ],
   "paths": {
@@ -24,17 +54,6 @@
         "operationId": "Agents_createAgent",
         "description": "Creates the agent.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
           {
             "name": "Foundry-Beta",
             "in": "header",
@@ -56,6 +75,16 @@
                 }
               ]
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -98,17 +127,6 @@
         "operationId": "Agents_listAgents",
         "description": "Returns the list of all agents.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
           {
             "name": "kind",
             "in": "query",
@@ -156,6 +174,16 @@
             "in": "query",
             "required": false,
             "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
             "schema": {
               "type": "string"
             },
@@ -221,17 +249,6 @@
         "description": "Retrieves the agent.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -239,6 +256,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -272,17 +299,6 @@
         "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -312,6 +328,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -355,17 +381,6 @@
         "description": "Deletes an agent.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -395,6 +410,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -430,17 +455,6 @@
         "description": "Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -470,6 +484,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -514,17 +538,6 @@
         "operationId": "Agents_listAgentContainerOperations",
         "description": "List container operations for an agent.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
           {
             "name": "Foundry-Beta",
             "in": "header",
@@ -583,6 +596,16 @@
             "in": "query",
             "required": false,
             "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
             "schema": {
               "type": "string"
             },
@@ -648,17 +671,6 @@
         "description": "Get the status of a container operation for an agent.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -687,6 +699,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -722,17 +744,6 @@
         "description": "Create a new agent version.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -763,6 +774,16 @@
               "type": "string",
               "maxLength": 63
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -805,17 +826,6 @@
         "operationId": "Agents_listAgentVersions",
         "description": "Returns the list of versions of an agent.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -862,6 +872,16 @@
             "in": "query",
             "required": false,
             "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
             "schema": {
               "type": "string"
             },
@@ -927,17 +947,6 @@
         "description": "Retrieves a specific version of an agent.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -954,6 +963,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -986,17 +1005,6 @@
         "operationId": "Agents_deleteAgentVersion",
         "description": "Deletes a specific version of an agent.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
           {
             "name": "Foundry-Beta",
             "in": "header",
@@ -1036,6 +1044,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1071,17 +1089,6 @@
         "description": "Get a container for a specific version of an agent.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -1110,6 +1117,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1144,17 +1161,6 @@
         "operationId": "Agents_listAgentVersionContainerOperations",
         "description": "List container operations for a specific version of an agent.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
           {
             "name": "Foundry-Beta",
             "in": "header",
@@ -1226,6 +1232,16 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1287,17 +1303,6 @@
         "description": "Delete a container for a specific version of an agent. If the container doesn't exist, the operation will be no-op.\nThe operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -1326,6 +1331,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1369,17 +1384,6 @@
         "operationId": "Agents_streamAgentContainerLogs",
         "description": "Container log entry streamed from the container as text chunks.\nEach chunk is a UTF-8 string that may be either a plain text log line\nor a JSON-formatted log entry, depending on the type of container log being streamed.\nClients should treat each chunk as opaque text and, if needed, attempt\nto parse it as JSON based on their logging requirements.\n\nFor system logs, the format is JSON with the following structure:\n{\"TimeStamp\":\"2025-12-15T16:51:33Z\",\"Type\":\"Normal\",\"ContainerAppName\":null,\"RevisionName\":null,\"ReplicaName\":null,\"Msg\":\"Connecting to the events collector...\",\"Reason\":\"StartingGettingEvents\",\"EventSource\":\"ContainerAppController\",\"Count\":1}\n{\"TimeStamp\":\"2025-12-15T16:51:34Z\",\"Type\":\"Normal\",\"ContainerAppName\":null,\"RevisionName\":null,\"ReplicaName\":null,\"Msg\":\"Successfully connected to events server\",\"Reason\":\"ConnectedToEventsServer\",\"EventSource\":\"ContainerAppController\",\"Count\":1}\n\nFor console logs, the format is plain text as emitted by the container's stdout/stderr.\n2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...\n2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']\n2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - \"GET /readiness HTTP/1.1\" 200 OK\n2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - \"GET /readiness HTTP/1.1\" 200 OK\n2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - \"GET /readiness HTTP/1.1\" 200 OK",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
           {
             "name": "Foundry-Beta",
             "in": "header",
@@ -1440,6 +1444,16 @@
               "format": "int32"
             },
             "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1467,17 +1481,6 @@
         "operationId": "Agents_startAgentContainer",
         "description": "Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.\nThe operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
           {
             "name": "Foundry-Beta",
             "in": "header",
@@ -1507,6 +1510,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1575,17 +1588,6 @@
         "description": "Stop a container for a specific version of an agent. If the container is not running, or already stopped, the operation will be no-op.\nThe operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -1614,6 +1616,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1658,17 +1670,6 @@
         "description": "Update a container for a specific version of an agent. If the container is not running, the operation will be no-op.\nThe operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -1697,6 +1698,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1763,17 +1774,6 @@
         "description": "Create a new agent version from a manifest.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -1804,6 +1804,16 @@
               "type": "string",
               "maxLength": 63
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1849,17 +1859,6 @@
         "description": "Creates an agent from a manifest.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string",
-              "minLength": 1
-            },
-            "explode": false
-          },
-          {
             "name": "Foundry-Beta",
             "in": "header",
             "required": false,
@@ -1880,6 +1879,16 @@
                 }
               ]
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -1990,7 +1999,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Connections"
+        ]
       }
     },
     "/connections/{name}": {
@@ -2053,7 +2065,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Connections"
+        ]
       }
     },
     "/connections/{name}/getConnectionWithCredentials": {
@@ -2116,7 +2131,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Connections"
+        ]
       }
     },
     "/datasets": {
@@ -2158,7 +2176,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Datasets"
+        ]
       }
     },
     "/datasets/{name}/versions": {
@@ -2209,7 +2230,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Datasets"
+        ]
       }
     },
     "/datasets/{name}/versions/{version}": {
@@ -2269,7 +2293,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Datasets"
+        ]
       },
       "delete": {
         "operationId": "Datasets_deleteVersion",
@@ -2320,7 +2347,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Datasets"
+        ]
       },
       "patch": {
         "operationId": "Datasets_createOrUpdateVersion",
@@ -2389,6 +2419,9 @@
             }
           }
         },
+        "tags": [
+          "Datasets"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -2459,7 +2492,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Datasets"
+        ]
       }
     },
     "/datasets/{name}/versions/{version}/startPendingUpload": {
@@ -2520,6 +2556,9 @@
             }
           }
         },
+        "tags": [
+          "Datasets"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -2614,7 +2653,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Deployments"
+        ]
       }
     },
     "/deployments/{name}": {
@@ -2677,6 +2719,292 @@
               }
             }
           }
+        },
+        "tags": [
+          "Deployments"
+        ]
+      }
+    },
+    "/evaluationrules": {
+      "get": {
+        "operationId": "EvaluationRules_list",
+        "description": "List all evaluation rules.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionType",
+            "in": "query",
+            "required": false,
+            "description": "Filter by the type of evaluation rule.",
+            "schema": {
+              "$ref": "#/components/schemas/EvaluationRuleActionType"
+            },
+            "explode": false
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "required": false,
+            "description": "Filter by the agent name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "description": "Filter by the enabled status.",
+            "schema": {
+              "type": "boolean"
+            },
+            "explode": false
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEvaluationRule"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationRules"
+        ]
+      }
+    },
+    "/evaluationrules/{id}": {
+      "get": {
+        "operationId": "EvaluationRules_get",
+        "description": "Get an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the evaluation rule.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationRule"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationRules"
+        ]
+      },
+      "delete": {
+        "operationId": "EvaluationRules_delete",
+        "description": "Delete an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the evaluation rule.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationRules"
+        ]
+      },
+      "put": {
+        "operationId": "EvaluationRules_createOrUpdate",
+        "description": "Create or update an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the evaluation rule.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationRule"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationRule"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationRules"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationRule"
+              }
+            }
+          },
+          "description": "Evaluation rule resource"
         }
       }
     },
@@ -2727,7 +3055,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedEvaluationPreviewTaxonomy"
+                  "$ref": "#/components/schemas/PagedEvaluationTaxonomy"
                 }
               }
             }
@@ -2751,7 +3079,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "EvaluationTaxonomies"
+        ]
       }
     },
     "/evaluationtaxonomies/{name}": {
@@ -2790,7 +3121,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EvaluationPreviewTaxonomy"
+                  "$ref": "#/components/schemas/EvaluationTaxonomy"
                 }
               }
             }
@@ -2814,7 +3145,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "EvaluationTaxonomies"
+        ]
       },
       "delete": {
         "operationId": "EvaluationTaxonomies_delete",
@@ -2868,7 +3202,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "EvaluationTaxonomies"
+        ]
       },
       "put": {
         "operationId": "EvaluationTaxonomies_create",
@@ -2905,7 +3242,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EvaluationPreviewTaxonomy"
+                  "$ref": "#/components/schemas/EvaluationTaxonomy"
                 }
               }
             }
@@ -2915,7 +3252,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EvaluationPreviewTaxonomy"
+                  "$ref": "#/components/schemas/EvaluationTaxonomy"
                 }
               }
             }
@@ -2940,12 +3277,15 @@
             }
           }
         },
+        "tags": [
+          "EvaluationTaxonomies"
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluationPreviewTaxonomyCreateOrUpdate"
+                "$ref": "#/components/schemas/EvaluationTaxonomyCreateOrUpdate"
               }
             }
           },
@@ -2987,7 +3327,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EvaluationPreviewTaxonomy"
+                  "$ref": "#/components/schemas/EvaluationTaxonomy"
                 }
               }
             }
@@ -3012,16 +3352,505 @@
             }
           }
         },
+        "tags": [
+          "EvaluationTaxonomies"
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluationPreviewTaxonomyUpdate"
+                "$ref": "#/components/schemas/EvaluationTaxonomyUpdate"
               }
             }
           },
           "description": "The evaluation taxonomy."
+        }
+      }
+    },
+    "/evaluators": {
+      "get": {
+        "operationId": "Evaluators_listLatestVersions",
+        "description": "List the latest version of each evaluator",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EvaluatorType"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "all"
+                  ]
+                }
+              ]
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=v1"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEvaluatorVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      }
+    },
+    "/evaluators/{name}/versions": {
+      "get": {
+        "operationId": "Evaluators_listVersions",
+        "description": "List all versions of the given evaluator",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EvaluatorType"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "all"
+                  ]
+                }
+              ]
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=v1"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEvaluatorVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      },
+      "post": {
+        "operationId": "Evaluators_createVersion",
+        "description": "Create a new EvaluatorVersion with auto incremented version id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=v1"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorVersionCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluators/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Evaluators_getVersion",
+        "description": "Get the specific version of the EvaluatorVersion. The service returns 404 Not Found error if the EvaluatorVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=v1"
+              ]
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      },
+      "delete": {
+        "operationId": "Evaluators_deleteVersion",
+        "description": "Delete the specific version of the EvaluatorVersion. The service returns 204 No Content if the EvaluatorVersion was deleted successfully or if the EvaluatorVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=v1"
+              ]
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the EvaluatorVersion to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      },
+      "patch": {
+        "operationId": "Evaluators_updateVersion",
+        "description": "Update an existing EvaluatorVersion with the given version id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=v1"
+              ]
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the EvaluatorVersion to update.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorVersionUpdate"
+              }
+            }
+          },
+          "description": "Evaluator resource"
         }
       }
     },
@@ -3064,7 +3893,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Indexes"
+        ]
       }
     },
     "/indexes/{name}/versions": {
@@ -3115,7 +3947,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Indexes"
+        ]
       }
     },
     "/indexes/{name}/versions/{version}": {
@@ -3175,7 +4010,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Indexes"
+        ]
       },
       "delete": {
         "operationId": "Indexes_deleteVersion",
@@ -3226,7 +4064,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Indexes"
+        ]
       },
       "patch": {
         "operationId": "Indexes_createOrUpdateVersion",
@@ -3295,6 +4136,9 @@
             }
           }
         },
+        "tags": [
+          "Indexes"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -3305,6 +4149,803 @@
             }
           },
           "description": "The Index to create or update."
+        }
+      }
+    },
+    "/memory_stores": {
+      "post": {
+        "operationId": "createMemoryStore",
+        "description": "Create a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryStoreObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "maxLength": 256,
+                    "description": "The name of the memory store."
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "A human-readable description of the memory store."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Arbitrary key-value metadata to associate with the memory store."
+                  },
+                  "definition": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/MemoryStoreDefinition"
+                      }
+                    ],
+                    "description": "The memory store definition."
+                  }
+                },
+                "required": [
+                  "name",
+                  "definition"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listMemoryStores",
+        "description": "List all memory stores.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MemoryStoreObject"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ]
+      }
+    },
+    "/memory_stores/{name}": {
+      "post": {
+        "operationId": "updateMemoryStore",
+        "description": "Update a memory store.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to update.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryStoreObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "A human-readable description of the memory store."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Arbitrary key-value metadata to associate with the memory store."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getMemoryStore",
+        "description": "Retrieve a memory store.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryStoreObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteMemoryStore",
+        "description": "Delete a memory store.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteMemoryStoreResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ]
+      }
+    },
+    "/memory_stores/{name}/updates/{update_id}": {
+      "get": {
+        "operationId": "getUpdateResult",
+        "description": "Get memory store update result.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "update_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the memory update operation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryStoreUpdateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ]
+      }
+    },
+    "/memory_stores/{name}:delete_scope": {
+      "post": {
+        "operationId": "deleteScopeMemories",
+        "description": "Delete all memories associated with a specific scope from a memory store.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryStoreDeleteScopeResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "type": "string",
+                    "description": "The namespace that logically groups and isolates memories to delete, such as a user ID."
+                  }
+                },
+                "required": [
+                  "scope"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory_stores/{name}:search_memories": {
+      "post": {
+        "operationId": "searchMemories",
+        "description": "Search for relevant memories from a memory store based on conversation context.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to search.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryStoreSearchResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "type": "string",
+                    "description": "The namespace that logically groups and isolates memories, such as a user ID."
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OpenAI.Item"
+                    },
+                    "description": "Items for which to search for relevant memories."
+                  },
+                  "previous_search_id": {
+                    "type": "string",
+                    "description": "The unique ID of the previous search request, enabling incremental memory search from where the last operation left off."
+                  },
+                  "options": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/MemorySearchOptions"
+                      }
+                    ],
+                    "description": "Memory search options."
+                  }
+                },
+                "required": [
+                  "scope"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory_stores/{name}:update_memories": {
+      "post": {
+        "operationId": "updateMemories",
+        "description": "Update memory store with conversation memories.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to update.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "The location for monitoring the operation state.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryStoreUpdateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "type": "string",
+                    "description": "The namespace that logically groups and isolates memories, such as a user ID."
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OpenAI.Item"
+                    },
+                    "description": "Conversation items from which to extract memories."
+                  },
+                  "previous_update_id": {
+                    "type": "string",
+                    "description": "The unique ID of the previous update request, enabling incremental memory updates from where the last operation left off."
+                  },
+                  "update_delay": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Timeout period before processing the memory update in seconds.\nIf a new update request is received during this period, it will cancel the current request and reset the timeout.\nSet to 0 to immediately trigger the update without delay.\nDefaults to 300 (5 minutes).",
+                    "default": 300
+                  }
+                },
+                "required": [
+                  "scope"
+                ]
+              }
+            }
+          }
         }
       }
     },
@@ -5555,7 +7196,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedRedTeamPreview"
+                  "$ref": "#/components/schemas/PagedRedTeam"
                 }
               }
             }
@@ -5579,7 +7220,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Redteams"
+        ]
       }
     },
     "/redTeams/runs/{name}": {
@@ -5618,61 +7262,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RedTeamPreview"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/redTeams/runs:run": {
-      "post": {
-        "operationId": "RedTeams_create",
-        "description": "Creates a redteam run.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Foundry-Beta",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "RedTeams=v1"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RedTeamPreview"
+                  "$ref": "#/components/schemas/RedTeam"
                 }
               }
             }
@@ -5697,17 +7287,488 @@
             }
           }
         },
+        "tags": [
+          "Redteams"
+        ]
+      }
+    },
+    "/redTeams/runs:run": {
+      "post": {
+        "operationId": "RedTeams_create",
+        "description": "Creates a redteam run.",
+        "parameters": [
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "RedTeams=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedTeam"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Redteams"
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RedTeamPreview"
+                "$ref": "#/components/schemas/RedTeam"
               }
             }
           },
           "description": "Redteam to be run"
         }
+      }
+    },
+    "/schedules": {
+      "get": {
+        "operationId": "Schedules_list",
+        "description": "List all schedules.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedSchedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Schedules"
+        ]
+      }
+    },
+    "/schedules/{id}": {
+      "delete": {
+        "operationId": "Schedules_delete",
+        "description": "Delete a schedule.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Identifier of the schedule.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Schedules"
+        ]
+      },
+      "get": {
+        "operationId": "Schedules_get",
+        "description": "Get a schedule by id.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Identifier of the schedule.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Schedules"
+        ]
+      },
+      "put": {
+        "operationId": "Schedules_createOrUpdate",
+        "description": "Create or update operation template.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Identifier of the schedule.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedule"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Schedules"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Schedule"
+              }
+            }
+          },
+          "description": "The resource instance."
+        }
+      }
+    },
+    "/schedules/{id}/runs": {
+      "get": {
+        "operationId": "Schedules_listRuns",
+        "description": "List all schedule runs.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Identifier of the schedule.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedScheduleRun"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Schedules"
+        ]
+      }
+    },
+    "/schedules/{schedule_id}/runs/{run_id}": {
+      "get": {
+        "operationId": "Schedules_getRun",
+        "description": "Get a schedule run by id.",
+        "parameters": [
+          {
+            "name": "schedule_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the schedule.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the schedule run.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Beta",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Insights=v1"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleRun"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Schedules"
+        ]
       }
     }
   },
@@ -5776,6 +7837,65 @@
           }
         },
         "description": "A AI Search Index resource."
+      },
+      "AgentClusterInsightRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "agentName"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AgentClusterInsight"
+            ],
+            "description": "The type of request."
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Identifier for the agent."
+          },
+          "modelConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InsightModelConfiguration"
+              }
+            ],
+            "description": "Configuration of the model used in the insight generation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InsightRequest"
+          }
+        ],
+        "description": "Insights on set of Agent Evaluation Results"
+      },
+      "AgentClusterInsightResult": {
+        "type": "object",
+        "required": [
+          "type",
+          "clusterInsight"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AgentClusterInsight"
+            ],
+            "description": "The type of insights result."
+          },
+          "clusterInsight": {
+            "$ref": "#/components/schemas/ClusterInsightResult"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InsightResult"
+          }
+        ],
+        "description": "Insights from the agent cluster analysis."
       },
       "AgentContainerOperationPreviewError": {
         "type": "object",
@@ -6090,7 +8210,7 @@
           }
         }
       },
-      "AgentTaxonomyPreviewInput": {
+      "AgentTaxonomyInput": {
         "type": "object",
         "required": [
           "type",
@@ -6101,14 +8221,14 @@
           "type": {
             "type": "string",
             "enum": [
-              "agent_preview"
+              "agent"
             ],
             "description": "Input type of the evaluation taxonomy."
           },
           "target": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AzureAIAgentPreviewTarget"
+                "$ref": "#/components/schemas/Target"
               }
             ],
             "description": "Target configuration for the agent."
@@ -6116,7 +8236,7 @@
           "riskCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RiskPreviewCategory"
+              "$ref": "#/components/schemas/RiskCategory"
             },
             "description": "List of risk categories to evaluate against."
           }
@@ -6128,20 +8248,20 @@
         ],
         "description": "Input configuration for the evaluation taxonomy when the input type is agent."
       },
-      "AgentTaxonomyPreviewInputUpdate": {
+      "AgentTaxonomyInputUpdate": {
         "type": "object",
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "agent_preview"
+              "agent"
             ],
             "description": "Input type of the evaluation taxonomy."
           },
           "target": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AzureAIAgentPreviewTargetUpdate"
+                "$ref": "#/components/schemas/TargetUpdate"
               }
             ],
             "description": "Target configuration for the agent."
@@ -6149,7 +8269,7 @@
           "riskCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RiskPreviewCategory"
+              "$ref": "#/components/schemas/RiskCategory"
             },
             "description": "List of risk categories to evaluate against."
           }
@@ -6295,6 +8415,10 @@
         },
         "description": "Represents a reference to a blob for consumption"
       },
+      "AssetId": {
+        "type": "string",
+        "description": "Identifier of a saved asset."
+      },
       "AttackStrategy": {
         "anyOf": [
           {
@@ -6407,6 +8531,24 @@
           }
         },
         "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors."
+      },
+      "Azure.Core.Foundations.OperationState": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "NotStarted",
+              "Running",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ]
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "Enum describing allowed operation states."
       },
       "Azure.Core.uuid": {
         "type": "string",
@@ -6845,7 +8987,7 @@
         ],
         "description": "The input definition information for an Azure Function Tool, as used to configure an Agent."
       },
-      "AzureOpenAIModelPreviewConfiguration": {
+      "AzureOpenAIModelConfiguration": {
         "type": "object",
         "required": [
           "type",
@@ -6855,7 +8997,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "AzureOpenAIModel_Preview"
+              "AzureOpenAIModel"
             ]
           },
           "modelDeploymentName": {
@@ -6865,7 +9007,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/TargetPreviewConfig"
+            "$ref": "#/components/schemas/TargetConfig"
           }
         ],
         "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model."
@@ -7068,6 +9210,7 @@
         "properties": {
           "blobUri": {
             "type": "string",
+            "format": "uri",
             "description": "Blob URI path for client to upload data. Example: `https://blob.windows.core.net/Container/Path`"
           },
           "storageAccountArmId": {
@@ -7174,6 +9317,136 @@
           }
         ],
         "description": "A tool for capturing structured outputs"
+      },
+      "ChartCoordinate": {
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "size"
+        ],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "format": "int32",
+            "description": "X-axis coordinate."
+          },
+          "y": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Y-axis coordinate."
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Size of the chart element."
+          }
+        },
+        "description": "Coordinates for the analysis chart."
+      },
+      "ChatSummaryMemoryItem": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "chat_summary"
+            ],
+            "description": "The kind of the memory item."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MemoryItem"
+          }
+        ],
+        "description": "A memory item containing a summary extracted from conversations."
+      },
+      "ClusterInsightResult": {
+        "type": "object",
+        "required": [
+          "summary",
+          "clusters"
+        ],
+        "properties": {
+          "summary": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InsightSummary"
+              }
+            ],
+            "description": "Summary of the insights report."
+          },
+          "clusters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsightCluster"
+            },
+            "description": "List of clusters identified in the insights."
+          },
+          "coordinates": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ChartCoordinate"
+            },
+            "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  ```\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n  ```\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results."
+          }
+        },
+        "description": "Insights from the cluster analysis."
+      },
+      "ClusterTokenUsage": {
+        "type": "object",
+        "required": [
+          "inputTokenUsage",
+          "outputTokenUsage",
+          "totalTokenUsage"
+        ],
+        "properties": {
+          "inputTokenUsage": {
+            "type": "integer",
+            "format": "int32",
+            "description": "input token usage"
+          },
+          "outputTokenUsage": {
+            "type": "integer",
+            "format": "int32",
+            "description": "output token usage"
+          },
+          "totalTokenUsage": {
+            "type": "integer",
+            "format": "int32",
+            "description": "total token usage"
+          }
+        },
+        "description": "Token usage for cluster analysis"
+      },
+      "CodeBasedEvaluatorDefinition": {
+        "type": "object",
+        "required": [
+          "type",
+          "code_text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "code"
+            ]
+          },
+          "code_text": {
+            "type": "string",
+            "description": "Inline code text for the evaluator"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDefinition"
+          }
+        ],
+        "description": "Code-based evaluator definition using python code"
       },
       "CompletionMessageToolCallChunk": {
         "type": "object",
@@ -7455,6 +9728,36 @@
           }
         ],
         "description": "Represents the parameters for continuous evaluation item generation."
+      },
+      "ContinuousEvaluationRuleAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "evalId"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "continuousEvaluation"
+            ]
+          },
+          "evalId": {
+            "type": "string",
+            "description": "Eval Id to add continuous evaluation runs to."
+          },
+          "maxHourlyRuns": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of evaluation runs allowed per hour."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationRuleAction"
+          }
+        ],
+        "description": "Evaluation rule action for continuous evaluation."
       },
       "CosmosDBIndex": {
         "type": "object",
@@ -7785,6 +10088,44 @@
         ],
         "description": "The credential type used by the connection"
       },
+      "CronTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "expression"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Cron"
+            ]
+          },
+          "expression": {
+            "type": "string",
+            "description": "Cron expression that defines the schedule frequency."
+          },
+          "timeZone": {
+            "type": "string",
+            "description": "Time zone for the cron schedule.",
+            "default": "UTC"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start time for the cron schedule in ISO 8601 format."
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End time for the cron schedule in ISO 8601 format."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Trigger"
+          }
+        ],
+        "description": "Cron based trigger."
+      },
       "CustomCredential": {
         "type": "object",
         "required": [
@@ -7809,6 +10150,36 @@
           }
         ],
         "description": "Custom credential definition"
+      },
+      "DailyRecurrenceSchedule": {
+        "type": "object",
+        "required": [
+          "type",
+          "hours"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Daily"
+            ],
+            "description": "Daily recurrence type."
+          },
+          "hours": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Hours for the recurrence schedule."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RecurrenceSchedule"
+          }
+        ],
+        "description": "Daily recurrence schedule."
       },
       "DataSourceConfig": {
         "type": "object",
@@ -7940,6 +10311,26 @@
         },
         "description": "DatasetVersion Definition"
       },
+      "DayOfWeek": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ]
+          }
+        ],
+        "description": "Days of the week for recurrence schedule."
+      },
       "DeleteAgentResponse": {
         "type": "object",
         "required": [
@@ -8043,6 +10434,31 @@
           }
         },
         "description": "A deleted evaluation run Object."
+      },
+      "DeleteMemoryStoreResponse": {
+        "type": "object",
+        "required": [
+          "object",
+          "name",
+          "deleted"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "memory_store.deleted"
+            ],
+            "description": "The object type. Always 'memory_store.deleted'."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the memory store."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the memory store was successfully deleted."
+          }
+        }
       },
       "DeleteResponseResult": {
         "type": "object",
@@ -8291,6 +10707,35 @@
           }
         },
         "title": "AzureAIEvaluatorGrader"
+      },
+      "EvalResult": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "score",
+          "passed"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name of the check"
+          },
+          "type": {
+            "type": "string",
+            "description": "type of the check"
+          },
+          "score": {
+            "type": "number",
+            "format": "float",
+            "description": "score"
+          },
+          "passed": {
+            "type": "boolean",
+            "description": "indicates if the check passed or failed"
+          }
+        },
+        "description": "Result of the evaluation."
       },
       "EvalRun": {
         "type": "object",
@@ -8642,7 +11087,450 @@
         },
         "description": "A message in the evaluation run."
       },
-      "EvaluationPreviewTaxonomy": {
+      "EvalRunResultCompareItem": {
+        "type": "object",
+        "required": [
+          "treatmentRunId",
+          "treatmentRunSummary",
+          "deltaEstimate",
+          "pValue",
+          "treatmentEffect"
+        ],
+        "properties": {
+          "treatmentRunId": {
+            "type": "string",
+            "description": "The treatment run ID."
+          },
+          "treatmentRunSummary": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalRunResultSummary"
+              }
+            ],
+            "description": "Summary statistics of the treatment run."
+          },
+          "deltaEstimate": {
+            "type": "number",
+            "format": "float",
+            "description": "Estimated difference between treatment and baseline."
+          },
+          "pValue": {
+            "type": "number",
+            "format": "float",
+            "description": "P-value for the treatment effect."
+          },
+          "treatmentEffect": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TreatmentEffectType"
+              }
+            ],
+            "description": "Type of treatment effect."
+          }
+        },
+        "description": "Metric comparison for a treatment against the baseline."
+      },
+      "EvalRunResultComparison": {
+        "type": "object",
+        "required": [
+          "testingCriteria",
+          "metric",
+          "evaluator",
+          "baselineRunSummary",
+          "compareItems"
+        ],
+        "properties": {
+          "testingCriteria": {
+            "type": "string",
+            "description": "Name of the testing criteria."
+          },
+          "metric": {
+            "type": "string",
+            "description": "Metric being evaluated."
+          },
+          "evaluator": {
+            "type": "string",
+            "description": "Name of the evaluator for this testing criteria."
+          },
+          "baselineRunSummary": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalRunResultSummary"
+              }
+            ],
+            "description": "Summary statistics of the baseline run."
+          },
+          "compareItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvalRunResultCompareItem"
+            },
+            "description": "List of comparison results for each treatment run."
+          }
+        },
+        "description": "Comparison results for treatment runs against the baseline."
+      },
+      "EvalRunResultSummary": {
+        "type": "object",
+        "required": [
+          "runId",
+          "sampleCount",
+          "average",
+          "standardDeviation"
+        ],
+        "properties": {
+          "runId": {
+            "type": "string",
+            "description": "The evaluation run ID."
+          },
+          "sampleCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of samples in the evaluation run."
+          },
+          "average": {
+            "type": "number",
+            "format": "float",
+            "description": "Average value of the metric in the evaluation run."
+          },
+          "standardDeviation": {
+            "type": "number",
+            "format": "float",
+            "description": "Standard deviation of the metric in the evaluation run."
+          }
+        },
+        "description": "Summary statistics of a metric in an evaluation run."
+      },
+      "EvaluationComparisonInsightRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "evalId",
+          "baselineRunId",
+          "treatmentRunIds"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "EvaluationComparison"
+            ],
+            "description": "The type of request."
+          },
+          "evalId": {
+            "type": "string",
+            "description": "Identifier for the evaluation."
+          },
+          "baselineRunId": {
+            "type": "string",
+            "description": "The baseline run ID for comparison."
+          },
+          "treatmentRunIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of treatment run IDs for comparison."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InsightRequest"
+          }
+        ],
+        "description": "Evaluation Comparison Request"
+      },
+      "EvaluationComparisonInsightResult": {
+        "type": "object",
+        "required": [
+          "type",
+          "comparisons",
+          "method"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "EvaluationComparison"
+            ],
+            "description": "The type of insights result."
+          },
+          "comparisons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvalRunResultComparison"
+            },
+            "description": "Comparison results for each treatment run against the baseline."
+          },
+          "method": {
+            "type": "string",
+            "description": "The statistical method used for comparison."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InsightResult"
+          }
+        ],
+        "description": "Insights from the evaluation comparison."
+      },
+      "EvaluationResultSample": {
+        "type": "object",
+        "required": [
+          "type",
+          "evaluationResult"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "EvaluationResultSample"
+            ],
+            "description": "Evaluation Result Sample Type"
+          },
+          "evaluationResult": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalResult"
+              }
+            ],
+            "description": "Evaluation result for the analysis sample."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InsightSample"
+          }
+        ],
+        "description": "A sample from the evaluation result."
+      },
+      "EvaluationRule": {
+        "type": "object",
+        "required": [
+          "id",
+          "action",
+          "eventType",
+          "enabled",
+          "systemData"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the evaluation rule.",
+            "readOnly": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display Name for the evaluation rule."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for the evaluation rule."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationRuleAction"
+              }
+            ],
+            "description": "Definition of the evaluation rule action."
+          },
+          "filter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationRuleFilter"
+              }
+            ],
+            "description": "Filter condition of the evaluation rule."
+          },
+          "eventType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationRuleEventType"
+              }
+            ],
+            "description": "Event type that the evaluation rule applies to."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Indicates whether the evaluation rule is enabled. Default is true."
+          },
+          "systemData": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "System metadata for the evaluation rule.",
+            "readOnly": true
+          }
+        },
+        "description": "Evaluation rule model."
+      },
+      "EvaluationRuleAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationRuleActionType"
+              }
+            ],
+            "description": "Type of the evaluation action."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "continuousEvaluation": "#/components/schemas/ContinuousEvaluationRuleAction",
+            "humanEvaluation": "#/components/schemas/HumanEvaluationRuleAction"
+          }
+        },
+        "description": "Evaluation action model."
+      },
+      "EvaluationRuleActionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "continuousEvaluation",
+              "humanEvaluation"
+            ]
+          }
+        ],
+        "description": "Type of the evaluation action."
+      },
+      "EvaluationRuleEventType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "responseCompleted",
+              "manual"
+            ]
+          }
+        ],
+        "description": "Type of the evaluation rule event."
+      },
+      "EvaluationRuleFilter": {
+        "type": "object",
+        "required": [
+          "agentName"
+        ],
+        "properties": {
+          "agentName": {
+            "type": "string",
+            "description": "Filter by agent name."
+          }
+        },
+        "description": "Evaluation filter model."
+      },
+      "EvaluationRunClusterInsightRequest": {
+        "type": "object",
+        "required": [
+          "type",
+          "evalId",
+          "runIds"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "EvaluationRunClusterInsight"
+            ],
+            "description": "The type of insights request."
+          },
+          "evalId": {
+            "type": "string",
+            "description": "Evaluation Id for the insights."
+          },
+          "runIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of evaluation run IDs for the insights."
+          },
+          "modelConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InsightModelConfiguration"
+              }
+            ],
+            "description": "Configuration of the model used in the insight generation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InsightRequest"
+          }
+        ],
+        "description": "Insights on set of Evaluation Results"
+      },
+      "EvaluationRunClusterInsightResult": {
+        "type": "object",
+        "required": [
+          "type",
+          "clusterInsight"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "EvaluationRunClusterInsight"
+            ],
+            "description": "The type of insights result."
+          },
+          "clusterInsight": {
+            "$ref": "#/components/schemas/ClusterInsightResult"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InsightResult"
+          }
+        ],
+        "description": "Insights from the evaluation run cluster analysis."
+      },
+      "EvaluationScheduleTask": {
+        "type": "object",
+        "required": [
+          "type",
+          "evalId",
+          "evalRun"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Evaluation"
+            ]
+          },
+          "evalId": {
+            "type": "string",
+            "description": "Identifier of the evaluation group."
+          },
+          "evalRun": {
+            "type": "object",
+            "description": "The evaluation run payload."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ScheduleTask"
+          }
+        ],
+        "description": "Evaluation task for the schedule."
+      },
+      "EvaluationTaxonomy": {
         "type": "object",
         "required": [
           "name",
@@ -8676,7 +11564,7 @@
           "taxonomyCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TaxonomyPreviewCategory"
+              "$ref": "#/components/schemas/TaxonomyCategory"
             },
             "description": "List of taxonomy categories."
           },
@@ -8690,7 +11578,7 @@
         },
         "description": "Evaluation Taxonomy Definition"
       },
-      "EvaluationPreviewTaxonomyCreateOrUpdate": {
+      "EvaluationTaxonomyCreateOrUpdate": {
         "type": "object",
         "required": [
           "taxonomyInput"
@@ -8718,46 +11606,7 @@
           "taxonomyCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TaxonomyPreviewCategory"
-            },
-            "description": "List of taxonomy categories."
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Additional properties for the evaluation taxonomy."
-          }
-        },
-        "description": "Evaluation Taxonomy Definition"
-      },
-      "EvaluationPreviewTaxonomyUpdate": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "The asset description text."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tag dictionary. Tags can be added, removed, and updated."
-          },
-          "taxonomyInput": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EvaluationTaxonomyInputUpdate"
-              }
-            ],
-            "description": "Input configuration for the evaluation taxonomy."
-          },
-          "taxonomyCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TaxonomyPreviewCategory"
+              "$ref": "#/components/schemas/TaxonomyCategory"
             },
             "description": "List of taxonomy categories."
           },
@@ -8789,7 +11638,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "agent_preview": "#/components/schemas/AgentTaxonomyPreviewInput"
+            "agent": "#/components/schemas/AgentTaxonomyInput"
           }
         },
         "description": "Input configuration for the evaluation taxonomy."
@@ -8802,8 +11651,8 @@
           {
             "type": "string",
             "enum": [
-              "agent_preview",
-              "policy_preview"
+              "agent",
+              "policy"
             ]
           }
         ],
@@ -8827,10 +11676,376 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "agent_preview": "#/components/schemas/AgentTaxonomyPreviewInputUpdate"
+            "agent": "#/components/schemas/AgentTaxonomyInputUpdate"
           }
         },
         "description": "Input configuration for the evaluation taxonomy."
+      },
+      "EvaluationTaxonomyUpdate": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          },
+          "taxonomyInput": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationTaxonomyInputUpdate"
+              }
+            ],
+            "description": "Input configuration for the evaluation taxonomy."
+          },
+          "taxonomyCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaxonomyCategory"
+            },
+            "description": "List of taxonomy categories."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional properties for the evaluation taxonomy."
+          }
+        },
+        "description": "Evaluation Taxonomy Definition"
+      },
+      "EvaluatorCategory": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "quality",
+              "safety",
+              "agents"
+            ]
+          }
+        ],
+        "description": "The category of the evaluator"
+      },
+      "EvaluatorDefinition": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorDefinitionType"
+              }
+            ],
+            "description": "The type of evaluator definition"
+          },
+          "init_parameters": {
+            "description": "The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required."
+          },
+          "data_schema": {
+            "description": "The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required."
+          },
+          "metrics": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/EvaluatorMetric"
+            },
+            "description": "List of output metrics produced by this evaluator"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "code": "#/components/schemas/CodeBasedEvaluatorDefinition",
+            "prompt": "#/components/schemas/PromptBasedEvaluatorDefinition"
+          }
+        },
+        "description": "Base evaluator configuration with discriminator"
+      },
+      "EvaluatorDefinitionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "prompt",
+              "code",
+              "prompt_and_code",
+              "service",
+              "openai_graders"
+            ]
+          }
+        ],
+        "description": "The type of evaluator definition"
+      },
+      "EvaluatorMetric": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorMetricType"
+              }
+            ],
+            "description": "Type of the metric."
+          },
+          "desirable_direction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorMetricDirection"
+              }
+            ],
+            "description": "It indicates whether a higher value is better or a lower value is better for this metric."
+          },
+          "min_value": {
+            "type": "number",
+            "format": "float",
+            "description": "Minimum value for the metric"
+          },
+          "max_value": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum value for the metric. If not specified, it is assumed to be unbounded."
+          },
+          "is_primary": {
+            "type": "boolean",
+            "description": "Indicates if this metric is primary when there are multiple metrics."
+          }
+        },
+        "description": "Evaluator Metric"
+      },
+      "EvaluatorMetricDirection": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "increase",
+              "decrease",
+              "neutral"
+            ]
+          }
+        ],
+        "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral"
+      },
+      "EvaluatorMetricType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ordinal",
+              "continuous",
+              "boolean"
+            ]
+          }
+        ],
+        "description": "The type of the evaluator"
+      },
+      "EvaluatorType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom"
+            ]
+          }
+        ],
+        "description": "The type of the evaluator"
+      },
+      "EvaluatorVersion": {
+        "type": "object",
+        "required": [
+          "evaluator_type",
+          "categories",
+          "definition",
+          "created_by",
+          "created_at",
+          "modified_at",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Metadata about the evaluator"
+          },
+          "evaluator_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorType"
+              }
+            ],
+            "description": "The type of the evaluator"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorCategory"
+            },
+            "description": "The categories of the evaluator"
+          },
+          "definition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorDefinition"
+              }
+            ],
+            "description": "Definition of the evaluator"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "Creator of the evaluator",
+            "readOnly": true
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Creation date/time of the evaluator",
+            "readOnly": true
+          },
+          "modified_at": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Last modified date/time of the evaluator",
+            "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Asset ID, a unique identifier for the asset",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the resource",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the resource",
+            "readOnly": true
+          }
+        },
+        "description": "Evaluator Definition"
+      },
+      "EvaluatorVersionCreate": {
+        "type": "object",
+        "required": [
+          "evaluator_type",
+          "categories",
+          "definition"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Metadata about the evaluator"
+          },
+          "evaluator_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorType"
+              }
+            ],
+            "description": "The type of the evaluator"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorCategory"
+            },
+            "description": "The categories of the evaluator"
+          },
+          "definition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorDefinition"
+              }
+            ],
+            "description": "Definition of the evaluator"
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "description": "Evaluator Definition"
+      },
+      "EvaluatorVersionUpdate": {
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Metadata about the evaluator"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorCategory"
+            },
+            "description": "The categories of the evaluator"
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "description": "Evaluator Definition"
       },
       "FabricDataAgentToolParameters": {
         "type": "object",
@@ -9022,6 +12237,55 @@
         ],
         "description": "The hosted agent definition."
       },
+      "HourlyRecurrenceSchedule": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Hourly"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RecurrenceSchedule"
+          }
+        ],
+        "description": "Hourly recurrence schedule."
+      },
+      "HumanEvaluationRuleAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "templateId"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "humanEvaluation"
+            ]
+          },
+          "templateId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssetId"
+              }
+            ],
+            "description": "Human evaluation template Id."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationRuleAction"
+          }
+        ],
+        "description": "Evaluation rule action for human evaluation."
+      },
       "ImageBasedHostedAgentPreviewDefinition": {
         "type": "object",
         "required": [
@@ -9141,6 +12405,323 @@
         },
         "description": "Index resource Definition"
       },
+      "Insight": {
+        "type": "object",
+        "required": [
+          "id",
+          "metadata",
+          "state",
+          "displayName",
+          "request"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the insights report.",
+            "readOnly": true
+          },
+          "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InsightsMetadata"
+              }
+            ],
+            "description": "Metadata about the insights report.",
+            "readOnly": true
+          },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Azure.Core.Foundations.OperationState"
+              }
+            ],
+            "description": "The current state of the insights.",
+            "readOnly": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "User friendly display name for the insight."
+          },
+          "request": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InsightRequest"
+              }
+            ],
+            "description": "Request for the insights analysis."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InsightResult"
+              }
+            ],
+            "description": "The result of the insights report.",
+            "readOnly": true
+          }
+        },
+        "description": "The response body for cluster insights."
+      },
+      "InsightCluster": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "suggestion",
+          "suggestionTitle",
+          "description",
+          "weight"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the analysis cluster."
+          },
+          "label": {
+            "type": "string",
+            "description": "Label for the cluster"
+          },
+          "suggestion": {
+            "type": "string",
+            "description": "Suggestion for the cluster"
+          },
+          "suggestionTitle": {
+            "type": "string",
+            "description": "The title of the suggestion for the cluster"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the analysis cluster."
+          },
+          "weight": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The weight of the analysis cluster. This indicate number of samples in the cluster."
+          },
+          "subClusters": {
+            "description": "List of subclusters within this cluster. Empty if no subclusters exist.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsightCluster"
+            }
+          },
+          "samples": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsightSample"
+            },
+            "description": "List of samples that belong to this cluster. Empty if samples are part of subclusters."
+          }
+        },
+        "description": "A cluster of analysis samples."
+      },
+      "InsightModelConfiguration": {
+        "type": "object",
+        "required": [
+          "modelDeploymentName"
+        ],
+        "properties": {
+          "modelDeploymentName": {
+            "type": "string",
+            "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'."
+          }
+        },
+        "description": "Configuration of the model used in the insight generation."
+      },
+      "InsightRequest": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InsightType"
+              }
+            ],
+            "description": "The type of request."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "EvaluationRunClusterInsight": "#/components/schemas/EvaluationRunClusterInsightRequest",
+            "AgentClusterInsight": "#/components/schemas/AgentClusterInsightRequest",
+            "EvaluationComparison": "#/components/schemas/EvaluationComparisonInsightRequest"
+          }
+        },
+        "description": "The request of the insights report."
+      },
+      "InsightResult": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InsightType"
+              }
+            ],
+            "description": "The type of insights result."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "EvaluationComparison": "#/components/schemas/EvaluationComparisonInsightResult",
+            "EvaluationRunClusterInsight": "#/components/schemas/EvaluationRunClusterInsightResult",
+            "AgentClusterInsight": "#/components/schemas/AgentClusterInsightResult"
+          }
+        },
+        "description": "The result of the insights."
+      },
+      "InsightSample": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "features",
+          "correlationInfo"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the analysis sample."
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SampleType"
+              }
+            ],
+            "description": "Sample type"
+          },
+          "features": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Features to help with additional filtering of data in UX."
+          },
+          "correlationInfo": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Info about the correlation for the analysis sample."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "EvaluationResultSample": "#/components/schemas/EvaluationResultSample"
+          }
+        },
+        "description": "A sample from the analysis."
+      },
+      "InsightScheduleTask": {
+        "type": "object",
+        "required": [
+          "type",
+          "insight"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Insight"
+            ]
+          },
+          "insight": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Insight"
+              }
+            ],
+            "description": "The insight payload."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ScheduleTask"
+          }
+        ],
+        "description": "Insight task for the schedule."
+      },
+      "InsightSummary": {
+        "type": "object",
+        "required": [
+          "sampleCount",
+          "uniqueSubclusterCount",
+          "uniqueClusterCount",
+          "method",
+          "usage"
+        ],
+        "properties": {
+          "sampleCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of samples analyzed."
+          },
+          "uniqueSubclusterCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of unique subcluster labels."
+          },
+          "uniqueClusterCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of unique clusters."
+          },
+          "method": {
+            "type": "string",
+            "description": "Method used for clustering."
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClusterTokenUsage"
+              }
+            ],
+            "description": "Token usage while performing clustering analysis"
+          }
+        },
+        "description": "Summary of the error cluster analysis."
+      },
+      "InsightType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "EvaluationRunClusterInsight",
+              "AgentClusterInsight",
+              "EvaluationComparison"
+            ]
+          }
+        ],
+        "description": "The request of the insights."
+      },
+      "InsightsMetadata": {
+        "type": "object",
+        "required": [
+          "createdAt"
+        ],
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when the insights were created."
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when the insights were completed."
+          }
+        },
+        "description": "Metadata about the insights."
+      },
       "ItemGenerationParams": {
         "type": "object",
         "required": [
@@ -9224,6 +12805,494 @@
           }
         ],
         "description": "Managed Azure AI Search Index Definition"
+      },
+      "MemoryItem": {
+        "type": "object",
+        "required": [
+          "memory_id",
+          "updated_at",
+          "scope",
+          "content",
+          "kind"
+        ],
+        "properties": {
+          "memory_id": {
+            "type": "string",
+            "description": "The unique ID of the memory item."
+          },
+          "updated_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The last update time of the memory item."
+          },
+          "scope": {
+            "type": "string",
+            "description": "The namespace that logically groups and isolates memories, such as a user ID."
+          },
+          "content": {
+            "type": "string",
+            "description": "The content of the memory."
+          },
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryItemKind"
+              }
+            ],
+            "description": "The kind of the memory item."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "user_profile": "#/components/schemas/UserProfileMemoryItem",
+            "chat_summary": "#/components/schemas/ChatSummaryMemoryItem"
+          }
+        },
+        "description": "A single memory item stored in the memory store, containing content and metadata."
+      },
+      "MemoryItemKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "user_profile",
+              "chat_summary"
+            ]
+          }
+        ],
+        "description": "Memory item kind."
+      },
+      "MemoryOperation": {
+        "type": "object",
+        "required": [
+          "kind",
+          "memory_item"
+        ],
+        "properties": {
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryOperationKind"
+              }
+            ],
+            "description": "The type of memory operation being performed."
+          },
+          "memory_item": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryItem"
+              }
+            ],
+            "description": "The memory item to create, update, or delete."
+          }
+        },
+        "description": "Represents a single memory operation (create, update, or delete) performed on a memory item."
+      },
+      "MemoryOperationKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "create",
+              "update",
+              "delete"
+            ]
+          }
+        ],
+        "description": "Memory operation kind."
+      },
+      "MemorySearchItem": {
+        "type": "object",
+        "required": [
+          "memory_item"
+        ],
+        "properties": {
+          "memory_item": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryItem"
+              }
+            ],
+            "description": "Retrieved memory item."
+          }
+        },
+        "description": "A retrieved memory item from memory search."
+      },
+      "MemorySearchOptions": {
+        "type": "object",
+        "properties": {
+          "max_memories": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of memory items to return."
+          }
+        },
+        "description": "Memory search options."
+      },
+      "MemoryStoreDefaultDefinition": {
+        "type": "object",
+        "required": [
+          "kind",
+          "chat_model",
+          "embedding_model"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "description": "The kind of the memory store."
+          },
+          "chat_model": {
+            "type": "string",
+            "description": "The name or identifier of the chat completion model deployment used for memory processing."
+          },
+          "embedding_model": {
+            "type": "string",
+            "description": "The name or identifier of the embedding model deployment used for memory processing."
+          },
+          "options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryStoreDefaultOptions"
+              }
+            ],
+            "description": "Default memory store options."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MemoryStoreDefinition"
+          }
+        ],
+        "description": "Default memory store implementation."
+      },
+      "MemoryStoreDefaultOptions": {
+        "type": "object",
+        "required": [
+          "user_profile_enabled",
+          "chat_summary_enabled"
+        ],
+        "properties": {
+          "user_profile_enabled": {
+            "type": "boolean",
+            "description": "Whether to enable user profile extraction and storage. Default is true.",
+            "default": true
+          },
+          "user_profile_details": {
+            "type": "string",
+            "description": "Specific categories or types of user profile information to extract and store."
+          },
+          "chat_summary_enabled": {
+            "type": "boolean",
+            "description": "Whether to enable chat summary extraction and storage. Default is true.",
+            "default": true
+          }
+        },
+        "description": "Default memory store configurations."
+      },
+      "MemoryStoreDefinition": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryStoreKind"
+              }
+            ],
+            "description": "The kind of the memory store."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "default": "#/components/schemas/MemoryStoreDefaultDefinition"
+          }
+        },
+        "description": "Base definition for memory store configurations."
+      },
+      "MemoryStoreDeleteScopeResponse": {
+        "type": "object",
+        "required": [
+          "object",
+          "name",
+          "scope",
+          "deleted"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "memory_store.scope.deleted"
+            ],
+            "description": "The object type. Always 'memory_store.scope.deleted'."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the memory store."
+          },
+          "scope": {
+            "type": "string",
+            "description": "The scope from which memories were deleted."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the deletion operation was successful."
+          }
+        },
+        "description": "Response for deleting memories from a scope."
+      },
+      "MemoryStoreKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "default"
+            ]
+          }
+        ],
+        "description": "The type of memory store implementation to use."
+      },
+      "MemoryStoreObject": {
+        "type": "object",
+        "required": [
+          "object",
+          "id",
+          "created_at",
+          "updated_at",
+          "name",
+          "definition"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "memory_store"
+            ],
+            "description": "The object type, which is always 'memory_store'."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the memory store."
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (seconds) when the memory store was created."
+          },
+          "updated_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (seconds) when the memory store was last updated."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The name of the memory store."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the memory store."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Arbitrary key-value metadata to associate with the memory store."
+          },
+          "definition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryStoreDefinition"
+              }
+            ],
+            "description": "The definition of the memory store."
+          }
+        },
+        "description": "A memory store that can store and retrieve user memories."
+      },
+      "MemoryStoreOperationUsage": {
+        "type": "object",
+        "required": [
+          "embedding_tokens",
+          "input_tokens",
+          "input_tokens_details",
+          "output_tokens",
+          "output_tokens_details",
+          "total_tokens"
+        ],
+        "properties": {
+          "embedding_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of embedding tokens."
+          },
+          "input_tokens": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
+            "description": "The number of input tokens."
+          },
+          "input_tokens_details": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ResponseUsageInputTokensDetails"
+              }
+            ],
+            "description": "A detailed breakdown of the input tokens."
+          },
+          "output_tokens": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
+            "description": "The number of output tokens."
+          },
+          "output_tokens_details": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ResponseUsageOutputTokensDetails"
+              }
+            ],
+            "description": "A detailed breakdown of the output tokens."
+          },
+          "total_tokens": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
+            "description": "The total number of tokens used."
+          }
+        },
+        "description": "Usage statistics of a memory store operation."
+      },
+      "MemoryStoreSearchResponse": {
+        "type": "object",
+        "required": [
+          "search_id",
+          "memories",
+          "usage"
+        ],
+        "properties": {
+          "search_id": {
+            "type": "string",
+            "description": "The unique ID of this search request. Use this value as previous_search_id in subsequent requests to perform incremental searches."
+          },
+          "memories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemorySearchItem"
+            },
+            "description": "Related memory items found during the search operation."
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryStoreOperationUsage"
+              }
+            ],
+            "description": "Usage statistics associated with the memory search operation."
+          }
+        },
+        "description": "Memory search response."
+      },
+      "MemoryStoreUpdateCompletedResult": {
+        "type": "object",
+        "required": [
+          "memory_operations",
+          "usage"
+        ],
+        "properties": {
+          "memory_operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MemoryOperation"
+            },
+            "description": "A list of individual memory operations that were performed during the update."
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryStoreOperationUsage"
+              }
+            ],
+            "description": "Usage statistics associated with the memory update operation."
+          }
+        },
+        "description": "Memory update result."
+      },
+      "MemoryStoreUpdateResponse": {
+        "type": "object",
+        "required": [
+          "update_id",
+          "status"
+        ],
+        "properties": {
+          "update_id": {
+            "type": "string",
+            "description": "The unique ID of this update request. Use this value as previous_update_id in subsequent requests to perform incremental updates."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryStoreUpdateStatus"
+              }
+            ],
+            "description": "The status of the memory update operation. One of \"queued\", \"in_progress\", \"completed\", \"failed\", or \"superseded\"."
+          },
+          "superseded_by": {
+            "type": "string",
+            "description": "The update_id the operation was superseded by when status is \"superseded\"."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemoryStoreUpdateCompletedResult"
+              }
+            ],
+            "description": "The result of memory store update operation when status is \"completed\"."
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error object that describes the error when status is \"failed\"."
+          }
+        },
+        "description": "Provides the status of a memory store update operation."
+      },
+      "MemoryStoreUpdateStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "in_progress",
+          "completed",
+          "failed",
+          "superseded"
+        ],
+        "description": "Status of a memory store update operation."
       },
       "MicrosoftFabricPreviewTool": {
         "type": "object",
@@ -9376,6 +13445,36 @@
         },
         "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
       },
+      "MonthlyRecurrenceSchedule": {
+        "type": "object",
+        "required": [
+          "type",
+          "daysOfMonth"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Monthly"
+            ],
+            "description": "Monthly recurrence type."
+          },
+          "daysOfMonth": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Days of the month for the recurrence schedule."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RecurrenceSchedule"
+          }
+        ],
+        "description": "Monthly recurrence schedule."
+      },
       "NoAuthenticationCredentials": {
         "type": "object",
         "required": [
@@ -9431,6 +13530,36 @@
           }
         ],
         "description": "Request from the service for the user to perform OAuth consent."
+      },
+      "OneTimeTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "triggerAt"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "OneTime"
+            ]
+          },
+          "triggerAt": {
+            "type": "string",
+            "description": "Date and time for the one-time trigger in ISO 8601 format."
+          },
+          "timeZone": {
+            "type": "string",
+            "description": "Time zone for the one-time trigger.",
+            "default": "UTC"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Trigger"
+          }
+        ],
+        "description": "One-time trigger."
       },
       "OpenAI.Annotation": {
         "type": "object",
@@ -24027,7 +28156,7 @@
         },
         "description": "Paged collection of Deployment items"
       },
-      "PagedEvaluationPreviewTaxonomy": {
+      "PagedEvaluationRule": {
         "type": "object",
         "required": [
           "value"
@@ -24036,9 +28165,9 @@
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EvaluationPreviewTaxonomy"
+              "$ref": "#/components/schemas/EvaluationRule"
             },
-            "description": "The EvaluationPreviewTaxonomy items on this page"
+            "description": "The EvaluationRule items on this page"
           },
           "nextLink": {
             "type": "string",
@@ -24046,7 +28175,49 @@
             "description": "The link to the next page of items"
           }
         },
-        "description": "Paged collection of EvaluationPreviewTaxonomy items"
+        "description": "Paged collection of EvaluationRule items"
+      },
+      "PagedEvaluationTaxonomy": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationTaxonomy"
+            },
+            "description": "The EvaluationTaxonomy items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of EvaluationTaxonomy items"
+      },
+      "PagedEvaluatorVersion": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorVersion"
+            },
+            "description": "The EvaluatorVersion items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of EvaluatorVersion items"
       },
       "PagedIndex": {
         "type": "object",
@@ -24069,7 +28240,7 @@
         },
         "description": "Paged collection of Index items"
       },
-      "PagedRedTeamPreview": {
+      "PagedRedTeam": {
         "type": "object",
         "required": [
           "value"
@@ -24078,9 +28249,9 @@
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RedTeamPreview"
+              "$ref": "#/components/schemas/RedTeam"
             },
-            "description": "The RedTeamPreview items on this page"
+            "description": "The RedTeam items on this page"
           },
           "nextLink": {
             "type": "string",
@@ -24088,7 +28259,49 @@
             "description": "The link to the next page of items"
           }
         },
-        "description": "Paged collection of RedTeamPreview items"
+        "description": "Paged collection of RedTeam items"
+      },
+      "PagedSchedule": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Schedule"
+            },
+            "description": "The Schedule items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Schedule items"
+      },
+      "PagedScheduleRun": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduleRun"
+            },
+            "description": "The ScheduleRun items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of ScheduleRun items"
       },
       "PendingUploadRequest": {
         "type": "object",
@@ -24228,6 +28441,31 @@
         ],
         "description": "The prompt agent definition"
       },
+      "PromptBasedEvaluatorDefinition": {
+        "type": "object",
+        "required": [
+          "type",
+          "prompt_text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "prompt"
+            ]
+          },
+          "prompt_text": {
+            "type": "string",
+            "description": "The prompt text used for evaluation"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDefinition"
+          }
+        ],
+        "description": "Prompt-based evaluator"
+      },
       "ProtocolVersionRecord": {
         "type": "object",
         "required": [
@@ -24263,7 +28501,99 @@
         },
         "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
       },
-      "RedTeamPreview": {
+      "RecurrenceSchedule": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RecurrenceType"
+              }
+            ],
+            "description": "Recurrence type for the recurrence schedule."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Hourly": "#/components/schemas/HourlyRecurrenceSchedule",
+            "Daily": "#/components/schemas/DailyRecurrenceSchedule",
+            "Weekly": "#/components/schemas/WeeklyRecurrenceSchedule",
+            "Monthly": "#/components/schemas/MonthlyRecurrenceSchedule"
+          }
+        },
+        "description": "Recurrence schedule model."
+      },
+      "RecurrenceTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "interval",
+          "schedule"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Recurrence"
+            ],
+            "description": "Type of the trigger."
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start time for the recurrence schedule in ISO 8601 format."
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End time for the recurrence schedule in ISO 8601 format."
+          },
+          "timeZone": {
+            "type": "string",
+            "description": "Time zone for the recurrence schedule.",
+            "default": "UTC"
+          },
+          "interval": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Interval for the recurrence schedule."
+          },
+          "schedule": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RecurrenceSchedule"
+              }
+            ],
+            "description": "Recurrence schedule for the recurrence trigger."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Trigger"
+          }
+        ],
+        "description": "Recurrence based trigger."
+      },
+      "RecurrenceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Hourly",
+              "Daily",
+              "Weekly",
+              "Monthly"
+            ]
+          }
+        ],
+        "description": "Recurrence type."
+      },
+      "RedTeam": {
         "type": "object",
         "required": [
           "id",
@@ -24299,7 +28629,7 @@
           "riskCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RiskPreviewCategory"
+              "$ref": "#/components/schemas/RiskCategory"
             },
             "description": "List of risk categories to generate attack objectives for."
           },
@@ -24329,7 +28659,7 @@
           "target": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/TargetPreviewConfig"
+                "$ref": "#/components/schemas/TargetConfig"
               }
             ],
             "description": "Target configuration for the red-team run."
@@ -24500,7 +28830,7 @@
         ],
         "description": "Represents the parameters for red team taxonomy item generation."
       },
-      "RiskPreviewCategory": {
+      "RiskCategory": {
         "anyOf": [
           {
             "type": "string"
@@ -24550,6 +28880,20 @@
         ],
         "description": "Shared Access Signature (SAS) credential definition"
       },
+      "SampleType": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "EvaluationResultSample"
+            ]
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The type of sample used in the analysis."
+      },
       "SasCredential": {
         "type": "object",
         "required": [
@@ -24572,6 +28916,190 @@
           }
         },
         "description": "SAS Credential definition"
+      },
+      "Schedule": {
+        "type": "object",
+        "required": [
+          "id",
+          "enabled",
+          "trigger",
+          "task",
+          "systemData"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the schedule.",
+            "readOnly": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Name of the schedule."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the schedule."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Enabled status of the schedule."
+          },
+          "provisioningStatus": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScheduleProvisioningStatus"
+              }
+            ],
+            "description": "Provisioning status of the schedule.",
+            "readOnly": true
+          },
+          "trigger": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Trigger"
+              }
+            ],
+            "description": "Trigger for the schedule."
+          },
+          "task": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScheduleTask"
+              }
+            ],
+            "description": "Task for the schedule."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Schedule's tags. Unlike properties, tags are fully mutable."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Schedule's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed."
+          },
+          "systemData": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "System metadata for the resource.",
+            "readOnly": true
+          }
+        },
+        "description": "Schedule model."
+      },
+      "ScheduleProvisioningStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Creating",
+              "Updating",
+              "Deleting",
+              "Succeeded",
+              "Failed"
+            ]
+          }
+        ],
+        "description": "Schedule provisioning status."
+      },
+      "ScheduleRun": {
+        "type": "object",
+        "required": [
+          "id",
+          "scheduleId",
+          "success",
+          "properties"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the schedule run.",
+            "readOnly": true
+          },
+          "scheduleId": {
+            "type": "string",
+            "description": "Identifier of the schedule."
+          },
+          "success": {
+            "type": "boolean",
+            "description": "Trigger success status of the schedule run.",
+            "readOnly": true
+          },
+          "triggerTime": {
+            "type": "string",
+            "description": "Trigger time of the schedule run."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error information for the schedule run.",
+            "readOnly": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Properties of the schedule run.",
+            "readOnly": true
+          }
+        },
+        "description": "Schedule run model."
+      },
+      "ScheduleTask": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScheduleTaskType"
+              }
+            ],
+            "description": "Type of the task."
+          },
+          "configuration": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Configuration for the task."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Evaluation": "#/components/schemas/EvaluationScheduleTask",
+            "Insight": "#/components/schemas/InsightScheduleTask"
+          }
+        },
+        "description": "Schedule task model."
+      },
+      "ScheduleTaskType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Evaluation",
+              "Insight"
+            ]
+          }
+        ],
+        "description": "Type of the task."
       },
       "SharepointGroundingToolParameters": {
         "type": "object",
@@ -24793,7 +29321,7 @@
         ],
         "description": "Represents a data source for target-based completion evaluation configuration."
       },
-      "TargetPreviewConfig": {
+      "TargetConfig": {
         "type": "object",
         "required": [
           "type"
@@ -24807,7 +29335,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "AzureOpenAIModel_Preview": "#/components/schemas/AzureOpenAIModelPreviewConfiguration"
+            "AzureOpenAIModel": "#/components/schemas/AzureOpenAIModelConfiguration"
           }
         },
         "description": "Abstract class for target configuration."
@@ -24826,12 +29354,13 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "azure_ai_model_preview": "#/components/schemas/AzureAIModelPreviewTargetUpdate"
+            "azure_ai_model_preview": "#/components/schemas/AzureAIModelPreviewTargetUpdate",
+            "azure_ai_agent_preview": "#/components/schemas/AzureAIAgentPreviewTargetUpdate"
           }
         },
         "description": "Base class for targets with discriminator support."
       },
-      "TaxonomyPreviewCategory": {
+      "TaxonomyCategory": {
         "type": "object",
         "required": [
           "id",
@@ -24855,7 +29384,7 @@
           "riskCategory": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/RiskPreviewCategory"
+                "$ref": "#/components/schemas/RiskCategory"
               }
             ],
             "description": "Risk category associated with this taxonomy category."
@@ -24863,7 +29392,7 @@
           "subCategories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TaxonomyPreviewSubCategory"
+              "$ref": "#/components/schemas/TaxonomySubCategory"
             },
             "description": "List of taxonomy sub categories."
           },
@@ -24877,7 +29406,7 @@
         },
         "description": "Taxonomy category definition."
       },
-      "TaxonomyPreviewSubCategory": {
+      "TaxonomySubCategory": {
         "type": "object",
         "required": [
           "id",
@@ -24997,6 +29526,65 @@
         ],
         "description": "Represents a data source for evaluation runs that operate over Agent traces stored in Application Insights."
       },
+      "TreatmentEffectType": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "TooFewSamples",
+              "Inconclusive",
+              "Changed",
+              "Improved",
+              "Degraded"
+            ]
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "Treatment Effect Type."
+      },
+      "Trigger": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TriggerType"
+              }
+            ],
+            "description": "Type of the trigger."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Cron": "#/components/schemas/CronTrigger",
+            "Recurrence": "#/components/schemas/RecurrenceTrigger",
+            "OneTime": "#/components/schemas/OneTimeTrigger"
+          }
+        },
+        "description": "Base model for Trigger of the schedule."
+      },
+      "TriggerType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Cron",
+              "Recurrence",
+              "OneTime"
+            ]
+          }
+        ],
+        "description": "Type of the trigger."
+      },
       "UpdateAgentFromManifestRequest": {
         "type": "object",
         "required": [
@@ -25080,6 +29668,56 @@
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
           }
         }
+      },
+      "UserProfileMemoryItem": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "user_profile"
+            ],
+            "description": "The kind of the memory item."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MemoryItem"
+          }
+        ],
+        "description": "A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details."
+      },
+      "WeeklyRecurrenceSchedule": {
+        "type": "object",
+        "required": [
+          "type",
+          "daysOfWeek"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Weekly"
+            ],
+            "description": "Weekly recurrence type."
+          },
+          "daysOfWeek": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DayOfWeek"
+            },
+            "description": "Days of the week for the recurrence schedule."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RecurrenceSchedule"
+          }
+        ],
+        "description": "Weekly recurrence schedule."
       },
       "WorkflowActionOutputItemResource": {
         "type": "object",

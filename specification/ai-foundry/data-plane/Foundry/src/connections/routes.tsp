@@ -8,12 +8,9 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias ConnectionServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests;
+alias ConnectionOperations = FoundryAzureOperations<{}>;
 
-alias ConnectionOperations = Azure.Core.ResourceOperations<ConnectionServiceTraits>;
-
+@tag("Connections")
 interface Connections {
   @doc("Get a connection by name, without populating connection credentials")
   get is ConnectionOperations.ResourceRead<Connection>;

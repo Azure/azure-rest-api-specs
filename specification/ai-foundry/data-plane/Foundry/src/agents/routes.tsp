@@ -109,10 +109,8 @@ interface Agents {
   /**
    * Returns the list of all agents.
    */
-  @get
   @route("/agents")
   @tag("Agents")
-  @list
   listAgents is FoundryDataPlaneOperation<
     {
       ...ListAgentQueryParameters;

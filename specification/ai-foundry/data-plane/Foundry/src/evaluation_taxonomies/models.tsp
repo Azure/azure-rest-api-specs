@@ -13,14 +13,14 @@ namespace Azure.AI.Projects;
 
 @doc("Evaluation Taxonomy Definition")
 @resource("evaluationtaxonomies")
-model EvaluationPreviewTaxonomy {
+model EvaluationTaxonomy {
   ...AssetBase;
 
   @doc("Input configuration for the evaluation taxonomy.")
   taxonomyInput: EvaluationTaxonomyInput;
 
   @doc("List of taxonomy categories.")
-  taxonomyCategories?: TaxonomyPreviewCategory[];
+  taxonomyCategories?: TaxonomyCategory[];
 
   @doc("Additional properties for the evaluation taxonomy.")
   properties?: Record<string>;
@@ -31,10 +31,10 @@ union EvaluationTaxonomyInputType {
   string,
 
   @doc("Agent")
-  agent_preview: "agent_preview",
+  agent: "agent",
 
   @doc("Policy")
-  policy_preview: "policy_preview",
+  policy: "policy",
 }
 
 @discriminator("type")
@@ -45,19 +45,19 @@ model EvaluationTaxonomyInput {
 }
 
 @doc("Input configuration for the evaluation taxonomy when the input type is agent.")
-model AgentTaxonomyPreviewInput extends EvaluationTaxonomyInput {
+model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
-  type: EvaluationTaxonomyInputType.agent_preview;
+  type: EvaluationTaxonomyInputType.agent;
 
   @doc("Target configuration for the agent.")
-  target: AzureAIAgentPreviewTarget;
+  target: Target;
 
   @doc("List of risk categories to evaluate against.")
-  riskCategories: RiskPreviewCategory[];
+  riskCategories: RiskCategory[];
 }
 
 @doc("Taxonomy category definition.")
-model TaxonomyPreviewCategory {
+model TaxonomyCategory {
   @doc("Unique identifier of the taxonomy category.")
   id: string;
 
@@ -68,17 +68,17 @@ model TaxonomyPreviewCategory {
   description?: string;
 
   @doc("Risk category associated with this taxonomy category.")
-  riskCategory: RiskPreviewCategory;
+  riskCategory: RiskCategory;
 
   @doc("List of taxonomy sub categories.")
-  subCategories: TaxonomyPreviewSubCategory[];
+  subCategories: TaxonomySubCategory[];
 
   @doc("Additional properties for the taxonomy category.")
   properties?: Record<string>;
 }
 
 @doc("Taxonomy sub-category definition.")
-model TaxonomyPreviewSubCategory {
+model TaxonomySubCategory {
   @doc("Unique identifier of the taxonomy sub-category.")
   id: string;
 

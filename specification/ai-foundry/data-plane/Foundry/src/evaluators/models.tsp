@@ -1,18 +1,16 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+
 import "../common/models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 @doc("The category of the evaluator")
-@removed(Versions.v1)
 union EvaluatorCategory {
   string,
 
@@ -27,7 +25,6 @@ union EvaluatorCategory {
 }
 
 @doc("The type of the evaluator")
-@removed(Versions.v1)
 union EvaluatorType {
   string,
 
@@ -39,7 +36,6 @@ union EvaluatorType {
 }
 
 @doc("The type of evaluator definition")
-@removed(Versions.v1)
 union EvaluatorDefinitionType {
   string,
 
@@ -61,7 +57,6 @@ union EvaluatorDefinitionType {
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
 @doc("Base evaluator configuration with discriminator")
-@removed(Versions.v1)
 @discriminator("type")
 model EvaluatorDefinition {
   @doc("The type of evaluator definition")
@@ -78,7 +73,6 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
-@removed(Versions.v1)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
@@ -87,7 +81,6 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Prompt-based evaluator")
-@removed(Versions.v1)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
@@ -97,7 +90,6 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 
 @doc("Evaluator Definition")
 @resource("evaluators")
-@removed(Versions.v1)
 model EvaluatorVersion {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
   display_name?: string;
@@ -132,7 +124,6 @@ model EvaluatorVersion {
 }
 
 @doc("Evaluator Metric")
-@removed(Versions.v1)
 model EvaluatorMetric {
   @doc("Type of the metric.")
   type?: EvaluatorMetricType;
@@ -151,7 +142,6 @@ model EvaluatorMetric {
 }
 
 @doc("The type of the evaluator")
-@removed(Versions.v1)
 union EvaluatorMetricType {
   string,
 
@@ -166,7 +156,6 @@ union EvaluatorMetricType {
 }
 
 @doc("The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral")
-@removed(Versions.v1)
 union EvaluatorMetricDirection {
   string,
 

@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
+
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
@@ -15,9 +13,8 @@ alias ScheduleServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
   NoConditionalRequests; // NoRetryRequests suppresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
 
-alias ScheduleOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
 alias ScheduleRunOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
-alias SchedulesFilterQueryParamsTraits = {
+alias SchedulesFilterQueryParams = {
   @query("type")
   @doc("Filter by the type of schedule.")
   type?: ScheduleTaskType;
@@ -27,46 +24,39 @@ alias SchedulesFilterQueryParamsTraits = {
   enabled?: boolean;
 };
 
-@removed(Versions.v1)
+alias ScheduleOps = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>>;
+
+@tag("Schedules")
 interface Schedules {
   @doc("Delete a schedule.")
-  delete is ScheduleOperations.ResourceDelete<Schedule>;
+  delete is ScheduleOps.ResourceDelete<Schedule>;
 
   @doc("Get a schedule by id.")
-  get is ScheduleOperations.ResourceRead<Schedule>;
+  get is ScheduleOps.ResourceRead<Schedule>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List all schedules.")
-  list is ScheduleOperations.ResourceList<
-    Schedule,
-    SchedulesFilterQueryParamsTraits
-  >;
+  list is ScheduleOps.ResourceList<Schedule, SchedulesFilterQueryParams>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create or update a schedule by id.")
-  @Http.put
-  createOrUpdate is Azure.Core.Foundations.ResourceOperation<
-    Schedule,
-    {
-      @doc("Schedule resource")
-      @Http.bodyRoot
-      Schedule: Schedule;
-    },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<Schedule>
-  >;
+  #suppress "@azure-tools/typespec-azure-core/verb-conflict" ""
+  @put
+  createOrUpdate is ScheduleOps.ResourceCreateOrUpdate<Schedule>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get a schedule run by id.")
-  @route("schedules/{scheduleId}/runs/{runId}")
-  getRun is Azure.Core.Foundations.Operation<
+  @route("schedules/{schedule_id}/runs/{run_id}")
+  @get
+  getRun is FoundryDataPlaneOperation<
     {
-      @doc("Identifier of the schedule.")
       @path
-      scheduleId: string;
+      @doc("The unique identifier of the schedule.")
+      schedule_id: string;
 
-      @doc("Identifier of the schedule run.")
       @path
-      runId: string;
+      @doc("The unique identifier of the schedule run.")
+      run_id: string;
+
+      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>;
     },
     OkResponse<ScheduleRun>
   >;
@@ -75,6 +65,7 @@ interface Schedules {
   @doc("List all schedule runs.")
   listRuns is ScheduleRunOperations.ResourceList<
     ScheduleRun,
-    SchedulesFilterQueryParamsTraits
+    SchedulesFilterQueryParams &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>
   >;
 }

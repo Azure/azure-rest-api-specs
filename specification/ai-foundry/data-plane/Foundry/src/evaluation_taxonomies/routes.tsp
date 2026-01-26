@@ -26,25 +26,26 @@ alias EvaluationTaxonomiesFilterQueryParamsTraits = {
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
+@tag("EvaluationTaxonomies")
 interface EvaluationTaxonomies {
   @doc("Get an evaluation run by name.")
-  get is EvaluationTaxonomiesOperations.ResourceRead<EvaluationPreviewTaxonomy>;
+  get is EvaluationTaxonomiesOperations.ResourceRead<EvaluationTaxonomy>;
 
   @doc("List evaluation taxonomies")
   list is EvaluationTaxonomiesOperations.ResourceList<
-    EvaluationPreviewTaxonomy,
+    EvaluationTaxonomy,
     ListQueryParametersTrait<EvaluationTaxonomiesFilterQueryParamsTraits>
   >;
 
   @doc("Delete an evaluation taxonomy by name.")
-  delete is EvaluationTaxonomiesOperations.ResourceDelete<EvaluationPreviewTaxonomy>;
+  delete is EvaluationTaxonomiesOperations.ResourceDelete<EvaluationTaxonomy>;
 
   @doc("Create an evaluation taxonomy.")
   @put
   @route("/evaluationtaxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
     {
-      ...FoundryBetaOptInHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+      ...WithConditionalFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
 
       @doc("The name of the evaluation taxonomy.")
       @path
@@ -52,9 +53,9 @@ interface EvaluationTaxonomies {
 
       @doc("The evaluation taxonomy.")
       @body
-      body: EvaluationPreviewTaxonomy;
+      body: EvaluationTaxonomy;
     },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationPreviewTaxonomy>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>
   >;
 
   @doc("Update an evaluation taxonomy.")
@@ -62,7 +63,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<
     {
-      ...FoundryBetaOptInHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+      ...WithConditionalFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
 
       @doc("The name of the evaluation taxonomy.")
       @path
@@ -70,8 +71,8 @@ interface EvaluationTaxonomies {
 
       @doc("The evaluation taxonomy.")
       @body
-      body: EvaluationPreviewTaxonomy;
+      body: EvaluationTaxonomy;
     },
-    OkResponse<EvaluationPreviewTaxonomy>
+    OkResponse<EvaluationTaxonomy>
   >;
 }

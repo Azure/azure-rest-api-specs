@@ -100,7 +100,7 @@ union AttackStrategy {
 }
 
 @doc("Risk category for the attack objective.")
-union RiskPreviewCategory {
+union RiskCategory {
   string,
 
   @doc("Represents content related to hate or unfairness.")
@@ -135,8 +135,8 @@ union RiskPreviewCategory {
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
-model AzureOpenAIModelPreviewConfiguration extends TargetPreviewConfig {
-  type: "AzureOpenAIModel_Preview";
+model AzureOpenAIModelConfiguration extends TargetConfig {
+  type: "AzureOpenAIModel";
 
   @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).")
   modelDeploymentName: string;
@@ -144,14 +144,14 @@ model AzureOpenAIModelPreviewConfiguration extends TargetPreviewConfig {
 
 @doc("Abstract class for target configuration.")
 @discriminator("type")
-model TargetPreviewConfig {
+model TargetConfig {
   @doc("Type of the model configuration.")
   type: string;
 }
 
 @doc("Red team details.")
 @resource("runs")
-model RedTeamPreview {
+model RedTeam {
   @doc("Identifier of the red team run.")
   @key("name")
   @encodedName("application/json", "id")
@@ -171,7 +171,7 @@ model RedTeamPreview {
   simulationOnly?: boolean = false;
 
   @doc("List of risk categories to generate attack objectives for.")
-  riskCategories?: RiskPreviewCategory[];
+  riskCategories?: RiskCategory[];
 
   @doc("Application scenario for the red team operation, to generate scenario specific attacks.")
   applicationScenario?: string;
@@ -187,5 +187,5 @@ model RedTeamPreview {
   status?: string;
 
   @doc("Target configuration for the red-team run.")
-  target: TargetPreviewConfig;
+  target: TargetConfig;
 }
