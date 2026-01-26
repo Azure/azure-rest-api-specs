@@ -42,6 +42,7 @@ options:
       name: "@azure/arm-appconfiguration"
     flavor: azure
     experimental-extensible-enums: true
+    compatibility-lro: true
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appconfiguration"
     namespace: com.azure.resourcemanager.appconfiguration
@@ -49,7 +50,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/appconfiguration"
     emitter-output-dir: "{output-dir}/{service-dir}/armappconfiguration"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappconfiguration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappconfiguration/v3"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
