@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2019-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-02'
 input-file:
-- Microsoft.Tables/stable/2019-02-02/table.json
+- stable/2019-02-02/table.json
 ```
 
 ---
