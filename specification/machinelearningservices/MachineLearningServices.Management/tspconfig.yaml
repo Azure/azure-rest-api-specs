@@ -12,7 +12,8 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/machinelearning/azure-mgmt-machinelearningservices"
+    service-dir: "sdk/machinelearning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-machinelearningservices"
     namespace: "azure.mgmt.machinelearningservices"
     generate-test: true
     generate-sample: true
@@ -23,18 +24,21 @@ options:
     namespace: "com.azure.resourcemanager.machinelearning"
     service-name: "Machine Learning"
     flavor: azure
-  "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-machinelearning"
-    service-dir: "sdk/machinelearning"
-    flavor: "azure"
-    experimental-extensible-enums: true
-    package-details:
-      name: "@azure/arm-machinelearning"
+    use-object-for-unknown: true
+  # Disabled TypeScript as LRO Paging and x-nullable not yet supported
+  # "@azure-tools/typespec-ts":
+  #   emitter-output-dir: "{output-dir}/{service-dir}/arm-machinelearning"
+  #   service-dir: "sdk/machinelearning"
+  #   flavor: "azure"
+  #   compatibility-lro: true
+  #   experimental-extensible-enums: true
+  #   package-details:
+  #     name: "@azure/arm-machinelearning"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/machinelearningservices"
-    emitter-output-dir: "{output-dir}/{service-dir}/armmachinelearningservices"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmachinelearningservices"
-    fix-const-stuttering: true
+    service-dir: "sdk/resourcemanager/machinelearning"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmachinelearning"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmachinelearning"
+    fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
     generate-fakes: true

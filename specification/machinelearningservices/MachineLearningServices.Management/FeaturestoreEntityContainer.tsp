@@ -28,6 +28,50 @@ model FeaturestoreEntityContainer
   >;
 }
 
+alias FeaturestoreEntityContainersListParameters = {
+  /**
+   * Continuation token for pagination.
+   */
+  @query("$skip")
+  $skip?: string;
+
+  /**
+   * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
+   */
+  @query("tags")
+  tags?: string;
+
+  /**
+   * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
+   */
+  @query("listViewType")
+  listViewType?: ListViewType = ListViewType.ActiveOnly;
+
+  /**
+   * page size
+   */
+  @query("pageSize")
+  pageSize?: int32 = 20;
+
+  /**
+   * name for the featurestore entity
+   */
+  @query("name")
+  name?: string;
+
+  /**
+   * description for the featurestore entity
+   */
+  @query("description")
+  description?: string;
+
+  /**
+   * createdBy user name
+   */
+  @query("createdBy")
+  createdBy?: string;
+};
+
 @armResourceOperations
 interface FeaturestoreEntityContainers {
   /**
@@ -78,49 +122,7 @@ interface FeaturestoreEntityContainers {
   @summary("List featurestore entity containers.")
   list is ArmResourceListByParent<
     FeaturestoreEntityContainer,
-    Parameters = {
-      /**
-       * Continuation token for pagination.
-       */
-      @query("$skip")
-      $skip?: string;
-
-      /**
-       * Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2
-       */
-      @query("tags")
-      tags?: string;
-
-      /**
-       * [ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.
-       */
-      @query("listViewType")
-      listViewType?: ListViewType = ListViewType.ActiveOnly;
-
-      /**
-       * page size
-       */
-      @query("pageSize")
-      pageSize?: int32 = 20;
-
-      /**
-       * name for the featurestore entity
-       */
-      @query("name")
-      name?: string;
-
-      /**
-       * description for the featurestore entity
-       */
-      @query("description")
-      description?: string;
-
-      /**
-       * createdBy user name
-       */
-      @query("createdBy")
-      createdBy?: string;
-    },
+    Parameters = FeaturestoreEntityContainersListParameters,
     Response = ArmResponse<FeaturestoreEntityContainerResourceArmPaginatedResult>
   >;
 }

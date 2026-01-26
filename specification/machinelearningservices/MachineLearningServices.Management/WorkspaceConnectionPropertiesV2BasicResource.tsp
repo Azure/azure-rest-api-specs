@@ -14,6 +14,26 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+alias WorkspaceConnectionListParameters = {
+  /**
+   * Target of the workspace connection.
+   */
+  @query("target")
+  target?: string;
+
+  /**
+   * Category of the workspace connection.
+   */
+  @query("category")
+  category?: string;
+
+  /**
+   * query parameter that indicates if get connection call should return both connections and datastores
+   */
+  @query("includeAll")
+  includeAll?: boolean = false;
+};
+
 @parentResource(Workspace)
 model WorkspaceConnectionPropertiesV2BasicResource
   is Azure.ResourceManager.ProxyResource<
@@ -70,25 +90,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   @summary("List all the available machine learning workspaces connections under the specified workspace.")
   list is ArmResourceListByParent<
     WorkspaceConnectionPropertiesV2BasicResource,
-    Parameters = {
-      /**
-       * Target of the workspace connection.
-       */
-      @query("target")
-      target?: string;
-
-      /**
-       * Category of the workspace connection.
-       */
-      @query("category")
-      category?: string;
-
-      /**
-       * query parameter that indicates if get connection call should return both connections and datastores
-       */
-      @query("includeAll")
-      includeAll?: boolean = false;
-    },
+    Parameters = WorkspaceConnectionListParameters,
     Response = ArmResponse<WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult>
   >;
 
