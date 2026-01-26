@@ -35,7 +35,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-namespace ContainerRegistryService;
+namespace ContainerRegistry;
 
 /**
  * The available API versions.

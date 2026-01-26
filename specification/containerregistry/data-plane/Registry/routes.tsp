@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Foundations;
 
-namespace ContainerRegistryService;
+namespace ContainerRegistry;
 
 /**
  * Custom operation template that uses AcrErrors for error responses

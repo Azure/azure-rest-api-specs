@@ -4,17 +4,17 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(ContainerRegistryService, "ContainerRegistry");
+@@clientName(ContainerRegistry, "ContainerRegistry");
 // Rename ChangeableAttributes models to WriteableProperties for Python SDK backward compatibility
-@@clientName(ContainerRegistryService.ManifestChangeableAttributes,
+@@clientName(ContainerRegistry.ManifestChangeableAttributes,
   "ManifestWriteableProperties",
   "python"
 );
-@@clientName(ContainerRegistryService.TagChangeableAttributes,
+@@clientName(ContainerRegistry.TagChangeableAttributes,
   "TagWriteableProperties",
   "python"
 );
-@@clientName(ContainerRegistryService.RepositoryChangeableAttributes,
+@@clientName(ContainerRegistry.RepositoryChangeableAttributes,
   "RepositoryWriteableProperties",
   "python"
 );
