@@ -67,6 +67,5 @@ namespace Customizations;
 @@access(Storage.Blob.Blob.startCopyFromUrl, Access.internal);
 @@access(Storage.Blob.BlockBlob.query, Access.internal);
 @@access(Storage.Blob.BlockBlob.stageBlockFromUrl, Access.internal);
-@@access(Storage.Blob.BlockBlob.upload, Access.internal);
 @@access(Storage.Blob.PageBlob.copyIncremental, Access.internal);
 @@access(Storage.Blob.PageBlob.getPageRangesDiff, Access.internal);
