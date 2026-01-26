@@ -94,7 +94,9 @@ using Azure.Core;
 @@clientName(Volumes.update::parameters.properties, "patch", "csharp");
 @@clientName(SkusOperationGroup.list, "GetSkus", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ElasticSans.listByElasticSan, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ElasticSans.listByElasticSan,
+  "csharp"
+);
 
 // Move restoreVolume operation to Management client for Go to maintain compatibility
 @@clientLocation(Microsoft.ElasticSan.restoreVolume, "Management", "go");
