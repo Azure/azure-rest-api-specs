@@ -75,7 +75,7 @@ I need:
 
 After making the TypeSpec changes, guide me through creating the API spec PR and generating SDKs locally. Stay in the current branch (ronniegeraghty/azsdktoolsagent-demo) for the API spec changes. All SDK language repositories (azure-sdk-for-net, azure-sdk-for-python, azure-sdk-for-java, azure-sdk-for-js, azure-sdk-for-go) are already cloned locally in the same parent directory as the azure-rest-api-specs repo. Create a branch named "ronniegeraghty/azsdktoolsagent-demo" in each SDK repo to work on the new library generations. Use separate subagents in parallel sfor each SDK language.
 
-Create a markdown file to track the progress of each step throughout this process.
+Create a markdown file in the typespec project dir to track the progress of each step throughout this process.
 ```
 
 ---
