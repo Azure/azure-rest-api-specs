@@ -7,6 +7,37 @@ using Storage.Blob;
 
 namespace Customizations;
 
+@@clientInitialization(Storage.Blob.Service,
+  {
+    initializedBy: InitializedBy.parent,
+  }
+);
+@@clientInitialization(Storage.Blob.Container,
+  {
+    initializedBy: InitializedBy.parent,
+  }
+);
+@@clientInitialization(Storage.Blob.Blob,
+  {
+    initializedBy: InitializedBy.parent,
+  }
+);
+@@clientInitialization(Storage.Blob.AppendBlob,
+  {
+    initializedBy: InitializedBy.parent,
+  }
+);
+@@clientInitialization(Storage.Blob.BlockBlob,
+  {
+    initializedBy: InitializedBy.parent,
+  }
+);
+@@clientInitialization(Storage.Blob.PageBlob,
+  {
+    initializedBy: InitializedBy.parent,
+  }
+);
+
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs");
