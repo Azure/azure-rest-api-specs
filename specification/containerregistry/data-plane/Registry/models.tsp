@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
-namespace ContainerRegistryService;
+namespace ContainerRegistry;
 
 /** The multipart body parameter for AAD token exchange. */
 model MultipartBodyParameter {
