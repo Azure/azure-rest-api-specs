@@ -13,14 +13,14 @@ namespace Microsoft.EventGrid;
 /**
  * Information of the private link resource.
  */
-model PrivateLinkResource
-  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateLinkResource,
-    KeyName = "privateLinkResourceName",
-    SegmentName = "privateLinkResources",
-    NamePattern = ""
-  >;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PrivateLinkResource extends ProxyResource {
+  /**
+   * Properties of the private link resource.
+   */
+  properties?: PrivateLinkResourceProperties;
 }
 
 @armResourceOperations
@@ -73,22 +73,14 @@ interface PrivateLinkResources {
   /**
    * List all the private link resources under a topic, domain, or partner namespace or namespace.
    */
+  @get
+  @list
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources")
   @summary("List private link resources under specific topic, domain, or partner namespace or namespace.")
-  listByResource is ArmResourceListByParent<
+  listByResource is PrivateLinkResourceOps.ActionSync<
     PrivateLinkResource,
+    Request = void,
     Parameters = {
-      /**
-       * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
-       */
-      @path
-      parentType: string;
-
-      /**
-       * The name of the parent resource (namely, either, the topic name, domain name, or partner namespace or namespace name).
-       */
-      @path
-      parentName: string;
-
       /**
        * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
        */
