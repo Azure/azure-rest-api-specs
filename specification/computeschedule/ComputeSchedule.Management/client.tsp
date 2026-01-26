@@ -226,6 +226,14 @@ using Azure.ResourceManager;
   "V2025-05-01",
   "javascript"
 );
+@@clientName(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`,
+  "V20240815Preview",
+  "javascript"
+);
+@@clientName(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`,
+  "V20250415Preview",
+  "javascript"
+);
 @@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
 
 @@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent");
