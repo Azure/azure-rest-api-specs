@@ -260,11 +260,15 @@ model PromptAgentDefinition extends AgentDefinition {
     """)
   tools?: OpenAI.Tool[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @doc("""
     Controls how the model selects which tool (or tools) to use when generating a response.
     Only applicable when `tools` are specified.
+    
+    `auto` (default): The model can choose between generating a message or calling one or more tools.
+    `required`: The model must call at least one tool before responding.
     """)
-  tool_choice_mode?: ToolChoiceMode;
+  tool_choice?: string | OpenAI.ToolChoiceParam;
 
   /**
    * Configuration options for a text response from the model. Can be plain text or structured JSON data.
@@ -276,14 +280,6 @@ model PromptAgentDefinition extends AgentDefinition {
 
   @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
   structured_inputs?: Record<StructuredInputDefinition>;
-}
-
-/**Controls tool selection of the model.
-`auto` (default): The model can choose between generating a message or calling one or more tools.
-`required`: The model must call at least one tool before responding.*/
-union ToolChoiceMode {
-  auto: "auto",
-  required: "required",
 }
 
 alias ListAgentQueryParameters = {

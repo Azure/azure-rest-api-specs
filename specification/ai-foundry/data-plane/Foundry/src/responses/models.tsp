@@ -27,8 +27,15 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.CreateResponse,
   {
-    /** The agent to use for generating the response. */
+    /**
+     * (Deprecated) Use agent_reference instead.
+     *  The agent to use for generating the response.
+     */
+    @removed(Versions.v1)
     agent?: AgentReference,
+
+    /** The agent to use for generating the response. */
+    agent_reference?: AgentReference,
 
     /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
     structured_inputs?: Record<unknown>,
@@ -38,7 +45,10 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.Response,
   {
-    /** The agent used for this response */
+    /**
+     * (Deprecated) Use agent_reference instead.
+     * The agent used for this response
+     */
     @removed(Versions.v1)
     agent?: AgentId,
 

@@ -2994,7 +2994,7 @@ paths:
                 items:
                   type: array
                   items:
-                    $ref: '#/components/schemas/OpenAI.Item'
+                    $ref: '#/components/schemas/OpenAI.InputItem'
                   description: Conversation items from which to extract memories.
                 previous_update_id:
                   type: string
@@ -4593,6 +4593,12 @@ paths:
                         - $ref: '#/components/schemas/OpenAI.ConversationParam'
                       nullable: true
                     agent:
+                      allOf:
+                        - $ref: '#/components/schemas/AgentReference'
+                      description: |-
+                        (Deprecated) Use agent_reference instead.
+                        The agent to use for generating the response.
+                    agent_reference:
                       allOf:
                         - $ref: '#/components/schemas/AgentReference'
                       description: The agent to use for generating the response.
@@ -11994,6 +12000,12 @@ components:
         agent:
           allOf:
             - $ref: '#/components/schemas/AgentReference'
+          description: |-
+            (Deprecated) Use agent_reference instead.
+            The agent to use for generating the response.
+        agent_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentReference'
           description: The agent to use for generating the response.
         structured_inputs:
           type: object
@@ -18018,7 +18030,9 @@ components:
         agent:
           allOf:
             - $ref: '#/components/schemas/AgentId'
-          description: The agent used for this response
+          description: |-
+            (Deprecated) Use agent_reference instead.
+            The agent used for this response
         agent_reference:
           allOf:
             - $ref: '#/components/schemas/AgentReference'
@@ -21906,12 +21920,16 @@ components:
           description: |-
             An array of tools the model may call while generating a response. You
             can specify which tool to use by setting the `tool_choice` parameter.
-        tool_choice_mode:
-          allOf:
-            - $ref: '#/components/schemas/ToolChoiceMode'
+        tool_choice:
+          anyOf:
+            - type: string
+            - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
           description: |-
             Controls how the model selects which tool (or tools) to use when generating a response.
             Only applicable when `tools` are specified.
+
+            `auto` (default): The model can choose between generating a message or calling one or more tools.
+            `required`: The model must call at least one tool before responding.
         text:
           type: object
           properties:
@@ -22597,15 +22615,6 @@ components:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
-    ToolChoiceMode:
-      type: string
-      enum:
-        - auto
-        - required
-      description: |-
-        Controls tool selection of the model.
-        `auto` (default): The model can choose between generating a message or calling one or more tools.
-        `required`: The model must call at least one tool before responding.
     ToolDescription:
       type: object
       properties:
