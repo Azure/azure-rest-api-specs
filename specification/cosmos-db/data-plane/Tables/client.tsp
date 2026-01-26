@@ -6,25 +6,29 @@ using Data.Tables;
 
 namespace Customizations;
 
+@client({
+  name: "TableServiceClient",
+  service: Data.Tables,
+})
+interface ClientParent {
+  getProperties is Data.Tables.getProperties;
+}
+
+@client({
+  name: "TableClient",
+  service: Data.Tables,
+})
+interface ClientChild {
+  insertOrReplaceEntity is Data.Tables.insertOrReplaceEntity;
+}
+
 @@clientNamespace(Data.Tables, "Azure.Data.Tables");
-@@clientNamespace(Data.Tables.Table, "Azure.Data.Tables");
-
-@@clientName(Data.Tables, "TableServiceClient");
-@@clientName(Data.Tables.Table, "TableClient");
-
-@@clientInitialization(Data.Tables.Table,
-  {
-    parameters: TablePathParameter,
-    initializedBy: InitializedBy.parent | InitializedBy.individually,
-  }
-);
-
-@@clientName(getProperties, "getServiceProperties");
-@@clientName(getProperties, "setServiceProperties");
-@@clientName(getStatistics, "getServiceStats", "python");
-@@clientName(Table.getAccessPolicy, "getTableAccessPolicy");
-@@clientName(Table.setAccessPolicy, "setTableAccessPolicy");
-@@clientName(Table.insertOrReplaceEntity, "upsertEntity", "python");
+@@clientName(Data.Tables.getProperties, "getServiceProperties");
+@@clientName(Data.Tables.setProperties, "setServiceProperties");
+@@clientName(Data.Tables.getStatistics, "getServiceStats", "python");
+@@clientName(Data.Tables.getAccessPolicy, "getTableAccessPolicy");
+@@clientName(Data.Tables.setAccessPolicy, "setTableAccessPolicy");
+@@clientName(Data.Tables.insertOrReplaceEntity, "upsertEntity", "python");
 @@clientName(AccessPolicy, "TableAccessPolicy");
 @@clientName(Logging, "TableAnalyticsLogging");
 @@clientName(TableProperties, "TableItem");

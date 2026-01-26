@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @useAuth(
-  OAuth2Auth<[
+  ApiKeyAuth<ApiKeyLocation.header, "Authorization"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
@@ -15,13 +15,13 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-@service(#{ title: "Azure Tables service" })
+@service(#{ title: "Azure Tables" })
 @server(
-  "{endpoint}",
+  "{url}",
   "The host name of the tables account, e.g. accountName.table.core.windows.net",
   {
     @doc("The host name of the tables account, e.g. accountName.table.core.windows.net")
-    endpoint: url,
+    url: url,
   }
 )
 @versioned(Versions)
