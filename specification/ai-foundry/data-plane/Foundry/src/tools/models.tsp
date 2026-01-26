@@ -53,34 +53,6 @@ union _AgentIncludable {
      */
     @removed(Versions.v1)
     project_connection_id?: string,
-
-    /**
-     * A handlebars template string containing one or more structured input references that render to HTTP headers map.
-     * If both headers and headers_template are provided, they are merged with template values taking precedence.
-     */
-    headers_template?: string,
-  }
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.FileSearchTool,
-  {
-    /**
-     * A handlebars template string containing one or more structured input references that render to vector store IDs array.
-     * If both vector_store_ids and vector_store_ids_template are provided, they are merged and duplicates are removed.
-     */
-    vector_store_ids_template?: string,
-  }
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.CodeInterpreterContainerAuto,
-  {
-    /**
-     * A handlebars template string containing one or more structured input references that render to file IDs array.
-     * If both file_ids and file_ids_template are provided, they are merged and duplicates are removed.
-     */
-    file_ids_template?: string,
   }
 );
 

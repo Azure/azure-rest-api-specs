@@ -9970,11 +9970,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
           nullable: true
-        file_ids_template:
-          type: string
-          description: |-
-            A handlebars template string containing one or more structured input references that render to file IDs array.
-            If both file_ids and file_ids_template are provided, they are merged and duplicates are removed.
       description: Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
       title: CodeInterpreterToolAuto
       x-stainless-naming:
@@ -13048,11 +13043,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
           nullable: true
-        vector_store_ids_template:
-          type: string
-          description: |-
-            A handlebars template string containing one or more structured input references that render to vector store IDs array.
-            If both vector_store_ids and vector_store_ids_template are provided, they are merged and duplicates are removed.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -16735,11 +16725,6 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-        headers_template:
-          type: string
-          description: |-
-            A handlebars template string containing one or more structured input references that render to HTTP headers map.
-            If both headers and headers_template are provided, they are merged with template values taking precedence.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
