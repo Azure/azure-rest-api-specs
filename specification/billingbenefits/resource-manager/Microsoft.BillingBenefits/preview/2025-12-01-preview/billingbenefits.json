@@ -3144,13 +3144,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'FreeServices' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/FreeServices"
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Resource 'FreeServices' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/FreeServices"
             },
@@ -3177,7 +3177,12 @@
           "FreeServicesCreate": {
             "$ref": "./examples/FreeServicesCreate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FreeServices"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "FreeServices_Update",
@@ -3221,7 +3226,7 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -3252,7 +3257,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/FreeServices"
         },
         "x-ms-long-running-operation": true
@@ -4215,46 +4220,14 @@
         },
         "balanceVersion": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created.",
           "readOnly": true
         },
         "duration": {
-          "$ref": "#/definitions/AwardDuration",
+          "$ref": "#/definitions/Term",
           "description": "Duration for which the benefit is active. Will be in format P{int}M or P{int}Y. Any values representing up to 12 years are valid. Upper limit examples: P144M, P12Y."
         }
-      }
-    },
-    "AwardDuration": {
-      "type": "string",
-      "description": "Duration for which the benefit is active",
-      "enum": [
-        "P1M",
-        "P1Y",
-        "P3Y",
-        "P5Y"
-      ],
-      "x-ms-enum": {
-        "name": "AwardDuration",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "P1M",
-            "value": "P1M"
-          },
-          {
-            "name": "P1Y",
-            "value": "P1Y"
-          },
-          {
-            "name": "P3Y",
-            "value": "P3Y"
-          },
-          {
-            "name": "P5Y",
-            "value": "P5Y"
-          }
-        ]
       }
     },
     "Azure.Core.armResourceType": {
@@ -4399,12 +4372,12 @@
         },
         "startDate": {
           "type": "string",
-          "format": "date-time-rfc7231",
+          "format": "date",
           "description": "Date when the billing plan has started."
         },
         "nextPaymentDueDate": {
           "type": "string",
-          "format": "date-time-rfc7231",
+          "format": "date",
           "description": "For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off."
         },
         "transactions": {
@@ -5289,7 +5262,7 @@
       "properties": {
         "code": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "The reason code for credit.",
           "readOnly": true
         },
@@ -7179,12 +7152,12 @@
       "properties": {
         "dueDate": {
           "type": "string",
-          "format": "date-time-rfc7231",
+          "format": "date",
           "description": "Date when the payment needs to be done."
         },
         "paymentDate": {
           "type": "string",
-          "format": "date-time-rfc7231",
+          "format": "date",
           "description": "Date when the transaction is completed. Is null when it is scheduled."
         },
         "pricingCurrencyTotal": {
@@ -8622,7 +8595,7 @@
         },
         "balanceVersion": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created."
         },
         "systemId": {
@@ -8669,6 +8642,7 @@
       "type": "string",
       "description": "Represent benefit term in ISO 8601 format.",
       "enum": [
+        "P1M",
         "P1Y",
         "P3Y",
         "P5Y"
@@ -8677,6 +8651,10 @@
         "name": "Term",
         "modelAsString": true,
         "values": [
+          {
+            "name": "P1M",
+            "value": "P1M"
+          },
           {
             "name": "P1Y",
             "value": "P1Y"

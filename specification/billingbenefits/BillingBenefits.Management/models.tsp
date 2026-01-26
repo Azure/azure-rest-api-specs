@@ -87,6 +87,8 @@ union ProvisioningState {
 union Term {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  P1M: "P1M",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P1Y: "P1Y",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P3Y: "P3Y",
@@ -856,14 +858,12 @@ model BillingPlanInformation {
   /**
    * Date when the billing plan has started.
    */
-  @encode(DateTimeKnownEncoding.rfc7231)
-  startDate?: utcDateTime;
+  startDate?: plainDate;
 
   /**
    * For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off.
    */
-  @encode(DateTimeKnownEncoding.rfc7231)
-  nextPaymentDueDate?: utcDateTime;
+  nextPaymentDueDate?: plainDate;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
@@ -877,14 +877,12 @@ model PaymentDetail {
   /**
    * Date when the payment needs to be done.
    */
-  @encode(DateTimeKnownEncoding.rfc7231)
-  dueDate?: utcDateTime;
+  dueDate?: plainDate;
 
   /**
    * Date when the transaction is completed. Is null when it is scheduled.
    */
-  @encode(DateTimeKnownEncoding.rfc7231)
-  paymentDate?: utcDateTime;
+  paymentDate?: plainDate;
 
   /**
    * Amount in pricing currency. Tax not included.
@@ -2193,7 +2191,7 @@ model Shortfall {
   /**
    * Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created.
    */
-  balanceVersion?: float32;
+  balanceVersion?: float64;
 
   /**
    * This is an identifier of the shortfall which will not change for its lifetime.
@@ -2558,7 +2556,7 @@ model CreditReason {
    * The reason code for credit.
    */
   @visibility(Lifecycle.Read)
-  code?: float32;
+  code?: float64;
 
   /**
    * The free string description of the credit.
@@ -2968,27 +2966,12 @@ model Award {
    * Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created.
    */
   @visibility(Lifecycle.Read)
-  balanceVersion?: float32;
+  balanceVersion?: float64;
 
   /**
    * Duration for which the benefit is active. Will be in format P{int}M or P{int}Y. Any values representing up to 12 years are valid. Upper limit examples: P144M, P12Y.
    */
-  duration?: AwardDuration;
-}
-
-/**
- * Duration for which the benefit is active
- */
-union AwardDuration {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  P1M: "P1M",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  P1Y: "P1Y",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  P3Y: "P3Y",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  P5Y: "P5Y",
+  duration?: Term;
 }
 
 /**

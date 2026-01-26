@@ -76,25 +76,18 @@ interface FreeServicesOperations {
   /**
    * Create a free service.
    */
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrReplaceAsync<
-    FreeServices,
-    Response = ArmResponse<FreeServices> | (ArmResourceCreatedResponse<
-      FreeServices,
-      LroHeaders = CustomArmAsyncOperationHeader<FinalResult = FreeServices>
-    > &
-      Azure.Core.Foundations.RetryAfterHeader)
-  >;
+  create is ArmResourceCreateOrReplaceAsync<FreeServices>;
 
   /**
    * Update a free service.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     FreeServices,
     PatchModel = FreeServicesPatchRequest,
-    Response = ArmResponse<FreeServices> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response = ArmResponse<FreeServices> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
