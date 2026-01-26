@@ -98,6 +98,11 @@ model BulkPublishTargetDetails {
     }
   ]>;
 
+  @added(Versions.v2025_08_01)
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
+
   @doc("Name of the solution instance")
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   solutionInstanceName?: string;
@@ -143,6 +148,10 @@ model BulkReviewTargetDetails {
       type: "Microsoft.Edge/Targets";
     }
   ]>;
+
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
 
   @doc("Name of the solution instance")
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
