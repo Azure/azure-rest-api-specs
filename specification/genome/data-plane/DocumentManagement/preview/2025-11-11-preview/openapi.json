@@ -1,0 +1,504 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Genome API",
+    "version": "2025-11-11-preview",
+    "description": "API for managing document uploads and downloads within the GenomeRP platform.\nSupports both internal and external document workflows for trade, logistics,\ncompliance, and facility operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/documentmanagement",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Document Management endpoints (protocol and hostname, for example:\nhttps://westus.api.genome.contoso.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://management.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://management.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/v1/documents": {
+      "post": {
+        "operationId": "UploadDocuments",
+        "summary": "Upload documents",
+        "description": "Upload endpoint that supports both internal and external uploads based on\nUploadType.\n\nFor External uploads:\n- POST /v1/documents with form body containing:\n- UploadType: External (mandatory)\n- CaseId: Case identifier (mandatory)\n- SupplierId: Supplier identifier (mandatory)\n- DocumentCategory: List of document categories (mandatory)\n- Files: Documents to upload (mandatory)\n\nFor Internal uploads:\n- POST /v1/documents with form body containing:\n- UploadType: Internal (mandatory)\n- CaseId: Case identifier (mandatory)\n- SupplierId: Supplier identifier (mandatory)\n- DocumentCategory: List of document categories (mandatory)\n- Files: Documents to upload (mandatory)",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadDocumentsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UploadResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload documents": {
+            "$ref": "./examples/UploadDocuments_MaximumSet_Gen.json"
+          },
+          "Upload documents - minimum set": {
+            "$ref": "./examples/UploadDocuments_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CommonError": {
+      "type": "object",
+      "description": "Common error response structure",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommonErrorDetails",
+          "description": "Error details"
+        }
+      }
+    },
+    "CommonErrorDetails": {
+      "type": "object",
+      "description": "Detailed error information",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "details": {
+          "type": "array",
+          "description": "Additional error details",
+          "items": {
+            "$ref": "#/definitions/CommonErrorDetails"
+          }
+        }
+      }
+    },
+    "DocumentCategory": {
+      "type": "string",
+      "description": "Categories of documents that can be associated with trade, logistics,\ncompliance, auditing, and facility operations",
+      "enum": [
+        "CommercialInvoice",
+        "Receipt",
+        "Report",
+        "Other",
+        "BillOfLading",
+        "PackingList",
+        "CertificateOfOrigin",
+        "CBPForm7501",
+        "ThirdPartyAuditReport",
+        "FacilityDocumentation"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CommercialInvoice",
+            "value": "CommercialInvoice",
+            "description": "CommercialInvoice"
+          },
+          {
+            "name": "Receipt",
+            "value": "Receipt",
+            "description": "Receipt"
+          },
+          {
+            "name": "Report",
+            "value": "Report",
+            "description": "Report"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other"
+          },
+          {
+            "name": "BillOfLading",
+            "value": "BillOfLading",
+            "description": "BillOfLading"
+          },
+          {
+            "name": "PackingList",
+            "value": "PackingList",
+            "description": "PackingList"
+          },
+          {
+            "name": "CertificateOfOrigin",
+            "value": "CertificateOfOrigin",
+            "description": "CertificateOfOrigin"
+          },
+          {
+            "name": "CBPForm7501",
+            "value": "CBPForm7501",
+            "description": "CBPForm7501"
+          },
+          {
+            "name": "ThirdPartyAuditReport",
+            "value": "ThirdPartyAuditReport",
+            "description": "ThirdPartyAuditReport"
+          },
+          {
+            "name": "FacilityDocumentation",
+            "value": "FacilityDocumentation",
+            "description": "FacilityDocumentation"
+          }
+        ]
+      }
+    },
+    "DocumentState": {
+      "type": "string",
+      "description": "Document state indicating the current processing state of documents",
+      "enum": [
+        "Uploaded",
+        "AllDuplicates",
+        "NoFiles",
+        "Pending",
+        "Processing",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Uploaded",
+            "value": "Uploaded",
+            "description": "Uploaded"
+          },
+          {
+            "name": "AllDuplicates",
+            "value": "AllDuplicates",
+            "description": "AllDuplicates"
+          },
+          {
+            "name": "NoFiles",
+            "value": "NoFiles",
+            "description": "NoFiles"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending"
+          },
+          {
+            "name": "Processing",
+            "value": "Processing",
+            "description": "Processing"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
+      }
+    },
+    "UploadDocumentsRequest": {
+      "type": "object",
+      "description": "Request body for uploading documents",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "description": "Case ID associated with the documents. Can come from URL parameters or form\nbody."
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID. For internal uploads, this will be auto-generated if not provided."
+        },
+        "supplierId": {
+          "type": "string",
+          "description": "Supplier ID. Required for external uploads."
+        },
+        "files": {
+          "type": "array",
+          "description": "List of files to upload",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "uploadType": {
+          "$ref": "#/definitions/UploadType",
+          "description": "Upload type indicating whether this is internal or external"
+        },
+        "documentCategory": {
+          "type": "array",
+          "description": "List of document categories for the uploaded files",
+          "items": {
+            "$ref": "#/definitions/DocumentCategory"
+          }
+        }
+      },
+      "required": [
+        "caseId",
+        "supplierId",
+        "files",
+        "uploadType",
+        "documentCategory"
+      ]
+    },
+    "UploadRequest": {
+      "type": "object",
+      "description": "Request model for document upload operations",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "description": "Case ID associated with the documents. Can come from URL parameters or form\nbody."
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID. For internal uploads, this will be auto-generated if not provided."
+        },
+        "supplierId": {
+          "type": "string",
+          "description": "Supplier ID. Required for external uploads."
+        },
+        "files": {
+          "type": "array",
+          "description": "List of files to upload",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "uploadType": {
+          "$ref": "#/definitions/UploadType",
+          "description": "Upload type indicating whether the upload is internal or external"
+        },
+        "documentCategory": {
+          "type": "array",
+          "description": "List of document categories for the uploaded files",
+          "items": {
+            "$ref": "#/definitions/DocumentCategory"
+          }
+        }
+      },
+      "required": [
+        "caseId",
+        "supplierId",
+        "files",
+        "uploadType",
+        "documentCategory"
+      ]
+    },
+    "UploadResponse": {
+      "type": "object",
+      "description": "Response containing the result of document upload operation",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "description": "Case ID associated with the uploaded documents"
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID who uploaded the documents"
+        },
+        "fileName": {
+          "type": "array",
+          "description": "List of successfully uploaded file names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "documentState": {
+          "$ref": "#/definitions/DocumentState",
+          "description": "Document state indicating the current processing state of documents"
+        },
+        "skippedFiles": {
+          "type": "array",
+          "description": "List of files that were skipped due to duplicates",
+          "items": {
+            "type": "string"
+          }
+        },
+        "totalFilesProcessed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of files processed in the upload request"
+        },
+        "filesUploaded": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of files successfully uploaded"
+        },
+        "filesSkipped": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of files skipped (duplicates)"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary message describing the upload result"
+        },
+        "uploadType": {
+          "$ref": "#/definitions/UploadType",
+          "description": "Upload type indicating whether the upload is internal or external"
+        },
+        "documentCategory": {
+          "type": "array",
+          "description": "List of document categories for the uploaded files",
+          "items": {
+            "$ref": "#/definitions/DocumentCategory"
+          }
+        }
+      }
+    },
+    "UploadType": {
+      "type": "string",
+      "description": "Upload type indicating whether the upload is internal or external",
+      "enum": [
+        "Internal",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "UploadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "Internal"
+          },
+          {
+            "name": "External",
+            "value": "External",
+            "description": "External"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

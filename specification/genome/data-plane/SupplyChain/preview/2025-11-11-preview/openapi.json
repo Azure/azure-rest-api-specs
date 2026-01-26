@@ -1,0 +1,1413 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Genome API",
+    "version": "2025-11-11-preview",
+    "description": "Comprehensive API documentation for Genome operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/supplychain",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Genome API endpoints (protocol and hostname, for example:\nhttps://westus.api.genome.contoso.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://genome.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://genome.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/v1/supplychain/entities": {
+      "get": {
+        "operationId": "GetSuppliers",
+        "summary": "Query entities",
+        "description": "Queries suppliers from the supply chain service with various filters using\ncursor-based pagination. Filters are applied only to Entity node properties.\nRelated data (addresses, identifiers, flags) are returned but not filterable.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Supplier name (fuzzy search)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "jurisdiction",
+            "in": "query",
+            "description": "The jurisdiction filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The entity type filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "riskScore",
+            "in": "query",
+            "description": "The risk score filter (exact match)",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "minRiskScore",
+            "in": "query",
+            "description": "The minimum risk score filter for range queries",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxRiskScore",
+            "in": "query",
+            "description": "The maximum risk score filter for range queries",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "The source system filter (e.g., SAP, TV)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "leaderSource",
+            "in": "query",
+            "description": "The leader source filter (e.g., TV)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "leaderEntityKey",
+            "in": "query",
+            "description": "The leader entity key filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The version filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "The cursor for pagination support",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results to return (default: 50)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 1
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Primary sort field (e.g., riskScore, name, jurisdiction, entityKey)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortDirection",
+            "in": "query",
+            "description": "Primary sort direction (ASC or DESC)",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "x-ms-enum": {
+              "name": "Paths1995XaxV1SupplychainEntitiesGetParameters13Schema",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ASC",
+                  "value": "ASC",
+                  "description": "ASC"
+                },
+                {
+                  "name": "DESC",
+                  "value": "DESC",
+                  "description": "DESC"
+                }
+              ]
+            }
+          },
+          {
+            "name": "secondarySortBy",
+            "in": "query",
+            "description": "Secondary sort field for stable ordering",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "secondarySortDirection",
+            "in": "query",
+            "description": "Secondary sort direction (ASC or DESC)",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "x-ms-enum": {
+              "name": "PathsMi8Vf6V1SupplychainEntitiesGetParameters15Schema",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ASC",
+                  "value": "ASC",
+                  "description": "ASC"
+                },
+                {
+                  "name": "DESC",
+                  "value": "DESC",
+                  "description": "DESC"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupplierListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query entities": {
+            "$ref": "./examples/GetSuppliers_MaximumSet_Gen.json"
+          },
+          "Query entities - minimum set": {
+            "$ref": "./examples/GetSuppliers_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/supplychain/entities/{entityKey}": {
+      "get": {
+        "operationId": "GetEntityById",
+        "summary": "Get entity by ID",
+        "description": "Retrieves a specific entity from the graph database using its unique\nidentifier. You can use TV-0 to TV-99",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "entityKey",
+            "in": "path",
+            "description": "The unique identifier of the entity to retrieve",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupplierResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get entity by ID": {
+            "$ref": "./examples/GetEntityById_MaximumSet_Gen.json"
+          },
+          "Get entity by ID - minimum set": {
+            "$ref": "./examples/GetEntityById_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/supplychain/entities/{entityKey}/search": {
+      "get": {
+        "operationId": "GetNTierSuppliersWithFilters",
+        "summary": "Get N-tier suppliers with filters (single-direction)",
+        "description": "Gets N-tier suppliers from a root entity using breadth-first search traversal\nwith advanced filtering capabilities. Only single-direction queries are\nsupported - specify either upstreamDepth OR downstreamDepth, but not both.\nDefaults to downstreamDepth = 1 for convenient single-tier downstream queries.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "entityKey",
+            "in": "path",
+            "description": "The unique identifier of the root entity to start traversal from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "upstreamDepth",
+            "in": "query",
+            "description": "The depth for upstream traversal (suppliers of suppliers, default: 0). Cannot\nbe used with downstreamDepth.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "downstreamDepth",
+            "in": "query",
+            "description": "The depth for downstream traversal (customers of customers, default: 1). Cannot\nbe used with upstreamDepth.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "The cursor for pagination support",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results to return (default: 100)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "minimum": 1
+          },
+          {
+            "name": "riskScore",
+            "in": "query",
+            "description": "The risk score filter (exact match)",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "minRiskScore",
+            "in": "query",
+            "description": "The minimum risk score filter",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxRiskScore",
+            "in": "query",
+            "description": "The maximum risk score filter",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "jurisdiction",
+            "in": "query",
+            "description": "The jurisdiction filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The supplier name filter for fuzzy search",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The entity type filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "The source system filter (exact match, e.g., SAP, TV)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "leaderSource",
+            "in": "query",
+            "description": "The leader source filter (e.g., TV)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "leaderEntityKey",
+            "in": "query",
+            "description": "The leader entity key filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Primary sort field (default: \"depth\"). Valid options: depth, riskScore, name,\njurisdiction, entityKey",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sortDirection",
+            "in": "query",
+            "description": "Primary sort direction (default: \"ASC\"). Valid options: ASC, DESC",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "x-ms-enum": {
+              "name": "Paths1A00F2QV1SupplychainEntitiesEntitykeySearchGetParameters15Schema",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ASC",
+                  "value": "ASC",
+                  "description": "ASC"
+                },
+                {
+                  "name": "DESC",
+                  "value": "DESC",
+                  "description": "DESC"
+                }
+              ]
+            }
+          },
+          {
+            "name": "secondarySortBy",
+            "in": "query",
+            "description": "Secondary sort field for stable ordering (default: \"name\")",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "secondarySortDirection",
+            "in": "query",
+            "description": "Secondary sort direction (default: \"ASC\")",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "x-ms-enum": {
+              "name": "Paths1Dk1QrqV1SupplychainEntitiesEntitykeySearchGetParameters17Schema",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ASC",
+                  "value": "ASC",
+                  "description": "ASC"
+                },
+                {
+                  "name": "DESC",
+                  "value": "DESC",
+                  "description": "DESC"
+                }
+              ]
+            }
+          },
+          {
+            "name": "flagIds",
+            "in": "query",
+            "description": "Optional list of flag IDs to filter by. Entities must have at least one\nmatching flag.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SearchNtierSuppliersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get N-tier suppliers with filters (single-direction)": {
+            "$ref": "./examples/GetNTierSuppliersWithFilters_MaximumSet_Gen.json"
+          },
+          "Get N-tier suppliers with filters (single-direction) - minimum set": {
+            "$ref": "./examples/GetNTierSuppliersWithFilters_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/supplychain/entities/{entityKey}/traversal": {
+      "get": {
+        "operationId": "GetNTierSuppliers",
+        "summary": "Get entity subgraph (single-direction)",
+        "description": "Gets the subgraph of entities connected to a root entity with configurable\nupstream OR downstream depth. Returns complete graph structure without\nartificial limits to maintain graph integrity. Only single-direction queries\nare supported - specify either upstreamDepth OR downstreamDepth, but not both.\nUses a high internal limit (10,000) to ensure complete subgraph retrieval.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "entityKey",
+            "in": "path",
+            "description": "The unique identifier of the root entity",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "upstreamDepth",
+            "in": "query",
+            "description": "The depth for upstream traversal (default: 0). Cannot be used with\ndownstreamDepth.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "downstreamDepth",
+            "in": "query",
+            "description": "The depth for downstream traversal (default: 0). Cannot be used with\nupstreamDepth.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NtierSuppliersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get entity subgraph (single-direction)": {
+            "$ref": "./examples/GetNTierSuppliers_MaximumSet_Gen.json"
+          },
+          "Get entity subgraph (single-direction) - minimum set": {
+            "$ref": "./examples/GetNTierSuppliers_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/supplychain/flags": {
+      "get": {
+        "operationId": "GetAllFlags",
+        "summary": "Get all flags",
+        "description": "Gets all flags from the supply chain graph database with pagination support.\nUsers can request any page size via the limit parameter, which will be capped\nat 100 to prevent excessive queries.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "The cursor for pagination support",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of results to return per page (default: 100, max: 100)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PathsFbhgtlV1SupplychainFlagsGetResponses200ContentApplicationJsonSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all flags": {
+            "$ref": "./examples/GetAllFlags_MaximumSet_Gen.json"
+          },
+          "Get all flags - minimum set": {
+            "$ref": "./examples/GetAllFlags_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/supplychain/search": {
+      "get": {
+        "operationId": "GetSearchResults",
+        "summary": "Search entities using Azure AI Search",
+        "description": "Searches supply chain entities using Azure AI Search with adaptive search\nstrategies. Searches across entity names and all address fields (streetAddress,\ncity, stateProvince, country, postalCode). Implements fuzzy matching for\nqueries 4-5 characters (1 char mismatch tolerance) and prefix search for all\nqueries. Returns raw data from Azure AI Search index in native OData format. If\nno search text is provided, returns the first 50 documents by default.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The search query text. If empty, returns default set of documents. Searches\nacross name and address fields.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of results to return per page (default: 50)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "minimum": 1
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of results to skip for pagination (default: 0). Note: skip + top cannot\nexceed 100,000 (Azure AI Search limit)",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SearchResultsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Search entities using Azure AI Search": {
+            "$ref": "./examples/GetSearchResults_MaximumSet_Gen.json"
+          },
+          "Search entities using Azure AI Search - minimum set": {
+            "$ref": "./examples/GetSearchResults_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CommonError": {
+      "type": "object",
+      "description": "Common error response wrapper",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommonErrorDetails",
+          "description": "Error details"
+        }
+      }
+    },
+    "CommonErrorDetails": {
+      "type": "object",
+      "description": "Common error details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the type of error"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message"
+        },
+        "details": {
+          "type": "array",
+          "description": "Additional error details for validation errors",
+          "items": {
+            "$ref": "#/definitions/CommonErrorDetails"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response from the API",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "details": {
+          "type": "string",
+          "description": "Additional error details"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Error timestamp"
+        },
+        "path": {
+          "type": "string",
+          "description": "Request path that caused the error"
+        }
+      }
+    },
+    "Get200ApplicationJsonPropertiesItemsItem": {
+      "type": "object",
+      "description": "Flag details item",
+      "properties": {
+        "flagId": {
+          "type": "string",
+          "description": "Unique flag identifier"
+        },
+        "flagName": {
+          "type": "string",
+          "description": "Flag name"
+        },
+        "flagDescription": {
+          "type": "string",
+          "description": "Flag description"
+        }
+      }
+    },
+    "NtierSupplierRelationship": {
+      "type": "object",
+      "description": "Represents a supplier relationship in the N-tier supply chain graph",
+      "properties": {
+        "fromEntityKey": {
+          "type": "string",
+          "description": "The source entity key in the relationship"
+        },
+        "toEntityKey": {
+          "type": "string",
+          "description": "The target entity key in the relationship"
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The type of relationship (e.g., SUPPLIES_TO, SUPPLIED_BY)"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The depth level where this relationship occurs"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties of the relationship. HS codes are available in this\ndictionary under the 'hsCodes' key.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NtierSuppliersResponse": {
+      "type": "object",
+      "description": "Response containing N-tier supplier hierarchy and relationships",
+      "properties": {
+        "suppliers": {
+          "type": "array",
+          "description": "The list of suppliers with their depth information",
+          "items": {
+            "$ref": "#/definitions/SupplierWithDepthResponse"
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "description": "The list of relationships between entities",
+          "items": {
+            "$ref": "#/definitions/NtierSupplierRelationship"
+          }
+        },
+        "rootEntityKey": {
+          "type": "string",
+          "description": "The root entity key that was used for the traversal"
+        },
+        "maxUpstreamDepth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum upstream depth that was traversed"
+        },
+        "maxDownstreamDepth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum downstream depth that was traversed"
+        },
+        "nextCursor": {
+          "type": "string",
+          "description": "The cursor for the next page (if applicable)"
+        },
+        "previousCursor": {
+          "type": "string",
+          "description": "The cursor for the previous page (if applicable)"
+        },
+        "hasMore": {
+          "type": "boolean",
+          "description": "Indicates whether there are more results available"
+        }
+      }
+    },
+    "Pagination": {
+      "type": "object",
+      "description": "Pagination information",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of items"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items per page"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items skipped"
+        },
+        "hasNext": {
+          "type": "boolean",
+          "description": "Whether there are more items"
+        },
+        "hasPrevious": {
+          "type": "boolean",
+          "description": "Whether there are previous items"
+        }
+      }
+    },
+    "Paths1995XaxV1SupplychainEntitiesGetParameters13Schema": {
+      "type": "string",
+      "description": "Sort order for supply chain entities",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "x-ms-enum": {
+        "name": "Paths1995XaxV1SupplychainEntitiesGetParameters13Schema",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ASC",
+            "value": "ASC",
+            "description": "ASC"
+          },
+          {
+            "name": "DESC",
+            "value": "DESC",
+            "description": "DESC"
+          }
+        ]
+      }
+    },
+    "Paths1A00F2QV1SupplychainEntitiesEntitykeySearchGetParameters15Schema": {
+      "type": "string",
+      "description": "Sort order for supply chain entity search",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "x-ms-enum": {
+        "name": "Paths1A00F2QV1SupplychainEntitiesEntitykeySearchGetParameters15Schema",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ASC",
+            "value": "ASC",
+            "description": "ASC"
+          },
+          {
+            "name": "DESC",
+            "value": "DESC",
+            "description": "DESC"
+          }
+        ]
+      }
+    },
+    "Paths1Dk1QrqV1SupplychainEntitiesEntitykeySearchGetParameters17Schema": {
+      "type": "string",
+      "description": "Sort order for supply chain entity search",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "x-ms-enum": {
+        "name": "Paths1Dk1QrqV1SupplychainEntitiesEntitykeySearchGetParameters17Schema",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ASC",
+            "value": "ASC",
+            "description": "ASC"
+          },
+          {
+            "name": "DESC",
+            "value": "DESC",
+            "description": "DESC"
+          }
+        ]
+      }
+    },
+    "PathsFbhgtlV1SupplychainFlagsGetResponses200ContentApplicationJsonSchema": {
+      "type": "object",
+      "description": "Response containing list of supply chain flags",
+      "properties": {
+        "flags": {
+          "type": "array",
+          "description": "List of flags",
+          "items": {
+            "$ref": "#/definitions/Get200ApplicationJsonPropertiesItemsItem"
+          }
+        },
+        "nextCursor": {
+          "type": "string",
+          "description": "Cursor for next page"
+        },
+        "hasMore": {
+          "type": "boolean",
+          "description": "Indicates if more results are available"
+        }
+      }
+    },
+    "PathsMi8Vf6V1SupplychainEntitiesGetParameters15Schema": {
+      "type": "string",
+      "description": "Sort order for supply chain entities",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "x-ms-enum": {
+        "name": "PathsMi8Vf6V1SupplychainEntitiesGetParameters15Schema",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ASC",
+            "value": "ASC",
+            "description": "ASC"
+          },
+          {
+            "name": "DESC",
+            "value": "DESC",
+            "description": "DESC"
+          }
+        ]
+      }
+    },
+    "SearchNtierSuppliersResponse": {
+      "type": "object",
+      "description": "Response containing search results for N-tier supplier relationships",
+      "properties": {
+        "suppliers": {
+          "type": "array",
+          "description": "The list of suppliers with their depth information",
+          "items": {
+            "$ref": "#/definitions/SupplierWithDepthResponse"
+          }
+        },
+        "rootEntityKey": {
+          "type": "string",
+          "description": "The root entity key that was used for the traversal"
+        },
+        "maxUpstreamDepth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum upstream depth that was traversed"
+        },
+        "maxDownstreamDepth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum downstream depth that was traversed"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total count of suppliers found"
+        },
+        "nextCursor": {
+          "type": "string",
+          "description": "The cursor for the next page (if applicable)"
+        },
+        "previousCursor": {
+          "type": "string",
+          "description": "The cursor for the previous page (if applicable)"
+        },
+        "hasMore": {
+          "type": "boolean",
+          "description": "Indicates whether there are more results available"
+        }
+      }
+    },
+    "SearchResultsResponse": {
+      "type": "object",
+      "description": "Azure AI Search results response with dynamic structure",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "SupplierListResponse": {
+      "type": "object",
+      "description": "Response containing a paginated list of suppliers",
+      "properties": {
+        "suppliers": {
+          "type": "array",
+          "description": "The list of suppliers",
+          "items": {
+            "$ref": "#/definitions/SupplierResponse"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total count of suppliers found"
+        },
+        "nextCursor": {
+          "type": "string",
+          "description": "The cursor for the next page (if applicable)"
+        },
+        "previousCursor": {
+          "type": "string",
+          "description": "The cursor for the previous page (if applicable)"
+        },
+        "hasMore": {
+          "type": "boolean",
+          "description": "Indicates whether there are more results available"
+        }
+      }
+    },
+    "SupplierResponse": {
+      "type": "object",
+      "description": "Response containing supplier entity details",
+      "properties": {
+        "entityKey": {
+          "type": "string",
+          "description": "The unique entity key/identifier"
+        },
+        "source": {
+          "type": "string",
+          "description": "The data source identifier"
+        },
+        "entityType": {
+          "type": "string",
+          "description": "The entity type"
+        },
+        "name": {
+          "type": "string",
+          "description": "The supplier name"
+        },
+        "jurisdiction": {
+          "type": "string",
+          "description": "The jurisdiction/country where the supplier is located"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The risk score"
+        },
+        "leiCode": {
+          "type": "string",
+          "description": "The LEI (Legal Entity Identifier) code"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified date"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created date"
+        },
+        "version": {
+          "type": "string",
+          "description": "The data version identifier"
+        },
+        "dunsNumber": {
+          "type": "string",
+          "description": "The DUNS number"
+        },
+        "vatId": {
+          "type": "string",
+          "description": "The VAT identifier"
+        },
+        "bizRegNo": {
+          "type": "string",
+          "description": "The business registration number"
+        },
+        "streetAddress": {
+          "type": "string",
+          "description": "The street address"
+        },
+        "city": {
+          "type": "string",
+          "description": "The city"
+        },
+        "stateProvince": {
+          "type": "string",
+          "description": "The state or province"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal code"
+        },
+        "primaryContactName": {
+          "type": "string",
+          "description": "The primary contact name"
+        },
+        "primaryEmail": {
+          "type": "string",
+          "description": "The primary email address"
+        },
+        "primaryPhone": {
+          "type": "string",
+          "description": "The primary phone number"
+        },
+        "website": {
+          "type": "string",
+          "description": "The website URL"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "The list of capabilities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "certifications": {
+          "type": "array",
+          "description": "The list of certifications",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flags": {
+          "type": "array",
+          "description": "The list of flags associated with this supplier",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "entityKey",
+        "source",
+        "entityType",
+        "name"
+      ]
+    },
+    "SupplierWithDepthResponse": {
+      "type": "object",
+      "description": "Supplier entity with depth information for hierarchical traversal",
+      "properties": {
+        "entityKey": {
+          "type": "string",
+          "description": "The unique entity key/identifier"
+        },
+        "source": {
+          "type": "string",
+          "description": "The data source identifier"
+        },
+        "entityType": {
+          "type": "string",
+          "description": "The entity type"
+        },
+        "name": {
+          "type": "string",
+          "description": "The supplier name"
+        },
+        "jurisdiction": {
+          "type": "string",
+          "description": "The jurisdiction/country where the supplier is located"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The supplier score"
+        },
+        "leiCode": {
+          "type": "string",
+          "description": "The LEI (Legal Entity Identifier) code"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The modification timestamp"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation timestamp"
+        },
+        "version": {
+          "type": "string",
+          "description": "The data version identifier"
+        },
+        "dunsNumber": {
+          "type": "string",
+          "description": "The DUNS number"
+        },
+        "vatId": {
+          "type": "string",
+          "description": "The VAT identifier"
+        },
+        "bizRegNo": {
+          "type": "string",
+          "description": "The business registration number"
+        },
+        "streetAddress": {
+          "type": "string",
+          "description": "The street address"
+        },
+        "city": {
+          "type": "string",
+          "description": "The city"
+        },
+        "stateProvince": {
+          "type": "string",
+          "description": "The state or province"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal code"
+        },
+        "primaryContactName": {
+          "type": "string",
+          "description": "The primary contact name"
+        },
+        "primaryEmail": {
+          "type": "string",
+          "description": "The primary email address"
+        },
+        "primaryPhone": {
+          "type": "string",
+          "description": "The primary phone number"
+        },
+        "website": {
+          "type": "string",
+          "description": "The website URL"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "The list of capabilities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "certifications": {
+          "type": "array",
+          "description": "The list of certifications",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flags": {
+          "type": "array",
+          "description": "The list of supplier flags",
+          "items": {
+            "type": "string"
+          }
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The depth/tier level of this supplier in the graph traversal"
+        }
+      },
+      "required": [
+        "entityKey",
+        "source",
+        "entityType",
+        "name",
+        "depth"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

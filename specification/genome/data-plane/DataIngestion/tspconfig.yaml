@@ -1,0 +1,56 @@
+parameters:
+  "service-dir":
+    default: "sdk/genomedataingestion"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "data-plane"
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.Genome"
+
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-genome"
+    namespace: "azure.genome"
+    generate-sample: true
+    generate-test: true
+    flavor: "azure"
+
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-dataplane-genome"
+    namespace: "com.azure.dataplane.genome"
+    service-name: "Genome" # human-readable service name, whitespace allowed
+    flavor: azure
+
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/genome-rest"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure-rest/genome"
+
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/azgenome"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azgenome"
+    module-version: "0.1.0"
+    generate-fakes: true
+    inject-spans: true
+    head-as-boolean: true
+    flavor: azure
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
