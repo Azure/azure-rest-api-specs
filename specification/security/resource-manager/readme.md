@@ -146,6 +146,15 @@ input-file:
   - Microsoft.Security/preview/2025-09-01-preview/privateLinks.json
 ```
 
+### Tag: package-preview-2025-08-01-preview
+
+These settings apply only when `--tag=package-preview-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08-01-preview'
+input-file:
+  - Microsoft.Security/preview/2025-08-01-preview/securityConnectors.json
+```
+
 ### Tag: package-preview-2025-05-04-preview
 
 These settings apply only when `--tag=package-preview-2025-05-04-preview` is specified on the command line.
@@ -663,7 +672,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
-- Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2025-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2025-05-04-preview/assessments.json
 - Microsoft.Security/preview/2025-09-01-preview/defenderForStorageSettings.json
