@@ -1,0 +1,14 @@
+- tool: TypeSpecValidation
+  reason: >
+    Rest-Only Specification: Does not generate SDKs by design.
+    Responsibility: No action required
+    Comment: Suppress until we know the awsconnector folder uses these settings.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+    - options.@azure-tools/typespec-go.*
+  paths:
+    - /**/tspconfig.yaml
