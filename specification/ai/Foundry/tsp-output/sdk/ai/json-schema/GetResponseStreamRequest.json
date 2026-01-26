@@ -1,0 +1,65 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "GetResponseStreamRequest.json",
+    "type": "object",
+    "properties": {
+        "includables": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/IncludeEnum"
+            },
+            "default": []
+        },
+        "starting_after": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+        }
+    },
+    "$defs": {
+        "IncludeEnum": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "file_search_call.results"
+                },
+                {
+                    "type": "string",
+                    "const": "web_search_call.results"
+                },
+                {
+                    "type": "string",
+                    "const": "web_search_call.action.sources"
+                },
+                {
+                    "type": "string",
+                    "const": "message.input_image.image_url"
+                },
+                {
+                    "type": "string",
+                    "const": "computer_call_output.output.image_url"
+                },
+                {
+                    "type": "string",
+                    "const": "code_interpreter_call.outputs"
+                },
+                {
+                    "type": "string",
+                    "const": "reasoning.encrypted_content"
+                },
+                {
+                    "type": "string",
+                    "const": "message.output_text.logprobs"
+                },
+                {
+                    "type": "string",
+                    "const": "memory_search_call.results"
+                }
+            ],
+            "description": "Specify additional output data to include in the model response. Currently supported values are:\n- `web_search_call.action.sources`: Include the sources of the web search tool call.\n- `code_interpreter_call.outputs`: Includes the outputs of python code execution in code interpreter tool call items.\n- `computer_call_output.output.image_url`: Include image urls from the computer call output.\n- `file_search_call.results`: Include the search results of the file search tool call.\n- `message.input_image.image_url`: Include image urls from the input message.\n- `message.output_text.logprobs`: Include logprobs with assistant messages.\n- `reasoning.encrypted_content`: Includes an encrypted version of reasoning tokens in reasoning item outputs. This enables reasoning items to be used in multi-turn conversations when using the Responses API statelessly (like when the `store` parameter is set to `false`, or when an organization is enrolled in the zero data retention program)."
+        }
+    }
+}
