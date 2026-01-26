@@ -2010,7 +2010,7 @@ model SnapshotProperties {
 }
 
 @added(Versions.v2026_02_01_preview)
-@doc("VHD Status provisioning status")
+@doc("Snapshot Status provisioning status")
 model SnapshotStatusProvisioningStatus {
   @doc("The ID of the operation performed on the snapshot")
   operationId?: string;
