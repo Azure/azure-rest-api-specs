@@ -3577,11 +3577,8 @@ directive:
 ## Suppressions
 
 ``` yaml
-supressions:
-  - code: MissingSegmentsInNestedResourceListOperation
-    from: BackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
-  - code: ResourceNameRestriction
+suppressions:
+    - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
   - code: ResourceNameRestriction
@@ -3596,18 +3593,12 @@ supressions:
   - code: ResourceNameRestriction
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"]
-  - code: ResourceNameRestriction
-    from: BackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: BackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"].put
@@ -4561,9 +4552,6 @@ supressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstanceBackups"].get["x-ms-examples"]
   - code: UniqueXmsExample
     from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstanceBackups"].get["x-ms-examples"]
-  - code: UniqueXmsExample
-    from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"].get["x-ms-examples"]
   - code: RequiredReadOnlySystemData
     from: SensitivityLabels.json
@@ -4874,9 +4862,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: BlobAuditing.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}"].put
   - code: PutResponseCodes
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/{blobAuditingPolicyName}"].put
@@ -4892,18 +4877,12 @@ supressions:
   - code: ResourceNameRestriction
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings"]
-  - code: ResourceNameRestriction
-    from: BlobAuditing.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings"]
   - code: ParameterNotDefinedInGlobalParameters
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: BlobAuditing.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/{blobAuditingPolicyName}"]
   - code: ResourceNameRestriction
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/{blobAuditingPolicyName}"]
@@ -4925,18 +4904,12 @@ supressions:
   - code: ResourceNameRestriction
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings"]
-  - code: ResourceNameRestriction
-    from: BlobAuditing.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings"]
   - code: ParameterNotDefinedInGlobalParameters
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: BlobAuditing.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings/{blobAuditingPolicyName}"]
   - code: ResourceNameRestriction
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings/{blobAuditingPolicyName}"]
@@ -4976,9 +4949,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/extendedAuditingSettings/{blobAuditingPolicyName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: BlobAuditing.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/extendedAuditingSettings/{blobAuditingPolicyName}"].put
   - code: PutResponseCodes
     from: BlobAuditing.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/extendedAuditingSettings/{blobAuditingPolicyName}"].put
@@ -4994,18 +4964,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advancedThreatProtectionSettings"]
-  - code: ResourceNameRestriction
-    from: DatabaseAdvancedThreatProtectionSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advancedThreatProtectionSettings"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advancedThreatProtectionSettings"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advancedThreatProtectionSettings"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseAdvancedThreatProtectionSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"]
   - code: ResourceNameRestriction
     from: DatabaseAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"]
@@ -5033,9 +4997,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseAdvisors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors"]
-  - code: ResourceNameRestriction
-    from: DatabaseAdvisors.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors"]
   - code: XmsPageableForListCalls
     from: DatabaseAdvisors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors"].get
@@ -5045,12 +5006,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseAdvisors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseAdvisors.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseAdvisors.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}"]
   - code: ResourceNameRestriction
     from: DatabaseAdvisors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}"]
@@ -5084,9 +5039,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseAutomaticTuning.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/automaticTuning/current"]
-  - code: ResourceNameRestriction
-    from: DatabaseAutomaticTuning.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/automaticTuning/current"]
   - code: OperationIdNounConflictingModelNames
     from: DatabaseAutomaticTuning.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/automaticTuning/current"].get.operationId
@@ -5109,9 +5061,6 @@ supressions:
     from: DatabaseAutomaticTuning.json
     where: $.definitions.DatabaseAutomaticTuningProperties.properties.options
   - code: MissingSegmentsInNestedResourceListOperation
-    from: DatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/columns"]
-  - code: ResourceNameRestriction
     from: DatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/columns"]
   - code: ResourceNameRestriction
@@ -5141,15 +5090,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"]
-  - code: ResourceNameRestriction
-    from: DatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"]
-  - code: ResourceNameRestriction
-    from: DatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"]
-  - code: ResourceNameRestriction
-    from: DatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"].get.parameters
@@ -5159,27 +5099,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseEncryptionProtectorRevalidate.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/encryptionProtector/{encryptionProtectorName}/revalidate"]
   - code: ResourceNameRestriction
     from: DatabaseEncryptionProtectorRevalidate.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/encryptionProtector/{encryptionProtectorName}/revalidate"]
@@ -5195,9 +5120,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseEncryptionProtectorRevert.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/encryptionProtector/{encryptionProtectorName}/revert"]
-  - code: ResourceNameRestriction
-    from: DatabaseEncryptionProtectorRevert.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/encryptionProtector/{encryptionProtectorName}/revert"]
   - code: PostResponseCodes
     from: DatabaseEncryptionProtectorRevert.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/encryptionProtector/{encryptionProtectorName}/revert"].post
@@ -5208,9 +5130,6 @@ supressions:
     from: DatabaseEncryptionProtectorRevert.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/encryptionProtector/{encryptionProtectorName}/revert"].post.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: DatabaseExtensions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions"]
-  - code: ResourceNameRestriction
     from: DatabaseExtensions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions"]
   - code: ResourceNameRestriction
@@ -5231,12 +5150,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseExtensions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseExtensions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseExtensions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}"]
   - code: OperationIdNounConflictingModelNames
     from: DatabaseExtensions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}"].get.operationId
@@ -5249,9 +5162,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseExtensions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: DatabaseExtensions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: DatabaseExtensions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}"].put
@@ -5288,9 +5198,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseOperations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations/{operationId}/cancel"]
-  - code: ResourceNameRestriction
-    from: DatabaseOperations.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations/{operationId}/cancel"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseOperations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations/{operationId}/cancel"].post.parameters
@@ -5306,16 +5213,7 @@ supressions:
   - code: PatchBodyParametersSchema
     from: DatabaseRecommendedActions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}"].patch.parameters["5"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: DatabaseRecommendedActions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}"].patch.parameters["5"].schema.properties.properties
   - code: MissingSegmentsInNestedResourceListOperation
-    from: DatabaseRecommendedActions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions"]
-  - code: ResourceNameRestriction
-    from: DatabaseRecommendedActions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions"]
-  - code: ResourceNameRestriction
     from: DatabaseRecommendedActions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions"]
   - code: ResourceNameRestriction
@@ -5330,15 +5228,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseRecommendedActions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseRecommendedActions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseRecommendedActions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseRecommendedActions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}"]
   - code: ResourceNameRestriction
     from: DatabaseRecommendedActions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}/recommendedActions/{recommendedActionName}"]
@@ -5365,33 +5254,6 @@ supressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
   - code: PatchBodyParametersSchema
     from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.sku
   - code: MissingSegmentsInNestedResourceListOperation
     from: Databases.json
@@ -5411,13 +5273,7 @@ supressions:
   - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"]
-  - code: ResourceNameRestriction
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"]
   - code: ParameterNotDefinedInGlobalParameters
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].get.parameters
-  - code: ParametersInPointGet
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].get.parameters
   - code: ParametersInPointGet
@@ -5426,9 +5282,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}"].put
@@ -5465,18 +5318,12 @@ supressions:
   - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export"]
-  - code: ResourceNameRestriction
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export"]
   - code: ParameterNotDefinedInGlobalParameters
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export"].post.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/failover"]
   - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/failover"]
@@ -5498,18 +5345,12 @@ supressions:
   - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/import"]
-  - code: ResourceNameRestriction
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/import"]
   - code: ParameterNotDefinedInGlobalParameters
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/import"].post.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/import"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move"]
   - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move"]
@@ -5520,9 +5361,6 @@ supressions:
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/move"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause"]
-  - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause"]
   - code: ResourceNameRestriction
@@ -5540,18 +5378,12 @@ supressions:
   - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume"]
-  - code: ResourceNameRestriction
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume"]
   - code: ParameterNotDefinedInGlobalParameters
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume"].post.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/upgradeDataWarehouse"]
   - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/upgradeDataWarehouse"]
@@ -5565,9 +5397,6 @@ supressions:
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/upgradeDataWarehouse"].post.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: Databases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases"]
-  - code: ResourceNameRestriction
     from: Databases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases"]
   - code: ResourceNameRestriction
@@ -5603,21 +5432,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseSchemas.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas"]
-  - code: ResourceNameRestriction
-    from: DatabaseSchemas.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseSchemas.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseSchemas.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseSchemas.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseSchemas.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}"]
   - code: ResourceNameRestriction
     from: DatabaseSchemas.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}"]
@@ -5633,18 +5453,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies"]
-  - code: ResourceNameRestriction
-    from: DatabaseSecurityAlertPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseSecurityAlertPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}"]
   - code: ResourceNameRestriction
     from: DatabaseSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}"]
@@ -5669,18 +5483,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentBaselines.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseSqlVulnerabilityAssessmentBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseSqlVulnerabilityAssessmentBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentBaselines.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines/{baselineName}"]
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines/{baselineName}"]
@@ -5723,9 +5531,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentExecuteScan.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/initiateScan"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentExecuteScan.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/initiateScan"]
   - code: PostResponseCodes
     from: DatabaseSqlVulnerabilityAssessmentExecuteScan.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/initiateScan"].post
@@ -5741,9 +5546,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines/{baselineName}/rules"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines/{baselineName}/rules"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines/{baselineName}/rules"].get.parameters
@@ -5753,9 +5555,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines/{baselineName}/rules"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines/{baselineName}/rules/{ruleId}"]
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/baselines/{baselineName}/rules/{ruleId}"]
@@ -5804,18 +5603,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentScanResult.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/scanResults"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentScanResult.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/scanResults"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseSqlVulnerabilityAssessmentScanResult.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/scanResults"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseSqlVulnerabilityAssessmentScanResult.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/scanResults"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentScanResult.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/scanResults/{scanResultId}"]
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentScanResult.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/scanResults/{scanResultId}"]
@@ -5837,18 +5630,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseSqlVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseSqlVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}"]
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}"]
@@ -5867,18 +5654,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentsSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentsSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseSqlVulnerabilityAssessmentsSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseSqlVulnerabilityAssessmentsSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseSqlVulnerabilityAssessmentsSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}"]
   - code: ResourceNameRestriction
     from: DatabaseSqlVulnerabilityAssessmentsSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}"]
@@ -5900,27 +5681,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseTables.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables"]
-  - code: ResourceNameRestriction
-    from: DatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables"]
-  - code: ResourceNameRestriction
-    from: DatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseTables.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseTables.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}"]
-  - code: ResourceNameRestriction
-    from: DatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}"]
   - code: ResourceNameRestriction
     from: DatabaseTables.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}"]
@@ -5936,9 +5702,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseUsages.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages"]
-  - code: ResourceNameRestriction
-    from: DatabaseUsages.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseUsages.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages"].get.parameters
@@ -5946,9 +5709,6 @@ supressions:
     from: DatabaseUsages.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages"].get.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: DatabaseVulnerabilityAssessmentRuleBaselines.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/rules/{ruleId}/baselines/{baselineName}"]
-  - code: ResourceNameRestriction
     from: DatabaseVulnerabilityAssessmentRuleBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/rules/{ruleId}/baselines/{baselineName}"]
   - code: ResourceNameRestriction
@@ -5984,18 +5744,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseVulnerabilityAssessments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments"]
-  - code: ResourceNameRestriction
-    from: DatabaseVulnerabilityAssessments.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseVulnerabilityAssessments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseVulnerabilityAssessments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseVulnerabilityAssessments.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}"]
   - code: ResourceNameRestriction
     from: DatabaseVulnerabilityAssessments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}"]
@@ -6026,9 +5780,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"]
-  - code: ResourceNameRestriction
-    from: DatabaseVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"].get.parameters
@@ -6038,18 +5789,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}"]
-  - code: ResourceNameRestriction
-    from: DatabaseVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DatabaseVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/export"]
   - code: ResourceNameRestriction
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/export"]
@@ -6065,9 +5810,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/initiateScan"]
-  - code: ResourceNameRestriction
-    from: DatabaseVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/initiateScan"]
   - code: PostResponseCodes
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/initiateScan"].post
@@ -6078,9 +5820,6 @@ supressions:
     from: DatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/initiateScan"].post.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: DataMaskingPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}"]
-  - code: ResourceNameRestriction
     from: DataMaskingPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}"]
   - code: ResourceNameRestriction
@@ -6110,21 +5849,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DataMaskingRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules"]
-  - code: ResourceNameRestriction
-    from: DataMaskingRules.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DataMaskingRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DataMaskingRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DataMaskingRules.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}"]
-  - code: ResourceNameRestriction
-    from: DataMaskingRules.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}"]
   - code: ResourceNameRestriction
     from: DataMaskingRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}"]
@@ -6146,9 +5876,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DataWarehouseUserActivities.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataWarehouseUserActivities"]
-  - code: ResourceNameRestriction
-    from: DataWarehouseUserActivities.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataWarehouseUserActivities"]
   - code: OperationIdNounConflictingModelNames
     from: DataWarehouseUserActivities.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataWarehouseUserActivities"].get.operationId
@@ -6158,9 +5885,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DataWarehouseUserActivities.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataWarehouseUserActivities"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: DataWarehouseUserActivities.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataWarehouseUserActivities/{dataWarehouseUserActivityName}"]
   - code: ResourceNameRestriction
     from: DataWarehouseUserActivities.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataWarehouseUserActivities/{dataWarehouseUserActivityName}"]
@@ -6191,9 +5915,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DeletedServers.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}"]
-  - code: ResourceNameRestriction
-    from: DeletedServers.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DeletedServers.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}"].get.parameters
@@ -6201,9 +5922,6 @@ supressions:
     from: DeletedServers.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}"].get.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: DeletedServers.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}/recover"]
-  - code: ResourceNameRestriction
     from: DeletedServers.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/deletedServers/{deletedServerName}/recover"]
   - code: ResourceNameRestriction
@@ -6230,18 +5948,12 @@ supressions:
   - code: ResourceNameRestriction
     from: DistributedAvailabilityGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}"]
-  - code: ResourceNameRestriction
-    from: DistributedAvailabilityGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DistributedAvailabilityGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: DistributedAvailabilityGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: DistributedAvailabilityGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: DistributedAvailabilityGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}"].put
@@ -6284,9 +5996,6 @@ supressions:
   - code: ResourceNameRestriction
     from: DistributedAvailabilityGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/setRole"]
-  - code: ResourceNameRestriction
-    from: DistributedAvailabilityGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/setRole"]
   - code: ParameterNotDefinedInGlobalParameters
     from: DistributedAvailabilityGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/setRole"].post.parameters
@@ -6294,9 +6003,6 @@ supressions:
     from: DistributedAvailabilityGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/setRole"].post.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: ElasticPoolOperations.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/operations"]
-  - code: ResourceNameRestriction
     from: ElasticPoolOperations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/operations"]
   - code: ResourceNameRestriction
@@ -6311,9 +6017,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ElasticPoolOperations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/operations"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ElasticPoolOperations.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/operations/{operationId}/cancel"]
   - code: ResourceNameRestriction
     from: ElasticPoolOperations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/operations/{operationId}/cancel"]
@@ -6347,18 +6050,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"]
-  - code: ResourceNameRestriction
-    from: ElasticPools.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ElasticPools.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"].put
@@ -6392,9 +6089,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/failover"]
-  - code: ResourceNameRestriction
-    from: ElasticPools.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/failover"]
   - code: PostResponseCodes
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/failover"].post
@@ -6425,9 +6119,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: EncryptionProtectors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/encryptionProtector/{encryptionProtectorName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: EncryptionProtectors.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/encryptionProtector/{encryptionProtectorName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: EncryptionProtectors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/encryptionProtector/{encryptionProtectorName}"].put
@@ -6497,18 +6188,12 @@ supressions:
   - code: ResourceNameRestriction
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}"]
-  - code: ResourceNameRestriction
-    from: FailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: FailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}"].put
@@ -6545,9 +6230,6 @@ supressions:
   - code: ResourceNameRestriction
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/failover"]
-  - code: ResourceNameRestriction
-    from: FailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/failover"]
   - code: ParameterNotDefinedInGlobalParameters
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/failover"].post.parameters
@@ -6560,18 +6242,12 @@ supressions:
   - code: ResourceNameRestriction
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/forceFailoverAllowDataLoss"]
-  - code: ResourceNameRestriction
-    from: FailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/forceFailoverAllowDataLoss"]
   - code: ParameterNotDefinedInGlobalParameters
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/forceFailoverAllowDataLoss"].post.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/forceFailoverAllowDataLoss"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: FailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/tryPlannedBeforeForcedFailover"]
   - code: ResourceNameRestriction
     from: FailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}/tryPlannedBeforeForcedFailover"]
@@ -6632,9 +6308,6 @@ supressions:
   - code: ResourceNameRestriction
     from: FirewallRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}"]
-  - code: ResourceNameRestriction
-    from: FirewallRules.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: FirewallRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}"].get.parameters
@@ -6659,18 +6332,12 @@ supressions:
   - code: ResourceNameRestriction
     from: GeoBackupPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies"]
-  - code: ResourceNameRestriction
-    from: GeoBackupPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies"]
   - code: ParameterNotDefinedInGlobalParameters
     from: GeoBackupPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: GeoBackupPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: GeoBackupPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies/{geoBackupPolicyName}"]
   - code: ResourceNameRestriction
     from: GeoBackupPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies/{geoBackupPolicyName}"]
@@ -6707,18 +6374,12 @@ supressions:
   - code: ResourceNameRestriction
     from: InstanceFailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}"]
-  - code: ResourceNameRestriction
-    from: InstanceFailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: InstanceFailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: InstanceFailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: InstanceFailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: InstanceFailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}"].put
@@ -6746,9 +6407,6 @@ supressions:
   - code: ResourceNameRestriction
     from: InstanceFailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}/failover"]
-  - code: ResourceNameRestriction
-    from: InstanceFailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}/failover"]
   - code: ParameterNotDefinedInGlobalParameters
     from: InstanceFailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}/failover"].post.parameters
@@ -6756,9 +6414,6 @@ supressions:
     from: InstanceFailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}/failover"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: InstanceFailoverGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}/forceFailoverAllowDataLoss"]
-  - code: ResourceNameRestriction
     from: InstanceFailoverGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/instanceFailoverGroups/{failoverGroupName}/forceFailoverAllowDataLoss"]
   - code: ResourceNameRestriction
@@ -6799,12 +6454,6 @@ supressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}"].patch.parameters["2"].schema.properties.properties
   - code: PatchBodyParametersSchema
     from: InstancePools.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}"].patch.parameters["2"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: InstancePools.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}"].patch.parameters["2"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: InstancePools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}"].patch.parameters["2"].schema.properties.sku
   - code: ParameterNotDefinedInGlobalParameters
     from: InstancePools.json
@@ -6827,9 +6476,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: InstancePools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: InstancePools.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: InstancePools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}"].put
@@ -6875,9 +6521,6 @@ supressions:
   - code: ResourceNameRestriction
     from: IPv6FirewallRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules/{firewallRuleName}"]
-  - code: ResourceNameRestriction
-    from: IPv6FirewallRules.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules/{firewallRuleName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: IPv6FirewallRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules/{firewallRuleName}"].get.parameters
@@ -6914,18 +6557,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}"]
-  - code: ResourceNameRestriction
-    from: JobAgents.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: JobAgents.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: JobAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}"].put
@@ -6962,21 +6599,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobCredentials.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/credentials"]
-  - code: ResourceNameRestriction
-    from: JobCredentials.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/credentials"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobCredentials.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/credentials"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobCredentials.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/credentials"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: JobCredentials.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/credentials/{credentialName}"]
-  - code: ResourceNameRestriction
-    from: JobCredentials.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/credentials/{credentialName}"]
   - code: ResourceNameRestriction
     from: JobCredentials.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/credentials/{credentialName}"]
@@ -7004,9 +6632,6 @@ supressions:
   - code: ResourceNameRestriction
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/executions"]
-  - code: ResourceNameRestriction
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/executions"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/executions"].get.parameters
@@ -7019,24 +6644,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions"]
-  - code: ResourceNameRestriction
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions"]
-  - code: ResourceNameRestriction
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}"]
-  - code: ResourceNameRestriction
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}"]
   - code: ResourceNameRestriction
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}"]
@@ -7058,12 +6671,6 @@ supressions:
   - code: ResourceNameRestriction
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel"]
-  - code: ResourceNameRestriction
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel"]
-  - code: ResourceNameRestriction
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel"].post.parameters
@@ -7071,12 +6678,6 @@ supressions:
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start"]
-  - code: ResourceNameRestriction
-    from: JobExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start"]
-  - code: ResourceNameRestriction
     from: JobExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start"]
   - code: ResourceNameRestriction
@@ -7094,9 +6695,6 @@ supressions:
   - code: ResourceNameRestriction
     from: JobPrivateEndpoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints"]
-  - code: ResourceNameRestriction
-    from: JobPrivateEndpoints.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobPrivateEndpoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints"].get.parameters
@@ -7106,21 +6704,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobPrivateEndpoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints/{privateEndpointName}"]
-  - code: ResourceNameRestriction
-    from: JobPrivateEndpoints.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints/{privateEndpointName}"]
-  - code: ResourceNameRestriction
-    from: JobPrivateEndpoints.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints/{privateEndpointName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobPrivateEndpoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints/{privateEndpointName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobPrivateEndpoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints/{privateEndpointName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: JobPrivateEndpoints.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints/{privateEndpointName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: JobPrivateEndpoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/privateEndpoints/{privateEndpointName}"].put
@@ -7148,21 +6737,12 @@ supressions:
   - code: ResourceNameRestriction
     from: Jobs.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs"]
-  - code: ResourceNameRestriction
-    from: Jobs.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs"]
   - code: ParameterNotDefinedInGlobalParameters
     from: Jobs.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: Jobs.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: Jobs.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}"]
-  - code: ResourceNameRestriction
-    from: Jobs.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}"]
   - code: ResourceNameRestriction
     from: Jobs.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}"]
@@ -7190,27 +6770,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobStepExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps"]
-  - code: ResourceNameRestriction
-    from: JobStepExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps"]
-  - code: ResourceNameRestriction
-    from: JobStepExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobStepExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobStepExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: JobStepExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}"]
-  - code: ResourceNameRestriction
-    from: JobStepExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}"]
-  - code: ResourceNameRestriction
-    from: JobStepExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}"]
   - code: ResourceNameRestriction
     from: JobStepExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}"]
@@ -7226,27 +6791,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobSteps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobSteps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobSteps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps/{stepName}"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps/{stepName}"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps/{stepName}"]
   - code: ResourceNameRestriction
     from: JobSteps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps/{stepName}"]
@@ -7274,27 +6824,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobSteps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobSteps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobSteps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps/{stepName}"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps/{stepName}"]
-  - code: ResourceNameRestriction
-    from: JobSteps.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps/{stepName}"]
   - code: ResourceNameRestriction
     from: JobSteps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps/{stepName}"]
@@ -7310,30 +6845,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobTargetExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets"]
-  - code: ResourceNameRestriction
-    from: JobTargetExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets"]
-  - code: ResourceNameRestriction
-    from: JobTargetExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets"]
-  - code: ResourceNameRestriction
-    from: JobTargetExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobTargetExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobTargetExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: JobTargetExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets/{targetId}"]
-  - code: ResourceNameRestriction
-    from: JobTargetExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets/{targetId}"]
-  - code: ResourceNameRestriction
-    from: JobTargetExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets/{targetId}"]
   - code: ResourceNameRestriction
     from: JobTargetExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets/{targetId}"]
@@ -7344,12 +6861,6 @@ supressions:
     from: JobTargetExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets/{targetId}"].get.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: JobTargetExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/targets"]
-  - code: ResourceNameRestriction
-    from: JobTargetExecutions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/targets"]
-  - code: ResourceNameRestriction
     from: JobTargetExecutions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/targets"]
   - code: ResourceNameRestriction
@@ -7367,21 +6878,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobTargetGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups"]
-  - code: ResourceNameRestriction
-    from: JobTargetGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobTargetGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobTargetGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: JobTargetGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups/{targetGroupName}"]
-  - code: ResourceNameRestriction
-    from: JobTargetGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups/{targetGroupName}"]
   - code: ResourceNameRestriction
     from: JobTargetGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups/{targetGroupName}"]
@@ -7409,24 +6911,12 @@ supressions:
   - code: ResourceNameRestriction
     from: JobVersions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions"]
-  - code: ResourceNameRestriction
-    from: JobVersions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions"]
-  - code: ResourceNameRestriction
-    from: JobVersions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions"]
   - code: ParameterNotDefinedInGlobalParameters
     from: JobVersions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: JobVersions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: JobVersions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}"]
-  - code: ResourceNameRestriction
-    from: JobVersions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}"]
   - code: ResourceNameRestriction
     from: JobVersions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}"]
@@ -7437,9 +6927,6 @@ supressions:
     from: JobVersions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}"].get.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: LedgerDigestUploads.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads"]
-  - code: ResourceNameRestriction
     from: LedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads"]
   - code: ResourceNameRestriction
@@ -7457,9 +6944,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"]
-  - code: ResourceNameRestriction
-    from: LedgerDigestUploads.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"]
   - code: OperationIdNounConflictingModelNames
     from: LedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].get.operationId
@@ -7472,9 +6956,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: LedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: LedgerDigestUploads.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: LedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].put
@@ -7497,9 +6978,6 @@ supressions:
     from: LedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].put.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LedgerDigestUploads.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}/disable"]
-  - code: ResourceNameRestriction
     from: LedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}/disable"]
   - code: ResourceNameRestriction
@@ -7544,9 +7022,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"].get.parameters
@@ -7556,27 +7031,12 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"]
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"]
@@ -7596,15 +7056,6 @@ supressions:
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"].delete.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier"]
   - code: ResourceNameRestriction
@@ -7637,15 +7088,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"].post.parameters
@@ -7653,15 +7095,6 @@ supressions:
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability"]
   - code: ResourceNameRestriction
@@ -7682,15 +7115,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"].post.parameters
@@ -7701,15 +7125,6 @@ supressions:
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability"]
   - code: ResourceNameRestriction
@@ -7730,15 +7145,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"].post.parameters
@@ -7749,15 +7155,6 @@ supressions:
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"]
   - code: ResourceNameRestriction
@@ -7787,9 +7184,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionBackups"].get.parameters
@@ -7802,27 +7196,12 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"]
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"]
@@ -7842,15 +7221,6 @@ supressions:
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"].delete.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/changeAccessTier"]
   - code: ResourceNameRestriction
@@ -7883,15 +7253,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"].post.parameters
@@ -7899,15 +7260,6 @@ supressions:
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/copy"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/lockTimeBasedImmutability"]
   - code: ResourceNameRestriction
@@ -7931,15 +7283,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"].post.parameters
@@ -7953,15 +7296,6 @@ supressions:
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeLegalHoldImmutability"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/removeTimeBasedImmutability"]
   - code: ResourceNameRestriction
@@ -7985,15 +7319,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"].post.parameters
@@ -8007,15 +7332,6 @@ supressions:
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/setLegalHoldImmutability"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}/update"]
   - code: ResourceNameRestriction
@@ -8039,27 +7355,12 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"]
   - code: ResourceNameRestriction
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"]
@@ -8078,9 +7379,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"].delete.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups"]
   - code: ResourceNameRestriction
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups"]
@@ -8108,27 +7406,12 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"]
   - code: ResourceNameRestriction
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}"]
@@ -8153,9 +7436,6 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionManagedInstanceBackups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups"].get.parameters
@@ -8163,9 +7443,6 @@ supressions:
     from: LongTermRetentionManagedInstanceBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups"].get.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: LongTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies"]
-  - code: ResourceNameRestriction
     from: LongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies"]
   - code: ResourceNameRestriction
@@ -8180,18 +7457,12 @@ supressions:
   - code: ResourceNameRestriction
     from: LongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"]
-  - code: ResourceNameRestriction
-    from: LongTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: LongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: LongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: LongTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: LongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"].put
@@ -8211,9 +7482,6 @@ supressions:
     from: MaintenanceWindowOptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindowOptions/current"]
   - code: ReservedResourceNamesModelAsEnum
-    from: MaintenanceWindowOptions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindowOptions/current"]
-  - code: ResourceNameRestriction
     from: MaintenanceWindowOptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindowOptions/current"]
   - code: ResourceNameRestriction
@@ -8241,9 +7509,6 @@ supressions:
     from: MaintenanceWindows.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindows/current"]
   - code: ReservedResourceNamesModelAsEnum
-    from: MaintenanceWindows.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindows/current"]
-  - code: ResourceNameRestriction
     from: MaintenanceWindows.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindows/current"]
   - code: ResourceNameRestriction
@@ -8279,9 +7544,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
-  - code: ResourceNameRestriction
-    from: ManagedBackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies"].get.parameters
@@ -8291,18 +7553,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"]
-  - code: ResourceNameRestriction
-    from: ManagedBackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedBackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"].put
@@ -8330,18 +7586,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/advancedThreatProtectionSettings"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseAdvancedThreatProtectionSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/advancedThreatProtectionSettings"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/advancedThreatProtectionSettings"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/advancedThreatProtectionSettings"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseAdvancedThreatProtectionSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"]
@@ -8361,9 +7611,6 @@ supressions:
     from: ManagedDatabaseAdvancedThreatProtectionSettings.json
     where: $.definitions.ManagedDatabaseAdvancedThreatProtection.properties.systemData["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: ManagedDatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/columns"]
-  - code: ResourceNameRestriction
     from: ManagedDatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/columns"]
   - code: ResourceNameRestriction
@@ -8393,33 +7640,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseColumns.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseColumns.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}"]
@@ -8468,9 +7694,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseQueries.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseQueries.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseQueries.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}"].get.parameters
@@ -8480,9 +7703,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseQueries.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseQueries.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}/statistics"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseQueries.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}/statistics"]
@@ -8504,63 +7724,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseRestoreDetails.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/restoreDetails/{restoreDetailsName}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseRestoreDetails.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/restoreDetails/{restoreDetailsName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseRestoreDetails.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/restoreDetails/{restoreDetailsName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseRestoreDetails.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/restoreDetails/{restoreDetailsName}"].get.responses.default.schema["$ref"]
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
   - code: PatchBodyParametersSchema
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].patch.parameters["3"].schema.properties.properties
@@ -8579,18 +7748,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}"].put
@@ -8624,9 +7787,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/cancelMove"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/cancelMove"]
   - code: PostResponseCodes
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/cancelMove"].post
@@ -8639,9 +7799,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeMove"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeMove"]
   - code: PostResponseCodes
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeMove"].post
@@ -8651,9 +7808,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeMove"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeRestore"]
   - code: ResourceNameRestriction
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeRestore"]
@@ -8672,18 +7826,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/reevaluateInaccessibleDatabaseState"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/reevaluateInaccessibleDatabaseState"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/reevaluateInaccessibleDatabaseState"].post.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/reevaluateInaccessibleDatabaseState"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/startMove"]
   - code: ResourceNameRestriction
     from: ManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/startMove"]
@@ -8714,21 +7862,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseSchemas.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSchemas.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseSchemas.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseSchemas.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSchemas.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSchemas.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseSchemas.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}"]
@@ -8744,18 +7883,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSecurityAlertPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSecurityAlertPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}"]
@@ -8777,9 +7910,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseSecurityEvents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityEvents"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSecurityEvents.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityEvents"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseSecurityEvents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityEvents"].get.parameters
@@ -8787,9 +7917,6 @@ supressions:
     from: ManagedDatabaseSecurityEvents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityEvents"].get.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/currentSensitivityLabels"]
-  - code: ResourceNameRestriction
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/currentSensitivityLabels"]
   - code: ResourceNameRestriction
@@ -8825,9 +7952,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/recommendedSensitivityLabels"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/recommendedSensitivityLabels"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/recommendedSensitivityLabels"].get.parameters
@@ -8850,18 +7974,6 @@ supressions:
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/recommendedSensitivityLabels"].patch.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
-  - code: ResourceNameRestriction
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
   - code: ResourceNameRestriction
@@ -8900,18 +8012,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"].post.parameters
@@ -8921,18 +8021,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
@@ -8951,9 +8039,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/sensitivityLabels"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseSensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/sensitivityLabels"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseSensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/sensitivityLabels"].get.parameters
@@ -8966,27 +8051,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseTables.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseTables.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseTables.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseTables.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseTables.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}"]
@@ -9002,18 +8072,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseTransparentDataEncryption.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseTransparentDataEncryption.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseTransparentDataEncryption.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseTransparentDataEncryption.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseTransparentDataEncryption.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseTransparentDataEncryption.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"]
@@ -9030,9 +8094,6 @@ supressions:
     from: ManagedDatabaseTransparentDataEncryption.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"].put.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: ManagedDatabaseVulnerabilityAssessmentRuleBaselines.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/rules/{ruleId}/baselines/{baselineName}"]
-  - code: ResourceNameRestriction
     from: ManagedDatabaseVulnerabilityAssessmentRuleBaselines.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/rules/{ruleId}/baselines/{baselineName}"]
   - code: ResourceNameRestriction
@@ -9068,18 +8129,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseVulnerabilityAssessments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseVulnerabilityAssessments.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseVulnerabilityAssessments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseVulnerabilityAssessments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseVulnerabilityAssessments.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseVulnerabilityAssessments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}"]
@@ -9110,18 +8165,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedDatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}"]
@@ -9134,9 +8183,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedDatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/export"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/export"]
   - code: PostResponseCodes
     from: ManagedDatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/export"].post
@@ -9146,9 +8192,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedDatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/export"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedDatabaseVulnerabilityAssessmentScans.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/initiateScan"]
   - code: ResourceNameRestriction
     from: ManagedDatabaseVulnerabilityAssessmentScans.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}/initiateScan"]
@@ -9185,9 +8228,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedInstanceAdministrators.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/administrators/{administratorName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedInstanceAdministrators.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/administrators/{administratorName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedInstanceAdministrators.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/administrators/{administratorName}"].put
@@ -9239,9 +8279,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedInstanceAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedInstanceAdvancedThreatProtectionSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"].put
   - code: PutResponseCodes
     from: ManagedInstanceAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"].put
@@ -9275,9 +8312,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedInstanceAzureADOnlyAuthentications.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/azureADOnlyAuthentications/{authenticationName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedInstanceAzureADOnlyAuthentications.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/azureADOnlyAuthentications/{authenticationName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedInstanceAzureADOnlyAuthentications.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/azureADOnlyAuthentications/{authenticationName}"].put
@@ -9356,9 +8390,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedInstanceEncryptionProtectors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/encryptionProtector/{encryptionProtectorName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedInstanceEncryptionProtectors.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/encryptionProtector/{encryptionProtectorName}"].put
   - code: PutResponseCodes
     from: ManagedInstanceEncryptionProtectors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/encryptionProtector/{encryptionProtectorName}"].put
@@ -9395,18 +8426,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedInstanceKeys.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/keys/{keyName}"]
-  - code: ResourceNameRestriction
-    from: ManagedInstanceKeys.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/keys/{keyName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedInstanceKeys.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/keys/{keyName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedInstanceKeys.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/keys/{keyName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedInstanceKeys.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/keys/{keyName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedInstanceKeys.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/keys/{keyName}"].put
@@ -9434,9 +8459,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedInstanceLongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies"]
-  - code: ResourceNameRestriction
-    from: ManagedInstanceLongTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedInstanceLongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies"].get.parameters
@@ -9446,18 +8468,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedInstanceLongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"]
-  - code: ResourceNameRestriction
-    from: ManagedInstanceLongTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedInstanceLongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedInstanceLongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedInstanceLongTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedInstanceLongTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/backupLongTermRetentionPolicies/{policyName}"].put
@@ -9602,24 +8618,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedInstancePrivateLinkResources.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateLinkResources/{groupName}"]
-  - code: ResourceNameRestriction
-    from: ManagedInstancePrivateLinkResources.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateLinkResources/{groupName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedInstancePrivateLinkResources.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateLinkResources/{groupName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedInstancePrivateLinkResources.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/privateLinkResources/{groupName}"].get.responses.default.schema["$ref"]
-  - code: PatchBodyParametersSchema
-    from: ManagedInstances.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}"].patch.parameters["2"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedInstances.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}"].patch.parameters["2"].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: ManagedInstances.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}"].patch.parameters["2"].schema.properties.properties
   - code: PatchBodyParametersSchema
     from: ManagedInstances.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}"].patch.parameters["2"].schema.properties.properties
@@ -9839,9 +8843,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedLedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads"]
-  - code: ResourceNameRestriction
-    from: ManagedLedgerDigestUploads.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads"]
   - code: OperationIdNounConflictingModelNames
     from: ManagedLedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads"].get.operationId
@@ -9851,9 +8852,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedLedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ManagedLedgerDigestUploads.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"]
   - code: ResourceNameRestriction
     from: ManagedLedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"]
@@ -9872,9 +8870,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedLedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedLedgerDigestUploads.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].put
   - code: PutResponseCodes
     from: ManagedLedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].put
@@ -9888,9 +8883,6 @@ supressions:
     from: ManagedLedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}"].put.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: ManagedLedgerDigestUploads.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}/disable"]
-  - code: ResourceNameRestriction
     from: ManagedLedgerDigestUploads.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/ledgerDigestUploads/{ledgerDigestUploads}/disable"]
   - code: ResourceNameRestriction
@@ -9938,9 +8930,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/restorableDroppedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/restorableDroppedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].put
   - code: PutResponseCodes
     from: ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/restorableDroppedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].put
@@ -9980,9 +8969,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ManagedServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}"]
-  - code: ResourceNameRestriction
-    from: ManagedServerDnsAliases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ManagedServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}"].get.parameters
@@ -9992,9 +8978,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ManagedServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedServerDnsAliases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}"].put
@@ -10029,9 +9012,6 @@ supressions:
     from: ManagedServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}"].delete.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: ManagedServerDnsAliases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}/acquire"]
-  - code: ResourceNameRestriction
     from: ManagedServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/dnsAliases/{dnsAliasName}/acquire"]
   - code: ResourceNameRestriction
@@ -10073,9 +9053,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ManagedServerSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/securityAlertPolicies/{securityAlertPolicyName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ManagedServerSecurityAlertPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/securityAlertPolicies/{securityAlertPolicyName}"].put
   - code: PutResponseCodes
     from: ManagedServerSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/securityAlertPolicies/{securityAlertPolicyName}"].put
@@ -10103,9 +9080,6 @@ supressions:
   - code: ResourceNameRestriction
     from: NetworkSecurityPerimeterConfigurations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations/{nspConfigName}"]
-  - code: ResourceNameRestriction
-    from: NetworkSecurityPerimeterConfigurations.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations/{nspConfigName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: NetworkSecurityPerimeterConfigurations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations/{nspConfigName}"].get.parameters
@@ -10115,9 +9089,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: NetworkSecurityPerimeterConfigurations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations/{nspConfigName}"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: NetworkSecurityPerimeterConfigurations.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations/{nspConfigName}/reconcile"]
   - code: ResourceNameRestriction
     from: NetworkSecurityPerimeterConfigurations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations/{nspConfigName}/reconcile"]
@@ -10298,9 +9269,6 @@ supressions:
   - code: ResourceNameRestriction
     from: PrivateLinkResources.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/privateLinkResources/{groupName}"]
-  - code: ResourceNameRestriction
-    from: PrivateLinkResources.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/privateLinkResources/{groupName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: PrivateLinkResources.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/privateLinkResources/{groupName}"].get.parameters
@@ -10322,13 +9290,7 @@ supressions:
   - code: ResourceNameRestriction
     from: RecoverableDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}"]
-  - code: ResourceNameRestriction
-    from: RecoverableDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}"]
   - code: ParameterNotDefinedInGlobalParameters
-    from: RecoverableDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}"].get.parameters
-  - code: ParametersInPointGet
     from: RecoverableDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}"].get.parameters
   - code: ParametersInPointGet
@@ -10355,9 +9317,6 @@ supressions:
   - code: ResourceNameRestriction
     from: RecoverableManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/recoverableDatabases/{recoverableDatabaseName}"]
-  - code: ResourceNameRestriction
-    from: RecoverableManagedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/recoverableDatabases/{recoverableDatabaseName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: RecoverableManagedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/recoverableDatabases/{recoverableDatabaseName}"].get.parameters
@@ -10373,9 +9332,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks"]
-  - code: ResourceNameRestriction
-    from: ReplicationLinks.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks"].get.parameters
@@ -10385,18 +9341,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}"]
-  - code: ResourceNameRestriction
-    from: ReplicationLinks.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ReplicationLinks.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}"].put
@@ -10448,9 +9398,6 @@ supressions:
   - code: ResourceNameRestriction
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/failover"]
-  - code: ResourceNameRestriction
-    from: ReplicationLinks.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/failover"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/failover"].post.parameters
@@ -10458,9 +9405,6 @@ supressions:
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/failover"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: ReplicationLinks.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/forceFailoverAllowDataLoss"]
-  - code: ResourceNameRestriction
     from: ReplicationLinks.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/replicationLinks/{linkId}/forceFailoverAllowDataLoss"]
   - code: ResourceNameRestriction
@@ -10500,9 +9444,6 @@ supressions:
     from: RestorableDroppedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppedDatabaseId}"]
   - code: ParameterNotDefinedInGlobalParameters
-    from: RestorableDroppedDatabases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppedDatabaseId}"].get.parameters
-  - code: ParametersInPointGet
     from: RestorableDroppedDatabases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppedDatabaseId}"].get.parameters
   - code: ParametersInPointGet
@@ -10550,9 +9491,6 @@ supressions:
   - code: ResourceNameRestriction
     from: RestorePoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints"]
-  - code: ResourceNameRestriction
-    from: RestorePoints.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints"]
   - code: ParameterNotDefinedInGlobalParameters
     from: RestorePoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints"].get.parameters
@@ -10568,12 +9506,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: RestorePoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: RestorePoints.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints/{restorePointName}"]
-  - code: ResourceNameRestriction
-    from: RestorePoints.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints/{restorePointName}"]
   - code: ResourceNameRestriction
     from: RestorePoints.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints/{restorePointName}"]
@@ -10596,9 +9528,6 @@ supressions:
     from: RestorePoints.json
     where: $.definitions.RestorePoint.properties.location
   - code: MissingSegmentsInNestedResourceListOperation
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/currentSensitivityLabels"]
-  - code: ResourceNameRestriction
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/currentSensitivityLabels"]
   - code: ResourceNameRestriction
@@ -10634,9 +9563,6 @@ supressions:
   - code: ResourceNameRestriction
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/recommendedSensitivityLabels"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/recommendedSensitivityLabels"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/recommendedSensitivityLabels"].get.parameters
@@ -10659,18 +9585,6 @@ supressions:
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/recommendedSensitivityLabels"].patch.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
-  - code: ResourceNameRestriction
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}"]
   - code: ResourceNameRestriction
@@ -10709,18 +9623,6 @@ supressions:
   - code: ResourceNameRestriction
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"].post.parameters
@@ -10730,18 +9632,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
-  - code: ResourceNameRestriction
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
   - code: ResourceNameRestriction
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"]
@@ -10755,9 +9645,6 @@ supressions:
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable"].post.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: SensitivityLabels.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sensitivityLabels"]
-  - code: ResourceNameRestriction
     from: SensitivityLabels.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sensitivityLabels"]
   - code: ResourceNameRestriction
@@ -10793,9 +9680,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerAdvancedThreatProtectionSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"].put
   - code: PutResponseCodes
     from: ServerAdvancedThreatProtectionSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}"].put
@@ -10826,9 +9710,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ServerAdvisors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: ServerAdvisors.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors/{advisorName}"]
   - code: ResourceNameRestriction
     from: ServerAdvisors.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors/{advisorName}"]
@@ -10907,9 +9788,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerAzureADAdministrators.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerAzureADAdministrators.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}"].put
   - code: PutResponseCodes
     from: ServerAzureADAdministrators.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}"].put
@@ -10949,9 +9827,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ServerAzureADOnlyAuthentications.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/azureADOnlyAuthentications/{authenticationName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerAzureADOnlyAuthentications.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/azureADOnlyAuthentications/{authenticationName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerAzureADOnlyAuthentications.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/azureADOnlyAuthentications/{authenticationName}"].put
@@ -11030,9 +9905,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerConnectionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/{connectionPolicyName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerConnectionPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/{connectionPolicyName}"].put
   - code: PutResponseCodes
     from: ServerConnectionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/{connectionPolicyName}"].put
@@ -11075,9 +9947,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerDevOpsAudit.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerDevOpsAudit.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}"].put
   - code: PutResponseCodes
     from: ServerDevOpsAudit.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}"].put
@@ -11108,18 +9977,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}"]
-  - code: ResourceNameRestriction
-    from: ServerDnsAliases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerDnsAliases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}"].put
@@ -11142,9 +10005,6 @@ supressions:
     from: ServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}"].delete.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: ServerDnsAliases.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}/acquire"]
-  - code: ResourceNameRestriction
     from: ServerDnsAliases.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/dnsAliases/{dnsAliasName}/acquire"]
   - code: ResourceNameRestriction
@@ -11174,18 +10034,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ServerKeys.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/keys/{keyName}"]
-  - code: ResourceNameRestriction
-    from: ServerKeys.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/keys/{keyName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ServerKeys.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/keys/{keyName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ServerKeys.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/keys/{keyName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerKeys.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/keys/{keyName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerKeys.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/keys/{keyName}"].put
@@ -11255,9 +10109,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: Servers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: Servers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: Servers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}"].put
@@ -11342,9 +10193,6 @@ supressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}"].put
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerSecurityAlertPolicies.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}"].put
   - code: PutResponseCodes
     from: ServerSecurityAlertPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}"].put
@@ -11372,18 +10220,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ServerTrustCertificates.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustCertificates/{certificateName}"]
-  - code: ResourceNameRestriction
-    from: ServerTrustCertificates.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustCertificates/{certificateName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ServerTrustCertificates.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustCertificates/{certificateName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ServerTrustCertificates.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustCertificates/{certificateName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerTrustCertificates.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustCertificates/{certificateName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerTrustCertificates.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustCertificates/{certificateName}"].put
@@ -11423,18 +10265,12 @@ supressions:
   - code: ResourceNameRestriction
     from: ServerTrustGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}"]
-  - code: ResourceNameRestriction
-    from: ServerTrustGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: ServerTrustGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: ServerTrustGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: ServerTrustGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: ServerTrustGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}"].put
@@ -11822,9 +10658,6 @@ supressions:
   - code: ResourceNameRestriction
     from: SubscriptionUsages.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/usages/{usageName}"]
-  - code: ResourceNameRestriction
-    from: SubscriptionUsages.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/usages/{usageName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SubscriptionUsages.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/usages/{usageName}"].get.parameters
@@ -11832,9 +10665,6 @@ supressions:
     from: SubscriptionUsages.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/usages/{usageName}"].get.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: SynapseLinkWorkspaces.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/linkWorkspaces"]
-  - code: ResourceNameRestriction
     from: SynapseLinkWorkspaces.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/linkWorkspaces"]
   - code: ResourceNameRestriction
@@ -11861,18 +10691,12 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}"]
-  - code: ResourceNameRestriction
-    from: SyncAgents.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SyncAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: SyncAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: SyncAgents.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: SyncAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}"].put
@@ -11897,18 +10721,12 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/generateKey"]
-  - code: ResourceNameRestriction
-    from: SyncAgents.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/generateKey"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SyncAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/generateKey"].post.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: SyncAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/generateKey"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: SyncAgents.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/linkedDatabases"]
   - code: ResourceNameRestriction
     from: SyncAgents.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/linkedDatabases"]
@@ -11936,9 +10754,6 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups"].get.parameters
@@ -11948,21 +10763,12 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}"].put
@@ -11996,24 +10802,12 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/cancelSync"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/cancelSync"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/cancelSync"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/cancelSync"].post.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/cancelSync"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/hubSchemas"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/hubSchemas"]
   - code: ResourceNameRestriction
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/hubSchemas"]
@@ -12026,24 +10820,12 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/logs"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/logs"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/logs"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/logs"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/logs"].get.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/refreshHubSchema"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/refreshHubSchema"]
   - code: ResourceNameRestriction
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/refreshHubSchema"]
@@ -12059,12 +10841,6 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/triggerSync"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/triggerSync"]
-  - code: ResourceNameRestriction
-    from: SyncGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/triggerSync"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/triggerSync"].post.parameters
@@ -12072,12 +10848,6 @@ supressions:
     from: SyncGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/triggerSync"].post.responses.default.schema["$ref"]
   - code: MissingSegmentsInNestedResourceListOperation
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers"]
-  - code: ResourceNameRestriction
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers"]
   - code: ResourceNameRestriction
@@ -12092,24 +10862,12 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}"].put
@@ -12149,15 +10907,6 @@ supressions:
   - code: ResourceNameRestriction
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema"]
   - code: PostResponseCodes
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema"].post
@@ -12167,15 +10916,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema"].post.responses.default.schema["$ref"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/schemas"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/schemas"]
-  - code: ResourceNameRestriction
-    from: SyncMembers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/schemas"]
   - code: ResourceNameRestriction
     from: SyncMembers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/schemas"]
@@ -12230,9 +10970,6 @@ supressions:
   - code: ResourceNameRestriction
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption"]
-  - code: ResourceNameRestriction
-    from: TransparentDataEncryptions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption"]
   - code: ParameterNotDefinedInGlobalParameters
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption"].get.parameters
@@ -12242,18 +10979,12 @@ supressions:
   - code: ResourceNameRestriction
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"]
-  - code: ResourceNameRestriction
-    from: TransparentDataEncryptions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: TransparentDataEncryptions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}"].put
@@ -12272,9 +11003,6 @@ supressions:
   - code: ResourceNameRestriction
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}/resume"]
-  - code: ResourceNameRestriction
-    from: TransparentDataEncryptions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}/resume"]
   - code: ParameterNotDefinedInGlobalParameters
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}/resume"].post.parameters
@@ -12282,9 +11010,6 @@ supressions:
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}/resume"].post.responses.default.schema["$ref"]
   - code: LongRunningOperationsOptionsValidator
-    from: TransparentDataEncryptions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}/suspend"]
-  - code: ResourceNameRestriction
     from: TransparentDataEncryptions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption/{tdeName}/suspend"]
   - code: ResourceNameRestriction
@@ -12329,9 +11054,6 @@ supressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: VirtualClusters.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/virtualClusters/{virtualClusterName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: VirtualClusters.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/virtualClusters/{virtualClusterName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: VirtualClusters.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/virtualClusters/{virtualClusterName}"].put
@@ -12389,18 +11111,12 @@ supressions:
   - code: ResourceNameRestriction
     from: VirtualNetworkRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"]
-  - code: ResourceNameRestriction
-    from: VirtualNetworkRules.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: VirtualNetworkRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: VirtualNetworkRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: VirtualNetworkRules.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: VirtualNetworkRules.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"].put
@@ -12428,12 +11144,6 @@ supressions:
   - code: ResourceNameRestriction
     from: WorkloadClassifiers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers"]
-  - code: ResourceNameRestriction
-    from: WorkloadClassifiers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers"]
-  - code: ResourceNameRestriction
-    from: WorkloadClassifiers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers"]
   - code: ParameterNotDefinedInGlobalParameters
     from: WorkloadClassifiers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers"].get.parameters
@@ -12443,24 +11153,12 @@ supressions:
   - code: ResourceNameRestriction
     from: WorkloadClassifiers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}"]
-  - code: ResourceNameRestriction
-    from: WorkloadClassifiers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}"]
-  - code: ResourceNameRestriction
-    from: WorkloadClassifiers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}"]
-  - code: ResourceNameRestriction
-    from: WorkloadClassifiers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: WorkloadClassifiers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: WorkloadClassifiers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: WorkloadClassifiers.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: WorkloadClassifiers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}"].put
@@ -12488,9 +11186,6 @@ supressions:
   - code: ResourceNameRestriction
     from: WorkloadGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups"]
-  - code: ResourceNameRestriction
-    from: WorkloadGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups"]
   - code: ParameterNotDefinedInGlobalParameters
     from: WorkloadGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups"].get.parameters
@@ -12500,21 +11195,12 @@ supressions:
   - code: ResourceNameRestriction
     from: WorkloadGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"]
-  - code: ResourceNameRestriction
-    from: WorkloadGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"]
-  - code: ResourceNameRestriction
-    from: WorkloadGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"]
   - code: ParameterNotDefinedInGlobalParameters
     from: WorkloadGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"].get.parameters
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: WorkloadGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"].get.responses.default.schema["$ref"]
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: WorkloadGroups.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"].put
   - code: ProvisioningStateSpecifiedForLROPut
     from: WorkloadGroups.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}"].put
