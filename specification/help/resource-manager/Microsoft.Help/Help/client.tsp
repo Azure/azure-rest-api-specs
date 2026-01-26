@@ -15,8 +15,3 @@ using Microsoft.Help;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
   "csharp"
 );
-
-@@clientName(SolutionResourceSelfHelps.get,
-  "GetSelfHelpSolutionById",
-  "csharp"
-);
