@@ -62,6 +62,9 @@ alias ReplicationProtectionContainersOps = Azure.ResourceManager.Legacy.LegacyOp
   }
 >;
 
+alias ProtectionContainerAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
 @armResourceOperations
 interface ProtectionContainers {
   /**
@@ -106,10 +109,11 @@ interface ProtectionContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationProtectionContainers_DiscoverProtectableItem")
   @summary("Adds a protectable item to the replication protection container.")
-  discoverProtectableItem is ArmResourceActionAsync<
+  discoverProtectableItem is ArmResourceActionAsyncBase<
     ProtectionContainer,
     DiscoverProtectableItemRequest,
-    ArmResponse<ProtectionContainer>,
+    ArmResponse<ProtectionContainer> | ProtectionContainerAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainer>,
     Error = never
   >;
 
@@ -120,10 +124,11 @@ interface ProtectionContainers {
   @operationId("ReplicationProtectionContainers_Delete")
   @action("remove")
   @summary("Removes a protection container.")
-  delete is ArmResourceActionAsync<
+  delete is ArmResourceActionAsyncBase<
     ProtectionContainer,
     void,
-    NoContentResponse,
+    NoContentResponse | ProtectionContainerAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainer>,
     Error = never
   >;
 
@@ -149,13 +154,13 @@ interface ProtectionContainers {
   @operationId("ReplicationProtectionContainers_SwitchProtection")
   @action("switchprotection")
   @summary("Switches protection from one container to another or one replication provider to another.")
-  switchProtection is ArmResourceActionAsync<
+  switchProtection is ArmResourceActionAsyncBase<
     ProtectionContainer,
     SwitchProtectionInput,
-    ArmResponse<ProtectionContainer>,
-    LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    ArmResponse<ProtectionContainer> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
+      ArmAsyncOperationHeader<FinalResult = ProtectionContainer> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainer>,
     Error = never
   >;
 }

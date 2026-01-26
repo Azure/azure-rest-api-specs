@@ -333,6 +333,7 @@ interface ReplicationStorageClassificationsOperationGroup {
   @operationId("ReplicationStorageClassifications_List")
   @autoRoute
   @get
+  @list
   @action("replicationStorageClassifications")
   list is ArmProviderActionSync<
     Response = StorageClassificationCollection,
@@ -344,7 +345,8 @@ interface ReplicationStorageClassificationsOperationGroup {
       @path
       @segment("vaults")
       resourceName: string;
-    }
+    },
+    Error = never
   >;
 }
 
@@ -358,6 +360,7 @@ interface ReplicationStorageClassificationMappingsOperationGroup {
   @operationId("ReplicationStorageClassificationMappings_List")
   @autoRoute
   @get
+  @list
   @action("replicationStorageClassificationMappings")
   list is ArmProviderActionSync<
     Response = StorageClassificationMappingCollection,
@@ -369,7 +372,8 @@ interface ReplicationStorageClassificationMappingsOperationGroup {
       @path
       @segment("vaults")
       resourceName: string;
-    }
+    },
+    Error = never
   >;
 }
 
@@ -383,6 +387,7 @@ interface ReplicationvCentersOperationGroup {
   @operationId("ReplicationvCenters_List")
   @autoRoute
   @get
+  @list
   @action("replicationvCenters")
   list is ArmProviderActionSync<
     Response = VCenterCollection,
@@ -394,7 +399,8 @@ interface ReplicationvCentersOperationGroup {
       @path
       @segment("vaults")
       resourceName: string;
-    }
+    },
+    Error = never
   >;
 }
 
@@ -451,7 +457,8 @@ interface SupportedOperatingSystemsOperationGroup {
        */
       @query("instanceType")
       instanceType?: string;
-    }
+    },
+    Error = never
   >;
 }
 
@@ -476,7 +483,8 @@ interface ReplicationVaultHealthOperationGroup {
       @path
       @segment("vaults")
       resourceName: string;
-    }
+    },
+    Error = never
   >;
   /**
    * Refreshes health summary of the vault.
@@ -496,6 +504,7 @@ interface ReplicationVaultHealthOperationGroup {
       @path
       @segment("vaults")
       resourceName: string;
-    }
+    },
+    Error = never
   >;
 }

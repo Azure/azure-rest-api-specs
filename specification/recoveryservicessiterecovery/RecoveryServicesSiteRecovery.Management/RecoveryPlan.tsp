@@ -30,6 +30,9 @@ model RecoveryPlan
   location?: string;
 }
 
+alias RecoveryPlanAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RecoveryPlan> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
 @armResourceOperations
 interface RecoveryPlans {
   /**
@@ -95,10 +98,11 @@ interface RecoveryPlans {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationRecoveryPlans_FailoverCancel")
   @summary("Execute cancel failover of the recovery plan.")
-  failoverCancel is ArmResourceActionAsync<
+  failoverCancel is ArmResourceActionAsyncBase<
     RecoveryPlan,
     void,
-    ArmResponse<RecoveryPlan>,
+    ArmResponse<RecoveryPlan> | RecoveryPlanAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPlan>,
     Error = never
   >;
 
@@ -108,10 +112,11 @@ interface RecoveryPlans {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationRecoveryPlans_FailoverCommit")
   @summary("Execute commit failover of the recovery plan.")
-  failoverCommit is ArmResourceActionAsync<
+  failoverCommit is ArmResourceActionAsyncBase<
     RecoveryPlan,
     void,
-    ArmResponse<RecoveryPlan>,
+    ArmResponse<RecoveryPlan> | RecoveryPlanAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPlan>,
     Error = never
   >;
 
@@ -121,10 +126,11 @@ interface RecoveryPlans {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationRecoveryPlans_PlannedFailover")
   @summary("Execute planned failover of the recovery plan.")
-  plannedFailover is ArmResourceActionAsync<
+  plannedFailover is ArmResourceActionAsyncBase<
     RecoveryPlan,
     RecoveryPlanPlannedFailoverInput,
-    ArmResponse<RecoveryPlan>,
+    ArmResponse<RecoveryPlan> | RecoveryPlanAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPlan>,
     Error = never
   >;
 
@@ -135,10 +141,11 @@ interface RecoveryPlans {
   @operationId("ReplicationRecoveryPlans_Reprotect")
   @action("reProtect")
   @summary("Execute reprotect of the recovery plan.")
-  reprotect is ArmResourceActionAsync<
+  reprotect is ArmResourceActionAsyncBase<
     RecoveryPlan,
     void,
-    ArmResponse<RecoveryPlan>,
+    ArmResponse<RecoveryPlan> | RecoveryPlanAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPlan>,
     Error = never
   >;
 
@@ -148,10 +155,11 @@ interface RecoveryPlans {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationRecoveryPlans_TestFailover")
   @summary("Execute test failover of the recovery plan.")
-  testFailover is ArmResourceActionAsync<
+  testFailover is ArmResourceActionAsyncBase<
     RecoveryPlan,
     RecoveryPlanTestFailoverInput,
-    ArmResponse<RecoveryPlan>,
+    ArmResponse<RecoveryPlan> | RecoveryPlanAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPlan>,
     Error = never
   >;
 
@@ -161,10 +169,11 @@ interface RecoveryPlans {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationRecoveryPlans_TestFailoverCleanup")
   @summary("Execute test failover cleanup of the recovery plan.")
-  testFailoverCleanup is ArmResourceActionAsync<
+  testFailoverCleanup is ArmResourceActionAsyncBase<
     RecoveryPlan,
     RecoveryPlanTestFailoverCleanupInput,
-    ArmResponse<RecoveryPlan>,
+    ArmResponse<RecoveryPlan> | RecoveryPlanAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPlan>,
     Error = never
   >;
 
@@ -174,10 +183,11 @@ interface RecoveryPlans {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationRecoveryPlans_UnplannedFailover")
   @summary("Execute unplanned failover of the recovery plan.")
-  unplannedFailover is ArmResourceActionAsync<
+  unplannedFailover is ArmResourceActionAsyncBase<
     RecoveryPlan,
     RecoveryPlanUnplannedFailoverInput,
-    ArmResponse<RecoveryPlan>,
+    ArmResponse<RecoveryPlan> | RecoveryPlanAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPlan>,
     Error = never
   >;
 }

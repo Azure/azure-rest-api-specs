@@ -13,6 +13,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * Vault setting.
  */
+@parentResource(Vault)
 model VaultSetting
   is Azure.ResourceManager.ProxyResource<VaultSettingProperties> {
   ...ResourceNameParameter<
@@ -29,6 +30,23 @@ model VaultSetting
   location?: string;
 }
 
+alias VaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the recovery services vault. */
+    @path
+    @segment("vaults")
+    @key
+    resourceName: string;
+  },
+  ErrorType = never
+>;
+
 @armResourceOperations
 interface VaultSettings {
   /**
@@ -37,7 +55,7 @@ interface VaultSettings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationVaultSetting_Get")
   @summary("Gets the vault setting.")
-  get is ArmResourceRead<VaultSetting>;
+  get is ArmResourceRead<VaultSetting, Error = never>;
 
   /**
    * The operation to configure vault setting.
@@ -49,9 +67,11 @@ interface VaultSettings {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     VaultSetting,
     Request = VaultSettingCreationInput,
-    Response = ArmResourceUpdatedResponse<VaultSetting>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = VaultSetting> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<VaultSetting> & {
+      ...ArmLroLocationHeader<FinalResult = VaultSetting>;
+      ...Azure.Core.Foundations.RetryAfterHeader;
+    },
+    Error = never
   >;
 
   /**
@@ -60,8 +80,12 @@ interface VaultSettings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationVaultSetting_List")
   @summary("Gets the list of vault setting.")
-  list is ArmResourceListByParent<
+  @action("replicationVaultSettings")
+  @list
+  @get
+  list is VaultOps.ActionSync<
     VaultSetting,
+    void,
     Response = ArmResponse<VaultSettingCollection>
   >;
 }

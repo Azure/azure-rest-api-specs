@@ -29,6 +29,9 @@ model Job is Azure.ResourceManager.ProxyResource<JobProperties> {
   location?: string;
 }
 
+alias JobAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Job> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
 @armResourceOperations
 interface Jobs {
   /**
@@ -63,7 +66,13 @@ interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationJobs_Cancel")
   @summary("Cancels the specified job.")
-  cancel is ArmResourceActionAsync<Job, void, ArmResponse<Job>, Error = never>;
+  cancel is ArmResourceActionAsyncBase<
+    Job,
+    void,
+    ArmResponse<Job> | JobAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Job>,
+    Error = never
+  >;
 
   /**
    * The operation to restart an Azure Site Recovery job.
@@ -71,7 +80,13 @@ interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationJobs_Restart")
   @summary("Restarts the specified job.")
-  restart is ArmResourceActionAsync<Job, void, ArmResponse<Job>, Error = never>;
+  restart is ArmResourceActionAsyncBase<
+    Job,
+    void,
+    ArmResponse<Job> | JobAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Job>,
+    Error = never
+  >;
 
   /**
    * The operation to resume an Azure Site Recovery job.
@@ -79,10 +94,11 @@ interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationJobs_Resume")
   @summary("Resumes the specified job.")
-  resume is ArmResourceActionAsync<
+  resume is ArmResourceActionAsyncBase<
     Job,
     ResumeJobParams,
-    ArmResponse<Job>,
+    ArmResponse<Job> | JobAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Job>,
     Error = never
   >;
 }

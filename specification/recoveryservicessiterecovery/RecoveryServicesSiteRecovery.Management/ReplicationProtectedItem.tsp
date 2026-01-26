@@ -31,6 +31,9 @@ model ReplicationProtectedItem
   location?: string;
 }
 
+alias ReplicationProtectedItemAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectedItem> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
 @armResourceOperations
 interface ReplicationProtectedItems {
   /**
@@ -87,10 +90,11 @@ interface ReplicationProtectedItems {
    * Operation to add disks(s) to the replication protected item.
    */
   @summary("Adds disk(s) for protection.")
-  addDisks is ArmResourceActionAsync<
+  addDisks is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     AddDisksInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -98,10 +102,11 @@ interface ReplicationProtectedItems {
    * The operation to change the recovery point of a failed over replication protected item.
    */
   @summary("Change or apply recovery point.")
-  applyRecoveryPoint is ArmResourceActionAsync<
+  applyRecoveryPoint is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     ApplyRecoveryPointInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -109,10 +114,11 @@ interface ReplicationProtectedItems {
    * Operation to cancel the failover of the replication protected item.
    */
   @summary("Execute cancel failover.")
-  failoverCancel is ArmResourceActionAsync<
+  failoverCancel is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     void,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -120,10 +126,11 @@ interface ReplicationProtectedItems {
    * Operation to commit the failover of the replication protected item.
    */
   @summary("Execute commit failover.")
-  failoverCommit is ArmResourceActionAsync<
+  failoverCommit is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     void,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -131,10 +138,11 @@ interface ReplicationProtectedItems {
    * Operation to initiate a planned failover of the replication protected item.
    */
   @summary("Execute planned failover.")
-  plannedFailover is ArmResourceActionAsync<
+  plannedFailover is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     PlannedFailoverInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -143,10 +151,11 @@ interface ReplicationProtectedItems {
    */
   @action("remove")
   @summary("Disables protection.")
-  delete is ArmResourceActionAsync<
+  delete is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     DisableProtectionInput,
-    NoContentResponse,
+    NoContentResponse | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -154,10 +163,11 @@ interface ReplicationProtectedItems {
    * Operation to remove disk(s) from the replication protected item.
    */
   @summary("Removes disk(s).")
-  removeDisks is ArmResourceActionAsync<
+  removeDisks is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     RemoveDisksInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -165,10 +175,11 @@ interface ReplicationProtectedItems {
    * The operation to start resynchronize/repair replication for a replication protected item requiring resynchronization.
    */
   @summary("Resynchronize or repair replication.")
-  repairReplication is ArmResourceActionAsync<
+  repairReplication is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     void,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -177,10 +188,11 @@ interface ReplicationProtectedItems {
    */
   @action("reProtect")
   @summary("Execute Reverse Replication\\Reprotect.")
-  reprotect is ArmResourceActionAsync<
+  reprotect is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     ReverseReplicationInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -188,10 +200,11 @@ interface ReplicationProtectedItems {
    * Operation to resolve health issues of the replication protected item.
    */
   @summary("Resolve health errors.")
-  resolveHealthErrors is ArmResourceActionAsync<
+  resolveHealthErrors is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     ResolveHealthInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -199,12 +212,12 @@ interface ReplicationProtectedItems {
    * Operation to initiate a switch provider of the replication protected item.
    */
   @summary("Execute switch provider.")
-  switchProvider is ArmResourceActionAsync<
+  switchProvider is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     SwitchProviderInput,
-    ArmResponse<ReplicationProtectedItem>,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ReplicationProtectedItem> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    ArmResponse<ReplicationProtectedItem> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ReplicationProtectedItem> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -212,10 +225,11 @@ interface ReplicationProtectedItems {
    * Operation to perform a test failover of the replication protected item.
    */
   @summary("Execute test failover.")
-  testFailover is ArmResourceActionAsync<
+  testFailover is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     TestFailoverInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -223,10 +237,11 @@ interface ReplicationProtectedItems {
    * Operation to clean up the test failover of a replication protected item.
    */
   @summary("Execute test failover cleanup.")
-  testFailoverCleanup is ArmResourceActionAsync<
+  testFailoverCleanup is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     TestFailoverCleanupInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -234,10 +249,11 @@ interface ReplicationProtectedItems {
    * Operation to initiate a failover of the replication protected item.
    */
   @summary("Execute unplanned failover.")
-  unplannedFailover is ArmResourceActionAsync<
+  unplannedFailover is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     UnplannedFailoverInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -245,10 +261,11 @@ interface ReplicationProtectedItems {
    * The operation to update appliance of an ASR replication protected item.
    */
   @summary("Updates appliance for replication protected Item.")
-  updateAppliance is ArmResourceActionAsync<
+  updateAppliance is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     UpdateApplianceForReplicationProtectedItemInput,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -256,10 +273,11 @@ interface ReplicationProtectedItems {
    * The operation to update(push update) the installed mobility service software on a replication protected item to the latest available version.
    */
   @summary("Update the mobility service on a protected item.")
-  updateMobilityService is ArmResourceActionAsync<
+  updateMobilityService is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     UpdateMobilityServiceRequest,
-    ArmResponse<ReplicationProtectedItem>,
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 
@@ -267,10 +285,12 @@ interface ReplicationProtectedItems {
    * The operation to reinstall the installed mobility service software on a replication protected item to the latest available version.
    */
   @summary("Reinstall the mobility service on a protected item.")
-  reinstallMobilityService is ArmResourceActionAsync<
+  reinstallMobilityService is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     ReinstallMobilityServiceRequest,
-    ArmResponse<ReplicationProtectedItem>
+    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
+    Error = never
   >;
 
   /**
@@ -282,10 +302,12 @@ interface ReplicationProtectedItems {
   @get
   @action("targetComputeSizes")
   @summary("Gets the list of target compute sizes for the replication protected item.")
-  listByReplicationProtectedItems is ArmResourceActionSync<
+  listByReplicationProtectedItems is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     void,
-    ArmResponse<TargetComputeSizeCollection>,
+    ArmResponse<TargetComputeSizeCollection> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = TargetComputeSizeCollection> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
 }

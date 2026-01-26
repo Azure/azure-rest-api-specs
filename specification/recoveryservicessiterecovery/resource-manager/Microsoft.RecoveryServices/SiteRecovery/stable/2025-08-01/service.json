@@ -193,150 +193,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/replicationVaultSettings": {
-      "get": {
-        "operationId": "ReplicationVaultSetting_List",
-        "tags": [
-          "VaultSettings"
-        ],
-        "summary": "Gets the list of vault setting.",
-        "description": "Gets the list of vault setting. This includes the Migration Hub connection settings.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VaultSettingCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the list of vault setting.": {
-            "$ref": "./examples/ReplicationVaultSetting_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/replicationVaultSettings/{vaultSettingName}": {
-      "get": {
-        "operationId": "ReplicationVaultSetting_Get",
-        "tags": [
-          "VaultSettings"
-        ],
-        "summary": "Gets the vault setting.",
-        "description": "Gets the vault setting. This includes the Migration Hub connection settings.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "vaultSettingName",
-            "in": "path",
-            "description": "Vault setting name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VaultSetting"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the vault setting.": {
-            "$ref": "./examples/ReplicationVaultSetting_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "ReplicationVaultSetting_Create",
-        "tags": [
-          "VaultSettings"
-        ],
-        "summary": "Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.",
-        "description": "The operation to configure vault setting.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "vaultSettingName",
-            "in": "path",
-            "description": "Vault setting name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "input",
-            "in": "body",
-            "description": "Vault setting creation input.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VaultSettingCreationInput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'VaultSetting' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VaultSetting"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.": {
-            "$ref": "./examples/ReplicationVaultSetting_Create.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAlertSettings": {
       "get": {
         "operationId": "ReplicationAlertSettings_List",
@@ -926,7 +782,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFabric%3E"
+          "final-state-schema": "#/definitions/Fabric"
         },
         "x-ms-long-running-operation": true
       }
@@ -990,7 +846,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.NoContentResponse"
+          "final-state-schema": "#/definitions/Fabric"
         },
         "x-ms-long-running-operation": true
       }
@@ -1066,7 +922,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFabric%3E"
+          "final-state-schema": "#/definitions/Fabric"
         },
         "x-ms-long-running-operation": true
       }
@@ -1130,7 +986,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.NoContentResponse"
+          "final-state-schema": "#/definitions/Fabric"
         },
         "x-ms-long-running-operation": true
       }
@@ -1272,7 +1128,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFabric%3E"
+          "final-state-schema": "#/definitions/Fabric"
         },
         "x-ms-long-running-operation": true
       }
@@ -2123,7 +1979,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CProtectionContainer%3E"
+          "final-state-schema": "#/definitions/ProtectionContainer"
         },
         "x-ms-long-running-operation": true
       }
@@ -2194,7 +2050,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.NoContentResponse"
+          "final-state-schema": "#/definitions/ProtectionContainer"
         },
         "x-ms-long-running-operation": true
       }
@@ -2682,7 +2538,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMigrationItem%3E"
+          "final-state-schema": "#/definitions/MigrationItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -2906,7 +2762,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMigrationItem%3E"
+          "final-state-schema": "#/definitions/MigrationItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -2996,7 +2852,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMigrationItem%3E"
+          "final-state-schema": "#/definitions/MigrationItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -3086,7 +2942,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMigrationItem%3E"
+          "final-state-schema": "#/definitions/MigrationItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -3176,7 +3032,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMigrationItem%3E"
+          "final-state-schema": "#/definitions/MigrationItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -3266,7 +3122,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMigrationItem%3E"
+          "final-state-schema": "#/definitions/MigrationItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -3867,7 +3723,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -3957,7 +3813,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4038,7 +3894,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4119,7 +3975,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4209,7 +4065,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4299,7 +4155,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4514,12 +4370,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
@@ -4529,7 +4379,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4616,7 +4466,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.NoContentResponse"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4706,7 +4556,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4787,7 +4637,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -4877,7 +4727,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -5025,6 +4875,20 @@
             "schema": {
               "$ref": "#/definitions/TargetComputeSizeCollection"
             }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -5122,7 +4986,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -5212,7 +5076,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -5302,7 +5166,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -5392,7 +5256,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -5482,7 +5346,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CReplicationProtectedItem%3E"
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       }
@@ -7104,7 +6968,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.NoContentResponse"
+          "final-state-schema": "#/definitions/ProtectionContainerMapping"
         },
         "x-ms-long-running-operation": true
       }
@@ -7285,7 +7149,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ProtectionContainer"
         },
         "x-ms-long-running-operation": true
       }
@@ -7613,7 +7478,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRecoveryServicesProvider%3E"
+          "final-state-schema": "#/definitions/RecoveryServicesProvider"
         },
         "x-ms-long-running-operation": true
       }
@@ -7684,7 +7549,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.NoContentResponse"
+          "final-state-schema": "#/definitions/RecoveryServicesProvider"
         },
         "x-ms-long-running-operation": true
       }
@@ -8579,7 +8444,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CJob%3E"
+          "final-state-schema": "#/definitions/Job"
         },
         "x-ms-long-running-operation": true
       }
@@ -8646,7 +8511,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CJob%3E"
+          "final-state-schema": "#/definitions/Job"
         },
         "x-ms-long-running-operation": true
       }
@@ -8722,7 +8587,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CJob%3E"
+          "final-state-schema": "#/definitions/Job"
         },
         "x-ms-long-running-operation": true
       }
@@ -9959,7 +9824,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRecoveryPlan%3E"
+          "final-state-schema": "#/definitions/RecoveryPlan"
         },
         "x-ms-long-running-operation": true
       }
@@ -10026,7 +9891,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRecoveryPlan%3E"
+          "final-state-schema": "#/definitions/RecoveryPlan"
         },
         "x-ms-long-running-operation": true
       }
@@ -10102,7 +9967,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRecoveryPlan%3E"
+          "final-state-schema": "#/definitions/RecoveryPlan"
         },
         "x-ms-long-running-operation": true
       }
@@ -10169,7 +10034,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRecoveryPlan%3E"
+          "final-state-schema": "#/definitions/RecoveryPlan"
         },
         "x-ms-long-running-operation": true
       }
@@ -10245,7 +10110,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRecoveryPlan%3E"
+          "final-state-schema": "#/definitions/RecoveryPlan"
         },
         "x-ms-long-running-operation": true
       }
@@ -10321,7 +10186,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRecoveryPlan%3E"
+          "final-state-schema": "#/definitions/RecoveryPlan"
         },
         "x-ms-long-running-operation": true
       }
@@ -10397,7 +10262,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CRecoveryPlan%3E"
+          "final-state-schema": "#/definitions/RecoveryPlan"
         },
         "x-ms-long-running-operation": true
       }
@@ -10472,18 +10337,15 @@
             "schema": {
               "$ref": "#/definitions/StorageClassificationMappingCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
           "Gets the list of storage classification mappings objects under a vault.": {
             "$ref": "./examples/ReplicationStorageClassificationMappings_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -10516,18 +10378,15 @@
             "schema": {
               "$ref": "#/definitions/StorageClassificationCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
           "Gets the list of storage classification objects under a vault.": {
             "$ref": "./examples/ReplicationStorageClassifications_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -10567,12 +10426,6 @@
             "schema": {
               "$ref": "#/definitions/SupportedOperatingSystems"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
@@ -10610,12 +10463,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/VaultHealthDetails"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -10669,12 +10516,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
@@ -10685,6 +10526,169 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/VaultHealthDetails"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationVaultSettings": {
+      "get": {
+        "operationId": "ReplicationVaultSetting_List",
+        "tags": [
+          "VaultSettings"
+        ],
+        "summary": "Gets the list of vault setting.",
+        "description": "Gets the list of vault setting. This includes the Migration Hub connection settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VaultSettingCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of vault setting.": {
+            "$ref": "./examples/ReplicationVaultSetting_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationVaultSettings/{vaultSettingName}": {
+      "get": {
+        "operationId": "ReplicationVaultSetting_Get",
+        "tags": [
+          "VaultSettings"
+        ],
+        "summary": "Gets the vault setting.",
+        "description": "Gets the vault setting. This includes the Migration Hub connection settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Vault",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vaultSettingName",
+            "in": "path",
+            "description": "Vault setting name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VaultSetting"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the vault setting.": {
+            "$ref": "./examples/ReplicationVaultSetting_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ReplicationVaultSetting_Create",
+        "tags": [
+          "VaultSettings"
+        ],
+        "summary": "Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.",
+        "description": "The operation to configure vault setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Vault",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vaultSettingName",
+            "in": "path",
+            "description": "Vault setting name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Vault setting creation input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultSettingCreationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VaultSetting"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.": {
+            "$ref": "./examples/ReplicationVaultSetting_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/VaultSetting"
         },
         "x-ms-long-running-operation": true
       }
@@ -10718,18 +10722,15 @@
             "schema": {
               "$ref": "#/definitions/VCenterCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
           "Gets the list of vCenter registered under the vault.": {
             "$ref": "./examples/ReplicationvCenters_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -10935,8 +10936,29 @@
           "description": "The automation account arm id."
         },
         "automationAccountAuthenticationType": {
-          "$ref": "#/definitions/AutomationAccountAuthenticationType",
-          "description": "A value indicating the type authentication to use for automation Account."
+          "type": "string",
+          "description": "A value indicating the type authentication to use for automation Account.",
+          "default": "RunAsAccount",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "RunAsAccount",
+                "value": "RunAsAccount",
+                "description": "RunAsAccount"
+              },
+              {
+                "name": "SystemAssignedIdentity",
+                "value": "SystemAssignedIdentity",
+                "description": "SystemAssignedIdentity"
+              }
+            ]
+          }
         }
       },
       "allOf": [
@@ -11037,8 +11059,29 @@
           "description": "A value indicating whether the auto update is enabled."
         },
         "automationAccountAuthenticationType": {
-          "$ref": "#/definitions/AutomationAccountAuthenticationType",
-          "description": "A value indicating the authentication type for automation account. The default value is \"RunAsAccount\"."
+          "type": "string",
+          "description": "A value indicating the authentication type for automation account. The default value is \"RunAsAccount\".",
+          "default": "RunAsAccount",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "RunAsAccount",
+                "value": "RunAsAccount",
+                "description": "RunAsAccount"
+              },
+              {
+                "name": "SystemAssignedIdentity",
+                "value": "SystemAssignedIdentity",
+                "description": "SystemAssignedIdentity"
+              }
+            ]
+          }
         },
         "automationAccountArmId": {
           "type": "string",
@@ -11726,8 +11769,29 @@
           "description": "The automation account arm id."
         },
         "automationAccountAuthenticationType": {
-          "$ref": "#/definitions/AutomationAccountAuthenticationType",
-          "description": "A value indicating the type authentication to use for automation Account."
+          "type": "string",
+          "description": "A value indicating the type authentication to use for automation Account.",
+          "default": "RunAsAccount",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "RunAsAccount",
+                "value": "RunAsAccount",
+                "description": "RunAsAccount"
+              },
+              {
+                "name": "SystemAssignedIdentity",
+                "value": "SystemAssignedIdentity",
+                "description": "SystemAssignedIdentity"
+              }
+            ]
+          }
         },
         "scheduleName": {
           "type": "string",
@@ -12292,8 +12356,29 @@
           "description": "The automation account arm id."
         },
         "automationAccountAuthenticationType": {
-          "$ref": "#/definitions/AutomationAccountAuthenticationType",
-          "description": "A value indicating the type authentication to use for automation Account."
+          "type": "string",
+          "description": "A value indicating the type authentication to use for automation Account.",
+          "default": "RunAsAccount",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "RunAsAccount",
+                "value": "RunAsAccount",
+                "description": "RunAsAccount"
+              },
+              {
+                "name": "SystemAssignedIdentity",
+                "value": "SystemAssignedIdentity",
+                "description": "SystemAssignedIdentity"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -12755,8 +12840,29 @@
           "description": "The automation account arm id."
         },
         "automationAccountAuthenticationType": {
-          "$ref": "#/definitions/AutomationAccountAuthenticationType",
-          "description": "A value indicating the type authentication to use for automation Account."
+          "type": "string",
+          "description": "A value indicating the type authentication to use for automation Account.",
+          "default": "RunAsAccount",
+          "enum": [
+            "RunAsAccount",
+            "SystemAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "AutomationAccountAuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "RunAsAccount",
+                "value": "RunAsAccount",
+                "description": "RunAsAccount"
+              },
+              {
+                "name": "SystemAssignedIdentity",
+                "value": "SystemAssignedIdentity",
+                "description": "SystemAssignedIdentity"
+              }
+            ]
+          }
         }
       },
       "allOf": [
@@ -13713,30 +13819,6 @@
         ]
       }
     },
-    "AutomationAccountAuthenticationType": {
-      "type": "string",
-      "description": "A value indicating the type authentication to use for automation Account.",
-      "enum": [
-        "RunAsAccount",
-        "SystemAssignedIdentity"
-      ],
-      "x-ms-enum": {
-        "name": "AutomationAccountAuthenticationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RunAsAccount",
-            "value": "RunAsAccount",
-            "description": "RunAsAccount"
-          },
-          {
-            "name": "SystemAssignedIdentity",
-            "value": "SystemAssignedIdentity",
-            "description": "SystemAssignedIdentity"
-          }
-        ]
-      }
-    },
     "AutomationRunbookTaskDetails": {
       "type": "object",
       "description": "This class represents the task details for an automation runbook.",
@@ -13784,97 +13866,6 @@
         }
       ],
       "x-ms-discriminator-value": "AutomationRunbookTaskDetails"
-    },
-    "Azure.ResourceManager.ArmResponse<Fabric>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Fabric",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Job>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Job",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<MigrationItem>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/MigrationItem",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ProtectionContainer>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ProtectionContainer",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<RecoveryPlan>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/RecoveryPlan",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<RecoveryServicesProvider>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/RecoveryServicesProvider",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ReplicationProtectedItem>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ReplicationProtectedItem",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "AzureFabricCreationInput": {
       "type": "object",
@@ -14124,16 +14115,31 @@
       "type": "object",
       "description": "Recovery point.",
       "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The recovery point Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionClusters/recoveryPoints"
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The recovery point name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        },
         "properties": {
           "$ref": "#/definitions/ClusterRecoveryPointProperties",
           "description": "The recovery point properties."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ClusterRecoveryPointCollection": {
       "type": "object",
@@ -15722,11 +15728,15 @@
         "skippedReasonString": {
           "type": "string",
           "description": "The skipped reason string."
+        },
+        "jobTask": {
+          "$ref": "#/definitions/JobEntity",
+          "description": "The job entity."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/JobTaskDetails"
+          "$ref": "#/definitions/TaskTypeDetails"
         }
       ],
       "x-ms-discriminator-value": "FabricReplicationGroupTaskDetails"
@@ -17320,11 +17330,55 @@
           "type": "integer",
           "format": "int32",
           "description": "A value indicating the replication interval."
+        },
+        "recoveryPoints": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A value indicating the number of recovery points."
+        },
+        "applicationConsistentSnapshotFrequencyInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A value indicating the application consistent frequency."
+        },
+        "compression": {
+          "type": "string",
+          "description": "A value indicating whether compression has to be enabled."
+        },
+        "initialReplicationMethod": {
+          "type": "string",
+          "description": "A value indicating whether IR is online."
+        },
+        "onlineReplicationStartTime": {
+          "type": "string",
+          "description": "A value indicating the online IR start time."
+        },
+        "offlineReplicationImportPath": {
+          "type": "string",
+          "description": "A value indicating the offline IR import path."
+        },
+        "offlineReplicationExportPath": {
+          "type": "string",
+          "description": "A value indicating the offline IR export path."
+        },
+        "replicationPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A value indicating the recovery HTTPS port."
+        },
+        "allowedAuthenticationType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A value indicating the authentication type."
+        },
+        "replicaDeletion": {
+          "type": "string",
+          "description": "A value indicating whether the VM has to be auto deleted."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/HyperVReplicaPolicyInput"
+          "$ref": "#/definitions/PolicyProviderSpecificInput"
         }
       ],
       "x-ms-discriminator-value": "HyperVReplica2012R2"
@@ -17436,10 +17490,6 @@
       "type": "object",
       "description": "Hyper-V Replica specific policy Input.",
       "properties": {
-        "instanceType": {
-          "type": "string",
-          "description": "Discriminator property for HyperVReplicaPolicyInput."
-        },
         "recoveryPoints": {
           "type": "integer",
           "format": "int32",
@@ -17485,15 +17535,12 @@
           "description": "A value indicating whether the VM has to be auto deleted."
         }
       },
-      "discriminator": "instanceType",
-      "required": [
-        "instanceType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/PolicyProviderSpecificInput"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "HyperVReplica2012"
     },
     "HyperVReplicaReplicationDetails": {
       "type": "object",
@@ -17565,10 +17612,6 @@
       "type": "object",
       "description": "Single Host fabric provider specific VM settings.",
       "properties": {
-        "instanceType": {
-          "type": "string",
-          "description": "Discriminator property for HyperVVirtualMachineDetails."
-        },
         "sourceItemId": {
           "type": "string",
           "description": "The source id of the object."
@@ -17605,15 +17648,12 @@
           "description": "The Id of the hyper-v host in fabric."
         }
       },
-      "discriminator": "instanceType",
-      "required": [
-        "instanceType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ConfigurationSettings"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "HyperVVirtualMachine"
     },
     "IPConfigDetails": {
       "type": "object",
@@ -22447,24 +22487,17 @@
       "type": "object",
       "description": "This class represents a task which is actually a workflow so that one can navigate to its individual drill down.",
       "properties": {
-        "instanceType": {
-          "type": "string",
-          "description": "Discriminator property for JobTaskDetails."
-        },
         "jobTask": {
           "$ref": "#/definitions/JobEntity",
           "description": "The job entity."
         }
       },
-      "discriminator": "instanceType",
-      "required": [
-        "instanceType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TaskTypeDetails"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "JobTaskDetails"
     },
     "KeyEncryptionKeyInfo": {
       "type": "object",
@@ -23710,6 +23743,7 @@
           "description": "Origin. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is \"user,system\"."
         },
         "properties": {
+          "$ref": "#/definitions/OperationsDiscoveryProperties",
           "description": "Properties. Reserved for future use."
         }
       }
@@ -23734,6 +23768,10 @@
       "required": [
         "value"
       ]
+    },
+    "OperationsDiscoveryProperties": {
+      "type": "object",
+      "description": "ClientDiscovery properties."
     },
     "PauseReplicationInput": {
       "type": "object",
@@ -25106,10 +25144,6 @@
       "type": "object",
       "description": "This class represents the recovery plan group task.",
       "properties": {
-        "instanceType": {
-          "type": "string",
-          "description": "Discriminator property for RecoveryPlanGroupTaskDetails."
-        },
         "name": {
           "type": "string",
           "description": "The name."
@@ -25123,15 +25157,12 @@
           "description": "The group type."
         }
       },
-      "discriminator": "instanceType",
-      "required": [
-        "instanceType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/GroupTaskDetails"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "RecoveryPlanGroupTaskDetails"
     },
     "RecoveryPlanGroupType": {
       "type": "string",
@@ -25556,9 +25587,23 @@
     "RecoveryPlanShutdownGroupTaskDetails": {
       "type": "object",
       "description": "This class represents the recovery plan shutdown group task details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group identifier."
+        },
+        "rpGroupType": {
+          "type": "string",
+          "description": "The group type."
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/RecoveryPlanGroupTaskDetails"
+          "$ref": "#/definitions/GroupTaskDetails"
         }
       ],
       "x-ms-discriminator-value": "RecoveryPlanShutdownGroupTaskDetails"
@@ -26923,7 +26968,10 @@
           "items": {
             "$ref": "#/definitions/HealthError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
         },
         "protectedItemCount": {
           "type": "integer",
@@ -28284,10 +28332,6 @@
         ]
       }
     },
-    "TypeSpec.Http.NoContentResponse": {
-      "type": "object",
-      "description": "There is no content to send for this request, but the headers may be useful."
-    },
     "UnplannedFailoverInput": {
       "type": "object",
       "description": "Input definition for unplanned failover.",
@@ -28842,7 +28886,8 @@
         },
         "reuseExistingNic": {
           "type": "boolean",
-          "description": "A value indicating whether an existing NIC is allowed to be reused during failover subject to availability."
+          "description": "A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.",
+          "default": false
         },
         "tfoRecoveryNicName": {
           "type": "string",
@@ -28854,7 +28899,8 @@
         },
         "tfoReuseExistingNic": {
           "type": "boolean",
-          "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability."
+          "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
+          "default": false
         },
         "targetNicName": {
           "type": "string",
@@ -30497,11 +30543,15 @@
         "skippedReasonString": {
           "type": "string",
           "description": "The skipped reason string."
+        },
+        "jobTask": {
+          "$ref": "#/definitions/JobEntity",
+          "description": "The job entity."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/JobTaskDetails"
+          "$ref": "#/definitions/TaskTypeDetails"
         }
       ],
       "x-ms-discriminator-value": "VirtualMachineTaskDetails"
@@ -30669,9 +30719,46 @@
     "VmmVirtualMachineDetails": {
       "type": "object",
       "description": "VMM fabric provider specific VM settings.",
+      "properties": {
+        "sourceItemId": {
+          "type": "string",
+          "description": "The source id of the object."
+        },
+        "generation": {
+          "type": "string",
+          "description": "The id of the object in fabric."
+        },
+        "osDetails": {
+          "$ref": "#/definitions/OSDetails",
+          "description": "The Last replication time."
+        },
+        "diskDetails": {
+          "type": "array",
+          "description": "The Last successful failover time.",
+          "items": {
+            "$ref": "#/definitions/DiskDetails"
+          }
+        },
+        "hasPhysicalDisk": {
+          "$ref": "#/definitions/PresenceStatus",
+          "description": "A value indicating whether the VM has a physical disk attached. String value of SrsDataContract.PresenceStatus enum."
+        },
+        "hasFibreChannelAdapter": {
+          "$ref": "#/definitions/PresenceStatus",
+          "description": "A value indicating whether the VM has a fibre channel adapter attached. String value of SrsDataContract.PresenceStatus enum."
+        },
+        "hasSharedVhd": {
+          "$ref": "#/definitions/PresenceStatus",
+          "description": "A value indicating whether the VM has a shared VHD attached. String value of SrsDataContract.PresenceStatus enum."
+        },
+        "hyperVHostId": {
+          "type": "string",
+          "description": "The Id of the hyper-v host in fabric."
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/HyperVVirtualMachineDetails"
+          "$ref": "#/definitions/ConfigurationSettings"
         }
       ],
       "x-ms-discriminator-value": "VmmVirtualMachine"

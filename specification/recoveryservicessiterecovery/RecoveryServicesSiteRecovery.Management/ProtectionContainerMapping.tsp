@@ -100,10 +100,12 @@ interface ProtectionContainerMappings {
   @operationId("ReplicationProtectionContainerMappings_Delete")
   @action("remove")
   @summary("Remove protection container mapping.")
-  delete is ArmResourceActionAsync<
+  delete is ArmResourceActionAsyncBase<
     ProtectionContainerMapping,
     RemoveProtectionContainerMappingInput,
-    NoContentResponse,
+    NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerMapping> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainerMapping>,
     Error = never
   >;
 }

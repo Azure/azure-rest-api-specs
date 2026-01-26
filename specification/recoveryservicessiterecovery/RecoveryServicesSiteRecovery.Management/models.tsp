@@ -1530,8 +1530,14 @@ model OperationsDiscovery {
   /**
    * Properties. Reserved for future use.
    */
-  properties?: unknown;
+  properties?: OperationsDiscoveryProperties;
 }
+
+/**
+ * ClientDiscovery properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+model OperationsDiscoveryProperties {}
 
 /**
  * Contains the localized display information for this particular operation / action. These value will be used by several clients for (1) custom role definitions for RBAC; (2) complex query filters for the event service; and (3) audit history / records for management operations.
@@ -6592,7 +6598,7 @@ model A2AContainerMappingInput
   /**
    * A value indicating the type authentication to use for automation Account.
    */
-  automationAccountAuthenticationType?: AutomationAccountAuthenticationType;
+  automationAccountAuthenticationType?: AutomationAccountAuthenticationType = "RunAsAccount";
 
   /**
    * The class type.
@@ -6708,7 +6714,7 @@ model A2ACreateProtectionIntentInput
   /**
    * A value indicating the authentication type for automation account. The default value is "RunAsAccount".
    */
-  automationAccountAuthenticationType?: AutomationAccountAuthenticationType;
+  automationAccountAuthenticationType?: AutomationAccountAuthenticationType = "RunAsAccount";
 
   /**
    * The automation account arm id.
@@ -7584,6 +7590,7 @@ model A2AProtectedManagedDiskDetails {
 /**
  * A2A provider specific settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model A2AProtectionContainerMappingDetails
   extends ProtectionContainerMappingProviderSpecificDetails {
   /**
@@ -7599,7 +7606,7 @@ model A2AProtectionContainerMappingDetails
   /**
    * A value indicating the type authentication to use for automation Account.
    */
-  automationAccountAuthenticationType?: AutomationAccountAuthenticationType;
+  automationAccountAuthenticationType?: AutomationAccountAuthenticationType = "RunAsAccount";
 
   /**
    * The schedule arm name.
@@ -8111,7 +8118,7 @@ model VMNicDetails {
   /**
    * A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.
    */
-  reuseExistingNic?: boolean;
+  reuseExistingNic?: boolean = false;
 
   /**
    * The name of the NIC to be used when creating target NICs in TFO.
@@ -8126,7 +8133,7 @@ model VMNicDetails {
   /**
    * A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.
    */
-  tfoReuseExistingNic?: boolean;
+  tfoReuseExistingNic?: boolean = false;
 
   /**
    * Target NIC name.
@@ -8309,7 +8316,7 @@ model A2AReplicationIntentDetails
   /**
    * A value indicating the type authentication to use for automation Account.
    */
-  automationAccountAuthenticationType?: AutomationAccountAuthenticationType;
+  automationAccountAuthenticationType?: AutomationAccountAuthenticationType = "RunAsAccount";
 
   /**
    * Gets the Instance type.
@@ -8737,7 +8744,7 @@ model A2AUpdateContainerMappingInput
   /**
    * A value indicating the type authentication to use for automation Account.
    */
-  automationAccountAuthenticationType?: AutomationAccountAuthenticationType;
+  automationAccountAuthenticationType?: AutomationAccountAuthenticationType = "RunAsAccount";
 
   /**
    * The class type.
@@ -9766,7 +9773,7 @@ model FabricQueryParameter {
 /**
  * This class represents the fabric replication group task details.
  */
-model FabricReplicationGroupTaskDetails extends JobTaskDetails {
+model FabricReplicationGroupTaskDetails extends TaskTypeDetails {
   /**
    * The skipped reason.
    */
@@ -9778,6 +9785,11 @@ model FabricReplicationGroupTaskDetails extends JobTaskDetails {
   skippedReasonString?: string;
 
   /**
+   * The job entity.
+   */
+  jobTask?: JobEntity;
+
+  /**
    * The type of task details.
    */
   instanceType: "FabricReplicationGroupTaskDetails";
@@ -9786,12 +9798,13 @@ model FabricReplicationGroupTaskDetails extends JobTaskDetails {
 /**
  * This class represents a task which is actually a workflow so that one can navigate to its individual drill down.
  */
-@discriminator("instanceType")
 model JobTaskDetails extends TaskTypeDetails {
   /**
    * The job entity.
    */
   jobTask?: JobEntity;
+
+  instanceType: "JobTaskDetails";
 }
 
 /**
@@ -11160,11 +11173,61 @@ model HyperVReplicaBluePolicyDetails extends PolicyProviderSpecificDetails {
 /**
  * HyperV Replica Blue policy input.
  */
-model HyperVReplicaBluePolicyInput extends HyperVReplicaPolicyInput {
+model HyperVReplicaBluePolicyInput extends PolicyProviderSpecificInput {
   /**
    * A value indicating the replication interval.
    */
   replicationFrequencyInSeconds?: int32;
+
+  /**
+   * A value indicating the number of recovery points.
+   */
+  recoveryPoints?: int32;
+
+  /**
+   * A value indicating the application consistent frequency.
+   */
+  applicationConsistentSnapshotFrequencyInHours?: int32;
+
+  /**
+   * A value indicating whether compression has to be enabled.
+   */
+  compression?: string;
+
+  /**
+   * A value indicating whether IR is online.
+   */
+  initialReplicationMethod?: string;
+
+  /**
+   * A value indicating the online IR start time.
+   */
+  onlineReplicationStartTime?: string;
+
+  /**
+   * A value indicating the offline IR import path.
+   */
+  offlineReplicationImportPath?: string;
+
+  /**
+   * A value indicating the offline IR export path.
+   */
+  offlineReplicationExportPath?: string;
+
+  /**
+   * A value indicating the recovery HTTPS port.
+   */
+  replicationPort?: int32;
+
+  /**
+   * A value indicating the authentication type.
+   */
+  allowedAuthenticationType?: int32;
+
+  /**
+   * A value indicating whether the VM has to be auto deleted.
+   */
+  replicaDeletion?: string;
 
   /**
    * The class type.
@@ -11175,8 +11238,13 @@ model HyperVReplicaBluePolicyInput extends HyperVReplicaPolicyInput {
 /**
  * Hyper-V Replica specific policy Input.
  */
-@discriminator("instanceType")
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model HyperVReplicaPolicyInput extends PolicyProviderSpecificInput {
+  /**
+   * The class type.
+   */
+  instanceType: "HyperVReplica2012";
+
   /**
    * A value indicating the number of recovery points.
    */
@@ -11400,7 +11468,6 @@ model HyperVSiteDetails extends FabricSpecificDetails {
 /**
  * Single Host fabric provider specific VM settings.
  */
-@discriminator("instanceType")
 model HyperVVirtualMachineDetails extends ConfigurationSettings {
   /**
    * The source id of the object.
@@ -11441,6 +11508,8 @@ model HyperVVirtualMachineDetails extends ConfigurationSettings {
    * The Id of the hyper-v host in fabric.
    */
   hyperVHostId?: string;
+
+  instanceType: "HyperVVirtualMachine";
 }
 
 /**
@@ -13609,6 +13678,7 @@ model ReprotectAgentDetails {
    * The health errors.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#["errorCode"])
   healthErrors?: HealthError[];
 
   /**
@@ -17058,7 +17128,6 @@ model RecoveryPlanAutomationRunbookActionDetails
 /**
  * This class represents the recovery plan group task.
  */
-@discriminator("instanceType")
 model RecoveryPlanGroupTaskDetails extends GroupTaskDetails {
   /**
    * The name.
@@ -17074,6 +17143,8 @@ model RecoveryPlanGroupTaskDetails extends GroupTaskDetails {
    * The group type.
    */
   rpGroupType?: string;
+
+  instanceType: "RecoveryPlanGroupTaskDetails";
 }
 
 /**
@@ -17245,8 +17316,22 @@ model RecoveryPlanScriptActionDetails extends RecoveryPlanActionDetails {
 /**
  * This class represents the recovery plan shutdown group task details.
  */
-model RecoveryPlanShutdownGroupTaskDetails
-  extends RecoveryPlanGroupTaskDetails {
+model RecoveryPlanShutdownGroupTaskDetails extends GroupTaskDetails {
+  /**
+   * The name.
+   */
+  name?: string;
+
+  /**
+   * The group identifier.
+   */
+  groupId?: string;
+
+  /**
+   * The group type.
+   */
+  rpGroupType?: string;
+
   /**
    * The type of task details.
    */
@@ -17416,7 +17501,7 @@ model TestFailoverJobDetails extends JobDetails {
 /**
  * This class represents the virtual machine task details.
  */
-model VirtualMachineTaskDetails extends JobTaskDetails {
+model VirtualMachineTaskDetails extends TaskTypeDetails {
   /**
    * The skipped reason.
    */
@@ -17426,6 +17511,11 @@ model VirtualMachineTaskDetails extends JobTaskDetails {
    * The skipped reason string.
    */
   skippedReasonString?: string;
+
+  /**
+   * The job entity.
+   */
+  jobTask?: JobEntity;
 
   /**
    * The type of task details.
@@ -17512,7 +17602,47 @@ model VmmToVmmUpdateNetworkMappingInput
 /**
  * VMM fabric provider specific VM settings.
  */
-model VmmVirtualMachineDetails extends HyperVVirtualMachineDetails {
+model VmmVirtualMachineDetails extends ConfigurationSettings {
+  /**
+   * The source id of the object.
+   */
+  sourceItemId?: string;
+
+  /**
+   * The id of the object in fabric.
+   */
+  generation?: string;
+
+  /**
+   * The Last replication time.
+   */
+  osDetails?: OSDetails;
+
+  /**
+   * The Last successful failover time.
+   */
+  diskDetails?: DiskDetails[];
+
+  /**
+   * A value indicating whether the VM has a physical disk attached. String value of SrsDataContract.PresenceStatus enum.
+   */
+  hasPhysicalDisk?: PresenceStatus;
+
+  /**
+   * A value indicating whether the VM has a fibre channel adapter attached. String value of SrsDataContract.PresenceStatus enum.
+   */
+  hasFibreChannelAdapter?: PresenceStatus;
+
+  /**
+   * A value indicating whether the VM has a shared VHD attached. String value of SrsDataContract.PresenceStatus enum.
+   */
+  hasSharedVhd?: PresenceStatus;
+
+  /**
+   * The Id of the hyper-v host in fabric.
+   */
+  hyperVHostId?: string;
+
   /**
    * Gets the class type. Overridden in derived classes.
    */

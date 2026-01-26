@@ -31,6 +31,9 @@ model MigrationItem
   location?: string;
 }
 
+alias MigrationItemAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MigrationItem> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
 @armResourceOperations
 interface MigrationItems {
   /**
@@ -125,10 +128,11 @@ interface MigrationItems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationMigrationItems_Migrate")
   @summary("Migrate item.")
-  migrate is ArmResourceActionAsync<
+  migrate is ArmResourceActionAsyncBase<
     MigrationItem,
     MigrateInput,
-    ArmResponse<MigrationItem>,
+    ArmResponse<MigrationItem> | MigrationItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<MigrationItem>,
     Error = never
   >;
 
@@ -138,10 +142,11 @@ interface MigrationItems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationMigrationItems_PauseReplication")
   @summary("Pause replication.")
-  pauseReplication is ArmResourceActionAsync<
+  pauseReplication is ArmResourceActionAsyncBase<
     MigrationItem,
     PauseReplicationInput,
-    ArmResponse<MigrationItem>,
+    ArmResponse<MigrationItem> | MigrationItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<MigrationItem>,
     Error = never
   >;
 
@@ -151,10 +156,11 @@ interface MigrationItems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationMigrationItems_ResumeReplication")
   @summary("Resume replication.")
-  resumeReplication is ArmResourceActionAsync<
+  resumeReplication is ArmResourceActionAsyncBase<
     MigrationItem,
     ResumeReplicationInput,
-    ArmResponse<MigrationItem>,
+    ArmResponse<MigrationItem> | MigrationItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<MigrationItem>,
     Error = never
   >;
 
@@ -164,10 +170,11 @@ interface MigrationItems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationMigrationItems_Resync")
   @summary("Resynchronizes replication.")
-  resync is ArmResourceActionAsync<
+  resync is ArmResourceActionAsyncBase<
     MigrationItem,
     ResyncInput,
-    ArmResponse<MigrationItem>,
+    ArmResponse<MigrationItem> | MigrationItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<MigrationItem>,
     Error = never
   >;
 
@@ -177,10 +184,11 @@ interface MigrationItems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationMigrationItems_TestMigrate")
   @summary("Test migrate item.")
-  testMigrate is ArmResourceActionAsync<
+  testMigrate is ArmResourceActionAsyncBase<
     MigrationItem,
     TestMigrateInput,
-    ArmResponse<MigrationItem>,
+    ArmResponse<MigrationItem> | MigrationItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<MigrationItem>,
     Error = never
   >;
 
@@ -190,10 +198,11 @@ interface MigrationItems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationMigrationItems_TestMigrateCleanup")
   @summary("Test migrate cleanup.")
-  testMigrateCleanup is ArmResourceActionAsync<
+  testMigrateCleanup is ArmResourceActionAsyncBase<
     MigrationItem,
     TestMigrateCleanupInput,
-    ArmResponse<MigrationItem>,
+    ArmResponse<MigrationItem> | MigrationItemAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<MigrationItem>,
     Error = never
   >;
 }

@@ -29,6 +29,9 @@ model Fabric is Azure.ResourceManager.ProxyResource<FabricProperties> {
   location?: string;
 }
 
+alias FabricAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
+  Azure.Core.Foundations.RetryAfterHeader>;
+
 @armResourceOperations
 interface Fabrics {
   /**
@@ -91,10 +94,11 @@ interface Fabrics {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationFabrics_CheckConsistency")
   @summary("Checks the consistency of the ASR fabric.")
-  checkConsistency is ArmResourceActionAsync<
+  checkConsistency is ArmResourceActionAsyncBase<
     Fabric,
     void,
-    ArmResponse<Fabric>,
+    ArmResponse<Fabric> | FabricAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>,
     Error = never
   >;
 
@@ -105,10 +109,11 @@ interface Fabrics {
   @operationId("ReplicationFabrics_MigrateToAad")
   @action("migratetoaad")
   @summary("Migrates the site to AAD.")
-  migrateToAad is ArmResourceActionAsync<
+  migrateToAad is ArmResourceActionAsyncBase<
     Fabric,
     void,
-    NoContentResponse,
+    NoContentResponse | FabricAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>,
     Error = never
   >;
 
@@ -118,10 +123,11 @@ interface Fabrics {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationFabrics_ReassociateGateway")
   @summary("Perform failover of the process server.")
-  reassociateGateway is ArmResourceActionAsync<
+  reassociateGateway is ArmResourceActionAsyncBase<
     Fabric,
     FailoverProcessServerRequest,
-    ArmResponse<Fabric>,
+    ArmResponse<Fabric> | FabricAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>,
     Error = never
   >;
 
@@ -132,10 +138,11 @@ interface Fabrics {
   @operationId("ReplicationFabrics_Delete")
   @action("remove")
   @summary("Deletes the site.")
-  delete is ArmResourceActionAsync<
+  delete is ArmResourceActionAsyncBase<
     Fabric,
     void,
-    NoContentResponse,
+    NoContentResponse | FabricAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>,
     Error = never
   >;
 
@@ -145,10 +152,11 @@ interface Fabrics {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ReplicationFabrics_RenewCertificate")
   @summary("Renews certificate for the fabric.")
-  renewCertificate is ArmResourceActionAsync<
+  renewCertificate is ArmResourceActionAsyncBase<
     Fabric,
     RenewCertificateInput,
-    ArmResponse<Fabric>,
+    ArmResponse<Fabric> | FabricAcceptedLroResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>,
     Error = never
   >;
 
@@ -162,7 +170,7 @@ interface Fabrics {
     Fabric,
     void,
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>
   >;
 }
 

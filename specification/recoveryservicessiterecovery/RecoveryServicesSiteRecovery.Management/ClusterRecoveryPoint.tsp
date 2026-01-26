@@ -14,15 +14,30 @@ namespace Microsoft.RecoveryServices;
 /**
  * Recovery point.
  */
-@parentResource(ReplicationProtectionCluster)
-model ClusterRecoveryPoint
-  is Azure.ResourceManager.ProxyResource<ClusterRecoveryPointProperties> {
-  ...ResourceNameParameter<
-    Resource = ClusterRecoveryPoint,
-    KeyName = "recoveryPointName",
-    SegmentName = "recoveryPoints",
-    NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
-  >;
+model ClusterRecoveryPoint {
+  /**
+   * The recovery point Id.
+   */
+  id?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionClusters/recoveryPoints";
+    }
+  ]>;
+
+  /**
+   * The name of the recovery point.
+   */
+  name?: string;
+
+  /**
+   * The resource type.
+   */
+  type?: string;
+
+  /**
+   * The recovery point properties.
+   */
+  properties?: ClusterRecoveryPointProperties;
 }
 
 alias ClusterRecoveryPointOps = Azure.ResourceManager.Legacy.LegacyOperations<
