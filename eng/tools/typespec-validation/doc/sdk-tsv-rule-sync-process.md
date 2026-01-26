@@ -28,6 +28,7 @@ When TypeSpec validation (TSV) rule changes are merged to `Public/Main`, they ar
 ### Non-Breaking Changes
 
 Non-breaking changes include:
+
 - Adding a new **optional** validation rule
 - Changing a required rule to optional (relaxing requirements)
 - Modifying an existing rule to be less restrictive
@@ -37,6 +38,7 @@ These changes should not cause existing valid specifications to fail validation.
 ### Breaking Changes
 
 Breaking changes include:
+
 - Adding a new **required** validation rule (may cause existing specs to fail)
 - Making an optional rule required (stricter requirements)
 - Modifying an existing rule to be more restrictive
@@ -122,6 +124,7 @@ This reveals which specifications need updating.
 ### 2. Update Specifications (When Possible)
 
 **For New Rules (Non-Breaking):**
+
 - Update specs in `public/main` first
 - Create **separate** PRs to update specs in `RPSaaSMaster`
 - Enable the new rule only after all specs are updated in both repositories
@@ -138,6 +141,7 @@ This reveals which specifications need updating.
 ### 4. Handle Auto-Mirror Gaps
 
 If there's a delay before auto-mirroring occurs:
+
 - A spec might slip into `rpsaasmaster` that doesn't comply with the new rule
 - Fix these cases reactively as they arise
 - This should be rare if the process is followed correctly
@@ -210,6 +214,7 @@ If there's a delay before auto-mirroring occurs:
 **Problem:** Specs fail validation after rule is merged.
 
 **Solution:**
+
 - Check if specs were added to `rpsaasmaster` during the auto-mirror gap
 - Create a hotfix PR to update the failing specs
 - Consider temporarily disabling the rule if critical
@@ -219,6 +224,7 @@ If there's a delay before auto-mirroring occurs:
 **Problem:** Changes don't appear in `private/rpsaasmaster` immediately.
 
 **Solution:**
+
 - Wait for the scheduled mirror (usually within 24 hours)
 - If urgent, contact the repository administrators
 - Have fixes ready for any specs that slip through
@@ -228,6 +234,7 @@ If there's a delay before auto-mirroring occurs:
 **Problem:** Specs fail that shouldn't based on the rule description.
 
 **Solution:**
+
 - Review the rule logic for edge cases
 - Check if there are unintended side effects
 - Create a follow-up PR to refine the rule
