@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Legacy {
     list(
       ...ApiVersionParameter,
       ...Azure.ResourceManager.Legacy.Provider,
-    ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Microsoft.Compute.CloudError;
+    ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Common.CloudError;
   }
 
   interface ComputeLegacyOperations<
