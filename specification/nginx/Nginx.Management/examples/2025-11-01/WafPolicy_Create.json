@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "deploymentName": "myDeployment",
+    "requestBody": {
+      "properties": {
+        "content": "QUJDREVGR0g=",
+        "filepath": "/etc/nginx/waf/policy.conf"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "wafPolicyName": "myWafPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myWafPolicy",
+        "type": "Nginx.NginxPlus/nginxDeployments/wafPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/wafPolicies/myWafPolicy",
+        "properties": {
+          "applyingState": {
+            "code": "NotApplied",
+            "displayStatus": "Not Applied",
+            "time": "2025-03-02T10:05:00.000Z"
+          },
+          "compilingState": {
+            "code": "Succeeded",
+            "displayStatus": "Succeeded",
+            "time": "2025-03-02T10:05:00.000Z"
+          },
+          "content": "QUJDREVGR0g=",
+          "filepath": "/etc/nginx/waf/policy.conf",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myWafPolicy",
+        "type": "Nginx.NginxPlus/nginxDeployments/wafPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/wafPolicies/myWafPolicy",
+        "properties": {
+          "applyingState": {
+            "code": "NotStarted",
+            "displayStatus": "Not Started",
+            "time": "2025-03-02T10:05:00.000Z"
+          },
+          "compilingState": {
+            "code": "NotStarted",
+            "displayStatus": "Not Started",
+            "time": "2025-03-02T10:05:00.000Z"
+          },
+          "content": "QUJDREVGR0g=",
+          "filepath": "/etc/nginx/waf/policy.conf",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  },
+  "operationId": "WafPolicy_Create",
+  "title": "WafPolicy_Create"
+}

@@ -16,7 +16,6 @@
           "autoUpgradeProfile": {
             "upgradeChannel": "stable"
           },
-          "dataplaneApiEndpoint": "mynginx-75b3bf22a555.eastus2.nginxaas.net",
           "networkProfile": {
             "frontEndIPConfiguration": {
               "privateIPAddresses": [
@@ -36,33 +35,20 @@
               "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
             }
           },
-          "nginxAppProtect": {
-            "webApplicationFirewallSettings": {
-              "activationState": "Enabled"
-            },
-            "webApplicationFirewallStatus": {
-              "attackSignaturesPackage": {
-                "revisionDatetime": "2024-02-21T15:50:53Z",
-                "version": "2024.02.21"
-              },
-              "botSignaturesPackage": {
-                "revisionDatetime": "2024-02-22T15:50:53Z",
-                "version": "2024.02.22"
-              },
-              "componentVersions": {
-                "wafEngineVersion": "10.624.0",
-                "wafNginxVersion": "4.815.0"
-              },
-              "threatCampaignsPackage": {
-                "revisionDatetime": "2024-02-23T15:50:53Z",
-                "version": "2024.02.23"
-              }
-            }
-          },
           "nginxVersion": "nginx-1.19.6",
           "provisioningState": "Succeeded",
           "scalingProperties": {
-            "capacity": 10
+            "autoScaleSettings": {
+              "profiles": [
+                {
+                  "name": "ExampleProfile",
+                  "capacity": {
+                    "max": 50,
+                    "min": 10
+                  }
+                }
+              ]
+            }
           },
           "userProfile": {
             "preferredEmail": "example@example.email"
@@ -72,5 +58,5 @@
     }
   },
   "operationId": "Deployments_Get",
-  "title": "Deployments_Get"
+  "title": "Deployments_Get_AutoScale"
 }

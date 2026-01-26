@@ -2,11 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./NginxDeployment.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -49,12 +51,21 @@ interface NginxDeploymentWafPolicies {
    * Reset the Nginx Waf Policy of given Nginx deployment to default
    */
   delete is ArmResourceDeleteWithoutOkAsync<NginxDeploymentWafPolicy>;
+
+  /**
+   * Analyze an Nginx Waf Policy
+   */
+  @added(Versions.v2025_11_01)
+  @action("analyzeWafPolicy")
+  analysis is ArmResourceActionSync<
+    NginxDeploymentWafPolicy,
+    NginxDeploymentWafPolicyAnalysisCreateRequest,
+    ArmResponse<NginxDeploymentWafPolicyAnalysisResponse>,
+    OptionalRequestBody = true
+  >;
 }
 
 @@doc(NginxDeploymentWafPolicy.name, "The name of Waf Policy");
 @@doc(NginxDeploymentWafPolicy.properties,
   "Nginx Deployment Waf Policy Properties"
-);
-@@doc(NginxDeploymentWafPolicies.create::parameters.resource,
-  "The Nginx Deployment Waf Policy"
 );

@@ -1,10 +1,8 @@
 {
   "parameters": {
-    "api-version": "2023-09-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroup",
-    "deploymentName": "myDeployment",
+    "api-version": "2025-11-01",
     "configurationName": "default",
+    "deploymentName": "myDeployment",
     "requestBody": {
       "properties": {
         "files": [
@@ -18,16 +16,17 @@
         },
         "rootFile": "/etc/nginx/nginx.conf"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/configurations/default",
         "name": "default",
         "type": "nginx.nginxplus/nginxDeployments/configurations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/configurations/default",
         "properties": {
-          "provisioningState": "Succeeded",
           "files": [
             {
               "content": "ABCDEF==",
@@ -37,17 +36,17 @@
           "package": {
             "data": null
           },
+          "provisioningState": "Succeeded",
           "rootFile": "/etc/nginx/nginx.conf"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/configurations/default",
         "name": "default",
         "type": "nginx.nginxplus/nginxDeployments/configurations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/configurations/default",
         "properties": {
-          "provisioningState": "Accepted",
           "files": [
             {
               "content": "ABCDEF==",
@@ -57,9 +56,12 @@
           "package": {
             "data": null
           },
+          "provisioningState": "Accepted",
           "rootFile": "/etc/nginx/nginx.conf"
         }
       }
     }
-  }
+  },
+  "operationId": "Configurations_CreateOrUpdate",
+  "title": "Configurations_CreateOrUpdate"
 }
