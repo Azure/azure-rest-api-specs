@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/topic.tsp";
-import "./common/ns_assetProperties.tsp";
+import "./properties/ns_assetProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -35,6 +35,43 @@ model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
   extendedLocation: ExtendedLocation;
 }
 
+@added(Versions.v2026_02_01_preview)
+@doc("The request body for the executeAction operation on NamespaceAsset.")
+model NamespaceAssetExecuteActionRequest {
+  @doc("Name of the management action to be executed.")
+  managementActionName: string;
+
+  @doc("Name of the management group under which the action is to be executed.")
+  managementGroupName: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "payload property field is custom defined by customer"
+  @doc("Payload required for executing the management action.")
+  payload?: {};
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("The response body for the executeAction operation on NamespaceAsset.")
+model NamespaceAssetExecuteActionResponse {
+  @doc("Status of the management action execution.")
+  status: string;
+
+  @doc("Name of the management action that was executed.")
+  managementActionName: string;
+
+  @doc("Name of the management group under which the action was executed.")
+  managementGroupName: string;
+
+  @doc("Resource ID of the asset on which the management action was executed.")
+  assetResourceId: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "payload property field is custom defined by connector"
+  @doc("Response from the asset regarding the management action execution.")
+  response?: {};
+
+  @doc("Error if the execute action operation is not successful.")
+  error?: Error;
+}
+
 alias NamespaceAssetPropertiesUpdate = {
   ...OptionalProperties<UpdateableProperties<OmitProperties<
     NamespaceAssetProperties,
@@ -52,6 +89,7 @@ alias NamespaceAssetPropertiesUpdate = {
 interface NamespaceAssets {
   get is ArmResourceRead<NamespaceAsset>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceAsset>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     NamespaceAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -63,4 +101,13 @@ interface NamespaceAssets {
   listByResourceGroup is ArmResourceListByParent<NamespaceAsset>;
   @removed(Versions.v2025_07_01_preview)
   listBySubscription is ArmListBySubscription<NamespaceAsset>;
+  @added(Versions.v2026_02_01_preview)
+  executeAction is ArmResourceActionAsync<
+    NamespaceAsset,
+    NamespaceAssetExecuteActionRequest,
+    NamespaceAssetExecuteActionResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
