@@ -101,10 +101,10 @@ using Microsoft.SignalRService;
 @@clientLocation(Replicas.get, "SignalRReplicas", "!csharp");
 @@clientLocation(Replicas.createOrUpdate, "SignalRReplicas", "!csharp");
 @@clientLocation(Replicas.update, "SignalRReplicas", "!csharp");
-@@clientLocation(Replicas.delete, "SignalRReplicas");
-@@clientLocation(Replicas.list, "SignalRReplicas");
-@@clientLocation(Replicas.restart, "SignalRReplicas");
-@@clientLocation(Replicas.listReplicaSkus, "SignalR");
+@@clientLocation(Replicas.delete, "SignalRReplicas", "!csharp");
+@@clientLocation(Replicas.list, "SignalRReplicas", "!csharp");
+@@clientLocation(Replicas.restart, "SignalRReplicas", "!csharp");
+@@clientLocation(Replicas.listReplicaSkus, "SignalR", "!csharp");
 @@clientLocation(SharedPrivateLinkResources.get,
   "SignalRReplicaSharedPrivateLinkResources",
   "!csharp"
@@ -117,7 +117,7 @@ using Microsoft.SignalRService;
   "SignalRReplicaSharedPrivateLinkResources",
   "!csharp"
 );
-@@clientLocation(SignalROperationGroup.checkNameAvailability, "SignalR");
+@@clientLocation(SignalROperationGroup.checkNameAvailability, "SignalR", "!csharp");
 @@clientLocation(SignalRResources.get, "SignalR", "!csharp");
 @@clientLocation(SignalRResources.createOrUpdate, "SignalR", "!csharp");
 @@clientLocation(SignalRResources.update, "SignalR", "!csharp");
@@ -132,4 +132,4 @@ using Microsoft.SignalRService;
   "SignalRPrivateLinkResources",
   "!csharp"
 );
-@@clientLocation(UsagesOperationGroup.list, "Usages");
+@@clientLocation(UsagesOperationGroup.list, "Usages", "!csharp");
