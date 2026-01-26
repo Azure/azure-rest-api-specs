@@ -14,9 +14,9 @@ namespace Azure.AI.Projects;
 //
 
 union _AgentToolType {
-
   // Preview tools (must end with "_preview"):
   a2a_preview: "a2a_preview",
+
   bing_custom_search_preview: "bing_custom_search_preview",
   browser_automation_preview: "browser_automation_preview",
   fabric_dataagent_preview: "fabric_dataagent_preview",
@@ -24,6 +24,7 @@ union _AgentToolType {
 
   // General availability tools:
   azure_ai_search: "azure_ai_search",
+
   azure_function: "azure_function",
   bing_grounding: "bing_grounding",
   capture_structured_outputs: "capture_structured_outputs",
@@ -52,6 +53,34 @@ union _AgentIncludable {
      */
     @removed(Versions.v1)
     project_connection_id?: string,
+
+    /**
+     * A handlebars template string containing one or more structured input references that render to HTTP headers map.
+     * If both headers and headers_template are provided, they are merged with template values taking precedence.
+     */
+    headers_template?: string,
+  }
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.FileSearchTool,
+  {
+    /**
+     * A handlebars template string containing one or more structured input references that render to vector store IDs array.
+     * If both vector_store_ids and vector_store_ids_template are provided, they are merged and duplicates are removed.
+     */
+    vector_store_ids_template?: string,
+  }
+);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.CodeInterpreterContainerAuto,
+  {
+    /**
+     * A handlebars template string containing one or more structured input references that render to file IDs array.
+     * If both file_ids and file_ids_template are provided, they are merged and duplicates are removed.
+     */
+    file_ids_template?: string,
   }
 );
 

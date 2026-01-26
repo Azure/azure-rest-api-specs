@@ -229,7 +229,10 @@ model PromptAgentDefinition extends AgentDefinition {
   @doc("The model deployment to use for this agent.")
   `model`: string;
 
-  @doc("A system (or developer) message inserted into the model's context.")
+  @doc("""
+    A system (or developer) message inserted into the model's context.
+    Supports handlebars template syntax with `structured_inputs` for dynamic content (e.g., "You are an assistant for {{company_name}}.").
+    """)
   instructions?: string | null;
 
   @doc("""
