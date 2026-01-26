@@ -74,6 +74,8 @@ I need:
 - The sku property added to DeidUpdate for PATCH operations
 
 After making the TypeSpec changes, guide me through creating the API spec PR and generating SDKs. Use separate subagents for each SDK language.
+
+Create a markdown file to track the progress of each step throughout this process.
 ```
 
 ---
