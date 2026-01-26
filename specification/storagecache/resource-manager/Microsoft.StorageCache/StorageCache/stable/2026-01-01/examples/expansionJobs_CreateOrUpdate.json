@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-01-01",
+    "amlFilesystemName": "fs1",
+    "expansionJobName": "expansionjob1",
+    "expansionJob": {
+      "tags": {
+        "Dept": "ContosoAds"
+      },
+      "location": "eastus",
+      "properties": {
+        "newStorageCapacityTiB": 16.0
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "Dept": "ContosoAds"
+        },
+        "name": "expansionjob1",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs/expansionjob1",
+        "type": "Microsoft.StorageCache/amlFilesystem/expansionJob",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "newStorageCapacityTiB": 16.0,
+          "status": {
+            "state": "InProgress",
+            "statusMessage": "Expansion is in progress",
+            "percentComplete": 85.0,
+            "startTimeUTC": "2024-03-21T17:25:43.511Z"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "tags": {
+          "Dept": "ContosoAds"
+        },
+        "name": "expansionjob1",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs/expansionjob1",
+        "type": "Microsoft.StorageCache/amlFilesystem/expansionJob",
+        "properties": {
+          "provisioningState": "Creating",
+          "newStorageCapacityTiB": 16.0,
+          "status": {
+            "state": "InProgress",
+            "statusMessage": "Expansion job is starting",
+            "percentComplete": 0.0,
+            "startTimeUTC": "2024-03-21T17:25:43.511Z"
+          }
+        }
+      }
+    }
+  }
+}

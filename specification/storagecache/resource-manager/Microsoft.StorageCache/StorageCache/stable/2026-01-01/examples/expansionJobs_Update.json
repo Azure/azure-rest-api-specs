@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-01-01",
+    "amlFilesystemName": "fs1",
+    "expansionJobName": "expansionjob1",
+    "expansionJob": {
+      "tags": {
+        "Dept": "ContosoFinance"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?monitor=true&api-version=2026-01-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?api-version=2026-01-01"
+      }
+    },
+    "200": {
+      "body": {
+        "tags": {
+          "Dept": "ContosoFinance"
+        },
+        "name": "expansionjob1",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs/expansionjob1",
+        "type": "Microsoft.StorageCache/amlFilesystem/expansionJob",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "newStorageCapacityTiB": 16.0,
+          "status": {
+            "state": "Completed",
+            "statusMessage": "Expansion completed successfully",
+            "percentComplete": 100.0,
+            "startTimeUTC": "2024-03-21T17:25:43.511Z",
+            "completionTimeUTC": "2024-03-21T19:15:43.511Z"
+          }
+        }
+      }
+    }
+  }
+}
