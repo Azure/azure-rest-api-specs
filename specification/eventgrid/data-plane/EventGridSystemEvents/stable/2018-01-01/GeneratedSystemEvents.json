@@ -7729,6 +7729,73 @@
         }
       }
     },
+    "ResourceNotificationsAksResourcesFleetGateCreatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.AKSResources.FleetGateCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ]
+    },
+    "ResourceNotificationsAksResourcesFleetGateDeletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.AKSResources.FleetGateDeleted event.",
+      "properties": {
+        "resourceInfo": {
+          "type": "object",
+          "description": "resourceInfo details for deleted event",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "id of the resource for which the event is being emitted"
+            },
+            "name": {
+              "type": "string",
+              "description": "name of the resource for which the event is being emitted"
+            },
+            "type": {
+              "type": "string",
+              "description": "the type of the resource for which the event is being emitted"
+            },
+            "properties": {
+              "type": "object",
+              "description": "properties in the payload of the resource for which the event is being emitted",
+              "additionalProperties": {},
+              "readOnly": true
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "type",
+            "properties"
+          ]
+        },
+        "operationalInfo": {
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
+          "description": "details about operational info"
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "api version of the resource properties bag"
+        }
+      },
+      "required": [
+        "resourceInfo",
+        "operationalInfo",
+        "apiVersion"
+      ]
+    },
+    "ResourceNotificationsAksResourcesFleetGateUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.AKSResources.FleetGateUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ]
+    },
     "ResourceNotificationsContainerServiceEventResourcesScheduledEventData": {
       "type": "object",
       "description": "Schema of the Data property of an event grid event for a Microsoft.ResourceNotifications.ContainerServiceEventResources.ScheduledEventEmitted preview event.Schema of the Data property of an event grid event for a Microsoft.ResourceNotifications.ContainerServiceEventResources.ScheduledEventEmitted preview event.",
