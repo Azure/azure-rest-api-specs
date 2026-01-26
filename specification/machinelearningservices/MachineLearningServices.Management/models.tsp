@@ -7788,7 +7788,6 @@ model ManagedResourceGroupAssignedIdentities {
    * Identity principal Id
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
   principalId?: Azure.Core.uuid;
 }
 
