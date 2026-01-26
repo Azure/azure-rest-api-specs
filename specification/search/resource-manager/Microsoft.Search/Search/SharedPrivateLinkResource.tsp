@@ -41,6 +41,11 @@ interface SharedPrivateLinkResources {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -62,6 +67,11 @@ interface SharedPrivateLinkResources {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = ArmResourceUpdatedResponse<SharedPrivateLinkResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SharedPrivateLinkResource>>,
@@ -85,6 +95,11 @@ interface SharedPrivateLinkResources {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
@@ -106,6 +121,11 @@ interface SharedPrivateLinkResources {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = SharedPrivateLinkResourceListResult,

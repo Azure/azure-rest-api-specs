@@ -141,6 +141,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -160,6 +165,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = SearchService> &
@@ -183,6 +193,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -203,6 +218,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = OkResponse | NoContentResponse | NotFoundResponse,
@@ -223,6 +243,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = SearchServiceListResult,
@@ -243,6 +268,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = SearchServiceListResult,
@@ -266,6 +296,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -288,6 +323,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     OverrideErrorType = CloudError
@@ -311,6 +351,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     OverrideErrorType = CloudError
@@ -334,6 +379,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -356,6 +406,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     OverrideErrorType = CloudError
@@ -391,6 +446,11 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @header("x-ms-client-request-id")
+      @OpenAPI.extension(
+        "x-ms-parameter-grouping",
+        #{ name: "search-management-request-options" }
+      )
+      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
