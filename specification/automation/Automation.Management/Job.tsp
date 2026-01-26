@@ -71,10 +71,7 @@ interface Jobs {
   getOutput is ArmResourceActionSync<
     Job,
     void,
-    ArmResponse<string & {
-      @header
-      contentType: "text/plain";
-    }>,
+    ArmResponse<stringTextPlain>,
     Parameters = {
       /**
        * Identifies this specific client request.
@@ -94,10 +91,7 @@ interface Jobs {
   getRunbookContent is ArmResourceActionSync<
     Job,
     void,
-    ArmResponse<string & {
-      @header
-      contentType: "text/powershell";
-    }>,
+    ArmResponse<stringTextPowershell>,
     Parameters = {
       /**
        * Identifies this specific client request.

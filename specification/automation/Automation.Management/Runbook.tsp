@@ -81,10 +81,7 @@ interface Runbooks {
   getContent is ArmResourceActionSync<
     Runbook,
     void,
-    ArmResponse<binary & {
-      @header
-      contentType: "text/powershell";
-    }>
+    ArmResponse<stringTextPowershell>
   >;
 
   /**
@@ -145,14 +142,7 @@ interface Runbooks {
   @operationId("Runbook_GetContent")
   @get
   @action("content")
-  runbookGetContent is ArmResourceActionSync<
-    Runbook,
-    void,
-    ArmResponse<binary & {
-      @header
-      contentType: "text/powershell";
-    }>
-  >;
+  runbookGetContent is ArmResourceActionSync<Runbook, void, ArmResponse<File>>;
 
   /**
    * Retrieve a test job stream of the test job identified by runbook name and stream id.

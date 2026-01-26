@@ -134,7 +134,7 @@ interface DscNodes {
   getContent is ArmResourceActionSync<
     DscNode,
     void,
-    ArmResponse<AnyObject>,
+    ArmResponse<unknown>,
     Parameters = {
       /**
        * The report id.

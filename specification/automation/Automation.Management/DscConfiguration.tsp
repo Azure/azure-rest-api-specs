@@ -113,10 +113,7 @@ interface DscConfigurations {
   getContent is ArmResourceActionSync<
     DscConfiguration,
     void,
-    ArmResponse<binary & {
-      @header
-      contentType: "text/powershell";
-    }>
+    ArmResponse<File>
   >;
 }
 

@@ -11,6 +11,12 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Automation;
 
+@mediaTypeHint("text/powershell")
+scalar stringTextPowershell extends string;
+
+@mediaTypeHint("text/plain")
+scalar stringTextPlain extends string;
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union CountType {
   string,
