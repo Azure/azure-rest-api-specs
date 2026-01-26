@@ -168,3 +168,19 @@ interface Responses {
     ...ConversationIdQueryParam,
   ): AgentsPagedResult<OpenAI.Response> | ApiErrorResponse;
 }
+
+// Same routes with a different route prefix for backwards compatibility
+// with AOAI Responses routes.
+@removed(Versions.v1)
+@route("openai/v1/responses") // Override @route on the Responses interface
+@tag("Responses")
+interface ResponsesV1 extends Azure.AI.Projects.Responses {}
+
+@@operationId(ResponsesV1.createResponse, "createResponseV1");
+@@operationId(ResponsesV1.createResponseStream, "createResponseStreamV1");
+@@operationId(ResponsesV1.getResponse, "getResponseV1");
+@@operationId(ResponsesV1.getResponseStream, "getResponseStreamV1");
+@@operationId(ResponsesV1.deleteResponse, "deleteResponseV1");
+@@operationId(ResponsesV1.cancelResponse, "cancelResponseV1");
+@@operationId(ResponsesV1.listInputItems, "listInputItemsV1");
+@@operationId(ResponsesV1.listResponses, "listResponsesV1");
