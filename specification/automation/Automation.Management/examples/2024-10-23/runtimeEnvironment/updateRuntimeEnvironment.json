@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount9",
+    "parameters": {
+      "properties": {
+        "defaultPackages": {
+          "Az": "8.3.0"
+        }
+      }
+    },
+    "resourceGroupName": "rg",
+    "runtimeEnvironmentName": "myRuntimeEnvironmentName",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRuntimeEnvironmentName",
+        "type": "Microsoft.Automation/automationAccounts/runtimeEnvironments",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount9/runtimeEnvironments/myRuntimeEnvironmentName",
+        "location": "East US 2",
+        "properties": {
+          "description": "Description of the Runtime Environment",
+          "defaultPackages": {
+            "Az": "8.3.0"
+          },
+          "runtime": {
+            "version": "7.1",
+            "language": "PowerShell"
+          }
+        },
+        "systemData": {
+          "createdAt": "2023-07-05T07:32:41.4389914+00:00",
+          "lastModifiedAt": "2023-07-05T07:33:07.5597465+00:00"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "RuntimeEnvironments_Update",
+  "title": "Update an automation account"
+}

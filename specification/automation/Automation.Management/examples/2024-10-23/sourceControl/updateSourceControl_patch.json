@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "sampleAccount9",
+    "parameters": {
+      "properties": {
+        "description": "my description",
+        "autoSync": true,
+        "branch": "master",
+        "folderPath": "/folderOne/folderTwo",
+        "publishRunbook": true,
+        "securityToken": {
+          "accessToken": "******",
+          "tokenType": "PersonalAccessToken"
+        }
+      }
+    },
+    "resourceGroupName": "rg",
+    "sourceControlName": "sampleSourceControl",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleSourceControl",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/sampleAccount9/sourcecontrols/sampleSourceControl",
+        "properties": {
+          "description": "my description",
+          "autoSync": true,
+          "branch": "master",
+          "creationTime": "2017-03-28T22:59:00.937+00:00",
+          "folderPath": "/folderOne/folderTwo",
+          "lastModifiedTime": "2017-03-28T22:59:00.937+00:00",
+          "publishRunbook": true,
+          "repoUrl": "https://sampleUser.visualstudio.com/myProject/_git/myRepository",
+          "sourceType": "VsoGit"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "SourceControl_Update",
+  "title": "Update a source control"
+}

@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount33",
+    "nodeId": "nodeId",
+    "reportId": "903a5ead-140c-11e7-a943-000d3a6140c9",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Consistency",
+        "configurationVersion": "2.0.0",
+        "endTime": "2017-03-28T23:16:27.587+00:00",
+        "errors": [],
+        "hostName": "DSCCOMP",
+        "iPV4Addresses": [
+          "172.16.2.5",
+          "127.0.0.1"
+        ],
+        "iPV6Addresses": [
+          "fe80::4c51:9518:aa3c:256a%5",
+          "::2000:0:0:0",
+          "::1",
+          "::2000:0:0:0",
+          "2001:0:9d38:78cf:106b:130a:53ef:fdfa",
+          "fe80::106b:130a:53ef:fdfa%7"
+        ],
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/nodeId/reports/903a5ead-140c-11e7-a943-000d3a6140c9",
+        "lastModifiedTime": "2017-03-28T23:16:29.4440401+00:00",
+        "metaConfiguration": {
+          "actionAfterReboot": "ContinueConfiguration",
+          "allowModuleOverwrite": false,
+          "certificateId": "certId",
+          "configurationMode": "ApplyAndMonitor",
+          "configurationModeFrequencyMins": 15,
+          "rebootNodeIfNeeded": false,
+          "refreshFrequencyMins": 30
+        },
+        "numberOfResources": 1,
+        "rawErrors": null,
+        "rebootRequested": "False",
+        "refreshMode": "Pull",
+        "reportFormatVersion": "2.0",
+        "reportId": "903a5ead-140c-11e7-a943-000d3a6140c9",
+        "resources": [
+          {
+            "dependsOn": [],
+            "durationInSeconds": 0.25,
+            "error": null,
+            "moduleName": "PsDesiredStateConfiguration",
+            "moduleVersion": "1.1",
+            "resourceId": "[WindowsFeature]IIS",
+            "resourceName": "WindowsFeature",
+            "sourceInfo": "::4::32::WindowsFeature",
+            "startDate": "2017-03-28T23:16:28.181+00:00",
+            "status": "Compliant"
+          }
+        ],
+        "startTime": "2017-03-28T23:16:27.587+00:00",
+        "status": "Compliant"
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "NodeReports_Get",
+  "title": "Get Dsc node report data by node id and report id. "
+}

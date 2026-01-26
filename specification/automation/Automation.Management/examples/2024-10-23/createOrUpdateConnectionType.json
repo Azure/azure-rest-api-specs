@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount22",
+    "connectionTypeName": "myCT",
+    "parameters": {
+      "name": "myCT",
+      "properties": {
+        "fieldDefinitions": {
+          "myBoolField": {
+            "type": "bool",
+            "isEncrypted": false,
+            "isOptional": false
+          },
+          "myStringField": {
+            "type": "string",
+            "isEncrypted": false,
+            "isOptional": false
+          },
+          "myStringFieldEncrypted": {
+            "type": "string",
+            "isEncrypted": true,
+            "isOptional": false
+          }
+        },
+        "isGlobal": false
+      }
+    },
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myCT",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount22/connectionTypes/myCT",
+        "properties": {
+          "creationTime": "2017-03-27T03:47:53.433+00:00",
+          "fieldDefinitions": {
+            "myBoolField": {
+              "type": "bool",
+              "isEncrypted": false,
+              "isOptional": false
+            },
+            "myStringField": {
+              "type": "string",
+              "isEncrypted": false,
+              "isOptional": false
+            },
+            "myStringFieldEncrypted": {
+              "type": "string",
+              "isEncrypted": true,
+              "isOptional": false
+            }
+          },
+          "isGlobal": false,
+          "lastModifiedTime": "2017-03-27T03:47:53.433+00:00"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ConnectionType_CreateOrUpdate",
+  "title": "Create or update connection type"
+}

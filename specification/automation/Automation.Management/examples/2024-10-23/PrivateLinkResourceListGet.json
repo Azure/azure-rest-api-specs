@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "testaccount",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sql",
+            "type": "Microsoft.Automation/automationAccounts/privateLinkResources",
+            "id": "/subscriptions/subid/resourceGroups/Default/providers/Microsoft.Automation/automationAccounts/testaccount/privateLinkResources/sql",
+            "properties": {
+              "groupId": "sql",
+              "requiredMembers": [
+                "testaccount",
+                "ddb1-westus"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_Automation",
+  "title": "Gets private endpoint connection."
+}

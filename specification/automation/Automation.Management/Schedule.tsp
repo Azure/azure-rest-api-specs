@@ -1,0 +1,77 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./AutomationAccount.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Automation;
+/**
+ * Definition of the schedule.
+ */
+@parentResource(AutomationAccount)
+model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
+  ...ResourceNameParameter<
+    Resource = Schedule,
+    KeyName = "scheduleName",
+    SegmentName = "schedules",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface Schedules {
+  /**
+   * Retrieve the schedule identified by schedule name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Schedule_Get")
+  get is ArmResourceRead<Schedule>;
+
+  /**
+   * Create a schedule.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Schedule_CreateOrUpdate")
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+    Schedule,
+    Request = ScheduleCreateOrUpdateParameters
+  >;
+
+  /**
+   * Update the schedule identified by schedule name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Schedule_Update")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<Schedule, PatchModel = ScheduleUpdateParameters>;
+
+  /**
+   * Delete the schedule identified by schedule name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("Schedule_Delete")
+  delete is ArmResourceDeleteSync<Schedule, Response = ArmDeletedResponse>;
+
+  /**
+   * Retrieve a list of schedules.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Schedule_ListByAutomationAccount")
+  listByAutomationAccount is ArmResourceListByParent<Schedule>;
+}
+
+@@doc(Schedule.name, "The schedule name.");
+@@doc(Schedule.properties, "Gets or sets the properties of the schedule.");
+@@doc(Schedules.createOrUpdate::parameters.resource,
+  "The parameters supplied to the create or update schedule operation."
+);
+@@doc(Schedules.update::parameters.properties,
+  "The parameters supplied to the update schedule operation."
+);

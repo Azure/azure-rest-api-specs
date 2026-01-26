@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount33",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DSCCOMP",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/nodeId",
+            "properties": {
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ],
+              "ip": "ip",
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "nodeId": "nodeId",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "status": "Pending"
+            }
+          },
+          {
+            "name": "DSCCOMP2",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/nodeId2",
+            "properties": {
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ],
+              "ip": "ip",
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "nodeId": "nodeId2",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "status": "Pending"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "DscNode_ListByAutomationAccount",
+  "title": "List DSC nodes by Automation Account"
+}

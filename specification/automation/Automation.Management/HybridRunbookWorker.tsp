@@ -1,0 +1,94 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./HybridRunbookWorkerGroup.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Automation;
+/**
+ * Definition of hybrid runbook worker.
+ */
+@parentResource(HybridRunbookWorkerGroup)
+model HybridRunbookWorker
+  is Azure.ResourceManager.TrackedResource<HybridRunbookWorkerProperties> {
+  ...ResourceNameParameter<
+    Resource = HybridRunbookWorker,
+    KeyName = "hybridRunbookWorkerId",
+    SegmentName = "hybridRunbookWorkers",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface HybridRunbookWorkers {
+  /**
+   * Retrieve a hybrid runbook worker.
+   */
+  get is ArmResourceRead<HybridRunbookWorker>;
+
+  /**
+   * Create a hybrid runbook worker.
+   */
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+    HybridRunbookWorker,
+    Request = HybridRunbookWorkerCreateParameters
+  >;
+
+  /**
+   * Update a hybrid runbook worker.
+   */
+  @patch(#{ implicitOptionality: false })
+  patch is Azure.ResourceManager.Legacy.CustomPatchSync<
+    HybridRunbookWorker,
+    PatchModel = HybridRunbookWorkerCreateParameters,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * Delete a hybrid runbook worker.
+   */
+  delete is ArmResourceDeleteSync<HybridRunbookWorker>;
+
+  /**
+   * Retrieve a list of hybrid runbook workers.
+   */
+  listByHybridRunbookWorkerGroup is ArmResourceListByParent<
+    HybridRunbookWorker,
+    Parameters = {
+      /**
+       * The filter to apply on the operation.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
+   * Move a hybrid worker to a different group.
+   */
+  move is ArmResourceActionSync<
+    HybridRunbookWorker,
+    HybridRunbookWorkerMoveParameters,
+    OkResponse
+  >;
+}
+
+@@doc(HybridRunbookWorker.name, "The hybrid runbook worker id");
+@@doc(HybridRunbookWorker.properties,
+  "Gets or sets the hybrid worker group properties."
+);
+@@doc(HybridRunbookWorkers.create::parameters.resource,
+  "The create or update parameters for hybrid runbook worker."
+);
+@@doc(HybridRunbookWorkers.patch::parameters.properties,
+  "The create or update parameters for hybrid runbook worker."
+);
+@@doc(HybridRunbookWorkers.move::parameters.body,
+  "The hybrid runbook worker move parameters"
+);

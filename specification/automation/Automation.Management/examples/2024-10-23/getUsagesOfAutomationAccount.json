@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount11",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": {
+              "localizedValue": "AccountUsage",
+              "value": "AccountUsage"
+            },
+            "currentValue": 0,
+            "limit": 500,
+            "throttleStatus": "NotThrottled",
+            "unit": "Minute"
+          },
+          {
+            "name": {
+              "localizedValue": "SubscriptionUsage",
+              "value": "SubscriptionUsage"
+            },
+            "currentValue": 429,
+            "limit": 500,
+            "throttleStatus": "NotThrottled",
+            "unit": "Minute"
+          },
+          {
+            "name": {
+              "localizedValue": "DscSubscriptionUsage",
+              "value": "DscSubscriptionUsage"
+            },
+            "currentValue": 8,
+            "limit": 5,
+            "throttleStatus": "ThrottledAtSubscriptionLevel",
+            "unit": "Count"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Usages_ListByAutomationAccount",
+  "title": "Get usages of an automation account"
+}

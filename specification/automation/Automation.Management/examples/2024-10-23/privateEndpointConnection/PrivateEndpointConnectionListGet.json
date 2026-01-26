@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "automationAccountName",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "privateEndpointConnectionName",
+            "type": "Microsoft.Automation/automationAccounts/privateEndpointConnections",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Automation/automationAccounts/automationAccountName/privateEndpointConnections/privateEndpointConnectionName",
+            "properties": {
+              "groupIds": [
+                "sql"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Auto-approved",
+                "actionsRequired": "None",
+                "status": "Approved"
+              }
+            }
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "type": "Microsoft.Automation/automationAccounts/privateEndpointConnections",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Automation/automationAccounts/automationAccountName/privateEndpointConnections/privateEndpointConnectionName2",
+            "properties": {
+              "groupIds": [
+                "sql"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName2"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "Auto-approved",
+                "actionsRequired": "None",
+                "status": "Approved"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_ListByAutomationAccount",
+  "title": "Gets private endpoint connection."
+}

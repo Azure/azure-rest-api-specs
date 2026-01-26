@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "$inlinecount": "allpages",
+    "$skip": 0,
+    "$top": 2,
+    "api-version": "2024-10-23",
+    "automationAccountName": "myAutomationAccount33",
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalCount": 152,
+        "value": [
+          {
+            "name": "DSCCOMP",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/nodeId",
+            "properties": {
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ],
+              "ip": "ip",
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "nodeId": "FCC20208-E781-41C4-A757-17AA0429B3A4",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "status": "Pending"
+            }
+          },
+          {
+            "name": "DSCCOMP2",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/nodeId2",
+            "properties": {
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ],
+              "ip": "ip",
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "nodeId": "A63C781C-0C50-4825-B295-B7F8ECFD0DBC",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "status": "Pending"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "DscNode_ListByAutomationAccount",
+  "title": "List Paged DSC nodes by Automation Account with no filters"
+}
