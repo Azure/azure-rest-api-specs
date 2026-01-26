@@ -249,44 +249,6 @@ model LdapConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(255)
   certificateCNHost?: string | null;
-
-  /**
-   * List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.
-   */
-  @added(Versions.v2025_12_15_preview)
-  dns?: Azure.Core.ipV4Address[];
-
-  /**
-   * Port number for LDAP communication. Default is 389 for LDAP.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @minValue(1)
-  @maxValue(65535)
-  ldapPort?: int32 = 389;
-
-  /**
-   * This specifies the user DN (Distinguished Name), which overrides the base DN for user lookups.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @maxLength(255)
-  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
-  userDn?: string;
-
-  /**
-   * This specifies the group DN (Distinguished Name), which overrides the base DN for group lookups.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @maxLength(255)
-  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
-  groupDn?: string;
-
-  /**
-   * This specifies the netgroup DN (Distinguished Name), which overrides the base DN for netgroup lookups.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @maxLength(255)
-  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
-  netGroupDn?: string;
 }
 
 /**
@@ -328,44 +290,6 @@ model LdapConfigurationPatch {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(255)
   certificateCNHost?: string | null;
-
-  /**
-   * List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.
-   */
-  @added(Versions.v2025_12_15_preview)
-  dns?: Azure.Core.ipV4Address[];
-
-  /**
-   * Port number for LDAP communication.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @minValue(1)
-  @maxValue(65535)
-  ldapPort?: int32;
-
-  /**
-   * This specifies the user DN (Distinguished Name), which overrides the base DN for user lookups.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @maxLength(255)
-  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
-  userDn?: string;
-
-  /**
-   * This specifies the group DN (Distinguished Name), which overrides the base DN for group lookups.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @maxLength(255)
-  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
-  groupDn?: string;
-
-  /**
-   * This specifies the netgroup DN (Distinguished Name), which overrides the base DN for netgroup lookups.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @maxLength(255)
-  @example("OU=subdirectory,OU=directory,DC=example,DC=com")
-  netGroupDn?: string;
 }
 
 @maxLength(255)

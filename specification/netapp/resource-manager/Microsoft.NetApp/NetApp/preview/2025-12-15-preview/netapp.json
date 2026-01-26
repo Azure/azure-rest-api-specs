@@ -4439,6 +4439,9 @@
           "Accounts_CreateOrUpdate": {
             "$ref": "./examples/Accounts_CreateOrUpdate.json"
           },
+          "Accounts_CreateOrUpdateLdapConfig": {
+            "$ref": "./examples/Accounts_CreateOrUpdateLdapConfig.json"
+          },
           "Accounts_CreateOrUpdateWithActiveDirectory": {
             "$ref": "./examples/Accounts_CreateOrUpdateAD.json"
           }
@@ -6592,6 +6595,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Caches_BreakFileLocks": {
+            "$ref": "./examples/Caches_BreakFileLocks.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -6746,6 +6754,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_ModifyClusterPeer": {
+            "$ref": "./examples/Caches_ModifyClusterPeer.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6920,6 +6933,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_ResetSmbPassword": {
+            "$ref": "./examples/Caches_ResetSmbPassword.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13754,7 +13772,8 @@
       "description": "Application Type",
       "enum": [
         "SAP-HANA",
-        "ORACLE"
+        "ORACLE",
+        "CUSTOM"
       ],
       "x-ms-enum": {
         "name": "ApplicationType",
@@ -13767,6 +13786,11 @@
           {
             "name": "ORACLE",
             "value": "ORACLE"
+          },
+          {
+            "name": "CUSTOM",
+            "value": "CUSTOM",
+            "description": "Custom application type allows min 2 and max 12 data volumes in a volume group."
           }
         ]
       }
@@ -18436,37 +18460,8 @@
         "certificateCNHost": {
           "type": "string",
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
+          "maxLength": 255,
           "x-nullable": true
-        },
-        "dns": {
-          "type": "array",
-          "description": "List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.ipV4Address"
-          }
-        },
-        "ldapPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Port number for LDAP communication. Default is 389 for LDAP.",
-          "default": 389,
-          "minimum": 1,
-          "maximum": 65535
-        },
-        "userDn": {
-          "type": "string",
-          "description": "This specifies the user DN (Distinguished Name), which overrides the base DN for user lookups.",
-          "maxLength": 255
-        },
-        "groupDn": {
-          "type": "string",
-          "description": "This specifies the group DN (Distinguished Name), which overrides the base DN for group lookups.",
-          "maxLength": 255
-        },
-        "netGroupDn": {
-          "type": "string",
-          "description": "This specifies the netgroup DN (Distinguished Name), which overrides the base DN for netgroup lookups.",
-          "maxLength": 255
         }
       }
     },
@@ -18502,36 +18497,8 @@
         "certificateCNHost": {
           "type": "string",
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
+          "maxLength": 255,
           "x-nullable": true
-        },
-        "dns": {
-          "type": "array",
-          "description": "List of DNS server IPv4 addresses for resolving the CN HOST certificate. This parameter is used when LDAP over TLS is enabled.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.ipV4Address"
-          }
-        },
-        "ldapPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Port number for LDAP communication.",
-          "minimum": 1,
-          "maximum": 65535
-        },
-        "userDn": {
-          "type": "string",
-          "description": "This specifies the user DN (Distinguished Name), which overrides the base DN for user lookups.",
-          "maxLength": 255
-        },
-        "groupDn": {
-          "type": "string",
-          "description": "This specifies the group DN (Distinguished Name), which overrides the base DN for group lookups.",
-          "maxLength": 255
-        },
-        "netGroupDn": {
-          "type": "string",
-          "description": "This specifies the netgroup DN (Distinguished Name), which overrides the base DN for netgroup lookups.",
-          "maxLength": 255
         }
       }
     },
@@ -20800,7 +20767,7 @@
           "$ref": "#/definitions/SmbEncryptionState",
           "description": "Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol cache."
         },
-        "smbAccessBasedEnumerations": {
+        "smbAccessBasedEnumeration": {
           "$ref": "#/definitions/SmbAccessBasedEnumeration",
           "description": "Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume"
         },
