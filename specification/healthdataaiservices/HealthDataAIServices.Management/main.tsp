@@ -20,6 +20,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2024-09-20 version.")
   v2024_09_20: "2024-09-20",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("The 2026-02-01-preview version.")
+  v2026_02_01_preview: "2026-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -40,6 +44,11 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding SKU property for versioning"
+  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+  @added(Versions.v2026_02_01_preview)
+  sku?: Sku;
 }
 
 /** Patch request body for DeidService */
@@ -51,6 +60,10 @@ model DeidUpdate {
 
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
+
+  /** The SKU (Stock Keeping Unit) to update for this resource. */
+  @added(Versions.v2026_02_01_preview)
+  sku?: Sku;
 }
 
 model DeidPropertiesUpdate
@@ -89,6 +102,34 @@ enum PublicNetworkAccess {
 
   @doc("The public network access is disabled")
   Disabled,
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
+@doc("The tier of the SKU.")
+union SkuTier {
+  string,
+
+  @doc("Free tier with limited capabilities.")
+  Free: "Free",
+
+  @doc("Basic tier with standard capabilities.")
+  Basic: "Basic",
+
+  @doc("Standard tier with full capabilities.")
+  Standard: "Standard",
+}
+
+@doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+@added(Versions.v2026_02_01_preview)
+model Sku {
+  @doc("The name of the SKU, e.g. S0 or F1.")
+  name: string;
+
+  @doc("The tier of this particular SKU.")
+  tier?: SkuTier;
+
+  @doc("The capacity of the SKU. This is an optional integer value.")
+  capacity?: int32;
 }
 
 @doc("Details of the HealthDataAIServices DeidService.")
