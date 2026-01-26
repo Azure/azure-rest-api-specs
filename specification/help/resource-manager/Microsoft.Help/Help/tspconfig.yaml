@@ -34,7 +34,6 @@ options:
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-selfhelp"
     "service-dir": "sdk/selfhelp"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     typespec-title-map:
@@ -44,7 +43,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/selfhelp"
     emitter-output-dir: "{output-dir}/{service-dir}/armselfhelp"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armselfhelp"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armselfhelp/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

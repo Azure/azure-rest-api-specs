@@ -55,6 +55,9 @@
 # PRLabel: %Network - CDN
 /specification/cdn/ @yunhemsft @jessicl-ms @rrahulms @ChenglongLiu @Ptnan7 @zhuofudeng
 
+# PRLabel: %Network - Edge Actions
+/specification/cdn/resource-manager/Microsoft.Cdn/EdgeActions/ @tundwed @anamikanupur
+
 # PRLabel: %Cognitive Services
 /specification/cognitiveservices/ @rkuthala @MattGal
 
@@ -92,10 +95,7 @@
 /specification/containerservice/ @palma21 @weinong @seguler @alvinli222 @justindavies @matthchr @robbiezhang @paulgmiller @yizhang4321 @circy9 @qike-ms
 
 # PRLabel: %Container Service Fleet
-/specification/containerservice/**/fleet/ @circy9 @serbrech @jim-minter @matthchr
-
-# PRLabel: %Container Service Fleet
-/specification/containerservice/Fleet.Management/ @circy9 @serbrech @jim-minter @matthchr
+/specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/ @circy9 @serbrech @matthchr
 
 # PRLabel: %Cosmos
 /specification/cosmos-db/ @pjohari-ms @MehaKaushik
@@ -147,13 +147,13 @@
 /specification/iothub/ @marcodalessandro @riteshrao
 
 # PRLabel: %KeyVault
-/specification/keyvault/resource-manager/ @vickm @chen-karen @cheathamb36 @Azure/azure-sdk-write-keyvault
+/specification/keyvault/resource-manager/ @chen-karen @Azure/azure-sdk-write-keyvault
 
 # PRLabel: %KeyVault
-/specification/keyvault/Security.*/ @vickm @chen-karen @cheathamb36 @Azure/azure-sdk-write-keyvault @heaths @chlowell
+/specification/keyvault/Security.*/ @chen-karen @Azure/azure-sdk-write-keyvault @heaths
 
 # PRLabel: %KeyVault
-/specification/keyvault/data-plane/ @vickm @chen-karen @cheathamb36 @Azure/azure-sdk-write-keyvault @heaths
+/specification/keyvault/data-plane/ @chen-karen @Azure/azure-sdk-write-keyvault @heaths
 
 # PRLabel: %Logic App
 /specification/logic/ @pankajsn @tonytang-microsoft-com
@@ -235,7 +235,8 @@
 /specification/servicebus/ @v-ajnava @dsouzaarun @damodaravadhani
 
 # PRLabel: %Service Fabric
-/specification/servicefabric/ @juhacket @samedder
+/specification/servicefabric/ @a-santamaria @iliu816
+/specification/servicefabricmanagedclusters/ @a-santamaria @iliu816
 
 # PRLabel: %SQL
 /specification/sql/ @jamestao @ericshape @jeremyfrosti @mitesh-pv @achyuth-ms
@@ -269,7 +270,7 @@
 /specification/trafficmanager/ @allencal @hrkulkarmsft
 
 # PRLabel: %Web Apps
-/specification/web/ @naveedaz @reillyanderson @jocawtho @1tariq
+/specification/web/ @naveedaz @reillyanderson @jocawtho @1tariq @dwmsft
 
 # PRLabel: %Video Indexer
 /specification/vi/ @dazilb @tshoham @omerhaimov @bermanraz @Einav94
@@ -298,7 +299,7 @@
 /eng/               @weshaggard @mikeharder @benbp
 /eng/common/        @Azure/azure-sdk-eng
 /eng/tools/typespec-migration-validation @pshao25 @live1206
-/eng/tools/typespec-validation/src/rules/sdk-tspconfig-validation.ts @marygao @raych1 @maririos
+/eng/tools/typespec-validation/**/sdk-tspconfig-validation*.ts @marygao @raych1 @maririos
 /scripts/           @weshaggard @mikeharder
 /specification/suppressions.yaml @weshaggard @mikeharder @benbp @raych1 @marygao @maririos @qiaozha
 /.github/CODEOWNERS @Azure/azure-sdk-eng
@@ -307,4 +308,8 @@
 /.github/copilot-instructions.md @praveenkuttappan @maririos
 /.github/prompts/                @praveenkuttappan @maririos
 /.github/instructions/           @praveenkuttappan @maririos
+/.github/instructions/*arm*.md   @raosuhas
 /.github/chatmodes/              @praveenkuttappan @maririos
+
+# Add owners for notifications for specific pipelines
+/eng/common/pipelines/codeowners-linter.yml

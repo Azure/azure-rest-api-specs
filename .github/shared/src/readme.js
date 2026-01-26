@@ -1,9 +1,11 @@
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
-import { dirname, normalize, relative, resolve } from "path";
+import { dirname, normalize, relative } from "path";
+import { inspect } from "util";
 import * as z from "zod";
 import { mapAsync } from "./array.js";
+import { resolvePairCached } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
@@ -80,7 +82,7 @@ export class Readme {
   constructor(path, options = {}) {
     const { content, logger, specModel } = options;
 
-    this.#path = resolve(specModel?.folder ?? "", path);
+    this.#path = resolvePairCached(specModel?.folder ?? "", path);
 
     this.#content = content;
     this.#logger = logger;
@@ -174,7 +176,7 @@ export class Readme {
           } /* v8 ignore start: defensive rethrow */ else {
             throw error;
           }
-          /* v8 ignore end */
+          /* v8 ignore stop */
         }
 
         if (!parsedObj["input-file"]) {
@@ -199,7 +201,7 @@ export class Readme {
 
         const swaggerPathsResolved = inputFilePaths
           .map((p) => Readme.#normalizeSwaggerPath(p))
-          .map((p) => resolve(dirname(this.#path), p));
+          .map((p) => resolvePairCached(dirname(this.#path), p));
 
         const tag = new Tag(tagName, swaggerPathsResolved, {
           logger: this.#logger,
@@ -274,6 +276,6 @@ export class Readme {
    * @returns {string}
    */
   toString() {
-    return `Readme(${this.#path}, {logger: ${this.#logger}})`;
+    return `Readme(${this.#path}, {logger: ${inspect(this.#logger)}})`;
   }
 }

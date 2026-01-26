@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using Versioning;
 
 namespace Microsoft.HealthBot;
 
@@ -35,7 +37,10 @@ union IdentityType {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SkuName {
   F0,
+
+  @removed(Versions.v2025_11_01)
   S1,
+
   C0,
   PES,
   C1,
@@ -285,14 +290,14 @@ model ErrorDetail {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: Error[];
 
   /**
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 /**
@@ -351,7 +356,7 @@ model HealthBotKeysResponse {
   /**
    * Array of Azure Health Bot Secrets.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secrets?: HealthBotKey[];
 }
 
@@ -383,7 +388,7 @@ model AvailableOperations {
   /**
    * Collection of available operation details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @pageItems
   value: OperationDetail[];
 

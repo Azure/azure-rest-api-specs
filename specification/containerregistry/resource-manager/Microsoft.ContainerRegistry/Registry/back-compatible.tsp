@@ -3,7 +3,63 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ContainerRegistry;
 
-// Remove deprecated @flattenProperty decorators since they're handled by @Azure.ClientGenerator.Core.Legacy.flattenProperty in models.tsp
+// Flatten properties for backward compatibility
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Archive.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArchiveVersion.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CacheRule.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConnectedRegistry.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CredentialSet.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportPipeline.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImportPipeline.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PipelineRun.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Replication.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScopeMap.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Token.properties,
+  "autorest,javascript,java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Webhook.properties,
+  "autorest,javascript,java,python"
+);
 
 @@clientName(IPRule.value, "IPAddressOrRange");
 

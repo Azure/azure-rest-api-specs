@@ -706,6 +706,7 @@ model WebResult {
   /**
    * Place holder used in HTML Content replace control with the content
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   replacementKey?: string;
 
   /**
@@ -782,6 +783,7 @@ model SolutionsDiagnostic {
   /**
    * Place holder used in HTML Content replace control with the content
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   replacementKey?: string;
 
   /**
@@ -853,6 +855,7 @@ model MetricsBasedChart {
   /**
    * Place holder used in HTML Content replace control with the content
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   replacementKey?: string;
 }
 
@@ -895,6 +898,7 @@ model Video extends VideoGroupVideo {
   /**
    * Place holder used in HTML Content replace control with the insight content
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   replacementKey?: string;
 }
 
@@ -926,6 +930,7 @@ model VideoGroup {
   /**
    * Place holder used in HTML Content replace control with the insight content
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   replacementKey?: string;
 }
 

@@ -50,9 +50,9 @@ suppressions:
   - code:  ProvisioningStateMustBeReadOnly
     reason: Schema ref is AgentDeploymentResource -> AgentDeployment. AgentDeployment has a readonly provisioning state.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].get.responses.200.schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].put.responses.200.schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].put.responses.201.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].put.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].put.responses.201.schema
   - code: ArmResourcePropertiesBag
     reason: This API is copied from Machine Learning Services RP where this behavior is already established.
     where:
@@ -101,10 +101,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -174,10 +170,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -229,10 +221,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -284,10 +272,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -339,10 +323,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:

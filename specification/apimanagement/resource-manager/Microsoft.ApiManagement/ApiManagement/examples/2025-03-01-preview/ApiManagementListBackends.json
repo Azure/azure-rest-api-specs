@@ -1,0 +1,148 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 4,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "proxybackend",
+            "type": "Microsoft.ApiManagement/service/backends",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
+            "properties": {
+              "description": "description5308",
+              "credentials": {
+                "authorization": {
+                  "parameter": "opensesma",
+                  "scheme": "Basic"
+                },
+                "header": {
+                  "x-my-1": [
+                    "val1",
+                    "val2"
+                  ]
+                },
+                "query": {
+                  "sv": [
+                    "xx",
+                    "bb",
+                    "cc"
+                  ]
+                }
+              },
+              "proxy": {
+                "password": "<password>",
+                "url": "http://192.168.1.1:8080",
+                "username": "Contoso\\admin"
+              },
+              "tls": {
+                "validateCertificateChain": false,
+                "validateCertificateName": false
+              },
+              "url": "https://backendname2644/",
+              "protocol": "http"
+            }
+          },
+          {
+            "name": "sfbackend",
+            "type": "Microsoft.ApiManagement/service/backends",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sfbackend",
+            "properties": {
+              "description": "Service Fabric Test App 1",
+              "properties": {
+                "serviceFabricCluster": {
+                  "clientCertificateId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
+                  "managementEndpoints": [
+                    "https://somecluster.com"
+                  ],
+                  "maxPartitionResolutionRetries": 5,
+                  "serverX509Names": [
+                    {
+                      "name": "ServerCommonName1",
+                      "issuerCertificateThumbprint": "IssuerCertificateThumbprint1"
+                    }
+                  ]
+                }
+              },
+              "url": "fabric:/mytestapp/mytestservice",
+              "protocol": "http"
+            }
+          },
+          {
+            "name": "sfbackend",
+            "type": "Microsoft.ApiManagement/service/backends",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sustainable-backend-europe-north",
+            "properties": {
+              "description": "description5308",
+              "azureRegion": "northeurope",
+              "credentials": {
+                "authorization": {
+                  "parameter": "opensesma",
+                  "scheme": "Basic"
+                },
+                "header": {
+                  "x-my-1": [
+                    "val1",
+                    "val2"
+                  ]
+                },
+                "query": {
+                  "sv": [
+                    "xx",
+                    "bb",
+                    "cc"
+                  ]
+                }
+              },
+              "proxy": {
+                "password": "<password>",
+                "url": "http://192.168.1.1:8080",
+                "username": "Contoso\\admin"
+              },
+              "tls": {
+                "validateCertificateChain": false,
+                "validateCertificateName": false
+              },
+              "url": "https://backendname2644/",
+              "protocol": "http"
+            }
+          },
+          {
+            "name": "sfbackend",
+            "type": "Microsoft.ApiManagement/service/backends",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/carbon-efficent-load-balancer",
+            "properties": {
+              "type": "Pool",
+              "pool": {
+                "services": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sustainable-backend-europe-north",
+                    "preferredCarbonEmission": "Medium",
+                    "priority": 1,
+                    "weight": 1
+                  },
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
+                    "priority": 1,
+                    "weight": 1
+                  }
+                ]
+              },
+              "title": null,
+              "url": null,
+              "protocol": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Backend_ListByService",
+  "title": "ApiManagementListBackends"
+}

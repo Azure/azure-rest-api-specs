@@ -10292,6 +10292,7 @@
         "certificateCNHost": {
           "type": "string",
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
+          "maxLength": 255,
           "x-nullable": true
         }
       }
@@ -10739,37 +10740,37 @@
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "Accepted"
+            "description": "Resource has been Accepted"
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "Creating"
+            "description": "Resource is being Created"
           },
           {
             "name": "Patching",
             "value": "Patching",
-            "description": "Patching"
+            "description": "Resource is being Patched"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deleting"
+            "description": "Resource is being Deleted"
           },
           {
             "name": "Moving",
             "value": "Moving",
-            "description": "Moving"
+            "description": "Resource is being Moved"
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "Resource has Failed"
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "Resource has Succeeded"
           }
         ]
       },
@@ -10909,11 +10910,11 @@
     },
     "NicInfo": {
       "type": "object",
-      "description": "NIC information and list of volumes for which the NIC has the primary mount ip address.",
+      "description": "NIC information and list of volumes for which the NIC has the primary mount IP Address.",
       "properties": {
         "ipAddress": {
           "type": "string",
-          "description": "ipAddress",
+          "description": "IP Address",
           "readOnly": true
         },
         "volumeResourceIds": {

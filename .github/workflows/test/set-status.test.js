@@ -5,7 +5,10 @@ import { setStatusImpl } from "../src/set-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("setStatusImpl", () => {
+  /** @type {ReturnType<typeof createMockCore>} */
   let core;
+
+  /** @type {ReturnType<typeof createMockGithub>} */
   let github;
 
   beforeEach(() => {
@@ -14,10 +17,9 @@ describe("setStatusImpl", () => {
   });
 
   it("throws if inputs null", async () => {
-    // @ts-expect-error Testing invalid input type
-    await expect(setStatusImpl({})).rejects.toMatchInlineSnapshot(
-      `[Error: head_sha is not a valid full git SHA: 'undefined']`,
-    );
+    await expect(
+      setStatusImpl(/** @type {Parameters<typeof setStatusImpl>[0]} */ ({})),
+    ).rejects.toMatchInlineSnapshot(`[Error: head_sha is not a valid full git SHA: 'undefined']`);
   });
 
   it.each([null, undefined, "", "abc123"])("throws when head_sha is %o", async (head_sha) => {
@@ -25,8 +27,7 @@ describe("setStatusImpl", () => {
       setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        // @ts-expect-error - Testing invalid input
-        head_sha,
+        head_sha: /** @type {string} */ (head_sha),
         issue_number: 123,
         target_url: "https://test.com/set_status_url",
         github,
@@ -44,8 +45,7 @@ describe("setStatusImpl", () => {
         owner: "test-owner",
         repo: "test-repo",
         head_sha: fullGitSha,
-        // @ts-expect-error - Testing invalid input
-        issue_number,
+        issue_number: /** @type {Number} */ (issue_number),
         target_url: "https://test.com/set_status_url",
         github,
         core,

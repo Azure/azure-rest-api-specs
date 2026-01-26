@@ -12,7 +12,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: true
+
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
@@ -32,7 +32,6 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-eventhub"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -50,6 +49,7 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     package-name: "Azure.ResourceManager.EventHub"
     namespace: "{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

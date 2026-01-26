@@ -4,11 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AppConfiguration;
 
@@ -720,7 +717,7 @@ model OperationDefinitionListResult {
   /**
    * The collection value.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @pageItems
   value?: OperationDefinition[];
 
@@ -739,13 +736,13 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 
   /**
    * Specifications of the Metrics for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -806,7 +803,7 @@ model MetricSpecification {
   /**
    * Dimensions of the metric
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: MetricDimension[];
 
   /**
@@ -868,6 +865,7 @@ model KeyValueProperties {
    * The primary identifier of a key-value.
    * The key is used in unison with the label to uniquely identify a key-value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   key?: string;
 
@@ -997,7 +995,7 @@ model SnapshotProperties {
   /**
    * A list of filters used to filter the key-values included in the snapshot.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @minItems(1)
   @maxItems(3)
   filters: KeyValueFilter[];
@@ -1061,6 +1059,7 @@ model KeyValueFilter {
   /**
    * Filters key-values by their key field.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 
   /**

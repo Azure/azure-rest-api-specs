@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Mixed version"
 @armProviderNamespace("Microsoft.Monitor")

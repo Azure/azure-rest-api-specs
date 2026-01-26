@@ -5,19 +5,19 @@ using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.NetApp;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(Operation.properties);
+@@flattenProperty(Operation.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(UsageResult.properties);
+@@flattenProperty(UsageResult.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(NetAppAccountPatch.properties);
+@@flattenProperty(NetAppAccountPatch.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(GetKeyVaultStatusResponse.properties);
+@@flattenProperty(GetKeyVaultStatusResponse.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(CapacityPoolPatch.properties);
+@@flattenProperty(CapacityPoolPatch.properties, "!javascript");
 
 @@clientName(ExportPolicyRule.kerberos5iReadOnly, "kerberos5IReadOnly");
 @@clientName(ExportPolicyRule.kerberos5iReadWrite, "kerberos5IReadWrite");
@@ -25,41 +25,41 @@ using Microsoft.NetApp;
 @@clientName(ExportPolicyRule.kerberos5pReadWrite, "kerberos5PReadWrite");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(VolumePatch.properties);
+@@flattenProperty(VolumePatch.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(SnapshotPolicyPatch.properties);
+@@flattenProperty(SnapshotPolicyPatch.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(BackupPolicyPatch.properties);
+@@flattenProperty(BackupPolicyPatch.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(VolumeQuotaRulePatch.properties);
+@@flattenProperty(VolumeQuotaRulePatch.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(VolumeGroup.properties);
+@@flattenProperty(VolumeGroup.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(VolumeGroupVolumeProperties.properties);
+@@flattenProperty(VolumeGroupVolumeProperties.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(SubvolumePatchRequest.properties);
+@@flattenProperty(SubvolumePatchRequest.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(SubvolumeModel.properties);
+@@flattenProperty(SubvolumeModel.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(BackupPatch.properties);
+@@flattenProperty(BackupPatch.properties, "!javascript");
 
 @@clientLocation(SubscriptionQuotaItems.get, "NetAppResourceQuotaLimits");
 @@clientLocation(SubscriptionQuotaItems.list, "NetAppResourceQuotaLimits");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(QuotaItem.properties);
+@@flattenProperty(QuotaItem.properties, "!javascript");
 
 @@clientLocation(RegionInfoResources.get, "NetAppResourceRegionInfos");
 @@clientLocation(RegionInfoResources.list, "NetAppResourceRegionInfos");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(RegionInfoResource.properties);
+@@flattenProperty(RegionInfoResource.properties, "!javascript");
 
 @@clientLocation(NetAppAccounts.get, "Accounts");
 @@clientLocation(NetAppAccounts.createOrUpdate, "Accounts");
@@ -76,7 +76,7 @@ using Microsoft.NetApp;
 @@clientLocation(NetAppAccounts.listByNetAppAccount, VolumeGroups);
 @@clientLocation(NetAppAccounts.migrateBackups, "BackupsUnderAccount");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(NetAppAccount.properties);
+@@flattenProperty(NetAppAccount.properties, "!javascript");
 
 @@clientLocation(CapacityPools.get, "Pools");
 @@clientLocation(CapacityPools.createOrUpdate, "Pools");
@@ -86,7 +86,7 @@ using Microsoft.NetApp;
 @@clientLocation(CapacityPools.delete, "Pools");
 @@clientLocation(CapacityPools.list, "Pools");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(CapacityPool.properties);
+@@flattenProperty(CapacityPool.properties, "!javascript");
 
 @@clientName(Volumes.createOrUpdate::parameters.resource, "body");
 @@clientName(Volumes.update::parameters.properties, "body");
@@ -94,31 +94,31 @@ using Microsoft.NetApp;
 @@clientLocation(Volumes.getVolumeLatestRestoreStatus, Backups);
 @@clientLocation(Volumes.migrateBackups, "BackupsUnderVolume");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(Volume.properties);
+@@flattenProperty(Volume.properties, "!javascript");
 
 @@clientName(Snapshots.create::parameters.resource, "body");
 @@clientName(Snapshots.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(Snapshot.properties);
+@@flattenProperty(Snapshot.properties, "!javascript");
 
 @@clientName(SnapshotPolicies.create::parameters.resource, "body");
 @@clientName(SnapshotPolicies.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(SnapshotPolicy.properties);
+@@flattenProperty(SnapshotPolicy.properties, "!javascript");
 
 @@clientName(BackupPolicies.create::parameters.resource, "body");
 @@clientName(BackupPolicies.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(BackupPolicy.properties);
+@@flattenProperty(BackupPolicy.properties, "!javascript");
 
 @@clientName(VolumeQuotaRules.create::parameters.resource, "body");
 @@clientName(VolumeQuotaRules.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(VolumeQuotaRule.properties);
+@@flattenProperty(VolumeQuotaRule.properties, "!javascript");
 
 @@clientName(VolumeGroups.create::parameters.resource, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(VolumeGroupDetails.properties);
+@@flattenProperty(VolumeGroupDetails.properties, "!javascript");
 
 @@clientLocation(SubvolumeInfos.get, "Subvolumes");
 @@clientLocation(SubvolumeInfos.create, "Subvolumes");
@@ -129,25 +129,25 @@ using Microsoft.NetApp;
 @@clientLocation(SubvolumeInfos.listByVolume, "Subvolumes");
 @@clientLocation(SubvolumeInfos.getMetadata, "Subvolumes");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(SubvolumeInfo.properties);
+@@flattenProperty(SubvolumeInfo.properties, "!javascript");
 
 @@clientName(Backups.create::parameters.resource, "body");
 @@clientName(Backups.update::parameters.properties, "body");
 @@clientLocation(Backups.restoreFiles, "BackupsUnderBackupVault");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(Backup.properties);
+@@flattenProperty(Backup.properties, "!javascript");
 
 @@clientName(BackupVaults.createOrUpdate::parameters.resource, "body");
 @@clientName(BackupVaults.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(BackupVault.properties);
+@@flattenProperty(BackupVault.properties, "!javascript");
 
 @@clientName(Buckets.createOrUpdate::parameters.resource, "body");
 @@clientName(Buckets.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(Bucket.properties);
+@@flattenProperty(Bucket.properties, "!javascript");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(BucketPatch.properties);
+@@flattenProperty(BucketPatch.properties, "!javascript");
 
 @@clientLocation(NetAppResourceOperationGroup.checkNameAvailability,
   "NetAppResource"
@@ -176,3 +176,11 @@ using Microsoft.NetApp;
 );
 
 @@clientName(ApplicationType.`SAP-HANA`, "SAP_HANA", "python");
+
+@@clientName(Caches.createOrUpdate::parameters.resource, "body");
+@@clientName(Caches.update::parameters.properties, "body");
+
+@@clientName(ActiveDirectoryConfigs.createOrUpdate::parameters.resource,
+  "body"
+);
+@@clientName(ActiveDirectoryConfigs.update::parameters.properties, "body");

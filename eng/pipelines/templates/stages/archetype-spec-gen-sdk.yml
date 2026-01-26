@@ -25,6 +25,9 @@ parameters:
   - name: CreatePullRequest
     type: boolean
     default: false
+  - name: ForceCreateEvenWithFailures
+    type: boolean
+    default: false
   - name: SpecBatchTypes
     type: string
     default: ''
@@ -33,8 +36,10 @@ parameters:
     default: 0
 
 stages:
-- stage: Build
-  displayName: 'SDK Generation'
+- stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
+  displayName: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'SDK Generation', format('Batch SDK Generation for ({0})', parameters.SpecBatchTypes)) }}
+  # Explicitly set to no dependencies so multiple instances of this template can run in parallel when called in a loop
+  dependsOn: []
   jobs:
   - job:
     timeoutInMinutes: 2400
@@ -206,6 +211,7 @@ stages:
           versionSpec: $(PythonVersion)
 
       - script: |
+          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
           sdk_gen_info="Configurations: "
 
@@ -256,6 +262,8 @@ stages:
             --spec-repo-url ${{ parameters.SpecRepoUrl }} \
             $optional_params || true # return true always to suppress exit error logging
         displayName: 'Generate SDK'
+        ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
+          continueOnError: true
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
@@ -305,6 +313,14 @@ stages:
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+
+        - pwsh: |
+            $currentTitle = "$(PrTitle)"
+            $updatedTitle = "Failed-$currentTitle"
+            Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
+            Write-Host "Updated PR Title to: '$updatedTitle'"
+          displayName: "Set PR title prefix on failures"
+          condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
         - task: PowerShell@2
           displayName: Create pull request

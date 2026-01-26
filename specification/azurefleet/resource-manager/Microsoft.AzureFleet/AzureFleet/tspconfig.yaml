@@ -14,8 +14,6 @@ options:
     emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{version-status}/{version}/azurefleet.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
@@ -53,3 +51,6 @@ options:
     flavor: azure
     package-details:
       name: "@azure/arm-computefleet"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ComputeFleet"
+    emitter-output-dir: "{output-dir}/sdk/computefleet/{namespace}"

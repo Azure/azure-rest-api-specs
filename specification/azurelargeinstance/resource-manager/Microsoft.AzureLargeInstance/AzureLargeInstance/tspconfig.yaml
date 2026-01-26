@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/azurelargeinstance"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -8,7 +11,8 @@ options:
     emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{version-status}/{version}/azurelargeinstance.json"
     use-read-only-status-schema: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.LargeInstance"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"

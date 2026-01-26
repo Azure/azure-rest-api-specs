@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { defaultLogger } from "../../shared/src/logger.js";
 import { getIssueNumber } from "../src/issues.js";
-import { asGitHub, createMockGithub, createMockLogger } from "./mocks.js";
+import { createMockGithub, createMockLogger } from "./mocks.js";
 
 /** @typedef {import('@actions/github-script').AsyncFunctionArguments["github"]} GitHub */
 
@@ -14,9 +14,7 @@ describe("getIssueNumber", () => {
   });
   it("should return NaN when head_sha is missing", async () => {
     // Call function and expect it to throw
-    await expect(
-      getIssueNumber(asGitHub(mockGithub), ""),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(
+    await expect(getIssueNumber(mockGithub, "")).rejects.toThrowErrorMatchingInlineSnapshot(
       `[Error: head_sha is required when trying to search a PR.]`,
     );
   });
@@ -36,7 +34,7 @@ describe("getIssueNumber", () => {
     });
 
     // Call function
-    const result = await getIssueNumber(asGitHub(mockGithub), "abc123", mockLogger);
+    const result = await getIssueNumber(mockGithub, "abc123", mockLogger);
 
     // Verify result uses first PR
     expect(result.issueNumber).toBe(123);
@@ -57,7 +55,7 @@ describe("getIssueNumber", () => {
     });
 
     // Call function
-    const result = await getIssueNumber(asGitHub(mockGithub), "abc123", defaultLogger);
+    const result = await getIssueNumber(mockGithub, "abc123", defaultLogger);
 
     // Verify result
     expect(result.issueNumber).toBeNaN();
@@ -69,6 +67,6 @@ describe("getIssueNumber", () => {
     mockGithub.rest.search.issuesAndPullRequests.mockRejectedValue(searchError);
 
     // Call function and expect it to throw
-    await expect(getIssueNumber(asGitHub(mockGithub), "abc123", defaultLogger)).rejects.toThrow();
+    await expect(getIssueNumber(mockGithub, "abc123", defaultLogger)).rejects.toThrow();
   });
 });

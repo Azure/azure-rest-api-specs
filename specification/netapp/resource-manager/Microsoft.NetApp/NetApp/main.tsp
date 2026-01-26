@@ -24,9 +24,20 @@ import "./BackupPolicy.tsp";
 import "./VolumeQuotaRule.tsp";
 import "./VolumeGroupDetails.tsp";
 import "./SubvolumeInfo.tsp";
+import "./RansomwareReport.tsp";
 import "./Backup.tsp";
 import "./BackupVault.tsp";
 import "./Bucket.tsp";
+import "./Cache.tsp";
+import "./Elastic/ElasticAccount.tsp";
+import "./Elastic/ElasticCapacityPool.tsp";
+import "./Elastic/ElasticVolume.tsp";
+import "./Elastic/ElasticSnapshot.tsp";
+import "./Elastic/ElasticSnapshotPolicy.tsp";
+import "./Elastic/ElasticBackupVault.tsp";
+import "./Elastic/ElasticBackupPolicy.tsp";
+import "./Elastic/ElasticBackup.tsp";
+import "./ActiveDirectory.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -66,8 +77,18 @@ enum Versions {
   /**
    * The 2025-08-01-preview API version.
    */
-  @previewVersion
   v2025_08_01_preview: "2025-08-01-preview",
+
+  /**
+   * The 2025-09-01 API version.
+   */
+  v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2025-09-01-preview API version.
+   */
+  @previewVersion
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 interface Operations

@@ -608,6 +608,7 @@
           {
             "name": "cloudHsmClusterName",
             "in": "path",
+            "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 23 characters in length.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -624,7 +625,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BackupResult"
             },
@@ -1077,7 +1078,7 @@
           {
             "name": "cloudHsmClusterName",
             "in": "path",
-            "description": "Name of the Cloud HSM Cluster",
+            "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 23 characters in length.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1094,7 +1095,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RestoreResult"
             },

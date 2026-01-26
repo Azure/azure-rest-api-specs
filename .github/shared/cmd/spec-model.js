@@ -4,14 +4,19 @@ import { debugLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
 
 const USAGE =
-  "Usage: npx spec-model path/to/spec [--debug] [--include-refs] [--relative-paths] [--no-embed-errors]\n" +
-  "Example: npx spec-model specification/widget";
+  "Usage: npx spec-model path/to/spec [--debug] [--include-operations] [--include-refs] [--relative-paths] [--no-embed-errors]\n" +
+  "Examples:\n" +
+  "  npx spec-model specification/widget\n" +
+  "  npx spec-model specification --include-operations --include-refs > out.txt; grep out.txt '\"error\":'";
 
 // Exclude first two args (node, script file)
 let args = process.argv.slice(2);
 
 const debug = args.includes("--debug");
 args = args.filter((a) => a != "--debug");
+
+const includeOperations = args.includes("--include-operations");
+args = args.filter((a) => a != "--include-operations");
 
 const includeRefs = args.includes("--include-refs");
 args = args.filter((a) => a != "--include-refs");
@@ -42,7 +47,12 @@ const specModel = new SpecModel(specPath, { logger });
 
 console.log(
   JSON.stringify(
-    await specModel.toJSONAsync({ embedErrors: !noEmbedErrors, includeRefs, relativePaths }),
+    await specModel.toJSONAsync({
+      embedErrors: !noEmbedErrors,
+      includeOperations,
+      includeRefs,
+      relativePaths,
+    }),
     null,
     2,
   ),

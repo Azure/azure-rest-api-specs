@@ -9,7 +9,6 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/bms.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: false
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     service-dir: "sdk/recoveryservices-backup"
@@ -40,7 +39,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/recoveryservices"
     emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservicesbackup"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservicesbackup"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservicesbackup/v4"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

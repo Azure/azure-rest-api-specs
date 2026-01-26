@@ -6,9 +6,9 @@ import "./models.tsp";
 import "./ManagedHsm.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
 /**
@@ -16,7 +16,7 @@ namespace Microsoft.KeyVault;
  */
 @parentResource(ManagedHsm)
 model MhsmPrivateEndpointConnection
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<MhsmPrivateEndpointConnectionProperties> {
+  is Azure.ResourceManager.ProxyResource<MhsmPrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = MhsmPrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
@@ -41,6 +41,15 @@ model MhsmPrivateEndpointConnection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: Azure.Core.eTag;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: azureLocation;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 @armResourceOperations

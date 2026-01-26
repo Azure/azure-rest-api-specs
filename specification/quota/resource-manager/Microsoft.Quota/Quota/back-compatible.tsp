@@ -4,37 +4,57 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Quota;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupQuotaDetails.name);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupQuotaRequestBase.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupQuotaDetails.name,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupQuotaRequestBaseProperties.name
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupQuotaRequestBase.properties,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionQuotaDetails.name
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupQuotaRequestBaseProperties.name,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaAllocationRequestBase.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionQuotaDetails.name,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaAllocationRequestBaseProperties.name
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaAllocationRequestBase.properties,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupQuotaUsagesBase.name);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaRequestOneResourceSubmitResponse.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaAllocationRequestBaseProperties.name,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaRequestSubmitResponse202.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupQuotaUsagesBase.name,
+  "!javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaRequestOneResourceSubmitResponse.properties,
+  "!javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaRequestSubmitResponse202.properties,
+  "!javascript"
 );
 
 @@clientLocation(CurrentUsagesBases.get, "Usages", "!csharp");
@@ -80,7 +100,9 @@ using Microsoft.Quota;
   "allocateQuotaRequest"
 );
 
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaAllocationRequestStatus.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaAllocationRequestStatus.properties,
+  "!javascript"
 );
 
 @@clientLocation(GroupQuotasEnforcementStatuses.get,
@@ -158,7 +180,9 @@ using Microsoft.Quota;
   "!csharp"
 );
 
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaRequestDetails.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaRequestDetails.properties,
+  "!javascript"
 );
 
 @@maxLength(Azure.ResourceManager.Extension.ManagementGroup.name, 63);
