@@ -117,7 +117,7 @@ interface DataProtectionOperationGroup {
     Request = FeatureValidationRequestBase,
     Response = FeatureValidationResponseBase,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = CloudError
   >;
 }
