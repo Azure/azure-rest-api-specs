@@ -31,6 +31,6 @@ namespace Data.Tables;
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Following standard typespec recommendation"
 @doc("The Azure Tables service versions.")
 enum Versions {
-  @doc("The 2020-12-06 version of the Azure.Data.Tables service.")
-  v2020_12_06: "2020-12-06",
+  @doc("The 2019-02-02 version of the Azure.Data.Tables service.")
+  v2019_02_02: "2019-02-02",
 }
