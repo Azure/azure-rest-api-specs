@@ -1,0 +1,2376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ContainerService management service",
+    "version": "2026-06-02-preview",
+    "description": "Microsoft.ContainerService Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Apps"
+    },
+    {
+      "name": "ManagedAppRevisions"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.ContainerService/managedAppRevisions": {
+      "get": {
+        "operationId": "ManagedAppRevisions_ListByManagedApp",
+        "tags": [
+          "ManagedAppRevisions"
+        ],
+        "description": "List ManagedAppRevision resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedAppRevisionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ContainerService/managedAppRevisions/{managedAppRevisionName}": {
+      "get": {
+        "operationId": "ManagedAppRevisions_Get",
+        "tags": [
+          "ManagedAppRevisions"
+        ],
+        "description": "Get a ManagedAppRevision",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "managedAppRevisionName",
+            "in": "path",
+            "description": "The name of the managed app revision resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedAppRevision"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ContainerService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/managedApps/{managedAppName}": {
+      "get": {
+        "operationId": "Apps_Get",
+        "tags": [
+          "Apps"
+        ],
+        "description": "Get a ManagedApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "description": "The name of the ManagedCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the ManagedNamespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedApp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Apps_CreateOrUpdate",
+        "tags": [
+          "Apps"
+        ],
+        "description": "Create a ManagedApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "description": "The name of the ManagedCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the ManagedNamespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedApp"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedApp' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedApp"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedApp' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedApp"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Apps_Delete",
+        "tags": [
+          "Apps"
+        ],
+        "description": "Delete a ManagedApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "description": "The name of the ManagedCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the ManagedNamespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/managedApps/{managedAppName}/rollback": {
+      "post": {
+        "operationId": "Apps_Rollback",
+        "tags": [
+          "Apps"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "description": "The name of the ManagedCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the ManagedNamespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedAppRollbackPostParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedApp"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AppDeploymentUserAssignedIdentity": {
+      "type": "object",
+      "description": "App Deployment User Assigned Identity",
+      "properties": {
+        "userAssignedIdentityId": {
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "The resource id of the user assigned identity"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of the user assigned identity"
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of the user assigned identity"
+        }
+      }
+    },
+    "AppProperties": {
+      "type": "object",
+      "description": "App properties",
+      "properties": {
+        "applicationType": {
+          "$ref": "#/definitions/ApplicationType",
+          "description": "Determines the application type. This influences the base set of kubernetes manifests that will be used"
+        },
+        "additionalK8sResources": {
+          "type": "array",
+          "description": "Additional k8s resources (in yaml format) to deploy along with the app\nThis can include things like ConfigMaps, Secrets, PersistentVolumeClaims, etc.\nDo we split this out into separate fields? Easier to maintain as raw yaml, but harder to validate",
+          "items": {
+            "type": "string"
+          }
+        },
+        "namespacedPermissions": {
+          "type": "array",
+          "description": "Represents the permissions for k8s resources that this app has, restricted to the same namespace the app is deployed in. This will create kubernetes Roles and RoleBindings for the app when it is deployed into a managed namespace",
+          "items": {
+            "$ref": "#/definitions/Permissions"
+          },
+          "x-ms-identifiers": [
+            "apiGroups",
+            "resources",
+            "verbs"
+          ]
+        },
+        "clusterWidePermissions": {
+          "type": "array",
+          "description": "Represents the permissions for k8s resources that this app has, cluster wide. Do not set this field if the app is not supposed to read resources outside of the namespace it is deployed in. This will create kubernetes ClusterRoles and ClusterRoleBindings for the app when it is deployed into a managed namespace",
+          "items": {
+            "$ref": "#/definitions/Permissions"
+          },
+          "x-ms-identifiers": [
+            "apiGroups",
+            "resources",
+            "verbs"
+          ]
+        },
+        "healthChecks": {
+          "type": "array",
+          "description": "An array of prometheus expressions to evaluate to determine if the app is healthy. Multiple expressions in this list are logically AND-ed together, so all must return true in order for the app to be considered healthy",
+          "items": {
+            "$ref": "#/definitions/HealthCheck"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "observability": {
+          "$ref": "#/definitions/ObservabilityProperties",
+          "description": "Observability configuration for the app"
+        },
+        "scaling": {
+          "$ref": "#/definitions/ScalingConfiguration",
+          "description": "Scaling type for the app. Default is manual scaling"
+        },
+        "ingressConfiguration": {
+          "$ref": "#/definitions/IngressProperties",
+          "description": "Ingress configuration for the app"
+        },
+        "identity": {
+          "$ref": "#/definitions/AppDeploymentUserAssignedIdentity",
+          "description": "User assigned identity for the app deployment to use",
+          "readOnly": true
+        },
+        "template": {
+          "$ref": "#/definitions/DeploymentTemplate",
+          "description": "Deployment Template for the app. Specify any configuration that will be needed or used for every deployment"
+        },
+        "generatedServiceAccountName": {
+          "type": "string",
+          "description": "The name of the generated service account. This is generated from the app deployment name, and namespace name",
+          "readOnly": true
+        },
+        "generatedKubernetesServiceName": {
+          "type": "string",
+          "description": "The name of the generated kubernetes service. This is generated from the app deployment name and namespace name",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "applicationType",
+        "template",
+        "generatedServiceAccountName",
+        "generatedKubernetesServiceName"
+      ]
+    },
+    "ApplicationType": {
+      "type": "string",
+      "description": "Type of application",
+      "enum": [
+        "webApp",
+        "aiTraining",
+        "aiInference",
+        "backgroundWorker"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WebApp",
+            "value": "webApp",
+            "description": "Web application"
+          },
+          {
+            "name": "AITraining",
+            "value": "aiTraining",
+            "description": "AI training application"
+          },
+          {
+            "name": "AIInference",
+            "value": "aiInference",
+            "description": "AI inference application"
+          },
+          {
+            "name": "BackgroundWorker",
+            "value": "backgroundWorker",
+            "description": "Background worker application"
+          }
+        ]
+      }
+    },
+    "AutoscalingTrigger": {
+      "type": "object",
+      "description": "KEDA Autoscaling Trigger",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AutoscalingTriggerType",
+          "description": "Type of the autoscaling trigger"
+        },
+        "gitHubRunner": {
+          "$ref": "#/definitions/GitHubRunnerTriggerMetadata",
+          "description": "Configuration for GitHub Runner trigger. Only required when type is 'github-runner'."
+        },
+        "azureAppInsights": {
+          "$ref": "#/definitions/AzureAppInsightsTriggerMetadata",
+          "description": "Configuration for Azure App Insights trigger. Only required when type is 'azure-app-insights'."
+        },
+        "azurePipelines": {
+          "$ref": "#/definitions/AzurePipelinesTriggerMetadata",
+          "description": "Configuration for Azure Pipelines trigger. Only required when type is 'azure-pipelines'."
+        },
+        "azureBlob": {
+          "$ref": "#/definitions/AzureBlobTriggerMetadata",
+          "description": "Configuration for Azure Blob trigger. Only required when type is 'azure-blob'."
+        },
+        "azureDataExplorer": {
+          "$ref": "#/definitions/AzureDataExplorerTriggerMetadata",
+          "description": "Configuration for Azure Data Explorer trigger. Only required when type is 'azure-data-explorer'."
+        },
+        "azureEventHub": {
+          "$ref": "#/definitions/AzureEventHubTriggerMetadata",
+          "description": "Configuration for Azure Event Hub trigger. Only required when type is 'azure-eventhub'."
+        },
+        "azureLogAnalytics": {
+          "$ref": "#/definitions/AzureLogAnalyticsTriggerMetadata",
+          "description": "Configuration for Azure Log Analytics trigger. Only required when type is 'azure-log-analytics'."
+        },
+        "azureMonitor": {
+          "$ref": "#/definitions/AzureMonitorTriggerMetadata",
+          "description": "Configuration for Azure Monitor trigger. Only required when type is 'azure-monitor'."
+        },
+        "azureServiceBus": {
+          "$ref": "#/definitions/AzureServiceBusTriggerMetadata",
+          "description": "Configuration for Azure Service Bus trigger. Only required when type is 'azure-servicebus'."
+        },
+        "azureStorageQueue": {
+          "$ref": "#/definitions/AzureStorageQueueTriggerMetadata",
+          "description": "Configuration for Azure Storage Queue trigger. Only required when type is 'azure-storage-queue'."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AutoscalingTriggerType": {
+      "type": "string",
+      "description": "KEDA Autoscaling Trigger Types",
+      "enum": [
+        "cpu",
+        "memory",
+        "cron",
+        "github-runner",
+        "azure-app-insights",
+        "azure-blob",
+        "azure-data-explorer",
+        "azure-eventhub",
+        "azure-log-analytics",
+        "azure-monitor",
+        "azure-pipelines",
+        "azure-servicebus",
+        "azure-storage-queue"
+      ],
+      "x-ms-enum": {
+        "name": "AutoscalingTriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cpu",
+            "value": "cpu",
+            "description": "CPU based autoscaling"
+          },
+          {
+            "name": "Memory",
+            "value": "memory",
+            "description": "Memory based autoscaling"
+          },
+          {
+            "name": "Cron",
+            "value": "cron",
+            "description": "Keda Cron trigger"
+          },
+          {
+            "name": "GitHubRunner",
+            "value": "github-runner",
+            "description": "Keda GitHub Runner trigger"
+          },
+          {
+            "name": "AzureAppInsights",
+            "value": "azure-app-insights",
+            "description": "Keda Azure App Insights trigger"
+          },
+          {
+            "name": "AzureBlob",
+            "value": "azure-blob",
+            "description": "Keda Azure Blob trigger"
+          },
+          {
+            "name": "AzureDataExplorer",
+            "value": "azure-data-explorer",
+            "description": "Keda Azure Data Explorer trigger"
+          },
+          {
+            "name": "AzureEventHub",
+            "value": "azure-eventhub",
+            "description": "Keda Azure Event Hub trigger"
+          },
+          {
+            "name": "AzureLogAnalytics",
+            "value": "azure-log-analytics",
+            "description": "Keda Azure Log Analytics trigger"
+          },
+          {
+            "name": "AzureMonitor",
+            "value": "azure-monitor",
+            "description": "Keda Azure Monitor trigger"
+          },
+          {
+            "name": "AzurePipelines",
+            "value": "azure-pipelines",
+            "description": "Keda Azure Pipelines Trigger"
+          },
+          {
+            "name": "AzureServiceBus",
+            "value": "azure-servicebus",
+            "description": "Keda Azure Service Bus Trigger"
+          },
+          {
+            "name": "AzureStorageQueue",
+            "value": "azure-storage-queue",
+            "description": "Keda Azure Storage Queue Trigger"
+          }
+        ]
+      }
+    },
+    "AzureAppInsightsTriggerMetadata": {
+      "type": "object",
+      "description": "Azure App Insights Trigger Configuration",
+      "properties": {
+        "metricAggregationTimespan": {
+          "type": "string",
+          "description": "Metric aggregation timespan"
+        },
+        "metricAggregationType": {
+          "type": "string",
+          "description": "Type of metric aggregation"
+        },
+        "metricFilter": {
+          "type": "string",
+          "description": "Filter expression for the metric"
+        },
+        "metricId": {
+          "type": "string",
+          "description": "Metric ID to monitor"
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "Target value for scaling"
+        },
+        "activationTargetValue": {
+          "type": "string",
+          "description": "Activation target value"
+        },
+        "activeDirectoryClientIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Active Directory Client ID"
+        },
+        "activeDirectoryClientPasswordFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Active Directory Client Password"
+        },
+        "applicationInsightsIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Application Insights ID"
+        },
+        "tenantIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Tenant ID"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud environment (Default: AzurePublicCloud)"
+        },
+        "appInsightsResourceUrl": {
+          "type": "string",
+          "description": "Application Insights resource URL (required when cloud = Private)"
+        },
+        "activeDirectoryEndpoint": {
+          "type": "string",
+          "description": "Active Directory endpoint (required when cloud = Private)"
+        },
+        "ignoreNullValues": {
+          "type": "boolean",
+          "description": "Whether to ignore null values in query results (Default: false)"
+        }
+      }
+    },
+    "AzureBlobTriggerMetadata": {
+      "type": "object",
+      "description": "Azure Blob Trigger Configuration",
+      "properties": {
+        "blobContainerName": {
+          "type": "string",
+          "description": "Blob container name"
+        },
+        "blobCount": {
+          "type": "string",
+          "description": "Target blob count"
+        },
+        "activationBlobCount": {
+          "type": "string",
+          "description": "Activation blob count"
+        },
+        "connectionFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for storage connection string"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Storage account name"
+        },
+        "blobPrefix": {
+          "type": "string",
+          "description": "Blob prefix filter"
+        },
+        "blobDelimiter": {
+          "type": "string",
+          "description": "Blob delimiter"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud environment (Default: AzurePublicCloud)"
+        },
+        "endpointSuffix": {
+          "type": "string",
+          "description": "Endpoint suffix (required when cloud = Private)"
+        },
+        "recursive": {
+          "type": "boolean",
+          "description": "Whether to search recursively"
+        },
+        "globPattern": {
+          "type": "string",
+          "description": "Glob pattern for filtering blobs"
+        }
+      }
+    },
+    "AzureDataExplorerTriggerMetadata": {
+      "type": "object",
+      "description": "Azure Data Explorer Trigger Configuration",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Azure Data Explorer endpoint"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name"
+        },
+        "query": {
+          "type": "string",
+          "description": "Kusto query to execute"
+        },
+        "threshold": {
+          "type": "string",
+          "description": "Threshold value for scaling"
+        },
+        "activationThreshold": {
+          "type": "string",
+          "description": "Activation threshold value"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID"
+        },
+        "clientIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Client ID"
+        },
+        "clientSecretFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Client Secret"
+        },
+        "tenantIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Tenant ID"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud environment (Default: AzurePublicCloud)"
+        },
+        "activeDirectoryEndpoint": {
+          "type": "string",
+          "description": "Active Directory endpoint (required when cloud = Private)"
+        }
+      }
+    },
+    "AzureEventHubTriggerMetadata": {
+      "type": "object",
+      "description": "Azure Event Hub Trigger Configuration",
+      "properties": {
+        "connectionFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Event Hub connection string"
+        },
+        "storageConnectionFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for storage connection string"
+        },
+        "consumerGroup": {
+          "type": "string",
+          "description": "Consumer group name"
+        },
+        "unprocessedEventThreshold": {
+          "type": "string",
+          "description": "Unprocessed event threshold"
+        },
+        "activationUnprocessedEventThreshold": {
+          "type": "string",
+          "description": "Activation unprocessed event threshold"
+        },
+        "blobContainer": {
+          "type": "string",
+          "description": "Blob container name"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud environment (Default: AzurePublicCloud)"
+        },
+        "endpointSuffix": {
+          "type": "string",
+          "description": "Service Bus endpoint suffix (required when cloud = Private)"
+        },
+        "storageEndpointSuffix": {
+          "type": "string",
+          "description": "Storage endpoint suffix (required when cloud = Private)"
+        },
+        "storageAccountName": {
+          "type": "string",
+          "description": "Storage account name (required for workload identity auth)"
+        }
+      }
+    },
+    "AzureLogAnalyticsTriggerMetadata": {
+      "type": "object",
+      "description": "Azure Log Analytics Trigger Configuration",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Service Principal Client ID"
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "Service Principal Client Secret",
+          "x-ms-secret": true
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Log Analytics Workspace ID"
+        },
+        "query": {
+          "type": "string",
+          "description": "Kusto query to execute"
+        },
+        "threshold": {
+          "type": "string",
+          "description": "Threshold value for scaling"
+        },
+        "activationThreshold": {
+          "type": "string",
+          "description": "Activation threshold value"
+        },
+        "workspaceIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Workspace ID"
+        },
+        "clientIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Client ID"
+        },
+        "tenantIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Tenant ID"
+        },
+        "clientSecretFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Client Secret"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud environment (Default: AzurePublicCloud)"
+        },
+        "logAnalyticsResourceUrl": {
+          "type": "string",
+          "description": "Log Analytics resource URL (required when cloud = Private)"
+        },
+        "activeDirectoryEndpoint": {
+          "type": "string",
+          "description": "Active Directory endpoint (required when cloud = Private)"
+        },
+        "unsafeSsl": {
+          "type": "string",
+          "description": "Whether to disable SSL verification (Default: false)"
+        },
+        "timeout": {
+          "type": "string",
+          "description": "Custom timeout for HTTP client in milliseconds"
+        }
+      }
+    },
+    "AzureMonitorTriggerMetadata": {
+      "type": "object",
+      "description": "Azure Monitor Trigger Configuration",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "Resource URI in Azure Monitor"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID"
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group name"
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Metric name to monitor"
+        },
+        "metricFilter": {
+          "type": "string",
+          "description": "Filter expression for the metric"
+        },
+        "metricAggregationInterval": {
+          "type": "string",
+          "description": "Metric aggregation interval"
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "Target value for scaling"
+        },
+        "activationTargetValue": {
+          "type": "string",
+          "description": "Activation target value"
+        },
+        "activeDirectoryClientId": {
+          "type": "string",
+          "description": "Active Directory Client ID"
+        },
+        "activeDirectoryClientIdFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Active Directory Client ID"
+        },
+        "activeDirectoryClientPasswordFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Active Directory Client Password"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud environment (Default: AzurePublicCloud)"
+        },
+        "azureResourceManagerEndpoint": {
+          "type": "string",
+          "description": "Azure Resource Manager endpoint (required when cloud = Private)"
+        },
+        "activeDirectoryEndpoint": {
+          "type": "string",
+          "description": "Active Directory endpoint (required when cloud = Private)"
+        }
+      }
+    },
+    "AzurePipelinesTriggerMetadata": {
+      "type": "object",
+      "description": "Azure Pipelines Trigger Configuration",
+      "properties": {
+        "poolName": {
+          "type": "string",
+          "description": "Name of the pool in Azure DevOps"
+        },
+        "poolId": {
+          "type": "string",
+          "description": "Pool ID in Azure DevOps"
+        },
+        "organizationUrlFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Azure DevOps organization URL"
+        },
+        "personalAccessTokenFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Personal Access Token"
+        },
+        "targetPipelinesQueueLength": {
+          "type": "string",
+          "description": "Target queue length (Default: 1)"
+        },
+        "activationTargetPipelinesQueueLength": {
+          "type": "string",
+          "description": "Activation target queue length (Default: 0)"
+        },
+        "parent": {
+          "type": "string",
+          "description": "Parent template to read demands from"
+        },
+        "demands": {
+          "type": "string",
+          "description": "Demands string to read from ScaledObject"
+        },
+        "requireAllDemands": {
+          "type": "boolean",
+          "description": "Whether job demands must exactly match trigger capabilities"
+        },
+        "requireAllDemandsAndIgnoreOthers": {
+          "type": "boolean",
+          "description": "Whether to require specified demands and ignore extras"
+        },
+        "jobsToFetch": {
+          "type": "string",
+          "description": "Number of jobs to fetch in API call (Default: 250)"
+        },
+        "fetchUnfinishedJobsOnly": {
+          "type": "boolean",
+          "description": "Whether to only fetch unfinished jobs (Default: false)"
+        },
+        "caseInsensitiveDemandsProcessing": {
+          "type": "boolean",
+          "description": "Enable case-insensitive comparison of demands (Default: false)"
+        }
+      }
+    },
+    "AzureServiceBusTriggerMetadata": {
+      "type": "object",
+      "description": "Azure Service Bus Trigger Configuration",
+      "properties": {
+        "queueName": {
+          "type": "string",
+          "description": "Queue name (required if not using topic)"
+        },
+        "topicName": {
+          "type": "string",
+          "description": "Topic name (required if using topic)"
+        },
+        "subscriptionName": {
+          "type": "string",
+          "description": "Subscription name (required when using topic)"
+        },
+        "serviceBusNamespace": {
+          "type": "string",
+          "description": "Service Bus namespace (required when using workload identity)"
+        },
+        "connectionFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for Service Bus connection string"
+        },
+        "messageCount": {
+          "type": "string",
+          "description": "Message count threshold (Default: 5)"
+        },
+        "activationMessageCount": {
+          "type": "string",
+          "description": "Activation message count"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud environment (Default: AzurePublicCloud)"
+        },
+        "endpointSuffix": {
+          "type": "string",
+          "description": "Service Bus endpoint suffix (required when cloud = Private)"
+        }
+      }
+    },
+    "AzureStorageQueueTriggerMetadata": {
+      "type": "object",
+      "description": "Azure Storage Queue Trigger Configuration",
+      "properties": {
+        "queueName": {
+          "type": "string",
+          "description": "Queue name"
+        },
+        "queueLength": {
+          "type": "string",
+          "description": "Target queue length"
+        },
+        "queueLengthStrategy": {
+          "type": "string",
+          "description": "Queue length strategy (all or visibleonly)"
+        },
+        "activationQueueLength": {
+          "type": "string",
+          "description": "Activation queue length"
+        },
+        "connectionFromEnv": {
+          "type": "string",
+          "description": "Environment variable name for storage connection string"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Storage account name"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud environment"
+        }
+      }
+    },
+    "ConfigMapKeyToPath": {
+      "type": "object",
+      "description": "Maps a string key to a path within a volume.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The key to project."
+        },
+        "path": {
+          "type": "string",
+          "description": "The relative path of the file to map the key to."
+        },
+        "mode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional: mode bits used to set permissions on this file."
+        }
+      },
+      "required": [
+        "keyName",
+        "path"
+      ]
+    },
+    "ConfigMapVolume": {
+      "type": "object",
+      "description": "Adapts a ConfigMap into a volume.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the ConfigMap."
+        },
+        "defaultMode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional: mode bits used to set permissions on created files by default."
+        },
+        "items": {
+          "type": "array",
+          "description": "If unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file.",
+          "items": {
+            "$ref": "#/definitions/ConfigMapKeyToPath"
+          },
+          "x-ms-identifiers": [
+            "keyName"
+          ]
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Specify whether the ConfigMap or its keys must be defined."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Container": {
+      "type": "object",
+      "description": "Container definition",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the container"
+        },
+        "image": {
+          "type": "string",
+          "description": "Container image including tag"
+        },
+        "command": {
+          "type": "string",
+          "description": "Command to run in the container"
+        },
+        "arguments": {
+          "type": "array",
+          "description": "Arguments to the command",
+          "items": {
+            "type": "string"
+          }
+        },
+        "probes": {
+          "type": "array",
+          "description": "An array of probes for the container",
+          "items": {
+            "$ref": "#/definitions/ContainerProbes"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "resources": {
+          "$ref": "#/definitions/ResourceRequirements",
+          "description": "Container Resource Requirements. If not specified, defaults will be applied"
+        },
+        "volumeMounts": {
+          "type": "array",
+          "description": "Volume mounts for the container",
+          "items": {
+            "$ref": "#/definitions/VolumeMount"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "image",
+        "command",
+        "arguments",
+        "probes"
+      ]
+    },
+    "ContainerPort": {
+      "type": "object",
+      "description": "Represents an exposed port on a container",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the port"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number",
+          "default": 8080
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Protocol for the port. Defaults to TCP",
+          "default": "TCP"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ContainerProbes": {
+      "type": "object",
+      "description": "Health check configuration",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ProbeType",
+          "description": "Type of health check"
+        },
+        "protocol": {
+          "$ref": "#/definitions/ProbeProtocol",
+          "description": "Protocol for the health check"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path for HTTP health checks"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port to check"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of seconds after the container has started before health checks are initiated",
+          "default": 0
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often (in seconds) to perform the health check",
+          "default": 10
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of seconds after which the health check times out",
+          "default": 1
+        },
+        "successThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum consecutive successes for the health check to be considered successful after having failed",
+          "default": 1
+        },
+        "failureThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum consecutive failures for the health check to be considered failed after having succeeded",
+          "default": 3
+        }
+      },
+      "required": [
+        "type",
+        "port"
+      ]
+    },
+    "DeploymentTemplate": {
+      "type": "object",
+      "description": "Deployment template for the app",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "Container image of App. This represents a fully qualified container image name, including the registry and tag. i.e. myregistry.azurecr.io/myapp:v1"
+        },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of replicas. Only needed if the ScalingType is Manual. Defaults to 3"
+        },
+        "command": {
+          "type": "string",
+          "description": "Command to run in the container"
+        },
+        "arguments": {
+          "type": "array",
+          "description": "Arguments to the command",
+          "items": {
+            "type": "string"
+          }
+        },
+        "primaryPort": {
+          "$ref": "#/definitions/ContainerPort",
+          "description": "The primary port your application listens on, where it receives traffic. Required if ingress configuration is set"
+        },
+        "containerProbes": {
+          "type": "array",
+          "description": "An array of container probes for the app. If not specified, the default is an http request to /healthz",
+          "items": {
+            "$ref": "#/definitions/ContainerProbes"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "additionalPorts": {
+          "type": "array",
+          "description": "Additional ports your application listens on",
+          "items": {
+            "$ref": "#/definitions/ContainerPort"
+          },
+          "x-ms-identifiers": [
+            "port",
+            "name"
+          ]
+        },
+        "labels": {
+          "type": "array",
+          "description": "Labels for the app",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "annotations": {
+          "type": "array",
+          "description": "Annotations for the app",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "environmentVariables": {
+          "type": "array",
+          "description": "Environment variables for the app",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "initContainers": {
+          "type": "array",
+          "description": "Init containers for the app",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "sidecarContainers": {
+          "type": "array",
+          "description": "Sidecar containers for the app",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Volumes for the app",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "volumeMounts": {
+          "type": "array",
+          "description": "Volume mounts for the app",
+          "items": {
+            "$ref": "#/definitions/VolumeMount"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "image",
+        "command"
+      ]
+    },
+    "EmptyDirVolume": {
+      "type": "object",
+      "description": "EmptyDir represents a temporary directory that shares a pod's lifetime.",
+      "properties": {
+        "medium": {
+          "$ref": "#/definitions/StorageMedium",
+          "description": "What type of storage medium should back this directory."
+        },
+        "sizeLimit": {
+          "type": "string",
+          "description": "Total amount of local storage required for this EmptyDir volume."
+        }
+      }
+    },
+    "EnvironmentVariable": {
+      "type": "object",
+      "description": "Environment variable for a container",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the environment variable"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the environment variable"
+        },
+        "secretRef": {
+          "type": "string",
+          "description": "Reference to a secret for the environment variable"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "GitHubRunnerTriggerMetadata": {
+      "type": "object",
+      "description": "GitHub Runner Trigger Configuration",
+      "properties": {
+        "githubApiUrl": {
+          "type": "string",
+          "description": "The URL of the GitHub API (Default: https://api.github.com)"
+        },
+        "owner": {
+          "type": "string",
+          "description": "The owner of the GitHub repository or organization"
+        },
+        "runnerScope": {
+          "type": "string",
+          "description": "The scope of the runner: org (organization), ent (enterprise), or repo (repository)"
+        },
+        "repos": {
+          "type": "string",
+          "description": "List of repositories to scale, separated by comma"
+        },
+        "labels": {
+          "type": "string",
+          "description": "List of runner labels to scale on, separated by comma"
+        },
+        "noDefaultLabels": {
+          "type": "string",
+          "description": "Do not scale on default runner labels (self-hosted, linux, x64) (Default: false)"
+        },
+        "matchUnlabeledJobsWithUnlabeledRunners": {
+          "type": "string",
+          "description": "When enabled, unlabeled jobs will not match unlabeled runners (Default: false)"
+        },
+        "enableEtags": {
+          "type": "string",
+          "description": "Enable etag headers for conditional requests to GitHub API (Default: false)"
+        },
+        "targetWorkflowQueueLength": {
+          "type": "string",
+          "description": "Target number of queued jobs to scale on (Default: 1)"
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID from the GitHub App"
+        },
+        "installationId": {
+          "type": "string",
+          "description": "Installation ID from the GitHub App once installed into org or repo"
+        }
+      }
+    },
+    "HealthCheck": {
+      "type": "object",
+      "description": "Health check for the app",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the health check"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port to fetch metrics. Default is 8080",
+          "default": 8080
+        },
+        "metricsPath": {
+          "type": "string",
+          "description": "Metrics path for Prometheus to scrape. Default is /metrics",
+          "default": "/metrics"
+        },
+        "query": {
+          "type": "string",
+          "description": "Prometheus expression to evaluate. Expression must return no results if the app is healthy"
+        },
+        "durationSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration in seconds for which the query must be true to consider the app healthy",
+          "default": 30
+        },
+        "frequencySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The frequency in seconds at which the query is evaluated",
+          "default": 5
+        },
+        "state": {
+          "$ref": "#/definitions/HealthCheckState",
+          "description": "The evaluated state of this health check",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "query",
+        "durationSeconds",
+        "frequencySeconds"
+      ]
+    },
+    "HealthCheckState": {
+      "type": "string",
+      "description": "Health check state",
+      "enum": [
+        "healthy",
+        "unhealthy",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "HealthCheckState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "healthy",
+            "description": "Health check is healthy"
+          },
+          {
+            "name": "Unhealthy",
+            "value": "unhealthy",
+            "description": "Health check is unhealthy"
+          },
+          {
+            "name": "Unknown",
+            "value": "unknown",
+            "description": "Health check is unknown"
+          }
+        ]
+      }
+    },
+    "IngressProperties": {
+      "type": "object",
+      "description": "Ingress properties",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/IngressState",
+          "description": "Ingress state, enabled or disabled. Intended to answer the question 'does my app accept public traffic?'. Use TrafficRules to configure traffic routing"
+        },
+        "ingressType": {
+          "$ref": "#/definitions/IngressType",
+          "description": "Ingress type needed. I.e. http, grpc,"
+        }
+      },
+      "required": [
+        "state",
+        "ingressType"
+      ]
+    },
+    "IngressState": {
+      "type": "string",
+      "description": "Ingress state enum",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "IngressState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "Ingress is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "Ingress is disabled"
+          }
+        ]
+      }
+    },
+    "IngressType": {
+      "type": "string",
+      "description": "Ingress configuration for the app",
+      "enum": [
+        "http",
+        "grpc"
+      ],
+      "x-ms-enum": {
+        "name": "IngressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "http",
+            "description": "HTTP Ingress"
+          },
+          {
+            "name": "Grpc",
+            "value": "grpc",
+            "description": "gRPC Ingress"
+          }
+        ]
+      }
+    },
+    "IngressVisibility": {
+      "type": "string",
+      "description": "Ingress visibility",
+      "enum": [
+        "public",
+        "private"
+      ],
+      "x-ms-enum": {
+        "name": "IngressVisibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "public",
+            "description": "Public visibility, accessible from the internet"
+          },
+          {
+            "name": "Private",
+            "value": "private",
+            "description": "Private visibility, only accessible within the cluster"
+          }
+        ]
+      }
+    },
+    "KeyValuePair": {
+      "type": "object",
+      "description": "Key Value Pair for labels/annotations",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key of the pair"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the pair"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "ManagedApp": {
+      "type": "object",
+      "description": "App resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedAppRevision": {
+      "type": "object",
+      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedAppRevisionListResult": {
+      "type": "object",
+      "description": "The response of a ManagedAppRevision list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedAppRevision items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedAppRevision"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedAppRollbackPostParameters": {
+      "type": "object",
+      "description": "Parameters for rolling back a managed app to a previous revision",
+      "properties": {
+        "managedAppRevisionName": {
+          "type": "string",
+          "description": "The name of the managed app revision to rollback to"
+        }
+      },
+      "required": [
+        "managedAppRevisionName"
+      ]
+    },
+    "ManagedCluster": {
+      "type": "object",
+      "description": "Represents a managed cluster. Just a placeholder until rest of aks is converted to typespec",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedClusterProperties": {
+      "type": "object",
+      "description": "Managed Cluster properties. Just a placeholder",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedNamespace": {
+      "type": "object",
+      "description": "Managed Namespace resource. Just a placeholder for now",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedNamespaceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedNamespaceProperties": {
+      "type": "object",
+      "description": "Managed Namespace properties. Just a placeholder",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ObservabilityProperties": {
+      "type": "object",
+      "description": "Observability properties for the app",
+      "properties": {
+        "logAnalyticsWorkspaceId": {
+          "$ref": "#/definitions/logAnalyticsWorkspaceId",
+          "description": "Log Analytics Workspace ID"
+        },
+        "azureMonitorAccount": {
+          "$ref": "#/definitions/azureManagedPrometheusWorkspaceId",
+          "description": "Azure Managed Prometheus Workspace ID"
+        }
+      }
+    },
+    "Permissions": {
+      "type": "object",
+      "description": "Role definition for k8s resources that the app needs to access",
+      "properties": {
+        "apiGroups": {
+          "type": "array",
+          "description": "API groups",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "description": "Resources in the api groups",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verbs": {
+          "type": "array",
+          "description": "Verbs that are allowed for these groups/resources. i.e. \"GET\", \"CREATE\", etc",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PersistentVolumeClaimVolume": {
+      "type": "object",
+      "description": "PersistentVolumeClaimVolume references a user's PVC in the same namespace.",
+      "properties": {
+        "claimName": {
+          "type": "string",
+          "description": "ClaimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Will force the ReadOnly setting in VolumeMounts."
+        }
+      },
+      "required": [
+        "claimName"
+      ]
+    },
+    "ProbeProtocol": {
+      "type": "string",
+      "description": "Protocol for the health check",
+      "enum": [
+        "HTTP",
+        "TCP",
+        "gRPC"
+      ],
+      "x-ms-enum": {
+        "name": "ProbeProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HTTP",
+            "value": "HTTP",
+            "description": "HTTP protocol"
+          },
+          {
+            "name": "TCP",
+            "value": "TCP",
+            "description": "TCP protocol"
+          },
+          {
+            "name": "gRPC",
+            "value": "gRPC",
+            "description": "gRPC protocol"
+          }
+        ]
+      }
+    },
+    "ProbeType": {
+      "type": "string",
+      "description": "Type of health check",
+      "enum": [
+        "liveness",
+        "readiness",
+        "startup"
+      ],
+      "x-ms-enum": {
+        "name": "ProbeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Liveness",
+            "value": "liveness",
+            "description": "Liveness probe"
+          },
+          {
+            "name": "Readiness",
+            "value": "readiness",
+            "description": "Readiness probe"
+          },
+          {
+            "name": "Startup",
+            "value": "startup",
+            "description": "Startup probe"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The resource provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ResourceRequirements": {
+      "type": "object",
+      "description": "Resource requirements for a container",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "CPU resource request and limit",
+          "default": "2"
+        },
+        "memory": {
+          "type": "string",
+          "description": "Memory resource request and limit",
+          "default": "2Gi"
+        }
+      }
+    },
+    "ScalingConfiguration": {
+      "type": "object",
+      "description": "Scaling configuration",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ScalingType",
+          "description": "Scaling type for the app. Default is manual scaling"
+        },
+        "minReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of replicas for the app when using autoscaling"
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of replicas for the app when using autoscaling"
+        },
+        "autoscalingTriggers": {
+          "type": "array",
+          "description": "List of autoscaling triggers for the app",
+          "items": {
+            "$ref": "#/definitions/AutoscalingTrigger"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      }
+    },
+    "ScalingType": {
+      "type": "string",
+      "description": "Scaling type for the app",
+      "enum": [
+        "autoscale",
+        "manual"
+      ],
+      "x-ms-enum": {
+        "name": "ScalingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Autoscale",
+            "value": "autoscale",
+            "description": "Auto scale"
+          },
+          {
+            "name": "Manual",
+            "value": "manual",
+            "description": "Manual scale"
+          }
+        ]
+      }
+    },
+    "SecretKeyToPath": {
+      "type": "object",
+      "description": "Maps a string key to a path within a volume.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The key to project."
+        },
+        "path": {
+          "type": "string",
+          "description": "The relative path of the file to map the key to."
+        },
+        "mode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional: mode bits used to set permissions on this file."
+        }
+      },
+      "required": [
+        "keyName",
+        "path"
+      ]
+    },
+    "SecretVolume": {
+      "type": "object",
+      "description": "Adapts a Secret into a volume.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the secret."
+        },
+        "defaultMode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional: mode bits used to set permissions on created files by default."
+        },
+        "items": {
+          "type": "array",
+          "description": "If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file.",
+          "items": {
+            "$ref": "#/definitions/SecretKeyToPath"
+          },
+          "x-ms-identifiers": [
+            "keyName"
+          ]
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Specify whether the Secret or its keys must be defined."
+        }
+      },
+      "required": [
+        "secretName"
+      ]
+    },
+    "StorageMedium": {
+      "type": "string",
+      "description": "Storage medium type for EmptyDir volume.",
+      "enum": [
+        "Default",
+        "Memory",
+        "HugePages"
+      ],
+      "x-ms-enum": {
+        "name": "StorageMedium",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Use default storage medium for the node"
+          },
+          {
+            "name": "Memory",
+            "value": "Memory",
+            "description": "Use memory (e.g. tmpfs on linux)"
+          },
+          {
+            "name": "HugePages",
+            "value": "HugePages",
+            "description": "Use hugepages"
+          }
+        ]
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+          }
+        ]
+      }
+    },
+    "Volume": {
+      "type": "object",
+      "description": "Volume definition. Right now emptyDir,configmap,secret,persistentVolumeClaim",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the volume"
+        },
+        "emptyDir": {
+          "$ref": "#/definitions/EmptyDirVolume",
+          "description": "EmptyDir volume"
+        },
+        "configMap": {
+          "$ref": "#/definitions/ConfigMapVolume",
+          "description": "ConfigMap volume"
+        },
+        "secret": {
+          "$ref": "#/definitions/SecretVolume",
+          "description": "Secret volume"
+        },
+        "persistentVolumeClaim": {
+          "$ref": "#/definitions/PersistentVolumeClaimVolume",
+          "description": "Persistent Volume Claim volume"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "VolumeMount": {
+      "type": "object",
+      "description": "Volume mount definition",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the volume"
+        },
+        "mountPath": {
+          "type": "string",
+          "description": "Mount path for the volume"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Volume is ReadOnly or not"
+        }
+      },
+      "required": [
+        "name",
+        "mountPath",
+        "readOnly"
+      ]
+    },
+    "azureManagedPrometheusWorkspaceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Monitor/accounts"
+          }
+        ]
+      }
+    },
+    "logAnalyticsWorkspaceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.OperationalInsights/workspaces"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}
