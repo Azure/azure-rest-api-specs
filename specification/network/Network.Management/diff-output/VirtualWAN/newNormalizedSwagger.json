@@ -1,0 +1,429 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualWans": {
+      "get": {
+        "operationId": "VirtualWans_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ListVirtualWANsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANList": {
+            "$ref": "./examples/VirtualWANList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans": {
+      "get": {
+        "operationId": "VirtualWans_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ListVirtualWANsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANListByResourceGroup": {
+            "$ref": "./examples/VirtualWANListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}": {
+      "get": {
+        "operationId": "VirtualWans_Get",
+        "parameters": [
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANGet": {
+            "$ref": "./examples/VirtualWANGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualWans_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "WANParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANCreate": {
+            "$ref": "./examples/VirtualWANPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/VirtualWAN"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualWans_UpdateTags",
+        "parameters": [
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "WANParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANUpdate": {
+            "$ref": "./examples/VirtualWANUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VirtualWans_Delete",
+        "parameters": [
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANDelete": {
+            "$ref": "./examples/VirtualWANDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile": {
+      "post": {
+        "operationId": "generatevirtualwanvpnserverconfigurationvpnprofile",
+        "parameters": [
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnClientParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/VirtualWanVpnProfileParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/VpnProfileResponse"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateVirtualWanVpnServerConfigurationVpnProfile": {
+            "$ref": "./examples/GenerateVirtualWanVpnServerConfigurationVpnProfile.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders": {
+      "get": {
+        "operationId": "SupportedSecurityProviders",
+        "parameters": [
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/VirtualWanSecurityProviders"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "supportedSecurityProviders": {
+            "$ref": "./examples/VirtualWanSupportedSecurityProviders.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
+      "post": {
+        "operationId": "VpnSitesConfiguration_Download",
+        "parameters": [
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/GetVpnSitesConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSitesConfigurationDownload": {
+            "$ref": "./examples/VpnSitesConfigurationDownload.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations": {
+      "post": {
+        "operationId": "VpnServerConfigurationsAssociatedWithVirtualWan_List",
+        "parameters": [
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/VpnServerConfigurationsResponse"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualWanVpnServerConfigurations": {
+            "$ref": "./examples/GetVirtualWanVpnServerConfigurations.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "VirtualWAN": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json/definitions/VirtualWanProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

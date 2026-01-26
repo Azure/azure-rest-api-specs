@@ -158,6 +158,7 @@ enum Versions {
   v2025_03_01: "2025-03-01",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum Features {
   applicationGateway,
   expressRoute,
@@ -172,6 +173,7 @@ enum Features {
   virtualWAN,
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<

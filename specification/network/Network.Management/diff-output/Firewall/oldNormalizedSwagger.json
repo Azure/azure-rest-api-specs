@@ -1,0 +1,1245 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "version": "2025-03-01",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags": {
+      "get": {
+        "operationId": "AzureFirewallFqdnTags_ListAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallFqdnTagListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Firewall FQDN Tags for a given subscription": {
+            "$ref": "./examples/AzureFirewallFqdnTagsListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewalls": {
+      "get": {
+        "operationId": "AzureFirewalls_ListAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Firewalls for a given subscription": {
+            "$ref": "./examples/AzureFirewallListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls": {
+      "get": {
+        "operationId": "AzureFirewalls_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Firewalls for a given resource group": {
+            "$ref": "./examples/AzureFirewallListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}": {
+      "get": {
+        "operationId": "AzureFirewalls_Get",
+        "parameters": [
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Firewall": {
+            "$ref": "./examples/AzureFirewallGet.json"
+          },
+          "Get Azure Firewall With Additional Properties": {
+            "$ref": "./examples/AzureFirewallGetWithAdditionalProperties.json"
+          },
+          "Get Azure Firewall With IpGroups": {
+            "$ref": "./examples/AzureFirewallGetWithIpGroups.json"
+          },
+          "Get Azure Firewall With Zones": {
+            "$ref": "./examples/AzureFirewallGetWithZones.json"
+          },
+          "Get Azure Firewall With management subnet": {
+            "$ref": "./examples/AzureFirewallGetWithMgmtSubnet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureFirewalls_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 56
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Azure Firewall": {
+            "$ref": "./examples/AzureFirewallPut.json"
+          },
+          "Create Azure Firewall With Additional Properties": {
+            "$ref": "./examples/AzureFirewallPutWithAdditionalProperties.json"
+          },
+          "Create Azure Firewall With IpGroups": {
+            "$ref": "./examples/AzureFirewallPutWithIpGroups.json"
+          },
+          "Create Azure Firewall With Zones": {
+            "$ref": "./examples/AzureFirewallPutWithZones.json"
+          },
+          "Create Azure Firewall With management subnet": {
+            "$ref": "./examples/AzureFirewallPutWithMgmtSubnet.json"
+          },
+          "Create Azure Firewall in virtual Hub": {
+            "$ref": "./examples/AzureFirewallPutInHub.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AzureFirewalls_UpdateTags",
+        "parameters": [
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Azure Firewall Tags": {
+            "$ref": "./examples/AzureFirewallUpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AzureFirewalls_Delete",
+        "parameters": [
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Azure Firewall": {
+            "$ref": "./examples/AzureFirewallDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/learnedIPPrefixes": {
+      "post": {
+        "operationId": "AzureFirewalls_ListLearnedPrefixes",
+        "parameters": [
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/IPPrefixesList"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureFirewallListLearnedPrefixes": {
+            "$ref": "./examples/AzureFirewallListLearnedIPPrefixes.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture": {
+      "post": {
+        "operationId": "AzureFirewalls_PacketCapture",
+        "parameters": [
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 56,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPacketCaptureParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureFirewallPacketCapture": {
+            "$ref": "./examples/AzureFirewallPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCaptureOperation": {
+      "post": {
+        "operationId": "AzureFirewalls_PacketCaptureOperation",
+        "parameters": [
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][\\w\\-._]{0,54}[A-Za-z0-9_]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPacketCaptureParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallPacketCaptureResponse"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureFirewallPacketCaptureOperation": {
+            "$ref": "./examples/AzureFirewallPacketCaptureOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AzureFirewall": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "./network.json#/definitions/ExtendedLocation"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AzureFirewallAdditionalProperties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "AzureFirewallApplicationRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallApplicationRuleProtocol"
+          }
+        },
+        "targetFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdnTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallApplicationRuleCollection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallApplicationRuleCollectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "AzureFirewallApplicationRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 100,
+          "exclusiveMinimum": false,
+          "maximum": 65000,
+          "exclusiveMaximum": false
+        },
+        "action": {
+          "$ref": "#/definitions/AzureFirewallRCAction"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallApplicationRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallApplicationRuleProtocol": {
+      "type": "object",
+      "properties": {
+        "protocolType": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https",
+            "Mssql"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallApplicationRuleProtocolType",
+            "modelAsString": true
+          }
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false,
+          "maximum": 64000,
+          "exclusiveMaximum": false
+        }
+      }
+    },
+    "AzureFirewallAutoscaleConfiguration": {
+      "type": "object",
+      "properties": {
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 2,
+          "x-nullable": true
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 2,
+          "x-nullable": true
+        }
+      }
+    },
+    "AzureFirewallFqdnTag": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallFqdnTagPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AzureFirewallFqdnTagListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallFqdnTag"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "AzureFirewallFqdnTagPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "fqdnTagName": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallIPConfigurationPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "AzureFirewallIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "publicIPAddress": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallIpGroups": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "changeNumber": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AzureFirewall"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "AzureFirewallNatRCAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Snat",
+            "Dnat"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallNatRCActionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureFirewallNatRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TCP",
+              "UDP",
+              "Any",
+              "ICMP"
+            ],
+            "x-ms-enum": {
+              "name": "AzureFirewallNetworkRuleProtocol",
+              "modelAsString": true
+            }
+          }
+        },
+        "translatedAddress": {
+          "type": "string"
+        },
+        "translatedPort": {
+          "type": "string"
+        },
+        "translatedFqdn": {
+          "type": "string"
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallNatRuleCollection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallNatRuleCollectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "AzureFirewallNatRuleCollectionProperties": {
+      "type": "object",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 100,
+          "exclusiveMinimum": false,
+          "maximum": 65000,
+          "exclusiveMaximum": false
+        },
+        "action": {
+          "$ref": "#/definitions/AzureFirewallNatRCAction"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallNatRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallNetworkRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TCP",
+              "UDP",
+              "Any",
+              "ICMP"
+            ],
+            "x-ms-enum": {
+              "name": "AzureFirewallNetworkRuleProtocol",
+              "modelAsString": true
+            }
+          }
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallNetworkRuleCollection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallNetworkRuleCollectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "AzureFirewallNetworkRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 100,
+          "exclusiveMinimum": false,
+          "maximum": 65000,
+          "exclusiveMaximum": false
+        },
+        "action": {
+          "$ref": "#/definitions/AzureFirewallRCAction"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallNetworkRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallPacketCaptureFlags": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "fin",
+            "syn",
+            "rst",
+            "push",
+            "ack",
+            "urg"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallPacketCaptureFlagsType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureFirewallPacketCaptureResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "NotImplemented",
+            "AzureFirewallPacketCaptureStartSucceeded",
+            "AzureFirewallPacketCaptureStartFailed",
+            "AzureFirewallPacketCaptureStartFailedToUpload",
+            "AzureFirewallPacketCaptureStartFailure",
+            "AzureFirewallPacketCaptureInProgress",
+            "AzureFirewallPacketCaptureNotInProgress",
+            "AzureFirewallPacketCaptureStopSucceeded",
+            "AzureFirewallPacketCaptureFailed",
+            "AzureFirewallPacketCaptureCompleted"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallPacketCaptureResponseCode",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureFirewallPacketCaptureRule": {
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "applicationRuleCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallApplicationRuleCollection"
+          }
+        },
+        "natRuleCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallNatRuleCollection"
+          }
+        },
+        "networkRuleCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallNetworkRuleCollection"
+          }
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallIPConfiguration"
+          }
+        },
+        "managementIpConfiguration": {
+          "$ref": "#/definitions/AzureFirewallIPConfiguration"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "threatIntelMode": {
+          "type": "string",
+          "enum": [
+            "Alert",
+            "Deny",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallThreatIntelMode",
+            "modelAsString": true
+          }
+        },
+        "virtualHub": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "hubIPAddresses": {
+          "$ref": "#/definitions/HubIPAddresses"
+        },
+        "ipGroups": {
+          "$ref": "#/definitions/IpGroups",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureFirewallSku"
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/AzureFirewallAdditionalProperties"
+        },
+        "autoscaleConfiguration": {
+          "$ref": "#/definitions/AzureFirewallAutoscaleConfiguration"
+        }
+      }
+    },
+    "AzureFirewallPublicIPAddress": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureFirewallRCAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallRCActionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureFirewallSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "AZFW_VNet",
+            "AZFW_Hub"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallSkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallSkuTier",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FirewallPacketCaptureParameters": {
+      "type": "object",
+      "properties": {
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "default": 60,
+          "minimum": 30,
+          "exclusiveMinimum": false,
+          "maximum": 1800,
+          "exclusiveMaximum": false
+        },
+        "numberOfPacketsToCapture": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1000,
+          "minimum": 100,
+          "exclusiveMinimum": false,
+          "maximum": 90000,
+          "exclusiveMaximum": false
+        },
+        "sasUrl": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "TCP",
+            "UDP",
+            "Any",
+            "ICMP"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallNetworkRuleProtocol",
+            "modelAsString": true
+          }
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPacketCaptureFlags"
+          }
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPacketCaptureRule"
+          }
+        },
+        "operation": {
+          "type": "string",
+          "default": "Start",
+          "enum": [
+            "Start",
+            "Status",
+            "Stop"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallPacketCaptureOperationType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "HubIPAddresses": {
+      "type": "object",
+      "properties": {
+        "publicIPs": {
+          "$ref": "#/definitions/HubPublicIPAddresses"
+        },
+        "privateIPAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "HubPublicIPAddresses": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPublicIPAddress"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "IPPrefixesList": {
+      "type": "object",
+      "properties": {
+        "ipPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IpGroups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AzureFirewallIpGroups"
+      }
+    }
+  },
+  "parameters": {}
+}

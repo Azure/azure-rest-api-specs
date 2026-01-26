@@ -1,0 +1,1134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/networkWatchers": {
+      "get": {
+        "operationId": "NetworkWatchers_ListAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/NetworkWatcherListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all network watchers": {
+            "$ref": "./examples/NetworkWatcherListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers": {
+      "get": {
+        "operationId": "NetworkWatchers_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/NetworkWatcherListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List network watchers": {
+            "$ref": "./examples/NetworkWatcherList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}": {
+      "get": {
+        "operationId": "NetworkWatchers_Get",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkWatcher"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network watcher": {
+            "$ref": "./examples/NetworkWatcherGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkWatchers_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkWatcher"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkWatcher"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkWatcher"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create network watcher": {
+            "$ref": "./examples/NetworkWatcherCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NetworkWatchers_UpdateTags",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkWatcher"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update network watcher tags": {
+            "$ref": "./examples/NetworkWatcherUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkWatchers_Delete",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete network watcher": {
+            "$ref": "./examples/NetworkWatcherDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/availableProvidersList": {
+      "post": {
+        "operationId": "NetworkWatchers_ListAvailableProviders",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/AvailableProvidersListParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/AvailableProvidersList"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/AvailableProvidersList"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Available Providers List": {
+            "$ref": "./examples/NetworkWatcherAvailableProvidersListGet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/azureReachabilityReport": {
+      "post": {
+        "operationId": "NetworkWatchers_GetAzureReachabilityReport",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/AzureReachabilityReportParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/AzureReachabilityReport"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/AzureReachabilityReport"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Reachability Report": {
+            "$ref": "./examples/NetworkWatcherAzureReachabilityReportGet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog": {
+      "post": {
+        "operationId": "NetworkWatchers_SetFlowLogConfiguration",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/FlowLogInformation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/FlowLogInformation"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/FlowLogInformation"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configure flow log": {
+            "$ref": "./examples/NetworkWatcherFlowLogConfigure.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck": {
+      "post": {
+        "operationId": "NetworkWatchers_CheckConnectivity",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/ConnectivityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ConnectivityInformation"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ConnectivityInformation"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check connectivity": {
+            "$ref": "./examples/NetworkWatcherConnectivityCheck.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/ipFlowVerify": {
+      "post": {
+        "operationId": "NetworkWatchers_VerifyIPFlow",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/VerificationIPFlowParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/VerificationIPFlowResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/VerificationIPFlowResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ip flow verify": {
+            "$ref": "./examples/NetworkWatcherIpFlowVerify.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic": {
+      "post": {
+        "operationId": "NetworkWatchers_GetNetworkConfigurationDiagnostic",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/NetworkConfigurationDiagnosticParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/NetworkConfigurationDiagnosticResponse"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/NetworkConfigurationDiagnosticResponse"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Network configuration diagnostic": {
+            "$ref": "./examples/NetworkWatcherNetworkConfigurationDiagnostic.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/nextHop": {
+      "post": {
+        "operationId": "NetworkWatchers_GetNextHop",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/NextHopParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/NextHopResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/NextHopResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get next hop": {
+            "$ref": "./examples/NetworkWatcherNextHopGet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures": {
+      "get": {
+        "operationId": "PacketCaptures_List",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/PacketCaptureListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List packet captures": {
+            "$ref": "./examples/NetworkWatcherPacketCapturesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}": {
+      "get": {
+        "operationId": "PacketCaptures_Get",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packetCaptureName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/PacketCaptureResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get packet capture": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PacketCaptures_Create",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packetCaptureName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/PacketCapture"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/PacketCaptureResult"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create packet capture": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NetworkWatcher"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PacketCaptures_Delete",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packetCaptureName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete packet capture": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus": {
+      "post": {
+        "operationId": "PacketCaptures_GetStatus",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packetCaptureName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/PacketCaptureQueryStatusResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/PacketCaptureQueryStatusResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query packet capture status": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureQueryStatus.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop": {
+      "post": {
+        "operationId": "PacketCaptures_Stop",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packetCaptureName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop packet capture": {
+            "$ref": "./examples/NetworkWatcherPacketCaptureStop.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus": {
+      "post": {
+        "operationId": "NetworkWatchers_GetFlowLogStatus",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/FlowLogStatusParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/FlowLogInformation"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/FlowLogInformation"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get flow log status": {
+            "$ref": "./examples/NetworkWatcherFlowLogStatusQuery.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryTroubleshootResult": {
+      "post": {
+        "operationId": "NetworkWatchers_GetTroubleshootingResult",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/QueryTroubleshootingParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/TroubleshootingResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/TroubleshootingResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get troubleshoot result": {
+            "$ref": "./examples/NetworkWatcherTroubleshootResultQuery.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView": {
+      "post": {
+        "operationId": "NetworkWatchers_GetVMSecurityRules",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/SecurityGroupViewParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/SecurityGroupViewResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/SecurityGroupViewResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get security group view": {
+            "$ref": "./examples/NetworkWatcherSecurityGroupViewGet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/topology": {
+      "post": {
+        "operationId": "NetworkWatchers_GetTopology",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/TopologyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/Topology"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Topology": {
+            "$ref": "./examples/NetworkWatcherTopologyGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot": {
+      "post": {
+        "operationId": "NetworkWatchers_GetTroubleshooting",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json/definitions/TroubleshootingParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/TroubleshootingResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/TroubleshootingResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get troubleshooting": {
+            "$ref": "./examples/NetworkWatcherTroubleshootGet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "NetworkWatcher": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json/definitions/NetworkWatcherPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/Resource"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

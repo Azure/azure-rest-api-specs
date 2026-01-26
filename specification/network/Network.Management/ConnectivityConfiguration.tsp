@@ -19,6 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NetworkManager)
 @Http.Private.includeInapplicableMetadataInPayload(false)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ConnectivityConfiguration extends ChildResource {
   properties?: ConnectivityConfigurationProperties;
@@ -36,6 +37,7 @@ model ConnectivityConfiguration extends ChildResource {
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @armResourceOperations
 interface ConnectivityConfigurations {

@@ -1,0 +1,3584 @@
+{
+  "info": {
+    "title": {
+      "__old": "NetworkManagementClient",
+      "__new": "WebApplicationFirewallManagement"
+    },
+    "description": {
+      "__old": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+      "__new": "APIs to manage web application firewall rules."
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors__deleted": {
+      "get": {
+        "operationId": "ConnectionMonitors_List",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List connection monitors": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}__deleted": {
+      "get": {
+        "operationId": "ConnectionMonitors_Get",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectionMonitors_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitor"
+            }
+          },
+          {
+            "name": "migrate",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorResult"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create connection monitor V1": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json"
+          },
+          "Create connection monitor V2": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorV2Create.json"
+          },
+          "Create connection monitor with Arc Network": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorCreateWithArcNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ConnectionMonitors_UpdateTags",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionMonitorResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update connection monitor tags": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectionMonitors_Delete",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/stop__deleted": {
+      "post": {
+        "operationId": "ConnectionMonitors_Stop",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionMonitorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop connection monitor": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorStop.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs__deleted": {
+      "get": {
+        "operationId": "FlowLogs_List",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/FlowLogListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List connection monitors": {
+            "$ref": "./examples/NetworkWatcherFlowLogList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}__deleted": {
+      "get": {
+        "operationId": "FlowLogs_Get",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowLogName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get flow log": {
+            "$ref": "./examples/NetworkWatcherFlowLogGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FlowLogs_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowLogName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update flow log": {
+            "$ref": "./examples/NetworkWatcherFlowLogCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FlowLogs_UpdateTags",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowLogName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/FlowLog"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update flow log tags": {
+            "$ref": "./examples/NetworkWatcherFlowLogUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FlowLogs_Delete",
+        "parameters": [
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowLogName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete flow log": {
+            "$ref": "./examples/NetworkWatcherFlowLogDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/networkWatchers": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkWatcherListResult",
+                "__new": "./common.json/definitions/NetworkWatcherListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkWatcherListResult",
+                "__new": "./common.json/definitions/NetworkWatcherListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./network.json#/definitions/TagsObject",
+                  "__new": "./common.json/definitions/TagsObject"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/availableProvidersList": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/AvailableProvidersListParameters",
+                  "__new": "./common.json/definitions/AvailableProvidersListParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/AvailableProvidersList",
+                "__new": "./common.json/definitions/AvailableProvidersList"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/AvailableProvidersList",
+                "__new": "./common.json/definitions/AvailableProvidersList"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/azureReachabilityReport": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/AzureReachabilityReportParameters",
+                  "__new": "./common.json/definitions/AzureReachabilityReportParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/AzureReachabilityReport",
+                "__new": "./common.json/definitions/AzureReachabilityReport"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/AzureReachabilityReport",
+                "__new": "./common.json/definitions/AzureReachabilityReport"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/FlowLogInformation",
+                  "__new": "./common.json/definitions/FlowLogInformation"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/FlowLogInformation",
+                "__new": "./common.json/definitions/FlowLogInformation"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/FlowLogInformation",
+                "__new": "./common.json/definitions/FlowLogInformation"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/ConnectivityParameters",
+                  "__new": "./common.json/definitions/ConnectivityParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ConnectivityInformation",
+                "__new": "./common.json/definitions/ConnectivityInformation"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ConnectivityInformation",
+                "__new": "./common.json/definitions/ConnectivityInformation"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/ipFlowVerify": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/VerificationIPFlowParameters",
+                  "__new": "./common.json/definitions/VerificationIPFlowParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/VerificationIPFlowResult",
+                "__new": "./common.json/definitions/VerificationIPFlowResult"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/VerificationIPFlowResult",
+                "__new": "./common.json/definitions/VerificationIPFlowResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/NetworkConfigurationDiagnosticParameters",
+                  "__new": "./common.json/definitions/NetworkConfigurationDiagnosticParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkConfigurationDiagnosticResponse",
+                "__new": "./common.json/definitions/NetworkConfigurationDiagnosticResponse"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkConfigurationDiagnosticResponse",
+                "__new": "./common.json/definitions/NetworkConfigurationDiagnosticResponse"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/nextHop": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/NextHopParameters",
+                  "__new": "./common.json/definitions/NextHopParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NextHopResult",
+                "__new": "./common.json/definitions/NextHopResult"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NextHopResult",
+                "__new": "./common.json/definitions/NextHopResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/PacketCaptureListResult",
+                "__new": "./common.json/definitions/PacketCaptureListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/PacketCaptureResult",
+                "__new": "./common.json/definitions/PacketCaptureResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/PacketCapture",
+                  "__new": "./common.json/definitions/PacketCapture"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/PacketCaptureResult",
+                "__new": "./common.json/definitions/PacketCaptureResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/NetworkWatcher"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/PacketCaptureQueryStatusResult",
+                "__new": "./common.json/definitions/PacketCaptureQueryStatusResult"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/PacketCaptureQueryStatusResult",
+                "__new": "./common.json/definitions/PacketCaptureQueryStatusResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/FlowLogStatusParameters",
+                  "__new": "./common.json/definitions/FlowLogStatusParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/FlowLogInformation",
+                "__new": "./common.json/definitions/FlowLogInformation"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/FlowLogInformation",
+                "__new": "./common.json/definitions/FlowLogInformation"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryTroubleshootResult": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/QueryTroubleshootingParameters",
+                  "__new": "./common.json/definitions/QueryTroubleshootingParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/TroubleshootingResult",
+                "__new": "./common.json/definitions/TroubleshootingResult"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/TroubleshootingResult",
+                "__new": "./common.json/definitions/TroubleshootingResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/SecurityGroupViewParameters",
+                  "__new": "./common.json/definitions/SecurityGroupViewParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/SecurityGroupViewResult",
+                "__new": "./common.json/definitions/SecurityGroupViewResult"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/SecurityGroupViewResult",
+                "__new": "./common.json/definitions/SecurityGroupViewResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/topology": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/TopologyParameters",
+                  "__new": "./common.json/definitions/TopologyParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/Topology",
+                "__new": "./common.json/definitions/Topology"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/TroubleshootingParameters",
+                  "__new": "./common.json/definitions/TroubleshootingParameters"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/TroubleshootingResult",
+                "__new": "./common.json/definitions/TroubleshootingResult"
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/TroubleshootingResult",
+                "__new": "./common.json/definitions/TroubleshootingResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ErrorResponse",
+                "__new": "./common.json/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailableProvidersList__deleted": {
+      "type": "object",
+      "properties": {
+        "countries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableProvidersListCountry"
+          }
+        }
+      },
+      "required": [
+        "countries"
+      ]
+    },
+    "AvailableProvidersListCity__deleted": {
+      "type": "object",
+      "properties": {
+        "cityName": {
+          "type": "string"
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AvailableProvidersListCountry__deleted": {
+      "type": "object",
+      "properties": {
+        "countryName": {
+          "type": "string"
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableProvidersListState"
+          }
+        }
+      }
+    },
+    "AvailableProvidersListParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "azureLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "country": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
+    },
+    "AvailableProvidersListState__deleted": {
+      "type": "object",
+      "properties": {
+        "stateName": {
+          "type": "string"
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableProvidersListCity"
+          }
+        }
+      }
+    },
+    "AzureReachabilityReport__deleted": {
+      "type": "object",
+      "properties": {
+        "aggregationLevel": {
+          "type": "string"
+        },
+        "providerLocation": {
+          "$ref": "#/definitions/AzureReachabilityReportLocation"
+        },
+        "reachabilityReport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureReachabilityReportItem"
+          }
+        }
+      },
+      "required": [
+        "aggregationLevel",
+        "providerLocation",
+        "reachabilityReport"
+      ]
+    },
+    "AzureReachabilityReportItem__deleted": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "azureLocation": {
+          "type": "string"
+        },
+        "latencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureReachabilityReportLatencyInfo"
+          }
+        }
+      }
+    },
+    "AzureReachabilityReportLatencyInfo__deleted": {
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100
+        }
+      }
+    },
+    "AzureReachabilityReportLocation__deleted": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "country"
+      ]
+    },
+    "AzureReachabilityReportParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "providerLocation": {
+          "$ref": "#/definitions/AzureReachabilityReportLocation"
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "endTime",
+        "providerLocation",
+        "startTime"
+      ]
+    },
+    "ConnectionMonitor__deleted": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionMonitorParameters",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ConnectionMonitorDestination__deleted": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      }
+    },
+    "ConnectionMonitorEndpoint__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "AzureVM",
+            "AzureVNet",
+            "AzureSubnet",
+            "ExternalAddress",
+            "MMAWorkspaceMachine",
+            "MMAWorkspaceNetwork",
+            "AzureArcVM",
+            "AzureVMSS",
+            "AzureArcNetwork"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointType",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/ConnectionMonitorEndpointFilter"
+        },
+        "scope": {
+          "$ref": "#/definitions/ConnectionMonitorEndpointScope"
+        },
+        "coverageLevel": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Low",
+            "BelowAverage",
+            "Average",
+            "AboveAverage",
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "CoverageLevel",
+            "modelAsString": true
+          }
+        },
+        "locationDetails": {
+          "$ref": "#/definitions/ConnectionMonitorEndpointLocationDetails"
+        },
+        "subscriptionId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ConnectionMonitorEndpointFilter__deleted": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Include"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorEndpointFilterType",
+            "modelAsString": true
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorEndpointFilterItem"
+          }
+        }
+      }
+    },
+    "ConnectionMonitorEndpointFilterItem__deleted": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AgentAddress"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorEndpointFilterItemType",
+            "modelAsString": true
+          }
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionMonitorEndpointLocationDetails__deleted": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionMonitorEndpointScope__deleted": {
+      "type": "object",
+      "properties": {
+        "include": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorEndpointScopeItem"
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorEndpointScopeItem"
+          }
+        }
+      }
+    },
+    "ConnectionMonitorEndpointScopeItem__deleted": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionMonitorHttpConfiguration__deleted": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "Get",
+            "Post"
+          ],
+          "x-ms-enum": {
+            "name": "HTTPConfigurationMethod",
+            "modelAsString": true
+          }
+        },
+        "path": {
+          "type": "string"
+        },
+        "requestHeaders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HTTPHeader"
+          }
+        },
+        "validStatusCodeRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "preferHTTPS": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ConnectionMonitorIcmpConfiguration__deleted": {
+      "type": "object",
+      "properties": {
+        "disableTraceRoute": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ConnectionMonitorListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorResult"
+          }
+        }
+      }
+    },
+    "ConnectionMonitorOutput__deleted": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Workspace"
+          ],
+          "x-ms-enum": {
+            "name": "OutputType",
+            "modelAsString": true
+          }
+        },
+        "workspaceSettings": {
+          "$ref": "#/definitions/ConnectionMonitorWorkspaceSettings"
+        }
+      }
+    },
+    "ConnectionMonitorParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ConnectionMonitorSource"
+        },
+        "destination": {
+          "$ref": "#/definitions/ConnectionMonitorDestination"
+        },
+        "autoStart": {
+          "type": "boolean",
+          "default": true
+        },
+        "monitoringIntervalInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "default": 60,
+          "minimum": 30,
+          "maximum": 1800
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorEndpoint"
+          }
+        },
+        "testConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorTestConfiguration"
+          }
+        },
+        "testGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorTestGroup"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorOutput"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionMonitorQueryResult__deleted": {
+      "type": "object",
+      "properties": {
+        "sourceStatus": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorSourceStatus",
+            "modelAsString": true
+          }
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionStateSnapshot"
+          }
+        }
+      }
+    },
+    "ConnectionMonitorResult__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectionMonitorResultProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectionMonitorResultProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "monitoringStatus": {
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionMonitorType": {
+          "type": "string",
+          "enum": [
+            "MultiEndpoint",
+            "SingleSourceDestination"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionMonitorParameters"
+        }
+      ]
+    },
+    "ConnectionMonitorSource__deleted": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "ConnectionMonitorSuccessThreshold__deleted": {
+      "type": "object",
+      "properties": {
+        "checksFailedPercent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "roundTripTimeMs": {
+          "type": "number"
+        }
+      }
+    },
+    "ConnectionMonitorTcpConfiguration__deleted": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "disableTraceRoute": {
+          "type": "boolean"
+        },
+        "destinationPortBehavior": {
+          "type": "string",
+          "enum": [
+            "None",
+            "ListenIfAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "DestinationPortBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ConnectionMonitorTestConfiguration__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "testFrequencySec": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Tcp",
+            "Http",
+            "Icmp"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorTestConfigurationProtocol",
+            "modelAsString": true
+          }
+        },
+        "preferredIPVersion": {
+          "type": "string",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredIPVersion",
+            "modelAsString": true
+          }
+        },
+        "httpConfiguration": {
+          "$ref": "#/definitions/ConnectionMonitorHttpConfiguration"
+        },
+        "tcpConfiguration": {
+          "$ref": "#/definitions/ConnectionMonitorTcpConfiguration"
+        },
+        "icmpConfiguration": {
+          "$ref": "#/definitions/ConnectionMonitorIcmpConfiguration"
+        },
+        "successThreshold": {
+          "$ref": "#/definitions/ConnectionMonitorSuccessThreshold"
+        }
+      },
+      "required": [
+        "name",
+        "protocol"
+      ]
+    },
+    "ConnectionMonitorTestGroup__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "disable": {
+          "type": "boolean"
+        },
+        "testConfigurations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "destinations",
+        "name",
+        "sources",
+        "testConfigurations"
+      ]
+    },
+    "ConnectionMonitorWorkspaceSettings__deleted": {
+      "type": "object",
+      "properties": {
+        "workspaceResourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionStateSnapshot__deleted": {
+      "type": "object",
+      "properties": {
+        "connectionState": {
+          "type": "string",
+          "enum": [
+            "Reachable",
+            "Unreachable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionState",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evaluationState": {
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "EvaluationState",
+            "modelAsString": true
+          }
+        },
+        "avgLatencyInMs": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "minLatencyInMs": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "maxLatencyInMs": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "probesSent": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "probesFailed": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "hops": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkWatcher.json#/definitions/ConnectivityHop"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectivityDestination__deleted": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      }
+    },
+    "ConnectivityHop__deleted": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "address": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "nextHopIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "previousHopIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HopLink"
+          },
+          "readOnly": true
+        },
+        "previousLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HopLink"
+          },
+          "readOnly": true
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectivityIssue"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectivityInformation__deleted": {
+      "type": "object",
+      "properties": {
+        "hops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectivityHop"
+          },
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Connected",
+            "Disconnected",
+            "Degraded"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "avgLatencyInMs": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "minLatencyInMs": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "maxLatencyInMs": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "probesSent": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "probesFailed": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectivityIssue__deleted": {
+      "type": "object",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "enum": [
+            "Local",
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "Error",
+            "Warning"
+          ],
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "AgentStopped",
+            "GuestFirewall",
+            "DnsResolution",
+            "SocketBind",
+            "NetworkSecurityRule",
+            "UserDefinedRoute",
+            "PortThrottled",
+            "Platform"
+          ],
+          "x-ms-enum": {
+            "name": "IssueType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "context": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IssueContext"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectivityParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ConnectivitySource"
+        },
+        "destination": {
+          "$ref": "#/definitions/ConnectivityDestination"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Tcp",
+            "Http",
+            "Https",
+            "Icmp"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true
+          }
+        },
+        "protocolConfiguration": {
+          "$ref": "#/definitions/ProtocolConfiguration"
+        },
+        "preferredIPVersion": {
+          "$ref": "./network.json#/definitions/IPVersion"
+        }
+      },
+      "required": [
+        "destination",
+        "source"
+      ]
+    },
+    "ConnectivitySource__deleted": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "ErrorResponse__deleted": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "./network.json#/definitions/ErrorDetails",
+          "title": "Error"
+        }
+      }
+    },
+    "EvaluatedNetworkSecurityGroup__deleted": {
+      "type": "object",
+      "properties": {
+        "networkSecurityGroupId": {
+          "type": "string"
+        },
+        "appliedTo": {
+          "type": "string"
+        },
+        "matchedRule": {
+          "$ref": "#/definitions/MatchedRule"
+        },
+        "rulesEvaluationResult": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityRulesEvaluationResult"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "FlowLog__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FlowLogPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "FlowLogFormatParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "JSON"
+          ],
+          "x-ms-enum": {
+            "name": "FlowLogFormatType",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0
+        }
+      }
+    },
+    "FlowLogInformation__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/FlowLogProperties",
+          "x-ms-client-flatten": true
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsProperties"
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity"
+        }
+      },
+      "required": [
+        "properties",
+        "targetResourceId"
+      ]
+    },
+    "FlowLogListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/FlowLog"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "FlowLogProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "storageId": {
+          "type": "string"
+        },
+        "enabledFilteringCriteria": {
+          "type": "string"
+        },
+        "recordTypes": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicyParameters"
+        },
+        "format": {
+          "$ref": "#/definitions/FlowLogFormatParameters"
+        }
+      },
+      "required": [
+        "enabled",
+        "storageId"
+      ]
+    },
+    "FlowLogPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        },
+        "targetResourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "storageId": {
+          "type": "string"
+        },
+        "enabledFilteringCriteria": {
+          "type": "string"
+        },
+        "recordTypes": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicyParameters"
+        },
+        "format": {
+          "$ref": "#/definitions/FlowLogFormatParameters"
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsProperties"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "storageId",
+        "targetResourceId"
+      ]
+    },
+    "FlowLogStatusParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetResourceId"
+      ]
+    },
+    "HTTPConfiguration__deleted": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "Get"
+          ],
+          "x-ms-enum": {
+            "name": "HTTPMethod",
+            "modelAsString": true
+          }
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HTTPHeader"
+          }
+        },
+        "validStatusCodes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "HTTPHeader__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "HopLink__deleted": {
+      "type": "object",
+      "properties": {
+        "nextHopId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "linkType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/HopLinkProperties",
+          "x-ms-client-flatten": true
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectivityIssue"
+          },
+          "readOnly": true
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HopLinkProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "roundTripTimeMin": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": true
+        },
+        "roundTripTimeAvg": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": true
+        },
+        "roundTripTimeMax": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": true
+        }
+      }
+    },
+    "IssueContext__deleted": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "MatchedRule__deleted": {
+      "type": "object",
+      "properties": {
+        "ruleName": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkConfigurationDiagnosticParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        },
+        "verbosityLevel": {
+          "type": "string",
+          "enum": [
+            "Normal",
+            "Minimum",
+            "Full"
+          ],
+          "x-ms-enum": {
+            "name": "VerbosityLevel",
+            "modelAsString": true
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile"
+          }
+        }
+      },
+      "required": [
+        "profiles",
+        "targetResourceId"
+      ]
+    },
+    "NetworkConfigurationDiagnosticProfile__deleted": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "Direction",
+            "modelAsString": true
+          }
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "destinationPort": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "destination",
+        "destinationPort",
+        "direction",
+        "protocol",
+        "source"
+      ]
+    },
+    "NetworkConfigurationDiagnosticResponse__deleted": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkConfigurationDiagnosticResult"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkConfigurationDiagnosticResult__deleted": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile"
+        },
+        "networkSecurityGroupResult": {
+          "$ref": "#/definitions/NetworkSecurityGroupResult"
+        }
+      }
+    },
+    "NetworkInterfaceAssociation__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "securityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkSecurityGroup.json#/definitions/SecurityRule"
+          }
+        }
+      }
+    },
+    "NetworkSecurityGroupResult__deleted": {
+      "type": "object",
+      "properties": {
+        "securityRuleAccessResult": {
+          "$ref": "./networkSecurityGroup.json#/definitions/SecurityRuleAccess"
+        },
+        "evaluatedNetworkSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvaluatedNetworkSecurityGroup"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityRulesEvaluationResult__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "protocolMatched": {
+          "type": "boolean"
+        },
+        "sourceMatched": {
+          "type": "boolean"
+        },
+        "sourcePortMatched": {
+          "type": "boolean"
+        },
+        "destinationMatched": {
+          "type": "boolean"
+        },
+        "destinationPortMatched": {
+          "type": "boolean"
+        }
+      }
+    },
+    "NetworkWatcherListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkWatcher"
+          }
+        }
+      }
+    },
+    "NetworkWatcherPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "NextHopParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        },
+        "sourceIPAddress": {
+          "type": "string"
+        },
+        "destinationIPAddress": {
+          "type": "string"
+        },
+        "targetNicResourceId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "destinationIPAddress",
+        "sourceIPAddress",
+        "targetResourceId"
+      ]
+    },
+    "NextHopResult__deleted": {
+      "type": "object",
+      "properties": {
+        "nextHopType": {
+          "type": "string",
+          "enum": [
+            "Internet",
+            "VirtualAppliance",
+            "VirtualNetworkGateway",
+            "VnetLocal",
+            "HyperNetGateway",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "NextHopType",
+            "modelAsString": true
+          }
+        },
+        "nextHopIpAddress": {
+          "type": "string"
+        },
+        "routeTableId": {
+          "type": "string"
+        }
+      }
+    },
+    "PacketCapture__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PacketCaptureParameters",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PacketCaptureFilter__deleted": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "default": "Any",
+          "enum": [
+            "TCP",
+            "UDP",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "PcProtocol",
+            "modelAsString": true
+          }
+        },
+        "localIPAddress": {
+          "type": "string"
+        },
+        "remoteIPAddress": {
+          "type": "string"
+        },
+        "localPort": {
+          "type": "string"
+        },
+        "remotePort": {
+          "type": "string"
+        }
+      }
+    },
+    "PacketCaptureListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PacketCaptureResult"
+          }
+        }
+      }
+    },
+    "PacketCaptureMachineScope__deleted": {
+      "type": "object",
+      "properties": {
+        "include": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PacketCaptureParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/PacketCaptureMachineScope"
+        },
+        "targetType": {
+          "type": "string",
+          "enum": [
+            "AzureVM",
+            "AzureVMSS"
+          ],
+          "x-ms-enum": {
+            "name": "PacketCaptureTargetType",
+            "modelAsString": false
+          }
+        },
+        "bytesToCapturePerPacket": {
+          "type": "integer",
+          "format": "int64",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "totalBytesPerSession": {
+          "type": "integer",
+          "format": "int64",
+          "default": 1073741824,
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "timeLimitInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "default": 18000,
+          "minimum": 0,
+          "maximum": 18000
+        },
+        "storageLocation": {
+          "$ref": "#/definitions/PacketCaptureStorageLocation"
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PacketCaptureFilter"
+          }
+        },
+        "continuousCapture": {
+          "type": "boolean"
+        },
+        "captureSettings": {
+          "$ref": "#/definitions/PacketCaptureSettings",
+          "type": "object"
+        }
+      },
+      "required": [
+        "storageLocation",
+        "target"
+      ]
+    },
+    "PacketCaptureQueryStatusResult__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "captureStartTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "packetCaptureStatus": {
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Stopped",
+            "Error",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "PcStatus",
+            "modelAsString": true
+          }
+        },
+        "stopReason": {
+          "type": "string"
+        },
+        "packetCaptureError": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "InternalError",
+              "AgentStopped",
+              "CaptureFailed",
+              "LocalFileFailed",
+              "StorageFailed"
+            ],
+            "x-ms-enum": {
+              "name": "PcError",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "PacketCaptureResult__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PacketCaptureResultProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PacketCaptureResultProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PacketCaptureParameters"
+        }
+      ]
+    },
+    "PacketCaptureSettings__deleted": {
+      "type": "object",
+      "properties": {
+        "fileCount": {
+          "type": "integer",
+          "format": "int32",
+          "default": 10,
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "fileSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "default": 104857600,
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "sessionTimeLimitInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "default": 86400,
+          "minimum": 0,
+          "maximum": 604800
+        }
+      }
+    },
+    "PacketCaptureStorageLocation__deleted": {
+      "type": "object",
+      "properties": {
+        "storageId": {
+          "type": "string"
+        },
+        "storagePath": {
+          "type": "string"
+        },
+        "filePath": {
+          "type": "string"
+        },
+        "localPath": {
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolConfiguration__deleted": {
+      "type": "object",
+      "properties": {
+        "HTTPConfiguration": {
+          "$ref": "#/definitions/HTTPConfiguration"
+        }
+      }
+    },
+    "QueryTroubleshootingParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetResourceId"
+      ]
+    },
+    "RetentionPolicyParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "SecurityGroupNetworkInterface__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "securityRuleAssociations": {
+          "$ref": "#/definitions/SecurityRuleAssociations"
+        }
+      }
+    },
+    "SecurityGroupViewParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetResourceId"
+      ]
+    },
+    "SecurityGroupViewResult__deleted": {
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityGroupNetworkInterface"
+          }
+        }
+      }
+    },
+    "SecurityRuleAssociations__deleted": {
+      "type": "object",
+      "properties": {
+        "networkInterfaceAssociation": {
+          "$ref": "#/definitions/NetworkInterfaceAssociation"
+        },
+        "subnetAssociation": {
+          "$ref": "#/definitions/SubnetAssociation"
+        },
+        "defaultSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkSecurityGroup.json#/definitions/SecurityRule"
+          }
+        },
+        "effectiveSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkInterface.json#/definitions/EffectiveNetworkSecurityRule"
+          }
+        }
+      }
+    },
+    "SubnetAssociation__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "securityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkSecurityGroup.json#/definitions/SecurityRule"
+          }
+        }
+      }
+    },
+    "Topology__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopologyResource"
+          }
+        }
+      }
+    },
+    "TopologyAssociation__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "associationType": {
+          "type": "string",
+          "enum": [
+            "Associated",
+            "Contains"
+          ],
+          "x-ms-enum": {
+            "name": "AssociationType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TopologyParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceGroupName": {
+          "type": "string"
+        },
+        "targetVirtualNetwork": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "targetSubnet": {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      }
+    },
+    "TopologyResource__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "associations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopologyAssociation"
+          }
+        }
+      }
+    },
+    "TrafficAnalyticsConfigurationProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "workspaceId": {
+          "type": "string"
+        },
+        "workspaceRegion": {
+          "type": "string"
+        },
+        "workspaceResourceId": {
+          "type": "string"
+        },
+        "trafficAnalyticsInterval": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TrafficAnalyticsProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "networkWatcherFlowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsConfigurationProperties"
+        }
+      }
+    },
+    "TroubleshootingDetails__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "reasonType": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "recommendedActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TroubleshootingRecommendedActions"
+          }
+        }
+      }
+    },
+    "TroubleshootingParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/TroubleshootingProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties",
+        "targetResourceId"
+      ]
+    },
+    "TroubleshootingProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "storageId": {
+          "type": "string"
+        },
+        "storagePath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "storageId",
+        "storagePath"
+      ]
+    },
+    "TroubleshootingRecommendedActions__deleted": {
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "type": "string"
+        },
+        "actionText": {
+          "type": "string"
+        },
+        "actionUri": {
+          "type": "string"
+        },
+        "actionUriText": {
+          "type": "string"
+        }
+      }
+    },
+    "TroubleshootingResult__deleted": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "code": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TroubleshootingDetails"
+          }
+        }
+      }
+    },
+    "VerificationIPFlowParameters__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "Direction",
+            "modelAsString": true
+          }
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "name": "IpFlowProtocol",
+            "modelAsString": true
+          }
+        },
+        "localPort": {
+          "type": "string"
+        },
+        "remotePort": {
+          "type": "string"
+        },
+        "localIPAddress": {
+          "type": "string"
+        },
+        "remoteIPAddress": {
+          "type": "string"
+        },
+        "targetNicResourceId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "direction",
+        "localIPAddress",
+        "localPort",
+        "protocol",
+        "remoteIPAddress",
+        "remotePort",
+        "targetResourceId"
+      ]
+    },
+    "VerificationIPFlowResult__deleted": {
+      "type": "object",
+      "properties": {
+        "access": {
+          "$ref": "./network.json#/definitions/Access"
+        },
+        "ruleName": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkWatcher": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/NetworkWatcherPropertiesFormat",
+            "__new": "./common.json/definitions/NetworkWatcherPropertiesFormat"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}

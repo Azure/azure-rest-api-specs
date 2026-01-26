@@ -1,0 +1,5029 @@
+{
+  "info": {
+    "description__added": "APIs to manage web application firewall rules.",
+    "title": {
+      "__old": "SecurityUserConfiguration",
+      "__new": "WebApplicationFirewallManagement"
+    }
+  },
+  "paths": {
+    "/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections__deleted": {
+      "get": {
+        "operationId": "ManagementGroupNetworkManagerConnections_List",
+        "parameters": [
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ListTopParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Management Group Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionManagementGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ManagementGroupIdParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerConnectionNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "operationId": "ManagementGroupNetworkManagerConnections_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Management Group Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionManagementGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagementGroupNetworkManagerConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Management Group Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionManagementGroupPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ManagementGroupNetworkManagerConnections_Delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Management Group Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionManagementGroupDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers__deleted": {
+      "get": {
+        "operationId": "StaticMembers_List",
+        "parameters": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "networkGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StaticMemberListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticMembersList": {
+            "$ref": "./examples/NetworkManagerStaticMemberList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers/{staticMemberName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/StaticMemberNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "operationId": "StaticMembers_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticMembersGet": {
+            "$ref": "./examples/NetworkManagerStaticMemberGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StaticMembers_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/StaticMember"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticMemberPut": {
+            "$ref": "./examples/NetworkManagerStaticMemberPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StaticMembers_Delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticMembersDelete": {
+            "$ref": "./examples/NetworkManagerStaticMemberDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections__deleted": {
+      "get": {
+        "operationId": "RoutingRuleCollections_List",
+        "parameters": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List routing rule collections": {
+            "$ref": "./examples/NetworkManagerRoutingRuleCollectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        }
+      ],
+      "get": {
+        "operationId": "RoutingRuleCollections_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets routing rule collection": {
+            "$ref": "./examples/NetworkManagerRoutingRuleCollectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoutingRuleCollections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "ruleCollection",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a routing rule collection": {
+            "$ref": "./examples/NetworkManagerRoutingRuleCollectionPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoutingRuleCollections_Delete",
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an routing rule collection": {
+            "$ref": "./examples/NetworkManagerRoutingRuleCollectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        },
+        {
+          "$ref": "#/parameters/ListSkipTokenParameter"
+        }
+      ],
+      "get": {
+        "operationId": "RoutingRules_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List routing rules": {
+            "$ref": "./examples/NetworkManagerRoutingRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationsRuleParameter"
+        }
+      ],
+      "get": {
+        "operationId": "RoutingRules_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets routing rule": {
+            "$ref": "./examples/NetworkManagerRoutingRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoutingRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "routingRule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a default routing rule": {
+            "$ref": "./examples/NetworkManagerRoutingRulePut.json"
+          },
+          "Create an routing rule": {
+            "$ref": "./examples/NetworkManagerRoutingRulePut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoutingRules_Delete",
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a routing rule": {
+            "$ref": "./examples/NetworkManagerRoutingRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections__deleted": {
+      "get": {
+        "operationId": "AdminRuleCollections_List",
+        "parameters": [
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AdminRuleCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List security admin rule collections": {
+            "$ref": "./examples/NetworkManagerAdminRuleCollectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        }
+      ],
+      "get": {
+        "operationId": "AdminRuleCollections_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AdminRuleCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets security admin rule collection": {
+            "$ref": "./examples/NetworkManagerAdminRuleCollectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AdminRuleCollections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "ruleCollection",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdminRuleCollection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AdminRuleCollection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AdminRuleCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update an admin rule collection": {
+            "$ref": "./examples/NetworkManagerAdminRuleCollectionPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AdminRuleCollections_Delete",
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an admin rule collection": {
+            "$ref": "./examples/NetworkManagerAdminRuleCollectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules__deleted": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        },
+        {
+          "$ref": "#/parameters/ListSkipTokenParameter"
+        }
+      ],
+      "get": {
+        "operationId": "AdminRules_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AdminRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List security admin rules": {
+            "$ref": "./examples/NetworkManagerAdminRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationsRuleParameter"
+        }
+      ],
+      "get": {
+        "operationId": "AdminRules_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BaseAdminRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets security admin rule": {
+            "$ref": "./examples/NetworkManagerAdminRuleGet.json"
+          },
+          "Gets security default admin rule": {
+            "$ref": "./examples/NetworkManagerDefaultAdminRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AdminRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "adminRule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BaseAdminRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BaseAdminRule"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BaseAdminRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a admin rule with network group as source or destination": {
+            "$ref": "./examples/NetworkManagerAdminRulePut_NetworkGroupSource.json"
+          },
+          "Create an admin rule": {
+            "$ref": "./examples/NetworkManagerAdminRulePut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AdminRules_Delete",
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an admin rule": {
+            "$ref": "./examples/NetworkManagerAdminRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections__deleted": {
+      "get": {
+        "operationId": "SecurityUserRuleCollections_List",
+        "parameters": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRuleCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List rule collections in a security configuration": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleCollectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        }
+      ],
+      "get": {
+        "operationId": "SecurityUserRuleCollections_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRuleCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets security user rule collection": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleCollectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecurityUserRuleCollections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "securityUserRuleCollection",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRuleCollection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRuleCollection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRuleCollection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Security User Rule Collection": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleCollectionPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecurityUserRuleCollections_Delete",
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a Security User Rule collection": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleCollectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        },
+        {
+          "$ref": "#/parameters/ListSkipTokenParameter"
+        }
+      ],
+      "get": {
+        "operationId": "SecurityUserRules_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List security user rules": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        },
+        {
+          "$ref": "#/parameters/RuleCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationsRuleParameter"
+        }
+      ],
+      "get": {
+        "operationId": "SecurityUserRules_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a security user rule": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecurityUserRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "securityUserRule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRule"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a security user rule": {
+            "$ref": "./examples/NetworkManagerSecurityUserRulePut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecurityUserRules_Delete",
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a security user rule": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "./networkManager.json#/parameters/ListTopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32",
+              "minimum__added": 1,
+              "maximum__added": 20
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "./networkManager.json#/parameters/ListSkipTokenParameter",
+              "name__added": "$skipToken",
+              "in__added": "query",
+              "type__added": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerConnectionNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagers": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/PatchObject",
+                  "__new": "./common.json/definitions/PatchObject"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/commit": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/NetworkManagerCommit",
+                  "__new": "./common.json/definitions/NetworkManagerCommit"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkManagerCommit",
+                "__new": "./common.json/definitions/NetworkManagerCommit"
+              }
+            }
+          },
+          "202": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkManagerCommit",
+                "__new": "./common.json/definitions/NetworkManagerCommit"
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ConnectivityConfigurationNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 20
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/ActiveConfigurationParameter",
+                  "__new": "./common.json/definitions/ActiveConfigurationParameter"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ActiveConnectivityConfigurationsListResult",
+                "__new": "./common.json/definitions/ActiveConnectivityConfigurationsListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 20
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/ActiveConfigurationParameter",
+                  "__new": "./common.json/definitions/ActiveConfigurationParameter"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ActiveSecurityAdminRulesListResult",
+                "__new": "./common.json/definitions/ActiveSecurityAdminRulesListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 20
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "#/definitions/NetworkManagerDeploymentStatusParameter",
+                  "__new": "./common.json/definitions/NetworkManagerDeploymentStatusParameter"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkManagerDeploymentStatusListResult",
+                "__new": "./common.json/definitions/NetworkManagerDeploymentStatusListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkGroupNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "./networkManager.json#/parameters/NetworkManagerNameParameter",
+              "name__added": "networkManagerName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "pattern__added": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "./networkManager.json#/parameters/ListTopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32",
+              "minimum__added": 1,
+              "maximum__added": 20
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "./networkManager.json#/parameters/ListSkipTokenParameter",
+              "name__added": "$skipToken",
+              "in__added": "query",
+              "type__added": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections/{scopeConnectionName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ScopeConnectionName"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scopeConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scopeConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scopeConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CommonErrorResponse",
+                "__new": "./common.json/definitions/CommonErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CommonErrorResponse",
+                "__new": "./common.json/definitions/CommonErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CommonErrorResponse",
+                "__new": "./common.json/definitions/CommonErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CommonErrorResponse",
+                "__new": "./common.json/definitions/CommonErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/SecurityConfigurationParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualNetworkNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "virtualNetworkName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 20
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./networkManagerGroup.json#/definitions/QueryRequestOptions",
+                  "__new": "./common.json/definitions/QueryRequestOptions"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult",
+                "__new": "./common.json/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules": {
+      "parameters__deleted": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualNetworkNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "virtualNetworkName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 20
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./networkManagerGroup.json#/definitions/QueryRequestOptions",
+                  "__new": "./common.json/definitions/QueryRequestOptions"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult",
+                "__new": "./common.json/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActiveBaseSecurityAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "commitTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "region": {
+          "type": "string"
+        },
+        "configurationDescription": {
+          "type": "string"
+        },
+        "ruleCollectionDescription": {
+          "type": "string"
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
+          }
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/ConfigurationGroup"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Custom",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveAdminRuleKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "ActiveConfigurationParameter__deleted": {
+      "type": "object",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        }
+      }
+    },
+    "ActiveConnectivityConfiguration__deleted": {
+      "type": "object",
+      "properties": {
+        "commitTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConnectivityConfiguration"
+        }
+      ]
+    },
+    "ActiveConnectivityConfigurationsListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActiveConnectivityConfiguration"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        }
+      }
+    },
+    "ActiveDefaultSecurityAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "ActiveSecurityAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "ActiveSecurityAdminRulesListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        }
+      }
+    },
+    "AddressPrefixItem__deleted": {
+      "type": "object",
+      "properties": {
+        "addressPrefix": {
+          "type": "string"
+        },
+        "addressPrefixType": {
+          "type": "string",
+          "enum": [
+            "IPPrefix",
+            "ServiceTag",
+            "NetworkGroup"
+          ],
+          "x-ms-enum": {
+            "name": "AddressPrefixType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AdminPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "Icmp",
+            "Esp",
+            "Any",
+            "Ah"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityConfigurationRuleProtocol",
+            "modelAsString": true
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "access": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny",
+            "AlwaysAllow"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityConfigurationRuleAccess",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityConfigurationRuleDirection",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "access",
+        "direction",
+        "priority",
+        "protocol"
+      ]
+    },
+    "AdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "AdminRuleCollection__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminRuleCollectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "AdminRuleCollectionListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AdminRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "AdminRuleCollectionPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appliesToGroups"
+      ]
+    },
+    "AdminRuleListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/BaseAdminRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "BaseAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Custom",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "AdminRuleKind",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "ConfigurationGroup__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectivityConfigurationProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "connectivityTopology": {
+          "type": "string",
+          "enum": [
+            "HubAndSpoke",
+            "Mesh"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityTopology",
+            "modelAsString": true
+          }
+        },
+        "hubs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Hub"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "isGlobal": {
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "IsGlobal",
+            "modelAsString": true
+          }
+        },
+        "connectivityCapabilities": {
+          "type": "object",
+          "properties": {
+            "connectedGroupPrivateEndpointsScale": {
+              "type": "string",
+              "description": "Option indicating the scale of private endpoints allowed in the connected group of the connectivity configuration.",
+              "default": "Standard",
+              "enum": [
+                "Standard",
+                "HighScale"
+              ],
+              "x-ms-enum": {
+                "name": "ConnectedGroupPrivateEndpointsScale",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Standard",
+                    "description": "Default. Allows for up to 2K private endpoints in the connected group."
+                  },
+                  {
+                    "value": "HighScale",
+                    "description": "Allows for up to 20K private endpoints in the connected group."
+                  }
+                ]
+              }
+            },
+            "connectedGroupAddressOverlap": {
+              "type": "string",
+              "description": "Behavior to handle overlapped IP address space among members of the connected group of the connectivity configuration.",
+              "default": "Allowed",
+              "enum": [
+                "Allowed",
+                "Disallowed"
+              ],
+              "x-ms-enum": {
+                "name": "ConnectedGroupAddressOverlap",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Allowed",
+                    "description": "Default. Allows connected group members to have overlapping IP address space."
+                  },
+                  {
+                    "value": "Disallowed",
+                    "description": "Strictly disallows connected group members from having overlapping IP address space. Prevents the addition of a virtual network with overlapping address to the connected group, blocks peering between a virtual network and a connected group member if any connected group member has an overlapping range, and restricts address space modifications that would introduce overlap."
+                  }
+                ]
+              }
+            },
+            "peeringEnforcement": {
+              "type": "string",
+              "description": "Option indicating enforcement of peerings created by the connectivity configuration.",
+              "default": "Unenforced",
+              "enum": [
+                "Unenforced",
+                "Enforced"
+              ],
+              "x-ms-enum": {
+                "name": "PeeringEnforcement",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "Unenforced",
+                    "description": "Default. Peerings created by the connectivity configuration may be modified or deleted outside of the network manager."
+                  },
+                  {
+                    "value": "Enforced",
+                    "description": "Peerings created by the connectivity configuration will not be modifiable or deletable outside of the network manager."
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "connectedGroupPrivateEndpointsScale",
+            "connectedGroupAddressOverlap",
+            "peeringEnforcement"
+          ]
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/connectivityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "deleteExistingPeering": {
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteExistingPeering",
+            "modelAsString": true
+          }
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appliesToGroups",
+        "connectivityTopology"
+      ]
+    },
+    "CrossTenantScopes__deleted": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "managementGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultAdminPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "flag": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "Icmp",
+            "Esp",
+            "Any",
+            "Ah"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityConfigurationRuleProtocol",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "access": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny",
+            "AlwaysAllow"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityConfigurationRuleAccess",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityConfigurationRuleDirection",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "EffectiveBaseSecurityAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "configurationDescription": {
+          "type": "string"
+        },
+        "ruleCollectionDescription": {
+          "type": "string"
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationGroup"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Custom",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveAdminRuleKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "EffectiveConnectivityConfiguration__deleted": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfigurationProperties",
+          "x-ms-client-flatten": true
+        },
+        "configurationGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationGroup"
+          }
+        }
+      }
+    },
+    "EffectiveDefaultSecurityAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "EffectiveSecurityAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "Hub__deleted": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkGroupProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "memberType": {
+          "type": "string",
+          "enum": [
+            "VirtualNetwork",
+            "Subnet"
+          ],
+          "x-ms-enum": {
+            "name": "GroupMemberType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkManagerCommit__deleted": {
+      "type": "object",
+      "properties": {
+        "commitId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "targetLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "configurationIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commitType": {
+          "type": "string",
+          "enum": [
+            "SecurityAdmin",
+            "Connectivity",
+            "SecurityUser",
+            "Routing"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "commitType",
+        "targetLocations"
+      ]
+    },
+    "NetworkManagerConnectionProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "networkManagerId": {
+          "type": "string"
+        },
+        "connectionState": {
+          "$ref": "./networkManagerScopeConnection.json#/definitions/ConnectionState",
+          "x-ms-client-flatten": true
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatus__deleted": {
+      "type": "object",
+      "properties": {
+        "commitTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "region": {
+          "type": "string"
+        },
+        "deploymentStatus": {
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Deploying",
+            "Deployed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
+        },
+        "configurationIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deploymentType": {
+          "type": "string",
+          "enum": [
+            "SecurityAdmin",
+            "Connectivity",
+            "SecurityUser",
+            "Routing"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatusListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerDeploymentStatus"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatusParameter__deleted": {
+      "type": "object",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deploymentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "SecurityAdmin",
+              "Connectivity",
+              "SecurityUser",
+              "Routing"
+            ],
+            "x-ms-enum": {
+              "name": "ConfigurationType",
+              "modelAsString": true
+            }
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkManagerEffectiveConnectivityConfigurationListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveConnectivityConfiguration"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkManagerEffectiveSecurityAdminRulesListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+          }
+        },
+        "skipToken": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkManagerProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "networkManagerScopes": {
+          "type": "object",
+          "properties": {
+            "managementGroups": {
+              "type": "array",
+              "description": "List of management groups.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "subscriptions": {
+              "type": "array",
+              "description": "List of subscriptions.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "crossTenantScopes": {
+              "type": "array",
+              "description": "List of cross tenant scopes.",
+              "items": {
+                "$ref": "#/definitions/CrossTenantScopes"
+              },
+              "readOnly": true,
+              "x-ms-identifiers": []
+            }
+          }
+        },
+        "networkManagerScopeAccesses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "SecurityAdmin",
+              "Connectivity",
+              "SecurityUser",
+              "Routing"
+            ],
+            "x-ms-enum": {
+              "name": "ConfigurationType",
+              "modelAsString": true
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "networkManagerScopes"
+      ]
+    },
+    "NetworkManagerRoutingConfigurationPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "routeTableUsageMode": {
+          "type": "string",
+          "default": "ManagedOnly",
+          "enum": [
+            "ManagedOnly",
+            "UseExisting"
+          ],
+          "x-ms-enum": {
+            "name": "RouteTableUsageMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "NetworkManagerRoutingGroupItem__deleted": {
+      "type": "object",
+      "properties": {
+        "networkGroupId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "NetworkManagerSecurityGroupItem__deleted": {
+      "type": "object",
+      "properties": {
+        "networkGroupId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "PatchObject__deleted": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryRequestOptions__deleted": {
+      "type": "object",
+      "properties": {
+        "skipToken": {
+          "type": "string"
+        }
+      }
+    },
+    "RoutingRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "RoutingRuleCollection__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRuleCollectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "RoutingRuleCollectionListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/RoutingRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "RoutingRuleCollectionPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "appliesTo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerRoutingGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "disableBgpRoutePropagation": {
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "DisableBgpRoutePropagation",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "appliesTo"
+      ]
+    },
+    "RoutingRuleListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/RoutingRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "RoutingRuleNextHop__deleted": {
+      "type": "object",
+      "properties": {
+        "nextHopType": {
+          "type": "string",
+          "enum": [
+            "Internet",
+            "NoNextHop",
+            "VirtualAppliance",
+            "VirtualNetworkGateway",
+            "VnetLocal"
+          ],
+          "x-ms-enum": {
+            "name": "RoutingRuleNextHopType",
+            "modelAsString": true
+          }
+        },
+        "nextHopAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nextHopType"
+      ]
+    },
+    "RoutingRulePropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "destination": {
+          "$ref": "#/definitions/RoutingRuleRouteDestination"
+        },
+        "nextHop": {
+          "$ref": "#/definitions/RoutingRuleNextHop"
+        }
+      },
+      "required": [
+        "destination",
+        "nextHop"
+      ]
+    },
+    "RoutingRuleRouteDestination__deleted": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AddressPrefix",
+            "ServiceTag"
+          ],
+          "x-ms-enum": {
+            "name": "RoutingRuleDestinationType",
+            "modelAsString": true
+          }
+        },
+        "destinationAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "destinationAddress",
+        "type"
+      ]
+    },
+    "ScopeConnectionProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "connectionState": {
+          "type": "string",
+          "enum": [
+            "Connected",
+            "Pending",
+            "Conflict",
+            "Revoked",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "name": "ScopeConnectionState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "SecurityAdminConfigurationPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "applyOnNetworkIntentPolicyBasedServices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "None",
+              "All",
+              "AllowRulesOnly"
+            ],
+            "x-ms-enum": {
+              "name": "NetworkIntentPolicyBasedService",
+              "modelAsString": true
+            }
+          }
+        },
+        "networkGroupAddressSpaceAggregationOption": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "AddressSpaceAggregationOption",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityUserConfigurationPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityUserGroupItem__deleted": {
+      "type": "object",
+      "properties": {
+        "networkGroupId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "SecurityUserRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityUserRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserRuleCollection__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityUserRuleCollectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserRuleCollectionListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "SecurityUserRuleCollectionPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityUserGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appliesToGroups"
+      ]
+    },
+    "SecurityUserRuleListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "SecurityUserRulePropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "protocol": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol",
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "direction": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "direction",
+        "protocol"
+      ]
+    },
+    "StaticMember__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticMemberProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "StaticMemberListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/StaticMember"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "StaticMemberProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "connectivityGroupItem__deleted": {
+      "type": "object",
+      "properties": {
+        "networkGroupId": {
+          "type": "string"
+        },
+        "useHubGateway": {
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "UseHubGateway",
+            "modelAsString": true
+          }
+        },
+        "isGlobal": {
+          "type": "string",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "IsGlobal",
+            "modelAsString": true
+          }
+        },
+        "groupConnectivity": {
+          "type": "string",
+          "enum": [
+            "None",
+            "DirectlyConnected"
+          ],
+          "x-ms-enum": {
+            "name": "GroupConnectivity",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "groupConnectivity",
+        "networkGroupId"
+      ]
+    },
+    "ConnectivityConfiguration": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/ConnectivityConfigurationProperties",
+            "__new": "./common.json/definitions/ConnectivityConfigurationProperties"
+          }
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/ChildResource",
+              "__new": "./common.json/definitions/ChildResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ConnectivityConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "NetworkGroup": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/NetworkGroupProperties",
+            "__new": "./common.json/definitions/NetworkGroupProperties"
+          }
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/ChildResource",
+              "__new": "./common.json/definitions/ChildResource"
+            }
+          }
+        ]
+      ]
+    },
+    "NetworkGroupListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "NetworkManager": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/NetworkManagerProperties",
+            "__new": "./common.json/definitions/NetworkManagerProperties"
+          }
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "NetworkManagerConnection": {
+      "properties": {
+        "etag__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/NetworkManagerConnectionProperties",
+            "__new": "./common.json/definitions/NetworkManagerConnectionProperties"
+          }
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/ChildResource",
+              "__new": "./common.json/definitions/ChildResource"
+            }
+          }
+        ]
+      ]
+    },
+    "NetworkManagerConnectionListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "NetworkManagerListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "NetworkManagerRoutingConfiguration": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/NetworkManagerRoutingConfigurationPropertiesFormat",
+            "__new": "./common.json/definitions/NetworkManagerRoutingConfigurationPropertiesFormat"
+          }
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/ChildResource",
+              "__new": "./common.json/definitions/ChildResource"
+            }
+          }
+        ]
+      ]
+    },
+    "NetworkManagerRoutingConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ScopeConnection": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/ScopeConnectionProperties",
+            "__new": "./common.json/definitions/ScopeConnectionProperties"
+          }
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/ChildResource",
+              "__new": "./common.json/definitions/ChildResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ScopeConnectionListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "SecurityAdminConfiguration": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/SecurityAdminConfigurationPropertiesFormat",
+            "__new": "./common.json/definitions/SecurityAdminConfigurationPropertiesFormat"
+          }
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/ChildResource",
+              "__new": "./common.json/definitions/ChildResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SecurityAdminConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "SecurityUserConfiguration": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "#/definitions/SecurityUserConfigurationPropertiesFormat",
+            "__new": "./common.json/definitions/SecurityUserConfigurationPropertiesFormat"
+          }
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/ChildResource",
+              "__new": "./common.json/definitions/ChildResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SecurityUserConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    }
+  }
+}
