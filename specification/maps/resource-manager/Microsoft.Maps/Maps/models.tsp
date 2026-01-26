@@ -231,6 +231,7 @@ model MapsAccountProperties {
   /**
    * The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s).
    */
+  @maxItems(10)
   linkedResources?: LinkedResource[];
 
   /**
