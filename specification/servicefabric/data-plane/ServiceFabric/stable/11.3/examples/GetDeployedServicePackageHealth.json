@@ -1,0 +1,73 @@
+{
+    "operationId": "GetDeployedServicePackageHealth",
+    "description": "Gets the information about health of a service package for a specific application deployed for a Service Fabric node and application.",
+    "parameters": {
+        "api-version": "6.0",
+        "nodeName": "_Node_0",
+        "applicationId": "fabric:\/VisualObjects",
+        "servicePackageName": "VisualObjects.ActorServicePkg"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "ApplicationName": "fabric:\/VisualObjects",
+                "ServiceManifestName": "VisualObjects.ActorServicePkg",
+                "NodeName": "_Node_0",
+                "ServicePackageActivationId": "",
+                "HealthEvents": [
+                    {
+                        "SourceId": "System.Hosting",
+                        "Property": "Activation",
+                        "HealthState": "Ok",
+                        "TimeToLiveInMilliSeconds": "P10675199DT2H48M5.4775807S",
+                        "Description": "The ServicePackage was activated successfully.",
+                        "SequenceNumber": "133126558875419937",
+                        "RemoveWhenExpired": false,
+                        "HealthReportId": "Hosting_7.0_1004",
+                        "SourceUtcTimestamp": "2022-11-11T15:58:07.541Z",
+                        "LastModifiedUtcTimestamp": "2022-11-11T15:58:28.449Z",
+                        "IsExpired": false,
+                        "LastOkTransitionAt": "2022-11-11T15:58:28.449Z",
+                        "LastWarningTransitionAt": "0001-01-01T00:00:00.000Z",
+                        "LastErrorTransitionAt": "0001-01-01T00:00:00.000Z"
+                    },
+                    {
+                        "SourceId": "System.Hosting",
+                        "Property": "CodePackageActivation:Code:EntryPoint:133126558467080229",
+                        "HealthState": "Ok",
+                        "TimeToLiveInMilliSeconds": "P10675199DT2H48M5.4775807S",
+                        "Description": "The CodePackage was activated successfully.S_OK",
+                        "SequenceNumber": "133126558875689929",
+                        "RemoveWhenExpired": false,
+                        "HealthReportId": "Hosting_7.0_1002",
+                        "SourceUtcTimestamp": "2022-11-11T15:58:07.568Z",
+                        "LastModifiedUtcTimestamp": "2022-11-11T15:58:28.516Z",
+                        "IsExpired": false,
+                        "LastOkTransitionAt": "2022-11-11T15:58:28.516Z",
+                        "LastWarningTransitionAt": "0001-01-01T00:00:00.000Z",
+                        "LastErrorTransitionAt": "0001-01-01T00:00:00.000Z"
+                    },
+                    {
+                        "SourceId": "System.Hosting",
+                        "Property": "ServiceTypeRegistration:VisualObjects.ActorServiceType",
+                        "HealthState": "Ok",
+                        "TimeToLiveInMilliSeconds": "P10675199DT2H48M5.4775807S",
+                        "Description": "The ServiceType was registered successfully.",
+                        "SequenceNumber": "133126558891349968",
+                        "RemoveWhenExpired": false,
+                        "HealthReportId": "Hosting_7.0_1001",
+                        "SourceUtcTimestamp": "2022-11-11T15:58:09.134Z",
+                        "LastModifiedUtcTimestamp": "2022-11-11T15:58:28.516Z",
+                        "IsExpired": false,
+                        "LastOkTransitionAt": "2022-11-11T15:58:28.516Z",
+                        "LastWarningTransitionAt": "0001-01-01T00:00:00.000Z",
+                        "LastErrorTransitionAt": "0001-01-01T00:00:00.000Z"
+                    }
+                ],
+                "AggregatedHealthState": "Ok",
+                "UnhealthyEvaluations": []
+            }
+        }
+    }
+}

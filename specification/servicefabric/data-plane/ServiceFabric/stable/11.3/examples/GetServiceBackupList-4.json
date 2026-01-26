@@ -1,0 +1,65 @@
+{
+  "operationId": "GetServiceBackupList",
+  "description": "This example shows how to get list of service backups. The number of results in a page are limited to maximum of two using the MaxResult parameter. This example uses the ContinuationToken parameter. The value of this parameter is provided from the previous query; in this case the example shown above. The response contains the remaining results and an empty ContinuationToken. The empty ContinuationToken indicates that additional results are not available.",
+  "parameters": {
+    "api-version": "6.4",
+    "serviceId": "CalcApp/CalcService",
+    "MaxResults": 2,
+    "ContinuationToken": "fabric:/CalcApp/CalcService#1daae3f5-7fd6-42e9-b1ba-8c05f873994d#7903dc2a-228d-44b0-b7c8-a13a6c9b46bd"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+            "BackupId": "0ff4fdbe-131c-4dfb-8249-7b4029ddc014",
+            "BackupChainId": "0ff4fdbe-131c-4dfb-8249-7b4029ddc014",
+            "ApplicationName": "fabric:/CalcApp",
+            "ServiceManifestVersion": "1.0.0",
+            "ServiceName": "fabric:/CalcApp/CalcService",
+            "PartitionInformation": {
+              "LowKey": "-9223372036854775808",
+              "HighKey": "9223372036854775807",
+              "ServicePartitionKind": "Int64Range",
+              "Id": "81645ec7-d260-4c59-9533-8f129bde8e83"
+            },
+            "BackupLocation": "CalcApp\\CalcService\\81645ec7-d260-4c59-9533-8f129bde8e83\\2018-01-01 09.01.02.zip",
+            "BackupType": "Full",
+            "EpochOfLastBackupRecord": {
+              "DataLossVersion": "131462452931584510",
+              "ConfigurationVersion": "8589934592"
+            },
+            "LsnOfLastBackupRecord": "161",
+            "CreationTimeUtc": "2018-01-01T09:01:02Z",
+            "FailureError": null
+          },
+          {
+            "BackupId": "d55a2d98-258b-4a34-8fe5-2063e81af9dc",
+            "BackupChainId": "0ff4fdbe-131c-4dfb-8249-7b4029ddc014",
+            "ApplicationName": "fabric:/CalcApp",
+            "ServiceManifestVersion": "1.0.0",
+            "ServiceName": "fabric:/CalcApp/CalcService",
+            "PartitionInformation": {
+              "LowKey": "-9223372036854775808",
+              "HighKey": "9223372036854775807",
+              "ServicePartitionKind": "Int64Range",
+              "Id": "81645ec7-d260-4c59-9533-8f129bde8e83"
+            },
+            "BackupLocation": "CalcApp\\CalcService\\81645ec7-d260-4c59-9533-8f129bde8e83\\2018-01-01 17.00.34.zip",
+            "BackupType": "Incremental",
+            "EpochOfLastBackupRecord": {
+              "DataLossVersion": "131462452931584510",
+              "ConfigurationVersion": "8589934592"
+            },
+            "LsnOfLastBackupRecord": "246",
+            "CreationTimeUtc": "2018-01-01T17:00:34Z",
+            "FailureError": null
+          }
+        ]
+      }
+    }
+  }
+}

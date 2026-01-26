@@ -1,0 +1,57 @@
+{
+    "operationId": "GetApplicationHealth",
+    "description": "Gets the health of a Service Fabric application.",
+    "parameters": {
+        "api-version": "6.0",
+        "serviceId": "VisualObjects%2FVisualObjects.ActorService"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "HealthEvents": [
+                    {
+                        "SourceId": "System.FM",
+                        "Property": "State",
+                        "HealthState": "Ok",
+                        "TimeToLiveInMilliSeconds": "P10675199DT2H48M5.4775807S",
+                        "Description": "Service has been created.",
+                        "SequenceNumber": "6",
+                        "RemoveWhenExpired": false,
+                        "HealthReportId": "FM_7.0_1008",
+                        "SourceUtcTimestamp": "2022-10-31T21:12:54.134Z",
+                        "LastModifiedUtcTimestamp": "2022-11-11T15:58:06.791Z",
+                        "IsExpired": false,
+                        "LastOkTransitionAt": "2022-10-31T21:13:08.808Z",
+                        "LastWarningTransitionAt": "0001-01-01T00:00:00.000Z",
+                        "LastErrorTransitionAt": "0001-01-01T00:00:00.000Z"
+                    }
+                ],
+                "AggregatedHealthState": "Ok",
+                "UnhealthyEvaluations": [],
+                "HealthStatistics": {
+                    "HealthStateCountList": [
+                        {
+                            "EntityKind": "Replica",
+                            "HealthStateCount": {
+                                "OkCount": 15,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "Partition",
+                            "HealthStateCount": {
+                                "OkCount": 5,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        }
+                    ]
+                },
+                "Name": "fabric:\/VisualObjects\/VisualObjects.ActorService",
+                "PartitionHealthStates": []
+            }
+        }
+    }
+}

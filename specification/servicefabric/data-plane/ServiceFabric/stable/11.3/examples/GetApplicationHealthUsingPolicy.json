@@ -1,0 +1,117 @@
+{
+    "operationId": "GetApplicationHealthUsingPolicy",
+    "description": "Gets the health of a Service Fabric application using the specified policy.",
+    "parameters": {
+        "api-version": "6.0",
+        "applicationId": "someApp"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "HealthEvents": [
+                    {
+                        "SourceId": "System.CM",
+                        "Property": "State",
+                        "HealthState": "Ok",
+                        "TimeToLiveInMilliSeconds": "P10675199DT2H48M5.4775807S",
+                        "Description": "Application has been created.",
+                        "SequenceNumber": "82",
+                        "RemoveWhenExpired": false,
+                        "HealthReportId": "CM_7.0_1000",
+                        "SourceUtcTimestamp": "2022-10-31T21:12:54.151Z",
+                        "LastModifiedUtcTimestamp": "2022-11-11T15:58:06.791Z",
+                        "IsExpired": false,
+                        "LastOkTransitionAt": "2022-10-31T21:12:54.151Z",
+                        "LastWarningTransitionAt": "0001-01-01T00:00:00.000Z",
+                        "LastErrorTransitionAt": "0001-01-01T00:00:00.000Z"
+                    }
+                ],
+                "AggregatedHealthState": "Ok",
+                "UnhealthyEvaluations": [],
+                "HealthStatistics": {
+                    "HealthStateCountList": [
+                        {
+                            "EntityKind": "Replica",
+                            "HealthStateCount": {
+                                "OkCount": 16,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "Partition",
+                            "HealthStateCount": {
+                                "OkCount": 6,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "Service",
+                            "HealthStateCount": {
+                                "OkCount": 2,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "DeployedServicePackage",
+                            "HealthStateCount": {
+                                "OkCount": 6,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        },
+                        {
+                            "EntityKind": "DeployedApplication",
+                            "HealthStateCount": {
+                                "OkCount": 5,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        }
+                    ]
+                },
+                "Name": "fabric:\/VisualObjects",
+                "ServiceHealthStates": [
+                    {
+                        "ServiceName": "fabric:\/VisualObjects\/VisualObjects.WebService",
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "ServiceName": "fabric:\/VisualObjects\/VisualObjects.ActorService",
+                        "AggregatedHealthState": "Ok"
+                    }
+                ],
+                "DeployedApplicationHealthStates": [
+                    {
+                        "ApplicationName": "fabric:\/VisualObjects",
+                        "NodeName": "_Node_1",
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "ApplicationName": "fabric:\/VisualObjects",
+                        "NodeName": "_Node_2",
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "ApplicationName": "fabric:\/VisualObjects",
+                        "NodeName": "_Node_4",
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "ApplicationName": "fabric:\/VisualObjects",
+                        "NodeName": "_Node_3",
+                        "AggregatedHealthState": "Ok"
+                    },
+                    {
+                        "ApplicationName": "fabric:\/VisualObjects",
+                        "NodeName": "_Node_0",
+                        "AggregatedHealthState": "Ok"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "operationId": "GetPartitionHealth",
+    "description": " Gets the health of the specified Service Fabric partition.",
+    "parameters": {
+        "api-version": "6.0",
+        "partitionId": "ea09316f-86a4-40c1-ba3b-bccf23646986"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "HealthEvents": [
+                    {
+                        "SourceId": "System.FM",
+                        "Property": "State",
+                        "HealthState": "Ok",
+                        "TimeToLiveInMilliSeconds": "P10675199DT2H48M5.4775807S",
+                        "Description": "Partition is healthy.",
+                        "SequenceNumber": "191",
+                        "RemoveWhenExpired": false,
+                        "HealthReportId": "FM_7.0_1011",
+                        "SourceUtcTimestamp": "2022-11-11T15:58:24.992Z",
+                        "LastModifiedUtcTimestamp": "2022-11-11T15:58:28.453Z",
+                        "IsExpired": false,
+                        "LastOkTransitionAt": "2022-11-02T15:52:25.877Z",
+                        "LastWarningTransitionAt": "0001-01-01T00:00:00.000Z",
+                        "LastErrorTransitionAt": "0001-01-01T00:00:00.000Z"
+                    }
+                ],
+                "AggregatedHealthState": "Ok",
+                "UnhealthyEvaluations": [],
+                "HealthStatistics": {
+                    "HealthStateCountList": [
+                        {
+                            "EntityKind": "Replica",
+                            "HealthStateCount": {
+                                "OkCount": 3,
+                                "ErrorCount": 0,
+                                "WarningCount": 0
+                            }
+                        }
+                    ]
+                },
+                "PartitionId": "ea09316f-86a4-40c1-ba3b-bccf23646986",
+                "ReplicaHealthStates": []
+            }
+        }
+    }
+}

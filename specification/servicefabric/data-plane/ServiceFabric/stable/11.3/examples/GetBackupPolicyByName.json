@@ -1,0 +1,37 @@
+{
+  "operationId": "GetBackupPolicyByName",
+  "description": "This example shows how to query a backup policy by name.",
+  "parameters": {
+    "api-version": "6.4",
+    "backupPolicyName": "DailyAzureBackupPolicy"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "Name": "DailyAzureBackupPolicy",
+        "AutoRestoreOnDataLoss": false,
+        "MaxIncrementalBackups": 3,
+        "Schedule": {
+          "ScheduleKind": "TimeBased",
+          "ScheduleFrequencyType": "Daily",
+          "RunTimes": [
+            "0001-01-01T09:00:00Z",
+            "0001-01-01T17:00:00Z"
+          ]
+        },
+        "Storage": {
+          "StorageKind": "AzureBlobStore",
+          "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=<PutYourAccountKeyHere>",
+          "ContainerName": "BackupContainer"
+        },
+        "RetentionPolicy": {
+          "RetentionPolicyType": "Basic",
+          "MinimumNumberOfBackups": 20,
+          "RetentionDuration": "P20D"
+        }
+      }
+    }
+  }
+}

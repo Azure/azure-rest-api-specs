@@ -25,7 +25,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '8.1'
+tag: '11.3'
 ```
 
 ### Suppression
@@ -158,6 +158,14 @@ These settings apply only when `--tag=8.2` is specified on the command line.
 ``` yaml $(tag) == '8.2'
 input-file:
 - stable/8.2/servicefabric.json
+```
+
+### Tag: 11.3
+These settings apply only when `--tag=11.3` is specified on the command line.
+
+``` yaml $(tag) == '11.3'
+input-file:
+- stable/11.3/servicefabric.json
 ```
 ---
 
