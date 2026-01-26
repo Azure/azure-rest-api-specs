@@ -365,10 +365,13 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@access(SearchClient.Documents.searchGet, Access.internal);
 @@access(SearchClient.Documents.searchPost, Access.internal);
+@@access(SearchClient.Documents.searchPost, Access.public, "java");
 @@access(SearchClient.Documents.autocompleteGet, Access.internal);
 @@access(SearchClient.Documents.autocompletePost, Access.internal);
+@@access(SearchClient.Documents.autocompletePost, Access.public, "java");
 @@access(SearchClient.Documents.suggestGet, Access.internal);
 @@access(SearchClient.Documents.suggestPost, Access.internal);
+@@access(SearchClient.Documents.suggestPost, Access.public, "java");
 @@access(SearchClient.Documents.index, Access.internal);
 @@access(SearchIndexerClient.DataSources.list, Access.internal);
 @@access(SearchIndexerClient.DataSources.createOrUpdate, Access.internal);
@@ -1059,6 +1062,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@access(Search.ListDataSourcesResult, Access.public, "java");
 @@clientNamespace(Search.DocumentKeysOrIds, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.DocumentKeysOrIds,
   "com.azure.search.documents.indexes",
@@ -1108,6 +1112,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@access(Search.ListIndexersResult, Access.public, "java");
 @@clientNamespace(Search.SearchIndexerStatus, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndexerStatus,
   "com.azure.search.documents.indexes",
@@ -1250,6 +1255,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@access(Search.ListSkillsetsResult, Access.public, "java");
 @@clientNamespace(Search.SkillNames, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SkillNames,
   "com.azure.search.documents.indexes",
@@ -1267,6 +1273,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@access(Search.ListSynonymMapsResult, Access.public, "java");
 @@clientNamespace(Search.SearchIndex, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndex,
   "com.azure.search.documents.indexes",
