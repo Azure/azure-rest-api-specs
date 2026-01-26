@@ -27,16 +27,6 @@ model Registry
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
-  /**
-   * ResourceId of the managed RG if the registry has system created resources
-   */
-  managedResourceGroup?: ArmResourceId;
-
-  /**
-   * Managed resource group specific settings
-   */
-  managedResourceGroupSettings?: ManagedResourceGroupSettings;
-
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
