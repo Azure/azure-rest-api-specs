@@ -1,0 +1,57 @@
+output-dir: "{project-root}/../"
+parameters:
+  "service-dir":
+    default: "sdk/discovery"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: false
+    output-file: "{azure-resource-provider-folder}/Microsoft.Discovery.Bookshelf/{version-status}/{version}/discovery-bookshelf.json"
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    version: "2026-02-01-preview"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-discovery-bookshelf"
+    namespace: "azure.discovery.bookshelf"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Discovery.Bookshelf
+    package-name: "{namespace}"
+    model-namespace: false
+    flavor: azure
+    examples-dir: "{project-dir}/examples"
+    clear-output-folder: true
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Discovery.Bookshelf
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-discovery-bookshelf"
+    is-modular-library: true
+    experimental-extensible-enums: true
+    flavor: azure
+    package-details:
+      name: "@azure/discovery-bookshelf"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-discovery-bookshelf"
+    namespace: com.azure.discovery.bookshelf
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azbookshelf"
+    emitter-output-dir: "{output-dir}/{service-dir}/azbookshelf"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/discovery/Discovery.DataPlane.Shared/"
