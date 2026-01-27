@@ -238,3 +238,21 @@ using Microsoft.SignalRService;
 // UsagesOperationGroup interface operations with Usages_ prefix
 @@clientLocation(UsagesOperationGroup.list, "Usages", "!csharp");
 @@clientName(UsagesOperationGroup.list, "List", "!csharp");
+
+// PersistentStorages interface operations with WebPubSubPersistentStorages_ prefix
+@@clientLocation(PersistentStorages.get,
+  "WebPubSubPersistentStorages"
+);
+@@clientName(PersistentStorages.get, "Get");
+@@clientLocation(PersistentStorages.createOrUpdate,
+  "WebPubSubPersistentStorages"
+);
+@@clientName(PersistentStorages.createOrUpdate, "CreateOrUpdate");
+@@clientLocation(PersistentStorages.delete,
+  "WebPubSubPersistentStorages"
+);
+@@clientName(PersistentStorages.delete, "Delete");
+@@clientLocation(PersistentStorages.list,
+  "WebPubSubPersistentStorages"
+);
+@@clientName(PersistentStorages.list, "List");
