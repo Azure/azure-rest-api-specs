@@ -240,13 +240,42 @@
         "description": "Operation permanently deletes the specified table.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "DataServiceVersion",
+            "in": "header",
+            "description": "DataServiceVersion header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "3.0"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "dataServiceVersion"
           },
           {
-            "$ref": "#/parameters/ClientRequestId"
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "The API version.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
           },
           {
-            "$ref": "#/parameters/tableNameParameter"
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
