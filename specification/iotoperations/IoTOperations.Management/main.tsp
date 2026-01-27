@@ -18,6 +18,7 @@ import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
+import "./models/akri/service.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -41,17 +42,17 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2025-04-01`,
 
-  /** 2025-07-01-preview */
+  /** 2025-07-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2025-07-01-preview`,
 
-  /** 2025-10-01 */
+  /** 2025-10-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2025-10-01`,
 
-  /** 2025-12-01-preview */
+  /** 2026-03-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2025-12-01-preview`,
+  `2026-03-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -171,4 +172,14 @@ interface AkriConnector {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriConnectorResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AkriConnectorResource>;
   listByTemplate is ArmResourceListByParent<AkriConnectorResource>;
+}
+
+// /instance/akriService resource Operations
+@armResourceOperations
+@added(Versions.`2026-03-01`)
+interface AkriService {
+  get is ArmResourceRead<AkriServiceResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriServiceResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<AkriServiceResource>;
+  listByInstanceResource is ArmResourceListByParent<AkriServiceResource>;
 }
