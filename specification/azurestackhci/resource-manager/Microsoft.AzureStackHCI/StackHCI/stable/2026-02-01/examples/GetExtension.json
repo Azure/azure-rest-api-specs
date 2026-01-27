@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01",
+    "arcSettingName": "default",
+    "clusterName": "myCluster",
+    "extensionName": "MicrosoftMonitoringAgent",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MicrosoftMonitoringAgent",
+        "type": "Microsoft.AzureStackHCI/clusters/arcSettings/extensions",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default/extensions/MicrosoftMonitoringAgent",
+        "properties": {
+          "aggregateState": "PartiallySucceeded",
+          "extensionParameters": {
+            "type": "string",
+            "autoUpgradeMinorVersion": false,
+            "enableAutomaticUpgrade": true,
+            "publisher": "Microsoft.Compute",
+            "settings": {
+              "workspaceId": "xx"
+            },
+            "typeHandlerVersion": "1.10.3"
+          },
+          "managedBy": "Azure",
+          "perNodeExtensionDetails": [
+            {
+              "name": "Node-1",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/MicrosoftMonitoringAgent",
+              "instanceView": {
+                "name": "MicrosoftMonitoringAgent",
+                "type": "MicrosoftMonitoringAgent",
+                "status": {
+                  "code": "success",
+                  "displayStatus": "Provisioning succeeded",
+                  "level": "Information",
+                  "message": "Finished executing command, StdOut: , StdErr:",
+                  "time": "2019-08-08T20:42:10.999Z"
+                },
+                "typeHandlerVersion": "1.10.0"
+              },
+              "state": "Succeeded",
+              "typeHandlerVersion": "1.10.0"
+            },
+            {
+              "name": "Node-2",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2/Extensions/MicrosoftMonitoringAgent",
+              "instanceView": {
+                "name": "MicrosoftMonitoringAgent",
+                "type": "MicrosoftMonitoringAgent",
+                "status": {
+                  "code": "error",
+                  "displayStatus": "Provisioning failed",
+                  "level": "Error",
+                  "message": "Finished executing command, StdOut: , StdErr:",
+                  "time": "2019-08-08T20:42:10.999Z"
+                },
+                "typeHandlerVersion": "1.10.3"
+              },
+              "state": "Failed",
+              "typeHandlerVersion": "1.10.3"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Extensions_Get",
+  "title": "Get ArcSettings Extension"
+}
