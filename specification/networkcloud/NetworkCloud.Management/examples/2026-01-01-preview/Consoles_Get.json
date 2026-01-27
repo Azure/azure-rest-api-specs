@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "consoleName": "default",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "virtualMachineName": "virtualMachineName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.NetworkCloud/virtualMachines/consoles",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName/consoles/default",
+        "location": "location",
+        "properties": {
+          "detailedStatus": "Ready",
+          "detailedStatusMessage": "Console is ready for use",
+          "enabled": "True",
+          "expiration": "2022-06-01T01:27:03.008Z",
+          "privateLinkServiceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Network/privateLinkServices/console-pls",
+          "provisioningState": "Succeeded",
+          "sshPublicKey": {
+            "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+          },
+          "virtualMachineAccessId": "VirtualMachineAccessId"
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        }
+      }
+    }
+  },
+  "operationId": "Consoles_Get",
+  "title": "Get virtual machine console"
+}

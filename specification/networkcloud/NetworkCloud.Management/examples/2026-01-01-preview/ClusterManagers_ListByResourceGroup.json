@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://fully.qualified.hyperlink",
+        "value": [
+          {
+            "name": "clusterManagerName",
+            "type": "Microsoft.NetworkCloud/clusterManagers",
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusterManagers/clusterManagerName",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "321e7654-e89b-12d3-a456-426655449999",
+              "tenantId": "199e9999-e89b-12d3-a456-426655441111"
+            },
+            "kind": "AzureLocal",
+            "location": "location",
+            "properties": {
+              "analyticsWorkspaceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/microsoft.operationalInsights/workspaces/logAnalyticsWorkspaceName",
+              "availabilityZones": [
+                "1",
+                "2"
+              ],
+              "clusterVersions": [
+                {
+                  "supportExpiryDate": "2023-04-29",
+                  "targetClusterVersion": "1.0.0"
+                },
+                {
+                  "supportExpiryDate": "2025-01-01",
+                  "targetClusterVersion": "1.0.2"
+                }
+              ],
+              "detailedStatus": "Available",
+              "detailedStatusMessage": "cluster manager is up and running",
+              "fabricControllerId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
+              "managedResourceGroupConfiguration": {
+                "name": "my-managed-rg",
+                "location": "East US"
+              },
+              "managerExtendedLocation": {
+                "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName",
+                "type": "CustomLocation"
+              },
+              "provisioningState": "Succeeded",
+              "relayConfiguration": {
+                "relayNamespaceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.Relay/namespaces/relayNamespaceName"
+              },
+              "vmSize": "Standard_D8s_v3"
+            },
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ClusterManagers_ListByResourceGroup",
+  "title": "List cluster managers for resource group"
+}

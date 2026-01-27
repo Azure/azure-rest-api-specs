@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "bareMetalMachineName": "bareMetalMachineName",
+    "bareMetalMachineRunReadCommandsParameters": {
+      "limitTimeSeconds": 60,
+      "commands": [
+        {
+          "arguments": [
+            "pods",
+            "-A"
+          ],
+          "command": "kubectl get"
+        },
+        {
+          "arguments": [
+            "192.168.0.99",
+            "-c",
+            "3"
+          ],
+          "command": "ping"
+        }
+      ]
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview"
+      }
+    }
+  },
+  "operationId": "BareMetalMachines_RunReadCommands",
+  "title": "Run and retrieve output from read only commands on bare metal machine."
+}

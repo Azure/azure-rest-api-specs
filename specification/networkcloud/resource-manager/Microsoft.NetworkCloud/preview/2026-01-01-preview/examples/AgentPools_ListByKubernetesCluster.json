@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "kubernetesClusterName": "kubernetesClusterName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://fully.qualified.hyperlink",
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.NetworkCloud/kubernetesClusters/agentPools",
+            "extendedLocation": {
+              "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+              "type": "CustomLocation"
+            },
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/agentPools/agentPoolName",
+            "location": "location",
+            "properties": {
+              "administratorConfiguration": {
+                "adminUsername": "azure",
+                "sshPublicKeys": [
+                  {
+                    "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+                  }
+                ]
+              },
+              "agentOptions": {
+                "hugepagesCount": 96,
+                "hugepagesSize": "1G"
+              },
+              "attachedNetworkConfiguration": {
+                "l2Networks": [
+                  {
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+                    "pluginType": "DPDK"
+                  }
+                ],
+                "l3Networks": [
+                  {
+                    "ipamEnabled": "False",
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                    "pluginType": "SRIOV"
+                  }
+                ],
+                "trunkedNetworks": [
+                  {
+                    "networkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+                    "pluginType": "MACVLAN"
+                  }
+                ]
+              },
+              "availabilityZones": [
+                "1",
+                "2",
+                "3"
+              ],
+              "count": 3,
+              "detailedStatus": "Available",
+              "detailedStatusMessage": "Agent pool is available",
+              "kubernetesVersion": "1.XX.Y",
+              "labels": [
+                {
+                  "key": "kubernetes.label",
+                  "value": "true"
+                }
+              ],
+              "mode": "System",
+              "provisioningState": "Succeeded",
+              "taints": [
+                {
+                  "key": "kubernetes.taint",
+                  "value": "true:NoSchedule"
+                }
+              ],
+              "upgradeSettings": {
+                "maxSurge": "1"
+              },
+              "vmSkuName": "NC_P46_224_v1"
+            },
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AgentPools_ListByKubernetesCluster",
+  "title": "List agent pools of the Kubernetes cluster"
+}
