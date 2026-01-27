@@ -45,7 +45,7 @@ interface DataShares {
    */
   update is ArmCustomPatchAsync<
     DataShare,
-    PatchModel = DataShare,
+    PatchModel = StorageDataShareUpdateParameters,
     Error = ErrorResponse
   >;
 

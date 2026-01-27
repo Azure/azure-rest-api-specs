@@ -6169,6 +6169,22 @@ alias ETagHeader = {
 };
 
 /**
+ * Parameters for updating a storage connector
+ */
+model StorageConnectorUpdateParameters {
+  /**
+   * The storage connector properties for update
+   */
+  properties?: StorageConnectorProperties;
+
+  /**
+   * The tags of the storage connector
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+}
+
+/**
  * The storage connector properties
  */
 model StorageConnectorProperties {
@@ -6341,6 +6357,22 @@ model TestConnectionResponse {
    */
   @minLength(1)
   storageConnectorRequestId: string;
+}
+
+/**
+ * Parameters for updating a storage data share
+ */
+model StorageDataShareUpdateParameters {
+  /**
+   * The storage data share properties for update
+   */
+  properties?: StorageDataShareProperties;
+
+  /**
+   * The tags of the storage connector
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 /**

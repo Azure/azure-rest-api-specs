@@ -45,7 +45,7 @@ interface Connectors {
    */
   update is ArmCustomPatchAsync<
     Connector,
-    PatchModel = Connector,
+    PatchModel = StorageConnectorUpdateParameters,
     Error = ErrorResponse
   >;
 

@@ -2305,7 +2305,7 @@
             "description": "The updated properties of the Storage Connector.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Connector"
+              "$ref": "#/definitions/StorageConnectorUpdateParameters"
             }
           }
         ],
@@ -2748,7 +2748,7 @@
             "description": "The updated properties of the Storage DataShare.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataShare"
+              "$ref": "#/definitions/StorageDataShareUpdateParameters"
             }
           }
         ],
@@ -14658,6 +14658,23 @@
         ]
       }
     },
+    "StorageConnectorUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating a storage connector",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageConnectorProperties",
+          "description": "The storage connector properties for update"
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the storage connector",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "StorageDataShareAccessPolicy": {
       "type": "object",
       "description": "Policy that specify the permission allowed to a managed identity",
@@ -14772,6 +14789,23 @@
         "accessPolicies",
         "assets"
       ]
+    },
+    "StorageDataShareUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating a storage data share",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageDataShareProperties",
+          "description": "The storage data share properties for update"
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the storage connector",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "StorageQueue": {
       "type": "object",
