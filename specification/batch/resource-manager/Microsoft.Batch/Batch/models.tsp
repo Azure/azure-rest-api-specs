@@ -2511,7 +2511,7 @@ model DiskCustomerManagedKey {
   /**
    * Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value.
    */
-  keyUrl?: string;
+  keyUrl?: url;
 
   /**
    * Set this flag to true to enable auto-updating of the Disk Encryption to the latest key version. Default is false.
@@ -2685,7 +2685,7 @@ model DiskEncryptionSetParameters {
    * The ARM resource id of the disk encryption set. The resource should be in the same subscription as the Batch account.
    */
   @summary("The resource id of the disk encryption set.")
-  id: string;
+  id: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -2769,7 +2769,7 @@ model HostEndpointSettings {
    * Specifies the reference to the InVMAccessControlProfileVersion resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  inVMAccessControlProfileReferenceId?: string;
+  inVMAccessControlProfileReferenceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
