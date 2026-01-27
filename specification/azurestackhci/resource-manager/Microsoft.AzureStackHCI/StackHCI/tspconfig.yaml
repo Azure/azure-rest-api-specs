@@ -18,28 +18,25 @@ options:
     flavor: "azure" #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
     emitter-output-dir: "{output-dir}/{service-dir}/armazurestackhci"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-placeholder" #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    namespace: azure.mgmt.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    generate-test: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    generate-sample: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    service-dir: "sdk/azurestackhci"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-azurestackhci"
+    namespace: azure.mgmt.azurestackhci
+    generate-test: true
+    generate-sample: true
+    flavor: azure
   "@azure-tools/typespec-java":
     flavor: azure
     namespace: com.azure.resourcemanager.azurestackhci
     service-dir: "sdk/azurestackhci"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-azurestackhci"
-    service-name: "AzureStackHCI"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    namespace: "Azure.ResourceManager.StackHCI"
-    service-name: sdk/azurestackhci
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
+    service-name: "Azure Stack Hci"
+    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     service-dir: "sdk/azurestackhci"
     package-dir: "arm-azurestackhci"
     emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
     flavor: azure
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-azurestackhci"

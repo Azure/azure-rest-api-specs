@@ -14,6 +14,7 @@ using Azure.Core;
 namespace Microsoft.AzureStackHCI;
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("EdgeMachine details.")
 model EdgeMachine
   is Azure.ResourceManager.TrackedResource<EdgeMachineProperties> {
@@ -27,6 +28,7 @@ model EdgeMachine
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @armResourceOperations
 interface EdgeMachines {
   @doc("Get an edge machine.")
@@ -54,6 +56,7 @@ interface EdgeMachines {
 ////////////////////// models //////////////////////
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Edge Machine Kind.")
 union EdgeMachineKind {
   string,
@@ -66,6 +69,7 @@ union EdgeMachineKind {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Properties for edge machine.")
 model EdgeMachineProperties {
   @doc("Edge Machine type.")
@@ -133,7 +137,7 @@ model EdgeMachineProperties {
 
   @doc("Reported properties for edge machine.")
   @visibility(Lifecycle.Read)
-  reportedProperties?: ReportedProperties;
+  reportedProperties?: EdgeMachineReportedProperties;
 
   @doc("operation status details for edge machine.")
   @visibility(Lifecycle.Read)
@@ -146,6 +150,7 @@ model EdgeMachineProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Model for patching edge machine.")
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -156,6 +161,7 @@ model EdgeMachinePatch {
  * Details for device provisioning.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model ProvisioningDetails {
   @doc("Operating system profile.")
   osProfile: OsProvisionProfile;
@@ -170,6 +176,7 @@ model ProvisioningDetails {
  * Details for ownership voucher.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model OwnershipVoucherDetails {
   @doc("Ownership voucher in base64 encoded format")
   @secret
@@ -183,6 +190,7 @@ model OwnershipVoucherDetails {
  * Type of owner key in the voucher
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 union OwnerKeyType {
   string,
 
@@ -191,6 +199,7 @@ union OwnerKeyType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("operation detail.")
 model OperationDetail {
   @doc("operation name.")
@@ -223,6 +232,7 @@ model OperationDetail {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Overall connectivity status for the machine resource.")
 union EdgeMachineConnectivityStatus {
   string,
@@ -238,6 +248,7 @@ union EdgeMachineConnectivityStatus {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Site Details consists of common configurations.")
 model SiteDetails {
   @doc("Site resource Id to be set during Edge Machine resource creation.")
@@ -248,10 +259,11 @@ model SiteDetails {
   ]>;
 
   @doc("Edge Device configuration received from site common configuration.")
-  deviceConfiguration?: DeviceConfiguration;
+  deviceConfiguration?: TargetDeviceConfiguration;
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("OS State")
 union EdgeMachineState {
   string,
@@ -285,48 +297,16 @@ union EdgeMachineState {
 }
 
 @added(Versions.v2025_12_01_preview)
-@doc("The provisioning state of a resource.")
-union ProvisioningState {
-  string,
-
-  @doc("The resource provision state is not specified")
-  NotSpecified: "NotSpecified",
-
-  @doc("Resource has been created.")
-  Succeeded: "Succeeded",
-
-  @doc("Resource creation failed.")
-  Failed: "Failed",
-
-  @doc("Resource creation was canceled.")
-  Canceled: "Canceled",
-
-  @doc("Resource creation is in progress.")
-  InProgress: "InProgress",
-
-  @doc("The resource is being provisioned")
-  Provisioning: "Provisioning",
-
-  @doc("The resource is updating")
-  Updating: "Updating",
-
-  @doc("The resource is being deleted")
-  Deleting: "Deleting",
-
-  @doc("The resource create request has been accepted")
-  Accepted: "Accepted",
-}
-
-@added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Reported properties for edge machine.")
-model ReportedProperties {
+model EdgeMachineReportedProperties {
   @doc("Last time data reported.")
   @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
 
   @doc("Network details for edge machine.")
   @visibility(Lifecycle.Read)
-  networkProfile?: NetworkProfile;
+  networkProfile?: EdgeMachineNetworkProfile;
 
   @doc("OS Properties for edge machine.")
   @visibility(Lifecycle.Read)
@@ -350,12 +330,13 @@ model ReportedProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("NetworkProfile of edge machine.")
-model NetworkProfile {
+model EdgeMachineNetworkProfile {
   @doc("List of Network Interface Card (NIC) Details of edge machine.")
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["adapterName"])
-  nicDetails?: NicDetail[];
+  nicDetails?: EdgeMachineNicDetail[];
 
   @doc("List of switch Details of edge machine.")
   @visibility(Lifecycle.Read)
@@ -364,8 +345,9 @@ model NetworkProfile {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Network Interface Card (NIC) Details of edge machine.")
-model NicDetail {
+model EdgeMachineNicDetail {
   /**
    * Adapter Name of NIC
    */
@@ -463,57 +445,11 @@ model NicDetail {
   rdmaCapability?: RdmaCapability = RdmaCapability.Disabled;
 }
 
-@added(Versions.v2025_12_01_preview)
-@doc("Switch Details of edge machine.")
-model SwitchDetail {
-  /**
-   * The name of the switch.
-   */
-  @visibility(Lifecycle.Read)
-  switchName?: string;
-
-  /**
-   * The type of the switch. e.g. external, internal.
-   */
-  @visibility(Lifecycle.Read)
-  switchType?: string;
-
-  /**
-   * This represents extensions installed on virtualSwitch.
-   */
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["extensionName"])
-  extensions?: SwitchExtension[];
-}
-
-/**
- * This represents extensions installed on virtualSwitch.
- */
-@added(Versions.v2025_12_01_preview)
-model SwitchExtension {
-  /**
-   * Unique identifier for virtualSwitch.
-   */
-  @visibility(Lifecycle.Read)
-  switchId?: string;
-
-  /**
-   * This will show extension name for virtualSwitch.
-   */
-  @visibility(Lifecycle.Read)
-  extensionName?: string;
-
-  /**
-   * This represents whether extension is enabled on virtualSwitch.
-   */
-  @visibility(Lifecycle.Read)
-  extensionEnabled?: boolean;
-}
-
 /**
  * OS configurations for HCI device.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model OsProfile {
   /**
    * The boot type of the device. e.g. UEFI, Legacy etc
@@ -565,27 +501,10 @@ model OsProfile {
 }
 
 /**
- * Describes the RDMA capability of the network adapter.
- */
-@added(Versions.v2025_12_01_preview)
-union RdmaCapability {
-  string,
-
-  /**
-   * Network Adapter on the device is RDMA Capable
-   */
-  Enabled: "Enabled",
-
-  /**
-   * Network Adapter on the device isn't RDMA Capable
-   */
-  Disabled: "Disabled",
-}
-
-/**
  * Hardware profile for the machine
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model HardwareProfile {
   /**
    * Number of cpu cores in the machine
@@ -631,183 +550,22 @@ model HardwareProfile {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("StorageProfile of edge machine.")
 model StorageProfile {
   @doc("Number of storage disks in the device with $CanPool as true.")
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
 }
-
-/**
- * Solution builder extension (SBE) deployment package information.
- */
-@added(Versions.v2025_12_01_preview)
-model SbeDeploymentPackageInfo {
-  /**
-   * SBE deployment validation code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * A detailed message that explains the SBE package validation result.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-
-  /**
-   * This represents discovered update results for matching updates and store it as SBE manifest.
-   */
-  @visibility(Lifecycle.Read)
-  sbeManifest?: string;
-}
-
-/**
- * Extensions details for edge device.
- */
-@added(Versions.v2025_12_01_preview)
-model ExtensionProfile {
-  /**
-   * List of Arc extensions installed on edge device.
-   */
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["extensionName"])
-  extensions?: Extension[];
-}
-
-/**
- * Arc extension installed on edge device.
- */
-@added(Versions.v2025_12_01_preview)
-model Extension {
-  /**
-   * Arc extension name installed on edge device.
-   */
-  @visibility(Lifecycle.Read)
-  extensionName?: string;
-
-  /**
-   * Arc extension state from arc machine extension.
-   */
-  @visibility(Lifecycle.Read)
-  state?: ArcExtensionState;
-
-  /**
-   * Error details while installing Arc extension.
-   */
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#[])
-  errorDetails?: ErrorDetailModel[];
-
-  /**
-   * Exception details while installing Arc extension.
-   */
-  @visibility(Lifecycle.Read)
-  exception?: string;
-
-  /**
-   * Arc Extension Azure resource id.
-   */
-  @visibility(Lifecycle.Read)
-  extensionResourceId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * Extension version installed.
-   */
-  @visibility(Lifecycle.Read)
-  typeHandlerVersion?: string;
-
-  /**
-   * Extension managed by user or Azure.
-   */
-  @visibility(Lifecycle.Read)
-  managedBy?: ExtensionManagedBy;
-}
-
-/**
- * Arc extension installation state.
- */
-@added(Versions.v2025_12_01_preview)
-union ArcExtensionState {
-  string,
-
-  /**
-   * Arc extension state is not specified.
-   */
-  NotSpecified: "NotSpecified",
-
-  /**
-   * Arc extension state is Accepted when extension installation triggered.
-   */
-  Accepted: "Accepted",
-
-  /**
-   * Arc extension state is Canceled.
-   */
-  Canceled: "Canceled",
-
-  /**
-   * Arc extension is in Creating State.
-   */
-  Creating: "Creating",
-
-  /**
-   * Arc extension is in Deleted State.
-   */
-  Deleted: "Deleted",
-
-  /**
-   * Arc extension is in Deleting State.
-   */
-  Deleting: "Deleting",
-
-  /**
-   * Arc extension state is Failed.
-   */
-  Failed: "Failed",
-
-  /**
-   * Arc extension is in Moving State.
-   */
-  Moving: "Moving",
-
-  /**
-   * Arc extension state is Succeeded.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Arc extension is in Updating State.
-   */
-  Updating: "Updating",
-}
-
 /**
  * details of validation failure
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model ErrorDetailModel {
   /**
    * Exception details while installing extension.
    */
   @visibility(Lifecycle.Read)
   exception?: string;
-}
-
-/**
- * Extension managed by user or Azure.
- */
-@added(Versions.v2025_12_01_preview)
-union ExtensionManagedBy {
-  string,
-
-  /**
-   * Extension managed by user.
-   */
-  User: "User",
-
-  /**
-   * Extension managed by Azure.
-   */
-  Azure: "Azure",
 }

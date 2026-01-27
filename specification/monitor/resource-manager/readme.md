@@ -95,7 +95,6 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
-  - Microsoft.Insights/preview/2024-01-01-preview/scheduledQueryRule_API.json
 
 suppressions:
   - code: AvoidAdditionalProperties
@@ -1516,6 +1515,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:

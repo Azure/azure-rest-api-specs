@@ -12,7 +12,7 @@
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
-    "lint": "cross-env DEBUG=eslint:eslint eslint",
+    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
@@ -25,13 +25,14 @@
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^4.0.15",
     "cross-env": "^10.1.0",
     "eslint": "^9.22.0",
-    "prettier": "3.7.4",
+    "prettier": "3.8.0",
     "prettier-plugin-organize-imports": "^4.2.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.45.0",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.15"
   },
   "engines": {
     "node": ">=20.0.0"

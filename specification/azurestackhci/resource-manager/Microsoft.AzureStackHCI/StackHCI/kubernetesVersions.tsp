@@ -12,9 +12,9 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-@added(Versions.v2025_11_01_preview)
 @doc("Represents a kubernetes version resource.")
 @parentResource(SubscriptionLocationResource)
+@removed(Versions.v2026_02_01)
 model KubernetesVersion
   is Azure.ResourceManager.ProxyResource<KubernetesVersionProperties> {
   ...ResourceNameParameter<
@@ -23,16 +23,16 @@ model KubernetesVersion
   >;
 }
 
-@added(Versions.v2025_11_01_preview)
 @armResourceOperations
+@removed(Versions.v2026_02_01)
 interface KubernetesVersions {
   @doc("List all kubernetes versions.")
   list is ArmResourceListAtScope<KubernetesVersion>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@added(Versions.v2025_11_01_preview)
 @doc("Represents properties of a kubernetes version.")
+@removed(Versions.v2026_02_01)
 model KubernetesVersionProperties {
   @doc("Represents kubernetes version.")
   version: string;
