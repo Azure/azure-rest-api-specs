@@ -23,8 +23,9 @@ Adding SKU support to the HealthDataAIServices DeidService with a new API versio
 | Step | Status | Notes |
 |------|--------|-------|
 | Create branch for TypeSpec changes | ✅ Complete | `ronniegeraghty/azsdktoolsagent-demo-3` |
-| Run TypeSpec validation | ✅ Complete | Passed successfully (fixed @useDependency issue) |
-| Commit TypeSpec changes | ✅ Complete | 2 commits: initial changes + fix |
+| Run TypeSpec validation | ✅ Complete | Passed successfully |
+| Generate OpenAPI specs | ✅ Complete | Generated specs for 2024-09-20 and 2026-02-01-preview |
+| Commit TypeSpec changes | ✅ Complete | 2 commits: TypeSpec + generated OpenAPI |
 | Push branch to remote | ✅ Complete | Pushed to origin |
 | Create API spec pull request | ✅ Complete | https://github.com/Azure/azure-rest-api-specs/pull/39935 |
 
