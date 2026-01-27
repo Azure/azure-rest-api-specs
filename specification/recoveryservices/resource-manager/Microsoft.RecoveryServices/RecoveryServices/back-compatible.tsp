@@ -7,8 +7,7 @@ using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
-  "!javascript"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "vault");
@@ -33,8 +32,7 @@ using Microsoft.RecoveryServices;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VaultExtendedInfoResource.properties,
-  "!javascript"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VaultExtendedInfoResource.properties
 );
 @@clientName(RecoveryServicesOperationGroup.capabilities::parameters.body,
   "input"
@@ -68,11 +66,11 @@ using Microsoft.RecoveryServices;
 );
 
 // Vaults operations
-@@clientLocation(Vaults.create, "VaultCertificates");
-@@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities");
-@@clientName(Vaults.registeredIdentitiesDelete, "Delete");
-@@clientLocation(Vaults.list, "ReplicationUsages");
-@@clientLocation(Vaults.listByVaults, "Usages");
+@@clientLocation(Vaults.create, "VaultCertificates", "!csharp");
+@@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities", "!csharp");
+@@clientName(Vaults.registeredIdentitiesDelete, "Delete", "!csharp");
+@@clientLocation(Vaults.list, "ReplicationUsages", "!csharp");
+@@clientLocation(Vaults.listByVaults, "Usages", "!csharp");
 
 // GetOperationResult operations
 @@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
