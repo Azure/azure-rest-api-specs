@@ -12,6 +12,18 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+@@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.CodeInterpreterTool,
+  {
+    /** The code interpreter container. Can be a container ID or an object that
+      specifies uploaded file IDs to make available to your code, along with an
+      optional `memory_limit` setting.*/
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
+    container?: string | OpenAI.CodeInterpreterContainerAuto,
+  }
+);
+
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(OpenAI.CreateResponse.`model`, string);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
