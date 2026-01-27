@@ -499,16 +499,18 @@ enum AllocationState {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_06_01)
-enum IPFamily {
+union IPFamily {
+  string,
+
   /**
    * IPv4 is available to the pool.
    */
-  IPv4,
+  IPv4: "IPv4",
 
   /**
    * IPv6 is available to the pool.
    */
-  IPv6,
+  IPv6: "IPv6",
 }
 
 /**
@@ -697,16 +699,18 @@ enum NetworkSecurityGroupRuleAccess {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_06_01)
-enum JobDefaultOrder {
+union JobDefaultOrder {
+  string,
+
   /**
    * Tasks should be scheduled uniformly from all equal-priority jobs for the pool.
    */
-  None,
+  None: "None",
 
   /**
    * If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first.
    */
-  CreationTime,
+  CreationTime: "CreationTime",
 }
 
 /**
@@ -783,16 +787,18 @@ enum LoginMode {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_06_01)
-enum HostEndpointSettingsModeTypes {
+union HostEndpointSettingsModeTypes {
+  string,
+
   /**
    * In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints.
    */
-  Audit,
+  Audit: "Audit",
 
   /**
    * Enforce mode is the recommended mode of operation and system will enforce the access control policy. This property cannot be used together with 'inVMAccessControlProfileReferenceId'.
    */
-  Enforce,
+  Enforce: "Enforce",
 }
 
 /**
