@@ -20,6 +20,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2024-09-20 version.")
   v2024_09_20: "2024-09-20",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("The 2026-02-01-preview version.")
+  v2026_02_01_preview: "2026-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -40,6 +44,11 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding SKU property for versioning"
+  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+  @added(Versions.v2026_02_01_preview)
+  sku?: Sku;
 }
 
 /** Patch request body for DeidService */
@@ -51,6 +60,10 @@ model DeidUpdate {
 
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
+
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  @added(Versions.v2026_02_01_preview)
+  sku?: Sku;
 }
 
 model DeidPropertiesUpdate
@@ -79,6 +92,35 @@ union ProvisioningState {
   Accepted: "Accepted",
 
   string,
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
+@doc("The tier of the SKU.")
+@added(Versions.v2026_02_01_preview)
+union SkuTier {
+  string,
+
+  /** Free tier. */
+  Free: "Free",
+
+  /** Basic tier. */
+  Basic: "Basic",
+
+  /** Standard tier. */
+  Standard: "Standard",
+}
+
+/** The SKU (Stock Keeping Unit) assigned to this resource. */
+@added(Versions.v2026_02_01_preview)
+model Sku {
+  /** The name of the SKU. */
+  name: string;
+
+  /** The tier of the SKU. */
+  tier?: SkuTier;
+
+  /** The capacity of the SKU. */
+  capacity?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
