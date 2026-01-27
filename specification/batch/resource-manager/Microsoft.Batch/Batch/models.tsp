@@ -1092,7 +1092,7 @@ model EndpointAccessProfile {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum IPRuleAction {
   /**
-   * Deny client access.
+   * Allow access for the matched client IP address.
    */
   Allow: "Allow",
 }
