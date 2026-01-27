@@ -27,6 +27,8 @@ using Microsoft.RecoveryServices;
   "parameters"
 );
 
+@@clientName(RecoveryPoints.update::parameters.properties, "parameters");
+
 @@clientName(BackupResourceEncryptionConfigs.update::parameters.resource,
   "parameters"
 );

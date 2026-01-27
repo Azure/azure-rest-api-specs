@@ -71,20 +71,14 @@ interface RecoveryPoints {
   /**
    * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-operation-group" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "This API does not support tags"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Recovery point updates use UpdateRecoveryPointRequest model which does not include tags property"
   @added(Versions.v2026_01_01_preview)
   @patch(#{ implicitOptionality: true })
-  @armResourceUpdate(RecoveryPointResource)
-  update(
-    ...ResourceInstanceParameters<RecoveryPointResource>,
-
-    /**
-     * Request body for operation
-     */
-    @bodyRoot
-    parameters: UpdateRecoveryPointRequest,
-  ): ArmResponse<RecoveryPointResource> | ErrorResponse;
+  update is ArmCustomPatchSync<
+    RecoveryPointResource,
+    PatchModel = UpdateRecoveryPointRequest,
+    Response = ArmResponse<RecoveryPointResource>
+  >;
 }
 
 @armResourceOperations
@@ -145,7 +139,7 @@ interface ItemLevelRecoveryConnections {
 @@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
 );
-@@doc(RecoveryPoints.update::parameters.parameters,
+@@doc(RecoveryPoints.update::parameters.properties,
   "Request body for operation"
 );
 @@doc(Restores.trigger::parameters.body, "resource restore request");
