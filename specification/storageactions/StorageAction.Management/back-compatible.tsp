@@ -6,13 +6,13 @@ using Microsoft.StorageActions;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTaskPreviewAction.properties,
-  "!csharp,!java,!python"
+  "!csharp,!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTaskUpdateParameters.properties,
-  "!csharp,!java,!python"
+  "!csharp,!java,!python,!javascript"
 );
 
 @@clientName(StorageTasks.create::parameters.resource, "parameters");
@@ -24,7 +24,7 @@ using Microsoft.StorageActions;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTask.properties,
-  "!csharp,!java,!python"
+  "!csharp,!java,!python,!javascript"
 );
 
 // @@clientLocation decorators for operations with custom @operationId
