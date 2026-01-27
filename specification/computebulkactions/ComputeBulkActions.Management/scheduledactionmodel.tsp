@@ -220,7 +220,7 @@ model ResourcesWithContext {
   ids: Array<ResourceWithContext>;
 }
 
-@added(Versions.`2026-02-15-preview`)
+@added(Versions.`2026-02-10-preview`)
 @doc("The fungible properties which the customers can use to specify multiple VM SKU options and allocation strategy, for greater flexibility and higher chances of successful VM creation")
 model FungibleProperties {
   @doc("List of VM sizes supported for fungible VMs")
@@ -257,7 +257,7 @@ model ResourceProvisionPayload {
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
   resourcePrefix?: string;
 
-  @added(Versions.`2026-02-15-preview`)
+  @added(Versions.`2026-02-10-preview`)
   @doc("Fungible properties tag to create Vms based on size, zone and allocation strategy")
   fungibleProperties?: FungibleProperties;
 }
