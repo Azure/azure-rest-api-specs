@@ -260,6 +260,13 @@ model PromptAgentDefinition extends AgentDefinition {
     """)
   tools?: OpenAI.Tool[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @doc("""
+    How the model should select which tool (or tools) to use when generating a response. 
+    See the `tools` parameter to see how to specify which tools the model can call.
+    """)
+  tool_choice?: string | OpenAI.ToolChoiceParam;
+
   /**
    * Configuration options for a text response from the model. Can be plain text or structured JSON data.
    */

@@ -3292,7 +3292,6 @@ components:
       type: object
       required:
         - type
-        - container
       properties:
         type:
           type: string
@@ -3306,8 +3305,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.CodeInterpreterContainerAuto'
           description: |-
             The code interpreter container. Can be a container ID or an object that
-              specifies uploaded file IDs to make available to your code, along with an
-              optional `memory_limit` setting.
+            specifies uploaded file IDs to make available to your code, along with an
+            optional `memory_limit` setting.
+            If not provided, the service assumes auto.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that runs Python code to help generate a response to a prompt.

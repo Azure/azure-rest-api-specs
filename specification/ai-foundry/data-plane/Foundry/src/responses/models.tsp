@@ -1,14 +1,31 @@
 import "@azure-tools/typespec-azure-core/experimental";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 import "../conversations/models.tsp";
 import "../tools/models.tsp";
 
 using TypeSpec.Http;
 using Azure.Core.Experimental;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
+
+/* Here we remove the container propery and the add it back as an optional property. */
+@@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.CodeInterpreterTool,
+  {
+    /** The code interpreter container. Can be a container ID or an object that
+     * specifies uploaded file IDs to make available to your code, along with an
+     * optional `memory_limit` setting.
+     * If not provided, the service assumes auto.
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
+    container?: string | OpenAI.CodeInterpreterContainerAuto,
+  }
+);
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(OpenAI.CreateResponse.`model`, string);
@@ -25,8 +42,15 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.CreateResponse,
   {
-    /** The agent to use for generating the response. */
+    /**
+     * (Deprecated) Use agent_reference instead.
+     *  The agent to use for generating the response.
+     */
+    @removed(Versions.v1)
     agent?: AgentReference,
+
+    /** The agent to use for generating the response. */
+    agent_reference?: AgentReference,
 
     /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
     structured_inputs?: Record<unknown>,
@@ -36,8 +60,15 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.Response,
   {
-    /** The agent used for this response */
+    /**
+     * (Deprecated) Use agent_reference instead.
+     * The agent used for this response
+     */
+    @removed(Versions.v1)
     agent?: AgentId,
+
+    /** The agent used for this response */
+    agent_reference?: AgentReference,
 
     /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
     structured_inputs?: Record<unknown>,
@@ -62,25 +93,6 @@ alias ConversationIdQueryParam = {
   conversation_id?: string;
 };
 
-model ResponseList {
-  @doc("""
-    The type of object returned, must be `list`.
-    """)
-  object: "list";
-
-  /** A list of items used to generate this response. */
-  data: OpenAI.Response[];
-
-  /** Whether there are more items available. */
-  has_more: boolean;
-
-  /** The ID of the first item in the list. */
-  first_id: string;
-
-  /** The ID of the last item in the list. */
-  last_id: string;
-}
-
 model AgentReference {
   type: "agent_reference";
 
@@ -92,6 +104,7 @@ model AgentReference {
   version?: string;
 }
 
+@removed(Versions.v1)
 model AgentId {
   type: "agent_id";
 
@@ -123,17 +136,24 @@ union _AgentItemType {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyVariants(OpenAI.ItemResourceType, _AgentItemType);
 
-/* created_by conflicts with the property in OpenAI.FunctionShellCall, ApplyPatchToolCall, and ApplyPatchToolCallOutput, to work around it we use a union type here */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.ItemResource,
   {
     /** The information about the creator of the item */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "This is required due to a conflict with the service."
+    @removed(Versions.v1)
     created_by?: CreatedBy | string,
+
+    @doc("The agent that created the item.")
+    agent_reference?: AgentReference,
+
+    @doc("The response on which the item is created.")
+    response_id?: string,
   }
 );
 
+@removed(Versions.v1)
 model CreatedBy {
   @doc("The agent that created the item.")
   agent?: AgentId;
