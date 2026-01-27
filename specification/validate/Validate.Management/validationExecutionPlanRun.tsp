@@ -21,11 +21,11 @@ model ExecutionPlanRunProperties {
 
   @doc("The status of the execution plan run.")
   @visibility(Lifecycle.Read)
-  status: ExecutionPlanRunStatus;
+  status?: ExecutionPlanRunStatus;
 
   @doc("The start time of the execution plan run.")
   @visibility(Lifecycle.Read)
-  startTimestampInUtc: utcDateTime;
+  startTimestampInUtc?: utcDateTime;
 
   @doc("The end time of the execution plan run.")
   @visibility(Lifecycle.Read)
@@ -33,13 +33,13 @@ model ExecutionPlanRunProperties {
 
   @doc("The reported timestamp of the execution plan run.")
   @visibility(Lifecycle.Read)
-  reportedTimestampInUtc: utcDateTime;
+  reportedTimestampInUtc?: utcDateTime;
 
   @doc("The test runs under this execution plan run.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   @maxItems(100)
-  testRuns: ValidationTestRun[];
+  testRuns?: ValidationTestRun[];
 
   @doc("The provisioning state of the execution plan run.")
   @visibility(Lifecycle.Read)
