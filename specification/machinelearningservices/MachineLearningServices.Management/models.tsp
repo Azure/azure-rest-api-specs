@@ -8723,6 +8723,7 @@ model WorkspaceUpdateParameters {
 model WorkspacePropertiesUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8746,6 +8747,7 @@ model WorkspacePropertiesUpdateParameters {
   /**
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace
    */
+  @removed(Versions.v2025_12_01)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8770,6 +8772,7 @@ model WorkspacePropertiesUpdateParameters {
    * The list of IPv4 addresses that are allowed to access the workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
   ipAllowlist?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8779,6 +8782,7 @@ model WorkspacePropertiesUpdateParameters {
   /**
    * A set of rules governing the network accessibility of the workspace.
    */
+  @removed(Versions.v2025_12_01)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8804,6 +8808,7 @@ model WorkspacePropertiesUpdateParameters {
   /**
    * Retention time in days after workspace get soft deleted.
    */
+  @removed(Versions.v2025_12_01)
   softDeleteRetentionInDays?: int32;
 
   /**
