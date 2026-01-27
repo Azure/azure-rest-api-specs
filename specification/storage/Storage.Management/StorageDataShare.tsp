@@ -33,27 +33,34 @@ interface DataShares {
   /**
    * Get the specified Storage DataShare.
    */
-  get is ArmResourceRead<DataShare>;
+  get is ArmResourceRead<DataShare, Error = ErrorResponse>;
 
   /**
    * Create a Storage DataShare if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource.
    */
-  create is ArmResourceCreateOrReplaceAsync<DataShare>;
+  create is ArmResourceCreateOrReplaceAsync<DataShare, Error = ErrorResponse>;
 
   /**
    * Update a Storage DataShare.
    */
-  update is ArmResourcePatchAsync<DataShare, StorageDataShareProperties>;
+  update is ArmCustomPatchAsync<
+    DataShare,
+    PatchModel = DataShare,
+    Error = ErrorResponse
+  >;
 
   /**
    * Delete a Storage DataShare.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<DataShare>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataShare, Error = ErrorResponse>;
 
   /**
    * List all Storage DataShares in a Storage Account.
    */
-  listByStorageAccount is ArmResourceListByParent<DataShare>;
+  listByStorageAccount is ArmResourceListByParent<
+    DataShare,
+    Error = ErrorResponse
+  >;
 }
 
 @@maxLength(DataShare.name, 63);

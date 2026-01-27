@@ -33,27 +33,34 @@ interface Connectors {
   /**
    * Get the specified Storage Connector.
    */
-  get is ArmResourceRead<Connector>;
+  get is ArmResourceRead<Connector, Error = ErrorResponse>;
 
   /**
    * Create a Storage Connector if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource.
    */
-  create is ArmResourceCreateOrReplaceAsync<Connector>;
+  create is ArmResourceCreateOrReplaceAsync<Connector, Error = ErrorResponse>;
 
   /**
    * Update a Storage Connector.
    */
-  update is ArmResourcePatchAsync<Connector, StorageConnectorProperties>;
+  update is ArmCustomPatchAsync<
+    Connector,
+    PatchModel = Connector,
+    Error = ErrorResponse
+  >;
 
   /**
    * Delete a Storage Connector.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Connector>;
+  delete is ArmResourceDeleteWithoutOkAsync<Connector, Error = ErrorResponse>;
 
   /**
    * List all Storage Connectors in a Storage Account.
    */
-  listByStorageAccount is ArmResourceListByParent<Connector>;
+  listByStorageAccount is ArmResourceListByParent<
+    Connector,
+    Error = ErrorResponse
+  >;
 
   /**
    * This method is used to verify that the connection to the backing data store works.
