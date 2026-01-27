@@ -63,7 +63,7 @@ model DeidUpdate {
 
   /** The SKU (Stock Keeping Unit) assigned to this resource. */
   @added(Versions.v2026_02_01_preview)
-  sku?: Sku;
+  sku?: SkuUpdate;
 }
 
 model DeidPropertiesUpdate
@@ -72,6 +72,10 @@ model DeidPropertiesUpdate
 #suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
+
+#suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
+@doc("The SKU (Stock Keeping Unit) update model for PATCH operations.")
+model SkuUpdate is OptionalProperties<UpdateableProperties<Sku>>;
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
 @Azure.Core.lroStatus

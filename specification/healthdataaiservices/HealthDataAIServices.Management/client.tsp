@@ -42,4 +42,5 @@ namespace Microsoft.HealthDataAIServices {
 
   @@clientName(SkuTier, "HealthDataAIServicesSkuTier", "csharp");
   @@clientName(Sku, "HealthDataAIServicesSku", "csharp");
+  @@clientName(SkuUpdate, "HealthDataAIServicesSkuPatch", "csharp");
 }
