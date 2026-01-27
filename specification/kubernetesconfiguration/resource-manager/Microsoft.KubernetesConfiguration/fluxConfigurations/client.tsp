@@ -7,3 +7,12 @@ using Azure.ClientGenerator.Core;
   "KubernetesConfigurationFluxConfigurationsMgmtClient",
   "python"
 );
+
+@@clientName(Microsoft.KubernetesConfiguration.KustomizationDefinition.wait,
+  "waitValue",
+  "java"
+);
+@@clientName(Microsoft.KubernetesConfiguration.KustomizationPatchDefinition.wait,
+  "waitValue",
+  "java"
+);
