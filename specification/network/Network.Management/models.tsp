@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -7818,6 +7818,8 @@ model ApplicationGatewayBackendAddressPoolPropertiesFormat {
  * Properties of IP configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * The reference to gateway load balancer frontend IP.
@@ -7948,6 +7950,8 @@ model VirtualNetworkTapPropertiesFormat {
 /**
  * Properties of Virtual Network Tap configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkInterfaceTapConfigurationPropertiesFormat {
   /**
    * The reference to the Virtual Network Tap resource.
@@ -8042,6 +8046,8 @@ model FrontendIPConfigurationPropertiesFormat {
 /**
  * Properties of the subnet.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model SubnetPropertiesFormat {
   /**
    * The address prefix for the subnet.
@@ -8167,6 +8173,8 @@ model SubnetPropertiesFormat {
 /**
  * Network Security Group resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkSecurityGroupPropertiesFormat {
   /**
    * When enabled, flows created from Network Security Group connections will be re-evaluated when rules are updates. Initial enablement will trigger re-evaluation.
@@ -8218,6 +8226,8 @@ model NetworkSecurityGroupPropertiesFormat {
 /**
  * Security rule resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model SecurityRulePropertiesFormat {
   /**
    * A description for this rule. Restricted to 140 chars.
@@ -8304,6 +8314,8 @@ model SecurityRulePropertiesFormat {
 /**
  * Application security group properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ApplicationSecurityGroupPropertiesFormat {
   /**
    * The resource GUID property of the application security group resource. It uniquely identifies a resource, even if the user changes its name or migrate the resource across subscriptions or resource groups.
@@ -8336,6 +8348,8 @@ model ExtendedLocation {
 /**
  * NetworkInterface properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkInterfacePropertiesFormat {
   /**
    * The reference to a virtual machine.
@@ -8468,6 +8482,8 @@ model NetworkInterfacePropertiesFormat {
 /**
  * Properties of the private endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateEndpointProperties {
   /**
    * The ID of the subnet from which the private IP will be allocated.
@@ -8554,6 +8570,8 @@ model PrivateLinkServiceConnection extends SubResource {
 /**
  * Properties of the PrivateLinkServiceConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceConnectionProperties {
   /**
    * The provisioning state of the private link service connection resource.
@@ -8585,6 +8603,8 @@ model PrivateLinkServiceConnectionProperties {
 /**
  * A collection of information about the state of the connection between service consumer and provider.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceConnectionState {
   /**
    * Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
@@ -8605,6 +8625,8 @@ model PrivateLinkServiceConnectionState {
 /**
  * Contains custom Dns resolution configuration from customer.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model CustomDnsConfigPropertiesFormat {
   /**
    * Fqdn that resolves to private endpoint ip address.
@@ -8620,6 +8642,8 @@ model CustomDnsConfigPropertiesFormat {
 /**
  * An IP Configuration of the private endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateEndpointIPConfiguration {
   /**
    * Properties of private endpoint IP configurations.
@@ -8648,6 +8672,8 @@ model PrivateEndpointIPConfiguration {
  * Properties of an IP Configuration of the private endpoint.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateEndpointIPConfigurationProperties {
   /**
    * The ID of a group obtained from the remote resource that this private endpoint should connect to.
@@ -8669,6 +8695,8 @@ model PrivateEndpointIPConfigurationProperties {
 /**
  * DNS settings of a network interface.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkInterfaceDnsSettings {
   /**
    * List of DNS servers IP addresses. Use 'AzureProvidedDNS' to switch to azure provided DNS resolution. 'AzureProvidedDNS' value cannot be combined with other IPs, it must be the only value in dnsServers collection.
@@ -8702,6 +8730,8 @@ model NetworkInterfaceDnsSettings {
 /**
  * Properties of the private link service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceProperties {
   /**
    * An array of references to the load balancer IP configurations.
@@ -8800,6 +8830,8 @@ model PrivateLinkServiceIpConfiguration extends SubResource {
 /**
  * Properties of private link service IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceIpConfigurationProperties {
   /**
    * The private IP address of the IP configuration.
@@ -8839,6 +8871,8 @@ model PrivateLinkServiceIpConfigurationProperties {
 /**
  * Properties of the PrivateEndpointConnectProperties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateEndpointConnectionProperties {
   /**
    * The resource of private end point.
@@ -8880,6 +8914,8 @@ model PrivateLinkServicePropertiesVisibility extends ResourceSet {}
 /**
  * The base resource set for visibility and auto-approval.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ResourceSet {
   /**
    * The list of subscriptions.
@@ -9078,6 +9114,8 @@ model Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidenti
 /**
  * Route Table resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model RouteTablePropertiesFormat {
   /**
    * Collection of routes contained within a route table.
@@ -9111,6 +9149,8 @@ model RouteTablePropertiesFormat {
 /**
  * Route resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model RoutePropertiesFormat {
   /**
    * The destination CIDR to which the route applies.
@@ -9143,6 +9183,8 @@ model RoutePropertiesFormat {
 /**
  * The service endpoint properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ServiceEndpointPropertiesFormat {
   /**
    * The type of the endpoint service.
@@ -9260,6 +9302,8 @@ model IPConfiguration extends SubResource {
  * Properties of IP configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
@@ -9295,6 +9339,8 @@ model IPConfigurationPropertiesFormat {
  * SKU of a public IP address.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PublicIPAddressSku {
   /**
    * Name of a public IP address SKU.
@@ -9311,6 +9357,8 @@ model PublicIPAddressSku {
  * Public IP address properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PublicIPAddressPropertiesFormat {
   /**
    * The public IP address allocation method.
@@ -9406,6 +9454,8 @@ model PublicIPAddressPropertiesFormat {
  * Contains FQDN of the DNS record associated with the public IP address.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PublicIPAddressDnsSettings {
   /**
    * The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
@@ -9431,6 +9481,8 @@ model PublicIPAddressDnsSettings {
 /**
  * Contains the DDoS protection settings of the public IP.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DdosSettings {
   /**
    * The DDoS protection mode of the public IP
@@ -9446,6 +9498,8 @@ model DdosSettings {
 /**
  * Contains the IpTag associated with the object.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpTag {
   /**
    * The IP tag type. Example: FirstPartyUsage.
@@ -9461,6 +9515,8 @@ model IpTag {
 /**
  * SKU of nat gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NatGatewaySku {
   /**
    * Name of Nat Gateway SKU.
@@ -9471,6 +9527,8 @@ model NatGatewaySku {
 /**
  * Nat Gateway properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NatGatewayPropertiesFormat {
   /**
    * The idle timeout of the nat gateway.
@@ -9554,6 +9612,8 @@ model IPConfigurationProfile extends SubResource {
  * IP configuration profile properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IPConfigurationProfilePropertiesFormat {
   /**
    * The reference to the subnet resource to create a container network interface ip configuration.
@@ -9604,6 +9664,8 @@ model ResourceNavigationLink extends SubResource {
 /**
  * Properties of ResourceNavigationLink.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ResourceNavigationLinkFormat {
   /**
    * Resource type of the linked resource.
@@ -9653,6 +9715,8 @@ model ServiceAssociationLink extends SubResource {
 /**
  * Properties of ServiceAssociationLink.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ServiceAssociationLinkPropertiesFormat {
   /**
    * Resource type of the linked resource.
@@ -9711,6 +9775,8 @@ model Delegation extends SubResource {
 /**
  * Properties of a service delegation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ServiceDelegationPropertiesFormat {
   /**
    * The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers).
@@ -9733,6 +9799,8 @@ model ServiceDelegationPropertiesFormat {
 /**
  * IpamPool prefix allocation reference.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpamPoolPrefixAllocation {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pool?: IpamPoolPrefixAllocationPool;
@@ -10021,6 +10089,8 @@ model InboundNatRulePropertiesFormat {
  * PrivateLinkConnection properties for the network interface.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties {
   /**
    * The group ID for current private link connection.
@@ -12114,6 +12184,8 @@ model AvailableDelegationsResult is Azure.Core.Page<AvailableDelegation>;
 /**
  * The serviceName of an AvailableDelegation indicates a possible delegation for a subnet.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model AvailableDelegation {
   /**
    * The name of the AvailableDelegation resource.
@@ -12149,6 +12221,8 @@ model AvailableServiceAliasesResult is Azure.Core.Page<AvailableServiceAlias>;
 /**
  * The available service alias.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model AvailableServiceAlias {
   /**
    * The name of the service alias.
@@ -12923,6 +12997,8 @@ model AzureWebCategoryPropertiesFormat {
 /**
  * Properties of the Bastion Host.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BastionHostPropertiesFormat {
   /**
    * IP configuration of the Bastion Host resource.
@@ -13028,6 +13104,8 @@ model BastionHostIPConfiguration extends SubResource {
  * Properties of IP configuration of an Bastion Host.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BastionHostIPConfigurationPropertiesFormat {
   /**
    * Reference of the subnet resource.
@@ -13063,6 +13141,8 @@ model BastionHostPropertiesFormatNetworkAcls {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IPRule {
   /**
    * Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
@@ -13073,6 +13153,8 @@ model IPRule {
 /**
  * The sku of this Bastion Host.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model Sku {
   /**
    * The name of the sku of this Bastion Host.
@@ -13083,6 +13165,8 @@ model Sku {
 /**
  * Post request for Create/Delete/Get Bastion Shareable Link endpoints.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BastionShareableLinkListRequest {
   /**
    * List of VM references.
@@ -13094,6 +13178,8 @@ model BastionShareableLinkListRequest {
 /**
  * Bastion Shareable Link.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BastionShareableLink {
   /**
    * Reference of the virtual machine resource.
@@ -13136,6 +13222,8 @@ model BastionShareableLinkListResult is Azure.Core.Page<BastionShareableLink>;
 /**
  * Post request for Delete Bastion Shareable Link By Token endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BastionShareableLinkTokenListRequest {
   /**
    * List of Bastion Shareable Link Token.
@@ -13151,6 +13239,8 @@ model BastionActiveSessionListResult is Azure.Core.Page<BastionActiveSession>;
 /**
  * The session detail for a target.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BastionActiveSession {
   /**
    * A unique id for the session.
@@ -13223,6 +13313,8 @@ model BastionActiveSession {
 /**
  * List of session IDs.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model SessionIds {
   /**
    * List of session IDs.
@@ -13239,6 +13331,8 @@ model BastionSessionDeleteResult is Azure.Core.Page<BastionSessionState>;
 /**
  * The session state detail for a target.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BastionSessionState {
   /**
    * A unique id for the session.
@@ -13262,6 +13356,8 @@ model BastionSessionState {
 /**
  * Response for the CheckDnsNameAvailability API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DnsNameAvailabilityResult {
   /**
    * Domain availability (True/False).
@@ -13273,6 +13369,8 @@ model DnsNameAvailabilityResult {
  * Swap resource properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model SwapResourceProperties {
   /**
    * Specifies slot info on a cloud service
@@ -13283,6 +13381,8 @@ model SwapResourceProperties {
 /**
  * SwapResource List with single entry to represent slot type on the specified cloud service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model SwapResourceListResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
@@ -13292,6 +13392,8 @@ model SwapResourceListResult {
 /**
  * Custom IP prefix properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model CustomIpPrefixPropertiesFormat {
   /**
    * The ASN for CIDR advertising. Should be an integer as string.
@@ -13377,6 +13479,8 @@ model CustomIpPrefixPropertiesFormat {
 /**
  * DDoS custom policy properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DdosCustomPolicyPropertiesFormat {
   /**
    * The resource GUID property of the DDoS custom policy resource. It uniquely identifies the resource, even if the user changes its name or migrate the resource across subscriptions or resource groups.
@@ -13438,6 +13542,8 @@ model DdosDetectionRule extends SubResource {
 /**
  * DDoS detection rule properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DdosDetectionRulePropertiesFormat {
   /**
    * The provisioning state of the DDoS detection rule.
@@ -13459,6 +13565,8 @@ model DdosDetectionRulePropertiesFormat {
 /**
  * Ddos Custom Policy traffic detection rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model TrafficDetectionRule {
   /**
    * The traffic type (one of Tcp, Udp, TcpSyn) that the detection rule will be applied upon.
@@ -13474,6 +13582,8 @@ model TrafficDetectionRule {
 /**
  * DDoS protection plan properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DdosProtectionPlanPropertiesFormat {
   /**
    * The resource GUID property of the DDoS protection plan resource. It uniquely identifies the resource, even if the user changes its name or migrate the resource across subscriptions or resource groups.
@@ -13504,6 +13614,8 @@ model DdosProtectionPlanPropertiesFormat {
 /**
  * Differentiated Services Code Point configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DscpConfigurationPropertiesFormat {
   /**
    * List of markings to be used in the configuration.
@@ -13573,6 +13685,8 @@ model DscpConfigurationPropertiesFormat {
 /**
  * Qos Traffic Profiler IP Range properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model QosIpRange {
   /**
    * Start IP Address.
@@ -13590,6 +13704,8 @@ model QosIpRange {
 /**
  * Qos Traffic Profiler Port range properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model QosPortRange {
   /**
    * Qos Port Range start.
@@ -13605,6 +13721,8 @@ model QosPortRange {
 /**
  * Quality of Service defines the traffic configuration between endpoints. Mandatory to have one marking.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model QosDefinition {
   /**
    * List of markings to be used in the configuration.
@@ -15654,6 +15772,8 @@ model IpamPoolList is Azure.Core.Page<IpamPool>;
 /**
  * Properties of IpamPool resource properties which are specific to the Pool resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpamPoolProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
@@ -15810,6 +15930,8 @@ model CommonErrorAdditionalInfo {
 /**
  * Represents the IpamPool update API request interface.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpamPoolUpdate {
   /**
    * Dictionary of <string>
@@ -15826,6 +15948,8 @@ model IpamPoolUpdate {
 /**
  * Represents the IpamPool update properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpamPoolUpdateProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
@@ -15839,6 +15963,8 @@ model IpamPoolUpdateProperties {
 /**
  * IpamPool usage information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PoolUsage {
   /**
    * List of IP address prefixes of the resource.
@@ -15903,6 +16029,8 @@ model PoolUsage {
 /**
  * Representation of basic resource information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ResourceBasics {
   /**
    * ResourceId of the Azure resource.
@@ -15923,6 +16051,8 @@ model PoolAssociationList is Azure.Core.Page<PoolAssociation>;
 /**
  * IpamPool association information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PoolAssociation {
   /**
    * Resource id of the associated Azure resource.
@@ -15986,6 +16116,8 @@ model StaticCidrList is Azure.Core.Page<StaticCidr>;
 /**
  * Properties of static CIDR resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model StaticCidrProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
@@ -16031,6 +16163,8 @@ model CommonProxyResource extends CommonResource {}
  * Properties of the IpAllocation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpAllocationPropertiesFormat {
   /**
    * The Subnet that using the prefix of this IpAllocation resource.
@@ -16081,6 +16215,8 @@ model IpAllocationPropertiesFormat {
 /**
  * The IpGroups property information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IpGroupPropertiesFormat {
   /**
    * The provisioning state of the IpGroups resource.
@@ -16633,6 +16769,8 @@ model EffectiveRouteListResult is Azure.Core.Page<EffectiveRoute>;
 /**
  * Effective Route.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model EffectiveRoute {
   /**
    * The name of the user defined route. This is optional.
@@ -16679,6 +16817,8 @@ model EffectiveNetworkSecurityGroupListResult
 /**
  * Effective network security group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model EffectiveNetworkSecurityGroup {
   /**
    * The ID of network security group that is applied.
@@ -16705,6 +16845,8 @@ model EffectiveNetworkSecurityGroup {
 /**
  * The effective network security group association.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model EffectiveNetworkSecurityGroupAssociation {
   /**
    * The ID of the Azure network manager if assigned.
@@ -16725,6 +16867,8 @@ model EffectiveNetworkSecurityGroupAssociation {
 /**
  * Effective network security rules.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model EffectiveNetworkSecurityRule {
   /**
    * The name of the security rule specified by the user (if created by the user).
@@ -18088,6 +18232,8 @@ model AddressPrefixItem {
 /**
  * Network profile properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkProfilePropertiesFormat {
   /**
    * List of child container network interfaces.
@@ -18144,6 +18290,8 @@ model ContainerNetworkInterface extends SubResource {
 /**
  * Properties of container network interface.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ContainerNetworkInterfacePropertiesFormat {
   /**
    * Container network interface configuration from which this container network interface is created.
@@ -18200,6 +18348,8 @@ model ContainerNetworkInterfaceConfiguration extends SubResource {
 /**
  * Container network interface configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ContainerNetworkInterfaceConfigurationPropertiesFormat {
   /**
    * A list of ip configurations of the container network interface configuration.
@@ -18228,6 +18378,8 @@ model Container extends SubResource {}
 /**
  * The ip configuration for a container network interface.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ContainerNetworkInterfaceIpConfiguration {
   /**
    * Properties of the container network interface IP configuration.
@@ -18255,6 +18407,8 @@ model ContainerNetworkInterfaceIpConfiguration {
 /**
  * Properties of the container network interface IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ContainerNetworkInterfaceIpConfigurationPropertiesFormat {
   /**
    * The provisioning state of the container network interface IP configuration resource.
@@ -18764,6 +18918,8 @@ model NspServiceTagsResource {
 /**
  * Represents the Reachability Analysis Intent properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ReachabilityAnalysisIntentProperties {
   /**
    * Provisioning states of a resource.
@@ -18793,6 +18949,8 @@ model ReachabilityAnalysisIntentProperties {
 /**
  * IP traffic information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IPTraffic {
   /**
    * List of source IP addresses of the traffic..
@@ -18821,6 +18979,8 @@ model IPTraffic {
 /**
  * Represents the Reachability Analysis Run properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ReachabilityAnalysisRunProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
@@ -18854,6 +19014,8 @@ model ReachabilityAnalysisRunProperties {
 /**
  * Intent information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IntentContent {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
@@ -18877,6 +19039,8 @@ model IntentContent {
 /**
  * Properties of Verifier Workspace resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VerifierWorkspaceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
@@ -18891,6 +19055,8 @@ model VerifierWorkspaceProperties {
 /**
  * Represents the VerifierWorkspace update API request interface.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VerifierWorkspaceUpdate {
   /**
    * Dictionary of <string>
@@ -18907,6 +19073,8 @@ model VerifierWorkspaceUpdate {
 /**
  * Represents the VerifierWorkspace update properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VerifierWorkspaceUpdateProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
@@ -18915,6 +19083,8 @@ model VerifierWorkspaceUpdateProperties {
 /**
  * Network Virtual Appliance definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualAppliancePropertiesFormat {
   /**
    * Network Virtual Appliance SKU.
@@ -19038,6 +19208,8 @@ model NetworkVirtualAppliancePropertiesFormat {
 /**
  * Network Virtual Appliance Sku Properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualApplianceSkuProperties {
   /**
    * Virtual Appliance Vendor.
@@ -19058,6 +19230,8 @@ model VirtualApplianceSkuProperties {
 /**
  * Network Virtual Appliance NIC properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualApplianceNicProperties {
   /**
    * NIC type - PublicNic, PrivateNic, or AdditionalNic; AdditionalPrivateNic and AdditionalPublicNic are only supported for NVAs deployed in VNets.
@@ -19102,6 +19276,8 @@ model NetworkVirtualAppliancePropertiesFormatNetworkProfile {
 /**
  * Represents a single NIC configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualApplianceNetworkInterfaceConfiguration {
   /**
    * NIC type. This should be either PublicNic or PrivateNic.
@@ -19117,6 +19293,8 @@ model VirtualApplianceNetworkInterfaceConfiguration {
 /**
  * Represents a single NIC configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualApplianceNetworkInterfaceConfigurationProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
@@ -19126,6 +19304,8 @@ model VirtualApplianceNetworkInterfaceConfigurationProperties {
 /**
  * Represents a single IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualApplianceIPConfiguration {
   /**
    * For hub NVAs, primary IP configs must be named 'privatenicipconfig' and 'publicnicipconfig', with non-primary configs using these prefixes; no naming restrictions apply for NVAs in VNets. Maximum 80 character are allowed.
@@ -19142,6 +19322,8 @@ model VirtualApplianceIPConfiguration {
  * Represents a single IP configuration properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualApplianceIPConfigurationProperties {
   /**
    * Whether or not this is primary IP configuration of the NIC.
@@ -19152,6 +19334,8 @@ model VirtualApplianceIPConfigurationProperties {
 /**
  * Network Virtual Appliance Additional NIC properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @summary("Network Virtual Appliance Additional Nic Properties")
 model VirtualApplianceAdditionalNicProperties {
   /**
@@ -19168,6 +19352,8 @@ model VirtualApplianceAdditionalNicProperties {
 /**
  * Resource Uri of Public Ip for Standard Load Balancer Frontend End.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @summary("Internet Ingress Public Ip Properties")
 model InternetIngressPublicIpsProperties {
   /**
@@ -19183,6 +19369,8 @@ model InternetIngressPublicIpsProperties {
 /**
  * Properties of the delegation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DelegationProperties {
   /**
    * The service name to which the NVA is delegated.
@@ -19199,6 +19387,8 @@ model DelegationProperties {
 /**
  * Properties of the partner managed resource. Only appliable for SaaS NVA.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PartnerManagedResourceProperties {
   /**
    * The partner managed resource id.
@@ -19234,6 +19424,8 @@ model PartnerManagedResourceProperties {
 /**
  * Specifies input parameters required NVA in VNet interface configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NvaInterfaceConfigurationsProperties {
   /**
    * A subnet resource id where the NIC will be deployed. Each subnet resource uri should be unique.
@@ -19255,6 +19447,8 @@ model NvaInterfaceConfigurationsProperties {
 /**
  * The resource URI of the subnets where the NVA NICS will be deployed
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @summary("Subnet references where the NVA NICS will be deployed")
 model NvaInVnetSubnetReferenceProperties {
   /**
@@ -19270,6 +19464,8 @@ model NvaInVnetSubnetReferenceProperties {
 /**
  * Specifies a list of virtual machine instance IDs from the Network Virtual Appliance VM instances.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceInstanceIds {
   /**
    * The network virtual appliance instance ids. Omitting the network virtual appliance instance ids will result in the operation being performed on all virtual machines belonging to the network virtual appliance.
@@ -19280,6 +19476,8 @@ model NetworkVirtualApplianceInstanceIds {
 /**
  * Specifies input parameters required to retrieve the boot diagnostic logs for an NVA instance
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceBootDiagnosticParameters {
   /**
    * The network virtual appliance instance id for which boot diagnostic logs is being requested
@@ -19298,6 +19496,8 @@ model NetworkVirtualApplianceBootDiagnosticParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkVirtualApplianceInstanceId {
   /**
    * The network virtual appliance instance id for which boot diagnostic logs is being requested
@@ -19308,6 +19508,8 @@ model NetworkVirtualApplianceInstanceId {
 /**
  * Properties of the rule group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualApplianceSiteProperties {
   /**
    * Address Prefix.
@@ -19329,6 +19531,8 @@ model VirtualApplianceSiteProperties {
 /**
  * Network Virtual Appliance Sku Properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model Office365PolicyProperties {
   /**
    * Office 365 breakout categories.
@@ -19339,6 +19543,8 @@ model Office365PolicyProperties {
 /**
  * Network Virtual Appliance Sku Properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BreakOutCategoryPolicies {
   /**
    * Flag to control breakout of o365 allow category.
@@ -19360,6 +19566,8 @@ model BreakOutCategoryPolicies {
  * Properties specific to NetworkVirtualApplianceSkus.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @summary("Network Virtual Appliance Sku Properties")
 model NetworkVirtualApplianceSkuPropertiesFormat {
   /**
@@ -19384,6 +19592,8 @@ model NetworkVirtualApplianceSkuPropertiesFormat {
 /**
  * List of available Sku and instances.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @summary("Network Virtual Appliance Sku Instances")
 model NetworkVirtualApplianceSkuInstances {
   /**
@@ -19402,6 +19612,8 @@ model NetworkVirtualApplianceSkuInstances {
 /**
  * Properties of the Inbound Security Rules resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model InboundSecurityRuleProperties {
   /**
    * Rule Type. This should be either AutoExpire or Permanent. Auto Expire Rule only creates NSG rules. Permanent Rule creates NSG rule and SLB LB Rule.
@@ -19423,6 +19635,8 @@ model InboundSecurityRuleProperties {
 /**
  * Properties of the Inbound Security Rules resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model InboundSecurityRules {
   /**
    * Name of the rule.
@@ -21818,6 +22032,8 @@ model AvailablePrivateEndpointTypesResult
 /**
  * The information of an AvailablePrivateEndpointType.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model AvailablePrivateEndpointType {
   /**
    * The name of the service and resource.
@@ -21870,6 +22086,8 @@ model PrivateDnsZoneGroup extends SubResource {
 /**
  * Properties of the private dns zone group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateDnsZoneGroupPropertiesFormat {
   /**
    * The provisioning state of the private dns zone group resource.
@@ -21886,6 +22104,8 @@ model PrivateDnsZoneGroupPropertiesFormat {
 /**
  * PrivateDnsZoneConfig resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateDnsZoneConfig {
   /**
    * Name of the resource that is unique within a resource group. This name can be used to access the resource.
@@ -21901,6 +22121,8 @@ model PrivateDnsZoneConfig {
 /**
  * Properties of the private dns zone configuration resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateDnsZonePropertiesFormat {
   /**
    * The resource id of the private dns zone.
@@ -21918,6 +22140,8 @@ model PrivateDnsZonePropertiesFormat {
 /**
  * A collective group of information about the record set information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model RecordSet {
   /**
    * Resource record type.
@@ -21959,6 +22183,8 @@ model PrivateDnsZoneGroupListResult is Azure.Core.Page<PrivateDnsZoneGroup>;
 /**
  * Request body of the CheckPrivateLinkServiceVisibility API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model CheckPrivateLinkServiceVisibilityRequest {
   /**
    * The alias of the private link service.
@@ -21969,6 +22195,8 @@ model CheckPrivateLinkServiceVisibilityRequest {
 /**
  * Response for the CheckPrivateLinkServiceVisibility API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceVisibility {
   /**
    * Private Link Service Visibility (True/False).
@@ -21985,6 +22213,8 @@ model AutoApprovedPrivateLinkServicesResult
 /**
  * The information of an AutoApprovedPrivateLinkService.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model AutoApprovedPrivateLinkService {
   /**
    * The id of the private link service resource.
@@ -21995,6 +22225,8 @@ model AutoApprovedPrivateLinkService {
 /**
  * Response for GetPublicIpAddressDdosProtectionStatusOperation API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PublicIpDdosProtectionStatusResult {
   /**
    * Public IP ARM resource ID
@@ -22020,6 +22252,8 @@ model PublicIpDdosProtectionStatusResult {
 /**
  * The request for ReserveCloudServicePublicIpAddressOperation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ReserveCloudServicePublicIpAddressRequest {
   /**
    * When true, reverts from Static to Dynamic allocation (undo reservation).
@@ -22030,6 +22264,8 @@ model ReserveCloudServicePublicIpAddressRequest {
 /**
  * The request for DisassociateCloudServicePublicIpOperation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DisassociateCloudServicePublicIpRequest {
   /**
    * ARM ID of the Standalone Public IP to associate. This is of the form : /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}
@@ -22045,6 +22281,8 @@ model DisassociateCloudServicePublicIpRequest {
  * SKU of a public IP prefix.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PublicIPPrefixSku {
   /**
    * Name of a public IP prefix SKU.
@@ -22061,6 +22299,8 @@ model PublicIPPrefixSku {
  * Public IP prefix properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PublicIPPrefixPropertiesFormat {
   /**
    * The public IP address version.
@@ -22125,6 +22365,8 @@ model PublicIPPrefixPropertiesFormat {
 /**
  * Reference to a public IP address.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ReferencedPublicIpAddress {
   /**
    * The PublicIPAddress Reference.
@@ -22225,6 +22467,8 @@ model RouteFilterRuleListResult is Azure.Core.Page<RouteFilterRule>;
 /**
  * Properties of the Security Partner Provider.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model SecurityPartnerProviderPropertiesFormat {
   /**
    * The provisioning state of the Security Partner Provider resource.
@@ -22321,6 +22565,8 @@ model BGPCommunity {
 /**
  * Response for the ListServiceTags API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ServiceTagsListResult {
   /**
    * The name of the cloud.
@@ -22368,6 +22614,8 @@ model ServiceTagsListResult {
 /**
  * The service tag information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ServiceTagInformation {
   /**
    * Properties of the service tag information.
@@ -22397,6 +22645,8 @@ model ServiceTagInformation {
 /**
  * Properties of the service tag information.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ServiceTagInformationPropertiesFormat {
   /**
    * The iteration number of service tag.
@@ -22442,6 +22692,8 @@ model UsagesListResult is Azure.Core.Page<Usage>;
 /**
  * The network resource usage.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model Usage {
   /**
    * Resource identifier.
@@ -22473,6 +22725,8 @@ model Usage {
 /**
  * The usage names.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model UsageName {
   /**
    * A string describing the resource name.
@@ -22488,6 +22742,8 @@ model UsageName {
 /**
  * Properties of the virtual network.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetworkPropertiesFormat {
   /**
    * The AddressSpace that contains an array of IP address ranges that can be used by subnets.
@@ -22578,6 +22834,8 @@ model VirtualNetworkPropertiesFormat {
 /**
  * AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model AddressSpace {
   /**
    * A list of address blocks reserved for this virtual network in CIDR notation.
@@ -22594,6 +22852,8 @@ model AddressSpace {
 /**
  * DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DhcpOptions {
   /**
    * The list of DNS servers IP addresses.
@@ -22604,6 +22864,8 @@ model DhcpOptions {
 /**
  * Properties of the virtual network peering.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetworkPeeringPropertiesFormat {
   /**
    * Whether the VMs in the local virtual network space would be able to access the VMs in remote virtual network space.
@@ -22713,6 +22975,8 @@ model VirtualNetworkPeeringPropertiesFormat {
 /**
  * Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetworkBgpCommunities {
   /**
    * The BGP community associated with the virtual network.
@@ -22729,6 +22993,8 @@ model VirtualNetworkBgpCommunities {
 /**
  * Indicates if encryption is enabled on virtual network and if VM without encryption is allowed in encrypted VNet.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetworkEncryption {
   /**
    * Indicates if encryption is enabled on the virtual network.
@@ -22744,6 +23010,8 @@ model VirtualNetworkEncryption {
 /**
  * Details of PrepareNetworkPolicies for Subnet.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrepareNetworkPoliciesRequest {
   /**
    * The name of the service for which subnet is being prepared for.
@@ -22760,6 +23028,8 @@ model PrepareNetworkPoliciesRequest {
 /**
  * Details of NetworkIntentPolicyConfiguration for PrepareNetworkPoliciesRequest.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkIntentPolicyConfiguration {
   /**
    * The name of the Network Intent Policy for storing in target subscription.
@@ -22789,6 +23059,8 @@ model NetworkIntentPolicy extends Resource {
 /**
  * Details of UnprepareNetworkPolicies for Subnet.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model UnprepareNetworkPoliciesRequest {
   /**
    * The name of the service for which subnet is being unprepared for.
@@ -22800,6 +23072,8 @@ model UnprepareNetworkPoliciesRequest {
  * Response for CheckIPAddressAvailability API service call.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IPAddressAvailabilityResult {
   /**
    * Private IP address availability.
@@ -22826,6 +23100,8 @@ model VirtualNetworkListUsageResult is Azure.Core.Page<VirtualNetworkUsage>;
 /**
  * Usage details for subnet.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetworkUsage {
   /**
    * Indicates number of IPs used from the Subnet.
@@ -22861,6 +23137,8 @@ model VirtualNetworkUsage {
 /**
  * Usage strings container.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualNetworkUsageName {
   /**
    * Localized subnet size and usage string.
@@ -24913,6 +25191,8 @@ model VirtualNetworkGatewayMigrationParameters {
 /**
  * Virtual Router definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualRouterPropertiesFormat {
   /**
    * VirtualRouter ASN.
@@ -24952,6 +25232,8 @@ model VirtualRouterPropertiesFormat {
 /**
  * Properties of the rule group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VirtualRouterPeeringProperties {
   /**
    * Peer ASN.

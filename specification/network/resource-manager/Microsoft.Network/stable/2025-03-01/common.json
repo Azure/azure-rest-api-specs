@@ -665,7 +665,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckPrivateLinkServiceVisibilityRequest"
+              "$ref": "./virtualNetwork.json/definitions/CheckPrivateLinkServiceVisibilityRequest"
             }
           }
         ],
@@ -673,7 +673,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServiceVisibility"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceVisibility"
             }
           },
           "202": {
@@ -704,7 +704,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/PrivateLinkServiceVisibility"
+          "final-state-schema": "./virtualNetwork.json/definitions/PrivateLinkServiceVisibility"
         },
         "x-ms-long-running-operation": true
       }
@@ -5794,7 +5794,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckPrivateLinkServiceVisibilityRequest"
+              "$ref": "./virtualNetwork.json/definitions/CheckPrivateLinkServiceVisibilityRequest"
             }
           }
         ],
@@ -5802,7 +5802,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServiceVisibility"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceVisibility"
             }
           },
           "202": {
@@ -5833,7 +5833,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/PrivateLinkServiceVisibility"
+          "final-state-schema": "./virtualNetwork.json/definitions/PrivateLinkServiceVisibility"
         },
         "x-ms-long-running-operation": true
       }
@@ -16151,7 +16151,7 @@
             "description": "Parameters supplied to prepare subnet by applying network intent policies.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrepareNetworkPoliciesRequest"
+              "$ref": "./virtualNetwork.json/definitions/PrepareNetworkPoliciesRequest"
             }
           }
         ],
@@ -16334,7 +16334,7 @@
             "description": "Parameters supplied to unprepare subnet to remove network intent policies.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UnprepareNetworkPoliciesRequest"
+              "$ref": "./virtualNetwork.json/definitions/UnprepareNetworkPoliciesRequest"
             }
           }
         ],
@@ -19813,26 +19813,6 @@
         ]
       }
     },
-    "AddressSpace": {
-      "type": "object",
-      "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network.",
-      "properties": {
-        "addressPrefixes": {
-          "type": "array",
-          "description": "A list of address blocks reserved for this virtual network in CIDR notation.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ipamPoolPrefixAllocations": {
-          "type": "array",
-          "description": "A list of IPAM Pools allocating IP address prefixes.",
-          "items": {
-            "$ref": "#/definitions/IpamPoolPrefixAllocation"
-          }
-        }
-      }
-    },
     "AddressSpaceAggregationOption": {
       "type": "string",
       "description": "Option indicating the update behavior of a resource's address prefixes referenced within a network manager configuration.",
@@ -21173,22 +21153,6 @@
       ],
       "x-ms-discriminator-value": "ApplicationRule"
     },
-    "ApplicationSecurityGroupPropertiesFormat": {
-      "type": "object",
-      "description": "Application security group properties.",
-      "properties": {
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the application security group resource. It uniquely identifies a resource, even if the user changes its name or migrate the resource across subscriptions or resource groups.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the application security group resource.",
-          "readOnly": true
-        }
-      }
-    },
     "AssociationAccessMode": {
       "type": "string",
       "description": "Access mode on the association.",
@@ -21312,16 +21276,6 @@
         ]
       }
     },
-    "AutoApprovedPrivateLinkService": {
-      "type": "object",
-      "description": "The information of an AutoApprovedPrivateLinkService.",
-      "properties": {
-        "privateLinkService": {
-          "type": "string",
-          "description": "The id of the private link service resource."
-        }
-      }
-    },
     "AutoApprovedPrivateLinkServicesResult": {
       "type": "object",
       "description": "An array of private link service id that can be linked to a private end point with auto approved.",
@@ -21330,7 +21284,7 @@
           "type": "array",
           "description": "The AutoApprovedPrivateLinkService items on this page",
           "items": {
-            "$ref": "#/definitions/AutoApprovedPrivateLinkService"
+            "$ref": "./virtualNetwork.json/definitions/AutoApprovedPrivateLinkService"
           }
         },
         "nextLink": {
@@ -21367,35 +21321,6 @@
         ]
       }
     },
-    "AvailableDelegation": {
-      "type": "object",
-      "description": "The serviceName of an AvailableDelegation indicates a possible delegation for a subnet.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the AvailableDelegation resource."
-        },
-        "id": {
-          "type": "string",
-          "description": "A unique identifier of the AvailableDelegation resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type."
-        },
-        "serviceName": {
-          "type": "string",
-          "description": "The name of the service and resource."
-        },
-        "actions": {
-          "type": "array",
-          "description": "The actions permitted to the service upon delegation.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "AvailableDelegationsResult": {
       "type": "object",
       "description": "An array of available delegations.",
@@ -21404,7 +21329,7 @@
           "type": "array",
           "description": "The AvailableDelegation items on this page",
           "items": {
-            "$ref": "#/definitions/AvailableDelegation"
+            "$ref": "./virtualNetwork.json/definitions/AvailableDelegation"
           }
         },
         "nextLink": {
@@ -21416,32 +21341,6 @@
       "required": [
         "value"
       ]
-    },
-    "AvailablePrivateEndpointType": {
-      "type": "object",
-      "description": "The information of an AvailablePrivateEndpointType.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the service and resource."
-        },
-        "id": {
-          "type": "string",
-          "description": "A unique identifier of the AvailablePrivateEndpoint Type resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type."
-        },
-        "resourceName": {
-          "type": "string",
-          "description": "The name of the service and resource."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the resource."
-        }
-      }
     },
     "AvailablePrivateEndpointTypesResult": {
       "type": "object",
@@ -21451,7 +21350,7 @@
           "type": "array",
           "description": "The AvailablePrivateEndpointType items on this page",
           "items": {
-            "$ref": "#/definitions/AvailablePrivateEndpointType"
+            "$ref": "./virtualNetwork.json/definitions/AvailablePrivateEndpointType"
           }
         },
         "nextLink": {
@@ -21464,28 +21363,6 @@
         "value"
       ]
     },
-    "AvailableServiceAlias": {
-      "type": "object",
-      "description": "The available service alias.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the service alias."
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the service alias."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource."
-        },
-        "resourceName": {
-          "type": "string",
-          "description": "The resource name of the service alias."
-        }
-      }
-    },
     "AvailableServiceAliasesResult": {
       "type": "object",
       "description": "An array of available service aliases.",
@@ -21494,7 +21371,7 @@
           "type": "array",
           "description": "The AvailableServiceAlias items on this page",
           "items": {
-            "$ref": "#/definitions/AvailableServiceAlias"
+            "$ref": "./virtualNetwork.json/definitions/AvailableServiceAlias"
           }
         },
         "nextLink": {
@@ -22186,67 +22063,6 @@
         }
       ]
     },
-    "BastionActiveSession": {
-      "type": "object",
-      "description": "The session detail for a target.",
-      "properties": {
-        "sessionId": {
-          "type": "string",
-          "description": "A unique id for the session.",
-          "readOnly": true
-        },
-        "startTime": {
-          "description": "The time when the session started.",
-          "readOnly": true
-        },
-        "targetSubscriptionId": {
-          "type": "string",
-          "description": "The subscription id for the target virtual machine.",
-          "readOnly": true
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "readOnly": true
-        },
-        "targetHostName": {
-          "type": "string",
-          "description": "The host name of the target.",
-          "readOnly": true
-        },
-        "targetResourceGroup": {
-          "type": "string",
-          "description": "The resource group of the target.",
-          "readOnly": true
-        },
-        "userName": {
-          "type": "string",
-          "description": "The user name who is active on this session.",
-          "readOnly": true
-        },
-        "targetIpAddress": {
-          "type": "string",
-          "description": "The IP Address of the target.",
-          "readOnly": true
-        },
-        "protocol": {
-          "$ref": "#/definitions/BastionConnectProtocol",
-          "description": "The protocol used to connect to the target.",
-          "readOnly": true
-        },
-        "targetResourceId": {
-          "type": "string",
-          "description": "The resource id of the target.",
-          "readOnly": true
-        },
-        "sessionDurationInMins": {
-          "type": "number",
-          "format": "float",
-          "description": "Duration in mins the session has been active.",
-          "readOnly": true
-        }
-      }
-    },
     "BastionActiveSessionListResult": {
       "type": "object",
       "description": "Response for GetActiveSessions.",
@@ -22255,7 +22071,7 @@
           "type": "array",
           "description": "The BastionActiveSession items on this page",
           "items": {
-            "$ref": "#/definitions/BastionActiveSession"
+            "$ref": "./virtualNetwork.json/definitions/BastionActiveSession"
           }
         },
         "nextLink": {
@@ -22297,7 +22113,7 @@
       "description": "IP configuration of an Bastion Host.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BastionHostIPConfigurationPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/BastionHostIPConfigurationPropertiesFormat",
           "description": "Represents the ip configuration associated with the resource.",
           "x-ms-client-flatten": true
         },
@@ -22322,108 +22138,6 @@
         }
       ]
     },
-    "BastionHostIPConfigurationPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of IP configuration of an Bastion Host.",
-      "properties": {
-        "subnet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Reference of the subnet resource."
-        },
-        "publicIPAddress": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Reference of the PublicIP resource. Null for private only bastion"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the bastion host IP configuration resource.",
-          "readOnly": true
-        },
-        "privateIPAllocationMethod": {
-          "$ref": "#/definitions/IPAllocationMethod",
-          "description": "Private IP allocation method."
-        }
-      },
-      "required": [
-        "subnet"
-      ]
-    },
-    "BastionHostPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the Bastion Host.",
-      "properties": {
-        "ipConfigurations": {
-          "type": "array",
-          "description": "IP configuration of the Bastion Host resource.",
-          "items": {
-            "$ref": "#/definitions/BastionHostIPConfiguration"
-          }
-        },
-        "dnsName": {
-          "type": "string",
-          "description": "FQDN for the endpoint on which bastion host is accessible."
-        },
-        "virtualNetwork": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Reference to an existing virtual network required for Developer Bastion Host only."
-        },
-        "networkAcls": {
-          "$ref": "#/definitions/BastionHostPropertiesFormatNetworkAcls"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the bastion host resource.",
-          "readOnly": true
-        },
-        "scaleUnits": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The scale units for the Bastion Host resource.",
-          "minimum": 2,
-          "maximum": 50
-        },
-        "disableCopyPaste": {
-          "type": "boolean",
-          "description": "Enable/Disable Copy/Paste feature of the Bastion Host resource.",
-          "default": false
-        },
-        "enableFileCopy": {
-          "type": "boolean",
-          "description": "Enable/Disable File Copy feature of the Bastion Host resource.",
-          "default": false
-        },
-        "enableIpConnect": {
-          "type": "boolean",
-          "description": "Enable/Disable IP Connect feature of the Bastion Host resource.",
-          "default": false
-        },
-        "enableShareableLink": {
-          "type": "boolean",
-          "description": "Enable/Disable Shareable Link of the Bastion Host resource.",
-          "default": false
-        },
-        "enableTunneling": {
-          "type": "boolean",
-          "description": "Enable/Disable Tunneling feature of the Bastion Host resource.",
-          "default": false
-        },
-        "enableKerberos": {
-          "type": "boolean",
-          "description": "Enable/Disable Kerberos feature of the Bastion Host resource.",
-          "default": false
-        },
-        "enableSessionRecording": {
-          "type": "boolean",
-          "description": "Enable/Disable Session Recording feature of the Bastion Host resource.",
-          "default": false
-        },
-        "enablePrivateOnlyBastion": {
-          "type": "boolean",
-          "description": "Enable/Disable Private Only feature of the Bastion Host resource.",
-          "default": false
-        }
-      }
-    },
     "BastionHostPropertiesFormatNetworkAcls": {
       "type": "object",
       "properties": {
@@ -22431,7 +22145,7 @@
           "type": "array",
           "description": "Sets the IP ACL rules for Developer Bastion Host.",
           "items": {
-            "$ref": "#/definitions/IPRule"
+            "$ref": "./virtualNetwork.json/definitions/IPRule"
           }
         }
       }
@@ -22444,7 +22158,7 @@
           "type": "array",
           "description": "The BastionSessionState items on this page",
           "items": {
-            "$ref": "#/definitions/BastionSessionState"
+            "$ref": "./virtualNetwork.json/definitions/BastionSessionState"
           }
         },
         "nextLink": {
@@ -22456,68 +22170,6 @@
       "required": [
         "value"
       ]
-    },
-    "BastionSessionState": {
-      "type": "object",
-      "description": "The session state detail for a target.",
-      "properties": {
-        "sessionId": {
-          "type": "string",
-          "description": "A unique id for the session.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Used for extra information.",
-          "readOnly": true
-        },
-        "state": {
-          "type": "string",
-          "description": "The state of the session. Disconnected/Failed/NotFound.",
-          "readOnly": true
-        }
-      }
-    },
-    "BastionShareableLink": {
-      "type": "object",
-      "description": "Bastion Shareable Link.",
-      "properties": {
-        "vm": {
-          "$ref": "#/definitions/VM",
-          "description": "Reference of the virtual machine resource."
-        },
-        "bsl": {
-          "type": "string",
-          "description": "The unique Bastion Shareable Link to the virtual machine.",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "description": "The time when the link was created.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Optional field indicating the warning or error message related to the vm in case of partial failure.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "vm"
-      ]
-    },
-    "BastionShareableLinkListRequest": {
-      "type": "object",
-      "description": "Post request for Create/Delete/Get Bastion Shareable Link endpoints.",
-      "properties": {
-        "vms": {
-          "type": "array",
-          "description": "List of VM references.",
-          "items": {
-            "$ref": "#/definitions/BastionShareableLink"
-          }
-        }
-      }
     },
     "BastionShareableLinkListResult": {
       "type": "object",
@@ -22527,7 +22179,7 @@
           "type": "array",
           "description": "The BastionShareableLink items on this page",
           "items": {
-            "$ref": "#/definitions/BastionShareableLink"
+            "$ref": "./virtualNetwork.json/definitions/BastionShareableLink"
           }
         },
         "nextLink": {
@@ -22539,19 +22191,6 @@
       "required": [
         "value"
       ]
-    },
-    "BastionShareableLinkTokenListRequest": {
-      "type": "object",
-      "description": "Post request for Delete Bastion Shareable Link By Token endpoint.",
-      "properties": {
-        "tokens": {
-          "type": "array",
-          "description": "List of Bastion Shareable Link Token.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "BgpConnection": {
       "type": "object",
@@ -22652,34 +22291,6 @@
       "required": [
         "value"
       ]
-    },
-    "BreakOutCategoryPolicies": {
-      "type": "object",
-      "description": "Network Virtual Appliance Sku Properties.",
-      "properties": {
-        "allow": {
-          "type": "boolean",
-          "description": "Flag to control breakout of o365 allow category."
-        },
-        "optimize": {
-          "type": "boolean",
-          "description": "Flag to control breakout of o365 optimize category."
-        },
-        "default": {
-          "type": "boolean",
-          "description": "Flag to control breakout of o365 default category."
-        }
-      }
-    },
-    "CheckPrivateLinkServiceVisibilityRequest": {
-      "type": "object",
-      "description": "Request body of the CheckPrivateLinkServiceVisibility API service call.",
-      "properties": {
-        "privateLinkServiceAlias": {
-          "type": "string",
-          "description": "The alias of the private link service."
-        }
-      }
     },
     "ChildResource": {
       "type": "object",
@@ -23405,7 +23016,7 @@
       "description": "Container network interface child resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ContainerNetworkInterfacePropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/ContainerNetworkInterfacePropertiesFormat",
           "description": "Container network interface properties.",
           "x-ms-client-flatten": true
         },
@@ -23435,7 +23046,7 @@
       "description": "Container network interface configuration child resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ContainerNetworkInterfaceConfigurationPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/ContainerNetworkInterfaceConfigurationPropertiesFormat",
           "description": "Container network interface configuration properties.",
           "x-ms-client-flatten": true
         },
@@ -23459,95 +23070,6 @@
           "$ref": "#/definitions/SubResource"
         }
       ]
-    },
-    "ContainerNetworkInterfaceConfigurationPropertiesFormat": {
-      "type": "object",
-      "description": "Container network interface configuration properties.",
-      "properties": {
-        "ipConfigurations": {
-          "type": "array",
-          "description": "A list of ip configurations of the container network interface configuration.",
-          "items": {
-            "$ref": "#/definitions/IPConfigurationProfile"
-          }
-        },
-        "containerNetworkInterfaces": {
-          "type": "array",
-          "description": "A list of container network interfaces created from this container network interface configuration.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the container network interface configuration resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "ContainerNetworkInterfaceIpConfiguration": {
-      "type": "object",
-      "description": "The ip configuration for a container network interface.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ContainerNetworkInterfaceIpConfigurationPropertiesFormat",
-          "description": "Properties of the container network interface IP configuration.",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource. This name can be used to access the resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Sub Resource type.",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        }
-      }
-    },
-    "ContainerNetworkInterfaceIpConfigurationPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the container network interface IP configuration.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the container network interface IP configuration resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "ContainerNetworkInterfacePropertiesFormat": {
-      "type": "object",
-      "description": "Properties of container network interface.",
-      "properties": {
-        "containerNetworkInterfaceConfiguration": {
-          "$ref": "#/definitions/ContainerNetworkInterfaceConfiguration",
-          "description": "Container network interface configuration from which this container network interface is created.",
-          "readOnly": true
-        },
-        "container": {
-          "$ref": "#/definitions/Container",
-          "description": "Reference to the container to which this container network interface is attached."
-        },
-        "ipConfigurations": {
-          "type": "array",
-          "description": "Reference to the ip configuration on this container nic.",
-          "items": {
-            "$ref": "#/definitions/ContainerNetworkInterfaceIpConfiguration"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the container network interface resource.",
-          "readOnly": true
-        }
-      }
     },
     "CoverageLevel": {
       "type": "string",
@@ -23597,100 +23119,6 @@
         ]
       }
     },
-    "CustomDnsConfigPropertiesFormat": {
-      "type": "object",
-      "description": "Contains custom Dns resolution configuration from customer.",
-      "properties": {
-        "fqdn": {
-          "type": "string",
-          "description": "Fqdn that resolves to private endpoint ip address."
-        },
-        "ipAddresses": {
-          "type": "array",
-          "description": "A list of private ip addresses of the private endpoint.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "CustomIpPrefixPropertiesFormat": {
-      "type": "object",
-      "description": "Custom IP prefix properties.",
-      "properties": {
-        "asn": {
-          "type": "string",
-          "description": "The ASN for CIDR advertising. Should be an integer as string."
-        },
-        "cidr": {
-          "type": "string",
-          "description": "The prefix range in CIDR notation. Should include the start address and the prefix length."
-        },
-        "signedMessage": {
-          "type": "string",
-          "description": "Signed message for WAN validation."
-        },
-        "authorizationMessage": {
-          "type": "string",
-          "description": "Authorization message for WAN validation."
-        },
-        "customIpPrefixParent": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The Parent CustomIpPrefix for IPv6 /64 CustomIpPrefix."
-        },
-        "childCustomIpPrefixes": {
-          "type": "array",
-          "description": "The list of all Children for IPv6 /48 CustomIpPrefix.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "commissionedState": {
-          "$ref": "#/definitions/CommissionedState",
-          "description": "The commissioned state of the Custom IP Prefix."
-        },
-        "expressRouteAdvertise": {
-          "type": "boolean",
-          "description": "Whether to do express route advertise."
-        },
-        "geo": {
-          "$ref": "#/definitions/Geo",
-          "description": "The Geo for CIDR advertising. Should be an Geo code."
-        },
-        "noInternetAdvertise": {
-          "type": "boolean",
-          "description": "Whether to Advertise the range to Internet."
-        },
-        "prefixType": {
-          "$ref": "#/definitions/CustomIpPrefixType",
-          "description": "Type of custom IP prefix. Should be Singular, Parent, or Child."
-        },
-        "publicIpPrefixes": {
-          "type": "array",
-          "description": "The list of all referenced PublicIpPrefixes.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the custom IP prefix resource.",
-          "readOnly": true
-        },
-        "failedReason": {
-          "type": "string",
-          "description": "The reason why resource is in failed state.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the custom IP prefix resource.",
-          "readOnly": true
-        }
-      }
-    },
     "CustomIpPrefixType": {
       "type": "string",
       "description": "Type of custom IP prefix. Should be Singular, Parent, or Child.",
@@ -23719,36 +23147,6 @@
             "description": "Child"
           }
         ]
-      }
-    },
-    "DdosCustomPolicyPropertiesFormat": {
-      "type": "object",
-      "description": "DDoS custom policy properties.",
-      "properties": {
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the DDoS custom policy resource. It uniquely identifies the resource, even if the user changes its name or migrate the resource across subscriptions or resource groups.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the DDoS custom policy resource.",
-          "readOnly": true
-        },
-        "detectionRules": {
-          "type": "array",
-          "description": "The list of DDoS detection rules associated with the custom policy.",
-          "items": {
-            "$ref": "#/definitions/DdosDetectionRule"
-          }
-        },
-        "frontEndIpConfiguration": {
-          "type": "array",
-          "description": "The list of frontend IP configurations associated with the custom policy.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          }
-        }
       }
     },
     "DdosDetectionMode": {
@@ -23793,7 +23191,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/DdosDetectionRulePropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/DdosDetectionRulePropertiesFormat",
           "description": "Properties of the DDoS detection rule.",
           "x-ms-client-flatten": true
         }
@@ -23803,71 +23201,6 @@
           "$ref": "#/definitions/SubResource"
         }
       ]
-    },
-    "DdosDetectionRulePropertiesFormat": {
-      "type": "object",
-      "description": "DDoS detection rule properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the DDoS detection rule.",
-          "readOnly": true
-        },
-        "detectionMode": {
-          "$ref": "#/definitions/DdosDetectionMode",
-          "description": "The detection mode for the DDoS detection rule."
-        },
-        "trafficDetectionRule": {
-          "$ref": "#/definitions/TrafficDetectionRule",
-          "description": "The traffic detection rule details."
-        }
-      }
-    },
-    "DdosProtectionPlanPropertiesFormat": {
-      "type": "object",
-      "description": "DDoS protection plan properties.",
-      "properties": {
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the DDoS protection plan resource. It uniquely identifies the resource, even if the user changes its name or migrate the resource across subscriptions or resource groups.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the DDoS protection plan resource.",
-          "readOnly": true
-        },
-        "publicIPAddresses": {
-          "type": "array",
-          "description": "The list of public IPs associated with the DDoS protection plan resource. This list is read-only.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "virtualNetworks": {
-          "type": "array",
-          "description": "The list of virtual networks associated with the DDoS protection plan resource. This list is read-only.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "DdosSettings": {
-      "type": "object",
-      "description": "Contains the DDoS protection settings of the public IP.",
-      "properties": {
-        "protectionMode": {
-          "$ref": "#/definitions/DdosSettingsProtectionMode",
-          "description": "The DDoS protection mode of the public IP"
-        },
-        "ddosProtectionPlan": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The DDoS protection plan associated with the public IP. Can only be set if ProtectionMode is Enabled"
-        }
-      }
     },
     "DdosSettingsProtectionMode": {
       "type": "string",
@@ -23965,7 +23298,7 @@
       "description": "Details the service to which the subnet is delegated.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ServiceDelegationPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/ServiceDelegationPropertiesFormat",
           "description": "Properties of the subnet.",
           "x-ms-client-flatten": true
         },
@@ -23988,21 +23321,6 @@
           "$ref": "#/definitions/SubResource"
         }
       ]
-    },
-    "DelegationProperties": {
-      "type": "object",
-      "description": "Properties of the delegation.",
-      "properties": {
-        "serviceName": {
-          "type": "string",
-          "description": "The service name to which the NVA is delegated."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "Provisioning states of a resource.",
-          "readOnly": true
-        }
-      }
     },
     "DeleteExistingPeering": {
       "type": "string",
@@ -24172,19 +23490,6 @@
         ]
       }
     },
-    "DhcpOptions": {
-      "type": "object",
-      "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options.",
-      "properties": {
-        "dnsServers": {
-          "type": "array",
-          "description": "The list of DNS servers IP addresses.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "Direction": {
       "type": "string",
       "description": "The direction of the traffic.",
@@ -24233,37 +23538,6 @@
         ]
       }
     },
-    "DisassociateCloudServicePublicIpRequest": {
-      "type": "object",
-      "description": "The request for DisassociateCloudServicePublicIpOperation.",
-      "properties": {
-        "publicIpArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM ID of the Standalone Public IP to associate. This is of the form : /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/publicIPAddresses"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "publicIpArmId"
-      ]
-    },
-    "DnsNameAvailabilityResult": {
-      "type": "object",
-      "description": "Response for the CheckDnsNameAvailability API service call.",
-      "properties": {
-        "available": {
-          "type": "boolean",
-          "description": "Domain availability (True/False)."
-        }
-      }
-    },
     "DnsSettings": {
       "type": "object",
       "description": "DNS Proxy Settings in Firewall Policy.",
@@ -24283,82 +23557,6 @@
           "type": "boolean",
           "description": "FQDNs in Network Rules are supported when set to true.",
           "x-nullable": true
-        }
-      }
-    },
-    "DscpConfigurationPropertiesFormat": {
-      "type": "object",
-      "description": "Differentiated Services Code Point configuration properties.",
-      "properties": {
-        "markings": {
-          "type": "array",
-          "description": "List of markings to be used in the configuration.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "sourceIpRanges": {
-          "type": "array",
-          "description": "Source IP ranges.",
-          "items": {
-            "$ref": "#/definitions/QosIpRange"
-          }
-        },
-        "destinationIpRanges": {
-          "type": "array",
-          "description": "Destination IP ranges.",
-          "items": {
-            "$ref": "#/definitions/QosIpRange"
-          }
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "description": "Sources port ranges.",
-          "items": {
-            "$ref": "#/definitions/QosPortRange"
-          }
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "description": "Destination port ranges.",
-          "items": {
-            "$ref": "#/definitions/QosPortRange"
-          }
-        },
-        "protocol": {
-          "$ref": "#/definitions/ProtocolType",
-          "description": "RNM supported protocol types."
-        },
-        "qosDefinitionCollection": {
-          "type": "array",
-          "description": "QoS object definitions",
-          "items": {
-            "$ref": "#/definitions/QosDefinition"
-          }
-        },
-        "qosCollectionId": {
-          "type": "string",
-          "description": "Qos Collection ID generated by RNM.",
-          "readOnly": true
-        },
-        "associatedNetworkInterfaces": {
-          "type": "array",
-          "description": "Associated Network Interfaces to the DSCP Configuration.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/NetworkInterface"
-          },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the DSCP Configuration resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the DSCP Configuration resource.",
-          "readOnly": true
         }
       }
     },
@@ -24403,55 +23601,6 @@
       ],
       "x-ms-discriminator-value": "Default"
     },
-    "EffectiveNetworkSecurityGroup": {
-      "type": "object",
-      "description": "Effective network security group.",
-      "properties": {
-        "networkSecurityGroup": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The ID of network security group that is applied."
-        },
-        "association": {
-          "$ref": "#/definitions/EffectiveNetworkSecurityGroupAssociation",
-          "description": "Associated resources."
-        },
-        "effectiveSecurityRules": {
-          "type": "array",
-          "description": "A collection of effective security rules.",
-          "items": {
-            "$ref": "#/definitions/EffectiveNetworkSecurityRule"
-          }
-        },
-        "tagMap": {
-          "type": "object",
-          "description": "Mapping of tags to list of IP Addresses included within the tag.",
-          "additionalProperties": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        }
-      }
-    },
-    "EffectiveNetworkSecurityGroupAssociation": {
-      "type": "object",
-      "description": "The effective network security group association.",
-      "properties": {
-        "networkManager": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The ID of the Azure network manager if assigned."
-        },
-        "subnet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The ID of the subnet if assigned."
-        },
-        "networkInterface": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The ID of the network interface if assigned."
-        }
-      }
-    },
     "EffectiveNetworkSecurityGroupListResult": {
       "type": "object",
       "description": "Response for list effective network security groups API service call.",
@@ -24460,7 +23609,7 @@
           "type": "array",
           "description": "The EffectiveNetworkSecurityGroup items on this page",
           "items": {
-            "$ref": "#/definitions/EffectiveNetworkSecurityGroup"
+            "$ref": "./virtualNetwork.json/definitions/EffectiveNetworkSecurityGroup"
           }
         },
         "nextLink": {
@@ -24473,131 +23622,6 @@
         "value"
       ]
     },
-    "EffectiveNetworkSecurityRule": {
-      "type": "object",
-      "description": "Effective network security rules.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the security rule specified by the user (if created by the user)."
-        },
-        "protocol": {
-          "$ref": "#/definitions/EffectiveSecurityRuleProtocol",
-          "description": "The network protocol this rule applies to."
-        },
-        "sourcePortRange": {
-          "type": "string",
-          "description": "The source port or range."
-        },
-        "destinationPortRange": {
-          "type": "string",
-          "description": "The destination port or range."
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "description": "The source port ranges. Expected values include a single integer between 0 and 65535, a range using '-' as separator (e.g. 100-400), or an asterisk (*).",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "description": "The destination port ranges. Expected values include a single integer between 0 and 65535, a range using '-' as separator (e.g. 100-400), or an asterisk (*).",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sourceAddressPrefix": {
-          "type": "string",
-          "description": "The source address prefix."
-        },
-        "destinationAddressPrefix": {
-          "type": "string",
-          "description": "The destination address prefix."
-        },
-        "sourceAddressPrefixes": {
-          "type": "array",
-          "description": "The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*).",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationAddressPrefixes": {
-          "type": "array",
-          "description": "The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*).",
-          "items": {
-            "type": "string"
-          }
-        },
-        "expandedSourceAddressPrefix": {
-          "type": "array",
-          "description": "The expanded source address prefix.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "expandedDestinationAddressPrefix": {
-          "type": "array",
-          "description": "Expanded destination address prefix.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "access": {
-          "$ref": "#/definitions/SecurityRuleAccess",
-          "description": "Whether network traffic is allowed or denied."
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of the rule."
-        },
-        "direction": {
-          "$ref": "#/definitions/SecurityRuleDirection",
-          "description": "The direction of the rule."
-        }
-      }
-    },
-    "EffectiveRoute": {
-      "type": "object",
-      "description": "Effective Route.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the user defined route. This is optional."
-        },
-        "disableBgpRoutePropagation": {
-          "type": "boolean",
-          "description": "If true, on-premises routes are not propagated to the network interfaces in the subnet."
-        },
-        "source": {
-          "$ref": "#/definitions/EffectiveRouteSource",
-          "description": "Who created the route."
-        },
-        "state": {
-          "$ref": "#/definitions/EffectiveRouteState",
-          "description": "The value of effective route."
-        },
-        "addressPrefix": {
-          "type": "array",
-          "description": "The address prefixes of the effective routes in CIDR notation.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "nextHopIpAddress": {
-          "type": "array",
-          "description": "The IP address of the next hop of the effective route.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "nextHopType": {
-          "$ref": "#/definitions/RouteNextHopType",
-          "description": "The type of Azure hop the packet should be sent to."
-        }
-      }
-    },
     "EffectiveRouteListResult": {
       "type": "object",
       "description": "Response for list effective route API service call.",
@@ -24606,7 +23630,7 @@
           "type": "array",
           "description": "The EffectiveRoute items on this page",
           "items": {
-            "$ref": "#/definitions/EffectiveRoute"
+            "$ref": "./virtualNetwork.json/definitions/EffectiveRoute"
           }
         },
         "nextLink": {
@@ -27831,27 +26855,6 @@
         }
       }
     },
-    "IPAddressAvailabilityResult": {
-      "type": "object",
-      "description": "Response for CheckIPAddressAvailability API service call.",
-      "properties": {
-        "available": {
-          "type": "boolean",
-          "description": "Private IP address availability."
-        },
-        "availableIPAddresses": {
-          "type": "array",
-          "description": "Contains other available private IP addresses if the asked for address is taken.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isPlatformReserved": {
-          "type": "boolean",
-          "description": "Private IP address platform reserved."
-        }
-      }
-    },
     "IPAllocationMethod": {
       "type": "string",
       "description": "IP address allocation method.",
@@ -27881,7 +26884,7 @@
       "description": "IP configuration.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/IPConfigurationPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/IPConfigurationPropertiesFormat",
           "description": "Properties of the IP configuration.",
           "x-ms-client-flatten": true
         },
@@ -27906,7 +26909,7 @@
       "description": "IP configuration profile child resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/IPConfigurationProfilePropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/IPConfigurationProfilePropertiesFormat",
           "description": "Properties of the IP configuration profile.",
           "x-ms-client-flatten": true
         },
@@ -27931,69 +26934,6 @@
         }
       ]
     },
-    "IPConfigurationProfilePropertiesFormat": {
-      "type": "object",
-      "description": "IP configuration profile properties.",
-      "properties": {
-        "subnet": {
-          "$ref": "#/definitions/Subnet",
-          "description": "The reference to the subnet resource to create a container network interface ip configuration."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the IP configuration profile resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "IPConfigurationPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of IP configuration.",
-      "properties": {
-        "privateIPAddress": {
-          "type": "string",
-          "description": "The private IP address of the IP configuration."
-        },
-        "privateIPAllocationMethod": {
-          "type": "string",
-          "description": "The private IP address allocation method.",
-          "default": "Dynamic",
-          "enum": [
-            "Static",
-            "Dynamic"
-          ],
-          "x-ms-enum": {
-            "name": "IPAllocationMethod",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Static",
-                "value": "Static",
-                "description": "Static"
-              },
-              {
-                "name": "Dynamic",
-                "value": "Dynamic",
-                "description": "Dynamic"
-              }
-            ]
-          }
-        },
-        "subnet": {
-          "$ref": "#/definitions/Subnet",
-          "description": "The reference to the subnet resource."
-        },
-        "publicIPAddress": {
-          "$ref": "./virtualNetwork.json/definitions/PublicIPAddress",
-          "description": "The reference to the public IP resource."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the IP configuration resource.",
-          "readOnly": true
-        }
-      }
-    },
     "IPPrefixesList": {
       "type": "object",
       "description": "List of SNAT IP Prefixes learnt by firewall to not SNAT",
@@ -28006,62 +26946,6 @@
           }
         }
       }
-    },
-    "IPRule": {
-      "type": "object",
-      "properties": {
-        "addressPrefix": {
-          "type": "string",
-          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed."
-        }
-      }
-    },
-    "IPTraffic": {
-      "type": "object",
-      "description": "IP traffic information.",
-      "properties": {
-        "sourceIps": {
-          "type": "array",
-          "description": "List of source IP addresses of the traffic..",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationIps": {
-          "type": "array",
-          "description": "List of destination IP addresses of the traffic..",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sourcePorts": {
-          "type": "array",
-          "description": "The source ports of the traffic.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationPorts": {
-          "type": "array",
-          "description": "The destination ports of the traffic.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "protocols": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkProtocol"
-          }
-        }
-      },
-      "required": [
-        "sourceIps",
-        "destinationIps",
-        "sourcePorts",
-        "destinationPorts",
-        "protocols"
-      ]
     },
     "IPVersion": {
       "type": "string",
@@ -28266,7 +27150,7 @@
       "description": "NVA Inbound Security Rule resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/InboundSecurityRuleProperties",
+          "$ref": "./virtualNetwork.json/definitions/InboundSecurityRuleProperties",
           "description": "The properties of the Inbound Security Rules.",
           "x-ms-client-flatten": true
         },
@@ -28281,28 +27165,6 @@
           "$ref": "#/definitions/SubResourceModel"
         }
       ]
-    },
-    "InboundSecurityRuleProperties": {
-      "type": "object",
-      "description": "Properties of the Inbound Security Rules resource.",
-      "properties": {
-        "ruleType": {
-          "$ref": "#/definitions/InboundSecurityRuleType",
-          "description": "Rule Type. This should be either AutoExpire or Permanent. Auto Expire Rule only creates NSG rules. Permanent Rule creates NSG rule and SLB LB Rule."
-        },
-        "rules": {
-          "type": "array",
-          "description": "List of allowed rules.",
-          "items": {
-            "$ref": "#/definitions/InboundSecurityRules"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        }
-      }
     },
     "InboundSecurityRuleType": {
       "type": "string",
@@ -28328,45 +27190,6 @@
         ]
       }
     },
-    "InboundSecurityRules": {
-      "type": "object",
-      "description": "Properties of the Inbound Security Rules resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the rule."
-        },
-        "protocol": {
-          "$ref": "#/definitions/InboundSecurityRulesProtocol",
-          "description": "Protocol. This should be either TCP or UDP."
-        },
-        "sourceAddressPrefix": {
-          "type": "string",
-          "description": "The CIDR or source IP range."
-        },
-        "destinationPortRange": {
-          "type": "integer",
-          "format": "int32",
-          "description": "NVA port ranges to be opened up. One needs to provide specific ports.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "description": "NVA port ranges to be opened up. One can provide a range of ports. Allowed port value between 0 and 65535.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "appliesOn": {
-          "type": "array",
-          "description": "Public IP name in case of Permanent Rule type & Interface Name in case of Auto Expire Rule type",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "InboundSecurityRulesProtocol": {
       "type": "string",
       "description": "Protocol. This should be either TCP or UDP.",
@@ -28389,99 +27212,6 @@
             "description": "UDP"
           }
         ]
-      }
-    },
-    "IntentContent": {
-      "type": "object",
-      "description": "Intent information.",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Source resource id of the intent."
-        },
-        "destinationResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Destination resource id of the intent."
-        },
-        "ipTraffic": {
-          "$ref": "#/definitions/IPTraffic",
-          "description": "IP traffic information."
-        }
-      },
-      "required": [
-        "sourceResourceId",
-        "destinationResourceId",
-        "ipTraffic"
-      ]
-    },
-    "InternetIngressPublicIpsProperties": {
-      "type": "object",
-      "title": "Internet Ingress Public Ip Properties",
-      "description": "Resource Uri of Public Ip for Standard Load Balancer Frontend End.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource Uri of Public Ip",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/publicIPAddresses"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "IpAllocationPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the IpAllocation.",
-      "properties": {
-        "subnet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The Subnet that using the prefix of this IpAllocation resource.",
-          "readOnly": true
-        },
-        "virtualNetwork": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The VirtualNetwork that using the prefix of this IpAllocation resource.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/IpAllocationType",
-          "description": "The type for the IpAllocation."
-        },
-        "prefix": {
-          "type": "string",
-          "description": "The address prefix for the IpAllocation."
-        },
-        "prefixLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The address prefix length for the IpAllocation.",
-          "default": 0,
-          "x-nullable": true
-        },
-        "prefixType": {
-          "$ref": "#/definitions/IPVersion",
-          "description": "The address prefix Type for the IpAllocation."
-        },
-        "ipamAllocationId": {
-          "type": "string",
-          "description": "The IPAM allocation ID."
-        },
-        "allocationTags": {
-          "type": "object",
-          "description": "IpAllocation tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
       }
     },
     "IpAllocationType": {
@@ -28532,54 +27262,6 @@
         ]
       }
     },
-    "IpGroupPropertiesFormat": {
-      "type": "object",
-      "description": "The IpGroups property information.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the IpGroups resource.",
-          "readOnly": true
-        },
-        "ipAddresses": {
-          "type": "array",
-          "description": "IpAddresses/IpAddressPrefixes in the IpGroups resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "firewalls": {
-          "type": "array",
-          "description": "List of references to Firewall resources that this IpGroups is associated with.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "firewallPolicies": {
-          "type": "array",
-          "description": "List of references to Firewall Policies resources that this IpGroups is associated with.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "IpTag": {
-      "type": "object",
-      "description": "Contains the IpTag associated with the object.",
-      "properties": {
-        "ipTagType": {
-          "type": "string",
-          "description": "The IP tag type. Example: FirstPartyUsage."
-        },
-        "tag": {
-          "type": "string",
-          "description": "The value of the IP tag associated with the public IP. Example: SQL."
-        }
-      }
-    },
     "IpType": {
       "type": "string",
       "description": "Enumeration to indicate the IP type.",
@@ -28625,28 +27307,6 @@
         "value"
       ]
     },
-    "IpamPoolPrefixAllocation": {
-      "type": "object",
-      "description": "IpamPool prefix allocation reference.",
-      "properties": {
-        "pool": {
-          "$ref": "#/definitions/IpamPoolPrefixAllocationPool",
-          "x-ms-client-flatten": true
-        },
-        "numberOfIpAddresses": {
-          "type": "string",
-          "description": "Number of IP addresses to allocate."
-        },
-        "allocatedAddressPrefixes": {
-          "type": "array",
-          "description": "List of assigned IP address prefixes in the IpamPool of the associated resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "IpamPoolPrefixAllocationPool": {
       "type": "object",
       "properties": {
@@ -28654,76 +27314,6 @@
           "type": "string",
           "format": "arm-id",
           "description": "Resource id of the associated Azure IpamPool resource."
-        }
-      }
-    },
-    "IpamPoolProperties": {
-      "type": "object",
-      "description": "Properties of IpamPool resource properties which are specific to the Pool resource.",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "String representing a friendly name for the resource."
-        },
-        "ipAddressType": {
-          "type": "array",
-          "description": "List of IP address type for the IpamPool.",
-          "items": {
-            "$ref": "#/definitions/IpType"
-          },
-          "readOnly": true
-        },
-        "parentPoolName": {
-          "type": "string",
-          "description": "String representing parent IpamPool resource name. If empty the IpamPool will be a root pool."
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "description": "List of IP address prefixes of the resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning states of a resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "addressPrefixes"
-      ]
-    },
-    "IpamPoolUpdate": {
-      "type": "object",
-      "description": "Represents the IpamPool update API request interface.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Dictionary of <string>",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/IpamPoolUpdateProperties",
-          "description": "Represents the IpamPool update properties."
-        }
-      }
-    },
-    "IpamPoolUpdateProperties": {
-      "type": "object",
-      "description": "Represents the IpamPool update properties.",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "String representing a friendly name for the resource."
         }
       }
     },
@@ -29953,77 +28543,6 @@
         "variableName"
       ]
     },
-    "NatGatewayPropertiesFormat": {
-      "type": "object",
-      "description": "Nat Gateway properties.",
-      "properties": {
-        "idleTimeoutInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The idle timeout of the nat gateway."
-        },
-        "publicIpAddresses": {
-          "type": "array",
-          "description": "An array of public ip addresses V4 associated with the nat gateway resource.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          }
-        },
-        "publicIpAddressesV6": {
-          "type": "array",
-          "description": "An array of public ip addresses V6 associated with the nat gateway resource.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          }
-        },
-        "publicIpPrefixes": {
-          "type": "array",
-          "description": "An array of public ip prefixes V4 associated with the nat gateway resource.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          }
-        },
-        "publicIpPrefixesV6": {
-          "type": "array",
-          "description": "An array of public ip prefixes V6 associated with the nat gateway resource.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          }
-        },
-        "subnets": {
-          "type": "array",
-          "description": "An array of references to the subnets using this nat gateway resource.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "sourceVirtualNetwork": {
-          "$ref": "#/definitions/SubResource",
-          "description": "A reference to the source virtual network using this nat gateway resource."
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the NAT gateway resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the NAT gateway resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "NatGatewaySku": {
-      "type": "object",
-      "description": "SKU of nat gateway.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/NatGatewaySkuName",
-          "description": "Name of Nat Gateway SKU."
-        }
-      }
-    },
     "NatGatewaySkuName": {
       "type": "string",
       "description": "Name of Nat Gateway SKU.",
@@ -30153,20 +28672,6 @@
         ]
       }
     },
-    "NetworkIntentPolicyConfiguration": {
-      "type": "object",
-      "description": "Details of NetworkIntentPolicyConfiguration for PrepareNetworkPoliciesRequest.",
-      "properties": {
-        "networkIntentPolicyName": {
-          "type": "string",
-          "description": "The name of the Network Intent Policy for storing in target subscription."
-        },
-        "sourceNetworkIntentPolicy": {
-          "$ref": "#/definitions/NetworkIntentPolicy",
-          "description": "Source network intent policy."
-        }
-      }
-    },
     "NetworkInterfaceAuxiliaryMode": {
       "type": "string",
       "description": "Auxiliary mode of Network Interface resource.",
@@ -30245,47 +28750,12 @@
         ]
       }
     },
-    "NetworkInterfaceDnsSettings": {
-      "type": "object",
-      "description": "DNS settings of a network interface.",
-      "properties": {
-        "dnsServers": {
-          "type": "array",
-          "description": "List of DNS servers IP addresses. Use 'AzureProvidedDNS' to switch to azure provided DNS resolution. 'AzureProvidedDNS' value cannot be combined with other IPs, it must be the only value in dnsServers collection.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "appliedDnsServers": {
-          "type": "array",
-          "description": "If the VM that uses this NIC is part of an Availability Set, then this list will have the union of all DNS servers from all NICs that are part of the Availability Set. This property is what is configured on each of those VMs.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "internalDnsNameLabel": {
-          "type": "string",
-          "description": "Relative DNS name for this NIC used for internal communications between VMs in the same virtual network."
-        },
-        "internalFqdn": {
-          "type": "string",
-          "description": "Fully qualified DNS name supporting internal communications between VMs in the same virtual network.",
-          "readOnly": true
-        },
-        "internalDomainNameSuffix": {
-          "type": "string",
-          "description": "Even if internalDnsNameLabel is not specified, a DNS entry is created for the primary NIC of the VM. This DNS name can be constructed by concatenating the VM name with the value of internalDomainNameSuffix.",
-          "readOnly": true
-        }
-      }
-    },
     "NetworkInterfaceIPConfiguration": {
       "type": "object",
       "description": "IPConfiguration in a network interface.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfigurationPropertiesFormat",
           "description": "Network interface IP configuration properties.",
           "x-ms-client-flatten": true
         },
@@ -30321,117 +28791,6 @@
       "required": [
         "value"
       ]
-    },
-    "NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties": {
-      "type": "object",
-      "description": "PrivateLinkConnection properties for the network interface.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The group ID for current private link connection.",
-          "readOnly": true
-        },
-        "requiredMemberName": {
-          "type": "string",
-          "description": "The required member name for current private link connection.",
-          "readOnly": true
-        },
-        "fqdns": {
-          "type": "array",
-          "description": "List of FQDNs for current private link connection.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkInterfaceIPConfigurationPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of IP configuration.",
-      "properties": {
-        "gatewayLoadBalancer": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to gateway load balancer frontend IP."
-        },
-        "virtualNetworkTaps": {
-          "type": "array",
-          "description": "The reference to Virtual Network Taps.",
-          "items": {
-            "$ref": "./networkGateway.json/definitions/VirtualNetworkTap"
-          }
-        },
-        "applicationGatewayBackendAddressPools": {
-          "type": "array",
-          "description": "The reference to ApplicationGatewayBackendAddressPool resource.",
-          "items": {
-            "$ref": "./applicationGateway.json/definitions/ApplicationGatewayBackendAddressPool"
-          }
-        },
-        "loadBalancerBackendAddressPools": {
-          "type": "array",
-          "description": "The reference to LoadBalancerBackendAddressPool resource.",
-          "items": {
-            "$ref": "#/definitions/BackendAddressPool"
-          }
-        },
-        "loadBalancerInboundNatRules": {
-          "type": "array",
-          "description": "A list of references of LoadBalancerInboundNatRules.",
-          "items": {
-            "$ref": "#/definitions/InboundNatRule"
-          }
-        },
-        "privateIPAddress": {
-          "type": "string",
-          "description": "Private IP address of the IP configuration. It can be a single IP address or a CIDR block in the format <address>/<prefix-length>."
-        },
-        "privateIPAddressPrefixLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.",
-          "minimum": 1,
-          "maximum": 128,
-          "x-nullable": true
-        },
-        "privateIPAllocationMethod": {
-          "$ref": "#/definitions/IPAllocationMethod",
-          "description": "The private IP address allocation method."
-        },
-        "privateIPAddressVersion": {
-          "$ref": "#/definitions/IPVersion",
-          "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
-        },
-        "subnet": {
-          "$ref": "#/definitions/Subnet",
-          "description": "Subnet bound to the IP configuration."
-        },
-        "primary": {
-          "type": "boolean",
-          "description": "Whether this is a primary customer address on the network interface."
-        },
-        "publicIPAddress": {
-          "$ref": "./virtualNetwork.json/definitions/PublicIPAddress",
-          "description": "Public IP address bound to the IP configuration."
-        },
-        "applicationSecurityGroups": {
-          "type": "array",
-          "description": "Application security groups in which the IP configuration is included.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/ApplicationSecurityGroup"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the network interface IP configuration.",
-          "readOnly": true
-        },
-        "privateLinkConnectionProperties": {
-          "$ref": "#/definitions/NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties",
-          "description": "PrivateLinkConnection properties for the network interface.",
-          "readOnly": true
-        }
-      }
     },
     "NetworkInterfaceLoadBalancerListResult": {
       "type": "object",
@@ -30520,130 +28879,12 @@
         ]
       }
     },
-    "NetworkInterfacePropertiesFormat": {
-      "type": "object",
-      "description": "NetworkInterface properties.",
-      "properties": {
-        "virtualMachine": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to a virtual machine.",
-          "readOnly": true
-        },
-        "networkSecurityGroup": {
-          "$ref": "./virtualNetwork.json/definitions/NetworkSecurityGroup",
-          "description": "The reference to the NetworkSecurityGroup resource."
-        },
-        "privateEndpoint": {
-          "$ref": "./virtualNetwork.json/definitions/PrivateEndpoint",
-          "description": "A reference to the private endpoint to which the network interface is linked.",
-          "readOnly": true
-        },
-        "ipConfigurations": {
-          "type": "array",
-          "description": "A list of IPConfigurations of the network interface.",
-          "items": {
-            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
-          }
-        },
-        "tapConfigurations": {
-          "type": "array",
-          "description": "A list of TapConfigurations of the network interface.",
-          "items": {
-            "$ref": "#/definitions/NetworkInterfaceTapConfiguration"
-          },
-          "readOnly": true
-        },
-        "dnsSettings": {
-          "$ref": "#/definitions/NetworkInterfaceDnsSettings",
-          "description": "The DNS settings in network interface."
-        },
-        "macAddress": {
-          "type": "string",
-          "description": "The MAC address of the network interface.",
-          "readOnly": true
-        },
-        "primary": {
-          "type": "boolean",
-          "description": "Whether this is a primary network interface on a virtual machine.",
-          "readOnly": true
-        },
-        "vnetEncryptionSupported": {
-          "type": "boolean",
-          "description": "Whether the virtual machine this nic is attached to supports encryption.",
-          "readOnly": true
-        },
-        "defaultOutboundConnectivityEnabled": {
-          "type": "boolean",
-          "description": "Whether default outbound connectivity for nic was configured or not.",
-          "readOnly": true
-        },
-        "enableAcceleratedNetworking": {
-          "type": "boolean",
-          "description": "If the network interface is configured for accelerated networking. Not applicable to VM sizes which require accelerated networking."
-        },
-        "disableTcpStateTracking": {
-          "type": "boolean",
-          "description": "Indicates whether to disable tcp state tracking."
-        },
-        "enableIPForwarding": {
-          "type": "boolean",
-          "description": "Indicates whether IP forwarding is enabled on this network interface."
-        },
-        "hostedWorkloads": {
-          "type": "array",
-          "description": "A list of references to linked BareMetal resources.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "dscpConfiguration": {
-          "$ref": "#/definitions/SubResource",
-          "description": "A reference to the dscp configuration to which the network interface is linked.",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the network interface resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the network interface resource.",
-          "readOnly": true
-        },
-        "workloadType": {
-          "type": "string",
-          "description": "WorkloadType of the NetworkInterface for BareMetal resources"
-        },
-        "nicType": {
-          "$ref": "#/definitions/NetworkInterfaceNicType",
-          "description": "Type of Network Interface resource."
-        },
-        "privateLinkService": {
-          "$ref": "#/definitions/PrivateLinkService",
-          "description": "Privatelinkservice of the network interface resource."
-        },
-        "migrationPhase": {
-          "$ref": "#/definitions/NetworkInterfaceMigrationPhase",
-          "description": "Migration phase of Network Interface resource."
-        },
-        "auxiliaryMode": {
-          "$ref": "#/definitions/NetworkInterfaceAuxiliaryMode",
-          "description": "Auxiliary mode of Network Interface resource."
-        },
-        "auxiliarySku": {
-          "$ref": "#/definitions/NetworkInterfaceAuxiliarySku",
-          "description": "Auxiliary sku of Network Interface resource."
-        }
-      }
-    },
     "NetworkInterfaceTapConfiguration": {
       "type": "object",
       "description": "Tap configuration in a Network Interface.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NetworkInterfaceTapConfigurationPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceTapConfigurationPropertiesFormat",
           "description": "Properties of the Virtual Network Tap configuration.",
           "x-ms-client-flatten": true
         },
@@ -30680,21 +28921,6 @@
         "value"
       ]
     },
-    "NetworkInterfaceTapConfigurationPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of Virtual Network Tap configuration.",
-      "properties": {
-        "virtualNetworkTap": {
-          "$ref": "./networkGateway.json/definitions/VirtualNetworkTap",
-          "description": "The reference to the Virtual Network Tap resource."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the network interface tap configuration resource.",
-          "readOnly": true
-        }
-      }
-    },
     "NetworkManagerPropertiesNetworkManagerScopes": {
       "type": "object",
       "description": "Scope of Network Manager.",
@@ -30721,37 +28947,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "NetworkProfilePropertiesFormat": {
-      "type": "object",
-      "description": "Network profile properties.",
-      "properties": {
-        "containerNetworkInterfaces": {
-          "type": "array",
-          "description": "List of child container network interfaces.",
-          "items": {
-            "$ref": "#/definitions/ContainerNetworkInterface"
-          },
-          "readOnly": true
-        },
-        "containerNetworkInterfaceConfigurations": {
-          "type": "array",
-          "description": "List of chid container network interface configurations.",
-          "items": {
-            "$ref": "#/definitions/ContainerNetworkInterfaceConfiguration"
-          }
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the network profile resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the network profile resource.",
-          "readOnly": true
         }
       }
     },
@@ -30888,86 +29083,6 @@
       ],
       "x-ms-discriminator-value": "NetworkRule"
     },
-    "NetworkSecurityGroupPropertiesFormat": {
-      "type": "object",
-      "description": "Network Security Group resource.",
-      "properties": {
-        "flushConnection": {
-          "type": "boolean",
-          "description": "When enabled, flows created from Network Security Group connections will be re-evaluated when rules are updates. Initial enablement will trigger re-evaluation."
-        },
-        "securityRules": {
-          "type": "array",
-          "description": "A collection of security rules of the network security group.",
-          "items": {
-            "$ref": "#/definitions/SecurityRule"
-          }
-        },
-        "defaultSecurityRules": {
-          "type": "array",
-          "description": "The default security rules of network security group.",
-          "items": {
-            "$ref": "#/definitions/SecurityRule"
-          },
-          "readOnly": true
-        },
-        "networkInterfaces": {
-          "type": "array",
-          "description": "A collection of references to network interfaces.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/NetworkInterface"
-          },
-          "readOnly": true
-        },
-        "subnets": {
-          "type": "array",
-          "description": "A collection of references to subnets.",
-          "items": {
-            "$ref": "#/definitions/Subnet"
-          },
-          "readOnly": true
-        },
-        "flowLogs": {
-          "type": "array",
-          "description": "A collection of references to flow log resources.",
-          "items": {
-            "$ref": "#/definitions/FlowLog"
-          },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the network security group resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the network security group resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkVirtualApplianceBootDiagnosticParameters": {
-      "type": "object",
-      "description": "Specifies input parameters required to retrieve the boot diagnostic logs for an NVA instance",
-      "properties": {
-        "instanceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The network virtual appliance instance id for which boot diagnostic logs is being requested"
-        },
-        "serialConsoleStorageSasUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written"
-        },
-        "consoleScreenshotStorageSasUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written"
-        }
-      }
-    },
     "NetworkVirtualApplianceConnection": {
       "type": "object",
       "description": "NetworkVirtualApplianceConnection resource.",
@@ -31009,160 +29124,6 @@
         "value"
       ]
     },
-    "NetworkVirtualApplianceInstanceId": {
-      "type": "object",
-      "properties": {
-        "instanceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The network virtual appliance instance id for which boot diagnostic logs is being requested"
-        }
-      }
-    },
-    "NetworkVirtualApplianceInstanceIds": {
-      "type": "object",
-      "description": "Specifies a list of virtual machine instance IDs from the Network Virtual Appliance VM instances.",
-      "properties": {
-        "instanceIds": {
-          "type": "array",
-          "description": "The network virtual appliance instance ids. Omitting the network virtual appliance instance ids will result in the operation being performed on all virtual machines belonging to the network virtual appliance.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "NetworkVirtualAppliancePropertiesFormat": {
-      "type": "object",
-      "description": "Network Virtual Appliance definition.",
-      "properties": {
-        "nvaSku": {
-          "$ref": "#/definitions/VirtualApplianceSkuProperties",
-          "description": "Network Virtual Appliance SKU."
-        },
-        "addressPrefix": {
-          "type": "string",
-          "description": "Address Prefix.",
-          "readOnly": true
-        },
-        "bootStrapConfigurationBlobs": {
-          "type": "array",
-          "description": "BootStrapConfigurationBlobs storage URLs.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "virtualHub": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The Virtual Hub where Network Virtual Appliance is being deployed."
-        },
-        "cloudInitConfigurationBlobs": {
-          "type": "array",
-          "description": "CloudInitConfigurationBlob storage URLs.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "cloudInitConfiguration": {
-          "type": "string",
-          "description": "CloudInitConfiguration string in plain text."
-        },
-        "virtualApplianceAsn": {
-          "type": "integer",
-          "format": "int64",
-          "description": "VirtualAppliance ASN. Microsoft private, public and IANA reserved ASN are not supported.",
-          "minimum": 0,
-          "maximum": 4294967295
-        },
-        "sshPublicKey": {
-          "type": "string",
-          "description": "Public key for SSH login."
-        },
-        "virtualApplianceNics": {
-          "type": "array",
-          "description": "List of Virtual Appliance Network Interfaces.",
-          "items": {
-            "$ref": "#/definitions/VirtualApplianceNicProperties"
-          },
-          "readOnly": true
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/NetworkVirtualAppliancePropertiesFormatNetworkProfile",
-          "description": "Network Profile containing configurations for Public and Private NIC."
-        },
-        "additionalNics": {
-          "type": "array",
-          "description": "Details required for Additional Network Interface. This property is not compatible with the NVA deployed in VNets.",
-          "items": {
-            "$ref": "#/definitions/VirtualApplianceAdditionalNicProperties"
-          },
-          "x-ms-identifiers": []
-        },
-        "internetIngressPublicIps": {
-          "type": "array",
-          "description": "List of Resource Uri of Public IPs for Internet Ingress Scenario.",
-          "items": {
-            "$ref": "#/definitions/InternetIngressPublicIpsProperties"
-          },
-          "x-ms-identifiers": []
-        },
-        "virtualApplianceSites": {
-          "type": "array",
-          "description": "List of references to VirtualApplianceSite.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "virtualApplianceConnections": {
-          "type": "array",
-          "description": "List of references to VirtualApplianceConnections.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "inboundSecurityRules": {
-          "type": "array",
-          "description": "List of references to InboundSecurityRules.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        },
-        "deploymentType": {
-          "type": "string",
-          "description": "The deployment type. PartnerManaged for the SaaS NVA",
-          "readOnly": true
-        },
-        "delegation": {
-          "$ref": "#/definitions/DelegationProperties",
-          "description": "The delegation for the Virtual Appliance. Only appliable for SaaS NVA."
-        },
-        "partnerManagedResource": {
-          "$ref": "#/definitions/PartnerManagedResourceProperties",
-          "description": "The delegation for the Virtual Appliance"
-        },
-        "nvaInterfaceConfigurations": {
-          "type": "array",
-          "description": "The NVA in VNet interface configurations",
-          "maxItems": 3,
-          "items": {
-            "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
-          }
-        },
-        "privateIpAddress": {
-          "type": "string",
-          "description": "A Internal Load Balancer's HA port frontend IP address. Can be used to set routes & UDR to load balance traffic between NVA instances",
-          "readOnly": true
-        }
-      }
-    },
     "NetworkVirtualAppliancePropertiesFormatNetworkProfile": {
       "type": "object",
       "description": "Network Profile containing configurations for Public and Private NIC.",
@@ -31170,7 +29131,7 @@
         "networkInterfaceConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfiguration"
+            "$ref": "./virtualNetwork.json/definitions/VirtualApplianceNetworkInterfaceConfiguration"
           },
           "x-ms-identifiers": []
         }
@@ -31203,7 +29164,7 @@
       "description": "Definition of the NetworkVirtualApplianceSkus resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NetworkVirtualApplianceSkuPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/NetworkVirtualApplianceSkuPropertiesFormat",
           "description": "NetworkVirtualApplianceSku properties.",
           "x-ms-client-flatten": true
         },
@@ -31218,24 +29179,6 @@
           "$ref": "#/definitions/Resource"
         }
       ]
-    },
-    "NetworkVirtualApplianceSkuInstances": {
-      "type": "object",
-      "title": "Network Virtual Appliance Sku Instances",
-      "description": "List of available Sku and instances.",
-      "properties": {
-        "scaleUnit": {
-          "type": "string",
-          "description": "Scale Unit.",
-          "readOnly": true
-        },
-        "instanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Instance Count.",
-          "readOnly": true
-        }
-      }
     },
     "NetworkVirtualApplianceSkuListResult": {
       "type": "object",
@@ -31257,33 +29200,6 @@
       "required": [
         "value"
       ]
-    },
-    "NetworkVirtualApplianceSkuPropertiesFormat": {
-      "type": "object",
-      "title": "Network Virtual Appliance Sku Properties",
-      "description": "Properties specific to NetworkVirtualApplianceSkus.",
-      "properties": {
-        "vendor": {
-          "type": "string",
-          "description": "Network Virtual Appliance Sku vendor.",
-          "readOnly": true
-        },
-        "availableVersions": {
-          "type": "array",
-          "description": "Available Network Virtual Appliance versions.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "availableScaleUnits": {
-          "type": "array",
-          "description": "The list of scale units available.",
-          "items": {
-            "$ref": "#/definitions/NetworkVirtualApplianceSkuInstances"
-          }
-        }
-      }
     },
     "NextHopType": {
       "type": "string",
@@ -31798,47 +29714,6 @@
         "value"
       ]
     },
-    "NvaInVnetSubnetReferenceProperties": {
-      "type": "object",
-      "title": "Subnet references where the NVA NICS will be deployed",
-      "description": "The resource URI of the subnets where the NVA NICS will be deployed",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource Uri of Subnet",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks/subnets"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "NvaInterfaceConfigurationsProperties": {
-      "type": "object",
-      "description": "Specifies input parameters required NVA in VNet interface configuration.",
-      "properties": {
-        "subnet": {
-          "$ref": "#/definitions/NvaInVnetSubnetReferenceProperties",
-          "description": "A subnet resource id where the NIC will be deployed. Each subnet resource uri should be unique."
-        },
-        "type": {
-          "type": "array",
-          "description": "Specifies the NIC types for the NVA interface configuration. Allowed values: PrivateNic, PublicNic, AdditionalPrivateNic, AdditionalPublicNic. Only the combination of PrivateNic and PublicNic is currently supported.",
-          "items": {
-            "$ref": "#/definitions/NvaNicType"
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "Specifies the name of the interface. Maximum length is 70 characters.",
-          "maxLength": 70
-        }
-      }
-    },
     "NvaNicType": {
       "type": "string",
       "enum": [
@@ -31872,16 +29747,6 @@
             "description": "An additional public NIC type"
           }
         ]
-      }
-    },
-    "Office365PolicyProperties": {
-      "type": "object",
-      "description": "Network Virtual Appliance Sku Properties.",
-      "properties": {
-        "breakOutCategories": {
-          "$ref": "#/definitions/BreakOutCategoryPolicies",
-          "description": "Office 365 breakout categories."
-        }
       }
     },
     "OfficeTrafficCategory": {
@@ -32290,51 +30155,6 @@
         ]
       }
     },
-    "PartnerManagedResourceProperties": {
-      "type": "object",
-      "description": "Properties of the partner managed resource. Only appliable for SaaS NVA.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The partner managed resource id.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "PaloAltoNetworks.Cloudngfw/firewalls"
-              }
-            ]
-          }
-        },
-        "internalLoadBalancerId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The partner managed ILB resource id",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/loadBalancers"
-              }
-            ]
-          }
-        },
-        "standardLoadBalancerId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The partner managed SLB resource id",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/loadBalancers"
-              }
-            ]
-          }
-        }
-      }
-    },
     "PatchRouteFilter": {
       "type": "object",
       "description": "Route Filter Resource.",
@@ -32655,66 +30475,6 @@
         }
       }
     },
-    "PoolAssociation": {
-      "type": "object",
-      "description": "IpamPool association information.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource id of the associated Azure resource."
-        },
-        "poolId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "IpamPool id for which the resource is associated to."
-        },
-        "description": {
-          "type": "string"
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "description": "List of assigned IP address prefixes in the IpamPool of the associated resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "reservedPrefixes": {
-          "type": "array",
-          "description": "List of reserved IP address prefixes in the IpamPool of the associated resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "totalNumberOfIPAddresses": {
-          "type": "string",
-          "description": "Total number of assigned IP addresses of the association.",
-          "readOnly": true
-        },
-        "numberOfReservedIPAddresses": {
-          "type": "string",
-          "description": "Total number of reserved IP addresses of the association.",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of the association.",
-          "readOnly": true
-        },
-        "reservationExpiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expire time for IP addresses reserved.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "resourceId"
-      ]
-    },
     "PoolAssociationList": {
       "type": "object",
       "description": "List of PoolAssociation",
@@ -32723,7 +30483,7 @@
           "type": "array",
           "description": "The PoolAssociation items on this page",
           "items": {
-            "$ref": "#/definitions/PoolAssociation"
+            "$ref": "./virtualNetwork.json/definitions/PoolAssociation"
           }
         },
         "nextLink": {
@@ -32735,75 +30495,6 @@
       "required": [
         "value"
       ]
-    },
-    "PoolUsage": {
-      "type": "object",
-      "description": "IpamPool usage information.",
-      "properties": {
-        "addressPrefixes": {
-          "type": "array",
-          "description": "List of IP address prefixes of the resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "childPools": {
-          "type": "array",
-          "description": "List of IpamPool that are children of this IpamPool.",
-          "items": {
-            "$ref": "#/definitions/ResourceBasics"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        },
-        "allocatedAddressPrefixes": {
-          "type": "array",
-          "description": "List of assigned IP address prefixes.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "reservedAddressPrefixes": {
-          "type": "array",
-          "description": "List of reserved IP address prefixes. These IP addresses could be reclaimed if not assigned in the given time.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "availableAddressPrefixes": {
-          "type": "array",
-          "description": "List of available IP address prefixes.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "totalNumberOfIPAddresses": {
-          "type": "string",
-          "description": "Total number of IP addresses managed in the IpamPool.",
-          "readOnly": true
-        },
-        "numberOfAllocatedIPAddresses": {
-          "type": "string",
-          "description": "Total number of assigned IP addresses in the IpamPool.",
-          "readOnly": true
-        },
-        "numberOfReservedIPAddresses": {
-          "type": "string",
-          "description": "Total number of reserved IP addresses in the IpamPool.",
-          "readOnly": true
-        },
-        "numberOfAvailableIPAddresses": {
-          "type": "string",
-          "description": "Total number of available IP addresses in the IpamPool.",
-          "readOnly": true
-        }
-      }
     },
     "PreferredIPVersion": {
       "type": "string",
@@ -32859,38 +30550,6 @@
         ]
       }
     },
-    "PrepareNetworkPoliciesRequest": {
-      "type": "object",
-      "description": "Details of PrepareNetworkPolicies for Subnet.",
-      "properties": {
-        "serviceName": {
-          "type": "string",
-          "description": "The name of the service for which subnet is being prepared for."
-        },
-        "networkIntentPolicyConfigurations": {
-          "type": "array",
-          "description": "A list of NetworkIntentPolicyConfiguration.",
-          "items": {
-            "$ref": "#/definitions/NetworkIntentPolicyConfiguration"
-          }
-        }
-      }
-    },
-    "PrivateDnsZoneConfig": {
-      "type": "object",
-      "description": "PrivateDnsZoneConfig resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateDnsZonePropertiesFormat",
-          "description": "Properties of the private dns zone configuration.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "PrivateDnsZoneGroup": {
       "type": "object",
       "description": "Private dns zone group resource.",
@@ -32905,7 +30564,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/PrivateDnsZoneGroupPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/PrivateDnsZoneGroupPropertiesFormat",
           "description": "Properties of the private dns zone group.",
           "x-ms-client-flatten": true
         }
@@ -32937,48 +30596,12 @@
         "value"
       ]
     },
-    "PrivateDnsZoneGroupPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the private dns zone group.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the private dns zone group resource.",
-          "readOnly": true
-        },
-        "privateDnsZoneConfigs": {
-          "type": "array",
-          "description": "A collection of private dns zone configurations of the private dns zone group.",
-          "items": {
-            "$ref": "#/definitions/PrivateDnsZoneConfig"
-          }
-        }
-      }
-    },
-    "PrivateDnsZonePropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the private dns zone configuration resource.",
-      "properties": {
-        "privateDnsZoneId": {
-          "type": "string",
-          "description": "The resource id of the private dns zone."
-        },
-        "recordSets": {
-          "type": "array",
-          "description": "A collection of information regarding a recordSet, holding information to identify private resources.",
-          "items": {
-            "$ref": "#/definitions/RecordSet"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "PrivateEndpointConnection": {
       "type": "object",
       "description": "PrivateEndpointConnection resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "./virtualNetwork.json/definitions/PrivateEndpointConnectionProperties",
           "description": "Properties of the private end point connection.",
           "x-ms-client-flatten": true
         },
@@ -33015,172 +30638,6 @@
         "value"
       ]
     },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Properties of the PrivateEndpointConnectProperties.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "./virtualNetwork.json/definitions/PrivateEndpoint",
-          "description": "The resource of private end point.",
-          "readOnly": true
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "A collection of information about the state of the connection between service consumer and provider."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource.",
-          "readOnly": true
-        },
-        "linkIdentifier": {
-          "type": "string",
-          "description": "The consumer link id.",
-          "readOnly": true
-        },
-        "privateEndpointLocation": {
-          "type": "string",
-          "description": "The location of the private endpoint.",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointIPConfiguration": {
-      "type": "object",
-      "description": "An IP Configuration of the private endpoint.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointIPConfigurationProperties",
-          "description": "Properties of private endpoint IP configurations.",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource that is unique within a resource group."
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointIPConfigurationProperties": {
-      "type": "object",
-      "description": "Properties of an IP Configuration of the private endpoint.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The ID of a group obtained from the remote resource that this private endpoint should connect to."
-        },
-        "memberName": {
-          "type": "string",
-          "description": "The member name of a group obtained from the remote resource that this private endpoint should connect to."
-        },
-        "privateIPAddress": {
-          "type": "string",
-          "description": "A private ip address obtained from the private endpoint's subnet."
-        }
-      }
-    },
-    "PrivateEndpointProperties": {
-      "type": "object",
-      "description": "Properties of the private endpoint.",
-      "properties": {
-        "subnet": {
-          "$ref": "#/definitions/Subnet",
-          "description": "The ID of the subnet from which the private IP will be allocated."
-        },
-        "networkInterfaces": {
-          "type": "array",
-          "description": "An array of references to the network interfaces created for this private endpoint.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/NetworkInterface"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the private endpoint resource.",
-          "readOnly": true
-        },
-        "ipVersionType": {
-          "type": "string",
-          "description": "Specifies the IP version type for the private IPs of the private endpoint. If not defined, this defaults to IPv4.",
-          "default": "IPv4",
-          "enum": [
-            "IPv4",
-            "IPv6",
-            "DualStack"
-          ],
-          "x-ms-enum": {
-            "name": "PrivateEndpointIPVersionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "IPv4",
-                "value": "IPv4",
-                "description": "Indicates that the Private IPs of the private endpoint will be IPv4 only."
-              },
-              {
-                "name": "IPv6",
-                "value": "IPv6",
-                "description": "Indicates that the Private IPs of the private endpoint will be IPv6 only."
-              },
-              {
-                "name": "DualStack",
-                "value": "DualStack",
-                "description": "Indicates that the Private IPs of the private endpoint can be both IPv4 and IPv6."
-              }
-            ]
-          }
-        },
-        "privateLinkServiceConnections": {
-          "type": "array",
-          "description": "A grouping of information about the connection to the remote resource.",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkServiceConnection"
-          }
-        },
-        "manualPrivateLinkServiceConnections": {
-          "type": "array",
-          "description": "A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource.",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkServiceConnection"
-          }
-        },
-        "customDnsConfigs": {
-          "type": "array",
-          "description": "An array of custom dns configurations.",
-          "items": {
-            "$ref": "#/definitions/CustomDnsConfigPropertiesFormat"
-          }
-        },
-        "applicationSecurityGroups": {
-          "type": "array",
-          "description": "Application security groups in which the private endpoint IP configuration is included.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/ApplicationSecurityGroup"
-          }
-        },
-        "ipConfigurations": {
-          "type": "array",
-          "description": "A list of IP configurations of the private endpoint. This will be used to map to the First Party Service's endpoints.",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointIPConfiguration"
-          }
-        },
-        "customNetworkInterfaceName": {
-          "type": "string",
-          "description": "The custom name of the network interface attached to the private endpoint."
-        }
-      }
-    },
     "PrivateEndpointVNetPolicies": {
       "type": "string",
       "description": "Private Endpoint VNet Policies.",
@@ -33210,7 +30667,7 @@
       "description": "Private link service resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkServiceProperties",
+          "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceProperties",
           "description": "Properties of the private link service.",
           "x-ms-client-flatten": true
         },
@@ -33235,7 +30692,7 @@
       "description": "PrivateLinkServiceConnection resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionProperties",
+          "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceConnectionProperties",
           "description": "Properties of the private link service connection.",
           "x-ms-client-flatten": true
         },
@@ -33260,60 +30717,12 @@
         }
       ]
     },
-    "PrivateLinkServiceConnectionProperties": {
-      "type": "object",
-      "description": "Properties of the PrivateLinkServiceConnection.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the private link service connection resource.",
-          "readOnly": true
-        },
-        "privateLinkServiceId": {
-          "type": "string",
-          "description": "The resource id of private link service."
-        },
-        "groupIds": {
-          "type": "array",
-          "description": "The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requestMessage": {
-          "type": "string",
-          "description": "A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "A collection of read-only information about the state of the connection to the remote resource."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "description": "A collection of information about the state of the connection between service consumer and provider.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
-        }
-      }
-    },
     "PrivateLinkServiceIpConfiguration": {
       "type": "object",
       "description": "The private link service ip configuration.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkServiceIpConfigurationProperties",
+          "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceIpConfigurationProperties",
           "description": "Properties of the private link service ip configuration.",
           "x-ms-client-flatten": true
         },
@@ -33338,37 +30747,6 @@
         }
       ]
     },
-    "PrivateLinkServiceIpConfigurationProperties": {
-      "type": "object",
-      "description": "Properties of private link service IP configuration.",
-      "properties": {
-        "privateIPAddress": {
-          "type": "string",
-          "description": "The private IP address of the IP configuration."
-        },
-        "privateIPAllocationMethod": {
-          "$ref": "#/definitions/IPAllocationMethod",
-          "description": "The private IP address allocation method."
-        },
-        "subnet": {
-          "$ref": "#/definitions/Subnet",
-          "description": "The reference to the subnet resource."
-        },
-        "primary": {
-          "type": "boolean",
-          "description": "Whether the ip configuration is primary or not."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the private link service IP configuration resource.",
-          "readOnly": true
-        },
-        "privateIPAddressVersion": {
-          "$ref": "#/definitions/IPVersion",
-          "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
-        }
-      }
-    },
     "PrivateLinkServiceListResult": {
       "type": "object",
       "description": "The response of a PrivateLinkService list operation.",
@@ -33390,85 +30768,12 @@
         "value"
       ]
     },
-    "PrivateLinkServiceProperties": {
-      "type": "object",
-      "description": "Properties of the private link service.",
-      "properties": {
-        "loadBalancerFrontendIpConfigurations": {
-          "type": "array",
-          "description": "An array of references to the load balancer IP configurations.",
-          "items": {
-            "$ref": "#/definitions/FrontendIPConfiguration"
-          }
-        },
-        "ipConfigurations": {
-          "type": "array",
-          "description": "An array of private link service IP configurations.",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkServiceIpConfiguration"
-          }
-        },
-        "destinationIPAddress": {
-          "type": "string",
-          "description": "The destination IP address of the private link service."
-        },
-        "accessMode": {
-          "$ref": "#/definitions/AccessMode",
-          "description": "The access mode of the private link service."
-        },
-        "networkInterfaces": {
-          "type": "array",
-          "description": "An array of references to the network interfaces created for this private link service.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/NetworkInterface"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the private link service resource.",
-          "readOnly": true
-        },
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "An array of list about connections to the private endpoint.",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "visibility": {
-          "$ref": "#/definitions/PrivateLinkServicePropertiesVisibility",
-          "description": "The visibility list of the private link service."
-        },
-        "autoApproval": {
-          "$ref": "#/definitions/PrivateLinkServicePropertiesAutoApproval",
-          "description": "The auto-approval list of the private link service."
-        },
-        "fqdns": {
-          "type": "array",
-          "description": "The list of Fqdn.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "alias": {
-          "type": "string",
-          "description": "The alias of the private link service.",
-          "readOnly": true
-        },
-        "enableProxyProtocol": {
-          "type": "boolean",
-          "description": "Whether the private link service is enabled for proxy protocol or not."
-        }
-      }
-    },
     "PrivateLinkServicePropertiesAutoApproval": {
       "type": "object",
       "description": "The auto-approval list of the private link service.",
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceSet"
+          "$ref": "./virtualNetwork.json/definitions/ResourceSet"
         }
       ]
     },
@@ -33477,19 +30782,9 @@
       "description": "The visibility list of the private link service.",
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceSet"
+          "$ref": "./virtualNetwork.json/definitions/ResourceSet"
         }
       ]
-    },
-    "PrivateLinkServiceVisibility": {
-      "type": "object",
-      "description": "Response for the CheckPrivateLinkServiceVisibility API service call.",
-      "properties": {
-        "visible": {
-          "type": "boolean",
-          "description": "Private Link Service Visibility (True/False)."
-        }
-      }
     },
     "Probe": {
       "type": "object",
@@ -33809,28 +31104,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "PublicIPAddressDnsSettings": {
-      "type": "object",
-      "description": "Contains FQDN of the DNS record associated with the public IP address.",
-      "properties": {
-        "domainNameLabel": {
-          "type": "string",
-          "description": "The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-        },
-        "domainNameLabelScope": {
-          "$ref": "#/definitions/PublicIpAddressDnsSettingsDomainNameLabelScope",
-          "description": "The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN."
-        },
-        "fqdn": {
-          "type": "string",
-          "description": "The Fully Qualified Domain Name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone."
-        },
-        "reverseFqdn": {
-          "type": "string",
-          "description": "The reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN."
-        }
-      }
-    },
     "PublicIPAddressMigrationPhase": {
       "type": "string",
       "description": "Migration phase of Public IP Address.",
@@ -33871,97 +31144,6 @@
             "description": "Committed"
           }
         ]
-      }
-    },
-    "PublicIPAddressPropertiesFormat": {
-      "type": "object",
-      "description": "Public IP address properties.",
-      "properties": {
-        "publicIPAllocationMethod": {
-          "$ref": "#/definitions/IPAllocationMethod",
-          "description": "The public IP address allocation method."
-        },
-        "publicIPAddressVersion": {
-          "$ref": "#/definitions/IPVersion",
-          "description": "The public IP address version."
-        },
-        "ipConfiguration": {
-          "$ref": "#/definitions/IPConfiguration",
-          "description": "The IP configuration associated with the public IP address.",
-          "readOnly": true
-        },
-        "dnsSettings": {
-          "$ref": "#/definitions/PublicIPAddressDnsSettings",
-          "description": "The FQDN of the DNS record associated with the public IP address."
-        },
-        "ddosSettings": {
-          "$ref": "#/definitions/DdosSettings",
-          "description": "The DDoS protection custom policy associated with the public IP address."
-        },
-        "ipTags": {
-          "type": "array",
-          "description": "The list of tags associated with the public IP address.",
-          "items": {
-            "$ref": "#/definitions/IpTag"
-          }
-        },
-        "ipAddress": {
-          "type": "string",
-          "description": "The IP address associated with the public IP address resource."
-        },
-        "publicIPPrefix": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The Public IP Prefix this Public IP Address should be allocated from."
-        },
-        "idleTimeoutInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The idle timeout of the public IP address."
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the public IP address resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the public IP address resource.",
-          "readOnly": true
-        },
-        "servicePublicIPAddress": {
-          "$ref": "./virtualNetwork.json/definitions/PublicIPAddress",
-          "description": "The service public IP address of the public IP address resource."
-        },
-        "natGateway": {
-          "$ref": "./virtualNetwork.json/definitions/NatGateway",
-          "description": "The NatGateway for the Public IP address."
-        },
-        "migrationPhase": {
-          "$ref": "#/definitions/PublicIPAddressMigrationPhase",
-          "description": "Migration phase of Public IP Address."
-        },
-        "linkedPublicIPAddress": {
-          "$ref": "./virtualNetwork.json/definitions/PublicIPAddress",
-          "description": "The linked public IP address of the public IP address resource."
-        },
-        "deleteOption": {
-          "$ref": "#/definitions/DeleteOptions",
-          "description": "Specify what happens to the public IP address when the VM using it is deleted"
-        }
-      }
-    },
-    "PublicIPAddressSku": {
-      "type": "object",
-      "description": "SKU of a public IP address.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/PublicIPAddressSkuName",
-          "description": "Name of a public IP address SKU."
-        },
-        "tier": {
-          "$ref": "#/definitions/PublicIPAddressSkuTier",
-          "description": "Tier of a public IP address SKU."
-        }
       }
     },
     "PublicIPAddressSkuName": {
@@ -34016,78 +31198,6 @@
             "description": "Global"
           }
         ]
-      }
-    },
-    "PublicIPPrefixPropertiesFormat": {
-      "type": "object",
-      "description": "Public IP prefix properties.",
-      "properties": {
-        "publicIPAddressVersion": {
-          "$ref": "#/definitions/IPVersion",
-          "description": "The public IP address version."
-        },
-        "ipTags": {
-          "type": "array",
-          "description": "The list of tags associated with the public IP prefix.",
-          "items": {
-            "$ref": "#/definitions/IpTag"
-          }
-        },
-        "prefixLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The Length of the Public IP Prefix."
-        },
-        "ipPrefix": {
-          "type": "string",
-          "description": "The allocated Prefix.",
-          "readOnly": true
-        },
-        "publicIPAddresses": {
-          "type": "array",
-          "description": "The list of all referenced PublicIPAddresses.",
-          "items": {
-            "$ref": "#/definitions/ReferencedPublicIpAddress"
-          },
-          "readOnly": true
-        },
-        "loadBalancerFrontendIpConfiguration": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to load balancer frontend IP configuration associated with the public IP prefix.",
-          "readOnly": true
-        },
-        "customIPPrefix": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The customIpPrefix that this prefix is associated with."
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the public IP prefix resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the public IP prefix resource.",
-          "readOnly": true
-        },
-        "natGateway": {
-          "$ref": "./virtualNetwork.json/definitions/NatGateway",
-          "description": "NatGateway of Public IP Prefix."
-        }
-      }
-    },
-    "PublicIPPrefixSku": {
-      "type": "object",
-      "description": "SKU of a public IP prefix.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/PublicIPPrefixSkuName",
-          "description": "Name of a public IP prefix SKU."
-        },
-        "tier": {
-          "$ref": "#/definitions/PublicIPPrefixSkuTier",
-          "description": "Tier of a public IP prefix SKU."
-        }
       }
     },
     "PublicIPPrefixSkuName": {
@@ -34174,104 +31284,6 @@
         ]
       }
     },
-    "PublicIpDdosProtectionStatusResult": {
-      "type": "object",
-      "description": "Response for GetPublicIpAddressDdosProtectionStatusOperation API service call.",
-      "properties": {
-        "publicIpAddressId": {
-          "type": "string",
-          "description": "Public IP ARM resource ID"
-        },
-        "publicIpAddress": {
-          "type": "string",
-          "description": "IP Address of the Public IP Resource"
-        },
-        "isWorkloadProtected": {
-          "$ref": "#/definitions/IsWorkloadProtected",
-          "description": "Value indicating whether the IP address is DDoS workload protected or not."
-        },
-        "ddosProtectionPlanId": {
-          "type": "string",
-          "description": "DDoS protection plan Resource Id of a if IP address is protected through a plan."
-        }
-      }
-    },
-    "QosDefinition": {
-      "type": "object",
-      "description": "Quality of Service defines the traffic configuration between endpoints. Mandatory to have one marking.",
-      "properties": {
-        "markings": {
-          "type": "array",
-          "description": "List of markings to be used in the configuration.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "sourceIpRanges": {
-          "type": "array",
-          "description": "Source IP ranges.",
-          "items": {
-            "$ref": "#/definitions/QosIpRange"
-          }
-        },
-        "destinationIpRanges": {
-          "type": "array",
-          "description": "Destination IP ranges.",
-          "items": {
-            "$ref": "#/definitions/QosIpRange"
-          }
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "description": "Sources port ranges.",
-          "items": {
-            "$ref": "#/definitions/QosPortRange"
-          }
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "description": "Destination port ranges.",
-          "items": {
-            "$ref": "#/definitions/QosPortRange"
-          }
-        },
-        "protocol": {
-          "$ref": "#/definitions/ProtocolType",
-          "description": "RNM supported protocol types."
-        }
-      }
-    },
-    "QosIpRange": {
-      "type": "object",
-      "description": "Qos Traffic Profiler IP Range properties.",
-      "properties": {
-        "startIP": {
-          "type": "string",
-          "description": "Start IP Address."
-        },
-        "endIP": {
-          "type": "string",
-          "description": "End IP Address."
-        }
-      }
-    },
-    "QosPortRange": {
-      "type": "object",
-      "description": "Qos Traffic Profiler Port range properties.",
-      "properties": {
-        "start": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Qos Port Range start."
-        },
-        "end": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Qos Port Range end."
-        }
-      }
-    },
     "QueryResults": {
       "type": "object",
       "description": "Query result",
@@ -34336,45 +31348,12 @@
         "radiusServerAddress"
       ]
     },
-    "ReachabilityAnalysisIntentProperties": {
-      "type": "object",
-      "description": "Represents the Reachability Analysis Intent properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning states of a resource.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string"
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Source resource id to verify the reachability path of."
-        },
-        "destinationResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Destination resource id to verify the reachability path of."
-        },
-        "ipTraffic": {
-          "$ref": "#/definitions/IPTraffic",
-          "description": "IP traffic information."
-        }
-      },
-      "required": [
-        "sourceResourceId",
-        "destinationResourceId",
-        "ipTraffic"
-      ]
-    },
     "ReachabilityAnalysisRun": {
       "type": "object",
       "description": "Configuration information for analysis run.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ReachabilityAnalysisRunProperties",
+          "$ref": "./virtualNetwork.json/definitions/ReachabilityAnalysisRunProperties",
           "description": "Represents the Reachability Analysis Run properties."
         },
         "systemData": {
@@ -34413,40 +31392,6 @@
         "value"
       ]
     },
-    "ReachabilityAnalysisRunProperties": {
-      "type": "object",
-      "description": "Represents the Reachability Analysis Run properties.",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "intentId": {
-          "type": "string",
-          "description": "Id of the intent resource to run analysis on."
-        },
-        "intentContent": {
-          "$ref": "#/definitions/IntentContent",
-          "description": "Intent information.",
-          "readOnly": true
-        },
-        "analysisResult": {
-          "type": "string",
-          "readOnly": true
-        },
-        "errorMessage": {
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning states of a resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "intentId"
-      ]
-    },
     "ReadOnlySubResourceModel": {
       "type": "object",
       "description": "Reference to another subresource.",
@@ -34468,64 +31413,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "RecordSet": {
-      "type": "object",
-      "description": "A collective group of information about the record set information.",
-      "properties": {
-        "recordType": {
-          "type": "string",
-          "description": "Resource record type."
-        },
-        "recordSetName": {
-          "type": "string",
-          "description": "Recordset name."
-        },
-        "fqdn": {
-          "type": "string",
-          "description": "Fqdn that resolves to private endpoint ip address."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the recordset.",
-          "readOnly": true
-        },
-        "ttl": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Recordset time to live."
-        },
-        "ipAddresses": {
-          "type": "array",
-          "description": "The private ip address of the private endpoint.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ReferencedPublicIpAddress": {
-      "type": "object",
-      "description": "Reference to a public IP address.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The PublicIPAddress Reference."
-        }
-      }
-    },
-    "ReserveCloudServicePublicIpAddressRequest": {
-      "type": "object",
-      "description": "The request for ReserveCloudServicePublicIpAddressOperation.",
-      "properties": {
-        "isRollback": {
-          "$ref": "#/definitions/IsRollback",
-          "description": "When true, reverts from Static to Dynamic allocation (undo reservation)."
-        }
-      },
-      "required": [
-        "isRollback"
-      ]
     },
     "ResiliencyModel": {
       "type": "string",
@@ -34608,24 +31495,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "ResourceBasics": {
-      "type": "object",
-      "description": "Representation of basic resource information.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ResourceId of the Azure resource."
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "description": "List of IP address prefixes of the resource.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ResourceIdentityType": {
       "type": "string",
       "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
@@ -34667,7 +31536,7 @@
       "description": "ResourceNavigationLink resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ResourceNavigationLinkFormat",
+          "$ref": "./virtualNetwork.json/definitions/ResourceNavigationLinkFormat",
           "description": "Resource navigation link properties format.",
           "x-ms-client-flatten": true
         },
@@ -34697,25 +31566,6 @@
         }
       ]
     },
-    "ResourceNavigationLinkFormat": {
-      "type": "object",
-      "description": "Properties of ResourceNavigationLink.",
-      "properties": {
-        "linkedResourceType": {
-          "type": "string",
-          "description": "Resource type of the linked resource."
-        },
-        "link": {
-          "type": "string",
-          "description": "Link to the external resource."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the resource navigation link resource.",
-          "readOnly": true
-        }
-      }
-    },
     "ResourceNavigationLinksListResult": {
       "type": "object",
       "description": "Paged collection of ResourceNavigationLink items",
@@ -34736,19 +31586,6 @@
       "required": [
         "value"
       ]
-    },
-    "ResourceSet": {
-      "type": "object",
-      "description": "The base resource set for visibility and auto-approval.",
-      "properties": {
-        "subscriptions": {
-          "type": "array",
-          "description": "The list of subscriptions.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ResourceWithReadOnlyID": {
       "type": "object",
@@ -34887,7 +31724,7 @@
       "description": "Route resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RoutePropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/RoutePropertiesFormat",
           "description": "Properties of the route.",
           "x-ms-client-flatten": true
         },
@@ -35139,37 +31976,6 @@
         ]
       }
     },
-    "RoutePropertiesFormat": {
-      "type": "object",
-      "description": "Route resource.",
-      "properties": {
-        "addressPrefix": {
-          "type": "string",
-          "description": "The destination CIDR to which the route applies."
-        },
-        "nextHopType": {
-          "$ref": "#/definitions/RouteNextHopType",
-          "description": "The type of Azure hop the packet should be sent to."
-        },
-        "nextHopIpAddress": {
-          "type": "string",
-          "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the route resource.",
-          "readOnly": true
-        },
-        "hasBgpOverride": {
-          "type": "boolean",
-          "description": "A value indicating whether this route overrides overlapping BGP routes regardless of LPM.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "nextHopType"
-      ]
-    },
     "RouteSourceDetails": {
       "type": "object",
       "properties": {
@@ -35184,41 +31990,6 @@
         "sec": {
           "type": "string",
           "description": "Flag to indicate if the route learned from the secondary device is active or passive"
-        }
-      }
-    },
-    "RouteTablePropertiesFormat": {
-      "type": "object",
-      "description": "Route Table resource.",
-      "properties": {
-        "routes": {
-          "type": "array",
-          "description": "Collection of routes contained within a route table.",
-          "items": {
-            "$ref": "#/definitions/Route"
-          }
-        },
-        "subnets": {
-          "type": "array",
-          "description": "A collection of references to subnets.",
-          "items": {
-            "$ref": "#/definitions/Subnet"
-          },
-          "readOnly": true
-        },
-        "disableBgpRoutePropagation": {
-          "type": "boolean",
-          "description": "Whether to disable the routes learned by BGP on that route table. True means disable."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the route table resource.",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the route table.",
-          "readOnly": true
         }
       }
     },
@@ -35657,30 +32428,6 @@
         ]
       }
     },
-    "SecurityPartnerProviderPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the Security Partner Provider.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the Security Partner Provider resource.",
-          "readOnly": true
-        },
-        "securityProviderName": {
-          "$ref": "#/definitions/SecurityProviderName",
-          "description": "The security provider name."
-        },
-        "connectionStatus": {
-          "$ref": "#/definitions/SecurityPartnerProviderConnectionStatus",
-          "description": "The connection status with the Security Partner Provider.",
-          "readOnly": true
-        },
-        "virtualHub": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The virtualHub to which the Security Partner Provider belongs."
-        }
-      }
-    },
     "SecurityProviderName": {
       "type": "string",
       "description": "The Security Providers.",
@@ -35716,7 +32463,7 @@
       "description": "Network security rule.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SecurityRulePropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/SecurityRulePropertiesFormat",
           "description": "Properties of the security rule.",
           "x-ms-client-flatten": true
         },
@@ -35799,102 +32546,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "SecurityRulePropertiesFormat": {
-      "type": "object",
-      "description": "Security rule resource.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "A description for this rule. Restricted to 140 chars."
-        },
-        "protocol": {
-          "$ref": "#/definitions/SecurityRuleProtocol",
-          "description": "Network protocol this rule applies to."
-        },
-        "sourcePortRange": {
-          "type": "string",
-          "description": "The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
-        },
-        "destinationPortRange": {
-          "type": "string",
-          "description": "The destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
-        },
-        "sourceAddressPrefix": {
-          "type": "string",
-          "description": "The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from."
-        },
-        "sourceAddressPrefixes": {
-          "type": "array",
-          "description": "The CIDR or source IP ranges.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sourceApplicationSecurityGroups": {
-          "type": "array",
-          "description": "The application security group specified as source.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/ApplicationSecurityGroup"
-          }
-        },
-        "destinationAddressPrefix": {
-          "type": "string",
-          "description": "The destination address prefix. CIDR or destination IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used."
-        },
-        "destinationAddressPrefixes": {
-          "type": "array",
-          "description": "The destination address prefixes. CIDR or destination IP ranges.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationApplicationSecurityGroups": {
-          "type": "array",
-          "description": "The application security group specified as destination.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/ApplicationSecurityGroup"
-          }
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "description": "The source port ranges.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "description": "The destination port ranges.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "access": {
-          "$ref": "#/definitions/SecurityRuleAccess",
-          "description": "The network traffic is allowed or denied."
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
-        },
-        "direction": {
-          "$ref": "#/definitions/SecurityRuleDirection",
-          "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the security rule resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "protocol",
-        "access",
-        "priority",
-        "direction"
       ]
     },
     "SecurityRuleProtocol": {
@@ -36064,7 +32715,7 @@
       "description": "ServiceAssociationLink resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ServiceAssociationLinkPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/ServiceAssociationLinkPropertiesFormat",
           "description": "Resource navigation link properties format.",
           "x-ms-client-flatten": true
         },
@@ -36089,36 +32740,6 @@
         }
       ]
     },
-    "ServiceAssociationLinkPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of ServiceAssociationLink.",
-      "properties": {
-        "linkedResourceType": {
-          "type": "string",
-          "description": "Resource type of the linked resource."
-        },
-        "link": {
-          "type": "string",
-          "description": "Link to the external resource."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the service association link resource.",
-          "readOnly": true
-        },
-        "allowDelete": {
-          "type": "boolean",
-          "description": "If true, the resource can be deleted."
-        },
-        "locations": {
-          "type": "array",
-          "description": "A list of locations.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ServiceAssociationLinksListResult": {
       "type": "object",
       "description": "Paged collection of ServiceAssociationLink items",
@@ -36139,55 +32760,6 @@
       "required": [
         "value"
       ]
-    },
-    "ServiceDelegationPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of a service delegation.",
-      "properties": {
-        "serviceName": {
-          "type": "string",
-          "description": "The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers)."
-        },
-        "actions": {
-          "type": "array",
-          "description": "The actions permitted to the service upon delegation.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the service delegation resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "ServiceEndpointPropertiesFormat": {
-      "type": "object",
-      "description": "The service endpoint properties.",
-      "properties": {
-        "service": {
-          "type": "string",
-          "description": "The type of the endpoint service."
-        },
-        "networkIdentifier": {
-          "$ref": "#/definitions/SubResource",
-          "description": "SubResource as network identifier."
-        },
-        "locations": {
-          "type": "array",
-          "description": "A list of locations.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the service endpoint resource.",
-          "readOnly": true
-        }
-      }
     },
     "ServiceProviderProvisioningState": {
       "type": "string",
@@ -36225,32 +32797,6 @@
         ]
       }
     },
-    "ServiceTagInformation": {
-      "type": "object",
-      "description": "The service tag information.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServiceTagInformationPropertiesFormat",
-          "description": "Properties of the service tag information.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of service tag.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of service tag.",
-          "readOnly": true
-        },
-        "serviceTagChangeNumber": {
-          "type": "string",
-          "description": "The iteration number of service tag object for region.",
-          "readOnly": true
-        }
-      }
-    },
     "ServiceTagInformationListResult": {
       "type": "object",
       "description": "Response for Get ServiceTagInformation API service call. Retrieves the list of service tag information resources.",
@@ -36259,7 +32805,7 @@
           "type": "array",
           "description": "The ServiceTagInformation items on this page",
           "items": {
-            "$ref": "#/definitions/ServiceTagInformation"
+            "$ref": "./virtualNetwork.json/definitions/ServiceTagInformation"
           }
         },
         "nextLink": {
@@ -36271,97 +32817,6 @@
       "required": [
         "value"
       ]
-    },
-    "ServiceTagInformationPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the service tag information.",
-      "properties": {
-        "changeNumber": {
-          "type": "string",
-          "description": "The iteration number of service tag.",
-          "readOnly": true
-        },
-        "region": {
-          "type": "string",
-          "description": "The region of service tag.",
-          "readOnly": true
-        },
-        "systemService": {
-          "type": "string",
-          "description": "The name of system service.",
-          "readOnly": true
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "description": "The list of IP address prefixes.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "state": {
-          "type": "string",
-          "description": "The state of the service tag.",
-          "readOnly": true
-        }
-      }
-    },
-    "ServiceTagsListResult": {
-      "type": "object",
-      "description": "Response for the ListServiceTags API service call.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the cloud.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the cloud.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The azure resource type.",
-          "readOnly": true
-        },
-        "changeNumber": {
-          "type": "string",
-          "description": "The iteration number.",
-          "readOnly": true
-        },
-        "cloud": {
-          "type": "string",
-          "description": "The name of the cloud.",
-          "readOnly": true
-        },
-        "values": {
-          "type": "array",
-          "description": "The list of service tag information resources.",
-          "items": {
-            "$ref": "#/definitions/ServiceTagInformation"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get next page of service tag information resources.",
-          "readOnly": true
-        }
-      }
-    },
-    "SessionIds": {
-      "type": "object",
-      "description": "List of session IDs.",
-      "properties": {
-        "sessionIds": {
-          "type": "array",
-          "description": "List of session IDs.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "Severity": {
       "type": "string",
@@ -36531,49 +32986,6 @@
         }
       }
     },
-    "Sku": {
-      "type": "object",
-      "description": "The sku of this Bastion Host.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the sku of this Bastion Host.",
-          "default": "Standard",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Developer",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "BastionHostSkuName",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Basic",
-                "value": "Basic",
-                "description": "Basic"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard"
-              },
-              {
-                "name": "Developer",
-                "value": "Developer",
-                "description": "Developer"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium"
-              }
-            ]
-          }
-        }
-      }
-    },
     "SlotType": {
       "type": "string",
       "description": "Specifies slot info on a cloud service",
@@ -36618,36 +33030,6 @@
       "required": [
         "value"
       ]
-    },
-    "StaticCidrProperties": {
-      "type": "object",
-      "description": "Properties of static CIDR resource.",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "numberOfIPAddressesToAllocate": {
-          "type": "string",
-          "description": "Number of IP addresses to allocate for a static CIDR resource. The IP addresses will be assigned based on IpamPools available space."
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "description": "List of IP address prefixes of the resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "totalNumberOfIPAddresses": {
-          "type": "string",
-          "description": "Total number of IP addresses allocated for the static CIDR resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning states of a resource.",
-          "readOnly": true
-        }
-      }
     },
     "StaticMember": {
       "type": "object",
@@ -36726,7 +33108,7 @@
       "description": "Subnet in a virtual network resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SubnetPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/SubnetPropertiesFormat",
           "description": "Properties of the subnet.",
           "x-ms-client-flatten": true
         },
@@ -36762,219 +33144,6 @@
       "required": [
         "value"
       ]
-    },
-    "SubnetPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the subnet.",
-      "properties": {
-        "addressPrefix": {
-          "type": "string",
-          "description": "The address prefix for the subnet."
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "description": "List of address prefixes for the subnet.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "networkSecurityGroup": {
-          "$ref": "./virtualNetwork.json/definitions/NetworkSecurityGroup",
-          "description": "The reference to the NetworkSecurityGroup resource."
-        },
-        "routeTable": {
-          "$ref": "./virtualNetwork.json/definitions/RouteTable",
-          "description": "The reference to the RouteTable resource."
-        },
-        "natGateway": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Nat gateway associated with this subnet."
-        },
-        "serviceEndpoints": {
-          "type": "array",
-          "description": "An array of service endpoints.",
-          "items": {
-            "$ref": "#/definitions/ServiceEndpointPropertiesFormat"
-          }
-        },
-        "serviceEndpointPolicies": {
-          "type": "array",
-          "description": "An array of service endpoint policies.",
-          "items": {
-            "$ref": "./expressRoute.json/definitions/ServiceEndpointPolicy"
-          }
-        },
-        "privateEndpoints": {
-          "type": "array",
-          "description": "An array of references to private endpoints.",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/PrivateEndpoint"
-          },
-          "readOnly": true
-        },
-        "ipConfigurations": {
-          "type": "array",
-          "description": "An array of references to the network interface IP configurations using subnet.",
-          "items": {
-            "$ref": "#/definitions/IPConfiguration"
-          },
-          "readOnly": true
-        },
-        "ipConfigurationProfiles": {
-          "type": "array",
-          "description": "Array of IP configuration profiles which reference this subnet.",
-          "items": {
-            "$ref": "#/definitions/IPConfigurationProfile"
-          },
-          "readOnly": true
-        },
-        "ipAllocations": {
-          "type": "array",
-          "description": "Array of IpAllocation which reference this subnet.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          }
-        },
-        "resourceNavigationLinks": {
-          "type": "array",
-          "description": "An array of references to the external resources using subnet.",
-          "items": {
-            "$ref": "#/definitions/ResourceNavigationLink"
-          },
-          "readOnly": true
-        },
-        "serviceAssociationLinks": {
-          "type": "array",
-          "description": "An array of references to services injecting into this subnet.",
-          "items": {
-            "$ref": "#/definitions/ServiceAssociationLink"
-          },
-          "readOnly": true
-        },
-        "delegations": {
-          "type": "array",
-          "description": "An array of references to the delegations on the subnet.",
-          "items": {
-            "$ref": "#/definitions/Delegation"
-          }
-        },
-        "purpose": {
-          "type": "string",
-          "description": "A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the subnet resource.",
-          "readOnly": true
-        },
-        "privateEndpointNetworkPolicies": {
-          "type": "string",
-          "description": "Enable or Disable apply network policies on private end point in the subnet.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "NetworkSecurityGroupEnabled",
-            "RouteTableEnabled"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualNetworkPrivateEndpointNetworkPolicies",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Enabled"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Disabled"
-              },
-              {
-                "name": "NetworkSecurityGroupEnabled",
-                "value": "NetworkSecurityGroupEnabled",
-                "description": "NetworkSecurityGroupEnabled"
-              },
-              {
-                "name": "RouteTableEnabled",
-                "value": "RouteTableEnabled",
-                "description": "RouteTableEnabled"
-              }
-            ]
-          }
-        },
-        "privateLinkServiceNetworkPolicies": {
-          "type": "string",
-          "description": "Enable or Disable apply network policies on private link service in the subnet.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualNetworkPrivateLinkServiceNetworkPolicies",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Enabled"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Disabled"
-              }
-            ]
-          }
-        },
-        "applicationGatewayIPConfigurations": {
-          "type": "array",
-          "description": "Application gateway IP configurations of virtual network resource.",
-          "items": {
-            "$ref": "./applicationGateway.json/definitions/ApplicationGatewayIPConfiguration"
-          }
-        },
-        "sharingScope": {
-          "$ref": "#/definitions/SharingScope",
-          "description": "Set this property to Tenant to allow sharing subnet with other subscriptions in your AAD tenant. This property can only be set if defaultOutboundAccess is set to false, both properties can only be set if subnet is empty."
-        },
-        "defaultOutboundAccess": {
-          "type": "boolean",
-          "description": "Set this property to false to disable default outbound connectivity for all VMs in the subnet."
-        },
-        "ipamPoolPrefixAllocations": {
-          "type": "array",
-          "description": "A list of IPAM Pools for allocating IP address prefixes.",
-          "items": {
-            "$ref": "#/definitions/IpamPoolPrefixAllocation"
-          }
-        }
-      }
-    },
-    "SwapResourceListResult": {
-      "type": "object",
-      "description": "SwapResource List with single entry to represent slot type on the specified cloud service.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "./virtualNetwork.json/definitions/SwapResource"
-          }
-        }
-      }
-    },
-    "SwapResourceProperties": {
-      "type": "object",
-      "description": "Swap resource properties",
-      "properties": {
-        "slotType": {
-          "$ref": "#/definitions/SlotType",
-          "description": "Specifies slot info on a cloud service"
-        }
-      }
     },
     "SyncMode": {
       "type": "string",
@@ -37050,21 +33219,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "TrafficDetectionRule": {
-      "type": "object",
-      "description": "Ddos Custom Policy traffic detection rule.",
-      "properties": {
-        "trafficType": {
-          "$ref": "#/definitions/DdosTrafficType",
-          "description": "The traffic type (one of Tcp, Udp, TcpSyn) that the detection rule will be applied upon."
-        },
-        "packetsPerSecond": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The customized packets per second threshold."
-        }
-      }
     },
     "TrafficSelectorPolicy": {
       "type": "object",
@@ -37159,65 +33313,6 @@
         }
       }
     },
-    "UnprepareNetworkPoliciesRequest": {
-      "type": "object",
-      "description": "Details of UnprepareNetworkPolicies for Subnet.",
-      "properties": {
-        "serviceName": {
-          "type": "string",
-          "description": "The name of the service for which subnet is being unprepared for."
-        }
-      }
-    },
-    "Usage": {
-      "type": "object",
-      "description": "The network resource usage.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource identifier.",
-          "readOnly": true
-        },
-        "unit": {
-          "$ref": "#/definitions/UsageUnit",
-          "description": "An enum describing the unit of measurement."
-        },
-        "currentValue": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The current value of the usage."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The limit of usage."
-        },
-        "name": {
-          "$ref": "#/definitions/UsageName",
-          "description": "The name of the type of usage."
-        }
-      },
-      "required": [
-        "unit",
-        "currentValue",
-        "limit",
-        "name"
-      ]
-    },
-    "UsageName": {
-      "type": "object",
-      "description": "The usage names.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "A string describing the resource name."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "A localized string describing the resource name."
-        }
-      }
-    },
     "UsageUnit": {
       "type": "string",
       "description": "An enum describing the unit of measurement.",
@@ -37244,7 +33339,7 @@
           "type": "array",
           "description": "The Usage items on this page",
           "items": {
-            "$ref": "#/definitions/Usage"
+            "$ref": "./virtualNetwork.json/definitions/Usage"
           }
         },
         "nextLink": {
@@ -37320,150 +33415,12 @@
         ]
       }
     },
-    "VerifierWorkspaceProperties": {
-      "type": "object",
-      "description": "Properties of Verifier Workspace resource.",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning states of a resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "VerifierWorkspaceUpdate": {
-      "type": "object",
-      "description": "Represents the VerifierWorkspace update API request interface.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Dictionary of <string>",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/VerifierWorkspaceUpdateProperties",
-          "description": "Represents the VerifierWorkspace update properties."
-        }
-      }
-    },
-    "VerifierWorkspaceUpdateProperties": {
-      "type": "object",
-      "description": "Represents the VerifierWorkspace update properties.",
-      "properties": {
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "VirtualApplianceAdditionalNicProperties": {
-      "type": "object",
-      "title": "Network Virtual Appliance Additional Nic Properties",
-      "description": "Network Virtual Appliance Additional NIC properties.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of additional nic"
-        },
-        "hasPublicIp": {
-          "type": "boolean",
-          "description": "Flag (true or false) for Intent for Public Ip on additional nic"
-        }
-      }
-    },
-    "VirtualApplianceIPConfiguration": {
-      "type": "object",
-      "description": "Represents a single IP configuration.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "For hub NVAs, primary IP configs must be named 'privatenicipconfig' and 'publicnicipconfig', with non-primary configs using these prefixes; no naming restrictions apply for NVAs in VNets. Maximum 80 character are allowed."
-        },
-        "properties": {
-          "$ref": "#/definitions/VirtualApplianceIPConfigurationProperties",
-          "description": "Represents a single IP configuration properties."
-        }
-      }
-    },
-    "VirtualApplianceIPConfigurationProperties": {
-      "type": "object",
-      "description": "Represents a single IP configuration properties.",
-      "properties": {
-        "primary": {
-          "type": "boolean",
-          "description": "Whether or not this is primary IP configuration of the NIC."
-        }
-      }
-    },
-    "VirtualApplianceNetworkInterfaceConfiguration": {
-      "type": "object",
-      "description": "Represents a single NIC configuration.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/NicTypeInRequest",
-          "description": "NIC type. This should be either PublicNic or PrivateNic.",
-          "x-ms-client-name": "NicType"
-        },
-        "properties": {
-          "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfigurationProperties",
-          "description": "Represents a single NIC configuration properties."
-        }
-      }
-    },
-    "VirtualApplianceNetworkInterfaceConfigurationProperties": {
-      "type": "object",
-      "description": "Represents a single NIC configuration properties.",
-      "properties": {
-        "ipConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualApplianceIPConfiguration"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "VirtualApplianceNicProperties": {
-      "type": "object",
-      "description": "Network Virtual Appliance NIC properties.",
-      "properties": {
-        "nicType": {
-          "$ref": "#/definitions/NicTypeInResponse",
-          "description": "NIC type - PublicNic, PrivateNic, or AdditionalNic; AdditionalPrivateNic and AdditionalPublicNic are only supported for NVAs deployed in VNets.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "NIC name.",
-          "readOnly": true
-        },
-        "publicIpAddress": {
-          "type": "string",
-          "description": "Public IP address.",
-          "readOnly": true
-        },
-        "privateIpAddress": {
-          "type": "string",
-          "description": "Private IP address.",
-          "readOnly": true
-        },
-        "instanceName": {
-          "type": "string",
-          "description": "Instance on which nic is attached.",
-          "readOnly": true
-        }
-      }
-    },
     "VirtualApplianceSite": {
       "type": "object",
       "description": "Virtual Appliance Site resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualApplianceSiteProperties",
+          "$ref": "./virtualNetwork.json/definitions/VirtualApplianceSiteProperties",
           "description": "The properties of the Virtual Appliance Sites.",
           "x-ms-client-flatten": true
         },
@@ -37478,43 +33435,6 @@
           "$ref": "#/definitions/SubResourceModel"
         }
       ]
-    },
-    "VirtualApplianceSiteProperties": {
-      "type": "object",
-      "description": "Properties of the rule group.",
-      "properties": {
-        "addressPrefix": {
-          "type": "string",
-          "description": "Address Prefix."
-        },
-        "o365Policy": {
-          "$ref": "#/definitions/Office365PolicyProperties",
-          "description": "Office 365 Policy."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "VirtualApplianceSkuProperties": {
-      "type": "object",
-      "description": "Network Virtual Appliance Sku Properties.",
-      "properties": {
-        "vendor": {
-          "type": "string",
-          "description": "Virtual Appliance Vendor."
-        },
-        "bundledScaleUnit": {
-          "type": "string",
-          "description": "Virtual Appliance Scale Unit."
-        },
-        "marketPlaceVersion": {
-          "type": "string",
-          "description": "Virtual Appliance Version."
-        }
-      }
     },
     "VirtualHub": {
       "type": "object",
@@ -37567,24 +33487,6 @@
         }
       ]
     },
-    "VirtualNetworkBgpCommunities": {
-      "type": "object",
-      "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET.",
-      "properties": {
-        "virtualNetworkCommunity": {
-          "type": "string",
-          "description": "The BGP community associated with the virtual network."
-        },
-        "regionalCommunity": {
-          "type": "string",
-          "description": "The BGP community associated with the region of the virtual network.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "virtualNetworkCommunity"
-      ]
-    },
     "VirtualNetworkConnectionGatewayReference": {
       "type": "object",
       "description": "A reference to VirtualNetworkGateway or LocalNetworkGateway resource.",
@@ -37606,7 +33508,7 @@
           "type": "array",
           "description": "The PublicIpDdosProtectionStatusResult items on this page",
           "items": {
-            "$ref": "#/definitions/PublicIpDdosProtectionStatusResult"
+            "$ref": "./virtualNetwork.json/definitions/PublicIpDdosProtectionStatusResult"
           }
         },
         "nextLink": {
@@ -37617,23 +33519,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "VirtualNetworkEncryption": {
-      "type": "object",
-      "description": "Indicates if encryption is enabled on virtual network and if VM without encryption is allowed in encrypted VNet.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates if encryption is enabled on the virtual network."
-        },
-        "enforcement": {
-          "$ref": "#/definitions/VirtualNetworkEncryptionEnforcement",
-          "description": "If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability."
-        }
-      },
-      "required": [
-        "enabled"
       ]
     },
     "VirtualNetworkEncryptionEnforcement": {
@@ -38339,7 +34224,7 @@
           "description": "Virtual network gateway's BGP speaker settings."
         },
         "customRoutes": {
-          "$ref": "#/definitions/AddressSpace",
+          "$ref": "./virtualNetwork.json/definitions/AddressSpace",
           "description": "The reference to the address space resource which represents the custom routes address space specified by the customer for virtual network gateway and VpnClient."
         },
         "resourceGuid": {
@@ -38672,7 +34557,7 @@
           "type": "array",
           "description": "The VirtualNetworkUsage items on this page",
           "items": {
-            "$ref": "#/definitions/VirtualNetworkUsage"
+            "$ref": "./virtualNetwork.json/definitions/VirtualNetworkUsage"
           },
           "readOnly": true
         },
@@ -38691,7 +34576,7 @@
       "description": "Peerings in a virtual network resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat",
+          "$ref": "./virtualNetwork.json/definitions/VirtualNetworkPeeringPropertiesFormat",
           "description": "Properties of the virtual network peering.",
           "x-ms-client-flatten": true
         },
@@ -38764,101 +34649,6 @@
         "value"
       ]
     },
-    "VirtualNetworkPeeringPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the virtual network peering.",
-      "properties": {
-        "allowVirtualNetworkAccess": {
-          "type": "boolean",
-          "description": "Whether the VMs in the local virtual network space would be able to access the VMs in remote virtual network space."
-        },
-        "allowForwardedTraffic": {
-          "type": "boolean",
-          "description": "Whether the forwarded traffic from the VMs in the local virtual network will be allowed/disallowed in remote virtual network."
-        },
-        "allowGatewayTransit": {
-          "type": "boolean",
-          "description": "If gateway links can be used in remote virtual networking to link to this virtual network."
-        },
-        "useRemoteGateways": {
-          "type": "boolean",
-          "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
-        },
-        "remoteVirtualNetwork": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to the remote virtual network. The remote virtual network can be in the same or different region (preview). See here to register for the preview and learn more (https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-create-peering)."
-        },
-        "localAddressSpace": {
-          "$ref": "#/definitions/AddressSpace",
-          "description": "The local address space of the local virtual network that is peered."
-        },
-        "localVirtualNetworkAddressSpace": {
-          "$ref": "#/definitions/AddressSpace",
-          "description": "The current local address space of the local virtual network that is peered."
-        },
-        "remoteAddressSpace": {
-          "$ref": "#/definitions/AddressSpace",
-          "description": "The reference to the address space peered with the remote virtual network."
-        },
-        "remoteVirtualNetworkAddressSpace": {
-          "$ref": "#/definitions/AddressSpace",
-          "description": "The reference to the current address space of the remote virtual network."
-        },
-        "remoteBgpCommunities": {
-          "$ref": "#/definitions/VirtualNetworkBgpCommunities",
-          "description": "The reference to the remote virtual network's Bgp Communities."
-        },
-        "remoteVirtualNetworkEncryption": {
-          "$ref": "#/definitions/VirtualNetworkEncryption",
-          "description": "The reference to the remote virtual network's encryption",
-          "readOnly": true
-        },
-        "peeringState": {
-          "$ref": "#/definitions/VirtualNetworkPeeringState",
-          "description": "The status of the virtual network peering."
-        },
-        "peeringSyncLevel": {
-          "$ref": "#/definitions/VirtualNetworkPeeringLevel",
-          "description": "The peering sync status of the virtual network peering."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the virtual network peering resource.",
-          "readOnly": true
-        },
-        "doNotVerifyRemoteGateways": {
-          "type": "boolean",
-          "description": "If we need to verify the provisioning state of the remote gateway."
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resourceGuid property of the Virtual Network peering resource.",
-          "readOnly": true
-        },
-        "peerCompleteVnets": {
-          "type": "boolean",
-          "description": "Whether complete virtual network address space is peered."
-        },
-        "enableOnlyIPv6Peering": {
-          "type": "boolean",
-          "description": "Whether only Ipv6 address space is peered for subnet peering."
-        },
-        "localSubnetNames": {
-          "type": "array",
-          "description": "List of local subnet names that are subnet peered with remote virtual network.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "remoteSubnetNames": {
-          "type": "array",
-          "description": "List of remote subnet names from remote virtual network that are subnet peered.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "VirtualNetworkPeeringState": {
       "type": "string",
       "description": "The status of the virtual network peering.",
@@ -38887,95 +34677,6 @@
             "description": "Disconnected"
           }
         ]
-      }
-    },
-    "VirtualNetworkPropertiesFormat": {
-      "type": "object",
-      "description": "Properties of the virtual network.",
-      "properties": {
-        "addressSpace": {
-          "$ref": "#/definitions/AddressSpace",
-          "description": "The AddressSpace that contains an array of IP address ranges that can be used by subnets."
-        },
-        "dhcpOptions": {
-          "$ref": "#/definitions/DhcpOptions",
-          "description": "The dhcpOptions that contains an array of DNS servers available to VMs deployed in the virtual network."
-        },
-        "flowTimeoutInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The FlowTimeout value (in minutes) for the Virtual Network"
-        },
-        "subnets": {
-          "type": "array",
-          "description": "A list of subnets in a Virtual Network.",
-          "items": {
-            "$ref": "#/definitions/Subnet"
-          }
-        },
-        "virtualNetworkPeerings": {
-          "type": "array",
-          "description": "A list of peerings in a Virtual Network.",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkPeering"
-          }
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resourceGuid property of the Virtual Network resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the virtual network resource.",
-          "readOnly": true
-        },
-        "enableDdosProtection": {
-          "type": "boolean",
-          "description": "Indicates if DDoS protection is enabled for all the protected resources in the virtual network. It requires a DDoS protection plan associated with the resource.",
-          "default": false
-        },
-        "enableVmProtection": {
-          "type": "boolean",
-          "description": "Indicates if VM protection is enabled for all the subnets in the virtual network.",
-          "default": false
-        },
-        "ddosProtectionPlan": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The DDoS protection plan associated with the virtual network."
-        },
-        "bgpCommunities": {
-          "$ref": "#/definitions/VirtualNetworkBgpCommunities",
-          "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET."
-        },
-        "encryption": {
-          "$ref": "#/definitions/VirtualNetworkEncryption",
-          "description": "Indicates if encryption is enabled on virtual network and if VM without encryption is allowed in encrypted VNet."
-        },
-        "ipAllocations": {
-          "type": "array",
-          "description": "Array of IpAllocation which reference this VNET.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          }
-        },
-        "flowLogs": {
-          "type": "array",
-          "description": "A collection of references to flow log resources.",
-          "items": {
-            "$ref": "#/definitions/FlowLog"
-          },
-          "readOnly": true
-        },
-        "privateEndpointVNetPolicies": {
-          "$ref": "#/definitions/PrivateEndpointVNetPolicies",
-          "description": "Private Endpoint VNet Policies."
-        },
-        "defaultPublicNatGateway": {
-          "$ref": "#/definitions/SubResource",
-          "description": "A reference to the default public nat gateway being used by this virtual network resource.",
-          "readOnly": true
-        }
       }
     },
     "VirtualNetworkTapPropertiesFormat": {
@@ -39015,61 +34716,12 @@
         }
       }
     },
-    "VirtualNetworkUsage": {
-      "type": "object",
-      "description": "Usage details for subnet.",
-      "properties": {
-        "currentValue": {
-          "type": "number",
-          "format": "double",
-          "description": "Indicates number of IPs used from the Subnet.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "Subnet identifier.",
-          "readOnly": true
-        },
-        "limit": {
-          "type": "number",
-          "format": "double",
-          "description": "Indicates the size of the subnet.",
-          "readOnly": true
-        },
-        "name": {
-          "$ref": "#/definitions/VirtualNetworkUsageName",
-          "description": "The name containing common and localized value for usage.",
-          "readOnly": true
-        },
-        "unit": {
-          "type": "string",
-          "description": "Usage units. Returns 'Count'.",
-          "readOnly": true
-        }
-      }
-    },
-    "VirtualNetworkUsageName": {
-      "type": "object",
-      "description": "Usage strings container.",
-      "properties": {
-        "localizedValue": {
-          "type": "string",
-          "description": "Localized subnet size and usage string.",
-          "readOnly": true
-        },
-        "value": {
-          "type": "string",
-          "description": "Subnet size and usage string.",
-          "readOnly": true
-        }
-      }
-    },
     "VirtualRouterPeering": {
       "type": "object",
       "description": "Virtual Router Peering resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualRouterPeeringProperties",
+          "$ref": "./virtualNetwork.json/definitions/VirtualRouterPeeringProperties",
           "description": "The properties of the Virtual Router Peering.",
           "x-ms-client-flatten": true
         },
@@ -39105,69 +34757,6 @@
       "required": [
         "value"
       ]
-    },
-    "VirtualRouterPeeringProperties": {
-      "type": "object",
-      "description": "Properties of the rule group.",
-      "properties": {
-        "peerAsn": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Peer ASN.",
-          "minimum": 0,
-          "maximum": 4294967295
-        },
-        "peerIp": {
-          "type": "string",
-          "description": "Peer IP."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "VirtualRouterPropertiesFormat": {
-      "type": "object",
-      "description": "Virtual Router definition.",
-      "properties": {
-        "virtualRouterAsn": {
-          "type": "integer",
-          "format": "int64",
-          "description": "VirtualRouter ASN.",
-          "minimum": 0,
-          "maximum": 4294967295
-        },
-        "virtualRouterIps": {
-          "type": "array",
-          "description": "VirtualRouter IPs.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "hostedSubnet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The Subnet on which VirtualRouter is hosted."
-        },
-        "hostedGateway": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The Gateway on which VirtualRouter is hosted."
-        },
-        "peerings": {
-          "type": "array",
-          "description": "List of references to VirtualRouterPeerings.",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        }
-      }
     },
     "VirtualWanSecurityProviderType": {
       "type": "string",
