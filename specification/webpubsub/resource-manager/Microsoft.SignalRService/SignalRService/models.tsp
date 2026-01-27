@@ -1126,6 +1126,12 @@ model WebPubSubHubProperties {
   @maxValue(120)
   @minValue(1)
   webSocketKeepAliveIntervalInSeconds?: int32 = 20;
+
+  /**
+   * The chat settings for the hub.
+   */
+  @added(Versions.v2025_12_01_preview)
+  chat?: ChatSettings;
 }
 
 /**
@@ -1251,6 +1257,21 @@ model EventListenerFilter {
 model EventListenerEndpoint {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: EventListenerEndpointDiscriminator;
+}
+
+/**
+ * Chat settings.
+ */
+model ChatSettings {
+  /**
+   * Enable or disable the chat feature.
+   */
+  mode?: string;
+
+  /**
+   * Reference to the the persistent storage for perisisting chat states.
+   */
+  persistentStorage?: ResourceReference;
 }
 
 /**

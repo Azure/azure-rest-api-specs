@@ -1,0 +1,91 @@
+{
+  "operationId": "WebPubSubReplicas_CreateOrUpdate",
+  "title": "WebPubSubReplicas_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "resourceStopped": "false"
+      },
+      "sku": {
+        "capacity": 1,
+        "name": "Premium_P1",
+        "tier": "Premium"
+      },
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "replicaName": "myWebPubSubService-eastus",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myWebPubSubService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/replicas/myWebPubSubService-eastus",
+        "location": "eastus",
+        "name": "myWebPubSubService-eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "regionEndpointEnabled": "Enabled",
+          "resourceStopped": "false"
+        },
+        "sku": {
+          "capacity": 1,
+          "name": "Premium_P1",
+          "size": "P1",
+          "tier": "Premium"
+        },
+        "systemData": {
+          "createdAt": "2015-02-03T04:05:06Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2015-02-03T04:05:06Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "type": "Microsoft.SignalRService/WebPubSub"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/replicas/myWebPubSubService-eastus",
+        "location": "eastus",
+        "name": "myWebPubSubService-eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "regionEndpointEnabled": "Enabled",
+          "resourceStopped": "false"
+        },
+        "sku": {
+          "capacity": 1,
+          "name": "Premium_P1",
+          "size": "P1",
+          "tier": "Premium"
+        },
+        "systemData": {
+          "createdAt": "2015-02-03T04:05:06Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2015-02-03T04:05:06Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "type": "Microsoft.SignalRService/WebPubSub"
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+      }
+    }
+  }
+}

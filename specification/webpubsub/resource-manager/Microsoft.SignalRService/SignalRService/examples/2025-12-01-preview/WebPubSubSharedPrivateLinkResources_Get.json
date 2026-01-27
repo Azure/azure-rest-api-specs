@@ -1,0 +1,27 @@
+{
+  "operationId": "WebPubSubSharedPrivateLinkResources_Get",
+  "title": "WebPubSubSharedPrivateLinkResources_Get",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myWebPubSubService",
+    "sharedPrivateLinkResourceName": "upstream",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/privateEndpointConnections/upstream",
+        "name": "upstream",
+        "properties": {
+          "groupId": "sites",
+          "privateLinkResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Web/sites/myWebApp",
+          "provisioningState": "Succeeded",
+          "requestMessage": "Please approve",
+          "status": "Approved"
+        },
+        "type": "Microsoft.SignalRService/WebPubSub/privateEndpointConnections"
+      }
+    }
+  }
+}
