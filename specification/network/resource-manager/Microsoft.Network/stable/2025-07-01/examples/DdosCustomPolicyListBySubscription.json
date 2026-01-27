@@ -1,0 +1,50 @@
+{
+    "parameters": {
+        "subscriptionId": "subid",
+        "api-version": "2025-07-01"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value": [
+                    {
+                        "name": "test-ddos-custom-policy",
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
+                        "type": "Microsoft.Network/ddosCustomPolicies",
+                        "location": "westus",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "resourceGuid": "00000000-0000-0000-0000-000000000000",
+                            "detectionRules": [
+                                {
+                                    "name": "detectionRuleTcp",
+                                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosDetectionRules/detectionRuleTcp",
+                                    "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+                                    "type": "Microsoft.Network/ddosCustomPolicies/ddosDetectionRules",
+                                    "properties": {
+                                        "provisioningState": "Succeeded",
+                                        "detectionMode": "TrafficThreshold",
+                                        "trafficDetectionRule": {
+                                            "trafficType": "Tcp",
+                                            "packetsPerSecond": 1000000
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "test-ddos-custom-policy-2",
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy-2",
+                        "type": "Microsoft.Network/ddosCustomPolicies",
+                        "location": "eastus",
+                        "properties": {
+                            "resourceGuid": "00000000-0000-0000-0000-000000000001",
+                            "provisioningState": "Succeeded"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
