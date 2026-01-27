@@ -331,11 +331,12 @@ union NetworkApiVersion {
 }
 
 /**
- * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+ * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and not Standard.
  */
 union SecurityTypes {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @added(Versions.v2025_11_01)
   Standard: "Standard",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TrustedLaunch: "TrustedLaunch",
