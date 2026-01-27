@@ -12,11 +12,8 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/sdk/selfhelp/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
     namespace: "Azure.ResourceManager.SelfHelp"
   "@azure-tools/typespec-python":
     service-dir: "sdk/selfhelp"
@@ -43,7 +40,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/selfhelp"
     emitter-output-dir: "{output-dir}/{service-dir}/armselfhelp"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armselfhelp"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armselfhelp/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
