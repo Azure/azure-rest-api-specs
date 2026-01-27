@@ -2156,9 +2156,8 @@ union IndexerStatus {
 }
 
 /** Represents the status of an individual indexer execution. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union IndexerExecutionStatus {
-  string,
-
   /** An indexer invocation has failed, but the failure may be transient. Indexer invocations will continue per schedule. */
   TransientFailure: "transientFailure",
 
