@@ -497,7 +497,6 @@ enum AllocationState {
 /**
  * The IP families used to specify IP versions available to the pool.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_06_01)
 union IPFamily {
   string,
