@@ -515,7 +515,7 @@
             "description": "Parameters supplied to specify which network manager is.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/PatchObject"
+              "$ref": "#/definitions/PatchObject"
             }
           }
         ],
@@ -641,7 +641,7 @@
             "description": "Parameters supplied to specify which Managed Network commit is.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/NetworkManagerCommit"
+              "$ref": "#/definitions/NetworkManagerCommit"
             }
           }
         ],
@@ -649,13 +649,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/NetworkManagerCommit"
+              "$ref": "#/definitions/NetworkManagerCommit"
             }
           },
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "./common.json/definitions/NetworkManagerCommit"
+              "$ref": "#/definitions/NetworkManagerCommit"
             },
             "headers": {
               "Location": {
@@ -683,7 +683,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json/definitions/NetworkManagerCommit"
+          "final-state-schema": "#/definitions/NetworkManagerCommit"
         },
         "x-ms-long-running-operation": true
       }
@@ -994,7 +994,7 @@
             "description": "Active Configuration Parameter.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/ActiveConfigurationParameter"
+              "$ref": "#/definitions/ActiveConfigurationParameter"
             }
           }
         ],
@@ -1002,7 +1002,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/ActiveConnectivityConfigurationsListResult"
+              "$ref": "#/definitions/ActiveConnectivityConfigurationsListResult"
             }
           },
           "default": {
@@ -1060,7 +1060,7 @@
             "description": "Active Configuration Parameter.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/ActiveConfigurationParameter"
+              "$ref": "#/definitions/ActiveConfigurationParameter"
             }
           }
         ],
@@ -1068,7 +1068,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/ActiveSecurityAdminRulesListResult"
+              "$ref": "#/definitions/ActiveSecurityAdminRulesListResult"
             }
           },
           "default": {
@@ -1126,7 +1126,7 @@
             "description": "Parameters supplied to specify which Managed Network deployment status is.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/NetworkManagerDeploymentStatusParameter"
+              "$ref": "#/definitions/NetworkManagerDeploymentStatusParameter"
             }
           }
         ],
@@ -1134,7 +1134,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/NetworkManagerDeploymentStatusListResult"
+              "$ref": "#/definitions/NetworkManagerDeploymentStatusListResult"
             }
           },
           "default": {
@@ -2525,7 +2525,7 @@
             "description": "Parameters supplied to list correct page.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/QueryRequestOptions"
+              "$ref": "#/definitions/QueryRequestOptions"
             }
           }
         ],
@@ -2533,7 +2533,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult"
+              "$ref": "#/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult"
             }
           },
           "default": {
@@ -2590,7 +2590,7 @@
             "description": "Parameters supplied to list correct page.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/QueryRequestOptions"
+              "$ref": "#/definitions/QueryRequestOptions"
             }
           }
         ],
@@ -2598,7 +2598,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult"
+              "$ref": "#/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult"
             }
           },
           "default": {
@@ -2617,12 +2617,254 @@
     }
   },
   "definitions": {
+    "ActiveBaseSecurityAdminRule": {
+      "type": "object",
+      "description": "Network base admin rule.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "commitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deployment time string."
+        },
+        "region": {
+          "type": "string",
+          "description": "Deployment region."
+        },
+        "configurationDescription": {
+          "type": "string",
+          "description": "A description of the security admin configuration."
+        },
+        "ruleCollectionDescription": {
+          "type": "string",
+          "description": "A description of the rule collection."
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "description": "Groups for rule collection",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "ruleGroups": {
+          "type": "array",
+          "description": "Effective configuration groups.",
+          "items": {
+            "$ref": "#/definitions/ConfigurationGroup"
+          }
+        },
+        "kind": {
+          "$ref": "./common.json/definitions/EffectiveAdminRuleKind",
+          "description": "Whether the rule is custom or default."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "ActiveConfigurationParameter": {
+      "type": "object",
+      "description": "Effective Virtual Networks Parameter.",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "description": "List of regions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "ActiveConnectivityConfigurationsListResult": {
+      "type": "object",
+      "description": "Result of the request to list active connectivity configurations. It contains a list of active connectivity configurations and a skiptoken to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of active connectivity configurations.",
+          "items": {
+            "$ref": "./common.json/definitions/ActiveConnectivityConfiguration"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "ActiveSecurityAdminRulesListResult": {
+      "type": "object",
+      "description": "Result of the request to list active security admin rules. It contains a list of active security admin rules and a skiptoken to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of active security admin rules.",
+          "items": {
+            "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "AddressPrefixItem": {
+      "type": "object",
+      "description": "Address prefix item.",
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "Address prefix."
+        },
+        "addressPrefixType": {
+          "$ref": "./common.json/definitions/AddressPrefixType",
+          "description": "Address prefix type."
+        }
+      }
+    },
+    "AdminPropertiesFormat": {
+      "type": "object",
+      "description": "Security admin rule resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule. Restricted to 140 chars."
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/SecurityConfigurationRuleProtocol",
+          "description": "Network protocol this rule applies to."
+        },
+        "sources": {
+          "type": "array",
+          "description": "The CIDR or source IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "description": "The destination address prefixes. CIDR or destination IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "description": "The source port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "description": "The destination port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "access": {
+          "$ref": "./common.json/definitions/SecurityConfigurationRuleAccess",
+          "description": "Indicates the access allowed for this particular rule"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "direction": {
+          "$ref": "./common.json/definitions/SecurityConfigurationRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "protocol",
+        "access",
+        "priority",
+        "direction"
+      ]
+    },
+    "AdminRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the admin rule collection properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the admin rule collection."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "description": "Groups for configuration",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appliesToGroups"
+      ]
+    },
+    "ConfigurationGroup": {
+      "type": "object",
+      "description": "The network configuration group resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Network group ID."
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkGroupProperties",
+          "description": "The network configuration group properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ConnectivityConfiguration": {
       "type": "object",
       "description": "The network manager connectivity configuration resource",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/ConnectivityConfigurationProperties",
+          "$ref": "#/definitions/ConnectivityConfigurationProperties",
           "description": "Properties of a network manager connectivity configuration",
           "x-ms-client-flatten": true
         },
@@ -2659,12 +2901,262 @@
         "value"
       ]
     },
+    "ConnectivityConfigurationProperties": {
+      "type": "object",
+      "description": "Properties of network manager connectivity configuration",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the connectivity configuration."
+        },
+        "connectivityTopology": {
+          "$ref": "./common.json/definitions/ConnectivityTopology",
+          "description": "Connectivity topology type."
+        },
+        "hubs": {
+          "type": "array",
+          "description": "List of hubItems",
+          "items": {
+            "$ref": "#/definitions/Hub"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "isGlobal": {
+          "$ref": "./common.json/definitions/IsGlobal",
+          "description": "Flag if global mesh is supported."
+        },
+        "connectivityCapabilities": {
+          "$ref": "./common.json/definitions/ConnectivityConfigurationPropertiesConnectivityCapabilities",
+          "description": "Collection of additional settings to enhance specific topology behaviors of the connectivity configuration resource."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "description": "Groups for configuration",
+          "items": {
+            "$ref": "#/definitions/connectivityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the connectivity configuration resource.",
+          "readOnly": true
+        },
+        "deleteExistingPeering": {
+          "$ref": "./common.json/definitions/DeleteExistingPeering",
+          "description": "Flag if need to remove current existing peerings."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectivityTopology",
+        "appliesToGroups"
+      ]
+    },
+    "CrossTenantScopes": {
+      "type": "object",
+      "description": "Cross tenant scopes.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID.",
+          "readOnly": true
+        },
+        "managementGroups": {
+          "type": "array",
+          "description": "List of management groups.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "List of subscriptions.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultAdminPropertiesFormat": {
+      "type": "object",
+      "description": "Security default admin rule resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule. Restricted to 140 chars.",
+          "readOnly": true
+        },
+        "flag": {
+          "type": "string",
+          "description": "Default rule flag."
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/SecurityConfigurationRuleProtocol",
+          "description": "Network protocol this rule applies to.",
+          "readOnly": true
+        },
+        "sources": {
+          "type": "array",
+          "description": "The CIDR or source IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "description": "The destination address prefixes. CIDR or destination IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "description": "The source port ranges.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "description": "The destination port ranges.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "access": {
+          "$ref": "./common.json/definitions/SecurityConfigurationRuleAccess",
+          "description": "Indicates the access allowed for this particular rule",
+          "readOnly": true
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "readOnly": true
+        },
+        "direction": {
+          "$ref": "./common.json/definitions/SecurityConfigurationRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "EffectiveBaseSecurityAdminRule": {
+      "type": "object",
+      "description": "Network base admin rule.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "configurationDescription": {
+          "type": "string",
+          "description": "A description of the security admin configuration."
+        },
+        "ruleCollectionDescription": {
+          "type": "string",
+          "description": "A description of the rule collection."
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "description": "Groups for rule collection",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "ruleGroups": {
+          "type": "array",
+          "description": "Effective configuration groups.",
+          "items": {
+            "$ref": "#/definitions/ConfigurationGroup"
+          }
+        },
+        "kind": {
+          "$ref": "./common.json/definitions/EffectiveAdminRuleKind",
+          "description": "Whether the rule is custom or default."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "EffectiveConnectivityConfiguration": {
+      "type": "object",
+      "description": "The network manager effective connectivity configuration",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Connectivity configuration ID."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectivityConfigurationProperties",
+          "description": "Properties of a network manager connectivity configuration",
+          "x-ms-client-flatten": true
+        },
+        "configurationGroups": {
+          "type": "array",
+          "description": "Effective configuration groups.",
+          "items": {
+            "$ref": "#/definitions/ConfigurationGroup"
+          }
+        }
+      }
+    },
+    "Hub": {
+      "type": "object",
+      "description": "Hub Item.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type."
+        }
+      }
+    },
     "NetworkGroup": {
       "type": "object",
       "description": "The network group resource",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/NetworkGroupProperties",
+          "$ref": "#/definitions/NetworkGroupProperties",
           "description": "The Network Group properties",
           "x-ms-client-flatten": true
         },
@@ -2701,12 +3193,36 @@
         "value"
       ]
     },
+    "NetworkGroupProperties": {
+      "type": "object",
+      "description": "Properties of network group",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the network group."
+        },
+        "memberType": {
+          "$ref": "./common.json/definitions/GroupMemberType",
+          "description": "The type of the group member."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the scope assignment resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      }
+    },
     "NetworkManager": {
       "type": "object",
       "description": "The Managed Network resource",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/NetworkManagerProperties",
+          "$ref": "#/definitions/NetworkManagerProperties",
           "description": "The network manager properties",
           "x-ms-client-flatten": true
         },
@@ -2727,12 +3243,45 @@
         }
       ]
     },
+    "NetworkManagerCommit": {
+      "type": "object",
+      "description": "Network Manager Commit.",
+      "properties": {
+        "commitId": {
+          "type": "string",
+          "description": "Commit Id.",
+          "readOnly": true
+        },
+        "targetLocations": {
+          "type": "array",
+          "description": "List of target locations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "configurationIds": {
+          "type": "array",
+          "description": "List of configuration ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commitType": {
+          "$ref": "./common.json/definitions/ConfigurationType",
+          "description": "Commit Type."
+        }
+      },
+      "required": [
+        "targetLocations",
+        "commitType"
+      ]
+    },
     "NetworkManagerConnection": {
       "type": "object",
       "description": "The Network Manager Connection resource",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/NetworkManagerConnectionProperties",
+          "$ref": "#/definitions/NetworkManagerConnectionProperties",
           "description": "The scope connection properties",
           "x-ms-client-flatten": true
         },
@@ -2769,6 +3318,136 @@
         "value"
       ]
     },
+    "NetworkManagerConnectionProperties": {
+      "type": "object",
+      "description": "Information about the network manager connection.",
+      "properties": {
+        "networkManagerId": {
+          "type": "string",
+          "description": "Network Manager Id."
+        },
+        "connectionState": {
+          "$ref": "./common.json/definitions/ScopeConnectionState",
+          "description": "Connection state.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the network manager connection."
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatus": {
+      "type": "object",
+      "description": "Network Manager Deployment Status.",
+      "properties": {
+        "commitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Commit Time."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region Name."
+        },
+        "deploymentStatus": {
+          "$ref": "./common.json/definitions/DeploymentStatus",
+          "description": "Deployment Status."
+        },
+        "configurationIds": {
+          "type": "array",
+          "description": "List of configuration ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deploymentType": {
+          "$ref": "./common.json/definitions/ConfigurationType",
+          "description": "Configuration Deployment Type."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error Message."
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatusListResult": {
+      "type": "object",
+      "description": "A list of Network Manager Deployment Status",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of Network Manager Deployment Status",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerDeploymentStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatusParameter": {
+      "type": "object",
+      "description": "Network Manager Deployment Status Parameter.",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "description": "List of locations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deploymentTypes": {
+          "type": "array",
+          "description": "List of deployment types.",
+          "items": {
+            "$ref": "./common.json/definitions/ConfigurationType"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query."
+        }
+      }
+    },
+    "NetworkManagerEffectiveConnectivityConfigurationListResult": {
+      "type": "object",
+      "description": "Result of the request to list networkManagerEffectiveConnectivityConfiguration. It contains a list of groups and a skiptoken to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of NetworkManagerEffectiveConnectivityConfiguration",
+          "items": {
+            "$ref": "#/definitions/EffectiveConnectivityConfiguration"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "NetworkManagerEffectiveSecurityAdminRulesListResult": {
+      "type": "object",
+      "description": "Result of the request to list networkManagerEffectiveSecurityAdminRules. It contains a list of groups and a skiptoken to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of NetworkManagerEffectiveSecurityAdminRules",
+          "items": {
+            "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
     "NetworkManagerListResult": {
       "type": "object",
       "description": "The response of a NetworkManager list operation.",
@@ -2790,12 +3469,46 @@
         "value"
       ]
     },
+    "NetworkManagerProperties": {
+      "type": "object",
+      "description": "Properties of Managed Network",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the network manager."
+        },
+        "networkManagerScopes": {
+          "$ref": "./common.json/definitions/NetworkManagerPropertiesNetworkManagerScopes",
+          "description": "Scope of Network Manager."
+        },
+        "networkManagerScopeAccesses": {
+          "type": "array",
+          "description": "Scope Access.",
+          "items": {
+            "$ref": "./common.json/definitions/ConfigurationType"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the network manager resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "networkManagerScopes"
+      ]
+    },
     "NetworkManagerRoutingConfiguration": {
       "type": "object",
       "description": "Defines the routing configuration",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/NetworkManagerRoutingConfigurationPropertiesFormat",
+          "$ref": "#/definitions/NetworkManagerRoutingConfigurationPropertiesFormat",
           "description": "Indicates the properties for the network manager routing configuration.",
           "x-ms-client-flatten": true
         },
@@ -2832,12 +3545,210 @@
         "value"
       ]
     },
+    "NetworkManagerRoutingConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the routing configuration properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the routing configuration."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        },
+        "routeTableUsageMode": {
+          "type": "string",
+          "description": "Route table usage mode defines which route table will be used by the configuration. If not defined, this will default to 'ManagedOnly'.",
+          "default": "ManagedOnly",
+          "enum": [
+            "ManagedOnly",
+            "UseExisting"
+          ],
+          "x-ms-enum": {
+            "name": "RouteTableUsageMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ManagedOnly",
+                "value": "ManagedOnly",
+                "description": "Only route tables managed by the routing configuration will be used."
+              },
+              {
+                "name": "UseExisting",
+                "value": "UseExisting",
+                "description": "Use existing user-defined route tables already associated with resources."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "NetworkManagerRoutingGroupItem": {
+      "type": "object",
+      "description": "Network manager routing group item.",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network manager group Id."
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "NetworkManagerSecurityGroupItem": {
+      "type": "object",
+      "description": "Network manager security group item.",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network manager group Id."
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "PatchObject": {
+      "type": "object",
+      "description": "Object for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryRequestOptions": {
+      "type": "object",
+      "description": "Query Request Options",
+      "properties": {
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "RoutingRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the routing rule collection properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the routing rule collection."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        },
+        "appliesTo": {
+          "type": "array",
+          "description": "Groups for configuration",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerRoutingGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "disableBgpRoutePropagation": {
+          "$ref": "./common.json/definitions/DisableBgpRoutePropagation",
+          "description": "Determines whether BGP route propagation is enabled. Defaults to true."
+        }
+      },
+      "required": [
+        "appliesTo"
+      ]
+    },
+    "RoutingRuleNextHop": {
+      "type": "object",
+      "description": "Next hop.",
+      "properties": {
+        "nextHopType": {
+          "$ref": "./common.json/definitions/RoutingRuleNextHopType",
+          "description": "Next hop type."
+        },
+        "nextHopAddress": {
+          "type": "string",
+          "description": "Next hop address. Only required if the next hop type is VirtualAppliance."
+        }
+      },
+      "required": [
+        "nextHopType"
+      ]
+    },
+    "RoutingRulePropertiesFormat": {
+      "type": "object",
+      "description": "Routing rule resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        },
+        "destination": {
+          "$ref": "#/definitions/RoutingRuleRouteDestination",
+          "description": "Indicates the destination for this particular rule."
+        },
+        "nextHop": {
+          "$ref": "#/definitions/RoutingRuleNextHop",
+          "description": "Indicates the next hop for this particular rule."
+        }
+      },
+      "required": [
+        "destination",
+        "nextHop"
+      ]
+    },
+    "RoutingRuleRouteDestination": {
+      "type": "object",
+      "description": "Route destination.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json/definitions/RoutingRuleDestinationType",
+          "description": "Destination type."
+        },
+        "destinationAddress": {
+          "type": "string",
+          "description": "Destination address."
+        }
+      },
+      "required": [
+        "type",
+        "destinationAddress"
+      ]
+    },
     "ScopeConnection": {
       "type": "object",
       "description": "The Scope Connections resource",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/ScopeConnectionProperties",
+          "$ref": "#/definitions/ScopeConnectionProperties",
           "description": "The scope connection properties",
           "x-ms-client-flatten": true
         },
@@ -2879,12 +3790,36 @@
         "value"
       ]
     },
+    "ScopeConnectionProperties": {
+      "type": "object",
+      "description": "Scope connection.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "connectionState": {
+          "$ref": "./common.json/definitions/ScopeConnectionState",
+          "description": "Connection State",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the scope connection."
+        }
+      }
+    },
     "SecurityAdminConfiguration": {
       "type": "object",
       "description": "Defines the security admin configuration",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/SecurityAdminConfigurationPropertiesFormat",
+          "$ref": "#/definitions/SecurityAdminConfigurationPropertiesFormat",
           "description": "Indicates the properties for the network manager security admin configuration.",
           "x-ms-client-flatten": true
         },
@@ -2921,12 +3856,43 @@
         "value"
       ]
     },
+    "SecurityAdminConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the security admin configuration properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the security configuration."
+        },
+        "applyOnNetworkIntentPolicyBasedServices": {
+          "type": "array",
+          "description": "Enum list of network intent policy based services.",
+          "items": {
+            "$ref": "./common.json/definitions/NetworkIntentPolicyBasedService"
+          }
+        },
+        "networkGroupAddressSpaceAggregationOption": {
+          "$ref": "./common.json/definitions/AddressSpaceAggregationOption",
+          "description": "Determine update behavior for changes to network groups referenced within the rules in this configuration."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      }
+    },
     "SecurityUserConfiguration": {
       "type": "object",
       "description": "Defines the security user configuration",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/SecurityUserConfigurationPropertiesFormat",
+          "$ref": "#/definitions/SecurityUserConfigurationPropertiesFormat",
           "description": "Indicates the properties for the network manager security user configuration.",
           "x-ms-client-flatten": true
         },
@@ -2961,6 +3927,184 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "SecurityUserConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the security user configuration properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the security user configuration."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityUserGroupItem": {
+      "type": "object",
+      "description": "Network manager security user group item.",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network manager group Id."
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "SecurityUserRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the security user rule collection properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the security user rule collection."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "description": "Groups for configuration",
+          "items": {
+            "$ref": "#/definitions/SecurityUserGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appliesToGroups"
+      ]
+    },
+    "SecurityUserRulePropertiesFormat": {
+      "type": "object",
+      "description": "Security rule resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule."
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/SecurityConfigurationRuleProtocol",
+          "description": "Network protocol this rule applies to."
+        },
+        "sources": {
+          "type": "array",
+          "description": "The CIDR or source IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "description": "The destination address prefixes. CIDR or destination IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "description": "The source port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "description": "The destination port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "direction": {
+          "$ref": "./common.json/definitions/SecurityConfigurationRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the security configuration user rule resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "protocol",
+        "direction"
+      ]
+    },
+    "StaticMemberProperties": {
+      "type": "object",
+      "description": "Properties of static member.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "region": {
+          "type": "string",
+          "description": "Resource region.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the scope assignment resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "connectivityGroupItem": {
+      "type": "object",
+      "description": "Connectivity group item.",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network group Id."
+        },
+        "useHubGateway": {
+          "$ref": "./common.json/definitions/UseHubGateway",
+          "description": "Flag if need to use hub gateway."
+        },
+        "isGlobal": {
+          "$ref": "./common.json/definitions/IsGlobal",
+          "description": "Flag if global is supported."
+        },
+        "groupConnectivity": {
+          "$ref": "./common.json/definitions/GroupConnectivity",
+          "description": "Group connectivity type."
+        }
+      },
+      "required": [
+        "networkGroupId",
+        "groupConnectivity"
       ]
     }
   },

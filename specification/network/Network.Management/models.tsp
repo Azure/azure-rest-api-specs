@@ -13939,6 +13939,8 @@ model Ipv6ExpressRouteCircuitPeeringConfig {
 /**
  * The ID of the ExpressRouteConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ExpressRouteConnectionId {
   /**
    * The ID of the ExpressRouteConnection.
@@ -16803,6 +16805,8 @@ model EffectiveNetworkSecurityRule {
 /**
  * Properties of Managed Network
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerProperties {
   /**
    * A description of the network manager.
@@ -16857,6 +16861,8 @@ model NetworkManagerPropertiesNetworkManagerScopes {
 /**
  * Cross tenant scopes.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model CrossTenantScopes {
   /**
    * Tenant ID.
@@ -16880,6 +16886,8 @@ model CrossTenantScopes {
 /**
  * Object for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model PatchObject {
   /**
    * Resource tags.
@@ -16891,6 +16899,8 @@ model PatchObject {
 /**
  * Network Manager Commit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerCommit {
   /**
    * Commit Id.
@@ -16917,6 +16927,8 @@ model NetworkManagerCommit {
 /**
  * Network Manager Deployment Status Parameter.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerDeploymentStatusParameter {
   /**
    * List of locations.
@@ -16937,6 +16949,8 @@ model NetworkManagerDeploymentStatusParameter {
 /**
  * A list of Network Manager Deployment Status
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerDeploymentStatusListResult {
   /**
    * Gets a page of Network Manager Deployment Status
@@ -16955,6 +16969,8 @@ model NetworkManagerDeploymentStatusListResult {
 /**
  * Network Manager Deployment Status.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerDeploymentStatus {
   /**
    * Commit Time.
@@ -16991,6 +17007,8 @@ model NetworkManagerDeploymentStatus {
 /**
  * Effective Virtual Networks Parameter.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ActiveConfigurationParameter {
   /**
    * List of regions.
@@ -17006,6 +17024,8 @@ model ActiveConfigurationParameter {
 /**
  * Result of the request to list active connectivity configurations. It contains a list of active connectivity configurations and a skiptoken to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ActiveConnectivityConfigurationsListResult {
   /**
    * Gets a page of active connectivity configurations.
@@ -17041,6 +17061,8 @@ model ActiveConnectivityConfiguration
 /**
  * The network manager effective connectivity configuration
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model EffectiveConnectivityConfiguration {
   /**
    * Connectivity configuration ID.
@@ -17061,6 +17083,8 @@ model EffectiveConnectivityConfiguration {
 /**
  * Properties of network manager connectivity configuration
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ConnectivityConfigurationProperties {
   /**
    * A description of the connectivity configuration.
@@ -17115,6 +17139,8 @@ model ConnectivityConfigurationProperties {
 /**
  * Hub Item.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model Hub {
   /**
    * Resource Id.
@@ -17150,6 +17176,8 @@ model ConnectivityConfigurationPropertiesConnectivityCapabilities {
 /**
  * Connectivity group item.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ConnectivityGroupItem {
   /**
    * Network group Id.
@@ -17175,6 +17203,8 @@ model ConnectivityGroupItem {
 /**
  * The network configuration group resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ConfigurationGroup {
   /**
    * Network group ID.
@@ -17190,6 +17220,8 @@ model ConfigurationGroup {
 /**
  * Properties of network group
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkGroupProperties {
   /**
    * A description of the network group.
@@ -17217,6 +17249,8 @@ model NetworkGroupProperties {
 /**
  * Result of the request to list active security admin rules. It contains a list of active security admin rules and a skiptoken to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ActiveSecurityAdminRulesListResult {
   /**
    * Gets a page of active security admin rules.
@@ -17234,6 +17268,8 @@ model ActiveSecurityAdminRulesListResult {
 /**
  * Network base admin rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @discriminator("kind")
 model ActiveBaseSecurityAdminRule {
   /**
@@ -17282,6 +17318,8 @@ model ActiveBaseSecurityAdminRule {
 /**
  * Network manager security group item.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerSecurityGroupItem {
   /**
    * Network manager group Id.
@@ -17293,6 +17331,8 @@ model NetworkManagerSecurityGroupItem {
  * Information about the network manager connection.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerConnectionProperties {
   /**
    * Network Manager Id.
@@ -17559,6 +17599,8 @@ model ChildResource {
 /**
  * Query Request Options
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model QueryRequestOptions {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
@@ -17569,6 +17611,8 @@ model QueryRequestOptions {
 /**
  * Result of the request to list networkManagerEffectiveConnectivityConfiguration. It contains a list of groups and a skiptoken to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerEffectiveConnectivityConfigurationListResult {
   /**
    * Gets a page of NetworkManagerEffectiveConnectivityConfiguration
@@ -17586,6 +17630,8 @@ model NetworkManagerEffectiveConnectivityConfigurationListResult {
 /**
  * Result of the request to list networkManagerEffectiveSecurityAdminRules. It contains a list of groups and a skiptoken to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerEffectiveSecurityAdminRulesListResult {
   /**
    * Gets a page of NetworkManagerEffectiveSecurityAdminRules
@@ -17603,6 +17649,8 @@ model NetworkManagerEffectiveSecurityAdminRulesListResult {
 /**
  * Network base admin rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @discriminator("kind")
 model EffectiveBaseSecurityAdminRule {
   /**
@@ -17640,6 +17688,8 @@ model EffectiveBaseSecurityAdminRule {
 /**
  * Properties of static member.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model StaticMemberProperties {
   /**
    * Resource Id.
@@ -17662,6 +17712,8 @@ model StaticMemberProperties {
 /**
  * Defines the routing configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerRoutingConfigurationPropertiesFormat {
   /**
    * A description of the routing configuration.
@@ -17689,6 +17741,8 @@ model NetworkManagerRoutingConfigurationPropertiesFormat {
 /**
  * Defines the routing rule collection properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model RoutingRuleCollectionPropertiesFormat {
   /**
    * A description of the routing rule collection.
@@ -17722,6 +17776,8 @@ model RoutingRuleCollectionPropertiesFormat {
 /**
  * Network manager routing group item.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model NetworkManagerRoutingGroupItem {
   /**
    * Network manager group Id.
@@ -17732,6 +17788,8 @@ model NetworkManagerRoutingGroupItem {
 /**
  * Routing rule resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model RoutingRulePropertiesFormat {
   /**
    * A description for this rule.
@@ -17764,6 +17822,8 @@ model RoutingRulePropertiesFormat {
 /**
  * Route destination.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model RoutingRuleRouteDestination {
   /**
    * Destination type.
@@ -17779,6 +17839,8 @@ model RoutingRuleRouteDestination {
 /**
  * Next hop.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model RoutingRuleNextHop {
   /**
    * Next hop type.
@@ -17795,6 +17857,8 @@ model RoutingRuleNextHop {
  * Scope connection.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ScopeConnectionProperties {
   /**
    * Tenant ID.
@@ -17821,6 +17885,8 @@ model ScopeConnectionProperties {
 /**
  * Defines the security admin configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model SecurityAdminConfigurationPropertiesFormat {
   /**
    * A description of the security configuration.
@@ -17853,6 +17919,8 @@ model SecurityAdminConfigurationPropertiesFormat {
 /**
  * Defines the admin rule collection properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model AdminRuleCollectionPropertiesFormat {
   /**
    * A description of the admin rule collection.
@@ -17881,6 +17949,8 @@ model AdminRuleCollectionPropertiesFormat {
 /**
  * Defines the security user configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model SecurityUserConfigurationPropertiesFormat {
   /**
    * A description of the security user configuration.
@@ -17903,6 +17973,8 @@ model SecurityUserConfigurationPropertiesFormat {
 /**
  * Defines the security user rule collection properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model SecurityUserRuleCollectionPropertiesFormat {
   /**
    * A description of the security user rule collection.
@@ -17931,6 +18003,8 @@ model SecurityUserRuleCollectionPropertiesFormat {
 /**
  * Network manager security user group item.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model SecurityUserGroupItem {
   /**
    * Network manager group Id.
@@ -17941,6 +18015,8 @@ model SecurityUserGroupItem {
 /**
  * Security rule resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model SecurityUserRulePropertiesFormat {
   /**
    * A description for this rule.
@@ -17995,6 +18071,8 @@ model SecurityUserRulePropertiesFormat {
 /**
  * Address prefix item.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model AddressPrefixItem {
   /**
    * Address prefix.
@@ -23525,6 +23603,8 @@ model VirtualNetworkGatewayNatRuleProperties {
 /**
  * Vpn NatRule mapping.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnNatRuleMapping {
   /**
    * Address space for Vpn NatRule mapping.
@@ -24800,6 +24880,8 @@ model VpnClientConnectionHealthDetail {
  * List of p2s vpn connections to be disconnected.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model P2SVpnConnectionRequest {
   /**
    * List of p2s vpn connection Ids.
@@ -24893,6 +24975,8 @@ model VirtualRouterPeeringProperties {
 /**
  * Parameters for VirtualWAN.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualWanProperties {
   /**
    * Vpn encryption to be disabled or not.
@@ -24949,6 +25033,8 @@ model ListVirtualWANsResult is Azure.Core.Page<VirtualWAN>;
 /**
  * Parameters for VpnSite.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnSiteProperties {
   /**
    * The VirtualWAN to which the vpnSite belongs.
@@ -25006,6 +25092,8 @@ model VpnSiteProperties {
 /**
  * List of properties of the device.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model DeviceProperties {
   /**
    * Name of the device Vendor.
@@ -25026,6 +25114,8 @@ model DeviceProperties {
 /**
  * Parameters for VpnSite.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnSiteLinkProperties {
   /**
    * The link provider properties.
@@ -25057,6 +25147,8 @@ model VpnSiteLinkProperties {
 /**
  * List of properties of a link provider.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnLinkProviderProperties {
   /**
    * Name of the link provider.
@@ -25072,6 +25164,8 @@ model VpnLinkProviderProperties {
 /**
  * BGP settings details for a link.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnLinkBgpSettings {
   /**
    * The BGP speaker's ASN.
@@ -25087,6 +25181,8 @@ model VpnLinkBgpSettings {
 /**
  * The Office365 breakout policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model O365PolicyProperties {
   /**
    * Office365 breakout categories.
@@ -25097,6 +25193,8 @@ model O365PolicyProperties {
 /**
  * Office365 breakout categories.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model O365BreakOutCategoryPolicies {
   /**
    * Flag to control allow category.
@@ -25127,6 +25225,8 @@ model ListVpnSiteLinksResult is Azure.Core.Page<VpnSiteLink>;
 /**
  * List of Vpn-Sites.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model GetVpnSitesConfigurationRequest {
   /**
    * List of resource-ids of the vpn-sites for which config is to be downloaded.
@@ -25142,6 +25242,8 @@ model GetVpnSitesConfigurationRequest {
 /**
  * Collection of SecurityProviders.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualWanSecurityProviders {
   /**
    * List of VirtualWAN security providers.
@@ -25152,6 +25254,8 @@ model VirtualWanSecurityProviders {
 /**
  * Collection of SecurityProviders.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualWanSecurityProvider {
   /**
    * Name of the security provider.
@@ -25173,6 +25277,8 @@ model VirtualWanSecurityProvider {
 /**
  * Parameters for VpnServerConfiguration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigurationProperties {
   /**
    * The name of the VpnServerConfiguration that is unique within a resource group.
@@ -25268,6 +25374,8 @@ model VpnServerConfigurationProperties {
 /**
  * Properties of VPN client root certificate of VpnServerConfiguration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigVpnClientRootCertificate {
   /**
    * The certificate name.
@@ -25283,6 +25391,8 @@ model VpnServerConfigVpnClientRootCertificate {
 /**
  * Properties of the revoked VPN client certificate of VpnServerConfiguration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigVpnClientRevokedCertificate {
   /**
    * The certificate name.
@@ -25298,6 +25408,8 @@ model VpnServerConfigVpnClientRevokedCertificate {
 /**
  * Properties of Radius Server root certificate of VpnServerConfiguration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigRadiusServerRootCertificate {
   /**
    * The certificate name.
@@ -25313,6 +25425,8 @@ model VpnServerConfigRadiusServerRootCertificate {
 /**
  * Properties of the Radius client root certificate of VpnServerConfiguration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigRadiusClientRootCertificate {
   /**
    * The certificate name.
@@ -25328,6 +25442,8 @@ model VpnServerConfigRadiusClientRootCertificate {
 /**
  * AAD Vpn authentication type related parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model AadAuthenticationParameters {
   /**
    * AAD Vpn authentication parameter AAD tenant.
@@ -25349,6 +25465,8 @@ model AadAuthenticationParameters {
  * Parameters for P2SVpnGateway.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model P2SVpnGatewayProperties {
   /**
    * The VirtualHub to which the gateway belongs.
@@ -25421,6 +25539,8 @@ model P2SConnectionConfiguration extends SubResource {
  * Parameters for P2SConnectionConfiguration.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model P2SConnectionConfigurationProperties {
   /**
    * The reference to the address space resource which represents Address space for P2S VpnClient.
@@ -25458,6 +25578,8 @@ model P2SConnectionConfigurationProperties {
 /**
  * Routing Configuration indicating the associated and propagated route tables for this connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model RoutingConfiguration {
   /**
    * The resource id RouteTable associated with this RoutingConfiguration.
@@ -25488,6 +25610,8 @@ model RoutingConfiguration {
 /**
  * The list of RouteTables to advertise the routes to.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model PropagatedRouteTable {
   /**
    * The list of labels.
@@ -25503,6 +25627,8 @@ model PropagatedRouteTable {
 /**
  * List of routes that control routing from VirtualHub into a virtual network connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VnetRoute {
   /**
    * Configuration for static routes on this HubVnetConnection.
@@ -25524,6 +25650,8 @@ model VnetRoute {
 /**
  * Configuration for static routes on this HubVnetConnectionConfiguration for static routes on this HubVnetConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model StaticRoutesConfig {
   /**
    * Boolean indicating whether static routes on this connection are automatically propagate to route tables which this connection propagates to.
@@ -25540,6 +25668,8 @@ model StaticRoutesConfig {
 /**
  * List of all Static Routes.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model StaticRoute {
   /**
    * The name of the StaticRoute that is unique within a VnetRoute.
@@ -25560,6 +25690,8 @@ model StaticRoute {
 /**
  * Parameters for VpnServerConfigurationPolicyGroup.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigurationPolicyGroupProperties {
   /**
    * Shows if this is a Default VpnServerConfigurationPolicyGroup or not.
@@ -25594,6 +25726,8 @@ model VpnServerConfigurationPolicyGroupProperties {
 /**
  * VpnServerConfiguration PolicyGroup member
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigurationPolicyGroupMember {
   /**
    * Name of the VpnServerConfigurationPolicyGroupMember.
@@ -25655,6 +25789,8 @@ model ListVpnServerConfigurationPolicyGroupsResult
 /**
  * Parameters for VirtualHub.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubProperties {
   /**
    * The VirtualWAN to which the VirtualHub belongs.
@@ -25778,6 +25914,8 @@ model VirtualHubProperties {
 /**
  * VirtualHub route table.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubRouteTable {
   /**
    * List of all routes.
@@ -25789,6 +25927,8 @@ model VirtualHubRouteTable {
 /**
  * VirtualHub route.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubRoute {
   /**
    * List of all addressPrefixes.
@@ -25826,6 +25966,8 @@ model VirtualHubRouteTableV2 extends SubResource {
 /**
  * Parameters for VirtualHubRouteTableV2.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubRouteTableV2Properties {
   /**
    * List of all routes.
@@ -25848,6 +25990,8 @@ model VirtualHubRouteTableV2Properties {
 /**
  * VirtualHubRouteTableV2 route.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubRouteV2 {
   /**
    * The type of destinations.
@@ -25873,6 +26017,8 @@ model VirtualHubRouteV2 {
 /**
  * The VirtualHub Router autoscale configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualRouterAutoScaleConfiguration {
   /**
    * The minimum number of scale units for VirtualHub Router.
@@ -25889,6 +26035,8 @@ model ListVirtualHubsResult is Azure.Core.Page<VirtualHub>;
 /**
  * Properties of RouteMap resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model RouteMapProperties {
   /**
    * List of connections which have this RoutMap associated for inbound traffic.
@@ -25916,6 +26064,8 @@ model RouteMapProperties {
 /**
  * A RouteMap Rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model RouteMapRule {
   /**
    * The unique name for the rule.
@@ -25943,6 +26093,8 @@ model RouteMapRule {
 /**
  * A matching criteria which matches routes based on route prefix, community, and AS path.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model Criterion {
   /**
    * List of route prefixes which this criteria matches.
@@ -25968,6 +26120,8 @@ model Criterion {
 /**
  * Action to be taken on a route matching a RouteMap criterion.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model Action {
   /**
    * Type of action to be taken. Supported types are 'Remove', 'Add', 'Replace', and 'Drop.'
@@ -25984,6 +26138,8 @@ model Action {
 /**
  * Parameters for an Action.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model Parameter {
   /**
    * List of route prefixes.
@@ -26031,6 +26187,8 @@ model HubVirtualNetworkConnection extends SubResource {
 /**
  * Parameters for HubVirtualNetworkConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model HubVirtualNetworkConnectionProperties {
   /**
    * Reference to the remote virtual network.
@@ -26073,6 +26231,8 @@ model ListHubVirtualNetworkConnectionsResult
 /**
  * Parameters for VpnGateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnGatewayProperties {
   /**
    * The VirtualHub to which the gateway belongs.
@@ -26147,6 +26307,8 @@ model VpnConnection extends SubResource {
 /**
  * Parameters for VpnConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnConnectionProperties {
   /**
    * Id of the connected vpn site.
@@ -26254,6 +26416,8 @@ model VpnConnectionProperties {
 /**
  * Parameters for VpnConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnSiteLinkConnectionProperties {
   /**
    * Id of the connected vpn site link.
@@ -26361,6 +26525,8 @@ model VpnSiteLinkConnectionProperties {
 /**
  * IP Configuration of a VPN Gateway Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnGatewayIpConfiguration {
   /**
    * The identifier of the IP configuration for a VPN Gateway.
@@ -26381,6 +26547,8 @@ model VpnGatewayIpConfiguration {
 /**
  * Parameters for VpnGatewayNatRule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnGatewayNatRuleProperties {
   /**
    * The provisioning state of the NAT Rule resource.
@@ -26432,6 +26600,8 @@ model VpnGatewayNatRuleProperties {
 /**
  * Start packet capture parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnGatewayPacketCaptureStartParameters {
   /**
    * Start Packet capture parameters on vpn gateway.
@@ -26442,6 +26612,8 @@ model VpnGatewayPacketCaptureStartParameters {
 /**
  * Stop packet capture parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnGatewayPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on vpn gateway.
@@ -26458,6 +26630,8 @@ model ConnectionSharedKeyResultList
 /**
  * Parameters for SharedKey.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model SharedKeyProperties {
   /**
    * The value of the shared key for the vpn link connection.
@@ -26487,6 +26661,8 @@ model ListVpnGatewaysResult is Azure.Core.Page<VpnGateway>;
 /**
  * Vpn Connection packet capture parameters supplied to start packet capture on gateway connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnConnectionPacketCaptureStartParameters {
   /**
    * Start Packet capture parameters on vpn connection.
@@ -26502,6 +26678,8 @@ model VpnConnectionPacketCaptureStartParameters {
 /**
  * Vpn Connection packet capture parameters supplied to stop packet capture on gateway connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnConnectionPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on vpn connection.
@@ -26540,6 +26718,8 @@ model ListP2SVpnGatewaysResult is Azure.Core.Page<P2SVpnGateway>;
  * Vpn Client Parameters for package generation.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model P2SVpnProfileParameters {
   /**
    * VPN client authentication method.
@@ -26550,6 +26730,8 @@ model P2SVpnProfileParameters {
 /**
  * Vpn Profile Response for package generation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnProfileResponse {
   /**
    * URL to the VPN profile.
@@ -26561,6 +26743,8 @@ model VpnProfileResponse {
  * List of P2S Vpn connection health request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model P2SVpnConnectionHealthRequest {
   /**
    * The list of p2s vpn user names whose p2s vpn connection detailed health to retrieve for.
@@ -26577,6 +26761,8 @@ model P2SVpnConnectionHealthRequest {
  * P2S Vpn connection detailed health written to sas url.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model P2SVpnConnectionHealth {
   /**
    * Returned sas url of the blob to which the p2s vpn connection detailed health will be written.
@@ -26587,6 +26773,8 @@ model P2SVpnConnectionHealth {
 /**
  * VpnServerConfigurations list associated with VirtualWan Response.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnServerConfigurationsResponse {
   /**
    * List of VpnServerConfigurations associated with VirtualWan.
@@ -26597,6 +26785,8 @@ model VpnServerConfigurationsResponse {
 /**
  * Virtual Wan Vpn profile parameters Vpn profile generation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualWanVpnProfileParameters {
   /**
    * VpnServerConfiguration partial resource uri with which VirtualWan is associated to.
@@ -26619,6 +26809,8 @@ model ListVirtualHubRouteTableV2SResult
 /**
  * List of ExpressRoute gateways.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ExpressRouteGatewayList {
   /**
    * List of ExpressRoute gateways.
@@ -26630,6 +26822,8 @@ model ExpressRouteGatewayList {
 /**
  * ExpressRoute gateway resource properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ExpressRouteGatewayProperties {
   /**
    * Configuration for auto scaling.
@@ -26702,6 +26896,8 @@ model ExpressRouteConnection extends SubResource {
 /**
  * Properties of the ExpressRouteConnection subresource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ExpressRouteConnectionProperties {
   /**
    * The provisioning state of the express route connection resource.
@@ -26749,6 +26945,8 @@ model ExpressRouteConnectionProperties {
 /**
  * ExpressRoute circuit peering identifier.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ExpressRouteCircuitPeeringId {
   /**
    * The ID of the ExpressRoute circuit peering.
@@ -26759,6 +26957,8 @@ model ExpressRouteCircuitPeeringId {
 /**
  * Virtual Hub identifier.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubId {
   /**
    * The resource URI for the Virtual Hub where the ExpressRoute gateway is or will be deployed. The Virtual Hub resource and the ExpressRoute gateway resource reside in the same subscription.
@@ -26769,6 +26969,8 @@ model VirtualHubId {
 /**
  * ExpressRouteConnection list.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ExpressRouteConnectionList {
   /**
    * The list of ExpressRoute connections.
@@ -26796,6 +26998,8 @@ model NetworkVirtualApplianceConnection extends SubResource {
 /**
  * Properties of the NetworkVirtualApplianceConnection subresource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model NetworkVirtualApplianceConnectionProperties {
   /**
    * The name of the resource.
@@ -26847,6 +27051,8 @@ model NetworkVirtualApplianceConnectionList
 /**
  * Properties of the bgp connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model BgpConnectionProperties {
   /**
    * Peer ASN.
@@ -26886,6 +27092,8 @@ model ListVirtualHubBgpConnectionResults is Azure.Core.Page<BgpConnection>;
 /**
  * Peer routing details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model PeerRoute {
   /**
    * The peer's local address.
@@ -26939,6 +27147,8 @@ alias PeerRouteList = Record<PeerRoute[]>;
  * Properties of IP configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model HubIPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
@@ -26979,6 +27189,8 @@ model ListVirtualHubIpConfigurationResults
 /**
  * Parameters for RouteTable.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model HubRouteTableProperties {
   /**
    * List of all routes.
@@ -27012,6 +27224,8 @@ model HubRouteTableProperties {
 /**
  * RouteTable route.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model HubRoute {
   /**
    * The name of the Route that is unique within a RouteTable. This name can be used to access this route.
@@ -27047,6 +27261,8 @@ model ListHubRouteTablesResult is Azure.Core.Page<HubRouteTable>;
 /**
  * The parameters specifying the resource whose effective routes are being requested.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model EffectiveRoutesParameters {
   /**
    * The resource whose effective routes are being requested.
@@ -27062,6 +27278,8 @@ model EffectiveRoutesParameters {
 /**
  * EffectiveRoutes List.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubEffectiveRouteList {
   /**
    * The list of effective routes configured on the virtual hub or the specified resource.
@@ -27074,6 +27292,8 @@ model VirtualHubEffectiveRouteList {
 /**
  * The effective route configured on the virtual hub or specified resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubEffectiveRoute {
   /**
    * The list of address prefixes.
@@ -27104,6 +27324,8 @@ model VirtualHubEffectiveRoute {
 /**
  * The parameters specifying the connection resource whose inbound routes are being requested.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model GetInboundRoutesParameters {
   /**
    * The connection resource whose inbound routes are being requested.
@@ -27119,6 +27341,8 @@ model GetInboundRoutesParameters {
 /**
  * EffectiveRouteMapRoute List.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model EffectiveRouteMapRouteList {
   /**
    * The list of Effective RouteMap Routes configured on the connection resource.
@@ -27131,6 +27355,8 @@ model EffectiveRouteMapRouteList {
 /**
  * The effective RouteMap route configured on the connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model EffectiveRouteMapRoute {
   /**
    * The address prefix of the route.
@@ -27151,6 +27377,8 @@ model EffectiveRouteMapRoute {
 /**
  * The parameters specifying the connection resource whose outbound routes are being requested.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model GetOutboundRoutesParameters {
   /**
    * The connection resource whose outbound routes are being requested.
@@ -27166,6 +27394,8 @@ model GetOutboundRoutesParameters {
 /**
  * The properties of a RoutingIntent resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model RoutingIntentProperties {
   /**
    * List of routing policies.
@@ -27182,6 +27412,8 @@ model RoutingIntentProperties {
 /**
  * The routing policy object used in a RoutingIntent resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model RoutingPolicy {
   /**
    * The unique name for the routing policy.
@@ -28039,6 +28271,8 @@ model ActiveSecurityAdminRule extends ActiveBaseSecurityAdminRule {
 /**
  * Security admin rule resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model AdminPropertiesFormat {
   /**
    * A description for this rule. Restricted to 140 chars.
@@ -28120,6 +28354,8 @@ model ActiveDefaultSecurityAdminRule extends ActiveBaseSecurityAdminRule {
 /**
  * Security default admin rule resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model DefaultAdminPropertiesFormat {
   /**
    * A description for this rule. Restricted to 140 chars.
@@ -28401,6 +28637,8 @@ model PatchRouteFilter extends SubResource {
 /**
  * VpnSite Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnSiteId {
   /**
    * The resource-uri of the vpn-site for which config is to be fetched.
