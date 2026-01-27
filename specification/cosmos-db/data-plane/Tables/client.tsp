@@ -22,6 +22,23 @@ interface ClientParent {
   query is Data.Tables.Table.query;
 }
 
+@@clientName(ClientParent.getProperties, "getServiceProperties", "python");
+@@clientName(ClientParent.setProperties, "setServiceProperties", "python");
+@@clientName(ClientParent.getStatistics, "getServiceStats", "python");
+@@access(ClientParent.query, Access.internal, "python");
+
+/** Client initialization options for TableClient */
+model TableClientOptions {
+  /** The name of the table to operate on */
+  tableName: string;
+}
+
+@@clientInitialization(ClientChild,
+  {
+    parameters: TableClientOptions,
+  }
+);
+
 @client({
   name: "TableClient",
   service: Data.Tables,
@@ -57,19 +74,17 @@ interface ClientChild {
   submitTransaction is Data.Tables.Table.submitTransaction;
 }
 
-@@clientNamespace(Data.Tables, "Azure.Data.Tables");
-@@clientName(Data.Tables.Service.getProperties, "getServiceProperties");
-@@clientName(Data.Tables.Service.setProperties, "setServiceProperties");
-@@clientName(Data.Tables.Service.getStatistics, "getServiceStats");
-@@clientName(Data.Tables.Table.getAccessPolicy, "getTableAccessPolicy");
-@@clientName(Data.Tables.Table.setAccessPolicy, "setTableAccessPolicy");
-@@clientName(Data.Tables.Table.query, "queryTables");
-@@clientName(Data.Tables.Table.create, "createTable");
-@@clientName(Data.Tables.Table.delete, "deleteTable");
-@@clientName(Data.Tables.Table.insertOrReplaceEntity, "upsertEntity");
+@@clientName(ClientChild.getAccessPolicy, "getTableAccessPolicy", "python");
+@@clientName(ClientChild.setAccessPolicy, "setTableAccessPolicy", "python");
+@@clientName(ClientChild.create, "createTable", "python");
+@@clientName(ClientChild.delete, "deleteTable", "python");
+@@clientName(ClientChild.queryEntityWithPartitionAndRowKey, "getEntity");
+@@clientName(ClientChild.insertOrReplaceEntity, "upsertEntity");
+@@access(ClientChild.mergeEntity, Access.internal, "python");
+@@access(ClientChild.insertOrMergeEntity, Access.internal, "python");
+@@access(ClientChild.queryEntities, Access.internal, "python");
+
 @@clientName(AccessPolicy, "TableAccessPolicy");
 @@clientName(Logging, "TableAnalyticsLogging");
 @@clientName(TableProperties, "TableItem");
 @@clientName(CorsRule, "TableCorsRule");
-@@access(Table.mergeEntity, Access.internal, "python");
-@@access(Table.insertOrMergeEntity, Access.internal, "python");
