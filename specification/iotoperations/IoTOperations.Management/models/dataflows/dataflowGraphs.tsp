@@ -303,7 +303,7 @@ model DataflowGraphConnectionOutput {
 }
 
 /** DataflowGraph status. */
-@added(Versions.`2025-12-01-preview`)
+@added(Versions.`2026-03-01`)
 model DataflowGraphStatus {
   /** The health state of the DataflowGraph. */
   @visibility(Lifecycle.Read)
