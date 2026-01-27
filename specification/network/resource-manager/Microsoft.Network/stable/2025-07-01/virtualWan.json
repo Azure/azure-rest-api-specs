@@ -10814,6 +10814,65 @@
       },
       "description": "Gateway Resiliency Information"
     },
+    "ResiliencyRecommendationComponents": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Resiliency based Recommendation Component"
+        },
+        "currentScore": {
+          "type": "string",
+          "description": "Current Score of the gateway"
+        },
+        "maxScore": {
+          "type": "string",
+          "description": "Max score that the gateway can achieve if the specified recommendation is applied"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayResiliencyRecommendation"
+          },
+          "description": "List of Gateway Resiliency based Recommendations"
+        }
+      },
+      "description": "Gateway Resiliency based Recommendations"
+    },
+    "GatewayResiliencyRecommendation": {
+      "type": "object",
+      "properties": {
+        "recommendationTitle": {
+          "type": "string",
+          "description": "Recommendation Title"
+        },
+        "recommendationId": {
+          "type": "string",
+          "description": "Recommendation Id"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Impact associated with the recommendation"
+        },
+        "recommendationText": {
+          "type": "string",
+          "description": "Recommendation details"
+        },
+        "callToActionText": {
+          "type": "string",
+          "description": "Action items to apply the recommendation"
+        },
+        "callToActionLink": {
+          "type": "string",
+          "description": "Link to the public documentation for the associated recommendation"
+        },
+        "details": {
+          "type": "string",
+          "description": "Additional details about the recommendation"
+        }
+      },
+      "description": "Resiliency Recommendation details"
+    },
     "VwanExpressRouteGatewayRouteSetsInformation": {
       "type": "object",
       "properties": {
