@@ -2538,6 +2538,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexerClient.Skillsets.delete, "deleteSkillset");
 
 @@clientName(VectorQuery.k, "kNearestNeighbors");
+@@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp");
 @@clientName(SearchDocumentsResult.value, "results");
 @@clientName(SearchRequest.count, "includeTotalCount");
 @@clientName(SearchRequest.highlight, "highlightFields");
@@ -2643,6 +2644,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(TagScoringFunction.tag, "parameters");
 @@clientName(OcrSkill.detectOrientation, "shouldDetectOrientation");
+@@clientName(PIIDetectionSkill.minimumPrecision, "minPrecision", "csharp");
 @@clientName(PIIDetectionSkill.maskingCharacter, "mask");
 @@clientName(ListAliasesResult.value, "aliases");
 @@clientName(AMLParameters.uri, "scoringUri");

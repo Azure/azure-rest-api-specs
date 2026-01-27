@@ -4770,7 +4770,11 @@
         },
         "searchFields": {
           "type": "string",
-          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
+          "items": {
+            "type": "string"
+          }
         },
         "suggesterName": {
           "type": "string",
@@ -5701,7 +5705,7 @@
       ],
       "x-ms-enum": {
         "name": "CjkBigramTokenFilterScripts",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Han",
@@ -13745,7 +13749,11 @@
         },
         "flags": {
           "type": "string",
-          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
+          "format": "ArrayEncoding.pipeDelimited",
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values.",
+          "items": {
+            "$ref": "#/definitions/RegexFlags"
+          }
         },
         "stopwords": {
           "type": "array",
@@ -13848,7 +13856,11 @@
         },
         "flags": {
           "type": "string",
-          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
+          "format": "ArrayEncoding.pipeDelimited",
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values.",
+          "items": {
+            "$ref": "#/definitions/RegexFlags"
+          }
         },
         "group": {
           "type": "integer",
@@ -16592,7 +16604,11 @@
         },
         "highlight": {
           "type": "string",
-          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.",
+          "items": {
+            "type": "string"
+          }
         },
         "highlightPostTag": {
           "type": "string",
@@ -16609,7 +16625,11 @@
         },
         "orderby": {
           "type": "string",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
+          "items": {
+            "type": "string"
+          }
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
@@ -16644,7 +16664,11 @@
         },
         "searchFields": {
           "type": "string",
-          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
+          "items": {
+            "type": "string"
+          }
         },
         "searchMode": {
           "$ref": "#/definitions/SearchMode",
@@ -16660,7 +16684,11 @@
         },
         "select": {
           "type": "string",
-          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.",
+          "items": {
+            "type": "string"
+          }
         },
         "skip": {
           "type": "integer",
@@ -16704,7 +16732,11 @@
         },
         "semanticFields": {
           "type": "string",
-          "description": "The comma-separated list of field names used for semantic ranking."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of field names used for semantic ranking.",
+          "items": {
+            "type": "string"
+          }
         },
         "vectorQueries": {
           "type": "array",
@@ -18802,7 +18834,11 @@
         },
         "orderby": {
           "type": "string",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
+          "items": {
+            "type": "string"
+          }
         },
         "search": {
           "type": "string",
@@ -18810,11 +18846,19 @@
         },
         "searchFields": {
           "type": "string",
-          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester.",
+          "items": {
+            "type": "string"
+          }
         },
         "select": {
           "type": "string",
-          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results."
+          "format": "ArrayEncoding.commaDelimited",
+          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results.",
+          "items": {
+            "type": "string"
+          }
         },
         "suggesterName": {
           "type": "string",
@@ -18899,7 +18943,11 @@
         },
         "synonyms": {
           "type": "string",
-          "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines."
+          "format": "ArrayEncoding.newlineDelimited",
+          "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.",
+          "items": {
+            "type": "string"
+          }
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
