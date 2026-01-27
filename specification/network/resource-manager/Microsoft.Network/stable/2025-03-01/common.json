@@ -1551,7 +1551,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -1609,7 +1609,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11098,13 +11098,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionMonitorListResult"
+              "$ref": "./networkWatcher.json/definitions/ConnectionMonitorListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11160,7 +11160,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11213,7 +11213,7 @@
             "description": "Parameters that define the operation to create a connection monitor.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectionMonitor"
+              "$ref": "./networkWatcher.json/definitions/ConnectionMonitor"
             }
           }
         ],
@@ -11244,7 +11244,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11315,7 +11315,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11377,7 +11377,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11445,7 +11445,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11495,7 +11495,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11551,7 +11551,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11628,7 +11628,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11693,7 +11693,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -11755,7 +11755,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -18297,7 +18297,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -18369,7 +18369,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -21630,24 +21630,6 @@
         ]
       }
     },
-    "Availability": {
-      "type": "object",
-      "description": "Availability of the metric.",
-      "properties": {
-        "timeGrain": {
-          "type": "string",
-          "description": "The time grain of the availability."
-        },
-        "retention": {
-          "type": "string",
-          "description": "The retention of the availability."
-        },
-        "blobDuration": {
-          "type": "string",
-          "description": "Duration of the availability blob."
-        }
-      }
-    },
     "AvailableDelegation": {
       "type": "object",
       "description": "The serviceName of an AvailableDelegation indicates a possible delegation for a subnet.",
@@ -21744,112 +21726,6 @@
       "required": [
         "value"
       ]
-    },
-    "AvailableProvidersList": {
-      "type": "object",
-      "description": "List of available countries with details.",
-      "properties": {
-        "countries": {
-          "type": "array",
-          "description": "List of available countries.",
-          "items": {
-            "$ref": "#/definitions/AvailableProvidersListCountry"
-          }
-        }
-      },
-      "required": [
-        "countries"
-      ]
-    },
-    "AvailableProvidersListCity": {
-      "type": "object",
-      "description": "City or town details.",
-      "properties": {
-        "cityName": {
-          "type": "string",
-          "description": "The city or town name."
-        },
-        "providers": {
-          "type": "array",
-          "description": "A list of Internet service providers.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "AvailableProvidersListCountry": {
-      "type": "object",
-      "description": "Country details.",
-      "properties": {
-        "countryName": {
-          "type": "string",
-          "description": "The country name."
-        },
-        "providers": {
-          "type": "array",
-          "description": "A list of Internet service providers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "states": {
-          "type": "array",
-          "description": "List of available states in the country.",
-          "items": {
-            "$ref": "#/definitions/AvailableProvidersListState"
-          }
-        }
-      }
-    },
-    "AvailableProvidersListParameters": {
-      "type": "object",
-      "description": "Constraints that determine the list of available Internet service providers.",
-      "properties": {
-        "azureLocations": {
-          "type": "array",
-          "description": "A list of Azure regions.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "country": {
-          "type": "string",
-          "description": "The country for available providers list."
-        },
-        "state": {
-          "type": "string",
-          "description": "The state for available providers list."
-        },
-        "city": {
-          "type": "string",
-          "description": "The city or town for available providers list."
-        }
-      }
-    },
-    "AvailableProvidersListState": {
-      "type": "object",
-      "description": "State details.",
-      "properties": {
-        "stateName": {
-          "type": "string",
-          "description": "The state name."
-        },
-        "providers": {
-          "type": "array",
-          "description": "A list of Internet service providers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "cities": {
-          "type": "array",
-          "description": "List of available cities or towns in the state.",
-          "items": {
-            "$ref": "#/definitions/AvailableProvidersListCity"
-          }
-        }
-      }
     },
     "AvailableServiceAlias": {
       "type": "object",
@@ -22516,131 +22392,6 @@
           }
         ]
       }
-    },
-    "AzureReachabilityReport": {
-      "type": "object",
-      "description": "Azure reachability report details.",
-      "properties": {
-        "aggregationLevel": {
-          "type": "string",
-          "description": "The aggregation level of Azure reachability report. Can be Country, State or City."
-        },
-        "providerLocation": {
-          "$ref": "#/definitions/AzureReachabilityReportLocation",
-          "description": "Parameters that define a geographic location."
-        },
-        "reachabilityReport": {
-          "type": "array",
-          "description": "List of Azure reachability report items.",
-          "items": {
-            "$ref": "#/definitions/AzureReachabilityReportItem"
-          }
-        }
-      },
-      "required": [
-        "aggregationLevel",
-        "providerLocation",
-        "reachabilityReport"
-      ]
-    },
-    "AzureReachabilityReportItem": {
-      "type": "object",
-      "description": "Azure reachability report details for a given provider location.",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "The Internet service provider."
-        },
-        "azureLocation": {
-          "type": "string",
-          "description": "The Azure region."
-        },
-        "latencies": {
-          "type": "array",
-          "description": "List of latency details for each of the time series.",
-          "items": {
-            "$ref": "#/definitions/AzureReachabilityReportLatencyInfo"
-          }
-        }
-      }
-    },
-    "AzureReachabilityReportLatencyInfo": {
-      "type": "object",
-      "description": "Details on latency for a time series.",
-      "properties": {
-        "timeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time stamp."
-        },
-        "score": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The relative latency score between 1 and 100, higher values indicating a faster connection.",
-          "minimum": 1,
-          "maximum": 100
-        }
-      }
-    },
-    "AzureReachabilityReportLocation": {
-      "type": "object",
-      "description": "Parameters that define a geographic location.",
-      "properties": {
-        "country": {
-          "type": "string",
-          "description": "The name of the country."
-        },
-        "state": {
-          "type": "string",
-          "description": "The name of the state."
-        },
-        "city": {
-          "type": "string",
-          "description": "The name of the city or town."
-        }
-      },
-      "required": [
-        "country"
-      ]
-    },
-    "AzureReachabilityReportParameters": {
-      "type": "object",
-      "description": "Geographic and time constraints for Azure reachability report.",
-      "properties": {
-        "providerLocation": {
-          "$ref": "#/definitions/AzureReachabilityReportLocation",
-          "description": "Parameters that define a geographic location."
-        },
-        "providers": {
-          "type": "array",
-          "description": "List of Internet service providers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "azureLocations": {
-          "type": "array",
-          "description": "Optional Azure regions to scope the query to.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time for the Azure reachability report."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time for the Azure reachability report."
-        }
-      },
-      "required": [
-        "providerLocation",
-        "startTime",
-        "endTime"
-      ]
     },
     "AzureWebCategoryPropertiesFormat": {
       "type": "object",
@@ -23611,128 +23362,6 @@
         ]
       }
     },
-    "ConnectionMonitor": {
-      "type": "object",
-      "description": "Parameters that define the operation to create a connection monitor.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Connection monitor location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Connection monitor tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ConnectionMonitorParameters",
-          "description": "Properties of the connection monitor.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "ConnectionMonitorDestination": {
-      "type": "object",
-      "description": "Describes the destination of connection monitor.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The ID of the resource used as the destination by connection monitor."
-        },
-        "address": {
-          "type": "string",
-          "description": "Address of the connection monitor destination (IP or domain name)."
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The destination port used by connection monitor.",
-          "minimum": 0,
-          "maximum": 65535
-        }
-      }
-    },
-    "ConnectionMonitorEndpoint": {
-      "type": "object",
-      "description": "Describes the connection monitor endpoint.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the connection monitor endpoint."
-        },
-        "type": {
-          "$ref": "#/definitions/EndpointType",
-          "description": "The endpoint type."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Resource ID of the connection monitor endpoint are supported for AzureVM, AzureVMSS, AzureVNet, AzureSubnet, MMAWorkspaceMachine, MMAWorkspaceNetwork, AzureArcVM endpoint type."
-        },
-        "address": {
-          "type": "string",
-          "description": "Address of the connection monitor endpoint. Supported for AzureVM, ExternalAddress, ArcMachine, MMAWorkspaceMachine endpoint type."
-        },
-        "filter": {
-          "$ref": "#/definitions/ConnectionMonitorEndpointFilter",
-          "description": "Filter field is getting deprecated and should not be used. Instead use Include/Exclude scope fields for it."
-        },
-        "scope": {
-          "$ref": "#/definitions/ConnectionMonitorEndpointScope",
-          "description": "Endpoint scope defines which target resource to monitor in case of compound resource endpoints like VMSS, AzureSubnet, AzureVNet, MMAWorkspaceNetwork, AzureArcNetwork."
-        },
-        "coverageLevel": {
-          "$ref": "#/definitions/CoverageLevel",
-          "description": "Test coverage for the endpoint."
-        },
-        "locationDetails": {
-          "$ref": "#/definitions/ConnectionMonitorEndpointLocationDetails",
-          "description": "Location details is optional and only being used for 'AzureArcNetwork' type endpoints, which contains region details."
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription ID for connection monitor endpoint. It's an optional parameter which is being used for 'AzureArcNetwork' type endpoint."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "ConnectionMonitorEndpointFilter": {
-      "type": "object",
-      "description": "Describes the connection monitor endpoint filter.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ConnectionMonitorEndpointFilterType",
-          "description": "The behavior of the endpoint filter. Currently only 'Include' is supported."
-        },
-        "items": {
-          "type": "array",
-          "description": "List of items in the filter.",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorEndpointFilterItem"
-          }
-        }
-      }
-    },
-    "ConnectionMonitorEndpointFilterItem": {
-      "type": "object",
-      "description": "Describes the connection monitor endpoint filter item.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ConnectionMonitorEndpointFilterItemType",
-          "description": "The type of item included in the filter. Currently only 'AgentAddress' is supported."
-        },
-        "address": {
-          "type": "string",
-          "description": "The address of the filter item."
-        }
-      }
-    },
     "ConnectionMonitorEndpointFilterItemType": {
       "type": "string",
       "description": "The type of item included in the filter. Currently only 'AgentAddress' is supported.",
@@ -23767,185 +23396,6 @@
             "description": "Include"
           }
         ]
-      }
-    },
-    "ConnectionMonitorEndpointLocationDetails": {
-      "type": "object",
-      "description": "Connection monitor endpoint location details only being used for 'AzureArcNetwork' type endpoints, which contains the region details.",
-      "properties": {
-        "region": {
-          "type": "string",
-          "description": "Region for connection monitor endpoint."
-        }
-      }
-    },
-    "ConnectionMonitorEndpointScope": {
-      "type": "object",
-      "description": "Describes the connection monitor endpoint scope.",
-      "properties": {
-        "include": {
-          "type": "array",
-          "description": "List of items which needs to be included to the endpoint scope.",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorEndpointScopeItem"
-          }
-        },
-        "exclude": {
-          "type": "array",
-          "description": "List of items which needs to be excluded from the endpoint scope.",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorEndpointScopeItem"
-          }
-        }
-      }
-    },
-    "ConnectionMonitorEndpointScopeItem": {
-      "type": "object",
-      "description": "Describes the connection monitor endpoint scope item.",
-      "properties": {
-        "address": {
-          "type": "string",
-          "description": "The address of the endpoint item. Supported types are IPv4/IPv6 subnet mask or IPv4/IPv6 IP address."
-        }
-      }
-    },
-    "ConnectionMonitorHttpConfiguration": {
-      "type": "object",
-      "description": "Describes the HTTP configuration.",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port to connect to.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "method": {
-          "$ref": "#/definitions/HTTPConfigurationMethod",
-          "description": "The HTTP method to use."
-        },
-        "path": {
-          "type": "string",
-          "description": "The path component of the URI. For instance, \"/dir1/dir2\"."
-        },
-        "requestHeaders": {
-          "type": "array",
-          "description": "The HTTP headers to transmit with the request.",
-          "items": {
-            "$ref": "#/definitions/HTTPHeader"
-          }
-        },
-        "validStatusCodeRanges": {
-          "type": "array",
-          "description": "HTTP status codes to consider successful. For instance, \"2xx,301-304,418\".",
-          "items": {
-            "type": "string"
-          }
-        },
-        "preferHTTPS": {
-          "type": "boolean",
-          "description": "Value indicating whether HTTPS is preferred over HTTP in cases where the choice is not explicit."
-        }
-      }
-    },
-    "ConnectionMonitorIcmpConfiguration": {
-      "type": "object",
-      "description": "Describes the ICMP configuration.",
-      "properties": {
-        "disableTraceRoute": {
-          "type": "boolean",
-          "description": "Value indicating whether path evaluation with trace route should be disabled."
-        }
-      }
-    },
-    "ConnectionMonitorListResult": {
-      "type": "object",
-      "description": "List of connection monitors.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Information about connection monitors.",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
-        }
-      }
-    },
-    "ConnectionMonitorOutput": {
-      "type": "object",
-      "description": "Describes a connection monitor output destination.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/OutputType",
-          "description": "Connection monitor output destination type. Currently, only \"Workspace\" is supported."
-        },
-        "workspaceSettings": {
-          "$ref": "#/definitions/ConnectionMonitorWorkspaceSettings",
-          "description": "Describes the settings for producing output into a log analytics workspace."
-        }
-      }
-    },
-    "ConnectionMonitorParameters": {
-      "type": "object",
-      "description": "Parameters that define the operation to create a connection monitor.",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/ConnectionMonitorSource",
-          "description": "Describes the source of connection monitor."
-        },
-        "destination": {
-          "$ref": "#/definitions/ConnectionMonitorDestination",
-          "description": "Describes the destination of connection monitor."
-        },
-        "autoStart": {
-          "type": "boolean",
-          "description": "Determines if the connection monitor will start automatically once created.",
-          "default": true
-        },
-        "monitoringIntervalInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Monitoring interval in seconds.",
-          "default": 60,
-          "minimum": 30,
-          "maximum": 1800
-        },
-        "endpoints": {
-          "type": "array",
-          "description": "List of connection monitor endpoints.",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorEndpoint"
-          }
-        },
-        "testConfigurations": {
-          "type": "array",
-          "description": "List of connection monitor test configurations.",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorTestConfiguration"
-          }
-        },
-        "testGroups": {
-          "type": "array",
-          "description": "List of connection monitor test groups.",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorTestGroup"
-          }
-        },
-        "outputs": {
-          "type": "array",
-          "description": "List of connection monitor outputs.",
-          "items": {
-            "$ref": "#/definitions/ConnectionMonitorOutput"
-          }
-        },
-        "notes": {
-          "type": "string",
-          "description": "Optional notes to be associated with the connection monitor."
-        }
       }
     },
     "ConnectionMonitorResult": {
@@ -23992,108 +23442,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectionMonitorParameters"
+          "$ref": "./networkWatcher.json/definitions/ConnectionMonitorParameters"
         }
-      ]
-    },
-    "ConnectionMonitorSource": {
-      "type": "object",
-      "description": "Describes the source of connection monitor.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The ID of the resource used as the source by connection monitor."
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The source port used by connection monitor.",
-          "minimum": 0,
-          "maximum": 65535
-        }
-      },
-      "required": [
-        "resourceId"
-      ]
-    },
-    "ConnectionMonitorSuccessThreshold": {
-      "type": "object",
-      "description": "Describes the threshold for declaring a test successful.",
-      "properties": {
-        "checksFailedPercent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum percentage of failed checks permitted for a test to evaluate as successful."
-        },
-        "roundTripTimeMs": {
-          "type": "number",
-          "format": "float",
-          "description": "The maximum round-trip time in milliseconds permitted for a test to evaluate as successful."
-        }
-      }
-    },
-    "ConnectionMonitorTcpConfiguration": {
-      "type": "object",
-      "description": "Describes the TCP configuration.",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port to connect to.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "disableTraceRoute": {
-          "type": "boolean",
-          "description": "Value indicating whether path evaluation with trace route should be disabled."
-        },
-        "destinationPortBehavior": {
-          "$ref": "#/definitions/DestinationPortBehavior",
-          "description": "Destination port behavior."
-        }
-      }
-    },
-    "ConnectionMonitorTestConfiguration": {
-      "type": "object",
-      "description": "Describes a connection monitor test configuration.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the connection monitor test configuration."
-        },
-        "testFrequencySec": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The frequency of test evaluation, in seconds."
-        },
-        "protocol": {
-          "$ref": "#/definitions/ConnectionMonitorTestConfigurationProtocol",
-          "description": "The protocol to use in test evaluation."
-        },
-        "preferredIPVersion": {
-          "$ref": "#/definitions/PreferredIPVersion",
-          "description": "The preferred IP version to use in test evaluation. The connection monitor may choose to use a different version depending on other parameters."
-        },
-        "httpConfiguration": {
-          "$ref": "#/definitions/ConnectionMonitorHttpConfiguration",
-          "description": "The parameters used to perform test evaluation over HTTP."
-        },
-        "tcpConfiguration": {
-          "$ref": "#/definitions/ConnectionMonitorTcpConfiguration",
-          "description": "The parameters used to perform test evaluation over TCP."
-        },
-        "icmpConfiguration": {
-          "$ref": "#/definitions/ConnectionMonitorIcmpConfiguration",
-          "description": "The parameters used to perform test evaluation over ICMP."
-        },
-        "successThreshold": {
-          "$ref": "#/definitions/ConnectionMonitorSuccessThreshold",
-          "description": "The threshold for declaring a test successful."
-        }
-      },
-      "required": [
-        "name",
-        "protocol"
       ]
     },
     "ConnectionMonitorTestConfigurationProtocol": {
@@ -24126,47 +23476,6 @@
         ]
       }
     },
-    "ConnectionMonitorTestGroup": {
-      "type": "object",
-      "description": "Describes the connection monitor test group.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the connection monitor test group."
-        },
-        "disable": {
-          "type": "boolean",
-          "description": "Value indicating whether test group is disabled."
-        },
-        "testConfigurations": {
-          "type": "array",
-          "description": "List of test configuration names.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sources": {
-          "type": "array",
-          "description": "List of source endpoint names.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinations": {
-          "type": "array",
-          "description": "List of destination endpoint names.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "name",
-        "testConfigurations",
-        "sources",
-        "destinations"
-      ]
-    },
     "ConnectionMonitorType": {
       "type": "string",
       "description": "Type of connection monitor.",
@@ -24189,16 +23498,6 @@
             "description": "SingleSourceDestination"
           }
         ]
-      }
-    },
-    "ConnectionMonitorWorkspaceSettings": {
-      "type": "object",
-      "description": "Describes the settings for producing output into a log analytics workspace.",
-      "properties": {
-        "workspaceResourceId": {
-          "type": "string",
-          "description": "Log analytics workspace resource ID."
-        }
       }
     },
     "ConnectionSharedKey": {
@@ -24435,224 +23734,6 @@
         "connectedGroupPrivateEndpointsScale",
         "connectedGroupAddressOverlap",
         "peeringEnforcement"
-      ]
-    },
-    "ConnectivityDestination": {
-      "type": "object",
-      "description": "Parameters that define destination of connection.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The ID of the resource to which a connection attempt will be made."
-        },
-        "address": {
-          "type": "string",
-          "description": "The IP address or URI the resource to which a connection attempt will be made."
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Port on which check connectivity will be performed.",
-          "minimum": 0,
-          "maximum": 65535
-        }
-      }
-    },
-    "ConnectivityHop": {
-      "type": "object",
-      "description": "Information about a hop between the source and the destination.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the hop.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the hop.",
-          "readOnly": true
-        },
-        "address": {
-          "type": "string",
-          "description": "The IP address of the hop.",
-          "readOnly": true
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The ID of the resource corresponding to this hop.",
-          "readOnly": true
-        },
-        "nextHopIds": {
-          "type": "array",
-          "description": "List of next hop identifiers.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "previousHopIds": {
-          "type": "array",
-          "description": "List of previous hop identifiers.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "links": {
-          "type": "array",
-          "description": "List of hop links.",
-          "items": {
-            "$ref": "#/definitions/HopLink"
-          },
-          "readOnly": true
-        },
-        "previousLinks": {
-          "type": "array",
-          "description": "List of previous hop links.",
-          "items": {
-            "$ref": "#/definitions/HopLink"
-          },
-          "readOnly": true
-        },
-        "issues": {
-          "type": "array",
-          "description": "List of issues.",
-          "items": {
-            "$ref": "#/definitions/ConnectivityIssue"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ConnectivityInformation": {
-      "type": "object",
-      "description": "Information on the connectivity status.",
-      "properties": {
-        "hops": {
-          "type": "array",
-          "description": "List of hops between the source and the destination.",
-          "items": {
-            "$ref": "#/definitions/ConnectivityHop"
-          },
-          "readOnly": true
-        },
-        "connectionStatus": {
-          "$ref": "#/definitions/ConnectionStatus",
-          "description": "The connection status.",
-          "readOnly": true
-        },
-        "avgLatencyInMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Average latency in milliseconds.",
-          "readOnly": true
-        },
-        "minLatencyInMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Minimum latency in milliseconds.",
-          "readOnly": true
-        },
-        "maxLatencyInMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum latency in milliseconds.",
-          "readOnly": true
-        },
-        "probesSent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of probes sent.",
-          "readOnly": true
-        },
-        "probesFailed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of failed probes.",
-          "readOnly": true
-        }
-      }
-    },
-    "ConnectivityIssue": {
-      "type": "object",
-      "description": "Information about an issue encountered in the process of checking for connectivity.",
-      "properties": {
-        "origin": {
-          "$ref": "#/definitions/Origin",
-          "description": "The origin of the issue.",
-          "readOnly": true
-        },
-        "severity": {
-          "$ref": "#/definitions/Severity",
-          "description": "The severity of the issue.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/IssueType",
-          "description": "The type of issue.",
-          "readOnly": true
-        },
-        "context": {
-          "type": "array",
-          "description": "Provides additional context on the issue.",
-          "items": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ConnectivityParameters": {
-      "type": "object",
-      "description": "Parameters that determine how the connectivity check will be performed.",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/ConnectivitySource",
-          "description": "The source of the connection."
-        },
-        "destination": {
-          "$ref": "#/definitions/ConnectivityDestination",
-          "description": "The destination of connection."
-        },
-        "protocol": {
-          "$ref": "#/definitions/Protocol",
-          "description": "Network protocol."
-        },
-        "protocolConfiguration": {
-          "$ref": "#/definitions/ProtocolConfiguration",
-          "description": "Configuration of the protocol."
-        },
-        "preferredIPVersion": {
-          "$ref": "#/definitions/IPVersion",
-          "description": "Preferred IP version of the connection."
-        }
-      },
-      "required": [
-        "source",
-        "destination"
-      ]
-    },
-    "ConnectivitySource": {
-      "type": "object",
-      "description": "Parameters that define the source of the connection.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The ID of the resource from which a connectivity check will be initiated."
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The source port from which a connectivity check will be performed.",
-          "minimum": 0,
-          "maximum": 65535
-        }
-      },
-      "required": [
-        "resourceId"
       ]
     },
     "ConnectivityTopology": {
@@ -25634,24 +24715,6 @@
         }
       }
     },
-    "Dimension": {
-      "type": "object",
-      "description": "Dimension of the metric.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the dimension."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the dimension."
-        },
-        "internalName": {
-          "type": "string",
-          "description": "The internal name of the dimension."
-        }
-      }
-    },
     "Direction": {
       "type": "string",
       "description": "The direction of the traffic.",
@@ -26456,43 +25519,6 @@
         "message": {
           "type": "string",
           "description": "Error message."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDetails",
-          "title": "Error",
-          "description": "The error details object."
-        }
-      }
-    },
-    "EvaluatedNetworkSecurityGroup": {
-      "type": "object",
-      "description": "Results of network security group evaluation.",
-      "properties": {
-        "networkSecurityGroupId": {
-          "type": "string",
-          "description": "Network security group ID."
-        },
-        "appliedTo": {
-          "type": "string",
-          "description": "Resource ID of nic or subnet to which network security group is applied."
-        },
-        "matchedRule": {
-          "$ref": "#/definitions/MatchedRule",
-          "description": "Matched network security rule."
-        },
-        "rulesEvaluationResult": {
-          "type": "array",
-          "description": "List of network security rules evaluation results.",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityRulesEvaluationResult"
-          },
-          "readOnly": true
         }
       }
     },
@@ -28922,7 +27948,7 @@
       "description": "A flow log resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/FlowLogPropertiesFormat",
+          "$ref": "./networkWatcher.json/definitions/FlowLogPropertiesFormat",
           "description": "Properties of the flow log.",
           "x-ms-client-flatten": true
         },
@@ -28942,22 +27968,6 @@
         }
       ]
     },
-    "FlowLogFormatParameters": {
-      "type": "object",
-      "description": "Parameters that define the flow log format.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/FlowLogFormatType",
-          "description": "The file type of flow log."
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The version (revision) of the flow log.",
-          "default": 0
-        }
-      }
-    },
     "FlowLogFormatType": {
       "type": "string",
       "description": "The file type of flow log.",
@@ -28975,33 +27985,6 @@
           }
         ]
       }
-    },
-    "FlowLogInformation": {
-      "type": "object",
-      "description": "Information on the configuration of flow log and traffic analytics (optional) .",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "The ID of the resource to configure for flow log and traffic analytics (optional) ."
-        },
-        "properties": {
-          "$ref": "#/definitions/FlowLogProperties",
-          "description": "Properties of the flow log.",
-          "x-ms-client-flatten": true
-        },
-        "flowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsProperties",
-          "description": "Parameters that define the configuration of traffic analytics."
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "FlowLog resource Managed Identity"
-        }
-      },
-      "required": [
-        "targetResourceId",
-        "properties"
-      ]
     },
     "FlowLogListResult": {
       "type": "object",
@@ -29022,105 +28005,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "FlowLogProperties": {
-      "type": "object",
-      "description": "Parameters that define the configuration of flow log.",
-      "properties": {
-        "storageId": {
-          "type": "string",
-          "description": "ID of the storage account which is used to store the flow log."
-        },
-        "enabledFilteringCriteria": {
-          "type": "string",
-          "description": "Optional field to filter network traffic logs based on SrcIP, SrcPort, DstIP, DstPort, Protocol, Encryption, Direction and Action. If not specified, all network traffic will be logged."
-        },
-        "recordTypes": {
-          "type": "string",
-          "description": "Optional field to filter network traffic logs based on flow states. Value of this field could be any comma separated combination string of letters B,C,E or D. B represents Begin, when a flow is created. C represents Continue for an ongoing flow generated at every five-minute interval. E represents End, when a flow is terminated. D represents Deny, when a flow is denied. If not specified, all network traffic will be logged."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Flag to enable/disable flow logging."
-        },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicyParameters",
-          "description": "Parameters that define the retention policy for flow log."
-        },
-        "format": {
-          "$ref": "#/definitions/FlowLogFormatParameters",
-          "description": "Parameters that define the flow log format."
-        }
-      },
-      "required": [
-        "storageId",
-        "enabled"
-      ]
-    },
-    "FlowLogPropertiesFormat": {
-      "type": "object",
-      "description": "Parameters that define the configuration of flow log.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "ID of network security group to which flow log will be applied."
-        },
-        "targetResourceGuid": {
-          "type": "string",
-          "description": "Guid of network security group to which flow log will be applied.",
-          "readOnly": true
-        },
-        "storageId": {
-          "type": "string",
-          "description": "ID of the storage account which is used to store the flow log."
-        },
-        "enabledFilteringCriteria": {
-          "type": "string",
-          "description": "Optional field to filter network traffic logs based on SrcIP, SrcPort, DstIP, DstPort, Protocol, Encryption, Direction and Action. If not specified, all network traffic will be logged."
-        },
-        "recordTypes": {
-          "type": "string",
-          "description": "Optional field to filter network traffic logs based on flow states. Value of this field could be any comma separated combination string of letters B,C,E or D. B represents Begin, when a flow is created. C represents Continue for an ongoing flow generated at every five-minute interval. E represents End, when a flow is terminated. D represents Deny, when a flow is denied. If not specified, all network traffic will be logged."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Flag to enable/disable flow logging."
-        },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicyParameters",
-          "description": "Parameters that define the retention policy for flow log."
-        },
-        "format": {
-          "$ref": "#/definitions/FlowLogFormatParameters",
-          "description": "Parameters that define the flow log format."
-        },
-        "flowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsProperties",
-          "description": "Parameters that define the configuration of traffic analytics."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the flow log.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "targetResourceId",
-        "storageId"
-      ]
-    },
-    "FlowLogStatusParameters": {
-      "type": "object",
-      "description": "Parameters that define a resource to query flow log and traffic analytics (optional) status.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "The target resource where getting the flow log and traffic analytics (optional) status."
-        }
-      },
-      "required": [
-        "targetResourceId"
       ]
     },
     "FrontendIPConfiguration": {
@@ -29532,31 +28416,6 @@
         ]
       }
     },
-    "HTTPConfiguration": {
-      "type": "object",
-      "description": "HTTP configuration of the connectivity check.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/HTTPMethod",
-          "description": "HTTP method."
-        },
-        "headers": {
-          "type": "array",
-          "description": "List of HTTP headers.",
-          "items": {
-            "$ref": "#/definitions/HTTPHeader"
-          }
-        },
-        "validStatusCodes": {
-          "type": "array",
-          "description": "Valid status codes.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      }
-    },
     "HTTPConfigurationMethod": {
       "type": "string",
       "description": "The HTTP method to use.",
@@ -29579,20 +28438,6 @@
             "description": "Post"
           }
         ]
-      }
-    },
-    "HTTPHeader": {
-      "type": "object",
-      "description": "The HTTP header.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name in HTTP header."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value in HTTP header."
-        }
       }
     },
     "HTTPMethod": {
@@ -29628,78 +28473,6 @@
         "negate": {
           "type": "boolean",
           "description": "Setting this value as truth will force to check the negation of the condition given by the user in the pattern field."
-        }
-      }
-    },
-    "HopLink": {
-      "type": "object",
-      "description": "Hop link.",
-      "properties": {
-        "nextHopId": {
-          "type": "string",
-          "description": "The ID of the next hop.",
-          "readOnly": true
-        },
-        "linkType": {
-          "type": "string",
-          "description": "Link type.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/HopLinkProperties",
-          "description": "Hop link properties.",
-          "x-ms-client-flatten": true
-        },
-        "issues": {
-          "type": "array",
-          "description": "List of issues.",
-          "items": {
-            "$ref": "#/definitions/ConnectivityIssue"
-          },
-          "readOnly": true
-        },
-        "context": {
-          "type": "object",
-          "description": "Provides additional context on links.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Resource ID.",
-          "readOnly": true
-        }
-      }
-    },
-    "HopLinkProperties": {
-      "type": "object",
-      "description": "Hop link properties.",
-      "properties": {
-        "roundTripTimeMin": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum roundtrip time in milliseconds.",
-          "minimum": 0,
-          "maximum": 4294967295,
-          "readOnly": true
-        },
-        "roundTripTimeAvg": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Average roundtrip time in milliseconds.",
-          "minimum": 0,
-          "maximum": 4294967295,
-          "readOnly": true
-        },
-        "roundTripTimeMax": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum roundtrip time in milliseconds.",
-          "minimum": 0,
-          "maximum": 4294967295,
-          "readOnly": true
         }
       }
     },
@@ -31905,24 +30678,6 @@
         "value"
       ]
     },
-    "LogSpecification": {
-      "type": "object",
-      "description": "Description of logging specification.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the specification."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the specification."
-        },
-        "blobDuration": {
-          "type": "string",
-          "description": "Duration of the blob."
-        }
-      }
-    },
     "ManagedRuleEnabledState": {
       "type": "string",
       "description": "The state of the managed rule. Defaults to Disabled if not specified.",
@@ -32159,88 +30914,6 @@
         "variableName"
       ]
     },
-    "MatchedRule": {
-      "type": "object",
-      "description": "Matched rule.",
-      "properties": {
-        "ruleName": {
-          "type": "string",
-          "description": "Name of the matched network security rule."
-        },
-        "action": {
-          "type": "string",
-          "description": "The network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'."
-        }
-      }
-    },
-    "MetricSpecification": {
-      "type": "object",
-      "description": "Description of metrics specification.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the metric."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the metric."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "The description of the metric."
-        },
-        "unit": {
-          "type": "string",
-          "description": "Units the metric to be displayed in."
-        },
-        "aggregationType": {
-          "type": "string",
-          "description": "The aggregation type."
-        },
-        "availabilities": {
-          "type": "array",
-          "description": "List of availability.",
-          "items": {
-            "$ref": "#/definitions/Availability"
-          }
-        },
-        "enableRegionalMdmAccount": {
-          "type": "boolean",
-          "description": "Whether regional MDM account enabled."
-        },
-        "fillGapWithZero": {
-          "type": "boolean",
-          "description": "Whether gaps would be filled with zeros."
-        },
-        "metricFilterPattern": {
-          "type": "string",
-          "description": "Pattern for the filter of the metric."
-        },
-        "dimensions": {
-          "type": "array",
-          "description": "List of dimensions.",
-          "items": {
-            "$ref": "#/definitions/Dimension"
-          }
-        },
-        "isInternal": {
-          "type": "boolean",
-          "description": "Whether the metric is internal."
-        },
-        "sourceMdmAccount": {
-          "type": "string",
-          "description": "The source MDM account."
-        },
-        "sourceMdmNamespace": {
-          "type": "string",
-          "description": "The source MDM namespace."
-        },
-        "resourceIdDimensionNameOverride": {
-          "type": "string",
-          "description": "The resource Id dimension name override."
-        }
-      }
-    },
     "NatGatewayPropertiesFormat": {
       "type": "object",
       "description": "Nat Gateway properties.",
@@ -32395,92 +31068,6 @@
       ],
       "x-ms-discriminator-value": "NatRule"
     },
-    "NetworkConfigurationDiagnosticParameters": {
-      "type": "object",
-      "description": "Parameters to get network configuration diagnostic.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "The ID of the target resource to perform network configuration diagnostic. Valid options are VM, NetworkInterface, VMSS/NetworkInterface and Application Gateway."
-        },
-        "verbosityLevel": {
-          "$ref": "#/definitions/VerbosityLevel",
-          "description": "Verbosity level."
-        },
-        "profiles": {
-          "type": "array",
-          "description": "List of network configuration diagnostic profiles.",
-          "items": {
-            "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile"
-          }
-        }
-      },
-      "required": [
-        "targetResourceId",
-        "profiles"
-      ]
-    },
-    "NetworkConfigurationDiagnosticProfile": {
-      "type": "object",
-      "description": "Parameters to compare with network configuration.",
-      "properties": {
-        "direction": {
-          "$ref": "#/definitions/Direction",
-          "description": "The direction of the traffic."
-        },
-        "protocol": {
-          "type": "string",
-          "description": "Protocol to be verified on. Accepted values are '*', TCP, UDP."
-        },
-        "source": {
-          "type": "string",
-          "description": "Traffic source. Accepted values are '*', IP Address/CIDR, Service Tag."
-        },
-        "destination": {
-          "type": "string",
-          "description": "Traffic destination. Accepted values are: '*', IP Address/CIDR, Service Tag."
-        },
-        "destinationPort": {
-          "type": "string",
-          "description": "Traffic destination port. Accepted values are '*' and a single port in the range (0 - 65535)."
-        }
-      },
-      "required": [
-        "direction",
-        "protocol",
-        "source",
-        "destination",
-        "destinationPort"
-      ]
-    },
-    "NetworkConfigurationDiagnosticResponse": {
-      "type": "object",
-      "description": "Results of network configuration diagnostic on the target resource.",
-      "properties": {
-        "results": {
-          "type": "array",
-          "description": "List of network configuration diagnostic results.",
-          "items": {
-            "$ref": "#/definitions/NetworkConfigurationDiagnosticResult"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkConfigurationDiagnosticResult": {
-      "type": "object",
-      "description": "Network configuration diagnostic result corresponded to provided traffic query.",
-      "properties": {
-        "profile": {
-          "$ref": "#/definitions/NetworkConfigurationDiagnosticProfile",
-          "description": "Network configuration diagnostic profile."
-        },
-        "networkSecurityGroupResult": {
-          "$ref": "#/definitions/NetworkSecurityGroupResult",
-          "description": "Network security group result."
-        }
-      }
-    },
     "NetworkGroupProperties": {
       "type": "object",
       "description": "Properties of network group",
@@ -32562,24 +31149,6 @@
         "sourceNetworkIntentPolicy": {
           "$ref": "#/definitions/NetworkIntentPolicy",
           "description": "Source network intent policy."
-        }
-      }
-    },
-    "NetworkInterfaceAssociation": {
-      "type": "object",
-      "description": "Network interface and its custom security rules.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Network interface ID.",
-          "readOnly": true
-        },
-        "securityRules": {
-          "type": "array",
-          "description": "Collection of custom security rules.",
-          "items": {
-            "$ref": "#/definitions/SecurityRule"
-          }
         }
       }
     },
@@ -33631,70 +32200,6 @@
         }
       }
     },
-    "NetworkSecurityGroupResult": {
-      "type": "object",
-      "description": "Network configuration diagnostic result corresponded provided traffic query.",
-      "properties": {
-        "securityRuleAccessResult": {
-          "$ref": "#/definitions/SecurityRuleAccess",
-          "description": "The network traffic is allowed or denied."
-        },
-        "evaluatedNetworkSecurityGroups": {
-          "type": "array",
-          "description": "List of results network security groups diagnostic.",
-          "items": {
-            "$ref": "#/definitions/EvaluatedNetworkSecurityGroup"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkSecurityPerimeterProperties": {
-      "type": "object",
-      "description": "Properties of network security perimeter.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NspProvisioningState",
-          "description": "The provisioning state of the scope assignment resource.",
-          "readOnly": true
-        },
-        "perimeterGuid": {
-          "type": "string",
-          "description": "perimeter guid of the network security perimeter.",
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkSecurityRulesEvaluationResult": {
-      "type": "object",
-      "description": "Network security rules evaluation result.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the network security rule."
-        },
-        "protocolMatched": {
-          "type": "boolean",
-          "description": "Value indicating whether protocol is matched."
-        },
-        "sourceMatched": {
-          "type": "boolean",
-          "description": "Value indicating whether source is matched."
-        },
-        "sourcePortMatched": {
-          "type": "boolean",
-          "description": "Value indicating whether source port is matched."
-        },
-        "destinationMatched": {
-          "type": "boolean",
-          "description": "Value indicating whether destination is matched."
-        },
-        "destinationPortMatched": {
-          "type": "boolean",
-          "description": "Value indicating whether destination port is matched."
-        }
-      }
-    },
     "NetworkVirtualApplianceBootDiagnosticParameters": {
       "type": "object",
       "description": "Specifies input parameters required to retrieve the boot diagnostic logs for an NVA instance",
@@ -34077,79 +32582,6 @@
         }
       }
     },
-    "NetworkWatcherListResult": {
-      "type": "object",
-      "description": "Response for ListNetworkWatchers API service call.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of network watcher resources.",
-          "items": {
-            "$ref": "./networkWatcher.json/definitions/NetworkWatcher"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
-        }
-      }
-    },
-    "NetworkWatcherPropertiesFormat": {
-      "type": "object",
-      "description": "The network watcher properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the network watcher resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "NextHopParameters": {
-      "type": "object",
-      "description": "Parameters that define the source and destination endpoint.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "The resource identifier of the target resource against which the action is to be performed."
-        },
-        "sourceIPAddress": {
-          "type": "string",
-          "description": "The source IP address."
-        },
-        "destinationIPAddress": {
-          "type": "string",
-          "description": "The destination IP address."
-        },
-        "targetNicResourceId": {
-          "type": "string",
-          "description": "The NIC ID. (If VM has multiple NICs and IP forwarding is enabled on any of the nics, then this parameter must be specified. Otherwise optional)."
-        }
-      },
-      "required": [
-        "targetResourceId",
-        "sourceIPAddress",
-        "destinationIPAddress"
-      ]
-    },
-    "NextHopResult": {
-      "type": "object",
-      "description": "The information about next hop from the specified VM.",
-      "properties": {
-        "nextHopType": {
-          "$ref": "#/definitions/NextHopType",
-          "description": "Next hop type."
-        },
-        "nextHopIpAddress": {
-          "type": "string",
-          "description": "Next hop IP Address."
-        },
-        "routeTableId": {
-          "type": "string",
-          "description": "The resource identifier for the route table associated with the route being returned. If the route being returned does not correspond to any user created routes then this field will be the string 'System Route'."
-        }
-      }
-    },
     "NextHopType": {
       "type": "string",
       "description": "Next hop type.",
@@ -34287,7 +32719,7 @@
       "description": "The NSP access rule resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NspAccessRuleProperties",
+          "$ref": "./networkSecurityPerimeter.json/definitions/NspAccessRuleProperties",
           "description": "Properties of the NSP access rule.",
           "x-ms-client-flatten": true
         }
@@ -34319,79 +32751,12 @@
         "value"
       ]
     },
-    "NspAccessRuleProperties": {
-      "type": "object",
-      "description": "Properties of NSP access rule.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NspProvisioningState",
-          "description": "The provisioning state of the scope assignment resource.",
-          "readOnly": true
-        },
-        "direction": {
-          "$ref": "#/definitions/AccessRuleDirection",
-          "description": "Direction that specifies whether the access rules is inbound/outbound."
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "description": "Inbound address prefixes (IPv4/IPv6)",
-          "items": {
-            "type": "string"
-          }
-        },
-        "fullyQualifiedDomainNames": {
-          "type": "array",
-          "description": "Outbound rules in fully qualified domain name format.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "subscriptions": {
-          "type": "array",
-          "description": "List of subscription ids",
-          "items": {
-            "$ref": "#/definitions/SubscriptionId"
-          },
-          "x-ms-client-flatten": true
-        },
-        "networkSecurityPerimeters": {
-          "type": "array",
-          "description": "Rule specified by the perimeter id.",
-          "items": {
-            "$ref": "#/definitions/PerimeterBasedAccessRule"
-          },
-          "readOnly": true,
-          "x-ms-client-flatten": true
-        },
-        "emailAddresses": {
-          "type": "array",
-          "description": "Outbound rules in email address format. This access rule type is currently unavailable for use.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "phoneNumbers": {
-          "type": "array",
-          "description": "Outbound rules in phone number format. This access rule type is currently unavailable for use.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "serviceTags": {
-          "type": "array",
-          "description": "Inbound rules of type service tag. This access rule type is currently unavailable for use.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "NspAssociation": {
       "type": "object",
       "description": "The NSP resource association resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NspAssociationProperties",
+          "$ref": "./networkSecurityPerimeter.json/definitions/NspAssociationProperties",
           "description": "Properties of the NSP resource association.",
           "x-ms-client-flatten": true
         }
@@ -34401,33 +32766,6 @@
           "$ref": "#/definitions/CommonProxyResource"
         }
       ]
-    },
-    "NspAssociationProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NspProvisioningState",
-          "description": "The provisioning state of the resource  association resource.",
-          "readOnly": true
-        },
-        "privateLinkResource": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The PaaS resource to be associated."
-        },
-        "profile": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Profile id to which the PaaS resource is associated."
-        },
-        "accessMode": {
-          "$ref": "#/definitions/AssociationAccessMode",
-          "description": "Access mode on the association."
-        },
-        "hasProvisioningIssues": {
-          "type": "string",
-          "description": "Specifies if there are provisioning issues",
-          "readOnly": true
-        }
-      }
     },
     "NspAssociationsListResult": {
       "type": "object",
@@ -34455,7 +32793,7 @@
       "description": "The network security perimeter link resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NspLinkProperties",
+          "$ref": "./networkSecurityPerimeter.json/definitions/NspLinkProperties",
           "description": "Properties of the network security perimeter link resource.",
           "x-ms-client-flatten": true
         }
@@ -34486,86 +32824,6 @@
       "required": [
         "value"
       ]
-    },
-    "NspLinkProperties": {
-      "type": "object",
-      "description": "Properties of NSP Link resource.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NspLinkProvisioningState",
-          "description": "The provisioning state of the NSP Link resource.",
-          "readOnly": true
-        },
-        "autoApprovedRemotePerimeterResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Perimeter ARM Id for the remote NSP with which the link gets created in Auto-approval mode. It should be used when the NSP admin have Microsoft.Network/networkSecurityPerimeters/linkPerimeter/action permission on the remote NSP resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/networkSecurityPerimeters"
-              }
-            ]
-          }
-        },
-        "remotePerimeterGuid": {
-          "type": "string",
-          "description": "Remote NSP Guid with which the link gets created.",
-          "readOnly": true
-        },
-        "remotePerimeterLocation": {
-          "type": "string",
-          "description": "Remote NSP location with which the link gets created.",
-          "readOnly": true
-        },
-        "localInboundProfiles": {
-          "type": "array",
-          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          }
-        },
-        "localOutboundProfiles": {
-          "type": "array",
-          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "remoteInboundProfiles": {
-          "type": "array",
-          "description": "Remote Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. This property can only be updated in auto-approval mode.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          }
-        },
-        "remoteOutboundProfiles": {
-          "type": "array",
-          "description": "Remote Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "A message passed to the owner of the remote NSP link resource with this connection request. In case of Auto-approved flow, it is default to 'Auto Approved'. Restricted to 140 chars."
-        },
-        "status": {
-          "$ref": "#/definitions/NspLinkStatus",
-          "description": "The NSP link state.",
-          "readOnly": true
-        }
-      }
     },
     "NspLinkProvisioningState": {
       "type": "string",
@@ -34626,7 +32884,7 @@
       "description": "The network security perimeter linkReference resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NspLinkReferenceProperties",
+          "$ref": "./networkSecurityPerimeter.json/definitions/NspLinkReferenceProperties",
           "description": "Properties of the network security perimeter linkReference resource.",
           "x-ms-client-flatten": true
         }
@@ -34657,82 +32915,6 @@
       "required": [
         "value"
       ]
-    },
-    "NspLinkReferenceProperties": {
-      "type": "object",
-      "description": "Properties of NSP LinkReference resource.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/NspLinkProvisioningState",
-          "description": "The provisioning state of the NSP LinkReference resource.",
-          "readOnly": true
-        },
-        "remotePerimeterResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Perimeter ARM Id for the remote NSP with which the link is created.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/networkSecurityPerimeters"
-              }
-            ]
-          }
-        },
-        "remotePerimeterGuid": {
-          "type": "string",
-          "description": "Remote NSP Guid with which the link is created.",
-          "readOnly": true
-        },
-        "remotePerimeterLocation": {
-          "type": "string",
-          "description": "Remote NSP location with which the link gets created.",
-          "readOnly": true
-        },
-        "localInboundProfiles": {
-          "type": "array",
-          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          }
-        },
-        "localOutboundProfiles": {
-          "type": "array",
-          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "remoteInboundProfiles": {
-          "type": "array",
-          "description": "Remote Inbound profile names to which Inbound is allowed. ['*'] value implies inbound is allowed to all profiles at remote perimeter. This property can only be updated from corresponding link resource present in remote perimeter.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "remoteOutboundProfiles": {
-          "type": "array",
-          "description": "Remote Outbound profile names from which Outbound is allowed. ['*'] value implies outbound is allowed from all profiles at remote perimeter. This property can only be updated from corresponding link resource present in remote perimeter.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "A message sent by the remote NSP link admin for connection request. In case of Auto-approved flow, it is default to 'Auto Approved'.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/NspLinkStatus",
-          "description": "The NSP linkReference state. It cannot be changed if link is created in auto-approval mode."
-        }
-      }
     },
     "NspLinkStatus": {
       "type": "string",
@@ -34775,7 +32957,7 @@
       "description": "The NSP logging configuration",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NspLoggingConfigurationProperties",
+          "$ref": "./networkSecurityPerimeter.json/definitions/NspLoggingConfigurationProperties",
           "description": "Properties of the NSP logging configuration.",
           "x-ms-client-flatten": true
         }
@@ -34807,29 +32989,12 @@
         "value"
       ]
     },
-    "NspLoggingConfigurationProperties": {
-      "type": "object",
-      "description": "The NSP logging configuration properties.",
-      "properties": {
-        "enabledLogCategories": {
-          "type": "array",
-          "description": "The log categories to enable in the NSP logging configuration.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the NSP logging configuration."
-        }
-      }
-    },
     "NspProfile": {
       "type": "object",
       "description": "The network security perimeter profile resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NspProfileProperties",
+          "$ref": "./networkSecurityPerimeter.json/definitions/NspProfileProperties",
           "description": "Properties of the network security perimeter profile",
           "x-ms-client-flatten": true
         }
@@ -34860,22 +33025,6 @@
       "required": [
         "value"
       ]
-    },
-    "NspProfileProperties": {
-      "type": "object",
-      "description": "Properties of NSP profile.",
-      "properties": {
-        "accessRulesVersion": {
-          "type": "string",
-          "description": "Version number that increases with every update to access rules within the profile.",
-          "readOnly": true
-        },
-        "diagnosticSettingsVersion": {
-          "type": "string",
-          "description": "Version number that increases with every update to diagnostic settings within the profile.",
-          "readOnly": true
-        }
-      }
     },
     "NspProvisioningState": {
       "type": "string",
@@ -34933,7 +33082,7 @@
           "type": "array",
           "description": "The NspServiceTagsResource items on this page",
           "items": {
-            "$ref": "#/definitions/NspServiceTagsResource"
+            "$ref": "./networkSecurityPerimeter.json/definitions/NspServiceTagsResource"
           }
         },
         "nextLink": {
@@ -34945,19 +33094,6 @@
       "required": [
         "value"
       ]
-    },
-    "NspServiceTagsResource": {
-      "type": "object",
-      "description": "Resource containing list of NSP service tags.",
-      "properties": {
-        "serviceTags": {
-          "type": "array",
-          "description": "NSP service tags.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "NvaInVnetSubnetReferenceProperties": {
       "type": "object",
@@ -35109,29 +33245,6 @@
         ]
       }
     },
-    "Operation": {
-      "type": "object",
-      "description": "Network REST API operation definition.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Operation name: {provider}/{resource}/{operation}."
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "Display metadata associated with the operation."
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationPropertiesFormat",
-          "description": "Operation properties format.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "OperationDisplay": {
       "type": "object",
       "description": "Display metadata associated with the operation.",
@@ -35162,7 +33275,7 @@
           "type": "array",
           "description": "The Operation items on this page",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "./networkingOperations.json/definitions/Operation"
           }
         },
         "nextLink": {
@@ -35175,16 +33288,6 @@
         "value"
       ]
     },
-    "OperationPropertiesFormat": {
-      "type": "object",
-      "description": "Description of operation properties format.",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/OperationPropertiesFormatServiceSpecification",
-          "description": "Specification of the service."
-        }
-      }
-    },
     "OperationPropertiesFormatServiceSpecification": {
       "type": "object",
       "description": "Specification of the service.",
@@ -35193,14 +33296,14 @@
           "type": "array",
           "description": "Operation service specification.",
           "items": {
-            "$ref": "#/definitions/MetricSpecification"
+            "$ref": "./networkingOperations.json/definitions/MetricSpecification"
           }
         },
         "logSpecifications": {
           "type": "array",
           "description": "Operation log specification.",
           "items": {
-            "$ref": "#/definitions/LogSpecification"
+            "$ref": "./networkingOperations.json/definitions/LogSpecification"
           }
         }
       }
@@ -35607,235 +33710,6 @@
         }
       }
     },
-    "PacketCapture": {
-      "type": "object",
-      "description": "Parameters that define the create packet capture operation.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PacketCaptureParameters",
-          "description": "Properties of the packet capture.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "PacketCaptureFilter": {
-      "type": "object",
-      "description": "Filter that is applied to packet capture request. Multiple filters can be applied.",
-      "properties": {
-        "protocol": {
-          "type": "string",
-          "description": "Protocol to be filtered on.",
-          "default": "Any",
-          "enum": [
-            "TCP",
-            "UDP",
-            "Any"
-          ],
-          "x-ms-enum": {
-            "name": "PcProtocol",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "TCP",
-                "value": "TCP",
-                "description": "TCP"
-              },
-              {
-                "name": "UDP",
-                "value": "UDP",
-                "description": "UDP"
-              },
-              {
-                "name": "Any",
-                "value": "Any",
-                "description": "Any"
-              }
-            ]
-          }
-        },
-        "localIPAddress": {
-          "type": "string",
-          "description": "Local IP Address to be filtered on. Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5\"? for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null."
-        },
-        "remoteIPAddress": {
-          "type": "string",
-          "description": "Local IP Address to be filtered on. Notation: \"127.0.0.1\" for single address entry. \"127.0.0.1-127.0.0.255\" for range. \"127.0.0.1;127.0.0.5;\" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null."
-        },
-        "localPort": {
-          "type": "string",
-          "description": "Local port to be filtered on. Notation: \"80\" for single port entry.\"80-85\" for range. \"80;443;\" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null."
-        },
-        "remotePort": {
-          "type": "string",
-          "description": "Remote port to be filtered on. Notation: \"80\" for single port entry.\"80-85\" for range. \"80;443;\" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null."
-        }
-      }
-    },
-    "PacketCaptureListResult": {
-      "type": "object",
-      "description": "List of packet capture sessions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Information about packet capture sessions.",
-          "items": {
-            "$ref": "#/definitions/PacketCaptureResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
-        }
-      }
-    },
-    "PacketCaptureMachineScope": {
-      "type": "object",
-      "description": "A list of AzureVMSS instances which can be included or excluded to run packet capture. If both included and excluded are empty, then the packet capture will run on all instances of AzureVMSS.",
-      "properties": {
-        "include": {
-          "type": "array",
-          "description": "List of AzureVMSS instances to run packet capture on.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "exclude": {
-          "type": "array",
-          "description": "List of AzureVMSS instances which has to be excluded from the AzureVMSS from running packet capture.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PacketCaptureParameters": {
-      "type": "object",
-      "description": "Parameters that define the create packet capture operation.",
-      "properties": {
-        "target": {
-          "type": "string",
-          "description": "The ID of the targeted resource, only AzureVM and AzureVMSS as target type are currently supported."
-        },
-        "scope": {
-          "$ref": "#/definitions/PacketCaptureMachineScope",
-          "description": "A list of AzureVMSS instances which can be included or excluded to run packet capture. If both included and excluded are empty, then the packet capture will run on all instances of AzureVMSS."
-        },
-        "targetType": {
-          "$ref": "#/definitions/PacketCaptureTargetType",
-          "description": "Target type of the resource provided."
-        },
-        "bytesToCapturePerPacket": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of bytes captured per packet, the remaining bytes are truncated.",
-          "default": 0,
-          "minimum": 0,
-          "maximum": 4294967295
-        },
-        "totalBytesPerSession": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum size of the capture output.",
-          "default": 1073741824,
-          "minimum": 0,
-          "maximum": 4294967295
-        },
-        "timeLimitInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum duration of the capture session in seconds.",
-          "default": 18000,
-          "minimum": 0,
-          "maximum": 18000
-        },
-        "storageLocation": {
-          "$ref": "#/definitions/PacketCaptureStorageLocation",
-          "description": "The storage location for a packet capture session."
-        },
-        "filters": {
-          "type": "array",
-          "description": "A list of packet capture filters.",
-          "items": {
-            "$ref": "#/definitions/PacketCaptureFilter"
-          }
-        },
-        "continuousCapture": {
-          "type": "boolean",
-          "description": "This continuous capture is a nullable boolean, which can hold 'null', 'true' or 'false' value. If we do not pass this parameter, it would be consider as 'null', default value is 'null'."
-        },
-        "captureSettings": {
-          "$ref": "#/definitions/PacketCaptureSettings",
-          "description": "The capture setting holds the 'FileCount', 'FileSizeInBytes', 'SessionTimeLimitInSeconds' values."
-        }
-      },
-      "required": [
-        "target",
-        "storageLocation"
-      ]
-    },
-    "PacketCaptureQueryStatusResult": {
-      "type": "object",
-      "description": "Status of packet capture session.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the packet capture resource."
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the packet capture resource."
-        },
-        "captureStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the packet capture session."
-        },
-        "packetCaptureStatus": {
-          "$ref": "#/definitions/PcStatus",
-          "description": "The status of the packet capture session."
-        },
-        "stopReason": {
-          "type": "string",
-          "description": "The reason the current packet capture session was stopped."
-        },
-        "packetCaptureError": {
-          "type": "array",
-          "description": "List of errors of packet capture session.",
-          "items": {
-            "$ref": "#/definitions/PcError"
-          }
-        }
-      }
-    },
-    "PacketCaptureResult": {
-      "type": "object",
-      "description": "Information about packet capture session.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the packet capture session.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "ID of the packet capture operation.",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/PacketCaptureResultProperties",
-          "description": "Properties of the packet capture result.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "PacketCaptureResultProperties": {
       "type": "object",
       "description": "The properties of a packet capture session.",
@@ -35848,61 +33722,9 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PacketCaptureParameters"
+          "$ref": "./networkWatcher.json/definitions/PacketCaptureParameters"
         }
       ]
-    },
-    "PacketCaptureSettings": {
-      "type": "object",
-      "description": "The storage location for a packet capture session.",
-      "properties": {
-        "fileCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of file count. Default value of count is 10 and maximum number is 10000.",
-          "default": 10,
-          "minimum": 0,
-          "maximum": 10000
-        },
-        "fileSizeInBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of bytes captured per packet. Default value in bytes 104857600 (100MB) and maximum in bytes 4294967295 (4GB).",
-          "default": 104857600,
-          "minimum": 0,
-          "maximum": 4294967295
-        },
-        "sessionTimeLimitInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum duration of the capture session in seconds is 604800s (7 days) for a file. Default value in second 86400s (1 day).",
-          "default": 86400,
-          "minimum": 0,
-          "maximum": 604800
-        }
-      }
-    },
-    "PacketCaptureStorageLocation": {
-      "type": "object",
-      "description": "The storage location for a packet capture session.",
-      "properties": {
-        "storageId": {
-          "type": "string",
-          "description": "The ID of the storage account to save the packet capture session. Required if no localPath or filePath is provided."
-        },
-        "storagePath": {
-          "type": "string",
-          "description": "The URI of the storage path to save the packet capture. Must be a well-formed URI describing the location to save the packet capture."
-        },
-        "filePath": {
-          "type": "string",
-          "description": "This path is invalid if 'Continuous Capture' is provided with 'true' or 'false'. A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures. Required if no storage ID is provided, otherwise optional."
-        },
-        "localPath": {
-          "type": "string",
-          "description": "This path is valid if 'Continuous Capture' is provided with 'true' or 'false' and required if no storage ID is provided, otherwise optional. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures."
-        }
-      }
     },
     "PacketCaptureTargetType": {
       "type": "string",
@@ -36202,55 +34024,6 @@
         }
       }
     },
-    "PerimeterAssociableResource": {
-      "type": "object",
-      "description": "Resource that is onboarded to use network security perimeter. Also referred as perimeter associable resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PerimeterAssociableResourceProperties",
-          "description": "Properties of the perimeter associable resource.",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
-        },
-        "id": {
-          "type": "string",
-          "description": "Identifier of the perimeter associable resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        }
-      }
-    },
-    "PerimeterAssociableResourceProperties": {
-      "type": "object",
-      "description": "Properties of the perimeter associable resources.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "A friendly name for the properties of perimeter associable resources.",
-          "readOnly": true
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "Resource type/provider name.",
-          "readOnly": true
-        },
-        "publicDnsZones": {
-          "type": "array",
-          "description": "Public DNS zone names of the resources.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "PerimeterAssociableResourcesListResult": {
       "type": "object",
       "description": "Paged collection of PerimeterAssociableResource items",
@@ -36259,7 +34032,7 @@
           "type": "array",
           "description": "The PerimeterAssociableResource items on this page",
           "items": {
-            "$ref": "#/definitions/PerimeterAssociableResource"
+            "$ref": "./networkSecurityPerimeter.json/definitions/PerimeterAssociableResource"
           }
         },
         "nextLink": {
@@ -36271,34 +34044,6 @@
       "required": [
         "value"
       ]
-    },
-    "PerimeterBasedAccessRule": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "NSP id in the ARM id format.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/networkSecurityPerimeters"
-              }
-            ]
-          }
-        },
-        "perimeterGuid": {
-          "type": "string",
-          "description": "Resource guid of the NSP supplied.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the NSP supplied.",
-          "readOnly": true
-        }
-      }
     },
     "PfsGroup": {
       "type": "string",
@@ -37443,16 +35188,6 @@
         ]
       }
     },
-    "ProtocolConfiguration": {
-      "type": "object",
-      "description": "Configuration of the protocol.",
-      "properties": {
-        "HTTPConfiguration": {
-          "$ref": "#/definitions/HTTPConfiguration",
-          "description": "HTTP configuration of the connectivity check."
-        }
-      }
-    },
     "ProtocolType": {
       "type": "string",
       "description": "RNM supported protocol types.",
@@ -38128,19 +35863,6 @@
         }
       }
     },
-    "QueryTroubleshootingParameters": {
-      "type": "object",
-      "description": "Parameters that define the resource to query the troubleshooting result.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "The target resource ID to query the troubleshooting result."
-        }
-      },
-      "required": [
-        "targetResourceId"
-      ]
-    },
     "RadiusAuthServerListResult": {
       "type": "object",
       "description": "List of Radius servers with respective radius secrets.",
@@ -38740,23 +36462,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "RetentionPolicyParameters": {
-      "type": "object",
-      "description": "Parameters that define the retention policy for flow log.",
-      "properties": {
-        "days": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of days to retain flow log records.",
-          "default": 0
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Flag to enable/disable retention.",
-          "default": false
-        }
-      }
     },
     "Route": {
       "type": "object",
@@ -39789,46 +37494,6 @@
         ]
       }
     },
-    "SecurityGroupNetworkInterface": {
-      "type": "object",
-      "description": "Network interface and all its associated security rules.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID of the network interface."
-        },
-        "securityRuleAssociations": {
-          "$ref": "#/definitions/SecurityRuleAssociations",
-          "description": "All security rules associated with the network interface."
-        }
-      }
-    },
-    "SecurityGroupViewParameters": {
-      "type": "object",
-      "description": "Parameters that define the VM to check security groups for.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "ID of the target VM."
-        }
-      },
-      "required": [
-        "targetResourceId"
-      ]
-    },
-    "SecurityGroupViewResult": {
-      "type": "object",
-      "description": "The information about security rules applied to the specified VM.",
-      "properties": {
-        "networkInterfaces": {
-          "type": "array",
-          "description": "List of network interfaces on the specified VM.",
-          "items": {
-            "$ref": "#/definitions/SecurityGroupNetworkInterface"
-          }
-        }
-      }
-    },
     "SecurityPartnerProviderConnectionStatus": {
       "type": "string",
       "description": "The current state of the connection with Security Partner Provider.",
@@ -39962,34 +37627,6 @@
             "description": "Deny"
           }
         ]
-      }
-    },
-    "SecurityRuleAssociations": {
-      "type": "object",
-      "description": "All security rules associated with the network interface.",
-      "properties": {
-        "networkInterfaceAssociation": {
-          "$ref": "#/definitions/NetworkInterfaceAssociation",
-          "description": "Network interface and it's custom security rules."
-        },
-        "subnetAssociation": {
-          "$ref": "#/definitions/SubnetAssociation",
-          "description": "Subnet and it's custom security rules."
-        },
-        "defaultSecurityRules": {
-          "type": "array",
-          "description": "Collection of default security rules of the network security group.",
-          "items": {
-            "$ref": "#/definitions/SecurityRule"
-          }
-        },
-        "effectiveSecurityRules": {
-          "type": "array",
-          "description": "Collection of effective security rules.",
-          "items": {
-            "$ref": "#/definitions/EffectiveNetworkSecurityRule"
-          }
-        }
       }
     },
     "SecurityRuleDirection": {
@@ -41190,24 +38827,6 @@
         }
       ]
     },
-    "SubnetAssociation": {
-      "type": "object",
-      "description": "Subnet and it's custom security rules.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Subnet ID.",
-          "readOnly": true
-        },
-        "securityRules": {
-          "type": "array",
-          "description": "Collection of custom security rules.",
-          "items": {
-            "$ref": "#/definitions/SecurityRule"
-          }
-        }
-      }
-    },
     "SubnetListResult": {
       "type": "object",
       "description": "The response of a Subnet list operation.",
@@ -41420,23 +39039,6 @@
         }
       }
     },
-    "SubscriptionId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Subscription id in the ARM id format.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Resources/subscriptions"
-              }
-            ]
-          }
-        }
-      }
-    },
     "SwapResourceListResult": {
       "type": "object",
       "description": "SwapResource List with single entry to represent slot type on the specified cloud service.",
@@ -41496,97 +39098,6 @@
         }
       }
     },
-    "Topology": {
-      "type": "object",
-      "description": "Topology of the specified resource group.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "GUID representing the operation id.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The datetime when the topology was initially created for the resource group.",
-          "readOnly": true
-        },
-        "lastModified": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The datetime when the topology was last modified.",
-          "readOnly": true
-        },
-        "resources": {
-          "type": "array",
-          "description": "A list of topology resources.",
-          "items": {
-            "$ref": "#/definitions/TopologyResource"
-          }
-        }
-      }
-    },
-    "TopologyAssociation": {
-      "type": "object",
-      "description": "Resources that have an association with the parent resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource that is associated with the parent resource."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The ID of the resource that is associated with the parent resource."
-        },
-        "associationType": {
-          "$ref": "#/definitions/AssociationType",
-          "description": "The association type of the child resource to the parent resource."
-        }
-      }
-    },
-    "TopologyParameters": {
-      "type": "object",
-      "description": "Parameters that define the representation of topology.",
-      "properties": {
-        "targetResourceGroupName": {
-          "type": "string",
-          "description": "The name of the target resource group to perform topology on."
-        },
-        "targetVirtualNetwork": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to the Virtual Network resource."
-        },
-        "targetSubnet": {
-          "$ref": "#/definitions/SubResource",
-          "description": "The reference to the Subnet resource."
-        }
-      }
-    },
-    "TopologyResource": {
-      "type": "object",
-      "description": "The network resource topology information for the given resource group.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the resource."
-        },
-        "id": {
-          "type": "string",
-          "description": "ID of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "associations": {
-          "type": "array",
-          "description": "Holds the associations the resource has with other resources in the resource group.",
-          "items": {
-            "$ref": "#/definitions/TopologyAssociation"
-          }
-        }
-      }
-    },
     "TrackedResourcewithOptionalLocation": {
       "type": "object",
       "description": "Tracked resource with optional location.",
@@ -41624,43 +39135,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "TrafficAnalyticsConfigurationProperties": {
-      "type": "object",
-      "description": "Parameters that define the configuration of traffic analytics.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Flag to enable/disable traffic analytics."
-        },
-        "workspaceId": {
-          "type": "string",
-          "description": "The resource guid of the attached workspace."
-        },
-        "workspaceRegion": {
-          "type": "string",
-          "description": "The location of the attached workspace."
-        },
-        "workspaceResourceId": {
-          "type": "string",
-          "description": "Resource Id of the attached workspace."
-        },
-        "trafficAnalyticsInterval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The interval in minutes which would decide how frequently TA service should do flow analytics."
-        }
-      }
-    },
-    "TrafficAnalyticsProperties": {
-      "type": "object",
-      "description": "Parameters that define the configuration of traffic analytics.",
-      "properties": {
-        "networkWatcherFlowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsConfigurationProperties",
-          "description": "Parameters that define the configuration of traffic analytics."
-        }
-      }
     },
     "TrafficDetectionRule": {
       "type": "object",
@@ -41737,121 +39211,6 @@
         ]
       }
     },
-    "TroubleshootingDetails": {
-      "type": "object",
-      "description": "Information gained from troubleshooting of specified resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the get troubleshoot operation."
-        },
-        "reasonType": {
-          "type": "string",
-          "description": "Reason type of failure."
-        },
-        "summary": {
-          "type": "string",
-          "description": "A summary of troubleshooting."
-        },
-        "detail": {
-          "type": "string",
-          "description": "Details on troubleshooting results."
-        },
-        "recommendedActions": {
-          "type": "array",
-          "description": "List of recommended actions.",
-          "items": {
-            "$ref": "#/definitions/TroubleshootingRecommendedActions"
-          }
-        }
-      }
-    },
-    "TroubleshootingParameters": {
-      "type": "object",
-      "description": "Parameters that define the resource to troubleshoot.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "The target resource to troubleshoot."
-        },
-        "properties": {
-          "$ref": "#/definitions/TroubleshootingProperties",
-          "description": "Properties of the troubleshooting resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "targetResourceId",
-        "properties"
-      ]
-    },
-    "TroubleshootingProperties": {
-      "type": "object",
-      "description": "Storage location provided for troubleshoot.",
-      "properties": {
-        "storageId": {
-          "type": "string",
-          "description": "The ID for the storage account to save the troubleshoot result."
-        },
-        "storagePath": {
-          "type": "string",
-          "description": "The path to the blob to save the troubleshoot result in."
-        }
-      },
-      "required": [
-        "storageId",
-        "storagePath"
-      ]
-    },
-    "TroubleshootingRecommendedActions": {
-      "type": "object",
-      "description": "Recommended actions based on discovered issues.",
-      "properties": {
-        "actionId": {
-          "type": "string",
-          "description": "ID of the recommended action."
-        },
-        "actionText": {
-          "type": "string",
-          "description": "Description of recommended actions."
-        },
-        "actionUri": {
-          "type": "string",
-          "description": "The uri linking to a documentation for the recommended troubleshooting actions."
-        },
-        "actionUriText": {
-          "type": "string",
-          "description": "The information from the URI for the recommended troubleshooting actions."
-        }
-      }
-    },
-    "TroubleshootingResult": {
-      "type": "object",
-      "description": "Troubleshooting information gained from specified resource.",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the troubleshooting."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the troubleshooting."
-        },
-        "code": {
-          "type": "string",
-          "description": "The result code of the troubleshooting."
-        },
-        "results": {
-          "type": "array",
-          "description": "Information from troubleshooting.",
-          "items": {
-            "$ref": "#/definitions/TroubleshootingDetails"
-          }
-        }
-      }
-    },
     "TunnelConnectionHealth": {
       "type": "object",
       "description": "VirtualNetworkGatewayConnection properties.",
@@ -41892,32 +39251,6 @@
         "serviceName": {
           "type": "string",
           "description": "The name of the service for which subnet is being unprepared for."
-        }
-      }
-    },
-    "UpdateTagsRequest": {
-      "type": "object",
-      "description": "Update tags request.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Network security perimeter identifier.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/networkSecurityPerimeters"
-              }
-            ]
-          }
-        },
-        "tags": {
-          "type": "object",
-          "description": "List of tags for Network Security Perimeter",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -42070,67 +39403,6 @@
             "description": "Full"
           }
         ]
-      }
-    },
-    "VerificationIPFlowParameters": {
-      "type": "object",
-      "description": "Parameters that define the IP flow to be verified.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "The ID of the target resource to perform next-hop on."
-        },
-        "direction": {
-          "$ref": "#/definitions/Direction",
-          "description": "The direction of the packet represented as a 5-tuple."
-        },
-        "protocol": {
-          "$ref": "#/definitions/IpFlowProtocol",
-          "description": "Protocol to be verified on."
-        },
-        "localPort": {
-          "type": "string",
-          "description": "The local port. Acceptable values are a single integer in the range (0-65535). Support for * for the source port, which depends on the direction."
-        },
-        "remotePort": {
-          "type": "string",
-          "description": "The remote port. Acceptable values are a single integer in the range (0-65535). Support for * for the source port, which depends on the direction."
-        },
-        "localIPAddress": {
-          "type": "string",
-          "description": "The local IP address. Acceptable values are valid IPv4 addresses."
-        },
-        "remoteIPAddress": {
-          "type": "string",
-          "description": "The remote IP address. Acceptable values are valid IPv4 addresses."
-        },
-        "targetNicResourceId": {
-          "type": "string",
-          "description": "The NIC ID. (If VM has multiple NICs and IP forwarding is enabled on any of them, then this parameter must be specified. Otherwise optional)."
-        }
-      },
-      "required": [
-        "targetResourceId",
-        "direction",
-        "protocol",
-        "localPort",
-        "remotePort",
-        "localIPAddress",
-        "remoteIPAddress"
-      ]
-    },
-    "VerificationIPFlowResult": {
-      "type": "object",
-      "description": "Results of IP flow verification on the target resource.",
-      "properties": {
-        "access": {
-          "$ref": "#/definitions/Access",
-          "description": "Indicates whether the traffic is allowed or denied."
-        },
-        "ruleName": {
-          "type": "string",
-          "description": "Name of the rule. If input is not matched against any security rule, it is not displayed."
-        }
       }
     },
     "VerifierWorkspaceProperties": {

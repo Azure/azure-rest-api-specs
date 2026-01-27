@@ -8897,6 +8897,8 @@ model PrivateLinkServicePropertiesAutoApproval extends ResourceSet {}
 /**
  * Parameters that define the configuration of flow log.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model FlowLogPropertiesFormat {
   /**
    * ID of network security group to which flow log will be applied.
@@ -8954,6 +8956,8 @@ model FlowLogPropertiesFormat {
 /**
  * Parameters that define the retention policy for flow log.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model RetentionPolicyParameters {
   /**
    * Number of days to retain flow log records.
@@ -8969,6 +8973,8 @@ model RetentionPolicyParameters {
 /**
  * Parameters that define the flow log format.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model FlowLogFormatParameters {
   /**
    * The file type of flow log.
@@ -8984,6 +8990,8 @@ model FlowLogFormatParameters {
 /**
  * Parameters that define the configuration of traffic analytics.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TrafficAnalyticsProperties {
   /**
    * Parameters that define the configuration of traffic analytics.
@@ -8994,6 +9002,8 @@ model TrafficAnalyticsProperties {
 /**
  * Parameters that define the configuration of traffic analytics.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TrafficAnalyticsConfigurationProperties {
   /**
    * Flag to enable/disable traffic analytics.
@@ -18178,6 +18188,8 @@ model ContainerNetworkInterfaceIpConfigurationPropertiesFormat {
 /**
  * Properties of network security perimeter.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model NetworkSecurityPerimeterProperties {
   /**
    * The provisioning state of the scope assignment resource.
@@ -18261,6 +18273,8 @@ model SecurityPerimeterSystemData {
 /**
  * Update tags request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model UpdateTagsRequest {
   /**
    * Network security perimeter identifier.
@@ -18283,6 +18297,8 @@ model UpdateTagsRequest {
  * Properties of NSP profile.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model NspProfileProperties {
   /**
    * Version number that increases with every update to access rules within the profile.
@@ -18307,6 +18323,8 @@ model SecurityPerimeterProxyResource extends SecurityPerimeterResource {}
 /**
  * Properties of NSP access rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model NspAccessRuleProperties {
   /**
    * The provisioning state of the scope assignment resource.
@@ -18361,6 +18379,8 @@ model NspAccessRuleProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model SubscriptionId {
   /**
    * Subscription id in the ARM id format.
@@ -18373,6 +18393,8 @@ model SubscriptionId {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model PerimeterBasedAccessRule {
   /**
    * NSP id in the ARM id format.
@@ -18398,6 +18420,8 @@ model PerimeterBasedAccessRule {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model NspAssociationProperties {
   /**
    * The provisioning state of the resource  association resource.
@@ -18430,6 +18454,8 @@ model NspAssociationProperties {
 /**
  * Resource that is onboarded to use network security perimeter. Also referred as perimeter associable resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model PerimeterAssociableResource {
   /**
    * Properties of the perimeter associable resource.
@@ -18457,6 +18483,8 @@ model PerimeterAssociableResource {
 /**
  * Properties of the perimeter associable resources.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model PerimeterAssociableResourceProperties {
   /**
    * A friendly name for the properties of perimeter associable resources.
@@ -18480,6 +18508,8 @@ model PerimeterAssociableResourceProperties {
 /**
  * Properties of NSP Link resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model NspLinkProperties {
   /**
    * The provisioning state of the NSP Link resource.
@@ -18550,6 +18580,8 @@ model NspLinkProperties {
 /**
  * Properties of NSP LinkReference resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model NspLinkReferenceProperties {
   /**
    * The provisioning state of the NSP LinkReference resource.
@@ -18620,6 +18652,8 @@ model NspLinkReferenceProperties {
  * The NSP logging configuration properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model NspLoggingConfigurationProperties {
   /**
    * The log categories to enable in the NSP logging configuration.
@@ -18640,6 +18674,8 @@ model NspServiceTagsListResult is Azure.Core.Page<NspServiceTagsResource>;
 /**
  * Resource containing list of NSP service tags.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
 model NspServiceTagsResource {
   /**
    * NSP service tags.
@@ -19346,6 +19382,8 @@ model InboundSecurityRules {
 /**
  * The network watcher properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkWatcherPropertiesFormat {
   /**
    * The provisioning state of the network watcher resource.
@@ -19357,6 +19395,8 @@ model NetworkWatcherPropertiesFormat {
 /**
  * The error object.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @error
 model ErrorResponse {
   /**
@@ -19369,6 +19409,8 @@ model ErrorResponse {
 /**
  * Response for ListNetworkWatchers API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkWatcherListResult {
   /**
    * List of network watcher resources.
@@ -19386,6 +19428,8 @@ model NetworkWatcherListResult {
 /**
  * Parameters that define the representation of topology.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TopologyParameters {
   /**
    * The name of the target resource group to perform topology on.
@@ -19406,6 +19450,8 @@ model TopologyParameters {
 /**
  * Topology of the specified resource group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model Topology {
   /**
    * GUID representing the operation id.
@@ -19436,6 +19482,8 @@ model Topology {
 /**
  * The network resource topology information for the given resource group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TopologyResource {
   /**
    * Name of the resource.
@@ -19461,6 +19509,8 @@ model TopologyResource {
 /**
  * Resources that have an association with the parent resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TopologyAssociation {
   /**
    * The name of the resource that is associated with the parent resource.
@@ -19482,6 +19532,8 @@ model TopologyAssociation {
  * Parameters that define the IP flow to be verified.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model VerificationIPFlowParameters {
   /**
    * The ID of the target resource to perform next-hop on.
@@ -19530,6 +19582,8 @@ model VerificationIPFlowParameters {
  * Results of IP flow verification on the target resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model VerificationIPFlowResult {
   /**
    * Indicates whether the traffic is allowed or denied.
@@ -19545,6 +19599,8 @@ model VerificationIPFlowResult {
 /**
  * Parameters that define the source and destination endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NextHopParameters {
   /**
    * The resource identifier of the target resource against which the action is to be performed.
@@ -19572,6 +19628,8 @@ model NextHopParameters {
 /**
  * The information about next hop from the specified VM.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NextHopResult {
   /**
    * Next hop type.
@@ -19592,6 +19650,8 @@ model NextHopResult {
 /**
  * Parameters that define the VM to check security groups for.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model SecurityGroupViewParameters {
   /**
    * ID of the target VM.
@@ -19602,6 +19662,8 @@ model SecurityGroupViewParameters {
 /**
  * The information about security rules applied to the specified VM.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model SecurityGroupViewResult {
   /**
    * List of network interfaces on the specified VM.
@@ -19612,6 +19674,8 @@ model SecurityGroupViewResult {
 /**
  * Network interface and all its associated security rules.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model SecurityGroupNetworkInterface {
   /**
    * ID of the network interface.
@@ -19627,6 +19691,8 @@ model SecurityGroupNetworkInterface {
 /**
  * All security rules associated with the network interface.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model SecurityRuleAssociations {
   /**
    * Network interface and it's custom security rules.
@@ -19652,6 +19718,8 @@ model SecurityRuleAssociations {
 /**
  * Network interface and its custom security rules.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkInterfaceAssociation {
   /**
    * Network interface ID.
@@ -19668,6 +19736,8 @@ model NetworkInterfaceAssociation {
 /**
  * Subnet and it's custom security rules.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model SubnetAssociation {
   /**
    * Subnet ID.
@@ -19684,6 +19754,8 @@ model SubnetAssociation {
 /**
  * Parameters that define the create packet capture operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCapture {
   /**
    * Properties of the packet capture.
@@ -19694,6 +19766,8 @@ model PacketCapture {
 /**
  * Parameters that define the create packet capture operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureParameters {
   /**
    * The ID of the targeted resource, only AzureVM and AzureVMSS as target type are currently supported.
@@ -19756,6 +19830,8 @@ model PacketCaptureParameters {
 /**
  * A list of AzureVMSS instances which can be included or excluded to run packet capture. If both included and excluded are empty, then the packet capture will run on all instances of AzureVMSS.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureMachineScope {
   /**
    * List of AzureVMSS instances to run packet capture on.
@@ -19771,6 +19847,8 @@ model PacketCaptureMachineScope {
 /**
  * The storage location for a packet capture session.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureStorageLocation {
   /**
    * The ID of the storage account to save the packet capture session. Required if no localPath or filePath is provided.
@@ -19796,6 +19874,8 @@ model PacketCaptureStorageLocation {
 /**
  * Filter that is applied to packet capture request. Multiple filters can be applied.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureFilter {
   /**
    * Protocol to be filtered on.
@@ -19828,6 +19908,8 @@ model PacketCaptureFilter {
 /**
  * The storage location for a packet capture session.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureSettings {
   /**
    * Number of file count. Default value of count is 10 and maximum number is 10000.
@@ -19854,6 +19936,8 @@ model PacketCaptureSettings {
 /**
  * Information about packet capture session.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureResult {
   /**
    * Name of the packet capture session.
@@ -19894,6 +19978,8 @@ model PacketCaptureResultProperties extends PacketCaptureParameters {
 /**
  * Status of packet capture session.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureQueryStatusResult {
   /**
    * The name of the packet capture resource.
@@ -19930,6 +20016,8 @@ model PacketCaptureQueryStatusResult {
 /**
  * List of packet capture sessions.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureListResult {
   /**
    * Information about packet capture sessions.
@@ -19947,6 +20035,8 @@ model PacketCaptureListResult {
 /**
  * Parameters that define the resource to troubleshoot.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TroubleshootingParameters {
   /**
    * The target resource to troubleshoot.
@@ -19962,6 +20052,8 @@ model TroubleshootingParameters {
 /**
  * Storage location provided for troubleshoot.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TroubleshootingProperties {
   /**
    * The ID for the storage account to save the troubleshoot result.
@@ -19977,6 +20069,8 @@ model TroubleshootingProperties {
 /**
  * Troubleshooting information gained from specified resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TroubleshootingResult {
   /**
    * The start time of the troubleshooting.
@@ -20004,6 +20098,8 @@ model TroubleshootingResult {
 /**
  * Information gained from troubleshooting of specified resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TroubleshootingDetails {
   /**
    * The id of the get troubleshoot operation.
@@ -20035,6 +20131,8 @@ model TroubleshootingDetails {
 /**
  * Recommended actions based on discovered issues.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model TroubleshootingRecommendedActions {
   /**
    * ID of the recommended action.
@@ -20060,6 +20158,8 @@ model TroubleshootingRecommendedActions {
 /**
  * Parameters that define the resource to query the troubleshooting result.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model QueryTroubleshootingParameters {
   /**
    * The target resource ID to query the troubleshooting result.
@@ -20070,6 +20170,8 @@ model QueryTroubleshootingParameters {
 /**
  * Information on the configuration of flow log and traffic analytics (optional) .
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model FlowLogInformation {
   /**
    * The ID of the resource to configure for flow log and traffic analytics (optional) .
@@ -20095,6 +20197,8 @@ model FlowLogInformation {
 /**
  * Parameters that define the configuration of flow log.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model FlowLogProperties {
   /**
    * ID of the storage account which is used to store the flow log.
@@ -20130,6 +20234,8 @@ model FlowLogProperties {
 /**
  * Parameters that define a resource to query flow log and traffic analytics (optional) status.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model FlowLogStatusParameters {
   /**
    * The target resource where getting the flow log and traffic analytics (optional) status.
@@ -20140,6 +20246,8 @@ model FlowLogStatusParameters {
 /**
  * Parameters that determine how the connectivity check will be performed.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectivityParameters {
   /**
    * The source of the connection.
@@ -20171,6 +20279,8 @@ model ConnectivityParameters {
 /**
  * Parameters that define the source of the connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectivitySource {
   /**
    * The ID of the resource from which a connectivity check will be initiated.
@@ -20188,6 +20298,8 @@ model ConnectivitySource {
 /**
  * Parameters that define destination of connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectivityDestination {
   /**
    * The ID of the resource to which a connection attempt will be made.
@@ -20210,6 +20322,8 @@ model ConnectivityDestination {
 /**
  * Configuration of the protocol.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ProtocolConfiguration {
   /**
    * HTTP configuration of the connectivity check.
@@ -20221,6 +20335,8 @@ model ProtocolConfiguration {
 /**
  * HTTP configuration of the connectivity check.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model HttpConfiguration {
   /**
    * HTTP method.
@@ -20241,6 +20357,8 @@ model HttpConfiguration {
 /**
  * The HTTP header.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model HttpHeader {
   /**
    * The name in HTTP header.
@@ -20256,6 +20374,8 @@ model HttpHeader {
 /**
  * Information on the connectivity status.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectivityInformation {
   /**
    * List of hops between the source and the destination.
@@ -20303,6 +20423,8 @@ model ConnectivityInformation {
 /**
  * Information about a hop between the source and the destination.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectivityHop {
   /**
    * The type of the hop.
@@ -20365,6 +20487,8 @@ model ConnectivityHop {
 /**
  * Hop link.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model HopLink {
   /**
    * The ID of the next hop.
@@ -20407,6 +20531,8 @@ model HopLink {
 /**
  * Hop link properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model HopLinkProperties {
   /**
    * Minimum roundtrip time in milliseconds.
@@ -20436,6 +20562,8 @@ model HopLinkProperties {
 /**
  * Information about an issue encountered in the process of checking for connectivity.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectivityIssue {
   /**
    * The origin of the issue.
@@ -20466,6 +20594,8 @@ model ConnectivityIssue {
 /**
  * Geographic and time constraints for Azure reachability report.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AzureReachabilityReportParameters {
   /**
    * Parameters that define a geographic location.
@@ -20498,6 +20628,8 @@ model AzureReachabilityReportParameters {
 /**
  * Parameters that define a geographic location.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AzureReachabilityReportLocation {
   /**
    * The name of the country.
@@ -20518,6 +20650,8 @@ model AzureReachabilityReportLocation {
 /**
  * Azure reachability report details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AzureReachabilityReport {
   /**
    * The aggregation level of Azure reachability report. Can be Country, State or City.
@@ -20539,6 +20673,8 @@ model AzureReachabilityReport {
 /**
  * Azure reachability report details for a given provider location.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AzureReachabilityReportItem {
   /**
    * The Internet service provider.
@@ -20560,6 +20696,8 @@ model AzureReachabilityReportItem {
 /**
  * Details on latency for a time series.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AzureReachabilityReportLatencyInfo {
   /**
    * The time stamp.
@@ -20578,6 +20716,8 @@ model AzureReachabilityReportLatencyInfo {
 /**
  * Constraints that determine the list of available Internet service providers.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AvailableProvidersListParameters {
   /**
    * A list of Azure regions.
@@ -20603,6 +20743,8 @@ model AvailableProvidersListParameters {
 /**
  * List of available countries with details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AvailableProvidersList {
   /**
    * List of available countries.
@@ -20614,6 +20756,8 @@ model AvailableProvidersList {
 /**
  * Country details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AvailableProvidersListCountry {
   /**
    * The country name.
@@ -20635,6 +20779,8 @@ model AvailableProvidersListCountry {
 /**
  * State details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AvailableProvidersListState {
   /**
    * The state name.
@@ -20656,6 +20802,8 @@ model AvailableProvidersListState {
 /**
  * City or town details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model AvailableProvidersListCity {
   /**
    * The city or town name.
@@ -20671,6 +20819,8 @@ model AvailableProvidersListCity {
 /**
  * Parameters to get network configuration diagnostic.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkConfigurationDiagnosticParameters {
   /**
    * The ID of the target resource to perform network configuration diagnostic. Valid options are VM, NetworkInterface, VMSS/NetworkInterface and Application Gateway.
@@ -20692,6 +20842,8 @@ model NetworkConfigurationDiagnosticParameters {
 /**
  * Parameters to compare with network configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkConfigurationDiagnosticProfile {
   /**
    * The direction of the traffic.
@@ -20722,6 +20874,8 @@ model NetworkConfigurationDiagnosticProfile {
 /**
  * Results of network configuration diagnostic on the target resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkConfigurationDiagnosticResponse {
   /**
    * List of network configuration diagnostic results.
@@ -20734,6 +20888,8 @@ model NetworkConfigurationDiagnosticResponse {
 /**
  * Network configuration diagnostic result corresponded to provided traffic query.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkConfigurationDiagnosticResult {
   /**
    * Network configuration diagnostic profile.
@@ -20749,6 +20905,8 @@ model NetworkConfigurationDiagnosticResult {
 /**
  * Network configuration diagnostic result corresponded provided traffic query.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkSecurityGroupResult {
   /**
    * The network traffic is allowed or denied.
@@ -20766,6 +20924,8 @@ model NetworkSecurityGroupResult {
 /**
  * Results of network security group evaluation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model EvaluatedNetworkSecurityGroup {
   /**
    * Network security group ID.
@@ -20792,6 +20952,8 @@ model EvaluatedNetworkSecurityGroup {
 /**
  * Matched rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model MatchedRule {
   /**
    * Name of the matched network security rule.
@@ -20807,6 +20969,8 @@ model MatchedRule {
 /**
  * Network security rules evaluation result.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model NetworkSecurityRulesEvaluationResult {
   /**
    * Name of the network security rule.
@@ -20842,6 +21006,8 @@ model NetworkSecurityRulesEvaluationResult {
 /**
  * Parameters that define the operation to create a connection monitor.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitor {
   /**
    * Connection monitor location.
@@ -20863,6 +21029,8 @@ model ConnectionMonitor {
 /**
  * Parameters that define the operation to create a connection monitor.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorParameters {
   /**
    * Describes the source of connection monitor.
@@ -20916,6 +21084,8 @@ model ConnectionMonitorParameters {
 /**
  * Describes the source of connection monitor.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorSource {
   /**
    * The ID of the resource used as the source by connection monitor.
@@ -20933,6 +21103,8 @@ model ConnectionMonitorSource {
 /**
  * Describes the destination of connection monitor.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorDestination {
   /**
    * The ID of the resource used as the destination by connection monitor.
@@ -20955,6 +21127,8 @@ model ConnectionMonitorDestination {
 /**
  * Describes the connection monitor endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorEndpoint {
   /**
    * The name of the connection monitor endpoint.
@@ -21005,6 +21179,8 @@ model ConnectionMonitorEndpoint {
 /**
  * Describes the connection monitor endpoint filter.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorEndpointFilter {
   /**
    * The behavior of the endpoint filter. Currently only 'Include' is supported.
@@ -21021,6 +21197,8 @@ model ConnectionMonitorEndpointFilter {
 /**
  * Describes the connection monitor endpoint filter item.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorEndpointFilterItem {
   /**
    * The type of item included in the filter. Currently only 'AgentAddress' is supported.
@@ -21036,6 +21214,8 @@ model ConnectionMonitorEndpointFilterItem {
 /**
  * Describes the connection monitor endpoint scope.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorEndpointScope {
   /**
    * List of items which needs to be included to the endpoint scope.
@@ -21053,6 +21233,8 @@ model ConnectionMonitorEndpointScope {
 /**
  * Describes the connection monitor endpoint scope item.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorEndpointScopeItem {
   /**
    * The address of the endpoint item. Supported types are IPv4/IPv6 subnet mask or IPv4/IPv6 IP address.
@@ -21063,6 +21245,8 @@ model ConnectionMonitorEndpointScopeItem {
 /**
  * Connection monitor endpoint location details only being used for 'AzureArcNetwork' type endpoints, which contains the region details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorEndpointLocationDetails {
   /**
    * Region for connection monitor endpoint.
@@ -21073,6 +21257,8 @@ model ConnectionMonitorEndpointLocationDetails {
 /**
  * Describes a connection monitor test configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorTestConfiguration {
   /**
    * The name of the connection monitor test configuration.
@@ -21119,6 +21305,8 @@ model ConnectionMonitorTestConfiguration {
 /**
  * Describes the HTTP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorHttpConfiguration {
   /**
    * The port to connect to.
@@ -21157,6 +21345,8 @@ model ConnectionMonitorHttpConfiguration {
 /**
  * Describes the TCP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorTcpConfiguration {
   /**
    * The port to connect to.
@@ -21179,6 +21369,8 @@ model ConnectionMonitorTcpConfiguration {
 /**
  * Describes the ICMP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorIcmpConfiguration {
   /**
    * Value indicating whether path evaluation with trace route should be disabled.
@@ -21189,6 +21381,8 @@ model ConnectionMonitorIcmpConfiguration {
 /**
  * Describes the threshold for declaring a test successful.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorSuccessThreshold {
   /**
    * The maximum percentage of failed checks permitted for a test to evaluate as successful.
@@ -21204,6 +21398,8 @@ model ConnectionMonitorSuccessThreshold {
 /**
  * Describes the connection monitor test group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorTestGroup {
   /**
    * The name of the connection monitor test group.
@@ -21234,6 +21430,8 @@ model ConnectionMonitorTestGroup {
 /**
  * Describes a connection monitor output destination.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorOutput {
   /**
    * Connection monitor output destination type. Currently, only "Workspace" is supported.
@@ -21249,6 +21447,8 @@ model ConnectionMonitorOutput {
 /**
  * Describes the settings for producing output into a log analytics workspace.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorWorkspaceSettings {
   /**
    * Log analytics workspace resource ID.
@@ -21290,6 +21490,8 @@ model ConnectionMonitorResultProperties extends ConnectionMonitorParameters {
 /**
  * List of connection monitors.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorListResult {
   /**
    * Information about connection monitors.
@@ -21307,6 +21509,8 @@ model ConnectionMonitorListResult {
 /**
  * Network REST API operation definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model Operation {
   /**
    * Operation name: {provider}/{resource}/{operation}.
@@ -21359,6 +21563,8 @@ model OperationListResult is Azure.Core.Page<Operation>;
 /**
  * Description of operation properties format.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model OperationPropertiesFormat {
   /**
    * Specification of the service.
@@ -21384,6 +21590,8 @@ model OperationPropertiesFormatServiceSpecification {
 /**
  * Description of metrics specification.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model MetricSpecification {
   /**
    * The name of the metric.
@@ -21460,6 +21668,8 @@ model MetricSpecification {
 /**
  * Availability of the metric.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model Availability {
   /**
    * The time grain of the availability.
@@ -21480,6 +21690,8 @@ model Availability {
 /**
  * Dimension of the metric.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model Dimension {
   /**
    * The name of the dimension.
@@ -21500,6 +21712,8 @@ model Dimension {
 /**
  * Description of logging specification.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model LogSpecification {
   /**
    * The name of the specification.
@@ -28046,6 +28260,8 @@ model DefaultAdminRule extends BaseAdminRule {
 /**
  * Connection state snapshot.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionStateSnapshot {
   /**
    * The connection state.
@@ -28109,6 +28325,8 @@ model ConnectionStateSnapshot {
 /**
  * List of connection states snapshots.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorQueryResult {
   /**
    * Status of connection monitor source.
