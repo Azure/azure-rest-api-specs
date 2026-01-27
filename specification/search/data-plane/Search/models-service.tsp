@@ -2505,8 +2505,8 @@ union MicrosoftStemmingTokenizerLanguage {
   Urdu: "urdu",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" ""
-union CjkBigramTokenFilterScripts {
+/** Scripts that can be ignored by CjkBigramTokenFilter. */
+enum CjkBigramTokenFilterScripts {
   /** Ignore Han script when forming bigrams of CJK terms. */
   Han: "han",
 
