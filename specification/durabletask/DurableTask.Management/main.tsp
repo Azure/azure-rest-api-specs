@@ -31,6 +31,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2025-05-04-preview")
   v2025_05_04_Preview: "2025-05-04-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2026-02-01")
+  v2026_02_01: "2026-02-01",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -297,7 +301,6 @@ interface PrivateEndpointConnections {
 interface PrivateLinkResources {
   /** list private link resources on the given resource */
   list is ArmResourceListByParent<PrivateLinkResource>;
-  //get is ArmResourceRead<PrivateLinkResource>;
 }
 
 // resource specific to the previous version 2024-02-01-preview (Private Preview only to be deprecated and not made public)
