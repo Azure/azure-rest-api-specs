@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models-service.tsp";
 import "./models-shared.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Search;
 
@@ -153,6 +155,7 @@ union IndexedSharePointContainerName {
 }
 
 /** Specifies runtime parameters for a indexed SharePoint knowledge source */
+@removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.IndexedSharePoint;
@@ -183,6 +186,7 @@ model WebKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 /** Specifies runtime parameters for a remote SharePoint knowledge source */
+@removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.RemoteSharePoint;
@@ -380,6 +384,7 @@ model KnowledgeBaseAzureBlobActivityArguments {
 /** Represents a indexed SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -390,6 +395,7 @@ model KnowledgeBaseIndexedSharePointActivityRecord
 }
 
 /** Represents the arguments the indexed SharePoint retrieval activity was run with. */
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityArguments {
   /** The search string used to query indexed SharePoint contents. */
   search?: string;
@@ -446,6 +452,7 @@ model KnowledgeBaseWebActivityArguments {
 /** Represents a remote SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -456,6 +463,7 @@ model KnowledgeBaseRemoteSharePointActivityRecord
 }
 
 /** Represents the arguments the remote SharePoint retrieval activity was run with. */
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityArguments {
   /** The search string used to query the remote SharePoint knowledge source. */
   search?: string;
@@ -571,6 +579,7 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
 
 /** Represents an indexed SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.indexedSharePoint;
@@ -604,6 +613,7 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
 
 /** Represents a remote SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.remoteSharePoint;
