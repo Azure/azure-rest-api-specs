@@ -708,9 +708,9 @@ model A2APreviewTool extends OpenAI.Tool {
 @removed(Versions.v1)
 model MemorySearchPreviewTool extends OpenAI.Tool {
   /**
-   * The type of the tool. Always `memory_search`.
+   * The type of the tool. Always `memory_search_preview`.
    */
-  type: "memory_search";
+  type: "memory_search_preview";
 
   /**
    * The name of the memory store to use.
