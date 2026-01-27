@@ -20,7 +20,6 @@ interface OperationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Returns the list of available operations.")
-  @operationId("Operations_List")
   @autoRoute
   @get
   @list
@@ -39,7 +38,6 @@ interface ReplicationAppliancesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of appliances.")
-  @operationId("ReplicationAppliances_List")
   @autoRoute
   @get
   @list
@@ -72,7 +70,6 @@ interface ReplicationNetworksOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of networks. View-only API.")
-  @operationId("ReplicationNetworks_List")
   @autoRoute
   @get
   @list
@@ -99,7 +96,6 @@ interface ReplicationNetworkMappingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets all the network mappings under a vault.")
-  @operationId("ReplicationNetworkMappings_List")
   @autoRoute
   @get
   @list
@@ -126,7 +122,6 @@ interface ReplicationProtectionContainersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of all protection containers in a vault.")
-  @operationId("ReplicationProtectionContainers_List")
   @autoRoute
   @get
   @list
@@ -153,7 +148,6 @@ interface ReplicationMigrationItemsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of migration items in the vault.")
-  @operationId("ReplicationMigrationItems_List")
   @autoRoute
   @get
   @list
@@ -198,7 +192,6 @@ interface ReplicationProtectedItemsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of replication protected items.")
-  @operationId("ReplicationProtectedItems_List")
   @autoRoute
   @get
   @list
@@ -237,7 +230,6 @@ interface ReplicationProtectionClustersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of Replication protection clusters in vault.")
-  @operationId("ReplicationProtectionClusters_List")
   @autoRoute
   @get
   @list
@@ -276,7 +268,6 @@ interface ReplicationProtectionContainerMappingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of all protection container mappings in a vault.")
-  @operationId("ReplicationProtectionContainerMappings_List")
   @autoRoute
   @get
   @list
@@ -303,7 +294,6 @@ interface ReplicationRecoveryServicesProvidersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of registered recovery services providers in the vault. This is a view only api.")
-  @operationId("ReplicationRecoveryServicesProviders_List")
   @autoRoute
   @get
   @list
@@ -330,7 +320,6 @@ interface ReplicationStorageClassificationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of storage classification objects under a vault.")
-  @operationId("ReplicationStorageClassifications_List")
   @autoRoute
   @get
   @list
@@ -357,7 +346,6 @@ interface ReplicationStorageClassificationMappingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of storage classification mappings objects under a vault.")
-  @operationId("ReplicationStorageClassificationMappings_List")
   @autoRoute
   @get
   @list
@@ -384,7 +372,6 @@ interface ReplicationvCentersOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the list of vCenter registered under the vault.")
-  @operationId("ReplicationvCenters_List")
   @autoRoute
   @get
   @list
@@ -411,7 +398,6 @@ interface ReplicationJobsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Exports the details of the Azure Site Recovery jobs of the vault.")
-  @operationId("ReplicationJobs_Export")
   @autoRoute
   @action("replicationJobs/export")
   export is ArmProviderActionAsync<
@@ -437,7 +423,6 @@ interface SupportedOperatingSystemsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the data of supported operating systems by SRS.")
-  @operationId("SupportedOperatingSystems_Get")
   @autoRoute
   @get
   @action("replicationSupportedOperatingSystems")
@@ -469,7 +454,6 @@ interface ReplicationVaultHealthOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the health summary for the vault.")
-  @operationId("ReplicationVaultHealth_Get")
   @autoRoute
   @get
   @action("replicationVaultHealth")
@@ -491,7 +475,6 @@ interface ReplicationVaultHealthOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Refreshes health summary of the vault.")
-  @operationId("ReplicationVaultHealth_Refresh")
   @autoRoute
   @action("replicationVaultHealth/default/refresh")
   refresh is ArmProviderActionAsync<

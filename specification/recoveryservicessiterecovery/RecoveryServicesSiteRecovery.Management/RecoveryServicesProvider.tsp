@@ -41,7 +41,6 @@ interface RecoveryServicesProviders {
    * Gets the details of registered recovery services provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationRecoveryServicesProviders_Get")
   @summary("Gets the details of a recovery services provider.")
   get is ArmResourceRead<RecoveryServicesProvider, Error = never>;
 
@@ -50,7 +49,6 @@ interface RecoveryServicesProviders {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationRecoveryServicesProviders_Create")
   @summary("Adds a recovery services provider.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RecoveryServicesProvider,
@@ -65,7 +63,6 @@ interface RecoveryServicesProviders {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationRecoveryServicesProviders_Purge")
   @summary("Purges recovery service provider from fabric.")
   purge is ArmResourceDeleteWithoutOkAsync<
     RecoveryServicesProvider,
@@ -76,7 +73,6 @@ interface RecoveryServicesProviders {
    * Lists the registered recovery services providers for the specified fabric.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationRecoveryServicesProviders_ListByReplicationFabrics")
   @summary("Gets the list of registered recovery services providers for the fabric.")
   listByReplicationFabrics is ArmResourceListByParent<
     RecoveryServicesProvider,
@@ -89,7 +85,6 @@ interface RecoveryServicesProviders {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationRecoveryServicesProviders_RefreshProvider")
   @summary("Refresh details from the recovery services provider.")
   refreshProvider is ArmResourceActionAsyncBase<
     RecoveryServicesProvider,
@@ -104,7 +99,6 @@ interface RecoveryServicesProviders {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationRecoveryServicesProviders_Delete")
   @action("remove")
   @summary("Deletes provider from fabric. Note: Deleting provider for any fabric other than SingleHost is unsupported. To maintain backward compatibility for released clients the object \"deleteRspInput\" is used (if the object is empty we assume that it is old client and continue the old behavior).")
   delete is ArmResourceActionAsyncBase<

@@ -36,7 +36,6 @@ interface Alerts {
    * Gets the details of the specified email notification(alert) configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationAlertSettings_Get")
   @summary("Gets an email notification(alert) configuration.")
   get is ArmResourceRead<Alert, Error = never>;
 
@@ -45,7 +44,6 @@ interface Alerts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationAlertSettings_Create")
   @summary("Configures email notifications for this vault.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Alert,
@@ -58,7 +56,6 @@ interface Alerts {
    * Gets the list of email notification(alert) configurations for the vault.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationAlertSettings_List")
   @summary("Gets the list of configured email notification(alert) configurations.")
   list is ArmResourceListByParent<
     Alert,

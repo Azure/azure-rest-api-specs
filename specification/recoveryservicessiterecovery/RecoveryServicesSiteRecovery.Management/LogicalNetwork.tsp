@@ -37,7 +37,6 @@ interface LogicalNetworks {
    * Gets the details of a logical network.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationLogicalNetworks_Get")
   @summary("Gets a logical network with specified server id and logical network name.")
   get is ArmResourceRead<LogicalNetwork, Error = never>;
 
@@ -45,7 +44,6 @@ interface LogicalNetworks {
    * Lists all the logical networks of the Azure Site Recovery fabric.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationLogicalNetworks_ListByReplicationFabrics")
   @summary("Gets the list of logical networks under a fabric.")
   listByReplicationFabrics is ArmResourceListByParent<
     LogicalNetwork,

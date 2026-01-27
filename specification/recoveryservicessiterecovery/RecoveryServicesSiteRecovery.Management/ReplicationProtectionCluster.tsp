@@ -223,7 +223,6 @@ interface ReplicationProtectionClusterOperationGroup {
    * Track the results of an asynchronous operation on the replication protection cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationProtectionClusters_GetOperationResults")
   @summary("Tracks the Replication protection cluster async operation.")
   getOperationResults is ReplicationProtectionClusterOperationGroupOps.Read<ReplicationProtectionCluster>;
 
@@ -231,7 +230,6 @@ interface ReplicationProtectionClusterOperationGroup {
    * Gets the list of ASR replication protected clusters in the protection container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationProtectionClusters_ListByReplicationProtectionContainers")
   @summary("Gets the list of Replication protection clusters in fabric, container.")
   listByReplicationProtectionContainers is ReplicationProtectionClusterOps.List<
     ReplicationProtectionCluster,

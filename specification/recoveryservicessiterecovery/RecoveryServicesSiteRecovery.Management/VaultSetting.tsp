@@ -54,7 +54,6 @@ interface VaultSettings {
    * Gets the vault setting. This includes the Migration Hub connection settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationVaultSetting_Get")
   @summary("Gets the vault setting.")
   get is ArmResourceRead<VaultSetting, Error = never>;
 
@@ -63,7 +62,6 @@ interface VaultSettings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationVaultSetting_Create")
   @summary("Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     VaultSetting,
@@ -79,7 +77,6 @@ interface VaultSettings {
    * Gets the list of vault setting. This includes the Migration Hub connection settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationVaultSetting_List")
   @summary("Gets the list of vault setting.")
   @action("replicationVaultSettings")
   @list

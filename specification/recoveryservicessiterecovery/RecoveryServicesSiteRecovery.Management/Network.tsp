@@ -36,7 +36,6 @@ interface Networks {
    * Gets the details of a network.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationNetworks_Get")
   @summary("Gets a network with specified server id and network name.")
   get is ArmResourceRead<Network, Error = never>;
 
@@ -44,7 +43,6 @@ interface Networks {
    * Lists the networks available for a fabric.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationNetworks_ListByReplicationFabrics")
   @summary("Gets the list of networks under a fabric.")
   listByReplicationFabrics is ArmResourceListByParent<
     Network,

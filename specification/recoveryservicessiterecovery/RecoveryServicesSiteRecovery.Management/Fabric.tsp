@@ -63,7 +63,6 @@ interface Fabrics {
    * Gets the details of an Azure Site Recovery fabric.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_Get")
   @summary("Gets the details of an ASR fabric.")
   get is ArmResourceRead<
     Fabric,
@@ -82,7 +81,6 @@ interface Fabrics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_Create")
   @summary("Creates an Azure Site Recovery fabric.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Fabric,
@@ -97,7 +95,6 @@ interface Fabrics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_Purge")
   @summary("Purges the site.")
   purge is ArmResourceDeleteWithoutOkAsync<Fabric, Error = never>;
 
@@ -105,7 +102,6 @@ interface Fabrics {
    * Gets a list of the Azure Site Recovery fabrics in the vault.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_List")
   @summary("Gets the list of ASR fabrics.")
   list is ArmResourceListByParent<
     Fabric,
@@ -118,7 +114,6 @@ interface Fabrics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_CheckConsistency")
   @summary("Checks the consistency of the ASR fabric.")
   checkConsistency is ArmResourceActionAsyncBase<
     Fabric,
@@ -133,7 +128,6 @@ interface Fabrics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_MigrateToAad")
   @action("migratetoaad")
   @summary("Migrates the site to AAD.")
   migrateToAad is ArmResourceActionAsyncBase<
@@ -149,7 +143,6 @@ interface Fabrics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_ReassociateGateway")
   @summary("Perform failover of the process server.")
   reassociateGateway is ArmResourceActionAsyncBase<
     Fabric,
@@ -164,7 +157,6 @@ interface Fabrics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_Delete")
   @action("remove")
   @summary("Deletes the site.")
   delete is ArmResourceActionAsyncBase<
@@ -180,7 +172,6 @@ interface Fabrics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_RenewCertificate")
   @summary("Renews certificate for the fabric.")
   renewCertificate is ArmResourceActionAsyncBase<
     Fabric,
@@ -194,7 +185,6 @@ interface Fabrics {
    * Removes the appliance's infrastructure under the fabric.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationFabrics_RemoveInfra")
   @summary("Removes the appliance's infrastructure under the fabric.")
   removeInfra is FabricOps.ActionAsync<
     Fabric,

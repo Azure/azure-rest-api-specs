@@ -40,7 +40,6 @@ interface MigrationItems {
    * Gets the details of a migration item.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_Get")
   @summary("Gets the details of a migration item.")
   get is ArmResourceRead<MigrationItem, Error = never>;
 
@@ -49,7 +48,6 @@ interface MigrationItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_Create")
   @summary("Enables migration.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MigrationItem,
@@ -63,7 +61,6 @@ interface MigrationItems {
    * The operation to update the recovery settings of an ASR migration item.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_Update")
   @patch(#{ implicitOptionality: false })
   @summary("Updates migration item.")
   update is ArmCustomPatchAsync<
@@ -77,7 +74,6 @@ interface MigrationItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_Delete")
   @summary("Delete the migration item.")
   delete is ArmResourceDeleteWithoutOkAsync<
     MigrationItem,
@@ -95,7 +91,6 @@ interface MigrationItems {
    * Gets the list of ASR migration items in the protection container.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_ListByReplicationProtectionContainers")
   @summary("Gets the list of migration items in the protection container.")
   listByReplicationProtectionContainers is ArmResourceListByParent<
     MigrationItem,
@@ -127,7 +122,6 @@ interface MigrationItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_Migrate")
   @summary("Migrate item.")
   migrate is ArmResourceActionAsyncBase<
     MigrationItem,
@@ -142,7 +136,6 @@ interface MigrationItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_PauseReplication")
   @summary("Pause replication.")
   pauseReplication is ArmResourceActionAsyncBase<
     MigrationItem,
@@ -157,7 +150,6 @@ interface MigrationItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_ResumeReplication")
   @summary("Resume replication.")
   resumeReplication is ArmResourceActionAsyncBase<
     MigrationItem,
@@ -172,7 +164,6 @@ interface MigrationItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_Resync")
   @summary("Resynchronizes replication.")
   resync is ArmResourceActionAsyncBase<
     MigrationItem,
@@ -187,7 +178,6 @@ interface MigrationItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_TestMigrate")
   @summary("Test migrate item.")
   testMigrate is ArmResourceActionAsyncBase<
     MigrationItem,
@@ -202,7 +192,6 @@ interface MigrationItems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationMigrationItems_TestMigrateCleanup")
   @summary("Test migrate cleanup.")
   testMigrateCleanup is ArmResourceActionAsyncBase<
     MigrationItem,

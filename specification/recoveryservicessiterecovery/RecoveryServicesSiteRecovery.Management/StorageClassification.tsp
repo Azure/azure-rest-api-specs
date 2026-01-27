@@ -37,7 +37,6 @@ interface StorageClassifications {
    * Gets the details of the specified storage classification.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationStorageClassifications_Get")
   @summary("Gets the details of a storage classification.")
   get is ArmResourceRead<StorageClassification, Error = never>;
 
@@ -45,7 +44,6 @@ interface StorageClassifications {
    * Lists the storage classifications available in the specified fabric.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationStorageClassifications_ListByReplicationFabrics")
   @summary("Gets the list of storage classification objects under a fabric.")
   listByReplicationFabrics is ArmResourceListByParent<
     StorageClassification,

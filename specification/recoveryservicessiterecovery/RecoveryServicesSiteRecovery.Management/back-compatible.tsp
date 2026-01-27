@@ -11,9 +11,9 @@ using Microsoft.RecoveryServices;
 @@clientLocation(ReplicationEligibilityResultsOperationGroup.get,
   "ReplicationEligibilityResults"
 );
-// @@clientLocation(ReplicationEligibilityResultsOperationGroup.list,
-//   "ReplicationEligibilityResults"
-// );
+@@clientLocation(ReplicationEligibilityResultsOperationGroup.list,
+  "ReplicationEligibilityResults"
+);
 
 @@clientLocation(Events.get, "ReplicationEvents");
 @@clientLocation(Events.list, "ReplicationEvents");

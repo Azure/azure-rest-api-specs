@@ -91,7 +91,6 @@ interface ClusterRecoveryPoints {
    * Get the details of specified recovery point.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ClusterRecoveryPoint_Get")
   @summary("Gets a recovery point.")
   get is ClusterRecoveryPointOps.Read<ClusterRecoveryPoint>;
 

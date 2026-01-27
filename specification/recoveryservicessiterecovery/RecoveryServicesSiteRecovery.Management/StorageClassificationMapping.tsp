@@ -37,7 +37,6 @@ interface StorageClassificationMappings {
    * Gets the details of the specified storage classification mapping.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationStorageClassificationMappings_Get")
   @summary("Gets the details of a storage classification mapping.")
   get is ArmResourceRead<StorageClassificationMapping, Error = never>;
 
@@ -46,7 +45,6 @@ interface StorageClassificationMappings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationStorageClassificationMappings_Create")
   @summary("Create storage classification mapping.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     StorageClassificationMapping,
@@ -61,7 +59,6 @@ interface StorageClassificationMappings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationStorageClassificationMappings_Delete")
   @summary("Delete a storage classification mapping.")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageClassificationMapping,
@@ -72,7 +69,6 @@ interface StorageClassificationMappings {
    * Lists the storage classification mappings for the fabric.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ReplicationStorageClassificationMappings_ListByReplicationStorageClassifications")
   @summary("Gets the list of storage classification mappings objects under a storage.")
   listByReplicationStorageClassifications is ArmResourceListByParent<
     StorageClassificationMapping,
