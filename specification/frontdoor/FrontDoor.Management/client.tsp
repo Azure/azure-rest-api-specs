@@ -24,3 +24,7 @@ using Microsoft.Network;
 @@clientName(TimeseriesProperties.startDateTimeUTC, "startDateTimeUtc", "java");
 @@clientName(TimeseriesProperties.endDateTimeUTC, "endDateTimeUtc", "java");
 @@clientName(TimeseriesDataPoint.dateTimeUTC, "dateTimeUtc", "java");
+@@clientName(GetLatencyScorecardsParameters.endDateTimeUTC,
+  "endDateTimeUtc",
+  "java"
+);

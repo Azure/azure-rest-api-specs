@@ -3230,6 +3230,30 @@ model LatencyScorecard extends Resource {
 }
 
 /**
+ * Defines a the properties of a Latency Scorecard query parameters
+ */
+model GetLatencyScorecardsParameters {
+  /**
+   * The end DateTime of the Latency Scorecard in UTC
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @query("endDateTimeUTC")
+  endDateTimeUTC?: string;
+
+  /**
+   * The country associated with the Latency Scorecard. Values are country ISO codes as specified here- https://www.iso.org/iso-3166-country-codes.html
+   */
+  @query("country")
+  country?: string;
+
+  /**
+   * The aggregation interval of the Latency Scorecard
+   */
+  @query("aggregationInterval")
+  aggregationInterval: LatencyScorecardAggregationInterval;
+}
+
+/**
  * Defines a the properties of a Latency Scorecard
  */
 model LatencyScorecardProperties {
