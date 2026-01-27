@@ -295,7 +295,7 @@ namespace SearchIndexerClient {
   service: Search,
 })
 @clientNamespace("Azure.Search.Documents.KnowledgeBases")
-@clientNamespace("com.azure.search.documents.knowledgebase", "java")
+@clientNamespace("com.azure.search.documents.knowledgebases", "java")
 namespace KnowledgeBaseRetrievalClient {
   interface KnowledgeRetrieval {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -365,8 +365,8 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@access(SearchClient.Documents.searchGet, Access.internal);
 @@access(SearchClient.Documents.searchPost, Access.internal);
-@@access(SearchClient.Documents.searchPost, Access.public, "java");
 @@clientName(SearchClient.Documents.searchPost, "search", "java");
+@@access(SearchClient.Documents.searchPost, Access.public, "java");
 @@access(SearchClient.Documents.autocompleteGet, Access.internal);
 @@access(SearchClient.Documents.autocompletePost, Access.internal);
 @@access(SearchClient.Documents.autocompletePost, Access.public, "java");
@@ -599,6 +599,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents",
   "java"
 );
+@@access(Search.IndexDocumentsResult, Access.public, "java");
 @@clientNamespace(Search.IndexingResult, "Azure.Search.Documents");
 @@clientNamespace(Search.IndexingResult, "com.azure.search.documents", "java");
 @@clientNamespace(Search.AutocompleteResult, "Azure.Search.Documents");
