@@ -336,6 +336,8 @@ union NetworkApiVersion {
 union SecurityTypes {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Standard: "Standard",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TrustedLaunch: "TrustedLaunch",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ConfidentialVM: "ConfidentialVM",
