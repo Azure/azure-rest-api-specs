@@ -20,7 +20,6 @@ namespace Commvault.ContentStore;
 @doc("Supported API versions for the Commvault.ContentStore resource provider.")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   v1_preview: "2024-10-01-preview",
 }
