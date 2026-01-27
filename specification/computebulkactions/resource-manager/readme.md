@@ -27,16 +27,16 @@ These are the global settings for the computebulkactions.
 ```yaml
 openapi-subtype: providerHub
 openapi-type: arm
-tag: package-2026-02-15-preview
+tag: package-2026-02-10-preview
 ```
 
-### Tag: package-2025-02-15-preview
+### Tag: package-2025-02-10-preview
 
-These settings apply only when `--tag=package-2026-02-15-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-02-10-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-02-15-preview'
+```yaml $(tag) == 'package-2026-02-10-preview'
 input-file:
-  - Microsoft.ComputeBulkActions/preview/2026-02-15-preview/computebulkactions.json
+  - Microsoft.ComputeBulkActions/preview/2026-02-10-preview/computebulkactions.json
 suppressions:  
   - code: DefinitionsPropertiesNamesCamelCase
     reason: SSD is the abbreviation for solid state drive used in the property name.
