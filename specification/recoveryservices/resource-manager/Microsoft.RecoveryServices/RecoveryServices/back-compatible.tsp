@@ -67,7 +67,10 @@ using Microsoft.RecoveryServices;
 
 // Vaults operations
 @@clientLocation(Vaults.create, "VaultCertificates", "!csharp");
-@@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities", "!csharp");
+@@clientLocation(Vaults.registeredIdentitiesDelete,
+  "RegisteredIdentities",
+  "!csharp"
+);
 @@clientName(Vaults.registeredIdentitiesDelete, "Delete", "!csharp");
 @@clientLocation(Vaults.list, "ReplicationUsages", "!csharp");
 @@clientLocation(Vaults.listByVaults, "Usages", "!csharp");

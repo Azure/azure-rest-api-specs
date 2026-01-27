@@ -182,10 +182,10 @@ namespace Microsoft.RecoveryServices;
   "csharp"
 );
 @@clientName(RawCertificateData.certificate, "CertificateData", "csharp");
-@@clientName(ResourceCertificateDetails.certificate,
-  "CertificateData",
-  "csharp"
-);
+// @@clientName(ResourceCertificateDetails.certificate,
+//   "CertificateData",
+//   "csharp"
+// );
 
 @@alternateType(PatchVault.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
@@ -205,4 +205,9 @@ namespace Microsoft.RecoveryServices;
 @@clientName(ResourceCertificateAndAcsDetails.globalAcsHostName,
   "globalAcsHostname",
   "java"
+);
+
+@@alternateType(PatchTrackedResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
 );
