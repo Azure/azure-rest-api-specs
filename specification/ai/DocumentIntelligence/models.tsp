@@ -450,6 +450,9 @@ model DocumentIntelligenceWarning {
 
 @doc("Status and result of the analyze operation.")
 model AnalyzeOperation {
+  @doc("Operation ID")
+  operationId?: string;
+
   @doc("Operation status.  notStarted, running, succeeded, or failed")
   status: DocumentIntelligenceOperationStatus;
 
