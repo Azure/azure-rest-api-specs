@@ -34,6 +34,52 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies": {
+      "get": {
+        "tags": [
+          "ddosCustomPolicies"
+        ],
+        "operationId": "DdosCustomPolicies_List",
+        "description": "Gets all the DDoS custom policies in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of DDoS custom policy resources.",
+            "schema": {
+              "$ref": "#/definitions/DdosCustomPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all DDoS custom policies": {
+            "$ref": "./examples/DdosCustomPolicyList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies/{ddosCustomPolicyName}": {
       "delete": {
         "tags": [
@@ -268,9 +314,65 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ddosCustomPolicies": {
+      "get": {
+        "tags": [
+          "ddosCustomPolicies"
+        ],
+        "operationId": "DdosCustomPolicies_ListBySubscription",
+        "description": "Gets all the DDoS custom policies in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of DDoS custom policy resources.",
+            "schema": {
+              "$ref": "#/definitions/DdosCustomPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all DDoS custom policies in subscription": {
+            "$ref": "./examples/DdosCustomPolicyListBySubscription.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "DdosCustomPolicyListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DdosCustomPolicy"
+          },
+          "description": "A list of DDoS custom policies in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListDdosCustomPolicies API service call."
+    },
     "DdosCustomPolicy": {
       "description": "A DDoS custom policy in a resource group.",
       "properties": {
