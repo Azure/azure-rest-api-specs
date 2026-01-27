@@ -748,7 +748,7 @@ union CharFilterName {
   HtmlStrip: "html_strip",
 }
 
-/** Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer. */
+/** Defines a regular expression flag that can be used in the pattern analyzer and pattern tokenizer. */
 union RegexFlags {
   string,
 
@@ -4816,7 +4816,7 @@ model PatternAnalyzer extends LexicalAnalyzer {
   /** A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters. */
   pattern?: string = "\\W+";
 
-  /** Regular expression flags. */
+  /** Regular expression flags, specified as a '|' separated string of RegexFlags values. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @encode(ArrayEncoding.pipeDelimited)
@@ -5002,8 +5002,11 @@ model PatternTokenizer extends LexicalTokenizer {
   /** A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters. */
   pattern?: string = "\\W+";
 
-  /** Regular expression flags. */
-  flags?: RegexFlags;
+  /** Regular expression flags, specified as a '|' separated string of RegexFlags values. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
+  @encode(ArrayEncoding.pipeDelimited)
+  flags?: RegexFlags[];
 
   /** The zero-based ordinal of the matching group in the regular expression pattern to extract into tokens. Use -1 if you want to use the entire pattern to split the input into tokens, irrespective of matching groups. Default is -1. */
   group?: int32 = -1;
