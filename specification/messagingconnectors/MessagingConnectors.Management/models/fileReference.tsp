@@ -45,6 +45,7 @@ import "./dataSourceModels/azureBlobSourceConnector.tsp";
 import "./dataSourceModels/oracleSourceConnector.tsp";
 import "./dataSourceModels/httpSourceConnector.tsp";
 import "./dataSourceModels/mongoDbSourceConnector.tsp";
+import "./dataSourceModels/deltaChangeFeedSourceConnector.tsp";
 import "./fetchCdcSchemaModels/schemaProperties/schemaProperties.tsp";
 import "./fetchCdcSchemaModels/schemaProperties/postgreSql/postgreSqlSchemaProperties.tsp";
 import "./fetchCdcSchemaModels/schemaProperties/sqlServer/sqlServerSchemaProperties.tsp";

@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "virtualInstanceName": "testvi",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "49d64d54-e966-4c46-a868-1999802b762c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "app01",
+            "type": "Microsoft.Workloads/virtualInstances/components",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi/components/app01",
+            "location": "eastus2euap",
+            "properties": {
+              "componentType": "application",
+              "componentRole": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1pas"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ap01"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1applb0"
+                }
+              ],
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T00:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "wd01",
+            "type": "Microsoft.Workloads/virtualInstances/components",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi/components/wd01",
+            "location": "eastus2euap",
+            "properties": {
+              "componentType": "webdispatcher",
+              "componentRole": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-wdrg/providers/Microsoft.Compute/virtualMachines/rs1wd1"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-wdrg/providers/Microsoft.Compute/virtualMachines/rs1wd2"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1wdlb0"
+                }
+              ],
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T00:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "cs01",
+            "type": "Microsoft.Workloads/virtualInstances/components",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi/components/cs01",
+            "location": "eastus2euap",
+            "properties": {
+              "componentType": "central",
+              "componentRole": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ascs"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Compute/virtualMachines/rs1ers"
+                },
+                {
+                  "resourceId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/saprise-apprg/providers/Microsoft.Network/loadBalancers/rs1cslb0"
+                }
+              ],
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T00:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "db01",
+            "type": "Microsoft.Workloads/virtualInstances/components",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi/components/db01",
+            "location": "eastus2euap",
+            "properties": {
+              "componentType": "database",
+              "componentRole": "default",
+              "resources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm0"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-dbrg/providers/Microsoft.Compute/virtualMachines/rs1dbvm1"
+                }
+              ],
+              "metadata": {
+                "DBType": "HANA",
+                "DBVersion": "2.0"
+              },
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T00:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WorkloadComponents_List",
+  "title": "List workload components by virtual instance - sample 1"
+}

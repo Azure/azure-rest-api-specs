@@ -279,7 +279,7 @@
             "description": "Request body to update the Virtual Instance resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateVirtualInstanceRequest"
+              "$ref": "#/definitions/VirtualInstanceUpdate"
             }
           }
         ],
@@ -604,10 +604,10 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Request body to update the Workload Component resource.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateWorkloadComponentRequest"
+              "$ref": "#/definitions/WorkloadComponentUpdate"
             }
           }
         ],
@@ -843,91 +843,6 @@
         ]
       }
     },
-    "UpdateVirtualInstanceProperties": {
-      "type": "object",
-      "description": "Defines the update request body properties for updating the Virtual Instance resource.",
-      "properties": {
-        "environmentLabel": {
-          "type": "string",
-          "description": "The user defined label indicating the sub category of the environment in which the workload system is deployed."
-        },
-        "systemPriority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of the workload system. The value must be an integer between 0 (highest priority) and 9 (lowest priority)."
-        },
-        "systemLifecycleStage": {
-          "$ref": "#/definitions/SystemLifecycleStage",
-          "description": "The current stage in the lifecycle of the workload system."
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Metadata pertaining to the workload system.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateVirtualInstanceRequest": {
-      "type": "object",
-      "description": "Defines the request body for updating the Virtual Instance resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Gets or sets the Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (user assigned identities)"
-        },
-        "properties": {
-          "$ref": "#/definitions/UpdateVirtualInstanceProperties",
-          "description": "The properties to be updated."
-        }
-      }
-    },
-    "UpdateWorkloadComponentProperties": {
-      "type": "object",
-      "description": "Defines the update request body properties for updating the workload component resource.",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "Resources that are part of the component.",
-          "items": {
-            "$ref": "#/definitions/ResourceConfiguration"
-          },
-          "x-ms-identifiers": []
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Metadata pertaining to the component.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateWorkloadComponentRequest": {
-      "type": "object",
-      "description": "Defines the request body for updating the workload component resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Gets or sets the Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/UpdateWorkloadComponentProperties",
-          "description": "The properties to be updated."
-        }
-      }
-    },
     "VirtualInstance": {
       "type": "object",
       "description": "Defines the Virtual Instance (VI) resource.",
@@ -987,7 +902,12 @@
         },
         "environmentType": {
           "$ref": "#/definitions/EnvironmentType",
-          "description": "The type of environment in which the workload system is deployed - Production / Non Production."
+          "description": "The type of environment in which the workload system is deployed - Production / Non Production.\nRequired on create, optional on update.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "environmentLabel": {
           "type": "string",
@@ -1002,7 +922,12 @@
         },
         "systemLifecycleStage": {
           "$ref": "#/definitions/SystemLifecycleStage",
-          "description": "The current stage in the lifecycle of the workload system."
+          "description": "The current stage in the lifecycle of the workload system.\nRequired on create, optional on update.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "metadata": {
           "type": "object",
@@ -1035,10 +960,29 @@
         }
       },
       "required": [
-        "architectureId",
-        "environmentType",
-        "systemLifecycleStage"
+        "architectureId"
       ]
+    },
+    "VirtualInstanceUpdate": {
+      "type": "object",
+      "description": "Defines the request body for updating the Virtual Instance resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (user assigned identities)"
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualInstanceProperties",
+          "description": "The properties to be updated."
+        }
+      }
     },
     "WorkloadComplianceState": {
       "type": "string",
@@ -1106,26 +1050,44 @@
       "properties": {
         "componentType": {
           "type": "string",
-          "description": "Type of the component. Allowed values change based on the workload type and will be defined in the workload definition. Examples include \"application\", \"database\", \"central\" etc."
+          "description": "Type of the component. Allowed values change based on the workload type and will be defined in the workload definition. Examples include \"application\", \"database\", \"central\" etc.\nRequired on create, read-only thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "componentRole": {
           "type": "string",
-          "description": "Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition. Examples of Role for SAP workloads include \"pas\"/\"aas\" for application component, \"ascs\"/\"ers\" for central component, \"backup\", etc."
+          "description": "Role of the component. There can be multiple roles for a same component type. Allowed values change based on the workload type and will be defined in the workload definition. Examples of Role for SAP workloads include \"pas\"/\"aas\" for application component, \"ascs\"/\"ers\" for central component, \"backup\", etc.\nRequired on create, read-only thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "resources": {
           "type": "array",
-          "description": "Resources that are part of the component. The entries in this list should be unique and correspond to a single Azure resource.",
+          "description": "Resources that are part of the component. The entries in this list should be unique and correspond to a single Azure resource.\nRequired on create, optional on update.",
           "items": {
             "$ref": "#/definitions/ResourceConfiguration"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "metadata": {
           "type": "object",
           "description": "Metadata pertaining to the component.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "complianceState": {
           "$ref": "#/definitions/WorkloadComplianceState",
@@ -1142,11 +1104,24 @@
           "description": "Indicates any errors on the workload component resource.",
           "readOnly": true
         }
-      },
-      "required": [
-        "componentType",
-        "resources"
-      ]
+      }
+    },
+    "WorkloadComponentUpdate": {
+      "type": "object",
+      "description": "Defines the request body for updating the workload component resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkloadComponentProperties",
+          "description": "The properties to be updated."
+        }
+      }
     },
     "WorkloadEnrollmentState": {
       "type": "string",

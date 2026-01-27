@@ -58,6 +58,7 @@ model PipelineGroupProperties {
 
   @doc("Networking configurations for the pipeline group instance.")
   @Azure.ResourceManager.identifiers(#[])
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   networkingConfigurations?: NetworkingConfiguration[];
 
   @doc("Constraints for guiding the execution environment of the pipeline group.")
@@ -221,6 +222,7 @@ union PipelineType {
 }
 
 @doc("Networking configuration for the pipeline group instance.")
+@removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model NetworkingConfiguration {
   @doc("External networking mode.")
   externalNetworkingMode: ExternalNetworkingMode;
@@ -235,6 +237,7 @@ model NetworkingConfiguration {
 }
 
 @doc("The mode of the external networking.")
+@removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
 union ExternalNetworkingMode {
   string,
 
@@ -243,6 +246,7 @@ union ExternalNetworkingMode {
 }
 
 @doc("Networking route configuration.")
+@removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model NetworkingRoute {
   @doc("The name of the previously defined receiver.")
   @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")

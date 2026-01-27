@@ -6,6 +6,11 @@ on:
       - main
       - RPSaaSMaster
 
+  pull_request:
+    paths:
+      - "eng/common/spelling/**"
+      - "cspell.json"
+
   schedule:
     # Run every day at 12:06 UTC
     - cron: "6 12 * * *"
