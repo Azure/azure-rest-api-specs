@@ -83,3 +83,9 @@ namespace Customizations;
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
+
+@@Legacy.disablePageable(Storage.Blob.Container.listBlobFlatSegment, "python");
+@@Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment,
+  "python"
+);
+@@Legacy.disablePageable(Storage.Blob.Service.listContainersSegment, "python");
