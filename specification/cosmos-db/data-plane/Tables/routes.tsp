@@ -38,7 +38,7 @@ namespace Data.Tables {
     /** Content-Type header */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
-    contentType: "application/json",
+    contentType: "application/json;odata=nometadata",
 
     /** DataServiceVersion header */
     @header("DataServiceVersion")
@@ -154,7 +154,7 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @get
-    @route("{tableName}?comp=acl")
+    @route("{table}?comp=acl")
     op getAccessPolicy is TablesXmlOperation<
       {
         ...TablePathParameter;
@@ -174,7 +174,7 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @put
-    @route("{tableName}?comp=acl")
+    @route("{table}?comp=acl")
     op setAccessPolicy is TablesXmlOperation<
       {
         ...TablePathParameter;
@@ -200,7 +200,7 @@ namespace Data.Tables {
     op create(
       /** Content-Type header */
       @header("Content-Type")
-      contentType: "application/json",
+      contentType: "application/json;odata=nometadata",
 
       /** DataServiceVersion header */
       @header("DataServiceVersion")
@@ -227,7 +227,7 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @delete
-    @route("/Tables('{tableName}')")
+    @route("/Tables('{table}')")
     op delete is TablesJsonOperation<
       {
         ...TablePathParameter;
@@ -242,7 +242,7 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @post
-    @route("/{tableName}")
+    @route("/{table}")
     op insertEntity(
       /** Content-Type header */
       @header("Content-Type")
@@ -277,7 +277,7 @@ namespace Data.Tables {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @put
     @sharedRoute
-    @route("/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
+    @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op updateEntity is TablesJsonOperation<
       {
         ...TablePathParameter;
@@ -322,7 +322,7 @@ namespace Data.Tables {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @patch(#{ implicitOptionality: false })
     @sharedRoute
-    @route("/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
+    @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op mergeEntity is TablesJsonOperation<
       {
         ...TablePathParameter;
@@ -367,7 +367,7 @@ namespace Data.Tables {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @put
     @sharedRoute
-    @route("/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
+    @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op insertOrReplaceEntity is TablesJsonOperation<
       {
         ...TablePathParameter;
@@ -404,7 +404,7 @@ namespace Data.Tables {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @patch(#{ implicitOptionality: false })
     @sharedRoute
-    @route("/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
+    @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op insertOrMergeEntity is TablesJsonOperation<
       {
         ...TablePathParameter;
@@ -440,7 +440,7 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @delete
-    @route("/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
+    @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op deleteEntity is TablesJsonOperation<
       {
         ...TablePathParameter;
@@ -478,7 +478,7 @@ namespace Data.Tables {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
     @list
-    @route("/{tableName}()")
+    @route("/{table}()")
     op queryEntities is TablesJsonOperation<
       {
         ...TablePathParameter;
@@ -527,7 +527,7 @@ namespace Data.Tables {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
-    @route("/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
+    @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op queryEntityWithPartitionAndRowKey is TablesJsonOperation<
       {
         ...TablePathParameter;

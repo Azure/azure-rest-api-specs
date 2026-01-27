@@ -35,6 +35,9 @@ union EchoFormat {
   Echo: "return-content",
 }
 
+/** The properties for the table entity. */
+alias TableEntityProperties = Record<unknown>;
+
 /** The type for values of entity properties */
 alias EntityValueType = string | numeric | boolean;
 
@@ -42,7 +45,7 @@ alias EntityValueType = string | numeric | boolean;
 alias TablePathParameter = {
   /** The name of the table. */
   @path
-  tableName: string;
+  table: string;
 };
 
 /** Specifies the version of the operation to use for this request. */
