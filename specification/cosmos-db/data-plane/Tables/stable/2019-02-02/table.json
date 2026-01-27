@@ -62,7 +62,7 @@
   },
   "tags": [],
   "paths": {
-    "/{tableName}": {
+    "/{table}": {
       "post": {
         "operationId": "Table_InsertEntity",
         "description": "Insert entity in a table.",
@@ -97,7 +97,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -317,7 +317,7 @@
         }
       }
     },
-    "/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')": {
+    "/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')": {
       "get": {
         "operationId": "Table_QueryEntityWithPartitionAndRowKey",
         "description": "Retrieve a single entity.",
@@ -349,7 +349,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -489,7 +489,7 @@
           "application/json"
         ],
         "consumes": [
-          "application/json"
+          "application/json;odata=nometadata"
         ],
         "parameters": [
           {
@@ -515,7 +515,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -622,7 +622,7 @@
           "application/json"
         ],
         "consumes": [
-          "application/json"
+          "application/json;odata=nometadata"
         ],
         "parameters": [
           {
@@ -648,7 +648,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -778,7 +778,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -865,7 +865,7 @@
         }
       }
     },
-    "/{tableName}()": {
+    "/{table}()": {
       "get": {
         "operationId": "Table_QueryEntities",
         "description": "Queries entities under the given table.",
@@ -897,7 +897,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -1283,7 +1283,7 @@
           "application/json"
         ],
         "consumes": [
-          "application/json"
+          "application/json;odata=nometadata"
         ],
         "parameters": [
           {
@@ -1503,7 +1503,7 @@
         }
       }
     },
-    "/Tables('{tableName}')": {
+    "/Tables('{table}')": {
       "delete": {
         "operationId": "Table_Delete",
         "description": "Deletes an existing table.",
@@ -1534,7 +1534,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -1592,7 +1592,7 @@
     }
   },
   "x-ms-paths": {
-    "/{tableName}?comp=acl": {
+    "/{table}?comp=acl": {
       "get": {
         "operationId": "Table_GetAccessPolicy",
         "description": "Retrieves details about any stored access policies specified on the table that\nmay be used with Shared Access Signatures.",
@@ -1609,7 +1609,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -1677,7 +1677,7 @@
         }
       }
     },
-    "/{tableName}?comp=acl&_overload=setAccessPolicy": {
+    "/{table}?comp=acl&_overload=setAccessPolicy": {
       "put": {
         "operationId": "Table_SetAccessPolicy",
         "description": "Sets stored access policies for the table that may be used with Shared Access\nSignatures.",
@@ -1697,7 +1697,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -1771,7 +1771,7 @@
         }
       }
     },
-    "/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')?_overload=insertOrReplaceEntity": {
+    "/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')?_overload=insertOrReplaceEntity": {
       "put": {
         "operationId": "Table_InsertOrReplaceEntity",
         "description": "Insert or replace entity in a table.",
@@ -1779,7 +1779,7 @@
           "application/json"
         ],
         "consumes": [
-          "application/json"
+          "application/json;odata=nometadata"
         ],
         "parameters": [
           {
@@ -1805,7 +1805,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
@@ -1898,7 +1898,7 @@
         }
       }
     },
-    "/{tableName}(PartitionKey='{partitionKey}',RowKey='{rowKey}')?_overload=insertOrMergeEntity": {
+    "/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')?_overload=insertOrMergeEntity": {
       "patch": {
         "operationId": "Table_InsertOrMergeEntity",
         "description": "Insert or merge entity in a table.",
@@ -1906,7 +1906,7 @@
           "application/json"
         ],
         "consumes": [
-          "application/json"
+          "application/json;odata=nometadata"
         ],
         "parameters": [
           {
@@ -1932,7 +1932,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "tableName",
+            "name": "table",
             "in": "path",
             "description": "The name of the table.",
             "required": true,
