@@ -28,3 +28,8 @@ using Microsoft.Network;
   "endDateTimeUtc",
   "java"
 );
+@@clientName(GetTimeseriesParameters.startDateTimeUTC,
+  "startDateTimeUtc",
+  "java"
+);
+@@clientName(GetTimeseriesParameters.endDateTimeUTC, "endDateTimeUtc", "java");
