@@ -1,0 +1,66 @@
+{
+  "operationId": "TrafficControllerInterface_ListBySubscription",
+  "title": "Get Traffic Controllers List",
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "tc1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1",
+            "type": "Microsoft.ServiceNetworking/trafficControllers",
+            "location": "NorthCentralUS",
+            "tags": {
+              "key1": "value1"
+            },
+            "properties": {
+              "configurationEndpoints": [
+                "abc.trafficcontroller.azure.net"
+              ],
+              "frontends": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/fe1"
+                }
+              ],
+              "associations": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/association/as1"
+                }
+              ],
+              "securityPolicies": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/securityPolicies/sp1"
+                }
+              ],
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnections/pec1"
+                }
+              ],
+              "privateEndpointConnectionProxies": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateEndpointConnectionProxies/pecp1"
+                }
+              ],
+              "privateLinkResources": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/privateLinkResources/private-frontend-1"
+                }
+              ],
+              "securityPolicyConfigurations": {
+                "wafSecurityPolicy": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/securityPolicies/waf-0"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
