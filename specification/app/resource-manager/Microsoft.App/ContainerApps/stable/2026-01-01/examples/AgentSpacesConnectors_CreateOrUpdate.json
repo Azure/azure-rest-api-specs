@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSpaceName": "testAgentSpace",
+    "dataConnectorName": "new-shared-cosmosdb-connector",
+    "api-version": "2026-01-01",
+    "agentSpaceDataConnectorEnvelope": {
+      "properties": {
+        "dataConnectorType": "CosmosDB",
+        "dataSource": "https://newsharedcosmos.documents.azure.com:443/",
+        "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-shared-cosmos-connection-string",
+        "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedCosmosIdentity"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/new-shared-cosmosdb-connector",
+        "name": "new-shared-cosmosdb-connector",
+        "type": "Microsoft.App/agentSpaces/connectors",
+        "properties": {
+          "dataConnectorType": "CosmosDB",
+          "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-shared-cosmos-connection-string",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedCosmosIdentity"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012"
+      },
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/new-shared-cosmosdb-connector",
+        "name": "new-shared-cosmosdb-connector",
+        "type": "Microsoft.App/agentSpaces/connectors",
+        "properties": {
+          "dataConnectorType": "CosmosDB",
+          "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-shared-cosmos-connection-string",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedCosmosIdentity"
+        }
+      }
+    }
+  }
+}

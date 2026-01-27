@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentName": "testAgent",
+    "dataConnectorName": "new-sql-connector",
+    "api-version": "2026-01-01",
+    "agentDataConnectorEnvelope": {
+      "properties": {
+        "dataConnectorType": "SqlServer",
+        "dataSource": "Server=newserver.database.windows.net;Database=NewDB;",
+        "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-sql-connection-string",
+        "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent/connectors/new-sql-connector",
+        "name": "new-sql-connector",
+        "type": "Microsoft.App/agents/connectors",
+        "properties": {
+          "dataConnectorType": "SqlServer",
+          "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-sql-connection-string",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
+          "source": "Agent"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012"
+      },
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent/connectors/new-sql-connector",
+        "name": "new-sql-connector",
+        "type": "Microsoft.App/agents/connectors",
+        "properties": {
+          "dataConnectorType": "SqlServer",
+          "keyVaultUri": "https://testkv.vault.azure.net/secrets/new-sql-connection-string",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
+          "source": "Agent",
+          "provisioningState": "InProgress"
+        }
+      }
+    }
+  }
+}
