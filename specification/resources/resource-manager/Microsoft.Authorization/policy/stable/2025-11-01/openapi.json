@@ -195,6 +195,9 @@
           "Create or update a policy assignment with resource selectors": {
             "$ref": "./examples/createPolicyAssignmentWithResourceSelectors.json"
           },
+          "Create or update a policy assignment with self-serve exemption settings": {
+            "$ref": "./examples/createPolicyAssignmentWithSelfserveExemptionSettings.json"
+          },
           "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
             "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
           }
@@ -262,6 +265,9 @@
           },
           "Update a policy assignment with resource selectors": {
             "$ref": "./examples/updatePolicyAssignmentWithResourceSelectors.json"
+          },
+          "Update a policy assignment with self-serve exemption settings": {
+            "$ref": "./examples/updatePolicyAssignmentWithSelfserveExemptionSettings.json"
           }
         }
       },
@@ -3644,6 +3650,10 @@
           "type": "string",
           "description": "The instance ID of the policy assignment. This ID only and always changes when the assignment is deleted and recreated.",
           "readOnly": true
+        },
+        "selfServeExemptionSettings": {
+          "$ref": "#/definitions/SelfServeExemptionSettings",
+          "description": "The self-serve exemption settings for the policy assignment."
         }
       }
     },
@@ -4509,6 +4519,26 @@
           }
         ]
       }
+    },
+    "SelfServeExemptionSettings": {
+      "type": "object",
+      "description": "The self-serve exemption settings for a policy assignment.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether self-serve exemption is enabled."
+        },
+        "policyDefinitionReferenceIds": {
+          "type": "array",
+          "description": "The policy definition reference IDs for self-serve exemption.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "enabled"
+      ]
     },
     "UserAssignedIdentitiesValue": {
       "type": "object",

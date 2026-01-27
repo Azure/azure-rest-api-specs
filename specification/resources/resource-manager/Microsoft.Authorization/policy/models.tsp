@@ -380,6 +380,28 @@ model PolicyAssignmentProperties {
    */
   @visibility(Lifecycle.Read)
   instanceId?: string;
+
+  /**
+   * The self-serve exemption settings for the policy assignment.
+   */
+  @added(Versions.v2025_11_01)
+  selfServeExemptionSettings?: SelfServeExemptionSettings;
+}
+
+/**
+ * The self-serve exemption settings for a policy assignment.
+ */
+@added(Versions.v2025_11_01)
+model SelfServeExemptionSettings {
+  /**
+   * Indicates whether self-serve exemption is enabled.
+   */
+  enabled: boolean;
+
+  /**
+   * The policy definition reference IDs for self-serve exemption.
+   */
+  policyDefinitionReferenceIds?: string[];
 }
 
 /**
