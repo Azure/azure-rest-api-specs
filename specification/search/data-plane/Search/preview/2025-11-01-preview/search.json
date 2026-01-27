@@ -4770,11 +4770,7 @@
         },
         "searchFields": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester."
         },
         "suggesterName": {
           "type": "string",
@@ -6815,7 +6811,7 @@
           ],
           "x-ms-enum": {
             "name": "EdgeNGramTokenFilterSide",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "Front",
@@ -6847,7 +6843,7 @@
       ],
       "x-ms-enum": {
         "name": "EdgeNGramTokenFilterSide",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Front",
@@ -6890,7 +6886,7 @@
           ],
           "x-ms-enum": {
             "name": "EdgeNGramTokenFilterSide",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "Front",
@@ -8322,7 +8318,7 @@
       ],
       "x-ms-enum": {
         "name": "IndexerExecutionStatusDetail",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "ResetDocs",
@@ -8441,7 +8437,7 @@
       ],
       "x-ms-enum": {
         "name": "IndexerStatus",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Unknown",
@@ -11920,7 +11916,7 @@
       ],
       "x-ms-enum": {
         "name": "MicrosoftStemmingTokenizerLanguage",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Arabic",
@@ -12199,7 +12195,7 @@
       ],
       "x-ms-enum": {
         "name": "MicrosoftTokenizerLanguage",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Bangla",
@@ -13749,11 +13745,7 @@
         },
         "flags": {
           "type": "string",
-          "format": "ArrayEncoding.pipeDelimited",
-          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values.",
-          "items": {
-            "$ref": "#/definitions/RegexFlags"
-          }
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
         },
         "stopwords": {
           "type": "array",
@@ -13856,11 +13848,7 @@
         },
         "flags": {
           "type": "string",
-          "format": "ArrayEncoding.pipeDelimited",
-          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values.",
-          "items": {
-            "$ref": "#/definitions/RegexFlags"
-          }
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
         },
         "group": {
           "type": "integer",
@@ -13924,7 +13912,7 @@
       ],
       "x-ms-enum": {
         "name": "PhoneticEncoder",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Metaphone",
@@ -14007,7 +13995,7 @@
           ],
           "x-ms-enum": {
             "name": "PhoneticEncoder",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "Metaphone",
@@ -15140,7 +15128,7 @@
       ],
       "x-ms-enum": {
         "name": "ScoringFunctionAggregation",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Sum",
@@ -15186,7 +15174,7 @@
       ],
       "x-ms-enum": {
         "name": "ScoringFunctionInterpolation",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Linear",
@@ -16604,11 +16592,7 @@
         },
         "highlight": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting."
         },
         "highlightPostTag": {
           "type": "string",
@@ -16625,11 +16609,7 @@
         },
         "orderby": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
@@ -16664,11 +16644,7 @@
         },
         "searchFields": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter."
         },
         "searchMode": {
           "$ref": "#/definitions/SearchMode",
@@ -16684,11 +16660,7 @@
         },
         "select": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
         },
         "skip": {
           "type": "integer",
@@ -16732,11 +16704,7 @@
         },
         "semanticFields": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names used for semantic ranking.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names used for semantic ranking."
         },
         "vectorQueries": {
           "type": "array",
@@ -17498,7 +17466,7 @@
       ],
       "x-ms-enum": {
         "name": "SnowballTokenFilterLanguage",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Armenian",
@@ -18063,7 +18031,7 @@
       ],
       "x-ms-enum": {
         "name": "StemmerTokenFilterLanguage",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Arabic",
@@ -18395,7 +18363,7 @@
       ],
       "x-ms-enum": {
         "name": "StopwordsList",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Arabic",
@@ -18605,7 +18573,7 @@
           ],
           "x-ms-enum": {
             "name": "StopwordsList",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "Arabic",
@@ -18834,11 +18802,7 @@
         },
         "orderby": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
         },
         "search": {
           "type": "string",
@@ -18846,19 +18810,11 @@
         },
         "searchFields": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester."
         },
         "select": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results."
         },
         "suggesterName": {
           "type": "string",
@@ -18943,11 +18899,7 @@
         },
         "synonyms": {
           "type": "string",
-          "format": "ArrayEncoding.newlineDelimited",
-          "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.",
-          "items": {
-            "type": "string"
-          }
+          "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines."
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
@@ -19567,7 +19519,7 @@
       ],
       "x-ms-enum": {
         "name": "TokenCharacterKind",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Letter",
