@@ -7392,7 +7392,7 @@
                         ],
                         "nullable": true
                       },
-                      "agent": {
+                      "agent_reference": {
                         "allOf": [
                           {
                             "$ref": "#/components/schemas/AgentReference"
@@ -7577,7 +7577,7 @@
                         ],
                         "nullable": true
                       },
-                      "agent": {
+                      "agent_reference": {
                         "allOf": [
                           {
                             "$ref": "#/components/schemas/AgentReference"
@@ -8996,31 +8996,6 @@
             "WorkflowAgents=v1",
             "MemoryStores=v1"
           ]
-        }
-      },
-      "AgentId": {
-        "type": "object",
-        "required": [
-          "type",
-          "name",
-          "version"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "agent_id"
-            ]
-          },
-          "name": {
-            "type": "string",
-            "maxLength": 256,
-            "description": "The name of the agent."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version identifier of the agent."
-          }
         }
       },
       "AgentKind": {
@@ -11015,23 +10990,6 @@
         },
         "title": "CreateEvalRunRequest"
       },
-      "CreatedBy": {
-        "type": "object",
-        "properties": {
-          "agent": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentId"
-              }
-            ],
-            "description": "The agent that created the item."
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The response on which the item is created."
-          }
-        }
-      },
       "CredentialType": {
         "anyOf": [
           {
@@ -12895,14 +12853,12 @@
             "readOnly": true
           },
           "created_at": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Creation date/time of the evaluator",
             "readOnly": true
           },
           "modified_at": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Last modified date/time of the evaluator",
             "readOnly": true
           },
@@ -13190,13 +13146,15 @@
               "name": "LOG_LEVEL",
               "value": "debug"
             }
+          },
+          "image": {
+            "type": "string",
+            "description": "The image ID for the agent, applicable to image-based hosted agents.",
+            "example": "my-registry.azurecr.io/my-hosted-agent:latest"
           }
         },
         "discriminator": {
-          "propertyName": "kind",
-          "mapping": {
-            "hosted": "#/components/schemas/ImageBasedHostedAgentDefinition"
-          }
+          "propertyName": "kind"
         },
         "allOf": [
           {
@@ -13258,37 +13216,6 @@
           }
         ],
         "description": "Evaluation rule action for human evaluation."
-      },
-      "ImageBasedHostedAgentDefinition": {
-        "type": "object",
-        "required": [
-          "kind",
-          "image"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "hosted"
-            ]
-          },
-          "image": {
-            "type": "string",
-            "description": "The image for the hosted agent.",
-            "example": "my-registry.azurecr.io/my-hosted-agent:latest"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/HostedAgentDefinition"
-          }
-        ],
-        "description": "The image-based deployment definition for a hosted agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=v1"
-          ]
-        }
       },
       "Index": {
         "type": "object",
@@ -13988,52 +13915,6 @@
           }
         ],
         "description": "A tool for integrating memories into the agent."
-      },
-      "MemorySearchTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "memory_store_name",
-          "scope"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "memory_search"
-            ],
-            "description": "The type of the tool. Always `memory_search_preview`."
-          },
-          "memory_store_name": {
-            "type": "string",
-            "description": "The name of the memory store to use."
-          },
-          "scope": {
-            "type": "string",
-            "description": "The namespace used to group and isolate memories, such as a user ID.\nLimits which memories can be retrieved or updated.\nUse special variable `{{$userId}}` to scope memories to the current signed-in user."
-          },
-          "search_options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/MemorySearchOptions"
-              }
-            ],
-            "description": "Options for searching the memory store."
-          },
-          "update_delay": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Time to wait before updating memories after inactivity (seconds). Default 300.",
-            "default": 300
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool for integrating memories into the agent.",
-        "deprecated": true
       },
       "MemorySearchToolCallItemParam": {
         "type": "object",
@@ -15454,8 +15335,7 @@
       "OpenAI.CodeInterpreterTool": {
         "type": "object",
         "required": [
-          "type",
-          "container"
+          "type"
         ],
         "properties": {
           "type": {
@@ -15475,7 +15355,7 @@
                 "$ref": "#/components/schemas/OpenAI.CodeInterpreterContainerAuto"
               }
             ],
-            "description": "The code interpreter container. Can be a container ID or an object that\n  specifies uploaded file IDs to make available to your code, along with an\n  optional `memory_limit` setting."
+            "description": "The code interpreter container. Can be a container ID or an object that\nspecifies uploaded file IDs to make available to your code, along with an\noptional `memory_limit` setting.\nIf not provided, the service assumes auto."
           }
         },
         "allOf": [
@@ -21556,7 +21436,7 @@
               "code_interpreter_call.outputs",
               "reasoning.encrypted_content",
               "message.output_text.logprobs",
-              "memory_search_preview_call.results"
+              "memory_search_call.results"
             ]
           }
         ],
@@ -22897,16 +22777,17 @@
           "type": {
             "$ref": "#/components/schemas/OpenAI.ItemResourceType"
           },
-          "created_by": {
-            "anyOf": [
+          "agent_reference": {
+            "allOf": [
               {
-                "$ref": "#/components/schemas/CreatedBy"
-              },
-              {
-                "type": "string"
+                "$ref": "#/components/schemas/AgentReference"
               }
             ],
-            "description": "The information about the creator of the item"
+            "description": "The agent that created the item."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The response on which the item is created."
           }
         },
         "discriminator": {
@@ -26002,7 +25883,8 @@
           "incomplete_details",
           "output",
           "instructions",
-          "parallel_tool_calls"
+          "parallel_tool_calls",
+          "agent_reference"
         ],
         "properties": {
           "metadata": {
@@ -26222,18 +26104,15 @@
             ],
             "nullable": true
           },
-          "agent": {
+          "agent_reference": {
+            "type": "object",
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentId"
+                "$ref": "#/components/schemas/AgentReference"
               }
             ],
+            "nullable": true,
             "description": "The agent used for this response"
-          },
-          "structured_inputs": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
           }
         },
         "title": "The response object"
@@ -29572,7 +29451,6 @@
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
-            "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
@@ -29921,8 +29799,7 @@
               "azure_function",
               "bing_grounding",
               "capture_structured_outputs",
-              "openapi",
-              "memory_search"
+              "openapi"
             ]
           }
         ]
@@ -30966,13 +30843,23 @@
             },
             "description": "An array of tools the model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter."
           },
-          "text": {
-            "type": "object",
-            "properties": {
-              "format": {
-                "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfiguration"
+          "tool_choice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
               }
-            },
+            ],
+            "description": "How the model should select which tool (or tools) to use when generating a response. \nSee the `tools` parameter to see how to specify which tools the model can call."
+          },
+          "text": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromptAgentDefinitionTextOptions"
+              }
+            ],
             "description": "Configuration options for a text response from the model. Can be plain text or structured JSON data."
           },
           "structured_inputs": {
@@ -30989,6 +30876,15 @@
           }
         ],
         "description": "The prompt agent definition"
+      },
+      "PromptAgentDefinitionTextOptions": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfiguration"
+          }
+        },
+        "description": "Configuration options for a text response from the model. Can be plain text or structured JSON data."
       },
       "PromptBasedEvaluatorDefinition": {
         "type": "object",

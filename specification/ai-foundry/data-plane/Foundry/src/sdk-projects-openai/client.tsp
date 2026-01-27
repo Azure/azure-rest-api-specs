@@ -46,6 +46,11 @@ namespace Azure.AI.Projects;
 @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
 
 // --------------------------------------------------------------------------------
+// Fix the xref.
+// --------------------------------------------------------------------------------
+@@clientNamespace(OpenAI, "Azure.AI.Projects.OpenAI", "csharp");
+
+// --------------------------------------------------------------------------------
 // Root client
 // --------------------------------------------------------------------------------
 @@clientName(OpenAI, "ProjectOpenAIClient");

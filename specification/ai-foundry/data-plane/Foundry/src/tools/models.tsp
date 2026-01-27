@@ -1,10 +1,12 @@
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core/experimental";
 import "@azure-tools/openai-typespec/models/responses";
 
 import "../memory_stores/models.tsp";
 
 using Azure.Core.Experimental;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 namespace Azure.AI.Projects {
@@ -29,7 +31,8 @@ namespace Azure.AI.Projects {
     bing_grounding: "bing_grounding",
     capture_structured_outputs: "capture_structured_outputs",
     openapi: "openapi",
-    #deprecated "Pre-V1 undecorated preview variant, preserved for temporary migration compatibility"
+
+    @removed(Versions.v1)
     memory_search: "memory_search",
   }
 
@@ -37,7 +40,7 @@ namespace Azure.AI.Projects {
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
 
   union _AgentIncludable {
-    "memory_search_preview_call.results",
+    "memory_search_call.results",
   }
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -733,7 +736,7 @@ namespace Azure.AI.Projects {
   /**
    * A tool for integrating memories into the agent.
    */
-  #deprecated "Pre-V1 undecorated preview variant, preserved for temporary migration compatibility"
+  @removed(Versions.v1)
   model MemorySearchTool extends OpenAI.Tool {
     /**
      * The type of the tool. Always `memory_search_preview`.

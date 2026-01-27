@@ -197,16 +197,27 @@ model PromptAgentDefinition extends AgentDefinition {
     """)
   tools?: OpenAI.Tool[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @doc("""
+    How the model should select which tool (or tools) to use when generating a response. 
+    See the `tools` parameter to see how to specify which tools the model can call.
+    """)
+  tool_choice?: string | OpenAI.ToolChoiceParam;
+
   /**
    * Configuration options for a text response from the model. Can be plain text or structured JSON data.
    */
-  text?: {
-    // Tool customization: Employ discriminated type base
-    format?: OpenAI.TextResponseFormatConfiguration;
-  };
+  text?: PromptAgentDefinitionTextOptions;
 
   @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
   structured_inputs?: Record<StructuredInputDefinition>;
+}
+
+/**
+ * Configuration options for a text response from the model. Can be plain text or structured JSON data.
+ */
+model PromptAgentDefinitionTextOptions {
+  format?: OpenAI.TextResponseFormatConfiguration;
 }
 
 @doc("The workflow agent definition.")
@@ -258,20 +269,10 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Environment variables to set in the hosted agent container.")
   @example(#{ name: "LOG_LEVEL", value: "debug" })
   environment_variables?: Record<string>;
-}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-@doc("The image-based deployment definition for a hosted agent.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.hosted_agents_v1] }
-)
-model ImageBasedHostedAgentDefinition extends HostedAgentDefinition {
-  kind: AgentKind.hosted;
-
-  @doc("The image for the hosted agent.")
+  @doc("The image ID for the agent, applicable to image-based hosted agents.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
-  image: string;
+  image?: string;
 }
 
 @doc("The container app agent definition.")

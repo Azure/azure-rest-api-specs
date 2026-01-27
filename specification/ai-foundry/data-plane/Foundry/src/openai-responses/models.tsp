@@ -1,12 +1,14 @@
 import "@azure-tools/typespec-azure-core/experimental";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 import "../openai-conversations/models.tsp";
 import "../tools/models.tsp";
 
-using TypeSpec.Http;
 using Azure.Core.Experimental;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
 namespace Azure.AI.Projects {
@@ -22,8 +24,15 @@ namespace Azure.AI.Projects {
 
   @@copyProperties(OpenAI.CreateResponse,
     {
-      /** The agent to use for generating the response. */
+      /**
+       * (Deprecated) Use agent_reference instead.
+       *  The agent to use for generating the response.
+       */
+      @removed(Versions.v1)
       agent?: AgentReference,
+
+      /** The agent to use for generating the response. */
+      agent_reference?: AgentReference,
 
       /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
       structured_inputs?: Record<unknown>,
@@ -32,11 +41,28 @@ namespace Azure.AI.Projects {
 
   @@copyProperties(OpenAI.Response,
     {
-      /** The agent used for this response */
+      /**
+       * (Deprecated) Use agent_reference instead.
+       * The agent used for this response
+       */
+      @removed(Versions.v1)
       agent?: AgentId,
 
-      /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
-      structured_inputs?: Record<unknown>,
+      /** The agent used for this response */
+      agent_reference: AgentReference | null,
+    }
+  );
+
+  @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
+  @@copyProperties(OpenAI.CodeInterpreterTool,
+    {
+      /** The code interpreter container. Can be a container ID or an object that
+       * specifies uploaded file IDs to make available to your code, along with an
+       * optional `memory_limit` setting.
+       * If not provided, the service assumes auto.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
+      container?: string | OpenAI.CodeInterpreterContainerAuto,
     }
   );
 
@@ -58,25 +84,6 @@ namespace Azure.AI.Projects {
     conversation_id?: string;
   };
 
-  model ResponseList {
-    @doc("""
-      The type of object returned, must be `list`.
-      """)
-    object: "list";
-
-    /** A list of items used to generate this response. */
-    data: OpenAI.Response[];
-
-    /** Whether there are more items available. */
-    has_more: boolean;
-
-    /** The ID of the first item in the list. */
-    first_id: string;
-
-    /** The ID of the last item in the list. */
-    last_id: string;
-  }
-
   model AgentReference {
     type: "agent_reference";
 
@@ -88,6 +95,7 @@ namespace Azure.AI.Projects {
     version?: string;
   }
 
+  @removed(Versions.v1)
   model AgentId {
     type: "agent_id";
 
@@ -123,10 +131,18 @@ namespace Azure.AI.Projects {
       /** The information about the creator of the item */
       #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "This is required due to a conflict with the service."
+      @removed(Versions.v1)
       created_by?: CreatedBy | string,
+
+      @doc("The agent that created the item.")
+      agent_reference?: AgentReference,
+
+      @doc("The response on which the item is created.")
+      response_id?: string,
     }
   );
 
+  @removed(Versions.v1)
   model CreatedBy {
     @doc("The agent that created the item.")
     agent?: AgentId;

@@ -114,11 +114,11 @@ model EvaluatorVersion {
 
   @visibility(Lifecycle.Read)
   @doc("Creation date/time of the evaluator")
-  created_at: int64;
+  created_at: string;
 
   @visibility(Lifecycle.Read)
   @doc("Last modified date/time of the evaluator")
-  modified_at: int64;
+  modified_at: string;
 
   ...AssetBase;
 }
