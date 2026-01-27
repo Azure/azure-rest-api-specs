@@ -565,6 +565,12 @@ model PolicyAssignmentUpdateProperties {
    */
   @identifiers(#[])
   overrides?: Override[];
+
+  /**
+   * The self-serve exemption settings for the policy assignment.
+   */
+  @added(Versions.v2025_11_01)
+  selfServeExemptionSettings?: SelfServeExemptionSettings;
 }
 
 /**
