@@ -12,21 +12,17 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Microsoft.QueueStorage/{version-status}/{version}/queue.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-queue"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: "azure-storage-queue"
     package-mode: dataplane
     flavor: azure
-  "@azure-tools/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.Storage.Queues"
-    flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-queue-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/storage-queue"
     generate-metadata: true
     generate-test: true
     package-details:
-      name: "@azure-rest/azure-storage-queue"
-      description: "Azure.Storage.Queue Service"
+      name: "@azure/storage-queue"
+      description: "Azure Storage Queue client library"
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-queue"
@@ -34,7 +30,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     emitter-output-dir: "{output-dir}/{service-dir}/azqueue"
-    module-name: "github.com/Azure/azure-sdk-for-go/sdk/storage/azqueue"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azqueue"
     flavor: azure
   "@azure-tools/typespec-rust":
     package-dir: "azure_storage_queue"
