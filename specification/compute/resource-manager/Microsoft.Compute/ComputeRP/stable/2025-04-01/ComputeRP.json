@@ -17517,9 +17517,8 @@
     },
     "SecurityTypes": {
       "type": "string",
-      "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.",
+      "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and not Standard.",
       "enum": [
-        "Standard",
         "TrustedLaunch",
         "ConfidentialVM"
       ],
@@ -17527,10 +17526,6 @@
         "name": "SecurityTypes",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Standard",
-            "value": "Standard"
-          },
           {
             "name": "TrustedLaunch",
             "value": "TrustedLaunch"
