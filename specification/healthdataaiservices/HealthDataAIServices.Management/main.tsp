@@ -20,9 +20,40 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2024-09-20 version.")
   v2024_09_20: "2024-09-20",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("The 2026-01-27-preview version.")
+  v2026_01_27_preview: "2026-01-27-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
+@doc("The tier of the SKU.")
+union SkuTier {
+  string,
+
+  /** Free tier */
+  Free: "Free",
+
+  /** Basic tier */
+  Basic: "Basic",
+
+  /** Standard tier */
+  Standard: "Standard",
+}
+
+@doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+model Sku {
+  @doc("The name of the SKU. E.g. P3. It is typically a letter+number code.")
+  name: string;
+
+  @doc("The tier of the SKU.")
+  tier?: SkuTier;
+
+  @doc("The SKU capacity. This allows scale out/in for the resource.")
+  capacity?: int32;
+}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
@@ -40,6 +71,11 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
+  @added(Versions.v2026_01_27_preview)
+  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+  sku?: Sku;
 }
 
 /** Patch request body for DeidService */
@@ -51,6 +87,10 @@ model DeidUpdate {
 
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
+
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  @added(Versions.v2026_01_27_preview)
+  sku?: Sku;
 }
 
 model DeidPropertiesUpdate
