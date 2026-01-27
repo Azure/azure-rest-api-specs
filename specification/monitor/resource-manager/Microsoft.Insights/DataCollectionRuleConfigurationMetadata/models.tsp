@@ -1,8 +1,12 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
+using Azure.ResourceManager;
 
 /** Request body for fetching configuration metadata. */
 model DataCollectionRuleConfigurationMetadataRequest {
@@ -42,9 +46,9 @@ model TelemetryTypeMetadata {
   /** List of supported source resource types. */
   supportedResourceTypes?: string[];
 
-  /** Detailed stream information per resource type (only in fetchDetails response). */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Using Record to represent dynamic resource type keys in the response"
-  supportedStreams?: Record<StreamMetadata[]>;
+  /** Detailed stream information (only in fetchDetails response). */
+  @identifiers(#["streamId"])
+  supportedStreams?: StreamMetadata[];
 }
 
 /** Metadata for a specific data stream. */

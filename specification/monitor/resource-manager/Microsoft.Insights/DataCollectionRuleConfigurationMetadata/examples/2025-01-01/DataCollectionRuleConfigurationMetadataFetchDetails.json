@@ -24,23 +24,21 @@
               "supportedResourceTypes": [
                 "Microsoft.Storage/storageAccounts"
               ],
-              "supportedStreams": {
-                "Microsoft.Storage/storageAccounts": [
-                  {
-                    "streamId": "Microsoft-StorageRead",
-                    "metadata": {
-                      "logsSpecification": {
-                        "name": "StorageRead",
-                        "displayName": "Storage Read Operations",
-                        "groups": [
-                          "audit",
-                          "read"
-                        ]
-                      }
+              "supportedStreams": [
+                {
+                  "streamId": "Microsoft-StorageRead",
+                  "metadata": {
+                    "logsSpecification": {
+                      "name": "StorageRead",
+                      "displayName": "Storage Read Operations",
+                      "groups": [
+                        "audit",
+                        "read"
+                      ]
                     }
                   }
-                ]
-              }
+                }
+              ]
             },
             "platformMetrics": {
               "supportedDestinations": [
@@ -50,25 +48,23 @@
               "supportedResourceTypes": [
                 "Microsoft.Storage/storageAccounts"
               ],
-              "supportedStreams": {
-                "Microsoft.Storage/storageAccounts": [
-                  {
-                    "streamId": "Microsoft-Transactions",
-                    "metadata": {
-                      "metricsSpecification": {
-                        "name": "transactions",
-                        "displayName": "Transactions",
-                        "description": "Number of requests made to storage service",
-                        "unit": "Count",
-                        "aggregationType": "Total",
-                        "groups": [
-                          "capacity"
-                        ]
-                      }
+              "supportedStreams": [
+                {
+                  "streamId": "Microsoft-Transactions",
+                  "metadata": {
+                    "metricsSpecification": {
+                      "name": "transactions",
+                      "displayName": "Transactions",
+                      "description": "Number of requests made to storage service",
+                      "unit": "Count",
+                      "aggregationType": "Total",
+                      "groups": [
+                        "capacity"
+                      ]
                     }
                   }
-                ]
-              }
+                }
+              ]
             }
           }
         }

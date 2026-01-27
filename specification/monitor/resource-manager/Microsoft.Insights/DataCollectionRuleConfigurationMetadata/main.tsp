@@ -27,7 +27,7 @@ namespace Microsoft.Insights;
 /** API versions */
 enum Versions {
   /** 2025-01-01 stable version */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2025-01-01`,
 }
 
