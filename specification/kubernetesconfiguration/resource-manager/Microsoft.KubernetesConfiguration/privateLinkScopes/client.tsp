@@ -7,6 +7,10 @@ using Azure.ClientGenerator.Core;
   "KubernetesConfigurationPrivateLinkScopesMgmtClient",
   "python"
 );
+@@clientName(Microsoft.KubernetesConfiguration,
+  "PrivateLinkScopesClient",
+  "javascript"
+);
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "python"
