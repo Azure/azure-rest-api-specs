@@ -71,7 +71,8 @@ interface Connectors {
   testExistingConnection is ArmResourceActionAsync<
     Connector,
     TestExistingConnectionRequest,
-    TestConnectionResponse
+    TestConnectionResponse,
+    Error = ErrorResponse
   >;
 }
 
