@@ -32,5 +32,6 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(TranscribedWord.durationMilliseconds, "duration", "java");
 @@access(transcribe, Access.internal, "csharp");
 @@access(TranscriptionContent, Access.internal, "java");
+@@access(TranscriptionContent, Access.internal, "csharp");
 @@clientName(TranscriptionContent.definition, "options", "java");
 @@clientName(TranscriptionContent.definition, "options", "csharp");

@@ -48,7 +48,7 @@ model PhraseListProperties {
   @doc("List of phrases for recognition.")
   phrases?: string[];
 
-  @doc("Biasing weight for phrase list (1.0 to 20.0).")
+  @doc("Biasing weight for phrase list (0.0-2.0).")
   biasingWeight?: float32;
 }
 
