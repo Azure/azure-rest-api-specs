@@ -1,5 +1,13 @@
 import { basename, dirname, resolve } from "path";
 
+import { KeyedCache, KeyedPairCache } from "./cache.js";
+
+/** @type {KeyedCache<string, string>} */
+const resolveCache = new KeyedCache();
+
+/** @type {KeyedPairCache<string, string, string>} */
+const resolvePairCache = new KeyedPairCache();
+
 /**
  *
  * @param {string} path Absolute or relative path
@@ -15,6 +23,27 @@ export function includesSegment(path, segment) {
 }
 
 /**
+ * Wraps `path.resolve(path)` with a cache to improve performance
+ *
+ * @param {string} path
+ * @returns {string}
+ */
+export function resolveCached(path) {
+  return resolveCache.getOrCreate(path, () => resolve(path));
+}
+
+/**
+ * Wraps `path.resolve(from, to)` with a cache to improve performance
+
+* @param {string} from
+ * @param {string} to
+ * @returns {string}
+ */
+export function resolvePairCached(from, to) {
+  return resolvePairCache.getOrCreate(from, to, () => resolve(from, to));
+}
+
+/**
  * @param {string} path Absolute or relative path
  * @param {string} segment File or folder
  * @returns {string} Portion of resolved path up to (and including) the last occurrence of segment
@@ -26,7 +55,7 @@ export function includesSegment(path, segment) {
 export function untilLastSegment(path, segment) {
   // Shares code with `untilLastSegmentWithParent()`, but not worth refactoring yet
 
-  let current = resolve(path);
+  let current = resolveCached(path);
 
   while (true) {
     const parent = dirname(current);
@@ -56,7 +85,7 @@ export function untilLastSegment(path, segment) {
 export function untilLastSegmentWithParent(path, segment) {
   // Shares code with `untilLastSegment()`, but not worth refactoring yet
 
-  let current = resolve(path);
+  let current = resolveCached(path);
 
   while (true) {
     const parent = dirname(current);
