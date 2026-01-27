@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "configurationName": "default",
+    "deploymentName": "myDeployment",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "nginx.nginxplus/nginxDeployments/configurations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/configurations/default",
+        "properties": {
+          "files": [
+            {
+              "content": "ABCDEF==",
+              "virtualPath": "/etc/nginx/nginx.conf"
+            }
+          ],
+          "package": {
+            "data": null
+          },
+          "protectedFiles": [
+            {
+              "contentHash": "sha256:1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF",
+              "virtualPath": "/etc/nginx/protected-file.cert"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "rootFile": "/etc/nginx/nginx.conf"
+        }
+      }
+    }
+  },
+  "operationId": "Configurations_Get",
+  "title": "Configurations_Get"
+}

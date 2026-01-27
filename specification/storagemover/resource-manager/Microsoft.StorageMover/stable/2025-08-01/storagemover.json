@@ -2666,6 +2666,12 @@
           "description": "The PrivateEndpointName associated with the connection.",
           "readOnly": true
         },
+        "privateEndpointResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The privateEndpoint resource Id",
+          "readOnly": true
+        },
         "jobList": {
           "type": "array",
           "description": "List of job definitions associated with this connection.",
@@ -2692,7 +2698,7 @@
         "Approved",
         "Rejected",
         "Disconnected",
-        "Pending Approval",
+        "Pending",
         "Stale"
       ],
       "x-ms-enum": {
@@ -2712,8 +2718,8 @@
             "value": "Disconnected"
           },
           {
-            "name": "PendingApproval",
-            "value": "Pending Approval"
+            "name": "Pending",
+            "value": "Pending"
           },
           {
             "name": "Stale",
@@ -2778,6 +2784,33 @@
       "required": [
         "type"
       ]
+    },
+    "DataIntegrityValidation": {
+      "type": "string",
+      "description": "The Data integrity validation mode.",
+      "enum": [
+        "SaveVerifyFileMD5",
+        "SaveFileMD5",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "DataIntegrityValidation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SaveVerifyFileMD5",
+            "value": "SaveVerifyFileMD5"
+          },
+          {
+            "name": "SaveFileMD5",
+            "value": "SaveFileMD5"
+          },
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
     },
     "DayOfWeek": {
       "type": "string",
@@ -3118,6 +3151,34 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
+        },
+        "dataIntegrityValidation": {
+          "type": "string",
+          "description": "The checksum validation mode for the job definition.",
+          "default": "None",
+          "enum": [
+            "SaveVerifyFileMD5",
+            "SaveFileMD5",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "DataIntegrityValidation",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SaveVerifyFileMD5",
+                "value": "SaveVerifyFileMD5"
+              },
+              {
+                "name": "SaveFileMD5",
+                "value": "SaveFileMD5"
+              },
+              {
+                "name": "None",
+                "value": "None"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -3159,6 +3220,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "dataIntegrityValidation": {
+          "$ref": "#/definitions/DataIntegrityValidation",
+          "description": "Data Integrity validation to be updated"
         }
       }
     },

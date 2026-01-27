@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.CleanRoom;
 /**
@@ -99,6 +101,19 @@ interface Consortiums {
   resume is ArmResourceActionAsync<
     Consortium,
     void,
+    ArmResponse<Consortium>,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Recovers consortium.
+   */
+  @added(Versions.v2025_10_31_preview)
+  recover is ArmResourceActionAsync<
+    Consortium,
+    RecoverConsortiumInput,
     ArmResponse<Consortium>,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &

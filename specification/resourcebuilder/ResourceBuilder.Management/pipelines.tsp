@@ -76,10 +76,10 @@ model PipelineJobBase {
 /** Pipeline job type */
 union PipelineJobType {
   /** Reference job type. */
-  Reference: "reference",
+  Reference: "Reference",
 
   /** Inline job type. */
-  Inline: "inline",
+  Inline: "Inline",
 
   string,
 }
@@ -87,7 +87,7 @@ union PipelineJobType {
 /** Inline pipeline job */
 model InlinePipelineJob extends PipelineJobBase {
   /** Job type. */
-  type: "inline";
+  type: "Inline";
 
   /** Job definition. */
   definition: Job;
@@ -96,7 +96,7 @@ model InlinePipelineJob extends PipelineJobBase {
 /** Reference pipeline job */
 model ReferencePipelineJob extends PipelineJobBase {
   /** Job type. */
-  type: "reference";
+  type: "Reference";
 
   /** Job name reference. */
   name: string;
@@ -115,12 +115,6 @@ model PipelineActivityDependency {
 union PipelineDependencyCondition {
   /** Succeeded condition. */
   Succeeded: "Succeeded",
-
-  /** Failed condition. */
-  Failed: "Failed",
-
-  /** Skipped condition. */
-  Skipped: "Skipped",
 
   string,
 }

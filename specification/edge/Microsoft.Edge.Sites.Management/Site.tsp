@@ -1,151 +1,106 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Edge;
 
-@doc("Site as ARM Resource")
-model Site is ProxyResource<SiteProperties> {
-  #suppress "@typespec/http/metadata-ignored" ""
-  @doc("Name of Site resource")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-  @path
-  @key("siteName")
-  @segment("sites")
+@doc("Site properties")
+model SiteProperties {
+  @doc("displayName of Site resource")
+  displayName?: string;
+
+  @doc("Description of Site resource")
+  description?: string;
+
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+
+  @doc("Provisioning state of last operation")
   @visibility(Lifecycle.Read)
-  name: string;
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Site address properties")
+model SiteAddressProperties {
+  @doc("First line of the street address")
+  streetAddress1?: string;
+
+  @doc("Second line of the street address")
+  streetAddress2?: string;
+
+  @doc("City of the address")
+  city?: string;
+
+  @doc("State or province of the address")
+  stateOrProvince?: string;
+
+  @doc("Country of the address")
+  country?: string;
+
+  @doc("Postal or ZIP code of the address")
+  postalCode?: string;
+}
+
+@doc("The updatable properties of the Site.")
+model SiteUpdateProperties {
+  @doc("displayName of Site resource")
+  displayName?: string;
+
+  @doc("Description of Site resource")
+  description?: string;
+
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
+}
+
+@doc("The type used for update operations of the Site.")
+model SiteUpdate {
+  @doc("The updatable properties of the Site.")
+  properties?: SiteUpdateProperties;
+}
+
+@doc("Site as Extension Resource")
+model Site is ExtensionResource<SiteProperties> {
+  ...ResourceNameParameter<
+    Resource = Site,
+    KeyName = "siteName",
+    SegmentName = "sites",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+  >;
+}
+
+@doc("Site operations as base operations which will be extended for each scopes")
+interface SiteOps<Scope extends Azure.ResourceManager.Foundations.SimpleResource> {
+  list is Extension.ListByTarget<Scope, Site>;
+  get is Extension.Read<Scope, Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<Scope, Site>;
+  update is Extension.CustomPatchSync<Scope, Site, SiteUpdate>;
+  delete is Extension.DeleteSync<Scope, Site>;
 }
 
 @armResourceOperations
-interface Sites {
-  get is ArmResourceRead<Site>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
-  update is ArmCustomPatchSync<Site, SiteUpdate>;
-  delete is ArmResourceDeleteSync<Site>;
-  listByResourceGroup is ArmResourceListByParent<Site>;
-}
+interface Sites extends SiteOps<Extension.ResourceGroup> {}
 
-alias SubscriptionParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
-interface SitesBySubscription {
-  list is ArmListBySubscription<Site>;
-  get is ArmResourceRead<Site, BaseParameters = SubscriptionParameters>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Site,
-    BaseParameters = SubscriptionParameters
-  >;
-  update is ArmCustomPatchSync<
-    Site,
-    SiteUpdate,
-    BaseParameters = SubscriptionParameters
-  >;
-  delete is ArmResourceDeleteSync<
-    Site,
-    BaseParameters = SubscriptionParameters
-  >;
-}
+@armResourceOperations
+interface SitesBySubscription extends SiteOps<Extension.Subscription> {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of Tenant"
-interface SitesByServiceGroup {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operation for tenant scope"
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
-  @doc("list Site at SG scope")
-  @list
-  listByServiceGroup(
-    ...ApiVersionParameter,
+alias ServiceGroup = Extension.ExternalResource<
+  TargetNamespace = "Microsoft.Management",
+  ResourceType = "serviceGroups",
+  ResourceParameterName = "servicegroupName",
+  NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$",
+  Description = "The name of the service group",
+  ParentType = "Tenant"
+>;
 
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    servicegroupName: string,
-  ): ArmResponse<ResourceListResult<Site>> | ErrorResponse;
-
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  @doc("Get Site at SG scope")
-  get(
-    ...ApiVersionParameter,
-
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    servicegroupName: string,
-
-    @path
-    @doc("The name of the site")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    siteName: string,
-  ): ArmResponse<Site> | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PUT call"
-  @Azure.Core.useFinalStateVia("original-uri")
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  @put
-  @doc("create or update Site at SG scope")
-  createOrUpdate(
-    ...ApiVersionParameter,
-
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    servicegroupName: string,
-
-    @path
-    @doc("The name of the site")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    siteName: string,
-
-    @body
-    @doc("The properties of the site")
-    resource: Site,
-  ): ArmResourceUpdatedResponse<Site> | ArmResourceCreatedResponse<
-    Site,
-    ArmAsyncOperationHeader<Site> & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PATCH call"
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  @patch(#{ implicitOptionality: true })
-  @doc("update Site at SG scope")
-  update(
-    ...ApiVersionParameter,
-
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    servicegroupName: string,
-
-    @path
-    @doc("The name of the site")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    siteName: string,
-
-    @body
-    @doc("The properties of the site")
-    properties: SiteUpdate,
-  ): ArmResponse<Site> | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom DELETE call"
-  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  @delete
-  @doc("delete Site at SG scope")
-  delete(
-    ...ApiVersionParameter,
-
-    @path
-    @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    servicegroupName: string,
-
-    @path
-    @doc("The name of the site")
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
-    siteName: string,
-  ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
-}
+@armResourceOperations
+interface SitesByServiceGroup extends SiteOps<ServiceGroup> {}

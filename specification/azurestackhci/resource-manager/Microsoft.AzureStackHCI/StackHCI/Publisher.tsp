@@ -29,13 +29,11 @@ interface Publishers {
   /**
    * Get Publisher resource details of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Publisher>;
 
   /**
    * List Publishers available for the HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByCluster is ArmResourceListByParent<
     Publisher,
     Response = ArmResponse<PublisherList>
@@ -46,22 +44,3 @@ interface Publishers {
   "The name of the publisher available within HCI cluster."
 );
 @@doc(Publisher.properties, "Publisher properties.");
-
-// Models
-
-/**
- * List of Publisher proxy resources for the HCI cluster.
- */
-model PublisherList is Azure.Core.Page<Publisher>;
-
-/**
- * Publisher properties.
- */
-model PublisherProperties {
-  /**
-   * Provisioning State
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility(Lifecycle.Read)
-  provisioningState?: string;
-}

@@ -1,0 +1,38 @@
+{
+  "title": "ChangeRecords_RetrieveNextStages",
+  "operationId": "ChangeRecords_RetrieveNextStages",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changeRecordResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord",
+        "lastStageProgressionSequence": 2,
+        "nextStages": [
+          {
+            "stageReference": "production",
+            "sequence": 3,
+            "status": "NotStarted",
+            "stageVariables": {
+              "environment": "prod",
+              "region": "eastus"
+            }
+          },
+          {
+            "stageReference": "monitoring",
+            "sequence": 4,
+            "status": "NotStarted",
+            "stageVariables": {
+              "environment": "prod",
+              "region": "eastus"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

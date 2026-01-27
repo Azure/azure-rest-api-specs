@@ -2,14 +2,10 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
 import "./Site.tsp";
 import "./SiteAwareResourceTypes.tsp";
+import "./backward-compatibles.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 

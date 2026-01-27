@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;

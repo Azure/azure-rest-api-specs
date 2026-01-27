@@ -68,6 +68,15 @@ union ConnectorType {
   @doc("MongoDb source connector.")
   MongoDbSource: "MongoDbSource",
 
+  @doc("Custom source connector.")
+  CustomConnectorSource: "CustomConnectorSource",
+
+  @doc("Dataverse source connector v2.")
+  DataverseSourceV2: "DataverseSourceV2",
+
+  @doc("DeltaChangeFeed source connector.")
+  DeltaChangeFeedSource: "DeltaChangeFeedSource",
+
   string,
 }
 

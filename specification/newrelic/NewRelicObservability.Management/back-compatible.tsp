@@ -55,9 +55,11 @@ using NewRelic.Observability;
 @@clientLocation(NewRelicMonitorResources.billingInfoGet, "BillingInfo");
 @@clientName(NewRelicMonitorResources.billingInfoGet, "Get");
 @@clientLocation(NewRelicMonitorResources.list, "ConnectedPartnerResources");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResource.properties
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRule.properties);
 
 @@clientName(MonitoredSubscriptions.createOrUpdate::parameters.resource,

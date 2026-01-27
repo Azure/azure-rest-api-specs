@@ -1,0 +1,1894 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BedrockGuardrails"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/bedrockGuardrails": {
+      "get": {
+        "operationId": "BedrockGuardrails_ListBySubscription",
+        "tags": [
+          "BedrockGuardrails"
+        ],
+        "description": "List BedrockGuardrail resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockGuardrailListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockGuardrails_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/BedrockGuardrails_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockGuardrails": {
+      "get": {
+        "operationId": "BedrockGuardrails_ListByResourceGroup",
+        "tags": [
+          "BedrockGuardrails"
+        ],
+        "description": "List BedrockGuardrail resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockGuardrailListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockGuardrails_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/BedrockGuardrails_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockGuardrails/{name}": {
+      "get": {
+        "operationId": "BedrockGuardrails_Get",
+        "tags": [
+          "BedrockGuardrails"
+        ],
+        "description": "Get a BedrockGuardrail",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockGuardrail",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockGuardrail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockGuardrails_Get_MaximumSet": {
+            "$ref": "./examples/BedrockGuardrails_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BedrockGuardrails_CreateOrReplace",
+        "tags": [
+          "BedrockGuardrails"
+        ],
+        "description": "Create a BedrockGuardrail. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockGuardrail",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockGuardrail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BedrockGuardrail' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockGuardrail"
+            }
+          },
+          "201": {
+            "description": "Resource 'BedrockGuardrail' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockGuardrail"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockGuardrails_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/BedrockGuardrails_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BedrockGuardrails_Update",
+        "tags": [
+          "BedrockGuardrails"
+        ],
+        "description": "Update a BedrockGuardrail",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockGuardrail",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockGuardrailTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockGuardrail"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockGuardrails_Update_MaximumSet": {
+            "$ref": "./examples/BedrockGuardrails_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BedrockGuardrails_Delete",
+        "tags": [
+          "BedrockGuardrails"
+        ],
+        "description": "Delete a BedrockGuardrail",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockGuardrail",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockGuardrails_Delete_MaximumSet": {
+            "$ref": "./examples/BedrockGuardrails_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AutomatedReasoningPolicyConfig": {
+      "type": "object",
+      "description": "Definition of AutomatedReasoningPolicyConfig",
+      "properties": {
+        "confidenceThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations."
+        },
+        "policies": {
+          "type": "array",
+          "description": "The list of Automated Reasoning policy ARNs to include in the guardrail configuration",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AwsBedrockGuardrailProperties": {
+      "type": "object",
+      "description": "Definition of awsBedrockGuardrail",
+      "properties": {
+        "automatedReasoningPolicyConfig": {
+          "$ref": "#/definitions/AutomatedReasoningPolicyConfig",
+          "description": "Optional configuration for integrating Automated Reasoning policies with the guardrail."
+        },
+        "blockedInputMessaging": {
+          "type": "string",
+          "description": "Messaging for when violations are detected in text"
+        },
+        "blockedOutputsMessaging": {
+          "type": "string",
+          "description": "Messaging for when violations are detected in text"
+        },
+        "contentPolicyConfig": {
+          "$ref": "#/definitions/ContentPolicyConfig",
+          "description": "Content policy config for a guardrail."
+        },
+        "contextualGroundingPolicyConfig": {
+          "$ref": "#/definitions/ContextualGroundingPolicyConfig",
+          "description": "Contextual grounding policy config for a guardrail."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Time Stamp"
+        },
+        "crossRegionConfig": {
+          "$ref": "#/definitions/GuardrailCrossRegionConfig",
+          "description": "The system-defined guardrail profile that you’re using with your guardrail"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the guardrail or its version"
+        },
+        "failureRecommendations": {
+          "type": "array",
+          "description": "List of failure recommendations",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guardrailArn": {
+          "type": "string",
+          "description": "Arn representation for the guardrail"
+        },
+        "guardrailId": {
+          "type": "string",
+          "description": "Unique id for the guardrail"
+        },
+        "kmsKeyArn": {
+          "type": "string",
+          "description": "The KMS key with which the guardrail was encrypted at rest"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the guardrail"
+        },
+        "sensitiveInformationPolicyConfig": {
+          "$ref": "#/definitions/SensitiveInformationPolicyConfig",
+          "description": "Sensitive information policy config for a guardrail."
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Status of the guardrail"
+        },
+        "statusReasons": {
+          "type": "array",
+          "description": "List of status reasons",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of Tags",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "topicPolicyConfig": {
+          "$ref": "#/definitions/TopicPolicyConfig",
+          "description": "Topic policy config for a guardrail."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Time Stamp"
+        },
+        "version": {
+          "type": "string",
+          "description": "Guardrail version"
+        },
+        "wordPolicyConfig": {
+          "$ref": "#/definitions/WordPolicyConfig",
+          "description": "Word policy config for a guardrail."
+        }
+      }
+    },
+    "BedrockGuardrail": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BedrockGuardrailProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BedrockGuardrailListResult": {
+      "type": "object",
+      "description": "The response of a BedrockGuardrail list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BedrockGuardrail items on this page",
+          "items": {
+            "$ref": "#/definitions/BedrockGuardrail"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BedrockGuardrailProperties": {
+      "type": "object",
+      "description": "Definition of BedrockGuardrail",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsBedrockGuardrailProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "BedrockGuardrailTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in BedrockGuardrail resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ContentFilterConfig": {
+      "type": "object",
+      "description": "Definition of ContentFilterConfig",
+      "properties": {
+        "inputAction": {
+          "$ref": "#/definitions/ContentFilterConfigInputAction",
+          "description": "Property inputAction"
+        },
+        "inputEnabled": {
+          "type": "boolean",
+          "description": "Property inputEnabled"
+        },
+        "inputModalities": {
+          "type": "array",
+          "description": "List of modalities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inputStrength": {
+          "$ref": "#/definitions/ContentFilterConfigInputStrength",
+          "description": "Strength for filters"
+        },
+        "outputAction": {
+          "$ref": "#/definitions/ContentFilterConfigOutputAction",
+          "description": "Property outputAction"
+        },
+        "outputEnabled": {
+          "type": "boolean",
+          "description": "Property outputEnabled"
+        },
+        "outputModalities": {
+          "type": "array",
+          "description": "List of modalities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputStrength": {
+          "$ref": "#/definitions/ContentFilterConfigOutputStrength",
+          "description": "Strength for filters"
+        },
+        "type": {
+          "$ref": "#/definitions/ContentFilterConfigType",
+          "description": "Type of filter in content policy"
+        }
+      }
+    },
+    "ContentFilterConfigInputAction": {
+      "type": "string",
+      "description": "ContentFilterConfigInputAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFilterConfigInputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "ContentFilterConfigInputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ContentFilterConfigInputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "ContentFilterConfigInputStrength": {
+      "type": "string",
+      "description": "ContentFilterConfigInputStrength enum",
+      "enum": [
+        "HIGH",
+        "LOW",
+        "MEDIUM",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFilterConfigInputStrength",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HIGH",
+            "value": "HIGH",
+            "description": "ContentFilterConfigInputStrength enum HIGH"
+          },
+          {
+            "name": "LOW",
+            "value": "LOW",
+            "description": "ContentFilterConfigInputStrength enum LOW"
+          },
+          {
+            "name": "MEDIUM",
+            "value": "MEDIUM",
+            "description": "ContentFilterConfigInputStrength enum MEDIUM"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ContentFilterConfigInputStrength enum NONE"
+          }
+        ]
+      }
+    },
+    "ContentFilterConfigOutputAction": {
+      "type": "string",
+      "description": "ContentFilterConfigOutputAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFilterConfigOutputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "ContentFilterConfigOutputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ContentFilterConfigOutputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "ContentFilterConfigOutputStrength": {
+      "type": "string",
+      "description": "ContentFilterConfigOutputStrength enum",
+      "enum": [
+        "HIGH",
+        "LOW",
+        "MEDIUM",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFilterConfigOutputStrength",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HIGH",
+            "value": "HIGH",
+            "description": "ContentFilterConfigOutputStrength enum HIGH"
+          },
+          {
+            "name": "LOW",
+            "value": "LOW",
+            "description": "ContentFilterConfigOutputStrength enum LOW"
+          },
+          {
+            "name": "MEDIUM",
+            "value": "MEDIUM",
+            "description": "ContentFilterConfigOutputStrength enum MEDIUM"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ContentFilterConfigOutputStrength enum NONE"
+          }
+        ]
+      }
+    },
+    "ContentFilterConfigType": {
+      "type": "string",
+      "description": "ContentFilterConfigType enum",
+      "enum": [
+        "HATE",
+        "INSULTS",
+        "MISCONDUCT",
+        "PROMPT_ATTACK",
+        "SEXUAL",
+        "VIOLENCE"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFilterConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HATE",
+            "value": "HATE",
+            "description": "ContentFilterConfigType enum HATE"
+          },
+          {
+            "name": "INSULTS",
+            "value": "INSULTS",
+            "description": "ContentFilterConfigType enum INSULTS"
+          },
+          {
+            "name": "MISCONDUCT",
+            "value": "MISCONDUCT",
+            "description": "ContentFilterConfigType enum MISCONDUCT"
+          },
+          {
+            "name": "PROMPT_ATTACK",
+            "value": "PROMPT_ATTACK",
+            "description": "ContentFilterConfigType enum PROMPT_ATTACK"
+          },
+          {
+            "name": "SEXUAL",
+            "value": "SEXUAL",
+            "description": "ContentFilterConfigType enum SEXUAL"
+          },
+          {
+            "name": "VIOLENCE",
+            "value": "VIOLENCE",
+            "description": "ContentFilterConfigType enum VIOLENCE"
+          }
+        ]
+      }
+    },
+    "ContentFiltersTierNameContentFiltersTierName": {
+      "type": "string",
+      "description": "ContentFiltersTierNameContentFiltersTierName enum",
+      "enum": [
+        "CLASSIC",
+        "STANDARD"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFiltersTierNameContentFiltersTierName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CLASSIC",
+            "value": "CLASSIC",
+            "description": "ContentFiltersTierNameContentFiltersTierName enum CLASSIC"
+          },
+          {
+            "name": "STANDARD",
+            "value": "STANDARD",
+            "description": "ContentFiltersTierNameContentFiltersTierName enum STANDARD"
+          }
+        ]
+      }
+    },
+    "ContentFiltersTierNameModel": {
+      "type": "object",
+      "description": "Definition of ContentFiltersTierName",
+      "properties": {
+        "contentFiltersTierName": {
+          "$ref": "#/definitions/ContentFiltersTierNameContentFiltersTierName",
+          "description": "Tier name for tier configuration in content filters policy"
+        }
+      }
+    },
+    "ContentPolicyConfig": {
+      "type": "object",
+      "description": "Definition of ContentPolicyConfig",
+      "properties": {
+        "contentFiltersTierConfig": {
+          "$ref": "#/definitions/ContentFiltersTierNameModel",
+          "description": "Guardrail tier config for content policy"
+        },
+        "filtersConfig": {
+          "type": "array",
+          "description": "List of content filter configs in content policy.",
+          "items": {
+            "$ref": "#/definitions/ContentFilterConfig"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ContextualGroundingFilterConfig": {
+      "type": "object",
+      "description": "Definition of ContextualGroundingFilterConfig",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/ContextualGroundingFilterConfigAction",
+          "description": "Property action"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Property enabled"
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The threshold for this filter."
+        },
+        "type": {
+          "$ref": "#/definitions/ContextualGroundingFilterConfigType",
+          "description": "Type of contextual grounding filter"
+        }
+      }
+    },
+    "ContextualGroundingFilterConfigAction": {
+      "type": "string",
+      "description": "ContextualGroundingFilterConfigAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "ContextualGroundingFilterConfigAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "ContextualGroundingFilterConfigAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ContextualGroundingFilterConfigAction enum NONE"
+          }
+        ]
+      }
+    },
+    "ContextualGroundingFilterConfigType": {
+      "type": "string",
+      "description": "ContextualGroundingFilterConfigType enum",
+      "enum": [
+        "GROUNDING",
+        "RELEVANCE"
+      ],
+      "x-ms-enum": {
+        "name": "ContextualGroundingFilterConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GROUNDING",
+            "value": "GROUNDING",
+            "description": "ContextualGroundingFilterConfigType enum GROUNDING"
+          },
+          {
+            "name": "RELEVANCE",
+            "value": "RELEVANCE",
+            "description": "ContextualGroundingFilterConfigType enum RELEVANCE"
+          }
+        ]
+      }
+    },
+    "ContextualGroundingPolicyConfig": {
+      "type": "object",
+      "description": "Definition of ContextualGroundingPolicyConfig",
+      "properties": {
+        "filtersConfig": {
+          "type": "array",
+          "description": "List of contextual grounding filter configs.",
+          "items": {
+            "$ref": "#/definitions/ContextualGroundingFilterConfig"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "GuardrailCrossRegionConfig": {
+      "type": "object",
+      "description": "Definition of GuardrailCrossRegionConfig",
+      "properties": {
+        "guardrailProfileArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the guardrail profile"
+        }
+      }
+    },
+    "ManagedWordsConfig": {
+      "type": "object",
+      "description": "Definition of ManagedWordsConfig",
+      "properties": {
+        "inputAction": {
+          "$ref": "#/definitions/ManagedWordsConfigInputAction",
+          "description": "Property inputAction"
+        },
+        "inputEnabled": {
+          "type": "boolean",
+          "description": "Property inputEnabled"
+        },
+        "outputAction": {
+          "$ref": "#/definitions/ManagedWordsConfigOutputAction",
+          "description": "Property outputAction"
+        },
+        "outputEnabled": {
+          "type": "boolean",
+          "description": "Property outputEnabled"
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedWordsConfigType",
+          "description": "Options for managed words."
+        }
+      }
+    },
+    "ManagedWordsConfigInputAction": {
+      "type": "string",
+      "description": "ManagedWordsConfigInputAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedWordsConfigInputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "ManagedWordsConfigInputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ManagedWordsConfigInputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "ManagedWordsConfigOutputAction": {
+      "type": "string",
+      "description": "ManagedWordsConfigOutputAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedWordsConfigOutputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "ManagedWordsConfigOutputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ManagedWordsConfigOutputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "ManagedWordsConfigType": {
+      "type": "string",
+      "description": "ManagedWordsConfigType enum",
+      "enum": [
+        "PROFANITY"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedWordsConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PROFANITY",
+            "value": "PROFANITY",
+            "description": "ManagedWordsConfigType enum PROFANITY"
+          }
+        ]
+      }
+    },
+    "PiiEntityConfig": {
+      "type": "object",
+      "description": "Definition of PiiEntityConfig",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/PiiEntityConfigAction",
+          "description": "Options for sensitive information action."
+        },
+        "inputAction": {
+          "$ref": "#/definitions/PiiEntityConfigInputAction",
+          "description": "Options for sensitive information action."
+        },
+        "inputEnabled": {
+          "type": "boolean",
+          "description": "Property inputEnabled"
+        },
+        "outputAction": {
+          "$ref": "#/definitions/PiiEntityConfigOutputAction",
+          "description": "Options for sensitive information action."
+        },
+        "outputEnabled": {
+          "type": "boolean",
+          "description": "Property outputEnabled"
+        },
+        "type": {
+          "$ref": "#/definitions/PiiEntityConfigType",
+          "description": "The currently supported PII entities"
+        }
+      }
+    },
+    "PiiEntityConfigAction": {
+      "type": "string",
+      "description": "PiiEntityConfigAction enum",
+      "enum": [
+        "ANONYMIZE",
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "PiiEntityConfigAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANONYMIZE",
+            "value": "ANONYMIZE",
+            "description": "PiiEntityConfigAction enum ANONYMIZE"
+          },
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "PiiEntityConfigAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "PiiEntityConfigAction enum NONE"
+          }
+        ]
+      }
+    },
+    "PiiEntityConfigInputAction": {
+      "type": "string",
+      "description": "PiiEntityConfigInputAction enum",
+      "enum": [
+        "ANONYMIZE",
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "PiiEntityConfigInputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANONYMIZE",
+            "value": "ANONYMIZE",
+            "description": "PiiEntityConfigInputAction enum ANONYMIZE"
+          },
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "PiiEntityConfigInputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "PiiEntityConfigInputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "PiiEntityConfigOutputAction": {
+      "type": "string",
+      "description": "PiiEntityConfigOutputAction enum",
+      "enum": [
+        "ANONYMIZE",
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "PiiEntityConfigOutputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANONYMIZE",
+            "value": "ANONYMIZE",
+            "description": "PiiEntityConfigOutputAction enum ANONYMIZE"
+          },
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "PiiEntityConfigOutputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "PiiEntityConfigOutputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "PiiEntityConfigType": {
+      "type": "string",
+      "description": "PiiEntityConfigType enum",
+      "enum": [
+        "ADDRESS",
+        "AGE",
+        "AWS_ACCESS_KEY",
+        "AWS_SECRET_KEY",
+        "CA_HEALTH_NUMBER",
+        "CA_SOCIAL_INSURANCE_NUMBER",
+        "CREDIT_DEBIT_CARD_CVV",
+        "CREDIT_DEBIT_CARD_EXPIRY",
+        "CREDIT_DEBIT_CARD_NUMBER",
+        "DRIVER_ID",
+        "EMAIL",
+        "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+        "IP_ADDRESS",
+        "LICENSE_PLATE",
+        "MAC_ADDRESS",
+        "NAME",
+        "PASSWORD",
+        "PHONE",
+        "PIN",
+        "SWIFT_CODE",
+        "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+        "UK_NATIONAL_INSURANCE_NUMBER",
+        "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+        "URL",
+        "USERNAME",
+        "US_BANK_ACCOUNT_NUMBER",
+        "US_BANK_ROUTING_NUMBER",
+        "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+        "US_PASSPORT_NUMBER",
+        "US_SOCIAL_SECURITY_NUMBER",
+        "VEHICLE_IDENTIFICATION_NUMBER"
+      ],
+      "x-ms-enum": {
+        "name": "PiiEntityConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ADDRESS",
+            "value": "ADDRESS",
+            "description": "PiiEntityConfigType enum ADDRESS"
+          },
+          {
+            "name": "AGE",
+            "value": "AGE",
+            "description": "PiiEntityConfigType enum AGE"
+          },
+          {
+            "name": "AWS_ACCESS_KEY",
+            "value": "AWS_ACCESS_KEY",
+            "description": "PiiEntityConfigType enum AWS_ACCESS_KEY"
+          },
+          {
+            "name": "AWS_SECRET_KEY",
+            "value": "AWS_SECRET_KEY",
+            "description": "PiiEntityConfigType enum AWS_SECRET_KEY"
+          },
+          {
+            "name": "CA_HEALTH_NUMBER",
+            "value": "CA_HEALTH_NUMBER",
+            "description": "PiiEntityConfigType enum CA_HEALTH_NUMBER"
+          },
+          {
+            "name": "CA_SOCIAL_INSURANCE_NUMBER",
+            "value": "CA_SOCIAL_INSURANCE_NUMBER",
+            "description": "PiiEntityConfigType enum CA_SOCIAL_INSURANCE_NUMBER"
+          },
+          {
+            "name": "CREDIT_DEBIT_CARD_CVV",
+            "value": "CREDIT_DEBIT_CARD_CVV",
+            "description": "PiiEntityConfigType enum CREDIT_DEBIT_CARD_CVV"
+          },
+          {
+            "name": "CREDIT_DEBIT_CARD_EXPIRY",
+            "value": "CREDIT_DEBIT_CARD_EXPIRY",
+            "description": "PiiEntityConfigType enum CREDIT_DEBIT_CARD_EXPIRY"
+          },
+          {
+            "name": "CREDIT_DEBIT_CARD_NUMBER",
+            "value": "CREDIT_DEBIT_CARD_NUMBER",
+            "description": "PiiEntityConfigType enum CREDIT_DEBIT_CARD_NUMBER"
+          },
+          {
+            "name": "DRIVER_ID",
+            "value": "DRIVER_ID",
+            "description": "PiiEntityConfigType enum DRIVER_ID"
+          },
+          {
+            "name": "EMAIL",
+            "value": "EMAIL",
+            "description": "PiiEntityConfigType enum EMAIL"
+          },
+          {
+            "name": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+            "value": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+            "description": "PiiEntityConfigType enum INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+          },
+          {
+            "name": "IP_ADDRESS",
+            "value": "IP_ADDRESS",
+            "description": "PiiEntityConfigType enum IP_ADDRESS"
+          },
+          {
+            "name": "LICENSE_PLATE",
+            "value": "LICENSE_PLATE",
+            "description": "PiiEntityConfigType enum LICENSE_PLATE"
+          },
+          {
+            "name": "MAC_ADDRESS",
+            "value": "MAC_ADDRESS",
+            "description": "PiiEntityConfigType enum MAC_ADDRESS"
+          },
+          {
+            "name": "NAME",
+            "value": "NAME",
+            "description": "PiiEntityConfigType enum NAME"
+          },
+          {
+            "name": "PASSWORD",
+            "value": "PASSWORD",
+            "description": "PiiEntityConfigType enum PASSWORD"
+          },
+          {
+            "name": "PHONE",
+            "value": "PHONE",
+            "description": "PiiEntityConfigType enum PHONE"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PiiEntityConfigType enum PIN"
+          },
+          {
+            "name": "SWIFT_CODE",
+            "value": "SWIFT_CODE",
+            "description": "PiiEntityConfigType enum SWIFT_CODE"
+          },
+          {
+            "name": "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+            "value": "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+            "description": "PiiEntityConfigType enum UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+          },
+          {
+            "name": "UK_NATIONAL_INSURANCE_NUMBER",
+            "value": "UK_NATIONAL_INSURANCE_NUMBER",
+            "description": "PiiEntityConfigType enum UK_NATIONAL_INSURANCE_NUMBER"
+          },
+          {
+            "name": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+            "value": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+            "description": "PiiEntityConfigType enum UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+          },
+          {
+            "name": "URL",
+            "value": "URL",
+            "description": "PiiEntityConfigType enum URL"
+          },
+          {
+            "name": "USERNAME",
+            "value": "USERNAME",
+            "description": "PiiEntityConfigType enum USERNAME"
+          },
+          {
+            "name": "US_BANK_ACCOUNT_NUMBER",
+            "value": "US_BANK_ACCOUNT_NUMBER",
+            "description": "PiiEntityConfigType enum US_BANK_ACCOUNT_NUMBER"
+          },
+          {
+            "name": "US_BANK_ROUTING_NUMBER",
+            "value": "US_BANK_ROUTING_NUMBER",
+            "description": "PiiEntityConfigType enum US_BANK_ROUTING_NUMBER"
+          },
+          {
+            "name": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+            "value": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+            "description": "PiiEntityConfigType enum US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+          },
+          {
+            "name": "US_PASSPORT_NUMBER",
+            "value": "US_PASSPORT_NUMBER",
+            "description": "PiiEntityConfigType enum US_PASSPORT_NUMBER"
+          },
+          {
+            "name": "US_SOCIAL_SECURITY_NUMBER",
+            "value": "US_SOCIAL_SECURITY_NUMBER",
+            "description": "PiiEntityConfigType enum US_SOCIAL_SECURITY_NUMBER"
+          },
+          {
+            "name": "VEHICLE_IDENTIFICATION_NUMBER",
+            "value": "VEHICLE_IDENTIFICATION_NUMBER",
+            "description": "PiiEntityConfigType enum VEHICLE_IDENTIFICATION_NUMBER"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RegexConfig": {
+      "type": "object",
+      "description": "Definition of RegexConfig",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/RegexConfigAction",
+          "description": "Options for sensitive information action."
+        },
+        "description": {
+          "type": "string",
+          "description": "The regex description."
+        },
+        "inputAction": {
+          "$ref": "#/definitions/RegexConfigInputAction",
+          "description": "Options for sensitive information action."
+        },
+        "inputEnabled": {
+          "type": "boolean",
+          "description": "Property inputEnabled"
+        },
+        "name": {
+          "type": "string",
+          "description": "The regex name."
+        },
+        "outputAction": {
+          "$ref": "#/definitions/RegexConfigOutputAction",
+          "description": "Options for sensitive information action."
+        },
+        "outputEnabled": {
+          "type": "boolean",
+          "description": "Property outputEnabled"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "The regex pattern."
+        }
+      }
+    },
+    "RegexConfigAction": {
+      "type": "string",
+      "description": "RegexConfigAction enum",
+      "enum": [
+        "ANONYMIZE",
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "RegexConfigAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANONYMIZE",
+            "value": "ANONYMIZE",
+            "description": "RegexConfigAction enum ANONYMIZE"
+          },
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "RegexConfigAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "RegexConfigAction enum NONE"
+          }
+        ]
+      }
+    },
+    "RegexConfigInputAction": {
+      "type": "string",
+      "description": "RegexConfigInputAction enum",
+      "enum": [
+        "ANONYMIZE",
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "RegexConfigInputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANONYMIZE",
+            "value": "ANONYMIZE",
+            "description": "RegexConfigInputAction enum ANONYMIZE"
+          },
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "RegexConfigInputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "RegexConfigInputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "RegexConfigOutputAction": {
+      "type": "string",
+      "description": "RegexConfigOutputAction enum",
+      "enum": [
+        "ANONYMIZE",
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "RegexConfigOutputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANONYMIZE",
+            "value": "ANONYMIZE",
+            "description": "RegexConfigOutputAction enum ANONYMIZE"
+          },
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "RegexConfigOutputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "RegexConfigOutputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "SensitiveInformationPolicyConfig": {
+      "type": "object",
+      "description": "Definition of SensitiveInformationPolicyConfig",
+      "properties": {
+        "piiEntitiesConfig": {
+          "type": "array",
+          "description": "List of entities.",
+          "items": {
+            "$ref": "#/definitions/PiiEntityConfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "regexesConfig": {
+          "type": "array",
+          "description": "List of regex.",
+          "items": {
+            "$ref": "#/definitions/RegexConfig"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status enum",
+      "enum": [
+        "CREATING",
+        "DELETING",
+        "FAILED",
+        "READY",
+        "UPDATING",
+        "VERSIONING"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CREATING",
+            "value": "CREATING",
+            "description": "Status enum CREATING"
+          },
+          {
+            "name": "DELETING",
+            "value": "DELETING",
+            "description": "Status enum DELETING"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "Status enum FAILED"
+          },
+          {
+            "name": "READY",
+            "value": "READY",
+            "description": "Status enum READY"
+          },
+          {
+            "name": "UPDATING",
+            "value": "UPDATING",
+            "description": "Status enum UPDATING"
+          },
+          {
+            "name": "VERSIONING",
+            "value": "VERSIONING",
+            "description": "Status enum VERSIONING"
+          }
+        ]
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Tag Key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Tag Value"
+        }
+      }
+    },
+    "TopicConfig": {
+      "type": "object",
+      "description": "Definition of TopicConfig",
+      "properties": {
+        "definition": {
+          "type": "string",
+          "description": "Definition of topic in topic policy"
+        },
+        "examples": {
+          "type": "array",
+          "description": "List of text examples",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inputAction": {
+          "$ref": "#/definitions/TopicConfigInputAction",
+          "description": "Property inputAction"
+        },
+        "inputEnabled": {
+          "type": "boolean",
+          "description": "Property inputEnabled"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of topic in topic policy"
+        },
+        "outputAction": {
+          "$ref": "#/definitions/TopicConfigOutputAction",
+          "description": "Property outputAction"
+        },
+        "outputEnabled": {
+          "type": "boolean",
+          "description": "Property outputEnabled"
+        },
+        "type": {
+          "$ref": "#/definitions/TopicConfigType",
+          "description": "Type of topic in a policy"
+        }
+      }
+    },
+    "TopicConfigInputAction": {
+      "type": "string",
+      "description": "TopicConfigInputAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "TopicConfigInputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "TopicConfigInputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "TopicConfigInputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "TopicConfigOutputAction": {
+      "type": "string",
+      "description": "TopicConfigOutputAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "TopicConfigOutputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "TopicConfigOutputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "TopicConfigOutputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "TopicConfigType": {
+      "type": "string",
+      "description": "TopicConfigType enum",
+      "enum": [
+        "DENY"
+      ],
+      "x-ms-enum": {
+        "name": "TopicConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DENY",
+            "value": "DENY",
+            "description": "TopicConfigType enum DENY"
+          }
+        ]
+      }
+    },
+    "TopicPolicyConfig": {
+      "type": "object",
+      "description": "Definition of TopicPolicyConfig",
+      "properties": {
+        "topicsConfig": {
+          "type": "array",
+          "description": "List of topic configs in topic policy.",
+          "items": {
+            "$ref": "#/definitions/TopicConfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "topicsTierConfig": {
+          "$ref": "#/definitions/TopicsTierNameModel",
+          "description": "Guardrail tier config for topic policy"
+        }
+      }
+    },
+    "TopicsTierNameModel": {
+      "type": "object",
+      "description": "Definition of TopicsTierName",
+      "properties": {
+        "topicsTierName": {
+          "$ref": "#/definitions/TopicsTierNameTopicsTierName",
+          "description": "Tier name for tier configuration in topic policy"
+        }
+      }
+    },
+    "TopicsTierNameTopicsTierName": {
+      "type": "string",
+      "description": "TopicsTierNameTopicsTierName enum",
+      "enum": [
+        "CLASSIC",
+        "STANDARD"
+      ],
+      "x-ms-enum": {
+        "name": "TopicsTierNameTopicsTierName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CLASSIC",
+            "value": "CLASSIC",
+            "description": "TopicsTierNameTopicsTierName enum CLASSIC"
+          },
+          {
+            "name": "STANDARD",
+            "value": "STANDARD",
+            "description": "TopicsTierNameTopicsTierName enum STANDARD"
+          }
+        ]
+      }
+    },
+    "WordConfig": {
+      "type": "object",
+      "description": "Definition of WordConfig",
+      "properties": {
+        "inputAction": {
+          "$ref": "#/definitions/WordConfigInputAction",
+          "description": "Property inputAction"
+        },
+        "inputEnabled": {
+          "type": "boolean",
+          "description": "Property inputEnabled"
+        },
+        "outputAction": {
+          "$ref": "#/definitions/WordConfigOutputAction",
+          "description": "Property outputAction"
+        },
+        "outputEnabled": {
+          "type": "boolean",
+          "description": "Property outputEnabled"
+        },
+        "text": {
+          "type": "string",
+          "description": "The custom word text."
+        }
+      }
+    },
+    "WordConfigInputAction": {
+      "type": "string",
+      "description": "WordConfigInputAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "WordConfigInputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "WordConfigInputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "WordConfigInputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "WordConfigOutputAction": {
+      "type": "string",
+      "description": "WordConfigOutputAction enum",
+      "enum": [
+        "BLOCK",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "WordConfigOutputAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "WordConfigOutputAction enum BLOCK"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "WordConfigOutputAction enum NONE"
+          }
+        ]
+      }
+    },
+    "WordPolicyConfig": {
+      "type": "object",
+      "description": "Definition of WordPolicyConfig",
+      "properties": {
+        "managedWordListsConfig": {
+          "type": "array",
+          "description": "A config for the list of managed words.",
+          "items": {
+            "$ref": "#/definitions/ManagedWordsConfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "wordsConfig": {
+          "type": "array",
+          "description": "List of custom word configs.",
+          "items": {
+            "$ref": "#/definitions/WordConfig"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

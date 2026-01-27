@@ -52,26 +52,22 @@ describe("runChecks", () => {
     );
   });
 
-  test("coalesces null tag when no tags specified", async () => {
+  test("throws when no tags specified", async () => {
     (execNpmExec as Mock).mockResolvedValue({ stdout: "", stderr: "" });
     const runList = new Map<string, ReadmeAffectedTags>([
       ["readme.md", { readme: new Readme(""), changedTags: new Set<string>() }],
     ]);
 
-    const actual = await runChecks("root", runList);
-    expect(actual).toHaveLength(1);
-    expect(execNpmExec).toHaveBeenCalledWith(
-      expect.not.arrayContaining([expect.stringContaining("--tag")]),
-      expect.anything(),
-    );
+    const actual = runChecks("root", runList);
+    await expect(actual).rejects.toThrowError("No changed tags found for readme");
   });
 
   test("error path populates error, stdout, stderr", async () => {
     // Consturct an error object that will return true when passed to isExecError
-    const err = new Error();
-    (err as any).stdout = "s";
-    (err as any).stderr = "e";
-    (err as any).code = 1;
+    const err = new Error() as Error & { stdout: string; stderr: string; code: number };
+    err.stdout = "s";
+    err.stderr = "e";
+    err.code = 1;
 
     (execNpmExec as Mock).mockRejectedValue(err);
     const runList = new Map<string, ReadmeAffectedTags>([
@@ -94,7 +90,7 @@ describe("runChecks", () => {
     const runList = new Map<string, ReadmeAffectedTags>([
       ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1", "tag2"]) }],
     ]);
-    expect(runChecks("root", runList)).rejects.toThrow();
+    await expect(runChecks("root", runList)).rejects.toThrow();
   });
 });
 
@@ -107,7 +103,7 @@ describe("getAutorestErrors", () => {
 {"level":"error","message":"stack: Error: There are multiple operations defined for \\n  'get: /providers/Microsoft.PortalServices/operations'.\\n\\n  You are probably trying to use an input with multiple API versions with an autorest V2 generator, and that will not work. \\n    at NewComposer.visitPath (/home/cloudtest/.autorest/@autorest_core@3.10.4/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:4371:23)\\n    at NewComposer.visitPaths (/home/cloudtest/.autorest/@autorest_core@3.10.4/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:4357:22)\\n    at NewComposer.process (/home/cloudtest/.autorest/@autorest_core@3.10.4/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:4305:26)\\n    at NewComposer.runProcess (/home/cloudtest/.autorest/@autorest_core@3.10.4/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:16339:28)\\n    at NewComposer.getOutput (/home/cloudtest/.autorest/@autorest_core@3.10.4/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:16259:9)\\n    at compose (/home/cloudtest/.autorest/@autorest_core@3.10.4/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:4624:56)\\n    at ScheduleNode (/home/cloudtest/.autorest/@autorest_core@3.10.4/node_modules/@autorest/core/dist/src_lib_autorest-core_ts.js:1351:29)"}
 {"level":"error","message":"Autorest completed with an error. If you think the error message is unclear, or is a bug, please declare an issues at https://github.com/Azure/autorest/issues with the error message you are seeing."}`;
 
-    const runResult = { stdout: lines, stderr: "" } as any;
+    const runResult = { stdout: lines, stderr: "" } as AutorestRunResult;
 
     const errors = getAutorestErrors(runResult);
     expect(errors).toEqual(

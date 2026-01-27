@@ -1,0 +1,1738 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BedrockFlows"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/bedrockFlows": {
+      "get": {
+        "operationId": "BedrockFlows_ListBySubscription",
+        "tags": [
+          "BedrockFlows"
+        ],
+        "description": "List BedrockFlow resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockFlowListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockFlows_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/BedrockFlows_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockFlows": {
+      "get": {
+        "operationId": "BedrockFlows_ListByResourceGroup",
+        "tags": [
+          "BedrockFlows"
+        ],
+        "description": "List BedrockFlow resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockFlowListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockFlows_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/BedrockFlows_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockFlows/{name}": {
+      "get": {
+        "operationId": "BedrockFlows_Get",
+        "tags": [
+          "BedrockFlows"
+        ],
+        "description": "Get a BedrockFlow",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockFlow",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockFlow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockFlows_Get_MaximumSet": {
+            "$ref": "./examples/BedrockFlows_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BedrockFlows_CreateOrReplace",
+        "tags": [
+          "BedrockFlows"
+        ],
+        "description": "Create a BedrockFlow. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockFlow",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockFlow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BedrockFlow' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockFlow"
+            }
+          },
+          "201": {
+            "description": "Resource 'BedrockFlow' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockFlow"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockFlows_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/BedrockFlows_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BedrockFlows_Update",
+        "tags": [
+          "BedrockFlows"
+        ],
+        "description": "Update a BedrockFlow",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockFlow",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockFlowTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockFlow"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockFlows_Update_MaximumSet": {
+            "$ref": "./examples/BedrockFlows_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BedrockFlows_Delete",
+        "tags": [
+          "BedrockFlows"
+        ],
+        "description": "Delete a BedrockFlow",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockFlow",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockFlows_Delete_MaximumSet": {
+            "$ref": "./examples/BedrockFlows_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AgentFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of AgentFlowNodeConfiguration",
+      "properties": {
+        "agentAliasArn": {
+          "type": "string",
+          "description": "Arn representation of the Agent Alias."
+        }
+      }
+    },
+    "AwsBedrockFlowProperties": {
+      "type": "object",
+      "description": "Definition of awsBedrockFlow",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "Arn representation of the Flow"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Time Stamp."
+        },
+        "customerEncryptionKeyArn": {
+          "type": "string",
+          "description": "A KMS key ARN"
+        },
+        "definition": {
+          "$ref": "#/definitions/FlowDefinition",
+          "description": "Flow definition"
+        },
+        "definitionS3Location": {
+          "$ref": "#/definitions/S3Location",
+          "description": "A bucket, key and optional version pointing to an S3 object containing a UTF-8 encoded JSON string Definition with the same schema as the Definition property of this resource"
+        },
+        "definitionString": {
+          "type": "string",
+          "description": "A JSON string containing a Definition with the same schema as the Definition property of this resource"
+        },
+        "definitionSubstitutions": {
+          "description": "When supplied with DefinitionString or DefinitionS3Location, substrings in the definition matching ${keyname} will be replaced with the associated value from this map"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the flow"
+        },
+        "executionRoleArn": {
+          "type": "string",
+          "description": "ARN of a IAM role"
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier for a Flow"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name for the flow"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Schema Type for Flow APIs"
+        },
+        "tags": {
+          "type": "object",
+          "description": "A map of tag keys and values",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "testAliasTags": {
+          "type": "object",
+          "description": "A map of tag keys and values",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Time Stamp."
+        },
+        "validations": {
+          "type": "array",
+          "description": "List of flow validations",
+          "items": {
+            "$ref": "#/definitions/FlowValidation"
+          },
+          "x-ms-identifiers": []
+        },
+        "version": {
+          "type": "string",
+          "description": "Draft Version."
+        }
+      }
+    },
+    "BedrockFlow": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BedrockFlowProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BedrockFlowListResult": {
+      "type": "object",
+      "description": "The response of a BedrockFlow list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BedrockFlow items on this page",
+          "items": {
+            "$ref": "#/definitions/BedrockFlow"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BedrockFlowProperties": {
+      "type": "object",
+      "description": "Definition of BedrockFlow",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsBedrockFlowProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "BedrockFlowTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in BedrockFlow resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConditionFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of ConditionFlowNodeConfiguration",
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "description": "List of conditions in a condition node",
+          "items": {
+            "$ref": "#/definitions/FlowCondition"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FieldForReranking": {
+      "type": "object",
+      "description": "Definition of FieldForReranking",
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "Field name for reranking"
+        }
+      }
+    },
+    "FlowCondition": {
+      "type": "object",
+      "description": "Definition of FlowCondition",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Expression for a condition in a flow"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of a condition in a flow"
+        }
+      }
+    },
+    "FlowConditionalConnectionConfiguration": {
+      "type": "object",
+      "description": "Definition of FlowConditionalConnectionConfiguration",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "Name of a condition in a flow"
+        }
+      }
+    },
+    "FlowConnection": {
+      "type": "object",
+      "description": "Definition of FlowConnection",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/FlowConnectionConfiguration",
+          "description": "Connection configuration"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of a connection in a flow"
+        },
+        "source": {
+          "type": "string",
+          "description": "Name of a node in a flow"
+        },
+        "target": {
+          "type": "string",
+          "description": "Name of a node in a flow"
+        },
+        "type": {
+          "$ref": "#/definitions/FlowConnectionType",
+          "description": "Connection type"
+        }
+      }
+    },
+    "FlowConnectionConfiguration": {
+      "type": "object",
+      "description": "Definition of FlowConnectionConfiguration",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/FlowDataConnectionConfiguration",
+          "description": "Data connection configuration"
+        },
+        "conditional": {
+          "$ref": "#/definitions/FlowConditionalConnectionConfiguration",
+          "description": "Conditional connection configuration"
+        }
+      }
+    },
+    "FlowConnectionType": {
+      "type": "string",
+      "description": "FlowConnectionType enum",
+      "enum": [
+        "Conditional",
+        "Data"
+      ],
+      "x-ms-enum": {
+        "name": "FlowConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Conditional",
+            "value": "Conditional",
+            "description": "FlowConnectionType enum Conditional"
+          },
+          {
+            "name": "Data",
+            "value": "Data",
+            "description": "FlowConnectionType enum Data"
+          }
+        ]
+      }
+    },
+    "FlowDataConnectionConfiguration": {
+      "type": "object",
+      "description": "Definition of FlowDataConnectionConfiguration",
+      "properties": {
+        "sourceOutput": {
+          "type": "string",
+          "description": "Name of a node output in a flow"
+        },
+        "targetInput": {
+          "type": "string",
+          "description": "Name of a node input in a flow"
+        }
+      }
+    },
+    "FlowDefinition": {
+      "type": "object",
+      "description": "Definition of FlowDefinition",
+      "properties": {
+        "connections": {
+          "type": "array",
+          "description": "List of connections",
+          "items": {
+            "$ref": "#/definitions/FlowConnection"
+          },
+          "x-ms-identifiers": []
+        },
+        "nodes": {
+          "type": "array",
+          "description": "List of nodes in a flow",
+          "items": {
+            "$ref": "#/definitions/FlowNode"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FlowNode": {
+      "type": "object",
+      "description": "Definition of FlowNode",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/FlowNodeConfiguration",
+          "description": "Node configuration in a flow"
+        },
+        "inputs": {
+          "type": "array",
+          "description": "List of node inputs in a flow",
+          "items": {
+            "$ref": "#/definitions/FlowNodeInput"
+          },
+          "x-ms-identifiers": []
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of a node in a flow"
+        },
+        "outputs": {
+          "type": "array",
+          "description": "List of node outputs in a flow",
+          "items": {
+            "$ref": "#/definitions/FlowNodeOutput"
+          },
+          "x-ms-identifiers": []
+        },
+        "type": {
+          "$ref": "#/definitions/FlowNodeType",
+          "description": "Flow node types"
+        }
+      }
+    },
+    "FlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of FlowNodeConfiguration",
+      "properties": {
+        "input": {
+          "description": "Input flow node configuration"
+        },
+        "output": {
+          "description": "Output flow node configuration"
+        },
+        "knowledgeBase": {
+          "$ref": "#/definitions/KnowledgeBaseFlowNodeConfiguration",
+          "description": "Knowledge base flow node configuration"
+        },
+        "condition": {
+          "$ref": "#/definitions/ConditionFlowNodeConfiguration",
+          "description": "Condition flow node configuration"
+        },
+        "lex": {
+          "$ref": "#/definitions/LexFlowNodeConfiguration",
+          "description": "Lex flow node configuration"
+        },
+        "prompt": {
+          "$ref": "#/definitions/PromptFlowNodeConfiguration",
+          "description": "Prompt flow node configuration"
+        },
+        "lambdaFunction": {
+          "$ref": "#/definitions/LambdaFunctionFlowNodeConfiguration",
+          "description": "Lambda function flow node configuration"
+        },
+        "agent": {
+          "$ref": "#/definitions/AgentFlowNodeConfiguration",
+          "description": "Agent flow node configuration"
+        },
+        "storage": {
+          "$ref": "#/definitions/StorageFlowNodeConfiguration",
+          "description": "Storage flow node configuration"
+        },
+        "iterator": {
+          "description": "Iterator flow node configuration"
+        },
+        "collector": {
+          "description": "Collector flow node configuration"
+        },
+        "retrieval": {
+          "$ref": "#/definitions/RetrievalFlowNodeConfiguration",
+          "description": "Retrieval flow node configuration"
+        },
+        "inlineCode": {
+          "$ref": "#/definitions/InlineCodeFlowNodeConfiguration",
+          "description": "Inline code config strucuture, contains code configs"
+        },
+        "loop": {
+          "$ref": "#/definitions/LoopFlowNodeConfiguration",
+          "description": "Loop node config, contains loop's internal definition"
+        },
+        "loopInput": {
+          "description": "Configuration for the LoopInput node"
+        },
+        "loopController": {
+          "$ref": "#/definitions/LoopControllerFlowNodeConfiguration",
+          "description": "Configuration for the LoopController node, which manages loop execution"
+        }
+      }
+    },
+    "FlowNodeInput": {
+      "type": "object",
+      "description": "Definition of FlowNodeInput",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/FlowNodeInputCategory",
+          "description": "Optional tag to classify input type, currently exclusive to LoopNode"
+        },
+        "expression": {
+          "type": "string",
+          "description": "Expression for a node input in a flow"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of a node input in a flow"
+        },
+        "type": {
+          "$ref": "#/definitions/FlowNodeInputType",
+          "description": "Type of input/output for a node in a flow"
+        }
+      }
+    },
+    "FlowNodeInputCategory": {
+      "type": "string",
+      "description": "FlowNodeInputCategory enum",
+      "enum": [
+        "ExitLoop",
+        "LoopCondition",
+        "ReturnValueToLoopStart"
+      ],
+      "x-ms-enum": {
+        "name": "FlowNodeInputCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ExitLoop",
+            "value": "ExitLoop",
+            "description": "FlowNodeInputCategory enum ExitLoop"
+          },
+          {
+            "name": "LoopCondition",
+            "value": "LoopCondition",
+            "description": "FlowNodeInputCategory enum LoopCondition"
+          },
+          {
+            "name": "ReturnValueToLoopStart",
+            "value": "ReturnValueToLoopStart",
+            "description": "FlowNodeInputCategory enum ReturnValueToLoopStart"
+          }
+        ]
+      }
+    },
+    "FlowNodeInputType": {
+      "type": "string",
+      "description": "FlowNodeInputType enum",
+      "enum": [
+        "Array",
+        "Boolean",
+        "Number",
+        "Object",
+        "String"
+      ],
+      "x-ms-enum": {
+        "name": "FlowNodeInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Array",
+            "value": "Array",
+            "description": "FlowNodeInputType enum Array"
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "FlowNodeInputType enum Boolean"
+          },
+          {
+            "name": "Number",
+            "value": "Number",
+            "description": "FlowNodeInputType enum Number"
+          },
+          {
+            "name": "Object",
+            "value": "Object",
+            "description": "FlowNodeInputType enum Object"
+          },
+          {
+            "name": "String",
+            "value": "String",
+            "description": "FlowNodeInputType enum String"
+          }
+        ]
+      }
+    },
+    "FlowNodeOutput": {
+      "type": "object",
+      "description": "Definition of FlowNodeOutput",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of a node output in a flow"
+        },
+        "type": {
+          "$ref": "#/definitions/FlowNodeOutputType",
+          "description": "Type of input/output for a node in a flow"
+        }
+      }
+    },
+    "FlowNodeOutputType": {
+      "type": "string",
+      "description": "FlowNodeOutputType enum",
+      "enum": [
+        "Array",
+        "Boolean",
+        "Number",
+        "Object",
+        "String"
+      ],
+      "x-ms-enum": {
+        "name": "FlowNodeOutputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Array",
+            "value": "Array",
+            "description": "FlowNodeOutputType enum Array"
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "FlowNodeOutputType enum Boolean"
+          },
+          {
+            "name": "Number",
+            "value": "Number",
+            "description": "FlowNodeOutputType enum Number"
+          },
+          {
+            "name": "Object",
+            "value": "Object",
+            "description": "FlowNodeOutputType enum Object"
+          },
+          {
+            "name": "String",
+            "value": "String",
+            "description": "FlowNodeOutputType enum String"
+          }
+        ]
+      }
+    },
+    "FlowNodeType": {
+      "type": "string",
+      "description": "FlowNodeType enum",
+      "enum": [
+        "Agent",
+        "Collector",
+        "Condition",
+        "InlineCode",
+        "Input",
+        "Iterator",
+        "KnowledgeBase",
+        "LambdaFunction",
+        "Lex",
+        "Loop",
+        "LoopController",
+        "LoopInput",
+        "Output",
+        "Prompt",
+        "Retrieval",
+        "Storage"
+      ],
+      "x-ms-enum": {
+        "name": "FlowNodeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Agent",
+            "value": "Agent",
+            "description": "FlowNodeType enum Agent"
+          },
+          {
+            "name": "Collector",
+            "value": "Collector",
+            "description": "FlowNodeType enum Collector"
+          },
+          {
+            "name": "Condition",
+            "value": "Condition",
+            "description": "FlowNodeType enum Condition"
+          },
+          {
+            "name": "InlineCode",
+            "value": "InlineCode",
+            "description": "FlowNodeType enum InlineCode"
+          },
+          {
+            "name": "Input",
+            "value": "Input",
+            "description": "FlowNodeType enum Input"
+          },
+          {
+            "name": "Iterator",
+            "value": "Iterator",
+            "description": "FlowNodeType enum Iterator"
+          },
+          {
+            "name": "KnowledgeBase",
+            "value": "KnowledgeBase",
+            "description": "FlowNodeType enum KnowledgeBase"
+          },
+          {
+            "name": "LambdaFunction",
+            "value": "LambdaFunction",
+            "description": "FlowNodeType enum LambdaFunction"
+          },
+          {
+            "name": "Lex",
+            "value": "Lex",
+            "description": "FlowNodeType enum Lex"
+          },
+          {
+            "name": "Loop",
+            "value": "Loop",
+            "description": "FlowNodeType enum Loop"
+          },
+          {
+            "name": "LoopController",
+            "value": "LoopController",
+            "description": "FlowNodeType enum LoopController"
+          },
+          {
+            "name": "LoopInput",
+            "value": "LoopInput",
+            "description": "FlowNodeType enum LoopInput"
+          },
+          {
+            "name": "Output",
+            "value": "Output",
+            "description": "FlowNodeType enum Output"
+          },
+          {
+            "name": "Prompt",
+            "value": "Prompt",
+            "description": "FlowNodeType enum Prompt"
+          },
+          {
+            "name": "Retrieval",
+            "value": "Retrieval",
+            "description": "FlowNodeType enum Retrieval"
+          },
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "FlowNodeType enum Storage"
+          }
+        ]
+      }
+    },
+    "FlowValidation": {
+      "type": "object",
+      "description": "Definition of FlowValidation",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "validation message"
+        }
+      }
+    },
+    "GuardrailConfiguration": {
+      "type": "object",
+      "description": "Definition of GuardrailConfiguration",
+      "properties": {
+        "guardrailIdentifier": {
+          "type": "string",
+          "description": "Identifier for the guardrail, could be the id or the arn"
+        },
+        "guardrailVersion": {
+          "type": "string",
+          "description": "Version of the guardrail"
+        }
+      }
+    },
+    "InlineCodeFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of InlineCodeFlowNodeConfiguration",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The inline code entered by customers. max size is 5MB."
+        },
+        "language": {
+          "$ref": "#/definitions/InlineCodeFlowNodeConfigurationLanguage",
+          "description": "Enum encodes the supported language type"
+        }
+      }
+    },
+    "InlineCodeFlowNodeConfigurationLanguage": {
+      "type": "string",
+      "description": "InlineCodeFlowNodeConfigurationLanguage enum",
+      "enum": [
+        "Python_3"
+      ],
+      "x-ms-enum": {
+        "name": "InlineCodeFlowNodeConfigurationLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Python_3",
+            "value": "Python_3",
+            "description": "InlineCodeFlowNodeConfigurationLanguage enum Python_3"
+          }
+        ]
+      }
+    },
+    "KnowledgeBaseFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of KnowledgeBaseFlowNodeConfiguration",
+      "properties": {
+        "guardrailConfiguration": {
+          "$ref": "#/definitions/GuardrailConfiguration",
+          "description": "Configuration for a guardrail"
+        },
+        "inferenceConfiguration": {
+          "$ref": "#/definitions/PromptInferenceConfiguration",
+          "description": "Model inference configuration"
+        },
+        "knowledgeBaseId": {
+          "type": "string",
+          "description": "Identifier of the KnowledgeBase"
+        },
+        "modelId": {
+          "type": "string",
+          "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models."
+        },
+        "numberOfResults": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number Of Results to Retrieve"
+        },
+        "orchestrationConfiguration": {
+          "$ref": "#/definitions/KnowledgeBaseOrchestrationConfiguration",
+          "description": "Property orchestrationConfiguration"
+        },
+        "promptTemplate": {
+          "$ref": "#/definitions/KnowledgeBasePromptTemplate",
+          "description": "Knowledge Base Prompt template"
+        },
+        "rerankingConfiguration": {
+          "$ref": "#/definitions/VectorSearchRerankingConfiguration",
+          "description": "Property rerankingConfiguration"
+        }
+      }
+    },
+    "KnowledgeBaseOrchestrationConfiguration": {
+      "type": "object",
+      "description": "Definition of KnowledgeBaseOrchestrationConfiguration",
+      "properties": {
+        "additionalModelRequestFields": {
+          "description": "Property additionalModelRequestFields"
+        },
+        "inferenceConfig": {
+          "$ref": "#/definitions/PromptInferenceConfiguration",
+          "description": "Model inference configuration"
+        },
+        "performanceConfig": {
+          "$ref": "#/definitions/PerformanceConfiguration",
+          "description": "Property performanceConfig"
+        },
+        "promptTemplate": {
+          "$ref": "#/definitions/KnowledgeBasePromptTemplate",
+          "description": "Knowledge Base Prompt template"
+        }
+      }
+    },
+    "KnowledgeBasePromptTemplate": {
+      "type": "object",
+      "description": "Definition of KnowledgeBasePromptTemplate",
+      "properties": {
+        "textPromptTemplate": {
+          "type": "string",
+          "description": "Property textPromptTemplate"
+        }
+      }
+    },
+    "LambdaFunctionFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of LambdaFunctionFlowNodeConfiguration",
+      "properties": {
+        "lambdaArn": {
+          "type": "string",
+          "description": "ARN of a Lambda."
+        }
+      }
+    },
+    "LexFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of LexFlowNodeConfiguration",
+      "properties": {
+        "botAliasArn": {
+          "type": "string",
+          "description": "ARN of a Lex bot alias"
+        },
+        "localeId": {
+          "type": "string",
+          "description": "Lex bot locale id"
+        }
+      }
+    },
+    "LoopControllerFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of LoopControllerFlowNodeConfiguration",
+      "properties": {
+        "continueCondition": {
+          "$ref": "#/definitions/FlowCondition",
+          "description": "Condition branch for a condition node"
+        },
+        "maxIterations": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of iterations the loop can perform",
+          "default": 10
+        }
+      }
+    },
+    "LoopFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of LoopFlowNodeConfiguration",
+      "properties": {
+        "definition": {
+          "$ref": "#/definitions/FlowDefinition",
+          "description": "Flow definition"
+        }
+      }
+    },
+    "MetadataConfigurationForReranking": {
+      "type": "object",
+      "description": "Definition of MetadataConfigurationForReranking",
+      "properties": {
+        "selectionMode": {
+          "$ref": "#/definitions/MetadataConfigurationForRerankingSelectionMode",
+          "description": "Reranking Metadata Selection Mode"
+        },
+        "selectiveModeConfiguration": {
+          "$ref": "#/definitions/RerankingMetadataSelectiveModeConfiguration",
+          "description": "Reranking Metadata Selective Mode Configuration"
+        }
+      }
+    },
+    "MetadataConfigurationForRerankingSelectionMode": {
+      "type": "string",
+      "description": "MetadataConfigurationForRerankingSelectionMode enum",
+      "enum": [
+        "ALL",
+        "SELECTIVE"
+      ],
+      "x-ms-enum": {
+        "name": "MetadataConfigurationForRerankingSelectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALL",
+            "value": "ALL",
+            "description": "MetadataConfigurationForRerankingSelectionMode enum ALL"
+          },
+          {
+            "name": "SELECTIVE",
+            "value": "SELECTIVE",
+            "description": "MetadataConfigurationForRerankingSelectionMode enum SELECTIVE"
+          }
+        ]
+      }
+    },
+    "PerformanceConfiguration": {
+      "type": "object",
+      "description": "Definition of PerformanceConfiguration",
+      "properties": {
+        "latency": {
+          "$ref": "#/definitions/PerformanceConfigurationLatency",
+          "description": "Performance Configuration Latency"
+        }
+      }
+    },
+    "PerformanceConfigurationLatency": {
+      "type": "string",
+      "description": "PerformanceConfigurationLatency enum",
+      "enum": [
+        "optimized",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "PerformanceConfigurationLatency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "optimized",
+            "value": "optimized",
+            "description": "PerformanceConfigurationLatency enum optimized"
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "PerformanceConfigurationLatency enum standard"
+          }
+        ]
+      }
+    },
+    "PromptFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptFlowNodeConfiguration",
+      "properties": {
+        "guardrailConfiguration": {
+          "$ref": "#/definitions/GuardrailConfiguration",
+          "description": "Configuration for a guardrail"
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/PromptFlowNodeSourceConfiguration",
+          "description": "Prompt source configuration for prompt node"
+        }
+      }
+    },
+    "PromptFlowNodeInlineConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptFlowNodeInlineConfiguration",
+      "properties": {
+        "inferenceConfiguration": {
+          "$ref": "#/definitions/PromptInferenceConfiguration",
+          "description": "Model inference configuration"
+        },
+        "modelId": {
+          "type": "string",
+          "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models."
+        },
+        "templateConfiguration": {
+          "$ref": "#/definitions/PromptTemplateConfiguration",
+          "description": "Prompt template configuration"
+        },
+        "templateType": {
+          "$ref": "#/definitions/PromptFlowNodeInlineConfigurationTemplateType",
+          "description": "Prompt template type"
+        }
+      }
+    },
+    "PromptFlowNodeInlineConfigurationTemplateType": {
+      "type": "string",
+      "description": "PromptFlowNodeInlineConfigurationTemplateType enum",
+      "enum": [
+        "TEXT"
+      ],
+      "x-ms-enum": {
+        "name": "PromptFlowNodeInlineConfigurationTemplateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TEXT",
+            "value": "TEXT",
+            "description": "PromptFlowNodeInlineConfigurationTemplateType enum TEXT"
+          }
+        ]
+      }
+    },
+    "PromptFlowNodeResourceConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptFlowNodeResourceConfiguration",
+      "properties": {
+        "promptArn": {
+          "type": "string",
+          "description": "ARN of a prompt resource possibly with a version"
+        }
+      }
+    },
+    "PromptFlowNodeSourceConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptFlowNodeSourceConfiguration",
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/PromptFlowNodeResourceConfiguration",
+          "description": "Resource prompt configuration for prompt node"
+        },
+        "inline": {
+          "$ref": "#/definitions/PromptFlowNodeInlineConfiguration",
+          "description": "Inline prompt configuration for prompt node"
+        }
+      }
+    },
+    "PromptInferenceConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptInferenceConfiguration",
+      "properties": {
+        "text": {
+          "$ref": "#/definitions/PromptModelInferenceConfiguration",
+          "description": "Prompt model inference configuration"
+        }
+      }
+    },
+    "PromptInputVariable": {
+      "type": "object",
+      "description": "Definition of PromptInputVariable",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for an input variable"
+        }
+      }
+    },
+    "PromptModelInferenceConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptModelInferenceConfiguration",
+      "properties": {
+        "maxTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum length of output"
+        },
+        "stopSequences": {
+          "type": "array",
+          "description": "List of stop sequences",
+          "items": {
+            "type": "string"
+          }
+        },
+        "temperature": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls randomness, higher values increase diversity"
+        },
+        "topP": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Cumulative probability cutoff for token selection"
+        }
+      }
+    },
+    "PromptTemplateConfiguration": {
+      "type": "object",
+      "description": "Definition of PromptTemplateConfiguration",
+      "properties": {
+        "text": {
+          "$ref": "#/definitions/TextPromptTemplateConfiguration",
+          "description": "Configuration for text prompt template"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RerankingMetadataSelectiveModeConfiguration": {
+      "type": "object",
+      "description": "Definition of RerankingMetadataSelectiveModeConfiguration",
+      "properties": {
+        "fieldsToInclude": {
+          "type": "array",
+          "description": "List of Fields For Reranking",
+          "items": {
+            "$ref": "#/definitions/FieldForReranking"
+          },
+          "x-ms-identifiers": []
+        },
+        "fieldsToExclude": {
+          "type": "array",
+          "description": "List of Fields For Reranking",
+          "items": {
+            "$ref": "#/definitions/FieldForReranking"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RetrievalFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of RetrievalFlowNodeConfiguration",
+      "properties": {
+        "serviceConfiguration": {
+          "$ref": "#/definitions/RetrievalFlowNodeServiceConfiguration",
+          "description": "Retrieval service configuration for Retrieval node"
+        }
+      }
+    },
+    "RetrievalFlowNodeS3Configuration": {
+      "type": "object",
+      "description": "Definition of RetrievalFlowNodeS3Configuration",
+      "properties": {
+        "bucketName": {
+          "type": "string",
+          "description": "bucket name of an s3 that will be used for Retrieval flow node configuration"
+        }
+      }
+    },
+    "RetrievalFlowNodeServiceConfiguration": {
+      "type": "object",
+      "description": "Definition of RetrievalFlowNodeServiceConfiguration",
+      "properties": {
+        "s3": {
+          "$ref": "#/definitions/RetrievalFlowNodeS3Configuration",
+          "description": "s3 Retrieval configuration for Retrieval node"
+        }
+      }
+    },
+    "S3Location": {
+      "type": "object",
+      "description": "Definition of S3Location",
+      "properties": {
+        "bucket": {
+          "type": "string",
+          "description": "A bucket in S3"
+        },
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "A object key in S3",
+          "x-ms-secret": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the the S3 object to use"
+        }
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status enum",
+      "enum": [
+        "Failed",
+        "NotPrepared",
+        "Prepared",
+        "Preparing"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Status enum Failed"
+          },
+          {
+            "name": "NotPrepared",
+            "value": "NotPrepared",
+            "description": "Status enum NotPrepared"
+          },
+          {
+            "name": "Prepared",
+            "value": "Prepared",
+            "description": "Status enum Prepared"
+          },
+          {
+            "name": "Preparing",
+            "value": "Preparing",
+            "description": "Status enum Preparing"
+          }
+        ]
+      }
+    },
+    "StorageFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Definition of StorageFlowNodeConfiguration",
+      "properties": {
+        "serviceConfiguration": {
+          "$ref": "#/definitions/StorageFlowNodeServiceConfiguration",
+          "description": "storage service configuration for storage node"
+        }
+      }
+    },
+    "StorageFlowNodeS3Configuration": {
+      "type": "object",
+      "description": "Definition of StorageFlowNodeS3Configuration",
+      "properties": {
+        "bucketName": {
+          "type": "string",
+          "description": "bucket name of an s3 that will be used for storage flow node configuration"
+        }
+      }
+    },
+    "StorageFlowNodeServiceConfiguration": {
+      "type": "object",
+      "description": "Definition of StorageFlowNodeServiceConfiguration",
+      "properties": {
+        "s3": {
+          "$ref": "#/definitions/StorageFlowNodeS3Configuration",
+          "description": "s3 storage configuration for storage node"
+        }
+      }
+    },
+    "TextPromptTemplateConfiguration": {
+      "type": "object",
+      "description": "Definition of TextPromptTemplateConfiguration",
+      "properties": {
+        "inputVariables": {
+          "type": "array",
+          "description": "List of input variables",
+          "items": {
+            "$ref": "#/definitions/PromptInputVariable"
+          },
+          "x-ms-identifiers": []
+        },
+        "text": {
+          "type": "string",
+          "description": "Prompt content for String prompt template"
+        }
+      }
+    },
+    "VectorSearchBedrockRerankingConfiguration": {
+      "type": "object",
+      "description": "Definition of VectorSearchBedrockRerankingConfiguration",
+      "properties": {
+        "metadataConfiguration": {
+          "$ref": "#/definitions/MetadataConfigurationForReranking",
+          "description": "Property metadataConfiguration"
+        },
+        "modelConfiguration": {
+          "$ref": "#/definitions/VectorSearchBedrockRerankingModelConfiguration",
+          "description": "Property modelConfiguration"
+        },
+        "numberOfRerankedResults": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number Of Results For Reranking"
+        }
+      }
+    },
+    "VectorSearchBedrockRerankingModelConfiguration": {
+      "type": "object",
+      "description": "Definition of VectorSearchBedrockRerankingModelConfiguration",
+      "properties": {
+        "additionalModelRequestFields": {
+          "description": "Property additionalModelRequestFields"
+        },
+        "modelArn": {
+          "type": "string",
+          "description": "Arn of a Bedrock Reranking model"
+        }
+      }
+    },
+    "VectorSearchRerankingConfiguration": {
+      "type": "object",
+      "description": "Definition of VectorSearchRerankingConfiguration",
+      "properties": {
+        "bedrockRerankingConfiguration": {
+          "$ref": "#/definitions/VectorSearchBedrockRerankingConfiguration",
+          "description": "Property bedrockRerankingConfiguration"
+        },
+        "type": {
+          "$ref": "#/definitions/VectorSearchRerankingConfigurationType",
+          "description": "Enum of Rerank Configuration Types"
+        }
+      }
+    },
+    "VectorSearchRerankingConfigurationType": {
+      "type": "string",
+      "description": "VectorSearchRerankingConfigurationType enum",
+      "enum": [
+        "BEDROCK_RERANKING_MODEL"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchRerankingConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BEDROCK_RERANKING_MODEL",
+            "value": "BEDROCK_RERANKING_MODEL",
+            "description": "VectorSearchRerankingConfigurationType enum BEDROCK_RERANKING_MODEL"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

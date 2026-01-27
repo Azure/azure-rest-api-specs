@@ -29,7 +29,6 @@ interface Skus {
   /**
    * Get SKU resource details within a offer of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<
     Sku,
     Parameters = {
@@ -44,7 +43,6 @@ interface Skus {
   /**
    * List Skus available for a offer within the HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByOffer is ArmResourceListByParent<
     Sku,
     Parameters = {
@@ -60,48 +58,3 @@ interface Skus {
 
 @@doc(Sku.name, "The name of the SKU available within HCI cluster.");
 @@doc(Sku.properties, "SKU properties.");
-
-// Models
-
-/**
- * List of SKU proxy resources for the HCI cluster.
- */
-model SkuList is Azure.Core.Page<Sku>;
-
-/**
- * SKU properties.
- */
-model SkuProperties {
-  /**
-   * Provisioning State
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility(Lifecycle.Read)
-  provisioningState?: string;
-
-  /**
-   * Identifier of the Publisher for the offer
-   */
-  publisherId?: string;
-
-  /**
-   * Identifier of the Offer for the sku
-   */
-  offerId?: string;
-
-  /**
-   * JSON serialized catalog content of the sku offer
-   */
-  content?: string;
-
-  /**
-   * The API version of the catalog service used to serve the catalog content
-   */
-  contentVersion?: string;
-
-  /**
-   * Array of SKU mappings
-   */
-  @identifiers(#[])
-  skuMappings?: SkuMappings[];
-}

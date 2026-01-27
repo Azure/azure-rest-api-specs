@@ -15,6 +15,7 @@ model EventGridTopicTypePublisherAuthenticationsResourceProperties {
   @doc("Name of the Topic Type. Required.")
   topicTypeName: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Authentication Type. Required.")
   authenticationType: string | "Certificate";
 

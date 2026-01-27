@@ -1,0 +1,63 @@
+{
+  "title": "List EapVirtualNetworks resource by ResourceGroup",
+  "operationId": "EapVirtualNetworks_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rg-hypernet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rg-hypernet/providers/Microsoft.Hypernet/eapVirtualNetworks/hypernet-vnet-001",
+            "name": "hypernet-vnet-001",
+            "type": "Microsoft.Hypernet/eapVirtualNetworks",
+            "properties": {
+              "ownerAliasList": "alice,bob,charlie",
+              "subscriptionTenantId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d",
+              "distributionList": "team-network@contoso.com,ops-team@contoso.com",
+              "securityGroups": "sg-network-admin,sg-ops-team",
+              "backendEnvironment": "Autopilot",
+              "subscriptionTags": "Environment=Production,Department=IT",
+              "allowTestClusterApplications": true,
+              "virtualNetworkName": "hypernet-vnet-001",
+              "businessCategory": "Infrastructure",
+              "region": "westus",
+              "manatreeOwners": "alice@contoso.com,bob@contoso.com",
+              "tags": "Project=HyperNet,Team=Infrastructure",
+              "virtualNetworkSubnets": [
+                {
+                  "name": "subnet-ipv6-standard",
+                  "isBringYourOwnIp": false,
+                  "ipType": "IPv6",
+                  "ips": [
+                    {
+                      "subnetSize": 125,
+                      "tags": "Subnet=Standard,Type=IPv6",
+                      "justification": "Standard IPv6 subnet for application workloads"
+                    }
+                  ]
+                },
+                {
+                  "name": "subnet-ipv6-byoip",
+                  "isBringYourOwnIp": true,
+                  "ipType": "IPv6",
+                  "ips": [
+                    {
+                      "prefix": "2001:db8::/64",
+                      "tags": "Subnet=BYOIP,Type=IPv6",
+                      "justification": "Bring your own IPv6 prefix for specialized workloads"
+                    }
+                  ]
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

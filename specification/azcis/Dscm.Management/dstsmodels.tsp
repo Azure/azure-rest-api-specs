@@ -39,6 +39,7 @@ model ClaimExpansion {
   @doc("Service account group service tree id. Optional.")
   serviceAccountGroupServiceTreeId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Flag to indicate if the claim is regional enforced or not. Optional.")
   isRegionalEnforced?: string | "False" | "True";
 }

@@ -53,6 +53,9 @@
     },
     {
       "name": "EdgeVolumes"
+    },
+    {
+      "name": "MirrorSubvolumes"
     }
   ],
   "paths": {
@@ -939,6 +942,327 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/{resourceUri}/providers/Microsoft.ArcContainerStorage/edgeVolumes/{edgeVolumeName}/mirrorSubvolumes": {
+      "get": {
+        "operationId": "MirrorSubvolumes_List",
+        "tags": [
+          "MirrorSubvolumes"
+        ],
+        "description": "List MirrorSubvolume resources by EdgeVolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeVolumeName",
+            "in": "path",
+            "description": "The name of the EdgeVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MirrorSubvolumeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MirrorSubvolumes_List_MaximumSet": {
+            "$ref": "./examples/MirrorSubvolumes_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ArcContainerStorage/edgeVolumes/{edgeVolumeName}/mirrorSubvolumes/{mirrorSubvolumeName}": {
+      "get": {
+        "operationId": "MirrorSubvolumes_Get",
+        "tags": [
+          "MirrorSubvolumes"
+        ],
+        "description": "Get a MirrorSubvolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeVolumeName",
+            "in": "path",
+            "description": "The name of the EdgeVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "mirrorSubvolumeName",
+            "in": "path",
+            "description": "The name of the MirrorSubvolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MirrorSubvolume"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MirrorSubvolumes_Get_MaximumSet": {
+            "$ref": "./examples/MirrorSubvolumes_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MirrorSubvolumes_CreateOrUpdate",
+        "tags": [
+          "MirrorSubvolumes"
+        ],
+        "description": "Create a MirrorSubvolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeVolumeName",
+            "in": "path",
+            "description": "The name of the EdgeVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "mirrorSubvolumeName",
+            "in": "path",
+            "description": "The name of the MirrorSubvolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MirrorSubvolume"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MirrorSubvolume' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MirrorSubvolume"
+            }
+          },
+          "201": {
+            "description": "Resource 'MirrorSubvolume' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MirrorSubvolume"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MirrorSubvolumes_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/MirrorSubvolumes_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "MirrorSubvolumes_Update",
+        "tags": [
+          "MirrorSubvolumes"
+        ],
+        "description": "Update a MirrorSubvolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeVolumeName",
+            "in": "path",
+            "description": "The name of the EdgeVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "mirrorSubvolumeName",
+            "in": "path",
+            "description": "The name of the MirrorSubvolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MirrorSubvolumeUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MirrorSubvolume"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MirrorSubvolumes_Update_MaximumSet": {
+            "$ref": "./examples/MirrorSubvolumes_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MirrorSubvolumes_Delete",
+        "tags": [
+          "MirrorSubvolumes"
+        ],
+        "description": "Delete a MirrorSubvolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeVolumeName",
+            "in": "path",
+            "description": "The name of the EdgeVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "mirrorSubvolumeName",
+            "in": "path",
+            "description": "The name of the MirrorSubvolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MirrorSubvolumes_Delete_MaximumSet": {
+            "$ref": "./examples/MirrorSubvolumes_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.ArcContainerStorage/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -1022,6 +1346,54 @@
     }
   },
   "definitions": {
+    "AccountConfig": {
+      "type": "object",
+      "description": "A storage account used for mirroring",
+      "properties": {
+        "accountType": {
+          "$ref": "#/definitions/AccountConfigType"
+        }
+      },
+      "discriminator": "accountType",
+      "required": [
+        "accountType"
+      ]
+    },
+    "AccountConfigType": {
+      "type": "string",
+      "description": "A storage account configuration type used for mirroring",
+      "enum": [
+        "blob",
+        "onelake"
+      ],
+      "x-ms-enum": {
+        "name": "AccountConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "blob",
+            "value": "blob"
+          },
+          {
+            "name": "onelake",
+            "value": "onelake"
+          }
+        ]
+      }
+    },
+    "AccountConfigUpdate": {
+      "type": "object",
+      "description": "A storage account used for mirroring",
+      "properties": {
+        "accountType": {
+          "$ref": "#/definitions/AccountConfigType"
+        }
+      },
+      "discriminator": "accountType",
+      "required": [
+        "accountType"
+      ]
+    },
     "AuthConfig": {
       "type": "object",
       "description": "Authentication settings for secure access to storage.",
@@ -1178,6 +1550,122 @@
             "description": "The backend connection disconnected due to auth error"
           }
         ]
+      }
+    },
+    "BlobAccountConfig": {
+      "type": "object",
+      "description": "a blob account used for mirroring",
+      "properties": {
+        "accountEndpoint": {
+          "type": "string",
+          "description": "Blob storage endpoint, for example: https://mysa.core.windows.net",
+          "minLength": 3,
+          "maxLength": 1024
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Blob container name.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([a-z0-9]|-[a-z0-9])*$"
+        },
+        "indexTagsMode": {
+          "type": "string",
+          "description": "Mode MirrorIndexTags requires higher permissions. When set index tags will be translated to corresponding azindex.<name> xattrs. NoIndexTags will keep index tag xattrs unset.",
+          "default": "NoIndexTags",
+          "enum": [
+            "MirrorIndexTags",
+            "NoIndexTags"
+          ],
+          "x-ms-enum": {
+            "name": "IndexTagsModes",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "mirrorIndexTags",
+                "value": "MirrorIndexTags",
+                "description": "use mirror"
+              },
+              {
+                "name": "noIndexTags",
+                "value": "NoIndexTags",
+                "description": "no tags used"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "accountEndpoint",
+        "containerName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccountConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "blob"
+    },
+    "BlobAccountConfigUpdate": {
+      "type": "object",
+      "description": "a blob account used for mirroring",
+      "properties": {
+        "accountEndpoint": {
+          "type": "string",
+          "description": "Blob storage endpoint, for example: https://mysa.core.windows.net",
+          "minLength": 3,
+          "maxLength": 1024
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Blob container name.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]([a-z0-9]|-[a-z0-9])*$"
+        },
+        "indexTagsMode": {
+          "type": "string",
+          "description": "Mode MirrorIndexTags requires higher permissions. When set index tags will be translated to corresponding azindex.<name> xattrs. NoIndexTags will keep index tag xattrs unset.",
+          "default": "NoIndexTags",
+          "enum": [
+            "MirrorIndexTags",
+            "NoIndexTags"
+          ],
+          "x-ms-enum": {
+            "name": "IndexTagsModes",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "mirrorIndexTags",
+                "value": "MirrorIndexTags",
+                "description": "use mirror"
+              },
+              {
+                "name": "noIndexTags",
+                "value": "NoIndexTags",
+                "description": "no tags used"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccountConfigUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "blob"
+    },
+    "BlobFilteringConfig": {
+      "type": "object",
+      "description": "A scheme for filtering blobs to mirror",
+      "properties": {
+        "blobNamePrefix": {
+          "type": "string",
+          "description": "Use a prefix for filtering. For example, if the value is 'a' it only mirrors blobs with names starting with a.",
+          "maxLength": 255,
+          "pattern": "(^(?!.*[/][/]).*[^.]$|^$)"
+        }
       }
     },
     "ConfigurationState": {
@@ -1470,7 +1958,7 @@
         "spaceAvailable": {
           "type": "string",
           "description": "The amount of space available (string format, e.g., '500Mi').",
-          "pattern": "^[0-9][0-9]*([.][0-9]+)?[KMGTP]i?$"
+          "pattern": "^(|[0-9.]+[eEinumkKMGTP]*[-+]?[0-9]*)$"
         },
         "persistentVolume": {
           "type": "string",
@@ -1661,7 +2149,13 @@
           "description": "Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "path",
+        "authentication",
+        "storageAccountEndpoint",
+        "containerName"
+      ]
     },
     "IngestSubvolumePropertiesUpdate": {
       "type": "object",
@@ -1768,6 +2262,268 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "MirrorSubvolume": {
+      "type": "object",
+      "description": "MirrorSubvolume is a custom resource that defines the configuration for a subvolume.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MirrorSubvolumeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MirrorSubvolumeListResult": {
+      "type": "object",
+      "description": "The response of a MirrorSubvolume list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MirrorSubvolume items on this page",
+          "items": {
+            "$ref": "#/definitions/MirrorSubvolume"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MirrorSubvolumeProperties": {
+      "type": "object",
+      "description": "Defines the properties of the MirrorSubvolume resource.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Top-level path for this subvolume (e.g., /mysubvol).",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^/?[a-zA-Z0-9-\\._]*$"
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthConfig",
+          "description": "Authentication config for certain subvolumes."
+        },
+        "account": {
+          "$ref": "#/definitions/AccountConfig",
+          "description": "Account used for mirror source"
+        },
+        "blobFiltering": {
+          "$ref": "#/definitions/BlobFilteringConfig",
+          "description": "Optional blob filtering configuration."
+        },
+        "authSys": {
+          "$ref": "#/definitions/AuthSysConfig",
+          "description": "Optional Unix-like ownership info (UID/GID) for the subvolume."
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduleConfig",
+          "description": "Schedule configuration for when mirroring should run."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/MirrorSubvolumeStatus",
+          "description": "Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "path",
+        "authentication",
+        "account",
+        "schedule"
+      ]
+    },
+    "MirrorSubvolumePropertiesUpdate": {
+      "type": "object",
+      "description": "Defines the properties of the MirrorSubvolume resource.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Top-level path for this subvolume (e.g., /mysubvol).",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^/?[a-zA-Z0-9-\\._]*$"
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthConfigUpdate",
+          "description": "Authentication config for certain subvolumes."
+        },
+        "account": {
+          "$ref": "#/definitions/AccountConfigUpdate",
+          "description": "Account used for mirror source"
+        },
+        "blobFiltering": {
+          "$ref": "#/definitions/BlobFilteringConfig",
+          "description": "Optional blob filtering configuration."
+        },
+        "authSys": {
+          "$ref": "#/definitions/AuthSysConfigUpdate",
+          "description": "Optional Unix-like ownership info (UID/GID) for the subvolume."
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduleConfigUpdate",
+          "description": "Schedule configuration for when mirroring should run."
+        }
+      }
+    },
+    "MirrorSubvolumeState": {
+      "type": "string",
+      "description": "States of an MirrorSubvolume",
+      "enum": [
+        "unknown",
+        "configuring",
+        "configured",
+        "cleaning_up"
+      ],
+      "x-ms-enum": {
+        "name": "MirrorSubvolumeState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "unknown",
+            "description": "MirrorSubvolume is in an unknown state"
+          },
+          {
+            "name": "Configuring",
+            "value": "configuring",
+            "description": "MirrorSubvolume configuration is in progress"
+          },
+          {
+            "name": "Configured",
+            "value": "configured",
+            "description": "MirrorSubvolume is configured and ready"
+          },
+          {
+            "name": "CleaningUp",
+            "value": "cleaning_up",
+            "description": "MirrorSubvolume is being deleted"
+          }
+        ]
+      }
+    },
+    "MirrorSubvolumeStatus": {
+      "type": "object",
+      "description": "Defines the observed status of the MirrorSubvolume resource.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/MirrorSubvolumeState",
+          "description": "The current state of the subvolume."
+        }
+      }
+    },
+    "MirrorSubvolumeUpdate": {
+      "type": "object",
+      "description": "MirrorSubvolume is a custom resource that defines the configuration for a subvolume.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MirrorSubvolumePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OnelakeAccountConfig": {
+      "type": "object",
+      "description": "A onelake account used for mirroring",
+      "properties": {
+        "accountEndpoint": {
+          "type": "string",
+          "description": "Onelake endpoint, for example: https://onelake.blob.fabric.microsoft.com",
+          "minLength": 3,
+          "maxLength": 1024
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Blob container name.",
+          "pattern": "^[^\\t\\n\\r\\\\/ #]*[/]([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Za-z0-9_]*[.]lakehouse)$"
+        }
+      },
+      "required": [
+        "accountEndpoint",
+        "containerName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccountConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "onelake"
+    },
+    "OnelakeAccountConfigUpdate": {
+      "type": "object",
+      "description": "A onelake account used for mirroring",
+      "properties": {
+        "accountEndpoint": {
+          "type": "string",
+          "description": "Onelake endpoint, for example: https://onelake.blob.fabric.microsoft.com",
+          "minLength": 3,
+          "maxLength": 1024
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Blob container name.",
+          "pattern": "^[^\\t\\n\\r\\\\/ #]*[/]([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Za-z0-9_]*[.]lakehouse)$"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccountConfigUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "onelake"
+    },
+    "ScheduleConfig": {
+      "type": "object",
+      "description": "schedule configuration",
+      "properties": {
+        "frequency": {
+          "type": "string",
+          "description": "Options are: @annually, @yearly, @monthly, @weekly, @daily, @hourly, never, or cron syntax (five digits, first is minutes (0-59), second is hours (0-23), third is day (1-31), fourth is month (1-12), fifth is day of the week (0-6)).",
+          "pattern": "^(never|@(annually|yearly|monthly|weekly|daily|hourly)|((([*]|([1-5]?[0-9])([-]([1-5]?[0-9]))?)([/]([1-5]?[0-9]))?)) ((([*]|(1?[0-9]|2[0-3])([-](1?[0-9]|2[0-3]))?)([/](1?[0-9]|2[0-3]))?)) ((([*]|([1-2]?[0-9]|3[0-1])([-]([1-2]?[0-9]|3[0-1]))?)([/]([1-2][0-9]|3[0-1]))?)) (([*]|((1[0-2]|[0-9]|[jJ][aA][nN]|[jJ][aA][nN][uU][aA][rR][yY]|[fF][eE][bB]|[fF][eE][bB][rR][uU][aA][rR][yY]|[mM][aA][rR]|[mM][aA][rR][cC][hH]|[aA][pP][rR]|[aA][pP][rR][iI][lL]|[mM][aA][yY]|[jJ][uU][nN]|[jJ][uU][nN][eE]|[aA][uU][gG]|[aA][uU][gG][uU][sS][tT]|[sS][eE][pP]|[sS][eE][pP][tT]|[sS][eE][pP][tT][eE][mM][bB][eE][rR]|[oO][cC][tT]|[oO][cC][tT][oO][bB][eE][rR]|[nN][oO][vV]|[nN][oO][vV][eE][mM][bB][eE][rR]|[dD][eE][cC]|[dD][eE][cC][eE][mM][bB][eE][rR])([-](1[0-2]|[0-9]|[jJ][aA][nN]|[jJ][aA][nN][uU][aA][rR][yY]|[fF][eE][bB]|[fF][eE][bB][rR][uU][aA][rR][yY]|[mM][aA][rR]|[mM][aA][rR][cC][hH]|[aA][pP][rR]|[aA][pP][rR][iI][lL]|[mM][aA][yY]|[jJ][uU][nN]|[jJ][uU][nN][eE]|[aA][uU][gG]|[aA][uU][gG][uU][sS][tT]|[sS][eE][pP]|[sS][eE][pP][tT]|[sS][eE][pP][tT][eE][mM][bB][eE][rR]|[oO][cC][tT]|[oO][cC][tT][oO][bB][eE][rR]|[nN][oO][vV]|[nN][oO][vV][eE][mM][bB][eE][rR]|[dD][eE][cC]|[dD][eE][cC][eE][mM][bB][eE][rR]))?))([/](1[0-2]|[0-9]|[jJ][aA][nN]|[jJ][aA][nN][uU][aA][rR][yY]|[fF][eE][bB]|[fF][eE][bB][rR][uU][aA][rR][yY]|[mM][aA][rR]|[mM][aA][rR][cC][hH]|[aA][pP][rR]|[aA][pP][rR][iI][lL]|[mM][aA][yY]|[jJ][uU][nN]|[jJ][uU][nN][eE]|[aA][uU][gG]|[aA][uU][gG][uU][sS][tT]|[sS][eE][pP]|[sS][eE][pP][tT]|[sS][eE][pP][tT][eE][mM][bB][eE][rR]|[oO][cC][tT]|[oO][cC][tT][oO][bB][eE][rR]|[nN][oO][vV]|[nN][oO][vV][eE][mM][bB][eE][rR]|[dD][eE][cC]|[dD][eE][cC][eE][mM][bB][eE][rR]))??) (([*]|([0-6]|[mM][oO][nN]|[mM][oO][nN][dD][aA][yY]|[tT][uU][eE]|[tT][uU][eE][sS]|[tT][uU][eE][sS][dD][aA][yY]|[wW][eE][dD]|[wW][eE][dD][sS]|[wW][eE][dD][nN][eE][sS][dD][aA][yY]|[tT][hH][uU]|[tT][hH][uU][rR]|[tT][hH][uU][rR][sS]|[tT][hH][uU][rR][sS][dD][aA][yY]|[fF][rR][iI]|[fF][rR][iI][dD][aA][yY]|[sS][aA][tT]|[sS][aA][tT][uU][rR][dD][aA][yY]|[sS][uU][nN]|[sS][uU][nN][dD][aA][yY])([-][0-6]|[mM][oO][nN]|[mM][oO][nN][dD][aA][yY]|[tT][uU][eE]|[tT][uU][eE][sS]|[tT][uU][eE][sS][dD][aA][yY]|[wW][eE][dD]|[wW][eE][dD][sS]|[wW][eE][dD][nN][eE][sS][dD][aA][yY]|[tT][hH][uU]|[tT][hH][uU][rR]|[tT][hH][uU][rR][sS]|[tT][hH][uU][rR][sS][dD][aA][yY]|[fF][rR][iI]|[fF][rR][iI][dD][aA][yY]|[sS][aA][tT]|[sS][aA][tT][uU][rR][dD][aA][yY]|[sS][uU][nN]|[sS][uU][nN][dD][aA][yY])?)([/]([0-6]|[mM][oO][nN]|[mM][oO][nN][dD][aA][yY]|[tT][uU][eE]|[tT][uU][eE][sS]|[tT][uU][eE][sS][dD][aA][yY]|[wW][eE][dD]|[wW][eE][dD][sS]|[wW][eE][dD][nN][eE][sS][dD][aA][yY]|[tT][hH][uU]|[tT][hH][uU][rR]|[tT][hH][uU][rR][sS]|[tT][hH][uU][rR][sS][dD][aA][yY]|[fF][rR][iI]|[fF][rR][iI][dD][aA][yY]|[sS][aA][tT]|[sS][aA][tT][uU][rR][dD][aA][yY]|[sS][uU][nN]|[sS][uU][nN][dD][aA][yY]))??))$"
+        },
+        "oneshot": {
+          "$ref": "#/definitions/UUIDType",
+          "description": "By default, left blank. If at any time a uuid is specified here, it triggers an 'immediate' sync. If a uuid is specified on creation, the subvolume performs a sync on initial create, and thereafter according to the frequency. If this parameter is empty on creation, the subvolume initially creates without a sync, and then syncs according to the frequency."
+        }
+      },
+      "required": [
+        "frequency"
+      ]
+    },
+    "ScheduleConfigUpdate": {
+      "type": "object",
+      "description": "schedule configuration",
+      "properties": {
+        "frequency": {
+          "type": "string",
+          "description": "Options are: @annually, @yearly, @monthly, @weekly, @daily, @hourly, never, or cron syntax (five digits, first is minutes (0-59), second is hours (0-23), third is day (1-31), fourth is month (1-12), fifth is day of the week (0-6)).",
+          "pattern": "^(never|@(annually|yearly|monthly|weekly|daily|hourly)|((([*]|([1-5]?[0-9])([-]([1-5]?[0-9]))?)([/]([1-5]?[0-9]))?)) ((([*]|(1?[0-9]|2[0-3])([-](1?[0-9]|2[0-3]))?)([/](1?[0-9]|2[0-3]))?)) ((([*]|([1-2]?[0-9]|3[0-1])([-]([1-2]?[0-9]|3[0-1]))?)([/]([1-2][0-9]|3[0-1]))?)) (([*]|((1[0-2]|[0-9]|[jJ][aA][nN]|[jJ][aA][nN][uU][aA][rR][yY]|[fF][eE][bB]|[fF][eE][bB][rR][uU][aA][rR][yY]|[mM][aA][rR]|[mM][aA][rR][cC][hH]|[aA][pP][rR]|[aA][pP][rR][iI][lL]|[mM][aA][yY]|[jJ][uU][nN]|[jJ][uU][nN][eE]|[aA][uU][gG]|[aA][uU][gG][uU][sS][tT]|[sS][eE][pP]|[sS][eE][pP][tT]|[sS][eE][pP][tT][eE][mM][bB][eE][rR]|[oO][cC][tT]|[oO][cC][tT][oO][bB][eE][rR]|[nN][oO][vV]|[nN][oO][vV][eE][mM][bB][eE][rR]|[dD][eE][cC]|[dD][eE][cC][eE][mM][bB][eE][rR])([-](1[0-2]|[0-9]|[jJ][aA][nN]|[jJ][aA][nN][uU][aA][rR][yY]|[fF][eE][bB]|[fF][eE][bB][rR][uU][aA][rR][yY]|[mM][aA][rR]|[mM][aA][rR][cC][hH]|[aA][pP][rR]|[aA][pP][rR][iI][lL]|[mM][aA][yY]|[jJ][uU][nN]|[jJ][uU][nN][eE]|[aA][uU][gG]|[aA][uU][gG][uU][sS][tT]|[sS][eE][pP]|[sS][eE][pP][tT]|[sS][eE][pP][tT][eE][mM][bB][eE][rR]|[oO][cC][tT]|[oO][cC][tT][oO][bB][eE][rR]|[nN][oO][vV]|[nN][oO][vV][eE][mM][bB][eE][rR]|[dD][eE][cC]|[dD][eE][cC][eE][mM][bB][eE][rR]))?))([/](1[0-2]|[0-9]|[jJ][aA][nN]|[jJ][aA][nN][uU][aA][rR][yY]|[fF][eE][bB]|[fF][eE][bB][rR][uU][aA][rR][yY]|[mM][aA][rR]|[mM][aA][rR][cC][hH]|[aA][pP][rR]|[aA][pP][rR][iI][lL]|[mM][aA][yY]|[jJ][uU][nN]|[jJ][uU][nN][eE]|[aA][uU][gG]|[aA][uU][gG][uU][sS][tT]|[sS][eE][pP]|[sS][eE][pP][tT]|[sS][eE][pP][tT][eE][mM][bB][eE][rR]|[oO][cC][tT]|[oO][cC][tT][oO][bB][eE][rR]|[nN][oO][vV]|[nN][oO][vV][eE][mM][bB][eE][rR]|[dD][eE][cC]|[dD][eE][cC][eE][mM][bB][eE][rR]))??) (([*]|([0-6]|[mM][oO][nN]|[mM][oO][nN][dD][aA][yY]|[tT][uU][eE]|[tT][uU][eE][sS]|[tT][uU][eE][sS][dD][aA][yY]|[wW][eE][dD]|[wW][eE][dD][sS]|[wW][eE][dD][nN][eE][sS][dD][aA][yY]|[tT][hH][uU]|[tT][hH][uU][rR]|[tT][hH][uU][rR][sS]|[tT][hH][uU][rR][sS][dD][aA][yY]|[fF][rR][iI]|[fF][rR][iI][dD][aA][yY]|[sS][aA][tT]|[sS][aA][tT][uU][rR][dD][aA][yY]|[sS][uU][nN]|[sS][uU][nN][dD][aA][yY])([-][0-6]|[mM][oO][nN]|[mM][oO][nN][dD][aA][yY]|[tT][uU][eE]|[tT][uU][eE][sS]|[tT][uU][eE][sS][dD][aA][yY]|[wW][eE][dD]|[wW][eE][dD][sS]|[wW][eE][dD][nN][eE][sS][dD][aA][yY]|[tT][hH][uU]|[tT][hH][uU][rR]|[tT][hH][uU][rR][sS]|[tT][hH][uU][rR][sS][dD][aA][yY]|[fF][rR][iI]|[fF][rR][iI][dD][aA][yY]|[sS][aA][tT]|[sS][aA][tT][uU][rR][dD][aA][yY]|[sS][uU][nN]|[sS][uU][nN][dD][aA][yY])?)([/]([0-6]|[mM][oO][nN]|[mM][oO][nN][dD][aA][yY]|[tT][uU][eE]|[tT][uU][eE][sS]|[tT][uU][eE][sS][dD][aA][yY]|[wW][eE][dD]|[wW][eE][dD][sS]|[wW][eE][dD][nN][eE][sS][dD][aA][yY]|[tT][hH][uU]|[tT][hH][uU][rR]|[tT][hH][uU][rR][sS]|[tT][hH][uU][rR][sS][dD][aA][yY]|[fF][rR][iI]|[fF][rR][iI][dD][aA][yY]|[sS][aA][tT]|[sS][aA][tT][uU][rR][dD][aA][yY]|[sS][uU][nN]|[sS][uU][nN][dD][aA][yY]))??))$"
+        },
+        "oneshot": {
+          "$ref": "#/definitions/UUIDType",
+          "description": "By default, left blank. If at any time a uuid is specified here, it triggers an 'immediate' sync. If a uuid is specified on creation, the subvolume performs a sync on initial create, and thereafter according to the frequency. If this parameter is empty on creation, the subvolume initially creates without a sync, and then syncs according to the frequency."
+        }
+      }
     },
     "StorageClass": {
       "type": "string",

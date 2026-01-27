@@ -1,19 +1,21 @@
 {
-  "title": "Arc Settings Initialize Disable Process",
-  "operationId": "ArcSettings_InitializeDisableProcess",
   "parameters": {
     "api-version": "2025-09-22-preview",
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
-    "resourceGroupName": "test-rg",
+    "arcSettingName": "default",
     "clusterName": "myCluster",
-    "arcSettingName": "default"
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
   },
   "responses": {
     "200": {},
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/operationStatuses/operation-id"
+        "Azure-AsyncOperation": "https://foo.com/operationStatuses",
+        "Retry-After": 200,
+        "location": "https://foo.com/operationStatuses"
       }
     }
-  }
+  },
+  "operationId": "ArcSettings_InitializeDisableProcess",
+  "title": "Trigger ARC Disable"
 }

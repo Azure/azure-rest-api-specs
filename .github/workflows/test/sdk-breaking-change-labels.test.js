@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { sdkLabels } from "../../shared/src/sdk-types.js";
+import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.js";
 import { LabelAction } from "../src/label.js";
 import {
   getLabelAndActionImpl,
@@ -12,9 +13,11 @@ vi.mock("../src/context.js", () => ({
   extractInputs: vi.fn(),
 }));
 
+/** @type {import('vitest').Mock<(url: string) => Promise<Partial<Response>>>} */
 const mockFetch = vi.fn();
+
 // Mock global fetch
-global.fetch = mockFetch;
+global.fetch = /** @type {import('vitest').MockedFunction<typeof fetch>} */ (mockFetch);
 
 const mockGithub = createMockGithub();
 const mockContext = createMockContext();
@@ -64,20 +67,22 @@ describe("sdk-breaking-change-labels", () => {
       const mockContentResponse = {
         ok: true,
         text: vi.fn().mockResolvedValue(
-          JSON.stringify({
-            labelAction: true,
-            language,
-            prNumber: "123",
-          }),
+          JSON.stringify(
+            createMockSpecGenSdkArtifactInfo({
+              labelAction: true,
+              language,
+              prNumber: "123",
+            }),
+          ),
         ),
       };
 
       // Setup fetch to return different responses for each call
       mockFetch.mockImplementation((url) => {
         if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
+          return Promise.resolve(mockArtifactResponse);
         } else {
-          return mockContentResponse;
+          return Promise.resolve(mockContentResponse);
         }
       });
 
@@ -90,6 +95,7 @@ describe("sdk-breaking-change-labels", () => {
 
       // Verify result
       expect(result).toEqual({
+        headSha: "abc123",
         labelName: sdkLabels[language].breakingChange,
         labelAction: LabelAction.Add,
         issueNumber: 123,
@@ -119,21 +125,21 @@ describe("sdk-breaking-change-labels", () => {
       const language = "azure-sdk-for-js";
       const mockContentResponse = {
         ok: true,
-        text: vi.fn().mockResolvedValue(
-          JSON.stringify({
-            labelAction: false,
-            language,
-            prNumber: "123",
-          }),
-        ),
+        text: vi
+          .fn()
+          .mockResolvedValue(
+            JSON.stringify(
+              createMockSpecGenSdkArtifactInfo({ labelAction: false, language, prNumber: "123" }),
+            ),
+          ),
       };
 
       // Setup fetch to return different responses for each call
       mockFetch.mockImplementation((url) => {
         if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
+          return Promise.resolve(mockArtifactResponse);
         } else {
-          return mockContentResponse;
+          return Promise.resolve(mockContentResponse);
         }
       });
 
@@ -146,6 +152,7 @@ describe("sdk-breaking-change-labels", () => {
 
       // Verify result has Remove action
       expect(result).toEqual({
+        headSha: "abc123",
         labelName: sdkLabels[language].breakingChange,
         labelAction: LabelAction.Remove,
         issueNumber: 123,
@@ -176,20 +183,22 @@ describe("sdk-breaking-change-labels", () => {
       const mockContentResponse = {
         ok: true,
         text: vi.fn().mockResolvedValue(
-          JSON.stringify({
-            labelAction: false,
-            language,
-            prNumber: "123",
-          }),
+          JSON.stringify(
+            createMockSpecGenSdkArtifactInfo({
+              labelAction: false,
+              language,
+              prNumber: "123",
+            }),
+          ),
         ),
       };
 
       // Setup fetch to return different responses for each call
       mockFetch.mockImplementation((url) => {
         if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
+          return Promise.resolve(mockArtifactResponse);
         } else {
-          return mockContentResponse;
+          return Promise.resolve(mockContentResponse);
         }
       });
 
@@ -202,6 +211,7 @@ describe("sdk-breaking-change-labels", () => {
 
       // Verify result has none action
       expect(result).toEqual({
+        headSha: "abc123",
         labelName: sdkLabels[language].breakingChange,
         labelAction: LabelAction.None,
         issueNumber: 123,
@@ -343,11 +353,7 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       // Setup fetch to return different responses for each call
-      mockFetch.mockImplementation((url) => {
-        if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
-        }
-      });
+      mockFetch.mockResolvedValue(mockArtifactResponse);
 
       // Call function and expect it to throw
       await expect(
@@ -374,11 +380,7 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       // Setup fetch to return different responses for each call
-      mockFetch.mockImplementation((url) => {
-        if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
-        }
-      });
+      mockFetch.mockResolvedValue(mockArtifactResponse);
 
       // Call function and expect it to throw
       await expect(
@@ -419,9 +421,9 @@ describe("sdk-breaking-change-labels", () => {
       // Setup fetch to return different responses for each call
       mockFetch.mockImplementation((url) => {
         if (url.includes("artifacts?artifactName=")) {
-          return mockArtifactResponse;
+          return Promise.resolve(mockArtifactResponse);
         } else {
-          return mockContentResponse;
+          return Promise.resolve(mockContentResponse);
         }
       });
 

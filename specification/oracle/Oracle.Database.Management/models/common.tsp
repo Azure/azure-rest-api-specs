@@ -44,6 +44,10 @@ union WorkloadType {
   @doc("APEX - indicates an Autonomous Database with the Oracle APEX Application Development workload type.")
   APEX: "APEX",
 
+  @added(Versions.v20251115_preview)
+  @doc("LH - indicates an Oracle Autonomous AI Lakehouse database")
+  LH: "LH",
+
   string,
 }
 

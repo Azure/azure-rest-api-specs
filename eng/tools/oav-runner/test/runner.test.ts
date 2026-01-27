@@ -13,7 +13,8 @@ describe("file processing", () => {
       "specification/serviceB/data-plane/service.B/readme.md",
     ];
 
-    expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves.toMatchInlineSnapshot(`
+    await expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves
+      .toMatchInlineSnapshot(`
       [
         "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
         "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",

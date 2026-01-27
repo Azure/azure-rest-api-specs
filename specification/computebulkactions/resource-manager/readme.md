@@ -50,6 +50,17 @@ suppressions:
     reason: Tags are mimicing the existing object structure from compute, bulkactions is a passthrough API and will deliver the object as is to compute.
     from: computebulkactions.json
     where: $.definitions.VirtualMachineExtensionProperties.properties.protectedSettings
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computebulkactions.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computebulkactions.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+  - code: BodyTopLevelProperties
+    from: computebulkactions.json
+    where: $.definitions.OperationStatus
 ```
 
 # Code Generation

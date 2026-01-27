@@ -1,24 +1,23 @@
 {
-  "title": "List Publishers By Cluster",
-  "operationId": "Publishers_ListByCluster",
   "parameters": {
     "api-version": "2025-09-22-preview",
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "clusterName": "myCluster",
     "resourceGroupName": "test-rg",
-    "clusterName": "myCluster"
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/clusters/myCluster/publishers/Microsoft",
-            "name": "Microsoft",
+            "name": "publisher1",
             "type": "Microsoft.AzureStackHCI/clusters/publishers",
-            "properties": {}
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/publishers/publisher1"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Publishers_ListByCluster",
+  "title": "List Publisher resources by HCI Cluster"
 }

@@ -1,18 +1,25 @@
 {
-  "title": "Upload Certificate",
-  "operationId": "Clusters_UploadCertificate",
   "parameters": {
     "api-version": "2025-09-22-preview",
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
-    "resourceGroupName": "test-rg",
     "clusterName": "myCluster",
-    "uploadCertificateRequest": {}
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "uploadCertificateRequest": {
+      "properties": {
+        "certificates": [
+          "base64cert",
+          "base64cert"
+        ]
+      }
+    }
   },
   "responses": {
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/operationStatuses/operation-id"
+        "location": "https://foo.com/operationStatuses"
       }
     }
-  }
+  },
+  "operationId": "Clusters_UploadCertificate",
+  "title": "Upload certificate"
 }

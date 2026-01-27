@@ -1,0 +1,27 @@
+# Managed centrally by the Azure SDK Team
+# Remove suppressions as specs are fixed
+
+- tool: TypeSpecValidation
+  rules: [Compile]
+  sub-rules: [ExtraSwagger]
+  reason: dont want to modify old swagger specs generated with cadl, Extra swaggers left behind when versions were removed from *.tsp files
+  paths:
+    - resource-manager/Microsoft.Impact/preview/2022-11-01-preview/impact.json
+    - resource-manager/Microsoft.Impact/preview/2023-02-01-preview/impact.json
+    - resource-manager/Microsoft.Impact/preview/2023-07-01-preview/impact.json
+    - resource-manager/Microsoft.Impact/preview/2023-12-01-preview/impact.json
+    - resource-manager/Microsoft.Impact/preview/2024-05-01-preview/impact.json
+    - resource-manager/Microsoft.Impact/preview/2025-01-01-preview/impact.json
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+  paths: [Impact.Management/tspconfig.yaml]

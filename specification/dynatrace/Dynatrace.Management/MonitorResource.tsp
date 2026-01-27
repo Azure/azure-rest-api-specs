@@ -104,6 +104,18 @@ interface MonitorResources {
   >;
 
   /**
+   * Lists the compute resources monitored by current monitor.
+   */
+  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  @list
+  listMonitoredComputeResources is ArmResourceActionSync<
+    MonitorResource,
+    MonitoredComputeResourcesRequest,
+    ArmResponse<MonitoredComputeResourceListResponse>,
+    OptionalRequestBody = true
+  >;
+
+  /**
    * Manages Dynatrace MCP connectors to add/remove through the Azure Dynatrace resource on the provided list of resources.
    */
   @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
@@ -173,6 +185,16 @@ interface MonitorResources {
     LinkableEnvironmentRequest,
     ArmResponse<LinkableEnvironmentListResponse>
   >;
+
+  /**
+   * Get the latest SaaS linked to the dynatrace account of the underlying monitor.
+   */
+  @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+  latestLinkedSaaS is ArmResourceActionSync<
+    MonitorResource,
+    void,
+    ArmResponse<LatestLinkedSaaSResponse>
+  >;
 }
 
 @@doc(MonitorResource.name, "Monitor resource name");
@@ -184,6 +206,9 @@ interface MonitorResources {
 );
 @@doc(MonitorResources.manageAgentInstallation::parameters.body,
   "List of resources and action"
+);
+@@doc(MonitorResources.listMonitoredComputeResources::parameters.body,
+  "Request body to filter compute resources by resource type."
 );
 @@doc(MonitorResources.getMetricStatus::parameters.body,
   "The details of the metric status request."

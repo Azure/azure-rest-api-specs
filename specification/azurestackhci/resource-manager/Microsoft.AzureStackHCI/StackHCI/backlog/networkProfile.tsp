@@ -57,13 +57,21 @@ model NetworkProfileProperties {
   @doc("Network profile resource Last sync timestamp.")
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
+
+  @doc("Network profile resource Last sync status.")
+  @visibility(Lifecycle.Read)
+  lastSyncStatus?: string;
 }
 
 @doc("Network Profile properties reported by the cluster.")
 model NetworkProfileReportedProperties {
-  @doc("The IP address of the cluster.")
+  @doc("The IPv4 addresses of the cluster.")
   @visibility(Lifecycle.Read)
-  clusterIpAddress?: string;
+  clusterIpv4Addresses?: string[];
+
+  @doc("The IPv6 addresses of the cluster.")
+  @visibility(Lifecycle.Read)
+  clusterIpv6Addresses?: string[];
 
   @doc("The subnet associated with the cluster.")
   @visibility(Lifecycle.Read)
@@ -156,8 +164,11 @@ model PhysicalAdapter {
   @doc("The VLAN associated with the physical adapter.")
   vlan?: int32;
 
-  @doc("The IP address of the physical adapter.")
-  ipAddress?: string;
+  @doc("The IPv4 addresses of the physical adapter.")
+  ipv4Addresses?: string[];
+
+  @doc("The IPv6 addresses of the physical adapter.")
+  ipv6Addresses?: string[];
 
   @doc("The driver version of the physical adapter.")
   driverVersion?: string;
@@ -238,8 +249,11 @@ model VirtualAdapter {
   @doc("The VLAN associated with the virtual adapter.")
   vlan?: int32;
 
-  @doc("The IP address of the virtual adapter.")
-  ipAddress?: string;
+  @doc("The IPv4 addresses of the virtual adapter.")
+  ipv4Addresses?: string[];
+
+  @doc("The IPv6 addresses of the virtual adapter.")
+  ipv6Addresses?: string[];
 }
 
 @doc("Details of a network intent.")
@@ -250,8 +264,14 @@ model NetworkIntent {
   @doc("The name of the intent.")
   name?: string;
 
-  @doc("The type of the intent.")
-  type: IntentType;
+  @doc("Whether this is a compute type intent.")
+  isComputeType?: boolean;
+
+  @doc("Whether this is a storage type intent.")
+  isStorageType?: boolean;
+
+  @doc("Whether this is a management type intent.")
+  isManagementType?: boolean;
 
   @doc("The physical adapter IDs associated with the intent.")
   physicalAdapterIds?: string[];
@@ -265,16 +285,16 @@ model NetworkIntent {
   @doc("The network IDs associated with the intent.")
   networkIds?: string[];
 
-  @doc("The physical adapter IDs associated with the intent.")
+  @doc("The physical adapter names associated with the intent.")
   physicalAdapterNames?: string[];
 
-  @doc("The virtual adapter IDs associated with the intent.")
+  @doc("The virtual adapter names associated with the intent.")
   virtualAdapterNames?: string[];
 
-  @doc("The virtual switch IDs associated with the intent.")
+  @doc("The virtual switch names associated with the intent.")
   virtualSwitchNames?: string[];
 
-  @doc("The network IDs associated with the intent.")
+  @doc("The network names associated with the intent.")
   networkNames?: string[];
 }
 
@@ -287,18 +307,4 @@ union NetworkType {
 
   @doc("Logical network type.")
   Logical: "Logical",
-}
-
-@doc("Types of intents.")
-union IntentType {
-  string,
-
-  @doc("Storage intent.")
-  Storage: "Storage",
-
-  @doc("Management intent.")
-  Management: "Management",
-
-  @doc("Compute intent.")
-  Compute: "Compute",
 }

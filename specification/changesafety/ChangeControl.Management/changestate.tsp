@@ -97,6 +97,7 @@ model ChangeStateProperties {
   stageParameters: Record<Parameter>;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
   @added(Versions.v2025_03_01_preview)
   @doc("Referenced stagemap snapshot.")
   @visibility(Lifecycle.Read)
@@ -105,6 +106,7 @@ model ChangeStateProperties {
   stageMapSnapshotOld?: Array<string | StageMap>;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
   @added(Versions.v2025_07_01_preview)
   @doc("Referenced stagemap snapshot.")
   @visibility(Lifecycle.Read)
@@ -210,6 +212,7 @@ model RetrieveNextStagesResponseItem {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   @doc("Parameters to apply on the change for the stage.")
   @visibility(Lifecycle.Read)
   @removed(Versions.v2025_07_01_preview)
@@ -290,6 +293,7 @@ union ChangeStatus {
 
   @doc("Resource is in Paused state.")
   @removed(Versions.v2025_09_01_preview)
+  @added(Versions.v2026_01_01_preview)
   Paused: "Paused",
 
   @doc("Resource is in Failed state.")

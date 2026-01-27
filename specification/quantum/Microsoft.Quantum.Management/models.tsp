@@ -459,9 +459,10 @@ model WorkspaceResourceProperties {
   managedStorageAccount?: StorageAccountResourceId;
 
   /**
-   * Quota allocations associated with this workspace. Available only for special providers.
+   * DEPRECATED: This field is deprecated and will be removed in future versions. Please use the quotas under providers instead.
    */
   @added(Versions.v2025_08_11_preview)
+  @removed(Versions.v2025_12_15_preview)
   quotas?: QuotaAllocations;
 }
 
@@ -527,6 +528,12 @@ model Provider {
    * Id to track resource usage for the provider.
    */
   resourceUsageId?: string;
+
+  /**
+   * Quota allocations associated with this provider. Available only for special providers.
+   */
+  @added(Versions.v2025_12_15_preview)
+  quotas?: QuotaAllocations;
 }
 
 /**

@@ -1827,7 +1827,7 @@
           "$ref": "#/definitions/PipelineJobBase"
         }
       ],
-      "x-ms-discriminator-value": "inline"
+      "x-ms-discriminator-value": "Inline"
     },
     "Job": {
       "type": "object",
@@ -2155,9 +2155,7 @@
       "type": "string",
       "description": "Pipeline dependency condition",
       "enum": [
-        "Succeeded",
-        "Failed",
-        "Skipped"
+        "Succeeded"
       ],
       "x-ms-enum": {
         "name": "PipelineDependencyCondition",
@@ -2167,20 +2165,9 @@
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "Succeeded condition."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed condition."
-          },
-          {
-            "name": "Skipped",
-            "value": "Skipped",
-            "description": "Skipped condition."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PipelineJobBase": {
       "type": "object",
@@ -2200,8 +2187,8 @@
       "type": "string",
       "description": "Pipeline job type",
       "enum": [
-        "reference",
-        "inline"
+        "Reference",
+        "Inline"
       ],
       "x-ms-enum": {
         "name": "PipelineJobType",
@@ -2209,12 +2196,12 @@
         "values": [
           {
             "name": "Reference",
-            "value": "reference",
+            "value": "Reference",
             "description": "Reference job type."
           },
           {
             "name": "Inline",
-            "value": "inline",
+            "value": "Inline",
             "description": "Inline job type."
           }
         ]
@@ -2422,7 +2409,7 @@
           "$ref": "#/definitions/PipelineJobBase"
         }
       ],
-      "x-ms-discriminator-value": "reference"
+      "x-ms-discriminator-value": "Reference"
     },
     "ResourceNotificationResourceType": {
       "type": "string",

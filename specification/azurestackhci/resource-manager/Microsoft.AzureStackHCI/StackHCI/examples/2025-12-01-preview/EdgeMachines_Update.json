@@ -1,0 +1,103 @@
+{
+  "title": "EdgeMachines_Update",
+  "operationId": "EdgeMachines_Update",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "properties": {
+      "tags": {
+        "key2335": "beth"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "arcMachineResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1",
+          "devicePoolResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/devicePools/pool-1",
+          "reportedProperties": {
+            "networkProfile": {
+              "nicDetails": [
+                {
+                  "adapterName": "vmanagement",
+                  "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
+                  "componentId": "vms_mp",
+                  "driverVersion": "10.0.25398.1",
+                  "ip4Address": "192.168.200.92",
+                  "subnetMask": "255.255.255.0",
+                  "defaultGateway": "192.168.200.1",
+                  "dnsServers": [
+                    "192.168.200.222"
+                  ],
+                  "defaultIsolationId": "0",
+                  "slot": "0",
+                  "macAddress": "000000000041",
+                  "switchName": null,
+                  "nicType": "Virtual",
+                  "vlanId": "0",
+                  "nicStatus": "Up"
+                }
+              ],
+              "switchDetails": [
+                {
+                  "switchName": "vmanagement",
+                  "switchType": "External"
+                }
+              ]
+            },
+            "osProfile": {
+              "bootType": "UEFI",
+              "assemblyVersion": "2402.1"
+            },
+            "hardwareProfile": {
+              "cpuCores": 4,
+              "cpuSockets": 14,
+              "memoryCapacityInGb": 25,
+              "serialNumber": "5855-7104-5665-0328-3864-8600-21"
+            },
+            "sbeDeploymentPackageInfo": {
+              "code": "NewerThanLatestPublished",
+              "message": "The SBE package at path 'C:\\SBE' with version 4.1.2312.10 is published later than the latest SBE manifest published for online discovery. ",
+              "sbeManifest": "PEFwcGxpY2Fi"
+            },
+            "extensionProfile": {
+              "extensions": [
+                {
+                  "extensionName": "DeviceManagementExtension",
+                  "state": "Connected",
+                  "extensionResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/DeviceManagementExtension",
+                  "typeHandlerVersion": "1.10.3",
+                  "managedBy": "Azure"
+                }
+              ]
+            }
+          }
+        },
+        "location": "eastus",
+        "tags": {
+          "key2335": "beth"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1",
+        "name": "machine-1",
+        "type": "Microsoft.AzureStackHCI/edgeMachines",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

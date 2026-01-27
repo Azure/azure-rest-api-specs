@@ -172,4 +172,12 @@ model RuleProperties {
   @minValue(duration.fromISO("PT5M"))
   @maxValue(duration.fromISO("PT1H"))
   minEnforcementDuration?: duration;
+
+  @doc("Maximal enforcement duration")
+  @minValue(duration.fromISO("PT5M"))
+  @maxValue(duration.fromISO("PT1H"))
+  maxEnforcementDuration?: duration;
+
+  @doc("Whether the rule is disabled what means that counters will be accepted but no enforcements will be rendered")
+  disabled?: boolean;
 }

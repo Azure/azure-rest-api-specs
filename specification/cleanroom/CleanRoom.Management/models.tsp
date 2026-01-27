@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -14,20 +16,19 @@ namespace Microsoft.CleanRoom;
  * Provisioning states.
  */
 union ProvisioningState {
+  ResourceProvisioningState,
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("Resource is being created.")
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("Resource is being updated.")
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("Resource is being deleted.")
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("Resource operation has been accepted.")
   Accepted: "Accepted",
 }
 
@@ -43,10 +44,24 @@ union ConsortiumType {
 /**
  * Types of collaboration types.
  */
+@removed(Versions.v2025_10_31_preview)
 union CollaborationType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CleanRoom: "CleanRoom",
+}
+
+/**
+ * Types of account types.
+ */
+@added(Versions.v2025_10_31_preview)
+union AccountType {
+  string,
+
+  /**
+   * Microsoft account.
+   */
+  Microsoft: "microsoft",
 }
 
 /**
@@ -61,17 +76,68 @@ model CollaborationProperties {
   /**
    * Gets or sets the CCF endpoint.
    */
+  @removed(Versions.v2025_10_31_preview)
   consortiumEndpoint: string;
 
   /**
    * Gets or sets the CCF public service certificate in PEM format.
    */
+  @removed(Versions.v2025_10_31_preview)
   consortiumServiceCertificatePem: string;
 
   /**
    * Gets or sets the collaboration member.
    */
+  @removed(Versions.v2025_10_31_preview)
   member: CollaborationMember;
+
+  /**
+   * Gets or sets the cluster endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_31_preview)
+  clusterEndpoint: string;
+
+  /**
+   * Gets or sets the consortium type.
+   */
+  @added(Versions.v2025_10_31_preview)
+  consortiumType: ConsortiumType;
+
+  /**
+   * Gets or sets the consortium ARM ID.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_31_preview)
+  consortiumArmId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Gets or sets the workloads.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2025_10_31_preview)
+  workloads: Workload[];
+
+  /**
+   * Gets or sets the user identity.
+   */
+  @added(Versions.v2025_10_31_preview)
+  userIdentity: UserIdentity;
+
+  /**
+   * Gets or sets the health of the collaboration.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_31_preview)
+  health: Health;
+
+  /**
+   * Gets or sets the managed on-behalf-of configuration.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_31_preview)
+  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   /**
    * Gets or sets the provisioning state.
@@ -81,8 +147,159 @@ model CollaborationProperties {
 }
 
 /**
+ * Types of workload types.
+ */
+@added(Versions.v2025_10_31_preview)
+union WorkloadType {
+  string,
+
+  /**
+   * Analytics workload.
+   */
+  Analytics: "analytics",
+}
+
+/**
+ * Configuration details of the workload.
+ */
+@added(Versions.v2025_10_31_preview)
+model Workload {
+  /**
+   * Type of the workload.
+   */
+  workloadType: WorkloadType;
+
+  /**
+   * Endpoint of the workload.
+   */
+  endpoint: string;
+
+  /**
+   * Namespace of the workload.
+   */
+  `namespace`: string;
+}
+
+/**
+ * Configuration details of the user identity.
+ */
+@added(Versions.v2025_10_31_preview)
+model UserIdentity {
+  /**
+   * Tenant ID of the user identity.
+   */
+  tenantId: string;
+
+  /**
+   * Object ID of the user identity.
+   */
+  objectId: string;
+
+  /**
+   * Account type of the user identity.
+   */
+  accountType: AccountType;
+}
+
+/**
+ * Input model to enable a workload.
+ */
+@added(Versions.v2025_10_31_preview)
+model EnableWorkloadInput {
+  /**
+   * Type of the workload to be enabled.
+   */
+  workloadType: WorkloadType;
+}
+
+/**
+ * Input model to add a collaborator.
+ */
+@added(Versions.v2025_10_31_preview)
+model AddCollaboratorInput {
+  /**
+   * Email of the collaborator to be added.
+   */
+  email: string;
+}
+
+/**
+ * Input model to recover a collaboration.
+ */
+@added(Versions.v2025_10_31_preview)
+model RecoverCollaborationInput {
+  /**
+   * Indicates whether to force recover the collaboration.
+   */
+  forceRecover: boolean;
+}
+
+/**
+ * Input model to recover a consortium.
+ */
+@added(Versions.v2025_10_31_preview)
+model RecoverConsortiumInput {
+  /**
+   * Indicates whether to force recover the consortium.
+   */
+  forceRecover: boolean;
+}
+
+/**
+ * Health states.
+ */
+@added(Versions.v2025_10_31_preview)
+union HealthState {
+  string,
+
+  /**
+   * Resource is healthy.
+   */
+  Ok: "Ok",
+
+  /**
+   * Resource is not healthy.
+   */
+  Error: "Error",
+}
+
+/**
+ * Health of a resource.
+ */
+@added(Versions.v2025_10_31_preview)
+model Health {
+  /**
+   * Health state of the resource.
+   */
+  healthState: HealthState;
+
+  /**
+   * List of health issues associated with the resource.
+   */
+  @Azure.ResourceManager.identifiers(#[])
+  healthIssues?: HealthIssue[];
+}
+
+/**
+ * Health issue of a resource.
+ */
+@added(Versions.v2025_10_31_preview)
+model HealthIssue {
+  /**
+   * Status code representing the health of the resource.
+   */
+  code: string;
+
+  /**
+   * Message providing additional information about the health status.
+   */
+  message: string;
+}
+
+/**
  * Configuration details of the collaboration members.
  */
+@removed(Versions.v2025_10_31_preview)
 model CollaborationMember {
   /**
    * Identifier of the member.
@@ -102,32 +319,59 @@ model CollaborationMember {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
+ * List of consortium views.
  */
-model Resource {
+@added(Versions.v2025_10_31_preview)
+model ConsortiumViewsList is Azure.Core.Page<ConsortiumView>;
+
+/**
+ * Defines the resource properties.
+ */
+@added(Versions.v2025_10_31_preview)
+model ConsortiumViewProperties {
   /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+   * Gets or sets the CCF endpoint.
    */
-  @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
+  consortiumEndpoint: string;
 
   /**
-   * The name of the resource
+   * Gets or sets the CCF public service certificate in PEM format.
    */
-  @visibility(Lifecycle.Read)
-  name?: string;
+  consortiumServiceCertificatePem: string;
 
   /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   * Gets or sets the consortium view member.
    */
-  @visibility(Lifecycle.Read)
-  type?: string;
+  member: ConsortiumViewMember;
 
   /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   * Gets or sets the provisioning state.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Configuration details of the consortium view members.
+ */
+@added(Versions.v2025_10_31_preview)
+model ConsortiumViewMember {
+  /**
+   * Identifier of the member.
+   */
+  @visibility(Lifecycle.Read)
+  identifier?: string;
+
+  /**
+   * Signature of the member (member identifier signed using the member private certificate).
+   */
+  @secret
+  signedPayload: string;
+
+  /**
+   * Gets or sets the public certificate of the member in PEM format.
+   */
+  certificatePem: string;
 }
 
 /**
@@ -158,6 +402,7 @@ model ConsortiumProperties {
   /**
    * Gets or sets the collaboration type.
    */
+  @removed(Versions.v2025_10_31_preview)
   collaborationType?: CollaborationType;
 
   /**
@@ -177,6 +422,13 @@ model ConsortiumProperties {
    */
   @Azure.ResourceManager.identifiers(#[])
   members?: ConsortiumMember[];
+
+  /**
+   * Gets or sets the health of the consortium.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_31_preview)
+  health: Health;
 
   /**
    * Gets or sets the managed on-behalf-of configuration.
@@ -241,6 +493,11 @@ model MoboBrokerResource {
  * List of contracts.
  */
 model ContractsList is Azure.Core.Page<Contract>;
+
+/**
+ * List of contracts.
+ */
+model ConsortiumViewContractsList is Azure.Core.Page<ConsortiumViewContract>;
 
 /**
  * Defines the resource properties.

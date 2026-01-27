@@ -27,7 +27,16 @@ These are the global settings for the informatica.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11-29-preview
+tag: package-2025-11-27
+```
+
+### Tag: package-2025-11-27
+
+These settings apply only when `--tag=package-2025-11-27` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-27'
+input-file:
+  - Informatica.DataManagement/stable/2025-11-27/openapi.json
 ```
 
 ### Tag: package-2024-11-29-preview

@@ -38,3 +38,11 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 input-file:
   - Microsoft.ArcContainerStorage/preview/2024-10-01-preview/arccontainerstorage.json
 ```
+
+## Supression
+``` yaml
+suppressions:
+ - code: PatchBodyParametersSchema
+   from: arccontainerstorage.json
+   reason: Descriminator requires accountType
+   where: $.paths["/{resourceUri}/providers/Microsoft.ArcContainerStorage/edgeVolumes/{edgeVolumeName}/mirrorSubvolumes/{mirrorSubvolumeName}"].patch.parameters[4].schema.properties.properties

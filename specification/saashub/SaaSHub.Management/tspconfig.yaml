@@ -1,6 +1,6 @@
 emit:
   - "@azure-tools/typespec-autorest"
-  # - "@azure-tools/typespec-csharp"  # Temporarily disabled due to beta emitter bug: 'AzureResourceManagerSaasHubContext' does not contain a definition for 'Default'
+  # - "@azure-tools/typespec-csharp"  # Disabled due to GeneratorPageableHelpers protection level bug in emitter
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -36,15 +36,27 @@ options:
     namespace: "azure.mgmt.saashub"
     generate-test: true
     generate-sample: true
-  # "@azure-tools/typespec-csharp":  # Temporarily disabled due to beta emitter bug (v0.2.0-beta.20250701.1)
-  #   flavor: azure                 # Error: 'AzureResourceManagerSaasHubContext' does not contain a definition for 'Default'
-  #   emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.SaasHub"  # Generated code tries to access AzureResourceManagerSaasHubContext.Default which doesn't exist
-  #   namespace: "Azure.ResourceManager.SaasHub"     # Try explicit namespace instead of {package-dir} to avoid context naming issues
+  # "@azure-tools/typespec-csharp": # Temporarily disabled due to beta emitter bug (v0.2.0-beta.20250926.1)
+  #   flavor: azure
+  #   package-dir: "Azure.ResourceManager.SaasHub"
+  #   namespace: "Azure.ResourceManager.SaasHub"
   #   clear-output-folder: true
-  #   # Alternative workaround approaches to try:
-  #   # 1. Use a different package-dir naming pattern to avoid context naming conflicts
-  #   # 2. Wait for a stable version of the C# emitter (current is beta)
-  #   # 3. Report this as a bug to the TypeSpec C# emitter team
+  #   emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.SaasHub"
+  #   unreferenced-types-handling: "keepAll"
+  #   suppress: ["AZC0030", "AZC0032", "AZC0033"]
+  #   # AZC0030: Model name ends with 'Request' or 'Response' - applies to MergeCloudServiceRequest, MergeSaasResourcesRequest, GetRefundableQuantityResponse
+  #   # AZC0032: Model name ends with 'Data' - applies to SystemData, SaasHubResourceData
+  #   # AZC0033: Model name ends with 'Operation' - applies to Operation model
+  #   # Protection level error with GeneratorPageableHelpers:
+  #   # The C# emitter generates code that calls GeneratorPageableHelpers.CreatePageable()
+  #   # but GeneratorPageableHelpers class is marked as internal in Azure.ResourceManager.Core
+  #   # This is a bug in the emitter - it should either:
+  #   # 1. Use public APIs instead of internal helpers
+  #   # 2. Generate different pagination code that doesn't rely on internal classes
+  #   # 3. The Azure.ResourceManager.Core should expose these helpers publicly
+  #   #
+  #   # Current workaround: C# emitter is disabled until bug is fixed
+  #   # To re-enable: uncomment this section when emitter is updated
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

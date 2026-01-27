@@ -125,6 +125,7 @@ model AllocationAggregateReservation {
   /**
    * The VM family that all instances scheduled against this reservation must belong to.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   vmFamily?:
     | "VM_FAMILY_CLOUD_TPU_LITE_DEVICE_CT5L"
     | "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP"
@@ -134,6 +135,7 @@ model AllocationAggregateReservation {
   /**
    * The workload type of the instances that will target this reservation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   workloadType?: "BATCH" | "SERVING" | "UNSPECIFIED" | string;
 }
 
@@ -196,6 +198,7 @@ model AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk {
   /**
    * Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   `interface`?: "NVME" | "SCSI" | string;
 }
 
@@ -206,6 +209,7 @@ model AttachedDisk {
   /**
    * [Output Only] The architecture of the attached disk. Valid values are ARM64 or X86_64.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   architecture?: "ARCHITECTURE_UNSPECIFIED" | "ARM64" | "X86_64" | string;
 
   /**
@@ -257,6 +261,7 @@ model AttachedDisk {
   /**
    * Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. For most machine types, the default is SCSI. Local SSDs can use either NVME or SCSI. In certain configurations, persistent disks can use NVMe. For more information, see About persistent disks.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   `interface`?: "NVME" | "SCSI" | string;
 
   /**
@@ -272,11 +277,13 @@ model AttachedDisk {
   /**
    * The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   mode?: "READ_ONLY" | "READ_WRITE" | string;
 
   /**
    * For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this field is set to PRESERVED if the LocalSSD data has been saved to a persistent location by customer request. (see the discard_local_ssd option on Stop/Suspend). Read-only in the api.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   savedState?: "DISK_SAVED_STATE_UNSPECIFIED" | "PRESERVED" | string;
 
   /**
@@ -292,6 +299,7 @@ model AttachedDisk {
   /**
    * Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   type?: "PERSISTENT" | "SCRATCH" | string;
 }
 
@@ -303,6 +311,7 @@ model AttachedDiskInitializeParams {
   /**
    * The architecture of the attached disk. Valid values are arm64 or x86_64.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   architecture?: "ARCHITECTURE_UNSPECIFIED" | "ARM64" | "X86_64" | string;
 
   /**
@@ -343,6 +352,7 @@ model AttachedDiskInitializeParams {
   /**
    * Specifies which action to take on instance update with this disk. Default is to use the existing disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   onUpdateAction?:
     | "RECREATE_DISK"
     | "RECREATE_DISK_IF_SOURCE_CHANGED"
@@ -448,6 +458,7 @@ model ReservationAffinity {
   /**
    * Specifies the type of reservation from which this instance can consume resources: ANY_RESERVATION (default), SPECIFIC_RESERVATION, or NO_RESERVATION. See Consuming reserved instances for examples.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   consumeReservationType?:
     | "ANY_RESERVATION"
     | "NO_RESERVATION"
@@ -495,6 +506,7 @@ model SchedulingNodeAffinity {
   /**
    * Defines the operation of node selection. Valid operators are IN for affinity and NOT_IN for anti-affinity.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   operator?: "IN" | "NOT_IN" | "OPERATOR_UNSPECIFIED" | string;
 
   /**
@@ -530,6 +542,7 @@ model Scheduling {
   /**
    * Specifies the termination action for the instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   instanceTerminationAction?:
     | "DELETE"
     | "INSTANCE_TERMINATION_ACTION_UNSPECIFIED"
@@ -560,6 +573,7 @@ model Scheduling {
   /**
    * Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM host maintenance policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   onHostMaintenance?: "MIGRATE" | "TERMINATE" | string;
 
   /**
@@ -570,6 +584,7 @@ model Scheduling {
   /**
    * Specifies the provisioning model of the instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   provisioningModel?: "SPOT" | "STANDARD" | string;
 }
 
@@ -595,6 +610,7 @@ model BulkInsertOperationStatus {
   /**
    * [Output Only] Creation status of BulkInsert operation - information if the flow is rolling forward or rolling back.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   status?: "CREATING" | "DONE" | "ROLLING_BACK" | "STATUS_UNSPECIFIED" | string;
 
   /**
@@ -640,11 +656,13 @@ model UpcomingMaintenance {
   /**
    * Maintenance Status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   maintenanceStatus?: "ONGOING" | "PENDING" | "UNKNOWN" | string;
 
   /**
    * Defines the type of maintenance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   type?: "SCHEDULED" | "UNKNOWN_TYPE" | "UNSCHEDULED" | string;
 
   /**
@@ -723,6 +741,7 @@ model AccessConfig {
   /**
    * This signifies the networking tier used for configuring this access configuration and can only take the following values: PREMIUM, STANDARD. If an AccessConfig is specified without a valid external IP address, an ephemeral IP will be created with this networkTier. If an AccessConfig with a valid external IP address is specified, it must match that of the networkTier associated with the Address resource owning that IP.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   networkTier?:
     | "FIXED_STANDARD"
     | "PREMIUM"
@@ -748,6 +767,7 @@ model AccessConfig {
   /**
    * The type of configuration. In accessConfigs (IPv4), the default and only option is ONE_TO_ONE_NAT. In ipv6AccessConfigs, the default and only option is DIRECT_IPV6.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   type?: "DIRECT_IPV6" | "ONE_TO_ONE_NAT" | string;
 }
 
@@ -758,6 +778,7 @@ model GuestOsFeature {
   /**
    * The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE - SEV_SNP_CAPABLE - TDX_CAPABLE - IDPF For more information, see Enabling guest operating system features.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   type?:
     | "FEATURE_TYPE_UNSPECIFIED"
     | "GVNIC"
@@ -882,6 +903,7 @@ model GcpComputeInstanceProperties {
   /**
    * KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   keyRevocationActionType?:
     | "KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED"
     | "NONE"
@@ -956,6 +978,7 @@ model GcpComputeInstanceProperties {
   /**
    * The private IPv6 google access type for the VM. If not specified, use INHERIT_FROM_SUBNETWORK as default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   privateIpv6GoogleAccess?:
     | "ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE"
     | "ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE"
@@ -1031,6 +1054,7 @@ model GcpComputeInstanceProperties {
   /**
    * [Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see Instance life cycle.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   status?:
     | "DEPROVISIONING"
     | "PROVISIONING"
@@ -1132,6 +1156,7 @@ model NetworkInterface {
   /**
    * [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be accessed from the Internet. This field is always inherited from its subnetwork. Valid only if stackType is IPV4_IPV6.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   ipv6AccessType?: "EXTERNAL" | "INTERNAL" | string;
 
   /**
@@ -1167,6 +1192,7 @@ model NetworkInterface {
   /**
    * The type of vNIC to be used on this interface. This may be gVNIC or VirtioNet.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   nicType?: "GVNIC" | "UNSPECIFIED_NIC_TYPE" | "VIRTIO_NET" | string;
 
   /**
@@ -1177,6 +1203,7 @@ model NetworkInterface {
   /**
    * The stack type for this network interface. To assign only IPv4 addresses, use IPV4_ONLY. To assign both IPv4 and IPv6 addresses, use IPV4_IPV6. If not specified, IPV4_ONLY is used. This field can be both set at instance creation and update network interface operations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   stackType?: "IPV4_IPV6" | "IPV4_ONLY" | string;
 
   /**
@@ -1279,6 +1306,7 @@ model NetworkPerformanceConfig {
   /**
    * Total Egress Bandwidth Tier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   totalEgressBandwidthTier?: "DEFAULT" | "TIER_1" | string;
 }
 
@@ -1310,6 +1338,7 @@ model SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo {
   /**
    * [Output Only] Status of the action, which can be one of the following: `PROPAGATING`, `PROPAGATED`, `ABANDONED`, `FAILED`, or `DONE`.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   state?:
     | "ABANDONED"
     | "DONE"
@@ -1332,6 +1361,7 @@ model FileContentBuffer {
   /**
    * The file type of source file.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   fileType?: "BIN" | "UNDEFINED" | "X509" | string;
 }
 

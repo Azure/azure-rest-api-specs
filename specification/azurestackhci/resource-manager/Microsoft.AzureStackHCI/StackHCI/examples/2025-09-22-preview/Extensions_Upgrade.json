@@ -1,22 +1,24 @@
 {
-  "title": "Upgrade Extension",
-  "operationId": "Extensions_Upgrade",
   "parameters": {
     "api-version": "2025-09-22-preview",
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
-    "resourceGroupName": "test-rg",
-    "clusterName": "myCluster",
     "arcSettingName": "default",
-    "extensionName": "microsoft-monitoring-agent",
+    "clusterName": "myCluster",
+    "extensionName": "MicrosoftMonitoringAgent",
     "extensionUpgradeParameters": {
-      "targetVersion": "1.2.0"
-    }
+      "targetVersion": "1.0.18062.0"
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
   },
   "responses": {
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/operationStatuses/operation-id"
+        "Azure-AsyncOperation": "https://foo.com/operationStatuses",
+        "Retry-After": 200,
+        "location": "https://foo.com/operationStatuses"
       }
     }
-  }
+  },
+  "operationId": "Extensions_Upgrade",
+  "title": "Upgrade Machine Extensions"
 }
