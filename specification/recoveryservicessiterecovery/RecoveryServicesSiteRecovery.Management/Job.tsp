@@ -57,7 +57,8 @@ interface Jobs {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<JobCollection>
+    Response = ArmResponse<JobCollection>,
+    Error = never
   >;
 
   /**

@@ -52,9 +52,8 @@ interface VCenters {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     VCenter,
     Request = AddVCenterRequest,
-    Response = ArmResourceUpdatedResponse<VCenter> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = VCenter> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<VCenter> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VCenter> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 

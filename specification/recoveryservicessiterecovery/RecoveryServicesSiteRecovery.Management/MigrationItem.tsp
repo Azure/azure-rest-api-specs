@@ -54,9 +54,8 @@ interface MigrationItems {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MigrationItem,
     Request = EnableMigrationInput,
-    Response = ArmResourceUpdatedResponse<MigrationItem> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MigrationItem> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<MigrationItem> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MigrationItem> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 

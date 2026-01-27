@@ -102,7 +102,7 @@ interface ReplicationProtectionClusters {
     ReplicationProtectionCluster,
     ApplyClusterRecoveryPointInput,
     ArmResponse<ReplicationProtectionCluster>,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -115,7 +115,7 @@ interface ReplicationProtectionClusters {
     ReplicationProtectionCluster,
     void,
     ArmResponse<ReplicationProtectionCluster>,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -128,7 +128,7 @@ interface ReplicationProtectionClusters {
     ReplicationProtectionCluster,
     void,
     ArmResponse<ReplicationProtectionCluster>,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -141,7 +141,7 @@ interface ReplicationProtectionClusters {
     ReplicationProtectionCluster,
     ClusterTestFailoverInput,
     ArmResponse<ReplicationProtectionCluster>,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -154,7 +154,7 @@ interface ReplicationProtectionClusters {
     ReplicationProtectionCluster,
     ClusterTestFailoverCleanupInput,
     ArmResponse<ReplicationProtectionCluster>,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -167,7 +167,7 @@ interface ReplicationProtectionClusters {
     ReplicationProtectionCluster,
     ClusterUnplannedFailoverInput,
     ArmResponse<ReplicationProtectionCluster>,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;

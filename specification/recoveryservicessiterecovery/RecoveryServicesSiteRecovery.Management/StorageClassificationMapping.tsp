@@ -51,9 +51,8 @@ interface StorageClassificationMappings {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     StorageClassificationMapping,
     Request = StorageClassificationMappingInput,
-    Response = ArmResourceUpdatedResponse<StorageClassificationMapping> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = StorageClassificationMapping> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<StorageClassificationMapping> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageClassificationMapping> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 

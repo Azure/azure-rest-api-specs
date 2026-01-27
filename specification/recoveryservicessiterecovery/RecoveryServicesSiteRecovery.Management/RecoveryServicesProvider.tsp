@@ -31,8 +31,9 @@ model RecoveryServicesProvider
   location?: string;
 }
 
-alias RecoveryServicesProviderAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RecoveryServicesProvider> &
-  Azure.Core.Foundations.RetryAfterHeader>;
+model RecoveryServicesProviderAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = RecoveryServicesProvider>
+  is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
+    Azure.Core.Foundations.RetryAfterHeader>;
 
 @armResourceOperations
 interface RecoveryServicesProviders {
@@ -54,9 +55,8 @@ interface RecoveryServicesProviders {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RecoveryServicesProvider,
     Request = AddRecoveryServicesProviderInput,
-    Response = ArmResourceUpdatedResponse<RecoveryServicesProvider> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = RecoveryServicesProvider> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<RecoveryServicesProvider> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RecoveryServicesProvider> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -110,7 +110,7 @@ interface RecoveryServicesProviders {
   delete is ArmResourceActionAsyncBase<
     RecoveryServicesProvider,
     void,
-    NoContentResponse | RecoveryServicesProviderAcceptedLroResponse,
+    NoContentResponse | RecoveryServicesProviderAcceptedLroResponse<void>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryServicesProvider>,
     Error = never
   >;

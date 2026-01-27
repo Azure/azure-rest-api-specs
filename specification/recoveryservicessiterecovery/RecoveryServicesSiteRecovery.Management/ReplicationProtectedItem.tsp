@@ -31,8 +31,47 @@ model ReplicationProtectedItem
   location?: string;
 }
 
-alias ReplicationProtectedItemAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectedItem> &
-  Azure.Core.Foundations.RetryAfterHeader>;
+alias ReplicationProtectedItemsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the recovery services vault. */
+    @path
+    @segment("vaults")
+    @key
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
+    resourceName: string;
+
+    /** Fabric name. */
+    @path
+    @segment("replicationFabrics")
+    @key
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
+    fabricName: string;
+
+    /** Protection container name. */
+    @path
+    @segment("replicationProtectionContainers")
+    @key
+    @pattern(".*")
+    protectionContainerName: string;
+  },
+  {
+    /** The name of the protected item on which the agent is to be updated. */
+    @path
+    @segment("replicationProtectedItems")
+    @key
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
+    replicatedProtectedItemName: string;
+  }
+>;
+
+model ReplicationProtectedItemAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = ReplicationProtectedItem>
+  is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
+    Azure.Core.Foundations.RetryAfterHeader>;
 
 @armResourceOperations
 interface ReplicationProtectedItems {
@@ -50,9 +89,8 @@ interface ReplicationProtectedItems {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ReplicationProtectedItem,
     Request = EnableProtectionInput,
-    Response = ArmResourceUpdatedResponse<ReplicationProtectedItem> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectedItem> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<ReplicationProtectedItem> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectedItem> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -60,7 +98,7 @@ interface ReplicationProtectedItems {
    * The operation to update the recovery settings of an ASR replication protected item.
    */
   @patch(#{ implicitOptionality: false })
-  @summary("Updates the Replication protected item settings.")
+  @summary("Updates the replication protected item settings.")
   update is ArmCustomPatchAsync<
     ReplicationProtectedItem,
     PatchModel = UpdateReplicationProtectedItemInput,
@@ -91,7 +129,7 @@ interface ReplicationProtectedItems {
    * Operation to add disks(s) to the replication protected item.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Adds disk(s) for protection.")
+  @summary("Add disk(s) for protection.")
   addDisks is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     AddDisksInput,
@@ -161,7 +199,7 @@ interface ReplicationProtectedItems {
   delete is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     DisableProtectionInput,
-    NoContentResponse | ReplicationProtectedItemAcceptedLroResponse,
+    NoContentResponse | ReplicationProtectedItemAcceptedLroResponse<void>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -304,12 +342,10 @@ interface ReplicationProtectedItems {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Reinstall the mobility service on a protected item.")
-  reinstallMobilityService is ArmResourceActionAsyncBase<
+  reinstallMobilityService is ReplicationProtectedItemsOps.ActionAsync<
     ReplicationProtectedItem,
     ReinstallMobilityServiceRequest,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
-    Error = never
+    ReplicationProtectedItem
   >;
 
   /**
@@ -325,8 +361,7 @@ interface ReplicationProtectedItems {
   listByReplicationProtectedItems is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     void,
-    ArmResponse<TargetComputeSizeCollection> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = TargetComputeSizeCollection> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    ArmResponse<TargetComputeSizeCollection>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;

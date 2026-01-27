@@ -153,46 +153,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default": {
-      "get": {
-        "operationId": "ReplicationEligibilityResults_Get",
-        "tags": [
-          "ReplicationEligibilityResultsOperationGroup"
-        ],
-        "summary": "Validates whether a given VM can be protected or not in which case returns list of errors.",
-        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ReplicationEligibilityResults"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the validation errors in case the VM is unsuitable for protection.": {
-            "$ref": "./examples/ReplicationEligibilityResults_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAlertSettings": {
       "get": {
         "operationId": "ReplicationAlertSettings_List",
@@ -654,7 +614,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Fabric"
         },
         "x-ms-long-running-operation": true
       },
@@ -845,8 +806,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Fabric"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -985,8 +945,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Fabric"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1012,16 +971,18 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the Vault",
+            "description": "The name of the recovery services vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "fabricName",
             "in": "path",
             "description": "Fabric name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
@@ -1409,7 +1370,7 @@
         "tags": [
           "NetworkMappings"
         ],
-        "summary": "Gets network mapping by name",
+        "summary": "Gets network mapping by name.",
         "description": "Gets the details of an ASR network mapping.",
         "parameters": [
           {
@@ -1469,7 +1430,7 @@
         "tags": [
           "NetworkMappings"
         ],
-        "summary": "Creates a network mapping.",
+        "summary": "Creates network mapping.",
         "description": "The operation to create an ASR network mapping.",
         "parameters": [
           {
@@ -1547,7 +1508,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkMapping"
         },
         "x-ms-long-running-operation": true
       },
@@ -1896,7 +1858,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ProtectionContainer"
         },
         "x-ms-long-running-operation": true
       }
@@ -2049,8 +2012,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ProtectionContainer"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2278,7 +2240,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrationItem"
         },
         "x-ms-long-running-operation": true
       },
@@ -3470,7 +3433,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReplicationProtectedItem"
         },
         "x-ms-long-running-operation": true
       },
@@ -3479,7 +3443,7 @@
         "tags": [
           "ReplicationProtectedItems"
         ],
-        "summary": "Updates the Replication protected item settings.",
+        "summary": "Updates the replication protected item settings.",
         "description": "The operation to update the recovery settings of an ASR replication protected item.",
         "parameters": [
           {
@@ -3644,7 +3608,7 @@
         "tags": [
           "ReplicationProtectedItems"
         ],
-        "summary": "Adds disk(s) for protection.",
+        "summary": "Add disk(s) for protection.",
         "description": "Operation to add disks(s) to the replication protected item.",
         "parameters": [
           {
@@ -4315,30 +4279,34 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the Vault",
+            "description": "The name of the recovery services vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "fabricName",
             "in": "path",
             "description": "Fabric name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "Protection container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": ".*"
           },
           {
             "name": "replicatedProtectedItemName",
             "in": "path",
-            "description": "Replication protected item name.",
+            "description": "The name of the protected item on which the agent is to be updated.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "updateMobilityServiceRequest",
@@ -4369,6 +4337,12 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4465,8 +4439,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ReplicationProtectedItem"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4874,20 +4847,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TargetComputeSizeCollection"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           }
         },
@@ -5779,7 +5738,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReplicationProtectionCluster"
         },
         "x-ms-long-running-operation": true
       }
@@ -5873,7 +5833,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReplicationProtectionCluster"
         },
         "x-ms-long-running-operation": true
       }
@@ -6202,7 +6163,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReplicationProtectionCluster"
         },
         "x-ms-long-running-operation": true
       }
@@ -6305,7 +6267,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReplicationProtectionCluster"
         },
         "x-ms-long-running-operation": true
       }
@@ -6408,7 +6371,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReplicationProtectionCluster"
         },
         "x-ms-long-running-operation": true
       }
@@ -6511,7 +6475,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ReplicationProtectionCluster"
         },
         "x-ms-long-running-operation": true
       }
@@ -6718,7 +6683,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ProtectionContainerMapping"
         },
         "x-ms-long-running-operation": true
       },
@@ -6967,8 +6933,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ProtectionContainerMapping"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -7063,7 +7028,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ProtectionContainer"
         },
         "x-ms-long-running-operation": true
       }
@@ -7336,7 +7302,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RecoveryServicesProvider"
         },
         "x-ms-long-running-operation": true
       },
@@ -7548,8 +7515,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/RecoveryServicesProvider"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -7862,7 +7828,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/StorageClassificationMapping"
         },
         "x-ms-long-running-operation": true
       },
@@ -8123,7 +8090,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/VCenter"
         },
         "x-ms-long-running-operation": true
       },
@@ -8315,12 +8283,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/JobCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -8962,7 +8924,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Policy"
         },
         "x-ms-long-running-operation": true
       },
@@ -9622,7 +9585,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RecoveryPlan"
         },
         "x-ms-long-running-operation": true
       },
@@ -10731,6 +10695,80 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults": {
+      "get": {
+        "operationId": "ReplicationEligibilityResults_List",
+        "tags": [
+          "ReplicationEligibilityResultsOperationGroup"
+        ],
+        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationEligibilityResultsParentParam.virtualMachineName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationEligibilityResultsCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default": {
+      "get": {
+        "operationId": "ReplicationEligibilityResults_Get",
+        "tags": [
+          "ReplicationEligibilityResultsOperationGroup"
+        ],
+        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationEligibilityResultsParentParam.virtualMachineName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationEligibilityResults"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_Get.json"
+          }
         }
       }
     }
@@ -26222,6 +26260,19 @@
         }
       ]
     },
+    "ReplicationEligibilityResultsCollection": {
+      "type": "object",
+      "description": "Replication eligibility results collection response model.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The replication eligibility results details.",
+          "items": {
+            "$ref": "#/definitions/ReplicationEligibilityResults"
+          }
+        }
+      }
+    },
     "ReplicationEligibilityResultsErrorInfo": {
       "type": "object",
       "description": "Error model that can be exposed to the user.",
@@ -30791,5 +30842,14 @@
       "x-ms-discriminator-value": "VMwareCbt"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ReplicationEligibilityResultsParentParam.virtualMachineName": {
+      "name": "virtualMachineName",
+      "in": "path",
+      "description": "Virtual Machine name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

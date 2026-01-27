@@ -62,8 +62,9 @@ alias ReplicationProtectionContainersOps = Azure.ResourceManager.Legacy.LegacyOp
   }
 >;
 
-alias ProtectionContainerAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
-  Azure.Core.Foundations.RetryAfterHeader>;
+model ProtectionContainerAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = ProtectionContainer>
+  is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
+    Azure.Core.Foundations.RetryAfterHeader>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
@@ -86,9 +87,8 @@ interface ProtectionContainers {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ProtectionContainer,
     Request = CreateProtectionContainerInput,
-    Response = ArmResourceUpdatedResponse<ProtectionContainer> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<ProtectionContainer> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -130,7 +130,7 @@ interface ProtectionContainers {
   delete is ArmResourceActionAsyncBase<
     ProtectionContainer,
     void,
-    NoContentResponse | ProtectionContainerAcceptedLroResponse,
+    NoContentResponse | ProtectionContainerAcceptedLroResponse<void>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainer>,
     Error = never
   >;
@@ -145,7 +145,7 @@ interface ProtectionContainers {
     ProtectionContainer,
     SwitchClusterProtectionInput,
     ArmResponse<ProtectionContainer>,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
       ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;

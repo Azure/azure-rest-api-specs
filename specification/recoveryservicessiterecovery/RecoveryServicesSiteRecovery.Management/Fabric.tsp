@@ -29,8 +29,33 @@ model Fabric is Azure.ResourceManager.ProxyResource<FabricProperties> {
   location?: string;
 }
 
-alias FabricAcceptedLroResponse = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
-  Azure.Core.Foundations.RetryAfterHeader>;
+alias FabricOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the recovery services vault. */
+    @path
+    @segment("vaults")
+    @key
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
+    resourceName: string;
+  },
+  {
+    /** Fabric name. */
+    @path
+    @segment("replicationFabrics")
+    @key
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
+    fabricName: string;
+  }
+>;
+
+model FabricAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = Fabric>
+  is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
+    Azure.Core.Foundations.RetryAfterHeader>;
 
 @armResourceOperations
 interface Fabrics {
@@ -62,9 +87,8 @@ interface Fabrics {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Fabric,
     Request = FabricCreationInput,
-    Response = ArmResourceUpdatedResponse<Fabric> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<Fabric> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -115,7 +139,7 @@ interface Fabrics {
   migrateToAad is ArmResourceActionAsyncBase<
     Fabric,
     void,
-    NoContentResponse | FabricAcceptedLroResponse,
+    NoContentResponse | FabricAcceptedLroResponse<void>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>,
     Error = never
   >;
@@ -146,7 +170,7 @@ interface Fabrics {
   delete is ArmResourceActionAsyncBase<
     Fabric,
     void,
-    NoContentResponse | FabricAcceptedLroResponse,
+    NoContentResponse | FabricAcceptedLroResponse<void>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>,
     Error = never
   >;
@@ -172,11 +196,11 @@ interface Fabrics {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationFabrics_RemoveInfra")
   @summary("Removes the appliance's infrastructure under the fabric.")
-  removeInfra is ArmResourceActionAsyncBase<
+  removeInfra is FabricOps.ActionAsync<
     Fabric,
     void,
-    ArmAcceptedLroResponse,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Fabric>
+    void,
+    Response = ArmAcceptedLroResponse
   >;
 }
 

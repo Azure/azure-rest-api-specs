@@ -38,7 +38,7 @@ interface NetworkMappings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationNetworkMappings_Get")
-  @summary("Gets network mapping by name")
+  @summary("Gets network mapping by name.")
   get is ArmResourceRead<NetworkMapping, Error = never>;
 
   /**
@@ -47,13 +47,12 @@ interface NetworkMappings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ReplicationNetworkMappings_Create")
-  @summary("Creates a network mapping.")
+  @summary("Creates network mapping.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     NetworkMapping,
     Request = CreateNetworkMappingInput,
-    Response = ArmResourceUpdatedResponse<NetworkMapping> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = NetworkMapping> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<NetworkMapping> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkMapping> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
