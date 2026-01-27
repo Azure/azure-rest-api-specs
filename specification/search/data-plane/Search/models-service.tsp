@@ -148,8 +148,9 @@ union IndexerExecutionEnvironment {
 }
 
 /** Details the status of an individual indexer execution. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union IndexerExecutionStatusDetail {
+  string,
+
   /** Indicates that the reset that occurred was for a call to ResetDocs. */
   ResetDocs: "resetDocs",
 
