@@ -3592,6 +3592,11 @@
                 "format": "date-time-rfc1123",
                 "description": "The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set."
               },
+              "x-ms-smart-access-tier": {
+                "x-ms-client-name": "SmartAccessTier",
+                "type": "string",
+                "description": "The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. Only returned if the blob is in Smart tier."
+              },
               "x-ms-version-id": {
                 "x-ms-client-name": "VersionId",
                 "type": "string",
@@ -9971,7 +9976,8 @@
         "Cool",
         "Archive",
         "Premium",
-        "Cold"
+        "Cold",
+        "Smart"
       ],
       "x-ms-enum": {
         "name": "AccessTier",
@@ -9983,7 +9989,8 @@
       "enum": [
         "rehydrate-pending-to-hot",
         "rehydrate-pending-to-cool",
-        "rehydrate-pending-to-cold"
+        "rehydrate-pending-to-cold",
+        "rehydrate-pending-to-smart"
       ],
       "x-ms-enum": {
         "name": "ArchiveStatus",
@@ -10150,6 +10157,9 @@
         },
         "ArchiveStatus": {
           "$ref": "#/definitions/ArchiveStatus"
+        },
+        "SmartAccessTier": {
+          "$ref": "#/definitions/AccessTier"
         },
         "CustomerProvidedKeySha256": {
           "type": "string"
