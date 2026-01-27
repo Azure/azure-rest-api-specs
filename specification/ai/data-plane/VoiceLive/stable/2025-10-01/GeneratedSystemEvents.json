@@ -4957,6 +4957,7 @@
       "description": "Server event types used in VoiceLive protocol.",
       "enum": [
         "error",
+        "warning",
         "session.avatar.connecting",
         "session.created",
         "session.updated",
@@ -5014,6 +5015,10 @@
           {
             "name": "error",
             "value": "error"
+          },
+          {
+            "name": "warning",
+            "value": "warning"
           },
           {
             "name": "session_avatar_connecting",
@@ -5213,6 +5218,46 @@
           }
         ]
       }
+    },
+    "ServerEventWarning": {
+      "type": "object",
+      "description": "Returned when a warning occurs that does not interrupt the conversation flow.\nWarnings are informational and the session will continue normally.",
+      "properties": {
+        "warning": {
+          "$ref": "#/definitions/ServerEventWarningDetails",
+          "description": "Details of the warning."
+        }
+      },
+      "required": [
+        "warning"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "warning"
+    },
+    "ServerEventWarningDetails": {
+      "type": "object",
+      "description": "Details of the warning.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable warning message."
+        },
+        "code": {
+          "type": "string",
+          "description": "Warning code, if any."
+        },
+        "param": {
+          "type": "string",
+          "description": "Parameter related to the warning, if any."
+        }
+      },
+      "required": [
+        "message"
+      ]
     },
     "ServerVad": {
       "type": "object",

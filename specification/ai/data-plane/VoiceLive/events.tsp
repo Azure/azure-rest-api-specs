@@ -28,6 +28,7 @@ union ClientEventType {
 union ServerEventType {
   string,
   error: "error",
+  warning: "warning",
   session_avatar_connecting: "session.avatar.connecting",
   session_created: "session.created",
   session_updated: "session.updated",
