@@ -823,3 +823,8 @@ using Azure.ClientGenerator.Core;
   "ToolChoiceFunctionSelection",
   "javascript"
 );
+
+@@clientName(VoiceLive.FillerResponseConfigBase.latency_threshold_ms,
+  "latencyThresholdInMs",
+  "javascript"
+);
