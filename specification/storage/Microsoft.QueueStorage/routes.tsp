@@ -90,6 +90,28 @@ namespace Storage.Queues {
     }
   >;
 
+  /** Retrieves a user delegation key for the Queue service. This is only a valid operation when using bearer token authentication. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  @post
+  @route("?restype=service&comp=userdelegationkey")
+  op getUserDelegationKey is StorageOperation<
+    {
+      ...TimeoutParameter;
+
+      /** Key information */
+      @body
+      keyInfo: KeyInfo;
+    },
+    {
+      ...DateResponseHeader;
+
+      /** A user delegation key */
+      @body
+      userDelegationKey: UserDelegationKey;
+    }
+  >;
+
   /** returns a list of the queues under the specified account */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."

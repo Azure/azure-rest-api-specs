@@ -494,3 +494,57 @@ alias QueueMessageBodyParameter = {
   @body
   queueMessage?: QueueMessage;
 };
+
+/** Key information for user delegation key */
+model KeyInfo {
+  /** The date-time the key is active in ISO 8601 UTC time */
+  @Xml.name("Start")
+  @encode("rfc3339")
+  start?: utcDateTime;
+
+  /** The date-time the key expires in ISO 8601 UTC time */
+  @Xml.name("Expiry")
+  @encode("rfc3339")
+  expiry: utcDateTime;
+
+  /** The delegated user tenant id in Azure AD */
+  @Xml.name("DelegatedUserTid")
+  delegatedUserTid?: string;
+}
+
+/** A user delegation key */
+model UserDelegationKey {
+  /** The Azure Active Directory object ID in GUID format. */
+  @Xml.name("SignedOid")
+  signedOid: string;
+
+  /** The Azure Active Directory tenant ID in GUID format */
+  @Xml.name("SignedTid")
+  signedTid: string;
+
+  /** The date-time the key is active */
+  @Xml.name("SignedStart")
+  @encode("rfc7231")
+  signedStart: utcDateTime;
+
+  /** The date-time the key expires */
+  @Xml.name("SignedExpiry")
+  @encode("rfc7231")
+  signedExpiry: utcDateTime;
+
+  /** The service that created the key */
+  @Xml.name("SignedService")
+  signedService: string;
+
+  /** The version of the service that created the key */
+  @Xml.name("SignedVersion")
+  signedVersion: string;
+
+  /** The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified. */
+  @Xml.name("SignedDelegatedUserTid")
+  signedDelegatedUserTid?: string;
+
+  /** The key as a base64 string */
+  @Xml.name("Value")
+  value: string;
+}
