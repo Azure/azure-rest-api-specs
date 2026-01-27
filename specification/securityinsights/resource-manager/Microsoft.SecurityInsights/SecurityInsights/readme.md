@@ -27,7 +27,7 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-09-01
+tag: package-preview-2025-07-01
 ```
 
 ---
