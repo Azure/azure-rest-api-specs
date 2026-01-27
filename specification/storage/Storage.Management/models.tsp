@@ -1068,12 +1068,10 @@ union TriggerType {
 /**
  * The type of the backing data source for storage connector
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorSourceType {
   /**
    * Source type - DataShare
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DataShare: "DataShare",
 
   string,
@@ -1082,18 +1080,15 @@ union StorageConnectorSourceType {
 /**
  * The state of the storage connector
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorState {
   /**
    * Whether the connector is active
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Active: "Active",
 
   /**
    * Whether the connector is inactive
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inactive: "Inactive",
 
   string,
@@ -1102,12 +1097,10 @@ union StorageConnectorState {
 /**
  * The auth type supported for bucket connection in storage connector.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorAuthType {
   /**
    * Managed Identity auth type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
 
   string,
@@ -1116,12 +1109,10 @@ union StorageConnectorAuthType {
 /**
  * The connection type for bucket connection in storage connector.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorConnectionType {
   /**
    * DataShare connection type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DataShare: "DataShare",
 
   string,
@@ -1130,12 +1121,10 @@ union StorageConnectorConnectionType {
 /**
  * The type of the backing data source for storage connector
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorDataSourceType {
   /**
    * Azure DataShare data source type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Azure_DataShare: "Azure_DataShare",
 
   string,
@@ -1144,18 +1133,15 @@ union StorageConnectorDataSourceType {
 /**
  * The permissions supported in access policies for storage data share
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageDataShareAccessPolicyPermission {
   /**
    * No permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 
   /**
    * Read permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Read: "Read",
 
   string,
@@ -1164,21 +1150,37 @@ union StorageDataShareAccessPolicyPermission {
 /**
  * Provisioning state of the resource at the time the operation was called.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union NativeDataSharingProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The request has been accepted for processing.
+   */
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The resource is being created.
+   */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The resource has been successfully created.
+   */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The resource is being deleted.
+   */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The request has been canceled.
+   */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The resource creation or deletion has failed.
+   */
   Failed: "Failed",
 }
 
@@ -6169,7 +6171,6 @@ alias ETagHeader = {
 /**
  * The storage connector properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageConnectorProperties {
   /**
    * System-generated identifier for the Storage Connector. Not a valid input parameter when creating.
@@ -6345,7 +6346,6 @@ model TestConnectionResponse {
 /**
  * The storage datashare properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageDataShareProperties {
   /**
    * System-generated identifier for the Storage DataShare. Not a valid input parameter when creating.
