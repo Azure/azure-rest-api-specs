@@ -3143,30 +3143,6 @@
         ]
       }
     },
-    "BooleanAsEnum": {
-      "type": "string",
-      "description": "A boolean value represented as a string enum. Possible values are true and false.",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "BooleanAsEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "true",
-            "value": "true",
-            "description": "The value is true."
-          },
-          {
-            "name": "false",
-            "value": "false",
-            "description": "The value is false."
-          }
-        ]
-      }
-    },
     "ExternalEndpointResult": {
       "type": "string",
       "description": "The result of the external endpoint. Possible values are Succeeded and Failed.",
@@ -4553,7 +4529,7 @@
       "description": "The self-serve exemption settings for a policy assignment.",
       "properties": {
         "enabled": {
-          "$ref": "#/definitions/BooleanAsEnum",
+          "type": "boolean",
           "description": "Indicates whether self-serve exemption is enabled."
         },
         "policyDefinitionReferenceIds": {
