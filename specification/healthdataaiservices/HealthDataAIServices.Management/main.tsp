@@ -74,6 +74,7 @@ model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
 
 #suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
+@added(Versions.v2026_02_01_preview)
 @doc("The SKU (Stock Keeping Unit) update model for PATCH operations.")
 model SkuUpdate is OptionalProperties<UpdateableProperties<Sku>>;
 
@@ -109,6 +110,7 @@ enum PublicNetworkAccess {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
+@added(Versions.v2026_02_01_preview)
 @doc("The tier of the SKU.")
 union SkuTier {
   string,
@@ -123,6 +125,7 @@ union SkuTier {
   Standard: "Standard",
 }
 
+@added(Versions.v2026_02_01_preview)
 @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
 model Sku {
   @doc("The name of the SKU.")

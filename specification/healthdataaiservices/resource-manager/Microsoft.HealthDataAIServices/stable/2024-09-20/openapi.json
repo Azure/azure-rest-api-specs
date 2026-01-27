@@ -986,58 +986,6 @@
           }
         ]
       }
-    },
-    "Sku": {
-      "type": "object",
-      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the SKU."
-        },
-        "tier": {
-          "$ref": "#/definitions/SkuTier",
-          "description": "The tier of the SKU."
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The capacity of the SKU."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "SkuTier": {
-      "type": "string",
-      "description": "The tier of the SKU.",
-      "enum": [
-        "Free",
-        "Basic",
-        "Standard"
-      ],
-      "x-ms-enum": {
-        "name": "SkuTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Free",
-            "value": "Free",
-            "description": "Free tier."
-          },
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic tier."
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard tier."
-          }
-        ]
-      }
     }
   },
   "parameters": {}
