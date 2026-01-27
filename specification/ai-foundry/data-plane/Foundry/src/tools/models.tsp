@@ -15,6 +15,7 @@ namespace Azure.AI.Projects;
 union _AgentToolType {
   // Preview tools (must end with "_preview"):
   a2a_preview: "a2a_preview",
+
   bing_custom_search_preview: "bing_custom_search_preview",
   browser_automation_preview: "browser_automation_preview",
   fabric_dataagent_preview: "fabric_dataagent_preview",
@@ -23,6 +24,7 @@ union _AgentToolType {
 
   // General availability tools:
   azure_ai_search: "azure_ai_search",
+
   azure_function: "azure_function",
   bing_grounding: "bing_grounding",
   capture_structured_outputs: "capture_structured_outputs",

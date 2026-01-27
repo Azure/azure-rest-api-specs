@@ -5,9 +5,24 @@ import "@azure-tools/typespec-azure-core";
 import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const AllConditionalAgentDefinitionPreviews = #{
+  conditional_previews: #[
+    FoundryPreviewOptInKeys.hosted_agents_v1,
+    FoundryPreviewOptInKeys.container_agents_v1,
+    FoundryPreviewOptInKeys.workflow_agents_v1,
+    FoundryPreviewOptInKeys.memory_stores_v1
+  ],
+};
+
+const MemoryStoreConditionalPreviews = #{
+  conditional_previews: #[FoundryPreviewOptInKeys.memory_stores_v1],
+};
+
+@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentVersionRequest {
   ...MetadataPropertyForRequest;
 
@@ -16,6 +31,7 @@ model CreateAgentVersionRequest {
   description?: string;
 
   @doc("The agent definition. This can be a workflow, hosted agent, or a simple agent definition.")
+  @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   definition: AgentDefinition;
 }
 
@@ -46,10 +62,12 @@ model CreateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+@extension("x-ms-foundry-meta", MemoryStoreConditionalPreviews)
 model UpdateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -63,6 +81,7 @@ model CreateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
+@extension("x-ms-foundry-meta", MemoryStoreConditionalPreviews)
 model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }
@@ -120,9 +139,9 @@ union AgentProtocol {
 union AgentKind {
   string,
   prompt: "prompt",
-  hosted_preview: "hosted_preview",
-  container_app_preview: "container_app_preview",
-  workflow_preview: "workflow_preview",
+  hosted: "hosted",
+  container_app: "container_app",
+  workflow: "workflow",
 }
 
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
@@ -132,6 +151,7 @@ model RaiConfig {
 }
 
 @discriminator("kind")
+@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model AgentDefinition {
   kind: AgentKind;
 
@@ -190,8 +210,12 @@ model PromptAgentDefinition extends AgentDefinition {
 }
 
 @doc("The workflow agent definition.")
-model WorkflowAgentPreviewDefinition extends AgentDefinition {
-  kind: AgentKind.workflow_preview;
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.workflow_agents_v1] }
+)
+model WorkflowAgentDefinition extends AgentDefinition {
+  kind: AgentKind.workflow;
 
   @doc("The CSDL YAML definition of the workflow.")
   workflow?: string;
@@ -199,8 +223,12 @@ model WorkflowAgentPreviewDefinition extends AgentDefinition {
 
 @doc("The hosted agent definition.")
 @discriminator("kind")
-model HostedAgentPreviewDefinition extends AgentDefinition {
-  kind: AgentKind.hosted_preview;
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.hosted_agents_v1] }
+)
+model HostedAgentDefinition extends AgentDefinition {
+  kind: AgentKind.hosted;
 
   @doc("""
     An array of tools the hosted agent's model may call while generating a response. You
@@ -234,9 +262,12 @@ model HostedAgentPreviewDefinition extends AgentDefinition {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The image-based deployment definition for a hosted agent.")
-model ImageBasedHostedAgentPreviewDefinition
-  extends HostedAgentPreviewDefinition {
-  kind: AgentKind.hosted_preview;
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.hosted_agents_v1] }
+)
+model ImageBasedHostedAgentDefinition extends HostedAgentDefinition {
+  kind: AgentKind.hosted;
 
   @doc("The image for the hosted agent.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
@@ -244,8 +275,12 @@ model ImageBasedHostedAgentPreviewDefinition
 }
 
 @doc("The container app agent definition.")
-model ContainerAppAgentPreviewDefinition extends AgentDefinition {
-  kind: AgentKind.container_app_preview;
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+model ContainerAppAgentDefinition extends AgentDefinition {
+  kind: AgentKind.container_app;
 
   @doc("The protocols that the agent supports for ingress communication of the containers.")
   @example(#[
@@ -332,10 +367,14 @@ model ToolArgumentBinding {
 }
 
 @doc("The details of the container of a specific version of an agent.")
-model AgentContainerPreviewObject {
-  @doc("The object type, which is always 'agent.container_preview'.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+model AgentContainerObject {
+  @doc("The object type, which is always 'agent.container'.")
   @visibility(Lifecycle.Read)
-  object: "agent.container_preview";
+  object: "agent.container";
 
   @doc("The identifier of the container.")
   @visibility(Lifecycle.Read)
@@ -343,7 +382,7 @@ model AgentContainerPreviewObject {
 
   @doc("The status of the container of a specific version of an agent.")
   @visibility(Lifecycle.Read)
-  status: AgentContainerPreviewStatus;
+  status: AgentContainerStatus;
 
   @doc("The maximum number of replicas for the container. Default is 1.")
   @example(10)
@@ -367,11 +406,15 @@ model AgentContainerPreviewObject {
 
   @doc("The detailed container information.")
   @visibility(Lifecycle.Read)
-  container?: ContainerPreviewDetails;
+  container?: ContainerDetails;
 }
 
 @doc("Detailed information about the container.")
-model ContainerPreviewDetails {
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+model ContainerDetails {
   @doc("The provisioning state of the container.")
   provisioning_state: string;
 
@@ -385,14 +428,18 @@ model ContainerPreviewDetails {
   health_state: string;
 
   @doc("The list of replicas in the container.")
-  replicas: ContainerPreviewReplica[];
+  replicas: ContainerReplica[];
 
   @doc("The last update time of the container.")
   updated_on: utcDateTime;
 }
 
 @doc("Information about a container replica.")
-model ContainerPreviewReplica {
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+model ContainerReplica {
   @doc("The name of the replica.")
   name: string;
 
@@ -404,7 +451,11 @@ model ContainerPreviewReplica {
 }
 
 @doc("Status of the container of a specific version of an agent.")
-union AgentContainerPreviewStatus {
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+union AgentContainerStatus {
   @doc("The container is starting.")
   Starting: "Starting",
 
@@ -431,7 +482,11 @@ union AgentContainerPreviewStatus {
 }
 
 @doc("The container operation for a specific version of an agent.")
-model AgentContainerOperationPreviewObject {
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+model AgentContainerOperationObject {
   @doc("The ID of the container operation. This id is unique identifier across the system.")
   id: string;
 
@@ -442,17 +497,21 @@ model AgentContainerOperationPreviewObject {
   agent_version_id: string;
 
   @doc("The status of the container operation.")
-  status: AgentContainerOperationPreviewStatus;
+  status: AgentContainerOperationStatus;
 
   @doc("The error of the container operation, if any.")
-  error?: AgentContainerOperationPreviewError;
+  error?: AgentContainerOperationError;
 
   @doc("The container of the specific version of an agent.")
-  container?: AgentContainerPreviewObject;
+  container?: AgentContainerObject;
 }
 
 @doc("The error details of the container operation, if any.")
-model AgentContainerOperationPreviewError {
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+model AgentContainerOperationError {
   @doc("The error code of the container operation, if any.")
   code: string;
 
@@ -464,7 +523,11 @@ model AgentContainerOperationPreviewError {
 }
 
 @doc("Status of the container operation for a specific version of an agent.")
-union AgentContainerOperationPreviewStatus {
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+union AgentContainerOperationStatus {
   @doc("The container operation is not started.")
   NotStarted: "NotStarted",
 
@@ -478,7 +541,11 @@ union AgentContainerOperationPreviewStatus {
   Failed: "Failed",
 }
 
-model AcceptedAgentContainerPreviewOperation {
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+model AcceptedAgentContainerOperation {
   @statusCode
   code: 202;
 
@@ -486,11 +553,15 @@ model AcceptedAgentContainerPreviewOperation {
   location: url;
 
   @body
-  body: AgentContainerOperationPreviewObject;
+  body: AgentContainerOperationObject;
 }
 
 /** The type of logs to stream from a container. */
-union ContainerLogPreviewKind {
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+union ContainerLogKind {
   /** Console logs from the container. */
   console: "console",
 

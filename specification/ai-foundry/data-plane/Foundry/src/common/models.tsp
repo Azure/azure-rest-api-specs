@@ -58,6 +58,7 @@ op FoundryDataPlaneOperation<
 enum FoundryPreviewOptInKeys {
   container_agents_v1: "ContainerAgents=v1",
   hosted_agents_v1: "HostedAgents=v1",
+  workflow_agents_v1: "WorkflowAgents=v1",
   evaluations_v1: "Evaluations=v1",
   red_teams_v1: "RedTeams=v1",
   insights_v1: "Insights=v1",
@@ -79,6 +80,8 @@ alias WithConditionalFoundryPreviewHeader<FeatureOptInHeaders> = {
   @header("Foundry-Beta")
   foundry_beta?: FeatureOptInHeaders;
 };
+
+alias FoundryPreviewExtensionKey = "x-ms-foundry-meta";
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""

@@ -37,6 +37,12 @@ paths:
               - type: string
                 enum:
                   - HostedAgents=v1
+              - type: string
+                enum:
+                  - WorkflowAgents=v1
+              - type: string
+                enum:
+                  - MemoryStores=v1
         - name: api-version
           in: query
           required: true
@@ -65,6 +71,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - HostedAgents=v1
+          - ContainerAgents=v1
+          - WorkflowAgents=v1
+          - MemoryStores=v1
     get:
       operationId: Agents_listAgents
       description: Returns the list of all agents.
@@ -201,13 +213,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=v1
-              - type: string
-                enum:
-                  - HostedAgents=v1
+            type: string
+            enum:
+              - MemoryStores=v1
         - name: agent_name
           in: path
           required: true
@@ -242,6 +250,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAgentRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     delete:
       operationId: Agents_deleteAgent
       description: Deletes an agent.
@@ -298,13 +309,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=v1
-              - type: string
-                enum:
-                  - HostedAgents=v1
+            type: string
+            enum:
+              - MemoryStores=v1
         - name: agent_name
           in: path
           required: true
@@ -419,7 +426,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/AgentContainerOperationPreviewObject'
+                      $ref: '#/components/schemas/AgentContainerOperationObject'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -439,6 +446,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/operations/{operation_id}:
     get:
       operationId: Agents_getAgentContainerOperation
@@ -477,7 +487,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgentContainerOperationPreviewObject'
+                $ref: '#/components/schemas/AgentContainerOperationObject'
         default:
           description: An unexpected error response.
           content:
@@ -486,6 +496,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/versions:
     post:
       operationId: Agents_createAgentVersion
@@ -503,6 +516,12 @@ paths:
               - type: string
                 enum:
                   - HostedAgents=v1
+              - type: string
+                enum:
+                  - WorkflowAgents=v1
+              - type: string
+                enum:
+                  - MemoryStores=v1
         - name: agent_name
           in: path
           required: true
@@ -542,6 +561,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentVersionRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - HostedAgents=v1
+          - ContainerAgents=v1
+          - WorkflowAgents=v1
+          - MemoryStores=v1
     get:
       operationId: Agents_listAgentVersions
       description: Returns the list of versions of an agent.
@@ -760,7 +785,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgentContainerPreviewObject'
+                $ref: '#/components/schemas/AgentContainerObject'
         default:
           description: An unexpected error response.
           content:
@@ -769,6 +794,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/versions/{agent_version}/containers/default/operations:
     get:
       operationId: Agents_listAgentVersionContainerOperations
@@ -855,7 +883,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/AgentContainerOperationPreviewObject'
+                      $ref: '#/components/schemas/AgentContainerOperationObject'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -875,6 +903,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/versions/{agent_version}/containers/default:delete:
     post:
       operationId: Agents_deleteAgentContainer
@@ -922,7 +953,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgentContainerOperationPreviewObject'
+                $ref: '#/components/schemas/AgentContainerOperationObject'
         default:
           description: An unexpected error response.
           content:
@@ -931,6 +962,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/versions/{agent_version}/containers/default:logstream:
     post:
       operationId: Agents_streamAgentContainerLogs
@@ -977,7 +1011,7 @@ paths:
           required: false
           description: console returns container stdout/stderr, system returns container app event stream. defaults to console
           schema:
-            $ref: '#/components/schemas/ContainerLogPreviewKind'
+            $ref: '#/components/schemas/ContainerLogKind'
           explode: false
         - name: replica_name
           in: query
@@ -1012,6 +1046,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/versions/{agent_version}/containers/default:start:
     post:
       operationId: Agents_startAgentContainer
@@ -1059,7 +1096,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgentContainerOperationPreviewObject'
+                $ref: '#/components/schemas/AgentContainerOperationObject'
         default:
           description: An unexpected error response.
           content:
@@ -1085,6 +1122,9 @@ paths:
                   format: int32
                   description: The maximum number of replicas. Defaults to 1.
                   default: 1
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/versions/{agent_version}/containers/default:stop:
     post:
       operationId: Agents_stopAgentContainer
@@ -1132,7 +1172,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgentContainerOperationPreviewObject'
+                $ref: '#/components/schemas/AgentContainerOperationObject'
         default:
           description: An unexpected error response.
           content:
@@ -1141,6 +1181,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/versions/{agent_version}/containers/default:update:
     post:
       operationId: Agents_updateAgentContainer
@@ -1188,7 +1231,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgentContainerOperationPreviewObject'
+                $ref: '#/components/schemas/AgentContainerOperationObject'
         default:
           description: An unexpected error response.
           content:
@@ -1212,23 +1255,14 @@ paths:
                   type: integer
                   format: int32
                   description: The maximum number of replicas.
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
   /agents/{agent_name}/versions:import:
     post:
       operationId: Agents_createAgentVersionFromManifest
       description: Create a new agent version from a manifest.
       parameters:
-        - name: Foundry-Beta
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=v1
-              - type: string
-                enum:
-                  - HostedAgents=v1
         - name: agent_name
           in: path
           required: true
@@ -5696,62 +5730,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the agent cluster analysis.
-    AgentContainerOperationPreviewError:
-      type: object
-      required:
-        - code
-        - type
-        - message
-      properties:
-        code:
-          type: string
-          description: The error code of the container operation, if any.
-        type:
-          type: string
-          description: The error type of the container operation, if any.
-        message:
-          type: string
-          description: The error message of the container operation, if any.
-      description: The error details of the container operation, if any.
-    AgentContainerOperationPreviewObject:
-      type: object
-      required:
-        - id
-        - agent_id
-        - agent_version_id
-        - status
-      properties:
-        id:
-          type: string
-          description: The ID of the container operation. This id is unique identifier across the system.
-        agent_id:
-          type: string
-          description: The ID of the agent.
-        agent_version_id:
-          type: string
-          description: The ID of the agent version.
-        status:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerOperationPreviewStatus'
-          description: The status of the container operation.
-        error:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerOperationPreviewError'
-          description: The error of the container operation, if any.
-        container:
-          allOf:
-            - $ref: '#/components/schemas/AgentContainerPreviewObject'
-          description: The container of the specific version of an agent.
-      description: The container operation for a specific version of an agent.
-    AgentContainerOperationPreviewStatus:
-      type: string
-      enum:
-        - NotStarted
-        - InProgress
-        - Succeeded
-        - Failed
-      description: Status of the container operation for a specific version of an agent.
-    AgentContainerPreviewObject:
+    AgentContainerObject:
       type: object
       required:
         - object
@@ -5762,8 +5741,8 @@ components:
         object:
           type: string
           enum:
-            - agent.container_preview
-          description: The object type, which is always 'agent.container_preview'.
+            - agent.container
+          description: The object type, which is always 'agent.container'.
           readOnly: true
         id:
           type: string
@@ -5771,7 +5750,7 @@ components:
           readOnly: true
         status:
           allOf:
-            - $ref: '#/components/schemas/AgentContainerPreviewStatus'
+            - $ref: '#/components/schemas/AgentContainerStatus'
           description: The status of the container of a specific version of an agent.
           readOnly: true
         max_replicas:
@@ -5800,11 +5779,78 @@ components:
           readOnly: true
         container:
           allOf:
-            - $ref: '#/components/schemas/ContainerPreviewDetails'
+            - $ref: '#/components/schemas/ContainerDetails'
           description: The detailed container information.
           readOnly: true
       description: The details of the container of a specific version of an agent.
-    AgentContainerPreviewStatus:
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
+    AgentContainerOperationError:
+      type: object
+      required:
+        - code
+        - type
+        - message
+      properties:
+        code:
+          type: string
+          description: The error code of the container operation, if any.
+        type:
+          type: string
+          description: The error type of the container operation, if any.
+        message:
+          type: string
+          description: The error message of the container operation, if any.
+      description: The error details of the container operation, if any.
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
+    AgentContainerOperationObject:
+      type: object
+      required:
+        - id
+        - agent_id
+        - agent_version_id
+        - status
+      properties:
+        id:
+          type: string
+          description: The ID of the container operation. This id is unique identifier across the system.
+        agent_id:
+          type: string
+          description: The ID of the agent.
+        agent_version_id:
+          type: string
+          description: The ID of the agent version.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AgentContainerOperationStatus'
+          description: The status of the container operation.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/AgentContainerOperationError'
+          description: The error of the container operation, if any.
+        container:
+          allOf:
+            - $ref: '#/components/schemas/AgentContainerObject'
+          description: The container of the specific version of an agent.
+      description: The container operation for a specific version of an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
+    AgentContainerOperationStatus:
+      type: string
+      enum:
+        - NotStarted
+        - InProgress
+        - Succeeded
+        - Failed
+      description: Status of the container operation for a specific version of an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
+    AgentContainerStatus:
       type: string
       enum:
         - Starting
@@ -5816,6 +5862,9 @@ components:
         - Deleted
         - Updating
       description: Status of the container of a specific version of an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
     AgentDefinition:
       type: object
       required:
@@ -5831,9 +5880,15 @@ components:
         propertyName: kind
         mapping:
           prompt: '#/components/schemas/PromptAgentDefinition'
-          workflow_preview: '#/components/schemas/WorkflowAgentPreviewDefinition'
-          hosted_preview: '#/components/schemas/HostedAgentPreviewDefinition'
-          container_app_preview: '#/components/schemas/ContainerAppAgentPreviewDefinition'
+          workflow: '#/components/schemas/WorkflowAgentDefinition'
+          hosted: '#/components/schemas/HostedAgentDefinition'
+          container_app: '#/components/schemas/ContainerAppAgentDefinition'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - HostedAgents=v1
+          - ContainerAgents=v1
+          - WorkflowAgents=v1
+          - MemoryStores=v1
     AgentId:
       type: object
       required:
@@ -5858,9 +5913,9 @@ components:
         - type: string
           enum:
             - prompt
-            - hosted_preview
-            - container_app_preview
-            - workflow_preview
+            - hosted
+            - container_app
+            - workflow
     AgentObject:
       type: object
       required:
@@ -6842,7 +6897,7 @@ components:
             - CustomKeys
             - RemoteTool_Preview
       description: The Type (or category) of the connection
-    ContainerAppAgentPreviewDefinition:
+    ContainerAppAgentDefinition:
       type: object
       required:
         - kind
@@ -6853,7 +6908,7 @@ components:
         kind:
           type: string
           enum:
-            - container_app_preview
+            - container_app
         container_protocol_versions:
           type: array
           items:
@@ -6874,13 +6929,10 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The container app agent definition.
-    ContainerLogPreviewKind:
-      type: string
-      enum:
-        - console
-        - system
-      description: The type of logs to stream from a container.
-    ContainerPreviewDetails:
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
+    ContainerDetails:
       type: object
       required:
         - provisioning_state
@@ -6904,14 +6956,26 @@ components:
         replicas:
           type: array
           items:
-            $ref: '#/components/schemas/ContainerPreviewReplica'
+            $ref: '#/components/schemas/ContainerReplica'
           description: The list of replicas in the container.
         updated_on:
           type: string
           format: date-time
           description: The last update time of the container.
       description: Detailed information about the container.
-    ContainerPreviewReplica:
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
+    ContainerLogKind:
+      type: string
+      enum:
+        - console
+        - system
+      description: The type of logs to stream from a container.
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
+    ContainerReplica:
       type: object
       required:
         - name
@@ -6928,6 +6992,9 @@ components:
           type: string
           description: The container state of the replica.
       description: Information about a container replica.
+      x-ms-foundry-meta:
+        required_previews:
+          - ContainerAgents=v1
     ContinuousEvalPreviewItemGenerationParams:
       type: object
       required:
@@ -7076,6 +7143,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentDefinition'
           description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - HostedAgents=v1
+              - ContainerAgents=v1
+              - WorkflowAgents=v1
+              - MemoryStores=v1
+      x-ms-foundry-meta:
+        conditional_previews:
+          - HostedAgents=v1
+          - ContainerAgents=v1
+          - WorkflowAgents=v1
+          - MemoryStores=v1
     CreateAgentVersionFromManifestRequest:
       type: object
       required:
@@ -7130,6 +7209,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentDefinition'
           description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - HostedAgents=v1
+              - ContainerAgents=v1
+              - WorkflowAgents=v1
+              - MemoryStores=v1
+      x-ms-foundry-meta:
+        conditional_previews:
+          - HostedAgents=v1
+          - ContainerAgents=v1
+          - WorkflowAgents=v1
+          - MemoryStores=v1
     CreateEvalRequest:
       type: object
       required:
@@ -8888,7 +8979,7 @@ components:
           type: string
           description: The arguments to call the function with, as generated by the model in JSON format.
       description: Details of a function tool call.
-    HostedAgentPreviewDefinition:
+    HostedAgentDefinition:
       type: object
       required:
         - kind
@@ -8899,7 +8990,7 @@ components:
         kind:
           type: string
           enum:
-            - hosted_preview
+            - hosted
         tools:
           type: array
           items:
@@ -8936,10 +9027,13 @@ components:
       discriminator:
         propertyName: kind
         mapping:
-          hosted_preview: '#/components/schemas/ImageBasedHostedAgentPreviewDefinition'
+          hosted: '#/components/schemas/ImageBasedHostedAgentDefinition'
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=v1
     HourlyRecurrenceSchedule:
       type: object
       required:
@@ -8969,7 +9063,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Evaluation rule action for human evaluation.
-    ImageBasedHostedAgentPreviewDefinition:
+    ImageBasedHostedAgentDefinition:
       type: object
       required:
         - kind
@@ -8978,14 +9072,17 @@ components:
         kind:
           type: string
           enum:
-            - hosted_preview
+            - hosted
         image:
           type: string
           description: The image for the hosted agent.
           example: my-registry.azurecr.io/my-hosted-agent:latest
       allOf:
-        - $ref: '#/components/schemas/HostedAgentPreviewDefinition'
+        - $ref: '#/components/schemas/HostedAgentDefinition'
       description: The image-based deployment definition for a hosted agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=v1
     Index:
       type: object
       required:
@@ -22931,6 +23028,9 @@ components:
           type: object
           additionalProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     UpdateAgentRequest:
       type: object
       required:
@@ -22956,6 +23056,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentDefinition'
           description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - HostedAgents=v1
+              - ContainerAgents=v1
+              - WorkflowAgents=v1
+              - MemoryStores=v1
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -23018,7 +23127,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Weekly recurrence schedule.
-    WorkflowAgentPreviewDefinition:
+    WorkflowAgentDefinition:
       type: object
       required:
         - kind
@@ -23026,13 +23135,16 @@ components:
         kind:
           type: string
           enum:
-            - workflow_preview
+            - workflow
         workflow:
           type: string
           description: The CSDL YAML definition of the workflow.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The workflow agent definition.
+      x-ms-foundry-meta:
+        required_previews:
+          - WorkflowAgents=v1
     WorkflowPreviewActionOutputItemResource:
       type: object
       required:

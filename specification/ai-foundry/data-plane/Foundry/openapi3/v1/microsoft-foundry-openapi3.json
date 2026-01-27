@@ -78,6 +78,18 @@
                   "enum": [
                     "HostedAgents=v1"
                   ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "WorkflowAgents=v1"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "MemoryStores=v1"
+                  ]
                 }
               ]
             }
@@ -127,6 +139,14 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "HostedAgents=v1",
+            "ContainerAgents=v1",
+            "WorkflowAgents=v1",
+            "MemoryStores=v1"
+          ]
         }
       },
       "get": {
@@ -310,19 +330,9 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=v1"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=v1"
-                  ]
-                }
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
               ]
             }
           },
@@ -380,6 +390,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       },
       "delete": {
@@ -466,19 +481,9 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=v1"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=v1"
-                  ]
-                }
+              "type": "string",
+              "enum": [
+                "MemoryStores=v1"
               ]
             }
           },
@@ -633,7 +638,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/AgentContainerOperationPreviewObject"
+                        "$ref": "#/components/schemas/AgentContainerOperationObject"
                       },
                       "description": "The requested list of items."
                     },
@@ -668,7 +673,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/operations/{operation_id}": {
@@ -723,7 +733,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentContainerOperationPreviewObject"
+                  "$ref": "#/components/schemas/AgentContainerOperationObject"
                 }
               }
             }
@@ -741,7 +751,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions": {
@@ -766,6 +781,18 @@
                   "type": "string",
                   "enum": [
                     "HostedAgents=v1"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "WorkflowAgents=v1"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "MemoryStores=v1"
                   ]
                 }
               ]
@@ -826,6 +853,14 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "HostedAgents=v1",
+            "ContainerAgents=v1",
+            "WorkflowAgents=v1",
+            "MemoryStores=v1"
+          ]
         }
       },
       "get": {
@@ -1141,7 +1176,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentContainerPreviewObject"
+                  "$ref": "#/components/schemas/AgentContainerObject"
                 }
               }
             }
@@ -1159,7 +1194,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions/{agent_version}/containers/default/operations": {
@@ -1265,7 +1305,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/AgentContainerOperationPreviewObject"
+                        "$ref": "#/components/schemas/AgentContainerOperationObject"
                       },
                       "description": "The requested list of items."
                     },
@@ -1300,7 +1340,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions/{agent_version}/containers/default:delete": {
@@ -1364,7 +1409,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentContainerOperationPreviewObject"
+                  "$ref": "#/components/schemas/AgentContainerOperationObject"
                 }
               }
             }
@@ -1382,7 +1427,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions/{agent_version}/containers/default:logstream": {
@@ -1426,7 +1476,7 @@
             "required": false,
             "description": "console returns container stdout/stderr, system returns container app event stream. defaults to console",
             "schema": {
-              "$ref": "#/components/schemas/ContainerLogPreviewKind"
+              "$ref": "#/components/schemas/ContainerLogKind"
             },
             "explode": false
           },
@@ -1479,7 +1529,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions/{agent_version}/containers/default:start": {
@@ -1543,7 +1598,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentContainerOperationPreviewObject"
+                  "$ref": "#/components/schemas/AgentContainerOperationObject"
                 }
               }
             }
@@ -1585,6 +1640,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
         }
       }
     },
@@ -1649,7 +1709,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentContainerOperationPreviewObject"
+                  "$ref": "#/components/schemas/AgentContainerOperationObject"
                 }
               }
             }
@@ -1667,7 +1727,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions/{agent_version}/containers/default:update": {
@@ -1731,7 +1796,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentContainerOperationPreviewObject"
+                  "$ref": "#/components/schemas/AgentContainerOperationObject"
                 }
               }
             }
@@ -1771,6 +1836,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
         }
       }
     },
@@ -1779,28 +1849,6 @@
         "operationId": "Agents_createAgentVersionFromManifest",
         "description": "Create a new agent version from a manifest.",
         "parameters": [
-          {
-            "name": "Foundry-Beta",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=v1"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=v1"
-                  ]
-                }
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -8677,88 +8725,7 @@
         ],
         "description": "Insights from the agent cluster analysis."
       },
-      "AgentContainerOperationPreviewError": {
-        "type": "object",
-        "required": [
-          "code",
-          "type",
-          "message"
-        ],
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "The error code of the container operation, if any."
-          },
-          "type": {
-            "type": "string",
-            "description": "The error type of the container operation, if any."
-          },
-          "message": {
-            "type": "string",
-            "description": "The error message of the container operation, if any."
-          }
-        },
-        "description": "The error details of the container operation, if any."
-      },
-      "AgentContainerOperationPreviewObject": {
-        "type": "object",
-        "required": [
-          "id",
-          "agent_id",
-          "agent_version_id",
-          "status"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The ID of the container operation. This id is unique identifier across the system."
-          },
-          "agent_id": {
-            "type": "string",
-            "description": "The ID of the agent."
-          },
-          "agent_version_id": {
-            "type": "string",
-            "description": "The ID of the agent version."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentContainerOperationPreviewStatus"
-              }
-            ],
-            "description": "The status of the container operation."
-          },
-          "error": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentContainerOperationPreviewError"
-              }
-            ],
-            "description": "The error of the container operation, if any."
-          },
-          "container": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentContainerPreviewObject"
-              }
-            ],
-            "description": "The container of the specific version of an agent."
-          }
-        },
-        "description": "The container operation for a specific version of an agent."
-      },
-      "AgentContainerOperationPreviewStatus": {
-        "type": "string",
-        "enum": [
-          "NotStarted",
-          "InProgress",
-          "Succeeded",
-          "Failed"
-        ],
-        "description": "Status of the container operation for a specific version of an agent."
-      },
-      "AgentContainerPreviewObject": {
+      "AgentContainerObject": {
         "type": "object",
         "required": [
           "object",
@@ -8770,9 +8737,9 @@
           "object": {
             "type": "string",
             "enum": [
-              "agent.container_preview"
+              "agent.container"
             ],
-            "description": "The object type, which is always 'agent.container_preview'.",
+            "description": "The object type, which is always 'agent.container'.",
             "readOnly": true
           },
           "id": {
@@ -8783,7 +8750,7 @@
           "status": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentContainerPreviewStatus"
+                "$ref": "#/components/schemas/AgentContainerStatus"
               }
             ],
             "description": "The status of the container of a specific version of an agent.",
@@ -8821,16 +8788,117 @@
           "container": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ContainerPreviewDetails"
+                "$ref": "#/components/schemas/ContainerDetails"
               }
             ],
             "description": "The detailed container information.",
             "readOnly": true
           }
         },
-        "description": "The details of the container of a specific version of an agent."
+        "description": "The details of the container of a specific version of an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       },
-      "AgentContainerPreviewStatus": {
+      "AgentContainerOperationError": {
+        "type": "object",
+        "required": [
+          "code",
+          "type",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The error code of the container operation, if any."
+          },
+          "type": {
+            "type": "string",
+            "description": "The error type of the container operation, if any."
+          },
+          "message": {
+            "type": "string",
+            "description": "The error message of the container operation, if any."
+          }
+        },
+        "description": "The error details of the container operation, if any.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
+      },
+      "AgentContainerOperationObject": {
+        "type": "object",
+        "required": [
+          "id",
+          "agent_id",
+          "agent_version_id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the container operation. This id is unique identifier across the system."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The ID of the agent."
+          },
+          "agent_version_id": {
+            "type": "string",
+            "description": "The ID of the agent version."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentContainerOperationStatus"
+              }
+            ],
+            "description": "The status of the container operation."
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentContainerOperationError"
+              }
+            ],
+            "description": "The error of the container operation, if any."
+          },
+          "container": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentContainerObject"
+              }
+            ],
+            "description": "The container of the specific version of an agent."
+          }
+        },
+        "description": "The container operation for a specific version of an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
+      },
+      "AgentContainerOperationStatus": {
+        "type": "string",
+        "enum": [
+          "NotStarted",
+          "InProgress",
+          "Succeeded",
+          "Failed"
+        ],
+        "description": "Status of the container operation for a specific version of an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
+      },
+      "AgentContainerStatus": {
         "type": "string",
         "enum": [
           "Starting",
@@ -8842,7 +8910,12 @@
           "Deleted",
           "Updating"
         ],
-        "description": "Status of the container of a specific version of an agent."
+        "description": "Status of the container of a specific version of an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       },
       "AgentDefinition": {
         "type": "object",
@@ -8866,10 +8939,18 @@
           "propertyName": "kind",
           "mapping": {
             "prompt": "#/components/schemas/PromptAgentDefinition",
-            "workflow_preview": "#/components/schemas/WorkflowAgentPreviewDefinition",
-            "hosted_preview": "#/components/schemas/HostedAgentPreviewDefinition",
-            "container_app_preview": "#/components/schemas/ContainerAppAgentPreviewDefinition"
+            "workflow": "#/components/schemas/WorkflowAgentDefinition",
+            "hosted": "#/components/schemas/HostedAgentDefinition",
+            "container_app": "#/components/schemas/ContainerAppAgentDefinition"
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "HostedAgents=v1",
+            "ContainerAgents=v1",
+            "WorkflowAgents=v1",
+            "MemoryStores=v1"
+          ]
         }
       },
       "AgentId": {
@@ -8906,9 +8987,9 @@
             "type": "string",
             "enum": [
               "prompt",
-              "hosted_preview",
-              "container_app_preview",
-              "workflow_preview"
+              "hosted",
+              "container_app",
+              "workflow"
             ]
           }
         ]
@@ -10341,7 +10422,7 @@
         ],
         "description": "The Type (or category) of the connection"
       },
-      "ContainerAppAgentPreviewDefinition": {
+      "ContainerAppAgentDefinition": {
         "type": "object",
         "required": [
           "kind",
@@ -10353,7 +10434,7 @@
           "kind": {
             "type": "string",
             "enum": [
-              "container_app_preview"
+              "container_app"
             ]
           },
           "container_protocol_versions": {
@@ -10388,17 +10469,14 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The container app agent definition."
+        "description": "The container app agent definition.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       },
-      "ContainerLogPreviewKind": {
-        "type": "string",
-        "enum": [
-          "console",
-          "system"
-        ],
-        "description": "The type of logs to stream from a container."
-      },
-      "ContainerPreviewDetails": {
+      "ContainerDetails": {
         "type": "object",
         "required": [
           "provisioning_state",
@@ -10427,7 +10505,7 @@
           "replicas": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ContainerPreviewReplica"
+              "$ref": "#/components/schemas/ContainerReplica"
             },
             "description": "The list of replicas in the container."
           },
@@ -10437,9 +10515,27 @@
             "description": "The last update time of the container."
           }
         },
-        "description": "Detailed information about the container."
+        "description": "Detailed information about the container.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       },
-      "ContainerPreviewReplica": {
+      "ContainerLogKind": {
+        "type": "string",
+        "enum": [
+          "console",
+          "system"
+        ],
+        "description": "The type of logs to stream from a container.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
+      },
+      "ContainerReplica": {
         "type": "object",
         "required": [
           "name",
@@ -10460,7 +10556,12 @@
             "description": "The container state of the replica."
           }
         },
-        "description": "Information about a container replica."
+        "description": "Information about a container replica.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ContainerAgents=v1"
+          ]
+        }
       },
       "ContinuousEvalPreviewItemGenerationParams": {
         "type": "object",
@@ -10649,8 +10750,24 @@
                 "$ref": "#/components/schemas/AgentDefinition"
               }
             ],
-            "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition."
+            "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "HostedAgents=v1",
+                "ContainerAgents=v1",
+                "WorkflowAgents=v1",
+                "MemoryStores=v1"
+              ]
+            }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "HostedAgents=v1",
+            "ContainerAgents=v1",
+            "WorkflowAgents=v1",
+            "MemoryStores=v1"
+          ]
         }
       },
       "CreateAgentVersionFromManifestRequest": {
@@ -10709,8 +10826,24 @@
                 "$ref": "#/components/schemas/AgentDefinition"
               }
             ],
-            "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition."
+            "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "HostedAgents=v1",
+                "ContainerAgents=v1",
+                "WorkflowAgents=v1",
+                "MemoryStores=v1"
+              ]
+            }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "HostedAgents=v1",
+            "ContainerAgents=v1",
+            "WorkflowAgents=v1",
+            "MemoryStores=v1"
+          ]
         }
       },
       "CreateEvalRequest": {
@@ -12943,7 +13076,7 @@
         },
         "description": "Details of a function tool call."
       },
-      "HostedAgentPreviewDefinition": {
+      "HostedAgentDefinition": {
         "type": "object",
         "required": [
           "kind",
@@ -12955,7 +13088,7 @@
           "kind": {
             "type": "string",
             "enum": [
-              "hosted_preview"
+              "hosted"
             ]
           },
           "tools": {
@@ -13007,7 +13140,7 @@
         "discriminator": {
           "propertyName": "kind",
           "mapping": {
-            "hosted_preview": "#/components/schemas/ImageBasedHostedAgentPreviewDefinition"
+            "hosted": "#/components/schemas/ImageBasedHostedAgentDefinition"
           }
         },
         "allOf": [
@@ -13015,7 +13148,12 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The hosted agent definition."
+        "description": "The hosted agent definition.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=v1"
+          ]
+        }
       },
       "HourlyRecurrenceSchedule": {
         "type": "object",
@@ -13066,7 +13204,7 @@
         ],
         "description": "Evaluation rule action for human evaluation."
       },
-      "ImageBasedHostedAgentPreviewDefinition": {
+      "ImageBasedHostedAgentDefinition": {
         "type": "object",
         "required": [
           "kind",
@@ -13076,7 +13214,7 @@
           "kind": {
             "type": "string",
             "enum": [
-              "hosted_preview"
+              "hosted"
             ]
           },
           "image": {
@@ -13087,10 +13225,15 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/HostedAgentPreviewDefinition"
+            "$ref": "#/components/schemas/HostedAgentDefinition"
           }
         ],
-        "description": "The image-based deployment definition for a hosted agent."
+        "description": "The image-based deployment definition for a hosted agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=v1"
+          ]
+        }
       },
       "Index": {
         "type": "object",
@@ -31832,6 +31975,11 @@
             "additionalProperties": {},
             "description": "The inputs to the manifest that will result in a fully materialized Agent."
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       },
       "UpdateAgentRequest": {
@@ -31859,8 +32007,21 @@
                 "$ref": "#/components/schemas/AgentDefinition"
               }
             ],
-            "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition."
+            "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "HostedAgents=v1",
+                "ContainerAgents=v1",
+                "WorkflowAgents=v1",
+                "MemoryStores=v1"
+              ]
+            }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       },
       "UpdateEvalParametersBody": {
@@ -31955,7 +32116,7 @@
         ],
         "description": "Weekly recurrence schedule."
       },
-      "WorkflowAgentPreviewDefinition": {
+      "WorkflowAgentDefinition": {
         "type": "object",
         "required": [
           "kind"
@@ -31964,7 +32125,7 @@
           "kind": {
             "type": "string",
             "enum": [
-              "workflow_preview"
+              "workflow"
             ]
           },
           "workflow": {
@@ -31977,7 +32138,12 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The workflow agent definition."
+        "description": "The workflow agent definition.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "WorkflowAgents=v1"
+          ]
+        }
       },
       "WorkflowPreviewActionOutputItemResource": {
         "type": "object",

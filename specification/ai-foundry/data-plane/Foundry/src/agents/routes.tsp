@@ -1,4 +1,5 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/streams";
 import "@azure-tools/typespec-azure-core";
 
@@ -6,18 +7,19 @@ import "../common/models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Streams;
 
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@tag("Agents")
 interface Agents {
   /**
    * Retrieves the agent.
    */
   @get
   @route("/agents/{agent_name}")
-  @tag("Agents")
   getAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
@@ -32,9 +34,13 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents")
-  @tag("Agents")
+  @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgent is FoundryDataPlanePreviewOperation<
-    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
+
+      | FoundryPreviewOptInKeys.container_agents_v1
+      | FoundryPreviewOptInKeys.hosted_agents_v1
+      | FoundryPreviewOptInKeys.workflow_agents_v1
+      | FoundryPreviewOptInKeys.memory_stores_v1,
     CreateAgentRequest,
     AgentObject
   >;
@@ -46,9 +52,9 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}")
-  @tag("Agents")
+  @extension("x-ms-foundry-meta", MemoryStoreConditionalPreviews)
   updateAgent is FoundryDataPlanePreviewOperation<
-    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
+    FoundryPreviewOptInKeys.memory_stores_v1,
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -64,7 +70,6 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents:import")
-  @tag("Agents")
   createAgentFromManifest is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     CreateAgentFromManifestRequest,
@@ -78,9 +83,8 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/import")
-  @tag("Agents")
   updateAgentFromManifest is FoundryDataPlanePreviewOperation<
-    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
+    FoundryPreviewOptInKeys.memory_stores_v1,
     {
       /** The name of the agent to update. */
       @path agent_name: string;
@@ -96,7 +100,6 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}")
-  @tag("Agents")
   deleteAgent is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     {
@@ -110,7 +113,6 @@ interface Agents {
    * Returns the list of all agents.
    */
   @route("/agents")
-  @tag("Agents")
   listAgents is FoundryDataPlaneOperation<
     {
       ...ListAgentQueryParameters;
@@ -124,9 +126,13 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions")
-  @tag("Agents")
+  @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentVersion is FoundryDataPlanePreviewOperation<
-    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
+
+      | FoundryPreviewOptInKeys.container_agents_v1
+      | FoundryPreviewOptInKeys.hosted_agents_v1
+      | FoundryPreviewOptInKeys.workflow_agents_v1
+      | FoundryPreviewOptInKeys.memory_stores_v1,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -149,9 +155,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions:import")
-  @tag("Agents")
-  createAgentVersionFromManifest is FoundryDataPlanePreviewOperation<
-    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
+  createAgentVersionFromManifest is FoundryDataPlaneOperation<
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -173,7 +177,6 @@ interface Agents {
    */
   @get
   @route("/agents/{agent_name}/versions/{agent_version}")
-  @tag("Agents")
   getAgentVersion is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
@@ -191,7 +194,6 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
-  @tag("Agents")
   deleteAgentVersion is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
     {
@@ -210,7 +212,6 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/versions")
   @list
-  @tag("Agents")
   listAgentVersions is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve versions for. */
@@ -229,7 +230,10 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:start")
-  @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   startAgentContainer is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -245,7 +249,7 @@ interface Agents {
       /** The maximum number of replicas. Defaults to 1. */
       max_replicas?: int32 = 1;
     },
-    AcceptedAgentContainerPreviewOperation
+    AcceptedAgentContainerOperation
   >;
 
   /**
@@ -256,7 +260,10 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:update")
-  @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   updateAgentContainer is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -272,7 +279,7 @@ interface Agents {
       /** The maximum number of replicas. */
       max_replicas?: int32;
     },
-    AcceptedAgentContainerPreviewOperation
+    AcceptedAgentContainerOperation
   >;
 
   /**
@@ -283,7 +290,10 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:stop")
-  @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   stopAgentContainer is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -293,7 +303,7 @@ interface Agents {
       /** The version of the agent. */
       @path agent_version: string;
     },
-    AcceptedAgentContainerPreviewOperation
+    AcceptedAgentContainerOperation
   >;
 
   /**
@@ -304,7 +314,10 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:delete")
-  @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   deleteAgentContainer is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -314,7 +327,7 @@ interface Agents {
       /** The version of the agent. */
       @path agent_version: string;
     },
-    AcceptedAgentContainerPreviewOperation
+    AcceptedAgentContainerOperation
   >;
 
   /**
@@ -322,7 +335,10 @@ interface Agents {
    */
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default")
-  @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   getAgentContainer is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -332,7 +348,7 @@ interface Agents {
       /** The version of the agent. */
       @path agent_version: string;
     },
-    AgentContainerPreviewObject
+    AgentContainerObject
   >;
 
   /**
@@ -341,7 +357,6 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:logstream")
-  @tag("Agents")
   @doc("""
     Container log entry streamed from the container as text chunks.
     Each chunk is a UTF-8 string that may be either a plain text log line
@@ -360,6 +375,10 @@ interface Agents {
     2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
     2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
     """)
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   streamAgentContainerLogs is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -372,7 +391,7 @@ interface Agents {
       /** The type of logs to stream. */
       @doc("console returns container stdout/stderr, system returns container app event stream. defaults to console")
       @query
-      kind?: ContainerLogPreviewKind;
+      kind?: ContainerLogKind;
 
       /** The name of the replica to stream logs from. */
       @doc("When omitted, the server chooses the first replica for console logs. Required to target a specific replica.")
@@ -396,7 +415,10 @@ interface Agents {
    */
   @get
   @route("/agents/{agent_name}/operations/{operation_id}")
-  @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   getAgentContainerOperation is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -406,7 +428,7 @@ interface Agents {
       /** The operation ID. */
       @path operation_id: string;
     },
-    AgentContainerOperationPreviewObject
+    AgentContainerOperationObject
   >;
 
   /**
@@ -414,8 +436,11 @@ interface Agents {
    */
   @get
   @route("/agents/{agent_name}/operations")
-  @tag("Agents")
   @list
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   listAgentContainerOperations is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -424,7 +449,7 @@ interface Agents {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<AgentContainerOperationPreviewObject>
+    AgentsPagedResult<AgentContainerOperationObject>
   >;
 
   /**
@@ -432,8 +457,11 @@ interface Agents {
    */
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default/operations")
-  @tag("Agents")
   @list
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  )
   listAgentVersionContainerOperations is FoundryDataPlanePreviewOperation<
     FoundryPreviewOptInKeys.container_agents_v1,
     {
@@ -445,6 +473,6 @@ interface Agents {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<AgentContainerOperationPreviewObject>
+    AgentsPagedResult<AgentContainerOperationObject>
   >;
 }
