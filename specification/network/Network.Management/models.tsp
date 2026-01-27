@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -7965,6 +7965,8 @@ model NetworkInterfaceTapConfigurationPropertiesFormat {
  * Properties of Frontend IP Configuration of the load balancer.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model FrontendIPConfigurationPropertiesFormat {
   /**
    * An array of references to inbound rules that use this frontend IP.
@@ -9157,6 +9159,8 @@ model ServiceEndpointPropertiesFormat {
 /**
  * Service Endpoint Policy resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ServiceEndpointPolicyPropertiesFormat {
   /**
    * A collection of service endpoint policy definitions of the service endpoint policy.
@@ -9195,6 +9199,8 @@ model ServiceEndpointPolicyPropertiesFormat {
 /**
  * Service Endpoint policy definition resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ServiceEndpointPolicyDefinitionPropertiesFormat {
   /**
    * A description for this rule. Restricted to 140 chars.
@@ -9744,6 +9750,8 @@ model IpamPoolPrefixAllocationPool {
 /**
  * Properties of the backend address pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model BackendAddressPoolPropertiesFormat {
   /**
    * The location of the backend address pool.
@@ -9817,6 +9825,8 @@ model BackendAddressPoolPropertiesFormat {
 /**
  * Gateway load balancer tunnel interface of a load balancer backend address pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model GatewayLoadBalancerTunnelInterface {
   /**
    * Port of gateway load balancer tunnel interface.
@@ -9842,6 +9852,8 @@ model GatewayLoadBalancerTunnelInterface {
 /**
  * Load balancer backend addresses.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerBackendAddress {
   /**
    * Properties of load balancer backend address pool.
@@ -9857,6 +9869,8 @@ model LoadBalancerBackendAddress {
 /**
  * Properties of the load balancer backend addresses.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerBackendAddressPropertiesFormat {
   /**
    * Reference to an existing virtual network.
@@ -9902,6 +9916,8 @@ model LoadBalancerBackendAddressPropertiesFormat {
 /**
  * Individual port mappings for inbound NAT rule created for backend pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model NatRulePortMapping {
   /**
    * Name of inbound NAT rule.
@@ -9922,6 +9938,8 @@ model NatRulePortMapping {
 /**
  * Properties of the inbound NAT rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model InboundNatRulePropertiesFormat {
   /**
    * A reference to frontend IP addresses.
@@ -12146,6 +12164,8 @@ model AvailableServiceAlias {
 /**
  * Properties of the Azure Firewall.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallPropertiesFormat {
   /**
    * Collection of application rule collections used by Azure Firewall.
@@ -12203,7 +12223,7 @@ model AzureFirewallPropertiesFormat {
    * IpGroups associated with AzureFirewall.
    */
   @visibility(Lifecycle.Read)
-  ipGroups?: AzureFirewallIpGroups[];
+  ipGroups?: AzureFirewallIPGroups[];
 
   /**
    * The Azure Firewall Resource SKU.
@@ -12276,6 +12296,8 @@ model AzureFirewallApplicationRuleCollectionPropertiesFormat {
  * Properties of the AzureFirewallRCAction.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallRCAction {
   /**
    * The type of action.
@@ -12286,6 +12308,8 @@ model AzureFirewallRCAction {
 /**
  * Properties of an application rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallApplicationRule {
   /**
    * Name of the application rule.
@@ -12327,6 +12351,8 @@ model AzureFirewallApplicationRule {
 /**
  * Properties of the application rule protocol.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallApplicationRuleProtocol {
   /**
    * Protocol type.
@@ -12395,6 +12421,8 @@ model AzureFirewallNatRuleCollectionProperties {
  * AzureFirewall NAT Rule Collection Action.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallNatRCAction {
   /**
    * The type of action.
@@ -12405,6 +12433,8 @@ model AzureFirewallNatRCAction {
 /**
  * Properties of a NAT rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallNatRule {
   /**
    * Name of the NAT rule.
@@ -12510,6 +12540,8 @@ model AzureFirewallNetworkRuleCollectionPropertiesFormat {
 /**
  * Properties of the network rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallNetworkRule {
   /**
    * Name of the network rule.
@@ -12589,6 +12621,8 @@ model AzureFirewallIPConfiguration extends SubResource {
  * Properties of IP configuration of an Azure Firewall.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallIPConfigurationPropertiesFormat {
   /**
    * The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes.
@@ -12618,6 +12652,8 @@ model AzureFirewallIPConfigurationPropertiesFormat {
 /**
  * IP addresses associated with azure firewall.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model HubIPAddresses {
   /**
    * Public IP addresses associated with azure firewall.
@@ -12635,6 +12671,8 @@ model HubIPAddresses {
 /**
  * Public IP addresses associated with azure firewall.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model HubPublicIPAddresses {
   /**
    * The list of Public IP addresses associated with azure firewall or IP addresses to be retained.
@@ -12651,6 +12689,8 @@ model HubPublicIPAddresses {
 /**
  * Public IP Address associated with azure firewall.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallPublicIPAddress {
   /**
    * Public IP Address value.
@@ -12661,7 +12701,9 @@ model AzureFirewallPublicIPAddress {
 /**
  * IpGroups associated with azure firewall.
  */
-model AzureFirewallIpGroups {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
+model AzureFirewallIPGroups {
   /**
    * Resource ID.
    */
@@ -12678,6 +12720,8 @@ model AzureFirewallIpGroups {
 /**
  * SKU of an Azure Firewall.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallSku {
   /**
    * Name of an Azure Firewall SKU.
@@ -12838,6 +12882,8 @@ model AzureFirewallFqdnTag extends Resource {
 /**
  * Azure Firewall FQDN Tag Properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallFqdnTagPropertiesFormat {
   /**
    * The provisioning state of the Azure firewall FQDN tag resource.
@@ -13606,6 +13652,8 @@ model EndpointServiceResult extends SubResource {
 /**
  * Properties of ExpressRouteCircuitAuthorization.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model AuthorizationPropertiesFormat {
   /**
    * The authorization key.
@@ -13634,6 +13682,8 @@ model AuthorizationPropertiesFormat {
 /**
  * Properties of the express route circuit peering.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitPeeringPropertiesFormat {
   /**
    * The peering type.
@@ -13747,6 +13797,8 @@ model ExpressRouteCircuitPeeringPropertiesFormat {
 /**
  * Specifies the peering configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitPeeringConfig {
   /**
    * The reference to AdvertisedPublicPrefixes.
@@ -13790,6 +13842,8 @@ model ExpressRouteCircuitPeeringConfig {
 /**
  * Prefix properties required to perform validation using openssl signature.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model AdvertisedPublicPrefixProperties {
   /**
    * Advertised Public Prefix.
@@ -13816,6 +13870,8 @@ model AdvertisedPublicPrefixProperties {
 /**
  * Contains stats associated with the peering.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitStats {
   /**
    * The Primary BytesIn of the peering.
@@ -13841,6 +13897,8 @@ model ExpressRouteCircuitStats {
 /**
  * Contains IPv6 peering config.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model Ipv6ExpressRouteCircuitPeeringConfig {
   /**
    * The primary address prefix.
@@ -13882,6 +13940,8 @@ model ExpressRouteConnectionId {
 /**
  * Properties of the express route circuit connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitConnectionPropertiesFormat {
   /**
    * Reference to Express Route Circuit Private Peering Resource of the circuit initiating connection.
@@ -13925,6 +13985,8 @@ model ExpressRouteCircuitConnectionPropertiesFormat {
 /**
  * IPv6 Circuit Connection properties for global reach.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model Ipv6CircuitConnectionConfig {
   /**
    * /125 IP address space to carve out customer addresses for global reach.
@@ -13941,6 +14003,8 @@ model Ipv6CircuitConnectionConfig {
 /**
  * Properties of the peer express route circuit connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model PeerExpressRouteCircuitConnectionPropertiesFormat {
   /**
    * Reference to Express Route Circuit Private Peering Resource of the circuit.
@@ -13983,6 +14047,8 @@ model PeerExpressRouteCircuitConnectionPropertiesFormat {
 /**
  * Contains SKU in an ExpressRouteCircuit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitSku {
   /**
    * The name of the SKU.
@@ -14003,6 +14069,8 @@ model ExpressRouteCircuitSku {
 /**
  * Properties of ExpressRouteCircuit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitPropertiesFormat {
   /**
    * Allow classic operations.
@@ -14098,6 +14166,8 @@ model ExpressRouteCircuitPropertiesFormat {
 /**
  * Contains ServiceProviderProperties in an ExpressRouteCircuit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitServiceProviderProperties {
   /**
    * The serviceProviderName.
@@ -14124,6 +14194,8 @@ model ExpressRouteCircuitsArpTableListResult
 /**
  * The ARP table associated with the ExpressRouteCircuit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitArpTable {
   /**
    * Entry age in minutes.
@@ -14155,6 +14227,8 @@ model ExpressRouteCircuitsRoutesTableListResult
 /**
  * The routes table associated with the ExpressRouteCircuit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitRoutesTable {
   /**
    * IP address of a network entity.
@@ -14191,6 +14265,8 @@ model ExpressRouteCircuitsRoutesTableSummaryListResult
 /**
  * The routes table associated with the ExpressRouteCircuit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitRoutesTableSummary {
   /**
    * IP address of the neighbor.
@@ -14234,6 +14310,8 @@ model ExpressRouteServiceProvider extends Resource {
 /**
  * Properties of ExpressRouteServiceProvider.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteServiceProviderPropertiesFormat {
   /**
    * A list of peering locations.
@@ -14256,6 +14334,8 @@ model ExpressRouteServiceProviderPropertiesFormat {
 /**
  * Contains bandwidths offered in ExpressRouteServiceProvider resources.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteServiceProviderBandwidthsOffered {
   /**
    * The OfferName.
@@ -14271,6 +14351,8 @@ model ExpressRouteServiceProviderBandwidthsOffered {
 /**
  * Properties of ExpressRouteCrossConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCrossConnectionProperties {
   /**
    * The name of the primary port.
@@ -14332,6 +14414,8 @@ model ExpressRouteCrossConnectionProperties {
 /**
  * Reference to an express route circuit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCircuitReference {
   /**
    * Corresponding Express Route Circuit Id.
@@ -14364,6 +14448,8 @@ model ExpressRouteCrossConnectionPeering extends SubResource {
 /**
  * Properties of express route cross connection peering.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCrossConnectionPeeringProperties {
   /**
    * The peering type.
@@ -14466,6 +14552,8 @@ model ExpressRouteCrossConnectionsRoutesTableSummaryListResult
 /**
  * The routes table associated with the ExpressRouteCircuit.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCrossConnectionRoutesTableSummary {
   /**
    * IP address of Neighbor router.
@@ -14491,6 +14579,8 @@ model ExpressRouteCrossConnectionRoutesTableSummary {
 /**
  * Properties specific to ExpressRoutePorts peering location resources.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRoutePorts Location Properties")
 model ExpressRoutePortsLocationPropertiesFormat {
   /**
@@ -14521,6 +14611,8 @@ model ExpressRoutePortsLocationPropertiesFormat {
 /**
  * Real-time inventory of available ExpressRoute port bandwidths.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRoutePorts Location Bandwidths")
 model ExpressRoutePortsLocationBandwidths {
   /**
@@ -14539,6 +14631,8 @@ model ExpressRoutePortsLocationBandwidths {
 /**
  * Properties specific to ExpressRoutePort resources.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRoutePort Properties")
 model ExpressRoutePortPropertiesFormat {
   /**
@@ -14636,6 +14730,8 @@ model ExpressRouteLink extends SubResource {
 /**
  * Properties specific to ExpressRouteLink resources.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRouteLink Resource Properties")
 model ExpressRouteLinkPropertiesFormat {
   /**
@@ -14694,6 +14790,8 @@ model ExpressRouteLinkPropertiesFormat {
 /**
  * ExpressRouteLink Mac Security Configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("Definition of ExpressRouteLink Mac Security configuration.")
 model ExpressRouteLinkMacSecConfig {
   /**
@@ -14727,6 +14825,8 @@ model ExpressRouteLinkListResult is Azure.Core.Page<ExpressRouteLink>;
  * The customer name to be printed on a letter of authorization.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model GenerateExpressRoutePortsLOARequest {
   /**
    * The customer name.
@@ -14738,6 +14838,8 @@ model GenerateExpressRoutePortsLOARequest {
  * Response for GenerateExpressRoutePortsLOA API service call.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model GenerateExpressRoutePortsLOAResult {
   /**
    * The content as a base64 encoded string.
@@ -14748,6 +14850,8 @@ model GenerateExpressRoutePortsLOAResult {
 /**
  * Properties of ExpressRoutePort Authorization.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRoute Port Authorization Properties")
 model ExpressRoutePortAuthorizationPropertiesFormat {
   /**
@@ -14780,6 +14884,8 @@ model ExpressRoutePortAuthorizationPropertiesFormat {
  * Properties of ExpressRouteProviderPort.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteProviderPortProperties {
   /**
    * The name of the port pair.
@@ -14918,6 +15024,8 @@ model FirewallPolicyPropertiesFormat {
 /**
  * ThreatIntel Whitelist for Firewall Policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyThreatIntelWhitelist {
   /**
    * List of IP addresses for the ThreatIntel Whitelist.
@@ -14984,6 +15092,8 @@ model FirewallPolicyLogAnalyticsWorkspace {
 /**
  * The private IP addresses/IP ranges to which traffic will not be SNAT.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicySnat {
   /**
    * List of private IP addresses/IP address ranges to not be SNAT.
@@ -15074,6 +15184,8 @@ model ExplicitProxy {
 /**
  * Configuration for intrusion detection mode and rules.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyIntrusionDetection {
   /**
    * Intrusion detection general state. When attached to a parent policy, the firewall's effective IDPS mode is the stricter mode of the two.
@@ -15094,6 +15206,8 @@ model FirewallPolicyIntrusionDetection {
 /**
  * The operation for configuring intrusion detection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyIntrusionDetectionConfiguration {
   /**
    * List of specific signatures states.
@@ -15115,6 +15229,8 @@ model FirewallPolicyIntrusionDetectionConfiguration {
 /**
  * Intrusion detection signatures specification states.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyIntrusionDetectionSignatureSpecification {
   /**
    * Signature id.
@@ -15130,6 +15246,8 @@ model FirewallPolicyIntrusionDetectionSignatureSpecification {
 /**
  * Intrusion detection bypass traffic specification.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyIntrusionDetectionBypassTrafficSpecifications {
   /**
    * Name of the bypass traffic rule.
@@ -15210,6 +15328,8 @@ model FirewallPolicySku {
 /**
  * Properties of the rule collection group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyRuleCollectionGroupProperties {
   /**
    * A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)
@@ -15977,6 +16097,8 @@ model IpGroupPropertiesFormat {
 /**
  * SKU of a load balancer.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerSku {
   /**
    * Name of a load balancer SKU.
@@ -15992,6 +16114,8 @@ model LoadBalancerSku {
 /**
  * Properties of the load balancer.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerPropertiesFormat {
   /**
    * Object representing the frontend IPs to be used for the load balancer.
@@ -16050,6 +16174,8 @@ model LoadBalancerPropertiesFormat {
 /**
  * Properties of the load balancer.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancingRulePropertiesFormat {
   /**
    * A reference to frontend IP addresses.
@@ -16128,6 +16254,8 @@ model LoadBalancingRulePropertiesFormat {
 /**
  * Load balancer probe resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model ProbePropertiesFormat {
   /**
    * The load balancer rules that use this probe.
@@ -16208,6 +16336,8 @@ model InboundNatPool extends SubResource {
 /**
  * Properties of Inbound NAT pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model InboundNatPoolPropertiesFormat {
   /**
    * A reference to frontend IP addresses.
@@ -16261,6 +16391,8 @@ model InboundNatPoolPropertiesFormat {
 /**
  * Outbound rule of the load balancer.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model OutboundRulePropertiesFormat {
   /**
    * The number of outbound ports to be used for NAT.
@@ -16303,6 +16435,8 @@ model OutboundRulePropertiesFormat {
 /**
  * The request for a VIP swap.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerVipSwapRequest {
   /**
    * A list of frontend IP configuration resources that should swap VIPs.
@@ -16314,6 +16448,8 @@ model LoadBalancerVipSwapRequest {
 /**
  * VIP swap request's frontend IP configuration object.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerVipSwapRequestFrontendIPConfiguration {
   /**
    * The ID of frontend IP configuration resource.
@@ -16330,6 +16466,8 @@ model LoadBalancerVipSwapRequestFrontendIPConfiguration {
  * The properties of VIP swap request's frontend IP configuration object.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerVipSwapRequestFrontendIPConfigurationProperties {
   /**
    * A reference to public IP address resource.
@@ -16341,6 +16479,8 @@ model LoadBalancerVipSwapRequestFrontendIPConfigurationProperties {
 /**
  * The request for a QueryInboundNatRulePortMapping API. Either IpConfiguration or IpAddress should be set
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model QueryInboundNatRulePortMappingRequest {
   /**
    * NetworkInterfaceIPConfiguration set in load balancer backend address.
@@ -16356,6 +16496,8 @@ model QueryInboundNatRulePortMappingRequest {
 /**
  * The response for a QueryInboundNatRulePortMapping API.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model BackendAddressInboundNatRulePortMappings {
   /**
    * Collection of inbound NAT rule port mappings.
@@ -16367,6 +16509,8 @@ model BackendAddressInboundNatRulePortMappings {
 /**
  * Individual port mappings for inbound NAT rule created for backend pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model InboundNatRulePortMapping {
   /**
    * Name of inbound NAT rule.
@@ -16396,6 +16540,8 @@ model InboundNatRulePortMapping {
 /**
  * The response for a Health API.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerHealthPerRule {
   /**
    * Number of backend instances associated to the LB rule that are considered healthy.
@@ -16417,6 +16563,8 @@ model LoadBalancerHealthPerRule {
 /**
  * The information about health per rule per backend address.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerHealthPerRulePerBackendAddress {
   /**
    * The IP address belonging to the backend address.
@@ -16443,6 +16591,8 @@ model LoadBalancerHealthPerRulePerBackendAddress {
 /**
  * The request for a migrateToIpBased API.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model MigrateLoadBalancerToIpBasedRequest {
   /**
    * A list of pool names that should be migrated from Nic based to IP based pool
@@ -16453,6 +16603,8 @@ model MigrateLoadBalancerToIpBasedRequest {
 /**
  * The response for a migrateToIpBased API.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model MigratedPools {
   /**
    * A list of pools migrated from Nic based to IP based pool
@@ -21691,6 +21843,8 @@ model ReferencedPublicIpAddress {
 /**
  * Route Filter Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model RouteFilterPropertiesFormat {
   /**
    * Collection of RouteFilterRules contained within a route filter.
@@ -21746,6 +21900,8 @@ model RouteFilterRule extends SubResource {
 /**
  * Route Filter Rule Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model RouteFilterRulePropertiesFormat {
   /**
    * The access type of the rule.
@@ -21817,6 +21973,8 @@ model BgpServiceCommunity extends Resource {
 /**
  * Properties of Service Community.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model BgpServiceCommunityPropertiesFormat {
   /**
    * The name of the bgp community. e.g. Skype.
@@ -21834,6 +21992,8 @@ model BgpServiceCommunityPropertiesFormat {
  * Contains bgp community information offered in Service Community resources.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model BGPCommunity {
   /**
    * The region which the service support. e.g. For O365, region is Global.
@@ -22627,6 +22787,8 @@ model VirtualNetworkGatewayIPConfiguration extends SubResource {
  * Properties of VirtualNetworkGatewayIPConfiguration.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayIPConfigurationPropertiesFormat {
   /**
    * The private IP address allocation method.
@@ -22682,6 +22844,8 @@ model VirtualNetworkGatewayMigrationStatus {
 /**
  * VirtualNetworkGatewaySku details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewaySku {
   /**
    * Gateway SKU name.
@@ -22703,6 +22867,8 @@ model VirtualNetworkGatewaySku {
 /**
  * VpnClientConfiguration for P2S client.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientConfiguration {
   /**
    * The reference to the address space resource which represents Address space for P2S VpnClient.
@@ -22852,6 +23018,8 @@ model VpnClientRevokedCertificatePropertiesFormat {
 /**
  * An IPSec Policy configuration for a virtual network gateway connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model IpsecPolicy {
   /**
    * The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for a site to site VPN tunnel.
@@ -22940,6 +23108,8 @@ model VngClientConnectionConfiguration extends SubResource {
 /**
  * Properties of VngClientConnectionConfiguration.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VngClientConnectionConfigurationProperties {
   /**
    * The reference to the address space resource which represents Address space for P2S VpnClient.
@@ -22983,6 +23153,8 @@ model VirtualNetworkGatewayPolicyGroup extends SubResource {
 /**
  * Properties of VirtualNetworkGatewayPolicyGroup.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayPolicyGroupProperties {
   /**
    * Shows if this is a Default VirtualNetworkGatewayPolicyGroup or not.
@@ -23016,6 +23188,8 @@ model VirtualNetworkGatewayPolicyGroupProperties {
 /**
  * Vpn Client Connection configuration PolicyGroup member
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayPolicyGroupMember {
   /**
    * Name of the VirtualNetworkGatewayPolicyGroupMember.
@@ -23036,6 +23210,8 @@ model VirtualNetworkGatewayPolicyGroupMember {
 /**
  * BGP settings details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model BgpSettings {
   /**
    * The BGP speaker's ASN.
@@ -23065,6 +23241,8 @@ model BgpSettings {
  * Properties of IPConfigurationBgpPeeringAddress.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model IPConfigurationBgpPeeringAddress {
   /**
    * The ID of IP configuration which belongs to gateway.
@@ -23092,6 +23270,8 @@ model IPConfigurationBgpPeeringAddress {
 /**
  * Parameters for VirtualNetworkGatewayNatRule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayNatRuleProperties {
   /**
    * The provisioning state of the NAT Rule resource.
@@ -23348,6 +23528,8 @@ model TunnelConnectionHealth {
 /**
  * GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayCustomBgpIpAddressIpConfiguration {
   /**
    * The IpconfigurationId of ipconfiguration which belongs to gateway.
@@ -23378,6 +23560,8 @@ model TrafficSelectorPolicy {
 /**
  * Vpn Client Parameters for package generation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientParameters {
   /**
    * VPN client Processor Architecture.
@@ -23403,6 +23587,8 @@ model VpnClientParameters {
 /**
  * Response for list BGP peer status API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model BgpPeerStatusListResult {
   /**
    * List of BGP peers.
@@ -23415,6 +23601,8 @@ model BgpPeerStatusListResult {
 /**
  * BGP peer status details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model BgpPeerStatus {
   /**
    * The virtual network gateway's local address.
@@ -23475,6 +23663,8 @@ model RadiusAuthServerListResult is Azure.Core.Page<RadiusAuthServer>;
 /**
  * Gateway or VpnServerConfiguration Radius server with radius secret details
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model RadiusAuthServer {
   /**
    * Radius server IPAddress
@@ -23491,6 +23681,8 @@ model RadiusAuthServer {
 /**
  * List of virtual network gateway routes.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayRouteListResult {
   /**
    * List of gateway routes.
@@ -23503,6 +23695,8 @@ model GatewayRouteListResult {
 /**
  * Gateway routing details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayRoute {
   /**
    * The gateway's local address.
@@ -23721,6 +23915,8 @@ model RouteSourceDetails {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model CircuitMetadataMap {
   /**
    * Express Route Circuit Name
@@ -23742,6 +23938,8 @@ model CircuitMetadataMap {
  * An IPSec parameters for a virtual network gateway P2S connection.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientIPsecParameters {
   /**
    * The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for P2S client.
@@ -23787,6 +23985,8 @@ model VpnClientIPsecParameters {
 /**
  * Vpn device configuration script generation parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnDeviceScriptParameters {
   /**
    * The vendor for the vpn device.
@@ -23807,6 +24007,8 @@ model VpnDeviceScriptParameters {
 /**
  * Start packet capture parameters on virtual network gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnPacketCaptureStartParameters {
   /**
    * Start Packet capture parameters.
@@ -23817,6 +24019,8 @@ model VpnPacketCaptureStartParameters {
 /**
  * Stop packet capture parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on virtual network gateway.
@@ -23827,6 +24031,8 @@ model VpnPacketCaptureStopParameters {
 /**
  * ExpressRoute failover test details
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ExpressRouteFailoverTestDetails {
   /**
    * Peering location of the test
@@ -24017,6 +24223,8 @@ model ExpressRouteFailoverStopApiParameters {
 /**
  * VirtualNetworkGatewayConnection properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * The authorizationKey.
@@ -24185,6 +24393,8 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
 /**
  * LocalNetworkGateway properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model LocalNetworkGatewayPropertiesFormat {
   /**
    * Local network site address space.
@@ -24235,6 +24445,8 @@ model VirtualNetworkGatewayConnectionTunnelProperties {
 /**
  * Certificate Authentication information for a certificate based authentication connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model CertificateAuthentication {
   /**
    * Keyvault secret ID for outbound authentication certificate.
@@ -24266,6 +24478,8 @@ model ConnectionSharedKey extends SubResource {
 /**
  * The virtual network connection reset shared key.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ConnectionResetSharedKey {
   /**
    * The virtual network connection reset shared key length, should between 1 and 128.
@@ -24278,6 +24492,8 @@ model ConnectionResetSharedKey {
 /**
  * List of virtual network gateway vpn client connection health.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientConnectionHealthDetailListResult {
   /**
    * List of vpn client connection health.
@@ -24290,6 +24506,8 @@ model VpnClientConnectionHealthDetailListResult {
 /**
  * VPN client connection health detail.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientConnectionHealthDetail {
   /**
    * The vpn client Id.
@@ -25182,6 +25400,8 @@ model VpnServerConfigurationPolicyGroupMember {
 /**
  * VpnClientConnectionHealth properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientConnectionHealth {
   /**
    * Total of the Ingress Bytes Transferred in this P2S Vpn connection.

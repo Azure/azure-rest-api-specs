@@ -1248,7 +1248,7 @@
       "description": "Azure Firewall resource.",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/AzureFirewallPropertiesFormat",
+          "$ref": "#/definitions/AzureFirewallPropertiesFormat",
           "description": "Properties of the azure firewall.",
           "x-ms-client-flatten": true
         },
@@ -1275,6 +1275,128 @@
         }
       ]
     },
+    "AzureFirewallApplicationRule": {
+      "type": "object",
+      "description": "Properties of an application rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the application rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Array of ApplicationRuleProtocols.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallApplicationRuleProtocol"
+          }
+        },
+        "targetFqdns": {
+          "type": "array",
+          "description": "List of FQDNs for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdnTags": {
+          "type": "array",
+          "description": "List of FQDN Tags for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallApplicationRuleProtocol": {
+      "type": "object",
+      "description": "Properties of the application rule protocol.",
+      "properties": {
+        "protocolType": {
+          "$ref": "./common.json/definitions/AzureFirewallApplicationRuleProtocolType",
+          "description": "Protocol type."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number for the protocol, cannot be greater than 64000. This field is optional.",
+          "minimum": 0,
+          "maximum": 64000
+        }
+      }
+    },
+    "AzureFirewallFqdnTagPropertiesFormat": {
+      "type": "object",
+      "description": "Azure Firewall FQDN Tag Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the Azure firewall FQDN tag resource.",
+          "readOnly": true
+        },
+        "fqdnTagName": {
+          "type": "string",
+          "description": "The name of this FQDN Tag.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of IP configuration of an Azure Firewall.",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes.",
+          "readOnly": true
+        },
+        "subnet": {
+          "$ref": "./common.json/definitions/SubResource",
+          "description": "Reference to the subnet resource. This resource must be named 'AzureFirewallSubnet' or 'AzureFirewallManagementSubnet'."
+        },
+        "publicIPAddress": {
+          "$ref": "./common.json/definitions/SubResource",
+          "description": "Reference to the PublicIP resource. This field is a mandatory input if subnet is not null."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the Azure firewall IP configuration resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallIPGroups": {
+      "type": "object",
+      "description": "IpGroups associated with azure firewall.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "changeNumber": {
+          "type": "string",
+          "description": "The iteration number.",
+          "readOnly": true
+        }
+      }
+    },
     "AzureFirewallListResult": {
       "type": "object",
       "description": "The response of a AzureFirewall list operation.",
@@ -1295,6 +1417,256 @@
       "required": [
         "value"
       ]
+    },
+    "AzureFirewallNatRCAction": {
+      "type": "object",
+      "description": "AzureFirewall NAT Rule Collection Action.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json/definitions/AzureFirewallNatRCActionType",
+          "description": "The type of action."
+        }
+      }
+    },
+    "AzureFirewallNatRule": {
+      "type": "object",
+      "description": "Properties of a NAT rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the NAT rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses for this rule. Supports IP ranges, prefixes, and service tags.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Array of AzureFirewallNetworkRuleProtocols applicable to this NAT rule.",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+          }
+        },
+        "translatedAddress": {
+          "type": "string",
+          "description": "The translated address for this NAT rule."
+        },
+        "translatedPort": {
+          "type": "string",
+          "description": "The translated port for this NAT rule."
+        },
+        "translatedFqdn": {
+          "type": "string",
+          "description": "The translated FQDN for this NAT rule."
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallNetworkRule": {
+      "type": "object",
+      "description": "Properties of the network rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule."
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Array of AzureFirewallNetworkRuleProtocols.",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+          }
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationFqdns": {
+          "type": "array",
+          "description": "List of destination FQDNs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "List of destination IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of the Azure Firewall.",
+      "properties": {
+        "applicationRuleCollections": {
+          "type": "array",
+          "description": "Collection of application rule collections used by Azure Firewall.",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallApplicationRuleCollection"
+          }
+        },
+        "natRuleCollections": {
+          "type": "array",
+          "description": "Collection of NAT rule collections used by Azure Firewall.",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallNatRuleCollection"
+          }
+        },
+        "networkRuleCollections": {
+          "type": "array",
+          "description": "Collection of network rule collections used by Azure Firewall.",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleCollection"
+          }
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "description": "IP configuration of the Azure Firewall resource.",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallIPConfiguration"
+          }
+        },
+        "managementIpConfiguration": {
+          "$ref": "./common.json/definitions/AzureFirewallIPConfiguration",
+          "description": "IP configuration of the Azure Firewall used for management traffic."
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the Azure firewall resource.",
+          "readOnly": true
+        },
+        "threatIntelMode": {
+          "$ref": "./common.json/definitions/AzureFirewallThreatIntelMode",
+          "description": "The operation mode for Threat Intelligence."
+        },
+        "virtualHub": {
+          "$ref": "./common.json/definitions/SubResource",
+          "description": "The virtualHub to which the firewall belongs."
+        },
+        "firewallPolicy": {
+          "$ref": "./common.json/definitions/SubResource",
+          "description": "The firewallPolicy associated with this azure firewall."
+        },
+        "hubIPAddresses": {
+          "$ref": "#/definitions/HubIPAddresses",
+          "description": "IP addresses associated with AzureFirewall."
+        },
+        "ipGroups": {
+          "type": "array",
+          "description": "IpGroups associated with AzureFirewall.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallIPGroups"
+          },
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureFirewallSku",
+          "description": "The Azure Firewall Resource SKU."
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "The additional properties used to further config this azure firewall.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "autoscaleConfiguration": {
+          "$ref": "./common.json/definitions/AzureFirewallAutoscaleConfiguration",
+          "description": "Properties to provide a custom autoscale configuration to this azure firewall."
+        }
+      }
+    },
+    "AzureFirewallPublicIPAddress": {
+      "type": "object",
+      "description": "Public IP Address associated with azure firewall.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Public IP Address value."
+        }
+      }
+    },
+    "AzureFirewallRCAction": {
+      "type": "object",
+      "description": "Properties of the AzureFirewallRCAction.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json/definitions/AzureFirewallRCActionType",
+          "description": "The type of action."
+        }
+      }
+    },
+    "AzureFirewallSku": {
+      "type": "object",
+      "description": "SKU of an Azure Firewall.",
+      "properties": {
+        "name": {
+          "$ref": "./common.json/definitions/AzureFirewallSkuName",
+          "description": "Name of an Azure Firewall SKU."
+        },
+        "tier": {
+          "$ref": "./common.json/definitions/AzureFirewallSkuTier",
+          "description": "Tier of an Azure Firewall."
+        }
+      }
     },
     "AzureWebCategory": {
       "type": "object",
@@ -1358,6 +1730,119 @@
         }
       ]
     },
+    "FirewallPolicyIntrusionDetection": {
+      "type": "object",
+      "description": "Configuration for intrusion detection mode and rules.",
+      "properties": {
+        "mode": {
+          "$ref": "./common.json/definitions/FirewallPolicyIntrusionDetectionStateType",
+          "description": "Intrusion detection general state. When attached to a parent policy, the firewall's effective IDPS mode is the stricter mode of the two."
+        },
+        "profile": {
+          "$ref": "./common.json/definitions/FirewallPolicyIntrusionDetectionProfileType",
+          "description": "IDPS profile name. When attached to a parent policy, the firewall's effective profile is the profile name of the parent policy."
+        },
+        "configuration": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionConfiguration",
+          "description": "Intrusion detection configuration properties."
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications": {
+      "type": "object",
+      "description": "Intrusion detection bypass traffic specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the bypass traffic rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the bypass traffic rule."
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/FirewallPolicyIntrusionDetectionProtocol",
+          "description": "The rule bypass protocol."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses or ranges for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses or ranges for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports or ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "List of destination IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionConfiguration": {
+      "type": "object",
+      "description": "The operation for configuring intrusion detection.",
+      "properties": {
+        "signatureOverrides": {
+          "type": "array",
+          "description": "List of specific signatures states.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionSignatureSpecification"
+          }
+        },
+        "bypassTrafficSettings": {
+          "type": "array",
+          "description": "List of rules for traffic to bypass.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
+          },
+          "x-ms-identifiers": []
+        },
+        "privateRanges": {
+          "type": "array",
+          "description": "IDPS Private IP address ranges are used to identify traffic direction (i.e. inbound, outbound, etc.). By default, only ranges defined by IANA RFC 1918 are considered private IP addresses. To modify default ranges, specify your Private IP address ranges with this property",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionSignatureSpecification": {
+      "type": "object",
+      "description": "Intrusion detection signatures specification states.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Signature id."
+        },
+        "mode": {
+          "$ref": "./common.json/definitions/FirewallPolicyIntrusionDetectionStateType",
+          "description": "The signature state."
+        }
+      }
+    },
     "FirewallPolicyListResult": {
       "type": "object",
       "description": "The response of a FirewallPolicy list operation.",
@@ -1378,6 +1863,106 @@
       "required": [
         "value"
       ]
+    },
+    "FirewallPolicyRuleCollectionGroupProperties": {
+      "type": "object",
+      "description": "Properties of the rule collection group.",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)",
+          "readOnly": true
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority of the Firewall Policy Rule Collection Group resource.",
+          "minimum": 100,
+          "maximum": 65000
+        },
+        "ruleCollections": {
+          "type": "array",
+          "description": "Group of Firewall Policy rule collections.",
+          "items": {
+            "$ref": "./common.json/definitions/FirewallPolicyRuleCollection"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the firewall policy rule collection group resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "FirewallPolicySNAT": {
+      "type": "object",
+      "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
+      "properties": {
+        "privateRanges": {
+          "type": "array",
+          "description": "List of private IP addresses/IP address ranges to not be SNAT.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "autoLearnPrivateRanges": {
+          "$ref": "./common.json/definitions/AutoLearnPrivateRangesMode",
+          "description": "The operation mode for automatically learning private ranges to not be SNAT"
+        }
+      }
+    },
+    "FirewallPolicyThreatIntelWhitelist": {
+      "type": "object",
+      "description": "ThreatIntel Whitelist for Firewall Policy.",
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "description": "List of IP addresses for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "type": "array",
+          "description": "List of FQDNs for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HubIPAddresses": {
+      "type": "object",
+      "description": "IP addresses associated with azure firewall.",
+      "properties": {
+        "publicIPs": {
+          "$ref": "#/definitions/HubPublicIPAddresses",
+          "description": "Public IP addresses associated with azure firewall."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Private IP Address associated with azure firewall."
+        }
+      }
+    },
+    "HubPublicIPAddresses": {
+      "type": "object",
+      "description": "Public IP addresses associated with azure firewall.",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "description": "The list of Public IP addresses associated with azure firewall or IP addresses to be retained.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPublicIPAddress"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of Public IP addresses associated with azure firewall."
+        }
+      }
     }
   },
   "parameters": {}

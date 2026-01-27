@@ -712,7 +712,7 @@
             "description": "Parameters supplied to the generate virtual network gateway VPN client package operation.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientParameters"
+              "$ref": "#/definitions/VpnClientParameters"
             }
           }
         ],
@@ -785,7 +785,7 @@
             "description": "Parameters supplied to the generate virtual network gateway VPN client package operation.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientParameters"
+              "$ref": "#/definitions/VpnClientParameters"
             }
           }
         ],
@@ -864,7 +864,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/GatewayRouteListResult"
+              "$ref": "#/definitions/GatewayRouteListResult"
             }
           },
           "202": {
@@ -895,7 +895,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json/definitions/GatewayRouteListResult"
+          "final-state-schema": "#/definitions/GatewayRouteListResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -936,7 +936,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/BgpPeerStatusListResult"
+              "$ref": "#/definitions/BgpPeerStatusListResult"
             }
           },
           "202": {
@@ -967,7 +967,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json/definitions/BgpPeerStatusListResult"
+          "final-state-schema": "#/definitions/BgpPeerStatusListResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1017,7 +1017,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "./common.json/definitions/ExpressRouteFailoverTestDetails"
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
               }
             }
           },
@@ -1163,7 +1163,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/GatewayRouteListResult"
+              "$ref": "#/definitions/GatewayRouteListResult"
             }
           },
           "202": {
@@ -1194,7 +1194,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json/definitions/GatewayRouteListResult"
+          "final-state-schema": "#/definitions/GatewayRouteListResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1372,7 +1372,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientConnectionHealthDetailListResult"
+              "$ref": "#/definitions/VpnClientConnectionHealthDetailListResult"
             }
           },
           "202": {
@@ -1403,7 +1403,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json/definitions/VpnClientConnectionHealthDetailListResult"
+          "final-state-schema": "#/definitions/VpnClientConnectionHealthDetailListResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1437,7 +1437,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientIPsecParameters"
+              "$ref": "#/definitions/VpnClientIPsecParameters"
             },
             "headers": {
               "Location": {
@@ -1465,7 +1465,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json/definitions/VpnClientIPsecParameters"
+          "final-state-schema": "#/definitions/VpnClientIPsecParameters"
         },
         "x-ms-long-running-operation": true
       }
@@ -1810,7 +1810,7 @@
             "description": "Parameters supplied to the Begin Set vpnclient ipsec parameters of Virtual Network Gateway P2S client operation through Network resource provider.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientIPsecParameters"
+              "$ref": "#/definitions/VpnClientIPsecParameters"
             }
           }
         ],
@@ -1818,7 +1818,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientIPsecParameters"
+              "$ref": "#/definitions/VpnClientIPsecParameters"
             }
           },
           "202": {
@@ -1849,7 +1849,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json/definitions/VpnClientIPsecParameters"
+          "final-state-schema": "#/definitions/VpnClientIPsecParameters"
         },
         "x-ms-long-running-operation": true
       }
@@ -1884,7 +1884,7 @@
             "description": "Virtual network gateway packet capture parameters supplied to start packet capture on gateway.",
             "required": false,
             "schema": {
-              "$ref": "./common.json/definitions/VpnPacketCaptureStartParameters"
+              "$ref": "#/definitions/VpnPacketCaptureStartParameters"
             }
           }
         ],
@@ -2031,7 +2031,7 @@
             "description": "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/VpnPacketCaptureStopParameters"
+              "$ref": "#/definitions/VpnPacketCaptureStopParameters"
             }
           }
         ],
@@ -2473,6 +2473,410 @@
     }
   },
   "definitions": {
+    "BgpPeerStatus": {
+      "type": "object",
+      "description": "BGP peer status details.",
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "description": "The virtual network gateway's local address.",
+          "readOnly": true
+        },
+        "neighbor": {
+          "type": "string",
+          "description": "The remote BGP peer.",
+          "readOnly": true
+        },
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The autonomous system number of the remote BGP peer.",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./common.json/definitions/BgpPeerState",
+          "description": "The BGP peer state.",
+          "readOnly": true
+        },
+        "connectedDuration": {
+          "type": "string",
+          "description": "For how long the peering has been up.",
+          "readOnly": true
+        },
+        "routesReceived": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of routes learned from this peer.",
+          "readOnly": true
+        },
+        "messagesSent": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of BGP messages sent.",
+          "readOnly": true
+        },
+        "messagesReceived": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of BGP messages received.",
+          "readOnly": true
+        }
+      }
+    },
+    "BgpPeerStatusListResult": {
+      "type": "object",
+      "description": "Response for list BGP peer status API service call.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of BGP peers.",
+          "items": {
+            "$ref": "#/definitions/BgpPeerStatus"
+          }
+        }
+      }
+    },
+    "BgpSettings": {
+      "type": "object",
+      "description": "BGP settings details.",
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The BGP speaker's ASN.",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "The BGP peering address and BGP identifier of this BGP speaker."
+        },
+        "peerWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight added to routes learned from this BGP speaker."
+        },
+        "bgpPeeringAddresses": {
+          "type": "array",
+          "description": "BGP peering address with IP configuration ID for virtual network gateway.",
+          "items": {
+            "$ref": "#/definitions/IPConfigurationBgpPeeringAddress"
+          }
+        }
+      }
+    },
+    "CertificateAuthentication": {
+      "type": "object",
+      "description": "Certificate Authentication information for a certificate based authentication connection.",
+      "properties": {
+        "outboundAuthCertificate": {
+          "type": "string",
+          "format": "uri",
+          "description": "Keyvault secret ID for outbound authentication certificate."
+        },
+        "inboundAuthCertificateSubjectName": {
+          "type": "string",
+          "description": "Inbound authentication certificate subject name."
+        },
+        "inboundAuthCertificateChain": {
+          "type": "array",
+          "description": "Inbound authentication certificate public keys.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CircuitMetadataMap": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Express Route Circuit Name"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link to the Express Route circuit"
+        },
+        "location": {
+          "type": "string",
+          "description": "Peering location of the Express Route Circuit"
+        }
+      }
+    },
+    "ConnectionResetSharedKey": {
+      "type": "object",
+      "description": "The virtual network connection reset shared key.",
+      "properties": {
+        "keyLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The virtual network connection reset shared key length, should between 1 and 128.",
+          "minimum": 1,
+          "maximum": 128
+        }
+      },
+      "required": [
+        "keyLength"
+      ]
+    },
+    "ExpressRouteFailoverTestDetails": {
+      "type": "object",
+      "description": "ExpressRoute failover test details",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "circuits": {
+          "type": "array",
+          "description": "All circuits in the peering location",
+          "items": {
+            "$ref": "./common.json/definitions/ExpressRouteFailoverCircuitResourceDetails"
+          }
+        },
+        "status": {
+          "$ref": "./common.json/definitions/FailoverTestStatus",
+          "description": "The current status of the test"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Time when the test was started"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Time when the test was completed"
+        },
+        "connections": {
+          "type": "array",
+          "description": "All connections to the circuits in the peering location",
+          "items": {
+            "$ref": "./common.json/definitions/ExpressRouteFailoverConnectionResourceDetails"
+          }
+        },
+        "testGuid": {
+          "type": "string",
+          "description": "The unique GUID associated with the test"
+        },
+        "testType": {
+          "$ref": "./common.json/definitions/FailoverTestType",
+          "description": "The type of failover test"
+        },
+        "issues": {
+          "type": "array",
+          "description": "A list of all issues with the test",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GatewayCustomBgpIpAddressIpConfiguration": {
+      "type": "object",
+      "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection.",
+      "properties": {
+        "ipConfigurationId": {
+          "type": "string",
+          "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
+        },
+        "customBgpIpAddress": {
+          "type": "string",
+          "description": "The custom BgpPeeringAddress which belongs to IpconfigurationId."
+        }
+      },
+      "required": [
+        "ipConfigurationId",
+        "customBgpIpAddress"
+      ]
+    },
+    "GatewayRoute": {
+      "type": "object",
+      "description": "Gateway routing details.",
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "description": "The gateway's local address.",
+          "readOnly": true
+        },
+        "network": {
+          "type": "string",
+          "description": "The route's network prefix.",
+          "readOnly": true
+        },
+        "nextHop": {
+          "type": "string",
+          "description": "The route's next hop.",
+          "readOnly": true
+        },
+        "sourcePeer": {
+          "type": "string",
+          "description": "The peer this route was learned from.",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "The source this route was learned from.",
+          "readOnly": true
+        },
+        "asPath": {
+          "type": "string",
+          "description": "The route's AS path sequence.",
+          "readOnly": true
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The route's weight.",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayRouteListResult": {
+      "type": "object",
+      "description": "List of virtual network gateway routes.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of gateway routes.",
+          "items": {
+            "$ref": "#/definitions/GatewayRoute"
+          }
+        }
+      }
+    },
+    "IPConfigurationBgpPeeringAddress": {
+      "type": "object",
+      "description": "Properties of IPConfigurationBgpPeeringAddress.",
+      "properties": {
+        "ipconfigurationId": {
+          "type": "string",
+          "description": "The ID of IP configuration which belongs to gateway."
+        },
+        "defaultBgpIpAddresses": {
+          "type": "array",
+          "description": "The list of default BGP peering addresses which belong to IP configuration.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "customBgpIpAddresses": {
+          "type": "array",
+          "description": "The list of custom BGP peering addresses which belong to IP configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tunnelIpAddresses": {
+          "type": "array",
+          "description": "The list of tunnel public IP addresses which belong to IP configuration.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "IpsecPolicy": {
+      "type": "object",
+      "description": "An IPSec Policy configuration for a virtual network gateway connection.",
+      "properties": {
+        "saLifeTimeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for a site to site VPN tunnel."
+        },
+        "saDataSizeKilobytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) payload size in KB for a site to site VPN tunnel."
+        },
+        "ipsecEncryption": {
+          "$ref": "./common.json/definitions/IpsecEncryption",
+          "description": "The IPSec encryption algorithm (IKE phase 1)."
+        },
+        "ipsecIntegrity": {
+          "$ref": "./common.json/definitions/IpsecIntegrity",
+          "description": "The IPSec integrity algorithm (IKE phase 1)."
+        },
+        "ikeEncryption": {
+          "$ref": "./common.json/definitions/IkeEncryption",
+          "description": "The IKE encryption algorithm (IKE phase 2)."
+        },
+        "ikeIntegrity": {
+          "$ref": "./common.json/definitions/IkeIntegrity",
+          "description": "The IKE integrity algorithm (IKE phase 2)."
+        },
+        "dhGroup": {
+          "$ref": "./common.json/definitions/DhGroup",
+          "description": "The DH Group used in IKE Phase 1 for initial SA."
+        },
+        "pfsGroup": {
+          "$ref": "./common.json/definitions/PfsGroup",
+          "description": "The Pfs Group used in IKE Phase 2 for new child SA."
+        }
+      },
+      "required": [
+        "saLifeTimeSeconds",
+        "saDataSizeKilobytes",
+        "ipsecEncryption",
+        "ipsecIntegrity",
+        "ikeEncryption",
+        "ikeIntegrity",
+        "dhGroup",
+        "pfsGroup"
+      ]
+    },
+    "LocalNetworkGatewayPropertiesFormat": {
+      "type": "object",
+      "description": "LocalNetworkGateway properties.",
+      "properties": {
+        "localNetworkAddressSpace": {
+          "$ref": "./common.json/definitions/AddressSpace",
+          "description": "Local network site address space."
+        },
+        "gatewayIpAddress": {
+          "type": "string",
+          "description": "IP address of local network gateway."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "FQDN of local network gateway."
+        },
+        "bgpSettings": {
+          "$ref": "#/definitions/BgpSettings",
+          "description": "Local network gateway's BGP speaker settings."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the local network gateway resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the local network gateway resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "RadiusAuthServer": {
+      "type": "object",
+      "description": "Gateway or VpnServerConfiguration Radius server with radius secret details",
+      "properties": {
+        "radiusServerAddress": {
+          "type": "string",
+          "description": "Radius server IPAddress"
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "Radius server secret",
+          "x-ms-secret": true
+        }
+      }
+    },
     "VirtualNetworkGateway": {
       "type": "object",
       "description": "A common class for general resource information.",
@@ -2505,6 +2909,198 @@
         }
       ]
     },
+    "VirtualNetworkGatewayConnectionPropertiesFormat": {
+      "type": "object",
+      "description": "VirtualNetworkGatewayConnection properties.",
+      "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorizationKey."
+        },
+        "virtualNetworkGateway1": {
+          "$ref": "#/definitions/VirtualNetworkGateway",
+          "description": "The reference to virtual network gateway resource."
+        },
+        "virtualNetworkGateway2": {
+          "$ref": "#/definitions/VirtualNetworkGateway",
+          "description": "The reference to virtual network gateway resource."
+        },
+        "localNetworkGateway2": {
+          "$ref": "./common.json/definitions/LocalNetworkGateway",
+          "description": "The reference to local network gateway resource."
+        },
+        "ingressNatRules": {
+          "type": "array",
+          "description": "List of ingress NatRules.",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          }
+        },
+        "egressNatRules": {
+          "type": "array",
+          "description": "List of egress NatRules.",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          }
+        },
+        "connectionType": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionType",
+          "description": "Gateway connection type."
+        },
+        "connectionProtocol": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionProtocol",
+          "description": "Connection protocol used for this connection."
+        },
+        "routingWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The routing weight."
+        },
+        "dpdTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The dead peer detection timeout of this connection in seconds."
+        },
+        "connectionMode": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionMode",
+          "description": "The connection mode for this connection."
+        },
+        "tunnelProperties": {
+          "type": "array",
+          "description": "Tunnel properties for virtual network gateway connection",
+          "items": {
+            "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionTunnelProperties"
+          }
+        },
+        "sharedKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The IPSec shared key.",
+          "x-ms-secret": true
+        },
+        "connectionStatus": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionStatus",
+          "description": "Virtual Network Gateway connection status.",
+          "readOnly": true
+        },
+        "tunnelConnectionStatus": {
+          "type": "array",
+          "description": "Collection of all tunnels' connection health status.",
+          "items": {
+            "$ref": "./common.json/definitions/TunnelConnectionHealth"
+          },
+          "readOnly": true
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The egress bytes transferred in this connection.",
+          "readOnly": true
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress bytes transferred in this connection.",
+          "readOnly": true
+        },
+        "peer": {
+          "$ref": "./common.json/definitions/SubResource",
+          "description": "The reference to peerings resource."
+        },
+        "enableBgp": {
+          "type": "boolean",
+          "description": "EnableBgp flag."
+        },
+        "gatewayCustomBgpIpAddresses": {
+          "type": "array",
+          "description": "GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.",
+          "items": {
+            "$ref": "#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "useLocalAzureIpAddress": {
+          "type": "boolean",
+          "description": "Use private local Azure IP for the connection."
+        },
+        "usePolicyBasedTrafficSelectors": {
+          "type": "boolean",
+          "description": "Enable policy-based traffic selectors."
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "description": "The IPSec Policies to be considered by this connection.",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          }
+        },
+        "trafficSelectorPolicies": {
+          "type": "array",
+          "description": "The Traffic Selector Policies to be considered by this connection.",
+          "items": {
+            "$ref": "./common.json/definitions/TrafficSelectorPolicy"
+          }
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the virtual network gateway connection resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the virtual network gateway connection resource.",
+          "readOnly": true
+        },
+        "expressRouteGatewayBypass": {
+          "type": "boolean",
+          "description": "Bypass ExpressRoute Gateway for data forwarding."
+        },
+        "enablePrivateLinkFastPath": {
+          "type": "boolean",
+          "description": "Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled."
+        },
+        "authenticationType": {
+          "$ref": "./common.json/definitions/ConnectionAuthenticationType",
+          "description": "Gateway connection authentication type."
+        },
+        "certificateAuthentication": {
+          "$ref": "#/definitions/CertificateAuthentication",
+          "description": "Certificate Authentication information for a certificate based authentication connection."
+        }
+      },
+      "required": [
+        "virtualNetworkGateway1",
+        "connectionType"
+      ]
+    },
+    "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of VirtualNetworkGatewayIPConfiguration.",
+      "properties": {
+        "privateIPAllocationMethod": {
+          "$ref": "./common.json/definitions/IPAllocationMethod",
+          "description": "The private IP address allocation method."
+        },
+        "subnet": {
+          "$ref": "./common.json/definitions/SubResource",
+          "description": "The reference to the subnet resource."
+        },
+        "publicIPAddress": {
+          "$ref": "./common.json/definitions/SubResource",
+          "description": "The reference to the public IP resource."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Private IP Address for this gateway.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the virtual network gateway IP configuration resource.",
+          "readOnly": true
+        }
+      }
+    },
     "VirtualNetworkGatewayListResult": {
       "type": "object",
       "description": "The response of a VirtualNetworkGateway list operation.",
@@ -2525,6 +3121,122 @@
       "required": [
         "value"
       ]
+    },
+    "VirtualNetworkGatewayNatRuleProperties": {
+      "type": "object",
+      "description": "Parameters for VirtualNetworkGatewayNatRule.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the NAT Rule resource.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "./common.json/definitions/VpnNatRuleType",
+          "description": "The type of NAT rule for VPN NAT."
+        },
+        "mode": {
+          "$ref": "./common.json/definitions/VpnNatRuleMode",
+          "description": "The Source NAT direction of a VPN NAT."
+        },
+        "internalMappings": {
+          "type": "array",
+          "description": "The private IP address internal mapping for NAT.",
+          "items": {
+            "$ref": "./common.json/definitions/VpnNatRuleMapping"
+          }
+        },
+        "externalMappings": {
+          "type": "array",
+          "description": "The private IP address external mapping for NAT.",
+          "items": {
+            "$ref": "./common.json/definitions/VpnNatRuleMapping"
+          }
+        },
+        "ipConfigurationId": {
+          "type": "string",
+          "description": "The IP Configuration ID this NAT rule applies to."
+        }
+      }
+    },
+    "VirtualNetworkGatewayPolicyGroupMember": {
+      "type": "object",
+      "description": "Vpn Client Connection configuration PolicyGroup member",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the VirtualNetworkGatewayPolicyGroupMember."
+        },
+        "attributeType": {
+          "$ref": "./common.json/definitions/VpnPolicyMemberAttributeType",
+          "description": "The Vpn Policy member attribute type."
+        },
+        "attributeValue": {
+          "type": "string",
+          "description": "The value of Attribute used for this VirtualNetworkGatewayPolicyGroupMember."
+        }
+      }
+    },
+    "VirtualNetworkGatewayPolicyGroupProperties": {
+      "type": "object",
+      "description": "Properties of VirtualNetworkGatewayPolicyGroup.",
+      "properties": {
+        "isDefault": {
+          "type": "boolean",
+          "description": "Shows if this is a Default VirtualNetworkGatewayPolicyGroup or not."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority for VirtualNetworkGatewayPolicyGroup."
+        },
+        "policyMembers": {
+          "type": "array",
+          "description": "Multiple PolicyMembers for VirtualNetworkGatewayPolicyGroup.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroupMember"
+          },
+          "x-ms-identifiers": []
+        },
+        "vngClientConnectionConfigurations": {
+          "type": "array",
+          "description": "List of references to vngClientConnectionConfigurations.",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the VirtualNetworkGatewayPolicyGroup resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "isDefault",
+        "priority",
+        "policyMembers"
+      ]
+    },
+    "VirtualNetworkGatewaySku": {
+      "type": "object",
+      "description": "VirtualNetworkGatewaySku details.",
+      "properties": {
+        "name": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewaySkuName",
+          "description": "Gateway SKU name."
+        },
+        "tier": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewaySkuTier",
+          "description": "Gateway SKU tier."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity.",
+          "readOnly": true
+        }
+      }
     },
     "VirtualNetworkTap": {
       "type": "object",
@@ -2567,6 +3279,342 @@
       "required": [
         "value"
       ]
+    },
+    "VngClientConnectionConfigurationProperties": {
+      "type": "object",
+      "description": "Properties of VngClientConnectionConfiguration.",
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "./common.json/definitions/AddressSpace",
+          "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
+        },
+        "virtualNetworkGatewayPolicyGroups": {
+          "type": "array",
+          "description": "List of references to virtualNetworkGatewayPolicyGroups",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the VngClientConnectionConfiguration resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "vpnClientAddressPool",
+        "virtualNetworkGatewayPolicyGroups"
+      ]
+    },
+    "VpnClientConfiguration": {
+      "type": "object",
+      "description": "VpnClientConfiguration for P2S client.",
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "./common.json/definitions/AddressSpace",
+          "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
+        },
+        "vpnClientRootCertificates": {
+          "type": "array",
+          "description": "VpnClientRootCertificate for virtual network gateway.",
+          "items": {
+            "$ref": "./common.json/definitions/VpnClientRootCertificate"
+          }
+        },
+        "vpnClientRevokedCertificates": {
+          "type": "array",
+          "description": "VpnClientRevokedCertificate for Virtual network gateway.",
+          "items": {
+            "$ref": "./common.json/definitions/VpnClientRevokedCertificate"
+          }
+        },
+        "vpnClientProtocols": {
+          "type": "array",
+          "description": "VpnClientProtocols for Virtual network gateway.",
+          "items": {
+            "$ref": "./common.json/definitions/VpnClientProtocol"
+          }
+        },
+        "vpnAuthenticationTypes": {
+          "type": "array",
+          "description": "VPN authentication types for the virtual network gateway..",
+          "items": {
+            "$ref": "./common.json/definitions/VpnAuthenticationType"
+          }
+        },
+        "vpnClientIpsecPolicies": {
+          "type": "array",
+          "description": "VpnClientIpsecPolicies for virtual network gateway P2S client.",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          }
+        },
+        "radiusServerAddress": {
+          "type": "string",
+          "description": "The radius server address property of the VirtualNetworkGateway resource for vpn client connection."
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets.",
+          "x-ms-secret": true
+        },
+        "radiusServers": {
+          "type": "array",
+          "description": "The radiusServers property for multiple radius server configuration.",
+          "items": {
+            "$ref": "./common.json/definitions/RadiusServer"
+          }
+        },
+        "aadTenant": {
+          "type": "string",
+          "description": "The AADTenant property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+        },
+        "aadAudience": {
+          "type": "string",
+          "description": "The AADAudience property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+        },
+        "aadIssuer": {
+          "type": "string",
+          "description": "The AADIssuer property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+        },
+        "vngClientConnectionConfigurations": {
+          "type": "array",
+          "description": "per ip address pool connection policy for virtual network gateway P2S client.",
+          "items": {
+            "$ref": "./common.json/definitions/VngClientConnectionConfiguration"
+          }
+        }
+      }
+    },
+    "VpnClientConnectionHealth": {
+      "type": "object",
+      "description": "VpnClientConnectionHealth properties.",
+      "properties": {
+        "totalIngressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total of the Ingress Bytes Transferred in this P2S Vpn connection.",
+          "readOnly": true
+        },
+        "totalEgressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total of the Egress Bytes Transferred in this connection.",
+          "readOnly": true
+        },
+        "vpnClientConnectionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total of p2s vpn clients connected at this time to this P2SVpnGateway."
+        },
+        "allocatedIpAddresses": {
+          "type": "array",
+          "description": "List of allocated ip addresses to the connected p2s vpn clients.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpnClientConnectionHealthDetail": {
+      "type": "object",
+      "description": "VPN client connection health detail.",
+      "properties": {
+        "vpnConnectionId": {
+          "type": "string",
+          "description": "The vpn client Id.",
+          "readOnly": true
+        },
+        "vpnConnectionDuration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The duration time of a connected vpn client.",
+          "readOnly": true
+        },
+        "vpnConnectionTime": {
+          "type": "string",
+          "description": "The start time of a connected vpn client.",
+          "readOnly": true
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "description": "The public Ip of a connected vpn client.",
+          "readOnly": true
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "description": "The assigned private Ip of a connected vpn client.",
+          "readOnly": true
+        },
+        "vpnUserName": {
+          "type": "string",
+          "description": "The user name of a connected vpn client.",
+          "readOnly": true
+        },
+        "maxBandwidth": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The max band width.",
+          "readOnly": true
+        },
+        "egressPacketsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The egress packets per second.",
+          "readOnly": true
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The egress bytes per second.",
+          "readOnly": true
+        },
+        "ingressPacketsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress packets per second.",
+          "readOnly": true
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress bytes per second.",
+          "readOnly": true
+        },
+        "maxPacketsPerSecond": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The max packets transferred per second.",
+          "readOnly": true
+        }
+      }
+    },
+    "VpnClientConnectionHealthDetailListResult": {
+      "type": "object",
+      "description": "List of virtual network gateway vpn client connection health.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of vpn client connection health.",
+          "items": {
+            "$ref": "#/definitions/VpnClientConnectionHealthDetail"
+          }
+        }
+      }
+    },
+    "VpnClientIPsecParameters": {
+      "type": "object",
+      "description": "An IPSec parameters for a virtual network gateway P2S connection.",
+      "properties": {
+        "saLifeTimeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for P2S client."
+        },
+        "saDataSizeKilobytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The IPSec Security Association (also called Quick Mode or Phase 2 SA) payload size in KB for P2S client.."
+        },
+        "ipsecEncryption": {
+          "$ref": "./common.json/definitions/IpsecEncryption",
+          "description": "The IPSec encryption algorithm (IKE phase 1)."
+        },
+        "ipsecIntegrity": {
+          "$ref": "./common.json/definitions/IpsecIntegrity",
+          "description": "The IPSec integrity algorithm (IKE phase 1)."
+        },
+        "ikeEncryption": {
+          "$ref": "./common.json/definitions/IkeEncryption",
+          "description": "The IKE encryption algorithm (IKE phase 2)."
+        },
+        "ikeIntegrity": {
+          "$ref": "./common.json/definitions/IkeIntegrity",
+          "description": "The IKE integrity algorithm (IKE phase 2)."
+        },
+        "dhGroup": {
+          "$ref": "./common.json/definitions/DhGroup",
+          "description": "The DH Group used in IKE Phase 1 for initial SA."
+        },
+        "pfsGroup": {
+          "$ref": "./common.json/definitions/PfsGroup",
+          "description": "The Pfs Group used in IKE Phase 2 for new child SA."
+        }
+      },
+      "required": [
+        "saLifeTimeSeconds",
+        "saDataSizeKilobytes",
+        "ipsecEncryption",
+        "ipsecIntegrity",
+        "ikeEncryption",
+        "ikeIntegrity",
+        "dhGroup",
+        "pfsGroup"
+      ]
+    },
+    "VpnClientParameters": {
+      "type": "object",
+      "description": "Vpn Client Parameters for package generation.",
+      "properties": {
+        "processorArchitecture": {
+          "$ref": "./common.json/definitions/ProcessorArchitecture",
+          "description": "VPN client Processor Architecture."
+        },
+        "authenticationMethod": {
+          "$ref": "./common.json/definitions/AuthenticationMethod",
+          "description": "VPN client authentication method."
+        },
+        "radiusServerAuthCertificate": {
+          "type": "string",
+          "description": "The public certificate data for the radius server authentication certificate as a Base-64 encoded string. Required only if external radius authentication has been configured with EAPTLS authentication."
+        },
+        "clientRootCertificates": {
+          "type": "array",
+          "description": "A list of client root certificates public certificate data encoded as Base-64 strings. Optional parameter for external radius based authentication with EAPTLS.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpnDeviceScriptParameters": {
+      "type": "object",
+      "description": "Vpn device configuration script generation parameters.",
+      "properties": {
+        "vendor": {
+          "type": "string",
+          "description": "The vendor for the vpn device."
+        },
+        "deviceFamily": {
+          "type": "string",
+          "description": "The device family for the vpn device."
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "The firmware version for the vpn device."
+        }
+      }
+    },
+    "VpnPacketCaptureStartParameters": {
+      "type": "object",
+      "description": "Start packet capture parameters on virtual network gateway.",
+      "properties": {
+        "filterData": {
+          "type": "string",
+          "description": "Start Packet capture parameters."
+        }
+      }
+    },
+    "VpnPacketCaptureStopParameters": {
+      "type": "object",
+      "description": "Stop packet capture parameters.",
+      "properties": {
+        "sasUrl": {
+          "type": "string",
+          "description": "SAS url for packet capture on virtual network gateway."
+        }
+      }
     }
   },
   "parameters": {}
