@@ -258,9 +258,6 @@
           "Create a PipelineGroup instance using a syslog receiver and cache.": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithCache.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
-          },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to a custom table": {
             "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransform.json"
           },
@@ -871,24 +868,6 @@
         ]
       }
     },
-    "ExternalNetworkingMode": {
-      "type": "string",
-      "description": "The mode of the external networking.",
-      "enum": [
-        "LoadBalancerOnly"
-      ],
-      "x-ms-enum": {
-        "name": "ExternalNetworkingMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LoadBalancerOnly",
-            "value": "LoadBalancerOnly",
-            "description": "Load balancer only."
-          }
-        ]
-      }
-    },
     "JsonArrayMapper": {
       "type": "object",
       "description": "A component that allows parsing a value from sourceField as a json array, match a key to each parsed value from keys, and output the key-value map to destinationField field.",
@@ -957,64 +936,6 @@
           "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself."
         }
       }
-    },
-    "NetworkingConfiguration": {
-      "type": "object",
-      "description": "Networking configuration for the pipeline group instance.",
-      "properties": {
-        "externalNetworkingMode": {
-          "$ref": "#/definitions/ExternalNetworkingMode",
-          "description": "External networking mode."
-        },
-        "host": {
-          "type": "string",
-          "description": "The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.",
-          "pattern": "^[a-zA-Z0-9-\\.]+$"
-        },
-        "routes": {
-          "type": "array",
-          "description": "Networking routes configuration.",
-          "items": {
-            "$ref": "#/definitions/NetworkingRoute"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "externalNetworkingMode",
-        "routes"
-      ]
-    },
-    "NetworkingRoute": {
-      "type": "object",
-      "description": "Networking route configuration.",
-      "properties": {
-        "receiver": {
-          "type": "string",
-          "description": "The name of the previously defined receiver.",
-          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port that will be configured externally. If not specified, it will use the port from the receiver definition.",
-          "minimum": 1,
-          "maximum": 65535
-        },
-        "path": {
-          "type": "string",
-          "description": "Route path.",
-          "pattern": "^[a-zA-Z0-9-/\\.]+$"
-        },
-        "subdomain": {
-          "type": "string",
-          "description": "Route subdomain.",
-          "pattern": "^[a-zA-Z0-9-\\.]+$"
-        }
-      },
-      "required": [
-        "receiver"
-      ]
     },
     "OtlpReceiver": {
       "type": "object",
@@ -1175,14 +1096,6 @@
           "$ref": "#/definitions/Service",
           "description": "The service section for a given pipeline group instance."
         },
-        "networkingConfigurations": {
-          "type": "array",
-          "description": "Networking configurations for the pipeline group instance.",
-          "items": {
-            "$ref": "#/definitions/NetworkingConfiguration"
-          },
-          "x-ms-identifiers": []
-        },
         "executionPlacement": {
           "$ref": "#/definitions/ExecutionPlacement",
           "description": "Constraints for guiding the execution environment of the pipeline group."
@@ -1244,14 +1157,6 @@
         "service": {
           "$ref": "#/definitions/ServiceUpdate",
           "description": "The service section for a given pipeline group instance."
-        },
-        "networkingConfigurations": {
-          "type": "array",
-          "description": "Networking configurations for the pipeline group instance.",
-          "items": {
-            "$ref": "#/definitions/NetworkingConfiguration"
-          },
-          "x-ms-identifiers": []
         },
         "executionPlacement": {
           "$ref": "#/definitions/ExecutionPlacement",

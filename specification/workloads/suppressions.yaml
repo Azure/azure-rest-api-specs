@@ -1,0 +1,17 @@
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-ts.*
+  paths: 
+    - Workloads.ConfigurationChecksTemplates.Management/tspconfig.yaml
+    - Workloads.ConfigurationValidationResults.Management/tspconfig.yaml
+    - Workloads.EpicVirtualInstance.Management/tspconfig.yaml
+    - Workloads.Monitor.Management/tspconfig.yaml
+    - Workloads.Operations.Management/tspconfig.yaml
+    - Workloads.SAPDiscoverySite.Management/tspconfig.yaml
+    - Workloads.SAPVirtualInstance.Management/tspconfig.yaml
+    - Workloads.VirtualInstance.Management/tspconfig.yaml
