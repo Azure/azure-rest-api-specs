@@ -16,6 +16,7 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Cluster Jobs resource")
 @parentResource(EdgeMachine)
 model EdgeMachineJob
@@ -29,6 +30,7 @@ model EdgeMachineJob
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @armResourceOperations
 interface EdgeMachineJobs {
   @doc("Get a EdgeMachineJob")
@@ -49,6 +51,7 @@ interface EdgeMachineJobs {
 //////////////////// models ////////////////////
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("EdgeMachine Job properties")
 @discriminator("jobType")
 model EdgeMachineJobProperties {
@@ -85,6 +88,7 @@ model EdgeMachineJobProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Job Type supported.")
 union EdgeMachineJobType {
   string,
@@ -103,6 +107,7 @@ union EdgeMachineJobType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Properties for adding a server in the cluster.")
 model EdgeMachineRemoteSupportJobProperties extends EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
@@ -123,6 +128,7 @@ model EdgeMachineRemoteSupportJobProperties extends EdgeMachineJobProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
 model ProvisionOsJobProperties extends EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
@@ -136,6 +142,7 @@ model ProvisionOsJobProperties extends EdgeMachineJobProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Download Request properties")
 model DownloadRequest {
   @doc("Target operating system to support polymorphic resource.")
@@ -147,6 +154,7 @@ model DownloadRequest {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Represents the properties of Download Os job.")
 model DownloadOsJobProperties extends EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
@@ -160,12 +168,14 @@ model DownloadOsJobProperties extends EdgeMachineJobProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Reported Properties for Provision Os job")
 model ProvisionOsReportedProperties {
   ...JobReportedProperties;
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Represents a provisioning request.")
 model ProvisioningRequest {
   @doc("Target operating system to support polymorphic resource.")
@@ -190,6 +200,7 @@ model ProvisioningRequest {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Represents the provisioning operating system type.")
 union ProvisioningOsType {
   string,
@@ -202,6 +213,7 @@ union ProvisioningOsType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Represents the reported properties of a remote support job.")
 model EdgeMachineRemoteSupportJobReportedProperties {
   ...EdgeMachineJobReportedProperties;
@@ -217,6 +229,7 @@ model EdgeMachineRemoteSupportJobReportedProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Represents the settings of a remote support node.")
 model EdgeMachineRemoteSupportNodeSettings {
   @doc("The state of the remote support node.")
@@ -241,6 +254,7 @@ model EdgeMachineRemoteSupportNodeSettings {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Properties for pausing a server in the cluster.")
 model EdgeMachineCollectLogJobProperties extends EdgeMachineJobProperties {
   @doc("ClusterJob Type to support polymorphic resource.")
@@ -262,6 +276,7 @@ model EdgeMachineCollectLogJobProperties extends EdgeMachineJobProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Represents the reported properties of a log collection job.")
 model EdgeMachineCollectLogJobReportedProperties {
   ...JobReportedProperties;
@@ -273,6 +288,7 @@ model EdgeMachineCollectLogJobReportedProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Reported Properties for job triggered from cloud.")
 model EdgeMachineJobReportedProperties {
   @doc("The percentage of the job that is complete.")
@@ -289,6 +305,7 @@ model EdgeMachineJobReportedProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Operating system profile.")
 model OsProvisionProfile {
   @doc("Name of the operating system.")
@@ -318,6 +335,7 @@ model OsProvisionProfile {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Operating system profile.")
 model DownloadOsProfile {
   @doc("Name of the operating system.")
@@ -344,6 +362,7 @@ model DownloadOsProfile {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("OS Provision Operation type")
 union OSOperationType {
   string,
@@ -359,6 +378,7 @@ union OSOperationType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Type of secret used for authentication.")
 union SecretType {
   string,
@@ -371,6 +391,7 @@ union SecretType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("User configuration.")
 model UserDetails {
   @doc("Name of the user.")
@@ -387,6 +408,7 @@ model UserDetails {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Onboarding resource type.")
 union OnboardingResourceType {
   string,
@@ -396,6 +418,7 @@ union OnboardingResourceType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Onboarding configuration.")
 model OnboardingConfiguration {
   @doc("Type of the onboarding resource to support polymorphic resource.")
@@ -417,6 +440,7 @@ model OnboardingConfiguration {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Device configuration.")
 model TargetDeviceConfiguration {
   @doc("Network configuration.")
@@ -436,6 +460,7 @@ model TargetDeviceConfiguration {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Network configuration.")
 model NetworkConfiguration {
   @Azure.ResourceManager.identifiers(#[])
@@ -444,6 +469,7 @@ model NetworkConfiguration {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Storage configuration.")
 model StorageConfiguration {
   @doc("Partition size.")
@@ -451,6 +477,7 @@ model StorageConfiguration {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Network adapter configuration.")
 model NetworkAdapter {
   @doc("Type of IP assignment.")
@@ -482,6 +509,7 @@ model NetworkAdapter {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("IP assignment types")
 union IpAssignmentType {
   string,
@@ -494,6 +522,7 @@ union IpAssignmentType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("IP address range configuration.")
 model IpAddressRange {
   @doc("Start IP address.")
@@ -504,6 +533,7 @@ model IpAddressRange {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Web proxy configuration.")
 model WebProxyConfiguration {
   @doc("Connection URI of the web proxy.")
@@ -518,6 +548,7 @@ model WebProxyConfiguration {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Time configuration.")
 model TimeConfiguration {
   @doc("Primary NTP server.")
