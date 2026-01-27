@@ -2506,7 +2506,7 @@ union MicrosoftStemmingTokenizerLanguage {
 }
 
 /** Scripts that can be ignored by CjkBigramTokenFilter. */
-enum CjkBigramTokenFilterScripts {
+union CjkBigramTokenFilterScripts {
   /** Ignore Han script when forming bigrams of CJK terms. */
   Han: "han",
 
