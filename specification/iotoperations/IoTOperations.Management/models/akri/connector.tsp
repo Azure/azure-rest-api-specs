@@ -41,7 +41,7 @@ model AkriConnectorProperties {
   @identifiers(#["deviceInboundEndpointName", "deviceName"])
   allocatedDevices?: AkriConnectorAllocatedDevice[];
 
-    /** The status for the connector. */
+  /** The status for the connector. */
   @visibility(Lifecycle.Read)
   @added(Versions.`2026-03-01`)
   status?: AkriConnectorStatus;
