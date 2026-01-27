@@ -168,7 +168,7 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(AnalyzedDocument.docType, "DocumentType", "csharp");
 @@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentOptions", "csharp");
 @@clientName(AnalyzeDocumentRequest.base64Source, "BytesSource", "csharp");
-@@clientName(AnalyzeDocumentRequest.urlSource, "UriSource", "csharp");
+@@clientName(AnalyzeDocumentRequest.sourceUrl, "UriSource", "csharp");
 @@clientName(AuthorizeClassifierCopyRequest,
   "AuthorizeClassifierCopyOptions",
   "csharp"
@@ -212,7 +212,7 @@ interface DocumentIntelligenceAdministrationClient {
 );
 @@clientName(ClassifyDocumentRequest, "ClassifyDocumentOptions", "csharp");
 @@clientName(ClassifyDocumentRequest.base64Source, "BytesSource", "csharp");
-@@clientName(ClassifyDocumentRequest.urlSource, "UriSource", "csharp");
+@@clientName(ClassifyDocumentRequest.sourceUrl, "UriSource", "csharp");
 @@clientName(ComposeDocumentModelRequest, "ComposeModelOptions", "csharp");
 @@clientName(ComposeDocumentModelRequest.docTypes, "DocumentTypes", "csharp");
 @@clientName(ContentSourceKind.azureBlob, "Blob", "csharp");
