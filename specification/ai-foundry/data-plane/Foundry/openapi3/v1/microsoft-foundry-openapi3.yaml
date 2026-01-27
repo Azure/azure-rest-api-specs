@@ -2957,6 +2957,9 @@ paths:
               required:
                 - name
                 - definition
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     get:
       operationId: listMemoryStores
       description: List all memory stores.
@@ -3050,6 +3053,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Memory Stores
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
   /memory_stores/{name}:
     post:
       operationId: updateMemoryStore
@@ -3107,6 +3113,9 @@ paths:
                   additionalProperties:
                     type: string
                   description: Arbitrary key-value metadata to associate with the memory store.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     get:
       operationId: getMemoryStore
       description: Retrieve a memory store.
@@ -3147,6 +3156,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Memory Stores
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     delete:
       operationId: deleteMemoryStore
       description: Delete a memory store.
@@ -3187,6 +3199,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Memory Stores
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
   /memory_stores/{name}/updates/{update_id}:
     get:
       operationId: getUpdateResult
@@ -3234,6 +3249,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Memory Stores
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
   /memory_stores/{name}:delete_scope:
     post:
       operationId: deleteScopeMemories
@@ -3287,6 +3305,9 @@ paths:
                   description: The namespace that logically groups and isolates memories to delete, such as a user ID.
               required:
                 - scope
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
   /memory_stores/{name}:search_memories:
     post:
       operationId: searchMemories
@@ -3352,6 +3373,9 @@ paths:
                   description: Memory search options.
               required:
                 - scope
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
   /memory_stores/{name}:update_memories:
     post:
       operationId: updateMemories
@@ -3429,6 +3453,9 @@ paths:
                   default: 300
               required:
                 - scope
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
   /openai/fine-tuning/jobs:
     post:
       operationId: createFineTuningJob
@@ -6743,6 +6770,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/MemoryItem'
       description: A memory item containing a summary extracted from conversations.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     ClusterInsightResult:
       type: object
       required:
@@ -7570,6 +7600,9 @@ components:
         deleted:
           type: boolean
           description: Whether the memory store was successfully deleted.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     DeleteResponseResult:
       type: object
       required:
@@ -9443,6 +9476,9 @@ components:
           user_profile: '#/components/schemas/UserProfileMemoryItem'
           chat_summary: '#/components/schemas/ChatSummaryMemoryItem'
       description: A single memory item stored in the memory store, containing content and metadata.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryItemKind:
       anyOf:
         - type: string
@@ -9451,6 +9487,9 @@ components:
             - user_profile
             - chat_summary
       description: Memory item kind.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryOperation:
       type: object
       required:
@@ -9466,6 +9505,9 @@ components:
             - $ref: '#/components/schemas/MemoryItem'
           description: The memory item to create, update, or delete.
       description: Represents a single memory operation (create, update, or delete) performed on a memory item.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryOperationKind:
       anyOf:
         - type: string
@@ -9475,6 +9517,9 @@ components:
             - update
             - delete
       description: Memory operation kind.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemorySearchItem:
       type: object
       required:
@@ -9485,6 +9530,9 @@ components:
             - $ref: '#/components/schemas/MemoryItem'
           description: Retrieved memory item.
       description: A retrieved memory item from memory search.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemorySearchOptions:
       type: object
       properties:
@@ -9493,6 +9541,9 @@ components:
           format: int32
           description: Maximum number of memory items to return.
       description: Memory search options.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemorySearchPreviewTool:
       type: object
       required:
@@ -9526,7 +9577,41 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool for integrating memories into the agent.
-    MemorySearchPreviewToolCallItemParam:
+    MemorySearchTool:
+      type: object
+      required:
+        - type
+        - memory_store_name
+        - scope
+      properties:
+        type:
+          type: string
+          enum:
+            - memory_search
+          description: The type of the tool. Always `memory_search_preview`.
+        memory_store_name:
+          type: string
+          description: The name of the memory store to use.
+        scope:
+          type: string
+          description: |-
+            The namespace used to group and isolate memories, such as a user ID.
+            Limits which memories can be retrieved or updated.
+            Use special variable `{{$userId}}` to scope memories to the current signed-in user.
+        search_options:
+          allOf:
+            - $ref: '#/components/schemas/MemorySearchOptions'
+          description: Options for searching the memory store.
+        update_delay:
+          type: integer
+          format: int32
+          description: Time to wait before updating memories after inactivity (seconds). Default 300.
+          default: 300
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool for integrating memories into the agent.
+      deprecated: true
+    MemorySearchToolCallItemParam:
       type: object
       required:
         - type
@@ -9534,7 +9619,7 @@ components:
         type:
           type: string
           enum:
-            - memory_search_preview_call
+            - memory_search_call
         results:
           type: array
           items:
@@ -9543,7 +9628,7 @@ components:
           description: The results returned from the memory search.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
-    MemorySearchPreviewToolCallItemResource:
+    MemorySearchToolCallItemResource:
       type: object
       required:
         - type
@@ -9552,7 +9637,7 @@ components:
         type:
           type: string
           enum:
-            - memory_search_preview_call
+            - memory_search_call
         status:
           type: string
           enum:
@@ -9597,6 +9682,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/MemoryStoreDefinition'
       description: Default memory store implementation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreDefaultOptions:
       type: object
       required:
@@ -9615,6 +9703,9 @@ components:
           description: Whether to enable chat summary extraction and storage. Default is true.
           default: true
       description: Default memory store configurations.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreDefinition:
       type: object
       required:
@@ -9629,6 +9720,9 @@ components:
         mapping:
           default: '#/components/schemas/MemoryStoreDefaultDefinition'
       description: Base definition for memory store configurations.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreDeleteScopeResponse:
       type: object
       required:
@@ -9652,6 +9746,9 @@ components:
           type: boolean
           description: Whether the deletion operation was successful.
       description: Response for deleting memories from a scope.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreKind:
       anyOf:
         - type: string
@@ -9659,6 +9756,9 @@ components:
           enum:
             - default
       description: The type of memory store implementation to use.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreObject:
       type: object
       required:
@@ -9703,6 +9803,9 @@ components:
             - $ref: '#/components/schemas/MemoryStoreDefinition'
           description: The definition of the memory store.
       description: A memory store that can store and retrieve user memories.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreOperationUsage:
       type: object
       required:
@@ -9738,6 +9841,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The total number of tokens used.
       description: Usage statistics of a memory store operation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreSearchResponse:
       type: object
       required:
@@ -9758,6 +9864,9 @@ components:
             - $ref: '#/components/schemas/MemoryStoreOperationUsage'
           description: Usage statistics associated with the memory search operation.
       description: Memory search response.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreUpdateCompletedResult:
       type: object
       required:
@@ -9774,6 +9883,9 @@ components:
             - $ref: '#/components/schemas/MemoryStoreOperationUsage'
           description: Usage statistics associated with the memory update operation.
       description: Memory update result.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreUpdateResponse:
       type: object
       required:
@@ -9799,6 +9911,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.Error'
           description: Error object that describes the error when status is "failed".
       description: Provides the status of a memory store update operation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MemoryStoreUpdateStatus:
       type: string
       enum:
@@ -9808,6 +9923,9 @@ components:
         - failed
         - superseded
       description: Status of a memory store update operation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     MicrosoftFabricPreviewTool:
       type: object
       required:
@@ -15308,7 +15426,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          memory_search_preview_call: '#/components/schemas/MemorySearchPreviewToolCallItemParam'
+          memory_search_call: '#/components/schemas/MemorySearchToolCallItemParam'
           message: '#/components/schemas/OpenAI.InputMessage'
           computer_call_output: '#/components/schemas/OpenAI.ComputerCallOutputItemParam'
           function_call_output: '#/components/schemas/OpenAI.FunctionCallOutputItemParam'
@@ -15901,7 +16019,7 @@ components:
           structured_outputs: '#/components/schemas/StructuredOutputsItemResource'
           workflow_preview_action: '#/components/schemas/WorkflowPreviewActionOutputItemResource'
           oauth_consent_request: '#/components/schemas/OAuthConsentRequestItemResource'
-          memory_search_preview_call: '#/components/schemas/MemorySearchPreviewToolCallItemResource'
+          memory_search_call: '#/components/schemas/MemorySearchToolCallItemResource'
           message: '#/components/schemas/OpenAI.InputMessageResource'
           output_message: '#/components/schemas/OpenAI.ItemResourceOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.ItemResourceFileSearchToolCall'
@@ -21186,6 +21304,7 @@ components:
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
           a2a_preview: '#/components/schemas/A2APreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
+          memory_search: '#/components/schemas/MemorySearchTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           function: '#/components/schemas/OpenAI.FunctionTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
@@ -21456,6 +21575,7 @@ components:
             - bing_grounding
             - capture_structured_outputs
             - openapi
+            - memory_search
     OpenAI.ToolsArray:
       type: array
       items:
@@ -23095,6 +23215,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/MemoryItem'
       description: A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=v1
     WebSearchConfiguration:
       type: object
       required:

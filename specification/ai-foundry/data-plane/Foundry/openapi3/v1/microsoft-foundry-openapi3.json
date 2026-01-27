@@ -4567,6 +4567,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       },
       "get": {
@@ -4688,7 +4693,12 @@
         },
         "tags": [
           "Memory Stores"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       }
     },
     "/memory_stores/{name}": {
@@ -4776,6 +4786,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       },
       "get": {
@@ -4838,7 +4853,12 @@
         },
         "tags": [
           "Memory Stores"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "delete": {
         "operationId": "deleteMemoryStore",
@@ -4900,7 +4920,12 @@
         },
         "tags": [
           "Memory Stores"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       }
     },
     "/memory_stores/{name}/updates/{update_id}": {
@@ -4973,7 +4998,12 @@
         },
         "tags": [
           "Memory Stores"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       }
     },
     "/memory_stores/{name}:delete_scope": {
@@ -5056,6 +5086,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       }
     },
@@ -5158,6 +5193,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       }
     },
@@ -5268,6 +5308,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       }
     },
@@ -10224,7 +10269,12 @@
             "$ref": "#/components/schemas/MemoryItem"
           }
         ],
-        "description": "A memory item containing a summary extracted from conversations."
+        "description": "A memory item containing a summary extracted from conversations.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "ClusterInsightResult": {
         "type": "object",
@@ -11371,6 +11421,11 @@
             "type": "boolean",
             "description": "Whether the memory store was successfully deleted."
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
         }
       },
       "DeleteResponseResult": {
@@ -13772,7 +13827,12 @@
             "chat_summary": "#/components/schemas/ChatSummaryMemoryItem"
           }
         },
-        "description": "A single memory item stored in the memory store, containing content and metadata."
+        "description": "A single memory item stored in the memory store, containing content and metadata.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryItemKind": {
         "anyOf": [
@@ -13787,7 +13847,12 @@
             ]
           }
         ],
-        "description": "Memory item kind."
+        "description": "Memory item kind.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryOperation": {
         "type": "object",
@@ -13813,7 +13878,12 @@
             "description": "The memory item to create, update, or delete."
           }
         },
-        "description": "Represents a single memory operation (create, update, or delete) performed on a memory item."
+        "description": "Represents a single memory operation (create, update, or delete) performed on a memory item.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryOperationKind": {
         "anyOf": [
@@ -13829,7 +13899,12 @@
             ]
           }
         ],
-        "description": "Memory operation kind."
+        "description": "Memory operation kind.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemorySearchItem": {
         "type": "object",
@@ -13846,7 +13921,12 @@
             "description": "Retrieved memory item."
           }
         },
-        "description": "A retrieved memory item from memory search."
+        "description": "A retrieved memory item from memory search.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemorySearchOptions": {
         "type": "object",
@@ -13857,7 +13937,12 @@
             "description": "Maximum number of memory items to return."
           }
         },
-        "description": "Memory search options."
+        "description": "Memory search options.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemorySearchPreviewTool": {
         "type": "object",
@@ -13904,7 +13989,53 @@
         ],
         "description": "A tool for integrating memories into the agent."
       },
-      "MemorySearchPreviewToolCallItemParam": {
+      "MemorySearchTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "memory_store_name",
+          "scope"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "memory_search"
+            ],
+            "description": "The type of the tool. Always `memory_search_preview`."
+          },
+          "memory_store_name": {
+            "type": "string",
+            "description": "The name of the memory store to use."
+          },
+          "scope": {
+            "type": "string",
+            "description": "The namespace used to group and isolate memories, such as a user ID.\nLimits which memories can be retrieved or updated.\nUse special variable `{{$userId}}` to scope memories to the current signed-in user."
+          },
+          "search_options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemorySearchOptions"
+              }
+            ],
+            "description": "Options for searching the memory store."
+          },
+          "update_delay": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Time to wait before updating memories after inactivity (seconds). Default 300.",
+            "default": 300
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A tool for integrating memories into the agent.",
+        "deprecated": true
+      },
+      "MemorySearchToolCallItemParam": {
         "type": "object",
         "required": [
           "type"
@@ -13913,7 +14044,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "memory_search_preview_call"
+              "memory_search_call"
             ]
           },
           "results": {
@@ -13931,7 +14062,7 @@
           }
         ]
       },
-      "MemorySearchPreviewToolCallItemResource": {
+      "MemorySearchToolCallItemResource": {
         "type": "object",
         "required": [
           "type",
@@ -13941,7 +14072,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "memory_search_preview_call"
+              "memory_search_call"
             ]
           },
           "status": {
@@ -14007,7 +14138,12 @@
             "$ref": "#/components/schemas/MemoryStoreDefinition"
           }
         ],
-        "description": "Default memory store implementation."
+        "description": "Default memory store implementation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreDefaultOptions": {
         "type": "object",
@@ -14031,7 +14167,12 @@
             "default": true
           }
         },
-        "description": "Default memory store configurations."
+        "description": "Default memory store configurations.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreDefinition": {
         "type": "object",
@@ -14054,7 +14195,12 @@
             "default": "#/components/schemas/MemoryStoreDefaultDefinition"
           }
         },
-        "description": "Base definition for memory store configurations."
+        "description": "Base definition for memory store configurations.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreDeleteScopeResponse": {
         "type": "object",
@@ -14085,7 +14231,12 @@
             "description": "Whether the deletion operation was successful."
           }
         },
-        "description": "Response for deleting memories from a scope."
+        "description": "Response for deleting memories from a scope.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreKind": {
         "anyOf": [
@@ -14099,7 +14250,12 @@
             ]
           }
         ],
-        "description": "The type of memory store implementation to use."
+        "description": "The type of memory store implementation to use.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreObject": {
         "type": "object",
@@ -14159,7 +14315,12 @@
             "description": "The definition of the memory store."
           }
         },
-        "description": "A memory store that can store and retrieve user memories."
+        "description": "A memory store that can store and retrieve user memories.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreOperationUsage": {
         "type": "object",
@@ -14218,7 +14379,12 @@
             "description": "The total number of tokens used."
           }
         },
-        "description": "Usage statistics of a memory store operation."
+        "description": "Usage statistics of a memory store operation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreSearchResponse": {
         "type": "object",
@@ -14248,7 +14414,12 @@
             "description": "Usage statistics associated with the memory search operation."
           }
         },
-        "description": "Memory search response."
+        "description": "Memory search response.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreUpdateCompletedResult": {
         "type": "object",
@@ -14273,7 +14444,12 @@
             "description": "Usage statistics associated with the memory update operation."
           }
         },
-        "description": "Memory update result."
+        "description": "Memory update result.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreUpdateResponse": {
         "type": "object",
@@ -14315,7 +14491,12 @@
             "description": "Error object that describes the error when status is \"failed\"."
           }
         },
-        "description": "Provides the status of a memory store update operation."
+        "description": "Provides the status of a memory store update operation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MemoryStoreUpdateStatus": {
         "type": "string",
@@ -14326,7 +14507,12 @@
           "failed",
           "superseded"
         ],
-        "description": "Status of a memory store update operation."
+        "description": "Status of a memory store update operation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "MicrosoftFabricPreviewTool": {
         "type": "object",
@@ -21932,7 +22118,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "memory_search_preview_call": "#/components/schemas/MemorySearchPreviewToolCallItemParam",
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemParam",
             "message": "#/components/schemas/OpenAI.InputMessage",
             "computer_call_output": "#/components/schemas/OpenAI.ComputerCallOutputItemParam",
             "function_call_output": "#/components/schemas/OpenAI.FunctionCallOutputItemParam",
@@ -22729,7 +22915,7 @@
             "structured_outputs": "#/components/schemas/StructuredOutputsItemResource",
             "workflow_preview_action": "#/components/schemas/WorkflowPreviewActionOutputItemResource",
             "oauth_consent_request": "#/components/schemas/OAuthConsentRequestItemResource",
-            "memory_search_preview_call": "#/components/schemas/MemorySearchPreviewToolCallItemResource",
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
             "message": "#/components/schemas/OpenAI.InputMessageResource",
             "output_message": "#/components/schemas/OpenAI.ItemResourceOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.ItemResourceFileSearchToolCall",
@@ -29386,6 +29572,7 @@
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
+            "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
@@ -29734,7 +29921,8 @@
               "azure_function",
               "bing_grounding",
               "capture_structured_outputs",
-              "openapi"
+              "openapi",
+              "memory_search"
             ]
           }
         ]
@@ -32067,7 +32255,12 @@
             "$ref": "#/components/schemas/MemoryItem"
           }
         ],
-        "description": "A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details."
+        "description": "A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=v1"
+          ]
+        }
       },
       "WebSearchConfiguration": {
         "type": "object",
