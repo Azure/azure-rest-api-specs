@@ -26,60 +26,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+          sparse-checkout: |
+            .github
 
-      - name: Fetch base branch
-        run: git fetch origin ${{ github.event.pull_request.base.ref }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
-      - name: Install dependencies
-        run: npm ci
-        working-directory: .github
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
 
       - name: Detect new resource providers
         id: detect
-        run: node workflows/src/detect-new-resource-provider.js ${{ github.event.pull_request.base.ref }}
-        working-directory: .github
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.event.repository.name }}
-
-      - name: Comment on PR
-        if: steps.detect.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
+          result-encoding: string
           script: |
-            const fs = require('fs');
-            const outputFile = '.github/new-rp-output.json';
-            
-            if (fs.existsSync(outputFile)) {
-              const data = JSON.parse(fs.readFileSync(outputFile, 'utf8'));
-              const rpList = data.newResourceProviders.map(rp => \`- \\\`\${rp}\\\`\`).join('\\n');
-              
-              const body = \`## 🆕 New Resource Provider Detected
-
-            The following new resource provider namespace(s) were detected in this PR:
-
-            \${rpList}
-
-            ### ⚠️ Action Required
-
-            New resource provider namespaces require having a discussion with the ARM team at **ARM API Modeling Office Hours** before merging.
-
-            📅 **Please schedule here:** https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true\`;
-
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: body
-              });
-            }
+            const { default: detectNewResourceProvider } =
+              await import('${{ github.workspace }}/.github/workflows/src/detect-new-resource-provider.js');
+            return await detectNewResourceProvider({ 
+              github, 
+              context, 
+              core,
+              baseBranch: '${{ github.event.pull_request.base.ref }}'
+            });

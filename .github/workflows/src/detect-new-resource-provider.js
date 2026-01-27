@@ -3,7 +3,6 @@
 import { execSync } from 'child_process';
 import { readdirSync, existsSync, statSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
-import { Octokit } from '@octokit/rest';
 import { simpleGit } from 'simple-git';
 import { getChangedFiles, swagger, example } from '../../shared/src/changed-files.js';
 import { checkLease } from './detect-arm-leases.js';
@@ -61,31 +60,16 @@ function resourceProviderExists(specPath, namespace) {
 
 /**
  * Add labels to the PR for new resource providers
+ * @param {Object} github - GitHub API client from github-script
+ * @param {Object} context - GitHub context from github-script
  * @returns {Promise<void>}
  */
-async function addNewResourceProviderLabels() {
-  const githubToken = process.env.GITHUB_TOKEN;
-  const prNumber = process.env.PR_NUMBER;
-  const repoOwner = process.env.REPO_OWNER || 'Azure';
-  const repoName = process.env.REPO_NAME || 'azure-rest-api-specs';
-
-  if (!githubToken) {
-    console.log('GITHUB_TOKEN not available, skipping label addition');
-    return;
-  }
-
-  if (!prNumber) {
-    console.log('PR_NUMBER not available, skipping label addition');
-    return;
-  }
-
+async function addNewResourceProviderLabels(github, context) {
   try {
-    const octokit = new Octokit({ auth: githubToken });
-    
-    await octokit.rest.issues.addLabels({
-      owner: repoOwner,
-      repo: repoName,
-      issue_number: parseInt(prNumber),
+    await github.rest.issues.addLabels({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      issue_number: context.issue.number,
       labels: NEW_RP_LABELS
     });
 
@@ -128,10 +112,17 @@ function extractResourceProviders(files) {
 // Main Detection Logic
 // ============================================
 
-async function main() {
-  const baseBranch = process.argv[2] || 'main';
+/**
+ * Main detection logic for GitHub script action
+ * @param {Object} params - Parameters from github-script
+ * @param {Object} params.github - GitHub API client
+ * @param {Object} params.context - GitHub context
+ * @param {Object} params.core - GitHub Actions core
+ * @param {string} params.baseBranch - Base branch name
+ * @returns {Promise<string>} Result status
+ */
+export default async function detectNewResourceProvider({ github, context, core, baseBranch }) {
   const repoRoot = execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim();
-  let exitCode = 0;
 
   console.log('Detecting New Resource Providers\n');
 
@@ -155,8 +146,11 @@ async function main() {
 
   if (rmFiles.length === 0) {
     console.log('No resource-manager files changed');
-    process.exit(0);
+    return 'no-changes';
   }
+
+  // Extract resource providers from changed files
+  const changedResourceProviders = extractResourceProviders(rmFiles);
 
   // Pre-check: Verify if spec directories are brand new (don't exist in base branch)
   const git = simpleGit(repoRoot);
@@ -194,7 +188,7 @@ async function main() {
     if (!hasAtLeastOneBrandNewRP) {
       console.log('No brand new resource providers detected, spec directories exist in base branch.');
       console.log('Skipping workflow.\n');
-      process.exit(0);
+      return 'no-new-rp';
     }
   }
 
@@ -237,13 +231,41 @@ async function main() {
       JSON.stringify({ newResourceProviders: leaseCheckResults }, null, 2)
     );
     
-    await addNewResourceProviderLabels();
-    exitCode = 1;
+    await addNewResourceProviderLabels(github, context);
+    
+    // Create PR comment with detected resource providers
+    const rpList = leaseCheckResults
+      .map(rp => `- \`${rp.namespace}\``)
+      .join('\n');
+
+    const commentBody = [
+      '## New Resource Provider Detected',
+      'The following new resource provider namespace(s) were detected in this PR:\n',
+      rpList,
+      '\n### Action Required',
+      'New resource provider namespaces require having a discussion with the ARM team at **ARM API Modeling Office Hours** before merging.\n',
+      '**Please schedule here:**',
+      'https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true'
+    ].join('\n');
+
+    try {
+      await github.rest.issues.createComment({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: context.issue.number,
+        body: commentBody
+      });
+      console.log('PR comment created successfully');
+    } catch (error) {
+      console.log(`[FAILED] Failed to create PR comment: ${error.message}`);
+    }
+    
+    // Set the action as failed to indicate new RPs were detected
+    core.setFailed('New resource providers detected');
+    return 'new-rp-detected';
   } else {
     console.log('No new resource providers detected.\n');
+    return 'no-new-rp';
   }
-
-  process.exit(exitCode);
 }
 
-main();
