@@ -250,6 +250,8 @@ suppressions:
     reason: Pre-existing API behavior.
   - code: PatchResponseCodes
     reason: Pre-existing API behavior.
+  - code: ProvisioningStateMustBeReadOnly
+    reason: Pre-existing API behavior, provisioningState properties are read-only in the API response.
 ```
 
 ### Tag: package-2025-09-01
