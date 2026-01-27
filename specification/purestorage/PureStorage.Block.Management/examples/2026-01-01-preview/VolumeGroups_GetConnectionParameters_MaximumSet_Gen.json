@@ -1,0 +1,26 @@
+{
+  "title": "VolumeGroups_GetConnectionParameters",
+  "operationId": "VolumeGroups_GetConnectionParameters",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "volumeGroupName": "volumegroup-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "iscsi": {
+          "endpoints": [
+            {
+              "ip": "10.0.1.10",
+              "port": 3260,
+              "iqn": "iqn.2010-06.com.purestorage:volumegroup-01"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

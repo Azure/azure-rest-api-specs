@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2025-03
+tag: package-2025-05
 ```
 
 ### Suppression
@@ -85,6 +85,18 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: Provider.json
     reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: openapi.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+```
+
+### Tag: package-2025-05
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05'
+input-file:
+    - stable/2025-05-01/openapi.json
 ```
 
 ### Tag: package-2025-03

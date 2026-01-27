@@ -1,0 +1,200 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "migrationName": "examplemigration",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examplemigration",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampletarget/migrations/examplemigration",
+        "location": "eastus",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {},
+              "validationDetails": {
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "exampledatabase1",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "messages": [
+                          {
+                            "message": "Unsupported Extension. Single to Flex migration tool does not support migration of databases having postgres_fdw extension. Consider performing the migration through other migration tools such as pg_dump/pg_restore (https://aka.ms/migrate-using-pgdump-restore)",
+                            "state": "Failed"
+                          }
+                        ],
+                        "state": "Failed"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "exampledatabase2",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "exampledatabase3",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "exampledatabase4",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "exampledatabase5",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "exampledatabase6",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  },
+                  {
+                    "databaseName": "exampledatabase7",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "messages": [
+                          {
+                            "message": "Unsupported Extension. Single to Flex migration tool does not support migration of databases having postgres_fdw extension. Consider performing the migration through other migration tools such as pg_dump/pg_restore (https://aka.ms/migrate-using-pgdump-restore)",
+                            "state": "Failed"
+                          }
+                        ],
+                        "state": "Failed"
+                      }
+                    ]
+                  }
+                ],
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "SourceVersionValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "ServerParametersValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "status": "Failed",
+                "validationEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
+                "validationStartTimeInUtc": "2025-06-01T18:30:22.123456Z"
+              }
+            },
+            "state": "ValidationFailed"
+          },
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4",
+            "exampledatabase5",
+            "exampledatabase6",
+            "exampledatabase7"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "a3e2d3cc-b139-4201-9431-e4f3003140fd",
+          "migrationMode": "Offline",
+          "migrationOption": "Validate",
+          "migrationWindowEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampletarget",
+          "triggerCutover": "True"
+        }
+      }
+    }
+  },
+  "operationId": "Migrations_Get",
+  "title": "Get information about a migration with validation failures."
+}

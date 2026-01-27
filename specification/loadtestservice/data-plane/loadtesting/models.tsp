@@ -158,6 +158,14 @@ union FileType {
   @added(APIVersions.v2024_03_01_preview)
   @doc("If the file is a test script.")
   TestScript: "TEST_SCRIPT",
+
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("If the file is a browser recording of interactions with web applications.")
+  BrowserRecording: "BROWSER_RECORDING",
+
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("If the file is an AI Recommendations file created by the system containing recommendations to create a load test plan from browser recording.")
+  TestPlanRecommendations: "TEST_PLAN_RECOMMENDATIONS",
 }
 
 @doc("File status.")
@@ -444,6 +452,10 @@ model Test {
   @visibility(Lifecycle.Read)
   estimatedVirtualUserHours?: float64;
 
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("Preferences for the test.")
+  preferences?: TestPreferences;
+
   ...SystemMetaData;
 }
 
@@ -655,6 +667,14 @@ model TestInputArtifacts {
   @doc("Additional supported files for the test run")
   @visibility(Lifecycle.Read)
   additionalFileInfo?: TestFileInfo[];
+}
+
+@doc("Preferences for the test.")
+@added(APIVersions.v2025_11_01_preview)
+model TestPreferences {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is an abbervation and should be all caps"
+  @doc("Enable or disable AI based insights on Test Run Errors.")
+  enableAIErrorInsights?: boolean = true;
 }
 
 @doc("File info")
@@ -871,7 +891,7 @@ model TestRun {
   @visibility(Lifecycle.Read)
   endDateTime?: utcDateTime;
 
-  @doc("Test run initiated time.")
+  @doc("Test run initiated time. This is legacy, new developments should use createdDateTime.")
   @visibility(Lifecycle.Read)
   executedDateTime?: utcDateTime;
 
@@ -925,19 +945,35 @@ model TestRun {
   @visibility(Lifecycle.Read)
   estimatedVirtualUserHours?: float64;
 
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("The test run execution start DateTime(RFC 3339 literal format).")
+  @visibility(Lifecycle.Read)
+  executionStartDateTime?: utcDateTime;
+
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("The test run execution end DateTime(RFC 3339 literal format).")
+  @visibility(Lifecycle.Read)
+  executionEndDateTime?: utcDateTime;
+
   ...SystemMetaData;
 }
 
-@doc("Represents insights for the test run.")
 @added(APIVersions.v2025_03_01_preview)
+@doc("Represents insights for the test run.")
 model TestRunInsights {
   @doc("The columns of the insights.")
   @visibility(Lifecycle.Read)
   columns?: TestRunInsightColumn[];
 
   @doc("The rows of the insights.")
+  @renamedFrom(APIVersions.v2025_11_01_preview, "rows")
+  @removed(APIVersions.v2025_11_01_preview)
   @visibility(Lifecycle.Read)
-  rows?: Record<string>[];
+  oldRows?: Record<string>[];
+
+  @doc("The rows of the insights.")
+  @added(APIVersions.v2025_11_01_preview)
+  rows?: Record<Record<string>>;
 
   @doc("The version of the insights.")
   @visibility(Lifecycle.Read)
@@ -1347,8 +1383,8 @@ model OldTestRunIdQueryParam {
 @doc("Parameters for list test run operation")
 model ListTestRunQueryParams {
   @doc("""
-    Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
-    asc. Supported fields - executedDateTime
+    Sort on the supported fields in (field asc/desc) format. eg: createdDateTime asc.
+    Supported fields - createdDateTime, executedDateTime (legacy)
     """)
   @query
   orderby?: string;
@@ -1491,6 +1527,10 @@ union OperationKind {
 
   @doc("Operation represents a test run insights generation operation")
   GenerateTestRunInsights: "GenerateTestRunInsights",
+
+  @doc("Operation represents a test plan recommendations generation operation")
+  @added(APIVersions.v2025_11_01_preview)
+  TestPlanRecommendations: "TestPlanRecommendations",
 }
 
 @added(APIVersions.v2025_03_01_preview)
@@ -1514,6 +1554,9 @@ model OperationStatus {
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
+  T;
+
+alias ResourceUpdatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
 
 alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &

@@ -248,6 +248,10 @@ using Microsoft.DataBox;
   "ValidateInputs",
   "csharp"
 );
+@@clientName(TransportShipmentTypes, "TransportShipmentType", "csharp");
+@@clientName(MitigateJobRequest, "MitigateJobContent", "csharp");
+@@clientName(ShipmentPickUpRequest, "ShipmentPickUpContent", "csharp");
+@@clientName(MarkDevicesShippedRequest, "MarkDevicesShippedContent", "csharp");
 @@alternateType(KeyEncryptionKey.kekVaultResourceID,
   armResourceIdentifier,
   "csharp"
@@ -305,8 +309,54 @@ using Microsoft.DataBox;
 @@alternateType(KeyEncryptionKey.kekUrl, url, "csharp");
 @@alternateType(PackageShippingDetails.trackingUrl, url, "csharp");
 @@alternateType(SkuCost.meterId, uuid, "csharp");
+@@alternateType(JobProperties.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "csharp"
+);
+@@alternateType(CloudError.details,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "csharp"
+);
+@@alternateType(ValidationInputResponse.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "csharp"
+);
+@@alternateType(JobSecrets.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "csharp"
+);
+@@alternateType(CopyProgress.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "csharp"
+);
+@@alternateType(DataBoxDiskCopyProgress.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "csharp"
+);
+@@alternateType(GranularCopyProgress.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "csharp"
+);
+
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 @@clientName(KeyEncryptionKey.kekVaultResourceID, "kekVaultResourceId", "java");
 @@clientName(ShareCredentialDetails.userName, "username", "java");
 @@alternateType(AdditionalErrorInfo.info, unknown, "java");
 @@alternateType(JobStages.jobStageDetails, unknown, "java");
+
+@@clientName(KeyEncryptionKey.kekVaultResourceID,
+  "kekVaultResourceId",
+  "csharp"
+);
+@@alternateType(JobResource.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(JobResourceUpdateParameter.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);

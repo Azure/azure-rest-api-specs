@@ -2,8 +2,29 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.KeyVault;
 using Azure.Core;
+
+@@scope(Keys.get, "!csharp");
+@@scope(Keys.createIfNotExist, "!csharp");
+@@scope(Keys.list, "!csharp");
+@@scope(KeyOperationGroup.getVersion, "!csharp");
+@@scope(KeyOperationGroup.listVersions, "!csharp");
+@@scope(ManagedHsmKeys.get, "!csharp");
+@@scope(ManagedHsmKeys.createIfNotExist, "!csharp");
+@@scope(ManagedHsmKeys.list, "!csharp");
+@@scope(ManagedHsmKeyOperationGroup.getVersion, "!csharp");
+@@scope(ManagedHsmKeyOperationGroup.listVersions, "!csharp");
+@@scope(Operations.list, "!csharp");
+@@scope(VaultsOperationGroup.list, "!csharp");
+
+@@clientName(Vaults.listByVault, "GetPrivateLinkResources", "csharp");
+@@clientName(ManagedHsms.listByMHSMResource,
+  "GetMHSMPrivateLinkResourcesByManagedHsmResource",
+  "csharp"
+);
+@@clientName(ManagedHsms.listByResource, "GetRegions", "csharp");
 
 @@clientName(CheckMhsmNameAvailabilityResult,
   "ManagedHsmNameAvailabilityResult",
@@ -14,7 +35,7 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(CheckMhsmNameAvailabilityParameters,
-  "MhsmNameAvailabilityParameters",
+  "ManagedHsmNameAvailabilityContent",
   "csharp"
 );
 @@clientName(ActivationStatus,
@@ -35,6 +56,12 @@ using Azure.Core;
   "ManagedHsmPrivateLinkResourceData",
   "csharp"
 );
+@@usage(MhsmPrivateLinkResource, Usage.input | Usage.output, "csharp");
+
+@@clientName(MhsmPrivateEndpointConnection,
+  "ManagedHsmPrivateEndpointConnection",
+  "csharp"
+);
 
 @@clientName(PublicNetworkAccess, "ManagedHsmPublicNetworkAccess", "csharp");
 @@clientName(ManagedHsmProperties.networkAcls, "NetworkRuleSet", "csharp");
@@ -45,8 +72,24 @@ using Azure.Core;
 @@clientName(PrivateLinkResource, "KeyVaultPrivateLinkResourceData", "csharp");
 @@clientName(AccessPolicyEntry, "KeyVaultAccessPolicy", "csharp");
 @@clientName(NetworkRuleSet, "KeyVaultNetworkRuleSet", "csharp");
+@@clientName(VaultsOperationGroup.checkNameAvailability,
+  "CheckKeyVaultNameAvailability",
+  "csharp"
+);
+@@clientName(ManagedHsmsOperationGroup.checkMhsmNameAvailability,
+  "CheckManagedHsmNameAvailability",
+  "csharp"
+);
 @@clientName(VaultCheckNameAvailabilityParameters,
   "KeyVaultNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(VaultCheckNameAvailabilityParameters.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(VaultCheckNameAvailabilityParameters.type,
+  armResourceType,
   "csharp"
 );
 @@clientName(VaultAccessPolicyProperties,
@@ -66,16 +109,29 @@ using Azure.Core;
 @@clientName(VaultProperties, "KeyVaultProperties", "csharp");
 @@clientName(VaultProperties.networkAcls, "NetworkRuleSet", "csharp");
 @@clientName(Vault, "KeyVault", "csharp");
+@@clientName(Vaults.createOrUpdate::parameters.resource, "content", "csharp");
+@@clientName(Vaults.update::parameters.properties, "patch", "csharp");
 @@clientName(VirtualNetworkRule, "KeyVaultVirtualNetworkRule", "csharp");
 @@clientName(Permissions, "IdentityAccessPermissions", "csharp");
 @@clientName(IPRule, "KeyVaultIPRule", "csharp");
 @@clientName(KeyPermissions, "IdentityAccessKeyPermission", "csharp");
 @@clientName(SecretPermissions, "IdentityAccessSecretPermission", "csharp");
 @@clientName(StoragePermissions, "IdentityAccessStoragePermission", "csharp");
+@@clientName(StoragePermissions.deletesas, "DeleteSas", "csharp");
+@@clientName(StoragePermissions.getsas, "GetSas", "csharp");
+@@clientName(StoragePermissions.listsas, "ListSas", "csharp");
+@@clientName(StoragePermissions.regeneratekey, "RegenerateKey", "csharp");
+@@clientName(StoragePermissions.setsas, "SetSas", "csharp");
 @@clientName(CertificatePermissions,
   "IdentityAccessCertificatePermission",
   "csharp"
 );
+@@clientName(CertificatePermissions.deleteissuers, "DeleteIssuers", "csharp");
+@@clientName(CertificatePermissions.getissuers, "GetIssuers", "csharp");
+@@clientName(CertificatePermissions.listissuers, "ListIssuers", "csharp");
+@@clientName(CertificatePermissions.managecontacts, "ManageContacts", "csharp");
+@@clientName(CertificatePermissions.manageissuers, "ManageIssuers", "csharp");
+@@clientName(CertificatePermissions.setissuers, "SetIssuers", "csharp");
 @@clientName(IPRule.value, "AddressRange", "csharp");
 @@clientName(CheckNameAvailabilityResult,
   "KeyVaultNameAvailabilityResult",
@@ -96,14 +152,24 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(MhsmNetworkRuleSet, "ManagedHsmNetworkRuleSet", "csharp");
+@@clientName(MhsmNetworkRuleSet.ipRules, "IPRules", "csharp");
+@@clientName(NetworkRuleSet.ipRules, "IPRules", "csharp");
 @@alternateType(VaultProperties.tenantId, uuid, "csharp");
+@@alternateType(VaultProperties.vaultUri, url, "csharp");
 @@clientName(MhsmPrivateEndpoint, "ManagedHsmPrivateEndpoint", "csharp");
 @@clientName(MhsmVirtualNetworkRule, "ManagedHsmVirtualNetworkRule", "csharp");
+@@alternateType(MhsmVirtualNetworkRule.id, armResourceIdentifier, "csharp");
+@@clientName(MhsmVirtualNetworkRule.id, "SubnetId", "csharp");
+@@clientName(SecretCreateOrUpdateParameters,
+  "KeyVaultSecretCreateOrUpdateContent",
+  "csharp"
+);
 @@clientName(MhsmPrivateLinkServiceConnectionState,
   "ManagedHsmPrivateLinkServiceConnectionState",
   "csharp"
 );
 @@clientName(ProvisioningState, "ManagedHsmProvisioningState", "csharp");
+@@clientName(MhsmServiceTagRule, "ManagedHsmServiceTagRule", "csharp");
 
 @@clientName(MhsmPrivateEndpointConnectionProperties,
   "ManagedHsmPrivateEndpointConnectionProperties",
@@ -135,13 +201,14 @@ using Azure.Core;
 @@alternateType(DeletedManagedHsmProperties.location, azureLocation, "csharp");
 @@alternateType(VaultAccessPolicyParameters.location, azureLocation, "csharp");
 @@alternateType(Secret.location, azureLocation, "csharp");
+@@clientName(Secrets.createOrUpdate::parameters.resource, "content", "csharp");
+@@clientName(Secrets.update::parameters.properties, "patch", "csharp");
 @@alternateType(Key.location, azureLocation, "csharp");
 @@alternateType(ManagedHsm.location, azureLocation, "csharp");
 @@alternateType(MhsmPrivateEndpointConnection.location,
   azureLocation,
   "csharp"
 );
-@@alternateType(ManagedHsmResource.location, azureLocation, "csharp");
 @@alternateType(PrivateLinkResource.location, azureLocation, "csharp");
 @@alternateType(MhsmNetworkRuleSet.bypass,
   ManagedHsmNetworkRuleBypassOption,
@@ -189,6 +256,55 @@ using Azure.Core;
   KeyVaultNameUnavailableReason,
   "csharp"
 );
+@@alternateType(Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(VaultCreateOrUpdateParameters.location,
+  azureLocation,
+  "csharp"
+);
+@@clientName(ManagedHsmsOperationGroup.listDeleted,
+  "GetDeletedManagedHsms",
+  "csharp"
+);
+@@clientName(VaultsOperationGroup.listDeleted, "GetDeletedKeyVaults", "csharp");
+@@clientName(PrivateEndpointConnection,
+  "KeyVaultPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(VaultCreateOrUpdateParameters,
+  "KeyVaultCreateOrUpdateContent",
+  "csharp"
+);
+@@alternateType(MhsmPrivateEndpoint.id, armResourceIdentifier, "csharp");
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Vault,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedHsm,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MhsmPrivateEndpointConnection,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+@@clientName(ManagedHsms.listByResource, "GetMHSMRegionsByResource", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
+@@markAsPageable(ManagedHsms.listByMHSMResource, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
+@@markAsPageable(Vaults.listByVault, "csharp");
 
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.AzureFleet;
+using TypeSpec.Versioning;
 
 @@clientName(Microsoft.AzureFleet, "ComputeFleetMgmtClient", "python");
 @@clientName(Microsoft.AzureFleet, "ComputeFleetManagementClient", "java");
@@ -12,23 +13,23 @@ using Microsoft.AzureFleet;
 @@clientName(ApiError, "ComputeFleetApiError", "csharp");
 @@clientName(ApplicationProfile, "ComputeFleetApplicationProfile", "csharp");
 @@clientName(BootDiagnostics, "ComputeFleetBootDiagnostics", "csharp");
-@@clientName(CachingTypes, "ComputeFleetCachingTypes", "csharp");
+@@clientName(CachingTypes, "ComputeFleetCachingType", "csharp");
 @@clientName(ComputeProfile, "ComputeFleetComputeProfile", "csharp");
 @@clientName(DiagnosticsProfile, "ComputeFleetDiagnosticsProfile", "csharp");
-@@clientName(DiffDiskOptions, "ComputeFleetDiffDiskOptions", "csharp");
+@@clientName(DiffDiskOptions, "ComputeFleetDiffDiskOption", "csharp");
 @@clientName(DiffDiskPlacement, "ComputeFleetDiffDiskPlacement", "csharp");
 @@clientName(DiffDiskSettings, "ComputeFleetDiffDiskSettings", "csharp");
-@@clientName(DiskControllerTypes, "ComputeFleetDiskControllerTypes", "csharp");
+@@clientName(DiskControllerTypes, "ComputeFleetDiskControllerType", "csharp");
 @@clientName(DiskCreateOptionTypes,
-  "ComputeFleetDiskCreateOptionTypes",
+  "ComputeFleetDiskCreateOptionType",
   "csharp"
 );
 @@clientName(DiskDeleteOptionTypes,
-  "ComputeFleetDiskDeleteOptionTypes",
+  "ComputeFleetDiskDeleteOptionType",
   "csharp"
 );
 @@clientName(DomainNameLabelScopeTypes,
-  "ComputeFleetDomainNameLabelScopeTypes",
+  "ComputeFleetDomainNameLabelScopeType",
   "csharp"
 );
 @@clientName(EncryptionIdentity, "ComputeFleetEncryptionIdentity", "csharp");
@@ -47,15 +48,15 @@ using Microsoft.AzureFleet;
 );
 @@clientName(LinuxPatchSettings, "ComputeFleetLinuxPatchSettings", "csharp");
 @@clientName(LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
-  "ComputeFleetLinuxVMGuestPatchAutomaticByPlatformRebootSetting",
+  "ComputeFleetLinuxVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
 @@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings,
-  "ComputeFleetLinuxVMGuestPatchAutomaticByPlatformSettings",
+  "ComputeFleetLinuxVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
 @@clientName(LinuxVMGuestPatchMode,
-  "ComputeFleetLinuxVMGuestPatchMode",
+  "ComputeFleetLinuxVmGuestPatchMode",
   "csharp"
 );
 @@clientName(NetworkApiVersion, "ComputeFleetNetworkApiVersion", "csharp");
@@ -67,15 +68,12 @@ using Microsoft.AzureFleet;
   "ComputeFleetNetworkInterfaceAuxiliarySku",
   "csharp"
 );
-@@clientName(OperatingSystemTypes,
-  "ComputeFleetOperatingSystemTypes",
-  "csharp"
-);
+@@clientName(OperatingSystemTypes, "ComputeFleetOperatingSystemType", "csharp");
 @@clientName(OSImageNotificationProfile,
   "ComputeFleetOSImageNotificationProfile",
   "csharp"
 );
-@@clientName(ProtocolTypes, "ComputeFleetProtocolTypes", "csharp");
+@@clientName(ProtocolTypes, "ComputeFleetProtocolType", "csharp");
 @@clientName(ProvisioningState, "ComputeFleetProvisioningState", "csharp");
 @@clientName(ProxyAgentSettings, "ComputeFleetProxyAgentSettings", "csharp");
 @@clientName(PublicIPAddressSku, "ComputeFleetPublicIPAddressSku", "csharp");
@@ -91,8 +89,20 @@ using Microsoft.AzureFleet;
   "ComputeFleetScheduledEventsProfile",
   "csharp"
 );
+@@clientName(ScheduledEventsProfile.osImageNotificationProfile,
+  "OSImageNotificationProfile",
+  "csharp"
+);
 @@clientName(SecurityEncryptionTypes,
-  "ComputeFleetSecurityEncryptionTypes",
+  "ComputeFleetSecurityEncryptionType",
+  "csharp"
+);
+@@clientName(SecurityEncryptionTypes.DiskWithVMGuestState,
+  "DiskWithVmGuestState",
+  "csharp"
+);
+@@clientName(SecurityEncryptionTypes.VMGuestStateOnly,
+  "VmGuestStateOnly",
   "csharp"
 );
 @@clientName(SecurityPostureReference,
@@ -100,10 +110,11 @@ using Microsoft.AzureFleet;
   "csharp"
 );
 @@clientName(SecurityProfile, "ComputeFleetSecurityProfile", "csharp");
-@@clientName(SecurityTypes, "ComputeFleetSecurityTypes", "csharp");
+@@clientName(SecurityTypes, "ComputeFleetSecurityType", "csharp");
+@@clientName(SecurityTypes.ConfidentialVM, "ConfidentialVm", "csharp");
 @@clientName(SshConfiguration, "ComputeFleetSshConfiguration", "csharp");
 @@clientName(SshPublicKey, "ComputeFleetSshPublicKey", "csharp");
-@@clientName(StorageAccountTypes, "ComputeFleetStorageAccountTypes", "csharp");
+@@clientName(StorageAccountTypes, "ComputeFleetStorageAccountType", "csharp");
 @@clientName(TerminateNotificationProfile,
   "ComputeFleetTerminateNotificationProfile",
   "csharp"
@@ -113,15 +124,15 @@ using Microsoft.AzureFleet;
 @@clientName(VaultSecretGroup, "ComputeFleetVaultSecretGroup", "csharp");
 @@clientName(VirtualHardDisk, "ComputeFleetVirtualHardDisk", "csharp");
 @@clientName(VMDiskSecurityProfile,
-  "ComputeFleetVMDiskSecurityProfile",
+  "ComputeFleetVmDiskSecurityProfile",
   "csharp"
 );
 @@clientName(VMGalleryApplication,
-  "ComputeFleetVMGalleryApplication",
+  "ComputeFleetVmGalleryApplication",
   "csharp"
 );
 @@clientName(VmSizeProfile, "ComputeFleetVmSizeProfile", "csharp");
-@@clientName(VMSizeProperties, "ComputeFleetVMSizeProperties", "csharp");
+@@clientName(VMSizeProperties, "ComputeFleetVmSizeProperties", "csharp");
 @@clientName(WindowsConfiguration,
   "ComputeFleetWindowsConfiguration",
   "csharp"
@@ -131,15 +142,15 @@ using Microsoft.AzureFleet;
   "csharp"
 );
 @@clientName(WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
-  "ComputeFleetWindowsVMGuestPatchAutomaticByPlatformRebootSetting",
+  "ComputeFleetWindowsVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
 @@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings,
-  "ComputeFleetWindowsVMGuestPatchAutomaticByPlatformSettings",
+  "ComputeFleetWindowsVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
 @@clientName(WindowsVMGuestPatchMode,
-  "ComputeFleetWindowsVMGuestPatchMode",
+  "ComputeFleetWindowsVmGuestPatchMode",
   "csharp"
 );
 @@clientName(WinRMListener, "ComputeFleetWinRMListener", "csharp");
@@ -158,10 +169,11 @@ using Microsoft.AzureFleet;
 
 @@clientName(BaseVirtualMachineProfile, "ComputeFleetVmProfile", "csharp");
 @@clientName(BaseVirtualMachineProfile.timeCreated, "CreatedOn", "csharp");
+@@clientName(BaseVirtualMachineProfile.osProfile, "OSProfile", "csharp");
 
 @@clientName(BootDiagnostics.enabled, "IsEnabled", "csharp");
 
-@@clientName(DeleteOptions, "ComputeFleetVmDeleteOptions", "csharp");
+@@clientName(DeleteOptions, "ComputeFleetVmDeleteOption", "csharp");
 
 @@clientName(DiskControllerTypes.NVMe, "Nvme", "csharp");
 @@clientName(DiskControllerTypes.SCSI, "Scsi", "csharp");
@@ -196,8 +208,9 @@ using Microsoft.AzureFleet;
   "IsEncryptionAtHostEnabled",
   "csharp"
 );
-@@clientName(SettingNames, "AdditionalInformationSettingNames", "csharp");
+@@clientName(SettingNames, "AdditionalInformationSettingName", "csharp");
 @@clientName(SpotPriorityProfile.maintain, "IsMaintainEnabled", "csharp");
+@@clientName(SpotPriorityProfile.maxPricePerVM, "MaxPricePerVm", "csharp");
 @@clientName(StorageAccountTypes.Standard_LRS, "StandardLrs", "csharp");
 @@clientName(StorageAccountTypes.Premium_LRS, "PremiumLrs", "csharp");
 @@clientName(StorageAccountTypes.StandardSSD_LRS, "StandardSsdLrd", "csharp");
@@ -270,6 +283,7 @@ using Microsoft.AzureFleet;
   "csharp"
 );
 @@clientName(VirtualMachineScaleSetIpTag, "ComputeFleetVmssIPTag", "csharp");
+@@clientName(VirtualMachineScaleSetIpTag.ipTagType, "IPTagType", "csharp");
 @@clientName(VirtualMachineScaleSetManagedDiskParameters,
   "ComputeFleetVmssManagedDisk",
   "csharp"
@@ -284,6 +298,10 @@ using Microsoft.AzureFleet;
 );
 @@clientName(VirtualMachineScaleSetNetworkConfigurationProperties,
   "ComputeFleetVmssNetworkConfigurationProperties",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.ipConfigurations,
+  "IPConfigurations",
   "csharp"
 );
 @@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.primary,
@@ -311,6 +329,7 @@ using Microsoft.AzureFleet;
   "csharp"
 );
 @@clientName(VirtualMachineScaleSetOSDisk, "ComputeFleetVmssOSDisk", "csharp");
+@@clientName(VirtualMachineScaleSetOSDisk.osType, "OSType", "csharp");
 @@clientName(VirtualMachineScaleSetOSDisk.writeAcceleratorEnabled,
   "IsWriteAcceleratorEnabled",
   "csharp"
@@ -339,10 +358,15 @@ using Microsoft.AzureFleet;
   "ComputeFleetVmssPublicIPAddressConfigurationProperties",
   "csharp"
 );
+@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationProperties.ipTags,
+  "IPTags",
+  "csharp"
+);
 @@clientName(VirtualMachineScaleSetStorageProfile,
   "ComputeFleetVmssStorageProfile",
   "csharp"
 );
+@@clientName(VirtualMachineScaleSetStorageProfile.osDisk, "OSDisk", "csharp");
 @@clientName(VMGalleryApplication.treatFailureAsDeploymentFailure,
   "IsTreatFailureAsDeploymentFailureEnabled",
   "csharp"
@@ -375,8 +399,9 @@ using Microsoft.AzureFleet;
   "isUltraSSDEnabled",
   "csharp"
 );
-@@clientName(VMAttributes, "ComputeFleetVMAttributes", "csharp");
-@@clientName(VMAttributeSupport, "ComputeFleetVMAttributeSupport", "csharp");
+@@clientName(VMAttributes, "ComputeFleetVmAttributes", "csharp");
+@@clientName(VMAttributes.excludedVMSizes, "ExcludedVmSizes", "csharp");
+@@clientName(VMAttributeSupport, "ComputeFleetVmAttributeSupport", "csharp");
 @@clientName(VMAttributeMinMaxDouble,
   "ComputeFleetVmAttributeMinMaxDouble",
   "csharp"
@@ -387,6 +412,7 @@ using Microsoft.AzureFleet;
 );
 @@clientName(VMCategory, "ComputeFleetVmCategory", "csharp");
 @@clientName(CapacityType, "ComputeFleetCapacityType", "csharp");
+@@clientName(CapacityType.VM, "Vm", "csharp");
 @@clientName(FleetMode, "ComputeFleetMode", "csharp");
 @@clientName(VirtualMachine, "ComputeFleetVirtualMachine", "csharp");
 @@clientName(VMOperationStatus, "ComputeFleetVmOperationStatus", "csharp");
@@ -398,7 +424,29 @@ using Microsoft.AzureFleet;
   "ComputeFleetZoneDistributionStrategy",
   "csharp"
 );
-@@clientName(Fleets.listVirtualMachines::parameters.$skiptoken,
-  "skipToken",
+@@alternateType(FleetUpdate.plan,
+  Azure.ResourceManager.CommonTypes.Plan,
   "csharp"
 );
+@@clientName(ListVirtualMachinesParameters.$skiptoken, "skipToken", "csharp");
+@@alternateType(VirtualMachineScaleSet, ComputeFleetVmss, "csharp");
+
+// The following code is added to solve the problem that the `compute fleet vmss` class does not inherit the `resource data` class
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("An AzureFleet's virtualMachineScaleSet")
+model ComputeFleetVmss extends Azure.ResourceManager.CommonTypes.Resource {
+  @removed(Versions.v2024_05_01_preview)
+  @doc("This represents the Provisioning State of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState: ProvisioningState;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("This represents the operationStatus of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.")
+  @visibility(Lifecycle.Read)
+  operationStatus: ProvisioningState;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("Error Information when `operationStatus` is `Failed`")
+  @visibility(Lifecycle.Read)
+  error?: ApiError;
+}

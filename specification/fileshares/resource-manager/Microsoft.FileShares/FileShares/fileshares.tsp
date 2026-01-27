@@ -344,11 +344,7 @@ interface Operations {
   @list
   list(
     ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
+    ...Azure.ResourceManager.Legacy.Provider,
   ): ArmResponse<OperationListResult> | ErrorResponse;
 }
 

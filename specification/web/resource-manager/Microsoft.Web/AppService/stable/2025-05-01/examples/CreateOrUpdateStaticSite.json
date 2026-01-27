@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "name": "testStaticSite0",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg",
+    "staticSiteEnvelope": {
+      "location": "West US 2",
+      "properties": {
+        "branch": "master",
+        "buildProperties": {
+          "apiLocation": "api",
+          "appArtifactLocation": "build",
+          "appLocation": "app"
+        },
+        "repositoryToken": "repoToken123",
+        "repositoryUrl": "https://github.com/username/RepoName"
+      },
+      "sku": {
+        "name": "Basic",
+        "tier": "Basic"
+      }
+    },
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testStaticSite0",
+        "type": "Microsoft.Web/staticSites",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0",
+        "location": "West US 2",
+        "properties": {
+          "allowConfigFileUpdates": true,
+          "branch": "demo",
+          "contentDistributionEndpoint": "",
+          "customDomains": [],
+          "defaultHostname": "happy-sea-15afae3e.azurestaticwebsites.net",
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "linkedBackends": [],
+          "privateEndpointConnections": [],
+          "repositoryUrl": "https://github.com/username/RepoName",
+          "stagingEnvironmentPolicy": "Enabled",
+          "userProvidedFunctionApps": null
+        },
+        "sku": {
+          "name": "Basic",
+          "tier": "Basic"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "body": {
+        "name": "testStaticSite0",
+        "type": "Microsoft.Web/staticSites",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0",
+        "location": "West US 2",
+        "properties": {
+          "allowConfigFileUpdates": true,
+          "branch": "demo",
+          "contentDistributionEndpoint": "",
+          "customDomains": [],
+          "defaultHostname": "happy-sea-15afae3e.azurestaticwebsites.net",
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "linkedBackends": [],
+          "privateEndpointConnections": [],
+          "repositoryUrl": "https://github.com/username/RepoName",
+          "stagingEnvironmentPolicy": "Enabled",
+          "userProvidedFunctionApps": null
+        },
+        "sku": {
+          "name": "Basic",
+          "tier": "Basic"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/locations/westus2/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2019-01-01"
+      }
+    }
+  },
+  "operationId": "StaticSites_CreateOrUpdateStaticSite",
+  "title": "Create or update a static site"
+}

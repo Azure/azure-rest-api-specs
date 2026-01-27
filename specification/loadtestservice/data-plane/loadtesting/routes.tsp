@@ -81,6 +81,20 @@ interface LoadTestAdministration {
     never
   >;
 
+  @summary("Generate load test plan recommendations.")
+  @doc("""
+    Generate AI Recommendations to author a load test plan using the uploaded browser recording file.
+    """)
+  @pollingOperation(Operations.getStatus)
+  @finalOperation(LoadTestAdministration.getTest)
+  @added(APIVersions.v2025_11_01_preview)
+  @action("generateTestPlanRecommendations")
+  generateTestPlanRecommendations is StandardResourceOperations.LongRunningResourceAction<
+    Test,
+    {},
+    never
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
@@ -282,6 +296,27 @@ interface LoadTestRun {
       ...TestRunIdParam;
     },
     TestRunInsights
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Update the latest insights for the test run.")
+  @doc("Update the latest insights for the test run.")
+  @added(APIVersions.v2025_11_01_preview)
+  @route("/test-runs/{testRunId}/insights/latest")
+  @patch(#{ implicitOptionality: true })
+  updateLatestInsights is Azure.Core.Foundations.Operation<
+    {
+      @header
+      @doc("Content type.")
+      contentType: "application/merge-patch+json";
+
+      ...TestRunIdParam;
+
+      @doc("Test run insights model.")
+      @bodyRoot
+      body: TestRunInsights;
+    },
+    ResourceUpdatedResponse<TestRunInsights>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

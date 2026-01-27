@@ -742,7 +742,7 @@ function getBlockedOnRpaas(
 ) {
   return (
     (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent) ||
-    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+    (ciRpaasRPNotInPrivateRepoLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
   );
 }
 
@@ -870,7 +870,7 @@ const rulesPri0NotReadyForArmReview = [
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: ["RPaaSException"],
     troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo"),
   },
   {
@@ -907,7 +907,7 @@ const rulesPri0ArmRpaas = [
   {
     precedence: 0,
     anyPrerequisiteLabels: ["CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: ["RPaaSException"],
     troubleshootingGuide:
       "This PR has <code>CI-RpaaSRPNotInPrivateRepo</code> label. " +
       "This means it is introducing a new RP (Resource Provider) namespace to the <code>main</code> branch " +

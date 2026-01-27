@@ -15,5 +15,3 @@ using Microsoft.ContainerRegistry;
   "ContainerRegistryTasksMgmtClient",
   "python"
 );
-
-@@clientName(Architecture.`386`, "THREE_HUNDRED_EIGHTY_SIX", "python");

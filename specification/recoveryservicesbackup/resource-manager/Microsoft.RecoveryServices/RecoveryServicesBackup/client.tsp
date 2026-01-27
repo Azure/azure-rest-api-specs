@@ -664,10 +664,7 @@ op backupResourceEncryptionConfigsUpdate(
 op backupResourceStorageConfigsNonCRRGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -691,10 +688,7 @@ op backupResourceStorageConfigsNonCRRGet(
 op backupResourceStorageConfigsNonCRRPatch(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -721,10 +715,7 @@ op backupResourceStorageConfigsNonCRRPatch(
 op backupResourceStorageConfigsNonCRRUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -751,10 +742,7 @@ op backupResourceStorageConfigsNonCRRUpdate(
 op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -781,10 +769,7 @@ op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
 op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path

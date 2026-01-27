@@ -145,10 +145,6 @@ op QueryCriticalDataElements is RpcOperation<
     @doc("The request body containing query criteria.")
     @bodyRoot
     request: CriticalDataElementQueryRequest;
-
-    @doc("The number of duplicate checks to perform.")
-    @query
-    duplicatecheck?: int32;
   },
   CriticalDataElementsResponse
 >;
@@ -436,10 +432,6 @@ op CreateDataProduct is RpcOperation<
 @post
 op QueryDataProducts is RpcOperation<
   {
-    @doc("Optional duplicate-check flag (1 to enable exact search).")
-    @query
-    duplicatecheck?: int32;
-
     @doc("Optional flag to restrict results to owned data products.")
     @query
     dataProductOwner?: boolean;
@@ -693,10 +685,6 @@ op DeleteTerm is UnifiedCatalogOperations.ResourceDelete<Term>;
 @post
 op QueryTerms is RpcOperation<
   {
-    @doc("The bypassObligations to skip obligations.")
-    @query
-    duplicatecheck?: int32;
-
     @doc("The request body containing query criteria.")
     @bodyRoot
     request: TermQueryRequest;
@@ -835,10 +823,6 @@ op CreateObjective is RpcOperation<
 @post
 op QueryObjectives is RpcOperation<
   {
-    @doc("Optional duplicate-check flag (1 to enable exact search).")
-    @query
-    duplicatecheck?: int32;
-
     @doc("Query request containing filters and pagination.")
     @bodyRoot
     request: ObjectiveQueryRequest;

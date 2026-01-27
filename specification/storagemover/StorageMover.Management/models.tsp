@@ -879,6 +879,12 @@ model JobDefinitionUpdateProperties {
    */
   @added(Versions.v2025_08_01)
   connections?: Azure.Core.armResourceIdentifier[];
+
+  /**
+   * Data Integrity Validation mode.
+   */
+  @added(Versions.v2025_08_01)
+  dataIntegrityValidation?: DataIntegrityValidation;
 }
 
 /**
@@ -1420,6 +1426,10 @@ model ConnectionProperties {
   /** The PrivateEndpointName associated with the connection. */
   @visibility(Lifecycle.Read)
   privateEndpointName?: string;
+
+  /** The privateEndpoint resource Id */
+  @visibility(Lifecycle.Read)
+  privateEndpointResourceId?: Azure.Core.armResourceIdentifier;
 
   /** List of job definitions associated with this connection. */
   jobList?: Azure.Core.armResourceIdentifier[];

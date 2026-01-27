@@ -95,7 +95,7 @@ interface SignalRSharedPrivateLinkResourceOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
 
         /**
          * The name of the SignalRResource
