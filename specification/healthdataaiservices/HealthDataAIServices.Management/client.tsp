@@ -34,4 +34,12 @@ namespace Microsoft.HealthDataAIServices {
     "$DO_NOT_NORMALIZE$V2024_09_20",
     "javascript"
   );
+
+  @@clientName(Versions.v2026_02_01_preview,
+    "$DO_NOT_NORMALIZE$V2026_02_01_Preview",
+    "javascript"
+  );
+
+  @@clientName(SkuTier, "HealthDataAIServicesSkuTier", "csharp");
+  @@clientName(Sku, "HealthDataAIServicesSku", "csharp");
 }
