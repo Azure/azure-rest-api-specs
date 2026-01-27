@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.StorageSync;
@@ -823,6 +825,14 @@ model CloudEndpointCreateParametersProperties {
    * Friendly Name
    */
   friendlyName?: string;
+
+  /**
+   * The interval for enumerating changes on the cloud endpoint.
+   */
+  @added(Versions.v2025_12_01)
+  @minValue(1)
+  @maxValue(20)
+  changeEnumerationIntervalDays?: int32;
 }
 
 /**
@@ -881,6 +891,14 @@ model CloudEndpointProperties {
    */
   @visibility(Lifecycle.Read)
   changeEnumerationStatus?: CloudEndpointChangeEnumerationStatus;
+
+  /**
+   * The interval for enumerating changes on the cloud endpoint.
+   */
+  @added(Versions.v2025_12_01)
+  @minValue(1)
+  @maxValue(20)
+  changeEnumerationIntervalDays?: int32;
 }
 
 /**
@@ -1065,6 +1083,30 @@ model CloudEndpointArray {
    */
   @nextLink
   nextLink?: string;
+}
+
+/**
+ * The parameters used when updating a cloud endpoint.
+ */
+@added(Versions.v2025_12_01)
+model CloudEndpointUpdateParameters {
+  /**
+   * The properties of the cloud endpoint.
+   */
+  properties?: CloudEndpointUpdateProperties;
+}
+
+/**
+ * CloudEndpoint Update Properties object.
+ */
+@added(Versions.v2025_12_01)
+model CloudEndpointUpdateProperties {
+  /**
+   * The interval for enumerating changes on the cloud endpoint.
+   */
+  @minValue(1)
+  @maxValue(20)
+  changeEnumerationIntervalDays?: int32;
 }
 
 /**

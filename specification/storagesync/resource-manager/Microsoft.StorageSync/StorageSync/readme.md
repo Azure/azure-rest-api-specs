@@ -26,10 +26,25 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-09
+tag: package-2025-12
 ```
 
 
+### Tag: package-2025-12
+
+These settings apply only when `--tag=package-2025-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-12'
+input-file:
+  - stable/2025-12-01/storagesync.json
+suppressions:
+    - code: ProvisioningStateMustBeReadOnly
+      from: storagesync.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly. Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: LroErrorContent
+      from: storagesync.json
+      reason: StorageSyncError custom model needs to be fixed for entire service and changed it to ARM CloudError
+```
 ### Tag: package-2022-09
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
