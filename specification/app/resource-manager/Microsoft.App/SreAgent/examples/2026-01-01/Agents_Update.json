@@ -1,16 +1,18 @@
 {
+  "title": "Agents_Update",
+  "operationId": "Agents_Update",
   "parameters": {
     "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
     "agentName": "testAgent",
     "api-version": "2026-01-01",
-    "agentEnvelope": {
+    "properties": {
       "tags": {
-        "environment": "staging",
-        "version": "v2.1"
+        "environment": "production",
+        "version": "v3.0"
       },
       "properties": {
-        "upgradeChannel": "Preview"
+        "upgradeChannel": "Stable"
       }
     }
   },
@@ -22,8 +24,8 @@
         "type": "Microsoft.App/agents",
         "location": "East US",
         "tags": {
-          "environment": "staging",
-          "version": "v2.1"
+          "environment": "production",
+          "version": "v3.0"
         },
         "identity": {
           "type": "SystemAssigned",
@@ -36,7 +38,7 @@
           "runningState": "Running",
           "powerState": "Running",
           "agentSpaceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
-          "upgradeChannel": "Preview"
+          "upgradeChannel": "Stable"
         }
       }
     },

@@ -1,54 +1,11 @@
 {
+  "title": "AgentSpaces_Get",
+  "operationId": "AgentSpaces_Get",
   "parameters": {
     "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
     "agentSpaceName": "testAgentSpace",
-    "api-version": "2026-01-01",
-    "agentSpaceEnvelope": {
-      "tags": {
-        "environment": "production",
-        "team": "platform",
-        "version": "v2.0"
-      },
-      "properties": {
-        "description": "Updated production agent space with enhanced capabilities",
-        "maxAgentCount": 20,
-        "policies": {
-          "genevaActionsConfiguration": {
-            "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
-            "authenticationMode": "OAuth",
-            "allowedActions": [
-              {
-                "actionName": "RestartService",
-                "extension": "GenevaActions",
-                "actionParameters": [
-                  {
-                    "name": "serviceName",
-                    "type": "string"
-                  }
-                ],
-                "approvalRequired": true
-              },
-              {
-                "actionName": "GetMetrics",
-                "extension": "GenevaActions",
-                "actionParameters": [
-                  {
-                    "name": "metricName",
-                    "type": "string"
-                  },
-                  {
-                    "name": "timeRange",
-                    "type": "string"
-                  }
-                ],
-                "approvalRequired": false
-              }
-            ]
-          }
-        }
-      }
-    }
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
@@ -60,7 +17,7 @@
         "tags": {
           "environment": "production",
           "team": "platform",
-          "version": "v2.0"
+          "costCenter": "12345"
         },
         "identity": {
           "type": "SystemAssigned",
@@ -70,23 +27,25 @@
         "properties": {
           "provisioningState": "Succeeded",
           "currentAgentCount": 3,
-          "maxAgentCount": 20,
+          "maxAgentCount": 10,
           "memberAgents": [
             "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/chatAgent",
             "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/dataAgent",
             "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/supportAgent"
           ],
-          "lastPolicyPropagation": "2025-10-28T12:00:00Z",
-          "description": "Updated production agent space with enhanced capabilities",
+          "lastPolicyPropagation": "2025-10-28T10:30:00Z",
+          "description": "Production agent space for customer-facing AI agents with comprehensive compliance and monitoring",
           "serviceTreeId": "12345678-1234-1234-1234-123456789012",
           "complianceStatus": {
             "isCompliant": true,
             "complianceIssues": [],
-            "lastComplianceCheck": "2025-10-28T12:00:00Z"
+            "lastComplianceCheck": "2025-10-28T09:00:00Z"
           },
           "policies": {
             "genevaActionsConfiguration": {
               "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+              "clientId": "12345678-1234-1234-1234-123456789012",
+              "certificateSubjectName": "CN=AgentSpaceAuth",
               "authenticationMode": "OAuth",
               "extensionName": "GenevaActions",
               "allowedActions": [
@@ -120,12 +79,6 @@
             }
           }
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/abcdef12-3456-7890-abcd-ef1234567890",
-        "azure-asyncoperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/abcdef12-3456-7890-abcd-ef1234567890"
       }
     }
   }

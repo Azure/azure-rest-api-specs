@@ -1,11 +1,20 @@
 {
-  "title": "Agents_Start",
-  "operationId": "Agents_Start",
+  "title": "Agents_Update",
+  "operationId": "Agents_Update",
   "parameters": {
     "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
     "agentName": "testAgent",
-    "api-version": "2026-01-01"
+    "api-version": "2026-01-01",
+    "properties": {
+      "tags": {
+        "environment": "production",
+        "version": "v3.0"
+      },
+      "properties": {
+        "upgradeChannel": "Stable"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -16,7 +25,7 @@
         "location": "East US",
         "tags": {
           "environment": "production",
-          "team": "platform"
+          "version": "v3.0"
         },
         "identity": {
           "type": "SystemAssigned",
@@ -35,8 +44,8 @@
     },
     "202": {
       "headers": {
-        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/87654321-4321-4321-4321-210987654321",
-        "azure-asyncoperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/87654321-4321-4321-4321-210987654321"
+        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/abcdef12-3456-7890-abcd-ef1234567890",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/abcdef12-3456-7890-abcd-ef1234567890"
       }
     }
   }

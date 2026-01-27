@@ -1,4 +1,6 @@
 {
+  "title": "AgentsConnectors_ListByAgent",
+  "operationId": "AgentsConnectors_ListByAgent",
   "parameters": {
     "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
@@ -15,9 +17,16 @@
             "type": "Microsoft.App/agents/connectors",
             "properties": {
               "dataConnectorType": "SqlServer",
-              "dataSource": "Server=sqlserver.database.windows.net;Database=MyDB;User Id=admin;",
+              "endpoint": "https://sqlserver.database.windows.net",
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
-              "source": "Agent"
+              "source": "Agent",
+              "extendedProperties": {
+                "AuthType": "Custom",
+                "CustomHeader": {
+                  "DD_API_KEY": "value 1",
+                  "DD_APPLICATION_KEY": "value 2"
+                }
+              }
             }
           },
           {
@@ -26,9 +35,17 @@
             "type": "Microsoft.App/agents/connectors",
             "properties": {
               "dataConnectorType": "AzureStorage",
-              "dataSource": "DefaultEndpointsProtocol=https;AccountName=teststorage;AccountKey=key123;",
+              "endpoint": "https://teststorage.blob.core.windows.net",
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/storageIdentity",
-              "source": "AgentSpace"
+              "source": "AgentSpace",
+              "extendedProperties": {
+                "environment": "production",
+                "owner": "alice",
+                "additionalEndpoints": [
+                  "https://foo.kusto.windows.net/databasename",
+                  "https://bar.kusto.windows.net/databasename"
+                ]
+              }
             }
           },
           {
@@ -37,6 +54,7 @@
             "type": "Microsoft.App/agents/connectors",
             "properties": {
               "dataConnectorType": "CosmosDB",
+              "endpoint": "https://testcosmos.documents.azure.com:443/",
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cosmosIdentity",
               "source": "Agent"
             }
