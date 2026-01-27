@@ -2,65 +2,108 @@
   "title": "DataflowGraph_Get_MaximumSet",
   "operationId": "DataflowGraph_Get",
   "parameters": {
-    "api-version": "2026-03-01",
-    "subscriptionId": "9CF0AD84-0E38-4C11-8F4F-93FBA8B5E5D7",
+    "api-version": "2025-10-01",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
     "resourceGroupName": "rgiotoperations",
-    "instanceName": "Replace this value with a string matching RegExp ^[a-z0-9][a-z0-9-]*[a-z0-9]$",
-    "dataflowProfileName": "Replace this value with a string matching RegExp ^[a-z0-9][a-z0-9-]*[a-z0-9]$",
-    "dataflowGraphName": "Replace this value with a string matching RegExp ^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+    "instanceName": "resource-123",
+    "dataflowProfileName": "resource-123",
+    "dataflowGraphName": "resource-123"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/resource-123/dataflowProfiles/resource-123/dataflowGraphs/resource-123",
         "properties": {
           "mode": "Enabled",
           "requestDiskPersistence": "Enabled",
           "nodes": [
             {
-              "name": "wrikgrgtfctjchxfzrdnyygaamegag",
-              "nodeType": "DataflowGraphNode"
+              "nodeType": "Source",
+              "name": "temperature",
+              "sourceSettings": {
+                "endpointRef": "default",
+                "dataSources": [
+                  "telemetry/temperature"
+                ]
+              }
+            },
+            {
+              "nodeType": "Graph",
+              "name": "my-graph",
+              "graphSettings": {
+                "registryEndpointRef": "my-registry-endpoint",
+                "artifact": "my-wasm-module:1.4.3",
+                "configuration": [
+                  {
+                    "key": "key1",
+                    "value": "value1"
+                  },
+                  {
+                    "key": "key2",
+                    "value": "value2"
+                  }
+                ]
+              }
+            },
+            {
+              "nodeType": "Destination",
+              "name": "alert",
+              "destinationSettings": {
+                "endpointRef": "default",
+                "dataDestination": "telemetry/temperature/alert"
+              }
+            },
+            {
+              "nodeType": "Destination",
+              "name": "fabric",
+              "destinationSettings": {
+                "endpointRef": "fabric",
+                "dataDestination": "my-table"
+              }
             }
           ],
           "nodeConnections": [
             {
               "from": {
-                "name": "ecwnxdaxhnaaxrsexunyvhhfzndhlo",
+                "name": "temperature",
                 "schema": {
-                  "serializationFormat": "Delta",
-                  "schemaRef": "nwjnanmlbccprfloivhr"
+                  "serializationFormat": "Avro",
+                  "schemaRef": "aio-sr://namespace/temperature:1"
                 }
               },
               "to": {
-                "name": "lxgmqrqyesufceapgnyrragquli"
+                "name": "my-graph"
+              }
+            },
+            {
+              "from": {
+                "name": "my-graph.alert-output",
+                "schema": {
+                  "serializationFormat": "Avro",
+                  "schemaRef": "aio-sr://namespace/alert:1"
+                }
+              },
+              "to": {
+                "name": "fabric"
+              }
+            },
+            {
+              "from": {
+                "name": "my-graph.normal-output",
+                "schema": {
+                  "serializationFormat": "Avro",
+                  "schemaRef": "aio-sr://namespace/alert:1"
+                }
+              },
+              "to": {
+                "name": "fabric"
               }
             }
-          ],
-          "provisioningState": "Succeeded",
-          "status": {
-            "healthState": {
-              "status": "Available",
-              "lastTransitionTime": "bhqgekl",
-              "lastUpdateTime": "mdpehmezslqzdr",
-              "message": "eqvxyektjxx",
-              "reasonCode": "bbrb"
-            }
-          },
-          "healthState": "Available"
+          ]
         },
         "extendedLocation": {
-          "name": "xshjwkhcqnjmsuvoawmlffhief",
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
           "type": "CustomLocation"
-        },
-        "id": "dclqawnqbhctejpaq",
-        "name": "kzpmgypsxdzzvgilwtmbqmzmqwuk",
-        "type": "uxjqnxlowtwiqqhjolrpfy",
-        "systemData": {
-          "createdBy": "btafmdufzspwxhfregycdmxcqewt",
-          "createdByType": "User",
-          "createdAt": "2026-01-27T17:27:48.687Z",
-          "lastModifiedBy": "orq",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2026-01-27T17:27:48.687Z"
         }
       }
     }
