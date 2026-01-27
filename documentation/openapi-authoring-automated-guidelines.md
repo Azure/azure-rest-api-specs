@@ -1445,7 +1445,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **CreatedAt** : N/A
 
-**LastModifiedAt** : February 18, 2020
+**LastModifiedAt** : January 27, 2026
 
 **Why the rule is important**: [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md). 
 
