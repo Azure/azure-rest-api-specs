@@ -46,6 +46,11 @@ jobs:
         run: node workflows/src/detect-new-resource-provider.js ${{ github.event.pull_request.base.ref }}
         working-directory: .github
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
 
       - name: Comment on PR
         if: steps.detect.outcome == 'failure'
@@ -67,16 +72,11 @@ jobs:
 
             ### ⚠️ Action Required
 
-            New resource provider namespaces require attending **ARM API Modeling Office Hours** before merging.
+            New resource provider namespaces require having a discussion with the ARM team at **ARM API Modeling Office Hours** before merging.
 
-            📅 **Please schedule here:** https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true
+            📅 **Please schedule here:** https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true\`;
 
-            During the office hours, the ARM team will review:
-            - Resource provider namespace naming conventions
-            - API design patterns and best practices
-            - Registration requirements for Azure environments\`;
-
-              github.rest.issues.createComment({
+              await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,

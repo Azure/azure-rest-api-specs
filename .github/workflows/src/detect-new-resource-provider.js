@@ -2,8 +2,10 @@
 
 import { execSync } from 'child_process';
 import { readdirSync, existsSync, statSync, writeFileSync } from 'fs';
-import { join } from 'path';
-import { getChangedFiles } from '../../shared/src/changed-files.js';
+import { join, dirname } from 'path';
+import { Octokit } from '@octokit/rest';
+import { simpleGit } from 'simple-git';
+import { getChangedFiles, swagger, example } from '../../shared/src/changed-files.js';
 import { checkLease } from './detect-arm-leases.js';
 
 // ============================================
@@ -16,6 +18,9 @@ const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\
 // Match pattern with optional service group: specification/<service>/resource-manager/<ResourceProvider.Namespace>/<ServiceGroup>/...
 // ServiceGroup folder name should not start with "stable" or "preview"
 const RESOURCE_MANAGER_WITH_GROUP_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\/(?!stable|preview)([^\/]+)\//;
+
+// Labels to add when new resource providers are detected
+const NEW_RP_LABELS = ['ARMModelingReviewRequired', 'NotReadyForARMReview'];
 
 // ============================================
 // Utility Functions
@@ -52,6 +57,42 @@ function resourceProviderExists(specPath, namespace) {
   }
   
   return false;
+}
+
+/**
+ * Add labels to the PR for new resource providers
+ * @returns {Promise<void>}
+ */
+async function addNewResourceProviderLabels() {
+  const githubToken = process.env.GITHUB_TOKEN;
+  const prNumber = process.env.PR_NUMBER;
+  const repoOwner = process.env.REPO_OWNER || 'Azure';
+  const repoName = process.env.REPO_NAME || 'azure-rest-api-specs';
+
+  if (!githubToken) {
+    console.log('GITHUB_TOKEN not available, skipping label addition');
+    return;
+  }
+
+  if (!prNumber) {
+    console.log('PR_NUMBER not available, skipping label addition');
+    return;
+  }
+
+  try {
+    const octokit = new Octokit({ auth: githubToken });
+    
+    await octokit.rest.issues.addLabels({
+      owner: repoOwner,
+      repo: repoName,
+      issue_number: parseInt(prNumber),
+      labels: NEW_RP_LABELS
+    });
+
+    console.log(`Successfully added labels: ${NEW_RP_LABELS.join(', ')}`);
+  } catch (error) {
+    console.log(`[FAILED] Failed to add labels: ${error.message}`);
+  }
 }
 
 /**
@@ -99,11 +140,10 @@ async function main() {
   try {
     mergeBase = execSync(`git merge-base origin/${baseBranch} HEAD`, { encoding: 'utf-8' }).trim();
   } catch (error) {
-    console.log('Warning: Could not find merge-base, using origin/main directly');
     mergeBase = `origin/${baseBranch}`;
   }
 
-  // Step 1: Get all changed files in specification/*/resource-manager/
+  // Get all changed files in specification/*/resource-manager/
   const allFiles = await getChangedFiles({
     baseCommitish: mergeBase,
     headCommitish: 'HEAD'
@@ -113,15 +153,52 @@ async function main() {
     file.includes('/resource-manager/') && file.startsWith('specification/')
   );
 
-  console.log(`Found ${rmFiles.length} changed file(s) in resource-manager directories\n`);
-
   if (rmFiles.length === 0) {
     console.log('No resource-manager files changed');
     process.exit(0);
   }
 
-  // Step 2: Extract resource providers and filter for new ones (don't exist in main branch)
-  const changedResourceProviders = extractResourceProviders(rmFiles);
+  // Pre-check: Verify if spec directories are brand new (don't exist in base branch)
+  const git = simpleGit(repoRoot);
+  const changedSpecDirs = new Set([
+    ...rmFiles.filter(swagger).map((f) => dirname(dirname(dirname(f)))),
+    ...rmFiles.filter(example).map((f) => dirname(dirname(dirname(dirname(f))))),
+  ]);
+
+  if (changedSpecDirs.size > 0) {
+    let hasAtLeastOneBrandNewRP = false;
+    
+    for (const changedSpecDir of changedSpecDirs) {
+      try {
+        const specFilesBaseBranch = await git.raw([
+          'ls-tree',
+          '-r',
+          '--name-only',
+          mergeBase,
+          changedSpecDir,
+        ]);
+        
+        const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
+          .split('\n')
+          .filter((file) => file.includes('/resource-manager/') && swagger(file));
+
+        if (specRmSwaggerFilesBaseBranch.length === 0) {
+          hasAtLeastOneBrandNewRP = true;
+        }
+      } catch (error) {
+        // Directory doesn't exist in base - brand new RP
+        hasAtLeastOneBrandNewRP = true;
+      }
+    }
+    
+    if (!hasAtLeastOneBrandNewRP) {
+      console.log('No brand new resource providers detected, spec directories exist in base branch.');
+      console.log('Skipping workflow.\n');
+      process.exit(0);
+    }
+  }
+
+  // Extract resource providers and filter for new ones
   const specPath = join(repoRoot, SPECIFICATION_PATH);
   const newResourceProviders = [];
   
@@ -135,42 +212,35 @@ async function main() {
     } 
   }
   
-  // Step 3: Check ARM leases for new resource providers
+  // Check ARM leases for new resource providers
   const leaseCheckResults = [];
   
   if (newResourceProviders.length > 0) {
-    console.log(`\n🆕 Detected ${newResourceProviders.length} NEW resource provider namespace(s):\n`);
+    console.log(`\n🆕 Detected ${newResourceProviders.length} new resource provider(s)\n`);
     
     for (const rp of newResourceProviders) {
       const leaseValid = checkLease(rp.serviceName, rp.namespace, rp.serviceGroup || '');
-      const leaseMessage = leaseValid ? 'Lease is valid' : 'No lease file found or lease has expired';
       
       leaseCheckResults.push({
         namespace: rp.namespace,
         serviceName: rp.serviceName,
         serviceGroup: rp.serviceGroup,
         leaseValid: leaseValid,
-        leaseMessage: leaseMessage
+        leaseMessage: leaseValid ? 'Lease is valid' : 'No lease file found or lease has expired'
       });
       
-      console.log(`    Lease check: ${leaseMessage}`);
+      console.log(`  - ${rp.namespace}: ${leaseValid ? '[OK]' : '[FAILED]'} Lease ${leaseValid ? 'valid' : 'invalid'}`);
     }
     
-    console.log('\nNew resource provider namespaces require attending "ARM API Modeling Office Hours".');
-    console.log('A comment will be posted on the PR with lease validation results.\n');
-    
-    // Step 4: Write output for GitHub Actions to use in PR comment
-    const outputData = {
-      newResourceProviders: leaseCheckResults
-    };
     writeFileSync(
       join(repoRoot, '.github', 'new-rp-output.json'),
-      JSON.stringify(outputData, null, 2)
+      JSON.stringify({ newResourceProviders: leaseCheckResults }, null, 2)
     );
     
+    await addNewResourceProviderLabels();
     exitCode = 1;
   } else {
-    console.log('No new resource provider namespaces detected. All changes are to existing namespaces.\n');
+    console.log('No new resource providers detected.\n');
   }
 
   process.exit(exitCode);
