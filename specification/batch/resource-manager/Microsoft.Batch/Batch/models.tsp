@@ -696,7 +696,6 @@ enum NetworkSecurityGroupRuleAccess {
 /**
  * The order for scheduling tasks from different jobs with the same priority.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_06_01)
 union JobDefaultOrder {
   string,
@@ -784,7 +783,6 @@ enum LoginMode {
 /**
  * Specifies the access control policy execution mode.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_06_01)
 union HostEndpointSettingsModeTypes {
   string,
@@ -2768,7 +2766,7 @@ model HostEndpointSettings {
   /**
    * Specifies the reference to the InVMAccessControlProfileVersion resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Mactching case of the property in the original spec"
   inVMAccessControlProfileReferenceId?: Azure.Core.armResourceIdentifier;
 }
 
