@@ -195,6 +195,7 @@ using Microsoft.Batch;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(KeyVaultReference.url, url, "csharp");
 @@clientName(AuthenticationMode, "BatchAuthenticationMode", "csharp");
 @@clientName(EncryptionProperties,
   "BatchAccountEncryptionConfiguration",
@@ -261,12 +262,15 @@ using Microsoft.Batch;
 @@clientName(DiffDiskPlacement, "BatchDiffDiskPlacement", "csharp");
 @@clientName(DiskEncryptionTarget, "BatchDiskEncryptionTarget", "csharp");
 @@clientName(InboundEndpointProtocol, "BatchInboundEndpointProtocol", "csharp");
+@@clientName(InboundEndpointProtocol.TCP, "Tcp", "csharp");
+@@clientName(InboundEndpointProtocol.UDP, "Udp", "csharp");
 @@clientName(InboundNatPool, "BatchInboundNatPool", "csharp");
 @@clientName(IPAddressProvisioningType,
   "BatchIPAddressProvisioningType",
   "csharp"
 );
-@@clientName(IPRuleAction, "BatchIPRuleAction", "csharp");
+// @@clientName(IPRuleAction, "BatchIPRuleAction", "csharp");
+@@alternateType(IPRuleAction, BatchIPRuleAction, "csharp");
 @@clientName(NetworkConfiguration, "BatchNetworkConfiguration", "csharp");
 @@clientName(NetworkConfiguration.dynamicVnetAssignmentScope,
   "dynamicVNetAssignmentScope",
@@ -312,7 +316,7 @@ using Microsoft.Batch;
 @@alternateType(ImageReference.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(CertificateCreateOrUpdateProperties.data, unknown, "csharp");
 @@alternateType(KeyVaultProperties.keyIdentifier, url, "csharp");
-@@clientName(AzureFileShareConfiguration.azureFileUrl, "FileUrl", "csharp");
+@@clientName(AzureFileShareConfiguration.azureFileUrl, "url", "csharp");
 @@clientName(MountConfiguration.azureBlobFileSystemConfiguration,
   "BlobFileSystemConfiguration",
   "csharp"
@@ -531,5 +535,17 @@ namespace Microsoft.Batch {
      * The user has cancelled the connection creation.
      */
     Cancelled: "Cancelled",
+  }
+
+  /**
+   * The action when client IP address is matched.
+   */
+  union BatchIPRuleAction {
+    string,
+
+    /**
+     * Allow access for the matched client IP address.
+     */
+    Allow: "Allow",
   }
 }
