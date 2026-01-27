@@ -131,6 +131,7 @@ export async function getSwaggerDiffs(
   additions: string[];
   modifications: string[];
   deletions: string[];
+  renames: { from: string; to: string }[];
   total: number;
 }> {
   try {
@@ -150,15 +151,16 @@ export async function getSwaggerDiffs(
       (rename) => swagger(rename.from) && swagger(rename.to),
     );
 
-    // Add renamed files to the additions array and deletions array
-    filteredAdditions.push(...filteredRenames.map((rename) => rename.to));
-    filteredDeletions.push(...filteredRenames.map((rename) => rename.from));
-
     return {
       additions: filteredAdditions,
       modifications: filteredModifications,
       deletions: filteredDeletions,
-      total: filteredAdditions.length + filteredModifications.length + filteredDeletions.length,
+      renames: filteredRenames,
+      total:
+        filteredAdditions.length +
+        filteredModifications.length +
+        filteredDeletions.length +
+        filteredRenames.length,
     };
   } catch (error) {
     logError(`Error getting categorized changed files: ${error}`);
@@ -167,6 +169,7 @@ export async function getSwaggerDiffs(
       additions: [],
       modifications: [],
       deletions: [],
+      renames: [],
       total: 0,
     };
   }
