@@ -7,6 +7,10 @@ using Azure.Core;
 using Azure.ResourceManager.Foundations;
 
 @@clientName(UsableStatus, "WorkspaceUsableStatus", "csharp");
+@@clientName(WorkspaceResourceProperties,
+  "QuantumWorkspaceProperties",
+  "csharp"
+);
 @@clientName(WorkspaceResourceProperties.apiKeyEnabled,
   "IsApiKeyEnabled",
   "csharp"
@@ -57,8 +61,8 @@ using Azure.ResourceManager.Foundations;
 @@clientName(PricingDetail, "QuantumPricingDetail", "csharp");
 @@clientName(Provider, "QuantumProvider", "csharp");
 @@alternateType(Provider.instanceUri, url, "csharp");
-@@clientName(ProviderDescription, "QuantumProviderDescription", "csharp");
-@@clientName(ProviderProperties, "QuantumProviderProperties", "csharp");
+@@clientName(ProviderDescription, "QuantumProviderOffer", "csharp");
+@@clientName(ProviderProperties, "QuantumProviderOfferProperties", "csharp");
 @@clientName(QuotaDimension, "QuantumQuotaDimension", "csharp");
 @@clientName(WorkspaceKind, "QuantumWorkspaceKind", "csharp");
 @@clientName(QuotaAllocations, "QuantumQuotaAllocations", "csharp");
@@ -66,6 +70,12 @@ using Azure.ResourceManager.Foundations;
   "MoboBrokerInfo",
   "csharp"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+  "WorkspaceNameUnavailableReason",
+  "csharp"
+);
+@@clientName(Offerings.list, "GetProviderOfferings", "csharp");
+@@clientName(SuiteOffers.listBySubscription, "GetSuiteOffer", "csharp");
 @@alternateType(ProviderPropertiesAad.tenantId, uuid, "csharp");
 @@alternateType(WorkspaceResourceProperties.endpointUri, url, "csharp");
 @@alternateType(QuantumSuiteOfferProperties.quotas, azureLocation, "csharp");
