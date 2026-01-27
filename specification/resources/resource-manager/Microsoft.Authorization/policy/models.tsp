@@ -389,6 +389,24 @@ model PolicyAssignmentProperties {
 }
 
 /**
+ * A boolean value represented as a string enum. Possible values are true and false.
+ */
+@added(Versions.v2025_11_01)
+union BooleanAsEnum {
+  string,
+
+  /**
+   * The value is true.
+   */
+  `true`: "true",
+
+  /**
+   * The value is false.
+   */
+  `false`: "false",
+}
+
+/**
  * The self-serve exemption settings for a policy assignment.
  */
 @added(Versions.v2025_11_01)
@@ -396,7 +414,7 @@ model SelfServeExemptionSettings {
   /**
    * Indicates whether self-serve exemption is enabled.
    */
-  enabled: boolean;
+  enabled?: BooleanAsEnum;
 
   /**
    * The policy definition reference IDs for self-serve exemption.
