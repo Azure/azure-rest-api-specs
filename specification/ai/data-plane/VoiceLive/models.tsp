@@ -456,6 +456,34 @@ model ServerEventErrorDetails {
   event_id?: string;
 }
 
+/** Details of the warning. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventWarningDetails {
+  /** A human-readable warning message. */
+  message: string;
+
+  /** Warning code, if any. */
+  code?: string;
+
+  /** Parameter related to the warning, if any. */
+  param?: string;
+}
+
+// Tool customization (apply_discriminator): apply discriminated type
+/**
+ * Returned when a warning occurs that does not interrupt the conversation flow.
+ * Warnings are informational and the session will continue normally.
+ */
+@usage(ResponseUsage)
+model ServerEventWarning extends ServerEvent {
+  /** The event type, must be `warning`. */
+  type: ServerEventType.warning;
+
+  /** Details of the warning. */
+  warning: ServerEventWarningDetails;
+}
+
 // Tool customization (apply_discriminator): apply discriminated type
 /**
  * Returned when a Session is created. Emitted automatically when a new

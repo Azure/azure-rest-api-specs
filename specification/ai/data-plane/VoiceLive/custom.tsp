@@ -606,6 +606,32 @@ model Animation {
   outputs?: AnimationOutputType[] = #[AnimationOutputType.blendshapes];
 }
 
+/** Configuration for avatar's zoom level, position, rotation and movement amplitude in the video frame. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
+model Scene {
+  /** Zoom level of the avatar. Range is (0, +∞). Values less than 1 zoom out, values greater than 1 zoom in. */
+  zoom?: float32 = 0.0;
+
+  /** Horizontal position of the avatar. Range is [-1, 1], as a proportion of frame width. Negative values move left, positive values move right. */
+  position_x?: float32 = 0.0;
+
+  /** Vertical position of the avatar. Range is [-1, 1], as a proportion of frame height. Negative values move up, positive values move down. */
+  position_y?: float32 = 0.0;
+
+  /** Rotation around the X-axis (pitch). Range is [-π, π] in radians. Negative values rotate up, positive values rotate down. */
+  rotation_x?: float32 = 0.0;
+
+  /** Rotation around the Y-axis (yaw). Range is [-π, π] in radians. Negative values rotate left, positive values rotate right. */
+  rotation_y?: float32 = 0.0;
+
+  /** Rotation around the Z-axis (roll). Range is [-π, π] in radians. Negative values rotate anticlockwise, positive values rotate clockwise. */
+  rotation_z?: float32 = 0.0;
+
+  /** Amplitude of the avatar movement. Range is (0, 1]. Values in (0, 1) mean reduced amplitude, 1 means full amplitude. */
+  amplitude?: float32 = 0.0;
+}
+
 /** Configuration for avatar streaming and behavior during the session. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
@@ -631,8 +657,14 @@ model AvatarConfig {
   /** Optional video configuration including resolution, bitrate, and codec. */
   video?: VideoParams;
 
+  /** Configuration for the avatar's zoom level, position, rotation and movement amplitude in the video frame. */
+  scene?: Scene;
+
   /** Output protocol for avatar streaming. Default is 'webrtc'. */
   output_protocol?: AvatarOutputProtocol = AvatarOutputProtocol.webrtc;
+
+  /** When enabled, forwards audit audio via WebSocket for review/debugging purposes, even when avatar output is delivered via WebRTC. */
+  output_audit_audio?: boolean = false;
 }
 
 /** Avatar config types */
