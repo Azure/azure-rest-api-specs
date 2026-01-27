@@ -262,11 +262,8 @@ model PromptAgentDefinition extends AgentDefinition {
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @doc("""
-    Controls how the model selects which tool (or tools) to use when generating a response.
-    Only applicable when `tools` are specified.
-    
-    `auto` (default): The model can choose between generating a message or calling one or more tools.
-    `required`: The model must call at least one tool before responding.
+    How the model should select which tool (or tools) to use when generating a response. 
+    See the `tools` parameter to see how to specify which tools the model can call.
     """)
   tool_choice?: string | OpenAI.ToolChoiceParam;
 
