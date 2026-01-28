@@ -432,7 +432,7 @@ model CreateTableEchoResponse {
 
   /** Content-Type header */
   @header("Content-Type")
-  contentType: "application/json;odata=minimalmetadata";
+  contentType: string;
 
   /** Whether the content echo was requested and applied. */
   @header("Preference-Applied")
@@ -470,7 +470,7 @@ model InsertEntityEchoResponse {
 
   /** Content-Type header */
   @header("Content-Type")
-  contentType: "application/json;odata=minimalmetadata";
+  contentType: string;
 
   /** Whether the content echo was requested and applied. */
   @header("Preference-Applied")

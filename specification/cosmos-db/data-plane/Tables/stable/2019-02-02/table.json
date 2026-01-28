@@ -67,7 +67,7 @@
         "operationId": "Table_InsertEntity",
         "description": "Insert entity in a table.",
         "produces": [
-          "application/json;odata=minimalmetadata",
+          "*/*",
           "application/json"
         ],
         "consumes": [
@@ -186,7 +186,7 @@
             "name": "tableEntityProperties",
             "in": "body",
             "description": "The entity properties to insert.",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "object",
               "additionalProperties": {}
@@ -282,7 +282,7 @@
         "operationId": "Table_QueryEntityWithPartitionAndRowKey",
         "description": "Retrieve a single entity.",
         "produces": [
-          "application/json;odata=minimalmetadata",
+          "*/*",
           "application/json"
         ],
         "parameters": [
@@ -457,7 +457,7 @@
           "application/json"
         ],
         "consumes": [
-          "application/json;odata=nometadata"
+          "application/json"
         ],
         "parameters": [
           {
@@ -533,7 +533,7 @@
             "name": "tableEntityProperties",
             "in": "body",
             "description": "The properties for the table entity.",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "object",
               "additionalProperties": {}
@@ -590,7 +590,7 @@
           "application/json"
         ],
         "consumes": [
-          "application/json;odata=nometadata"
+          "application/json"
         ],
         "parameters": [
           {
@@ -666,7 +666,7 @@
             "name": "tableEntityProperties",
             "in": "body",
             "description": "The properties for the table entity.",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "object",
               "additionalProperties": {}
@@ -838,7 +838,7 @@
         "operationId": "Table_QueryEntities",
         "description": "Queries entities under the given table.",
         "produces": [
-          "application/json;odata=minimalmetadata",
+          "*/*",
           "application/json"
         ],
         "parameters": [
@@ -1101,7 +1101,7 @@
         "operationId": "Table_Query",
         "description": "Queries tables under the given account.",
         "produces": [
-          "application/json;odata=minimalmetadata",
+          "*/*",
           "application/json"
         ],
         "parameters": [
@@ -1250,11 +1250,11 @@
         "operationId": "Table_Create",
         "description": "Creates a new table under the given account.",
         "produces": [
-          "application/json;odata=minimalmetadata",
+          "*/*",
           "application/json"
         ],
         "consumes": [
-          "application/json;odata=nometadata"
+          "application/json"
         ],
         "parameters": [
           {

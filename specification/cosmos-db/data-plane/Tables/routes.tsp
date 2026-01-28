@@ -39,20 +39,10 @@ namespace Data.Tables {
     @header("DataServiceVersion")
     dataServiceVersion: "3.0",
 
-    /** Content-Type header */
-    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-    @header("Content-Type")
-    contentType: "application/json;odata=nometadata",
-
     ...ApiVersionHeader,
     ...ClientRequestIdHeader,
     ...TParams,
   ): (TResponse & {
-    /** Content-Type header */
-    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-    @header("Content-Type")
-    contentType: "application/json;odata=minimalmetadata";
-
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
@@ -138,6 +128,11 @@ namespace Data.Tables {
       {
         @body body: TablesPagedResult;
 
+        /** Content-Type header */
+        #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+        @header("Content-Type")
+        contentType: string;
+
         /**
          * A table query continuation token.
          */
@@ -199,7 +194,7 @@ namespace Data.Tables {
     op create(
       /** Content-Type header */
       @header("Content-Type")
-      contentType: "application/json;odata=nometadata",
+      contentType: "application/json",
 
       /** DataServiceVersion header */
       @header("DataServiceVersion")
@@ -270,7 +265,7 @@ namespace Data.Tables {
       /** The entity properties to insert. */
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
       @body
-      tableEntityProperties: TableEntityProperties,
+      tableEntityProperties?: TableEntityProperties,
     ): InsertEntityEchoResponse | InsertEntityResponse | TablesError;
 
     /**
@@ -283,6 +278,10 @@ namespace Data.Tables {
       {
         ...TablePathParameter;
         ...TimeoutParameter;
+
+        /** Content-Type header */
+        @header("Content-Type")
+        contentType: "application/json";
 
         /**
          * Match condition for an entity to be deleted. If specified and a matching entity
@@ -309,7 +308,7 @@ namespace Data.Tables {
          */
         #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
         @body
-        tableEntityProperties: TableEntityProperties;
+        tableEntityProperties?: TableEntityProperties;
       },
       {
         @statusCode statusCode: 204;
@@ -328,6 +327,10 @@ namespace Data.Tables {
         ...TablePathParameter;
         ...TimeoutParameter;
 
+        /** Content-Type header */
+        @header("Content-Type")
+        contentType: "application/json";
+
         /**
          * Match condition for an entity to be deleted. If specified and a matching entity
          * is not found, an error will be raised. To force an unconditional delete, set to
@@ -353,7 +356,7 @@ namespace Data.Tables {
          */
         #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
         @body
-        tableEntityProperties: TableEntityProperties;
+        tableEntityProperties?: TableEntityProperties;
       },
       {
         @statusCode statusCode: 204;
@@ -428,6 +431,11 @@ namespace Data.Tables {
       {
         @body body: TableEntitiesPagedResult;
 
+        /** Content-Type header */
+        #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+        @header("Content-Type")
+        contentType: string;
+
         /**
          * An entity partition key continuation token.
          */
@@ -476,6 +484,11 @@ namespace Data.Tables {
         @body tableEntityProperties: TableEntityProperties;
 
         ...EtagResponseHeader;
+
+        /** Content-Type header */
+        #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+        @header("Content-Type")
+        contentType: string;
 
         /**
          * An entity partition key continuation token.

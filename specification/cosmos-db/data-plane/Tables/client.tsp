@@ -63,10 +63,6 @@ interface ClientChild {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   mergeEntity is Data.Tables.Table.mergeEntity;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  insertOrMergeEntity is Data.Tables.Table.insertOrMergeEntity;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  insertOrReplaceEntity is Data.Tables.Table.insertOrReplaceEntity;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   getAccessPolicy is Data.Tables.Table.getAccessPolicy;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   setAccessPolicy is Data.Tables.Table.setAccessPolicy;
@@ -79,9 +75,8 @@ interface ClientChild {
 @@clientName(ClientChild.create, "createTable", "python");
 @@clientName(ClientChild.delete, "deleteTable", "python");
 @@clientName(ClientChild.queryEntityWithPartitionAndRowKey, "getEntity");
-@@clientName(ClientChild.insertOrReplaceEntity, "upsertEntity");
+@@access(ClientChild.updateEntity, Access.internal, "python");
 @@access(ClientChild.mergeEntity, Access.internal, "python");
-@@access(ClientChild.insertOrMergeEntity, Access.internal, "python");
 @@access(ClientChild.queryEntities, Access.internal, "python");
 
 @@clientName(AccessPolicy, "TableAccessPolicy");
