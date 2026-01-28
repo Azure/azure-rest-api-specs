@@ -8,7 +8,8 @@ This is the AutoRest configuration file for Desktop Virtualization.
 
 ## Getting Started
 
-To build the SDK for DesktopVirtualizationClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for DesktopVirtualizationClient, simply
+[Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -26,7 +27,57 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2025-11-01-preview
+tag: package-preview-2026-01-01-preview
+```
+
+### Tag: package-preview-2026-01-01-preview
+
+These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-01-preview'
+input-file:
+  - preview/2026-01-01-preview/desktopvirtualization.json
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
+    where:
+        - $.definitions.ResourceProviderOperationListResult
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
+    where:
+        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: BodyTopLevelProperties
+    from: desktopvirtualization.json
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: desktopvirtualization.json
+    reason: Property name follows RDP specification and existing naming conventions in the service.
+    where:
+      - $.definitions.HostPoolProperties.properties.allowRDPShortPathWithPrivateLink
+      - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
 ```
 
 ### Tag: package-preview-2025-11-01-preview
@@ -39,23 +90,36 @@ input-file:
 suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have the related properties. The rule seems conflict with the contract. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270 and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683. There is a fix for this and is waiting for the rollout.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
     where:
         - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
     where:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: DefinitionsPropertiesNamesCamelCase
@@ -76,23 +140,36 @@ input-file:
 suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have the related properties. The rule seems conflict with the contract. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270 and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683. There is a fix for this and is waiting for the rollout.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
     where:
         - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
     where:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: DefinitionsPropertiesNamesCamelCase
@@ -113,23 +190,36 @@ input-file:
 suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have the related properties. The rule seems conflict with the contract. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270 and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683. There is a fix for this and is waiting for the rollout.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
     where:
         - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
     where:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
 ```
@@ -144,23 +234,36 @@ input-file:
 suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have the related properties. The rule seems conflict with the contract. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270 and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683. There is a fix for this and is waiting for the rollout.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
     where:
         - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
     where:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
 ```
@@ -175,12 +278,18 @@ input-file:
 suppressions:
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
-    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    reason: |
+      Our service design forces this behavior -> The response in this new API aligns with an existing API
+      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
+      and will be in the same public version, so we would want to make sure they share a similar pattern.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
 ```
@@ -204,7 +313,9 @@ input-file:
 suppressions:
   - code: PutResponseCodes
     from: desktopvirtualization.json
-    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
     where:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
@@ -220,10 +331,18 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: desktopvirtualization.json
-    reason: False positive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties". We cannot manually exclude using where clauses because of an active bug on this rule. When this is fixed, we should be able to add a (single) where clause.
+    reason: |
+      False positive -> additionalProperties showing in the nested object properties, not at the top level.
+      E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties". We cannot manually
+      exclude using where clauses because of an active bug on this rule. When this is fixed, we should be
+      able to add a (single) where clause.
   - code: XmsPageableForListCalls
     from: desktopvirtualization.json
-    reason: False positive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we will never return a collection hence no need for such list annotations. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
+    reason: |
+      False positive -> we have a singleton element in the collection, per recommendation from ARM API review,
+      meaning that we will never return a collection hence no need for such list annotations. Learn more about
+      this (approved) scenario @ ARM RPC Guidance
+      https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
     where:
       - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default'].*
       - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostUpdateStatuses/default'].*
@@ -231,7 +350,11 @@ suppressions:
       - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/default'].*
   - code: EvenSegmentedPathForPutOperation
     from: desktopvirtualization.json
-    reason: False positive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
+    reason: |
+      False positive -> we have a singleton element in the collection, per recommendation from ARM API review,
+      meaning that we won't have an "even" number of segments. Learn more about this (approved) scenario @
+      ARM RPC Guidance
+      https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
     where:
       - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default']
       - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default']
@@ -294,7 +417,9 @@ input-file:
   - preview/2023-10-04-preview/desktopvirtualization.json
 suppressions:
   - code: ResourceNameRestriction
-    reason: HostPoolName, ApplicationGroupName, WorkspaceName, ScalingPlanName were already implemented in previous versions of the API and we cannot change naming pattern now.
+    reason: |
+      HostPoolName, ApplicationGroupName, WorkspaceName, ScalingPlanName were already implemented in previous
+      versions of the API and we cannot change naming pattern now.
 ```
 
 ### Tag: package-2023-09
@@ -474,7 +599,7 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## C#
+## C
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 

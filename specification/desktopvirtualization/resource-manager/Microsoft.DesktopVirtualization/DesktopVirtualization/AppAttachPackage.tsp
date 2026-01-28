@@ -6,6 +6,8 @@ import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -90,6 +92,24 @@ interface AppAttachPackages {
       $filter?: string;
     },
     Response = AppAttachPackageList
+  >;
+}
+
+/**
+ * Operations for expanding MSIX files associated with App Attach packages.
+ */
+@added(Versions.v2026_02_01_preview)
+@armResourceOperations
+interface AppAttachMsixFile {
+  /**
+   * Expands MSIX files from the specified sources and outputs them to the designated file share paths.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  @action("expandMsixFile")
+  expand is ArmResourceActionAsync<
+    AppAttachPackage,
+    ExpandMsixFileRequest,
+    ExpandMsixFileResult
   >;
 }
 

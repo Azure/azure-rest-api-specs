@@ -2989,6 +2989,17 @@ model Time {
 }
 
 /**
+ * Request body for listing scoped registration tokens for a session host.
+ */
+@added(Versions.v2026_01_01_preview)
+model ScopedRegistrationTokenProperties {
+  /**
+   * Expiration time of the registration token in UTC.
+   */
+  expirationTimeInUtc: utcDateTime;
+}
+
+/**
  * Scaling plan reference to hostpool.
  */
 model ScalingHostPoolReference {
@@ -5317,3 +5328,129 @@ model ResourceProviderOperationListResult
 @@Azure.ResourceManager.identifiers(ResourceProviderOperationListResult.value,
   #[]
 );
+
+/**
+ * The source of the MSIX package.
+ */
+union MsixPackageSource {
+  string,
+
+  /**
+   * Package sourced from Winget.
+   */
+  Winget: "Winget",
+
+  /**
+   * Package sourced from a file share.
+   */
+  FileShare: "FileShare",
+
+  /**
+   * Package sourced from a URL.
+   */
+  Url: "Url",
+}
+
+/**
+ * The output file type for the expanded MSIX file.
+ */
+union OutputFileType {
+  string,
+
+  /**
+   * CIM file format.
+   */
+  CIM: "CIM",
+
+  /**
+   * VHD file format.
+   */
+  VHD: "VHD",
+
+  /**
+   * VHDX file format.
+   */
+  VHDX: "VHDX",
+}
+
+/**
+ * Properties for expanding MSIX files.
+ */
+model ExpandMsixFileRequestProperties {
+  /**
+   * List of URIs to MSIX files to expand.
+   */
+  msixFileUri?: string[];
+
+  /**
+   * The file share path containing MSIX files.
+   */
+  msixFileShare?: string;
+
+  /**
+   * List of UNC paths to MSIX files.
+   */
+  msixUncPath?: string[];
+
+  /**
+   * List of output file share paths where expanded files will be stored.
+   */
+  outputFileSharePath?: string[];
+
+  /**
+   * The source of the MSIX package.
+   */
+  msixPackageSource?: MsixPackageSource;
+
+  /**
+   * The output file type for the expanded MSIX file.
+   */
+  outputFileType?: OutputFileType;
+}
+
+/**
+ * Request body for expanding MSIX files.
+ */
+model ExpandMsixFileRequest {
+  /**
+   * Properties for expanding MSIX files.
+   */
+  properties?: ExpandMsixFileRequestProperties;
+}
+
+/**
+ * Details about a file expansion failure.
+ */
+model ExpandMsixFileFailure {
+  /**
+   * The name of the file that failed to expand.
+   */
+  fileName?: string;
+
+  /**
+   * The error message describing why the expansion failed.
+   */
+  error?: string;
+}
+
+/**
+ * Result of expanding MSIX files.
+ */
+model ExpandMsixFileResult {
+  /**
+   * List of successfully expanded files.
+   */
+  successes?: string[];
+
+  /**
+   * List of files that failed to expand.
+   */
+  @Azure.ResourceManager.identifiers(#[])
+  failures?: ExpandMsixFileFailure[];
+
+  /**
+   * Link to the next page of results.
+   */
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
