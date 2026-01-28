@@ -651,7 +651,7 @@ model StructuredOutputDefinition {
   /**
    * The JSON schema for the structured output.
    */
-  schema: unknown;
+  schema: Record<unknown>;
 
   @doc("""
     Whether to enforce strict validation. Default `true`.

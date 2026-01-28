@@ -166,7 +166,7 @@ model StructuredOutputsItemResource extends OpenAI.ItemResource {
   type: "structured_outputs";
 
   @doc("The structured output captured during the response.")
-  output: unknown;
+  output: Record<unknown>;
 }
 
 model WorkflowActionOutputItemResource extends OpenAI.ItemResource {
