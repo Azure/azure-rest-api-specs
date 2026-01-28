@@ -71,7 +71,7 @@ namespace Microsoft.RecoveryServices;
 @@clientName(CapabilitiesResponse, "CapabilitiesResult", "csharp");
 @@alternateType(VaultExtendedInfoResource.etag, eTag, "csharp");
 @@clientName(MonitoringSettings, "VaultMonitoringSettings", "csharp");
-@@clientName(PrivateEndpointConnectionVaultProperties,
+@@clientName(PrivateEndpointConnectionVaultPropertiesReplacement,
   "RecoveryServicesPrivateEndpointConnectionVaultProperties",
   "csharp"
 );
@@ -241,3 +241,18 @@ model PatchVaultWithEtag extends PatchTrackedResource {
    */
   etag?: eTag;
 }
+
+/**
+ * Information to be stored in Vault properties as an element of privateEndpointConnections List.
+ */
+model PrivateEndpointConnectionVaultPropertiesReplacement
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<
+    PrivateEndpointConnectionVaultProperties,
+    "id" | "name" | "type"
+  >;
+}
+@@alternateType(PrivateEndpointConnectionVaultProperties,
+  PrivateEndpointConnectionVaultPropertiesReplacement,
+  "csharp"
+);
