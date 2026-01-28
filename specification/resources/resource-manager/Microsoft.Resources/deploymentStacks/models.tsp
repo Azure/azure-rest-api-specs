@@ -45,7 +45,7 @@ alias DeploymentStackNameParameter = ResourceNameParameter<
  */
 union UnmanageActionResourceMode {
   string,
-  
+
   /** Delete the resources from Azure. */
   Delete: "delete",
 
@@ -58,7 +58,7 @@ union UnmanageActionResourceMode {
  */
 union UnmanageActionResourceGroupMode {
   string,
-  
+
   /** Delete the resource groups from Azure. */
   Delete: "delete",
 
@@ -71,14 +71,14 @@ union UnmanageActionResourceGroupMode {
  */
 union UnmanageActionManagementGroupMode {
   string,
-  
+
   /** Delete the management groups from Azure. */
   Delete: "delete",
 
   /** Keep the management groups in Azure. */
   Detach: "detach",
 }
-  
+
 /**
  * Specifies an action for resources that do not support deletion.
  */
@@ -585,7 +585,7 @@ model ActionOnUnmanage {
    * Specifies an action for a newly unmanaged management group.
    */
   managementGroups?: UnmanageActionManagementGroupMode;
-  
+
   /**
    * Some resources do not support deletion.  This flag will denote how the stack should handle those resources.
    */
