@@ -6218,7 +6218,7 @@ components:
       type: string
       format: uuid
       description: Universally Unique Identifier
-    AzureAIAgentPreviewTarget:
+    AzureAIAgentTarget:
       type: object
       required:
         - type
@@ -6227,7 +6227,7 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_agent_preview
+            - azure_ai_agent
           description: The type of target, always `azure_ai_agent`.
         name:
           type: string
@@ -6243,13 +6243,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/Target'
       description: Represents a target specifying an Azure AI agent.
-    AzureAIAgentPreviewTargetUpdate:
+    AzureAIAgentTargetUpdate:
       type: object
       properties:
         type:
           type: string
           enum:
-            - azure_ai_agent_preview
+            - azure_ai_agent
           description: The type of target, always `azure_ai_agent`.
         name:
           type: string
@@ -6285,7 +6285,7 @@ components:
           description: Data schema scenario.
       allOf:
         - $ref: '#/components/schemas/DataSourceConfig'
-    AzureAIModelPreviewTarget:
+    AzureAIModelTarget:
       type: object
       required:
         - type
@@ -6293,7 +6293,7 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_model_preview
+            - azure_ai_model
           description: The type of target, always `azure_ai_model`.
         model:
           type: string
@@ -6305,13 +6305,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/Target'
       description: Represents a target specifying an Azure AI model for operations requiring model selection.
-    AzureAIModelPreviewTargetUpdate:
+    AzureAIModelTargetUpdate:
       type: object
       properties:
         type:
           type: string
           enum:
-            - azure_ai_model_preview
+            - azure_ai_model
           description: The type of target, always `azure_ai_model`.
         model:
           type: string
@@ -6323,7 +6323,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/TargetUpdate'
       description: Represents a target specifying an Azure AI model for operations requiring model selection.
-    AzureAIResponsesPreviewEvalRunDataSource:
+    AzureAIResponsesEvalRunDataSource:
       type: object
       required:
         - type
@@ -6334,11 +6334,11 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_responses_preview
+            - azure_ai_responses
           description: The type of data source, always `azure_ai_responses`.
         item_generation_params:
           allOf:
-            - $ref: '#/components/schemas/ContinuousEvalPreviewItemGenerationParams'
+            - $ref: '#/components/schemas/ContinuousEvalItemGenerationParams'
           description: The parameters for item generation.
         max_runs_hourly:
           type: integer
@@ -7007,7 +7007,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=v1
-    ContinuousEvalPreviewItemGenerationParams:
+    ContinuousEvalItemGenerationParams:
       type: object
       required:
         - type
@@ -7018,8 +7018,8 @@ components:
         type:
           type: string
           enum:
-            - response_retrieval_preview
-          description: The type of item generation parameters, always `ResponseRetrieval`.
+            - response_retrieval
+          description: The type of item generation parameters, always `response_retrieval`.
         max_num_turns:
           type: integer
           format: int32
@@ -8080,10 +8080,10 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          azure_ai_traces_preview: '#/components/schemas/TracesPreviewEvalRunDataSource'
-          azure_ai_responses_preview: '#/components/schemas/AzureAIResponsesPreviewEvalRunDataSource'
-          azure_ai_target_completions_preview: '#/components/schemas/TargetCompletionsPreviewEvalRunDataSource'
-          azure_ai_red_team_preview: '#/components/schemas/RedTeamPreviewEvalRunDataSource'
+          azure_ai_traces: '#/components/schemas/TracesEvalRunDataSource'
+          azure_ai_responses: '#/components/schemas/AzureAIResponsesEvalRunDataSource'
+          azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
+          azure_ai_red_team: '#/components/schemas/RedTeamEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
     EvalRunOutputItem:
       type: object
@@ -9356,19 +9356,19 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          red_team_preview: '#/components/schemas/RedTeamPreviewItemGenerationParams'
-          red_team_seed_prompts_preview: '#/components/schemas/RedTeamSeedPromptsPreviewItemGenerationParams'
-          red_team_taxonomy_preview: '#/components/schemas/RedTeamTaxonomyPreviewItemGenerationParams'
+          red_team: '#/components/schemas/RedTeamItemGenerationParams'
+          red_team_seed_prompts: '#/components/schemas/RedTeamSeedPromptsItemGenerationParams'
+          red_team_taxonomy: '#/components/schemas/RedTeamTaxonomyItemGenerationParams'
       description: Represents the set of parameters used to control item generation operations.
     ItemGenerationParamsType:
       anyOf:
         - type: string
         - type: string
           enum:
-            - red_team_preview
-            - response_retrieval_preview
-            - red_team_seed_prompts_preview
-            - red_team_taxonomy_preview
+            - red_team
+            - response_retrieval
+            - red_team_seed_prompts
+            - red_team_taxonomy
       description: The types of parameters for red team item generation.
     ManagedAzureAISearchIndex:
       type: object
@@ -22427,7 +22427,7 @@ components:
             - $ref: '#/components/schemas/TargetConfig'
           description: Target configuration for the red-team run.
       description: Red team details.
-    RedTeamPreviewEvalRunDataSource:
+    RedTeamEvalRunDataSource:
       type: object
       required:
         - type
@@ -22437,7 +22437,7 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_red_team_preview
+            - azure_ai_red_team
           description: The type of data source. Always `azure_ai_red_team`.
         item_generation_params:
           allOf:
@@ -22449,7 +22449,7 @@ components:
           description: The target configuration for the evaluation.
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
-    RedTeamPreviewItemGenerationParams:
+    RedTeamItemGenerationParams:
       type: object
       required:
         - type
@@ -22459,7 +22459,7 @@ components:
         type:
           type: string
           enum:
-            - red_team_preview
+            - red_team
           description: The type of item generation parameters.
         attack_strategies:
           type: array
@@ -22473,7 +22473,7 @@ components:
           default: 20
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
-    RedTeamSeedPromptsPreviewItemGenerationParams:
+    RedTeamSeedPromptsItemGenerationParams:
       type: object
       required:
         - type
@@ -22484,7 +22484,7 @@ components:
         type:
           type: string
           enum:
-            - red_team_seed_prompts_preview
+            - red_team_seed_prompts
           description: The type of item generation parameters, always `red_team_seed_prompts`.
         attack_strategies:
           type: array
@@ -22503,7 +22503,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team seed prompts item generation.
-    RedTeamTaxonomyPreviewItemGenerationParams:
+    RedTeamTaxonomyItemGenerationParams:
       type: object
       required:
         - type
@@ -22514,7 +22514,7 @@ components:
         type:
           type: string
           enum:
-            - red_team_taxonomy_preview
+            - red_team_taxonomy
           description: The type of item generation parameters, always `red_team_taxonomy`.
         attack_strategies:
           type: array
@@ -22832,10 +22832,10 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          azure_ai_model_preview: '#/components/schemas/AzureAIModelPreviewTarget'
-          azure_ai_agent_preview: '#/components/schemas/AzureAIAgentPreviewTarget'
+          azure_ai_model: '#/components/schemas/AzureAIModelTarget'
+          azure_ai_agent: '#/components/schemas/AzureAIAgentTarget'
       description: Base class for targets with discriminator support.
-    TargetCompletionsPreviewEvalRunDataSource:
+    TargetCompletionEvalRunDataSource:
       type: object
       required:
         - type
@@ -22845,7 +22845,7 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_target_completions_preview
+            - azure_ai_target_completions
           description: The type of data source, always `azure_ai_target_completions`.
         input_messages:
           allOf:
@@ -22887,8 +22887,8 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          azure_ai_model_preview: '#/components/schemas/AzureAIModelPreviewTargetUpdate'
-          azure_ai_agent_preview: '#/components/schemas/AzureAIAgentPreviewTargetUpdate'
+          azure_ai_model: '#/components/schemas/AzureAIModelTargetUpdate'
+          azure_ai_agent: '#/components/schemas/AzureAIAgentTargetUpdate'
       description: Base class for targets with discriminator support.
     TaxonomyCategory:
       type: object
@@ -22966,7 +22966,7 @@ components:
           type: string
           description: A project connection in a ToolProjectConnectionList attached to this tool.
       description: A project connection resource.
-    TracesPreviewEvalRunDataSource:
+    TracesEvalRunDataSource:
       type: object
       required:
         - type
@@ -22974,7 +22974,7 @@ components:
         type:
           type: string
           enum:
-            - azure_ai_traces_preview
+            - azure_ai_traces
           description: The type of data source, always `azure_ai_traces`.
         trace_ids:
           type: array
