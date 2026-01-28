@@ -826,6 +826,9 @@ model ExternalSignalGroup {
 model ExternalSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.ExternalSignal;
+
+  @doc("Evaluation rules for the external signal as submitted.")
+  evaluationRules?: EvaluationRule;
 }
 
 @doc("Type of impact an entity has on health state propagation")

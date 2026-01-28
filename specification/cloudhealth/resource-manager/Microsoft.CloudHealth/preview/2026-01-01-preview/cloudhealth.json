@@ -2783,6 +2783,12 @@
     "ExternalSignal": {
       "type": "object",
       "description": "An externally submitted signal instance assigned to an entity.",
+      "properties": {
+        "evaluationRules": {
+          "$ref": "#/definitions/EvaluationRule",
+          "description": "Evaluation rules for the external signal as submitted."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/SignalInstanceProperties"
