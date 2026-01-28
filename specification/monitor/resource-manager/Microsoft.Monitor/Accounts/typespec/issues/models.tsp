@@ -7,6 +7,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
 namespace Microsoft.Monitor;
@@ -45,6 +46,7 @@ union Relevance {
   string,
 }
 
+@removed(Versions.v2025_10_03)
 @doc("The execution state of the investigation")
 union InvestigationExecutionRunState {
   @doc("The investigation execution didn't start")
@@ -65,6 +67,7 @@ union InvestigationExecutionRunState {
   string,
 }
 
+@removed(Versions.v2025_10_03)
 @doc("Details about the execution of the investigation")
 model InvestigationExecution {
   @doc("The state of the investigation execution")
@@ -74,6 +77,7 @@ model InvestigationExecution {
   completedAt?: utcDateTime;
 }
 
+@removed(Versions.v2025_10_03)
 @doc("A single scope of the investigation")
 model InvestigationScope {
   @doc("The ID of the scope of the investigation - either an Azure alert ID or an Azure resource ID")
@@ -86,6 +90,7 @@ model InvestigationScope {
   relevance?: Relevance;
 }
 
+@removed(Versions.v2025_10_03)
 @doc("Parameters provided to start an investigation operation")
 model StartInvestigationParameters {
   @doc("The impact time to use for this investigation - by default, the impact time from the issue is used (in UTC)")
@@ -100,18 +105,23 @@ model InvestigationResult {
   @doc("The identifier of the investigation")
   id: string;
 
+  @madeOptional(Versions.v2025_10_03)
   @doc("The origin of the investigation")
-  origin: Origin;
+  origin?: Origin;
 
+  @madeOptional(Versions.v2025_10_03)
   @doc("The creation time of the investigation (in UTC)")
-  createdAt: utcDateTime;
+  createdAt?: utcDateTime;
 
+  @madeOptional(Versions.v2025_10_03)
   @doc("The last update time of the investigation (in UTC)")
-  lastModifiedAt: utcDateTime;
+  lastModifiedAt?: utcDateTime;
 
+  @removed(Versions.v2025_10_03)
   @doc("The execution details of the investigation")
   execution: InvestigationExecution;
 
+  @removed(Versions.v2025_10_03)
   @doc("The parameters used to run the investigation")
   runParameters: RunParameters;
 
@@ -120,6 +130,7 @@ model InvestigationResult {
 }
 
 @@clientName(RunParameters, "RunParametersContent", "csharp");
+@removed(Versions.v2025_10_03)
 @doc("The parameters used to run the investigation")
 model RunParameters {
   @doc("The impact time to investigate (in UTC)")
@@ -137,12 +148,14 @@ model InvestigationMetadata {
   @doc("The unique identifier of the investigation")
   id: uuid;
 
+  @removed(Versions.v2025_10_03)
   @doc("The execution details of the investigation")
   execution: InvestigationExecution;
 
   @doc("The creation time of the investigation (in UTC)")
   createdAt: utcDateTime;
 
+  @removed(Versions.v2025_10_03)
   @doc("The parameters that were used to start the investigation")
   runParameters: RunParameters;
 }
@@ -173,6 +186,40 @@ union Status {
   string,
 }
 
+@added(Versions.v2025_10_03)
+@doc("A background details element")
+model BackgroundDetails {
+  @doc("The background details name")
+  name: string;
+
+  @doc("The background details value")
+  value: string;
+}
+
+@added(Versions.v2025_10_03)
+@doc("The issue background information")
+model Background {
+  @doc("The background type")
+  type?: string;
+
+  @doc("The background text")
+  text?: string;
+
+  @doc("The background details")
+  details?: BackgroundDetails[];
+}
+
+@added(Versions.v2025_10_03)
+@doc("The issue background visualization")
+model BackgroundVisualization {
+  @doc("The background visualization content, in Adaptive Card format")
+  visualization: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The background visualization origin")
+  origin: Origin;
+}
+
 @doc("The issue properties")
 model IssuePayload {
   @doc("The issue title")
@@ -194,6 +241,10 @@ model IssuePayload {
   @visibility(Lifecycle.Read)
   @doc("The number of investigations in the issue")
   investigationsCount: int32;
+
+  @added(Versions.v2025_10_03)
+  @doc("The issue background information")
+  background?: Background;
 }
 
 @doc("Properties of an alert which is related to the issue")
