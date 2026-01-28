@@ -310,9 +310,9 @@ model EvalRunDataSource {
 }
 
 /** Represents a data source for evaluation runs that operate over Agent traces stored in Application Insights. */
-model TracesEvalRunDataSource extends EvalRunDataSource {
-  /** The type of data source, always `azure_ai_traces`. */
-  type: "azure_ai_traces";
+model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_traces_preview`. */
+  type: "azure_ai_traces_preview";
 
   /** Collection of Agent trace identifiers that should be evaluated. */
   trace_ids?: string[];
@@ -394,7 +394,7 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource */
 );
 
 model EvalRun is OpenAI.EvalRun {
@@ -423,7 +423,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource */
 );
 
 model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {

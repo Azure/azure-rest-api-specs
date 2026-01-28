@@ -11814,7 +11814,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "azure_ai_traces": "#/components/schemas/TracesEvalRunDataSource",
+            "azure_ai_traces_preview": "#/components/schemas/TracesPreviewEvalRunDataSource",
             "azure_ai_responses": "#/components/schemas/AzureAIResponsesEvalRunDataSource",
             "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource"
@@ -31912,7 +31912,7 @@
         },
         "description": "A project connection resource."
       },
-      "TracesEvalRunDataSource": {
+      "TracesPreviewEvalRunDataSource": {
         "type": "object",
         "required": [
           "type"
@@ -31921,9 +31921,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_traces"
+              "azure_ai_traces_preview"
             ],
-            "description": "The type of data source, always `azure_ai_traces`."
+            "description": "The type of data source, always `azure_ai_traces_preview`."
           },
           "trace_ids": {
             "type": "array",
