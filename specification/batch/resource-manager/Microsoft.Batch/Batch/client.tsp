@@ -90,6 +90,7 @@ using Microsoft.Batch;
   "csharp"
 );
 @@clientName(Certificate, "BatchAccountCertificate", "csharp");
+@@alternateType(Certificate.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@clientName(CertificateFormat, "BatchAccountCertificateFormat", "csharp");
 @@alternateType(CertificateProvisioningState,
   BatchAccountCertificateProvisioningState,
@@ -173,6 +174,7 @@ using Microsoft.Batch;
   "csharp"
 );
 @@clientName(AutoStorageProperties.lastKeySync, "LastKeySyncedOn", "csharp");
+@@usage(AutoStorageProperties, Usage.input, "csharp");
 @@clientName(AutoStorageBaseProperties,
   "BatchAccountAutoStorageBaseConfiguration",
   "csharp"
@@ -401,11 +403,23 @@ using Microsoft.Batch;
   "csharp"
 );
 @@clientName(SecurityEncryptionTypes, "BatchSecurityEncryptionType", "csharp");
+@@clientName(AutomaticOSUpgradePolicy.osRollingUpgradeDeferral,
+  "OSRollingUpgradeDeferral",
+  "csharp"
+);
 @@clientName(PrivateEndpointConnection,
   "BatchPrivateEndpointConnection",
   "csharp"
 );
+@@alternateType(PrivateEndpointConnection.etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
 @@clientName(PrivateLinkResource, "BatchPrivateLinkResource", "csharp");
+@@alternateType(PrivateLinkResource.etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
 @@clientName(BatchAccountCreateParameters,
   "BatchAccountCreateOrUpdateContent",
   "csharp"
@@ -439,6 +453,7 @@ using Microsoft.Batch;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(BatchAccount, BatchAccountData, "csharp");
 @@alternateType(AutoScaleRun.error, ResponseError, "csharp");
 
@@ -590,6 +605,9 @@ namespace Microsoft.Batch {
     Deleting: "Deleting",
   }
 
+  /**
+   * The provisioning state of the certificate.
+   */
   union BatchAccountCertificateProvisioningState {
     string,
 
