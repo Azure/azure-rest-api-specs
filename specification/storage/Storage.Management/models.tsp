@@ -12,7 +12,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Storage;
 
 /**
- * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+ * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
  */
 union IntervalUnit {
   string,
@@ -1059,10 +1059,13 @@ enum HttpProtocol {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TriggerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** RunOnce trigger type */
   RunOnce: "RunOnce",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** OnSchedule trigger type */
   OnSchedule: "OnSchedule",
+  /** MockRun trigger type for testing purposes */
+  @added(Versions.v2025_08_01)
+  MockRun: "MockRun",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5752,30 +5755,30 @@ model ExecutionTrigger {
  */
 model TriggerParameters {
   /**
-   * When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+   * When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startFrom?: utcDateTime;
 
   /**
-   * Run interval of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+   * Run interval of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
    */
   @minValue(1)
   interval?: int32;
 
   /**
-   * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+   * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
    */
   intervalUnit?: IntervalUnit;
 
   /**
-   * When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+   * When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endBy?: utcDateTime;
 
   /**
-   * When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'
+   * When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule' or 'MockRun'
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startOn?: utcDateTime;
@@ -5979,30 +5982,30 @@ model ExecutionTriggerUpdate {
  */
 model TriggerParametersUpdate {
   /**
-   * When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+   * When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startFrom?: utcDateTime;
 
   /**
-   * Run interval of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+   * Run interval of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
    */
   @minValue(1)
   interval?: int32;
 
   /**
-   * Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+   * Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
    */
   intervalUnit?: IntervalUnit;
 
   /**
-   * When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+   * When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endBy?: utcDateTime;
 
   /**
-   * When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'
+   * When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule' or 'MockRun'
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startOn?: utcDateTime;
