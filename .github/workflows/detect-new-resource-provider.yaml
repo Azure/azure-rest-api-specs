@@ -1,0 +1,49 @@
+name: Detect New Resource Provider
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - "specification/**/resource-manager/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  ENABLE_NEW_RP_DETECTION: false
+
+jobs:
+  detect-new-rp:
+    name: Detect New Resource Provider
+    runs-on: ubuntu-24.04
+    if: env.ENABLE_NEW_RP_DETECTION == 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+          sparse-checkout: |
+            .github
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Detect new resource providers
+        id: detect
+        uses: actions/github-script@v8
+        with:
+          result-encoding: string
+          script: |
+            const { default: detectNewResourceProvider } =
+              await import('${{ github.workspace }}/.github/workflows/src/detect-new-resource-provider.js');
+            return await detectNewResourceProvider({ 
+              github, 
+              context, 
+              core,
+              baseBranch: '${{ github.event.pull_request.base.ref }}'
+            });
