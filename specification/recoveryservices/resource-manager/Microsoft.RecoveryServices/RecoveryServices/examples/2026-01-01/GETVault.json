@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "resourceGroupName": "Default-RecoveryServices-ResourceGroup",
+    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18",
+    "vaultName": "swaggerExample"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "swaggerExample",
+        "type": "Microsoft.RecoveryServices/vaults",
+        "etag": "W/\"datetime'2017-12-15T12%3A36%3A51.68Z'\"",
+        "id": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/vaults/swaggerExample",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "3137d6c7-5d6c-411c-b934-7a2a729ee247",
+          "tenantId": "d676e86e-2206-4a7c-999c-ece52c144b5b"
+        },
+        "location": "westus",
+        "properties": {
+          "bcdrSecurityLevel": "Poor",
+          "monitoringSettings": {
+            "azureMonitorAlertSettings": {
+              "alertsForAllFailoverIssues": "Disabled",
+              "alertsForAllJobFailures": "Enabled",
+              "alertsForAllReplicationIssues": "Enabled"
+            },
+            "classicAlertSettings": {
+              "alertsForCriticalOperations": "Disabled",
+              "emailNotificationsForSiteRecovery": "Enabled"
+            }
+          },
+          "costManagementSettings": {
+            "granularityLevel": "ProtectedItemLevel"
+          },
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/6c48fa17-39c7-45f1-90ac-47a587128ace/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/Vaults/pemsi-ecy-rsv2/privateEndpointConnections/pe114-pemsi-ecy-rsv.5944358949303501042.backup.75061caa-cba4-4849-8e09-608da4914aad",
+              "properties": {
+                "groupIds": [
+                  "AzureBackup"
+                ],
+                "privateEndpoint": {
+                  "id": "/subscriptions/6c48fa17-39c7-45f1-90ac-47a587128ace/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.Network/privateEndpoints/pe114-pemsi-ecy-rsv"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "None",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                },
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "privateEndpointStateForBackup": "Enabled",
+          "privateEndpointStateForSiteRecovery": "None",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
+          "redundancySettings": {
+            "crossRegionRestore": "Enabled",
+            "standardTierStorageRedundancy": "GeoRedundant"
+          },
+          "secureScore": "None",
+          "securitySettings": {
+            "immutabilitySettings": {
+              "state": "Disabled"
+            },
+            "multiUserAuthorization": "Disabled",
+            "softDeleteSettings": {
+              "enhancedSecurityState": "Enabled",
+              "softDeleteRetentionPeriodInDays": 14,
+              "softDeleteState": "Enabled"
+            },
+            "sourceScanConfiguration": {
+              "sourceScanIdentity": {
+                "operationIdentityType": "SystemAssigned"
+              },
+              "state": "Enabled"
+            }
+          }
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "tags": {
+          "TestUpdatedKey": "TestUpdatedValue"
+        }
+      }
+    }
+  },
+  "operationId": "Vaults_Get",
+  "title": "Get Recovery Services Resource"
+}
