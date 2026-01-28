@@ -883,7 +883,7 @@ interface Sites {
   startWebSiteNetworkTraceOperation is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
@@ -1251,7 +1251,8 @@ interface Sites {
   startNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
@@ -2118,7 +2119,7 @@ interface WebApps {
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
@@ -2487,7 +2488,8 @@ interface WebApps {
   startNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
