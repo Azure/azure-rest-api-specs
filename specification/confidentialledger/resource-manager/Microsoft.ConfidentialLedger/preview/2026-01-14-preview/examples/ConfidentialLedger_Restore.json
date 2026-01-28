@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2026-01-14-preview",
+    "confidentialLedger": {
+      "fileShareName": "DummyFileShareName",
+      "restoreRegion": "EastUS",
+      "uri": "DummySASUri"
+    },
+    "ledgerName": "DummyLedgerName",
+    "resourceGroupName": "DummyResourceGroupName",
+    "subscriptionId": "0000000-0000-0000-0000-000000000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "Restore Created for Ledger : DummyLedgerName."
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "Ledger_Restore",
+  "title": "ConfidentialLedgerRestore"
+}
