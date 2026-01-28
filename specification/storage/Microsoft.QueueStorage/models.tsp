@@ -10,6 +10,182 @@ using Azure.ClientGenerator.Core;
 
 namespace Storage.Queues;
 
+/** Error codes returned by the service */
+union StorageErrorCode {
+  /** AccountAlreadyExists */
+  AccountAlreadyExists: "AccountAlreadyExists",
+
+  /** AccountBeingCreated */
+  AccountBeingCreated: "AccountBeingCreated",
+
+  /** AccountIsDisabled */
+  AccountIsDisabled: "AccountIsDisabled",
+
+  /** AuthenticationFailed */
+  AuthenticationFailed: "AuthenticationFailed",
+
+  /** AuthorizationFailure */
+  AuthorizationFailure: "AuthorizationFailure",
+
+  /** ConditionHeadersNotSupported */
+  ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
+
+  /** ConditionNotMet */
+  ConditionNotMet: "ConditionNotMet",
+
+  /** EmptyMetadataKey */
+  EmptyMetadataKey: "EmptyMetadataKey",
+
+  /** InsufficientAccountPermissions */
+  InsufficientAccountPermissions: "InsufficientAccountPermissions",
+
+  /** InternalError */
+  InternalError: "InternalError",
+
+  /** InvalidAuthenticationInfo */
+  InvalidAuthenticationInfo: "InvalidAuthenticationInfo",
+
+  /** InvalidHeaderValue */
+  InvalidHeaderValue: "InvalidHeaderValue",
+
+  /** InvalidHttpVerb */
+  InvalidHttpVerb: "InvalidHttpVerb",
+
+  /** InvalidInput */
+  InvalidInput: "InvalidInput",
+
+  /** InvalidMd5 */
+  InvalidMd5: "InvalidMd5",
+
+  /** InvalidMetadata */
+  InvalidMetadata: "InvalidMetadata",
+
+  /** InvalidQueryParameterValue */
+  InvalidQueryParameterValue: "InvalidQueryParameterValue",
+
+  /** InvalidRange */
+  InvalidRange: "InvalidRange",
+
+  /** InvalidResourceName */
+  InvalidResourceName: "InvalidResourceName",
+
+  /** InvalidUri */
+  InvalidUri: "InvalidUri",
+
+  /** InvalidXmlDocument */
+  InvalidXmlDocument: "InvalidXmlDocument",
+
+  /** InvalidXmlNodeValue */
+  InvalidXmlNodeValue: "InvalidXmlNodeValue",
+
+  /** Md5Mismatch */
+  Md5Mismatch: "Md5Mismatch",
+
+  /** MetadataTooLarge */
+  MetadataTooLarge: "MetadataTooLarge",
+
+  /** MissingContentLengthHeader */
+  MissingContentLengthHeader: "MissingContentLengthHeader",
+
+  /** MissingRequiredQueryParameter */
+  MissingRequiredQueryParameter: "MissingRequiredQueryParameter",
+
+  /** MissingRequiredHeader */
+  MissingRequiredHeader: "MissingRequiredHeader",
+
+  /** MissingRequiredXmlNode */
+  MissingRequiredXmlNode: "MissingRequiredXmlNode",
+
+  /** MultipleConditionHeadersNotSupported */
+  MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
+
+  /** OperationTimedOut */
+  OperationTimedOut: "OperationTimedOut",
+
+  /** OutOfRangeInput */
+  OutOfRangeInput: "OutOfRangeInput",
+
+  /** OutOfRangeQueryParameterValue */
+  OutOfRangeQueryParameterValue: "OutOfRangeQueryParameterValue",
+
+  /** RequestBodyTooLarge */
+  RequestBodyTooLarge: "RequestBodyTooLarge",
+
+  /** ResourceTypeMismatch */
+  ResourceTypeMismatch: "ResourceTypeMismatch",
+
+  /** RequestUrlFailedToParse */
+  RequestUrlFailedToParse: "RequestUrlFailedToParse",
+
+  /** ResourceAlreadyExists */
+  ResourceAlreadyExists: "ResourceAlreadyExists",
+
+  /** ResourceNotFound */
+  ResourceNotFound: "ResourceNotFound",
+
+  /** ServerBusy */
+  ServerBusy: "ServerBusy",
+
+  /** UnsupportedHeader */
+  UnsupportedHeader: "UnsupportedHeader",
+
+  /** UnsupportedXmlNode */
+  UnsupportedXmlNode: "UnsupportedXmlNode",
+
+  /** UnsupportedQueryParameter */
+  UnsupportedQueryParameter: "UnsupportedQueryParameter",
+
+  /** UnsupportedHttpVerb */
+  UnsupportedHttpVerb: "UnsupportedHttpVerb",
+
+  /** InvalidMarker */
+  InvalidMarker: "InvalidMarker",
+
+  /** MessageNotFound */
+  MessageNotFound: "MessageNotFound",
+
+  /** MessageTooLarge */
+  MessageTooLarge: "MessageTooLarge",
+
+  /** PopReceiptMismatch */
+  PopReceiptMismatch: "PopReceiptMismatch",
+
+  /** QueueAlreadyExists */
+  QueueAlreadyExists: "QueueAlreadyExists",
+
+  /** QueueBeingDeleted */
+  QueueBeingDeleted: "QueueBeingDeleted",
+
+  /** QueueDisabled */
+  QueueDisabled: "QueueDisabled",
+
+  /** QueueNotEmpty */
+  QueueNotEmpty: "QueueNotEmpty",
+
+  /** QueueNotFound */
+  QueueNotFound: "QueueNotFound",
+
+  /** AuthorizationSourceIPMismatch */
+  AuthorizationSourceIPMismatch: "AuthorizationSourceIPMismatch",
+
+  /** AuthorizationProtocolMismatch */
+  AuthorizationProtocolMismatch: "AuthorizationProtocolMismatch",
+
+  /** AuthorizationPermissionMismatch */
+  AuthorizationPermissionMismatch: "AuthorizationPermissionMismatch",
+
+  /** AuthorizationServiceMismatch */
+  AuthorizationServiceMismatch: "AuthorizationServiceMismatch",
+
+  /** AuthorizationResourceTypeMismatch */
+  AuthorizationResourceTypeMismatch: "AuthorizationResourceTypeMismatch",
+
+  /** FeatureVersionMismatch */
+  FeatureVersionMismatch: "FeatureVersionMismatch",
+
+  string,
+}
+
 /** Include this parameter to specify that the queue's metadata be returned as part of the response body. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListQueuesIncludeType {
@@ -457,6 +633,29 @@ alias DateResponseHeader = {
   date: utcDateTime;
 };
 
+/** The approximate messages count header */
+alias ApproximateMessagesCountHeader = {
+  /** The approximate number of messages in the queue. This number is not lower than the actual number of messages in the queue, but could be higher. */
+  @header("x-ms-approximate-messages-count")
+  approximateMessagesCount?: int64;
+};
+
+/** The pop receipt response header */
+alias PopReceiptResponseHeader = {
+  /** The pop receipt of the queue message. */
+  @header("x-ms-popreceipt")
+  popReceipt: string;
+};
+
+/** The time next visible response header */
+alias TimeNextVisibleResponseHeader = {
+  /** A UTC date/time value that represents when the message will be visible on the queue. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-time-next-visible")
+  timeNextVisible: utcDateTime;
+};
+
 /** The queue name path parameter */
 alias QueueNamePathParameter = {
   /** The name of the queue. */
@@ -491,7 +690,7 @@ alias QueueMessageBodyParameter = {
   /**
    * A Message object which can be stored in a Queue
    */
-  @body
+  @bodyRoot
   queueMessage?: QueueMessage;
 };
 

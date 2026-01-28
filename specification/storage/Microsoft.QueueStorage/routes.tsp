@@ -139,7 +139,10 @@ namespace Storage.Queues {
       /** Include this parameter to specify that the queue's metadata be returned as part of the response body. */
       @query include?: Array<ListQueuesIncludeType>;
     },
-    ListQueuesResponse
+    {
+      ...DateResponseHeader;
+      @bodyRoot body: ListQueuesResponse;
+    }
   >;
 
   @route("/{queueName}")
@@ -154,7 +157,10 @@ namespace Storage.Queues {
         ...TimeoutParameter;
         ...MetadataHeaders;
       },
-      CreatedResponse
+      {
+        @statusCode statusCode: 201;
+        ...DateResponseHeader;
+      }
     >;
 
     /** returns all user-defined metadata and system properties for the specified queue. */
@@ -169,6 +175,8 @@ namespace Storage.Queues {
       },
       {
         ...MetadataHeaders;
+        ...ApproximateMessagesCountHeader;
+        ...DateResponseHeader;
       }
     >;
 
@@ -180,9 +188,11 @@ namespace Storage.Queues {
       {
         ...QueueNamePathParameter;
         ...TimeoutParameter;
-        ...MetadataHeaders;
       },
-      NoContentResponse
+      {
+        @statusCode statusCode: 204;
+        ...DateResponseHeader;
+      }
     >;
 
     /** operation sets one or more user-defined name-value pairs for the specified queue. */
@@ -200,7 +210,10 @@ namespace Storage.Queues {
         @header("x-ms-meta")
         metadata: string;
       },
-      NoContentResponse
+      {
+        @statusCode statusCode: 204;
+        ...DateResponseHeader;
+      }
     >;
 
     /** gets the permissions for the specified queue. The permissions indicate whether queue data may be accessed publicly. */
@@ -266,7 +279,10 @@ namespace Storage.Queues {
         ...VisibilityTimeoutParameter;
         ...TimeoutParameter;
       },
-      ListOfReceivedMessage
+      {
+        ...DateResponseHeader;
+        @bodyRoot body: ListOfReceivedMessage;
+      }
     >;
 
     /**
@@ -280,8 +296,12 @@ namespace Storage.Queues {
     op clear is StorageOperationNoBody<
       {
         ...QueueNamePathParameter;
+        ...TimeoutParameter;
       },
-      NoContentResponse
+      {
+        @statusCode statusCode: 204;
+        ...DateResponseHeader;
+      }
     >;
 
     /**
@@ -312,11 +332,16 @@ namespace Storage.Queues {
         @query("messageTtl")
         messageTimeToLive?: int32;
 
-        ...QueueMessageBodyParameter;
+        ...TimeoutParameter;
+
+        /** A Message object which can be stored in a Queue */
+        @body
+        queueMessage: QueueMessage;
       },
       {
         @statusCode statusCode: 201;
-        ...ListOfSentMessage;
+        ...DateResponseHeader;
+        @bodyRoot body: ListOfSentMessage;
       }
     >;
 
@@ -342,8 +367,13 @@ namespace Storage.Queues {
         @minValue(1)
         @query("numofmessages")
         numberOfMessages?: int32;
+
+        ...TimeoutParameter;
       },
-      ListOfPeekedMessage
+      {
+        ...DateResponseHeader;
+        @bodyRoot queueMessagesList: ListOfPeekedMessage;
+      }
     >;
 
     /**
@@ -369,9 +399,15 @@ namespace Storage.Queues {
         @query("visibilityTimeout")
         visibilityTimeout: int32;
 
+        ...TimeoutParameter;
         ...QueueMessageBodyParameter;
       },
-      NoContentResponse
+      {
+        @statusCode statusCode: 204;
+        ...DateResponseHeader;
+        ...PopReceiptResponseHeader;
+        ...TimeNextVisibleResponseHeader;
+      }
     >;
 
     /**
@@ -386,8 +422,12 @@ namespace Storage.Queues {
         ...QueueNamePathParameter;
         ...MessageIdPathParameter;
         ...PopReceiptQueryParameter;
+        ...TimeoutParameter;
       },
-      NoContentResponse
+      {
+        @statusCode statusCode: 204;
+        ...DateResponseHeader;
+      }
     >;
   }
 }
