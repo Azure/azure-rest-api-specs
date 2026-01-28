@@ -1,6 +1,7 @@
 namespace Microsoft.ContainerRegistry;
 
 using Azure.ResourceManager;
+using Versioning;
 
 /**
  * The mode of the connected registry resource that indicates the permissions of the registry.
@@ -92,6 +93,71 @@ union AuditLogStatus {
 }
 
 /**
+ * The action that triggered the most recent registry sync.
+ */
+@added(Versions.vLatestPreview)
+union SyncTrigger {
+  string,
+
+  /**
+   * Connected Registry is not activated
+   */
+  NotActivated: "NotActivated",
+
+  /**
+   * Connected Registry is syncing
+   */
+  Syncing: "Syncing",
+
+  /**
+   * Connected Registry sync failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Connected Registry sync succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Connected Registry sync timed out
+   */
+  TimedOut: "TimedOut",
+
+  /**
+   * Connected Registry sync is pending
+   */
+  Pending: "Pending",
+}
+
+/**
+ * The status of the connected registry's most recent sync.
+ */
+union SyncState {
+  string,
+
+  /**
+   * Connected Registry sync was triggered by a sync token update
+   */
+  SyncTokenUpdate: "SyncTokenUpdate",
+
+  /**
+   * Connected Registry sync was triggered by an initial sync during activation
+   */
+  InitialSync: "InitialSync",
+
+  /**
+   * Connected Registry sync was triggered by a manual resync request
+   */
+  ManualResync: "ManualResync",
+
+  /**
+   * Connected Registry sync was triggered by the Connected Registry's recovery service
+   */
+  RecoveryService: "RecoveryService",
+}
+
+/**
  * The properties of a connected registry.
  */
 model ConnectedRegistryProperties {
@@ -167,6 +233,12 @@ model ConnectedRegistryProperties {
    * The garbage collection properties of the connected registry.
    */
   garbageCollection?: GarbageCollectionProperties;
+
+  /**
+   * The result of the connected registry's most recent sync with its parent.
+   */
+  @added(Versions.vLatestPreview)
+  registrySyncResult?: RegistrySyncResult;
 }
 
 /**
@@ -348,6 +420,39 @@ model GarbageCollectionProperties {
    * The cron expression indicating the schedule that the connected registry will run garbage collection.
    */
   schedule?: string;
+}
+
+/**
+ * The registry sync result of the connected registry.
+ */
+@added(Versions.vLatestPreview)
+model RegistrySyncResult {
+  /**
+   * The action that triggered the most recent registry sync.
+   */
+  @visibility(Lifecycle.Read)
+  syncTrigger: SyncTrigger;
+
+  /**
+   * The status of the connected registry's most recent sync.
+   */
+  @visibility(Lifecycle.Read)
+  syncState: SyncState;
+
+  /**
+   * The time that the connected registry's most recent sync started.
+   */
+  lastSyncStartTime?: utcDateTime;
+
+  /**
+   * The time that the connected registry's most recent sync ended.
+   */
+  lastSyncEndTime?: utcDateTime;
+
+  /**
+   * The time that the connected registry's most recent successful sync ended.
+   */
+  lastSuccessfulSyncEndTime?: utcDateTime;
 }
 
 /**
