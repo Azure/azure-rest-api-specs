@@ -110,7 +110,8 @@ union PublicNetworkAccess {
 @added(Versions.v2024_10_01_Preview)
 model SchedulerSku {
   @doc("The name of the SKU")
-  name: string;
+  @typeChangedFrom(Versions.v2026_02_01, string)
+  name: SchedulerSkuName;
 
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
   capacity?: int32;
@@ -118,6 +119,18 @@ model SchedulerSku {
   @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility(Lifecycle.Read)
   redundancyState: RedundancyState;
+}
+
+@added(Versions.v2026_02_01)
+@doc("The name of the Stock Keeping Unit (SKU) of a Durable Task Scheduler")
+union SchedulerSkuName {
+  string,
+
+  @doc("Dedicated SKU")
+  Dedicated: "Dedicated",
+
+  @doc("Consumption SKU")
+  Consumption: "Consumption",
 }
 
 @doc("A Task Hub resource belonging to the scheduler")

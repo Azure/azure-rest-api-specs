@@ -1700,7 +1700,7 @@
       "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
       "properties": {
         "name": {
-          "type": "string",
+          "$ref": "#/definitions/SchedulerSkuName",
           "description": "The name of the SKU"
         },
         "capacity": {
@@ -1719,12 +1719,36 @@
         "redundancyState"
       ]
     },
+    "SchedulerSkuName": {
+      "type": "string",
+      "description": "The name of the Stock Keeping Unit (SKU) of a Durable Task Scheduler",
+      "enum": [
+        "Dedicated",
+        "Consumption"
+      ],
+      "x-ms-enum": {
+        "name": "SchedulerSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dedicated",
+            "value": "Dedicated",
+            "description": "Dedicated SKU"
+          },
+          {
+            "name": "Consumption",
+            "value": "Consumption",
+            "description": "Consumption SKU"
+          }
+        ]
+      }
+    },
     "SchedulerSkuUpdate": {
       "type": "object",
       "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
       "properties": {
         "name": {
-          "type": "string",
+          "$ref": "#/definitions/SchedulerSkuName",
           "description": "The name of the SKU"
         },
         "capacity": {
