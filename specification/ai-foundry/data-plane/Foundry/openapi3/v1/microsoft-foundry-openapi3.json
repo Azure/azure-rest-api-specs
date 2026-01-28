@@ -9436,7 +9436,7 @@
         "format": "uuid",
         "description": "Universally Unique Identifier"
       },
-      "AzureAIAgentPreviewTarget": {
+      "AzureAIAgentTarget": {
         "type": "object",
         "required": [
           "type",
@@ -9446,7 +9446,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_agent_preview"
+              "azure_ai_agent"
             ],
             "description": "The type of target, always `azure_ai_agent`."
           },
@@ -9473,13 +9473,13 @@
         ],
         "description": "Represents a target specifying an Azure AI agent."
       },
-      "AzureAIAgentPreviewTargetUpdate": {
+      "AzureAIAgentTargetUpdate": {
         "type": "object",
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_agent_preview"
+              "azure_ai_agent"
             ],
             "description": "The type of target, always `azure_ai_agent`."
           },
@@ -9536,7 +9536,7 @@
           }
         ]
       },
-      "AzureAIModelPreviewTarget": {
+      "AzureAIModelTarget": {
         "type": "object",
         "required": [
           "type"
@@ -9545,7 +9545,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_model_preview"
+              "azure_ai_model"
             ],
             "description": "The type of target, always `azure_ai_model`."
           },
@@ -9569,13 +9569,13 @@
         ],
         "description": "Represents a target specifying an Azure AI model for operations requiring model selection."
       },
-      "AzureAIModelPreviewTargetUpdate": {
+      "AzureAIModelTargetUpdate": {
         "type": "object",
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_model_preview"
+              "azure_ai_model"
             ],
             "description": "The type of target, always `azure_ai_model`."
           },
@@ -9599,7 +9599,7 @@
         ],
         "description": "Represents a target specifying an Azure AI model for operations requiring model selection."
       },
-      "AzureAIResponsesPreviewEvalRunDataSource": {
+      "AzureAIResponsesEvalRunDataSource": {
         "type": "object",
         "required": [
           "type",
@@ -9611,14 +9611,14 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_responses_preview"
+              "azure_ai_responses"
             ],
             "description": "The type of data source, always `azure_ai_responses`."
           },
           "item_generation_params": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ContinuousEvalPreviewItemGenerationParams"
+                "$ref": "#/components/schemas/ContinuousEvalItemGenerationParams"
               }
             ],
             "description": "The parameters for item generation."
@@ -10588,7 +10588,7 @@
           ]
         }
       },
-      "ContinuousEvalPreviewItemGenerationParams": {
+      "ContinuousEvalItemGenerationParams": {
         "type": "object",
         "required": [
           "type",
@@ -10600,9 +10600,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "response_retrieval_preview"
+              "response_retrieval"
             ],
-            "description": "The type of item generation parameters, always `ResponseRetrieval`."
+            "description": "The type of item generation parameters, always `response_retrieval`."
           },
           "max_num_turns": {
             "type": "integer",
@@ -11814,10 +11814,10 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "azure_ai_traces_preview": "#/components/schemas/TracesPreviewEvalRunDataSource",
-            "azure_ai_responses_preview": "#/components/schemas/AzureAIResponsesPreviewEvalRunDataSource",
-            "azure_ai_target_completions_preview": "#/components/schemas/TargetCompletionsPreviewEvalRunDataSource",
-            "azure_ai_red_team_preview": "#/components/schemas/RedTeamPreviewEvalRunDataSource"
+            "azure_ai_traces": "#/components/schemas/TracesEvalRunDataSource",
+            "azure_ai_responses": "#/components/schemas/AzureAIResponsesEvalRunDataSource",
+            "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
+            "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource"
           }
         },
         "description": "Base class for run data sources with discriminator support."
@@ -13645,9 +13645,9 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "red_team_preview": "#/components/schemas/RedTeamPreviewItemGenerationParams",
-            "red_team_seed_prompts_preview": "#/components/schemas/RedTeamSeedPromptsPreviewItemGenerationParams",
-            "red_team_taxonomy_preview": "#/components/schemas/RedTeamTaxonomyPreviewItemGenerationParams"
+            "red_team": "#/components/schemas/RedTeamItemGenerationParams",
+            "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
+            "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
@@ -13660,10 +13660,10 @@
           {
             "type": "string",
             "enum": [
-              "red_team_preview",
-              "response_retrieval_preview",
-              "red_team_seed_prompts_preview",
-              "red_team_taxonomy_preview"
+              "red_team",
+              "response_retrieval",
+              "red_team_seed_prompts",
+              "red_team_taxonomy"
             ]
           }
         ],
@@ -31112,7 +31112,7 @@
         },
         "description": "Red team details."
       },
-      "RedTeamPreviewEvalRunDataSource": {
+      "RedTeamEvalRunDataSource": {
         "type": "object",
         "required": [
           "type",
@@ -31123,7 +31123,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_red_team_preview"
+              "azure_ai_red_team"
             ],
             "description": "The type of data source. Always `azure_ai_red_team`."
           },
@@ -31150,7 +31150,7 @@
           }
         ]
       },
-      "RedTeamPreviewItemGenerationParams": {
+      "RedTeamItemGenerationParams": {
         "type": "object",
         "required": [
           "type",
@@ -31161,7 +31161,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "red_team_preview"
+              "red_team"
             ],
             "description": "The type of item generation parameters."
           },
@@ -31185,7 +31185,7 @@
           }
         ]
       },
-      "RedTeamSeedPromptsPreviewItemGenerationParams": {
+      "RedTeamSeedPromptsItemGenerationParams": {
         "type": "object",
         "required": [
           "type",
@@ -31197,7 +31197,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "red_team_seed_prompts_preview"
+              "red_team_seed_prompts"
             ],
             "description": "The type of item generation parameters, always `red_team_seed_prompts`."
           },
@@ -31230,7 +31230,7 @@
         ],
         "description": "Represents the parameters for red team seed prompts item generation."
       },
-      "RedTeamTaxonomyPreviewItemGenerationParams": {
+      "RedTeamTaxonomyItemGenerationParams": {
         "type": "object",
         "required": [
           "type",
@@ -31242,7 +31242,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "red_team_taxonomy_preview"
+              "red_team_taxonomy"
             ],
             "description": "The type of item generation parameters, always `red_team_taxonomy`."
           },
@@ -31710,13 +31710,13 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "azure_ai_model_preview": "#/components/schemas/AzureAIModelPreviewTarget",
-            "azure_ai_agent_preview": "#/components/schemas/AzureAIAgentPreviewTarget"
+            "azure_ai_model": "#/components/schemas/AzureAIModelTarget",
+            "azure_ai_agent": "#/components/schemas/AzureAIAgentTarget"
           }
         },
         "description": "Base class for targets with discriminator support."
       },
-      "TargetCompletionsPreviewEvalRunDataSource": {
+      "TargetCompletionEvalRunDataSource": {
         "type": "object",
         "required": [
           "type",
@@ -31727,7 +31727,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_target_completions_preview"
+              "azure_ai_target_completions"
             ],
             "description": "The type of data source, always `azure_ai_target_completions`."
           },
@@ -31799,8 +31799,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "azure_ai_model_preview": "#/components/schemas/AzureAIModelPreviewTargetUpdate",
-            "azure_ai_agent_preview": "#/components/schemas/AzureAIAgentPreviewTargetUpdate"
+            "azure_ai_model": "#/components/schemas/AzureAIModelTargetUpdate",
+            "azure_ai_agent": "#/components/schemas/AzureAIAgentTargetUpdate"
           }
         },
         "description": "Base class for targets with discriminator support."
@@ -31912,7 +31912,7 @@
         },
         "description": "A project connection resource."
       },
-      "TracesPreviewEvalRunDataSource": {
+      "TracesEvalRunDataSource": {
         "type": "object",
         "required": [
           "type"
@@ -31921,7 +31921,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "azure_ai_traces_preview"
+              "azure_ai_traces"
             ],
             "description": "The type of data source, always `azure_ai_traces`."
           },
