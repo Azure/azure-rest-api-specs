@@ -484,6 +484,10 @@ using Microsoft.Batch;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(BatchAccountData.properties,
   "csharp"
 );
+@@alternateType(BatchAccount.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
 namespace Microsoft.Batch {
@@ -500,17 +504,10 @@ namespace Microsoft.Batch {
       SegmentName = "batchAccounts",
       NamePattern = "^[a-zA-Z0-9]+$"
     >;
-
-    /**
-     * The identity of the Batch account.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
-
-    /** Resource tags. */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    tags?: Record<string>;
+    ...OmitProperties<
+      BatchAccount,
+      "id" | "name" | "type" | "properties" | "location"
+    >;
 
     /** The geo-location where the resource lives */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -522,136 +519,47 @@ namespace Microsoft.Batch {
    * The provisioned state of the resource
    */
   union BatchProvisioningState {
+    ProvisioningState,
     string,
-
-    /**
-     * The account is in an invalid state.
-     */
-    Invalid: "Invalid",
-
-    /**
-     * The account is being created.
-     */
-    Creating: "Creating",
-
-    /**
-     * The account is being deleted.
-     */
-    Deleting: "Deleting",
-
-    /**
-     * The account has been created and is ready for use.
-     */
-    Succeeded: "Succeeded",
-
-    /**
-     * The last operation for the account is failed.
-     */
-    Failed: "Failed",
-
-    /**
-     * The last operation for the account is cancelled.
-     */
-    Cancelled: "Cancelled",
   }
 
   /**
    * The provisioning state of the private endpoint connection.
    */
   union BatchPrivateEndpointConnectionProvisioningState {
+    PrivateEndpointConnectionProvisioningState,
     string,
-
-    /**
-     * The connection is creating.
-     */
-    Creating: "Creating",
-
-    /**
-     * The user has requested that the connection status be updated, but the update operation has not yet completed. You may not reference the connection when connecting the Batch account.
-     */
-    Updating: "Updating",
-
-    /**
-     * The connection is deleting.
-     */
-    Deleting: "Deleting",
-
-    /**
-     * The connection status is final and is ready for use if Status is Approved.
-     */
-    Succeeded: "Succeeded",
-
-    /**
-     * The user requested that the connection be updated and it failed. You may retry the update operation.
-     */
-    Failed: "Failed",
-
-    /**
-     * The user has cancelled the connection creation.
-     */
-    Cancelled: "Cancelled",
   }
 
   /**
    * The action when client IP address is matched.
    */
   union BatchIPRuleAction {
+    IPRuleAction,
     string,
-
-    /**
-     * Allow access for the matched client IP address.
-     */
-    Allow: "Allow",
   }
 
   /**
    * The location where the OS disk should be placed.
    */
   union BatchDiffDiskPlacement {
+    DiffDiskPlacement,
     string,
-
-    /**
-     * The OS disk will be placed on the cache disk of the VM.
-     */
-    CacheDisk: "CacheDisk",
   }
 
   /**
    * The current state of the pool.
    */
   union BatchAccountPoolProvisioningState {
+    PoolProvisioningState,
     string,
-
-    /**
-     * The pool is available to run tasks subject to the availability of compute nodes.
-     */
-    Succeeded: "Succeeded",
-
-    /**
-     * The user has requested that the pool be deleted, but the delete operation has not yet completed.
-     */
-    Deleting: "Deleting",
   }
 
   /**
    * The provisioning state of the certificate.
    */
   union BatchAccountCertificateProvisioningState {
+    CertificateProvisioningState,
     string,
-
-    /**
-     * The certificate is available for use in pools.
-     */
-    Succeeded: "Succeeded",
-
-    /**
-     * The user has requested that the certificate be deleted, but the delete operation has not yet completed. You may not reference the certificate when creating or updating pools.
-     */
-    Deleting: "Deleting",
-
-    /**
-     * The user requested that the certificate be deleted, but there are pools that still have references to the certificate, or it is still installed on one or more compute nodes. (The latter can occur if the certificate has been removed from the pool, but the node has not yet restarted. Nodes refresh their certificates only when they restart.) You may use the cancel certificate delete operation to cancel the delete, or the delete certificate operation to retry the delete.
-     */
-    Failed: "Failed",
   }
 }
