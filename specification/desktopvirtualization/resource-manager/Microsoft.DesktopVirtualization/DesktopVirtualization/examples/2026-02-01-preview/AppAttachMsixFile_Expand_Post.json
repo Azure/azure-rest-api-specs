@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
+    "resourceGroupName": "resourceGroup1",
+    "api-version": "2026-02-01-preview",
+    "appAttachPackageName": "msixpackagefullname",
+    "body": {
+      "properties": {
+        "msixFileUri": [
+          "https://github.com/microsoft/XmlNotepad/releases/download/2.9.0.10/XmlNotepadPackage_2.9.0.10_AnyCPU.msixbundle",
+          "https://github.com/microsoft/XmlNotepad/releases/download/2.9.0.9/XmlNotepadPackage_2.9.0.9_AnyCPU.msixbundle",
+          "https://github.com/microsoft/XmlNotepad/releases/download/2.9.0.8/XmlNotepadPackage_2.9.0.8_AnyCPU.msixbundle"
+        ],
+        "msixFileShare": "https://exampleAzureSA.file.core.windows.net/myMsixFileShare",
+        "msixUncPath": [
+          "\\\\exampleServer\\msixFolder"
+        ],
+        "outputFileSharePath": [
+          "https://exampleAzureSA.file.core.windows.net/exampleOutputFolder",
+          "https://anotherExampleSA.file.core.windows.net/anotherExampleOutputFolder"
+        ],
+        "msixPackageSource": "Winget",
+        "outputFileType": "CIM"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/appattachpackages/msixpackagefullname/expansionRequests/default/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      },
+      "body": {
+        "successes": [
+          "XmlNotepadPackage_2.9.0.10_AnyCPU.msixbundle",
+          "XmlNotepadPackage_2.9.0.9_AnyCPU.msixbundle"
+        ],
+        "failures": [
+          {
+            "fileName": "XmlNotepadPackage_2.9.0.8_AnyCPU.msixbundle",
+            "error": "Failed to access file"
+          }
+        ],
+        "nextLink": null
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/appattachpackages/msixpackagefullname/expansionRequests/default/operationResults/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "Retry-After": "60",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/appattachpackages/msixpackagefullname/expansionRequests/default/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      }
+    }
+  },
+  "operationId": "AppAttachMsixFile_Expand",
+  "title": "AppAttachMsixFile_Expand_Post"
+}
