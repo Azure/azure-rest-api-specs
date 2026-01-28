@@ -25,7 +25,7 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]) {
 }
 
 export function outputSuccessSummary(swaggerFiles: string[], reportName: string) {
-  let builtLines: string[] = [];
+  const builtLines: string[] = [];
 
   builtLines.push(`## All specifications passed ${reportName}`);
   builtLines.push("| File | Status |");
@@ -44,7 +44,7 @@ export function outputSuccessSummary(swaggerFiles: string[], reportName: string)
 }
 
 export function outputErrorSummary(errors: ReportableOavError[], reportName: string) {
-  let builtLines: string[] = [];
+  const builtLines: string[] = [];
   let checkName: string = "";
 
   builtLines.push(`## Error Summary - ${reportName}`);

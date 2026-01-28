@@ -1,0 +1,135 @@
+{
+  "operationId": "DeploymentStacks_CreateOrUpdateAtManagementGroup",
+  "title": "Create or update a management group Deployment stack",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "managementGroupId": "myMg",
+    "deploymentStackName": "simpleDeploymentStack",
+    "deploymentStack": {
+      "location": "eastus",
+      "tags": {
+        "tagkey": "tagVal"
+      },
+      "properties": {
+        "actionOnUnmanage": {
+          "resources": "delete",
+          "resourceGroups": "delete",
+          "managementGroups": "detach"
+        },
+        "denySettings": {
+          "mode": "denyDelete",
+          "excludedPrincipals": [
+            "principal"
+          ],
+          "excludedActions": [
+            "action"
+          ],
+          "applyToChildScopes": false
+        },
+        "parameters": {
+          "parameter1": {
+            "value": "a string"
+          }
+        },
+        "extensionConfigs": {
+          "contoso": {
+            "configOne": {
+              "value": "config1Value"
+            },
+            "configTwo": {
+              "value": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+        "type": "Microsoft.Resources/deploymentStacks",
+        "name": "simpleDeploymentStack",
+        "location": "eastus",
+        "tags": {
+          "tagkey": "tagVal"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "description": "my Description",
+          "actionOnUnmanage": {
+            "resources": "delete",
+            "resourceGroups": "delete",
+            "managementGroups": "detach"
+          },
+          "denySettings": {
+            "mode": "denyDelete",
+            "excludedPrincipals": [
+              "principal"
+            ],
+            "excludedActions": [
+              "action"
+            ],
+            "applyToChildScopes": false
+          },
+          "parameters": {
+            "parameter1": {
+              "value": "a string"
+            }
+          },
+          "provisioningState": "creating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+        "type": "Microsoft.Resources/deploymentStacks",
+        "name": "simpleDeploymentStack",
+        "location": "eastus",
+        "tags": {
+          "tagkey": "tagVal"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "description": "my Description",
+          "actionOnUnmanage": {
+            "resources": "delete",
+            "resourceGroups": "delete",
+            "managementGroups": "detach"
+          },
+          "denySettings": {
+            "mode": "denyDelete",
+            "excludedPrincipals": [
+              "principal"
+            ],
+            "excludedActions": [
+              "action"
+            ],
+            "applyToChildScopes": false
+          },
+          "parameters": {
+            "parameter1": {
+              "value": "a string"
+            }
+          },
+          "provisioningState": "creating"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3695 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Content Understanding",
+    "version": "2025-11-01",
+    "description": "The Content Understanding service extracts content and fields from multimodal input.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/contentunderstanding",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Content Understanding service endpoint.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AzureKey": []
+    },
+    {
+      "EntraIdToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "Key-based authentication using the access key of the Azure resource.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "EntraIdToken": {
+      "type": "oauth2",
+      "description": "Microsoft Entra ID OAuth2 authentication using an access token.",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/analyzerResults/{operationId}": {
+      "get": {
+        "operationId": "ContentAnalyzers_GetResult",
+        "description": "Get the result of an analysis operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzerAnalyzeOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analysis Result": {
+            "$ref": "./examples/ContentAnalyzers_GetResult.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ContentAnalyzers_DeleteResult",
+        "description": "Mark the result of an analysis operation for deletion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Analyzer Result": {
+            "$ref": "./examples/ContentAnalyzers_DeleteResult.json"
+          }
+        }
+      }
+    },
+    "/analyzerResults/{operationId}/files/{path}": {
+      "get": {
+        "operationId": "ContentAnalyzers_GetResultFile",
+        "description": "Get a file associated with the result of an analysis operation.",
+        "produces": [
+          "*/*",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "description": "File path.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analysis Result File": {
+            "$ref": "./examples/ContentAnalyzers_GetResultFile.json"
+          }
+        }
+      }
+    },
+    "/analyzers": {
+      "get": {
+        "operationId": "ContentAnalyzers_List",
+        "description": "List analyzers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedContentAnalyzer"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Analyzers": {
+            "$ref": "./examples/ContentAnalyzers_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/analyzers/{analyzerId}": {
+      "get": {
+        "operationId": "ContentAnalyzers_Get",
+        "description": "Get analyzer properties.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzer"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_GetAnalyzer.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ContentAnalyzers_CreateOrReplace",
+        "description": "Create a new analyzer asynchronously.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "name": "allowReplace",
+            "in": "query",
+            "description": "Allow the operation to replace an existing resource.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzer"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzer"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Replace Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ContentAnalyzers_Update",
+        "description": "Update analyzer properties.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzer"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ContentAnalyzers_Delete",
+        "description": "Delete analyzer.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_DeleteAnalyzer.json"
+          }
+        }
+      }
+    },
+    "/analyzers/{analyzerId}:analyze": {
+      "post": {
+        "operationId": "ContentAnalyzers_Analyze",
+        "description": "Extract content and fields from input.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeParameters.stringEncoding"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeParameters.processingLocation"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/AnalyzeResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze URL": {
+            "$ref": "./examples/ContentAnalyzers_Analyze.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/analyzers/{analyzerId}:analyzeBinary": {
+      "post": {
+        "operationId": "ContentAnalyzers_AnalyzeBinary",
+        "description": "Extract content and fields from input.",
+        "consumes": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeParameters.stringEncoding"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeParameters.processingLocation"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeBinaryRequest.range"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/AnalyzeBinaryRequest.input"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/AnalyzeResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze File": {
+            "$ref": "./examples/ContentAnalyzers_AnalyzeBinary.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/analyzers/{analyzerId}:copy": {
+      "post": {
+        "operationId": "ContentAnalyzers_Copy",
+        "description": "Create a copy of the source analyzer to the current location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "name": "allowReplace",
+            "in": "query",
+            "description": "Allow the operation to replace an existing resource.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ContentAnalyzer",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy Analyzer": {
+            "$ref": "./examples/ContentAnalyzers_Copy.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/analyzers/{analyzerId}:grantCopyAuthorization": {
+      "post": {
+        "operationId": "ContentAnalyzers_GrantCopyAuthorization",
+        "description": "Get authorization for copying this analyzer to another location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantCopyAuthorizationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CopyAuthorization"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grant Copy Authorization": {
+            "$ref": "./examples/ContentAnalyzers_GrantCopyAuthorization.json"
+          }
+        }
+      }
+    },
+    "/analyzers/{analyzerId}/operations/{operationId}": {
+      "get": {
+        "operationId": "ContentAnalyzers_GetOperationStatus",
+        "description": "Get the status of an analyzer creation operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "analyzerId",
+            "in": "path",
+            "description": "The unique identifier of the analyzer.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzerOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Analyzer Operation Status": {
+            "$ref": "./examples/ContentAnalyzers_GetOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/defaults": {
+      "get": {
+        "operationId": "ContentAnalyzers_GetDefaults",
+        "description": "Return default settings for this Content Understanding resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContentUnderstandingDefaults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Defaults": {
+            "$ref": "./examples/ContentAnalyzers_GetDefaults.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ContentAnalyzers_UpdateDefaults",
+        "description": "Return default settings for this Content Understanding resource.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContentUnderstandingDefaultsMergePatchUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContentUnderstandingDefaults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Defaults": {
+            "$ref": "./examples/ContentAnalyzers_UpdateDefaults.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AnalyzeInput": {
+      "type": "object",
+      "description": "Additional input to analyze.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the input to analyze.  Only one of url or data should be specified."
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded binary content of the input to analyze.  Only one of url or data should be specified."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the input."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type of the input content.  Ex. application/pdf, image/jpeg, etc."
+        },
+        "range": {
+          "$ref": "#/definitions/RangeExpression",
+          "description": "Range of the input to analyze (ex. `1-3,5,9-`).  Document content uses 1-based page numbers, while audio visual content uses integer milliseconds."
+        }
+      }
+    },
+    "AnalyzeRequest": {
+      "type": "object",
+      "description": "Analyze operation request.",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "description": "Inputs to analyze.  Currently, only pro mode supports multiple inputs.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeInput"
+          }
+        },
+        "modelDeployments": {
+          "type": "object",
+          "description": "Override default mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AnalyzeResult": {
+      "type": "object",
+      "description": "Analyze operation result.",
+      "properties": {
+        "analyzerId": {
+          "type": "string",
+          "description": "The unique identifier of the analyzer.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The version of the API used to analyze the document."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the result was created."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while analyzing the document.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "stringEncoding": {
+          "type": "string",
+          "description": "  The string encoding format for content spans in the response.\n  Possible values are 'codePoint', 'utf16', and `utf8`.  Default is `codePoint`.\")",
+          "default": "codePoint"
+        },
+        "contents": {
+          "type": "array",
+          "description": "The extracted content.",
+          "items": {
+            "$ref": "#/definitions/MediaContent"
+          }
+        }
+      },
+      "required": [
+        "contents"
+      ]
+    },
+    "ArrayField": {
+      "type": "object",
+      "description": "Array field extracted from the content.",
+      "properties": {
+        "valueArray": {
+          "type": "array",
+          "description": "Array field value.",
+          "items": {
+            "$ref": "#/definitions/ContentField"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "array"
+    },
+    "AudioVisualContent": {
+      "type": "object",
+      "description": "Audio visual content.  Ex. audio/wav, video/mp4.",
+      "properties": {
+        "startTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Start time of the content in milliseconds."
+        },
+        "endTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "End time of the content in milliseconds."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Width of each video frame in pixels, if applicable."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Height of each video frame in pixels, if applicable."
+        },
+        "cameraShotTimesMs": {
+          "type": "array",
+          "description": "List of camera shot changes in the video, represented by its timestamp in milliseconds.  Only if returnDetails is true.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "keyFrameTimesMs": {
+          "type": "array",
+          "description": "List of key frames in the video, represented by its timestamp in milliseconds.  Only if returnDetails is true.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "transcriptPhrases": {
+          "type": "array",
+          "description": "List of transcript phrases.  Only if returnDetails is true.",
+          "items": {
+            "$ref": "#/definitions/TranscriptPhrase"
+          }
+        },
+        "segments": {
+          "type": "array",
+          "description": "List of detected content segments.  Only if enableSegment is true.",
+          "items": {
+            "$ref": "#/definitions/AudioVisualContentSegment"
+          }
+        }
+      },
+      "required": [
+        "startTimeMs",
+        "endTimeMs"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaContent"
+        }
+      ],
+      "x-ms-discriminator-value": "audioVisual"
+    },
+    "AudioVisualContentSegment": {
+      "type": "object",
+      "description": "Detected audio/visual content segment.",
+      "properties": {
+        "segmentId": {
+          "type": "string",
+          "description": "Segment identifier."
+        },
+        "category": {
+          "type": "string",
+          "description": "Classified content category."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the segment in the markdown content."
+        },
+        "startTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Start time of the segment in milliseconds."
+        },
+        "endTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "End time of the segment in milliseconds."
+        }
+      },
+      "required": [
+        "segmentId",
+        "category",
+        "span",
+        "startTimeMs",
+        "endTimeMs"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "BooleanField": {
+      "type": "object",
+      "description": "Boolean field extracted from the content.",
+      "properties": {
+        "valueBoolean": {
+          "type": "boolean",
+          "description": "Boolean field value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "boolean"
+    },
+    "ContentAnalyzer": {
+      "type": "object",
+      "description": "Analyzer that extracts content and fields from multimodal documents.",
+      "properties": {
+        "analyzerId": {
+          "type": "string",
+          "description": "The unique identifier of the analyzer.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9._-]{1,64}$",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the analyzer."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags associated with the analyzer.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/ContentAnalyzerStatus",
+          "description": "The status of the analyzer.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the analyzer was created.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the analyzer was last modified.",
+          "readOnly": true
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while creating the analyzer.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "readOnly": true
+        },
+        "baseAnalyzerId": {
+          "type": "string",
+          "description": "The analyzer to incrementally train from.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9._-]{1,64}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "config": {
+          "$ref": "#/definitions/ContentAnalyzerConfig",
+          "description": "Analyzer configuration settings.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fieldSchema": {
+          "$ref": "#/definitions/ContentFieldSchema",
+          "description": "The schema of fields to extracted.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "dynamicFieldSchema": {
+          "type": "boolean",
+          "description": "Indicates whether the result may contain additional fields outside of the defined schema.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "processingLocation": {
+          "type": "string",
+          "description": "The location where the data may be processed.  Defaults to global.",
+          "default": "global",
+          "enum": [
+            "geography",
+            "dataZone",
+            "global"
+          ],
+          "x-ms-enum": {
+            "name": "ProcessingLocation",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "geography",
+                "value": "geography",
+                "description": "Data may be processed in the same geography as the resource."
+              },
+              {
+                "name": "dataZone",
+                "value": "dataZone",
+                "description": "Data may be processed in the same data zone as the resource."
+              },
+              {
+                "name": "global",
+                "value": "global",
+                "description": "Data may be processed in any Azure data center globally."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "knowledgeSources": {
+          "type": "array",
+          "description": "Additional knowledge sources used to enhance the analyzer.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSource"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "models": {
+          "type": "object",
+          "description": "Mapping of model roles to specific model names.\nEx. { \"completion\": \"gpt-4.1\", \"embedding\": \"text-embedding-3-large\" }.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "supportedModels": {
+          "$ref": "#/definitions/SupportedModels",
+          "description": "Chat completion and embedding models supported by the analyzer.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "analyzerId",
+        "status",
+        "createdAt",
+        "lastModifiedAt"
+      ]
+    },
+    "ContentAnalyzerAnalyzeOperationStatus": {
+      "type": "object",
+      "description": "Provides status details for analyze operations.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\"."
+        },
+        "result": {
+          "$ref": "#/definitions/AnalyzeResult",
+          "description": "The result of the operation."
+        },
+        "usage": {
+          "$ref": "#/definitions/UsageDetails",
+          "description": "Usage details of the analyze operation."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ContentAnalyzerConfig": {
+      "type": "object",
+      "description": "Configuration settings for an analyzer.",
+      "properties": {
+        "returnDetails": {
+          "type": "boolean",
+          "description": "Return all content details."
+        },
+        "locales": {
+          "type": "array",
+          "description": "List of locale hints for speech transcription.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableOcr": {
+          "type": "boolean",
+          "description": "Enable optical character recognition (OCR)."
+        },
+        "enableLayout": {
+          "type": "boolean",
+          "description": "Enable layout analysis."
+        },
+        "enableFigureDescription": {
+          "type": "boolean",
+          "description": "Enable generation of figure description."
+        },
+        "enableFigureAnalysis": {
+          "type": "boolean",
+          "description": "Enable analysis of figures, such as charts and diagrams."
+        },
+        "enableFormula": {
+          "type": "boolean",
+          "description": "Enable mathematical formula detection."
+        },
+        "tableFormat": {
+          "type": "string",
+          "description": "Representation format of tables in analyze result markdown.",
+          "default": "html",
+          "enum": [
+            "html",
+            "markdown"
+          ],
+          "x-ms-enum": {
+            "name": "TableFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "html",
+                "value": "html",
+                "description": "Represent tables using HTML table elements: \\<table>, \\<th>, \\<tr>, \\<td>."
+              },
+              {
+                "name": "markdown",
+                "value": "markdown",
+                "description": "Represent tables using GitHub Flavored Markdown table syntax, which does not support merged cells or rich headers."
+              }
+            ]
+          }
+        },
+        "chartFormat": {
+          "type": "string",
+          "description": "Representation format of charts in analyze result markdown.",
+          "default": "chartJs",
+          "enum": [
+            "chartJs",
+            "markdown"
+          ],
+          "x-ms-enum": {
+            "name": "ChartFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "chartJs",
+                "value": "chartJs",
+                "description": "Represent charts as Chart.js code blocks."
+              },
+              {
+                "name": "markdown",
+                "value": "markdown",
+                "description": "Represent charts as markdown tables."
+              }
+            ]
+          }
+        },
+        "annotationFormat": {
+          "type": "string",
+          "description": "Representation format of annotations in analyze result markdown.",
+          "default": "markdown",
+          "enum": [
+            "none",
+            "markdown"
+          ],
+          "x-ms-enum": {
+            "name": "AnnotationFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "none",
+                "value": "none",
+                "description": "Do not represent annotations."
+              },
+              {
+                "name": "markdown",
+                "value": "markdown",
+                "description": "Represent basic annotation information using markdown formatting."
+              }
+            ]
+          }
+        },
+        "disableFaceBlurring": {
+          "type": "boolean",
+          "description": "Disable the default blurring of faces for privacy while processing the content."
+        },
+        "estimateFieldSourceAndConfidence": {
+          "type": "boolean",
+          "description": "Return field grounding source and confidence."
+        },
+        "contentCategories": {
+          "type": "object",
+          "description": "Map of categories to classify the input content(s) against.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentCategoryDefinition"
+          }
+        },
+        "enableSegment": {
+          "type": "boolean",
+          "description": "Enable segmentation of the input by contentCategories."
+        },
+        "segmentPerPage": {
+          "type": "boolean",
+          "description": "Force segmentation of document content by page."
+        },
+        "omitContent": {
+          "type": "boolean",
+          "description": "Omit the content for this analyzer from analyze result.\nOnly return content(s) from additional analyzers specified in contentCategories, if any."
+        }
+      }
+    },
+    "ContentAnalyzerOperationStatus": {
+      "type": "object",
+      "description": "Provides status details for analyzer creation operations.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\"."
+        },
+        "result": {
+          "$ref": "#/definitions/ContentAnalyzer",
+          "description": "The result of the operation."
+        },
+        "usage": {
+          "$ref": "#/definitions/UsageDetails",
+          "description": "Usage details of the analyzer creation operation."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ContentAnalyzerStatus": {
+      "type": "string",
+      "description": "Status of a resource.",
+      "enum": [
+        "creating",
+        "ready",
+        "deleting",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "ContentAnalyzerStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "creating",
+            "value": "creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "ready",
+            "value": "ready",
+            "description": "The resource is ready."
+          },
+          {
+            "name": "deleting",
+            "value": "deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The resource failed during creation."
+          }
+        ]
+      }
+    },
+    "ContentAnalyzerUpdate": {
+      "type": "object",
+      "description": "Analyzer that extracts content and fields from multimodal documents.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the analyzer."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags associated with the analyzer.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ContentCategoryDefinition": {
+      "type": "object",
+      "description": "Content category definition.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the category."
+        },
+        "analyzerId": {
+          "type": "string",
+          "description": "Optional analyzer used to process the content."
+        },
+        "analyzer": {
+          "$ref": "#/definitions/ContentAnalyzer",
+          "description": "Optional inline definition of analyzer used to process the content."
+        }
+      }
+    },
+    "ContentField": {
+      "type": "object",
+      "description": "Field extracted from the content.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentFieldType",
+          "description": "Semantic data type of the field value."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Span(s) associated with the field value in the markdown content.",
+          "items": {
+            "$ref": "#/definitions/ContentSpan"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of predicting the field value.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the field value in the content."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ContentFieldDefinition": {
+      "type": "object",
+      "description": "Definition of the field using a JSON Schema like syntax.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/GenerationMethod",
+          "description": "Generation method."
+        },
+        "type": {
+          "$ref": "#/definitions/ContentFieldType",
+          "description": "Semantic data type of the field value."
+        },
+        "description": {
+          "type": "string",
+          "description": "Field description."
+        },
+        "items": {
+          "$ref": "#/definitions/ContentFieldDefinition",
+          "description": "Field type schema of each array element, if type is array."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Named sub-fields, if type is object.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentFieldDefinition"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "description": "Examples of field values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enum": {
+          "type": "array",
+          "description": "Enumeration of possible field values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enumDescriptions": {
+          "type": "object",
+          "description": "Descriptions for each enumeration value.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "$ref": {
+          "type": "string",
+          "description": "Reference to another field definition."
+        },
+        "estimateSourceAndConfidence": {
+          "type": "boolean",
+          "description": "Return grounding source and confidence."
+        }
+      }
+    },
+    "ContentFieldSchema": {
+      "type": "object",
+      "description": "Schema of fields to be extracted from documents.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field schema.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the field schema.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fields": {
+          "type": "object",
+          "description": "The fields defined in the schema.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentFieldDefinition"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "definitions": {
+          "type": "object",
+          "description": "Additional definitions referenced by the fields in the schema.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentFieldDefinition"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "fields"
+      ]
+    },
+    "ContentFieldType": {
+      "type": "string",
+      "description": "Semantic data type of the field value.",
+      "enum": [
+        "string",
+        "date",
+        "time",
+        "number",
+        "integer",
+        "boolean",
+        "array",
+        "object",
+        "json"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFieldType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "string",
+            "value": "string",
+            "description": "Plain text."
+          },
+          {
+            "name": "date",
+            "value": "date",
+            "description": "Date, normalized to ISO 8601 (YYYY-MM-DD) format."
+          },
+          {
+            "name": "time",
+            "value": "time",
+            "description": "Time, normalized to ISO 8601 (hh:mm:ss) format."
+          },
+          {
+            "name": "number",
+            "value": "number",
+            "description": "Number as double precision floating point."
+          },
+          {
+            "name": "integer",
+            "value": "integer",
+            "description": "Integer as 64-bit signed integer."
+          },
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "Boolean value."
+          },
+          {
+            "name": "array",
+            "value": "array",
+            "description": "List of subfields of the same type."
+          },
+          {
+            "name": "object",
+            "value": "object",
+            "description": "Named list of subfields."
+          },
+          {
+            "name": "json",
+            "value": "json",
+            "description": "JSON object."
+          }
+        ]
+      }
+    },
+    "ContentSpan": {
+      "type": "object",
+      "description": "Position of the element in markdown, specified as a character offset and length.",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Starting position (0-indexed) of the element in markdown, specified in characters."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length of the element in markdown, specified in characters."
+        }
+      },
+      "required": [
+        "offset",
+        "length"
+      ]
+    },
+    "ContentUnderstandingDefaults": {
+      "type": "object",
+      "description": "default settings for this Content Understanding resource.",
+      "properties": {
+        "modelDeployments": {
+          "type": "object",
+          "description": "Mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "modelDeployments"
+      ]
+    },
+    "ContentUnderstandingDefaultsMergePatchUpdate": {
+      "type": "object",
+      "description": "default settings for this Content Understanding resource.",
+      "properties": {
+        "modelDeployments": {
+          "type": "object",
+          "description": "Mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CopyAuthorization": {
+      "type": "object",
+      "description": "Copy authorization details for cross-resource copy.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Full path of the source analyzer."
+        },
+        "targetAzureResourceId": {
+          "type": "string",
+          "description": "Azure resource ID of the target location to copy to."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date/time when the copy authorization expires."
+        }
+      },
+      "required": [
+        "source",
+        "targetAzureResourceId",
+        "expiresAt"
+      ]
+    },
+    "CopyRequest": {
+      "type": "object",
+      "description": "Copy operation request.",
+      "properties": {
+        "sourceAzureResourceId": {
+          "type": "string",
+          "description": "Azure resource ID of the source analyzer location.  Defaults to the current resource."
+        },
+        "sourceRegion": {
+          "type": "string",
+          "description": "Azure region of the source analyzer location.  Defaults to current region."
+        },
+        "sourceAnalyzerId": {
+          "type": "string",
+          "description": "Source analyzer ID."
+        }
+      },
+      "required": [
+        "sourceAnalyzerId"
+      ]
+    },
+    "DateField": {
+      "type": "object",
+      "description": "Date field extracted from the content.",
+      "properties": {
+        "valueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date field value, in ISO 8601 (YYYY-MM-DD) format."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "date"
+    },
+    "DocumentAnnotation": {
+      "type": "object",
+      "description": "Annotation in a document, such as a strikethrough or a comment.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Annotation identifier."
+        },
+        "kind": {
+          "$ref": "#/definitions/DocumentAnnotationKind",
+          "description": "Annotation kind."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Spans of the content associated with the annotation.",
+          "items": {
+            "$ref": "#/definitions/ContentSpan"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Position of the annotation."
+        },
+        "comments": {
+          "type": "array",
+          "description": "Comments associated with the annotation.",
+          "items": {
+            "$ref": "#/definitions/DocumentAnnotationComment"
+          }
+        },
+        "author": {
+          "type": "string",
+          "description": "Annotation author."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the annotation was created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the annotation was last modified."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the annotation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind"
+      ]
+    },
+    "DocumentAnnotationComment": {
+      "type": "object",
+      "description": "Comment associated with a document annotation.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Comment message in Markdown."
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of the comment."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the comment was created."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the comment was last modified."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the comment.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "DocumentAnnotationKind": {
+      "type": "string",
+      "description": "Document annotation kind.",
+      "enum": [
+        "highlight",
+        "strikethrough",
+        "underline",
+        "italic",
+        "bold",
+        "circle",
+        "note"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentAnnotationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "highlight",
+            "value": "highlight",
+            "description": "Highlight annotation."
+          },
+          {
+            "name": "strikethrough",
+            "value": "strikethrough",
+            "description": "Strikethrough annotation."
+          },
+          {
+            "name": "underline",
+            "value": "underline",
+            "description": "Underline annotation."
+          },
+          {
+            "name": "italic",
+            "value": "italic",
+            "description": "Italic annotation."
+          },
+          {
+            "name": "bold",
+            "value": "bold",
+            "description": "Bold annotation."
+          },
+          {
+            "name": "circle",
+            "value": "circle",
+            "description": "Circle annotation."
+          },
+          {
+            "name": "note",
+            "value": "note",
+            "description": "Note annotation."
+          }
+        ]
+      }
+    },
+    "DocumentBarcode": {
+      "type": "object",
+      "description": "Barcode in a document.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DocumentBarcodeKind",
+          "description": "Barcode kind."
+        },
+        "value": {
+          "type": "string",
+          "description": "Barcode value."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the barcode in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the barcode in the markdown content."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of predicting the barcode.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ]
+    },
+    "DocumentBarcodeKind": {
+      "type": "string",
+      "description": "Barcode kind.",
+      "enum": [
+        "QRCode",
+        "PDF417",
+        "UPCA",
+        "UPCE",
+        "Code39",
+        "Code128",
+        "EAN8",
+        "EAN13",
+        "DataBar",
+        "Code93",
+        "Codabar",
+        "DataBarExpanded",
+        "ITF",
+        "MicroQRCode",
+        "Aztec",
+        "DataMatrix",
+        "MaxiCode"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentBarcodeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QRCode",
+            "value": "QRCode",
+            "description": "QR code, as defined in ISO/IEC 18004:2015."
+          },
+          {
+            "name": "PDF417",
+            "value": "PDF417",
+            "description": "PDF417, as defined in ISO 15438."
+          },
+          {
+            "name": "UPCA",
+            "value": "UPCA",
+            "description": "GS1 12-digit Universal Product Code."
+          },
+          {
+            "name": "UPCE",
+            "value": "UPCE",
+            "description": "GS1 6-digit Universal Product Code."
+          },
+          {
+            "name": "Code39",
+            "value": "Code39",
+            "description": "Code 39 barcode, as defined in ISO/IEC 16388:2007."
+          },
+          {
+            "name": "Code128",
+            "value": "Code128",
+            "description": "Code 128 barcode, as defined in ISO/IEC 15417:2007."
+          },
+          {
+            "name": "EAN8",
+            "value": "EAN8",
+            "description": "GS1 8-digit International Article Number (European Article Number)."
+          },
+          {
+            "name": "EAN13",
+            "value": "EAN13",
+            "description": "GS1 13-digit International Article Number (European Article Number)."
+          },
+          {
+            "name": "DataBar",
+            "value": "DataBar",
+            "description": "GS1 DataBar barcode."
+          },
+          {
+            "name": "Code93",
+            "value": "Code93",
+            "description": "Code 93 barcode, as defined in ANSI/AIM BC5-1995."
+          },
+          {
+            "name": "Codabar",
+            "value": "Codabar",
+            "description": "Codabar barcode, as defined in ANSI/AIM BC3-1995."
+          },
+          {
+            "name": "DataBarExpanded",
+            "value": "DataBarExpanded",
+            "description": "GS1 DataBar Expanded barcode."
+          },
+          {
+            "name": "ITF",
+            "value": "ITF",
+            "description": "Interleaved 2 of 5 barcode, as defined in ANSI/AIM BC2-1995."
+          },
+          {
+            "name": "MicroQRCode",
+            "value": "MicroQRCode",
+            "description": "Micro QR code, as defined in ISO/IEC 23941:2022."
+          },
+          {
+            "name": "Aztec",
+            "value": "Aztec",
+            "description": "Aztec code, as defined in ISO/IEC 24778:2008."
+          },
+          {
+            "name": "DataMatrix",
+            "value": "DataMatrix",
+            "description": "Data matrix code, as defined in ISO/IEC 16022:2006."
+          },
+          {
+            "name": "MaxiCode",
+            "value": "MaxiCode",
+            "description": "MaxiCode, as defined in ISO/IEC 16023:2000."
+          }
+        ]
+      }
+    },
+    "DocumentCaption": {
+      "type": "object",
+      "description": "Caption of a table or figure.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of the caption."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the caption in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the caption in the markdown content."
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the caption.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "DocumentChartFigure": {
+      "type": "object",
+      "description": "Figure containing a chart, such as a bar chart, line chart, or pie chart.",
+      "properties": {
+        "content": {
+          "type": "object",
+          "description": "Chart content represented using [Chart.js config](https://www.chartjs.org/docs/latest/configuration/).",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentFigure"
+        }
+      ],
+      "x-ms-discriminator-value": "chart"
+    },
+    "DocumentContent": {
+      "type": "object",
+      "description": "Document content.  Ex. text/plain, application/pdf, image/jpeg.",
+      "properties": {
+        "startPageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start page number (1-indexed) of the content."
+        },
+        "endPageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "End page number (1-indexed) of the content."
+        },
+        "unit": {
+          "$ref": "#/definitions/LengthUnit",
+          "description": "Length unit used by the width, height, and source properties.\nFor images/tiff, the default unit is pixel.  For PDF, the default unit is inch."
+        },
+        "pages": {
+          "type": "array",
+          "description": "List of pages in the document.",
+          "items": {
+            "$ref": "#/definitions/DocumentPage"
+          }
+        },
+        "paragraphs": {
+          "type": "array",
+          "description": "List of paragraphs in the document.  Only if enableOcr and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentParagraph"
+          }
+        },
+        "sections": {
+          "type": "array",
+          "description": "List of sections in the document.  Only if enableLayout and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentSection"
+          }
+        },
+        "tables": {
+          "type": "array",
+          "description": "List of tables in the document.  Only if enableLayout and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentTable"
+          }
+        },
+        "figures": {
+          "type": "array",
+          "description": "List of figures in the document.  Only if enableLayout and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentFigure"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "description": "List of annotations in the document.  Only if enableAnnotations and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentAnnotation"
+          }
+        },
+        "hyperlinks": {
+          "type": "array",
+          "description": "List of hyperlinks in the document.  Only if returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentHyperlink"
+          }
+        },
+        "segments": {
+          "type": "array",
+          "description": "List of detected content segments.  Only if enableSegment is true.",
+          "items": {
+            "$ref": "#/definitions/DocumentContentSegment"
+          }
+        }
+      },
+      "required": [
+        "startPageNumber",
+        "endPageNumber"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaContent"
+        }
+      ],
+      "x-ms-discriminator-value": "document"
+    },
+    "DocumentContentSegment": {
+      "type": "object",
+      "description": "Detected document content segment.",
+      "properties": {
+        "segmentId": {
+          "type": "string",
+          "description": "Segment identifier."
+        },
+        "category": {
+          "type": "string",
+          "description": "Classified content category."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the segment in the markdown content."
+        },
+        "startPageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start page number (1-indexed) of the segment."
+        },
+        "endPageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "End page number (1-indexed) of the segment."
+        }
+      },
+      "required": [
+        "segmentId",
+        "category",
+        "span",
+        "startPageNumber",
+        "endPageNumber"
+      ]
+    },
+    "DocumentElement": {
+      "type": "string",
+      "description": "JSON pointer referencing an element of the document, such as paragraph,\ntable, section, etc."
+    },
+    "DocumentFigure": {
+      "type": "object",
+      "description": "Figure in a document.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Figure kind.",
+          "default": "unknown",
+          "enum": [
+            "unknown",
+            "chart",
+            "mermaid"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentFigureKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "unknown",
+                "value": "unknown",
+                "description": "Unknown figure kind."
+              },
+              {
+                "name": "chart",
+                "value": "chart",
+                "description": "Figure containing a chart, such as a bar chart, line chart, or pie chart."
+              },
+              {
+                "name": "mermaid",
+                "value": "mermaid",
+                "description": "Figure containing a diagram, such as a flowchart or network diagram."
+              }
+            ]
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "Figure identifier."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the figure in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the figure in the markdown content."
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the figure, excluding any caption or footnotes.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        },
+        "caption": {
+          "$ref": "#/definitions/DocumentCaption",
+          "description": "Figure caption."
+        },
+        "footnotes": {
+          "type": "array",
+          "description": "List of figure footnotes.",
+          "items": {
+            "$ref": "#/definitions/DocumentFootnote"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the figure."
+        },
+        "role": {
+          "$ref": "#/definitions/SemanticRole",
+          "description": "Semantic role of the figure."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "id"
+      ]
+    },
+    "DocumentFootnote": {
+      "type": "object",
+      "description": "Footnote of a table or figure.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of the footnote."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the footnote in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the footnote in the markdown content."
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the footnote.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "DocumentFormula": {
+      "type": "object",
+      "description": "Mathematical formula in a document.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DocumentFormulaKind",
+          "description": "Formula kind."
+        },
+        "value": {
+          "type": "string",
+          "description": "LaTex expression describing the formula."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the formula in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the formula in the markdown content."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of predicting the formula.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ]
+    },
+    "DocumentFormulaKind": {
+      "type": "string",
+      "description": "Formula kind.",
+      "enum": [
+        "inline",
+        "display"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentFormulaKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inline",
+            "value": "inline",
+            "description": "A formula embedded within the content of a paragraph."
+          },
+          {
+            "name": "display",
+            "value": "display",
+            "description": "A formula in display mode that takes up an entire line."
+          }
+        ]
+      }
+    },
+    "DocumentHyperlink": {
+      "type": "object",
+      "description": "Hyperlink in a document, such as a link to a web page or an email address.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Hyperlinked content."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the hyperlink."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the hyperlink in the markdown content."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Position of the hyperlink."
+        }
+      },
+      "required": [
+        "content",
+        "url"
+      ]
+    },
+    "DocumentLine": {
+      "type": "object",
+      "description": "Line in a document, consisting of an contiguous sequence of words.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Line text."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the line in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the line in the markdown content."
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "DocumentMermaidFigure": {
+      "type": "object",
+      "description": "Figure containing a diagram, such as a flowchart or network diagram.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Diagram content represented using [Mermaid syntax](https://mermaid.js.org/intro/)."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentFigure"
+        }
+      ],
+      "x-ms-discriminator-value": "mermaid"
+    },
+    "DocumentPage": {
+      "type": "object",
+      "description": "Content from a document page.",
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number (1-based).",
+          "minimum": 1
+        },
+        "width": {
+          "type": "number",
+          "format": "float",
+          "description": "Width of the page."
+        },
+        "height": {
+          "type": "number",
+          "format": "float",
+          "description": "Height of the page."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Span(s) associated with the page in the markdown content.",
+          "items": {
+            "$ref": "#/definitions/ContentSpan"
+          }
+        },
+        "angle": {
+          "type": "number",
+          "format": "float",
+          "description": "The general orientation of the content in clockwise direction,\nmeasured in degrees between (-180, 180].\nOnly if enableOcr is true.",
+          "maximum": 180
+        },
+        "words": {
+          "type": "array",
+          "description": "List of words in the page.  Only if enableOcr and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentWord"
+          }
+        },
+        "lines": {
+          "type": "array",
+          "description": "List of lines in the page.  Only if enableOcr and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentLine"
+          }
+        },
+        "barcodes": {
+          "type": "array",
+          "description": "List of barcodes in the page.  Only if enableBarcode and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentBarcode"
+          }
+        },
+        "formulas": {
+          "type": "array",
+          "description": "List of mathematical formulas in the page.  Only if enableFormula and returnDetails are true.",
+          "items": {
+            "$ref": "#/definitions/DocumentFormula"
+          }
+        }
+      },
+      "required": [
+        "pageNumber"
+      ]
+    },
+    "DocumentParagraph": {
+      "type": "object",
+      "description": "Paragraph in a document, generally consisting of an contiguous sequence of lines\nwith common alignment and spacing.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/SemanticRole",
+          "description": "Semantic role of the paragraph."
+        },
+        "content": {
+          "type": "string",
+          "description": "Paragraph text."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the paragraph in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the paragraph in the markdown content."
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "DocumentSection": {
+      "type": "object",
+      "description": "Section in a document.",
+      "properties": {
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the section in the markdown content."
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the section.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        }
+      }
+    },
+    "DocumentTable": {
+      "type": "object",
+      "description": "Table in a document, consisting table cells arranged in a rectangular layout.",
+      "properties": {
+        "rowCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of rows in the table.",
+          "minimum": 1
+        },
+        "columnCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of columns in the table.",
+          "minimum": 1
+        },
+        "cells": {
+          "type": "array",
+          "description": "Cells contained within the table.",
+          "items": {
+            "$ref": "#/definitions/DocumentTableCell"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the table in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the table in the markdown content."
+        },
+        "caption": {
+          "$ref": "#/definitions/DocumentCaption",
+          "description": "Table caption."
+        },
+        "footnotes": {
+          "type": "array",
+          "description": "List of table footnotes.",
+          "items": {
+            "$ref": "#/definitions/DocumentFootnote"
+          }
+        },
+        "role": {
+          "$ref": "#/definitions/SemanticRole",
+          "description": "Semantic role of the table."
+        }
+      },
+      "required": [
+        "rowCount",
+        "columnCount",
+        "cells"
+      ]
+    },
+    "DocumentTableCell": {
+      "type": "object",
+      "description": "Table cell in a document table.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Table cell kind.",
+          "default": "content",
+          "enum": [
+            "content",
+            "rowHeader",
+            "columnHeader",
+            "stubHead",
+            "description"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentTableCellKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "content",
+                "value": "content",
+                "description": "Main content/data."
+              },
+              {
+                "name": "rowHeader",
+                "value": "rowHeader",
+                "description": "Description of the row content."
+              },
+              {
+                "name": "columnHeader",
+                "value": "columnHeader",
+                "description": "Description the column content."
+              },
+              {
+                "name": "stubHead",
+                "value": "stubHead",
+                "description": "Description of the row headers, usually located at the top left corner of a table."
+              },
+              {
+                "name": "description",
+                "value": "description",
+                "description": "Description of the content in (parts of) the table."
+              }
+            ]
+          }
+        },
+        "rowIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Row index of the cell."
+        },
+        "columnIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Column index of the cell."
+        },
+        "rowSpan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of rows spanned by this cell.",
+          "default": 1,
+          "minimum": 1
+        },
+        "columnSpan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of columns spanned by this cell.",
+          "default": 1,
+          "minimum": 1
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the table cell."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the table cell in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the table cell in the markdown content."
+        },
+        "elements": {
+          "type": "array",
+          "description": "Child elements of the table cell.",
+          "items": {
+            "$ref": "#/definitions/DocumentElement"
+          }
+        }
+      },
+      "required": [
+        "rowIndex",
+        "columnIndex",
+        "content"
+      ]
+    },
+    "DocumentWord": {
+      "type": "object",
+      "description": "Word in a document, consisting of a contiguous sequence of characters.\nFor non-space delimited languages, such as Chinese, Japanese, and Korean, \neach character is represented as its own word.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Word text."
+        },
+        "source": {
+          "$ref": "#/definitions/SourceExpression",
+          "description": "Encoded source that identifies the position of the word in the content."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the word in the markdown content."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of predicting the word.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "GenerationMethod": {
+      "type": "string",
+      "description": "Generation method.",
+      "enum": [
+        "generate",
+        "extract",
+        "classify"
+      ],
+      "x-ms-enum": {
+        "name": "GenerationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "generate",
+            "value": "generate",
+            "description": "Values are generated freely based on the content."
+          },
+          {
+            "name": "extract",
+            "value": "extract",
+            "description": "Values are extracted as they appear in the content."
+          },
+          {
+            "name": "classify",
+            "value": "classify",
+            "description": "Values are classified against a predefined set of categories."
+          }
+        ]
+      }
+    },
+    "GrantCopyAuthorizationRequest": {
+      "type": "object",
+      "description": "Grant copy authorization request.",
+      "properties": {
+        "targetAzureResourceId": {
+          "type": "string",
+          "description": "Azure resource ID of the target analyzer location."
+        },
+        "targetRegion": {
+          "type": "string",
+          "description": "Azure region of the target analyzer location.  Defaults to current region."
+        }
+      },
+      "required": [
+        "targetAzureResourceId"
+      ]
+    },
+    "IntegerField": {
+      "type": "object",
+      "description": "Integer field extracted from the content.",
+      "properties": {
+        "valueInteger": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Integer field value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "integer"
+    },
+    "JsonField": {
+      "type": "object",
+      "description": "JSON field extracted from the content.",
+      "properties": {
+        "valueJson": {
+          "description": "JSON field value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "json"
+    },
+    "KnowledgeSource": {
+      "type": "object",
+      "description": "Knowledge source.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/KnowledgeSourceKind",
+          "description": "The kind of knowledge source."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "KnowledgeSourceKind": {
+      "type": "string",
+      "description": "Knowledge source kind.",
+      "enum": [
+        "labeledData"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "labeledData",
+            "value": "labeledData",
+            "description": "A labeled data knowledge source."
+          }
+        ]
+      }
+    },
+    "LabeledDataKnowledgeSource": {
+      "type": "object",
+      "description": "Labeled data knowledge source.",
+      "properties": {
+        "containerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the blob container containing labeled data."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "An optional prefix to filter blobs within the container."
+        },
+        "fileListPath": {
+          "type": "string",
+          "description": "An optional path to a file listing specific blobs to include."
+        }
+      },
+      "required": [
+        "containerUrl",
+        "fileListPath"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "labeledData"
+    },
+    "LengthUnit": {
+      "type": "string",
+      "description": "Length unit used by the width, height, and source properties.",
+      "enum": [
+        "pixel",
+        "inch"
+      ],
+      "x-ms-enum": {
+        "name": "LengthUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pixel",
+            "value": "pixel",
+            "description": "Pixel unit."
+          },
+          {
+            "name": "inch",
+            "value": "inch",
+            "description": "Inch unit."
+          }
+        ]
+      }
+    },
+    "MediaContent": {
+      "type": "object",
+      "description": "Media content base class.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MediaContentKind",
+          "description": "Content kind."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "Detected MIME type of the content.  Ex. application/pdf, image/jpeg, etc."
+        },
+        "analyzerId": {
+          "type": "string",
+          "description": "The analyzer that generated this content.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+        },
+        "category": {
+          "type": "string",
+          "description": "Classified content category."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path of the content in the input."
+        },
+        "markdown": {
+          "type": "string",
+          "description": "Markdown representation of the content."
+        },
+        "fields": {
+          "type": "object",
+          "description": "Extracted fields from the content.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentField"
+          }
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "mimeType"
+      ]
+    },
+    "MediaContentKind": {
+      "type": "string",
+      "description": "Kind of media content.",
+      "enum": [
+        "document",
+        "audioVisual"
+      ],
+      "x-ms-enum": {
+        "name": "MediaContentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "document",
+            "value": "document",
+            "description": "Document content, such as pdf, image, txt, etc."
+          },
+          {
+            "name": "audioVisual",
+            "value": "audioVisual",
+            "description": "Audio visual content, such as mp3, mp4, etc."
+          }
+        ]
+      }
+    },
+    "NumberField": {
+      "type": "object",
+      "description": "Number field extracted from the content.",
+      "properties": {
+        "valueNumber": {
+          "type": "number",
+          "format": "double",
+          "description": "Number field value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "number"
+    },
+    "ObjectField": {
+      "type": "object",
+      "description": "Object field extracted from the content.",
+      "properties": {
+        "valueObject": {
+          "type": "object",
+          "description": "Object field value.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentField"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "object"
+    },
+    "PagedContentAnalyzer": {
+      "type": "object",
+      "description": "Paged collection of ContentAnalyzer items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ContentAnalyzer items on this page",
+          "items": {
+            "$ref": "#/definitions/ContentAnalyzer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RangeExpression": {
+      "type": "string",
+      "description": "  Range expression for specifying parts of the input to analyze (ex. `1-3,5,9-`).\n  Document content uses 1-based page numbers, while audio visual content uses integer milliseconds."
+    },
+    "SemanticRole": {
+      "type": "string",
+      "description": "Semantic role of the paragraph.",
+      "enum": [
+        "pageHeader",
+        "pageFooter",
+        "pageNumber",
+        "title",
+        "sectionHeading",
+        "footnote",
+        "formulaBlock"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pageHeader",
+            "value": "pageHeader",
+            "description": "Text near the top edge of the page."
+          },
+          {
+            "name": "pageFooter",
+            "value": "pageFooter",
+            "description": "Text near the bottom edge of the page."
+          },
+          {
+            "name": "pageNumber",
+            "value": "pageNumber",
+            "description": "Page number."
+          },
+          {
+            "name": "title",
+            "value": "title",
+            "description": "Top-level title describing the entire document."
+          },
+          {
+            "name": "sectionHeading",
+            "value": "sectionHeading",
+            "description": "Sub heading describing a section of the document."
+          },
+          {
+            "name": "footnote",
+            "value": "footnote",
+            "description": "Note usually placed after the main content on a page."
+          },
+          {
+            "name": "formulaBlock",
+            "value": "formulaBlock",
+            "description": "Block of formulas, often with shared alignment."
+          }
+        ]
+      }
+    },
+    "SourceExpression": {
+      "type": "string",
+      "description": "Encoded string expression that describes positions in the content."
+    },
+    "StringField": {
+      "type": "object",
+      "description": "String field extracted from the content.",
+      "properties": {
+        "valueString": {
+          "type": "string",
+          "description": "String field value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "SupportedModels": {
+      "type": "object",
+      "description": "Chat completion and embedding models supported by the analyzer.",
+      "properties": {
+        "completion": {
+          "type": "object",
+          "description": "Chat completion models supported by the analyzer.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "embedding": {
+          "type": "object",
+          "description": "Embedding models supported by the analyzer.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "completion",
+        "embedding"
+      ]
+    },
+    "TimeField": {
+      "type": "object",
+      "description": "Time field extracted from the content.",
+      "properties": {
+        "valueTime": {
+          "type": "string",
+          "format": "time",
+          "description": "Time field value, in ISO 8601 (hh:mm:ss) format."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentField"
+        }
+      ],
+      "x-ms-discriminator-value": "time"
+    },
+    "TranscriptPhrase": {
+      "type": "object",
+      "description": "Transcript phrase.",
+      "properties": {
+        "speaker": {
+          "type": "string",
+          "description": "Speaker index or name."
+        },
+        "startTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Start time of the phrase in milliseconds."
+        },
+        "endTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "End time of the phrase in milliseconds."
+        },
+        "locale": {
+          "type": "string",
+          "description": "Detected locale of the phrase.  Ex. en-US."
+        },
+        "text": {
+          "type": "string",
+          "description": "Transcript text."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of predicting the phrase.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the phrase in the markdown content."
+        },
+        "words": {
+          "type": "array",
+          "description": "List of words in the phrase.",
+          "items": {
+            "$ref": "#/definitions/TranscriptWord"
+          }
+        }
+      },
+      "required": [
+        "startTimeMs",
+        "endTimeMs",
+        "text",
+        "words"
+      ]
+    },
+    "TranscriptWord": {
+      "type": "object",
+      "description": "Transcript word.",
+      "properties": {
+        "startTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Start time of the word in milliseconds."
+        },
+        "endTimeMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "End time of the word in milliseconds."
+        },
+        "text": {
+          "type": "string",
+          "description": "Transcript text."
+        },
+        "span": {
+          "$ref": "#/definitions/ContentSpan",
+          "description": "Span of the word in the markdown content."
+        }
+      },
+      "required": [
+        "startTimeMs",
+        "endTimeMs",
+        "text"
+      ]
+    },
+    "UsageDetails": {
+      "type": "object",
+      "description": "Usage details.",
+      "properties": {
+        "documentPagesMinimal": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of document pages processed at the minimal level.\nFor documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page."
+        },
+        "documentPagesBasic": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of document pages processed at the basic level.\nFor documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page."
+        },
+        "documentPagesStandard": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of document pages processed at the standard level.\nFor documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page."
+        },
+        "audioHours": {
+          "type": "number",
+          "format": "float",
+          "description": "The hours of audio processed."
+        },
+        "videoHours": {
+          "type": "number",
+          "format": "float",
+          "description": "The hours of video processed."
+        },
+        "contextualizationTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of contextualization tokens consumed for preparing context, generating confidence scores, source grounding, and output formatting."
+        },
+        "tokens": {
+          "type": "object",
+          "description": "The number of LLM and embedding tokens consumed, grouped by model (ex. GTP 4.1) and type (ex. input, cached input, output).",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AnalyzeBinaryRequest.input": {
+      "name": "input",
+      "in": "body",
+      "description": "The binary content of the document to analyze.",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AnalyzeBinaryRequest.range": {
+      "name": "range",
+      "in": "query",
+      "description": "Range of the input to analyze (ex. `1-3,5,9-`).  Document content uses 1-based page numbers, while audio visual content uses integer milliseconds.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AnalyzeParameters.processingLocation": {
+      "name": "processingLocation",
+      "in": "query",
+      "description": "The location where the data may be processed.  Defaults to global.",
+      "required": false,
+      "type": "string",
+      "default": "global",
+      "enum": [
+        "geography",
+        "dataZone",
+        "global"
+      ],
+      "x-ms-enum": {
+        "name": "ProcessingLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "geography",
+            "value": "geography",
+            "description": "Data may be processed in the same geography as the resource."
+          },
+          {
+            "name": "dataZone",
+            "value": "dataZone",
+            "description": "Data may be processed in the same data zone as the resource."
+          },
+          {
+            "name": "global",
+            "value": "global",
+            "description": "Data may be processed in any Azure data center globally."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AnalyzeParameters.stringEncoding": {
+      "name": "stringEncoding",
+      "in": "query",
+      "description": "  The string encoding format for content spans in the response.\n  Possible values are 'codePoint', 'utf16', and `utf8`.  Default is `codePoint`.\")",
+      "required": false,
+      "type": "string",
+      "default": "codePoint",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

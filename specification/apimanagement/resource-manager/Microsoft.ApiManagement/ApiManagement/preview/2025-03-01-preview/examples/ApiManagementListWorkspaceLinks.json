@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "service1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "wk-1",
+            "type": "Microsoft.ApiManagement/service/workspaceLinks",
+            "etag": "AAAAAAAWN/4=",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/service-1/workspaceLinks/wk-1",
+            "properties": {
+              "gateways": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/gateway-1"
+                }
+              ],
+              "workspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/services/service-1/workspaces/wk-1"
+            }
+          },
+          {
+            "name": "wk-1",
+            "type": "Microsoft.ApiManagement/service/workspaceLinks",
+            "etag": "AAAAAAAWKwo=",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/service-1/workspaceLinks/wk-2",
+            "properties": {
+              "gateways": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/gateway-1"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/gateway-2"
+                }
+              ],
+              "workspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/services/service-1/workspaces/wk-2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApiManagementWorkspaceLinks_ListByService",
+  "title": "ApiManagementListGatewayConfigConnection"
+}

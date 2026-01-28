@@ -1,3 +1,4 @@
+import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
@@ -10,6 +11,7 @@ import {
 import * as log from "../src/log.js";
 import { LogLevel } from "../src/log.js";
 import * as changeFiles from "../src/spec-helpers.js";
+import type { ExecutionReport } from "../src/types.js";
 import * as utils from "../src/utils.js";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
@@ -33,7 +35,7 @@ describe("generateSdkForSingleSpec", () => {
       runMode: "release",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -52,7 +54,9 @@ describe("generateSdkForSingleSpec", () => {
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
     vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
@@ -103,7 +107,7 @@ describe("generateSdkForSingleSpec", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -127,10 +131,10 @@ describe("generateSdkForSingleSpec", () => {
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalled();
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledWith(["mock-command"]);
     expect(log.logMessage).toHaveBeenCalledWith(
-      `Runner: error executing command:Error: Command failed`,
+      expect.stringContaining("Runner: error executing command:Error: Command failed"),
       LogLevel.Error,
     );
-    expect(commandHelpers.setPipelineVariables).not.toHaveBeenCalled();
+    expect(commandHelpers.setPipelineVariables).toHaveBeenCalled();
   });
 
   test("should handle errors during execution report reading", async () => {
@@ -142,7 +146,7 @@ describe("generateSdkForSingleSpec", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -166,7 +170,9 @@ describe("generateSdkForSingleSpec", () => {
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
-      "Runner: error reading execution-report.json:Error: Failed to read execution report",
+      expect.stringContaining(
+        "Runner: error reading execution-report.json:Error: Failed to read execution report",
+      ),
       LogLevel.Error,
     );
   });
@@ -184,7 +190,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "batch",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -208,7 +214,9 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
-    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
     vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
     vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
     vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
@@ -256,7 +264,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "spec-pull-request",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -298,7 +306,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "batch",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -337,7 +345,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "batch",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -360,7 +368,9 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockRejectedValue(new Error("Command failed"));
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
-    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
     vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
@@ -372,7 +382,7 @@ describe("generateSdkForSpecPr", () => {
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
-      "Runner: error executing command:Error: Command failed",
+      expect.stringContaining("Runner: error executing command:Error: Command failed"),
       LogLevel.Error,
     );
   });
@@ -384,7 +394,7 @@ describe("generateSdkForSpecPr", () => {
       workingFolder: "/working/folder",
       runMode: "batch",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -417,7 +427,9 @@ describe("generateSdkForSpecPr", () => {
 
     expect(statusCode).toBe(1);
     expect(log.logMessage).toHaveBeenCalledWith(
-      "Runner: error reading execution-report.json:Error: Failed to read execution report",
+      expect.stringContaining(
+        "Runner: error reading execution-report.json:Error: Failed to read execution report",
+      ),
       LogLevel.Error,
     );
   });
@@ -436,7 +448,7 @@ describe("generateSdkForBatchSpecs", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -504,7 +516,7 @@ describe("generateSdkForBatchSpecs", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -564,7 +576,7 @@ describe("generateSdkForBatchSpecs", () => {
       runMode: "batch",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
-      sdkLanguage: "javascript",
+      sdkLanguage: SdkName.Js,
       specCommitSha: "",
       specRepoHttpsUrl: "",
     };
@@ -601,7 +613,7 @@ describe("generateSdkForBatchSpecs", () => {
     );
     expect(logSpy).toHaveBeenNthCalledWith(
       3,
-      "Runner: error executing command:Error: Command failed",
+      expect.stringContaining("Runner: error executing command:Error: Command failed"),
       LogLevel.Error,
     );
     expect(logSpy).toHaveBeenNthCalledWith(5, "ending group logging", "endgroup");

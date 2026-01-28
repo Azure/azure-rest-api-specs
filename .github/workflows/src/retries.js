@@ -3,14 +3,16 @@
  * @property {number} [maxRetries] Default: 3
  * @property {number} [initialDelayMs] Default: 1000
  * @property {number} [maxDelayMs] - Default: 10000
- * @property {Function} [logger] - Default: console.log
+ * @property {(message: string) => void} [logger] - Default: console.log
  */
 
 /**
  * Retry a function with exponential backoff
- * @param {Function} fn - Function to retry
+ *
+ * @template T
+ * @param {() => T} fn - Function to retry
  * @param {RetryOptions} [options] - Retry options
- * @returns {Promise<any>} - Result of the function
+ * @returns {Promise<T>} - Result of the function
  */
 export async function retry(fn, options = {}) {
   const {

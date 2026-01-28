@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2025-11-03-preview",
+    "body": {
+      "properties": {
+        "automuting": true,
+        "logRules": {
+          "filteringTags": [
+            {
+              "name": "Environment",
+              "action": "Include",
+              "value": "Prod"
+            },
+            {
+              "name": "Environment",
+              "action": "Exclude",
+              "value": "Dev"
+            }
+          ],
+          "sendAadLogs": false,
+          "sendResourceLogs": true,
+          "sendSubscriptionLogs": true
+        },
+        "metricRules": {
+          "filteringTags": []
+        }
+      }
+    },
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "ruleSetName": "default",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Datadog/monitors/tagRules",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/tagRules/default",
+        "properties": {
+          "automuting": true,
+          "logRules": {
+            "filteringTags": [
+              {
+                "name": "Environment",
+                "action": "Include",
+                "value": "Prod"
+              },
+              {
+                "name": "Environment",
+                "action": "Exclude",
+                "value": "Dev"
+              }
+            ],
+            "sendAadLogs": false,
+            "sendResourceLogs": true,
+            "sendSubscriptionLogs": true
+          },
+          "metricRules": {
+            "filteringTags": []
+          }
+        }
+      }
+    }
+  },
+  "operationId": "TagRules_CreateOrUpdate",
+  "title": "TagRules_CreateOrUpdate"
+}

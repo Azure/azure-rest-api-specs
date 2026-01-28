@@ -7,11 +7,6 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-disconnectedoperations"
     package-details:
       name: "@azure/arm-disconnectedoperations"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: Azure.ResourceManager.DisconnectedOperations
-    clear-output-folder: true
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
@@ -49,6 +44,61 @@ options:
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/edge/Microsoft.Edge.Shared/"
+
+  "@azure-tools/typespec-powershell":
+    service-dir: "src"
+    package-dir: "DisconnectedOperations/DisconnectedOperations.Autorest"
+    clear-output-folder: true
+    azure: true
+    module-version: 0.1.0
+    prefix: "Az"
+    subject-prefix: "DisconnectedOperations"
+    service-name: "DisconnectedOperations"
+    module-name: "{prefix}.{service-name}"
+    output-folder: "{output-dir}"
+    exclude-tableview-properties:
+      - Id
+      - Type
+    directive:
+      - where:
+          subject: Operation
+        hide: true
+      - where:
+          parameter-name: SubscriptionId
+        set:
+          default:
+            script: "(Get-AzContext).Subscription.Id"
+      - where:
+          variant: ^(Create|Update)(?!.*?(Expanded|ViaJsonString|ViaJsonFilePath))
+        remove: true
+      - where:
+          variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
+        remove: true
+      - where:
+          verb: Set
+        remove: true
+      - where:
+          subject: Artifact
+          variant: GetViaIdentityDisconnectedOperation|GetViaIdentityImage
+          parameter-name: Name
+        set:
+          parameter-name: ArtifactName
+      - where:
+          parameter-name: ArtifactName
+        clear-alias: true
+      - where:
+          subject: Image
+          variant: GetViaIdentityDisconnectedOperation
+          parameter-name: Name
+        set:
+          parameter-name: ImageName
+      - where:
+          parameter-name: ImageName
+        clear-alias: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.DisconnectedOperations"
+    emitter-output-dir: "{output-dir}/sdk/disconnectedoperations/{namespace}"
+
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

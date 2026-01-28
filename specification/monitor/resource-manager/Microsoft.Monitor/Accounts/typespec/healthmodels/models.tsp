@@ -474,7 +474,7 @@ union DependenciesAggregationType {
 model SignalAssignmentGroup {
   @doc("Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.")
   @maxItems(50)
-  @OpenAPI.extension("x-ms-identifiers", #["signalDefinitions"])
+  @identifiers(#["signalDefinitions"])
   signalAssignments?: SignalAssignment[];
 
   @doc("Reference to the name of the authentication setting which is used for querying the data source")

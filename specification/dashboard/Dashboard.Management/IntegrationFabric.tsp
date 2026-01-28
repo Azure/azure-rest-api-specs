@@ -44,7 +44,7 @@ interface IntegrationFabrics {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     IntegrationFabric,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = IntegrationFabric> &
+    LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader &
       LocationHeader
   >;

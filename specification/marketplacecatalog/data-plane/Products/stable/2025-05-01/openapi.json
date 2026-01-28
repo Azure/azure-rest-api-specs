@@ -595,7 +595,7 @@
     },
     "PlanDetails": {
       "type": "object",
-      "description": "Returns a subset of Plan attributes",
+      "description": "Returns the full set of Plan attributes",
       "properties": {
         "planId": {
           "type": "string",
@@ -825,6 +825,10 @@
           "items": {
             "$ref": "#/definitions/OfferingProperties"
           }
+        },
+        "planArtifactsVersion": {
+          "type": "string",
+          "description": "Plan's artifacts version"
         }
       },
       "required": [
@@ -1016,7 +1020,7 @@
     },
     "ProductDetails": {
       "type": "object",
-      "description": "Summary description of the product",
+      "description": "Returns the full set of Product attributes",
       "properties": {
         "displayName": {
           "type": "string",
@@ -1207,6 +1211,33 @@
           "type": "string",
           "description": "Used to map SaaS apps to their Azure AD appIds"
         },
+        "productLabels": {
+          "type": "array",
+          "description": "Labels used to filter the product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mixProductId": {
+          "type": "string",
+          "description": "An identifier for publishing services"
+        },
+        "linkedAddIns": {
+          "type": "array",
+          "description": "List of linked Add Ins provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skuAggregatedData": {
+          "$ref": "#/definitions/SkuAggregatedData",
+          "description": "Data aggregated from product Sku level"
+        },
+        "maxQuantityOnProposal": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum quantity allowed on a proposal"
+        },
         "videos": {
           "type": "array",
           "description": "List of product videos",
@@ -1219,13 +1250,6 @@
           "description": "List of Images",
           "items": {
             "$ref": "#/definitions/ImageGroup"
-          }
-        },
-        "linkedAddIns": {
-          "type": "array",
-          "description": "List of linked add ins provided for the item",
-          "items": {
-            "type": "string"
           }
         },
         "links": {
@@ -1346,6 +1370,14 @@
           "items": {
             "$ref": "#/definitions/PlanDetails"
           }
+        },
+        "productCustomData": {
+          "type": "string",
+          "description": "Custom passthrough data provided by the publisher"
+        },
+        "serviceId": {
+          "type": "string",
+          "description": "The Id of the service"
         }
       },
       "required": [
@@ -1548,6 +1580,33 @@
           "type": "string",
           "description": "Used to map SaaS apps to their Azure AD appIds"
         },
+        "productLabels": {
+          "type": "array",
+          "description": "Labels used to filter the product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mixProductId": {
+          "type": "string",
+          "description": "An identifier for publishing services"
+        },
+        "linkedAddIns": {
+          "type": "array",
+          "description": "List of linked Add Ins provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skuAggregatedData": {
+          "$ref": "#/definitions/SkuAggregatedData",
+          "description": "Data aggregated from product Sku level"
+        },
+        "maxQuantityOnProposal": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum quantity allowed on a proposal"
+        },
         "plans": {
           "type": "array",
           "description": "Full set of plan/SKU attributes",
@@ -1626,6 +1685,52 @@
         "identity": {
           "type": "string",
           "description": "The Sku identity"
+        }
+      }
+    },
+    "SkuAggregatedData": {
+      "type": "object",
+      "description": "Data aggregated from product Sku level",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Superset of actions aggregated from availabilities and terms across product SKUs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "states": {
+          "type": "array",
+          "description": "Superset of sku availability term states",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasEndUserEligibleSKUs": {
+          "type": "boolean",
+          "description": "There is at least one EndUser Eligible Sku"
+        },
+        "hasAdminEligibleSKUs": {
+          "type": "boolean",
+          "description": "There is at least one Admin Eligible Sku"
+        },
+        "features": {
+          "type": "array",
+          "description": "Superset of Sku features",
+          "items": {
+            "type": "string"
+          }
+        },
+        "programs": {
+          "type": "array",
+          "description": "Superset of Sku programs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasConsumptionComponents": {
+          "type": "boolean",
+          "description": "There is at least one Sku with consumption components"
         }
       }
     },

@@ -3,10 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace PaloAltoNetworks.Cloudngfw;
 
@@ -700,7 +697,7 @@ model AdvSecurityObjectModel {
   /**
    * URL entry
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   entry: NameDescriptionObject[];
 }
 
@@ -811,7 +808,7 @@ model SecurityServicesTypeList {
   /**
    * list
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   entry: NameDescriptionObject[];
 }
 
@@ -911,7 +908,7 @@ model RuleEntry {
   /**
    * tag for rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tags?: TagInfo[];
 
   /**
@@ -1076,7 +1073,7 @@ model AppSeenData {
   /**
    * array of appSeen
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   appSeenList: AppSeenInfo[];
 }
 
@@ -1268,7 +1265,7 @@ model FirewallDeploymentProperties {
   /**
    * Frontend settings for Firewall
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   frontEndSettings?: FrontendSetting[];
 
   /**
@@ -1310,7 +1307,7 @@ model NetworkProfile {
   /**
    * List of IPs associated with the Firewall
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   publicIps: IPAddress[];
 
   /**
@@ -1321,7 +1318,7 @@ model NetworkProfile {
   /**
    * Egress nat IP to use
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   egressNatIp?: IPAddress[];
 
   /**
@@ -1433,6 +1430,7 @@ model PanoramaConfig {
   /**
    * VM auth key for panorama connectivity
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   vmAuthKey?: string;
 
@@ -1521,7 +1519,7 @@ model DNSSettings {
   /**
    * List of IPs associated with the Firewall
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsServers?: IPAddress[];
 }
 
@@ -1795,7 +1793,7 @@ model FirewallResourceUpdateProperties {
   /**
    * Frontend settings for Firewall
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   frontEndSettings?: FrontendSetting[];
 
   /**
@@ -1871,6 +1869,7 @@ model ApplicationInsights {
   /**
    * Application Insights key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key?: string;
 }
 
@@ -1966,11 +1965,13 @@ model MonitorLog {
   /**
    * Primary Key value for Monitor
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   primaryKey?: string;
 
   /**
    * Secondary Key value for Monitor
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secondaryKey?: string;
 }
 

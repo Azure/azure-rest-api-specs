@@ -12,11 +12,15 @@ using Azure.Core;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+  "!javascript"
 );
 
 @@clientName(ManagedPrivateEndpointModels.create::parameters.resource,
@@ -26,7 +30,9 @@ using Azure.Core;
   "requestBodyParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedPrivateEndpointModel.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedPrivateEndpointModel.properties,
+  "!javascript"
 );
 
 @@clientName(IntegrationFabrics.create::parameters.resource,
@@ -44,7 +50,9 @@ using Azure.Core;
 );
 @@clientName(PrivateEndpointConnections.approve::parameters.resource, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedDashboard.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedDashboard.properties,
+  "!javascript"
 );
 @@alternateType(ManagedPrivateEndpointModelProperties.privateLinkResourceId,
   armResourceIdentifier

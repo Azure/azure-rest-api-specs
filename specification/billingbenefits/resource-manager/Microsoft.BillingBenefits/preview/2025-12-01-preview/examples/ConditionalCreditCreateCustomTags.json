@@ -1,0 +1,130 @@
+{
+  "parameters": {
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource_group_name_01",
+    "conditionalCreditName": "conditionalCredit_custom_tags_20251027",
+    "api-version": "2025-12-01-preview",
+    "body": {
+      "location": "global",
+      "properties": {
+        "entityType": "Primary",
+        "displayName": "Conditional Credit Custom Tags Example",
+        "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+        "startAt": "2025-11-01T00:00:00Z",
+        "allowContributors": "Enabled",
+        "milestones": [
+          {
+            "name": "Milestone 1",
+            "spendTarget": {
+              "amount": 1000,
+              "currencyCode": "USD"
+            },
+            "award": {
+              "duration": "P1M",
+              "credit": {
+                "amount": 100,
+                "currencyCode": "USD"
+              }
+            },
+            "endAt": "2025-11-30T23:59:59Z"
+          }
+        ]
+      },
+      "tags": {
+        "department": "finance",
+        "project": "cloud-migration",
+        "environment": "test"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_custom_tags_20251027",
+        "name": "conditionalCredit_custom_tags_20251027",
+        "type": "Microsoft.BillingBenefits/conditionalCredits",
+        "properties": {
+          "entityType": "Primary",
+          "displayName": "Conditional Credit Custom Tags Example",
+          "systemId": "CACO-SYSTEM-TAGS-001",
+          "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+          "startAt": "2025-11-01T00:00:00Z",
+          "endAt": "2025-11-30T23:59:59Z",
+          "allowContributors": "Enabled",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
+          "provisioningState": "Succeeded",
+          "status": "Scheduled",
+          "milestones": [
+            {
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440041",
+              "name": "Milestone 1",
+              "status": "Scheduled",
+              "endAt": "2025-11-30T23:59:59Z",
+              "spendTarget": {
+                "amount": 1000,
+                "currencyCode": "USD"
+              },
+              "award": {
+                "duration": "P1M",
+                "credit": {
+                  "amount": 100,
+                  "currencyCode": "USD"
+                }
+              }
+            }
+          ]
+        },
+        "location": "global",
+        "tags": {
+          "department": "finance",
+          "project": "cloud-migration",
+          "environment": "test"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_custom_tags_20251027",
+        "name": "conditionalCredit_custom_tags_20251027",
+        "type": "Microsoft.BillingBenefits/conditionalCredits",
+        "properties": {
+          "entityType": "Primary",
+          "displayName": "Conditional Credit Custom Tags Example",
+          "systemId": "CACO-SYSTEM-TAGS-001",
+          "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+          "startAt": "2025-11-01T00:00:00Z",
+          "endAt": "2025-11-30T23:59:59Z",
+          "allowContributors": "Enabled",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
+          "provisioningState": "Succeeded",
+          "status": "Active",
+          "milestones": [
+            {
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440041",
+              "name": "Milestone 1",
+              "status": "Active",
+              "endAt": "2025-11-30T23:59:59Z",
+              "spendTarget": {
+                "amount": 1000,
+                "currencyCode": "USD"
+              },
+              "award": {
+                "duration": "P1M",
+                "credit": {
+                  "amount": 100,
+                  "currencyCode": "USD"
+                }
+              }
+            }
+          ]
+        },
+        "location": "global",
+        "tags": {
+          "department": "finance",
+          "project": "cloud-migration",
+          "environment": "test"
+        }
+      }
+    }
+  }
+}

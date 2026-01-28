@@ -78,6 +78,14 @@ interface Services {
     ServiceResource,
     Response = ArmResponse<ServiceResourceList>
   >;
+
+  @added(Versions.v2025_10_01_preview)
+  restartReplica is ArmResourceActionAsync<
+    ServiceResource,
+    RestartReplicaRequest,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
 }
 
 @@doc(ServiceResource.name,
@@ -87,6 +95,9 @@ interface Services {
 @@doc(Services.createOrUpdate::parameters.resource, "The service resource.");
 @@doc(Services.update::parameters.properties,
   "The service resource updated tags."
+);
+@@doc(Services.restartReplica::parameters.body,
+  "The parameters for restarting replicas."
 );
 
 /**
@@ -805,4 +816,48 @@ union MoveCost {
    * Specifies the move cost of the service as High. The value is 3.
    */
   High: "High",
+}
+
+/**
+ * Request to restart a replica.
+ */
+@added(Versions.v2025_10_01_preview)
+model RestartReplicaRequest {
+  /**
+   * The ID of the partition.
+   */
+  partitionId: string;
+
+  /**
+   * The IDs of the replicas to be restarted.
+   */
+  replicaIds: int64[];
+
+  /**
+   *  The kind of restart to perform.
+   */
+  restartKind: RestartKind;
+
+  /**
+   * If true, the restart operation will be forced. Use this option with care, as it may cause data loss.
+   */
+  forceRestart?: boolean;
+
+  /**
+   * The server timeout for performing the operation in seconds. This timeout specifies the time duration that the client is willing to wait for the requested operation to complete. The default value for this parameter is 60 seconds.
+   */
+  timeout?: int64;
+}
+
+/**
+ *  The kind of restart to perform.
+ */
+@added(Versions.v2025_10_01_preview)
+union RestartKind {
+  string,
+
+  /**
+   * Restart all listed replicas at the same time.
+   */
+  Simultaneous: "Simultaneous",
 }

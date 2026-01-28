@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "backendId": "cabackend",
+    "parameters": {
+      "properties": {
+        "description": "Custom Assigned certificate Example",
+        "tls": {
+          "serverX509Names": [
+            {
+              "name": "*.badssl.com",
+              "issuerCertificateThumbprint": null
+            }
+          ],
+          "validateCertificateChain": true,
+          "validateCertificateName": true
+        },
+        "url": "https://self-signed.badssl.com/",
+        "protocol": "http"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cabackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/cabackend",
+        "properties": {
+          "description": "Custom Assigned certificate Example",
+          "tls": {
+            "serverX509Names": [
+              {
+                "name": "*.badssl.com",
+                "issuerCertificateThumbprint": null
+              }
+            ],
+            "validateCertificateChain": true,
+            "validateCertificateName": true
+          },
+          "url": "https://self-signed.badssl.com/",
+          "protocol": "http"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cabackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/cabackend",
+        "properties": {
+          "description": "Custom Assigned certificate Example",
+          "tls": {
+            "serverX509Names": [
+              {
+                "name": "*.badssl.com",
+                "issuerCertificateThumbprint": null
+              }
+            ],
+            "validateCertificateChain": true,
+            "validateCertificateName": true
+          },
+          "url": "https://self-signed.badssl.com/",
+          "protocol": "http"
+        }
+      }
+    }
+  },
+  "operationId": "Backend_CreateOrUpdate",
+  "title": "ApiManagementCreateBackendCustomAssignedCertificateX509Names"
+}

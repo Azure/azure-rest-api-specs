@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Datadog;
 
@@ -87,6 +89,27 @@ interface DatadogMonitorResources {
   list is ArmListBySubscription<
     DatadogMonitorResource,
     Response = ArmResponse<DatadogMonitorResourceListResponse>
+  >;
+
+  /**
+   * Manages Datadog MCP connectors to add/remove for the SRE Agent.
+   */
+  @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+  manageSreAgentConnectors is ArmResourceActionSync<
+    DatadogMonitorResource,
+    SreAgentConnectorRequest,
+    ArmResponse<SreAgentConfigurationListResponse>
+  >;
+
+  /**
+   * Get the default application key.
+   */
+  @summary("Get the default application key.")
+  @added(Versions.v2025_11_03_preview)
+  getDefaultApplicationKey is ArmResourceActionSync<
+    DatadogMonitorResource,
+    void,
+    ArmResponse<DatadogApplicationKey>
   >;
 
   /**

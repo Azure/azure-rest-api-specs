@@ -1,5 +1,7 @@
 namespace Microsoft.ContainerRegistry;
 
+using Azure.ResourceManager;
+
 /**
  * The mode of the connected registry resource that indicates the permissions of the registry.
  */
@@ -153,7 +155,7 @@ model ConnectedRegistryProperties {
    * The list of current statuses of the connected registry.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["correlationId"])
+  @identifiers(#["correlationId"])
   statusDetails?: StatusDetailProperties[];
 
   /**

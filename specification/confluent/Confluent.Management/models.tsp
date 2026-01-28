@@ -1964,6 +1964,7 @@ model AzureBlobStorageSinkConnectorServiceInfo
   /**
    * Azure Blob Storage Account Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   storageAccountKey?: string;
 
   /**
@@ -2018,6 +2019,7 @@ model AzureCosmosDBSinkConnectorServiceInfo
   /**
    * Azure Cosmos Database Master Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   cosmosMasterKey?: string;
 
   /**
@@ -2061,6 +2063,7 @@ model AzureCosmosDBSourceConnectorServiceInfo
   /**
    * Azure Cosmos Database Master Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   cosmosMasterKey?: string;
 
   /**
@@ -2113,6 +2116,7 @@ model AzureSynapseAnalyticsSinkConnectorServiceInfo
   /**
    * Azure Synapse SQL login details
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   synapseSqlPassword?: string;
 
   /**
@@ -2148,11 +2152,13 @@ model KafkaAzureBlobStorageSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiSecret?: string;
 
   /**
@@ -2219,6 +2225,7 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
@@ -2282,11 +2289,13 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiSecret?: string;
 
   /**
@@ -2354,6 +2363,7 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
@@ -2416,11 +2426,13 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiSecret?: string;
 
   /**

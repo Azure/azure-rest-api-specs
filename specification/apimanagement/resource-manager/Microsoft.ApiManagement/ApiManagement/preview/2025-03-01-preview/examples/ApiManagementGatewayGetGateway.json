@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "gatewayName": "apimService1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-gateway",
+        "type": "Microsoft.ApiManagement/gateway",
+        "etag": "AAAAAAAWN/4=",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateway/example-gateway",
+        "location": "East US",
+        "properties": {
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
+            }
+          },
+          "configurationApi": {
+            "hostname": "example-gateway.eastus.configuration.gateway.azure-api.net"
+          },
+          "createdAtUtc": "2021-06-16T09:40:00.9453556Z",
+          "frontend": {
+            "defaultHostname": "example-gateway.eastus.gateway.azure-api.net"
+          },
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": ""
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdAt": "2021-06-16T09:40:00.7106733Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-06-20T06:33:09.6159006Z",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "ReleaseName": "Z3",
+          "owner": "v-aswmoh"
+        }
+      }
+    }
+  },
+  "operationId": "ApiGateway_Get",
+  "title": "ApiManagementGatewayGetGateway"
+}

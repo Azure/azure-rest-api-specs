@@ -1,0 +1,123 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "etag": "AAAAAAK5GpM=",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "b413456e-a9c8-4242-9754-0a01c061bd41",
+          "tenantId": "b413456e-a9c8-4242-9754-0a01c061bd41"
+        },
+        "location": "West Europe",
+        "properties": {
+          "additionalLocations": [
+            {
+              "disableGateway": false,
+              "gatewayRegionalUrl": "https://apimService1-northeurope-01.regional.azure-api.net",
+              "location": "North Europe",
+              "outboundPublicIPAddresses": [
+                "4.xxx.40.176"
+              ],
+              "platformVersion": "stv2",
+              "publicIPAddresses": [
+                "4.xxx.40.176"
+              ],
+              "sku": {
+                "name": "Premium",
+                "capacity": 1
+              },
+              "virtualNetworkConfiguration": {
+                "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/apimVnet/subnets/default2"
+              }
+            }
+          ],
+          "createdAtUtc": "2016-04-12T00:20:15.6018952Z",
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "True",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "True"
+          },
+          "developerPortalStatus": "Enabled",
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
+          "disableGateway": false,
+          "gatewayRegionalUrl": "https://apimService1-westeurope-01.regional.azure-api.net",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": false,
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false
+            },
+            {
+              "type": "Proxy",
+              "certificate": {
+                "expiry": "2025-12-18T11:11:47+00:00",
+                "subject": "CN=*.msitesting.net",
+                "thumbprint": "9833D531D7A45XXXXXXXXXXXX8BD392E0BD3F"
+              },
+              "certificateSource": "KeyVault",
+              "defaultSslBinding": true,
+              "hostName": "proxy.msitesting.net",
+              "keyVaultId": "https://apim-msi-keyvault.vault.azure.net/secrets/sslcertificate",
+              "negotiateClientCertificate": false
+            }
+          ],
+          "legacyPortalStatus": "Disabled",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "natGatewayState": "Disabled",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "outboundPublicIPAddresses": [
+            "57.xxx.61.xx"
+          ],
+          "platformVersion": "stv2.1",
+          "provisioningState": "Succeeded",
+          "publicIPAddresses": [
+            "XX.153.XX.94"
+          ],
+          "publicNetworkAccess": "Enabled",
+          "publisherEmail": "autorest@contoso.com",
+          "publisherName": "Microsoft",
+          "releaseChannel": "Default",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "virtualNetworkConfiguration": {
+            "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1/subnets/default"
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "systemData": {
+          "lastModifiedAt": "2024-06-14T17:33:34.8195595Z",
+          "lastModifiedBy": "autorest@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2025-03-01-preview"
+      }
+    }
+  },
+  "operationId": "ApiManagementService_RefreshHostnames",
+  "title": "ApiManagementServiceRefreshKeyVaultHostnames"
+}

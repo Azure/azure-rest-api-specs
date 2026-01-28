@@ -1,9 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.Core;
 
 namespace Microsoft.AzureFleet;
@@ -1441,8 +1440,9 @@ model VirtualMachineScaleSetExtensionProperties {
    * The extension can contain either protectedSettings or
    * protectedSettingsFromKeyVault or no protected settings at all.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Needed to mark as secret without changing format"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @OpenAPI.extension("x-ms-secret", true)
   protectedSettings?: Record<unknown>;

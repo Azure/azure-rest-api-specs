@@ -11,9 +11,12 @@ vi.mock("../src/context.js", () => ({
   extractInputs: vi.fn(),
 }));
 
-// Mock global fetch
+/** @type {import('vitest').Mock<(input: string, init?: RequestInit) => Promise<Partial<Response>>>} */
 const mockFetch = vi.fn();
-global.fetch = mockFetch;
+
+// Mock global fetch
+global.fetch = /** @type {import('vitest').MockedFunction<typeof fetch>} */ (mockFetch);
+
 const mockCore = createMockCore();
 
 describe("getAzurePipelineArtifact function", () => {
@@ -87,27 +90,27 @@ describe("getAzurePipelineArtifact function", () => {
 
       // First attempted artifact request with 404
       if (url.includes(`artifacts?artifactName=${inputs.artifactName}&api-version=7.0`)) {
-        return mockInitialResponse;
+        return Promise.resolve(mockInitialResponse);
       }
       // List all artifacts request
       else if (url.includes("artifacts?api-version=7.0") && !url.includes("artifactName=")) {
-        return mockListResponse;
+        return Promise.resolve(mockListResponse);
       }
       // Request for failed artifact
       else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt1")) {
-        return mockFailedArtifactResponse;
+        return Promise.resolve(mockFailedArtifactResponse);
       }
       // Content download request
       else if (url.includes("format=file&subPath=")) {
-        return mockContentResponse;
+        return Promise.resolve(mockContentResponse);
       }
 
-      return {
+      return Promise.resolve({
         ok: false,
         status: 404,
         statusText: "URL not matched in test mock",
         text: vi.fn().mockResolvedValue("URL not matched in test mock"),
-      };
+      });
     });
 
     // Call function with fallbackToFailedArtifact set to true
@@ -156,12 +159,12 @@ describe("getAzurePipelineArtifact function", () => {
     mockFetch.mockImplementation((url, options) => {
       if (url.includes("artifacts?artifactName=")) {
         // Verify headers contain Authorization
-        expect(options.headers).toHaveProperty("Authorization", `Bearer ${testToken}`);
-        return mockArtifactResponse;
+        expect(options?.headers).toHaveProperty("Authorization", `Bearer ${testToken}`);
+        return Promise.resolve(mockArtifactResponse);
       } else {
         // Verify headers contain Authorization for the content download as well
-        expect(options.headers).toHaveProperty("Authorization", `Bearer ${testToken}`);
-        return mockContentResponse;
+        expect(options?.headers).toHaveProperty("Authorization", `Bearer ${testToken}`);
+        return Promise.resolve(mockContentResponse);
       }
     });
 
@@ -180,10 +183,12 @@ describe("getAzurePipelineArtifact function", () => {
     expect(global.fetch).toHaveBeenCalledWith(
       expect.any(String),
       expect.objectContaining({
-        headers: expect.objectContaining({
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${testToken}`,
-        }),
+        headers: /** @type {unknown} */ (
+          expect.objectContaining({
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${testToken}`,
+          })
+        ),
       }),
     );
   });
@@ -293,26 +298,26 @@ describe("getAzurePipelineArtifact function", () => {
     mockFetch.mockImplementation((url) => {
       // First attempted artifact request with 404
       if (url.includes(`artifacts?artifactName=${inputs.artifactName}&api-version=7.0`)) {
-        return mockInitialResponse;
+        return Promise.resolve(mockInitialResponse);
       }
       // List all artifacts request
       else if (url.includes("artifacts?api-version=7.0") && !url.includes("artifactName=")) {
-        return mockListResponse;
+        return Promise.resolve(mockListResponse);
       }
       // Request for failed artifact - notice we use the first item from mockListResponse
       else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt2")) {
-        return mockFailedArtifactResponse;
+        return Promise.resolve(mockFailedArtifactResponse);
       }
       // Content download request
       else if (url.includes("format=file&subPath=")) {
-        return mockContentResponse;
+        return Promise.resolve(mockContentResponse);
       }
-      return {
+      return Promise.resolve({
         ok: false,
         status: 404,
         statusText: "URL not matched in test mock",
         text: vi.fn().mockResolvedValue("URL not matched in test mock"),
-      };
+      });
     });
 
     // Call function with fallbackToFailedArtifact set to true
@@ -341,11 +346,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch to return different responses for each call
-    mockFetch.mockImplementation((url) => {
-      if (url.includes("artifacts?artifactName=")) {
-        return mockArtifactResponse;
-      }
-    });
+    mockFetch.mockResolvedValue(mockArtifactResponse);
 
     // Call function and expect it to throw
     await expect(
@@ -369,11 +370,7 @@ describe("getAzurePipelineArtifact function", () => {
     };
 
     // Setup fetch to return different responses for each call
-    mockFetch.mockImplementation((url) => {
-      if (url.includes("artifacts?artifactName=")) {
-        return mockArtifactResponse;
-      }
-    });
+    mockFetch.mockResolvedValue(mockArtifactResponse);
 
     // Call function and expect it to throw
     await expect(
@@ -411,9 +408,9 @@ describe("getAzurePipelineArtifact function", () => {
     // Setup fetch to return different responses for each call
     mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?artifactName=")) {
-        return mockArtifactResponse;
+        return Promise.resolve(mockArtifactResponse);
       } else {
-        return mockContentResponse;
+        return Promise.resolve(mockContentResponse);
       }
     });
 
@@ -476,9 +473,9 @@ describe("getAzurePipelineArtifact function", () => {
     // Setup fetch to return different responses for each call
     mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?artifactName=")) {
-        return mockArtifactResponse;
+        return Promise.resolve(mockArtifactResponse);
       } else {
-        return mockContentResponse;
+        return Promise.resolve(mockContentResponse);
       }
     });
 
@@ -590,12 +587,12 @@ describe("fetchFailedArtifact function", () => {
     // Setup fetch with a spy to capture the headers
     mockFetch.mockImplementation((url, options) => {
       // Verify that the custom headers are included in all requests
-      expect(options.headers).toEqual(customHeaders);
+      expect(options?.headers).toEqual(customHeaders);
 
       if (url.includes("artifacts?api-version") && !url.includes("artifactName=")) {
-        return mockListResponse;
+        return Promise.resolve(mockListResponse);
       } else {
-        return mockFetchResponse;
+        return Promise.resolve(mockFetchResponse);
       }
     });
 
@@ -657,9 +654,10 @@ describe("fetchFailedArtifact function", () => {
     // Setup fetch to return different responses for each call
     mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?api-version")) {
-        return mockListResponse;
-      } else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt2")) {
-        return mockFetchResponse;
+        return Promise.resolve(mockListResponse);
+      } else {
+        expect(url).toContain("artifactName=spec-gen-sdk-artifact-FailedAttempt2");
+        return Promise.resolve(mockFetchResponse);
       }
     });
 
@@ -754,9 +752,10 @@ describe("fetchFailedArtifact function", () => {
     // Setup fetch to return different responses for each call
     mockFetch.mockImplementation((url) => {
       if (url.includes("artifacts?api-version")) {
-        return mockListResponse;
-      } else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt3")) {
-        return mockFetchResponse;
+        return Promise.resolve(mockListResponse);
+      } else {
+        expect(url).toContain("artifactName=spec-gen-sdk-artifact-FailedAttempt3");
+        return Promise.resolve(mockFetchResponse);
       }
     });
 

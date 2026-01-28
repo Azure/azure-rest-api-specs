@@ -29,7 +29,7 @@ jobs:
         if: ${{ env.user-allowed == 'true' }}
         run: echo "Account '${{ github.event.pull_request.user.login }}' is allowed to update protected files"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         if: ${{ env.user-allowed != 'true' }}
         with:
           # Required since "HEAD^" is passed to Get-ChangedFiles
@@ -40,7 +40,7 @@ jobs:
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
 
-          $protectedFiles = @("cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", "eng/*")
+          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".vscode/*", "eng/*")
           $excludedFiles = @(".github/CODEOWNERS")
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
 

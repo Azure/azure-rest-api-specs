@@ -1446,7 +1446,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1455,6 +1466,11 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ProtectedItemResource"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Enable Protection on Azure IaasVm": {
             "$ref": "./examples/AzureIaasVm/ConfigureProtection.json"

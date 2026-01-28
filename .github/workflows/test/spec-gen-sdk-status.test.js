@@ -1,5 +1,7 @@
 import fs from "fs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { SdkName } from "../../shared/src/sdk-types.js";
+import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.js";
 import * as artifacts from "../src/artifacts.js";
 import * as github from "../src/github.js";
 import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.js";
@@ -31,21 +33,23 @@ describe("spec-gen-sdk-status", () => {
       .spyOn(artifacts, "getAzurePipelineArtifact")
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .mockImplementation(async ({ ado_build_id, ado_project_url, artifactName }) => {
-        return {
-          artifactData: JSON.stringify({
-            language: "test-language",
-            result: "succeeded",
-            isSpecGenSdkCheckRequired: true,
-          }),
-        };
+        return Promise.resolve({
+          artifactData: JSON.stringify(
+            createMockSpecGenSdkArtifactInfo({
+              language: SdkName.Go,
+              result: "succeeded",
+              isSpecGenSdkCheckRequired: true,
+            }),
+          ),
+        });
       });
 
     writeToActionsSummaryMock = vi
       .spyOn(github, "writeToActionsSummary")
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .mockImplementation(async (content, core) => {
+      .mockImplementation((content, core) => {
         // Implementation that just returns
-        return;
+        return Promise.resolve();
       });
 
     appendFileSyncMock = vi.spyOn(fs, "appendFileSync").mockImplementation(vi.fn());
@@ -122,11 +126,13 @@ describe("spec-gen-sdk-status", () => {
 
     // Mock getAzurePipelineArtifact to return success data
     getAzurePipelineArtifactMock.mockResolvedValue({
-      artifactData: JSON.stringify({
-        language: "test-language",
-        result: "succeeded",
-        isSpecGenSdkCheckRequired: true,
-      }),
+      artifactData: JSON.stringify(
+        createMockSpecGenSdkArtifactInfo({
+          language: SdkName.Go,
+          result: "succeeded",
+          isSpecGenSdkCheckRequired: true,
+        }),
+      ),
     });
 
     // Call the function
@@ -176,22 +182,26 @@ describe("spec-gen-sdk-status", () => {
     });
 
     // Mock getAzurePipelineArtifact to return mixed results
-    getAzurePipelineArtifactMock.mockImplementation(async ({ ado_build_id }) => {
+    getAzurePipelineArtifactMock.mockImplementation(({ ado_build_id }) => {
       if (ado_build_id === "123") {
         return {
-          artifactData: JSON.stringify({
-            language: "test-language-1",
-            result: "succeeded",
-            isSpecGenSdkCheckRequired: true,
-          }),
+          artifactData: JSON.stringify(
+            createMockSpecGenSdkArtifactInfo({
+              language: SdkName.Go,
+              result: "succeeded",
+              isSpecGenSdkCheckRequired: true,
+            }),
+          ),
         };
       } else {
         return {
-          artifactData: JSON.stringify({
-            language: "test-language-2",
-            result: "failed",
-            isSpecGenSdkCheckRequired: true,
-          }),
+          artifactData: JSON.stringify(
+            createMockSpecGenSdkArtifactInfo({
+              language: SdkName.Java,
+              result: "failed",
+              isSpecGenSdkCheckRequired: true,
+            }),
+          ),
         };
       }
     });
@@ -214,7 +224,7 @@ describe("spec-gen-sdk-status", () => {
         repo: "testRepo",
         sha: "testSha",
         state: "failure",
-        description: expect.stringContaining("failed for"),
+        description: /** @type {unknown} */ (expect.stringContaining("failed for")),
       }),
     );
   });
@@ -308,22 +318,26 @@ describe("spec-gen-sdk-status", () => {
     });
 
     // Mock getAzurePipelineArtifact to return mixed results
-    getAzurePipelineArtifactMock.mockImplementation(async ({ ado_build_id }) => {
+    getAzurePipelineArtifactMock.mockImplementation(({ ado_build_id }) => {
       if (ado_build_id === "123") {
         return {
-          artifactData: JSON.stringify({
-            language: "test-language-1",
-            result: "succeeded",
-            isSpecGenSdkCheckRequired: true,
-          }),
+          artifactData: JSON.stringify(
+            createMockSpecGenSdkArtifactInfo({
+              language: SdkName.Go,
+              result: "succeeded",
+              isSpecGenSdkCheckRequired: true,
+            }),
+          ),
         };
       } else {
         return {
-          artifactData: JSON.stringify({
-            language: "test-language-2",
-            result: "failed",
-            isSpecGenSdkCheckRequired: false, // Not required
-          }),
+          artifactData: JSON.stringify(
+            createMockSpecGenSdkArtifactInfo({
+              language: SdkName.Java,
+              result: "failed",
+              isSpecGenSdkCheckRequired: false, // Not required
+            }),
+          ),
         };
       }
     });

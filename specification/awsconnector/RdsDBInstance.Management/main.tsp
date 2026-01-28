@@ -202,6 +202,7 @@ model AwsRdsDBInstanceProperties {
   @doc("Specifies whether to manage the master user password with AWS Secrets Manager. For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide.*  Constraints:  +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.")
   manageMasterUserPassword?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The password for the master user. The password can include any printable ASCII character except '/', ''', or '@'.  *Amazon Aurora*  Not applicable. The password for the master user is managed by the DB cluster.  *RDS for Db2*  Must contain from 8 to 255 characters.  *RDS for MariaDB*  Constraints: Must contain from 8 to 41 characters.  *RDS for Microsoft SQL Server*  Constraints: Must contain from 8 to 128 characters.  *RDS for MySQL*  Constraints: Must contain from 8 to 41 characters.  *RDS for Oracle*  Constraints: Must contain from 8 to 30 characters.  *RDS for PostgreSQL*  Constraints: Must contain from 8 to 128 characters.")
   masterUserPassword?: string;
 
@@ -294,6 +295,7 @@ model AwsRdsDBInstanceProperties {
   @doc("Property tdeCredentialArn")
   tdeCredentialArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Property tdeCredentialPassword")
   tdeCredentialPassword?: string;
 

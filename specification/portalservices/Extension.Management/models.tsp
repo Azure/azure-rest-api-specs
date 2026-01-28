@@ -1,4 +1,3 @@
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.PortalServices;

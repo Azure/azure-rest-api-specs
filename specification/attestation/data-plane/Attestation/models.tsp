@@ -2,8 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 
-using Azure.ClientGenerator.Core;
-
 namespace AttestationService;
 
 /**
@@ -489,7 +487,6 @@ model JsonWebKeySet {
    * can choose to assign a meaning to the order for their purposes, if
    * desired.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   keys?: JsonWebKey[];
 }
 

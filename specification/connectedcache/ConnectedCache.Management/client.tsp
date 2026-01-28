@@ -23,6 +23,7 @@ using Microsoft.ConnectedCache;
   "MccCacheNodeAdditionalProperties",
   "csharp"
 );
+@@clientName(AdditionalCacheNodeProperties.osType, "OSType", "csharp");
 @@clientName(AdditionalCustomerProperties,
   "MccCustomerAdditionalProperties",
   "csharp"
@@ -40,8 +41,13 @@ using Microsoft.ConnectedCache;
   "csharp"
 );
 @@clientName(BgpConfiguration, "MccCacheNodeBgpConfiguration", "csharp");
+@@clientName(BgpConfiguration.asnToIpAddressMapping,
+  "asnToIPAddressMapping",
+  "csharp"
+);
 @@clientName(BgpReviewStateEnum, "MccCacheNodeBgpReviewState", "csharp");
 @@clientName(CacheNodeEntity, "MccCacheNodeEntity", "csharp");
+@@clientName(CacheNodeEntity.ipAddress, "IPAddress", "csharp");
 @@alternateType(CacheNodeEntity.fullyQualifiedResourceId,
   armResourceIdentifier,
   "csharp"
@@ -74,6 +80,7 @@ using Microsoft.ConnectedCache;
   "csharp"
 );
 @@clientName(ConfigurationState, "MccCacheNodeConfigurationState", "csharp");
+@@clientName(ConfigurationState.NotConfigured_Ip, "NotConfigured_IP", "csharp");
 @@clientName(CustomerEntity, "MccCustomerEntity", "csharp");
 @@alternateType(CustomerEntity.fullyQualifiedResourceId,
   armResourceIdentifier,

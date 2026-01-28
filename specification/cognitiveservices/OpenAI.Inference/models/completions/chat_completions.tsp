@@ -395,7 +395,7 @@ model PredictionContent {
    * can be returned much more quickly.
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility with existing clients."
   content: string | ChatMessageTextContentItem[];
 }
 

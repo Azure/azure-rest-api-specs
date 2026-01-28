@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2025-03-01-preview",
+    "diagnosticId": "applicationinsights",
+    "parameters": {
+      "properties": {
+        "alwaysLog": "allErrors",
+        "backend": {
+          "response": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          },
+          "request": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          }
+        },
+        "frontend": {
+          "response": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          },
+          "request": {
+            "body": {
+              "bytes": 512
+            },
+            "headers": [
+              "Content-type"
+            ]
+          }
+        },
+        "loggerId": "/workspaces/wks1/loggers/applicationinsights",
+        "sampling": {
+          "percentage": 50,
+          "samplingType": "fixed"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "applicationinsights",
+        "type": "Microsoft.ApiManagement/service/workspaces/diagnostics",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/diagnostics/applicationinsights",
+        "properties": {
+          "alwaysLog": "allErrors",
+          "backend": {
+            "response": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            },
+            "request": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            }
+          },
+          "frontend": {
+            "response": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            },
+            "request": {
+              "body": {
+                "bytes": 512
+              },
+              "headers": [
+                "Content-type"
+              ]
+            }
+          },
+          "httpCorrelationProtocol": "Legacy",
+          "logClientIp": true,
+          "loggerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/loggers/aisamplingtest",
+          "sampling": {
+            "percentage": 50,
+            "samplingType": "fixed"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "WorkspaceDiagnostic_Update",
+  "title": "ApiManagementUpdateWorkspaceDiagnostic"
+}

@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "backendId": "carbonawareloadbalancerbackend",
+    "parameters": {
+      "properties": {
+        "type": "Pool",
+        "pool": {
+          "services": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sustainable-backend-europe-north",
+              "preferredCarbonEmission": "Medium",
+              "priority": 1,
+              "weight": 1
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
+              "priority": 1,
+              "weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "carbonawareloadbalancerbackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/carbonawareloadbalancerbackend",
+        "properties": {
+          "type": "Pool",
+          "pool": {
+            "services": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sustainable-backend-europe-north",
+                "preferredCarbonEmission": "Medium",
+                "priority": 1,
+                "weight": 1
+              },
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
+                "priority": 1,
+                "weight": 1
+              }
+            ]
+          },
+          "title": null,
+          "url": null,
+          "protocol": null
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "carbonawareloadbalancerbackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/carbonawareloadbalancerbackend",
+        "properties": {
+          "type": "Pool",
+          "pool": {
+            "services": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sustainable-backend-europe-north",
+                "preferredCarbonEmission": "Medium",
+                "priority": 1,
+                "weight": 1
+              },
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
+                "priority": 1,
+                "weight": 1
+              }
+            ]
+          },
+          "title": null,
+          "url": null,
+          "protocol": null
+        }
+      }
+    }
+  },
+  "operationId": "Backend_CreateOrUpdate",
+  "title": "ApiManagementCreateBackendWithCarbonAwareLoadBalancer"
+}

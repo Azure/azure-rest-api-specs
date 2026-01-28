@@ -1,8 +1,8 @@
 import { readdir } from "fs/promises";
-import { resolve } from "path";
 import { inspect } from "util";
 import { flatMapAsync, mapAsync } from "./array.js";
 import { readme } from "./changed-files.js";
+import { resolveCached, resolvePairCached } from "./path.js";
 import { Readme } from "./readme.js";
 import { SpecModelError } from "./spec-model-error.js";
 
@@ -26,6 +26,7 @@ import { SpecModelError } from "./spec-model-error.js";
 /**
  * @typedef {Object} ToJSONOptions
  * @prop {boolean} [embedErrors]
+ * @prop {boolean} [includeOperations] Whether to include the operations in each swagger. Increases runtime about 20x, from 6s to 120s for whole specs repo.
  * @prop {boolean} [includeRefs]
  * @prop {boolean} [relativePaths]
  */
@@ -52,7 +53,7 @@ export class SpecModel {
   constructor(folder, options = {}) {
     const { logger } = options;
 
-    const resolvedFolder = resolve(folder);
+    const resolvedFolder = resolveCached(folder);
 
     const cachedSpecModel = specModelCache.get(resolvedFolder);
     if (cachedSpecModel !== undefined) {
@@ -78,7 +79,7 @@ export class SpecModel {
    * @returns {Promise<Map<string, Map<string, Tag>>>} map of readme paths to (map of tag names to Tag objects)
    */
   async getAffectedReadmeTags(swaggerPath) {
-    const swaggerPathResolved = resolve(swaggerPath);
+    const swaggerPathResolved = resolveCached(swaggerPath);
 
     /** @type {Map<string, Map<string, Tag>>} */
     const affectedReadmeTags = new Map();
@@ -117,7 +118,7 @@ export class SpecModel {
    * @returns {Promise<Map<string, Swagger>>} map of swagger paths to Swagger objects
    */
   async getAffectedSwaggers(swaggerPath) {
-    const swaggerPathResolved = resolve(swaggerPath);
+    const swaggerPathResolved = resolveCached(swaggerPath);
 
     /** @type {Map<string, Swagger>} */
     const affectedSwaggers = new Map();
@@ -201,7 +202,7 @@ export class SpecModel {
       const readmePaths = files
         // filter before resolve to (slightly) improve perf, since filter only needs filename
         .filter(readme)
-        .map((p) => resolve(this.#folder, p));
+        .map((p) => resolvePairCached(this.#folder, p));
 
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
 

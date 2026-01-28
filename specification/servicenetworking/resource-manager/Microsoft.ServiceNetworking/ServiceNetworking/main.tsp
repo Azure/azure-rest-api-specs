@@ -77,8 +77,7 @@ model Association is TrackedResource<AssociationProperties> {
 
 /** The type used for update operations of the Association. */
 model AssociationUpdate {
-  /** Resource tags. */
-  tags?: TrackedResource.tags;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** The resource-specific properties for this resource. */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"

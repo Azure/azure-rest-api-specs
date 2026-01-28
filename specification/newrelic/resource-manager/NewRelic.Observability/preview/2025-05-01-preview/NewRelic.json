@@ -1310,6 +1310,7 @@
             "description": "The configuration name. Only 'default' value is supported.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "enum": [
               "default"
             ],
@@ -1376,6 +1377,7 @@
             "description": "The configuration name. Only 'default' value is supported.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "enum": [
               "default"
             ],
@@ -1473,6 +1475,7 @@
             "description": "The configuration name. Only 'default' value is supported.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "enum": [
               "default"
             ],
@@ -1567,6 +1570,7 @@
             "description": "The configuration name. Only 'default' value is supported.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "enum": [
               "default"
             ],
@@ -1786,7 +1790,14 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Azure operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."

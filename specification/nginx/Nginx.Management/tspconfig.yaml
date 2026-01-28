@@ -11,12 +11,9 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/swagger.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Nginx"
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Nginx"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-nginx"
     namespace: "azure.mgmt.nginx"
@@ -31,15 +28,15 @@ options:
   "@azure-tools/typespec-ts":
     service-dir: sdk/nginx
     emitter-output-dir: "{output-dir}/{service-dir}/arm-nginx"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
+    compatibility-lro: true
     package-details:
       name: "@azure/arm-nginx"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/nginx"
     emitter-output-dir: "{output-dir}/{service-dir}/armnginx"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnginx"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnginx/v3"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

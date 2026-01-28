@@ -1,4 +1,4 @@
-import { sdkLabels } from "../../shared/src/sdk-types.js";
+import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
 import { LabelAction } from "./label.js";
@@ -72,12 +72,14 @@ export async function getLabelAndActionImpl({ details_url, core, retryOptions = 
   } else {
     core.info(`Artifact content: ${result.artifactData}`);
     // Parse the JSON data
-    const specGenSdkArtifactInfo = JSON.parse(result.artifactData);
+    const specGenSdkArtifactInfo = SpecGenSdkArtifactInfoSchema.parse(
+      JSON.parse(result.artifactData),
+    );
     const labelActionText = specGenSdkArtifactInfo.labelAction;
 
     head_sha = specGenSdkArtifactInfo.headSha;
 
-    issue_number = parseInt(specGenSdkArtifactInfo.prNumber, 10);
+    issue_number = parseInt(specGenSdkArtifactInfo.prNumber ?? "", 10);
     if (!issue_number) {
       core.warning(
         `No PR number found in the artifact '${artifactName}' with details_url:${details_url}.`,

@@ -11,13 +11,10 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-quota"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "azure-resourcemanager-quota"
-    enable-bicep-serialization: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.Quota"
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-quota"
     namespace: "azure.mgmt.quota"
@@ -41,7 +38,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/quota"
     emitter-output-dir: "{output-dir}/{service-dir}/armquota"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armquota"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armquota/v2"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

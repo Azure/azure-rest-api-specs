@@ -6,11 +6,10 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./CapacityPool.tsp";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
@@ -25,6 +24,7 @@ model Volume is Azure.ResourceManager.TrackedResource<VolumeProperties, false> {
     SegmentName = "volumes",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
@@ -54,6 +54,7 @@ model VolumeProperties {
   /**
    * A unique file path for the volume. Used when creating mount targets
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark with @secret if this value should be kept private"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
@@ -68,7 +69,19 @@ model VolumeProperties {
   /**
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
+  @removed(Versions.v2025_09_01_preview)
+  @renamedFrom(Versions.v2025_09_01_preview, "usageThreshold")
   @maxValue(2638827906662400)
+  @minValue(53687091200)
+  usageThresholdOld: int64 = 107374182400;
+
+  /**
+   * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB.
+   * For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB.
+   * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
+   */
+  @added(Versions.v2025_09_01_preview)
+  @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
 
@@ -159,7 +172,7 @@ model VolumeProperties {
    * List of mount targets
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["fileSystemId"])
+  @identifiers(#["fileSystemId"])
   mountTargets?: MountTargetProperties[];
 
   /**
@@ -255,6 +268,11 @@ model VolumeProperties {
    * Specifies the type of LDAP server for a given NFS volume.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -371,7 +389,7 @@ model VolumeProperties {
   /**
    * Application specific placement rules for the particular volume
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   placementRules?: PlacementKeyValuePairs[];
 
   /**
@@ -393,6 +411,15 @@ model VolumeProperties {
   isLargeVolume?: boolean = false;
 
   /**
+   * Specifies the type of the Large Volume. When set to 'LargeVolume', the large volume is created with standard configuration.
+   * If it is set to 'ExtraLargeVolume7Dot2PiB', the extra large volume is created with higher capacity limit 7.2PiB with cool access enabled,
+   * delivering higher capacity limit with lower costs.
+   */
+  @added(Versions.v2025_09_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  largeVolumeType?: LargeVolumeType;
+
+  /**
    * Id of the snapshot or backup that the volume is restored from.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
@@ -410,7 +437,18 @@ model VolumeProperties {
    * Language supported for volume.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   language?: VolumeLanguage;
+
+  /**
+   * Specifies whether the volume operates in Breakthrough Mode.
+   */
+  @added(Versions.v2025_09_01_preview)
+  breakthroughMode?: BreakthroughMode;
 }
 
 /**
@@ -433,6 +471,12 @@ union LdapServerType {
 /**
  * Language supported for volume.
  */
+@added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 union VolumeLanguage {
   string,
 
@@ -790,7 +834,7 @@ model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ExportPolicyRule[];
 }
 
@@ -930,6 +974,12 @@ model VolumePropertiesDataProtection {
    * VolumeRelocation properties
    */
   volumeRelocation?: VolumeRelocationProperties;
+
+  /**
+   * Advanced Ransomware Protection settings
+   */
+  @added(Versions.v2025_09_01_preview)
+  ransomwareProtection?: RansomwareProtectionSettings;
 }
 
 /**
@@ -1002,13 +1052,18 @@ model ReplicationObject {
    * A list of destination replications
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   destinationReplications?: DestinationReplication[];
 
   /**
    * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
 
@@ -1016,6 +1071,11 @@ model ReplicationObject {
    * Contains human-readable instructions on what the next step is to finish the external replication setup.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
 
@@ -1023,6 +1083,11 @@ model ReplicationObject {
    * The mirror state property describes the current status of data replication for a replication. It provides insight into whether the data is actively being mirrored, if the replication process has been paused, or if it has yet to be initialized.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
 
@@ -1030,6 +1095,11 @@ model ReplicationObject {
    * The status of the Volume Replication
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
 }
@@ -1037,6 +1107,12 @@ model ReplicationObject {
 /**
  * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
  */
+@added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 union ExternalReplicationSetupStatus {
   string,
 
@@ -1208,7 +1284,19 @@ model VolumePatchProperties {
   /**
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
+  @removed(Versions.v2025_09_01_preview)
+  @renamedFrom(Versions.v2025_09_01_preview, "usageThreshold")
   @maxValue(2638827906662400)
+  @minValue(53687091200)
+  usageThreshold20250901?: int64;
+
+  /**
+   * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB.
+   * For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB.
+   * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
+   */
+  @added(Versions.v2025_09_01_preview)
+  @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
 
@@ -1302,7 +1390,7 @@ model VolumePatchPropertiesExportPolicy {
   /**
    * Export policy rule
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleIndex"])
+  @identifiers(#["ruleIndex"])
   rules?: ExportPolicyRule[];
 }
 
@@ -1319,6 +1407,12 @@ model VolumePatchPropertiesDataProtection {
    * Snapshot properties.
    */
   snapshot?: VolumeSnapshotProperties;
+
+  /**
+   * Advanced Ransomware Protection updatable settings
+   */
+  @added(Versions.v2025_09_01_preview)
+  ransomwareProtection?: RansomwareProtectionPatchSettings;
 }
 
 /**
@@ -1976,6 +2070,7 @@ union EnableSubvolumes {
 /**
  * The status of the replication
  */
+@clientName("NetAppMirrorState", "csharp")
 union MirrorState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1987,14 +2082,58 @@ union MirrorState {
 }
 
 /**
+ * Specifies the type of the Large Volume. When set to 'LargeVolume', the large volume is created with standard configuration.
+ * If it is set to 'ExtraLargeVolume7Dot2PiB', the extra large volume is created with higher capacity limit 7.2PiB with cool access enabled,
+ * delivering higher capacity limit with lower costs.
+ */
+union LargeVolumeType {
+  string,
+
+  /**
+   * The large volume is created with standard configuration that provides standard performance and throughput.
+   */
+  LargeVolume: "LargeVolume",
+
+  /**
+   * The extra large volume is created with higher volume capacity limit 7.2PiB with cool access enabled, delivering higher capacity limit with lower costs
+   */
+  ExtraLargeVolume7Dot2PiB: "PremExtraLargeVolume7Dot2PiB",
+}
+
+/**
+ * Specifies whether the volume operates in Breakthrough Mode. When set to 'Enabled', the volume runs on the resources configured for this mode,
+ * delivering improved performance and higher throughput. If set to 'Disabled' or omitted, the volume uses the basic configuration. This feature
+ * is available only in regions where it’s been configured and first-time users must finish onboarding prior to using Breakthrough Mode.
+ */
+@added(Versions.v2025_09_01_preview)
+union BreakthroughMode {
+  string,
+
+  /**
+   * The volume runs on the resources configured for Breakthrough mode which ensures consistent high performance and a higher throughput.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The volume uses configuration that provides basic performance and throughput.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Quota Report for volume
  */
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 model ListQuotaReportResponse {
   /**
    * List of quota reports
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: QuotaReport[];
 }
 
@@ -2002,6 +2141,11 @@ model ListQuotaReportResponse {
  * Quota report record properties
  */
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 model QuotaReport {
   /**
    * Type of quota
@@ -2032,6 +2176,80 @@ model QuotaReport {
    * Flag to indicate whether the quota is derived from default quota.
    */
   isDerivedQuota?: boolean;
+}
+
+/**
+ * Advanced Ransomware Protection reports (ARP) settings
+ */
+@added(Versions.v2025_09_01_preview)
+model RansomwareProtectionSettings {
+  /**
+   * The desired value of the Advanced Ransomware Protection feature state available to the volume
+   */
+  desiredRansomwareProtectionState?: DesiredRansomwareProtectionState;
+
+  /**
+   * The actual state of the Advanced Ransomware Protection feature currently active on the volume
+   */
+  @visibility(Lifecycle.Read)
+  actualRansomwareProtectionState?: ActualRansomwareProtectionState;
+}
+
+/**
+ * Advanced Ransomware Protection reports (ARP) updatable settings
+ */
+@added(Versions.v2025_09_01_preview)
+model RansomwareProtectionPatchSettings {
+  /**
+   * The desired value of the ARP feature state available to the volume
+   */
+  desiredRansomwareProtectionState?: DesiredRansomwareProtectionState;
+}
+
+/**
+ * The desired state of the Advanced Ransomware Protection feature
+ */
+@added(Versions.v2025_09_01_preview)
+union DesiredRansomwareProtectionState {
+  string,
+
+  /**
+   * Advanced Ransomware Protection is disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Advanced Ransomware Protection is enabled
+   */
+  Enabled: "Enabled",
+}
+
+/**
+ * The actual state of the Advanced Ransomware Protection feature
+ */
+@added(Versions.v2025_09_01_preview)
+union ActualRansomwareProtectionState {
+  string,
+
+  /**
+   * Advanced Ransomware Protection is disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Advanced Ransomware Protection is enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Advanced Ransomware Protection is in learning mode
+   */
+  Learning: "Learning",
+
+  /**
+   * Advanced Ransomware Protection is in paused state
+   */
+  Paused: "Paused",
 }
 
 @@visibility(Azure.ResourceManager.AvailabilityZonesProperty.zones,
@@ -2402,6 +2620,11 @@ interface Volumes {
   >;
 
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   listQuotaReport is ArmResourceActionAsync<
     Volume,
     void,

@@ -1456,6 +1456,12 @@ model AppAttachPackageProperties {
    * Field that can be populated with custom data and filtered on in list GET calls
    */
   customData?: string;
+
+  /**
+   * DeploymentScope type for AppAttachPackage.
+   */
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -2286,6 +2292,13 @@ model ApplicationGroupProperties {
    */
   @added(Versions.v2025_08_01_preview)
   oboTenantId?: string;
+
+  /**
+   * DeploymentScope type for ApplicationGroup.
+   */
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -2629,6 +2642,7 @@ model RegistrationInfo {
   /**
    * The registration token base64 encoded string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token?: string;
 
   /**
@@ -3042,6 +3056,12 @@ model WorkspaceProperties {
    */
   @added(Versions.v2025_08_01_preview)
   oboTenantId?: string;
+
+  /**
+   * DeploymentScope type for Workspace.
+   */
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -3853,6 +3873,7 @@ model RegistrationTokenMinimal {
   /**
    * The registration token base64 encoded string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token?: string;
 }
 

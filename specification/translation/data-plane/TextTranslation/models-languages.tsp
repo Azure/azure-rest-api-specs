@@ -4,6 +4,7 @@ import "./models-shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace TextTranslation;
@@ -51,16 +52,36 @@ model GetSupportedLanguagesResult {
     To make subsequent requests more efficient, the client may send the `ETag` value in an 
     `If-None-Match` header field.
     """)
-  etag: string;
+  etag: eTag;
 
   @doc("Languages that support translate API.")
+  @renamedFrom(APIVersion.v2025_10_01_preview, "translation")
+  @removed(APIVersion.v2025_10_01_preview)
+  translationV3?: Record<TranslationLanguage>;
+
+  @doc("Languages that support transliteration API.")
+  @renamedFrom(APIVersion.v2025_10_01_preview, "transliteration")
+  @removed(APIVersion.v2025_10_01_preview)
+  transliterationV3?: Record<TransliterationLanguage>;
+
+  @doc("Languages that support translate API.")
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
   translation?: Record<TranslationLanguage>;
 
   @doc("Languages that support transliteration API.")
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
   transliteration?: Record<TransliterationLanguage>;
 
   @doc("Languages that support dictionary API.")
+  @removed(APIVersion.v2025_10_01_preview)
   dictionary?: Record<SourceDictionaryLanguage>;
+
+  @doc("LLM models supported.")
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  models?: string[];
 }
 
 alias BaseLanguage = {
@@ -80,6 +101,11 @@ model TranslationLanguage {
 
   @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
   dir: LanguageDirectionality;
+
+  @doc("LLM models supported for translation.")
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  models: string[];
 }
 
 @doc("""
@@ -91,6 +117,13 @@ model TransliterationLanguage {
   ...BaseLanguage;
 
   @doc("List of scripts to convert from.")
+  @removed(APIVersion.v2025_10_01_preview)
+  @renamedFrom(APIVersion.v2025_10_01_preview, "scripts")
+  scriptsV3: TransliterableScript[];
+
+  @doc("List of scripts to convert from.")
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
   scripts: TransliterableScript[];
 }
 
@@ -116,6 +149,7 @@ model LanguageScript {
 }
 
 @doc("Properties ot the source dictionary language")
+@removed(APIVersion.v2025_10_01_preview)
 model SourceDictionaryLanguage {
   ...BaseLanguage;
 
@@ -127,6 +161,7 @@ model SourceDictionaryLanguage {
 }
 
 @doc("Properties of the target dictionary language")
+@removed(APIVersion.v2025_10_01_preview)
 model TargetDictionaryLanguage {
   ...BaseLanguage;
 

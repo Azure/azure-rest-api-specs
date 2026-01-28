@@ -1,25 +1,16 @@
 # Widget
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for Widget.
 
-## Getting Started
-
-To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
-
-> `autorest readme.md`
-> To see additional help and options, run:
-
-> `autorest --help`
-> For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
-
----
+This is the AutoRest configuration file for Widget.
 
 ## Configuration
 
 ### Basic Information
 
-These are the global settings.
+This is a TypeSpec project so we only want to readme to default the default tag and point to the outputted swagger file.
+This is used for some tools such as doc generation and swagger apiview generation it isn't used for SDK code gen as we
+use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: arm

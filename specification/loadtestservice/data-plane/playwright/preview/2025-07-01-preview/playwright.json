@@ -35,11 +35,22 @@
     {
       "OAuth2Auth": [
         "https://playwright.microsoft.com/.default"
+      ],
+      "OAuth2Auth_": [
+        "https://playwright.microsoft.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
     "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://playwright.microsoft.com/.default": ""
+      }
+    },
+    "OAuth2Auth_": {
       "type": "oauth2",
       "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
@@ -71,6 +82,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -140,6 +158,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -204,6 +229,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "resource",
@@ -290,6 +322,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -380,6 +419,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -388,7 +434,6 @@
             "headers": {
               "location": {
                 "type": "string",
-                "format": "uri",
                 "description": "The redirect target URL for executing Playwright scripts on remote browsers."
               },
               "x-ms-client-request-id": {
@@ -438,6 +483,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -510,6 +562,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "resource",

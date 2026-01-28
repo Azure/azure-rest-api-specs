@@ -13,21 +13,17 @@ using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Legacy {
   interface ComputeOperations {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LEGACY - DO NOT COPY - FIX ME"
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
     @tag("Operations")
     @autoRoute
-    @Azure.ResourceManager.Private.armUpdateProviderNamespace
     @doc("List the operations for the provider")
     @segment("operations")
     @get
     @list
     list(
       ...ApiVersionParameter,
-
-      @path
-      @segment("providers")
-      @doc("The provider namespace (this parameter will not show up in operations).")
-      provider: "Microsoft.ThisWillBeReplaced",
+      ...Azure.ResourceManager.Legacy.Provider,
     ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Microsoft.Compute.CloudError;
   }
 
@@ -350,44 +346,44 @@ namespace Azure.ResourceManager.Legacy {
       @bodyRoot
       body: Request,
     ): Response | ErrorType;
-
-    /**
-     * A resource list operation, at the scope of the resource's parent
-     * @template Resource the resource being patched
-     * @template BaseParameters Optional. Allows overriding the operation parameters
-     * @template ParentName Optional. The name of the parent resource
-     * @template ParentFriendlyName Optional. The friendly name of the parent resource
-     * @template Parameters Optional. Additional parameters after the path parameters
-     * @template Response Optional. The success response for the list operation
-     * @template Error Optional. The error response, if non-standard.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-    @get
-    @autoRoute
-    @list
-    @listsResource(Resource)
-    @segmentOf(Resource)
-    @Private.armRenameListByOperation(
-      Resource,
-      ParentName,
-      ParentFriendlyName,
-      false
-    ) // This must come before @armResourceList!
-    @armResourceList(Resource)
-    ArmResourceListByParent<
-      Resource extends {},
-      BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
-      ParentName extends valueof string = "",
-      ParentFriendlyName extends valueof string = "",
-      Parameters extends {} = {},
-      Response extends {} = ArmResponse<ResourceListResult<Resource>>,
-      Error extends {} = Microsoft.Compute.CloudError
-    > is Azure.ResourceManager.Foundations.ArmReadOperation<
-      ResourceParentParameters<Resource, BaseParameters> & Parameters,
-      Response,
-      Error
-    >;
   }
+
+  /**
+   * A resource list operation, at the scope of the resource's parent
+   * @template Resource the resource being patched
+   * @template BaseParameters Optional. Allows overriding the operation parameters
+   * @template ParentName Optional. The name of the parent resource
+   * @template ParentFriendlyName Optional. The friendly name of the parent resource
+   * @template Parameters Optional. Additional parameters after the path parameters
+   * @template Response Optional. The success response for the list operation
+   * @template Error Optional. The error response, if non-standard.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @get
+  @autoRoute
+  @list
+  @listsResource(Resource)
+  @segmentOf(Resource)
+  @Private.armRenameListByOperation(
+    Resource,
+    ParentName,
+    ParentFriendlyName,
+    false
+  ) // This must come before @armResourceList!
+  @armResourceList(Resource)
+  op ComputeArmResourceListByParent<
+    Resource extends {},
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+    ParentName extends valueof string = "",
+    ParentFriendlyName extends valueof string = "",
+    Parameters extends {} = {},
+    Response extends {} = ArmResponse<ResourceListResult<Resource>>,
+    Error extends {} = Microsoft.Compute.CloudError
+  > is Azure.ResourceManager.Foundations.ArmReadOperation<
+    ResourceParentParameters<Resource, BaseParameters> & Parameters,
+    Response,
+    Error
+  >;
 
   alias BasePath = {
     ...ApiVersionParameter;

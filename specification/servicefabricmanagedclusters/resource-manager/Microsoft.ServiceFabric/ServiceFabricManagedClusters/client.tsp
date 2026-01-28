@@ -5,6 +5,15 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceFabric;
 
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model WritableSubResource {
+    /** the id */
+    id?: armResourceIdentifier;
+  }
+}
+
 @@clientName(Microsoft.ServiceFabric,
   "ServiceFabricManagedClustersManagementClient",
   "python"
@@ -21,6 +30,7 @@ using Microsoft.ServiceFabric;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VMSSExtension.properties);
 
 @@clientName(ApplicationTypes.createOrUpdate::parameters.resource,
@@ -28,6 +38,7 @@ using Microsoft.ServiceFabric;
 );
 @@clientName(ApplicationTypes.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationTypeResource.properties
 );
 
@@ -38,6 +49,7 @@ using Microsoft.ServiceFabric;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationTypeVersionResource.properties
 );
 
@@ -45,12 +57,18 @@ using Microsoft.ServiceFabric;
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientName(Applications.resumeUpgrade::parameters.body, "parameters");
 @@clientName(Applications.updateUpgrade::parameters.body, "parameters");
+@@clientName(Applications.fetchHealth::parameters.body, "parameters");
+@@clientName(Applications.restartDeployedCodePackage::parameters.body,
+  "parameters"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationResource.properties
 );
 
 @@clientName(Services.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Services.update::parameters.properties, "parameters");
+@@clientName(Services.restartReplica::parameters.body, "parameters");
 
 @@clientName(ManagedClusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedClusters.update::parameters.properties, "parameters");
@@ -62,9 +80,11 @@ using Microsoft.ServiceFabric;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedCluster.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedClusterCodeVersionResult.properties
 );
 
@@ -80,6 +100,7 @@ using Microsoft.ServiceFabric;
 @@clientName(NodeTypes.startFaultSimulation::parameters.body, "parameters");
 @@clientName(NodeTypes.stopFaultSimulation::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NodeType.properties);
 
 @@Azure.ResourceManager.identifiers(FaultSimulationListResult.value,
@@ -141,6 +162,11 @@ using Microsoft.ServiceFabric;
  */
 @@scope(Operations.list, "!csharp");
 
+@@alternateType(Azure.ResourceManager.CommonTypes.TrackedResource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+
 @@clientName(ManagedAzResiliencyStatus.get,
   "GetManagedAzResiliencyStatus",
   "csharp"
@@ -162,10 +188,31 @@ using Microsoft.ServiceFabric;
   "GetManagedAzResiliencyStatus",
   "csharp"
 );
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ApplicationResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ApplicationResource, "ServiceFabricManagedApplication", "csharp");
+@@alternateType(ApplicationResource.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ApplicationTypeResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ApplicationTypeResource,
   "ServiceFabricManagedApplicationType",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ApplicationTypeVersionResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 @@clientName(ApplicationTypeVersionResource,
@@ -176,10 +223,17 @@ using Microsoft.ServiceFabric;
   "ApplicationUserAssignedIdentityInfo",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedClusterCodeVersionResult,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
 @@clientName(ManagedClusterCodeVersionResult,
   "ServiceFabricManagedClusterVersion",
   "csharp"
 );
+@@clientName(ManagedClusterVersionDetails.osType, "OSType", "csharp");
 @@clientName(ManagedClusterVersionDetails.supportExpiryUtc,
   "VersionSupportExpireOn",
   "csharp"
@@ -207,6 +261,10 @@ using Microsoft.ServiceFabric;
   "IsHttpGatewayExclusiveAuthModeEnabled",
   "csharp"
 );
+@@clientName(ManagedClusterProperties.ipTags, "IPTags", "csharp");
+@@clientName(ManagedClusterProperties.ipv4Address, "IPv4Address", "csharp");
+@@clientName(ManagedClusterProperties.ipv6Address, "IPv6Address", "csharp");
+@@clientName(ManagedClusterProperties.VMImage, "VmImage", "csharp");
 
 @@clientName(OsType, "ServiceFabricManagedClusterOSType", "csharp");
 @@clientName(Subnet, "ManagedClusterSubnet", "csharp");
@@ -228,6 +286,7 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(IpTag, "ManagedClusterIPTag", "csharp");
+@@clientName(IpTag.ipTagType, "IPTagType", "csharp");
 @@clientName(LoadBalancingRule, "ManagedClusterLoadBalancingRule", "csharp");
 @@clientName(NetworkSecurityRule,
   "ServiceFabricManagedNetworkSecurityRule",
@@ -247,6 +306,10 @@ using Microsoft.ServiceFabric;
 );
 @@clientName(ServiceEndpoint, "ManagedClusterServiceEndpoint", "csharp");
 @@clientName(NodeType, "ServiceFabricManagedNodeType", "csharp");
+@@clientName(NodeTypeProperties,
+  "ServiceFabricManagedNodeTypeProperties",
+  "csharp"
+);
 @@clientName(NodeTypeProperties.zoneBalance, "IsZoneBalanceEnabled", "csharp");
 @@clientName(NodeTypeProperties.dataDiskSizeGB, "DataDiskSizeInGB", "csharp");
 @@clientName(NodeTypeProperties.enableAcceleratedNetworking,
@@ -279,12 +342,23 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(VaultSecretGroup, "NodeTypeVaultSecretGroup", "csharp");
+@@alternateType(VaultSecretGroup.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
 @@clientName(VaultCertificate, "NodeTypeVaultCertificate", "csharp");
 @@clientName(DiskType, "ServiceFabricManagedDataDiskType", "csharp");
 @@clientName(FrontendConfiguration, "NodeTypeFrontendConfiguration", "csharp");
+@@clientName(FrontendConfiguration.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NodeTypeActionParameters, "NodeTypeActionContent", "csharp");
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
 @@clientName(FaultSimulationContent.force, "IsForced", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ServiceResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ServiceResource, "ServiceFabricManagedService", "csharp");
 @@clientName(ServiceResourceProperties, "ManagedServiceProperties", "csharp");
 @@clientName(ServiceResourcePropertiesBase,
@@ -339,7 +413,18 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(ServicePlacementPolicy, "ManagedServicePlacementPolicy", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedVMSize,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
 @@clientName(ManagedVMSize, "ServiceFabricManagedUnsupportedVmSize", "csharp");
+@@clientName(ManagedVMSizesResult,
+  "ServiceFabricManagedUnsupportedVmSizeListResult",
+  "csharp"
+);
+@@clientName(VMSize, "ServiceFabricManagedVmSizeProperties", "csharp");
 @@clientName(AddRemoveIncrementalNamedPartitionScalingMechanism,
   "NamedPartitionAddOrRemoveScalingMechanism",
   "csharp"
@@ -352,8 +437,10 @@ using Microsoft.ServiceFabric;
   "IsSecureBootEnabled",
   "csharp"
 );
+@@clientName(NodeTypeProperties.isSpotVM, "IsSpotVm", "csharp");
 @@clientName(EvictionPolicyType, "SpotNodeVmEvictionPolicyType", "csharp");
 @@clientName(SecurityType, "ServiceFabricManagedClusterSecurityType", "csharp");
+@@clientName(SecurityType.ConfidentialVM, "ConfidentialVm", "csharp");
 @@clientName(UpdateType, "ServiceFabricManagedClusterUpdateType", "csharp");
 @@clientName(ClusterHealthPolicy, "ManagedClusterHealthPolicy", "csharp");
 @@clientName(ClusterUpgradePolicy, "ManagedClusterUpgradePolicy", "csharp");
@@ -381,6 +468,7 @@ using Microsoft.ServiceFabric;
   "ServiceFabricManagedClusterPublicIPAddressConfiguration",
   "csharp"
 );
+@@clientName(PublicIPAddressConfiguration.ipTags, "IPTags", "csharp");
 @@clientName(ManagedMaintenanceWindowStatusContent.lastWindowStatusUpdateAtUTC,
   "LastWindowStatusUpdatedOn",
   "csharp"
@@ -406,6 +494,25 @@ using Microsoft.ServiceFabric;
 
 @@clientName(SecurityEncryptionType,
   "NodeTypeSecurityEncryptionType",
+  "csharp"
+);
+@@clientName(SecurityEncryptionType.DiskWithVMGuestState,
+  "DiskWithVmGuestState",
+  "csharp"
+);
+@@clientName(SecurityEncryptionType.VMGuestStateOnly,
+  "VmGuestStateOnly",
+  "csharp"
+);
+@@clientName(HealthFilter, "ApplicationFetchHealthFilter ", "csharp");
+@@clientName(RestartReplicaRequest,
+  "ManagedServiceRestartReplicaContent ",
+  "csharp"
+);
+@@clientName(RestartReplicaRequest.timeout, "TimeoutInSeconds", "csharp");
+@@clientName(RestartKind, "ManagedServiceRestartKind", "csharp");
+@@clientName(ApplicationFetchHealthRequest.timeout,
+  "TimeoutInSeconds",
   "csharp"
 );
 
@@ -464,6 +571,10 @@ using Microsoft.ServiceFabric;
 @@alternateType(ClientCertificate.issuerThumbprint, unknown, "csharp");
 @@alternateType(VMSSExtensionProperties.settings, unknown, "csharp");
 @@alternateType(VMSSExtensionProperties.protectedSettings, unknown, "csharp");
+@@clientName(VmManagedIdentity.userAssignedIdentities,
+  "UserAssignedIdentities",
+  "csharp"
+);
 @@alternateType(VmManagedIdentity.userAssignedIdentities,
   armResourceIdentifier[],
   "csharp"
@@ -474,3 +585,80 @@ using Microsoft.ServiceFabric;
 );
 @@alternateType(ClusterMonitoringPolicy.upgradeDomainTimeout, string, "csharp");
 @@alternateType(ClusterMonitoringPolicy.upgradeTimeout, string, "csharp");
+@@alternateType(Microsoft.ServiceFabric.SubResource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@clientName(AdditionalNetworkInterfaceConfiguration.ipConfigurations,
+  "IPConfigurations",
+  "csharp"
+);
+@@clientName(ManagedMaintenanceWindowStatus.get,
+  "GetManagedMaintenanceWindowStatus",
+  "csharp"
+);
+@@clientName(ManagedClusterVersion.list, "GetManagedClusterVersions", "csharp");
+@@clientName(ManagedClusterVersion.listByEnvironment,
+  "GetManagedClusterVersionsByEnvironment",
+  "csharp"
+);
+@@clientName(ManagedClusterVersion.get, "GetManagedClusterVersion", "csharp");
+@@clientName(RuntimeUpdateApplicationUpgradeParameters,
+  "RuntimeUpdateApplicationUpgradeContent",
+  "csharp"
+);
+@@clientName(RestartDeployedCodePackageRequest,
+  "RestartDeployedCodePackageContent",
+  "csharp"
+);
+@@clientName(RuntimeResumeApplicationUpgradeParameters,
+  "RuntimeResumeApplicationUpgradeContent",
+  "csharp"
+);
+@@clientName(ApplicationFetchHealthRequest,
+  "ApplicationFetchHealthContent",
+  "csharp"
+);
+@@clientName(ManagedApplyMaintenanceWindow.post,
+  "PostManagedApplyMaintenanceWindow",
+  "csharp"
+);
+@@clientName(Applications.fetchHealth::parameters.body, "content", "csharp");
+@@clientName(Applications.restartDeployedCodePackage::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(Applications.updateUpgrade::parameters.body, "content", "csharp");
+@@clientName(Applications.resumeUpgrade::parameters.body, "content", "csharp");
+@@clientName(Applications.update::parameters.properties, "patch", "csharp");
+@@clientName(ApplicationTypes.update::parameters.properties, "patch", "csharp");
+@@clientName(ApplicationTypeVersions.update::parameters.properties,
+  "patch",
+  "csharp"
+);
+@@clientName(ManagedClusters.getFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ManagedClusters.stopFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ManagedClusters.update::parameters.properties, "patch", "csharp");
+@@clientName(NodeTypes.deallocate::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.deleteNode::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.getFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(NodeTypes.redeploy::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.reimage::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.restart::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.start::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.stopFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(NodeTypes.update::parameters.properties, "patch", "csharp");
+@@clientName(Services.update::parameters.properties, "patch", "csharp");

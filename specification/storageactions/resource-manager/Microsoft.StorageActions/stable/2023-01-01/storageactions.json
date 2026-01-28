@@ -828,19 +828,19 @@
       "type": "object",
       "description": "Represents Storage Task.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identity of the resource."
-        },
         "properties": {
           "$ref": "#/definitions/StorageTaskProperties",
           "description": "Properties of the storage task.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identity of the resource."
         }
       },
       "required": [
-        "identity",
-        "properties"
+        "properties",
+        "identity"
       ],
       "allOf": [
         {

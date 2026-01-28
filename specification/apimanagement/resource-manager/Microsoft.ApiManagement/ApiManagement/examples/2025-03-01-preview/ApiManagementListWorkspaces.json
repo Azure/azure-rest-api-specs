@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "nextLink": "",
+        "value": [
+          {
+            "name": "wks1",
+            "type": "Microsoft.ApiManagement/service/workspaces",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1",
+            "properties": {
+              "description": "workspace 1",
+              "displayName": "my workspace"
+            }
+          },
+          {
+            "name": "wks1",
+            "type": "Microsoft.ApiManagement/service/workspaces",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks2",
+            "properties": {
+              "description": "workspace 2",
+              "displayName": "my workspace"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Workspace_ListByService",
+  "title": "ApiManagementListWorkspaces"
+}

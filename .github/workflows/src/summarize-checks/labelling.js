@@ -4,6 +4,7 @@
     2. It calculates what set of labels should be added or removed from the PR.
 */
 
+import * as z from "zod";
 import { includesEvery, includesNone } from "../../../shared/src/array.js";
 import {
   brchTsg,
@@ -45,19 +46,23 @@ import {
  * @property {Set<string>} toRemove - The set of labels to remove
  */
 
+export const ImpactAssessmentSchema = z.object({
+  resourceManagerRequired: z.boolean().describe("Whether a resource manager review is required."),
+  dataPlaneRequired: z.boolean().describe("Whether a data plane review is required."),
+  suppressionReviewRequired: z.boolean().describe("Whether a suppression review is required."),
+  isNewApiVersion: z.boolean().describe("Whether this PR introduces a new API version."),
+  rpaasRpNotInPrivateRepo: z
+    .boolean()
+    .describe("Whether the RPaaS RP is not present in the private repo."),
+  rpaasChange: z.boolean().describe("Whether this PR includes RPaaS changes."),
+  newRP: z.boolean().describe("Whether this PR introduces a new resource provider."),
+  rpaasRPMissing: z.boolean().describe("Whether the RPaaS RP label is missing."),
+  typeSpecChanged: z.boolean().describe("Whether a TypeSpec file has changed."),
+  isDraft: z.boolean().describe("Whether the PR is a draft."),
+  targetBranch: z.string().describe("The name of the target branch for the PR."),
+});
 /**
- * @typedef {Object} ImpactAssessment
- * @property {boolean} resourceManagerRequired - Whether a resource manager review is required.
- * @property {boolean} dataPlaneRequired - Whether a data plane review is required.
- * @property {boolean} suppressionReviewRequired - Whether a suppression review is required.
- * @property {boolean} isNewApiVersion - Whether this PR introduces a new API version.
- * @property {boolean} rpaasRpNotInPrivateRepo - Whether the RPaaS RP is not present in the private repo.
- * @property {boolean} rpaasChange - Whether this PR includes RPaaS changes.
- * @property {boolean} newRP - Whether this PR introduces a new resource provider.
- * @property {boolean} rpaasRPMissing - Whether the RPaaS RP label is missing.
- * @property {boolean} typeSpecChanged - Whether a TypeSpec file has changed.
- * @property {boolean} isDraft - Whether the PR is a draft.
- * @property {string} targetBranch - The name of the target branch for the PR.
+ * @typedef {import("zod").infer<typeof ImpactAssessmentSchema>} ImpactAssessment
  */
 
 /**
@@ -465,9 +470,9 @@ This function does the following, **among other things**:
 /**
  * @param {LabelContext} labelContext
  * @param {ImpactAssessment} impactAssessment
- * @returns {Promise<{armReviewLabelShouldBePresent: boolean}>}
+ * @returns {{armReviewLabelShouldBePresent: boolean}}
  */
-export async function processImpactAssessment(labelContext, impactAssessment) {
+export function processImpactAssessment(labelContext, impactAssessment) {
   console.log("ENTER definition processARMReview");
 
   // By default these two should not be present. We may determine later in this function that they should be present after all.
@@ -535,7 +540,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
     }
 
     armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
-    await processARMReviewWorkflowLabels(
+    processARMReviewWorkflowLabels(
       labelContext,
       armReviewLabel.shouldBePresent,
       impactAssessment.rpaasRPMissing,
@@ -620,9 +625,8 @@ labels are being removed or added to a PR is pipelineBotOnPRLabelEvent.ts.
  * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
  * @param {boolean} rpaasExceptionLabelShouldBePresent
  * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
- * @returns {Promise<void>}
  */
-async function processARMReviewWorkflowLabels(
+function processARMReviewWorkflowLabels(
   labelContext,
   armReviewLabelShouldBePresent,
   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
@@ -706,7 +710,6 @@ async function processARMReviewWorkflowLabels(
       `blockedOnRpaas: ${blockedOnRpaas}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
-  return;
 }
 
 /**
@@ -739,7 +742,7 @@ function getBlockedOnRpaas(
 ) {
   return (
     (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent) ||
-    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+    (ciRpaasRPNotInPrivateRepoLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
   );
 }
 
@@ -867,7 +870,7 @@ const rulesPri0NotReadyForArmReview = [
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: ["RPaaSException"],
     troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo"),
   },
   {
@@ -904,7 +907,7 @@ const rulesPri0ArmRpaas = [
   {
     precedence: 0,
     anyPrerequisiteLabels: ["CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: ["RPaaSException"],
     troubleshootingGuide:
       "This PR has <code>CI-RpaaSRPNotInPrivateRepo</code> label. " +
       "This means it is introducing a new RP (Resource Provider) namespace to the <code>main</code> branch " +
@@ -986,23 +989,6 @@ const rulesPri1Suppressions = [
     troubleshootingGuide:
       `The suppressions added to the AutoRest config files (README.mds) require review. ${diagramTsg(1, true)}, ` +
       `or to step 3, depending on the kind of suppression you did.`,
-  },
-];
-
-/** @type {RequiredLabelRule[]} */
-const rulesPri1ArcReview = [
-  {
-    precedence: 1,
-    anyPrerequisiteLabels: ["ArcReview"],
-    anyRequiredLabels: ["ArcSignedOff"],
-    troubleshootingGuide:
-      "This PR is labelled with <code>ArcReview</code>. " +
-      "For this PR to be merged, it must pass an ARC review and be labelled <code>ArcSignedOff</code>.<br/>" +
-      "Email the ARC board to request review per " +
-      `${href(
-        "this Contact section",
-        "https://msazure.visualstudio.com/One/_wiki/wikis/One.wiki/377428/Consistency-in-ARM-Modeling?anchor=contact",
-      )}.`,
   },
 ];
 
@@ -1152,7 +1138,6 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0ArmRev)
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
-  .concat(rulesPri1ArcReview)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);
@@ -1164,9 +1149,9 @@ export const requiredLabelsRules = rulesPri0dataPlane
  * @param {string[]} existingLabels
  * @param {string} targetBranch
  *
- * @returns {Promise<{presentBlockingLabels: string[], missingRequiredLabels: string[]}>}
+ * @returns {{presentBlockingLabels: string[], missingRequiredLabels: string[]}}
  */
-export async function getPresentBlockingLabelsAndMissingRequiredLabels(
+export function getPresentBlockingLabelsAndMissingRequiredLabels(
   core,
   repo,
   owner,
@@ -1176,15 +1161,17 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
   // this is a little bit of a strange looking branch format, but not going to touch this for now.
   const repoTargetBranch = `${repo}/${targetBranch}`;
 
-  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
+  const violatedReqLabelsRules = getViolatedRequiredLabelsRules(
     core,
     existingLabels,
     repoTargetBranch,
   );
   const presentBlockingLabels = getPresentBlockingLabels(violatedReqLabelsRules);
 
-  const requiredLabelsFromRules = (
-    await getViolatedRequiredLabelsRules(core, existingLabels, repoTargetBranch)
+  const requiredLabelsFromRules = getViolatedRequiredLabelsRules(
+    core,
+    existingLabels,
+    repoTargetBranch,
   )
     .filter((rule) => rule.anyRequiredLabels.length > 0)
     // See comment on RequiredLabelRule.anyRequiredLabels to understand why we pick [0] from rule.anyRequiredLabels here.
@@ -1201,12 +1188,12 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
  * @param {typeof import("@actions/core")} core
  * @param {string[]} labels
  * @param {string} targetBranch This function uses a special format {repo/branch}, e.g. "azure-rest-api-specs/main".
- * @returns {Promise<RequiredLabelRule[]>}
+ * @returns {RequiredLabelRule[]}
  */
-export async function getViolatedRequiredLabelsRules(core, labels, targetBranch) {
+export function getViolatedRequiredLabelsRules(core, labels, targetBranch) {
   const violatedRules = [];
   for (const rule of requiredLabelsRules) {
-    if (await requiredLabelRuleViolated(core, labels, targetBranch, rule)) {
+    if (requiredLabelRuleViolated(core, labels, targetBranch, rule)) {
       violatedRules.push(rule);
     }
   }
@@ -1218,9 +1205,9 @@ export async function getViolatedRequiredLabelsRules(core, labels, targetBranch)
  * @param {string[]} presentLabels
  * @param {string} targetBranch
  * @param {RequiredLabelRule} rule
- * @returns {Promise<boolean>}
+ * @returns {boolean}
  */
-export async function requiredLabelRuleViolated(core, presentLabels, targetBranch, rule) {
+export function requiredLabelRuleViolated(core, presentLabels, targetBranch, rule) {
   const branchIsApplicable = rule.branches === undefined || rule.branches.includes(targetBranch);
 
   const anyPrerequisiteLabelPresent =

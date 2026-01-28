@@ -21,7 +21,16 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-09-01
+tag: package-2025-09-01
+```
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-09-01'
+input-file:
+- stable/2025-09-01/vmware.json
 ```
 
 ### Tag: package-2024-09-01
@@ -126,15 +135,6 @@ swagger-to-sdk:
 ## Suppression
 
 ``` yaml
-directive:
-
-  - transform: $["x-ms-client-flatten"] = false
-    from: vmware.json
-    where:
-      - $.definitions.Addon.properties.properties
-      - $.definitions.PlacementPolicy.properties.properties
-      - $.definitions.WorkloadNetworkDhcp.properties.properties
-
 suppressions:
     
   - code: RequiredPropertiesMissingInResourceModel

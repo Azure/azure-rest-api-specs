@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -343,11 +344,7 @@ interface Operations {
   @list
   list(
     ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
+    ...Azure.ResourceManager.Legacy.Provider,
   ): ArmResponse<OperationListResult> | ErrorResponse;
 }
 

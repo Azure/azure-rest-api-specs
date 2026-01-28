@@ -2389,6 +2389,7 @@ model ExportJobsResult {
   /**
    * SAS key to access the blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   blobSasKey?: string;
 
@@ -2401,6 +2402,7 @@ model ExportJobsResult {
   /**
    * SAS key to access the ExcelFile blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   excelFileBlobSasKey?: string;
 }
@@ -3158,12 +3160,45 @@ model BackupPolicy extends BaseBackupPolicy {
  */
 model BackupSchedule {
   /**
-   * Repeating time interval which only support the following ISO 8601 format [R/startDateTime/Duration]. Example: R/2007-03-01T13:00:00Z/P1Y2M10DT2H30M
+   * Repeating time interval which supports the ISO 8601 format and unsupported or partially supported formats.
+   *
+   * Supported ISO 8601 Time Formats
+   *
+   * The following time formats were verified to be successfully parsed and supported:
+   * - T14:30:45.123 → Thh:mm:ss.sss (with milliseconds)
+   * - T14:30:45 → Thh:mm:ss (standard time format)
+   * - T14:30 → Thh:mm (hour and minute only)
+   *
+   * All of the above may include time zone indicators like 'Z', '+05:30', '-08:00'.
+   *
+   * Examples of supported timestamps:
+   * - 2023-10-15T14:30:45Z
+   * - 2023-10-15T14:30:45.123+05:30
+   * - 2023-10-15T14:30Z
+   *
+   * Unsupported or partially supported formats:
+   * - T143045.123 or T143045 (no colons)
+   * - T14.500 (decimal hours)
+   * - T14 (hour only)
+   * - T14:30.500 (minute fractions)
+   * - T24:00:00 (invalid)
+   * - T23:59:60 (leap second)
    */
   repeatingTimeIntervals: string[];
 
   /**
-   * Time zone for a schedule. Example: Pacific Standard Time
+   * Time Zone for a schedule.
+   *
+   * Supported timezone indicators include:
+   * - 'Z' for UTC
+   * - '+00:00'
+   * - '+05:30'
+   * - '-08:00'
+   *
+   * Examples:
+   * - 2023-10-15T14:30:45Z
+   * - 2023-10-15T14:30:45.123+05:30
+   * - 2023-10-15T14:30-08:00
    */
   timeZone?: string;
 }

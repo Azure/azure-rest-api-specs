@@ -63,7 +63,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -591,7 +591,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -873,7 +873,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1183,7 +1183,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1560,7 +1560,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1867,7 +1867,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -2360,7 +2360,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -2514,7 +2514,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -2922,6 +2922,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -2929,6 +2931,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -4192,6 +4196,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -4199,6 +4205,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -4267,6 +4275,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -4274,6 +4284,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model\nconsiders the results of the tokens with top_p probability mass. So 0.1 means only the tokens\ncomprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -4281,6 +4293,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxPromptTokens"
         },
@@ -4288,6 +4301,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens\nspecified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxCompletionTokens"
         },
@@ -4383,6 +4397,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -4390,6 +4406,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model\nconsiders the results of the tokens with top_p probability mass. So 0.1 means only the tokens\ncomprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },
@@ -4397,6 +4415,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only\nthe number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,\nthe run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxPromptTokens"
         },
@@ -4404,6 +4423,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort\nto use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of\ncompletion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxCompletionTokens"
         },
@@ -6632,7 +6652,8 @@
         "cancelled",
         "failed",
         "completed",
-        "expired"
+        "expired",
+        "incomplete"
       ],
       "x-ms-enum": {
         "name": "RunStatus",
@@ -6677,6 +6698,11 @@
             "name": "expired",
             "value": "expired",
             "description": "Represents a run that expired before it could otherwise finish."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "Represents a run that cannot be completed due to safety guardrails."
           }
         ]
       }
@@ -8884,6 +8910,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of prompt tokens specified to have been used over the course of the run.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxPromptTokens"
         },
@@ -8891,6 +8918,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of completion tokens specified to have been used over the course of the run.",
+          "minimum": 256,
           "x-nullable": true,
           "x-ms-client-name": "maxCompletionTokens"
         },
@@ -9123,6 +9151,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of most recent messages from the thread when constructing the context for the run.",
+          "minimum": 1,
           "x-nullable": true,
           "x-ms-client-name": "lastMessages"
         }
@@ -9215,6 +9244,8 @@
           "format": "float",
           "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 2,
           "x-nullable": true
         },
         "top_p": {
@@ -9222,6 +9253,8 @@
           "format": "float",
           "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
           "default": 1,
+          "minimum": 0,
+          "maximum": 1,
           "x-nullable": true,
           "x-ms-client-name": "topP"
         },

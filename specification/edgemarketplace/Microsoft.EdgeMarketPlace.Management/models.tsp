@@ -213,7 +213,7 @@ model MarketplaceSku {
   @doc("The operating system supported")
   operatingSystem?: SkuOperatingSystem;
 
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @doc("The marketplace sku version")
   marketplaceSkuVersions?: MarketplaceSkuVersion[];
 }
@@ -283,6 +283,7 @@ model DiskAccessToken {
   @doc("The access token creation status.")
   status?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The access token.")
   accessToken: string;
 }

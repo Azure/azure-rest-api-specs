@@ -3,8 +3,8 @@ namespace Microsoft.AVS;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 alias PrivateCloudList = ResourceList<PrivateCloud>;
 @armResourceOperations
@@ -56,6 +56,10 @@ interface PrivateClouds {
     PrivateCloud,
     AdminCredentials
   >;
+
+  @doc("Get the license for the private cloud")
+  @added(Versions.v2025_09_01)
+  getVcfLicense is ArmResourceActionSyncNoRequestBody<PrivateCloud, VcfLicense>;
 }
 
 @@clientName(PrivateClouds.createOrUpdate::parameters.resource, "privateCloud");
@@ -189,7 +193,7 @@ model PrivateCloudUpdate {
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("The updatable properties of a private cloud resource")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!javascript")
   properties?: PrivateCloudUpdateProperties;
 }
 
@@ -328,6 +332,10 @@ model PrivateCloudProperties {
 
   @doc("The type of DNS zone to use.")
   dnsZoneType?: DnsZoneType;
+
+  @doc("The private cloud license")
+  @added(Versions.v2025_09_01)
+  vcfLicense?: VcfLicense;
 }
 
 @doc("An ExpressRoute Circuit")

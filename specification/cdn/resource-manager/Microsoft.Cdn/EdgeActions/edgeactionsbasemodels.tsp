@@ -27,6 +27,15 @@ model SkuType {
   tier: string;
 }
 
+/** The SKU type for update operations */
+model SkuTypeUpdate {
+  /** The name of the SKU */
+  name?: string;
+
+  /** The tier of the SKU */
+  tier?: string;
+}
+
 /** The deployment type for edge action versions */
 union EdgeActionVersionDeploymentType {
   string,
@@ -116,7 +125,8 @@ union ProvisioningState {
 model EdgeActionAttachment {
   @doc("The edge action attachment id")
   @visibility(Lifecycle.Read)
-  id: string;
+  @madeOptional(Versions.`2025-12-01-preview`)
+  id?: string;
 
   @doc("The attached resource Id")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -132,6 +142,7 @@ model EdgeActionAttachmentResponse {
   edgeActionId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Represents an edge action properties")
 model EdgeActionProperties {
   @doc("The provisioning state of the edge action")
@@ -143,6 +154,23 @@ model EdgeActionProperties {
   attachments: EdgeActionAttachment[];
 }
 
+/** The type used for update operations of the EdgeAction. */
+model EdgeActionUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: EdgeActionPropertiesUpdate;
+
+  @doc("The sku type of the edge action")
+  sku?: SkuTypeUpdate;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+/** Represents an edge action properties */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model EdgeActionPropertiesUpdate {}
+
 @doc("Represents an edge action version")
 model EdgeActionVersionProperties {
   @doc("The deployment type")
@@ -151,7 +179,8 @@ model EdgeActionVersionProperties {
 
   @doc("The validation status")
   @visibility(Lifecycle.Read)
-  validationStatus: EdgeActionVersionValidationStatus;
+  @madeOptional(Versions.`2025-12-01-preview`)
+  validationStatus?: EdgeActionVersionValidationStatus;
 
   @doc("The provisioning state")
   @visibility(Lifecycle.Read)
@@ -163,7 +192,8 @@ model EdgeActionVersionProperties {
 
   @doc("The last update time in UTC for package update")
   @visibility(Lifecycle.Read)
-  lastPackageUpdateTime: utcDateTime;
+  @madeOptional(Versions.`2025-12-01-preview`)
+  lastPackageUpdateTime?: utcDateTime;
 }
 
 /** Properties for edge action execution filter */
@@ -174,7 +204,8 @@ model EdgeActionExecutionFilterProperties {
 
   @doc("The last update time in UTC for the execution filter")
   @visibility(Lifecycle.Read)
-  lastUpdateTime: utcDateTime;
+  @madeOptional(Versions.`2025-12-01-preview`)
+  lastUpdateTime?: utcDateTime;
 
   @doc("Custom Header Key associated with the execution filter")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

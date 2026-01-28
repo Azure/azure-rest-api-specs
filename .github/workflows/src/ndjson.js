@@ -3,7 +3,7 @@
 
 /**
  * @param {string} text
- * @returns {any[]}
+ * @returns {unknown[]}
  */
 export function parse(text) {
   return (
@@ -11,7 +11,7 @@ export function parse(text) {
       .split("\n")
       // Skip empty lines, since JSON.parse("") throws "unexpected end of JSON input"
       .filter((line) => line.trim() !== "")
-      .map((line) => JSON.parse(line))
+      .map((line) => /** @type {unknown} */ (JSON.parse(line)))
   );
 }
 
