@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/authenticationMethod.tsp";
-import "./common/assetEndpointProfilesProperties.tsp";
+import "./properties/assetEndpointProfilesProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -54,6 +54,7 @@ alias NamespaceAssetEndpointProfilePropertiesUpdate = {
 interface NamespaceAssetEndpointProfiles {
   get is ArmResourceRead<NamespaceAssetEndpointProfile>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceAssetEndpointProfile>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     NamespaceAssetEndpointProfile,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

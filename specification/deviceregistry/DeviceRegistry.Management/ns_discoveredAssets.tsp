@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/topic.tsp";
-import "./common/ns_discoveredAssetProperties.tsp";
+import "./properties/ns_discoveredAssetProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -53,6 +53,7 @@ alias NamespaceDiscoveredAssetPropertiesUpdate = {
 interface NamespaceDiscoveredAssets {
   get is ArmResourceRead<NamespaceDiscoveredAsset>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredAsset>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     NamespaceDiscoveredAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

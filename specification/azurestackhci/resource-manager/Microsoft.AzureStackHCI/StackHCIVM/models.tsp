@@ -2818,3 +2818,10 @@ model GuestCredential {
   @secret
   password?: string;
 }
+
+@added(Versions.v2026_04_01_preview)
+@doc("The operation gracefully shuts down a virtual machine by requesting the operating system to shut down. The virtual machine can be restarted with the same provisioned resources. To force an immediate shut down, see the skipShutdown flag.")
+model PowerOffVirtualMachineOptions {
+  @doc("Indicates whether to perform an immediate shut down. When set to true, the VM is forcefully shut down. If not specified, the default value is false, and the operation attempts a graceful shut down of the VM.")
+  skipShutdown?: boolean = false;
+}
