@@ -32,6 +32,12 @@ options:
     namespace: "com.azure.search.documents"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-search-documents"
+    customization-class: "customizations/src/main/java/SearchCustomizations.java"
+    use-object-for-unknown: true
+    partial-update: true
+    float32-as-double: false
+    generate-samples: false
+    generate-tests: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
