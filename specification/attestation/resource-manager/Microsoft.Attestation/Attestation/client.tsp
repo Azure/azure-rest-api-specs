@@ -11,6 +11,7 @@ using Microsoft.Attestation;
 );
 @@clientName(Microsoft.Attestation, "AttestationManagementClient", "python");
 
+// csharp configurations
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
@@ -19,8 +20,29 @@ using Microsoft.Attestation;
   "AttestationPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(AttestationProviderListResult,
+@@clientName(AttestationServiceCreationParams,
   "AttestationProviderCreateOrUpdateContent",
+  "csharp"
+);
+@@alternateType(AttestationServiceCreationParams.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(AttestationServicePatchSpecificParams,
+  "AttestationProviderPatchProperties",
+  "csharp"
+);
+@@clientName(JsonWebKey, "AttestationJsonWebKey", "csharp");
+@@clientName(PublicNetworkAccessType,
+  "AttestationPublicNetworkAccessType",
+  "csharp"
+);
+@@clientName(AttestationProvidersOperationGroup.listDefault,
+  "GetDefaultAttestationProvider",
+  "csharp"
+);
+@@clientName(AttestationProvidersOperationGroup.getDefaultByLocation,
+  "GetDefaultAttestationProviderByLocation",
   "csharp"
 );
 @@alternateType(StatusResult.attestUri, url, "csharp");
@@ -28,3 +50,12 @@ using Microsoft.Attestation;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(AttestationProviders.listByResourceGroup,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(AttestationProviders.list,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(AttestationProviders.listByProvider,
+  "csharp"
+);
+@@usage(AttestationProvider, Usage.input, "csharp");
