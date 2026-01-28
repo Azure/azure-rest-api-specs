@@ -33,7 +33,7 @@ When encountering a TypeSpec-related task, follow this workflow (must follow exa
 ### Step 1 — Intake & Clarification (no file edits)
 - Read the user request.
 - Extract any provided values for the Required Inputs Checklist.
-- If missing, ask concise questions and wait for the user reply.
+- If missing, ask concise questions and wait for the user reply. ask the questions one by one, with each question confirming a specific piece of information.
 
 ### Step 2 — Call the `azure-sdk-mcp/azsdk_typespec_consult` tool to retrieve solution (must happen)
 
