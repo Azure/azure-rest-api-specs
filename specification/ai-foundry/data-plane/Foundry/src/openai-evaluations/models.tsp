@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "@typespec/openapi";
 
 import "@azure-tools/typespec-autorest";
@@ -12,7 +11,6 @@ import "../common/models.tsp";
 import "../red-teams/models.tsp";
 
 using Azure.Core.Experimental;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -169,22 +167,28 @@ union ItemGenerationParamsType {
   string,
 
   /** Parameters for red team. */
-  redTeam: "red_team",
+  redTeamPreview: "red_team_preview",
 
   /** The ResponseRetrieval item generation parameters. */
-  responseRetrieval: "response_retrieval",
+  responseRetrievalPreview: "response_retrieval_preview",
 
   /** Parameters for red team seed prompts. */
-  redTeamSeedPrompts: "red_team_seed_prompts",
+  redTeamSeedPromptsPreview: "red_team_seed_prompts_preview",
 
   /** Parameters for red team taxonomy item generation. */
-  redTeamTaxonomy: "red_team_taxonomy",
+  redTeamTaxonomyPreview: "red_team_taxonomy_preview",
 }
 
-@removed(Versions.v1)
-model RedTeamItemGenerationParams extends ItemGenerationParams {
+/** Represents the set of parameters used to control item generation operations. */
+@discriminator("type")
+model ItemGenerationParams {
+  /** The type of item generation parameters to use. */
+  type: ItemGenerationParamsType;
+}
+
+model RedTeamPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters. */
-  type: ItemGenerationParamsType.redTeam;
+  type: ItemGenerationParamsType.redTeamPreview;
 
   /** The collection of attack strategies to be used. */
   attack_strategies: AttackStrategy[];
@@ -194,10 +198,10 @@ model RedTeamItemGenerationParams extends ItemGenerationParams {
 }
 
 /** Represents the parameters for red team seed prompts item generation. */
-@removed(Versions.v1)
-model RedTeamSeedPromptsItemGenerationParams extends ItemGenerationParams {
+model RedTeamSeedPromptsPreviewItemGenerationParams
+  extends ItemGenerationParams {
   /** The type of item generation parameters, always `red_team_seed_prompts`. */
-  type: ItemGenerationParamsType.redTeamSeedPrompts;
+  type: ItemGenerationParamsType.redTeamSeedPromptsPreview;
 
   /** The collection of attack strategies to be used. */
   attack_strategies: AttackStrategy[];
@@ -210,10 +214,9 @@ model RedTeamSeedPromptsItemGenerationParams extends ItemGenerationParams {
 }
 
 /** Represents the parameters for red team taxonomy item generation. */
-@removed(Versions.v1)
-model RedTeamTaxonomyItemGenerationParams extends ItemGenerationParams {
+model RedTeamTaxonomyPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `red_team_taxonomy`. */
-  type: ItemGenerationParamsType.redTeamTaxonomy;
+  type: ItemGenerationParamsType.redTeamTaxonomyPreview;
 
   /** The collection of attack strategies to be used. */
   attack_strategies: AttackStrategy[];
@@ -225,19 +228,10 @@ model RedTeamTaxonomyItemGenerationParams extends ItemGenerationParams {
   source: OpenAI.EvalJsonlFileContentSource;
 }
 
-/** Represents the set of parameters used to control item generation operations. */
-@discriminator("type")
-@removed(Versions.v1)
-model ItemGenerationParams {
-  /** The type of item generation parameters to use. */
-  type: ItemGenerationParamsType;
-}
-
 /** Represents the parameters for continuous evaluation item generation. */
-@removed(Versions.v1)
-model ContinuousEvalItemGenerationParams extends ItemGenerationParams {
+model ContinuousEvalPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `ResponseRetrieval`. */
-  type: ItemGenerationParamsType.responseRetrieval;
+  type: ItemGenerationParamsType.responseRetrievalPreview;
 
   /** The maximum number of turns of chat history to evaluate. */
   max_num_turns: int32;
@@ -259,9 +253,9 @@ model Target {
 }
 
 /** Represents a target specifying an Azure AI model for operations requiring model selection. */
-model AzureAIModelTarget extends Target {
+model AzureAIModelPreviewTarget extends Target {
   /** The type of target, always `azure_ai_model`. */
-  type: "azure_ai_model";
+  type: "azure_ai_model_preview";
 
   /** The unique identifier of the Azure AI model. */
   `model`?: string;
@@ -271,10 +265,9 @@ model AzureAIModelTarget extends Target {
 }
 
 /** Represents a target specifying an Azure AI agent. */
-@removed(Versions.v1)
-model AzureAIAgentTarget extends Target {
+model AzureAIAgentPreviewTarget extends Target {
   /** The type of target, always `azure_ai_agent`. */
-  type: "azure_ai_agent";
+  type: "azure_ai_agent_preview";
 
   /** The unique identifier of the Azure AI agent. */
   name: string;
@@ -318,10 +311,9 @@ model EvalRunDataSource {
 }
 
 /** Represents a data source for evaluation runs that operate over Agent traces stored in Application Insights. */
-@removed(Versions.v1)
-model TracesEvalRunDataSource extends EvalRunDataSource {
+model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_traces`. */
-  type: "azure_ai_traces";
+  type: "azure_ai_traces_preview";
 
   /** Collection of Agent trace identifiers that should be evaluated. */
   trace_ids?: string[];
@@ -353,13 +345,12 @@ model TracesEvalRunDataSource extends EvalRunDataSource {
 }
 
 /** Represents a data source for evaluation runs that are specific to Continuous Evaluation scenarios. */
-@removed(Versions.v1)
-model AzureAIResponsesEvalRunDataSource extends EvalRunDataSource {
+model AzureAIResponsesPreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_responses`. */
-  type: "azure_ai_responses";
+  type: "azure_ai_responses_preview";
 
   /** The parameters for item generation. */
-  item_generation_params: ContinuousEvalItemGenerationParams;
+  item_generation_params: ContinuousEvalPreviewItemGenerationParams;
 
   /** Maximum number of evaluation runs allowed per hour. */
   max_runs_hourly: int32;
@@ -369,10 +360,9 @@ model AzureAIResponsesEvalRunDataSource extends EvalRunDataSource {
 }
 
 /** Represents a data source for target-based completion evaluation configuration. */
-@removed(Versions.v1)
-model TargetCompletionsEvalRunDataSource extends EvalRunDataSource {
+model TargetCompletionsPreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_target_completions`. */
-  type: "azure_ai_target_completions";
+  type: "azure_ai_target_completions_preview";
 
   /** Input messages configuration. */
   input_messages?: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
@@ -386,10 +376,9 @@ model TargetCompletionsEvalRunDataSource extends EvalRunDataSource {
   target: Target;
 }
 
-@removed(Versions.v1)
-model RedTeamEvalRunDataSource extends EvalRunDataSource {
+model RedTeamPreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source. Always `azure_ai_red_team`. */
-  type: "azure_ai_red_team";
+  type: "azure_ai_red_team_preview";
 
   /** The parameters for item generation. */
   item_generation_params: ItemGenerationParams;

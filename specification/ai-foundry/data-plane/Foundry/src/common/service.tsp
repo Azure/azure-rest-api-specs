@@ -36,8 +36,10 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects {
   @doc("Microsoft Foundry API versions")
   enum Versions {
-    @doc("Microsoft Foundry API version 2025-11-15-preview.")
-    v2025_11_15_preview: "2025-11-15-preview",
+    /**
+     * An interim virtual API version representing backwards compatibility changes moving from public preview to general availability.
+     */
+    PuPr: "virtual-public-preview",
 
     @doc("Microsoft Foundry API version v1.")
     v1: "v1",

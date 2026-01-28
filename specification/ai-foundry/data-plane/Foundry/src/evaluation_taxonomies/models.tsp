@@ -1,19 +1,17 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+
 import "../common/models.tsp";
 import "../openai-evaluations/models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 @doc("Evaluation Taxonomy Definition")
-@removed(Versions.v1)
 @resource("evaluationtaxonomies")
 model EvaluationTaxonomy {
   ...AssetBase;
@@ -28,7 +26,6 @@ model EvaluationTaxonomy {
   properties?: Record<string>;
 }
 
-@removed(Versions.v1)
 @doc("Type of the evaluation taxonomy input.")
 union EvaluationTaxonomyInputType {
   string,
@@ -36,11 +33,10 @@ union EvaluationTaxonomyInputType {
   @doc("Agent")
   agent: "agent",
 
-  @doc("Policy.")
+  @doc("Policy")
   policy: "policy",
 }
 
-@removed(Versions.v1)
 @discriminator("type")
 @doc("Input configuration for the evaluation taxonomy.")
 model EvaluationTaxonomyInput {
@@ -48,20 +44,18 @@ model EvaluationTaxonomyInput {
   type: EvaluationTaxonomyInputType;
 }
 
-@removed(Versions.v1)
 @doc("Input configuration for the evaluation taxonomy when the input type is agent.")
 model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
   type: EvaluationTaxonomyInputType.agent;
 
   @doc("Target configuration for the agent.")
-  target: AzureAIAgentTarget;
+  target: Target;
 
   @doc("List of risk categories to evaluate against.")
   riskCategories: RiskCategory[];
 }
 
-@removed(Versions.v1)
 @doc("Taxonomy category definition.")
 model TaxonomyCategory {
   @doc("Unique identifier of the taxonomy category.")
@@ -83,7 +77,6 @@ model TaxonomyCategory {
   properties?: Record<string>;
 }
 
-@removed(Versions.v1)
 @doc("Taxonomy sub-category definition.")
 model TaxonomySubCategory {
   @doc("Unique identifier of the taxonomy sub-category.")

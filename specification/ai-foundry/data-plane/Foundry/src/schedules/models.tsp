@@ -1,19 +1,17 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
+
 import "../common/models.tsp";
 import "../insights/models.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 @doc("Schedule provisioning status.")
-@removed(Versions.v1)
 union ScheduleProvisioningStatus {
   string,
 
@@ -34,7 +32,6 @@ union ScheduleProvisioningStatus {
 }
 
 @doc("Type of the trigger.")
-@removed(Versions.v1)
 union TriggerType {
   string,
 
@@ -50,14 +47,12 @@ union TriggerType {
 
 @doc("Base model for Trigger of the schedule.")
 @discriminator("type")
-@removed(Versions.v1)
 model Trigger {
   @doc("Type of the trigger.")
   type: TriggerType;
 }
 
 @doc("Cron based trigger.")
-@removed(Versions.v1)
 model CronTrigger extends Trigger {
   type: TriggerType.Cron;
 
@@ -75,7 +70,6 @@ model CronTrigger extends Trigger {
 }
 
 @doc("Recurrence type.")
-@removed(Versions.v1)
 union RecurrenceType {
   string,
 
@@ -93,7 +87,6 @@ union RecurrenceType {
 }
 
 @doc("Days of the week for recurrence schedule.")
-@removed(Versions.v1)
 union DayOfWeek {
   string,
 
@@ -120,7 +113,6 @@ union DayOfWeek {
 }
 
 @doc("Recurrence schedule model.")
-@removed(Versions.v1)
 @discriminator("type")
 model RecurrenceSchedule {
   @doc("Recurrence type for the recurrence schedule.")
@@ -128,13 +120,11 @@ model RecurrenceSchedule {
 }
 
 @doc("Hourly recurrence schedule.")
-@removed(Versions.v1)
 model HourlyRecurrenceSchedule extends RecurrenceSchedule {
   type: RecurrenceType.Hourly;
 }
 
 @doc("Daily recurrence schedule.")
-@removed(Versions.v1)
 model DailyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Daily recurrence type.")
   type: RecurrenceType.Daily;
@@ -144,7 +134,6 @@ model DailyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Weekly recurrence schedule.")
-@removed(Versions.v1)
 model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Weekly recurrence type.")
   type: RecurrenceType.Weekly;
@@ -154,7 +143,6 @@ model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Monthly recurrence schedule.")
-@removed(Versions.v1)
 model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Monthly recurrence type.")
   type: RecurrenceType.Monthly;
@@ -164,7 +152,6 @@ model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Recurrence based trigger.")
-@removed(Versions.v1)
 model RecurrenceTrigger extends Trigger {
   @doc("Type of the trigger.")
   type: TriggerType.Recurrence;
@@ -186,7 +173,6 @@ model RecurrenceTrigger extends Trigger {
 }
 
 @doc("One-time trigger.")
-@removed(Versions.v1)
 model OneTimeTrigger extends Trigger {
   type: TriggerType.OneTime;
 
@@ -198,7 +184,6 @@ model OneTimeTrigger extends Trigger {
 }
 
 @doc("Type of the task.")
-@removed(Versions.v1)
 union ScheduleTaskType {
   string,
 
@@ -210,7 +195,6 @@ union ScheduleTaskType {
 }
 
 @doc("Schedule task model.")
-@removed(Versions.v1)
 @discriminator("type")
 model ScheduleTask {
   @doc("Type of the task.")
@@ -221,7 +205,6 @@ model ScheduleTask {
 }
 
 @doc("Evaluation task for the schedule.")
-@removed(Versions.v1)
 model EvaluationScheduleTask extends ScheduleTask {
   type: ScheduleTaskType.Evaluation;
 
@@ -233,7 +216,6 @@ model EvaluationScheduleTask extends ScheduleTask {
 }
 
 @doc("Insight task for the schedule.")
-@removed(Versions.v1)
 model InsightScheduleTask extends ScheduleTask {
   type: ScheduleTaskType.Insight;
 
@@ -243,7 +225,6 @@ model InsightScheduleTask extends ScheduleTask {
 
 @resource("schedules")
 @doc("Schedule model.")
-@removed(Versions.v1)
 model Schedule {
   @doc("Identifier of the schedule.")
   @key("id")
@@ -285,7 +266,6 @@ model Schedule {
 @doc("Schedule run model.")
 @parentResource(Schedule)
 @resource("runs")
-@removed(Versions.v1)
 model ScheduleRun {
   @doc("Identifier of the schedule run.")
   @key("runId")

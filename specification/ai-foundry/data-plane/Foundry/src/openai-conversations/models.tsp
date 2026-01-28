@@ -1,8 +1,7 @@
-import "../responses/models.tsp";
-// import "../.external-readonly/openai.external.typespec/conversations/custom.tsp";
-
 import "@typespec/http";
 import "@typespec/openapi";
+
+import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
 

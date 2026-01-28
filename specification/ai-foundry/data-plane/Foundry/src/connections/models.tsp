@@ -1,12 +1,9 @@
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
-import "@typespec/versioning";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -103,11 +100,10 @@ model NoAuthenticationCredentials extends BaseCredentials {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Agentic identity credential definition")
-@removed(Versions.v1)
-model AgenticIdentityCredentials extends BaseCredentials {
+model AgenticIdentityPreviewCredentials extends BaseCredentials {
   @doc("The credential type")
   @visibility(Lifecycle.Read)
-  type: CredentialType.agenticIdentity;
+  type: CredentialType.agenticIdentityPreview;
 }
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
@@ -142,9 +138,8 @@ union ConnectionType {
   @doc("Custom Keys")
   Custom: "CustomKeys",
 
-  @removed(Versions.v1)
   @doc("Remote tool")
-  RemoteTool: "RemoteTool",
+  RemoteTool: "RemoteTool_Preview",
 }
 
 @doc("The credential type used by the connection")
@@ -166,7 +161,17 @@ union CredentialType {
   @doc("No credential")
   None: "None",
 
-  @removed(Versions.v1)
   @doc("Agentic identity credential")
-  agenticIdentity: "AgenticIdentityToken",
+  agenticIdentityPreview: "AgenticIdentityToken_Preview",
+}
+
+@doc("SAS Credential definition")
+model SasCredential {
+  @doc("SAS uri")
+  @visibility(Lifecycle.Read)
+  sasUri: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Type of credential")
+  type: "SAS";
 }

@@ -14,7 +14,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
 @route("openai/fine-tuning")
 @tag("Fine-tuning")
 interface FineTuning {
@@ -30,7 +29,7 @@ interface FineTuning {
   @route("jobs")
   @post
   @operationId("createFineTuningJob")
-  createFineTuningJob is AgentOperation<
+  createFineTuningJob is FoundryDataPlaneOperation<
     OpenAI.CreateFineTuningJobRequest,
     OpenAI.FineTuningJob
   >;
@@ -43,7 +42,7 @@ interface FineTuning {
   @route("jobs")
   @get
   @operationId("listPaginatedFineTuningJobs")
-  listPaginatedFineTuningJobs is AgentOperation<
+  listPaginatedFineTuningJobs is FoundryDataPlaneOperation<
     {
       /** Identifier for the last job from the previous pagination request. */
       @query after?: string;
@@ -64,7 +63,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}")
   @get
   @operationId("retrieveFineTuningJob")
-  retrieveFineTuningJob is AgentOperation<
+  retrieveFineTuningJob is FoundryDataPlaneOperation<
     {
       /** The ID of the fine-tuning job. */
       @path fine_tuning_job_id: string;
@@ -80,7 +79,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/cancel")
   @post
   @operationId("cancelFineTuningJob")
-  cancelFineTuningJob is AgentOperation<
+  cancelFineTuningJob is FoundryDataPlaneOperation<
     {
       /** The ID of the fine-tuning job to cancel. */
       @path fine_tuning_job_id: string;
@@ -96,7 +95,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/pause")
   @post
   @operationId("pauseFineTuningJob")
-  pauseFineTuningJob is AgentOperation<
+  pauseFineTuningJob is FoundryDataPlaneOperation<
     {
       /** The ID of the fine-tuning job to pause. */
       @path fine_tuning_job_id: string;
@@ -112,7 +111,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/resume")
   @post
   @operationId("resumeFineTuningJob")
-  resumeFineTuningJob is AgentOperation<
+  resumeFineTuningJob is FoundryDataPlaneOperation<
     {
       /** The ID of the fine-tuning job to resume. */
       @path fine_tuning_job_id: string;
@@ -128,7 +127,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/checkpoints")
   @get
   @operationId("listFineTuningJobCheckpoints")
-  listFineTuningJobCheckpoints is AgentOperation<
+  listFineTuningJobCheckpoints is FoundryDataPlaneOperation<
     {
       /** The ID of the fine-tuning job to get checkpoints for. */
       @path fine_tuning_job_id: string;
@@ -150,7 +149,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/events")
   @get
   @operationId("listFineTuningJobEvents")
-  listFineTuningJobEvents is AgentOperation<
+  listFineTuningJobEvents is FoundryDataPlaneOperation<
     {
       /** The ID of the fine-tuning job to get events for. */
       @path fine_tuning_job_id: string;

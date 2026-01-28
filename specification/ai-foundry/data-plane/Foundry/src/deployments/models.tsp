@@ -1,13 +1,12 @@
 import "@typespec/rest";
+import "@typespec/openapi";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+
 import "../common/service.tsp";
 import "../common/models.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
