@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -234,7 +236,9 @@ interface Workspaces {
 
   /**
    * Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @action("listConnectionModels")
   @summary("Get all models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.")
   getAllModels is ArmResourceActionSync<
@@ -244,8 +248,10 @@ interface Workspaces {
   >;
 
   /**
-   * Get all the deployments under the workspace scope
+   * Get all the deployments under the workspace scope.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Get all the deployments under the workspace scope")
   @list
   @get
