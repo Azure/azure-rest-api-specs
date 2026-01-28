@@ -82,13 +82,13 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
 
   /** Data schema scenario. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-  scenario: "red_team" | "responses" | "traces" | "benchmark";
+  scenario: "red_team" | "responses" | "traces";
 }
 
 /** Metadata for benchmark evaluation configuration. */
 @removed(Versions.v1)
 model BenchmarkMetadata {
-  /** The name of the benchmark specification (e.g., 'builtin.gpqa_diamond'). */
+  /** The name of the benchmark specification. */
   benchmark_name: string;
 
   /** The version of the benchmark specification (e.g., '0.1'). */
@@ -108,11 +108,10 @@ model AzureAIBenchmarkDataSourceConfig extends DataSourceConfig {
   metadata: BenchmarkMetadata;
 
   /**
-   * The translated item schema from the benchmark specification.
-   * Populated in responses only. Must not be provided in requests.
-   * Service validates and rejects requests that include this field.
+   * The translated dataset schema from the benchmark specification.
+   * Inherited from DataSourceConfig base class as `schema: Record<unknown>`.
+   * Populated in responses only; excluded from POST requests by the service.
    */
-  item_schema?: Record<unknown>;
 }
 
 /** Adding Azure AI Source type to data source for foundry extension. */
