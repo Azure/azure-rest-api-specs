@@ -1,0 +1,5691 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VoiceLive",
+    "version": "2025-10-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {},
+  "definitions": {
+    "AgentConfig": {
+      "type": "object",
+      "description": "Configuration for the agent.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of agent to use.",
+          "enum": [
+            "agent"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the agent."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of the agent."
+        },
+        "agent_id": {
+          "type": "string",
+          "description": "The ID of the agent."
+        },
+        "thread_id": {
+          "type": "string",
+          "description": "The ID of the conversation thread."
+        }
+      },
+      "required": [
+        "type",
+        "name",
+        "agent_id",
+        "thread_id"
+      ]
+    },
+    "Animation": {
+      "type": "object",
+      "description": "Configuration for animation outputs including blendshapes and visemes metadata.",
+      "properties": {
+        "model_name": {
+          "type": "string",
+          "description": "The name of the animation model to use.",
+          "default": "default"
+        },
+        "outputs": {
+          "type": "array",
+          "description": "Set of output data types requested from the animation system.",
+          "default": [
+            "blendshapes"
+          ],
+          "items": {
+            "$ref": "#/definitions/AnimationOutputType"
+          }
+        }
+      }
+    },
+    "AnimationOutputType": {
+      "type": "string",
+      "description": "Specifies the types of animation data to output.",
+      "enum": [
+        "blendshapes",
+        "viseme_id"
+      ],
+      "x-ms-enum": {
+        "name": "AnimationOutputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "blendshapes",
+            "value": "blendshapes",
+            "description": "Blendshapes output type."
+          },
+          {
+            "name": "viseme_id",
+            "value": "viseme_id",
+            "description": "Viseme ID output type."
+          }
+        ]
+      }
+    },
+    "AssistantMessageItem": {
+      "type": "object",
+      "description": "An assistant message item within a conversation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageItem"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "AudioEchoCancellation": {
+      "type": "object",
+      "description": "Echo cancellation configuration for server-side audio processing.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of echo cancellation model to use.",
+          "enum": [
+            "server_echo_cancellation"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AudioInputTranscriptionModel": {
+      "type": "string",
+      "description": "Supported audio input transcription models.",
+      "enum": [
+        "whisper-1"
+      ],
+      "x-ms-enum": {
+        "name": "AudioInputTranscriptionModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whisper_1",
+            "value": "whisper-1",
+            "description": "OpenAI Whisper model."
+          }
+        ]
+      }
+    },
+    "AudioInputTranscriptionOptions": {
+      "type": "object",
+      "description": "Configuration for input audio transcription.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'azure-speech'.",
+          "enum": [
+            "whisper-1",
+            "gpt-4o-transcribe",
+            "gpt-4o-mini-transcribe",
+            "azure-speech"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "language": {
+          "type": "string",
+          "description": "Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh')."
+        },
+        "custom_speech": {
+          "type": "object",
+          "description": "Optional configuration for custom speech models.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "phrase_list": {
+          "type": "array",
+          "description": "Optional list of phrase hints to bias recognition.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "model"
+      ]
+    },
+    "AudioNoiseReduction": {
+      "type": "object",
+      "description": "Configuration for input audio noise reduction.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of noise reduction model.",
+          "enum": [
+            "azure_deep_noise_suppression",
+            "near_field",
+            "far_field"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AudioTimestampType": {
+      "type": "string",
+      "description": "Output timestamp types supported in audio response content.",
+      "enum": [
+        "word"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTimestampType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "word",
+            "value": "word",
+            "description": "Timestamps per word in the output audio."
+          }
+        ]
+      }
+    },
+    "AvatarConfig": {
+      "type": "object",
+      "description": "Configuration for avatar streaming and behavior during the session.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AvatarConfigTypes",
+          "description": "Type of avatar to use."
+        },
+        "ice_servers": {
+          "type": "array",
+          "description": "Optional list of ICE servers to use for WebRTC connection establishment.",
+          "items": {
+            "$ref": "#/definitions/IceServer"
+          }
+        },
+        "character": {
+          "type": "string",
+          "description": "The character name or ID used for the avatar."
+        },
+        "style": {
+          "type": "string",
+          "description": "Optional avatar style, such as emotional tone or speaking style."
+        },
+        "model": {
+          "$ref": "#/definitions/PhotoAvatarBaseModes",
+          "description": "Base model to use for the avatar. Required for photo avatar."
+        },
+        "customized": {
+          "type": "boolean",
+          "description": "Indicates whether the avatar is customized or not."
+        },
+        "video": {
+          "$ref": "#/definitions/VideoParams",
+          "description": "Optional video configuration including resolution, bitrate, and codec."
+        },
+        "scene": {
+          "$ref": "#/definitions/Scene",
+          "description": "Configuration for the avatar's zoom level, position, rotation and movement amplitude in the video frame."
+        },
+        "output_protocol": {
+          "type": "string",
+          "description": "Output protocol for avatar streaming. Default is 'webrtc'.",
+          "default": "webrtc",
+          "enum": [
+            "webrtc",
+            "websocket"
+          ],
+          "x-ms-enum": {
+            "name": "AvatarOutputProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "webrtc",
+                "value": "webrtc",
+                "description": "WebRTC protocol, output the audio/video streams via WebRTC"
+              },
+              {
+                "name": "websocket",
+                "value": "websocket",
+                "description": "WebSocket protocol, output the video frames over WebSocket"
+              }
+            ]
+          }
+        },
+        "output_audit_audio": {
+          "type": "boolean",
+          "description": "When enabled, forwards audit audio via WebSocket for review/debugging purposes, even when avatar output is delivered via WebRTC.",
+          "default": false
+        }
+      },
+      "required": [
+        "character",
+        "customized"
+      ]
+    },
+    "AvatarConfigTypes": {
+      "type": "string",
+      "description": "Avatar config types",
+      "enum": [
+        "video-avatar",
+        "photo-avatar"
+      ],
+      "x-ms-enum": {
+        "name": "AvatarConfigTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "video-avatar",
+            "value": "video-avatar",
+            "description": "Video avatar"
+          },
+          {
+            "name": "photo-avatar",
+            "value": "photo-avatar",
+            "description": "Photo avatar"
+          }
+        ]
+      }
+    },
+    "AvatarOutputProtocol": {
+      "type": "string",
+      "description": "Avatar config output protocols",
+      "enum": [
+        "webrtc",
+        "websocket"
+      ],
+      "x-ms-enum": {
+        "name": "AvatarOutputProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "webrtc",
+            "value": "webrtc",
+            "description": "WebRTC protocol, output the audio/video streams via WebRTC"
+          },
+          {
+            "name": "websocket",
+            "value": "websocket",
+            "description": "WebSocket protocol, output the video frames over WebSocket"
+          }
+        ]
+      }
+    },
+    "AzureCustomVoice": {
+      "type": "object",
+      "description": "Azure custom voice configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Voice name cannot be empty.",
+          "minLength": 1
+        },
+        "endpoint_id": {
+          "type": "string",
+          "description": "Endpoint ID cannot be empty.",
+          "minLength": 1
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Temperature must be between 0.0 and 1.0.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "custom_lexicon_url": {
+          "type": "string"
+        },
+        "custom_text_normalization_url": {
+          "type": "string"
+        },
+        "prefer_locales": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string"
+        },
+        "pitch": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "endpoint_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVoice"
+        }
+      ],
+      "x-ms-discriminator-value": "azure-custom"
+    },
+    "AzurePersonalVoice": {
+      "type": "object",
+      "description": "Azure personal voice configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Voice name cannot be empty.",
+          "minLength": 1
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Temperature must be between 0.0 and 1.0.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "model": {
+          "$ref": "#/definitions/PersonalVoiceModels",
+          "description": "Underlying neural model to use for personal voice."
+        },
+        "custom_lexicon_url": {
+          "type": "string"
+        },
+        "custom_text_normalization_url": {
+          "type": "string"
+        },
+        "prefer_locales": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string"
+        },
+        "pitch": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "model"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVoice"
+        }
+      ],
+      "x-ms-discriminator-value": "azure-personal"
+    },
+    "AzureSemanticDetection": {
+      "type": "object",
+      "description": "Azure semantic end-of-utterance detection (default).",
+      "properties": {
+        "threshold_level": {
+          "$ref": "#/definitions/EouThresholdLevel",
+          "description": "Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`."
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds. Recommended instead of `timeout`.",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EouDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "semantic_detection_v1"
+    },
+    "AzureSemanticDetectionEn": {
+      "type": "object",
+      "description": "Azure semantic end-of-utterance detection (English-optimized).",
+      "properties": {
+        "threshold_level": {
+          "$ref": "#/definitions/EouThresholdLevel",
+          "description": "Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`."
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds. Recommended instead of `timeout`.",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EouDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "semantic_detection_v1_en"
+    },
+    "AzureSemanticDetectionMultilingual": {
+      "type": "object",
+      "description": "Azure semantic end-of-utterance detection (multilingual).",
+      "properties": {
+        "threshold_level": {
+          "$ref": "#/definitions/EouThresholdLevel",
+          "description": "Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`."
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds. Recommended instead of `timeout`.",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EouDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "semantic_detection_v1_multilingual"
+    },
+    "AzureSemanticVad": {
+      "type": "object",
+      "description": "Server Speech Detection (Azure semantic VAD, default variant).",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "prefix_padding_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "silence_duration_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "end_of_utterance_detection": {
+          "$ref": "#/definitions/EouDetection"
+        },
+        "speech_duration_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "remove_filler_words": {
+          "type": "boolean",
+          "default": false
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auto_truncate": {
+          "type": "boolean",
+          "default": false
+        },
+        "create_response": {
+          "type": "boolean",
+          "default": false
+        },
+        "interrupt_response": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TurnDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_semantic_vad"
+    },
+    "AzureSemanticVadEn": {
+      "type": "object",
+      "description": "Server Speech Detection (Azure semantic VAD, English-only).",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "prefix_padding_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "silence_duration_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "end_of_utterance_detection": {
+          "$ref": "#/definitions/EouDetection"
+        },
+        "speech_duration_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "remove_filler_words": {
+          "type": "boolean",
+          "default": false
+        },
+        "auto_truncate": {
+          "type": "boolean",
+          "default": false
+        },
+        "create_response": {
+          "type": "boolean",
+          "default": false
+        },
+        "interrupt_response": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TurnDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_semantic_vad_en"
+    },
+    "AzureSemanticVadMultilingual": {
+      "type": "object",
+      "description": "Server Speech Detection (Azure semantic VAD).",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "prefix_padding_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "silence_duration_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "end_of_utterance_detection": {
+          "$ref": "#/definitions/EouDetection"
+        },
+        "speech_duration_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "remove_filler_words": {
+          "type": "boolean",
+          "default": false
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auto_truncate": {
+          "type": "boolean",
+          "default": false
+        },
+        "create_response": {
+          "type": "boolean",
+          "default": false
+        },
+        "interrupt_response": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TurnDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_semantic_vad_multilingual"
+    },
+    "AzureStandardVoice": {
+      "type": "object",
+      "description": "Azure standard voice configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Voice name cannot be empty.",
+          "minLength": 1
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Temperature must be between 0.0 and 1.0.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "custom_lexicon_url": {
+          "type": "string"
+        },
+        "custom_text_normalization_url": {
+          "type": "string"
+        },
+        "prefer_locales": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string"
+        },
+        "pitch": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVoice"
+        }
+      ],
+      "x-ms-discriminator-value": "azure-standard"
+    },
+    "AzureVoice": {
+      "type": "object",
+      "description": "Base for Azure voice configurations.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AzureVoiceType",
+          "description": "The type of the Azure voice."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AzureVoiceType": {
+      "type": "string",
+      "description": "Union of all supported Azure voice types.",
+      "enum": [
+        "azure-custom",
+        "azure-standard",
+        "azure-personal"
+      ],
+      "x-ms-enum": {
+        "name": "AzureVoiceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "azure_custom",
+            "value": "azure-custom",
+            "description": "Azure custom voice."
+          },
+          {
+            "name": "azure_standard",
+            "value": "azure-standard",
+            "description": "Azure standard voice."
+          },
+          {
+            "name": "azure_personal",
+            "value": "azure-personal",
+            "description": "Azure personal voice."
+          }
+        ]
+      }
+    },
+    "Background": {
+      "type": "object",
+      "description": "Defines a video background, either a solid color or an image URL (mutually exclusive).",
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "Background color in hex format (e.g., `#00FF00FF`). Cannot be set if `image_url` is provided."
+        },
+        "image_url": {
+          "type": "string",
+          "description": "Background image URL. Cannot be set if `color` is provided."
+        }
+      }
+    },
+    "BasicFillerResponseConfig": {
+      "type": "object",
+      "description": "Configuration for basic/static filler response generation.\nRandomly selects from configured texts when any trigger condition is met.",
+      "properties": {
+        "texts": {
+          "type": "array",
+          "description": "List of filler text options to randomly select from.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FillerResponseConfigBase"
+        }
+      ],
+      "x-ms-discriminator-value": "static_filler"
+    },
+    "CachedTokenDetails": {
+      "type": "object",
+      "description": "Details of output token usage.",
+      "properties": {
+        "text_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cached text tokens."
+        },
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cached audio tokens."
+        },
+        "image_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cached image tokens."
+        }
+      },
+      "required": [
+        "text_tokens",
+        "audio_tokens",
+        "image_tokens"
+      ]
+    },
+    "ClientEvent": {
+      "type": "object",
+      "description": "A voicelive client event.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ClientEventType",
+          "description": "The type of event."
+        },
+        "event_id": {
+          "type": "string"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ClientEventConversationItemCreate": {
+      "type": "object",
+      "description": "Add a new Item to the Conversation's context, including messages, function\ncalls, and function call responses. This event can be used both to populate a\n\"history\" of the conversation and to add new items mid-stream, but has the\ncurrent limitation that it cannot populate assistant audio messages.\nIf successful, the server will respond with a `conversation.item.created`\nevent, otherwise an `error` event will be sent.",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "description": "Optional client-generated ID used to identify this event."
+        },
+        "previous_item_id": {
+          "type": "string",
+          "description": "The ID of the preceding item after which the new item will be inserted.\nIf not set, the new item will be appended to the end of the conversation.\nIf set to `root`, the new item will be added to the beginning of the conversation.\nIf set to an existing ID, it allows an item to be inserted mid-conversation. If the\nID cannot be found, an error will be returned and the item will not be added."
+        },
+        "item": {
+          "$ref": "#/definitions/ConversationRequestItem"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.create"
+    },
+    "ClientEventConversationItemDelete": {
+      "type": "object",
+      "description": "Send this event when you want to remove any item from the conversation\nhistory. The server will respond with a `conversation.item.deleted` event,\nunless the item does not exist in the conversation history, in which case the\nserver will respond with an error.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item to delete."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.delete"
+    },
+    "ClientEventConversationItemRetrieve": {
+      "type": "object",
+      "description": "Send this event when you want to retrieve the server's representation of a specific item in the conversation history. This is useful, for example, to inspect user audio after noise cancellation and VAD.\nThe server will respond with a `conversation.item.retrieved` event,\nunless the item does not exist in the conversation history, in which case the\nserver will respond with an error.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item to retrieve."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.retrieve"
+    },
+    "ClientEventConversationItemTruncate": {
+      "type": "object",
+      "description": "Send this event to truncate a previous assistant message’s audio. The server\nwill produce audio faster than voicelive, so this event is useful when the user\ninterrupts to truncate audio that has already been sent to the client but not\nyet played. This will synchronize the server's understanding of the audio with\nthe client's playback.\nTruncating audio will delete the server-side text transcript to ensure there\nis not text in the context that hasn't been heard by the user.\nIf successful, the server will respond with a `conversation.item.truncated`\nevent.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the assistant message item to truncate. Only assistant message\nitems can be truncated."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part to truncate. Set this to 0."
+        },
+        "audio_end_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Inclusive duration up to which audio is truncated, in milliseconds. If\nthe audio_end_ms is greater than the actual audio duration, the server\nwill respond with an error."
+        }
+      },
+      "required": [
+        "item_id",
+        "content_index",
+        "audio_end_ms"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.truncate"
+    },
+    "ClientEventInputAudioBufferAppend": {
+      "type": "object",
+      "description": "Send this event to append audio bytes to the input audio buffer. The audio\nbuffer is temporary storage you can write to and later commit. In Server VAD\nmode, the audio buffer is used to detect speech and the server will decide\nwhen to commit. When Server VAD is disabled, you must commit the audio buffer\nmanually.\n\nThe client may choose how much audio to place in each event up to a maximum\nof 15 MiB, for example streaming smaller chunks from the client may allow the\nVAD to be more responsive. Unlike made other client events, the server will\nnot send a confirmation response to this event.",
+      "properties": {
+        "audio": {
+          "type": "string",
+          "description": "Base64-encoded audio. This must be in the format specified by the\n`input_audio_format` field in the session configuration."
+        }
+      },
+      "required": [
+        "audio"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.append"
+    },
+    "ClientEventInputAudioBufferClear": {
+      "type": "object",
+      "description": "Send this event to clear the audio bytes in the buffer. The server will\nrespond with an `input_audio_buffer.cleared` event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.clear"
+    },
+    "ClientEventInputAudioBufferCommit": {
+      "type": "object",
+      "description": "Send this event to commit the user input audio buffer, which will create a\nnew user message item in the conversation. This event will produce an error\nif the input audio buffer is empty. When in Server VAD mode, the client does\nnot need to send this event, the server will commit the audio buffer\nautomatically.\nCommitting the input audio buffer will trigger input audio transcription\n(if enabled in session configuration), but it will not create a response\nfrom the model. The server will respond with an `input_audio_buffer.committed`\nevent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.commit"
+    },
+    "ClientEventInputAudioClear": {
+      "type": "object",
+      "description": "Clears all input audio currently being streamed.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio.clear"
+    },
+    "ClientEventInputAudioTurnAppend": {
+      "type": "object",
+      "description": "Appends audio data to an ongoing input turn.",
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "description": "The ID of the turn this audio is part of."
+        },
+        "audio": {
+          "type": "string",
+          "description": "Base64-encoded audio chunk."
+        }
+      },
+      "required": [
+        "turn_id",
+        "audio"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio.turn.append"
+    },
+    "ClientEventInputAudioTurnCancel": {
+      "type": "object",
+      "description": "Cancels an in-progress input audio turn.",
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "description": "The ID of the turn to cancel."
+        }
+      },
+      "required": [
+        "turn_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio.turn.cancel"
+    },
+    "ClientEventInputAudioTurnEnd": {
+      "type": "object",
+      "description": "Marks the end of an audio input turn.",
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "description": "The ID of the audio turn being ended."
+        }
+      },
+      "required": [
+        "turn_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio.turn.end"
+    },
+    "ClientEventInputAudioTurnStart": {
+      "type": "object",
+      "description": "Indicates the start of a new audio input turn.",
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "description": "Unique identifier for the input audio turn."
+        }
+      },
+      "required": [
+        "turn_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio.turn.start"
+    },
+    "ClientEventResponseCancel": {
+      "type": "object",
+      "description": "Send this event to cancel an in-progress response. The server will respond\nwith a `response.cancelled` event or an error if there is no response to\ncancel.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "A specific response ID to cancel - if not provided, will cancel an\nin-progress response in the default conversation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.cancel"
+    },
+    "ClientEventResponseCreate": {
+      "type": "object",
+      "description": "This event instructs the server to create a Response, which means triggering\nmodel inference. When in Server VAD mode, the server will create Responses\nautomatically.\nA Response will include at least one Item, and may have two, in which case\nthe second will be a function call. These Items will be appended to the\nconversation history.\nThe server will respond with a `response.created` event, events for Items\nand content created, and finally a `response.done` event to indicate the\nResponse is complete.\nThe `response.create` event includes inference configuration like\n`instructions`, and `temperature`. These fields will override the Session's\nconfiguration for this Response only.",
+      "properties": {
+        "response": {
+          "$ref": "#/definitions/ResponseCreateParams"
+        },
+        "additional_instructions": {
+          "type": "string",
+          "description": "additional instructions (system prompt) appended to the default instructions of the session. Only affects this response only."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.create"
+    },
+    "ClientEventSessionAvatarConnect": {
+      "type": "object",
+      "description": "Sent when the client connects and provides its SDP (Session Description Protocol)\n\nfor avatar-related media negotiation.",
+      "properties": {
+        "client_sdp": {
+          "type": "string",
+          "description": "The client's SDP offer."
+        }
+      },
+      "required": [
+        "client_sdp"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.avatar.connect"
+    },
+    "ClientEventSessionUpdate": {
+      "type": "object",
+      "description": "Send this event to update the session’s default configuration.\nThe client may send this event at any time to update any field,\nexcept for `voice`. However, note that once a session has been\ninitialized with a particular `model`, it can’t be changed to\nanother model using `session.update`.\nWhen the server receives a `session.update`, it will respond\nwith a `session.updated` event showing the full, effective configuration.\nOnly the fields that are present are updated. To clear a field like\n`instructions`, pass an empty string.",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/RequestSession"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.update"
+    },
+    "ClientEventType": {
+      "type": "string",
+      "description": "Client event types used in VoiceLive protocol.",
+      "enum": [
+        "session.update",
+        "input_audio_buffer.append",
+        "input_audio_buffer.commit",
+        "input_audio_buffer.clear",
+        "input_audio.turn.start",
+        "input_audio.turn.append",
+        "input_audio.turn.end",
+        "input_audio.turn.cancel",
+        "input_audio.clear",
+        "conversation.item.create",
+        "conversation.item.retrieve",
+        "conversation.item.truncate",
+        "conversation.item.delete",
+        "response.create",
+        "response.cancel",
+        "session.avatar.connect",
+        "mcp_approval_response"
+      ],
+      "x-ms-enum": {
+        "name": "ClientEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "session_update",
+            "value": "session.update"
+          },
+          {
+            "name": "input_audio_buffer_append",
+            "value": "input_audio_buffer.append"
+          },
+          {
+            "name": "input_audio_buffer_commit",
+            "value": "input_audio_buffer.commit"
+          },
+          {
+            "name": "input_audio_buffer_clear",
+            "value": "input_audio_buffer.clear"
+          },
+          {
+            "name": "input_audio_turn_start",
+            "value": "input_audio.turn.start"
+          },
+          {
+            "name": "input_audio_turn_append",
+            "value": "input_audio.turn.append"
+          },
+          {
+            "name": "input_audio_turn_end",
+            "value": "input_audio.turn.end"
+          },
+          {
+            "name": "input_audio_turn_cancel",
+            "value": "input_audio.turn.cancel"
+          },
+          {
+            "name": "input_audio_clear",
+            "value": "input_audio.clear"
+          },
+          {
+            "name": "conversation_item_create",
+            "value": "conversation.item.create"
+          },
+          {
+            "name": "conversation_item_retrieve",
+            "value": "conversation.item.retrieve"
+          },
+          {
+            "name": "conversation_item_truncate",
+            "value": "conversation.item.truncate"
+          },
+          {
+            "name": "conversation_item_delete",
+            "value": "conversation.item.delete"
+          },
+          {
+            "name": "response_create",
+            "value": "response.create"
+          },
+          {
+            "name": "response_cancel",
+            "value": "response.cancel"
+          },
+          {
+            "name": "session_avatar_connect",
+            "value": "session.avatar.connect"
+          },
+          {
+            "name": "mcp_approval_response",
+            "value": "mcp_approval_response"
+          }
+        ]
+      }
+    },
+    "ContentPart": {
+      "type": "object",
+      "description": "Base for any content part; discriminated by `type`.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentPartType"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ContentPartType": {
+      "type": "string",
+      "enum": [
+        "input_text",
+        "input_audio",
+        "input_image",
+        "text",
+        "audio"
+      ],
+      "x-ms-enum": {
+        "name": "ContentPartType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "input_text",
+            "value": "input_text"
+          },
+          {
+            "name": "input_audio",
+            "value": "input_audio"
+          },
+          {
+            "name": "input_image",
+            "value": "input_image"
+          },
+          {
+            "name": "text",
+            "value": "text"
+          },
+          {
+            "name": "audio",
+            "value": "audio"
+          }
+        ]
+      }
+    },
+    "ConversationItemBase": {
+      "type": "object",
+      "description": "The item to add to the conversation."
+    },
+    "ConversationRequestItem": {
+      "type": "object",
+      "description": "Base for any response item; discriminated by `type`.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ItemType"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EouDetection": {
+      "type": "object",
+      "description": "Top-level union for end-of-utterance (EOU) semantic detection configuration.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "enum": [
+            "semantic_detection_v1",
+            "semantic_detection_v1_en",
+            "semantic_detection_v1_multilingual"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "model",
+      "required": [
+        "model"
+      ]
+    },
+    "EouThresholdLevel": {
+      "type": "string",
+      "description": "Threshold level settings for Azure semantic end-of-utterance detection.",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "EouThresholdLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Low sensitivity threshold level."
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Medium sensitivity threshold level."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "High sensitivity threshold level."
+          },
+          {
+            "name": "default",
+            "value": "default",
+            "description": "Default sensitivity threshold level."
+          }
+        ]
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Standard error response envelope.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/VoiceLiveErrorDetails",
+          "description": "Error object returned in case of API failure."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "FillerResponseConfig": {},
+    "FillerResponseConfigBase": {
+      "type": "object",
+      "description": "Base model for filler response configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FillerResponseConfigType",
+          "description": "The type of filler response configuration."
+        },
+        "triggers": {
+          "type": "array",
+          "description": "List of triggers that can fire the filler. Any trigger can activate the filler (OR logic).\nSupported: 'latency', 'tool'.",
+          "default": [
+            "latency"
+          ],
+          "items": {
+            "$ref": "#/definitions/FillerTrigger"
+          }
+        },
+        "latency_threshold_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Latency threshold in milliseconds before triggering filler response. Default is 2000ms.",
+          "minimum": 0
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FillerResponseConfigType": {
+      "type": "string",
+      "description": "Filler response configuration types.",
+      "enum": [
+        "static_filler",
+        "llm_filler"
+      ],
+      "x-ms-enum": {
+        "name": "FillerResponseConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "static_filler",
+            "value": "static_filler",
+            "description": "Static filler configuration type."
+          },
+          {
+            "name": "llm_filler",
+            "value": "llm_filler",
+            "description": "LLM-based filler configuration type."
+          }
+        ]
+      }
+    },
+    "FillerTrigger": {
+      "type": "string",
+      "description": "Triggers that can activate filler response generation.",
+      "enum": [
+        "latency",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "FillerTrigger",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "latency",
+            "value": "latency",
+            "description": "Trigger filler when response latency exceeds threshold."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "Trigger filler when a tool call is being executed."
+          }
+        ]
+      }
+    },
+    "FoundryAgentContextType": {
+      "type": "string",
+      "description": "The available set of Foundry agent context types.",
+      "enum": [
+        "no_context",
+        "agent_context"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryAgentContextType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "no_context",
+            "value": "no_context",
+            "description": "Only the current user input is sent, no context maintained."
+          },
+          {
+            "name": "agent_context",
+            "value": "agent_context",
+            "description": "Agent maintains its own context (thread), only current input sent per call."
+          }
+        ]
+      }
+    },
+    "FoundryAgentTool": {
+      "type": "object",
+      "description": "The definition of a Foundry agent tool as used by the voicelive endpoint.",
+      "properties": {
+        "agent_name": {
+          "type": "string",
+          "description": "The name of the Foundry agent to call."
+        },
+        "agent_version": {
+          "type": "string",
+          "description": "The version of the Foundry agent to call."
+        },
+        "project_name": {
+          "type": "string",
+          "description": "The name of the Foundry project containing the agent."
+        },
+        "client_id": {
+          "type": "string",
+          "description": "The client ID associated with the Foundry agent."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the Foundry agent tool. If this is provided, it will be used instead of the agent's description in foundry portal."
+        },
+        "foundry_resource_override": {
+          "type": "string",
+          "description": "An optional override for the Foundry resource used to execute the agent."
+        },
+        "agent_context_type": {
+          "type": "string",
+          "description": "The context type to use when invoking the Foundry agent. Defaults to 'agent_context'.",
+          "default": "agent_context",
+          "enum": [
+            "no_context",
+            "agent_context"
+          ],
+          "x-ms-enum": {
+            "name": "FoundryAgentContextType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "no_context",
+                "value": "no_context",
+                "description": "Only the current user input is sent, no context maintained."
+              },
+              {
+                "name": "agent_context",
+                "value": "agent_context",
+                "description": "Agent maintains its own context (thread), only current input sent per call."
+              }
+            ]
+          }
+        },
+        "return_agent_response_directly": {
+          "type": "boolean",
+          "description": "Whether to return the agent's response directly in the VoiceLive response. Set to false means to ask the voice live to rewrite the response.",
+          "default": true
+        }
+      },
+      "required": [
+        "agent_name",
+        "project_name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "foundry_agent"
+    },
+    "FunctionCallItem": {
+      "type": "object",
+      "description": "A function call item within a conversation.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "call_id": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/ItemParamStatus"
+        }
+      },
+      "required": [
+        "name",
+        "call_id",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationRequestItem"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call"
+    },
+    "FunctionCallOutputItem": {
+      "type": "object",
+      "description": "A function call output item within a conversation.",
+      "properties": {
+        "call_id": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/ItemParamStatus"
+        }
+      },
+      "required": [
+        "call_id",
+        "output"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationRequestItem"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call_output"
+    },
+    "FunctionTool": {
+      "type": "object",
+      "description": "The definition of a function tool as used by the voicelive endpoint.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "parameters": {}
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "IceServer": {
+      "type": "object",
+      "description": "ICE server configuration for WebRTC connection negotiation.",
+      "properties": {
+        "urls": {
+          "type": "array",
+          "description": "List of ICE server URLs (e.g., TURN or STUN endpoints).",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "username": {
+          "type": "string",
+          "description": "Optional username used for authentication with the ICE server."
+        },
+        "credential": {
+          "type": "string",
+          "description": "Optional credential (e.g., password or token) used for authentication."
+        }
+      },
+      "required": [
+        "urls"
+      ]
+    },
+    "InputAudioContentPart": {
+      "type": "object",
+      "description": "Input audio content part.",
+      "properties": {
+        "audio": {
+          "type": "string"
+        },
+        "transcript": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "audio"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio"
+    },
+    "InputAudioFormat": {
+      "type": "string",
+      "description": "Input audio format types supported.",
+      "enum": [
+        "pcm16",
+        "g711_ulaw",
+        "g711_alaw"
+      ],
+      "x-ms-enum": {
+        "name": "InputAudioFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pcm16",
+            "value": "pcm16",
+            "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+          },
+          {
+            "name": "g711_ulaw",
+            "value": "g711_ulaw",
+            "description": "G.711 μ-law (mu-law) audio format at 8kHz sampling rate"
+          },
+          {
+            "name": "g711_alaw",
+            "value": "g711_alaw",
+            "description": "G.711 A-law audio format at 8kHz sampling rate"
+          }
+        ]
+      }
+    },
+    "InputTextContentPart": {
+      "type": "object",
+      "description": "Input text content part.",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "input_text"
+    },
+    "InputTokenDetails": {
+      "type": "object",
+      "description": "Details of input token usage.",
+      "properties": {
+        "cached_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cached tokens used in the input."
+        },
+        "text_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of text tokens used in the input."
+        },
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of audio tokens used in the input."
+        },
+        "image_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of image tokens used in the input."
+        },
+        "cached_tokens_details": {
+          "$ref": "#/definitions/CachedTokenDetails",
+          "description": "Details of cached token usage."
+        }
+      },
+      "required": [
+        "cached_tokens",
+        "text_tokens",
+        "audio_tokens",
+        "image_tokens",
+        "cached_tokens_details"
+      ]
+    },
+    "ItemParamStatus": {
+      "type": "string",
+      "description": "Indicates the processing status of an item or parameter.",
+      "enum": [
+        "completed",
+        "incomplete"
+      ],
+      "x-ms-enum": {
+        "name": "ItemParamStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "Item or parameter is still being processed."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "Item or parameter is not yet complete."
+          }
+        ]
+      }
+    },
+    "ItemType": {
+      "type": "string",
+      "enum": [
+        "message",
+        "function_call",
+        "function_call_output",
+        "mcp_list_tools",
+        "mcp_call",
+        "mcp_approval_request",
+        "mcp_approval_response",
+        "foundry_agent_call"
+      ],
+      "x-ms-enum": {
+        "name": "ItemType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "message",
+            "value": "message"
+          },
+          {
+            "name": "function_call",
+            "value": "function_call"
+          },
+          {
+            "name": "function_call_output",
+            "value": "function_call_output"
+          },
+          {
+            "name": "mcp_list_tools",
+            "value": "mcp_list_tools"
+          },
+          {
+            "name": "mcp_call",
+            "value": "mcp_call"
+          },
+          {
+            "name": "mcp_approval_request",
+            "value": "mcp_approval_request"
+          },
+          {
+            "name": "mcp_approval_response",
+            "value": "mcp_approval_response"
+          },
+          {
+            "name": "foundry_agent_call",
+            "value": "foundry_agent_call"
+          }
+        ]
+      }
+    },
+    "LlmFillerResponseConfig": {
+      "type": "object",
+      "description": "Configuration for LLM-based filler response generation.\nUses LLM to generate context-aware filler responses when any trigger condition is met.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model to use for LLM-based filler generation. Default is gpt-4.1-mini."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Custom instructions for generating filler responses. If not provided, a default prompt is used."
+        },
+        "max_completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of tokens to generate for the filler response.",
+          "default": 50,
+          "minimum": 1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FillerResponseConfigBase"
+        }
+      ],
+      "x-ms-discriminator-value": "llm_filler"
+    },
+    "LogProbProperties": {
+      "type": "object",
+      "description": "A single log probability entry for a token.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The token that was used to generate the log probability."
+        },
+        "logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The log probability of the token."
+        },
+        "bytes": {
+          "type": "array",
+          "description": "The bytes that were used to generate the log probability.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "token",
+        "logprob",
+        "bytes"
+      ]
+    },
+    "MCPApprovalResponseRequestItem": {
+      "type": "object",
+      "description": "A request item that represents a response to an MCP approval request.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request."
+        },
+        "approve": {
+          "type": "boolean",
+          "description": "Whether the tool call was approved."
+        }
+      },
+      "required": [
+        "approval_request_id",
+        "approve"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationRequestItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_response"
+    },
+    "MCPApprovalType": {
+      "type": "string",
+      "description": "The available set of MCP approval types.",
+      "enum": [
+        "never",
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "MCPApprovalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Never",
+            "value": "never",
+            "description": "Approval is never required."
+          },
+          {
+            "name": "Always",
+            "value": "always",
+            "description": "Approval is always required."
+          }
+        ]
+      }
+    },
+    "MCPServer": {
+      "type": "object",
+      "description": "The definition of an MCP server as used by the voicelive endpoint.",
+      "properties": {
+        "server_label": {
+          "type": "string"
+        },
+        "server_url": {
+          "type": "string"
+        },
+        "authorization": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "allowed_tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "require_approval": {}
+      },
+      "required": [
+        "server_label",
+        "server_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
+    "MCPTool": {
+      "type": "object",
+      "description": "Represents a mcp tool definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tool."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the tool."
+        },
+        "input_schema": {
+          "description": "The input schema for the tool."
+        },
+        "annotations": {
+          "description": "The annotations for the tool."
+        }
+      },
+      "required": [
+        "name",
+        "input_schema"
+      ]
+    },
+    "MessageContentPart": {
+      "type": "object",
+      "description": "Base for any message content part; discriminated by `type`.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentPartType",
+          "description": "The type of the content part."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "MessageItem": {
+      "type": "object",
+      "description": "A message item within a conversation.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/MessageRole",
+          "description": "The role of the message origionator."
+        },
+        "content": {
+          "type": "array",
+          "description": "The content parts of the message.",
+          "items": {
+            "$ref": "#/definitions/MessageContentPart"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/ItemParamStatus",
+          "description": "Processing status of the message item."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role",
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationRequestItem"
+        }
+      ],
+      "x-ms-discriminator-value": "message"
+    },
+    "MessageRole": {
+      "type": "string",
+      "enum": [
+        "system",
+        "user",
+        "assistant"
+      ],
+      "x-ms-enum": {
+        "name": "MessageRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "system",
+            "value": "system"
+          },
+          {
+            "name": "user",
+            "value": "user"
+          },
+          {
+            "name": "assistant",
+            "value": "assistant"
+          }
+        ]
+      }
+    },
+    "Modality": {
+      "type": "string",
+      "description": "Supported modalities for the session.",
+      "enum": [
+        "text",
+        "audio",
+        "animation",
+        "avatar"
+      ],
+      "x-ms-enum": {
+        "name": "Modality",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Text modality."
+          },
+          {
+            "name": "audio",
+            "value": "audio",
+            "description": "Audio modality."
+          },
+          {
+            "name": "animation",
+            "value": "animation",
+            "description": "Animation modality."
+          },
+          {
+            "name": "avatar",
+            "value": "avatar",
+            "description": "Avatar modality."
+          }
+        ]
+      }
+    },
+    "OAIVoice": {
+      "type": "string",
+      "description": "Supported OpenAI voice names (string enum).",
+      "enum": [
+        "alloy",
+        "ash",
+        "ballad",
+        "coral",
+        "echo",
+        "sage",
+        "shimmer",
+        "verse",
+        "marin",
+        "cedar"
+      ],
+      "x-ms-enum": {
+        "name": "OAIVoice",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "alloy",
+            "value": "alloy",
+            "description": "Alloy voice."
+          },
+          {
+            "name": "ash",
+            "value": "ash",
+            "description": "Ash voice."
+          },
+          {
+            "name": "ballad",
+            "value": "ballad",
+            "description": "Ballard voice."
+          },
+          {
+            "name": "coral",
+            "value": "coral",
+            "description": "Coral voice."
+          },
+          {
+            "name": "echo",
+            "value": "echo",
+            "description": "Echo voice."
+          },
+          {
+            "name": "sage",
+            "value": "sage",
+            "description": "Sage voice."
+          },
+          {
+            "name": "shimmer",
+            "value": "shimmer",
+            "description": "Shimmer voice."
+          },
+          {
+            "name": "verse",
+            "value": "verse",
+            "description": "Verse voice."
+          },
+          {
+            "name": "marin",
+            "value": "marin",
+            "description": "Marin voice."
+          },
+          {
+            "name": "cedar",
+            "value": "cedar",
+            "description": "Cedar voice."
+          }
+        ]
+      }
+    },
+    "OpenAIVoice": {
+      "type": "object",
+      "description": "OpenAI voice configuration with explicit type field.\n\nThis provides a unified interface for OpenAI voices, complementing the\nexisting string-based OAIVoice for backward compatibility.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the voice.",
+          "enum": [
+            "openai"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "$ref": "#/definitions/OAIVoice",
+          "description": "The name of the OpenAI voice."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "OutputAudioFormat": {
+      "type": "string",
+      "description": "Output audio format types supported.",
+      "enum": [
+        "pcm16",
+        "pcm16_8000hz",
+        "pcm16_16000hz",
+        "g711_ulaw",
+        "g711_alaw"
+      ],
+      "x-ms-enum": {
+        "name": "OutputAudioFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pcm16",
+            "value": "pcm16",
+            "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+          },
+          {
+            "name": "pcm16_8000hz",
+            "value": "pcm16_8000hz",
+            "description": "16-bit PCM audio format at 8kHz sampling rate"
+          },
+          {
+            "name": "pcm16_16000hz",
+            "value": "pcm16_16000hz",
+            "description": "16-bit PCM audio format at 16kHz sampling rate"
+          },
+          {
+            "name": "g711_ulaw",
+            "value": "g711_ulaw",
+            "description": "G.711 μ-law (mu-law) audio format at 8kHz sampling rate"
+          },
+          {
+            "name": "g711_alaw",
+            "value": "g711_alaw",
+            "description": "G.711 A-law audio format at 8kHz sampling rate"
+          }
+        ]
+      }
+    },
+    "OutputTextContentPart": {
+      "type": "object",
+      "description": "Output text content part.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text content."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "OutputTokenDetails": {
+      "type": "object",
+      "description": "Details of output token usage.",
+      "properties": {
+        "text_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of text tokens generated in the output."
+        },
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of audio tokens generated in the output."
+        }
+      },
+      "required": [
+        "text_tokens",
+        "audio_tokens"
+      ]
+    },
+    "PersonalVoiceModels": {
+      "type": "string",
+      "description": "PersonalVoice models",
+      "enum": [
+        "DragonLatestNeural",
+        "PhoenixLatestNeural",
+        "PhoenixV2Neural"
+      ],
+      "x-ms-enum": {
+        "name": "PersonalVoiceModels",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DragonLatestNeural",
+            "value": "DragonLatestNeural",
+            "description": "Use the latest Dragon model."
+          },
+          {
+            "name": "PhoenixLatestNeural",
+            "value": "PhoenixLatestNeural",
+            "description": "Use the latest Phoenix model."
+          },
+          {
+            "name": "PhoenixV2Neural",
+            "value": "PhoenixV2Neural",
+            "description": "Use the Phoenix V2 model."
+          }
+        ]
+      }
+    },
+    "PhotoAvatarBaseModes": {
+      "type": "string",
+      "description": "Photo avatar base modes",
+      "enum": [
+        "vasa-1"
+      ],
+      "x-ms-enum": {
+        "name": "PhotoAvatarBaseModes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "vasa-1",
+            "value": "vasa-1",
+            "description": "VASA-1 model"
+          }
+        ]
+      }
+    },
+    "ReasoningEffort": {
+      "type": "string",
+      "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.",
+      "enum": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "x-ms-enum": {
+        "name": "ReasoningEffort",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "No reasoning effort."
+          },
+          {
+            "name": "minimal",
+            "value": "minimal",
+            "description": "Minimal reasoning effort."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Low reasoning effort - faster responses with less reasoning."
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Medium reasoning effort - balanced between speed and reasoning depth."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "High reasoning effort - more thorough reasoning, may take longer."
+          },
+          {
+            "name": "xhigh",
+            "value": "xhigh",
+            "description": "Extra high reasoning effort - maximum reasoning depth."
+          }
+        ]
+      }
+    },
+    "RequestAudioContentPart": {
+      "type": "object",
+      "description": "An audio content part for a request.",
+      "properties": {
+        "transcript": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio"
+    },
+    "RequestImageContentPart": {
+      "type": "object",
+      "description": "Input image content part.",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "detail": {
+          "$ref": "#/definitions/RequestImageContentPartDetail"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "input_image"
+    },
+    "RequestImageContentPartDetail": {
+      "type": "string",
+      "description": "Specifies an image's detail level. Can be 'auto', 'low', 'high', or an unknown future value.",
+      "enum": [
+        "auto",
+        "low",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "RequestImageContentPartDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Automatically select an appropriate detail level."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Use a lower detail level to reduce bandwidth or cost."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "Use a higher detail level—potentially more resource-intensive."
+          }
+        ]
+      }
+    },
+    "RequestSession": {
+      "type": "object",
+      "description": "Base for session configuration shared between request and response.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model for the session."
+        },
+        "modalities": {
+          "type": "array",
+          "description": "The modalities to be used in the session.",
+          "items": {
+            "$ref": "#/definitions/Modality"
+          }
+        },
+        "animation": {
+          "$ref": "#/definitions/Animation",
+          "description": "The animation configuration for the session."
+        },
+        "voice": {
+          "$ref": "#/definitions/Voice",
+          "description": "The voice configuration for the session."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Optional instructions to guide the model's behavior throughout the session."
+        },
+        "input_audio_sampling_rate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Input audio sampling rate in Hz. Available values:\n\n- For pcm16: 8000, 16000, 24000\n\n- For g711_alaw/g711_ulaw: 8000",
+          "default": 24000
+        },
+        "input_audio_format": {
+          "type": "string",
+          "description": "Input audio format. Default is 'pcm16'.",
+          "default": "pcm16",
+          "enum": [
+            "pcm16",
+            "g711_ulaw",
+            "g711_alaw"
+          ],
+          "x-ms-enum": {
+            "name": "InputAudioFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "pcm16",
+                "value": "pcm16",
+                "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "g711_ulaw",
+                "value": "g711_ulaw",
+                "description": "G.711 μ-law (mu-law) audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "g711_alaw",
+                "value": "g711_alaw",
+                "description": "G.711 A-law audio format at 8kHz sampling rate"
+              }
+            ]
+          }
+        },
+        "output_audio_format": {
+          "type": "string",
+          "description": "Output audio format. Default is 'pcm16'.",
+          "default": "pcm16",
+          "enum": [
+            "pcm16",
+            "pcm16_8000hz",
+            "pcm16_16000hz",
+            "g711_ulaw",
+            "g711_alaw"
+          ],
+          "x-ms-enum": {
+            "name": "OutputAudioFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "pcm16",
+                "value": "pcm16",
+                "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "pcm16_8000hz",
+                "value": "pcm16_8000hz",
+                "description": "16-bit PCM audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "pcm16_16000hz",
+                "value": "pcm16_16000hz",
+                "description": "16-bit PCM audio format at 16kHz sampling rate"
+              },
+              {
+                "name": "g711_ulaw",
+                "value": "g711_ulaw",
+                "description": "G.711 μ-law (mu-law) audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "g711_alaw",
+                "value": "g711_alaw",
+                "description": "G.711 A-law audio format at 8kHz sampling rate"
+              }
+            ]
+          }
+        },
+        "turn_detection": {
+          "$ref": "#/definitions/TurnDetection",
+          "description": "Type of turn detection to use."
+        },
+        "input_audio_noise_reduction": {
+          "$ref": "#/definitions/AudioNoiseReduction",
+          "description": "Configuration for input audio noise reduction."
+        },
+        "input_audio_echo_cancellation": {
+          "$ref": "#/definitions/AudioEchoCancellation",
+          "description": "Configuration for echo cancellation during server-side audio processing."
+        },
+        "avatar": {
+          "$ref": "#/definitions/AvatarConfig",
+          "description": "Configuration for avatar streaming and behavior during the session."
+        },
+        "input_audio_transcription": {
+          "$ref": "#/definitions/AudioInputTranscriptionOptions",
+          "description": "Configuration for input audio transcription."
+        },
+        "output_audio_timestamp_types": {
+          "type": "array",
+          "description": "Types of timestamps to include in audio response content.",
+          "items": {
+            "$ref": "#/definitions/AudioTimestampType"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "description": "Configuration for tools to be used during the session, if applicable.",
+          "items": {
+            "$ref": "#/definitions/Tool"
+          }
+        },
+        "tool_choice": {
+          "$ref": "#/definitions/ToolChoice",
+          "description": "Specifies which tools the model is allowed to call during the session."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7."
+        },
+        "max_response_output_tokens": {
+          "description": "Maximum number of tokens to generate in the response. Default is unlimited."
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
+        "filler_response": {
+          "$ref": "#/definitions/FillerResponseConfig",
+          "description": "Configuration for filler response generation during latency or tool calls."
+        }
+      }
+    },
+    "RequestTextContentPart": {
+      "type": "object",
+      "description": "A text content part for a request.",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "input_text"
+    },
+    "Response": {
+      "type": "object",
+      "description": "The response resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the response."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, must be `realtime.response`.",
+          "enum": [
+            "realtime.response"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/ResponseStatus",
+          "description": "The final status of the response.\n\nOne of: `completed`, `cancelled`, `failed`, `incomplete`, or `in_progress`."
+        },
+        "status_details": {
+          "$ref": "#/definitions/ResponseStatusDetails",
+          "description": "Additional details about the status."
+        },
+        "output": {
+          "type": "array",
+          "description": "The list of output items generated by the response.",
+          "items": {
+            "$ref": "#/definitions/ResponseItem"
+          }
+        },
+        "usage": {
+          "$ref": "#/definitions/TokenUsage",
+          "description": "Usage statistics for the Response, this will correspond to billing. A\nVoiceLive API session will maintain a conversation context and append new\nItems to the Conversation, thus output from previous turns (text and\naudio tokens) will become the input for later turns."
+        },
+        "conversation_id": {
+          "type": "string",
+          "description": "Which conversation the response is added to, determined by the `conversation`\nfield in the `response.create` event. If `auto`, the response will be added to\nthe default conversation and the value of `conversation_id` will be an id like\n`conv_1234`. If `none`, the response will not be added to any conversation and\nthe value of `conversation_id` will be `null`. If responses are being triggered\nby server VAD, the response will be added to the default conversation, thus\nthe `conversation_id` will be an id like `conv_1234`."
+        },
+        "voice": {
+          "$ref": "#/definitions/Voice",
+          "description": "supported voice identifiers and configurations."
+        },
+        "modalities": {
+          "type": "array",
+          "description": "The set of modalities the model used to respond. If there are multiple modalities,\nthe model will pick one, for example if `modalities` is `[\"text\", \"audio\"]`, the model\ncould be responding in either text or audio.",
+          "items": {
+            "$ref": "#/definitions/Modality"
+          }
+        },
+        "output_audio_format": {
+          "type": "string",
+          "description": "The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.",
+          "default": "pcm16",
+          "enum": [
+            "pcm16",
+            "pcm16_8000hz",
+            "pcm16_16000hz",
+            "g711_ulaw",
+            "g711_alaw"
+          ],
+          "x-ms-enum": {
+            "name": "OutputAudioFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "pcm16",
+                "value": "pcm16",
+                "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "pcm16_8000hz",
+                "value": "pcm16_8000hz",
+                "description": "16-bit PCM audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "pcm16_16000hz",
+                "value": "pcm16_16000hz",
+                "description": "16-bit PCM audio format at 16kHz sampling rate"
+              },
+              {
+                "name": "g711_ulaw",
+                "value": "g711_ulaw",
+                "description": "G.711 μ-law (mu-law) audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "g711_alaw",
+                "value": "g711_alaw",
+                "description": "G.711 A-law audio format at 8kHz sampling rate"
+              }
+            ]
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8."
+        },
+        "max_output_tokens": {
+          "description": "Maximum number of output tokens for a single assistant response,\ninclusive of tool calls, that was used in this response."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of up to 16 key-value pairs that can be attached to an object.\nThis can be useful for storing additional information about the object in a structured format.\nKeys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResponseAudioContentPart": {
+      "type": "object",
+      "description": "An audio content part for a response.",
+      "properties": {
+        "transcript": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "audio"
+    },
+    "ResponseCancelledDetails": {
+      "type": "object",
+      "description": "Details for a cancelled response.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "enum": [
+            "turn_detected",
+            "client_cancelled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "reason"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseStatusDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "cancelled"
+    },
+    "ResponseCreateParams": {
+      "type": "object",
+      "description": "Create a new VoiceLive response with these parameters",
+      "properties": {
+        "commit": {
+          "type": "boolean",
+          "description": "Whether to commit the response to the conversation. Defaults to true.",
+          "default": true
+        },
+        "cancel_previous": {
+          "type": "boolean",
+          "description": "Whether to cancel any ongoing generation before starting this one. Defaults to true.",
+          "default": true
+        },
+        "append_input_items": {
+          "type": "array",
+          "description": "Input items to append to the conversation context before generating a response.",
+          "items": {
+            "$ref": "#/definitions/ConversationRequestItem"
+          }
+        },
+        "input_items": {
+          "type": "array",
+          "description": "Input items to be used as the context for this response.\nAn empty array clears previous context.",
+          "items": {
+            "$ref": "#/definitions/ConversationRequestItem"
+          }
+        },
+        "modalities": {
+          "type": "array",
+          "description": "The set of modalities the model can respond with. To disable audio,\nset this to [\"text\"].",
+          "items": {
+            "$ref": "#/definitions/Modality"
+          }
+        },
+        "instructions": {
+          "type": "string",
+          "description": "The default system instructions (i.e. system message) prepended to model\ncalls. This field allows the client to guide the model on desired\nresponses. The model can be instructed on response content and format,\n(e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good\nresponses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion\ninto your voice\", \"laugh frequently\"). The instructions are not guaranteed\nto be followed by the model, but they provide guidance to the model on the\ndesired behavior.\n\nNote that the server sets default instructions which will be used if this\nfield is not set and are visible in the `session.created` event at the\nstart of the session."
+        },
+        "voice": {
+          "$ref": "#/definitions/Voice",
+          "description": "supported voice identifiers and configurations."
+        },
+        "output_audio_format": {
+          "type": "string",
+          "description": "The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.",
+          "default": "pcm16",
+          "enum": [
+            "pcm16",
+            "pcm16_8000hz",
+            "pcm16_16000hz",
+            "g711_ulaw",
+            "g711_alaw"
+          ],
+          "x-ms-enum": {
+            "name": "OutputAudioFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "pcm16",
+                "value": "pcm16",
+                "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "pcm16_8000hz",
+                "value": "pcm16_8000hz",
+                "description": "16-bit PCM audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "pcm16_16000hz",
+                "value": "pcm16_16000hz",
+                "description": "16-bit PCM audio format at 16kHz sampling rate"
+              },
+              {
+                "name": "g711_ulaw",
+                "value": "g711_ulaw",
+                "description": "G.711 μ-law (mu-law) audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "g711_alaw",
+                "value": "g711_alaw",
+                "description": "G.711 A-law audio format at 8kHz sampling rate"
+              }
+            ]
+          }
+        },
+        "tools": {
+          "type": "array",
+          "description": "Tools (functions) available to the model.",
+          "items": {
+            "$ref": "#/definitions/Tool"
+          }
+        },
+        "tool_choice": {
+          "type": "string",
+          "description": "How the model chooses tools. Options are `auto`, `none`, `required`, or\nspecify a function, like `{\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}`."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8."
+        },
+        "max_output_tokens": {
+          "description": "Maximum number of output tokens for a single assistant response,\ninclusive of tool calls. Provide an integer between 1 and 4096 to\nlimit output tokens, or `inf` for the maximum available tokens for a\ngiven model. Defaults to `inf`."
+        },
+        "pre_generated_assistant_message": {
+          "$ref": "#/definitions/AssistantMessageItem",
+          "description": "Create the response with pre-generated assistant message. The message item would be\nadded into the conversation history and returned with synthesized audio output in the created response."
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of up to 16 key-value pairs that can be attached to an object.\nThis can be useful for storing additional information about the object in a structured format.\nKeys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResponseFailedDetails": {
+      "type": "object",
+      "description": "Details for a failed response.",
+      "properties": {
+        "error": {}
+      },
+      "required": [
+        "error"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseStatusDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "failed"
+    },
+    "ResponseFoundryAgentCallItem": {
+      "type": "object",
+      "description": "A response item that represents a call to a Foundry agent.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Foundry agent."
+        },
+        "call_id": {
+          "type": "string",
+          "description": "The ID of the call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for the agent call."
+        },
+        "agent_response_id": {
+          "type": "string",
+          "description": "The ID of the agent response, if any."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output of the agent call."
+        },
+        "error": {
+          "description": "The error, if any, from the agent call."
+        }
+      },
+      "required": [
+        "name",
+        "call_id",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "foundry_agent_call"
+    },
+    "ResponseFunctionCallItem": {
+      "type": "object",
+      "description": "A function call item within a conversation.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "call_id": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/ResponseItemStatus"
+        }
+      },
+      "required": [
+        "name",
+        "call_id",
+        "arguments",
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call"
+    },
+    "ResponseFunctionCallOutputItem": {
+      "type": "object",
+      "description": "A function call output item within a conversation.",
+      "properties": {
+        "call_id": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "call_id",
+        "output"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call_output"
+    },
+    "ResponseIncompleteDetails": {
+      "type": "object",
+      "description": "Details for an incomplete response.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "enum": [
+            "max_output_tokens",
+            "content_filter"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "reason"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseStatusDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "incomplete"
+    },
+    "ResponseItem": {
+      "type": "object",
+      "description": "Base for any response item; discriminated by `type`.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ItemType"
+        },
+        "id": {
+          "type": "string"
+        },
+        "object": {
+          "type": "string",
+          "enum": [
+            "realtime.item"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ResponseItemStatus": {
+      "type": "string",
+      "description": "Indicates the processing status of a response item.",
+      "enum": [
+        "in_progress",
+        "completed",
+        "incomplete"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseItemStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "in_progress",
+            "value": "in_progress",
+            "description": "Item that is in progress."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "Item has been fully processed and is complete."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "Item has been processed but is incomplete."
+          }
+        ]
+      }
+    },
+    "ResponseMCPApprovalRequestItem": {
+      "type": "object",
+      "description": "A response item that represents a request for approval to call an MCP tool.",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for the tool call."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the tool to call."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tool."
+        }
+      },
+      "required": [
+        "name",
+        "server_label"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_request"
+    },
+    "ResponseMCPApprovalResponseItem": {
+      "type": "object",
+      "description": "A response item that represents a response to an MCP approval request.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request."
+        },
+        "approve": {
+          "type": "boolean",
+          "description": "Whether the tool call was approved."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the approval decision."
+        }
+      },
+      "required": [
+        "approval_request_id",
+        "approve"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_response"
+    },
+    "ResponseMCPCallItem": {
+      "type": "object",
+      "description": "A response item that represents a call to an MCP tool.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request, if any."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for the tool call."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tool."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the tool to call."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output of the tool call."
+        },
+        "error": {
+          "description": "The error, if any, from the tool call."
+        }
+      },
+      "required": [
+        "arguments",
+        "server_label",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_call"
+    },
+    "ResponseMCPListToolItem": {
+      "type": "object",
+      "description": "A response item that lists the tools available on an MCP server.",
+      "properties": {
+        "tools": {
+          "type": "array",
+          "description": "The tools available on the server.",
+          "items": {
+            "$ref": "#/definitions/MCPTool"
+          }
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tools."
+        }
+      },
+      "required": [
+        "tools",
+        "server_label"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools"
+    },
+    "ResponseMessageItem": {
+      "type": "object",
+      "description": "Base type for message item within a conversation.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/MessageRole"
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentPart"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/ResponseItemStatus"
+        }
+      },
+      "required": [
+        "role",
+        "content",
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "message"
+    },
+    "ResponseSession": {
+      "type": "object",
+      "description": "Base for session configuration in the response.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model for the session."
+        },
+        "modalities": {
+          "type": "array",
+          "description": "The modalities to be used in the session.",
+          "items": {
+            "$ref": "#/definitions/Modality"
+          }
+        },
+        "animation": {
+          "$ref": "#/definitions/Animation",
+          "description": "The animation configuration for the session."
+        },
+        "voice": {
+          "$ref": "#/definitions/Voice",
+          "description": "The voice configuration for the session."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Optional instructions to guide the model's behavior throughout the session."
+        },
+        "input_audio_sampling_rate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Input audio sampling rate in Hz. Available values:\n\n- For pcm16: 8000, 16000, 24000\n\n- For g711_alaw/g711_ulaw: 8000",
+          "default": 24000
+        },
+        "input_audio_format": {
+          "type": "string",
+          "description": "Input audio format. Default is 'pcm16'.",
+          "default": "pcm16",
+          "enum": [
+            "pcm16",
+            "g711_ulaw",
+            "g711_alaw"
+          ],
+          "x-ms-enum": {
+            "name": "InputAudioFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "pcm16",
+                "value": "pcm16",
+                "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "g711_ulaw",
+                "value": "g711_ulaw",
+                "description": "G.711 μ-law (mu-law) audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "g711_alaw",
+                "value": "g711_alaw",
+                "description": "G.711 A-law audio format at 8kHz sampling rate"
+              }
+            ]
+          }
+        },
+        "output_audio_format": {
+          "type": "string",
+          "description": "Output audio format. Default is 'pcm16'.",
+          "default": "pcm16",
+          "enum": [
+            "pcm16",
+            "pcm16_8000hz",
+            "pcm16_16000hz",
+            "g711_ulaw",
+            "g711_alaw"
+          ],
+          "x-ms-enum": {
+            "name": "OutputAudioFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "pcm16",
+                "value": "pcm16",
+                "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "pcm16_8000hz",
+                "value": "pcm16_8000hz",
+                "description": "16-bit PCM audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "pcm16_16000hz",
+                "value": "pcm16_16000hz",
+                "description": "16-bit PCM audio format at 16kHz sampling rate"
+              },
+              {
+                "name": "g711_ulaw",
+                "value": "g711_ulaw",
+                "description": "G.711 μ-law (mu-law) audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "g711_alaw",
+                "value": "g711_alaw",
+                "description": "G.711 A-law audio format at 8kHz sampling rate"
+              }
+            ]
+          }
+        },
+        "turn_detection": {
+          "$ref": "#/definitions/TurnDetection",
+          "description": "Type of turn detection to use."
+        },
+        "input_audio_noise_reduction": {
+          "$ref": "#/definitions/AudioNoiseReduction",
+          "description": "Configuration for input audio noise reduction."
+        },
+        "input_audio_echo_cancellation": {
+          "$ref": "#/definitions/AudioEchoCancellation",
+          "description": "Configuration for echo cancellation during server-side audio processing."
+        },
+        "avatar": {
+          "$ref": "#/definitions/AvatarConfig",
+          "description": "Configuration for avatar streaming and behavior during the session."
+        },
+        "input_audio_transcription": {
+          "$ref": "#/definitions/AudioInputTranscriptionOptions",
+          "description": "Configuration for input audio transcription."
+        },
+        "output_audio_timestamp_types": {
+          "type": "array",
+          "description": "Types of timestamps to include in audio response content.",
+          "items": {
+            "$ref": "#/definitions/AudioTimestampType"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "description": "Configuration for tools to be used during the session, if applicable.",
+          "items": {
+            "$ref": "#/definitions/Tool"
+          }
+        },
+        "tool_choice": {
+          "$ref": "#/definitions/ToolChoice",
+          "description": "Specifies which tools the model is allowed to call during the session."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7."
+        },
+        "max_response_output_tokens": {
+          "description": "Maximum number of tokens to generate in the response. Default is unlimited."
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
+        "filler_response": {
+          "$ref": "#/definitions/FillerResponseConfig",
+          "description": "Configuration for filler response generation during latency or tool calls."
+        },
+        "agent": {
+          "$ref": "#/definitions/AgentConfig",
+          "description": "The agent configuration for the session, if applicable."
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the session."
+        }
+      }
+    },
+    "ResponseStatus": {
+      "type": "string",
+      "description": "Terminal status of a response.",
+      "enum": [
+        "completed",
+        "cancelled",
+        "failed",
+        "incomplete",
+        "in_progress"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "completed",
+            "value": "completed"
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "failed",
+            "value": "failed"
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete"
+          },
+          {
+            "name": "in_progress",
+            "value": "in_progress"
+          }
+        ]
+      }
+    },
+    "ResponseStatusDetails": {
+      "type": "object",
+      "description": "Base for all non-success response details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResponseStatus"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ResponseTextContentPart": {
+      "type": "object",
+      "description": "A text content part for a response.",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "Scene": {
+      "type": "object",
+      "description": "Configuration for avatar's zoom level, position, rotation and movement amplitude in the video frame.",
+      "properties": {
+        "zoom": {
+          "type": "number",
+          "format": "float",
+          "description": "Zoom level of the avatar. Range is (0, +∞). Values less than 1 zoom out, values greater than 1 zoom in.",
+          "default": 0
+        },
+        "position_x": {
+          "type": "number",
+          "format": "float",
+          "description": "Horizontal position of the avatar. Range is [-1, 1], as a proportion of frame width. Negative values move left, positive values move right.",
+          "default": 0
+        },
+        "position_y": {
+          "type": "number",
+          "format": "float",
+          "description": "Vertical position of the avatar. Range is [-1, 1], as a proportion of frame height. Negative values move up, positive values move down.",
+          "default": 0
+        },
+        "rotation_x": {
+          "type": "number",
+          "format": "float",
+          "description": "Rotation around the X-axis (pitch). Range is [-π, π] in radians. Negative values rotate up, positive values rotate down.",
+          "default": 0
+        },
+        "rotation_y": {
+          "type": "number",
+          "format": "float",
+          "description": "Rotation around the Y-axis (yaw). Range is [-π, π] in radians. Negative values rotate left, positive values rotate right.",
+          "default": 0
+        },
+        "rotation_z": {
+          "type": "number",
+          "format": "float",
+          "description": "Rotation around the Z-axis (roll). Range is [-π, π] in radians. Negative values rotate anticlockwise, positive values rotate clockwise.",
+          "default": 0
+        },
+        "amplitude": {
+          "type": "number",
+          "format": "float",
+          "description": "Amplitude of the avatar movement. Range is (0, 1]. Values in (0, 1) mean reduced amplitude, 1 means full amplitude.",
+          "default": 0
+        }
+      }
+    },
+    "ServerEvent": {
+      "type": "object",
+      "description": "A voicelive server event.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ServerEventType",
+          "description": "The type of event."
+        },
+        "event_id": {
+          "type": "string"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ServerEventConversationItemCreated": {
+      "type": "object",
+      "description": "Returned when a conversation item is created. There are several scenarios that produce this event:\n- The server is generating a Response, which if successful will produce\neither one or two Items, which will be of type `message`\n(role `assistant`) or type `function_call`.\n- The input audio buffer has been committed, either by the client or the\nserver (in `server_vad` mode). The server will take the content of the\ninput audio buffer and add it to a new user message Item.\n- The client has sent a `conversation.item.create` event to add a new Item\nto the Conversation.",
+      "properties": {
+        "previous_item_id": {
+          "type": "string",
+          "description": "The ID of the preceding item in the Conversation context, allows the\nclient to understand the order of the conversation."
+        },
+        "item": {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.created"
+    },
+    "ServerEventConversationItemDeleted": {
+      "type": "object",
+      "description": "Returned when an item in the conversation is deleted by the client with a\n`conversation.item.delete` event. This event is used to synchronize the\nserver's understanding of the conversation history with the client's view.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item that was deleted."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.deleted"
+    },
+    "ServerEventConversationItemInputAudioTranscriptionCompleted": {
+      "type": "object",
+      "description": "This event is the output of audio transcription for user audio written to the\nuser audio buffer. Transcription begins when the input audio buffer is\ncommitted by the client or server (in `server_vad` mode). Transcription runs\nasynchronously with Response creation, so this event may come before or after\nthe Response events.\nVoiceLive API models accept audio natively, and thus input transcription is a\nseparate process run on a separate ASR (Automatic Speech Recognition) model.\nThe transcript may diverge somewhat from the model's interpretation, and\nshould be treated as a rough guide.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the user message item containing the audio."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part containing the audio."
+        },
+        "transcript": {
+          "type": "string",
+          "description": "The transcribed text."
+        }
+      },
+      "required": [
+        "item_id",
+        "content_index",
+        "transcript"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.input_audio_transcription.completed"
+    },
+    "ServerEventConversationItemInputAudioTranscriptionDelta": {
+      "type": "object",
+      "description": "Returned when the text value of an input audio transcription content part is updated.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The text delta."
+        },
+        "logprobs": {
+          "type": "array",
+          "description": "The log probabilities of the transcription.",
+          "items": {
+            "$ref": "#/definitions/LogProbProperties"
+          }
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.input_audio_transcription.delta"
+    },
+    "ServerEventConversationItemInputAudioTranscriptionFailed": {
+      "type": "object",
+      "description": "Returned when input audio transcription is configured, and a transcription\nrequest for a user message failed. These events are separate from other\n`error` events so that the client can identify the related Item.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the user message item."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part containing the audio."
+        },
+        "error": {
+          "$ref": "#/definitions/VoiceLiveErrorDetails",
+          "description": "Details of the transcription error."
+        }
+      },
+      "required": [
+        "item_id",
+        "content_index",
+        "error"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.input_audio_transcription.failed"
+    },
+    "ServerEventConversationItemRetrieved": {
+      "type": "object",
+      "description": "Returned when a conversation item is retrieved with `conversation.item.retrieve`.",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/ResponseItem"
+        },
+        "event_id": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.retrieved"
+    },
+    "ServerEventConversationItemTruncated": {
+      "type": "object",
+      "description": "Returned when an earlier assistant audio message item is truncated by the\nclient with a `conversation.item.truncate` event. This event is used to\nsynchronize the server's understanding of the audio with the client's playback.\nThis action will truncate the audio and remove the server-side text transcript\nto ensure there is no text in the context that hasn't been heard by the user.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the assistant message item that was truncated."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part that was truncated."
+        },
+        "audio_end_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration up to which the audio was truncated, in milliseconds."
+        }
+      },
+      "required": [
+        "item_id",
+        "content_index",
+        "audio_end_ms"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation.item.truncated"
+    },
+    "ServerEventError": {
+      "type": "object",
+      "description": "Returned when an error occurs, which could be a client problem or a server\nproblem. Most errors are recoverable and the session will stay open, we\nrecommend to implementors to monitor and log error messages by default.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ServerEventErrorDetails",
+          "description": "Details of the error."
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "error"
+    },
+    "ServerEventErrorDetails": {
+      "type": "object",
+      "description": "Details of the error.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of error (e.g., \"invalid_request_error\", \"server_error\")."
+        },
+        "code": {
+          "type": "string",
+          "description": "Error code, if any."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable error message."
+        },
+        "param": {
+          "type": "string",
+          "description": "Parameter related to the error, if any."
+        },
+        "event_id": {
+          "type": "string",
+          "description": "The event_id of the client event that caused the error, if applicable."
+        }
+      },
+      "required": [
+        "type",
+        "message"
+      ]
+    },
+    "ServerEventInputAudioBufferCleared": {
+      "type": "object",
+      "description": "Returned when the input audio buffer is cleared by the client with a\n`input_audio_buffer.clear` event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.cleared"
+    },
+    "ServerEventInputAudioBufferCommitted": {
+      "type": "object",
+      "description": "Returned when an input audio buffer is committed, either by the client or\nautomatically in server VAD mode. The `item_id` property is the ID of the user\nmessage item that will be created, thus a `conversation.item.created` event\nwill also be sent to the client.",
+      "properties": {
+        "previous_item_id": {
+          "type": "string",
+          "description": "The ID of the preceding item after which the new item will be inserted."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the user message item that will be created."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.committed"
+    },
+    "ServerEventInputAudioBufferSpeechStarted": {
+      "type": "object",
+      "description": "Sent by the server when in `server_vad` mode to indicate that speech has been\ndetected in the audio buffer. This can happen any time audio is added to the\nbuffer (unless speech is already detected). The client may want to use this\nevent to interrupt audio playback or provide visual feedback to the user.\nThe client should expect to receive a `input_audio_buffer.speech_stopped` event\nwhen speech stops. The `item_id` property is the ID of the user message item\nthat will be created when speech stops and will also be included in the\n`input_audio_buffer.speech_stopped` event (unless the client manually commits\nthe audio buffer during VAD activation).",
+      "properties": {
+        "audio_start_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Milliseconds from the start of all audio written to the buffer during the\nsession when speech was first detected. This will correspond to the\nbeginning of audio sent to the model, and thus includes the\n`prefix_padding_ms` configured in the Session."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the user message item that will be created when speech stops."
+        }
+      },
+      "required": [
+        "audio_start_ms",
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.speech_started"
+    },
+    "ServerEventInputAudioBufferSpeechStopped": {
+      "type": "object",
+      "description": "Returned in `server_vad` mode when the server detects the end of speech in\nthe audio buffer. The server will also send an `conversation.item.created`\nevent with the user message item that is created from the audio buffer.",
+      "properties": {
+        "audio_end_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Milliseconds since the session started when speech stopped. This will\ncorrespond to the end of audio sent to the model, and thus includes the\n`min_silence_duration_ms` configured in the Session."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the user message item that will be created."
+        }
+      },
+      "required": [
+        "audio_end_ms",
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio_buffer.speech_stopped"
+    },
+    "ServerEventMcpListToolsCompleted": {
+      "type": "object",
+      "description": "MCP list tools completed message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.completed"
+    },
+    "ServerEventMcpListToolsFailed": {
+      "type": "object",
+      "description": "MCP list tools failed message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.failed"
+    },
+    "ServerEventMcpListToolsInProgress": {
+      "type": "object",
+      "description": "MCP list tools in progress message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.in_progress"
+    },
+    "ServerEventResponseAnimationBlendshapeDelta": {
+      "type": "object",
+      "description": "Represents a delta update of blendshape animation frames for a specific output of a response.",
+      "properties": {
+        "response_id": {
+          "type": "string"
+        },
+        "item_id": {
+          "type": "string"
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "frames": {},
+        "frame_index": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "frames",
+        "frame_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.animation_blendshapes.delta"
+    },
+    "ServerEventResponseAnimationBlendshapeDone": {
+      "type": "object",
+      "description": "Indicates the completion of blendshape animation processing for a specific output of a response.",
+      "properties": {
+        "response_id": {
+          "type": "string"
+        },
+        "item_id": {
+          "type": "string"
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.animation_blendshapes.done"
+    },
+    "ServerEventResponseAnimationVisemeDelta": {
+      "type": "object",
+      "description": "Represents a viseme ID delta update for animation based on audio.",
+      "properties": {
+        "response_id": {
+          "type": "string"
+        },
+        "item_id": {
+          "type": "string"
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "audio_offset_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "viseme_id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "audio_offset_ms",
+        "viseme_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.animation_viseme.delta"
+    },
+    "ServerEventResponseAnimationVisemeDone": {
+      "type": "object",
+      "description": "Indicates completion of viseme animation delivery for a response.",
+      "properties": {
+        "response_id": {
+          "type": "string"
+        },
+        "item_id": {
+          "type": "string"
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.animation_viseme.done"
+    },
+    "ServerEventResponseAudioDelta": {
+      "type": "object",
+      "description": "Returned when the model-generated audio is updated.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "delta": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded audio data delta."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.audio.delta"
+    },
+    "ServerEventResponseAudioDone": {
+      "type": "object",
+      "description": "Returned when the model-generated audio is done. Also emitted when a Response\nis interrupted, incomplete, or cancelled.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.audio.done"
+    },
+    "ServerEventResponseAudioTimestampDelta": {
+      "type": "object",
+      "description": "Represents a word-level audio timestamp delta for a response.",
+      "properties": {
+        "response_id": {
+          "type": "string"
+        },
+        "item_id": {
+          "type": "string"
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "audio_offset_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "audio_duration_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "text": {
+          "type": "string"
+        },
+        "timestamp_type": {
+          "type": "string",
+          "enum": [
+            "word"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "audio_offset_ms",
+        "audio_duration_ms",
+        "text",
+        "timestamp_type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.audio_timestamp.delta"
+    },
+    "ServerEventResponseAudioTimestampDone": {
+      "type": "object",
+      "description": "Indicates completion of audio timestamp delivery for a response.",
+      "properties": {
+        "response_id": {
+          "type": "string"
+        },
+        "item_id": {
+          "type": "string"
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.audio_timestamp.done"
+    },
+    "ServerEventResponseAudioTranscriptDelta": {
+      "type": "object",
+      "description": "Returned when the model-generated transcription of audio output is updated.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The transcript delta."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.audio_transcript.delta"
+    },
+    "ServerEventResponseAudioTranscriptDone": {
+      "type": "object",
+      "description": "Returned when the model-generated transcription of audio output is done\nstreaming. Also emitted when a Response is interrupted, incomplete, or\ncancelled.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "transcript": {
+          "type": "string",
+          "description": "The final transcript of the audio."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "transcript"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.audio_transcript.done"
+    },
+    "ServerEventResponseContentPartAdded": {
+      "type": "object",
+      "description": "Returned when a new content part is added to an assistant message item during\nresponse generation.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item to which the content part was added."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "part": {
+          "$ref": "#/definitions/ContentPart",
+          "description": "The content part that was added."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "part"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.content_part.added"
+    },
+    "ServerEventResponseContentPartDone": {
+      "type": "object",
+      "description": "Returned when a content part is done streaming in an assistant message item.\nAlso emitted when a Response is interrupted, incomplete, or cancelled.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "part": {
+          "$ref": "#/definitions/ContentPart",
+          "description": "The content part that is done."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "part"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.content_part.done"
+    },
+    "ServerEventResponseCreated": {
+      "type": "object",
+      "description": "Returned when a new Response is created. The first event of response creation,\nwhere the response is in an initial state of `in_progress`.",
+      "properties": {
+        "response": {
+          "$ref": "#/definitions/Response"
+        }
+      },
+      "required": [
+        "response"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.created"
+    },
+    "ServerEventResponseDone": {
+      "type": "object",
+      "description": "Returned when a Response is done streaming. Always emitted, no matter the\nfinal state. The Response object included in the `response.done` event will\ninclude all output Items in the Response but will omit the raw audio data.",
+      "properties": {
+        "response": {
+          "$ref": "#/definitions/Response"
+        }
+      },
+      "required": [
+        "response"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.done"
+    },
+    "ServerEventResponseFoundryAgentCallArgumentsDelta": {
+      "type": "object",
+      "description": "Represents a delta update of the arguments for a Foundry agent call.",
+      "properties": {
+        "delta": {
+          "type": "string",
+          "description": "The delta of the arguments."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "delta",
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call_arguments.delta"
+    },
+    "ServerEventResponseFoundryAgentCallArgumentsDone": {
+      "type": "object",
+      "description": "Indicates the completion of the arguments for a Foundry agent call.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The full arguments for the agent call."
+        }
+      },
+      "required": [
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call_arguments.done"
+    },
+    "ServerEventResponseFoundryAgentCallCompleted": {
+      "type": "object",
+      "description": "Indicates the Foundry agent call has completed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call.completed"
+    },
+    "ServerEventResponseFoundryAgentCallFailed": {
+      "type": "object",
+      "description": "Indicates the Foundry agent call has failed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call.failed"
+    },
+    "ServerEventResponseFoundryAgentCallInProgress": {
+      "type": "object",
+      "description": "Indicates the Foundry agent call is in progress.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "agent_response_id": {
+          "type": "string",
+          "description": "The ID of the agent response, if any."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call.in_progress"
+    },
+    "ServerEventResponseFunctionCallArgumentsDelta": {
+      "type": "object",
+      "description": "Returned when the model-generated function call arguments are updated.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the function call item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "call_id": {
+          "type": "string",
+          "description": "The ID of the function call."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The arguments delta as a JSON string."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "call_id",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.function_call_arguments.delta"
+    },
+    "ServerEventResponseFunctionCallArgumentsDone": {
+      "type": "object",
+      "description": "Returned when the model-generated function call arguments are done streaming.\nAlso emitted when a Response is interrupted, incomplete, or cancelled.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the function call item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "call_id": {
+          "type": "string",
+          "description": "The ID of the function call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The final arguments as a JSON string."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the function call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "call_id",
+        "arguments",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.function_call_arguments.done"
+    },
+    "ServerEventResponseMcpCallArgumentsDelta": {
+      "type": "object",
+      "description": "Represents a delta update of the arguments for an MCP tool call.",
+      "properties": {
+        "delta": {
+          "type": "string",
+          "description": "The delta of the arguments."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "obfuscation": {
+          "type": "string",
+          "description": "The obfuscation of the arguments."
+        }
+      },
+      "required": [
+        "delta",
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call_arguments.delta"
+    },
+    "ServerEventResponseMcpCallArgumentsDone": {
+      "type": "object",
+      "description": "Indicates the completion of the arguments for an MCP tool call.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The full arguments for the tool call."
+        }
+      },
+      "required": [
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call_arguments.done"
+    },
+    "ServerEventResponseMcpCallCompleted": {
+      "type": "object",
+      "description": "Indicates the MCP call has completed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.completed"
+    },
+    "ServerEventResponseMcpCallFailed": {
+      "type": "object",
+      "description": "Indicates the MCP call has failed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.failed"
+    },
+    "ServerEventResponseMcpCallInProgress": {
+      "type": "object",
+      "description": "Indicates the MCP call running.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.in_progress"
+    },
+    "ServerEventResponseOutputItemAdded": {
+      "type": "object",
+      "description": "Returned when a new Item is created during Response generation.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the Response to which the item belongs."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the Response."
+        },
+        "item": {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      },
+      "required": [
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.output_item.added"
+    },
+    "ServerEventResponseOutputItemDone": {
+      "type": "object",
+      "description": "Returned when an Item is done streaming. Also emitted when a Response is\ninterrupted, incomplete, or cancelled.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the Response to which the item belongs."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the Response."
+        },
+        "item": {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      },
+      "required": [
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.output_item.done"
+    },
+    "ServerEventResponseTextDelta": {
+      "type": "object",
+      "description": "Returned when the text value of a \"text\" content part is updated.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The text delta."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.text.delta"
+    },
+    "ServerEventResponseTextDone": {
+      "type": "object",
+      "description": "Returned when the text value of a \"text\" content part is done streaming. Also\nemitted when a Response is interrupted, incomplete, or cancelled.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "text": {
+          "type": "string",
+          "description": "The final text content."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.text.done"
+    },
+    "ServerEventSessionAvatarConnecting": {
+      "type": "object",
+      "description": "Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer.",
+      "properties": {
+        "server_sdp": {
+          "type": "string",
+          "description": "The server's SDP answer for the avatar connection."
+        }
+      },
+      "required": [
+        "server_sdp"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.avatar.connecting"
+    },
+    "ServerEventSessionCreated": {
+      "type": "object",
+      "description": "Returned when a Session is created. Emitted automatically when a new\nconnection is established as the first server event. This event will contain\nthe default Session configuration.",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/ResponseSession"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.created"
+    },
+    "ServerEventSessionUpdated": {
+      "type": "object",
+      "description": "Returned when a session is updated with a `session.update` event, unless\nthere is an error.",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/ResponseSession"
+        }
+      },
+      "required": [
+        "session"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.updated"
+    },
+    "ServerEventType": {
+      "type": "string",
+      "description": "Server event types used in VoiceLive protocol.",
+      "enum": [
+        "error",
+        "warning",
+        "session.avatar.connecting",
+        "session.created",
+        "session.updated",
+        "conversation.item.input_audio_transcription.completed",
+        "conversation.item.input_audio_transcription.delta",
+        "conversation.item.input_audio_transcription.failed",
+        "conversation.item.created",
+        "conversation.item.retrieved",
+        "conversation.item.truncated",
+        "conversation.item.deleted",
+        "input_audio_buffer.committed",
+        "input_audio_buffer.cleared",
+        "input_audio_buffer.speech_started",
+        "input_audio_buffer.speech_stopped",
+        "response.created",
+        "response.done",
+        "response.output_item.added",
+        "response.output_item.done",
+        "response.content_part.added",
+        "response.content_part.done",
+        "response.text.delta",
+        "response.text.done",
+        "response.audio_transcript.delta",
+        "response.audio_transcript.done",
+        "response.audio.delta",
+        "response.audio.done",
+        "response.animation_blendshapes.delta",
+        "response.animation_blendshapes.done",
+        "response.audio_timestamp.delta",
+        "response.audio_timestamp.done",
+        "response.animation_viseme.delta",
+        "response.animation_viseme.done",
+        "response.function_call_arguments.delta",
+        "response.function_call_arguments.done",
+        "mcp_list_tools.in_progress",
+        "mcp_list_tools.completed",
+        "mcp_list_tools.failed",
+        "response.mcp_call_arguments.delta",
+        "response.mcp_call_arguments.done",
+        "mcp_approval_request",
+        "mcp_approval_response",
+        "response.mcp_call.in_progress",
+        "response.mcp_call.completed",
+        "response.mcp_call.failed",
+        "response.foundry_agent_call_arguments.delta",
+        "response.foundry_agent_call_arguments.done",
+        "response.foundry_agent_call.in_progress",
+        "response.foundry_agent_call.completed",
+        "response.foundry_agent_call.failed"
+      ],
+      "x-ms-enum": {
+        "name": "ServerEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "error",
+            "value": "error"
+          },
+          {
+            "name": "warning",
+            "value": "warning"
+          },
+          {
+            "name": "session_avatar_connecting",
+            "value": "session.avatar.connecting"
+          },
+          {
+            "name": "session_created",
+            "value": "session.created"
+          },
+          {
+            "name": "session_updated",
+            "value": "session.updated"
+          },
+          {
+            "name": "conversation_item_input_audio_transcription_completed",
+            "value": "conversation.item.input_audio_transcription.completed"
+          },
+          {
+            "name": "conversation_item_input_audio_transcription_delta",
+            "value": "conversation.item.input_audio_transcription.delta"
+          },
+          {
+            "name": "conversation_item_input_audio_transcription_failed",
+            "value": "conversation.item.input_audio_transcription.failed"
+          },
+          {
+            "name": "conversation_item_created",
+            "value": "conversation.item.created"
+          },
+          {
+            "name": "conversation_item_retrieved",
+            "value": "conversation.item.retrieved"
+          },
+          {
+            "name": "conversation_item_truncated",
+            "value": "conversation.item.truncated"
+          },
+          {
+            "name": "conversation_item_deleted",
+            "value": "conversation.item.deleted"
+          },
+          {
+            "name": "input_audio_buffer_committed",
+            "value": "input_audio_buffer.committed"
+          },
+          {
+            "name": "input_audio_buffer_cleared",
+            "value": "input_audio_buffer.cleared"
+          },
+          {
+            "name": "input_audio_buffer_speech_started",
+            "value": "input_audio_buffer.speech_started"
+          },
+          {
+            "name": "input_audio_buffer_speech_stopped",
+            "value": "input_audio_buffer.speech_stopped"
+          },
+          {
+            "name": "response_created",
+            "value": "response.created"
+          },
+          {
+            "name": "response_done",
+            "value": "response.done"
+          },
+          {
+            "name": "response_output_item_added",
+            "value": "response.output_item.added"
+          },
+          {
+            "name": "response_output_item_done",
+            "value": "response.output_item.done"
+          },
+          {
+            "name": "response_content_part_added",
+            "value": "response.content_part.added"
+          },
+          {
+            "name": "response_content_part_done",
+            "value": "response.content_part.done"
+          },
+          {
+            "name": "response_text_delta",
+            "value": "response.text.delta"
+          },
+          {
+            "name": "response_text_done",
+            "value": "response.text.done"
+          },
+          {
+            "name": "response_audio_transcript_delta",
+            "value": "response.audio_transcript.delta"
+          },
+          {
+            "name": "response_audio_transcript_done",
+            "value": "response.audio_transcript.done"
+          },
+          {
+            "name": "response_audio_delta",
+            "value": "response.audio.delta"
+          },
+          {
+            "name": "response_audio_done",
+            "value": "response.audio.done"
+          },
+          {
+            "name": "response_animation_blendshapes_delta",
+            "value": "response.animation_blendshapes.delta"
+          },
+          {
+            "name": "response_animation_blendshapes_done",
+            "value": "response.animation_blendshapes.done"
+          },
+          {
+            "name": "response_audio_timestamp_delta",
+            "value": "response.audio_timestamp.delta"
+          },
+          {
+            "name": "response_audio_timestamp_done",
+            "value": "response.audio_timestamp.done"
+          },
+          {
+            "name": "response_animation_viseme_delta",
+            "value": "response.animation_viseme.delta"
+          },
+          {
+            "name": "response_animation_viseme_done",
+            "value": "response.animation_viseme.done"
+          },
+          {
+            "name": "response_function_call_arguments_delta",
+            "value": "response.function_call_arguments.delta"
+          },
+          {
+            "name": "response_function_call_arguments_done",
+            "value": "response.function_call_arguments.done"
+          },
+          {
+            "name": "mcp_list_tools_in_progress",
+            "value": "mcp_list_tools.in_progress"
+          },
+          {
+            "name": "mcp_list_tools_completed",
+            "value": "mcp_list_tools.completed"
+          },
+          {
+            "name": "mcp_list_tools_failed",
+            "value": "mcp_list_tools.failed"
+          },
+          {
+            "name": "response_mcp_call_arguments_delta",
+            "value": "response.mcp_call_arguments.delta"
+          },
+          {
+            "name": "response_mcp_call_arguments_done",
+            "value": "response.mcp_call_arguments.done"
+          },
+          {
+            "name": "mcp_approval_request",
+            "value": "mcp_approval_request"
+          },
+          {
+            "name": "mcp_approval_response",
+            "value": "mcp_approval_response"
+          },
+          {
+            "name": "response_mcp_call_in_progress",
+            "value": "response.mcp_call.in_progress"
+          },
+          {
+            "name": "response_mcp_call_completed",
+            "value": "response.mcp_call.completed"
+          },
+          {
+            "name": "response_mcp_call_failed",
+            "value": "response.mcp_call.failed"
+          },
+          {
+            "name": "response_foundry_agent_call_arguments_delta",
+            "value": "response.foundry_agent_call_arguments.delta"
+          },
+          {
+            "name": "response_foundry_agent_call_arguments_done",
+            "value": "response.foundry_agent_call_arguments.done"
+          },
+          {
+            "name": "response_foundry_agent_call_in_progress",
+            "value": "response.foundry_agent_call.in_progress"
+          },
+          {
+            "name": "response_foundry_agent_call_completed",
+            "value": "response.foundry_agent_call.completed"
+          },
+          {
+            "name": "response_foundry_agent_call_failed",
+            "value": "response.foundry_agent_call.failed"
+          }
+        ]
+      }
+    },
+    "ServerEventWarning": {
+      "type": "object",
+      "description": "Returned when a warning occurs that does not interrupt the conversation flow.\nWarnings are informational and the session will continue normally.",
+      "properties": {
+        "warning": {
+          "$ref": "#/definitions/ServerEventWarningDetails",
+          "description": "Details of the warning."
+        }
+      },
+      "required": [
+        "warning"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "warning"
+    },
+    "ServerEventWarningDetails": {
+      "type": "object",
+      "description": "Details of the warning.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable warning message."
+        },
+        "code": {
+          "type": "string",
+          "description": "Warning code, if any."
+        },
+        "param": {
+          "type": "string",
+          "description": "Parameter related to the warning, if any."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "ServerVad": {
+      "type": "object",
+      "description": "Base model for VAD-based turn detection.",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "prefix_padding_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "silence_duration_ms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "end_of_utterance_detection": {
+          "$ref": "#/definitions/EouDetection"
+        },
+        "auto_truncate": {
+          "type": "boolean",
+          "default": false
+        },
+        "create_response": {
+          "type": "boolean",
+          "default": false
+        },
+        "interrupt_response": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TurnDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "server_vad"
+    },
+    "SessionBase": {
+      "type": "object",
+      "description": "VoiceLive session object configuration."
+    },
+    "SystemMessageItem": {
+      "type": "object",
+      "description": "A system message item within a conversation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageItem"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "TokenUsage": {
+      "type": "object",
+      "description": "Overall usage statistics for a response.",
+      "properties": {
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tokens (input + output)."
+        },
+        "input_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of input tokens."
+        },
+        "output_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of output tokens."
+        },
+        "input_token_details": {
+          "$ref": "#/definitions/InputTokenDetails",
+          "description": "Detailed breakdown of input tokens."
+        },
+        "output_token_details": {
+          "$ref": "#/definitions/OutputTokenDetails",
+          "description": "Detailed breakdown of output tokens."
+        }
+      },
+      "required": [
+        "total_tokens",
+        "input_tokens",
+        "output_tokens",
+        "input_token_details",
+        "output_token_details"
+      ]
+    },
+    "Tool": {
+      "type": "object",
+      "description": "The base representation of a voicelive tool definition.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ToolType"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ToolChoice": {},
+    "ToolChoiceFunctionObject": {
+      "type": "object",
+      "description": "The representation of a voicelive tool_choice selecting a named function tool.",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolChoiceObject"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ToolChoiceLiteral": {
+      "type": "string",
+      "description": "The available set of mode-level, string literal tool_choice options for the voicelive endpoint.",
+      "enum": [
+        "auto",
+        "none",
+        "required"
+      ],
+      "x-ms-enum": {
+        "name": "ToolChoiceLiteral",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Specifies that the model should freely determine which tool or tools, if any, to call."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Specifies that the model should call no tools whatsoever."
+          },
+          {
+            "name": "required",
+            "value": "required",
+            "description": "Specifies that the model should call at least one tool."
+          }
+        ]
+      }
+    },
+    "ToolChoiceObject": {
+      "type": "object",
+      "description": "A base representation for a voicelive tool_choice selecting a named tool.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ToolType"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ToolType": {
+      "type": "string",
+      "description": "The supported tool type discriminators for voicelive tools.\nCurrently, only 'function' tools are supported.",
+      "enum": [
+        "function",
+        "mcp",
+        "foundry_agent"
+      ],
+      "x-ms-enum": {
+        "name": "ToolType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "function",
+            "value": "function"
+          },
+          {
+            "name": "mcp",
+            "value": "mcp"
+          },
+          {
+            "name": "foundry_agent",
+            "value": "foundry_agent"
+          }
+        ]
+      }
+    },
+    "TurnDetection": {
+      "type": "object",
+      "description": "Top-level union for turn detection configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TurnDetectionType"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "TurnDetectionType": {
+      "type": "string",
+      "enum": [
+        "server_vad",
+        "azure_semantic_vad",
+        "azure_semantic_vad_en",
+        "azure_semantic_vad_multilingual"
+      ],
+      "x-ms-enum": {
+        "name": "TurnDetectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "server_vad",
+            "value": "server_vad"
+          },
+          {
+            "name": "azure_semantic_vad",
+            "value": "azure_semantic_vad"
+          },
+          {
+            "name": "azure_semantic_vad_en",
+            "value": "azure_semantic_vad_en"
+          },
+          {
+            "name": "azure_semantic_vad_multilingual",
+            "value": "azure_semantic_vad_multilingual"
+          }
+        ]
+      }
+    },
+    "UserMessageItem": {
+      "type": "object",
+      "description": "A user message item within a conversation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageItem"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "VideoCrop": {
+      "type": "object",
+      "description": "Defines a video crop rectangle using top-left and bottom-right coordinates.",
+      "properties": {
+        "top_left": {
+          "type": "array",
+          "description": "Top-left corner of the crop region. Array of [x, y], must be non-negative integers.",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "bottom_right": {
+          "type": "array",
+          "description": "Bottom-right corner of the crop region. Array of [x, y], must be non-negative integers.",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "top_left",
+        "bottom_right"
+      ]
+    },
+    "VideoParams": {
+      "type": "object",
+      "description": "Video streaming parameters for avatar.",
+      "properties": {
+        "bitrate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Bitrate in bits per second (e.g., 2000000 for 2 Mbps).",
+          "default": 2000000
+        },
+        "codec": {
+          "type": "string",
+          "description": "Codec to use for encoding. Currently only 'h264' is supported.",
+          "default": "h264",
+          "enum": [
+            "h264"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "crop": {
+          "$ref": "#/definitions/VideoCrop",
+          "description": "Optional cropping settings for the video stream."
+        },
+        "resolution": {
+          "$ref": "#/definitions/VideoResolution",
+          "description": "Optional resolution settings for the video stream."
+        },
+        "background": {
+          "$ref": "#/definitions/Background",
+          "description": "Optional background settings for the video. Allows specifying either a solid color or an image URL."
+        },
+        "gop_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Group of Pictures (GOP) size for video encoding. Controls the interval between keyframes, affecting compression efficiency and seeking performance.",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 2000
+        }
+      }
+    },
+    "VideoResolution": {
+      "type": "object",
+      "description": "Resolution of the video feed in pixels.",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Width of the video in pixels. Must be greater than 0."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Height of the video in pixels. Must be greater than 0."
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ]
+    },
+    "Voice": {},
+    "VoiceLiveErrorDetails": {
+      "type": "object",
+      "description": "Error object returned in case of API failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, or null if unspecified."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message."
+        },
+        "param": {
+          "type": "string",
+          "description": "Parameter name related to the error, if applicable."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type or category of the error."
+        },
+        "event_id": {
+          "type": "string",
+          "description": "Event id of the error."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    }
+  },
+  "parameters": {}
+}
