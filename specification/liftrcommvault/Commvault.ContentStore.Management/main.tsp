@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using LiftrBase;
-using Azure.Core;
 
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -23,6 +22,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v1_preview: "2024-10-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2_preview: "2025-01-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -662,6 +665,19 @@ interface ProtectionGroups {
     @doc("The body type of the operation request.")
     request: StopBackupProtectionGroupRequest,
   ): ArmAcceptedLroResponse | ErrorResponse;
+
+  @doc("Restore resource for a protected items in given protection group.")
+  @armResourceAction(ProtectionGroup)
+  @action("restore")
+  @post
+  @added(Versions.v2_preview)
+  restore(
+    ...ResourceInstanceParameters<ProtectionGroup>,
+
+    @bodyRoot
+    @doc("The body type of the operation request.")
+    request: RestoreProtectionItemRequest,
+  ): ArmResponse<RestoreProtectionItemResponse> | ErrorResponse;
 }
 
 @parentResource(ProtectionGroup)
