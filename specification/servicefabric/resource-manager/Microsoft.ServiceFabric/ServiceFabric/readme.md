@@ -65,8 +65,7 @@ These settings apply only when `--tag=package-2023-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2023-11-preview'
 input-file:
-- preview/2023-11-01-preview/cluster.json
-- preview/2023-11-01-preview/application.json
+- preview/2023-11-01-preview/servicefabric.json
 ```
 
 ### Tag: package-2021-06
@@ -184,6 +183,91 @@ These settings apply only when `--tag=package-2018-02-only` is specified on the 
 ``` yaml $(tag) == 'package-2018-02-only'
 input-file:
 - stable/2018-02-01/cluster.json
+```
+
+### AutoRest v3 Suppressions
+
+```yaml
+suppressions:
+
+  - code: ResourceNameRestriction
+    reason: Resource names didn't have a pattern initially, adding the constraint now will cause a breaking change.
+
+  - code: PutResponseCodes
+    reason: Existing response codes are non-standard and changing would be a breaking change.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}/versions/{version}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].put
+
+  - code: PatchResponseCodes
+    reason: Cluster, application, and schema PATCH LRO 202 have had response body schema since day 0. Removing would be a breaking change.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].patch
+  
+  - code: PatchBodyParametersSchema
+    reason: The existing API has these properties marked as required.
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].patch.parameters[5].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].patch.parameters[6].schema.properties.properties
+  
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: No existing operatoins have 201 response code.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}/versions/{version}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}"].put
+  
+  - code: AvoidAdditionalProperties
+    reason: Existing API use additional properties, removing would be breaking change
+    where: 
+      - $.definitions.ApplicationDeltaHealthPolicy.properties.serviceTypeDeltaHealthPolicies
+      - $.definitions.ApplicationHealthPolicy.properties.serviceTypeHealthPolicies
+      - $.definitions.ApplicationResourceUpdateProperties.properties.parameters
+      - $.definitions.ApplicationTypeVersionResourceProperties.properties.defaultParameterList
+      - $.definitions.ArmApplicationHealthPolicy.properties.serviceTypeHealthPolicyMap
+      - $.definitions.ClusterHealthPolicy.properties.applicationHealthPolicies
+      - $.definitions.ClusterUpgradeDeltaHealthPolicy.properties.applicationDeltaHealthPolicies
+      - $.definitions.NodeTypeDescription.properties.placementProperties
+      - $.definitions.NodeTypeDescription.properties.capacities
+  
+  - code: TrackedResourcesMustHavePut
+    reason: Resources do have Put operation, but the operations do not seem to be properly detected.
+    where:
+    - $.definitions.ApplicationTypeVersionResource
+    - $.definitions.ApplicationResource
+    - $.definitions.ServiceResource
+    
+  - code: GetCollectionResponseSchema
+    reason: Existing ClusterVersions APIs returns list for all list and get. Changing right now would break the API.
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"]
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"]
+  
+  - code: PatchIdentityProperty
+    reason: Existing application patch has Identity property in properties bad. Would be a breaking change to move it.
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}"].patch.parameters[5]
+  
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Backwards compatability with previously approved specs. Models did not change. Results are not of type resource. Validation may be incorrectly marking as violation
+    where:
+    - $.definitions.ClusterCodeVersionsListResult
+    - $.definitions.OperationListResult
+  
+  - code: XmsPageableForListCalls
+    reason: Backwards compability with previously approved specs. API modeling did not change.
+    where:
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusters"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters"].get
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"].get
+    - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"].get
 ```
 
 ---
