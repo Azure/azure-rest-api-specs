@@ -94,7 +94,6 @@ namespace Microsoft.RecoveryServices;
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@clientName(UpgradeDetails.lastUpdatedTimeUtc, "LastUpdatedOn", "csharp");
-@@clientName(VaultCertificateResponse, "VaultCertificateResult", "csharp");
 @@clientName(TriggerType, "VaultUpgradeTriggerType", "csharp");
 @@clientName(SoftDeleteSettings,
   "RecoveryServicesSoftDeleteSettings",
@@ -254,5 +253,21 @@ model PrivateEndpointConnectionVaultPropertiesReplacement
 }
 @@alternateType(PrivateEndpointConnectionVaultProperties,
   PrivateEndpointConnectionVaultPropertiesReplacement,
+  "csharp"
+);
+
+/**
+ * Certificate corresponding to a vault that can be used by clients to register themselves with the vault.
+ */
+model VaultCertificateResponseReplacement
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  ...OmitProperties<VaultCertificateResponse, "id" | "name" | "type">;
+}
+@@alternateType(VaultCertificateResponse,
+  VaultCertificateResponseReplacement,
+  "csharp"
+);
+@@clientName(VaultCertificateResponseReplacement,
+  "VaultCertificateResult",
   "csharp"
 );
