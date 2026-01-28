@@ -213,3 +213,31 @@ namespace Microsoft.RecoveryServices;
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+
+@@alternateType(PatchVault, PatchVaultWithEtag, "csharp");
+
+/**
+ * Patch Resource information, as returned by the resource provider.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model PatchVaultWithEtag extends PatchTrackedResource {
+  /**
+   * Properties of the vault.
+   */
+  properties?: VaultProperties;
+
+  /**
+   * Identifies the unique system identifier for each Azure resource.
+   */
+  sku?: Sku;
+
+  /**
+   * Identity for the resource.
+   */
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+
+  /**
+   * Optional ETag.
+   */
+  etag?: eTag;
+}
