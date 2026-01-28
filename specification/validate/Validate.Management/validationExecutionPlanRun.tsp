@@ -3,6 +3,7 @@ import "./validationExecutionPlan.tsp";
 import "./validationTestRun.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -21,10 +22,12 @@ model ExecutionPlanRunProperties {
 
   @doc("The status of the execution plan run.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   status?: ExecutionPlanRunStatus;
 
   @doc("The start time of the execution plan run.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   startTimestampInUtc?: utcDateTime;
 
   @doc("The end time of the execution plan run.")
@@ -33,10 +36,12 @@ model ExecutionPlanRunProperties {
 
   @doc("The reported timestamp of the execution plan run.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   reportedTimestampInUtc?: utcDateTime;
 
   @doc("The test runs under this execution plan run.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   @identifiers(#[])
   @maxItems(100)
   testRuns?: ValidationTestRun[];

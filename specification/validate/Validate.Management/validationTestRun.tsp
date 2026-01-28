@@ -2,6 +2,7 @@ import "./common.tsp";
 import "./validationExecutionPlan.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Validate;
@@ -16,6 +17,7 @@ model ValidationTestRun is ProxyResource<ValidationTestRunProperties> {
 model ValidationTestRunProperties {
   @doc("The overall status of the test run.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   status?: ValidationTestRunStatus;
 
   @doc("The state of the test run.")
@@ -24,14 +26,17 @@ model ValidationTestRunProperties {
 
   @doc("The start timestamp of the test run.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   startTimestampInUtc?: utcDateTime;
 
   @doc("The reported timestamp of the test run.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   reportedTimestampInUtc?: utcDateTime;
 
   @doc("The end timestamp of the test run.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   endTimestampInUtc?: utcDateTime;
 
   @doc("Validation test run inputs json")
@@ -80,10 +85,12 @@ union ValidationTestRunStatus {
 model ValidationTestPassDetails {
   @doc("Result code categorizing the type of pass.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   resultCode?: string;
 
   @doc("test name which passed.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   testName?: string;
 
   @doc("Detailed information about the passed test.")
@@ -95,10 +102,12 @@ model ValidationTestPassDetails {
 model ValidationTestFailureDetails {
   @doc("Error code categorizing the type of failure.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   errorCode?: string;
 
   @doc("Human-readable error message describing the failure.")
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_01_01_preview)
   errorMessage?: string;
 
   @doc("Detailed information about the failure.")
