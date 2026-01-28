@@ -23,8 +23,13 @@ model Supercomputer is TrackedResource<SupercomputerProperties> {
 @added(Versions.v2025_12_01_preview)
 @doc("Supported System SKU Sizes.")
 union SystemSku {
-  @doc("Standard_D4s_v6 SKU")
-  Standard_D4s_v6: "Standard_D4s_v6 basic compute VM (default)",
+  @added(Versions.v2026_02_01_preview)
+  @doc("Standard_D4s_v6 basic compute VM (default)")
+  Standard_D4s_v6: "Standard_D4s_v6",
+
+  @removed(Versions.v2026_02_01_preview)
+  @doc("Standard_D4s_v6 basic compute VM (default)")
+  Standard_D4s_v6_legacy: "Standard_D4s_v6 basic compute VM (default)",
 
   @doc("Standard_D4s_v5 SKU")
   Standard_D4s_v5: "Standard_D4s_v5",
@@ -39,10 +44,10 @@ union SystemSku {
 @doc("Supported network egress types.")
 union NetworkEgressType {
   @doc("Public outbound network via load balancer (Default)")
-  LoadBalancer: "Public outbound route via load balancer (Default)",
+  LoadBalancer: "LoadBalancer",
 
   @doc("No default outbound")
-  None: "No default outbound connectivity",
+  None: "None",
 
   string,
 }
@@ -85,7 +90,7 @@ model SupercomputerProperties {
   @added(Versions.v2026_02_01_preview)
   outboundType?: NetworkEgressType = NetworkEgressType.LoadBalancer;
 
-  @doc("The SKU to use for the system nodepool.")
+  @doc("The SKU to use for the system node pool.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2025_12_01_preview)
   systemSku?: SystemSku;

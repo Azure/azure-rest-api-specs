@@ -26,7 +26,7 @@ model StorageAssetProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("The path to the data within its parent container.")
+  @doc("The path to the data within its parent container. This should be relative to the root of the parent container.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   path?: string;
 }

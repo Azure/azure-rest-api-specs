@@ -62,7 +62,7 @@ model WithVersion {
   version: string;
 }
 
-@doc("For tracking he status of the last operation.")
+@doc("For tracking the status of the last operation.")
 model WithProvisioningState {
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
@@ -156,7 +156,7 @@ model KeyVaultSecretCredential extends Credential {
 
 /** For associated azure storage account ID */
 model WithStorageAccountId {
-  @doc("The associated azure storage account ID.")
+  @doc("The associated Azure Storage Account ID.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageAccountId: Azure.Core.armResourceIdentifier<[
     {

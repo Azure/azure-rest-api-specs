@@ -87,11 +87,11 @@ model NodePoolProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("The subnet.")
+  @doc("The node pool subnet.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId: Microsoft.Discovery.Shared.SubnetId;
 
-  @doc("The Size of the underlying Azure VM.")
+  @doc("The size of the underlying Azure VM.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   vmSize: VmSize;
 
