@@ -174,7 +174,7 @@ namespace Microsoft.RecoveryServices;
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
 @@clientName(DeletedVault, "RecoveryServicesDeletedVault", "csharp");
 @@clientName(DeletedVaultUndeleteInput,
-  "DeletedVaultUndeleteContent",
+  "DeletedVaultRestoreContent",
   "csharp"
 );
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
