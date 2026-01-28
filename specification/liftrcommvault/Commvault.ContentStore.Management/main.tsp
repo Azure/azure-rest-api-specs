@@ -670,6 +670,7 @@ interface ProtectionGroups {
   @armResourceAction(ProtectionGroup)
   @action("restore")
   @post
+  @added(Versions.v2_preview)
   restore(
     ...ResourceInstanceParameters<ProtectionGroup>,
 
