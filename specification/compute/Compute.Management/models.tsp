@@ -1269,7 +1269,7 @@ model VMScaleSetLifecycleHookEventProperties {
   timeCreated?: string;
 
   /**
-   * Specify the action that will be aplied on the a target resource in the VMScaleSet lifecycle hook event, if the platform does not get a response from the customer for the target resource before waitUntil.
+   * Specify the action that will be applied on the a target resource in the VMScaleSet lifecycle hook event, if the platform does not get a response from the customer for the target resource before waitUntil.
    */
   defaultAction?: LifecycleHookAction;
 
