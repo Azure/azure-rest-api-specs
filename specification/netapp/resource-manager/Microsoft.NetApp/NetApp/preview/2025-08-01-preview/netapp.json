@@ -9178,13 +9178,17 @@
       "properties": {
         "accessKey": {
           "type": "string",
+          "format": "password",
           "description": "The Access Key that is required along with the Secret Key to access the bucket.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secretKey": {
           "type": "string",
+          "format": "password",
           "description": "The Secret Key that is required along with the Access Key to access the bucket.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "keyPairExpiry": {
           "type": "string",
