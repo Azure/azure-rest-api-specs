@@ -106,6 +106,13 @@ model AzureAIBenchmarkDataSourceConfig extends DataSourceConfig {
 
   /** Metadata identifying the benchmark to use. */
   metadata: BenchmarkMetadata;
+
+  /**
+   * The translated item schema from the benchmark specification.
+   * Populated in responses only. Must not be provided in requests.
+   * Service validates and rejects requests that include this field.
+   */
+  item_schema?: Record<unknown>;
 }
 
 /** Adding Azure AI Source type to data source for foundry extension. */
@@ -311,15 +318,6 @@ model AzureAIAgentTarget extends Target {
   tool_descriptions?: ToolDescription[];
 }
 
-/** Represents a simplified target for benchmark evaluations specifying the model to evaluate. */
-@removed(Versions.v1)
-model AzureAIModelBenchmarkTarget extends Target {
-  /** The type of target, always `azure_ai_model_benchmark`. */
-  type: "azure_ai_model_benchmark";
-
-  /** The model deployment name or model identifier to evaluate (e.g., 'gpt-4o-mini'). */
-  `model`: string;
-}
 
 /** Description of a tool that can be used by an agent. */
 model ToolDescription {
@@ -439,10 +437,14 @@ model AzureAIBenchmarkEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_benchmark`. */
   type: "azure_ai_benchmark";
 
-  /** The target model or agent to evaluate against the benchmark. */
+  /**
+   * The target model or agent to evaluate against the benchmark.
+   * When using `azure_ai_model` target, `sampling_params` must not be provided;
+   * inference parameters are auto-filled from the benchmark specification stored in eval group properties.
+   */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-  target: AzureAIModelBenchmarkTarget | AzureAIAgentTarget;
+  target: AzureAIModelTarget | AzureAIAgentTarget;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
