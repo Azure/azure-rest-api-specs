@@ -1,0 +1,129 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2026-01-01",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedModels": {
+      "get": {
+        "tags": [
+          "SupportedModels"
+        ],
+        "summary": "List supported AI models by location.",
+        "description": "Lists supported AI models in a given Azure region.",
+        "operationId": "SupportedModels_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SupportedModelsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SupportedModels_Get": {
+            "$ref": "./examples/SupportedModels_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SupportedModelProperties": {
+      "description": "Supported AI model properties.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider name (e.g., MicrosoftFoundry, Anthropic)."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name (e.g., gpt-5.2, claude-sonnet-4-5)."
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Indicates whether this is the default model."
+        }
+      }
+    },
+    "SupportedModel": {
+      "description": "A supported AI model in a region.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Region of the supported model."
+        },
+        "properties": {
+          "$ref": "#/definitions/SupportedModelProperties"
+        }
+      }
+    },
+    "SupportedModelsCollection": {
+      "description": "Collection of supported AI models in the location.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of supported models.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedModel"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
