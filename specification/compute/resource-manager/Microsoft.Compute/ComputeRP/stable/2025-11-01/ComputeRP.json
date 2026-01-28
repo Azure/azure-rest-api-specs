@@ -17564,7 +17564,7 @@
         },
         "securityType": {
           "$ref": "#/definitions/SecurityTypes",
-          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set."
+          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. By default the value in response will be Standard starting 2025-11-01 api version."
         },
         "encryptionIdentity": {
           "$ref": "#/definitions/EncryptionIdentity",
@@ -17578,7 +17578,7 @@
     },
     "SecurityTypes": {
       "type": "string",
-      "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and not Standard.",
+      "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. By default the value in response will be Standard starting 2025-11-01 api version.",
       "enum": [
         "Standard",
         "TrustedLaunch",
@@ -17590,7 +17590,8 @@
         "values": [
           {
             "name": "Standard",
-            "value": "Standard"
+            "value": "Standard",
+            "description": "Standard added officially as of 2025-11-01 api version.\nIt's the default value in response when user doesn't specify the security type."
           },
           {
             "name": "TrustedLaunch",
