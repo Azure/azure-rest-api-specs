@@ -513,6 +513,22 @@ model ResourceSku {
 }
 
 /**
+ * Details about the marketplace offer associated with the monitor resource.
+ */
+@added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+model MarketplaceOfferDetails {
+  /**
+   * The publisher ID (e.g., "datadog1591740804488").
+   */
+  publisherId?: string;
+
+  /**
+   * The offer ID (e.g., "dd_liftr_v3_decoupled").
+   */
+  offerId?: string;
+}
+
+/**
  * Properties specific to the monitor resource.
  */
 model MonitorProperties {
@@ -565,6 +581,14 @@ model MonitorProperties {
   @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
   @visibility(Lifecycle.Update)
   sreAgentConfiguration?: SreAgentConfiguration[];
+
+  /**
+   * Details about the marketplace offer associated with the resource.
+   * Required for API version 2025-11 and later.
+   * For earlier API versions, defaults to the legacy offer.
+   */
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  marketplaceOfferDetails?: MarketplaceOfferDetails;
 }
 
 /**
