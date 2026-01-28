@@ -423,62 +423,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}/executeTransform": {
-      "post": {
-        "operationId": "PipelineGroups_ExecuteTransform",
-        "tags": [
-          "PipelineGroups"
-        ],
-        "description": "This method is used to execute a transform configuration to be used in a pipeline group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "pipelineGroupName",
-            "in": "path",
-            "description": "The name of pipeline group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteTransformRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ExecuteTransformResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Response when executing a transform": {
-            "$ref": "./examples/PipelineGroupExecuteTransform.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -762,48 +706,6 @@
           "description": "Maximum number of instances allowed per compute unit (node/VM). If not specified, default scheduling applies."
         }
       }
-    },
-    "ExecuteTransformRequest": {
-      "type": "object",
-      "description": "Request to execute a transform.",
-      "properties": {
-        "transformStatement": {
-          "type": "string",
-          "description": "Transform statement to execute.",
-          "minLength": 1,
-          "maxLength": 10000
-        }
-      },
-      "required": [
-        "transformStatement"
-      ]
-    },
-    "ExecuteTransformResponse": {
-      "type": "object",
-      "description": "Response for the execute transform request.",
-      "properties": {
-        "validation": {
-          "$ref": "#/definitions/ExecuteTransformResponseValidation",
-          "description": "Validation information for the execute transform response."
-        }
-      },
-      "required": [
-        "validation"
-      ]
-    },
-    "ExecuteTransformResponseValidation": {
-      "type": "object",
-      "description": "Validation information for the execute transform response.",
-      "properties": {
-        "duration": {
-          "type": "number",
-          "format": "float",
-          "description": "Duration of validation portion of the transform execution in seconds."
-        }
-      },
-      "required": [
-        "duration"
-      ]
     },
     "ExecutionPlacement": {
       "type": "object",

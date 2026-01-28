@@ -11,7 +11,6 @@ import "./receivers/OtlpReceiver.tsp";
 import "./receivers/SyslogReceiver.tsp";
 import "./processors/BatchProcessor.tsp";
 import "./processors/TransformLanguageProcessor.tsp";
-import "./actions/executeTransform.tsp";
 import "./ExecutionPlacement.tsp";
 
 using TypeSpec.Http;
@@ -380,12 +379,4 @@ interface PipelineGroups {
 
   @doc("Lists all workspaces in the specified subscription")
   listBySubscription is ArmListBySubscription<PipelineGroup>;
-
-  @doc("This method is used to execute a transform configuration to be used in a pipeline group.")
-  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-  executeTransform is ArmResourceActionSync<
-    PipelineGroup,
-    ExecuteTransformRequest,
-    ExecuteTransformResponse
-  >;
 }

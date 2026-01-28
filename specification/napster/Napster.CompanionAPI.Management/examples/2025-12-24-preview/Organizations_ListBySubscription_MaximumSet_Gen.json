@@ -1,0 +1,79 @@
+{
+  "title": "Organizations_ListBySubscription_MaximumSet",
+  "operationId": "Organizations_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-12-24-preview",
+    "subscriptionId": "0F0FBCF9-8374-47FC-B189-B79B84033EA3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "marketplace": {
+                "subscriptionId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+                "subscriptionStatus": "PendingFulfillmentStart",
+                "offerDetails": {
+                  "publisherId": "contoso",
+                  "offerId": "contoso-saas-app",
+                  "planId": "standard-plan",
+                  "planName": "Standard Plan",
+                  "termUnit": "P1M",
+                  "termId": "monthly-term-001"
+                }
+              },
+              "user": {
+                "firstName": "John",
+                "lastName": "Doe",
+                "emailAddress": "john.doe@contoso.com",
+                "upn": "john.doe@contoso.com",
+                "phoneNumber": "+1-425-555-1234"
+              },
+              "provisioningState": "Succeeded",
+              "partnerProperties": {
+                "application": "Contoso App"
+              },
+              "singleSignOnProperties": {
+                "type": "Saml",
+                "state": "Initial",
+                "enterpriseAppId": "b2c3d4e5-f6a7-4b5c-8d9e-0f1a2b3c4d5e",
+                "url": "https://login.contoso.com",
+                "aadDomains": [
+                  "contoso.com"
+                ]
+              }
+            },
+            "identity": {
+              "principalId": "c3d4e5f6-a7b8-4c5d-9e0f-1a2b3c4d5e6f",
+              "tenantId": "d4e5f6a7-b8c9-4d5e-0f1a-2b3c4d5e6f7a",
+              "type": "None",
+              "userAssignedIdentities": {
+                "key5757": {
+                  "principalId": "e5f6a7b8-c9d0-4e5f-1a2b-3c4d5e6f7a8b",
+                  "clientId": "f6a7b8c9-d0e1-4f5a-2b3c-4d5e6f7a8b9c"
+                }
+              }
+            },
+            "tags": {
+              "key6298": "value1"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/0F0FBCF9-8374-47FC-B189-B79B84033EA3/resourceGroups/rgopenapi/providers/Napster.CompanionAPI/organizations/contosoOrg",
+            "name": "contosoOrg",
+            "type": "Napster.CompanionAPI/organizations",
+            "systemData": {
+              "createdBy": "john.doe@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-12-24T15:55:17.787Z",
+              "lastModifiedBy": "jane.smith@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-12-24T15:55:17.787Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/0F0FBCF9-8374-47FC-B189-B79B84033EA3/providers/Napster.CompanionAPI/organizations?api-version=2025-12-24-preview&$skiptoken=X'12345'"
+      }
+    }
+  }
+}
