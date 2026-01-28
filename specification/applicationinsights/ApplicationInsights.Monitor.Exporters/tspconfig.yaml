@@ -1,0 +1,47 @@
+parameters:
+  "service-dir":
+    default: "sdk/monitor"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Monitor.Exporters/preview/{version}/swagger.json"
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-opentelemetry-exporter/azure/monitor/opentelemetry/exporter/_generated"
+    package-name: "azure-monitor-opentelemetry-exporter"
+    flavor: azure
+    namespace: "exporter"
+    generate-packaging-files: false
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.Monitor.OpenTelemetry.Exporter"
+    generate-convenience-methods: false
+    model-namespace: false
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    output-path: "./src/Generated"
+    clear-output-folder: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/monitor-opentelemetry-exporter"
+    src-folder: "src/generated"
+    generate-metadata: true
+    is-modular-library: true
+    package-details:
+      name: "@azure/monitor-opentelemetry-exporter"
+      description: "Azure Monitor OpenTelemetry Exporter"
+    flavor: azure
+    experimental-extensible-enums: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-opentelemetry-exporter"
+    namespace: "com.azure.monitor.opentelemetry.exporter"
+    flavor: azure
