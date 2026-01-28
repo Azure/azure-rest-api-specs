@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-01-01-preview",
+    "containerName": "VMAppContainer;Compute;testRG;testSQL",
+    "fabricName": "Azure",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testvault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "VMAppContainer;Compute;testRG;testSQL",
+        "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers",
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL",
+        "properties": {
+          "backupManagementType": "AzureWorkload",
+          "containerType": "VMAppContainer",
+          "extendedInfo": {
+            "hostServerName": "testsql",
+            "inquiryInfo": {
+              "errorDetail": {
+                "code": "Success",
+                "message": "Not Available",
+                "recommendations": [
+                  "Not Available"
+                ]
+              },
+              "inquiryDetails": [
+                {
+                  "type": "sql",
+                  "inquiryValidation": {
+                    "errorDetail": {
+                      "code": "Success",
+                      "message": "Not Available",
+                      "recommendations": [
+                        "Not Available"
+                      ]
+                    },
+                    "status": "Success"
+                  },
+                  "itemCount": 14
+                }
+              ],
+              "status": "Success"
+            },
+            "nodesList": []
+          },
+          "friendlyName": "testSQL",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/testSQL",
+          "workloadType": null
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2017-07-01",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.RecoveryServices/vaults/testvault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;testSQL/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01",
+        "Retry-After": 60
+      }
+    },
+    "204": {}
+  },
+  "operationId": "ProtectionContainerOperationResults_Get",
+  "title": "Get Azure Storage Protection Container Operation Result"
+}
