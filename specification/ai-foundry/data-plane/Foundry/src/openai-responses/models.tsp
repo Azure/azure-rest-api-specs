@@ -155,7 +155,7 @@ namespace Azure.AI.Projects {
     type: "structured_outputs";
 
     @doc("The structured output captured during the response.")
-    output: Record<unknown>;
+    output: unknown;
   }
 
   model WorkflowPreviewActionOutputItemResource extends OpenAI.ItemResource {

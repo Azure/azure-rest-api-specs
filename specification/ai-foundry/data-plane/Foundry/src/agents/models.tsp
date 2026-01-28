@@ -350,7 +350,7 @@ model StructuredInputDefinition {
   description?: string;
 
   @doc("The default value for the input if no run-time value is provided.")
-  default_value?: Record<unknown>;
+  default_value?: unknown;
 
   @doc("The JSON schema for the structured input (optional).")
   schema?: Record<unknown>;
