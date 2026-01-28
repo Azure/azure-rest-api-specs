@@ -2780,6 +2780,33 @@
         "unhealthyRule"
       ]
     },
+    "ExternalSignal": {
+      "type": "object",
+      "description": "An externally submitted signal instance assigned to an entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignalInstanceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ExternalSignal"
+    },
+    "ExternalSignalGroup": {
+      "type": "object",
+      "description": "A grouping of externally submitted signals.",
+      "properties": {
+        "signals": {
+          "type": "array",
+          "description": "Signals assigned to this signal group.",
+          "items": {
+            "$ref": "#/definitions/ExternalSignal"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "HealthModel": {
       "type": "object",
       "description": "A HealthModel resource",
@@ -3759,6 +3786,11 @@
         "dependencies": {
           "$ref": "#/definitions/DependenciesSignalGroup",
           "description": "Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity."
+        },
+        "external": {
+          "$ref": "#/definitions/ExternalSignalGroup",
+          "description": "List of signals which have been externally submitted for this entity.",
+          "readOnly": true
         }
       }
     },
@@ -3876,7 +3908,8 @@
       "enum": [
         "AzureResourceMetric",
         "LogAnalyticsQuery",
-        "PrometheusMetricsQuery"
+        "PrometheusMetricsQuery",
+        "ExternalSignal"
       ],
       "x-ms-enum": {
         "name": "SignalKind",
@@ -3893,6 +3926,10 @@
           {
             "name": "PrometheusMetricsQuery",
             "value": "PrometheusMetricsQuery"
+          },
+          {
+            "name": "ExternalSignal",
+            "value": "ExternalSignal"
           }
         ]
       }

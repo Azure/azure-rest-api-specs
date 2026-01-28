@@ -117,6 +117,9 @@ union SignalKind {
   AzureResourceMetric: "AzureResourceMetric",
   LogAnalyticsQuery: "LogAnalyticsQuery",
   PrometheusMetricsQuery: "PrometheusMetricsQuery",
+
+  @added(Versions.v2026_01_01_preview)
+  ExternalSignal: "ExternalSignal",
 }
 
 @doc("SignalDefinition properties")
@@ -633,6 +636,10 @@ model SignalGroups {
 
   @doc("Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity.")
   dependencies?: DependenciesSignalGroup;
+
+  @doc("List of signals which have been externally submitted for this entity.")
+  @visibility(Lifecycle.Read)
+  external?: ExternalSignalGroup;
 }
 
 @doc("Properties for dependent entities, i.e. child entities")
@@ -803,6 +810,22 @@ model AzureMonitorWorkspaceSignals {
   @maxItems(50)
   @identifiers(#["name"])
   signals?: PrometheusMetricsSignal[];
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("A grouping of externally submitted signals.")
+model ExternalSignalGroup {
+  @doc("Signals assigned to this signal group.")
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Read)
+  signals?: ExternalSignal[];
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("An externally submitted signal instance assigned to an entity.")
+model ExternalSignal extends SignalInstanceProperties {
+  @doc("Kind of the signal instance")
+  signalKind: SignalKind.ExternalSignal;
 }
 
 @doc("Type of impact an entity has on health state propagation")

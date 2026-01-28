@@ -134,6 +134,29 @@
                   "aggregationType": "Thresholds",
                   "degradedThreshold": "3",
                   "unhealthyThreshold": "50%"
+                },
+                "external": {
+                  "signals": [
+                    {
+                      "name": "external-signal-1",
+                      "signalKind": "ExternalSignal",
+                      "status": {
+                        "healthState": "Degraded",
+                        "value": 75.5,
+                        "reportedAt": "2025-12-15T12:00:00Z"
+                      },
+                      "evaluationRules": {
+                        "degradedRule": {
+                          "operator": "GreaterThan",
+                          "threshold": 70
+                        },
+                        "unhealthyRule": {
+                          "operator": "GreaterThan",
+                          "threshold": 90
+                        }
+                      }
+                    }
+                  ]
                 }
               },
               "discoveredBy": "discoveryRule1",
