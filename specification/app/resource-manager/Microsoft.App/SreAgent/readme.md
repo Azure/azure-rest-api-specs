@@ -47,9 +47,9 @@ input-file:
 directive:
   - suppress: AvoidAdditionalProperties
     from: sreagent.json
-    reason: unnecessary check
+    reason: A dictionary allow passing through various key-value pairs
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: sreagent.json
-    reason: unnecessary check
+    reason: A dictionary allow passing through various key-value pairs
 
 ```
