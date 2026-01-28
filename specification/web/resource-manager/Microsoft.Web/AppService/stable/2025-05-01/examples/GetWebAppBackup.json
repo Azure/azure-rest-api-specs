@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "name": "sitef6141",
+    "api-version": "2025-05-01",
+    "backupId": "12345",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sitef6141",
+        "type": "Microsoft.Web/sites",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/backups/12345",
+        "properties": {
+          "name": "sitef6141_2024-11-01",
+          "blobName": "sitef6141_2024-11-01",
+          "created": "2022-09-03T17:33:11.641Z",
+          "databases": [
+            {
+              "name": "backenddb",
+              "connectionString": "DSN=data-source-name[;SERVER=value] [;PWD=value] [;UID=value] [;<Attribute>=<value>]",
+              "connectionStringName": "backend",
+              "databaseType": "SqlAzure"
+            },
+            {
+              "name": "statsdb",
+              "connectionString": "DSN=data-source-name[;SERVER=value] [;PWD=value] [;UID=value] [;<Attribute>=<value>]",
+              "connectionStringName": "stats",
+              "databaseType": "SqlAzure"
+            }
+          ],
+          "finishedTimeStamp": "2022-09-05T17:33:11.641Z",
+          "id": 12345,
+          "lastRestoreTimeStamp": "2022-09-04T17:33:11.641Z",
+          "log": "Succeeded",
+          "scheduled": true,
+          "sizeInBytes": 56091883,
+          "status": "InProgress",
+          "storageAccountUrl": "DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=<account-key>",
+          "websiteSizeInBytes": 56091883
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "WebApps_GetBackupStatus",
+  "title": "Get web app backup"
+}
