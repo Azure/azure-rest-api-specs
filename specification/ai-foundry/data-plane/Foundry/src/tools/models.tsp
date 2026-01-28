@@ -373,8 +373,7 @@ namespace Azure.AI.Projects {
     /**
      * The openapi function shape, described as a JSON Schema object.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
-    spec: unknown;
+    spec: Record<unknown>;
 
     /**
      * Open API authentication details
