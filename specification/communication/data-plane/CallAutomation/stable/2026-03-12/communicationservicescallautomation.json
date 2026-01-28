@@ -2720,6 +2720,40 @@
       },
       "additionalProperties": false
     },
+    "IncomingCall": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "from": {
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "callerDisplayName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "customContext": {
+          "$ref": "#/definitions/CustomCallingContext"
+        },
+        "incomingCallContext": {
+          "type": "string",
+          "readOnly": true
+        },
+        "onBehalfOfCallee": {
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "correlationId": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
     "MediaStreamingAudioChannelType": {
       "enum": [
         "mixed",
@@ -3045,9 +3079,6 @@
     "ParticipantsUpdated": {
       "type": "object",
       "properties": {
-        "operationContext": {
-          "type": "string"
-        },
         "callConnectionId": {
           "type": "string"
         },
@@ -3503,9 +3534,6 @@
     "RecordingStateChanged": {
       "type": "object",
       "properties": {
-        "operationContext": {
-          "type": "string"
-        },
         "callConnectionId": {
           "type": "string"
         },
