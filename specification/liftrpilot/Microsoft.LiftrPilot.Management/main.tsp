@@ -536,6 +536,39 @@ model ActivateSaasResponse {
   saasId: string;
 }
 
+@added(Versions.v2025_10_24_preview)
+@doc("Input for ProviderLevelTestAction")
+model ProviderLevelTestActionRequest {
+  @doc("ID of the action performed")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  actionId: string;
+}
+
+@added(Versions.v2025_10_24_preview)
+@doc("Output for ProviderLevelTestAction")
+model ProviderLevelTestActionResponse {
+  @doc("Result of the action performed")
+  @visibility(Lifecycle.Read)
+  result: string;
+}
+
+@added(Versions.v2025_10_24_preview)
+@armResourceOperations
+interface ProviderLevelTestActions {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
+  @doc("Test Provider Level Action.")
+  @route("/providers/Microsoft.LiftrPilot/providerLevelTestAction")
+  @post
+  @OpenAPI.extension("x-ms-long-running-operation", true)
+  invoke(
+    ...ApiVersionParameter,
+
+    @bodyRoot
+    @doc("The details for ProviderLevelTestAction request.")
+    request: ProviderLevelTestActionRequest,
+  ): ArmResponse<ProviderLevelTestActionResponse> | ArmAcceptedLroResponse | ErrorResponse;
+}
+
 @added(Versions.v2025_05_23_preview)
 @armResourceOperations
 interface SaasOperations {
