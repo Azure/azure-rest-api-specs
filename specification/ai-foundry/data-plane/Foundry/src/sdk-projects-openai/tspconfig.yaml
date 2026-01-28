@@ -1,0 +1,45 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+emit:
+options:
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.Projects.OpenAI
+    api-version: "v1"
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - specification/ai-foundry/data-plane/Foundry/src/agents
+      - specification/ai-foundry/data-plane/Foundry/src/common
+      - specification/ai-foundry/data-plane/Foundry/src/connections
+      - specification/ai-foundry/data-plane/Foundry/src/datasets
+      - specification/ai-foundry/data-plane/Foundry/src/indexes
+      - specification/ai-foundry/data-plane/Foundry/src/deployments
+      - specification/ai-foundry/data-plane/Foundry/src/red-teams
+      - specification/ai-foundry/data-plane/Foundry/src/evaluationrules
+      - specification/ai-foundry/data-plane/Foundry/src/openai-evaluations
+      - specification/ai-foundry/data-plane/Foundry/src/evaluation_taxonomies
+      - specification/ai-foundry/data-plane/Foundry/src/evaluators
+      - specification/ai-foundry/data-plane/Foundry/src/insights
+      - specification/ai-foundry/data-plane/Foundry/src/schedules
+      - specification/ai-foundry/data-plane/Foundry/src/memory_stores
+      - specification/ai-foundry/data-plane/Foundry/src/conversations
+      - specification/ai-foundry/data-plane/Foundry/src/responses
+      - specification/ai-foundry/data-plane/Foundry/src/tools
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"
+    "@azure-tools/typespec-azure-core/bad-record-type": "We do want to use Record<unknown>, and not Record<string>. But this needs further investigation"
+    "@azure-tools/typespec-azure-core/use-standard-names": "PUT operations that return 200 should start with 'replace' or 'createOrReplace'"
+    # The set of rules, disabled because of .external-readonly contains non compliant code.
+    "@azure-tools/typespec-azure-core/documentation-required": "Some OpenAI models do not contain docstrings."
+    "@azure-tools/typespec-azure-core/no-nullable": "Some OpenAI models still contain <> | null notation."
+    "@azure-tools/typespec-azure-core/no-closed-literal-union": "OpenAI incompliance"
+    "@azure-tools/typespec-azure-core/no-openapi": ".external-readonly uses OpenAI."
+    "@azure-tools/typespec-azure-core/no-multiple-discriminator": "OpenAI contains multiple discriminators."
+    "@azure-tools/typespec-azure-core/no-unknown": "unknowns are used in OpenAI package."
+    "@azure-tools/typespec-azure-core/no-query-explode": "Explode is used in OpenAI package."
+    "@azure-tools/typespec-client-generator-core/property-name-conflict": "OpenAI package has conflict."

@@ -1,0 +1,79 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+emit:
+  - "@typespec/openapi3"
+options:
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}/"
+    output-file: "openapi3/{version}/microsoft-foundry-openapi3.json"
+    # output-file: "openapi3/{version}/microsoft-foundry-openapi3.yaml"
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-mode: "dataplane"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
+    package-name: "azure-ai-projects"
+    namespace: "azure.ai.projects"
+    api-version: "v1"
+    flavor: azure
+    generate-test: false
+    generate-sample: false
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.Projects
+    api-version: "v1"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.Agents.Contracts.V2
+    namespace: Azure.AI.Agents.Contracts.V2
+    api-version: "virtual-public-preview"
+    flavor: azure
+    clear-output-folder: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-projects"
+    api-version: "v1"
+    is-modular-library: true
+    generate-test: true
+    generate-metadata: false
+    ignore-property-name-normalize: true
+    ignore-enum-member-name-normalize: true
+    package-details:
+      name: "@azure/ai-projects"
+      description: "Azure AI Projects Client"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    api-version: "v1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
+    namespace: "com.azure.ai.projects"
+    service-name: "AIProjects"
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
+    generate-samples: false
+    custom-types-subpackage: "implementation.models"
+    customization-class: customizations/src/main/java/ProjectsCustomizations.java
+    flavor: azure
+  "@typespec/json-schema":
+    emitAllModels: true
+    emitAllRefs: false
+    emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
+    file-type: json
+    bundleId: azure-ai-agents-v2.json
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"
+    "@azure-tools/typespec-azure-core/bad-record-type": "We do want to use Record<unknown>, and not Record<string>. But this needs further investigation"
+    "@azure-tools/typespec-azure-core/use-standard-names": "PUT operations that return 200 should start with 'replace' or 'createOrReplace'"
+    # The set of rules, disabled because of .external-readonly contains non compliant code.
+    "@azure-tools/typespec-azure-core/documentation-required": "Some OpenAI models do not contain docstrings."
+    "@azure-tools/typespec-azure-core/no-nullable": "Some OpenAI models still contain <> | null notation."
+    "@azure-tools/typespec-azure-core/no-closed-literal-union": "OpenAI incompliance"
+    "@azure-tools/typespec-azure-core/no-openapi": ".external-readonly uses OpenAI."
+    "@azure-tools/typespec-azure-core/no-multiple-discriminator": "OpenAI contains multiple discriminators."
+    "@azure-tools/typespec-azure-core/no-unknown": "unknowns are used in OpenAI package."
+    "@azure-tools/typespec-azure-core/no-query-explode": "Explode is used in OpenAI package."
+    "@azure-tools/typespec-client-generator-core/property-name-conflict": "OpenAI package has conflict."
+    "@azure-tools/typespec-azure-core/no-enum": "OpenAI uses enums."
