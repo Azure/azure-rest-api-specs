@@ -178,6 +178,7 @@ namespace Microsoft.RecoveryServices;
   "DeletedVaultRestoreInputProperties",
   "csharp"
 );
+@@clientName(DeletedVaults.undelete, "restoreDeletedVault", "csharp");
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
