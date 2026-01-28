@@ -17,7 +17,7 @@ namespace Microsoft.MachineLearningServices;
 /**
  * Alias for proxy api version parameter
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 alias ProxyApiVersion = {
   /**
    * Api version used by proxy call
@@ -31,7 +31,7 @@ alias ProxyApiVersion = {
  */
 union UsageUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Count: "Count",
 }
 
@@ -40,7 +40,7 @@ union UsageUnit {
  */
 union BillingCurrency {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   USD: "USD",
 }
 
@@ -49,7 +49,7 @@ union BillingCurrency {
  */
 union UnitOfMeasure {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OneHour: "OneHour",
 }
 
@@ -58,9 +58,9 @@ union UnitOfMeasure {
  */
 union VMPriceOSType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Linux: "Linux",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Windows: "Windows",
 }
 
@@ -69,11 +69,11 @@ union VMPriceOSType {
  */
 union VMTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   LowPriority: "LowPriority",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Spot: "Spot",
 }
 
@@ -82,7 +82,7 @@ union VMTier {
  */
 union QuotaUnit {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Count: "Count",
 }
 
@@ -91,21 +91,21 @@ union QuotaUnit {
  */
 union Status {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Undefined: "Undefined",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Success: "Success",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failure: "Failure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   InvalidQuotaBelowClusterMinimum: "InvalidQuotaBelowClusterMinimum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   InvalidQuotaExceedsSubscriptionLimit: "InvalidQuotaExceedsSubscriptionLimit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   InvalidVMFamilyName: "InvalidVMFamilyName",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OperationNotSupportedForSku: "OperationNotSupportedForSku",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OperationNotEnabledForRegion: "OperationNotEnabledForRegion",
 }
 
@@ -114,13 +114,13 @@ union Status {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Key: "Key",
 }
 
@@ -129,25 +129,25 @@ union CreatedByType {
  */
 union ComputeType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AKS: "AKS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Kubernetes: "Kubernetes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AmlCompute: "AmlCompute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ComputeInstance: "ComputeInstance",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DataFactory: "DataFactory",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   VirtualMachine: "VirtualMachine",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   HDInsight: "HDInsight",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Databricks: "Databricks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DataLakeAnalytics: "DataLakeAnalytics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SynapseSpark: "SynapseSpark",
 }
 
@@ -156,28 +156,28 @@ union ComputeType {
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union UnderlyingResourceAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Delete: "Delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Detach: "Detach",
 }
 
@@ -186,9 +186,9 @@ union UnderlyingResourceAction {
  */
 union ImageType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   docker: "docker",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   azureml: "azureml",
 }
 
@@ -197,7 +197,7 @@ union ImageType {
  */
 union EnvironmentVariableType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   local: "local",
 }
 
@@ -206,11 +206,11 @@ union EnvironmentVariableType {
  */
 union Protocol {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   tcp: "tcp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   udp: "udp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   http: "http",
 }
 
@@ -219,13 +219,13 @@ union Protocol {
  */
 union VolumeDefinitionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   bind: "bind",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   volume: "volume",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   tmpfs: "tmpfs",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   npipe: "npipe",
 }
 
@@ -234,17 +234,17 @@ union VolumeDefinitionType {
  */
 union NodeState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   idle: "idle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   running: "running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   preparing: "preparing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   unusable: "unusable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   leaving: "leaving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   preempted: "preempted",
 }
 
@@ -253,11 +253,11 @@ union NodeState {
  */
 union SourceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Dataset: "Dataset",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Datastore: "Datastore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   URI: "URI",
 }
 
@@ -266,9 +266,9 @@ union SourceType {
  */
 union MountAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Mount: "Mount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Unmount: "Unmount",
 }
 
@@ -277,9 +277,9 @@ union MountAction {
  */
 union MountMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ReadOnly: "ReadOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ReadWrite: "ReadWrite",
 }
 
@@ -288,17 +288,17 @@ union MountMode {
  */
 union MountState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MountRequested: "MountRequested",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Mounted: "Mounted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MountFailed: "MountFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UnmountRequested: "UnmountRequested",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UnmountFailed: "UnmountFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Unmounted: "Unmounted",
 }
 
@@ -307,17 +307,17 @@ union MountState {
  */
 union AssetProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
 }
 
@@ -326,9 +326,9 @@ union AssetProvisioningState {
  */
 union PendingUploadType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TemporaryBlobReference: "TemporaryBlobReference",
 }
 
@@ -337,18 +337,18 @@ union PendingUploadType {
  */
 union PendingUploadCredentialType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SAS: "SAS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ListViewType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ActiveOnly: "ActiveOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ArchivedOnly: "ArchivedOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   All: "All",
 }
 
@@ -357,11 +357,11 @@ union ListViewType {
  */
 union DataType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   uri_file: "uri_file",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   uri_folder: "uri_folder",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   mltable: "mltable",
 }
 
@@ -370,13 +370,13 @@ union DataType {
  */
 union DataReferenceCredentialType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SAS: "SAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DockerCredentials: "DockerCredentials",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   NoCredentials: "NoCredentials",
 }
 
@@ -385,9 +385,9 @@ union DataReferenceCredentialType {
  */
 union AutoRebuildSetting {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OnBaseImageUpdate: "OnBaseImageUpdate",
 }
 
@@ -396,24 +396,24 @@ union AutoRebuildSetting {
  */
 union EnvironmentType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Curated: "Curated",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UserCreated: "UserCreated",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union VulnerabilityRisk {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UNKNOWN: "UNKNOWN",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CRITICAL: "CRITICAL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   HIGH: "HIGH",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MEDIUM: "MEDIUM",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   LOW: "LOW",
 }
 
@@ -422,9 +422,9 @@ union VulnerabilityRisk {
  */
 union OperatingSystemType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Linux: "Linux",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Windows: "Windows",
 }
 
@@ -433,17 +433,17 @@ union OperatingSystemType {
  */
 union EndpointProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
 }
 
@@ -452,11 +452,11 @@ union EndpointProvisioningState {
  */
 union EndpointAuthMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AMLToken: "AMLToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Key: "Key",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AADToken: "AADToken",
 }
 
@@ -465,9 +465,9 @@ union EndpointAuthMode {
  */
 union BatchDeploymentConfigurationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Model: "Model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PipelineComponent: "PipelineComponent",
 }
 
@@ -478,11 +478,11 @@ union BatchDeploymentConfigurationType {
  */
 union BatchLoggingLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Info: "Info",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Debug: "Debug",
 }
 
@@ -491,11 +491,11 @@ union BatchLoggingLevel {
  */
 union ReferenceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Id: "Id",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DataPath: "DataPath",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OutputPath: "OutputPath",
 }
 
@@ -504,9 +504,9 @@ union ReferenceType {
  */
 union BatchOutputAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SummaryOnly: "SummaryOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AppendRow: "AppendRow",
 }
 
@@ -515,26 +515,26 @@ union BatchOutputAction {
  */
 union DeploymentProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Scaling: "Scaling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union CapabilityHostKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Agents: "Agents",
 }
 
@@ -543,17 +543,17 @@ union CapabilityHostKind {
  */
 union CapabilityHostProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
 }
 
@@ -562,15 +562,15 @@ union CapabilityHostProvisioningState {
  */
 union CredentialsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AccountKey: "AccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Certificate: "Certificate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sas: "Sas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ServicePrincipal: "ServicePrincipal",
 }
 
@@ -579,15 +579,15 @@ union CredentialsType {
  */
 union DatastoreType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureBlob: "AzureBlob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureDataLakeGen1: "AzureDataLakeGen1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureDataLakeGen2: "AzureDataLakeGen2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureFile: "AzureFile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OneLake: "OneLake",
 }
 
@@ -596,34 +596,34 @@ union DatastoreType {
  */
 union SecretsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AccountKey: "AccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Certificate: "Certificate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sas: "Sas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ServicePrincipal: "ServicePrincipal",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union FeatureDataType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   String: "String",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Integer: "Integer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Long: "Long",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Float: "Float",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Double: "Double",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Binary: "Binary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Datetime: "Datetime",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Boolean: "Boolean",
 }
 
@@ -632,11 +632,11 @@ union FeatureDataType {
  */
 union EmailNotificationEnableType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   JobCompleted: "JobCompleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   JobFailed: "JobFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   JobCancelled: "JobCancelled",
 }
 
@@ -645,7 +645,7 @@ union EmailNotificationEnableType {
  */
 union WebhookType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureDevOps: "AzureDevOps",
 }
 
@@ -723,51 +723,51 @@ union WeekDay {
   Sunday: "Sunday",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union TriggerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Recurrence: "Recurrence",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Cron: "Cron",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union MaterializationStoreType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Offline: "Offline",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OnlineAndOffline: "OnlineAndOffline",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union DataAvailabilityStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Incomplete: "Incomplete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Complete: "Complete",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union OrderString {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CreatedAtDesc: "CreatedAtDesc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CreatedAtAsc: "CreatedAtAsc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UpdatedAtDesc: "UpdatedAtDesc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UpdatedAtAsc: "UpdatedAtAsc",
 }
 
@@ -776,17 +776,17 @@ union OrderString {
  */
 union PoolProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
 }
 
@@ -795,7 +795,7 @@ union PoolProvisioningState {
  */
 union AuthMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AAD: "AAD",
 }
 
@@ -826,11 +826,11 @@ union SkuScaleType {
  */
 union IdentityConfigurationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Managed: "Managed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AMLToken: "AMLToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UserIdentity: "UserIdentity",
 }
 
@@ -839,19 +839,19 @@ union IdentityConfigurationType {
  */
 union JobType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AutoML: "AutoML",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Command: "Command",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sweep: "Sweep",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Pipeline: "Pipeline",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Spark: "Spark",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   FineTuning: "FineTuning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Distillation: "Distillation",
 }
 
@@ -860,7 +860,7 @@ union JobType {
  */
 union NodesValueType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   All: "All",
 }
 
@@ -942,7 +942,7 @@ union JobStatus {
   Unknown: "Unknown",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union MarketplaceSubscriptionStatus {
   string,
 
@@ -966,7 +966,7 @@ union MarketplaceSubscriptionStatus {
   Unsubscribed: "Unsubscribed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union MarketplaceSubscriptionProvisioningState {
   string,
 
@@ -995,7 +995,7 @@ union MarketplaceSubscriptionProvisioningState {
    */
   Updating: "Updating",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
 }
 
@@ -1004,11 +1004,11 @@ union MarketplaceSubscriptionProvisioningState {
  */
 union EndpointComputeType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Managed: "Managed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Kubernetes: "Kubernetes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureMLCompute: "AzureMLCompute",
 }
 
@@ -1017,33 +1017,33 @@ union EndpointComputeType {
  */
 union PublicNetworkAccessType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union DataCollectionMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union RollingRateType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Year: "Year",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Month: "Month",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Day: "Day",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Hour: "Hour",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Minute: "Minute",
 }
 
@@ -1052,86 +1052,86 @@ union RollingRateType {
  */
 union EgressPublicNetworkAccessType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ScaleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Default: "Default",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TargetUtilization: "TargetUtilization",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ContainerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   StorageInitializer: "StorageInitializer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   InferenceServer: "InferenceServer",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union KeyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Primary: "Primary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Secondary: "Secondary",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ScheduleListViewType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   EnabledOnly: "EnabledOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DisabledOnly: "DisabledOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   All: "All",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ScheduleActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CreateJob: "CreateJob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   InvokeBatchEndpoint: "InvokeBatchEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CreateMonitor: "CreateMonitor",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ScheduleProvisioningStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ServerlessInferenceEndpointAuthMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Key: "Key",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AAD: "AAD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   KeyAndAAD: "KeyAndAAD",
 }
 
@@ -1140,9 +1140,9 @@ union ServerlessInferenceEndpointAuthMode {
  */
 union ContentSafetyLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Blocking: "Blocking",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deferred: "Deferred",
 }
 
@@ -1151,9 +1151,9 @@ union ContentSafetyLevel {
  */
 union ContentSafetyStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
@@ -1162,23 +1162,23 @@ union ContentSafetyStatus {
  */
 union ServerlessEndpointState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Suspending: "Suspending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Reinstating: "Reinstating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Suspended: "Suspended",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CreationFailed: "CreationFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DeletionFailed: "DeletionFailed",
 }
 
@@ -1187,15 +1187,15 @@ union ServerlessEndpointState {
  */
 union EndpointServiceConnectionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Rejected: "Rejected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Timeout: "Timeout",
 }
 
@@ -1204,11 +1204,11 @@ union EndpointServiceConnectionStatus {
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   `user,system`: "user,system",
 }
 
@@ -1217,7 +1217,7 @@ union Origin {
  */
 union ActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Internal: "Internal",
 }
 
@@ -1226,9 +1226,9 @@ union ActionType {
  */
 union EncryptionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
@@ -1237,11 +1237,11 @@ union EncryptionStatus {
  */
 union IsolationMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AllowInternetOutbound: "AllowInternetOutbound",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AllowOnlyApprovedOutbound: "AllowOnlyApprovedOutbound",
 }
 
@@ -1250,13 +1250,13 @@ union IsolationMode {
  */
 union RuleCategory {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Required: "Required",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Recommended: "Recommended",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UserDefined: "UserDefined",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Dependency: "Dependency",
 }
 
@@ -1265,15 +1265,15 @@ union RuleCategory {
  */
 union RuleStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
 }
 
@@ -1282,11 +1282,11 @@ union RuleStatus {
  */
 union RuleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   FQDN: "FQDN",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PrivateEndpoint: "PrivateEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ServiceTag: "ServiceTag",
 }
 
@@ -1295,9 +1295,9 @@ union RuleType {
  */
 union ManagedNetworkStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Active: "Active",
 }
 
@@ -1306,9 +1306,9 @@ union ManagedNetworkStatus {
  */
 union FirewallSku {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Basic: "Basic",
 }
 
@@ -1317,34 +1317,34 @@ union FirewallSku {
  */
 union ManagedNetworkKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   V1: "V1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   V2: "V2",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union DefaultActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deny: "Deny",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Allow: "Allow",
 }
 
 /**
  * The current provisioning state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 union PrivateEndpointConnectionProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
 }
 
@@ -1353,11 +1353,11 @@ union PrivateEndpointConnectionProvisioningState {
  */
 union SystemDatastoresAuthMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AccessKey: "AccessKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Identity: "Identity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UserDelegationSAS: "UserDelegationSAS",
 }
 
@@ -1366,43 +1366,43 @@ union SystemDatastoresAuthMode {
  */
 union ConnectionAuthType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PAT: "PAT",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UsernamePassword: "UsernamePassword",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SAS: "SAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AccountKey: "AccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ServicePrincipal: "ServicePrincipal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AccessKey: "AccessKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ApiKey: "ApiKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CustomKeys: "CustomKeys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OAuth2: "OAuth2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AAD: "AAD",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DelegatedSAS: "DelegatedSAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ProjectManagedIdentity: "ProjectManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AccountManagedIdentity: "AccountManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UserEntraToken: "UserEntraToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AgentUserImpersonation: "AgentUserImpersonation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AgenticIdentityToken: "AgenticIdentityToken",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AgenticUser: "AgenticUser",
 }
 
@@ -1411,245 +1411,245 @@ union ConnectionAuthType {
  */
 union ConnectionCategory {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PythonFeed: "PythonFeed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ContainerRegistry: "ContainerRegistry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Git: "Git",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   S3: "S3",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Snowflake: "Snowflake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureKeyVault: "AzureKeyVault",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureSqlDb: "AzureSqlDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureSynapseAnalytics: "AzureSynapseAnalytics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureMySqlDb: "AzureMySqlDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzurePostgresDb: "AzurePostgresDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ADLSGen2: "ADLSGen2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureContainerAppEnvironment: "AzureContainerAppEnvironment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Redis: "Redis",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ApiKey: "ApiKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureOpenAI: "AzureOpenAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AIServices: "AIServices",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CognitiveSearch: "CognitiveSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CognitiveService: "CognitiveService",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CustomKeys: "CustomKeys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureBlob: "AzureBlob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureStorageAccount: "AzureStorageAccount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureOneLake: "AzureOneLake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CosmosDb: "CosmosDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CosmosDbMongoDbApi: "CosmosDbMongoDbApi",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureDataExplorer: "AzureDataExplorer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureMariaDb: "AzureMariaDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureDatabricksDeltaLake: "AzureDatabricksDeltaLake",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureSqlMi: "AzureSqlMi",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureTableStorage: "AzureTableStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AmazonRdsForOracle: "AmazonRdsForOracle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AmazonRdsForSqlServer: "AmazonRdsForSqlServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AmazonRedshift: "AmazonRedshift",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Db2: "Db2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Drill: "Drill",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GoogleBigQuery: "GoogleBigQuery",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Greenplum: "Greenplum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Hbase: "Hbase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Hive: "Hive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Impala: "Impala",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Informix: "Informix",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MariaDb: "MariaDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MicrosoftAccess: "MicrosoftAccess",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MySql: "MySql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Netezza: "Netezza",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Oracle: "Oracle",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Phoenix: "Phoenix",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PostgreSql: "PostgreSql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Presto: "Presto",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SapOpenHub: "SapOpenHub",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SapBw: "SapBw",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SapHana: "SapHana",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SapTable: "SapTable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Spark: "Spark",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SqlServer: "SqlServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sybase: "Sybase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Teradata: "Teradata",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Vertica: "Vertica",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Pinecone: "Pinecone",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Databricks: "Databricks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Cassandra: "Cassandra",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Couchbase: "Couchbase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MongoDbV2: "MongoDbV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MongoDbAtlas: "MongoDbAtlas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AmazonS3Compatible: "AmazonS3Compatible",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   FileServer: "FileServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   FtpServer: "FtpServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GoogleCloudStorage: "GoogleCloudStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Hdfs: "Hdfs",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OracleCloudStorage: "OracleCloudStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sftp: "Sftp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GenericHttp: "GenericHttp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ODataRest: "ODataRest",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Odbc: "Odbc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GenericRest: "GenericRest",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   RemoteTool: "RemoteTool",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AmazonMws: "AmazonMws",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Concur: "Concur",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Dynamics: "Dynamics",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DynamicsAx: "DynamicsAx",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DynamicsCrm: "DynamicsCrm",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GoogleAdWords: "GoogleAdWords",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Hubspot: "Hubspot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Jira: "Jira",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Magento: "Magento",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Marketo: "Marketo",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Office365: "Office365",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Eloqua: "Eloqua",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Responsys: "Responsys",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OracleServiceCloud: "OracleServiceCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PayPal: "PayPal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   QuickBooks: "QuickBooks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Salesforce: "Salesforce",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SalesforceServiceCloud: "SalesforceServiceCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SalesforceMarketingCloud: "SalesforceMarketingCloud",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SapCloudForCustomer: "SapCloudForCustomer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SapEcc: "SapEcc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ServiceNow: "ServiceNow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SharePointOnlineList: "SharePointOnlineList",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Shopify: "Shopify",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Square: "Square",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   WebTable: "WebTable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Xero: "Xero",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Zoho: "Zoho",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GenericContainerRegistry: "GenericContainerRegistry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Elasticsearch: "Elasticsearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AppInsights: "AppInsights",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AppConfig: "AppConfig",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OpenAI: "OpenAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Serp: "Serp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   BingLLMSearch: "BingLLMSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Serverless: "Serverless",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ManagedOnlineEndpoint: "ManagedOnlineEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ApiManagement: "ApiManagement",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ModelGateway: "ModelGateway",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GroundingWithBingSearch: "GroundingWithBingSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GroundingWithCustomSearch: "GroundingWithCustomSearch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sharepoint: "Sharepoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MicrosoftFabric: "MicrosoftFabric",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PowerPlatformEnvironment: "PowerPlatformEnvironment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   RemoteA2A: "RemoteA2A",
 }
 
@@ -1658,66 +1658,66 @@ union ConnectionCategory {
  */
 union ConnectionGroup {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Azure: "Azure",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   AzureAI: "AzureAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Database: "Database",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   NoSQL: "NoSQL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   File: "File",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GenericProtocol: "GenericProtocol",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ServicesAndApps: "ServicesAndApps",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ManagedPERequirement {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Required: "Required",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   NotRequired: "NotRequired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   NotApplicable: "NotApplicable",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ManagedPEStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Inactive: "Inactive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   NotApplicable: "NotApplicable",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union DefaultResourceProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   NotStarted: "NotStarted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Scaling: "Scaling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
@@ -1726,9 +1726,9 @@ union DefaultResourceProvisioningState {
  */
 union ModelLifecycleStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   GenerallyAvailable: "GenerallyAvailable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Preview: "Preview",
 }
 
@@ -1737,11 +1737,11 @@ union ModelLifecycleStatus {
  */
 union AllowedContentLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Low: "Low",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Medium: "Medium",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   High: "High",
 }
 
@@ -1750,9 +1750,9 @@ union AllowedContentLevel {
  */
 union RaiPolicyContentSource {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Prompt: "Prompt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Completion: "Completion",
 }
 
@@ -1761,11 +1761,11 @@ union RaiPolicyContentSource {
  */
 union RaiPolicyMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Default: "Default",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deferred: "Deferred",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Blocking: "Blocking",
 }
 
@@ -1774,9 +1774,9 @@ union RaiPolicyMode {
  */
 union RaiPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UserManaged: "UserManaged",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SystemManaged: "SystemManaged",
 }
 
@@ -1785,17 +1785,17 @@ union RaiPolicyType {
  */
 union EndpointType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   `Azure.OpenAI`: "Azure.OpenAI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   `Azure.Speech`: "Azure.Speech",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   `Azure.ContentSafety`: "Azure.ContentSafety",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   `Azure.Llama`: "Azure.Llama",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   managedOnlineEndpoint: "managedOnlineEndpoint",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   serverlessEndpoint: "serverlessEndpoint",
 }
 
@@ -1804,38 +1804,38 @@ union EndpointType {
  */
 union DiagnoseResultLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Information: "Information",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ServiceAccountKeyName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Key1: "Key1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Key2: "Key2",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 union ManagedNetworkProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deferred: "Deferred",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleted: "Deleted",
 }
 
@@ -1844,11 +1844,11 @@ union ManagedNetworkProvisioningState {
  */
 union ClusterPurpose {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   FastProd: "FastProd",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DenseProd: "DenseProd",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DevTest: "DevTest",
 }
 
@@ -1857,11 +1857,11 @@ union ClusterPurpose {
  */
 union SslConfigStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Auto: "Auto",
 }
 
@@ -1870,9 +1870,9 @@ union SslConfigStatus {
  */
 union LoadBalancerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PublicIp: "PublicIp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   InternalLoadBalancer: "InternalLoadBalancer",
 }
 
@@ -1881,9 +1881,9 @@ union LoadBalancerType {
  */
 union OsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Linux: "Linux",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Windows: "Windows",
 }
 
@@ -1892,9 +1892,9 @@ union OsType {
  */
 union VmPriority {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Dedicated: "Dedicated",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   LowPriority: "LowPriority",
 }
 
@@ -1903,11 +1903,11 @@ union VmPriority {
  */
 union RemoteLoginPortPublicAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   NotSpecified: "NotSpecified",
 }
 
@@ -1916,9 +1916,9 @@ union RemoteLoginPortPublicAccess {
  */
 union AllocationState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Steady: "Steady",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Resizing: "Resizing",
 }
 
@@ -1927,9 +1927,9 @@ union AllocationState {
  */
 union ApplicationSharingPolicy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Personal: "Personal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Shared: "Shared",
 }
 
@@ -1938,9 +1938,9 @@ union ApplicationSharingPolicy {
  */
 union MlflowAutologger {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
@@ -1949,9 +1949,9 @@ union MlflowAutologger {
  */
 union SshPublicAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
@@ -1960,15 +1960,15 @@ union SshPublicAccess {
  */
 union PatchStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CompletedWithWarnings: "CompletedWithWarnings",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Unknown: "Unknown",
 }
 
@@ -1977,37 +1977,37 @@ union PatchStatus {
  */
 union ComputeInstanceState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CreateFailed: "CreateFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Restarting: "Restarting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Resizing: "Resizing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   JobRunning: "JobRunning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SettingUp: "SettingUp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SetupFailed: "SetupFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Starting: "Starting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Stopped: "Stopped",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Stopping: "Stopping",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UserSettingUp: "UserSettingUp",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   UserSetupFailed: "UserSetupFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Unusable: "Unusable",
 }
 
@@ -2016,7 +2016,7 @@ union ComputeInstanceState {
  */
 union ComputeInstanceAuthorizationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   personal: "personal",
 }
 
@@ -2025,19 +2025,19 @@ union ComputeInstanceAuthorizationType {
  */
 union OperationName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Create: "Create",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Start: "Start",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Stop: "Stop",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Restart: "Restart",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Resize: "Resize",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Reimage: "Reimage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Delete: "Delete",
 }
 
@@ -2046,23 +2046,23 @@ union OperationName {
  */
 union OperationStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   CreateFailed: "CreateFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   StartFailed: "StartFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   StopFailed: "StopFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   RestartFailed: "RestartFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ResizeFailed: "ResizeFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ReimageFailed: "ReimageFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   DeleteFailed: "DeleteFailed",
 }
 
@@ -2071,11 +2071,11 @@ union OperationStatus {
  */
 union OperationTrigger {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Schedule: "Schedule",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   IdleShutdown: "IdleShutdown",
 }
 
@@ -2084,11 +2084,11 @@ union OperationTrigger {
  */
 union ProvisioningStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
 }
 
@@ -2097,9 +2097,9 @@ union ProvisioningStatus {
  */
 union ScheduleStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Disabled: "Disabled",
 }
 
@@ -2108,18 +2108,18 @@ union ScheduleStatus {
  */
 union ComputePowerAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Start: "Start",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Stop: "Stop",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ComputeTriggerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Recurrence: "Recurrence",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Cron: "Cron",
 }
 
@@ -2202,11 +2202,11 @@ union ComputeWeekDay {
  */
 union ScheduleProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Failed: "Failed",
 }
 
@@ -2215,11 +2215,11 @@ union ScheduleProvisioningState {
  */
 union Autosave {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Local: "Local",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Remote: "Remote",
 }
 
@@ -2228,9 +2228,9 @@ union Autosave {
  */
 union Network {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Bridge: "Bridge",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Host: "Host",
 }
 
@@ -2239,11 +2239,11 @@ union Network {
  */
 union Caching {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ReadOnly: "ReadOnly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ReadWrite: "ReadWrite",
 }
 
@@ -2252,13 +2252,13 @@ union Caching {
  */
 union StorageAccountType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Standard_LRS: "Standard_LRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Premium_LRS: "Premium_LRS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union MonitoringFeatureFilterType {
   string,
 
@@ -2300,17 +2300,17 @@ union MonitorComputeIdentityType {
  */
 union InputDeliveryMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ReadOnlyMount: "ReadOnlyMount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ReadWriteMount: "ReadWriteMount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Download: "Download",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Direct: "Direct",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   EvalMount: "EvalMount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   EvalDownload: "EvalDownload",
 }
 
@@ -2319,11 +2319,11 @@ union InputDeliveryMode {
  */
 union OutputDeliveryMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ReadWriteMount: "ReadWriteMount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Upload: "Upload",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Direct: "Direct",
 }
 
@@ -2349,17 +2349,17 @@ union ForecastHorizonMode {
  */
 union JobOutputType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   uri_file: "uri_file",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   uri_folder: "uri_folder",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   mltable: "mltable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   custom_model: "custom_model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   mlflow_model: "mlflow_model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   triton_model: "triton_model",
 }
 
@@ -2368,15 +2368,15 @@ union JobOutputType {
  */
 union JobTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Null: "Null",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Spot: "Spot",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Premium: "Premium",
 }
 
@@ -2487,19 +2487,19 @@ union TaskType {
  */
 union JobInputType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   literal: "literal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   uri_file: "uri_file",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   uri_folder: "uri_folder",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   mltable: "mltable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   custom_model: "custom_model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   mlflow_model: "mlflow_model",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   triton_model: "triton_model",
 }
 
@@ -2571,7 +2571,7 @@ union TargetRollingWindowSizeMode {
   Custom: "Custom",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union ServiceDataAccessAuthIdentity {
   string,
 
@@ -2608,56 +2608,56 @@ union ModelProvider {
   Custom: "Custom",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union FineTuningTaskType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ChatCompletion: "ChatCompletion",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TextCompletion: "TextCompletion",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TextClassification: "TextClassification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   QuestionAnswering: "QuestionAnswering",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TextSummarization: "TextSummarization",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TokenClassification: "TokenClassification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TextTranslation: "TextTranslation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ImageClassification: "ImageClassification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ImageInstanceSegmentation: "ImageInstanceSegmentation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   ImageObjectDetection: "ImageObjectDetection",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   VideoMultiObjectTracking: "VideoMultiObjectTracking",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union EarlyTerminationPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Bandit: "Bandit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   MedianStopping: "MedianStopping",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TruncationSelection: "TruncationSelection",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union SamplingAlgorithmType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Grid: "Grid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Random: "Random",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Bayesian: "Bayesian",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union CategoricalDataDriftMetric {
   string,
 
@@ -2677,7 +2677,7 @@ union CategoricalDataDriftMetric {
   PearsonsChiSquaredTest: "PearsonsChiSquaredTest",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union MonitoringFeatureDataType {
   string,
 
@@ -2692,7 +2692,7 @@ union MonitoringFeatureDataType {
   Categorical: "Categorical",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union CategoricalDataQualityMetric {
   string,
 
@@ -2712,7 +2712,7 @@ union CategoricalDataQualityMetric {
   OutOfBoundsRate: "OutOfBoundsRate",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union CategoricalPredictionDriftMetric {
   string,
 
@@ -2859,7 +2859,7 @@ union ClassificationModels {
  */
 union StackMetaLearnerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   None: "None",
 
   /**
@@ -2872,7 +2872,7 @@ union StackMetaLearnerType {
    */
   LogisticRegressionCV: "LogisticRegressionCV",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   LightGBMClassifier: "LightGBMClassifier",
 
   /**
@@ -2885,9 +2885,9 @@ union StackMetaLearnerType {
    */
   ElasticNetCV: "ElasticNetCV",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   LightGBMRegressor: "LightGBMRegressor",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   LinearRegression: "LinearRegression",
 }
 
@@ -2975,20 +2975,20 @@ union FeaturizationMode {
  */
 union DistributionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   PyTorch: "PyTorch",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   TensorFlow: "TensorFlow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Mpi: "Mpi",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union JobLimitsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Command: "Command",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sweep: "Sweep",
 }
 
@@ -3009,13 +3009,13 @@ union MonitorComputeType {
  */
 union ModelTaskType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Classification: "Classification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Regression: "Regression",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union MonitoringNotificationType {
   string,
 
@@ -3025,7 +3025,7 @@ union MonitoringNotificationType {
   AmlNotification: "AmlNotification",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union MonitoringSignalType {
   string,
 
@@ -3143,7 +3143,7 @@ union DataGenerationType {
   DataGeneration: "DataGeneration",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union FeatureAttributionMetric {
   string,
 
@@ -3208,13 +3208,13 @@ union TargetAggregationFunction {
    */
   None: "None",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sum: "Sum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Max: "Max",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Min: "Min",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Mean: "Mean",
 }
 
@@ -3229,9 +3229,9 @@ union UseStl {
    */
   None: "None",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Season: "Season",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SeasonTrend: "SeasonTrend",
 }
 
@@ -3553,11 +3553,11 @@ union ObjectDetectionPrimaryMetrics {
  */
 union OneLakeArtifactType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   LakeHouse: "LakeHouse",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union NumericalDataDriftMetric {
   string,
 
@@ -3582,7 +3582,7 @@ union NumericalDataDriftMetric {
   TwoSampleKolmogorovSmirnovTest: "TwoSampleKolmogorovSmirnovTest",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union NumericalDataQualityMetric {
   string,
 
@@ -3602,7 +3602,7 @@ union NumericalDataQualityMetric {
   OutOfBoundsRate: "OutOfBoundsRate",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union NumericalPredictionDriftMetric {
   string,
 
@@ -3632,9 +3632,9 @@ union NumericalPredictionDriftMetric {
  */
 union Goal {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Minimize: "Minimize",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Maximize: "Maximize",
 }
 
@@ -3643,9 +3643,9 @@ union Goal {
  */
 union RandomSamplingAlgorithmRule {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Random: "Random",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Sobol: "Sobol",
 }
 
@@ -3739,12 +3739,12 @@ union RegressionModels {
   XGBoostRegressor: "XGBoostRegressor",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 union SparkJobEntryType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SparkJobPythonEntry: "SparkJobPythonEntry",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   SparkJobScalaEntry: "SparkJobScalaEntry",
 }
 
@@ -3753,11 +3753,11 @@ union SparkJobEntryType {
  */
 union DeploymentModelVersionUpgradeOption {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OnceNewDefaultVersionAvailable: "OnceNewDefaultVersionAvailable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   OnceCurrentVersionExpired: "OnceCurrentVersionExpired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   NoAutoUpgrade: "NoAutoUpgrade",
 }
 
@@ -3766,9 +3766,9 @@ union DeploymentModelVersionUpgradeOption {
  */
 union RuleAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Allow: "Allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Deny: "Deny",
 }
 
@@ -3873,7 +3873,7 @@ model VirtualMachineSize {
   /**
    * The number of vCPUs supported by the virtual machine size.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("Number of vPUs")
   @visibility(Lifecycle.Read)
   vCPUs?: int32;
@@ -3888,7 +3888,7 @@ model VirtualMachineSize {
   /**
    * The OS VHD disk size, in MB, allowed by the virtual machine size.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("OS VHD Disk size")
   @visibility(Lifecycle.Read)
   osVhdSizeMB?: int32;
@@ -3896,7 +3896,7 @@ model VirtualMachineSize {
   /**
    * The resource volume size, in MB, allowed by the virtual machine size.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("Resource volume size")
   @visibility(Lifecycle.Read)
   maxResourceVolumeMB?: int32;
@@ -3904,7 +3904,7 @@ model VirtualMachineSize {
   /**
    * The amount of memory, in GB, supported by the virtual machine size.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("Memory size")
   @visibility(Lifecycle.Read)
   memoryGB?: float64;
@@ -3919,7 +3919,7 @@ model VirtualMachineSize {
   /**
    * Specifies if the virtual machine size supports premium IO.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("Premium IO supported")
   @visibility(Lifecycle.Read)
   premiumIO?: boolean;
@@ -3927,7 +3927,7 @@ model VirtualMachineSize {
   /**
    * The estimated price information for using a VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("Estimated VM prices")
   estimatedVMPrices?: EstimatedVMPrices;
 
@@ -3957,8 +3957,8 @@ model EstimatedVMPrices {
   /**
    * The list of estimated prices for using a VM of a particular OS type, tier, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   @OpenAPI.extension("x-ms-identifiers", #[])
   @summary("List of estimated VM prices.")
   values: EstimatedVMPrice[];
@@ -4150,13 +4150,13 @@ model ResourceName {
  */
 model PaginatedComputeResourcesList is Azure.Core.Page<ComputeResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 model ComputeResourceSchema {
   /**
    * Compute properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
   properties?: Compute;
 }
 
@@ -4185,7 +4185,7 @@ model Compute {
   /**
    * The description of the Machine Learning compute.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   description?: string | null;
 
   /**
@@ -4205,14 +4205,14 @@ model Compute {
   /**
    * ARM resource id of the underlying compute
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   resourceId?: string | null;
 
   /**
    * Errors during provisioning
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   provisioningErrors?: ErrorResponse[] | null;
@@ -4233,7 +4233,7 @@ model Compute {
 /**
  * AmlCompute update parameters.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing API uses custom patch envelope"
 model ClusterUpdateParameters {
   /**
    * The properties of the amlCompute.
@@ -4255,7 +4255,7 @@ model ClusterUpdateProperties {
  * Desired scale settings for the amlCompute.
  */
 model ScaleSettingsInformation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @summary("Scale settings.")
   scaleSettings?: ScaleSettings;
 }
@@ -4299,13 +4299,13 @@ model CustomService {
   /**
    * Environment Variable for the container
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   environmentVariables?: Record<EnvironmentVariable>;
 
   /**
    * Describes the docker settings for the image
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   docker?: Docker | null;
 
   /**
@@ -4326,7 +4326,7 @@ model CustomService {
   kernel?: JupyterKernelConfig;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model Image {
   ...Record<unknown>;
 
@@ -4347,7 +4347,7 @@ model Image {
   version?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EnvironmentVariable {
   ...Record<unknown>;
 
@@ -4363,18 +4363,18 @@ model EnvironmentVariable {
   value?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model Docker {
   ...Record<unknown>;
 
   /**
    * Indicate whether container shall run in privileged or non-privileged mode.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   privileged?: boolean | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model Endpoint {
   /**
    * Protocol over which communication will happen over this endpoint
@@ -4395,17 +4395,17 @@ model Endpoint {
   /**
    * Port over which the application is exposed from container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   published?: int32 | null;
 
   /**
    * Host IP over which the application is exposed from the container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   hostIp?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model VolumeDefinition {
   /**
    * Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe
@@ -4416,7 +4416,7 @@ model VolumeDefinition {
   /**
    * Indicate whether to mount volume as readOnly. Default value for this is false.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   readOnly?: boolean | null;
 
   /**
@@ -4432,59 +4432,59 @@ model VolumeDefinition {
   /**
    * Consistency of the volume
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   consistency?: string | null;
 
   /**
    * Bind Options of the mount
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   bind?: BindOptions | null;
 
   /**
    * Volume Options of the mount
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   volume?: VolumeOptions | null;
 
   /**
    * tmpfs option of the mount
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tmpfs?: TmpfsOptions | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model BindOptions {
   /**
    * Type of Bind Option
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   propagation?: string | null;
 
   /**
    * Indicate whether to create host path.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   createHostPath?: boolean | null;
 
   /**
    * Mention the selinux options.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   selinux?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model VolumeOptions {
   /**
    * Indicate whether volume is nocopy
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nocopy?: boolean | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model TmpfsOptions {
   /**
    * Mention the Tmpfs size
@@ -4546,7 +4546,7 @@ model AmlComputeNodeInformation {
   /**
    * Private IP address of the compute node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   @summary("Private IP address.")
   privateIpAddress?: string | null;
@@ -4554,7 +4554,7 @@ model AmlComputeNodeInformation {
   /**
    * Public IP address of the compute node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   @summary("Public IP address.")
   publicIpAddress?: string | null;
@@ -4575,7 +4575,7 @@ model AmlComputeNodeInformation {
   /**
    * ID of the Experiment running on the node, if any else null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   @summary("Run ID.")
   runId?: string | null;
@@ -4666,7 +4666,7 @@ model ResizeSchema {
   /**
    * The name of the virtual machine size.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   targetVMSize?: string;
 }
 
@@ -4675,16 +4675,16 @@ model ResizeSchema {
  */
 model AvailableQuotaArmPaginatedResult is Azure.Core.Page<AvailableQuota>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AvailableQuota {
   /**
    * Available quota properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   properties?: AvailableQuotaProperties | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AvailableQuotaProperties {
   /**
    * The number of available quota
@@ -4698,12 +4698,12 @@ model AvailableQuotaProperties {
 model UsageAndQuotaDetailsArmPaginatedResult
   is Azure.Core.Page<UsageAndQuotaDetails>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model UsageAndQuotaDetails {
   /**
    * Model collection name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelCollection?: string | null;
 
   /**
@@ -4714,12 +4714,12 @@ model UsageAndQuotaDetails {
   /**
    * Usage details for each deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   usageDetails?: PTUDeploymentUsage[] | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model PTUDeploymentUsage {
   /**
    * Usage number from the collection level quota
@@ -4729,13 +4729,13 @@ model PTUDeploymentUsage {
   /**
    * Deployment name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   deploymentName?: string | null;
 
   /**
    * Resource group name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   resourceGroup?: string | null;
 
   /**
@@ -4746,7 +4746,7 @@ model PTUDeploymentUsage {
   /**
    * Workspace name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   workspaceName?: string | null;
 }
 
@@ -4758,7 +4758,7 @@ model CodeContainerResourceArmPaginatedResult is Azure.Core.Page<CodeContainer>;
 /**
  * Container for code asset versions.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model CodeContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the code container.
@@ -4767,8 +4767,8 @@ model CodeContainerProperties extends AssetContainer {
   provisioningState?: AssetProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AssetContainer extends ResourceBase {
   /**
    * Is the asset archived?
@@ -4779,39 +4779,39 @@ model AssetContainer extends ResourceBase {
   /**
    * The latest version inside this container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   latestVersion?: string | null;
 
   /**
    * The next auto incremental version
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   nextVersion?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ResourceBase {
   /**
    * The asset description text.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   description?: string | null;
 
   /**
    * The asset property dictionary.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   properties?: Record<string | null> | null;
 
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tags?: Record<string | null> | null;
 }
 
@@ -4823,12 +4823,12 @@ model CodeVersionResourceArmPaginatedResult is Azure.Core.Page<CodeVersion>;
 /**
  * Code asset version details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model CodeVersionProperties extends AssetBase {
   /**
    * Uri where code is located
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   codeUri?: string | null;
 
   /**
@@ -4838,8 +4838,8 @@ model CodeVersionProperties extends AssetBase {
   provisioningState?: AssetProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AssetBase extends ResourceBase {
   /**
    * If the name version are system generated (anonymous registration).
@@ -4854,12 +4854,12 @@ model AssetBase extends ResourceBase {
   isArchived?: boolean = false;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model PendingUploadRequestDto {
   /**
    * If PendingUploadId = null then random guid will be used.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   pendingUploadId?: string | null;
 
   /**
@@ -4868,18 +4868,18 @@ model PendingUploadRequestDto {
   pendingUploadType?: PendingUploadType = PendingUploadType.TemporaryBlobReference;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model PendingUploadResponseDto {
   /**
    * Container level read, write, list SAS
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blobReferenceForConsumption?: BlobReferenceForConsumptionDto | null;
 
   /**
    * ID for this upload request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   pendingUploadId?: string | null;
 
   /**
@@ -4888,29 +4888,29 @@ model PendingUploadResponseDto {
   pendingUploadType?: PendingUploadType = PendingUploadType.TemporaryBlobReference;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model BlobReferenceForConsumptionDto {
   /**
    * Blob URI path for client to upload data.
    * Example: https://blob.windows.core.net/Container/Path
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blobUri?: url | null;
 
   /**
    * Credential info to access storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   credential?: PendingUploadCredentialDto | null;
 
   /**
    * Arm ID of the storage account to use
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   storageAccountArmId?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("credentialType")
 model PendingUploadCredentialDto {
   /**
@@ -4929,7 +4929,7 @@ model ComponentContainerResourceArmPaginatedResult
  * Component container definition.
  * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ComponentContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the component container.
@@ -4947,13 +4947,13 @@ model ComponentVersionResourceArmPaginatedResult
 /**
  * Definition of a component version: defines resources that span component types.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ComponentVersionProperties extends AssetBase {
   /**
    * Defines Component definition details.
    * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   componentSpec?: unknown | null;
 
@@ -4972,8 +4972,8 @@ model DataContainerResourceArmPaginatedResult is Azure.Core.Page<DataContainer>;
 /**
  * Container for data asset versions.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 model DataContainerProperties extends AssetContainer {
   /**
    * [Required] Specifies the type of data.
@@ -4991,8 +4991,8 @@ model DataVersionBaseResourceArmPaginatedResult
 /**
  * Data version base definition
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 @discriminator("dataType")
 model DataVersionBaseProperties extends AssetBase {
   /**
@@ -5013,51 +5013,51 @@ model DataVersionBaseProperties extends AssetBase {
 /**
  * BlobReferenceSASRequest for getBlobReferenceSAS API
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model GetBlobReferenceSASRequestDto {
   /**
    * Id of the asset to be accessed
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   assetId?: string | null;
 
   /**
    * Blob uri of the asset to be accessed
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blobUri?: url | null;
 }
 
 /**
  * BlobReferenceSASResponse for getBlobReferenceSAS API
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model GetBlobReferenceSASResponseDto {
   /**
    * Blob reference for consumption details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blobReferenceForConsumption?: GetBlobReferenceForConsumptionDto | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model GetBlobReferenceForConsumptionDto {
   /**
    * Blob uri, example: https://blob.windows.core.net/Container/Path
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blobUri?: url | null;
 
   /**
    * Credential info to access storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   credential?: DataReferenceCredential | null;
 
   /**
    * The ARM id of the storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   storageAccountArmId?: string | null;
 }
 
@@ -5081,7 +5081,7 @@ model EnvironmentContainerResourceArmPaginatedResult
 /**
  * Container for environment specification versions.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model EnvironmentContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the environment container.
@@ -5099,7 +5099,7 @@ model EnvironmentVersionResourceArmPaginatedResult
 /**
  * Environment version details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model EnvironmentVersionProperties extends AssetBase {
   /**
    * AutoRebuild setting for the derived image
@@ -5160,7 +5160,7 @@ model EnvironmentVersionProperties extends AssetBase {
   /**
    * Stage in the environment lifecycle assigned to this environment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   stage?: string | null;
 }
 
@@ -5185,7 +5185,7 @@ model BuildContext {
   dockerfilePath?: string = "Dockerfile";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ImageDetails {
   /**
    * Indicates if image exists
@@ -5195,49 +5195,49 @@ model ImageDetails {
   /**
    * Container image details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   image?: ImageInfo | null;
 
   /**
    * Vulnerability findings details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   vulnerabilityFindings?: VulnerabilityFindings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ImageInfo {
   /**
    * Image digest
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   digest?: string | null;
 
   /**
    * Container registry host name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   hostname?: string | null;
 
   /**
    * Repository name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   repository?: string | null;
 
   /**
    * Image tag
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tag?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model VulnerabilityFindings {
   /**
    * AssetId (Image digest).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   assetId?: string | null;
 
   /**
@@ -5249,7 +5249,7 @@ model VulnerabilityFindings {
   /**
    * List of vulnerability findings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   data?: VulnerabilityDetails[] | null;
 
   /**
@@ -5268,19 +5268,19 @@ model VulnerabilityFindings {
    * Scan result date.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   lastScanDate?: utcDateTime | null;
 
   /**
    * Vulnerability scanner name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   scanner?: string | null;
 
   /**
    * Data source (internal).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   source?: string | null;
 
   /**
@@ -5290,38 +5290,38 @@ model VulnerabilityFindings {
   totalFindingsCount?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model VulnerabilityDetails {
   /**
    * CVE id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   cve?: string | null;
 
   /**
    * CVE url.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   cveUrl?: string | null;
 
   /**
    * DueDate for vulnerability. Provider data or PublishDate + 30 days.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   dueDate?: utcDateTime | null;
 
   /**
    * Vulnerability ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   id?: string | null;
 
   /**
    * Dependency details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   packageDetails?: PackageDetails[] | null;
 
   /**
@@ -5332,14 +5332,14 @@ model VulnerabilityDetails {
   /**
    * Vulnerability ID from provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   providerId?: string | null;
 
   /**
    * Vulnerability publish date.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   publishDate?: utcDateTime | null;
 
   /**
@@ -5350,56 +5350,56 @@ model VulnerabilityDetails {
   /**
    * Vulnerability description.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   solution?: string | null;
 
   /**
    * Vulnerability name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   title?: string | null;
 
   /**
    * Vendor vulnerability ID (USN, GH Advisory, etc).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   vendorId?: string | null;
 
   /**
    * Vendor vulnerability url.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   vendorUrl?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model PackageDetails {
   /**
    * Install path.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   installPath?: string | null;
 
   /**
    * Installed version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   installedVersion?: string | null;
 
   /**
    * Package or dependency name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   name?: string | null;
 
   /**
    * Patched version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   patchedVersion?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model InferenceContainerProperties {
   /**
    * The route to check the liveness of the inference server container.
@@ -5419,11 +5419,11 @@ model InferenceContainerProperties {
   /**
    * The route to check the startup of the application in the container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   startupRoute?: Route | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model Route {
   /**
    * [Required] The path for the route.
@@ -5444,8 +5444,8 @@ model Route {
 model ModelContainerResourceArmPaginatedResult
   is Azure.Core.Page<ModelContainer>;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ModelContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the model container.
@@ -5462,31 +5462,31 @@ model ModelVersionResourceArmPaginatedResult is Azure.Core.Page<ModelVersion>;
 /**
  * Model asset version details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ModelVersionProperties extends AssetBase {
   /**
    * Mapping of model flavors to their properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   flavors?: Record<FlavorData | null> | null;
 
   /**
    * Name of the training job which produced this model
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   jobName?: string | null;
 
   /**
    * The storage format for this entity. Used for NCD.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelType?: string | null;
 
   /**
    * The URI path to the model contents.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelUri?: string | null;
 
   /**
@@ -5498,23 +5498,23 @@ model ModelVersionProperties extends AssetBase {
   /**
    * Stage in the model lifecycle assigned to this model
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   stage?: string | null;
 
   /**
    * Array of dataset references
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   datasets?: DatasetReference[] | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FlavorData {
   /**
    * Model flavor-specific data.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   data?: Record<string | null> | null;
 }
 
@@ -5525,13 +5525,13 @@ model DatasetReference {
   /**
    * The name of the dataset reference.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   name?: string | null;
 
   /**
    * The fully qualified ARM id of the dataset reference.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   id?: string | null;
 }
 
@@ -5544,12 +5544,12 @@ model BatchEndpointTrackedResourceArmPaginatedResult
 /**
  * Batch endpoint configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model BatchEndpointProperties extends EndpointPropertiesBase {
   /**
    * Default values for Batch Endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   defaults?: BatchEndpointDefaults | null;
 
   /**
@@ -5567,7 +5567,7 @@ model BatchEndpointDefaults {
    * Name of the deployment that will be default for the endpoint.
    * This deployment will end up getting 100% traffic when the endpoint scoring URL is invoked.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   deploymentName?: string | null;
 }
 
@@ -5583,14 +5583,14 @@ model EndpointPropertiesBase {
   /**
    * Description of the inference endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   description?: string | null;
 
   /**
    * EndpointAuthKeys to set initially on an Endpoint.
    * This property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Create)
   @secret
   keys?: EndpointAuthKeys | null;
@@ -5598,22 +5598,22 @@ model EndpointPropertiesBase {
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   properties?: Record<string | null> | null;
 
   /**
    * Endpoint URI.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   scoringUri?: url | null;
 
   /**
    * Endpoint Swagger URI.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   swaggerUri?: url | null;
 }
@@ -5625,14 +5625,14 @@ model EndpointAuthKeys {
   /**
    * The primary key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   primaryKey?: string | null;
 
   /**
    * The secondary key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   secondaryKey?: string | null;
 }
@@ -5640,8 +5640,8 @@ model EndpointAuthKeys {
 /**
  * Strictly used in update requests.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing API uses custom patch envelope"
 model PartialMinimalTrackedResourceWithIdentity
   extends PartialMinimalTrackedResource {
   /**
@@ -5662,7 +5662,7 @@ model PartialManagedServiceIdentity {
   /**
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   userAssignedIdentities?: Record<unknown>;
 }
 
@@ -5673,8 +5673,8 @@ model PartialMinimalTrackedResource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tags?: Record<string | null>;
 }
 
@@ -5687,18 +5687,18 @@ model BatchDeploymentTrackedResourceArmPaginatedResult
 /**
  * Batch inference settings per deployment.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Compute target for batch inference operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   compute?: string | null;
 
   /**
    * Properties relevant to different deployment types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   deploymentConfiguration?: BatchDeploymentConfiguration | null;
 
   /**
@@ -5732,7 +5732,7 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Reference to the model asset for the endpoint deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   `model`?: AssetReferenceBase | null;
 
   /**
@@ -5755,14 +5755,14 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
    * Indicates compute configuration for the job.
    * If not provided, will default to the defaults defined in ResourceConfiguration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   resources?: DeploymentResourceConfiguration | null;
 
   /**
    * Retry Settings for the batch inference operation.
    * If not provided, will default to the defaults defined in BatchRetrySettings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   retrySettings?: BatchRetrySettings | null;
 }
 
@@ -5788,12 +5788,12 @@ model AssetReferenceBase {
   referenceType: ReferenceType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
 model DeploymentResourceConfiguration extends ResourceConfiguration {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ResourceConfiguration {
   /**
    * Optional number of instances or nodes used by the compute target.
@@ -5804,15 +5804,15 @@ model ResourceConfiguration {
   /**
    * Optional type of VM used as supported by the compute target.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string | null;
 
   /**
    * Additional properties bag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   properties?: Record<unknown | null> | null;
 }
@@ -5839,34 +5839,34 @@ model EndpointDeploymentPropertiesBase {
   /**
    * Code configuration for the endpoint deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   codeConfiguration?: CodeConfiguration | null;
 
   /**
    * Description of the endpoint deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   description?: string | null;
 
   /**
    * ARM resource ID or AssetId of the environment specification for the endpoint deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   environmentId?: string | null;
 
   /**
    * Environment variables configuration for the deployment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   environmentVariables?: Record<string | null> | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   properties?: Record<string | null> | null;
 }
 
@@ -5877,7 +5877,7 @@ model CodeConfiguration {
   /**
    * ARM resource ID of the code asset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string | null;
 
@@ -5893,7 +5893,7 @@ model CodeConfiguration {
 /**
  * Strictly used in update requests.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing API uses custom patch envelope"
 model PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties {
   /**
    * Additional attributes of the entity.
@@ -5903,7 +5903,7 @@ model PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   tags?: Record<string | null>;
 }
 
@@ -5914,23 +5914,23 @@ model PartialBatchDeployment {
   /**
    * Description of the endpoint deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   description?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CapabilityHostProperties extends ResourceBase {
   /**
    * List of Aca Environment connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   acaEnvironmentConnections?: string[] | null;
 
   /**
    * List of AI services connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   aiServicesConnections?: string[] | null;
 
   /**
@@ -5941,7 +5941,7 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * Customer subnet info to help set up this capability host.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   customerSubnet?: string | null;
 
   /**
@@ -5953,25 +5953,25 @@ model CapabilityHostProperties extends ResourceBase {
   /**
    * List of Storage connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   storageConnections?: string[] | null;
 
   /**
    * List of Thread storage connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   threadStorageConnections?: string[] | null;
 
   /**
    * List of VectorStore connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   vectorStoreConnections?: string[] | null;
 
   /**
    * List of messages containing errors.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   messages?: string[] | null;
 }
@@ -5983,19 +5983,19 @@ model DestinationAsset {
   /**
    * Destination asset name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   destinationName?: string | null;
 
   /**
    * Destination asset version
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   destinationVersion?: string | null;
 
   /**
    * Destination registry name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   registryName?: string | null;
 }
 
@@ -6007,8 +6007,8 @@ model DatastoreResourceArmPaginatedResult is Azure.Core.Page<Datastore>;
 /**
  * Base definition for datastore contents configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 @discriminator("datastoreType")
 model DatastoreProperties extends ResourceBase {
   /**
@@ -6074,7 +6074,7 @@ model FeaturesetContainerResourceArmPaginatedResult
 /**
  * DTO object representing feature set
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model FeaturesetContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the featureset container.
@@ -6091,8 +6091,8 @@ model FeatureResourceArmPaginatedResult is Azure.Core.Page<Feature>;
 /**
  * DTO object representing feature
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 model FeatureProperties extends ResourceBase {
   /**
    * Specifies type
@@ -6102,7 +6102,7 @@ model FeatureProperties extends ResourceBase {
   /**
    * Specifies name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   featureName?: string | null;
 }
 
@@ -6115,18 +6115,18 @@ model FeaturesetVersionResourceArmPaginatedResult
 /**
  * DTO object representing feature set version
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model FeaturesetVersionProperties extends AssetBase {
   /**
    * Specifies list of entities
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   entities?: string[] | null;
 
   /**
    * Specifies the materialization settings
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   materializationSettings?: MaterializationSettings | null;
 
   /**
@@ -6138,41 +6138,41 @@ model FeaturesetVersionProperties extends AssetBase {
   /**
    * Specifies the feature spec details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   specification?: FeaturesetSpecification | null;
 
   /**
    * Specifies the asset stage
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   stage?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MaterializationSettings {
   /**
    * Specifies the notification details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   notification?: NotificationSetting | null;
 
   /**
    * Specifies the compute resource settings
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   resource?: MaterializationComputeResource | null;
 
   /**
    * Specifies the schedule details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   schedule?: RecurrenceTrigger | null;
 
   /**
    * Specifies the spark compute settings
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sparkConfiguration?: Record<string | null> | null;
 
   /**
@@ -6188,22 +6188,22 @@ model NotificationSetting {
   /**
    * Send email notification to user on specified notification type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   emailOn?: EmailNotificationEnableType[] | null;
 
   /**
    * This is the email recipient list which has a limitation of 499 characters in total concat with comma separator
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   emails?: string[] | null;
 
   /**
    * Send webhook callback to a service. Key is a user-provided name for the webhook.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   webhooks?: Record<Webhook | null> | null;
 }
@@ -6216,7 +6216,7 @@ model Webhook {
   /**
    * Send callback on a specified notification event
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   eventType?: string | null;
 
@@ -6234,11 +6234,11 @@ model MaterializationComputeResource {
   /**
    * Specifies the instance type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   instanceType?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model RecurrenceTrigger extends TriggerBase {
   /**
    * [Required] The frequency to trigger schedule.
@@ -6253,7 +6253,7 @@ model RecurrenceTrigger extends TriggerBase {
   /**
    * The recurrence schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   schedule?: RecurrenceSchedule | null;
 
   /**
@@ -6262,7 +6262,7 @@ model RecurrenceTrigger extends TriggerBase {
   triggerType: "Recurrence";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model RecurrenceSchedule {
   /**
    * [Required] List of hours for the schedule.
@@ -6277,17 +6277,17 @@ model RecurrenceSchedule {
   /**
    * List of month days for the schedule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   monthDays?: int32[] | null;
 
   /**
    * List of days for the schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   weekDays?: WeekDay[] | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("triggerType")
 model TriggerBase {
   /**
@@ -6295,13 +6295,13 @@ model TriggerBase {
    * Recommented format would be "2022-06-01T00:00:01"
    * If not present, the schedule will run indefinitely
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   endTime?: string | null;
 
   /**
    * Specifies start time of schedule in ISO 8601 format, but without a UTC offset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   startTime?: string | null;
 
   /**
@@ -6324,7 +6324,7 @@ model FeaturesetSpecification {
   /**
    * Specifies the spec path
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   path?: string | null;
 }
 
@@ -6350,7 +6350,7 @@ model FeaturesetVersionBackfillRequest {
   /**
    * Specifies the backfill feature window to be materialized
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   featureWindow?: FeatureWindow | null;
 
   /**
@@ -6361,7 +6361,7 @@ model FeaturesetVersionBackfillRequest {
   /**
    * Specifies the properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   properties?: Record<string | null>;
 
   /**
@@ -6372,13 +6372,13 @@ model FeaturesetVersionBackfillRequest {
   /**
    * Specifies the spark compute settings
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   sparkConfiguration?: Record<string | null>;
 
   /**
    * Specifies the tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   tags?: Record<string | null>;
 }
 
@@ -6390,14 +6390,14 @@ model FeatureWindow {
    * Specifies the feature window end time
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   featureWindowEnd?: utcDateTime | null;
 
   /**
    * Specifies the feature window start time
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   featureWindowStart?: utcDateTime | null;
 }
 
@@ -6408,7 +6408,7 @@ model FeaturesetVersionBackfillResponse {
   /**
    * List of jobs submitted as part of the backfill request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   jobIds?: string[] | null;
 }
 
@@ -6421,7 +6421,7 @@ model FeaturestoreEntityContainerResourceArmPaginatedResult
 /**
  * DTO object representing feature entity
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model FeaturestoreEntityContainerProperties extends AssetContainer {
   /**
    * Provisioning state for the featurestore entity container.
@@ -6439,13 +6439,13 @@ model FeaturestoreEntityVersionResourceArmPaginatedResult
 /**
  * DTO object representing feature entity version
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies index columns
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   indexColumns?: IndexColumn[] | null;
 
@@ -6458,7 +6458,7 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
   /**
    * Specifies the asset stage
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   stage?: string | null;
 }
 
@@ -6469,7 +6469,7 @@ model IndexColumn {
   /**
    * Specifies the column name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   columnName?: string | null;
 
   /**
@@ -6487,7 +6487,7 @@ model InferencePoolTrackedResourceArmPaginatedResult
 /**
  * Inference pool configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model InferencePoolProperties extends PropertiesBase {
   /**
    * Provisioning state for the pool.
@@ -6498,7 +6498,7 @@ model InferencePoolProperties extends PropertiesBase {
   /**
    * Gets or sets ScaleUnitConfiguration for the inference pool. Used if PoolType=ScaleUnit.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   scaleUnitConfiguration?: ScaleUnitConfiguration | null;
 }
 
@@ -6514,7 +6514,7 @@ model ScaleUnitConfiguration {
   /**
    * Gets or sets a list of Registry sources that will be used to confirm identity, storage, ACR.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   registries?: string[] | null;
 }
 
@@ -6525,29 +6525,29 @@ model PropertiesBase {
   /**
    * Description of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   description?: string | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   properties?: StringStringKeyValuePair[] | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model StringStringKeyValuePair {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   key?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   value?: string;
 }
 
 /**
  * Strictly used in update requests.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model PartialMinimalTrackedResourceWithSkuAndIdentity
   extends PartialMinimalTrackedResource {
   /**
@@ -6600,7 +6600,7 @@ model InferenceEndpointTrackedResourceArmPaginatedResult
 /**
  * InferenceEndpoint configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model InferenceEndpointProperties extends PropertiesBase {
   /**
    * [Required] Authentication mode for the endpoint.
@@ -6610,7 +6610,7 @@ model InferenceEndpointProperties extends PropertiesBase {
   /**
    * Endpoint URI for the inference endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   endpointUri?: url | null;
 
@@ -6630,7 +6630,7 @@ model InferenceEndpointProperties extends PropertiesBase {
   /**
    * RequestConfiguration for endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   requestConfiguration?: RequestConfiguration | null;
 }
 
@@ -6659,24 +6659,24 @@ model InferenceGroupTrackedResourceArmPaginatedResult
 /**
  * Inference group configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model InferenceGroupProperties extends PropertiesBase {
   /**
    * Gets or sets environment configuration for the inference group. Used if PoolType=ScaleUnit.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   environmentConfiguration?: GroupEnvironmentConfiguration | null;
 
   /**
    * Gets or sets model configuration for the inference group. Used if PoolType=ScaleUnit.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelConfiguration?: GroupModelConfiguration | null;
 
   /**
    * Gets or sets compute instance type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nodeSkuType?: string | null;
 
   /**
@@ -6698,31 +6698,31 @@ model GroupEnvironmentConfiguration {
   /**
    * ARM resource ID of the environment specification for the inference pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   environmentId?: string | null;
 
   /**
    * Environment variables configuration for the inference pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   environmentVariables?: StringStringKeyValuePair[] | null;
 
   /**
    * Liveness probe monitors the health of the container regularly.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   livenessProbe?: ProbeSettings | null;
 
   /**
    * Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   readinessProbe?: ProbeSettings | null;
 
   /**
    * This verifies whether the application within a container is started. Startup probes run before any other probe, and, unless it finishes successfully, disables other probes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   startupProbe?: ProbeSettings | null;
 }
 
@@ -6738,7 +6738,7 @@ model ProbeSettings {
   /**
    * The delay before the first probe in ISO 8601 format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   initialDelay?: duration | null;
 
   /**
@@ -6764,15 +6764,15 @@ model GroupModelConfiguration {
   /**
    * The URI path to the model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelId?: string | null;
 }
 
 /**
  * Strictly used in update requests.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing API uses custom patch envelope"
 model PartialMinimalTrackedResourceWithSku
   extends PartialMinimalTrackedResource {
   /**
@@ -6781,18 +6781,18 @@ model PartialMinimalTrackedResourceWithSku
   sku?: PartialSku;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DeltaModelStatusRequest {
   /**
    * Gets or sets collection of delta models to retrieve status for.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   deltaModels?: string[] | null;
 
   /**
    * Gets or sets target base model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   targetBaseModel?: string | null;
 }
 
@@ -6808,8 +6808,8 @@ model DeltaModelStatusResponse {
   /**
    * Gets or sets dictionary representing modelID and its current state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   deltaModels?: Record<DeltaModelCurrentState[] | null> | null;
 
   /**
@@ -6820,13 +6820,13 @@ model DeltaModelStatusResponse {
   /**
    * Gets or sets revision ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   revisionId?: string | null;
 
   /**
    * Gets or sets target base model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   targetBaseModel?: string | null;
 }
 
@@ -6842,18 +6842,18 @@ model DeltaModelCurrentState {
   /**
    * Gets or sets sample of instances with model.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sampleInstanceID?: string | null;
 
   /**
    * Gets or sets status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   status?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DeltaModelListRequest {
   /**
    * Gets or sets number of delta models to return. Default: -1, means that all will be returned.
@@ -6863,13 +6863,13 @@ model DeltaModelListRequest {
   /**
    * Gets or sets skip token for paginated response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   skipToken?: string | null;
 
   /**
    * Gets or sets target base model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   targetBaseModel?: string | null;
 }
 
@@ -6897,33 +6897,32 @@ model DeltaModelModifyRequest {
   /**
    * Gets or sets delta models to remove.
    */
-  #suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "Array contains unique string items"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @uniqueItems
   addDeltaModels?: string[] | null;
 
   /**
    * Gets or sets delta models to remove.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/unique-items-invalid-type" "Array contains unique string items"
   @uniqueItems
   removeDeltaModels?: string[] | null;
 
   /**
    * Gets or sets target base model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   targetBaseModel?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model GroupStatus {
   /**
    * Gets or sets the actual capacity info for the group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   actualCapacityInfo?: ActualCapacityInfo | null;
 
   /**
@@ -6937,7 +6936,7 @@ model GroupStatus {
   requestedCapacity?: int32 = 0;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ActualCapacityInfo {
   /**
    * Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.
@@ -6977,20 +6976,20 @@ model SkuResource {
   /**
    * Gets or sets the Sku Capacity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   capacity?: SkuCapacity | null;
 
   /**
    * The resource type name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   resourceType?: string | null;
 
   /**
    * Gets or sets the Sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sku?: SkuSetting | null;
 }
 
@@ -7044,28 +7043,28 @@ model JobBaseResourceArmPaginatedResult is Azure.Core.Page<JobBase>;
 /**
  * Base definition for a job.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 @discriminator("jobType")
 model JobBaseProperties extends ResourceBase {
   /**
    * ARM resource ID of the component resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   componentId?: string | null;
 
   /**
    * ARM resource ID of the compute resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeId?: string | null;
 
   /**
    * Display name of job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string | null;
 
@@ -7079,7 +7078,7 @@ model JobBaseProperties extends ResourceBase {
    * Identity configuration. If set, this should be one of AmlToken, ManagedIdentity, UserIdentity or null.
    * Defaults to AmlToken if null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: IdentityConfiguration | null;
 
@@ -7098,22 +7097,22 @@ model JobBaseProperties extends ResourceBase {
   /**
    * Notification setting for the job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   notificationSetting?: NotificationSetting | null;
 
   /**
    * Parent job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   parentJobName?: string | null;
 
   /**
    * List of JobEndpoints.
    * For local jobs, a job endpoint will have an endpoint value of FileStreamObject.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   services?: Record<JobService | null> | null;
 
   /**
@@ -7142,21 +7141,21 @@ model JobService {
   /**
    * Url for endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
   /**
    * Any error in the service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   errorMessage?: string | null;
 
   /**
    * Endpoint type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobServiceType?: string | null;
 
@@ -7164,27 +7163,27 @@ model JobService {
    * Nodes that user would like to start the service on.
    * If Nodes is not set or set to null, the service will only be started on leader node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nodes?: Nodes | null;
 
   /**
    * Port for endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   port?: int32 | null;
 
   /**
    * Additional properties to set on the endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   properties?: Record<string | null> | null;
 
   /**
    * Status of endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   status?: string | null;
 }
@@ -7207,12 +7206,12 @@ model Nodes {
 model MarketplaceSubscriptionResourceArmPaginatedResult
   is Azure.Core.Page<MarketplaceSubscription>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MarketplaceSubscriptionProperties {
   /**
    * Marketplace Plan associated with the Marketplace Subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   marketplacePlan?: MarketplacePlan | null;
 
@@ -7236,26 +7235,26 @@ model MarketplaceSubscriptionProperties {
   provisioningState?: MarketplaceSubscriptionProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MarketplacePlan {
   /**
    * The identifying name of the Offer of the Marketplace Plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   offerId?: string | null;
 
   /**
    * The identifying name of the Plan of the Marketplace Plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   planId?: string | null;
 
   /**
    * The identifying name of the Publisher of the Marketplace Plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   publisherId?: string | null;
 }
@@ -7269,20 +7268,20 @@ model OnlineEndpointTrackedResourceArmPaginatedResult
 /**
  * Online endpoint configuration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model OnlineEndpointProperties extends EndpointPropertiesBase {
   /**
    * ARM resource ID of the compute if it exists.
    * optional
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   compute?: string | null;
 
   /**
    * Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   mirrorTraffic?: Record<int32> | null;
 
   /**
@@ -7299,8 +7298,8 @@ model OnlineEndpointProperties extends EndpointPropertiesBase {
   /**
    * Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   traffic?: Record<int32> | null;
 }
 
@@ -7310,8 +7309,8 @@ model OnlineEndpointProperties extends EndpointPropertiesBase {
 model OnlineDeploymentTrackedResourceArmPaginatedResult
   is Azure.Core.Page<OnlineDeployment>;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("endpointComputeType")
 model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
@@ -7322,7 +7321,7 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * The mdc configuration, we disable mdc when it's null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   dataCollector?: DataCollector | null;
 
   /**
@@ -7338,26 +7337,26 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Compute instance type. Default: Standard_F4s_v2.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string | null = "Standard_F4s_v2";
 
   /**
    * Liveness probe monitors the health of the container regularly.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   livenessProbe?: ProbeSettings | null;
 
   /**
    * The URI path to the model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   `model`?: string | null;
 
   /**
    * The path to mount the model in custom container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelMountPath?: string | null;
 
   /**
@@ -7369,13 +7368,13 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   readinessProbe?: ProbeSettings | null;
 
   /**
    * Request settings for the deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   requestSettings?: OnlineRequestSettings | null;
 
   /**
@@ -7384,29 +7383,29 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
    * it defaults to TargetUtilizationScaleSettings for KubernetesOnlineDeployment
    * and to DefaultScaleSettings for ManagedOnlineDeployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   scaleSettings?: OnlineScaleSettings | null;
 
   /**
    * Startup probe verify whether an application within a container has started successfully.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   startupProbe?: ProbeSettings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DataCollector {
   /**
    * [Required] The collection configuration. Each collection has it own configuration to collect model data and the name of collection can be arbitrary string.
    * Model data collector can be used for either payload logging or custom logging or both of them. Collection request and response are reserved for payload logging, others are for custom logging.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   collections: Record<Collection | null>;
 
   /**
    * The request logging configuration for mdc, it includes advanced logging settings for all collections. It's optional.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   requestLogging?: RequestLogging | null;
 
   /**
@@ -7418,12 +7417,12 @@ model DataCollector {
   rollingRate?: RollingRateType = RollingRateType.Hour;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model Collection {
   /**
    * The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   clientId?: string | null;
 
   /**
@@ -7434,7 +7433,7 @@ model Collection {
   /**
    * The data asset arm resource id. Client side will ensure data asset is pointing to the blob storage, and backend will collect data to the blob storage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   dataId?: string | null;
 
   /**
@@ -7443,12 +7442,12 @@ model Collection {
   samplingRate?: float64 = 1;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model RequestLogging {
   /**
    * For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   captureHeaders?: string[] | null;
 }
 
@@ -7486,7 +7485,7 @@ model OnlineScaleSettings {
   scaleType: ScaleType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DeploymentLogsRequest {
   /**
    * The type of container to retrieve logs from.
@@ -7496,20 +7495,20 @@ model DeploymentLogsRequest {
   /**
    * The maximum number of lines to tail.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tail?: int32 | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DeploymentLogs {
   /**
    * The retrieved online deployment logs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   content?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model RegenerateEndpointKeysRequest {
   /**
    * [Required] Specification for which type of key to generate. Primary or Secondary.
@@ -7519,7 +7518,7 @@ model RegenerateEndpointKeysRequest {
   /**
    * The value the key is set to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   keyValue?: string | null;
 }
 
@@ -7530,7 +7529,7 @@ model EndpointAuthToken {
   /**
    * Access token for endpoint authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   accessToken?: string | null;
 
   /**
@@ -7546,7 +7545,7 @@ model EndpointAuthToken {
   /**
    * Access token type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tokenType?: string | null;
 }
 
@@ -7558,7 +7557,7 @@ model ScheduleResourceArmPaginatedResult is Azure.Core.Page<Schedule>;
 /**
  * Base definition of a schedule
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ScheduleProperties extends ResourceBase {
   /**
    * [Required] Specifies the action of the schedule
@@ -7569,7 +7568,7 @@ model ScheduleProperties extends ResourceBase {
   /**
    * Display name of schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   displayName?: string | null;
 
@@ -7592,7 +7591,7 @@ model ScheduleProperties extends ResourceBase {
   trigger: TriggerBase;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("actionType")
 model ScheduleActionBase {
   /**
@@ -7608,7 +7607,7 @@ model ScheduleActionBase {
 model ServerlessEndpointTrackedResourceArmPaginatedResult
   is Azure.Core.Page<ServerlessEndpoint>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessEndpointProperties {
   /**
    * [Required] Specifies the authentication mode for the Serverless endpoint.
@@ -7618,7 +7617,7 @@ model ServerlessEndpointProperties {
   /**
    * Specifies the content safety options. If omitted, the default content safety settings will be configured
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   contentSafety?: ContentSafety | null;
 
   /**
@@ -7630,21 +7629,21 @@ model ServerlessEndpointProperties {
   /**
    * The inference uri to target when making requests against the serverless endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   inferenceEndpoint?: ServerlessInferenceEndpoint | null;
 
   /**
    * The MarketplaceSubscription Azure ID associated to this ServerlessEndpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   marketplaceSubscriptionId?: string | null;
 
   /**
    * The model settings (model id) for the model being serviced on the ServerlessEndpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelSettings?: ModelSettings | null;
 
   /**
@@ -7654,7 +7653,7 @@ model ServerlessEndpointProperties {
   provisioningState?: EndpointProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ContentSafety {
   /**
    * Specifies the current safety level for content safety.
@@ -7667,13 +7666,13 @@ model ContentSafety {
   contentSafetyStatus: ContentSafetyStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessInferenceEndpoint {
   /**
    * Specifies any required headers to target this serverless endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read)
   headers?: Record<string | null> | null;
 
@@ -7684,12 +7683,12 @@ model ServerlessInferenceEndpoint {
   uri: url;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ModelSettings {
   /**
    * The unique model identifier that this ServerlessEndpoint should provision.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelId?: string | null;
 }
 
@@ -7701,56 +7700,56 @@ model RegistryTrackedResourceArmPaginatedResult is Azure.Core.Page<Registry>;
 /**
  * Details of the Registry
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 model RegistryProperties {
   /**
    * Discovery URL for the Registry
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   discoveryUrl?: string | null;
 
   /**
    * IntellectualPropertyPublisher for the registry
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   intellectualPropertyPublisher?: string | null;
 
   /**
    * ResourceId of the managed RG if the registry has system created resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   managedResourceGroup?: ArmResourceId | null;
 
   /**
    * Managed resource group specific settings
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   managedResourceGroupSettings?: ManagedResourceGroupSettings | null;
 
   /**
    * MLFlow Registry URI for the Registry
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   mlFlowRegistryUri?: string | null;
 
   /**
    * Private endpoint connections info used for pending connections in private link portal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   registryPrivateEndpointConnections?: RegistryPrivateEndpointConnection[] | null;
 
   /**
    * Is the Registry accessible from the internet?
    * Possible values: "Enabled" or "Disabled"
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   publicNetworkAccess?: string | null;
 
   /**
    * Details of each region the registry is in
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   regionDetails?: RegistryRegionArmDetails[] | null;
 }
@@ -7763,7 +7762,7 @@ model ArmResourceId {
    * Arm ResourceId is in the format "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}"
    * or "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{AcrName}"
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   resourceId?: string | null;
 }
 
@@ -7774,8 +7773,8 @@ model ManagedResourceGroupSettings {
   /**
    * List of assigned identities for the managed resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   assignedIdentities?: ManagedResourceGroupAssignedIdentities[] | null;
 }
@@ -7787,7 +7786,7 @@ model ManagedResourceGroupAssignedIdentities {
   /**
    * Identity principal Id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
   principalId?: Azure.Core.uuid;
 }
 
@@ -7799,20 +7798,20 @@ model RegistryPrivateEndpointConnection {
    * This is the private endpoint connection name created on SRP
    * Full resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   id?: string | null;
 
   /**
    * Same as workspace location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string | null;
 
   /**
    * Properties of the Private Endpoint Connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   properties?: RegistryPrivateEndpointConnectionProperties | null;
 }
 
@@ -7823,38 +7822,38 @@ model RegistryPrivateEndpointConnectionProperties {
   /**
    * The group ids
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   groupIds?: string[] | null;
 
   /**
    * The PE network resource that is linked to this PE connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   privateEndpoint?: PrivateEndpointResource | null;
 
   /**
    * The connection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   registryPrivateLinkServiceConnectionState?: RegistryPrivateLinkServiceConnectionState | null;
 
   /**
    * One of null, "Succeeded", "Provisioning", "Failed". While not approved, it's null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   provisioningState?: string | null;
 }
 
 /**
  * The PE network resource that is linked to this PE connection.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model PrivateEndpointResource
   extends Azure.ResourceManager.CommonTypes.PrivateEndpoint {
   /**
    * The subnetId that the private endpoint is connected to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   subnetArmId?: string | null;
 }
 
@@ -7865,13 +7864,13 @@ model RegistryPrivateLinkServiceConnectionState {
   /**
    * Some RP chose "None". Other RPs use this for region expansion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   actionsRequired?: string | null;
 
   /**
    * User-defined message that, per NRP doc, may be used for approval-related message.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   description?: string | null;
 
   /**
@@ -7887,22 +7886,22 @@ model RegistryRegionArmDetails {
   /**
    * List of ACR accounts
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   acrDetails?: AcrDetails[] | null;
 
   /**
    * The location where the registry exists
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   location?: string | null;
 
   /**
    * List of storage accounts
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   storageAccountDetails?: StorageAccountDetails[] | null;
 }
@@ -7914,28 +7913,28 @@ model AcrDetails {
   /**
    * Details of system created ACR account to be used for the Registry
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   systemCreatedAcrAccount?: SystemCreatedAcrAccount | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SystemCreatedAcrAccount {
   /**
    * Name of the ACR account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   acrAccountName?: string | null;
 
   /**
    * SKU of the ACR account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   acrAccountSku?: string | null;
 
   /**
    * This is populated once the ACR account is created.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   armResourceId?: ArmResourceId | null;
 }
 
@@ -7946,11 +7945,11 @@ model StorageAccountDetails {
   /**
    * Details of system created storage account to be used for the registry
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   systemCreatedStorageAccount?: SystemCreatedStorageAccount | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SystemCreatedStorageAccount {
   /**
    * Public blob access allowed
@@ -7960,7 +7959,7 @@ model SystemCreatedStorageAccount {
   /**
    * This is populated once the storage account is created.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   armResourceId?: ArmResourceId | null;
 
   /**
@@ -7971,7 +7970,7 @@ model SystemCreatedStorageAccount {
   /**
    * Name of the storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   storageAccountName?: string | null;
 
   /**
@@ -7985,7 +7984,7 @@ model SystemCreatedStorageAccount {
    * "Premium_LRS",
    * "Premium_ZRS"
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   storageAccountType?: string | null;
 }
 
@@ -8006,15 +8005,15 @@ model PartialRegistryPartialTrackedResource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   tags?: Record<string | null>;
 }
 
 /**
  * Managed service identity (system assigned and/or user assigned identities)
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model RegistryPartialManagedServiceIdentity
   extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
 
@@ -8093,7 +8092,7 @@ model WorkspaceProperties {
    * The flag to indicate whether we will do role assignment for the workspace MSI on resource group level.
    * Preview-only property.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
   allowRoleAssignmentOnRG?: boolean;
 
@@ -8102,13 +8101,13 @@ model WorkspaceProperties {
    */
   applicationInsights?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   associatedWorkspaces?: string[];
 
   /**
    * Preview-only property.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   containerRegistries?: string[];
 
@@ -8127,10 +8126,10 @@ model WorkspaceProperties {
    */
   discoveryUrl?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   enableDataIsolation?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   enableServiceSideCMKEncryption?: boolean;
 
   /**
@@ -8147,13 +8146,13 @@ model WorkspaceProperties {
   @removed(Versions.v2025_12_01)
   enableSoftwareBillOfMaterials?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   encryption?: EncryptionProperty;
 
   /**
    * Preview-only property.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   existingWorkspaces?: string[];
 
@@ -8172,7 +8171,7 @@ model WorkspaceProperties {
    */
   hbiWorkspace?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   hubResourceId?: string;
 
   /**
@@ -8195,13 +8194,13 @@ model WorkspaceProperties {
   /**
    * Preview-only property.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   keyVaults?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -8294,7 +8293,7 @@ model WorkspaceProperties {
   /**
    * Preview-only property.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   storageAccounts?: string[];
 
@@ -8332,7 +8331,7 @@ model WorkspaceProperties {
   workspaceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EncryptionProperty {
   /**
    * The byok cosmosdb account that customer brings to store customer's data
@@ -8403,19 +8402,19 @@ model KeyVaultProperties {
   keyVaultArmId: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FeatureStoreSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   computeRuntime?: ComputeRuntimeDto;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   offlineStoreConnectionName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   onlineStoreConnectionName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ComputeRuntimeDto {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   sparkRuntimeVersion?: string;
 }
 
@@ -8433,15 +8432,15 @@ model ManagedNetworkSettings {
    */
   isolationMode?: IsolationMode;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   networkId?: string;
 
   /**
    * Dictionary of <OutboundRule>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   outboundRules?: Record<OutboundRule> | null;
 
   /**
@@ -8462,7 +8461,7 @@ model ManagedNetworkSettings {
   /**
    * Public IP address assigned to the Azure Firewall.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   firewallPublicIpAddress?: string | null;
 }
@@ -8470,7 +8469,7 @@ model ManagedNetworkSettings {
 /**
  * Outbound Rule for the managed network of a machine learning workspace.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 @discriminator("type")
 model OutboundRule {
   /**
@@ -8486,7 +8485,7 @@ model OutboundRule {
   /**
    * Type of a managed network Outbound Rule of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
   type: RuleType;
 
   /**
@@ -8495,7 +8494,7 @@ model OutboundRule {
   @visibility(Lifecycle.Read)
   errorInformation?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   parentRuleNames?: string[];
 }
@@ -8504,7 +8503,7 @@ model OutboundRule {
  * Status of the Provisioning for the managed network of a machine learning workspace.
  */
 model ManagedNetworkProvisionStatus {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   sparkReady?: boolean;
 
   /**
@@ -8513,7 +8512,7 @@ model ManagedNetworkProvisionStatus {
   status?: ManagedNetworkStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NetworkAcls {
   /**
    * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
@@ -8523,7 +8522,7 @@ model NetworkAcls {
   /**
    * Rules governing the accessibility of a resource from a specific ip address or ip range.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   ipRules?: IPRule[];
 }
 
@@ -8537,11 +8536,11 @@ model IPRule {
   value?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NotebookResourceInfo {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   fqdn?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   isPrivateLinkEnabled?: boolean;
 
   /**
@@ -8555,18 +8554,18 @@ model NotebookResourceInfo {
   resourceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NotebookPreparationError {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   errorMessage?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   statusCode?: int32;
 }
 
 /**
  * Private endpoint connection properties.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model PrivateEndpointConnectionProperties {
   privateEndpoint?: WorkspacePrivateEndpointResource;
 
@@ -8619,7 +8618,7 @@ model PrivateLinkServiceConnectionState {
   status?: EndpointServiceConnectionStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessComputeSettings {
   /**
    * The resource ID of an existing virtual network subnet in which serverless compute nodes should be deployed
@@ -8629,23 +8628,23 @@ model ServerlessComputeSettings {
   /**
    * The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   serverlessComputeNoPublicIP?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServiceManagedResourcesSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   cosmosDb?: CosmosDbSettings;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CosmosDbSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   collectionsThroughput?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SharedPrivateLinkResource {
   /**
    * Unique name of the private link
@@ -8687,16 +8686,16 @@ model SharedPrivateLinkResourceProperty {
  * WorkspaceHub's configuration object.
  */
 model WorkspaceHubConfig {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   additionalWorkspaceStorageAccounts?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   defaultWorkspaceResourceGroup?: string;
 }
 
 /**
  * The parameters for updating a machine learning workspace.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceUpdateParameters {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
@@ -8713,7 +8712,7 @@ model WorkspaceUpdateParameters {
   /**
    * The resource tags for the machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   tags?: Record<string>;
 }
 
@@ -8721,8 +8720,8 @@ model WorkspaceUpdateParameters {
  * The parameters for updating a machine learning workspace.
  */
 model WorkspacePropertiesUpdateParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
   allowRoleAssignmentOnRG?: boolean;
 
@@ -8741,7 +8740,7 @@ model WorkspacePropertiesUpdateParameters {
    */
   description?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   enableDataIsolation?: boolean;
 
   /**
@@ -8750,7 +8749,7 @@ model WorkspacePropertiesUpdateParameters {
   @removed(Versions.v2025_12_01)
   enableSoftwareBillOfMaterials?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   encryption?: EncryptionUpdateProperties;
 
   /**
@@ -8771,12 +8770,12 @@ model WorkspacePropertiesUpdateParameters {
   /**
    * The list of IPv4 addresses that are allowed to access the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   ipAllowlist?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -8822,26 +8821,26 @@ model WorkspacePropertiesUpdateParameters {
   v1LegacyMode?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EncryptionUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   keyVaultProperties: EncryptionKeyVaultUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EncryptionKeyVaultUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   keyIdentifier: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult
   is Azure.Core.Page<WorkspaceConnectionPropertiesV2BasicResource>;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("authType")
 model WorkspaceConnectionPropertiesV2 {
   /**
@@ -8854,15 +8853,15 @@ model WorkspaceConnectionPropertiesV2 {
    */
   category?: ConnectionCategory;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   createdByWorkspaceArmId?: Azure.Core.armResourceIdentifier;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   error?: string;
 
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   expiryTime?: utcDateTime;
 
   /**
@@ -8871,24 +8870,24 @@ model WorkspaceConnectionPropertiesV2 {
   @visibility(Lifecycle.Read)
   group?: ConnectionGroup;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   isSharedToAll?: boolean;
 
   /**
    * Store user metadata for this connection
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   metadata?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   peRequirement?: ManagedPERequirement;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   peStatus?: ManagedPEStatus;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   sharedUserList?: string[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   target?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   useWorkspaceManagedIdentity?: boolean;
 }
 
@@ -8902,11 +8901,11 @@ model WorkspaceConnectionUpdateParameter {
   properties?: WorkspaceConnectionPropertiesV2;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult
   is Azure.Core.Page<EndpointDeploymentResourcePropertiesBasicResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("type")
 model EndpointDeploymentResourceProperties {
   /**
@@ -8923,14 +8922,14 @@ model EndpointDeploymentResourceProperties {
   /**
    * Kind of the deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "String discriminator used for polymorphic type"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   type: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointModels is Azure.Core.Page<EndpointModelProperties>;
 
 /**
@@ -8940,16 +8939,16 @@ model EndpointModelProperties {
   /**
    * The capabilities.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   capabilities?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   deprecation?: EndpointModelDeprecationProperties;
 
   /**
    * The capabilities for finetune models.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   finetuneCapabilities?: Record<string>;
 
   /**
@@ -8980,11 +8979,11 @@ model EndpointModelProperties {
   /**
    * The list of Model Sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   skus?: EndpointModelSkuProperties[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   systemData?: SystemData;
 
   /**
@@ -8993,7 +8992,7 @@ model EndpointModelProperties {
   version?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointModelDeprecationProperties {
   /**
    * The datetime of deprecation of the fineTune Model.
@@ -9008,9 +9007,9 @@ model EndpointModelDeprecationProperties {
   inference?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointModelSkuProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   capacity?: EndpointModelSkuCapacityProperties;
 
   /**
@@ -9029,8 +9028,8 @@ model EndpointModelSkuProperties {
    */
   name?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   rateLimits?: EndpointModelSkuRateLimitProperties[];
 
   /**
@@ -9039,7 +9038,7 @@ model EndpointModelSkuProperties {
   usageName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointModelSkuCapacityProperties {
   /**
    * The default capacity.
@@ -9052,7 +9051,7 @@ model EndpointModelSkuCapacityProperties {
   maximum?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointModelSkuRateLimitProperties {
   /**
    * The count value of Call Rate Limit.
@@ -9067,13 +9066,13 @@ model EndpointModelSkuRateLimitProperties {
   /**
    * The call rate limit for the model.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   rules?: EndpointModelSkuRateLimitRuleProperties[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointModelSkuRateLimitRuleProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   count?: float32;
 
   /**
@@ -9081,36 +9080,36 @@ model EndpointModelSkuRateLimitRuleProperties {
    */
   dynamicThrottlingEnabled?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   key?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   matchPatterns?: EndpointModelSkuRateLimitRulePatternProperties[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   minCount?: float32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   renewalPeriod?: float32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointModelSkuRateLimitRulePatternProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   method?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   path?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model RaiBlocklistPropertiesBasicResourceArmPaginatedResult
   is Azure.Core.Page<RaiBlocklistPropertiesBasicResource>;
 
 /**
  * RAI Custom Blocklist properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 model RaiBlocklistProperties {
   /**
    * Description of the block list.
@@ -9121,8 +9120,8 @@ model RaiBlocklistProperties {
 /**
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
 @OpenAPI.extension("x-ms-identifiers", #["name"])
 model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
 
@@ -9130,7 +9129,7 @@ model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
  * The Cognitive Services RaiBlocklist Item request body.
  */
 model RaiBlocklistItemBulkRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   name?: string;
 
   /**
@@ -9142,7 +9141,7 @@ model RaiBlocklistItemBulkRequest {
 /**
  * RAI Custom Blocklist Item properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 model RaiBlocklistItemProperties {
   /**
    * If the pattern is a regex pattern.
@@ -9155,7 +9154,7 @@ model RaiBlocklistItemProperties {
   pattern?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model RaiBlocklistItemPropertiesBasicResourceArmPaginatedResult
   is Azure.Core.Page<RaiBlocklistItemPropertiesBasicResource>;
 
@@ -9168,17 +9167,17 @@ model RaiPolicyPropertiesBasicResourceArmPaginatedResult
 /**
  * Azure OpenAI Content Filters properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning state is defined in base properties"
 model RaiPolicyProperties {
   /**
    * Name of the base Content Filters.
    */
   basePolicyName?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   completionBlocklists?: RaiBlocklistConfig[];
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   contentFilters?: RaiPolicyContentFilter[];
 
   /**
@@ -9186,14 +9185,14 @@ model RaiPolicyProperties {
    */
   mode?: RaiPolicyMode;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   promptBlocklists?: RaiBlocklistConfig[];
 
   /**
    * Content Filters policy type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
   type?: RaiPolicyType;
 }
 
@@ -9246,114 +9245,114 @@ model RaiPolicyContentFilter {
  * Parameters to diagnose a workspace
  */
 model DiagnoseWorkspaceParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   value?: DiagnoseRequestProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DiagnoseRequestProperties {
   /**
    * Setting for diagnosing dependent application insights
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   applicationInsights?: Record<unknown>;
 
   /**
    * Setting for diagnosing dependent container registry
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   containerRegistry?: Record<unknown>;
 
   /**
    * Setting for diagnosing dns resolution
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   dnsResolution?: Record<unknown>;
 
   /**
    * Setting for diagnosing dependent key vault
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   keyVault?: Record<unknown>;
 
   /**
    * Setting for diagnosing network security group
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   nsg?: Record<unknown>;
 
   /**
    * Setting for diagnosing unclassified category of problems
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   others?: Record<unknown>;
 
   /**
    * Setting for diagnosing the presence of required resource providers in the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   requiredResourceProviders?: Record<unknown>;
 
   /**
    * Setting for diagnosing resource lock
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   resourceLock?: Record<unknown>;
 
   /**
    * Setting for diagnosing dependent storage account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   storageAccount?: Record<unknown>;
 
   /**
    * Setting for diagnosing user defined routing
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   udr?: Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DiagnoseResponseResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   value?: DiagnoseResponseResultValue;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DiagnoseResponseResultValue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   userDefinedRouteResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   networkSecurityRuleResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   resourceLockResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   dnsResolutionResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   storageAccountResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   keyVaultResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   containerRegistryResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   applicationInsightsResults?: DiagnoseResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["message"])
   otherResults?: DiagnoseResult[];
 }
@@ -9381,11 +9380,11 @@ model DiagnoseResult {
   message?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointResourcePropertiesBasicResourceArmPaginatedResult
   is Azure.Core.Page<EndpointResourcePropertiesBasicResource>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("endpointType")
 model EndpointResourceProperties {
   /**
@@ -9426,7 +9425,7 @@ model EndpointResourceProperties {
   /**
    * Name of the endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Property intentionally duplicated for API compatibility"
   name?: string;
 
   /**
@@ -9441,7 +9440,7 @@ model EndpointResourceProperties {
   shouldCreateAiServicesEndpoint?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointKeys {
   /**
    * Dictionary of Keys for the endpoint.
@@ -9450,24 +9449,24 @@ model EndpointKeys {
   keys?: AccountApiKeys;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AccountApiKeys {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @secret
   key1?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @secret
   key2?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model RegenerateServiceAccountKeyContent {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   keyName?: ServiceAccountKeyName;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ListWorkspaceKeysResult {
   /**
    * The access key of the workspace app insights
@@ -9476,9 +9475,9 @@ model ListWorkspaceKeysResult {
   @secret
   appInsightsInstrumentationKey?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   containerRegistryCredentials?: RegistryListCredentialsResult;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   notebookAccessKeys?: ListNotebookKeysResult;
 
   /**
@@ -9495,7 +9494,7 @@ model ListWorkspaceKeysResult {
   userStorageKey?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model RegistryListCredentialsResult {
   /**
    * The location of the workspace ACR
@@ -9503,7 +9502,7 @@ model RegistryListCredentialsResult {
   @visibility(Lifecycle.Read)
   location?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["name"])
   passwords?: Password[];
 
@@ -9514,20 +9513,20 @@ model RegistryListCredentialsResult {
   username?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model Password {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   @secret
   name?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   @secret
   value?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ListNotebookKeysResult {
   /**
    * The primary access key of the Notebook
@@ -9544,44 +9543,44 @@ model ListNotebookKeysResult {
   secondaryAccessKey?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NotebookAccessTokenResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   @secret
   accessToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   expiresIn?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   hostName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   notebookResourceId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   publicDns?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   @secret
   refreshToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   scope?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   tokenType?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ListStorageAccountKeysResult {
   /**
    * The access key of the storage
@@ -9591,10 +9590,10 @@ model ListStorageAccountKeysResult {
   userStorageKey?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model ExternalFQDNResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["/properties/category"])
   value?: FqdnEndpointsPropertyBag[];
 }
@@ -9603,33 +9602,33 @@ model ExternalFQDNResponse {
  * Property bag for FQDN endpoints result
  */
 model FqdnEndpointsPropertyBag {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   properties?: FqdnEndpoints;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FqdnEndpoints {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   category?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["domainName"])
   endpoints?: FqdnEndpoint[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FqdnEndpoint {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   domainName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @identifiers(#["port"])
   endpointDetails?: FqdnEndpointDetail[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FqdnEndpointDetail {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   port?: int32;
 }
 
@@ -9643,7 +9642,7 @@ model PrivateEndpointConnectionListResult {
   @pageItems
   value?: PrivateEndpointConnection[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @nextLink
   nextLink?: string;
 }
@@ -9655,11 +9654,11 @@ model PrivateLinkResourceListResult {
   /**
    * A list of private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @pageItems
   value?: PrivateLinkResource[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @nextLink
   nextLink?: string;
 }
@@ -9667,8 +9666,8 @@ model PrivateLinkResourceListResult {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
@@ -9687,8 +9686,8 @@ model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
    */
   sku?: Azure.ResourceManager.CommonTypes.Sku;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   tags?: Record<string>;
 }
 
@@ -9716,12 +9715,12 @@ model PrivateLinkResourceProperties {
  * Managed Network Provisioning options for managed network of a machine learning workspace.
  */
 model ManagedNetworkProvisionOptions {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   includeSpark?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ManagedNetworkSettingsBasicResource
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
@@ -9746,10 +9745,10 @@ model ManagedNetworkSettingsProperties {
   provisioningState?: ManagedNetworkProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ManagedNetworkSettingsEx extends ManagedNetworkSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   changeableIsolationModes?: IsolationMode[];
 }
@@ -9757,7 +9756,7 @@ model ManagedNetworkSettingsEx extends ManagedNetworkSettings {
 /**
  * Represents a resource ID. For example, for a subnet, it is the resource URL for the subnet.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model ResourceId {
   /**
    * The ID of the resource
@@ -9768,7 +9767,7 @@ model ResourceId {
 /**
  * A Machine Learning compute based on AKS.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model AKS extends Compute {
   ...AKSSchema;
 
@@ -9778,8 +9777,8 @@ model AKS extends Compute {
   computeType: "AKS";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model AKSSchema {
   /**
    * AKS properties
@@ -9790,19 +9789,19 @@ model AKSSchema {
 /**
  * AKS properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model AKSSchemaProperties {
   /**
    * Cluster full qualified domain name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   clusterFqdn?: string | null;
 
   /**
    * System services
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
   systemServices?: SystemService[] | null;
@@ -9810,14 +9809,14 @@ model AKSSchemaProperties {
   /**
    * Number of agents
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @minValue(0)
   agentCount?: int32 | null;
 
   /**
    * Agent virtual machine size
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   agentVmSize?: string | null;
 
   /**
@@ -9828,13 +9827,13 @@ model AKSSchemaProperties {
   /**
    * SSL configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sslConfiguration?: SslConfiguration | null;
 
   /**
    * AKS networking configuration for vnet
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   aksNetworkingConfiguration?: AksNetworkingConfiguration | null;
 
   /**
@@ -9845,7 +9844,7 @@ model AKSSchemaProperties {
   /**
    * Load Balancer Subnet
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   loadBalancerSubnet?: string | null;
 }
 
@@ -9884,27 +9883,27 @@ model SslConfiguration {
   /**
    * Cert data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @secret
   cert?: string | null;
 
   /**
    * Key data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @secret
   key?: string | null;
 
   /**
    * CNAME of the cert
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   cname?: string | null;
 
   /**
    * Leaf domain label of public endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   leafDomainLabel?: string | null;
 
   /**
@@ -9931,7 +9930,7 @@ model AksNetworkingConfiguration {
   /**
    * An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @pattern("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   dnsServiceIP?: string;
 
@@ -9971,21 +9970,21 @@ model KubernetesProperties {
   /**
    * Relay connection string.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @secret
   relayConnectionString?: string | null;
 
   /**
    * ServiceBus connection string.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @secret
   serviceBusConnectionString?: string | null;
 
   /**
    * Extension principal-id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   extensionPrincipalId?: string | null;
 
   /**
@@ -10011,7 +10010,7 @@ model KubernetesProperties {
   /**
    * Instance Type Schema
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   instanceTypes?: Record<InstanceTypeSchema>;
 }
 
@@ -10022,8 +10021,8 @@ model InstanceTypeSchema {
   /**
    * Node Selector
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   nodeSelector?: Record<string | null> | null;
 
   /**
@@ -10039,13 +10038,13 @@ model InstanceTypeSchemaResources {
   /**
    * Resource requests for this instance type
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   requests?: Record<string>;
 
   /**
    * Resource limits for this instance type
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   limits?: Record<string>;
 }
 
@@ -10071,7 +10070,7 @@ model AmlComputeProperties {
   /**
    * Virtual Machine image for AML Compute - windows only
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   virtualMachineImage?: VirtualMachineImage | null;
 
   /**
@@ -10087,14 +10086,14 @@ model AmlComputeProperties {
   /**
    * Credentials for an administrator user account that will be created on each compute node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("User account credentials.")
   userAccountCredentials?: UserAccountCredentials | null;
 
   /**
    * Virtual network subnet resource ID the compute nodes belong to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Subnet.")
   subnet?: ResourceId | null;
 
@@ -10121,8 +10120,8 @@ model AmlComputeProperties {
   /**
    * Collection of errors encountered by various compute nodes during node setup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @summary("Errors.")
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
@@ -10131,7 +10130,7 @@ model AmlComputeProperties {
   /**
    * The number of compute nodes currently assigned to the compute.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   @summary("Current node count.")
   currentNodeCount?: int32 | null;
@@ -10139,7 +10138,7 @@ model AmlComputeProperties {
   /**
    * The target number of compute nodes for the compute. If the allocationState is resizing, this property denotes the target node count for the ongoing resize operation. If the allocationState is steady, this property denotes the target node count for the previous resize operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   @summary("Target node count.")
   targetNodeCount?: int32 | null;
@@ -10147,7 +10146,7 @@ model AmlComputeProperties {
   /**
    * Counts of various node states on the compute.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   @summary("Node state counts.")
   nodeStateCounts?: NodeStateCounts | null;
@@ -10155,14 +10154,14 @@ model AmlComputeProperties {
   /**
    * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Enable node public IP.")
   enableNodePublicIp?: boolean | null = true;
 
   /**
    * A property bag containing additional properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   propertyBag?: unknown | null;
 }
 
@@ -10282,7 +10281,7 @@ model ComputeInstanceProperties {
   /**
    * Virtual network subnet resource ID the compute nodes belong to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Subnet.")
   subnet?: ResourceId | null;
 
@@ -10295,20 +10294,20 @@ model ComputeInstanceProperties {
   /**
    * Specifies settings for autologger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
    * Specifies policy and settings for SSH access.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sshSettings?: ComputeInstanceSshSettings | null;
 
   /**
    * List of Custom Services added to the compute.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   customServices?: CustomService[] | null;
 
@@ -10354,64 +10353,64 @@ model ComputeInstanceProperties {
   /**
    * The Compute Instance Authorization type. Available values are personal (default).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Compute Instance Authorization type.")
   computeInstanceAuthorizationType?: ComputeInstanceAuthorizationType | null = ComputeInstanceAuthorizationType.personal;
 
   /**
    * Enable Auto OS Patching. Possible values are: true, false.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("Enable Auto OS Patching.")
   enableOSPatching?: boolean | null = false;
 
   /**
    * Enable root access. Possible values are: true, false.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Enable root access.")
   enableRootAccess?: boolean | null = true;
 
   /**
    * Enable SSO (single sign on). Possible values are: true, false.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("Enable SSO (single sign on).")
   enableSSO?: boolean | null = true;
 
   /**
    * Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean | null = false;
 
   /**
    * Settings for a personal compute instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Personal Compute Instance settings.")
   personalComputeInstanceSettings?: PersonalComputeInstanceSettings | null;
 
   /**
    * Details of customized scripts to execute for setting up the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   setupScripts?: SetupScripts | null;
 
   /**
    * The last operation on ComputeInstance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   lastOperation?: ComputeInstanceLastOperation | null;
 
   /**
    * The list of schedules to be applied on the computes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   schedules?: ComputeSchedules | null;
 
   /**
@@ -10422,15 +10421,15 @@ model ComputeInstanceProperties {
   /**
    * Enable or disable node public IP address provisioning. Possible values are: Possible values are: true - Indicates that the compute nodes will have public IPs provisioned. false - Indicates that the compute nodes will have a private endpoint and no public IPs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Enable node public IP.")
   enableNodePublicIp?: boolean | null;
 
   /**
    * Describes informations of containers on this ComputeInstance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   containers?: ComputeInstanceContainer[] | null;
@@ -10438,8 +10437,8 @@ model ComputeInstanceProperties {
   /**
    * Describes informations of dataDisks on this ComputeInstance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   dataDisks?: ComputeInstanceDataDisk[] | null;
@@ -10447,8 +10446,8 @@ model ComputeInstanceProperties {
   /**
    * Describes informations of dataMounts on this ComputeInstance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
   dataMounts?: ComputeInstanceDataMount[] | null;
@@ -10551,8 +10550,8 @@ model OsPatchingStatus {
   /**
    * Collection of errors encountered when doing os patching.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   osPatchingErrors?: ErrorResponse[] | null;
 }
@@ -10564,14 +10563,14 @@ model ComputeInstanceConnectivityEndpoints {
   /**
    * Public IP Address of this ComputeInstance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   publicIpAddress?: string | null;
 
   /**
    * Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   privateIpAddress?: string | null;
 }
@@ -10598,7 +10597,7 @@ model ComputeInstanceCreatedBy {
   /**
    * Name of the user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   userName?: string | null;
 
@@ -10611,7 +10610,7 @@ model ComputeInstanceCreatedBy {
   /**
    * Uniquely identifies the user within his/her organization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   userId?: string | null;
 }
@@ -10735,7 +10734,7 @@ model ComputeStartStopSchedule {
   /**
    * A system assigned id for the schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   id?: string | null;
 
@@ -10793,7 +10792,7 @@ model Recurrence {
   /**
    * The start time in yyyy-MM-ddTHH:mm:ss format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   startTime?: string | null;
 
   /**
@@ -10808,7 +10807,7 @@ model Recurrence {
   schedule?: ComputeRecurrenceSchedule;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ComputeRecurrenceSchedule {
   /**
    * [Required] List of hours for the schedule.
@@ -10823,13 +10822,13 @@ model ComputeRecurrenceSchedule {
   /**
    * List of month days for the schedule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   monthDays?: int32[] | null;
 
   /**
    * List of days for the schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   weekDays?: ComputeWeekDay[] | null;
 }
 
@@ -10840,7 +10839,7 @@ model Cron {
   /**
    * The start time in yyyy-MM-ddTHH:mm:ss format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   startTime?: string | null;
 
   /**
@@ -10856,12 +10855,12 @@ model Cron {
   expression?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ScheduleBase {
   /**
    * A system assigned id for the schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   id?: string | null;
 
   /**
@@ -10938,7 +10937,7 @@ model ComputeInstanceDataDisk {
   /**
    * The initial disk size in gigabytes.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @summary("The initial disk size in gigabytes.")
   diskSizeGB?: int32;
 
@@ -10961,7 +10960,7 @@ model ComputeInstanceVersion {
   /**
    * Runtime of compute instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   runtime?: string | null;
 }
 
@@ -10999,13 +10998,13 @@ model VirtualMachine extends Compute {
   computeType: "VirtualMachine";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model VirtualMachineSchema {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   properties?: VirtualMachineSchemaProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model VirtualMachineSchemaProperties {
   /**
    * Virtual Machine size
@@ -11050,7 +11049,7 @@ model VirtualMachineSshCredentials {
   /**
    * Password of admin account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   password?: string;
 
   /**
@@ -11069,7 +11068,7 @@ model VirtualMachineSshCredentials {
 /**
  * HDInsight compute properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model HDInsightProperties {
   /**
    * Port open for ssh connections on the master node of the cluster.
@@ -11090,7 +11089,7 @@ model HDInsightProperties {
 /**
  * A HDInsight compute.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model HDInsight extends Compute {
   ...HDInsightSchema;
 
@@ -11099,8 +11098,8 @@ model HDInsight extends Compute {
    */
   computeType: "HDInsight";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model HDInsightSchema {
   properties?: HDInsightProperties;
 }
@@ -11122,7 +11121,7 @@ model DatabricksProperties {
   /**
    * Databricks access token
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   databricksAccessToken?: string;
 
   /**
@@ -11143,7 +11142,7 @@ model Databricks extends Compute {
   computeType: "Databricks";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DatabricksSchema {
   properties?: DatabricksProperties;
 }
@@ -11160,13 +11159,13 @@ model DataLakeAnalytics extends Compute {
   computeType: "DataLakeAnalytics";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DataLakeAnalyticsSchema {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   properties?: DataLakeAnalyticsSchemaProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DataLakeAnalyticsSchemaProperties {
   /**
    * DataLake Store Account Name
@@ -11178,7 +11177,7 @@ model DataLakeAnalyticsSchemaProperties {
  * A SynapseSpark compute.
  */
 model SynapseSpark extends Compute {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   properties?: SynapseSparkProperties;
 
   /**
@@ -11187,7 +11186,7 @@ model SynapseSpark extends Compute {
   computeType: "SynapseSpark";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SynapseSparkProperties {
   /**
    * Auto scale properties.
@@ -11244,11 +11243,11 @@ model SynapseSparkProperties {
  * Auto scale properties
  */
 model AutoScaleProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   minNodeCount?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   enabled?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   maxNodeCount?: int32;
 }
 
@@ -11256,9 +11255,9 @@ model AutoScaleProperties {
  * Auto pause properties
  */
 model AutoPauseProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   delayInMinutes?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   enabled?: boolean;
 }
 
@@ -11279,7 +11278,7 @@ model AksComputeSecretsProperties {
   /**
    * Image registry pull secret.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   imagePullSecretName?: string | null;
 }
 
@@ -11307,7 +11306,7 @@ model VirtualMachineSecrets extends ComputeSecrets {
   computeType: "VirtualMachine";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model VirtualMachineSecretsSchema {
   /**
    * Admin credentials for virtual machine.
@@ -11322,7 +11321,7 @@ model DatabricksComputeSecretsProperties {
   /**
    * access token for databricks account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   databricksAccessToken?: string;
 }
 
@@ -11362,7 +11361,7 @@ model AccountKeyDatastoreSecrets extends DatastoreSecrets {
   /**
    * Storage account key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   key?: string | null;
 
   /**
@@ -11371,7 +11370,7 @@ model AccountKeyDatastoreSecrets extends DatastoreSecrets {
   secretsType: "AccountKey";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AllFeatures extends MonitoringFeatureFilterBase {
   /**
    * [Required] Specifies the feature filter to leverage when selecting features to calculate metrics over.
@@ -11379,7 +11378,7 @@ model AllFeatures extends MonitoringFeatureFilterBase {
   filterType: "AllFeatures";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("filterType")
 model MonitoringFeatureFilterBase {
   /**
@@ -11466,7 +11465,7 @@ model AssetJobOutput {
   /**
    * Output Asset Name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   assetName?: string | null;
 
   /**
@@ -11478,7 +11477,7 @@ model AssetJobOutput {
   /**
    * Output Asset URI.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   uri?: string | null;
 }
 
@@ -11509,36 +11508,36 @@ model ForecastHorizon {
  * Use this class for executing AutoML tasks like Classification/Regression etc.
  * See TaskType enum for all the tasks supported.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model AutoMLJob extends JobBaseProperties {
   /**
    * The ARM resource ID of the Environment specification for the job.
    * This is optional value to provide, if not provided, AutoML will default this to Production AutoML curated environment version when running the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentId?: string | null;
 
   /**
    * Environment variables included in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string | null> | null;
 
   /**
    * Mapping of output data bindings used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Queue settings for the job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -11567,7 +11566,7 @@ model JobOutput {
   /**
    * Description for the output.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string | null;
 
@@ -11578,7 +11577,7 @@ model JobOutput {
   jobOutputType: JobOutputType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model QueueSettings {
   /**
    * Enum to determine the job tier.
@@ -11587,20 +11586,20 @@ model QueueSettings {
   jobTier?: JobTier = JobTier.Null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model JobResourceConfiguration extends ResourceConfiguration {
   /**
    * Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dockerArgs?: string | null;
 
   /**
    * Extra arguments to pass to the Docker run command, as a collection. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dockerArgsList?: string[] | null;
 
@@ -11616,7 +11615,7 @@ model JobResourceConfiguration extends ResourceConfiguration {
  * AutoML vertical class.
  * Base class for AutoML verticals - TableVertical/ImageVertical/NLPVertical
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 @discriminator("taskType")
 model AutoMLVertical {
   /**
@@ -11628,7 +11627,7 @@ model AutoMLVertical {
    * Target column name: This is prediction values column.
    * Also known as label column name in context of classification tasks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   targetColumnName?: string | null;
 
   /**
@@ -11642,8 +11641,8 @@ model AutoMLVertical {
    */
   trainingData: MLTableJobInput;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MLTableJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -11661,7 +11660,7 @@ model JobInput {
   /**
    * Description for the input.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   description?: string | null;
 
@@ -11675,7 +11674,7 @@ model JobInput {
 /**
  * N-Cross validations determined automatically.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model AutoNCrossValidations extends NCrossValidations {
   /**
    * [Required] Mode for determining N-Cross validations.
@@ -11686,7 +11685,7 @@ model AutoNCrossValidations extends NCrossValidations {
 /**
  * N-Cross validations value.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 @discriminator("mode")
 model NCrossValidations {
   /**
@@ -11696,7 +11695,7 @@ model NCrossValidations {
   mode: NCrossValidationsMode;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AutoSeasonality extends Seasonality {
   /**
    * [Required] Seasonality mode.
@@ -11716,7 +11715,7 @@ model Seasonality {
   mode: SeasonalityMode;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AutoTargetLags extends TargetLags {
   /**
    * [Required] Set target lags mode - Auto/Custom
@@ -11767,28 +11766,28 @@ model AzureBlobDatastore extends DatastoreProperties {
   /**
    * Storage account name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   accountName?: string | null;
 
   /**
    * Storage account container name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   containerName?: string | null;
 
   /**
    * Azure cloud endpoint for the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
   /**
    * Protocol used to communicate with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string | null;
 
@@ -11811,13 +11810,13 @@ model AzureDatastore {
   /**
    * Azure Resource Group name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   resourceGroup?: string | null;
 
   /**
    * Azure Subscription Id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   subscriptionId?: string | null;
 }
 
@@ -11864,7 +11863,7 @@ model AzureDataLakeGen2Datastore extends DatastoreProperties {
   /**
    * Azure cloud endpoint for the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
@@ -11879,7 +11878,7 @@ model AzureDataLakeGen2Datastore extends DatastoreProperties {
   /**
    * Protocol used to communicate with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string | null;
 
@@ -11922,7 +11921,7 @@ model AzureFileDatastore extends DatastoreProperties {
   /**
    * Azure cloud endpoint for the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
@@ -11937,7 +11936,7 @@ model AzureFileDatastore extends DatastoreProperties {
   /**
    * Protocol used to communicate with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   protocol?: string | null;
 
@@ -11953,12 +11952,12 @@ model AzureFileDatastore extends DatastoreProperties {
   datastoreType: "AzureFile";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AzureOpenAiFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning Azure Open AI model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   hyperParameters?: AzureOpenAiHyperParameters | null;
 
   /**
@@ -11974,23 +11973,23 @@ model AzureOpenAiHyperParameters {
   /**
    * Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   batchSize?: int32 | null;
 
   /**
    * Scaling factor for the learning rate. A smaller learning rate may be useful to avoid over fitting.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   learningRateMultiplier?: float64 | null;
 
   /**
    * The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nEpochs?: int32 | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("modelProvider")
 model FineTuningVertical {
   /**
@@ -12018,7 +12017,7 @@ model FineTuningVertical {
   /**
    * Validation data for fine tuning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationData?: JobInput | null;
 }
 
@@ -12071,27 +12070,27 @@ model BatchPipelineComponentDeploymentConfiguration
   /**
    * The ARM id of the component to be run.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   componentId?: IdAssetReference | null;
 
   /**
    * The description which will be applied to the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   description?: string | null;
 
   /**
    * Run-time settings for the pipeline job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   settings?: Record<string | null> | null;
 
   /**
    * The tags which will be applied to the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   tags?: Record<string | null> | null;
 
   /**
@@ -12139,7 +12138,7 @@ model SamplingAlgorithm {
   samplingAlgorithmType: SamplingAlgorithmType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   /**
    * [Required] The categorical data drift metric to calculate.
@@ -12153,7 +12152,7 @@ model CategoricalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   dataType: "Categorical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("dataType")
 model DataDriftMetricThresholdBase {
   /**
@@ -12165,22 +12164,22 @@ model DataDriftMetricThresholdBase {
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MonitoringThreshold {
   /**
    * The threshold value. If null, the set default is dependent on the metric type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   value?: float64 | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CategoricalDataQualityMetricThreshold
   extends DataQualityMetricThresholdBase {
   /**
@@ -12195,7 +12194,7 @@ model CategoricalDataQualityMetricThreshold
   dataType: "Categorical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("dataType")
 model DataQualityMetricThresholdBase {
   /**
@@ -12207,12 +12206,12 @@ model DataQualityMetricThresholdBase {
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CategoricalPredictionDriftMetricThreshold
   extends PredictionDriftMetricThresholdBase {
   /**
@@ -12227,7 +12226,7 @@ model CategoricalPredictionDriftMetricThreshold
   dataType: "Categorical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("dataType")
 model PredictionDriftMetricThresholdBase {
   /**
@@ -12239,7 +12238,7 @@ model PredictionDriftMetricThresholdBase {
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
@@ -12251,19 +12250,19 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
    * Authority URL used for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   authorityUrl?: string | null;
 
   /**
    * [Required] Service principal client ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
   clientId: Azure.Core.uuid;
 
   /**
    * Resource the service principal has access to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   resourceUrl?: string | null;
 
   /**
@@ -12276,7 +12275,7 @@ model CertificateDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] ID of the tenant to which the service principal belongs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
   tenantId: Azure.Core.uuid;
 
   /**
@@ -12299,7 +12298,7 @@ model CertificateDatastoreSecrets extends DatastoreSecrets {
   /**
    * Service principal certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   certificate?: string | null;
 
   /**
@@ -12317,7 +12316,7 @@ model Classification extends AutoMLVertical {
   /**
    * Positive label for binary metrics calculation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   positiveLabel?: string | null;
 
   /**
@@ -12328,7 +12327,7 @@ model Classification extends AutoMLVertical {
   /**
    * Inputs for training phase for an AutoML Job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trainingSettings?: ClassificationTrainingSettings | null;
 
   /**
@@ -12340,18 +12339,18 @@ model Classification extends AutoMLVertical {
 /**
  * Classification Training related configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ClassificationTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for classification task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   allowedTrainingAlgorithms?: ClassificationModels[] | null;
 
   /**
    * Blocked models for classification task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blockedTrainingAlgorithms?: ClassificationModels[] | null;
 }
 
@@ -12393,7 +12392,7 @@ model TrainingSettings {
   /**
    * Stack ensemble settings for stack ensemble run.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   stackEnsembleSettings?: StackEnsembleSettings | null;
 }
 
@@ -12404,8 +12403,8 @@ model StackEnsembleSettings {
   /**
    * Optional parameters to pass to the initializer of the meta-learner.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   stackMetaLearnerKWargs?: unknown | null;
 
   /**
@@ -12426,32 +12425,32 @@ model TableVertical {
   /**
    * Columns to use for CVSplit data.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   cvSplitColumnNames?: string[] | null;
 
   /**
    * Featurization inputs needed for AutoML job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   featurizationSettings?: TableVerticalFeaturizationSettings | null;
 
   /**
    * Execution constraints for AutoMLJob.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   limitSettings?: TableVerticalLimitSettings | null;
 
   /**
    * Number of cross validation folds to be applied on training dataset
    * when validation dataset is not provided.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nCrossValidations?: NCrossValidations | null;
 
   /**
    * Test data input.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   testData?: MLTableJobInput | null;
 
   /**
@@ -12459,13 +12458,13 @@ model TableVertical {
    * Values between (0.0 , 1.0)
    * Applied when validation dataset is not provided.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   testDataSize?: float64 | null;
 
   /**
    * Validation data inputs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationData?: MLTableJobInput | null;
 
   /**
@@ -12473,32 +12472,32 @@ model TableVertical {
    * Values between (0.0 , 1.0)
    * Applied when validation dataset is not provided.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationDataSize?: float64 | null;
 
   /**
    * The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   weightColumnName?: string | null;
 }
 
 /**
  * Featurization Configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * These transformers shall not be used in featurization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blockedTransformers?: BlockedTransformers[] | null;
 
   /**
    * Dictionary of column name and its type (int, float, string, datetime etc).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   columnNameAndTypes?: Record<string | null> | null;
 
   /**
@@ -12516,9 +12515,9 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   transformerParams?: Record<ColumnTransformer[] | null> | null;
 }
@@ -12530,14 +12529,14 @@ model ColumnTransformer {
   /**
    * Fields to apply transformer logic on.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   fields?: string[] | null;
 
   /**
    * Different properties to be passed to transformer.
    * Input expected is dictionary of key,value pairs in JSON format.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   parameters?: unknown | null;
 }
 
@@ -12548,7 +12547,7 @@ model FeaturizationSettings {
   /**
    * Dataset language, useful for the text data.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   datasetLanguage?: string | null;
 }
 
@@ -12564,7 +12563,7 @@ model TableVerticalLimitSettings {
   /**
    * Exit score for the AutoML job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   exitScore?: float64 | null;
 
   /**
@@ -12600,7 +12599,7 @@ model CommandJob extends JobBaseProperties {
   /**
    * ARM resource ID of the code asset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string | null;
 
@@ -12615,7 +12614,7 @@ model CommandJob extends JobBaseProperties {
   /**
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   distribution?: DistributionConfiguration | null;
 
@@ -12630,45 +12629,45 @@ model CommandJob extends JobBaseProperties {
   /**
    * Environment variables included in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string | null> | null;
 
   /**
    * Mapping of input data bindings used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
 
   /**
    * Command Job limit.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   limits?: CommandJobLimits | null;
 
   /**
    * Mapping of output data bindings used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Input parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read)
   parameters?: unknown | null;
 
   /**
    * Queue settings for the job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -12706,7 +12705,7 @@ model CommandJobLimits extends JobLimits {
   jobLimitsType: "Command";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("jobLimitsType")
 model JobLimits {
   /**
@@ -12717,7 +12716,7 @@ model JobLimits {
   /**
    * The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   timeout?: duration | null;
 }
 
@@ -12728,41 +12727,41 @@ model ContainerResourceRequirements {
   /**
    * Container resource limit info:
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   containerResourceLimits?: ContainerResourceSettings | null;
 
   /**
    * Container resource request info:
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   containerResourceRequests?: ContainerResourceSettings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ContainerResourceSettings {
   /**
    * Number of vCPUs request/limit for container. More info:
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   cpu?: string | null;
 
   /**
    * Number of Nvidia GPU cards request/limit for container. More info:
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   gpu?: string | null;
 
   /**
    * Memory size request/limit for container. More info:
    * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   memory?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CreateMonitorAction extends ScheduleActionBase {
   /**
    * [Required] Defines the monitor.
@@ -12776,12 +12775,12 @@ model CreateMonitorAction extends ScheduleActionBase {
   actionType: "CreateMonitor";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MonitorDefinition {
   /**
    * The monitor's notification settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   alertNotificationSettings?: MonitorNotificationSettings | null;
 
@@ -12794,35 +12793,35 @@ model MonitorDefinition {
   /**
    * The entities targeted by the monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   monitoringTarget?: MonitoringTarget | null;
 
   /**
    * [Required] The signals to monitor.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   signals: Record<MonitoringSignalBase | null>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MonitorNotificationSettings {
   /**
    * The AML notification email settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   emailNotificationSettings?: MonitorEmailNotificationSettings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MonitorEmailNotificationSettings {
   /**
    * The email recipient list which has a limitation of 499 characters in total.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
   emails?: string[] | null;
@@ -12847,14 +12846,14 @@ model MonitoringTarget {
   /**
    * Reference to the deployment asset targeted by this monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   deploymentId?: string | null;
 
   /**
    * Reference to the model asset targeted by this monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   modelId?: string | null;
 
@@ -12865,14 +12864,14 @@ model MonitoringTarget {
   taskType: ModelTaskType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("signalType")
 model MonitoringSignalBase {
   /**
    * The current notification mode for this signal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.extension("x-ms-identifiers", #[])
   notificationTypes?: MonitoringNotificationType[] | null;
@@ -12880,8 +12879,8 @@ model MonitoringSignalBase {
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   properties?: Record<string | null> | null;
 
   /**
@@ -12891,7 +12890,7 @@ model MonitoringSignalBase {
   signalType: MonitoringSignalType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CronTrigger extends TriggerBase {
   /**
    * [Required] Specifies cron expression of schedule.
@@ -12922,7 +12921,7 @@ model CustomForecastHorizon extends ForecastHorizon {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomMetricThreshold {
   /**
    * [Required] The user-defined metric to calculate.
@@ -12935,18 +12934,18 @@ model CustomMetricThreshold {
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomModelFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning custom model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   hyperParameters?: Record<string | null> | null;
 
   /**
@@ -12955,7 +12954,7 @@ model CustomModelFineTuning extends FineTuningVertical {
   modelProvider: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -12965,7 +12964,7 @@ model CustomModelJobInput extends JobInput {
   jobInputType: "custom_model";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -12975,7 +12974,7 @@ model CustomModelJobOutput extends JobOutput {
   jobOutputType: "custom_model";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomMonitoringSignal extends MonitoringSignalBase {
   /**
    * [Required] Reference to the component asset used to calculate the custom metrics.
@@ -12988,16 +12987,16 @@ model CustomMonitoringSignal extends MonitoringSignalBase {
   /**
    * Monitoring assets to take as input. Key is the component input port name, value is the data asset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputAssets?: Record<MonitoringInputDataBase | null> | null;
 
   /**
    * Extra component parameters to take as input. Key is the component literal input port name, value is the parameter value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
 
@@ -13022,15 +13021,15 @@ model MonitoringInputDataBase {
   /**
    * Mapping of column names to special uses.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   columns?: Record<string | null> | null;
 
   /**
    * The context metadata of the data source.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataContext?: string | null;
 
@@ -13058,7 +13057,7 @@ model MonitoringInputDataBase {
 /**
  * N-Cross validations are specified by user.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model CustomNCrossValidations extends NCrossValidations {
   /**
    * [Required] N-Cross validations value.
@@ -13071,7 +13070,7 @@ model CustomNCrossValidations extends NCrossValidations {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomSeasonality extends Seasonality {
   /**
    * [Required] Seasonality value.
@@ -13084,7 +13083,7 @@ model CustomSeasonality extends Seasonality {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomTargetLags extends TargetLags {
   /**
    * [Required] Set target lags values.
@@ -13097,7 +13096,7 @@ model CustomTargetLags extends TargetLags {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomTargetRollingWindowSize extends TargetRollingWindowSize {
   /**
    * [Required] TargetRollingWindowSize value.
@@ -13110,27 +13109,27 @@ model CustomTargetRollingWindowSize extends TargetRollingWindowSize {
   mode: "Custom";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DataDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
   /**
    * The settings for computing feature importance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureImportanceSettings?: FeatureImportanceSettings | null;
 
   /**
    * The feature filter which identifies which feature to calculate drift over.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   features?: MonitoringFeatureFilterBase | null;
 
@@ -13159,7 +13158,7 @@ model DataDriftMonitoringSignal extends MonitoringSignalBase {
   signalType: "DataDrift";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FeatureImportanceSettings {
   /**
    * The mode of operation for computing feature importance.
@@ -13169,11 +13168,11 @@ model FeatureImportanceSettings {
   /**
    * The name of the target column within the input data asset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   targetColumn?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @discriminator("dataGenerationType")
 model DataGenerationVertical {
   /**
@@ -13191,7 +13190,7 @@ model DataGenerationVertical {
   /**
    * Prompt Settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   promptSettings?: PromptSettings | null;
 
   /**
@@ -13200,49 +13199,49 @@ model DataGenerationVertical {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   teacherModelEndpoint: TeacherModelEndpoint;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   teacherModelSettings?: TeacherModelSettings | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model PromptSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   enableChainOfDensity?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   enableChainOfThought?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   maxLenSummary?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
 model TeacherModelEndpoint {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   endpointName?: string | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model TeacherModelSettings {
   /**
    * Teacher Model Request Settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   teacherModelEndpointRequestSettings?: TeacherModelEndpointRequestSettings | null;
 
   /**
    * Teacher Model Inference Settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   teacherModelInferenceParameters?: Record<string | null> | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model TeacherModelEndpointRequestSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   minEndpointSuccessRatio?: float64;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   requestBatchSize?: int32;
 }
 
@@ -13253,13 +13252,13 @@ model DataPathAssetReference extends AssetReferenceBase {
   /**
    * ARM resource ID of the datastore where the asset is located.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   datastoreId?: string | null;
 
   /**
    * The path of the file/directory in the datastore.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   path?: string | null;
 
   /**
@@ -13268,27 +13267,27 @@ model DataPathAssetReference extends AssetReferenceBase {
   referenceType: "DataPath";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DataQualityMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
   /**
    * The settings for computing feature importance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureImportanceSettings?: FeatureImportanceSettings | null;
 
   /**
    * The features to calculate drift over.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   features?: MonitoringFeatureFilterBase | null;
 
@@ -13317,7 +13316,7 @@ model DataQualityMonitoringSignal extends MonitoringSignalBase {
   signalType: "DataQuality";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model DefaultScaleSettings extends OnlineScaleSettings {
   /**
    * [Required] Type of deployment scaling algorithm
@@ -13342,14 +13341,14 @@ model DistillationJob extends JobBaseProperties {
   /**
    * [Required]
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs: Record<JobOutput | null>;
 
   /**
    * Queue settings for the job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -13365,13 +13364,13 @@ model DistillationJob extends JobBaseProperties {
   jobType: "Distillation";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FinetuningDetails {
   /**
    * Finetuning Hyperparameters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   hyperParameters?: Record<string | null> | null;
 
   /**
@@ -13380,7 +13379,7 @@ model FinetuningDetails {
   studentModel: JobInput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model JobResources {
   /**
    * List of instance types to choose from.
@@ -13396,13 +13395,13 @@ model DockerCredential extends DataReferenceCredential {
   /**
    * DockerCredential user password
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   password?: string | null;
 
   /**
    * DockerCredential user name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   userName?: string | null;
 
   /**
@@ -13411,13 +13410,13 @@ model DockerCredential extends DataReferenceCredential {
   credentialType: "DockerCredentials";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointScheduleAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
    * <see href="TBD" />
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   endpointInvocationDefinition: Record<unknown>;
 
@@ -13427,13 +13426,13 @@ model EndpointScheduleAction extends ScheduleActionBase {
   actionType: "InvokeBatchEndpoint";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
@@ -13468,7 +13467,7 @@ model FeatureAttributionDriftMonitoringSignal extends MonitoringSignalBase {
   signalType: "FeatureAttributionDrift";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FeatureAttributionMetricThreshold {
   /**
    * [Required] The feature attribution metric to calculate.
@@ -13479,12 +13478,12 @@ model FeatureAttributionMetricThreshold {
   /**
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   threshold?: MonitoringThreshold | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model FeatureSubset extends MonitoringFeatureFilterBase {
   /**
    * [Required] The list of features to include.
@@ -13510,14 +13509,14 @@ model FineTuningJob extends JobBaseProperties {
   /**
    * [Required]
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs: Record<JobOutput | null>;
 
   /**
    * Queue settings for the job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -13552,7 +13551,7 @@ model Forecasting extends AutoMLVertical {
   /**
    * Forecasting task specific inputs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   forecastingSettings?: ForecastingSettings | null;
 
   /**
@@ -13563,7 +13562,7 @@ model Forecasting extends AutoMLVertical {
   /**
    * Inputs for training phase for an AutoML Job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trainingSettings?: ForecastingTrainingSettings | null;
 
   /**
@@ -13580,7 +13579,7 @@ model ForecastingSettings {
    * Country or region for holidays for forecasting tasks.
    * These should be ISO 3166 two-letter country/region codes, for example 'US' or 'GB'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   countryOrRegionForHolidays?: string | null;
 
   /**
@@ -13588,7 +13587,7 @@ model ForecastingSettings {
    * example, if `CVStepSize` = 3 for daily data, the origin time for each fold will be
    * three days apart.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   cvStepSize?: int32 | null;
 
   /**
@@ -13604,7 +13603,7 @@ model ForecastingSettings {
   /**
    * When forecasting, this parameter represents the period with which the forecast is desired, for example daily, weekly, yearly, etc. The forecast frequency is dataset frequency by default.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   frequency?: string | null;
 
   /**
@@ -13626,26 +13625,26 @@ model ForecastingSettings {
   /**
    * The number of past periods to lag from the target column.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   targetLags?: TargetLags | null;
 
   /**
    * The number of past periods used to create a rolling window average of the target column.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   targetRollingWindowSize?: TargetRollingWindowSize | null;
 
   /**
    * The name of the time column. This parameter is required when forecasting to specify the datetime column in the input data used for building the time series and inferring its frequency.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   timeColumnName?: string | null;
 
   /**
    * The names of columns used to group a timeseries. It can be used to create multiple series.
    * If grain is not defined, the data set is assumed to be one time-series. This parameter is used with task type forecasting.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   timeSeriesIdColumnNames?: string[] | null;
 
   /**
@@ -13657,18 +13656,18 @@ model ForecastingSettings {
 /**
  * Forecasting Training related configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ForecastingTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for forecasting task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   allowedTrainingAlgorithms?: ForecastingModels[] | null;
 
   /**
    * Blocked models for forecasting task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blockedTrainingAlgorithms?: ForecastingModels[] | null;
 }
 
@@ -13700,20 +13699,20 @@ model ImageClassification extends AutoMLVertical {
   taskType: "ImageClassification";
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ImageClassificationBase extends ImageVertical {
   /**
    * Settings used for training the model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelSettings?: ImageModelSettingsClassification | null;
 
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsClassification[] | null;
 }
@@ -13723,31 +13722,31 @@ model ImageClassificationBase extends ImageVertical {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ImageModelSettingsClassification extends ImageModelSettings {
   /**
    * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trainingCropSize?: int32 | null;
 
   /**
    * Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationCropSize?: int32 | null;
 
   /**
    * Image size to which to resize before cropping for validation dataset. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationResizeSize?: int32 | null;
 
   /**
    * Weighted loss. The accepted values are 0 for no weighted loss.
    * 1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   weightedLoss?: int32 | null;
 }
 
@@ -13760,87 +13759,87 @@ model ImageModelSettings {
   /**
    * Settings for advanced scenarios.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   advancedSettings?: string | null;
 
   /**
    * Enable AMSGrad when optimizer is 'adam' or 'adamw'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   amsGradient?: boolean | null;
 
   /**
    * Settings for using Augmentations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   augmentations?: string | null;
 
   /**
    * Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   beta1?: float32 | null;
 
   /**
    * Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   beta2?: float32 | null;
 
   /**
    * Frequency to store model checkpoints. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   checkpointFrequency?: int32 | null;
 
   /**
    * The pretrained checkpoint model for incremental training.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   checkpointModel?: MLFlowModelJobInput | null;
 
   /**
    * The id of a previous run that has a pretrained checkpoint for incremental training.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   checkpointRunId?: string | null;
 
   /**
    * Whether to use distributed training.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   distributed?: boolean | null;
 
   /**
    * Enable early stopping logic during training.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   earlyStopping?: boolean | null;
 
   /**
    * Minimum number of epochs or validation evaluations to wait before primary metric improvement
    * is tracked for early stopping. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   earlyStoppingDelay?: int32 | null;
 
   /**
    * Minimum number of epochs or validation evaluations with no primary metric improvement before
    * the run is stopped. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   earlyStoppingPatience?: int32 | null;
 
   /**
    * Enable normalization when exporting ONNX model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   enableOnnxNormalization?: boolean | null;
 
   /**
    * Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   evaluationFrequency?: int32 | null;
 
   /**
@@ -13848,7 +13847,7 @@ model ImageModelSettings {
    * updating the model weights while accumulating the gradients of those steps, and then using
    * the accumulated gradients to compute the weight updates. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   gradientAccumulationStep?: int32 | null;
 
   /**
@@ -13857,13 +13856,13 @@ model ImageModelSettings {
    * freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
    * see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   layersToFreeze?: int32 | null;
 
   /**
    * Initial learning rate. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   learningRate?: float32 | null;
 
   /**
@@ -13876,31 +13875,31 @@ model ImageModelSettings {
    * For more information on the available models please visit the official documentation:
    * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelName?: string | null;
 
   /**
    * Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   momentum?: float32 | null;
 
   /**
    * Enable nesterov when optimizer is 'sgd'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nesterov?: boolean | null;
 
   /**
    * Number of training epochs. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   numberOfEpochs?: int32 | null;
 
   /**
    * Number of data loader workers. Must be a non-negative integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   numberOfWorkers?: int32 | null;
 
   /**
@@ -13911,57 +13910,57 @@ model ImageModelSettings {
   /**
    * Random seed to be used when using deterministic training.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   randomSeed?: int32 | null;
 
   /**
    * Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   stepLRGamma?: float32 | null;
 
   /**
    * Value of step size when learning rate scheduler is 'step'. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   stepLRStepSize?: int32 | null;
 
   /**
    * Training batch size. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trainingBatchSize?: int32 | null;
 
   /**
    * Validation batch size. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationBatchSize?: int32 | null;
 
   /**
    * Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   warmupCosineLRCycles?: float32 | null;
 
   /**
    * Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   warmupCosineLRWarmupEpochs?: int32 | null;
 
   /**
    * Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   weightDecay?: float32 | null;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MLFlowModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -13985,32 +13984,32 @@ model MLFlowModelJobInput extends JobInput {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ImageModelDistributionSettingsClassification
   extends ImageModelDistributionSettings {
   /**
    * Image crop size that is input to the neural network for the training dataset. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trainingCropSize?: string | null;
 
   /**
    * Image crop size that is input to the neural network for the validation dataset. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationCropSize?: string | null;
 
   /**
    * Image size to which to resize before cropping for validation dataset. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationResizeSize?: string | null;
 
   /**
    * Weighted loss. The accepted values are 0 for no weighted loss.
    * 1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   weightedLoss?: string | null;
 }
 
@@ -14034,63 +14033,63 @@ model ImageModelDistributionSettings {
   /**
    * Enable AMSGrad when optimizer is 'adam' or 'adamw'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   amsGradient?: string | null;
 
   /**
    * Settings for using Augmentations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   augmentations?: string | null;
 
   /**
    * Value of 'beta1' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   beta1?: string | null;
 
   /**
    * Value of 'beta2' when optimizer is 'adam' or 'adamw'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   beta2?: string | null;
 
   /**
    * Whether to use distributer training.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   distributed?: string | null;
 
   /**
    * Enable early stopping logic during training.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   earlyStopping?: string | null;
 
   /**
    * Minimum number of epochs or validation evaluations to wait before primary metric improvement
    * is tracked for early stopping. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   earlyStoppingDelay?: string | null;
 
   /**
    * Minimum number of epochs or validation evaluations with no primary metric improvement before
    * the run is stopped. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   earlyStoppingPatience?: string | null;
 
   /**
    * Enable normalization when exporting ONNX model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   enableOnnxNormalization?: string | null;
 
   /**
    * Frequency to evaluate validation dataset to get metric scores. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   evaluationFrequency?: string | null;
 
   /**
@@ -14098,7 +14097,7 @@ model ImageModelDistributionSettings {
    * updating the model weights while accumulating the gradients of those steps, and then using
    * the accumulated gradients to compute the weight updates. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   gradientAccumulationStep?: string | null;
 
   /**
@@ -14107,19 +14106,19 @@ model ImageModelDistributionSettings {
    * freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
    * see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   layersToFreeze?: string | null;
 
   /**
    * Initial learning rate. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   learningRate?: string | null;
 
   /**
    * Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   learningRateScheduler?: string | null;
 
   /**
@@ -14127,89 +14126,89 @@ model ImageModelDistributionSettings {
    * For more information on the available models please visit the official documentation:
    * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelName?: string | null;
 
   /**
    * Value of momentum when optimizer is 'sgd'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   momentum?: string | null;
 
   /**
    * Enable nesterov when optimizer is 'sgd'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nesterov?: string | null;
 
   /**
    * Number of training epochs. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   numberOfEpochs?: string | null;
 
   /**
    * Number of data loader workers. Must be a non-negative integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   numberOfWorkers?: string | null;
 
   /**
    * Type of optimizer. Must be either 'sgd', 'adam', or 'adamw'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   optimizer?: string | null;
 
   /**
    * Random seed to be used when using deterministic training.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   randomSeed?: string | null;
 
   /**
    * Value of gamma when learning rate scheduler is 'step'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   stepLRGamma?: string | null;
 
   /**
    * Value of step size when learning rate scheduler is 'step'. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   stepLRStepSize?: string | null;
 
   /**
    * Training batch size. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trainingBatchSize?: string | null;
 
   /**
    * Validation batch size. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationBatchSize?: string | null;
 
   /**
    * Value of cosine cycle when learning rate scheduler is 'warmup_cosine'. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   warmupCosineLRCycles?: string | null;
 
   /**
    * Value of warmup epochs when learning rate scheduler is 'warmup_cosine'. Must be a positive integer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   warmupCosineLRWarmupEpochs?: string | null;
 
   /**
    * Value of weight decay when optimizer is 'sgd', 'adam', or 'adamw'. Must be a float in the range[0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   weightDecay?: string | null;
 }
 
@@ -14226,13 +14225,13 @@ model ImageVertical {
   /**
    * Model sweeping and hyperparameter sweeping related settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sweepSettings?: ImageSweepSettings | null;
 
   /**
    * Validation data inputs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationData?: MLTableJobInput | null;
 
   /**
@@ -14240,7 +14239,7 @@ model ImageVertical {
    * Values between (0.0 , 1.0)
    * Applied when validation dataset is not provided.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationDataSize?: float64 | null;
 }
 
@@ -14271,7 +14270,7 @@ model ImageSweepSettings {
   /**
    * Type of early termination policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   earlyTermination?: EarlyTerminationPolicy | null;
 
   /**
@@ -14316,19 +14315,19 @@ model ImageInstanceSegmentation extends AutoMLVertical {
   taskType: "ImageInstanceSegmentation";
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ImageObjectDetectionBase extends ImageVertical {
   /**
    * Settings used for training the model.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelSettings?: ImageModelSettingsObjectDetection | null;
 
   /**
    * Search space for sampling different combinations of models and their hyperparameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   searchSpace?: ImageModelDistributionSettingsObjectDetection[] | null;
 }
 
@@ -14337,20 +14336,20 @@ model ImageObjectDetectionBase extends ImageVertical {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ImageModelSettingsObjectDetection extends ImageModelSettings {
   /**
    * Maximum number of detections per image, for all classes. Must be a positive integer.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   boxDetectionsPerImage?: int32 | null;
 
   /**
    * During inference, only return proposals with a classification score greater than
    * BoxScoreThreshold. Must be a float in the range[0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   boxScoreThreshold?: float32 | null;
 
   /**
@@ -14358,7 +14357,7 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    * Note: The training run may get into CUDA OOM if the size is too big.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   imageSize?: int32 | null;
 
   /**
@@ -14366,7 +14365,7 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   maxSize?: int32 | null;
 
   /**
@@ -14374,7 +14373,7 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   minSize?: int32 | null;
 
   /**
@@ -14387,13 +14386,13 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    * Note: training run may get into CUDA OOM if no sufficient GPU memory.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   multiScale?: boolean | null;
 
   /**
    * IOU threshold used during inference in NMS post processing. Must be a float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nmsIouThreshold?: float32 | null;
 
   /**
@@ -14401,14 +14400,14 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    * None to enable small object detection logic. A string containing two integers in mxn format.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tileGridSize?: string | null;
 
   /**
    * Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tileOverlapRatio?: float32 | null;
 
   /**
@@ -14416,13 +14415,13 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
    * Used in validation/ inference. Must be float in the range [0, 1].
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tilePredictionsNmsThreshold?: float32 | null;
 
   /**
    * IOU threshold to use when computing validation metric. Must be float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationIouThreshold?: float32 | null;
 
   /**
@@ -14445,21 +14444,21 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
  * For more information on the available settings please visit the official documentation:
  * https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model ImageModelDistributionSettingsObjectDetection
   extends ImageModelDistributionSettings {
   /**
    * Maximum number of detections per image, for all classes. Must be a positive integer.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   boxDetectionsPerImage?: string | null;
 
   /**
    * During inference, only return proposals with a classification score greater than
    * BoxScoreThreshold. Must be a float in the range[0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   boxScoreThreshold?: string | null;
 
   /**
@@ -14467,7 +14466,7 @@ model ImageModelDistributionSettingsObjectDetection
    * Note: The training run may get into CUDA OOM if the size is too big.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   imageSize?: string | null;
 
   /**
@@ -14475,7 +14474,7 @@ model ImageModelDistributionSettingsObjectDetection
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   maxSize?: string | null;
 
   /**
@@ -14483,7 +14482,7 @@ model ImageModelDistributionSettingsObjectDetection
    * Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   minSize?: string | null;
 
   /**
@@ -14491,7 +14490,7 @@ model ImageModelDistributionSettingsObjectDetection
    * Note: training run may get into CUDA OOM if the model size is too big.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   modelSize?: string | null;
 
   /**
@@ -14499,13 +14498,13 @@ model ImageModelDistributionSettingsObjectDetection
    * Note: training run may get into CUDA OOM if no sufficient GPU memory.
    * Note: This settings is only supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   multiScale?: string | null;
 
   /**
    * IOU threshold used during inference in NMS post processing. Must be float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   nmsIouThreshold?: string | null;
 
   /**
@@ -14513,14 +14512,14 @@ model ImageModelDistributionSettingsObjectDetection
    * None to enable small object detection logic. A string containing two integers in mxn format.
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tileGridSize?: string | null;
 
   /**
    * Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
    * Note: This settings is not supported for the 'yolov5' algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tileOverlapRatio?: string | null;
 
   /**
@@ -14529,19 +14528,19 @@ model ImageModelDistributionSettingsObjectDetection
    * Note: This settings is not supported for the 'yolov5' algorithm.
    * NMS: Non-maximum suppression
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tilePredictionsNmsThreshold?: string | null;
 
   /**
    * IOU threshold to use when computing validation metric. Must be float in the range [0, 1].
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationIouThreshold?: string | null;
 
   /**
    * Metric computation method to use for validation metrics. Must be 'none', 'coco', 'voc', or 'coco_voc'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationMetricType?: string | null;
 }
 
@@ -14563,7 +14562,7 @@ model ImageObjectDetection extends AutoMLVertical {
   taskType: "ImageObjectDetection";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model JobScheduleAction extends ScheduleActionBase {
   /**
    * [Required] Defines Schedule action definition details.
@@ -14584,7 +14583,7 @@ model KubernetesOnlineDeployment extends OnlineDeploymentProperties {
   /**
    * The resource requirements for the container (cpu and memory).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   containerResourceRequirements?: ContainerResourceRequirements | null;
 
   /**
@@ -14593,18 +14592,18 @@ model KubernetesOnlineDeployment extends OnlineDeploymentProperties {
   endpointComputeType: "Kubernetes";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model LabelGeneration extends DataGenerationVertical {
   /**
    * Training data for fine tuning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trainingData?: JobInput | null;
 
   /**
    * Validation data for fine tuning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationData?: JobInput | null;
 
   /**
@@ -14613,7 +14612,7 @@ model LabelGeneration extends DataGenerationVertical {
   dataGenerationType: "LabelGeneration";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model LakeHouseArtifact extends OneLakeArtifact {
   /**
    * [Required] OneLake artifact type
@@ -14656,8 +14655,8 @@ model LiteralJobInput extends JobInput {
    */
   jobInputType: "literal";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MLFlowModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -14670,12 +14669,12 @@ model MLFlowModelJobOutput extends JobOutput {
 /**
  * MLTable data definition
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model MLTableData extends DataVersionBaseProperties {
   /**
    * Uris referenced in the MLTable definition (required for lineage)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   referencedUris?: string[] | null;
 
@@ -14684,8 +14683,8 @@ model MLTableData extends DataVersionBaseProperties {
    */
   dataType: "mltable";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model MLTableJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -14702,7 +14701,7 @@ model ManagedComputeIdentity extends MonitorComputeIdentityBase {
   /**
    * The identity which will be leveraged by the monitoring jobs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity | null;
 
   /**
@@ -14718,23 +14717,23 @@ model ManagedIdentity extends IdentityConfiguration {
   /**
    * Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   clientId?: Azure.Core.uuid | null;
 
   /**
    * Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   objectId?: Azure.Core.uuid | null;
 
   /**
    * Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resourceId?: string | null;
 
@@ -14751,31 +14750,31 @@ model ManagedIdentityCredential extends DataReferenceCredential {
   /**
    * ManagedIdentityCredential identity type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   managedIdentityType?: string | null;
 
   /**
    * ClientId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   userManagedIdentityClientId?: string | null;
 
   /**
    * PrincipalId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   userManagedIdentityPrincipalId?: string | null;
 
   /**
    * Full arm scope for the Id. For ManagedIdentityType = SystemManaged, this field is null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   userManagedIdentityResourceId?: string | null;
 
   /**
    * TenantId for the UAMI. For ManagedIdentityType = SystemManaged, this field is null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   userManagedIdentityTenantId?: string | null;
 
   /**
@@ -14843,7 +14842,7 @@ model Mpi extends DistributionConfiguration {
   /**
    * Number of processes per MPI node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   processCountPerInstance?: int32 | null;
 
@@ -14861,25 +14860,25 @@ model NlpVertical {
   /**
    * Featurization inputs needed for AutoML job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   featurizationSettings?: NlpVerticalFeaturizationSettings | null;
 
   /**
    * Execution constraints for AutoMLJob.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   limitSettings?: NlpVerticalLimitSettings | null;
 
   /**
    * Validation data inputs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   validationData?: MLTableJobInput | null;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NlpVerticalFeaturizationSettings extends FeaturizationSettings {}
 
 /**
@@ -14912,7 +14911,7 @@ model NoneDatastoreCredentials extends DatastoreCredentials {
   credentialsType: "None";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NumericalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   /**
    * [Required] The numerical data drift metric to calculate.
@@ -14925,7 +14924,7 @@ model NumericalDataDriftMetricThreshold extends DataDriftMetricThresholdBase {
   dataType: "Numerical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NumericalDataQualityMetricThreshold
   extends DataQualityMetricThresholdBase {
   /**
@@ -14940,7 +14939,7 @@ model NumericalDataQualityMetricThreshold
   dataType: "Numerical";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NumericalPredictionDriftMetricThreshold
   extends PredictionDriftMetricThresholdBase {
   /**
@@ -14985,7 +14984,7 @@ model OneLakeDatastore extends DatastoreProperties {
   /**
    * OneLake endpoint to use for the datastore.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpoint?: string | null;
 
@@ -15016,13 +15015,13 @@ model OutputPathAssetReference extends AssetReferenceBase {
   /**
    * ARM resource ID of the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   jobId?: string | null;
 
   /**
    * The path of the file/directory in the job output.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   path?: string | null;
 
   /**
@@ -15038,38 +15037,38 @@ model PipelineJob extends JobBaseProperties {
   /**
    * Inputs for the pipeline job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
 
   /**
    * Jobs construct the Pipeline Job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobs?: Record<unknown | null> | null;
 
   /**
    * Outputs for the pipeline job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Pipeline settings, for things like ContinueRunOnStepFailure etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   settings?: unknown | null;
 
   /**
    * ARM resource ID of source job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceJobId?: string | null;
 
@@ -15079,13 +15078,13 @@ model PipelineJob extends JobBaseProperties {
   jobType: "Pipeline";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
   /**
    * A dictionary that maps feature names to their respective data types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
@@ -15121,7 +15120,7 @@ model PyTorch extends DistributionConfiguration {
   /**
    * Number of processes per node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   processCountPerInstance?: int32 | null;
 
   /**
@@ -15142,7 +15141,7 @@ model RandomSamplingAlgorithm extends SamplingAlgorithm {
   /**
    * An optional integer to use as the seed for random number generation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   seed?: int32 | null;
 
   /**
@@ -15165,7 +15164,7 @@ model Regression extends AutoMLVertical {
   /**
    * Inputs for training phase for an AutoML Job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trainingSettings?: RegressionTrainingSettings | null;
 
   /**
@@ -15177,18 +15176,18 @@ model Regression extends AutoMLVertical {
 /**
  * Regression Training related configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Existing API uses inheritance pattern"
 model RegressionTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for regression task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   allowedTrainingAlgorithms?: RegressionModels[] | null;
 
   /**
    * Blocked models for regression task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   blockedTrainingAlgorithms?: RegressionModels[] | null;
 }
 
@@ -15199,7 +15198,7 @@ model RollingInputData extends MonitoringInputDataBase {
   /**
    * Reference to the component asset used to preprocess the data.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   preprocessingComponentId?: string | null;
 
@@ -15224,12 +15223,12 @@ model RollingInputData extends MonitoringInputDataBase {
 /**
  * Access with full SAS uri
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model SASCredential extends DataReferenceCredential {
   /**
    * Full SAS Uri, including the storage, container/blob path and SAS token
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sasUri?: url | null;
 
   /**
@@ -15237,13 +15236,13 @@ model SASCredential extends DataReferenceCredential {
    */
   credentialType: "SAS";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SASCredentialDto extends PendingUploadCredentialDto {
   /**
    * Full SAS Uri, including the storage, container/blob path and SAS token
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @secret
   sasUri?: url | null;
 
@@ -15277,7 +15276,7 @@ model SasDatastoreSecrets extends DatastoreSecrets {
   /**
    * Storage container SAS token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sasToken?: string | null;
 
   /**
@@ -15293,19 +15292,19 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   /**
    * Authority URL used for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   authorityUrl?: string | null;
 
   /**
    * [Required] Service principal client ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
   clientId: Azure.Core.uuid;
 
   /**
    * Resource the service principal has access to.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   resourceUrl?: string | null;
 
   /**
@@ -15318,7 +15317,7 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   /**
    * [Required] ID of the tenant to which the service principal belongs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
   tenantId: Azure.Core.uuid;
 
   /**
@@ -15334,7 +15333,7 @@ model ServicePrincipalDatastoreSecrets extends DatastoreSecrets {
   /**
    * Service principal secret.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   clientSecret?: string | null;
 
   /**
@@ -15350,14 +15349,14 @@ model SparkJob extends JobBaseProperties {
   /**
    * Archive files used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   archives?: string[] | null;
 
   /**
    * Arguments for the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   args?: string | null;
 
@@ -15372,8 +15371,8 @@ model SparkJob extends JobBaseProperties {
   /**
    * Spark configured properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   conf?: Record<string | null> | null;
 
@@ -15386,66 +15385,66 @@ model SparkJob extends JobBaseProperties {
   /**
    * The ARM resource ID of the Environment specification for the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentId?: Azure.Core.armResourceIdentifier | null;
 
   /**
    * Environment variables included in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string | null> | null;
 
   /**
    * Files used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   files?: string[] | null;
 
   /**
    * Mapping of input data bindings used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
 
   /**
    * Jar files used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jars?: string[] | null;
 
   /**
    * Mapping of output data bindings used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Python files used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   pyFiles?: string[] | null;
 
   /**
    * Queue settings for the job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
   /**
    * Compute Resource configuration for the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   resources?: SparkResourceConfiguration | null;
 
@@ -15467,12 +15466,12 @@ model SparkJobEntry {
   sparkJobEntryType: SparkJobEntryType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SparkResourceConfiguration {
   /**
    * Optional type of VM used as supported by the compute target.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceType?: string | null;
 
@@ -15483,7 +15482,7 @@ model SparkResourceConfiguration {
   runtimeVersion?: string = "3.1";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SparkJobPythonEntry extends SparkJobEntry {
   /**
    * [Required] Relative python file path for job entry point.
@@ -15499,7 +15498,7 @@ model SparkJobPythonEntry extends SparkJobEntry {
   sparkJobEntryType: "SparkJobPythonEntry";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SparkJobScalaEntry extends SparkJobEntry {
   /**
    * [Required] Scala class name used as entry point.
@@ -15522,7 +15521,7 @@ model StaticInputData extends MonitoringInputDataBase {
   /**
    * Reference to the component asset used to preprocess the data.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   preprocessingComponentId?: string | null;
 
@@ -15553,14 +15552,14 @@ model SweepJob extends JobBaseProperties {
   /**
    * Early termination policies enable canceling poor-performing runs before they complete
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   earlyTermination?: EarlyTerminationPolicy | null;
 
   /**
    * Mapping of input data bindings used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   inputs?: Record<JobInput | null> | null;
 
@@ -15578,15 +15577,15 @@ model SweepJob extends JobBaseProperties {
   /**
    * Mapping of output data bindings used in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputs?: Record<JobOutput | null> | null;
 
   /**
    * Queue settings for the job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   queueSettings?: QueueSettings | null;
 
@@ -15598,8 +15597,8 @@ model SweepJob extends JobBaseProperties {
   /**
    * [Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   searchSpace: unknown;
 
   /**
@@ -15620,19 +15619,19 @@ model SweepJobLimits extends JobLimits {
   /**
    * Sweep Job max concurrent trials.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   maxConcurrentTrials?: int32 | null;
 
   /**
    * Sweep Job max total trials.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   maxTotalTrials?: int32 | null;
 
   /**
    * Sweep Job Trial timeout value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   trialTimeout?: duration | null;
 
   /**
@@ -15648,7 +15647,7 @@ model TrialComponent {
   /**
    * ARM resource ID of the code asset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   codeId?: string | null;
 
@@ -15663,7 +15662,7 @@ model TrialComponent {
   /**
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   distribution?: DistributionConfiguration | null;
 
@@ -15677,8 +15676,8 @@ model TrialComponent {
   /**
    * Environment variables included in the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentVariables?: Record<string | null> | null;
 
@@ -15689,7 +15688,7 @@ model TrialComponent {
   resources?: JobResourceConfiguration;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model TargetUtilizationScaleSettings extends OnlineScaleSettings {
   /**
    * The maximum number of instances that the deployment can scale to. The quota will be reserved for max_instances.
@@ -15730,7 +15729,7 @@ model TensorFlow extends DistributionConfiguration {
   /**
    * Number of workers. If not specified, will default to the instance count.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   workerCount?: int32 | null;
 
@@ -15798,8 +15797,8 @@ model TextNer extends AutoMLVertical {
    */
   taskType: "TextNER";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model TopNFeaturesByAttribution extends MonitoringFeatureFilterBase {
   /**
    * The number of top features to include.
@@ -15813,7 +15812,7 @@ model TopNFeaturesByAttribution extends MonitoringFeatureFilterBase {
   filterType: "TopNByAttribution";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model TritonModelJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -15823,7 +15822,7 @@ model TritonModelJobInput extends JobInput {
   jobInputType: "triton_model";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model TritonModelJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -15858,7 +15857,7 @@ model UriFileDataVersion extends DataVersionBaseProperties {
   dataType: "uri_file";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model UriFileJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -15868,7 +15867,7 @@ model UriFileJobInput extends JobInput {
   jobInputType: "uri_file";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model UriFileJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -15888,7 +15887,7 @@ model UriFolderDataVersion extends DataVersionBaseProperties {
   dataType: "uri_folder";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model UriFolderJobInput extends JobInput {
   ...AssetJobInput;
 
@@ -15898,7 +15897,7 @@ model UriFolderJobInput extends JobInput {
   jobInputType: "uri_folder";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model UriFolderJobOutput extends JobOutput {
   ...AssetJobOutput;
 
@@ -15921,7 +15920,7 @@ model UserIdentity extends IdentityConfiguration {
 /**
  * This connection type covers the AAD auth for any applicable Azure service
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model AADAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   /**
@@ -15930,10 +15929,10 @@ model AADAuthTypeWorkspaceConnectionProperties
   authType: "AAD";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model AccessKeyAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   credentials?: WorkspaceConnectionAccessKey;
 
   /**
@@ -15942,12 +15941,12 @@ model AccessKeyAuthTypeWorkspaceConnectionProperties
   authType: "AccessKey";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceConnectionAccessKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   accessKeyId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   secretAccessKey?: string;
 }
 
@@ -15971,8 +15970,8 @@ model AccountKeyAuthTypeWorkspaceConnectionProperties
  * Account key object for workspace connection credential.
  */
 model WorkspaceConnectionAccountKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   key?: string;
 }
 
@@ -15998,7 +15997,7 @@ model WorkspaceConnectionAccountKey {
  *
  * Use Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ApiKeyAuthWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   credentials?: WorkspaceConnectionApiKey;
@@ -16013,8 +16012,8 @@ model ApiKeyAuthWorkspaceConnectionProperties
  * Api key object for workspace connection credential.
  */
 model WorkspaceConnectionApiKey {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   key?: string;
 }
 
@@ -16048,7 +16047,7 @@ model CapacityConfig {
   allowedValues?: int32[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CognitiveServiceEndpointDeploymentResourceProperties {
   /**
    * Model used for the endpoint deployment.
@@ -16060,7 +16059,7 @@ model CognitiveServiceEndpointDeploymentResourceProperties {
    */
   raiPolicyName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   sku?: CognitiveServicesSku;
 
   /**
@@ -16069,7 +16068,7 @@ model CognitiveServiceEndpointDeploymentResourceProperties {
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model EndpointDeploymentModel {
   /**
    * Model format
@@ -16092,21 +16091,21 @@ model EndpointDeploymentModel {
   version?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CognitiveServicesSku {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   capacity?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   family?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   size?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   tier?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessEndpointContentSafety {
   /**
    * Specifies the status of content safety.
@@ -16114,7 +16113,7 @@ model ServerlessEndpointContentSafety {
   contentSafetyStatus: ContentSafetyStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ContentSafetyEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
   ...CognitiveServiceEndpointDeploymentResourceProperties;
@@ -16125,7 +16124,7 @@ model ContentSafetyEndpointDeploymentResourceProperties
   type: "Azure.ContentSafety";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ContentSafetyEndpointResourceProperties
   extends EndpointResourceProperties {
   /**
@@ -16137,9 +16136,9 @@ model ContentSafetyEndpointResourceProperties
 /**
  * Custom Keys credential object
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomKeys {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   keys?: Record<string>;
 }
 
@@ -16167,7 +16166,7 @@ model CustomKeysWorkspaceConnectionProperties
  * FQDN Outbound Rule for the managed network of a machine learning workspace.
  */
 model FqdnOutboundRule extends OutboundRule {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   destination?: string;
 
   /**
@@ -16176,10 +16175,10 @@ model FqdnOutboundRule extends OutboundRule {
   type: "FQDN";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ManagedIdentityAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   credentials?: WorkspaceConnectionManagedIdentity;
 
   /**
@@ -16188,15 +16187,15 @@ model ManagedIdentityAuthTypeWorkspaceConnectionProperties
   authType: "ManagedIdentity";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceConnectionManagedIdentity {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   clientId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   resourceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ManagedOnlineEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
   /**
@@ -16204,7 +16203,7 @@ model ManagedOnlineEndpointDeploymentResourceProperties
    */
   endpointComputeType?: EndpointComputeType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   `model`?: string;
 
   /**
@@ -16213,7 +16212,7 @@ model ManagedOnlineEndpointDeploymentResourceProperties
   type: "managedOnlineEndpoint";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ManagedOnlineEndpointResourceProperties
   extends EndpointResourceProperties {
   /**
@@ -16221,15 +16220,15 @@ model ManagedOnlineEndpointResourceProperties
    */
   authMode?: EndpointAuthMode;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   compute?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   description?: string;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   mirrorTraffic?: Record<int32>;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   scoringUri?: url;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   traffic?: Record<int32>;
 
   /**
@@ -16238,15 +16237,15 @@ model ManagedOnlineEndpointResourceProperties
   endpointType: "managedOnlineEndpoint";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessEndpointModelSettings {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   modelId: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model NoneAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   /**
@@ -16254,8 +16253,8 @@ model NoneAuthTypeWorkspaceConnectionProperties
    */
   authType: "None";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model OAuth2AuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
   credentials?: WorkspaceConnectionOAuth2;
@@ -16270,7 +16269,7 @@ model OAuth2AuthTypeWorkspaceConnectionProperties
  * ClientId and ClientSecret are required. Other properties are optional
  * depending on each OAuth2 provider's implementation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 model WorkspaceConnectionOAuth2 {
   /**
    * Required by Concur connection category
@@ -16280,10 +16279,10 @@ model WorkspaceConnectionOAuth2 {
   /**
    * Client id in the format of UUID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Format not applicable for this property"
   clientId?: Azure.Core.uuid;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @secret
   clientSecret?: string;
 
@@ -16293,7 +16292,7 @@ model WorkspaceConnectionOAuth2 {
   @secret
   developerToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @secret
   password?: string;
 
@@ -16315,8 +16314,8 @@ model WorkspaceConnectionOAuth2 {
    */
   username?: string;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model OpenAIEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
   ...CognitiveServiceEndpointDeploymentResourceProperties;
@@ -16326,19 +16325,19 @@ model OpenAIEndpointDeploymentResourceProperties
    */
   type: "Azure.OpenAI";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model OpenAIEndpointResourceProperties extends EndpointResourceProperties {
   /**
    * Type of the endpoint.
    */
   endpointType: "Azure.OpenAI";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model PATAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   credentials?: WorkspaceConnectionPersonalAccessToken;
 
   /**
@@ -16347,9 +16346,9 @@ model PATAuthTypeWorkspaceConnectionProperties
   authType: "PAT";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceConnectionPersonalAccessToken {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   pat?: string;
 }
 
@@ -16357,9 +16356,9 @@ model WorkspaceConnectionPersonalAccessToken {
  * Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.
  */
 model PrivateEndpointDestination {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   serviceResourceId?: Azure.Core.armResourceIdentifier;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   sparkEnabled?: boolean;
 
   /**
@@ -16367,7 +16366,7 @@ model PrivateEndpointDestination {
    */
   sparkStatus?: RuleStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   subresourceTarget?: string;
 }
 
@@ -16380,7 +16379,7 @@ model PrivateEndpointOutboundRule extends OutboundRule {
    */
   destination?: PrivateEndpointDestination;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   fqdns?: string[];
 
   /**
@@ -16388,11 +16387,11 @@ model PrivateEndpointOutboundRule extends OutboundRule {
    */
   type: "PrivateEndpoint";
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SASAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   credentials?: WorkspaceConnectionSharedAccessSignature;
 
   /**
@@ -16401,30 +16400,30 @@ model SASAuthTypeWorkspaceConnectionProperties
   authType: "SAS";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceConnectionSharedAccessSignature {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   sas?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessEndpointCapacityReservation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   capacityReservationGroupId: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   endpointReservedCapacity?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   authMode?: ServerlessInferenceEndpointAuthMode;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   capacityReservation?: ServerlessEndpointCapacityReservation;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   contentSafety?: ServerlessEndpointContentSafety;
 
   /**
@@ -16432,17 +16431,17 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
    */
   endpointState?: ServerlessEndpointState;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   inferenceEndpoint?: ServerlessEndpointInferenceEndpoint;
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   marketplaceSubscriptionId?: string;
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   metadata?: unknown;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   modelSettings?: ServerlessEndpointModelSettings;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   offer?: ServerlessOffer;
 
   /**
@@ -16451,34 +16450,34 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
   endpointType: "serverlessEndpoint";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessEndpointInferenceEndpoint {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   @visibility(Lifecycle.Read)
   headers?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @visibility(Lifecycle.Read)
   uri: url;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServerlessOffer {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   offerName: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   publisher: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model ServicePrincipalAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   credentials?: WorkspaceConnectionServicePrincipal;
 
   /**
@@ -16487,16 +16486,16 @@ model ServicePrincipalAuthTypeWorkspaceConnectionProperties
   authType: "ServicePrincipal";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceConnectionServicePrincipal {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   clientId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @secret
   clientSecret?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   tenantId?: string;
 }
 
@@ -16514,11 +16513,11 @@ model ServiceTagDestination {
    */
   addressPrefixes?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   portRanges?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   protocol?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   serviceTag?: string;
 }
 
@@ -16537,7 +16536,7 @@ model ServiceTagOutboundRule extends OutboundRule {
   type: "ServiceTag";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SpeechEndpointDeploymentResourceProperties
   extends EndpointDeploymentResourceProperties {
   ...CognitiveServiceEndpointDeploymentResourceProperties;
@@ -16548,7 +16547,7 @@ model SpeechEndpointDeploymentResourceProperties
   type: "Azure.Speech";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model SpeechEndpointResourceProperties extends EndpointResourceProperties {
   /**
    * Type of the endpoint.
@@ -16556,10 +16555,10 @@ model SpeechEndpointResourceProperties extends EndpointResourceProperties {
   endpointType: "Azure.Speech";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model UsernamePasswordAuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   credentials?: WorkspaceConnectionUsernamePassword;
 
   /**
@@ -16568,10 +16567,10 @@ model UsernamePasswordAuthTypeWorkspaceConnectionProperties
   authType: "UsernamePassword";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceConnectionUsernamePassword {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   password?: string;
 
   /**
@@ -16580,15 +16579,15 @@ model WorkspaceConnectionUsernamePassword {
   @secret
   securityToken?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   username?: string;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 //Fix Me: Compile Error
 model InferenceUpdateParameterProperties {
   description?: string;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 //Fix Me: Compile Error
 model InferenceUpdateParameter {
   properties: InferenceUpdateParameterProperties;
@@ -16615,13 +16614,13 @@ alias ReferenceSASParameters = {
   /**
    * Asset id and blob uri.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @body
   body: GetBlobReferenceSASRequestDto;
 };
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model CustomLocationParameter {
   @path
   @segment("locations")

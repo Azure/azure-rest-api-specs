@@ -59,7 +59,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Create or update machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   @summary("Create or update machine learning workspaces connections under the specified workspace.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     WorkspaceConnectionPropertiesV2BasicResource,
@@ -137,7 +137,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }

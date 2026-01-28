@@ -87,7 +87,7 @@ interface RaiPolicyPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -105,7 +105,7 @@ interface RaiPolicyPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -121,7 +121,7 @@ interface RaiPolicyPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -188,7 +188,7 @@ interface RaiPolicy {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -206,7 +206,7 @@ interface RaiPolicy {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -222,7 +222,7 @@ interface RaiPolicy {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },

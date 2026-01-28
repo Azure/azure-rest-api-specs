@@ -51,7 +51,7 @@ interface RaiBlocklistPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -69,7 +69,7 @@ interface RaiBlocklistPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -85,7 +85,7 @@ interface RaiBlocklistPropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -115,7 +115,7 @@ interface RaiBlocklistPropertiesBasicResources {
   /**
    * Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API returns additional response codes"
   @summary("Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.")
   @action("deleteRaiBlocklistItems")
   deleteBulk is ArmResourceActionAsync<

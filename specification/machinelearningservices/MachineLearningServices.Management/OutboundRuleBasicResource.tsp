@@ -62,7 +62,7 @@ interface OutboundRuleBasicResources {
   /**
    * Creates or updates an outbound rule in the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   @summary("Creates or updates an outbound rule in the managed network of a machine learning workspace.")
   createOrUpdate is OutboundRuleBasicResourceOps.CreateOrUpdateAsync<
     OutboundRuleBasicResource,
@@ -73,7 +73,7 @@ interface OutboundRuleBasicResources {
   /**
    * Deletes an outbound rule from the managed network of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Deletes an outbound rule from the managed network of a machine learning workspace.")
   delete is OutboundRuleBasicResourceOps.DeleteWithoutOkAsync<
     OutboundRuleBasicResource,
@@ -131,7 +131,7 @@ interface OutboundRuleBasicResourceOperationGroup {
   @summary("The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.")
   get is OutboundRuleBasicResourceOperationGroupOps.Read<OutboundRuleBasicResource>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   createOrUpdate is OutboundRuleBasicResourceOperationGroupOps.CreateOrUpdateAsync<
     OutboundRuleBasicResource,
     Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource>> &

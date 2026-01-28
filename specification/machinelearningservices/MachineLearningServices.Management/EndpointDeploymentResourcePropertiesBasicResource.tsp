@@ -91,7 +91,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -109,7 +109,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
@@ -125,7 +125,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     },
@@ -185,7 +185,7 @@ interface EndpointDeployment {
   /**
    * Create or update endpoint deployment resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
@@ -203,7 +203,7 @@ interface EndpointDeployment {
       /**
        * Api version used by proxy call
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
       @query("proxy-api-version")
       `proxy-api-version`?: string;
     }
