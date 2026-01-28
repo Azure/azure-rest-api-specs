@@ -1,13 +1,12 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
+
 import "../common/models.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -101,7 +100,6 @@ union AttackStrategy {
 }
 
 @doc("Risk category for the attack objective.")
-@removed(Versions.v1)
 union RiskCategory {
   string,
 
@@ -137,7 +135,6 @@ union RiskCategory {
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
-@removed(Versions.v1)
 model AzureOpenAIModelConfiguration extends TargetConfig {
   type: "AzureOpenAIModel";
 
@@ -146,7 +143,6 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
 }
 
 @doc("Abstract class for target configuration.")
-@removed(Versions.v1)
 @discriminator("type")
 model TargetConfig {
   @doc("Type of the model configuration.")
@@ -155,7 +151,6 @@ model TargetConfig {
 
 @doc("Red team details.")
 @resource("runs")
-@removed(Versions.v1)
 model RedTeam {
   @doc("Identifier of the red team run.")
   @key("name")

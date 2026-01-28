@@ -2,12 +2,27 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 
-import "../responses/models.tsp";
+import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const AllConditionalAgentDefinitionPreviews = #{
+  conditional_previews: #[
+    FoundryPreviewOptInKeys.hosted_agents_v1,
+    FoundryPreviewOptInKeys.container_agents_v1,
+    FoundryPreviewOptInKeys.workflow_agents_v1,
+    FoundryPreviewOptInKeys.memory_stores_v1
+  ],
+};
+
+const MemoryStoreConditionalPreviews = #{
+  conditional_previews: #[FoundryPreviewOptInKeys.memory_stores_v1],
+};
+
+@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentVersionRequest {
   ...MetadataPropertyForRequest;
 
@@ -16,6 +31,7 @@ model CreateAgentVersionRequest {
   description?: string;
 
   @doc("The agent definition. This can be a workflow, hosted agent, or a simple agent definition.")
+  @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   definition: AgentDefinition;
 }
 
@@ -46,10 +62,12 @@ model CreateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+@extension("x-ms-foundry-meta", MemoryStoreConditionalPreviews)
 model UpdateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
+@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -63,6 +81,7 @@ model CreateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
+@extension("x-ms-foundry-meta", MemoryStoreConditionalPreviews)
 model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }
@@ -132,94 +151,12 @@ model RaiConfig {
 }
 
 @discriminator("kind")
+@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model AgentDefinition {
   kind: AgentKind;
 
   @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
   rai_config?: RaiConfig;
-}
-
-@doc("A record mapping for a single protocol and its version.")
-model ProtocolVersionRecord {
-  @doc("The protocol type.")
-  protocol: AgentProtocol;
-
-  @doc("The version string for the protocol, e.g. 'v0.1.1'.")
-  version: string;
-}
-
-@doc("The workflow agent definition.")
-model WorkflowAgentDefinition extends AgentDefinition {
-  kind: AgentKind.workflow;
-
-  @doc("The CSDL YAML definition of the workflow.")
-  workflow?: string;
-}
-
-@doc("The hosted agent definition.")
-@discriminator("kind")
-model HostedAgentDefinition extends AgentDefinition {
-  kind: AgentKind.hosted;
-
-  @doc("""
-    An array of tools the hosted agent's model may call while generating a response. You
-    can specify which tool to use by setting the `tool_choice` parameter.
-    """)
-  tools?: OpenAI.Tool[];
-
-  @doc("The protocols that the agent supports for ingress communication of the containers.")
-  @example(#[
-    #{ protocol: "responses", version: "v0.1.1" },
-    #{ protocol: "a2a", version: "v0.3.0" }
-  ])
-  container_protocol_versions: ProtocolVersionRecord[];
-
-  /**
-   * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
-   * See [vCPU and memory allocation requirements](https://learn.microsoft.com/azure/container-apps/containers#allocations).
-   */
-  @doc("The CPU configuration for the hosted agent.")
-  @example("0.25")
-  cpu: string;
-
-  @doc("The memory configuration for the hosted agent.")
-  @example("0.5Gi")
-  memory: string;
-
-  @doc("Environment variables to set in the hosted agent container.")
-  @example(#{ name: "LOG_LEVEL", value: "debug" })
-  environment_variables?: Record<string>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-@doc("The image-based deployment definition for a hosted agent.")
-model ImageBasedHostedAgentDefinition extends HostedAgentDefinition {
-  kind: AgentKind.hosted;
-
-  @doc("The image for the hosted agent.")
-  @example("my-registry.azurecr.io/my-hosted-agent:latest")
-  image: string;
-}
-
-@doc("The container app agent definition.")
-model ContainerAppAgentDefinition extends AgentDefinition {
-  kind: AgentKind.container_app;
-
-  @doc("The protocols that the agent supports for ingress communication of the containers.")
-  @example(#[
-    #{ protocol: "responses", version: "v0.1.1" },
-    #{ protocol: "a2a", version: "v0.3.0" }
-  ])
-  container_protocol_versions: ProtocolVersionRecord[];
-
-  @doc("The resource ID of the Azure Container App that hosts this agent. Not mutable across versions.")
-  container_app_resource_id: string;
-
-  @doc("The suffix to apply to the app subdomain when sending ingress to the agent. This can be a label (e.g., '---current'), a specific revision (e.g., '--0000001'), or empty to use the default endpoint for the container app.")
-  @example("")
-  @example("---current")
-  @example("--0000001")
-  ingress_subdomain_suffix: string;
 }
 
 @doc("The prompt agent definition")
@@ -270,13 +207,106 @@ model PromptAgentDefinition extends AgentDefinition {
   /**
    * Configuration options for a text response from the model. Can be plain text or structured JSON data.
    */
-  text?: {
-    // Tool customization: Employ discriminated type base
-    format?: OpenAI.TextResponseFormatConfiguration;
-  };
+  text?: PromptAgentDefinitionTextOptions;
 
   @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
   structured_inputs?: Record<StructuredInputDefinition>;
+}
+
+/**
+ * Configuration options for a text response from the model. Can be plain text or structured JSON data.
+ */
+model PromptAgentDefinitionTextOptions {
+  format?: OpenAI.TextResponseFormatConfiguration;
+}
+
+@doc("The workflow agent definition.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.workflow_agents_v1] }
+)
+model WorkflowAgentDefinition extends AgentDefinition {
+  kind: AgentKind.workflow;
+
+  @doc("The CSDL YAML definition of the workflow.")
+  workflow?: string;
+}
+
+@doc("The hosted agent definition.")
+@discriminator("kind")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.hosted_agents_v1] }
+)
+model HostedAgentDefinition extends AgentDefinition {
+  kind: AgentKind.hosted;
+
+  @doc("""
+    An array of tools the hosted agent's model may call while generating a response. You
+    can specify which tool to use by setting the `tool_choice` parameter.
+    """)
+  tools?: OpenAI.Tool[];
+
+  @doc("The protocols that the agent supports for ingress communication of the containers.")
+  @example(#[
+    #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "a2a", version: "v0.3.0" }
+  ])
+  container_protocol_versions: ProtocolVersionRecord[];
+
+  /**
+   * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
+   * See [vCPU and memory allocation requirements](https://learn.microsoft.com/azure/container-apps/containers#allocations).
+   */
+  @doc("The CPU configuration for the hosted agent.")
+  @example("0.25")
+  cpu: string;
+
+  @doc("The memory configuration for the hosted agent.")
+  @example("0.5Gi")
+  memory: string;
+
+  @doc("Environment variables to set in the hosted agent container.")
+  @example(#{ name: "LOG_LEVEL", value: "debug" })
+  environment_variables?: Record<string>;
+
+  @doc("The image ID for the agent, applicable to image-based hosted agents.")
+  @example("my-registry.azurecr.io/my-hosted-agent:latest")
+  image?: string;
+}
+
+@doc("The container app agent definition.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
+model ContainerAppAgentDefinition extends AgentDefinition {
+  kind: AgentKind.container_app;
+
+  @doc("The protocols that the agent supports for ingress communication of the containers.")
+  @example(#[
+    #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "a2a", version: "v0.3.0" }
+  ])
+  container_protocol_versions: ProtocolVersionRecord[];
+
+  @doc("The resource ID of the Azure Container App that hosts this agent. Not mutable across versions.")
+  container_app_resource_id: string;
+
+  @doc("The suffix to apply to the app subdomain when sending ingress to the agent. This can be a label (e.g., '---current'), a specific revision (e.g., '--0000001'), or empty to use the default endpoint for the container app.")
+  @example("")
+  @example("---current")
+  @example("--0000001")
+  ingress_subdomain_suffix: string;
+}
+
+@doc("A record mapping for a single protocol and its version.")
+model ProtocolVersionRecord {
+  @doc("The protocol type.")
+  protocol: AgentProtocol;
+
+  @doc("The version string for the protocol, e.g. 'v0.1.1'.")
+  version: string;
 }
 
 alias ListAgentQueryParameters = {
@@ -338,6 +368,10 @@ model ToolArgumentBinding {
 }
 
 @doc("The details of the container of a specific version of an agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 model AgentContainerObject {
   @doc("The object type, which is always 'agent.container'.")
   @visibility(Lifecycle.Read)
@@ -377,6 +411,10 @@ model AgentContainerObject {
 }
 
 @doc("Detailed information about the container.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 model ContainerDetails {
   @doc("The provisioning state of the container.")
   provisioning_state: string;
@@ -398,6 +436,10 @@ model ContainerDetails {
 }
 
 @doc("Information about a container replica.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 model ContainerReplica {
   @doc("The name of the replica.")
   name: string;
@@ -410,6 +452,10 @@ model ContainerReplica {
 }
 
 @doc("Status of the container of a specific version of an agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 union AgentContainerStatus {
   @doc("The container is starting.")
   Starting: "Starting",
@@ -437,6 +483,10 @@ union AgentContainerStatus {
 }
 
 @doc("The container operation for a specific version of an agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 model AgentContainerOperationObject {
   @doc("The ID of the container operation. This id is unique identifier across the system.")
   id: string;
@@ -458,6 +508,10 @@ model AgentContainerOperationObject {
 }
 
 @doc("The error details of the container operation, if any.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 model AgentContainerOperationError {
   @doc("The error code of the container operation, if any.")
   code: string;
@@ -470,6 +524,10 @@ model AgentContainerOperationError {
 }
 
 @doc("Status of the container operation for a specific version of an agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 union AgentContainerOperationStatus {
   @doc("The container operation is not started.")
   NotStarted: "NotStarted",
@@ -484,6 +542,10 @@ union AgentContainerOperationStatus {
   Failed: "Failed",
 }
 
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 model AcceptedAgentContainerOperation {
   @statusCode
   code: 202;
@@ -496,6 +558,10 @@ model AcceptedAgentContainerOperation {
 }
 
 /** The type of logs to stream from a container. */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+)
 union ContainerLogKind {
   /** Console logs from the container. */
   console: "console",

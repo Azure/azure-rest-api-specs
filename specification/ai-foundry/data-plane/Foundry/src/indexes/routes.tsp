@@ -13,6 +13,7 @@ namespace Azure.AI.Projects;
 alias ListIndexVersionParameters = {};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
+@tag("Indexes")
 interface Indexes
   extends VersionedOperations<
       Index,

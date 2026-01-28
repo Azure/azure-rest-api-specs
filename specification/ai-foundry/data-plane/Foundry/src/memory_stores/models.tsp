@@ -1,16 +1,20 @@
 import "@typespec/http";
-import "@typespec/versioning";
+import "@typespec/openapi";
 
 import "../common/service.tsp";
-import "../responses/models.tsp";
+import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
+const MemoryStoreRequiredPreviews = #{
+  conditional_previews: #[FoundryPreviewOptInKeys.memory_stores_v1],
+};
+
 @doc("A memory store that can store and retrieve user memories.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreObject {
   @doc("The object type, which is always 'memory_store'.")
   object: "memory_store";
@@ -41,7 +45,7 @@ model MemoryStoreObject {
   definition: MemoryStoreDefinition;
 }
 
-@removed(Versions.v1)
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model DeleteMemoryStoreResponse {
   @doc("The object type. Always 'memory_store.deleted'.")
   object: "memory_store.deleted";
@@ -53,8 +57,8 @@ model DeleteMemoryStoreResponse {
   deleted: boolean;
 }
 
-@removed(Versions.v1)
 @doc("The type of memory store implementation to use.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreKind {
   string,
 
@@ -62,16 +66,16 @@ union MemoryStoreKind {
   default: "default",
 }
 
-@removed(Versions.v1)
 @doc("Base definition for memory store configurations.")
 @discriminator("kind")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDefinition {
   @doc("The kind of the memory store.")
   kind: MemoryStoreKind;
 }
 
-@removed(Versions.v1)
 @doc("Default memory store implementation.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDefaultDefinition extends MemoryStoreDefinition {
   @doc("The kind of the memory store.")
   kind: MemoryStoreKind.default;
@@ -89,8 +93,8 @@ model MemoryStoreDefaultDefinition extends MemoryStoreDefinition {
   options?: MemoryStoreDefaultOptions;
 }
 
-@removed(Versions.v1)
 @doc("Default memory store configurations.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDefaultOptions {
   @doc("Whether to enable user profile extraction and storage. Default is true.")
   user_profile_enabled: boolean = true;
@@ -102,8 +106,8 @@ model MemoryStoreDefaultOptions {
   chat_summary_enabled: boolean = true;
 }
 
-@removed(Versions.v1)
 @doc("Usage statistics of a memory store operation.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreOperationUsage {
   @doc("The number of embedding tokens.")
   embedding_tokens: int32;
@@ -111,8 +115,8 @@ model MemoryStoreOperationUsage {
   ...OpenAI.ResponseUsage;
 }
 
-@removed(Versions.v1)
 @doc("Status of a memory store update operation.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreUpdateStatus {
   queued: "queued",
   in_progress: "in_progress",
@@ -127,8 +131,8 @@ union MemoryStoreUpdateStatus {
   superseded: "superseded",
 }
 
-@removed(Versions.v1)
 @doc("Provides the status of a memory store update operation.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreUpdateResponse {
   @doc("The unique ID of this update request. Use this value as previous_update_id in subsequent requests to perform incremental updates.")
   update_id: string;
@@ -137,7 +141,6 @@ model MemoryStoreUpdateResponse {
     The status of the memory update operation. One of "queued", "in_progress", "completed", "failed", or "superseded".
     """)
   @Azure.Core.lroStatus
-  @removed(Versions.v1)
   status: MemoryStoreUpdateStatus;
 
   @doc("The update_id the operation was superseded by when status is \"superseded\".")
@@ -145,7 +148,6 @@ model MemoryStoreUpdateResponse {
 
   @doc("The result of memory store update operation when status is \"completed\".")
   @Azure.Core.lroResult
-  @removed(Versions.v1)
   result?: MemoryStoreUpdateCompletedResult;
 
   @doc("Error object that describes the error when status is \"failed\".")
@@ -153,8 +155,8 @@ model MemoryStoreUpdateResponse {
   error?: ApiError;
 }
 
-@removed(Versions.v1)
 @doc("Memory update result.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreUpdateCompletedResult {
   @doc("A list of individual memory operations that were performed during the update.")
   memory_operations: MemoryOperation[];
@@ -163,8 +165,8 @@ model MemoryStoreUpdateCompletedResult {
   usage: MemoryStoreOperationUsage;
 }
 
-@removed(Versions.v1)
 @doc("Represents a single memory operation (create, update, or delete) performed on a memory item.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryOperation {
   @doc("The type of memory operation being performed.")
   kind: MemoryOperationKind;
@@ -173,8 +175,8 @@ model MemoryOperation {
   memory_item: MemoryItem;
 }
 
-@removed(Versions.v1)
 @doc("Memory operation kind.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryOperationKind {
   string,
 
@@ -188,15 +190,15 @@ union MemoryOperationKind {
   delete: "delete",
 }
 
-@removed(Versions.v1)
 @doc("Memory search options.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemorySearchOptions {
   @doc("Maximum number of memory items to return.")
   max_memories?: int32;
 }
 
-@removed(Versions.v1)
 @doc("Memory search response.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreSearchResponse {
   @doc("The unique ID of this search request. Use this value as previous_search_id in subsequent requests to perform incremental searches.")
   search_id: string;
@@ -208,15 +210,15 @@ model MemoryStoreSearchResponse {
   usage: MemoryStoreOperationUsage;
 }
 
-@removed(Versions.v1)
 @doc("A retrieved memory item from memory search.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemorySearchItem {
   @doc("Retrieved memory item.")
   memory_item: MemoryItem;
 }
 
-@removed(Versions.v1)
 @doc("Memory item kind.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryItemKind {
   string,
 
@@ -227,9 +229,9 @@ union MemoryItemKind {
   chat_summary: "chat_summary",
 }
 
-@removed(Versions.v1)
 @doc("A single memory item stored in the memory store, containing content and metadata.")
 @discriminator("kind")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryItem {
   @doc("The unique ID of the memory item.")
   memory_id: string;
@@ -248,22 +250,22 @@ model MemoryItem {
   kind: MemoryItemKind;
 }
 
-@removed(Versions.v1)
 @doc("A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model UserProfileMemoryItem extends MemoryItem {
   @doc("The kind of the memory item.")
   kind: MemoryItemKind.user_profile;
 }
 
-@removed(Versions.v1)
 @doc("A memory item containing a summary extracted from conversations.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model ChatSummaryMemoryItem extends MemoryItem {
   @doc("The kind of the memory item.")
   kind: MemoryItemKind.chat_summary;
 }
 
-@removed(Versions.v1)
 @doc("Response for deleting memories from a scope.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDeleteScopeResponse {
   @doc("The object type. Always 'memory_store.scope.deleted'.")
   object: "memory_store.scope.deleted";

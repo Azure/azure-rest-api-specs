@@ -1,13 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../common/models.tsp";
-import "./models.tsp";
-import "../servicepatterns.tsp";
 
-using TypeSpec.Versioning;
+import "../common/models.tsp";
+import "../servicepatterns.tsp";
+import "./models.tsp";
 
 namespace Azure.AI.Projects;
 
@@ -22,7 +20,7 @@ alias ListEvaluatorVersionsParameters = {
   limit?: int32 = 20;
 };
 
-@removed(Versions.v1)
+@tag("Evaluators")
 interface Evaluators {
   // GET /evaluators/{name}/versions
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
@@ -33,7 +31,8 @@ interface Evaluators {
   @list
   listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
     EvaluatorVersion,
-    ListEvaluatorVersionsParameters,
+    ListEvaluatorVersionsParameters &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>,
     Azure.Core.Page<EvaluatorVersion>
   >;
 
@@ -43,7 +42,8 @@ interface Evaluators {
   @Rest.listsResource(EvaluatorVersion)
   listLatestVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
-    ListEvaluatorVersionsParameters,
+    ListEvaluatorVersionsParameters &
+      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>,
     Azure.Core.Page<EvaluatorVersion>
   >;
 
@@ -56,6 +56,8 @@ interface Evaluators {
   getVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
+      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+
       @doc(
         "The specific version id of the {name} to retrieve.",
         EvaluatorVersion
@@ -77,6 +79,8 @@ interface Evaluators {
   deleteVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
+      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+
       @doc("The version of the {name} to delete.", EvaluatorVersion)
       @Rest.segment("versions")
       @Http.path
@@ -93,7 +97,8 @@ interface Evaluators {
   createVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
-      @doc("Evaluator resource")
+      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+
       @Http.bodyRoot
       evaluatorVersion: EvaluatorVersion;
     },
@@ -108,6 +113,8 @@ interface Evaluators {
   updateVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
+      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+
       @doc("The version of the {name} to update.", EvaluatorVersion)
       @Rest.segment("versions")
       @Http.path

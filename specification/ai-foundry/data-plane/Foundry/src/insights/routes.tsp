@@ -1,11 +1,10 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
@@ -14,7 +13,7 @@ alias InsightsServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
   NoConditionalRequests;
 
-alias InsightsOperations = Azure.Core.ResourceOperations<InsightsServiceTraits>;
+alias InsightsOperations = FoundryAzureOperations<WithConditionalFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>>;
 
 alias IncludeCoordinatesTrait = {
   @query("includeCoordinates")
@@ -42,14 +41,7 @@ alias FilterQueryParamsTraits = {
   ...IncludeCoordinatesTrait;
 };
 
-// Query trait for single-resource GET that exposes only includeCoordinates
-alias IncludeCoordinatesQueryTrait = {
-  @query("includeCoordinates")
-  @doc("Whether to include coordinates for visualization in the response. Defaults to false.")
-  includeCoordinates?: boolean;
-};
-
-@removed(Versions.v1)
+@tag("Insights")
 interface Insights {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Generate Insights")
@@ -57,6 +49,8 @@ interface Insights {
   @route("insights")
   generate is Azure.Core.Foundations.Operation<
     {
+      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>;
+
       @header("Repeatability-Request-ID")
       @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
       repeatabilityRequestId?: string;

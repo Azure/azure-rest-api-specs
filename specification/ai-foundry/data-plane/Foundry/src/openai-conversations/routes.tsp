@@ -1,30 +1,27 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-import "../common/models.tsp";
 import "./models.tsp";
-import "../responses/models.tsp";
+import "../common/models.tsp";
+import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
-@route("openai/conversations")
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+@route("openai/v1/conversations")
 @tag("Conversations")
 interface Conversations {
   /**
    * Create a conversation.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @post
   @operationId("createConversation")
-  createConversation is AgentOperation<
+  createConversation is OpenAIOperation<
     OpenAI.CreateConversationBody,
     OpenAI.ConversationResource
   >;
@@ -32,11 +29,10 @@ interface Conversations {
   /**
    * Update a conversation.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @route("{conversation_id}")
   @post
   @operationId("updateConversation")
-  updateConversation is AgentOperation<
+  updateConversation is OpenAIOperation<
     {
       /** The id of the conversation to update. */
       @path conversation_id: string;
@@ -49,12 +45,10 @@ interface Conversations {
   /**
    * Retrieves a conversation.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}")
   @get
   @operationId("getConversation")
-  getConversation is AgentOperation<
+  getConversation is OpenAIOperation<
     {
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
@@ -65,12 +59,10 @@ interface Conversations {
   /**
    * Deletes a conversation.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}")
   @delete
   @operationId("deleteConversation")
-  deleteConversation is AgentOperation<
+  deleteConversation is OpenAIOperation<
     {
       /** The id of the conversation to delete. */
       @path conversation_id: string;
@@ -84,12 +76,10 @@ interface Conversations {
   /**
    * Returns the list of all conversations.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @operationId("listConversations")
   @list
-  listConversations is AgentOperation<
+  listConversations is OpenAIOperation<
     {
       ...CommonPageQueryParameters;
       ...AgentNameQueryParam;
@@ -101,12 +91,10 @@ interface Conversations {
   /**
    * Create items in a conversation with the given ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}/items")
   @post
   @operationId("createConversationItems")
-  createConversationItems is AgentOperation<
+  createConversationItems is OpenAIOperation<
     {
       /** The id of the conversation on which the item needs to be created. */
       @path conversation_id: string;
@@ -118,7 +106,6 @@ interface Conversations {
       @query include?: string[];
 
       /** The items to add to the conversation. You may add up to 20 items at a time. */
-      #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
       @maxItems(20)
       items: (OpenAI.Item | OpenAI.EasyInputMessage)[];
@@ -129,12 +116,10 @@ interface Conversations {
   /**
    * Get a single item from a conversation with the given IDs.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}/items/{item_id}")
   @get
   @operationId("getConversationItem")
-  getConversationItem is AgentOperation<
+  getConversationItem is OpenAIOperation<
     {
       /** The ID of the conversation that contains the item. */
       @path conversation_id: string;
@@ -148,12 +133,10 @@ interface Conversations {
   /**
    * Delete an item from a conversation with the given IDs.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}/items/{item_id}")
   @delete
   @operationId("deleteConversationItem")
-  deleteConversationItem is AgentOperation<
+  deleteConversationItem is OpenAIOperation<
     {
       /** The id of the conversation on which the item needs to be deleted from. */
       @path conversation_id: string;
@@ -167,13 +150,11 @@ interface Conversations {
   /**
    * List all items for a conversation with the given ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @route("{conversation_id}/items")
   @get
   @operationId("listConversationItems")
   @list
-  listConversationItems is AgentOperation<
+  listConversationItems is OpenAIOperation<
     {
       /** The id of the conversation on which the items needs to be listed. */
       @path conversation_id: string;

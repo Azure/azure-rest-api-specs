@@ -17,7 +17,7 @@ alias ServiceTraits = SupportsClientRequestId &
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("evaluations")
-@removed(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
 interface Evaluations {
   @doc("Get an evaluation run by name.")
   get is EvaluationsOperations.ResourceRead<Evaluation>;

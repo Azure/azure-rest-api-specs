@@ -1,21 +1,16 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
 using Azure.Core.Traits;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias ConnectionServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests;
+alias ConnectionOperations = FoundryAzureOperations<{}>;
 
-alias ConnectionOperations = Azure.Core.ResourceOperations<ConnectionServiceTraits>;
-
+@tag("Connections")
 interface Connections {
   @doc("Get a connection by name, without populating connection credentials")
   get is ConnectionOperations.ResourceRead<Connection>;
