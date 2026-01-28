@@ -1150,7 +1150,6 @@ union StorageDataShareAccessPolicyPermission {
 /**
  * Provisioning state of the resource at the time the operation was called.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Swagger has the correct readOnly annotation, still showing a warning."
 union NativeDataSharingProvisioningState {
   string,
 
@@ -6172,7 +6171,6 @@ alias ETagHeader = {
 /**
  * The storage connector properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Swagger has the correct readOnly annotation, still showing a warning."
 model StorageConnectorProperties {
   /**
    * System-generated identifier for the Storage Connector. Not a valid input parameter when creating.
@@ -6348,7 +6346,6 @@ model TestConnectionResponse {
 /**
  * The storage datashare properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Swagger has the correct readOnly annotation, still showing a warning."
 model StorageDataShareProperties {
   /**
    * System-generated identifier for the Storage DataShare. Not a valid input parameter when creating.
