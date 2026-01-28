@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "registryName": "mymlregistry",
+    "api-version": "2025-12-01",
+    "body": {
+      "tags": {},
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "sku": {
+        "name": "Standard",
+        "tier": "Basic",
+        "size": "S1",
+        "family": "S",
+        "capacity": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "tags": {},
+        "location": "eastus",
+        "kind": "Registry",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "sku": {
+          "name": "Standard",
+          "tier": "Free",
+          "size": "S1",
+          "family": "S",
+          "capacity": 1
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/registries/mymlregistry",
+        "name": "mymlregistry",
+        "type": "Microsoft.MachineLearningServices/registries",
+        "properties": {
+          "regionDetails": [
+            {
+              "location": "eastus",
+              "storageAccountDetails": [
+                {
+                  "systemCreatedStorageAccount": {
+                    "storageAccountName": "mlstorageaccount",
+                    "storageAccountType": "Standard_LRS",
+                    "storageAccountHnsEnabled": false,
+                    "armResourceId": {
+                      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/mlstorageaccount"
+                    },
+                    "allowBlobPublicAccess": false
+                  }
+                }
+              ],
+              "acrDetails": [
+                {
+                  "systemCreatedAcrAccount": {
+                    "acrAccountName": "mlacraccount",
+                    "acrAccountSku": "Standard",
+                    "armResourceId": {
+                      "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.ContainerRegistry/registries/mlacraccount"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "intellectualPropertyPublisher": "Contoso",
+          "publicNetworkAccess": "Enabled",
+          "discoveryUrl": "https://mymlregistry.eastus.azureml.ms",
+          "managedResourceGroup": {
+            "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg-managed"
+          },
+          "mlFlowRegistryUri": "https://mymlregistry.eastus.azureml.ms/mlflow",
+          "registryPrivateEndpointConnections": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/registries/mymlregistry/privateEndpointConnections/pe1",
+              "location": "eastus",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/pe1",
+                  "subnetArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+                },
+                "registryPrivateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Connection approved.",
+                  "actionsRequired": "None"
+                },
+                "groupIds": [
+                  "amlregistry"
+                ]
+              }
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:02",
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:02",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}
