@@ -3232,7 +3232,7 @@ model LatencyScorecard extends Resource {
 /**
  * Defines a the properties of a Timeseries query parameters
  */
-model GetTimeseriesParameters {
+alias GetTimeseriesParameters = {
   /**
    * The start DateTime of the Timeseries in UTC
    */
@@ -3270,12 +3270,12 @@ model GetTimeseriesParameters {
    */
   @query("country")
   country?: string;
-}
+};
 
 /**
  * Defines a the properties of a Latency Scorecard query parameters
  */
-model GetLatencyScorecardsParameters {
+alias GetLatencyScorecardsParameters = {
   /**
    * The end DateTime of the Latency Scorecard in UTC
    */
@@ -3294,7 +3294,7 @@ model GetLatencyScorecardsParameters {
    */
   @query("aggregationInterval")
   aggregationInterval: LatencyScorecardAggregationInterval;
-}
+};
 
 /**
  * Defines a the properties of a Latency Scorecard
