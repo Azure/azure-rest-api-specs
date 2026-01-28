@@ -1,0 +1,251 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2025-11-01",
+    "parameters": {
+      "location": "eastus2euap",
+      "tags": {
+        "AllowInstanceMixOnAnyVMFamily": "true"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSizePolicy": {
+            "vmSizes": [
+              {
+                "name": "Standard_D2s_v3",
+                "rank": 0
+              },
+              {
+                "name": "Standard_D4s_v3",
+                "rank": 1
+              },
+              {
+                "name": "Standard_DS2_v2",
+                "rank": 2
+              },
+              {
+                "name": "Standard_DS4_v2",
+                "rank": 3
+              },
+              {
+                "name": "Standard_DS1_v2",
+                "rank": 4
+              }
+            ],
+            "allocationStrategy": "Prioritized"
+          }
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2019-Datacenter",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "FromImage",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS"
+            }
+          }
+        },
+        "osProfile": {
+          "computerName": "myVM",
+          "adminUsername": "azureuser",
+          "adminPassword": "{your-password}",
+          "windowsConfiguration": {
+            "enableAutomaticUpdates": true,
+            "provisionVMAgent": true
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/testnic1",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "name": "myVM",
+        "location": "eastus2euap",
+        "tags": {
+          "AllowInstanceMixOnAnyVMFamily": "true"
+        },
+        "properties": {
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3",
+            "vmSizePolicy": {
+              "vmSizes": [
+                {
+                  "name": "Standard_D2s_v3",
+                  "rank": 0
+                },
+                {
+                  "name": "Standard_D4s_v3",
+                  "rank": 1
+                },
+                {
+                  "name": "Standard_DS2_v2",
+                  "rank": 2
+                },
+                {
+                  "name": "Standard_DS4_v2",
+                  "rank": 3
+                },
+                {
+                  "name": "Standard_DS1_v2",
+                  "rank": 4
+                }
+              ],
+              "allocationStrategy": "Prioritized"
+            }
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-Datacenter",
+              "version": "latest",
+              "exactVersion": "17763.5830.240509"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "name": "myVM_OsDisk_1_abc123",
+              "createOption": "FromImage",
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Premium_LRS",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVM_OsDisk_1_abc123"
+              },
+              "diskSizeGB": 127
+            },
+            "dataDisks": []
+          },
+          "osProfile": {
+            "computerName": "myVM",
+            "adminUsername": "azureuser",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            },
+            "secrets": [],
+            "allowExtensionOperations": true,
+            "requireGuestProvisionSignal": true
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/testnic1",
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "name": "myVM",
+        "location": "eastus2euap",
+        "tags": {
+          "AllowInstanceMixOnAnyVMFamily": "true"
+        },
+        "properties": {
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3",
+            "vmSizePolicy": {
+              "vmSizes": [
+                {
+                  "name": "Standard_D2s_v3",
+                  "rank": 0
+                },
+                {
+                  "name": "Standard_D4s_v3",
+                  "rank": 1
+                },
+                {
+                  "name": "Standard_DS2_v2",
+                  "rank": 2
+                },
+                {
+                  "name": "Standard_DS4_v2",
+                  "rank": 3
+                },
+                {
+                  "name": "Standard_DS1_v2",
+                  "rank": 4
+                }
+              ],
+              "allocationStrategy": "Prioritized"
+            }
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-Datacenter",
+              "version": "latest",
+              "exactVersion": "17763.5830.240509"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "name": "myVM_OsDisk_1_abc123",
+              "createOption": "FromImage",
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Premium_LRS",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVM_OsDisk_1_abc123"
+              },
+              "diskSizeGB": 127
+            },
+            "dataDisks": []
+          },
+          "osProfile": {
+            "computerName": "myVM",
+            "adminUsername": "azureuser",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            },
+            "secrets": [],
+            "allowExtensionOperations": true,
+            "requireGuestProvisionSignal": true
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/testnic1",
+                "properties": {
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_CreateOrUpdate",
+  "title": "Create a VM with VMSizePolicy"
+}

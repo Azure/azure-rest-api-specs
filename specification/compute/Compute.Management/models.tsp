@@ -438,6 +438,10 @@ union ZonalPlatformFaultDomainAlignMode {
   Aligned: "Aligned",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
+
+  /** Offload Alignment to VMSS. VMSS aligns disks that support enough Storage Fault Domains, while keeping others unaligned. */
+  @added(Versions.v2025_11_01)
+  BestEffortAligned: "BestEffortAligned",
 }
 
 /**
@@ -900,6 +904,34 @@ union DiskControllerTypes {
   SCSI: "SCSI",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NVMe: "NVMe",
+}
+
+/**
+ * Specifies the storage fault domain alignment type for the disk.
+ */
+@added(Versions.v2025_11_01)
+union StorageFaultDomainAlignmentType {
+  string,
+
+  /** Disk Storage Fault Domains are mapped to Compute Fault Domains. Deployment fails if disk does not support enough Fault Domains. */
+  Aligned: "Aligned",
+
+  /** Attempt to map Storage Fault Domains to Compute Fault Domains. Disks are unaligned if disk does not support enough Fault Domains. */
+  BestEffortAligned: "BestEffortAligned",
+}
+
+/**
+ * Specifies the storage alignment status for the disk.
+ */
+@added(Versions.v2025_11_01)
+union StorageAlignmentStatus {
+  string,
+
+  /** Disk does not have Storage Fault Domain to Compute Fault Domain mapping. A single Storage Fault Domain failure may impact all VMs that reference this disk profile. */
+  Unaligned: "Unaligned",
+
+  /** Disk has Storage Fault Domain to Compute Fault Domain mapping. Storage Fault Domain failure is contained to VMs in a single Compute Fault Domain. */
+  Aligned: "Aligned",
 }
 
 /**
@@ -2501,6 +2533,12 @@ model VirtualMachineScaleSetOSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**
    */
   osType?: OperatingSystemTypes;
@@ -2539,6 +2577,12 @@ model DiffDiskSettings {
    * Specifies the ephemeral disk placement for operating system disk. Possible values are: **CacheDisk,** **ResourceDisk,** **NvmeDisk.** The defaulting behavior is: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** or **NvmeDisk** is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Minimum api-version for NvmeDisk: 2024-03-01.
    */
   placement?: DiffDiskPlacement;
+
+  /**
+   * Specifies whether or not to enable full caching for this VM which will cache the OS disk locally on the host and make this VM more resilient to storage outages
+   */
+  @added(Versions.v2025_11_01)
+  enableFullCaching?: boolean;
 }
 
 /**
@@ -2626,6 +2670,12 @@ model VirtualMachineScaleSetDataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -3309,6 +3359,39 @@ model VMSizeProperties {
 }
 
 /**
+ * Specifies the VM size policy for the virtual machine. With this property the customer is able to specify a list of VM sizes and an allocation strategy.
+ */
+@added(Versions.v2025_11_01)
+model VMSizePolicy {
+  /**
+   * Specifies the VM sizes for the virtual machine.
+   */
+  @identifiers(#["name"])
+  vmSizes?: VMSizeWithRank[];
+
+  /**
+   * Specifies the allocation strategy for the virtual machine based on which the VM will be allocated.
+   */
+  allocationStrategy?: AllocationStrategy;
+}
+
+/**
+ * Specifies the VM Size with priority rank.
+ */
+@added(Versions.v2025_11_01)
+model VMSizeWithRank {
+  /**
+   * Specifies the name of the VM Size. This must be a valid Azure VM size (e.g., Standard_D2s_v3).
+   */
+  name?: string;
+
+  /**
+   * Specifies the rank (a.k.a priority) associated with the VM Size. Lower rank values have higher priority. Ranks should be non-negative integers and typically contiguous starting from 0.
+   */
+  rank?: int32;
+}
+
+/**
  * Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01
  */
 model ServiceArtifactReference {
@@ -3626,6 +3709,12 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
    * The virtual machine scale set zones.
    */
   zones?: string[];
+
+  /**
+   * User-defined constraints for virtual machine scale set hardware placement.
+   */
+  @added(Versions.v2025_11_01)
+  placement?: Placement;
 }
 
 /**
@@ -3844,6 +3933,12 @@ model VirtualMachineScaleSetUpdateOSDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.
@@ -5006,6 +5101,12 @@ model DiskInstanceView {
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
+
+  /**
+   * Specifies the storage alignment status for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageAlignmentStatus?: StorageAlignmentStatus;
 }
 
 /**
@@ -5122,6 +5223,12 @@ model HardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified in the request, but not both. When vmSizePolicy is used, the allocated VM size will be returned in the vmSize property in the response.
+   */
+  @added(Versions.v2025_11_01)
+  vmSizePolicy?: VMSizePolicy;
 }
 
 /**
@@ -5153,6 +5260,28 @@ model StorageProfile {
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
   alignRegionalDisksToVMZone?: boolean;
+}
+
+/**
+ * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.
+ */
+@added(Versions.v2025_11_01)
+model ZoneMovement {
+  /**
+   * Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another.
+   */
+  isEnabled?: boolean;
+}
+
+/**
+ * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.
+ */
+@added(Versions.v2025_11_01)
+model ResiliencyProfile {
+  /**
+   * Zone movement configuration.
+   */
+  zoneMovement?: ZoneMovement;
 }
 
 /**
@@ -5208,6 +5337,12 @@ model OSDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -5284,6 +5419,12 @@ model DataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -6154,6 +6295,12 @@ model VirtualMachineProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Resiliency profile for the virtual machine.
+   */
+  @added(Versions.v2025_11_01)
+  resiliencyProfile?: ResiliencyProfile;
 }
 
 /**
