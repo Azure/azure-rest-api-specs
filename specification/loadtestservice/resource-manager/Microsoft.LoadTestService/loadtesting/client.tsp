@@ -46,3 +46,23 @@ interface LoadTests {
 
   checkAvailabilityQuota is Microsoft.LoadTestService.Quotas.checkAvailability;
 }
+
+@@clientName(type, "LoadTestingCmkIdentityType", "csharp");
+@@clientName(LoadTestResource, "LoadTestingResource", "csharp");
+@@clientName(QuotaResource, "LoadTestingQuota", "csharp");
+@@clientName(EncryptionProperties, "LoadTestingCmkEncryptionProperties", "csharp");
+@@clientName(EncryptionPropertiesIdentity, "LoadTestingCmkIdentity", "csharp");
+@@clientName(EndpointDependency, "LoadTestingEndpointDependency", "csharp");
+@@clientName(EndpointDetail, "LoadTestingEndpointDetail", "csharp");
+@@clientName(CheckQuotaAvailabilityResponse, "LoadTestingQuotaAvailabilityResult", "csharp");
+@@clientName(QuotaBucketRequest, "LoadTestingQuotaBucketContent", "csharp");
+@@clientName(QuotaBucketRequestPropertiesDimensions, "LoadTestingQuotaBucketDimensions", "csharp");
+@@clientName(ResourceState, "LoadTestingProvisioningState", "csharp");
+@@clientName(QuotaBucketRequestPropertiesDimensions, "LoadTestingQuotaBucketDimensions", "csharp");
+@@clientName(OutboundEnvironmentEndpoint, "LoadTestingOutboundEnvironmentEndpoint", "csharp");
+
+@@clientName(LoadTests.checkAvailabilityQuota, "CheckLoadTestingQuotaAvailability", "csharp");
+@@clientName(LoadTests.outboundNetworkDependenciesEndpoints,
+  "GetOutboundNetworkDependenciesEndpoints",
+  "csharp"
+);
