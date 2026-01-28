@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./ConfigurationStore.tsp";
 import "./DeletedConfigurationStore.tsp";
 import "./PrivateEndpointConnection.tsp";
+import "./NetworkSecurityPerimeterConfigurations.tsp";
 import "./PrivateLinkResource.tsp";
 import "./KeyValue.tsp";
 import "./Replica.tsp";
@@ -51,4 +52,9 @@ enum Versions {
    * The 2025-06-01-preview API version.
    */
   v2025_06_01_preview: "2025-06-01-preview",
+
+  /**
+   * The 2025-08-01-preview API version.
+   */
+  v2025_08_01_preview: "2025-08-01-preview",
 }
