@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "reservationOrderId": "20000000-0000-0000-0000-000000000000",
+    "reservationId": "30000000-0000-0000-0000-000000000000",
+    "body": {
+      "properties": {
+        "displayName": "NewName"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/reservationOrders/20000000-0000-0000-0000-000000000000/reservations/30000000-0000-0000-0000-000000000000",
+        "name": "30000000-0000-0000-0000-000000000000",
+        "type": "microsoft.billing/billingAccounts/reservationOrders/reservations",
+        "location": "westus",
+        "etag": 15,
+        "sku": {
+          "name": "Standard_DS1_v2"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "properties": {
+          "reservedResourceType": "VirtualMachines",
+          "userFriendlyRenewState": "On",
+          "skuDescription": "Reserved VM Instance, Standard_DS1_v2, US West, 3 Years",
+          "renew": true,
+          "archived": false,
+          "quantity": 1,
+          "appliedScopeType": "Shared",
+          "displayName": "NewName",
+          "provisioningState": "Succeeded",
+          "term": "P3Y",
+          "displayProvisioningState": "Succeeded",
+          "userFriendlyAppliedScopeType": "Shared",
+          "expiryDateTime": "2024-11-25T06:34:12.9266987Z",
+          "purchaseDateTime": "2021-11-25T06:31:18.3925493Z",
+          "benefitStartTime": "2021-11-25T06:34:12.9266987Z",
+          "lastUpdatedDateTime": "2023-01-24T01:46:05.5344318Z",
+          "expiryDate": "2024-11-25",
+          "purchaseDate": "2021-11-25",
+          "effectiveDateTime": "2023-01-24T01:46:05.4250511Z",
+          "instanceFlexibility": "On",
+          "utilization": {
+            "trend": "SAME",
+            "aggregates": [
+              {
+                "grain": 1,
+                "grainUnit": "days",
+                "value": 0,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 7,
+                "grainUnit": "days",
+                "value": 0,
+                "valueUnit": "percentage"
+              },
+              {
+                "grain": 30.0,
+                "grainUnit": "days",
+                "value": 0,
+                "valueUnit": "percentage"
+              }
+            ]
+          },
+          "billingPlan": "Monthly",
+          "productCode": "20000000-0000-0000-0000-000000000005",
+          "billingScopeId": "/subscriptions/30000000-0000-0000-0000-000000000009",
+          "renewProperties": {
+            "purchaseProperties": {
+              "sku": {
+                "name": "Standard_DS1_v2"
+              },
+              "location": "westus",
+              "properties": {
+                "billingScopeId": "/subscriptions/30000000-0000-0000-0000-000000000009",
+                "term": "P3Y",
+                "billingPlan": "Monthly",
+                "quantity": 1,
+                "displayName": "VM_RI_11-24-2021_22-30_renewed",
+                "appliedScopeType": "Shared",
+                "reservedResourceProperties": {
+                  "instanceFlexibility": "On"
+                },
+                "reservedResourceType": "VirtualMachines",
+                "instanceFlexibility": "On",
+                "renew": false
+              }
+            },
+            "billingCurrencyTotal": {
+              "currencyCode": "USD",
+              "amount": 715.68
+            },
+            "pricingCurrencyTotal": {
+              "currencyCode": "USD",
+              "amount": 715.68
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/reservationOrders/20000000-0000-0000-0000-000000000000/reservations/30000000-0000-0000-0000-000000000000?api-version=2024-04-01",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/reservationOrders/20000000-0000-0000-0000-000000000000/reservations/30000000-0000-0000-0000-000000000000?api-version=2024-04-01",
+        "Retry-After": 120
+      }
+    }
+  }
+}

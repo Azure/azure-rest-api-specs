@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2026-01-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listProductRecommendations": {
+      "post": {
+        "tags": [
+          "ProductRecommendation"
+        ],
+        "description": "Lists ProductIds or offerIds recommended for purchase on an account. Please specify the type of the cohort for the billing account in the 'x-ms-recommendations-cohort-type' header as a required string parameter.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Recommendations_ListByBillingAccountName",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The parameters of recommendations request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductRecommendationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recommended products for a billing account.",
+            "schema": {
+              "$ref": "#/definitions/ProductRecommendationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListRecommendationsByBillingAccount": {
+            "$ref": "./examples/listRecommendationsByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProductRecommendationRequest": {
+      "description": "The parameters of recommendations request.",
+      "type": "object",
+      "properties": {
+        "topPersonalizedRecommendations": {
+          "format": "int32",
+          "description": "Number of Personalized recommendations to be included in result. Supported value is between 0 and 16. Defaults to 12.",
+          "type": "integer"
+        },
+        "topCohortRecommendations": {
+          "format": "int32",
+          "description": "Number of Cohort recommendations to be included in result. Supported value is between 0 and 16. Defaults to 12.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProductRecommendationResponse": {
+      "description": "Recommended products for a billing account.",
+      "type": "object",
+      "properties": {
+        "cohortRecommendations": {
+          "description": "A list of product recommendations based on what is popular in the billing account's cohort.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [ ]
+        },
+        "personalizedRecommendations": {
+          "description": "A list of personalized product recommendations for the billing account.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [ ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

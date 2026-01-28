@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "billingAccountName": "123456",
+    "licenseReservationName": "34567",
+    "parameters": {
+      "properties": {
+        "lineItems": [
+          {
+            "skuId": "1C9-00002",
+            "quantity": 4,
+            "usageCountry": "IN"
+          },
+          {
+            "skuId": "JFQ-00001",
+            "quantity": 2,
+            "usageCountry": "US"
+          }
+        ],
+        "termStartDate": "2024-08-01T00:00:00Z"
+      },
+      "type": "Microsoft.Billing/billingAccounts/licenseReservations"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/123456/licenseReservations/34567",
+        "name": "34567",
+        "properties": {
+          "provisioningState": "Pending",
+          "lineItems": [
+            {
+              "skuId": "1C9-00002",
+              "skuDescription": "OLS License Type",
+              "quantity": 4,
+              "usageCountry": "IN"
+            },
+            {
+              "skuId": "JFQ-00001",
+              "skuDescription": "OLS License Type",
+              "quantity": 2,
+              "usageCountry": "US"
+            }
+          ],
+          "termStartDate": "2025-04-01T00:00:00Z",
+          "status": "Pending",
+          "reservedBy": "Test User1",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2025-04-01T00:00:00Z"
+          }
+        },
+        "type": "Microsoft.Billing/billingAccounts/licenseReservations",
+        "systemData": {
+          "createdAt": "2025-04-01T00:00:00Z",
+          "lastModifiedAt": "2025-04-01T00:00:00Z"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/123456/operationsStatuses/createLicenseReservation_11111111-1111-1111-1111-111111111111?api-version=2026-01-01",
+        "retry-after": "30"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/123456/licenseReservations/34567",
+        "name": "34567",
+        "properties": {
+          "provisioningState": "Pending",
+          "lineItems": [
+            {
+              "skuId": "1C9-00002",
+              "skuDescription": "OLS License Type",
+              "quantity": 4,
+              "usageCountry": "IN"
+            },
+            {
+              "skuId": "JFQ-00001",
+              "skuDescription": "OLS License Type",
+              "quantity": 2,
+              "usageCountry": "US"
+            }
+          ],
+          "termStartDate": "2025-04-01T00:00:00Z",
+          "status": "Pending",
+          "reservedBy": "Test User1",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2025-04-01T00:00:00Z"
+          }
+        },
+        "type": "Microsoft.Billing/billingAccounts/licenseReservations",
+        "systemData": {
+          "createdAt": "2025-04-01T00:00:00Z",
+          "lastModifiedAt": "2025-04-01T00:00:00Z"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/123456/operationsStatuses/createLicenseReservation_11111111-1111-1111-1111-111111111111?api-version=2026-01-01",
+        "retry-after": "30"
+      }
+    }
+  }
+}
