@@ -6,7 +6,7 @@ import { simpleGit } from "simple-git";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { parse } from "../tsp-config.js";
-import { fileExists, normalizePath, readTspConfig } from "../utils.js";
+import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -25,6 +25,24 @@ export class FolderStructureRule implements Rule {
     // must be using "folder structure v2".  Otherwise, it must be using v1.
     const structureVersion =
       relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
+
+    if (structureVersion === 1) {
+      const suppressions = await getSuppressions(folder);
+
+      const mustUseV2Suppressions = suppressions.filter(
+        (s) => s.rules?.includes(this.name) && s.subRules?.includes("MustUseV2"),
+      );
+
+      if (mustUseV2Suppressions.length === 0) {
+        return {
+          success: false,
+          stdOutput: stdOutput,
+          errorOutput: `Folder '${folder}' must use "folder structure v2".  See https://aka.ms/azsdk/fsv2.\n`,
+        };
+      } else {
+        stdOutput += `Folder '${folder}' is not using "folder structure v2", but was suppressed.\n`;
+      }
+    }
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await fileExists(folder))) {
