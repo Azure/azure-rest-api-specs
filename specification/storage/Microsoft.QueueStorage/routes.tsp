@@ -145,12 +145,12 @@ namespace Storage.Queues {
     }
   >;
 
-  @route("/{queueName}")
   namespace Queue {
     /** Creates a new queue under the specified account. If the queue with the same name already exists, the operation fails. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     @put
+    @route("{queueName}")
     op create is StorageOperationNoBody<
       {
         ...QueueNamePathParameter;
@@ -167,7 +167,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     @get
-    @route("?comp=metadata")
+    @route("{queueName}?comp=metadata")
     op getMetadata is StorageOperationNoBody<
       {
         ...QueueNamePathParameter;
@@ -184,6 +184,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     @delete
+    @route("{queueName}")
     op delete is StorageOperationNoBody<
       {
         ...QueueNamePathParameter;
@@ -199,7 +200,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     @put
-    @route("?comp=metadata")
+    @route("{queueName}?comp=metadata")
     op setMetadata is StorageOperationNoBody<
       {
         ...QueueNamePathParameter;
@@ -220,7 +221,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     @get
-    @route("?comp=acl")
+    @route("{queueName}?comp=acl")
     op getAccessPolicy is StorageOperation<
       {
         ...QueueNamePathParameter;
@@ -237,7 +238,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
-    @route("?comp=acl")
+    @route("{queueName}?comp=acl")
     op setAccessPolicy is StorageOperation<
       {
         ...QueueNamePathParameter;
@@ -261,7 +262,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
-    @route("/messages")
+    @route("{queueName}/messages")
     op receiveMessages is StorageOperation<
       {
         ...QueueNamePathParameter;
@@ -292,7 +293,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @delete
-    @route("/messages")
+    @route("{queueName}/messages")
     op clear is StorageOperationNoBody<
       {
         ...QueueNamePathParameter;
@@ -315,7 +316,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     @post
-    @route("/messages")
+    @route("{queueName}/messages")
     op sendMessage is StorageOperation<
       {
         ...QueueNamePathParameter;
@@ -353,7 +354,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
-    @route("/messages?peekonly=true")
+    @route("{queueName}/messages?peekonly=true")
     op peekMessages is StorageOperation<
       {
         ...QueueNamePathParameter;
@@ -387,7 +388,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
-    @route("/messages/{messageId}")
+    @route("{queueName}/messages/{messageId}")
     op update is StorageOperation<
       {
         ...QueueNamePathParameter;
@@ -416,7 +417,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     @delete
-    @route("/messages/{messageId}")
+    @route("{queueName}/messages/{messageId}")
     op deleteMessage is StorageOperationNoBody<
       {
         ...QueueNamePathParameter;
