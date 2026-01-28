@@ -1065,6 +1065,125 @@ union TriggerType {
   OnSchedule: "OnSchedule",
 }
 
+/**
+ * The type of the backing data source for storage connector
+ */
+union StorageConnectorSourceType {
+  /**
+   * Source type - DataShare
+   */
+  DataShare: "DataShare",
+
+  string,
+}
+
+/**
+ * The state of the storage connector
+ */
+union StorageConnectorState {
+  /**
+   * Whether the connector is active
+   */
+  Active: "Active",
+
+  /**
+   * Whether the connector is inactive
+   */
+  Inactive: "Inactive",
+
+  string,
+}
+
+/**
+ * The auth type supported for bucket connection in storage connector.
+ */
+union StorageConnectorAuthType {
+  /**
+   * Managed Identity auth type
+   */
+  ManagedIdentity: "ManagedIdentity",
+
+  string,
+}
+
+/**
+ * The connection type for bucket connection in storage connector.
+ */
+union StorageConnectorConnectionType {
+  /**
+   * DataShare connection type
+   */
+  DataShare: "DataShare",
+
+  string,
+}
+
+/**
+ * The type of the backing data source for storage connector
+ */
+union StorageConnectorDataSourceType {
+  /**
+   * Azure DataShare data source type.
+   */
+  Azure_DataShare: "Azure_DataShare",
+
+  string,
+}
+
+/**
+ * The permissions supported in access policies for storage data share
+ */
+union StorageDataShareAccessPolicyPermission {
+  /**
+   * No permission
+   */
+  None: "None",
+
+  /**
+   * Read permission
+   */
+  Read: "Read",
+
+  string,
+}
+
+/**
+ * Provisioning state of the resource at the time the operation was called.
+ */
+union NativeDataSharingProvisioningState {
+  string,
+
+  /**
+   * The request has been accepted for processing.
+   */
+  Accepted: "Accepted",
+
+  /**
+   * The resource is being created.
+   */
+  Creating: "Creating",
+
+  /**
+   * The resource has been successfully created.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The resource is being deleted.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * The request has been canceled.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * The resource creation or deletion has failed.
+   */
+  Failed: "Failed",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BlobServiceItems {
   /**
@@ -6048,3 +6167,260 @@ alias ETagHeader = {
   @header("ETag")
   eTag: string;
 };
+
+/**
+ * The storage connector properties
+ */
+model StorageConnectorProperties {
+  /**
+   * System-generated identifier for the Storage Connector. Not a valid input parameter when creating.
+   */
+  @visibility(Lifecycle.Read)
+  uniqueId?: string;
+
+  /**
+   * State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active)
+   * (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.
+   */
+  state?: StorageConnectorState = StorageConnectorState.Active;
+
+  /**
+   * System-generated creation time for the Storage Connector. Not a valid input parameter when creating.
+   */
+  @visibility(Lifecycle.Read)
+  creationTime?: string;
+
+  /**
+   * Arbitrary description of this Storage Connector. Max 250 characters.
+   */
+  @maxLength(250)
+  description?: string;
+
+  /**
+   * Test connection to backing data source before creating the storage connector.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  testConnection?: boolean = false;
+
+  /**
+   * The type of backing data source for this Storage Connector.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  dataSourceType: StorageConnectorDataSourceType;
+
+  /**
+   * Information about how to communicate with and authenticate to the backing data store.
+   */
+  source: StorageConnectorSource;
+
+  /**
+   * Represents the provisioning state of the storage connector.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NativeDataSharingProvisioningState;
+}
+
+/**
+ * The storage connector backing data source information
+ */
+@discriminator("type")
+model StorageConnectorSource {
+  /**
+   * Type of the Storage Connector. Not mutable once the Storage Connector is created."
+   */
+  type: StorageConnectorSourceType;
+}
+
+/**
+ * The properties of data share source
+ */
+model DataShareSource extends StorageConnectorSource {
+  /**
+   * The type for data share source
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorSourceType.DataShare;
+
+  /**
+   * Details for how to connect to the backing data store.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  connection: StorageConnectorConnection;
+
+  /**
+   * Details for how to authenticate to the backing data store.
+   */
+  authProperties: StorageConnectorAuthProperties;
+}
+
+/**
+ * The connection properties of the backing data source
+ */
+@discriminator("type")
+model StorageConnectorConnection {
+  /**
+   * Type of the connection. Controls the type of the connection object. Not mutable once the Storage Connector is created.
+   */
+  type: StorageConnectorConnectionType;
+}
+
+/**
+ * The connection details for Data Share source
+ */
+model DataShareConnection extends StorageConnectorConnection {
+  /**
+   * The type for data share connection
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorConnectionType.DataShare;
+
+  /**
+   * The URI of the backing DataShare. Must be in the format: azds://<region>:<DataShareName>:<DataShareIdentifier>
+   */
+  @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareUri: string;
+}
+
+/**
+ * The authentication properties of the backing data source
+ */
+@discriminator("type")
+model StorageConnectorAuthProperties {
+  /**
+   * Type of the authentication properties. Controls the type of the authProperties object
+   */
+  type: StorageConnectorAuthType;
+}
+
+/**
+ * The managed identity auth properties for dataShare connection.
+ */
+model ManagedIdentityAuthProperties extends StorageConnectorAuthProperties {
+  /**
+   * The type of managed identity auth
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorAuthType.ManagedIdentity;
+
+  /**
+   * ARM ResourceId of the managed identity that should be used to authenticate to the backing data source.
+   */
+  identityResourceId?: string;
+}
+
+/**
+ * Test existing connection request properties
+ */
+model TestExistingConnectionRequest {
+  /**
+   * The uniqueId of the storage connector as returned by the server.
+   */
+  uniqueId: string;
+}
+
+/**
+ * Test connection response properties
+ */
+model TestConnectionResponse {
+  /**
+   * Indicates the method used to validate the connection to the backing data store.
+   * Valid values are `GetBlob` and `ListBlobs` for failure, and `TestExistingConnection` for success.
+   */
+  @minLength(1)
+  storageConnectorMethodName: string;
+
+  /**
+   * A string representing the error received from the backing data store.
+   * Format will vary depending on the data store type and will be capped at 1 MB in size.
+   * The error message will be empty if the connection was successful.
+   */
+  storageConnectorErrorMessage?: string;
+
+  /**
+   * The request Id associated with the request sent to the backing data store for validation.
+   */
+  @minLength(1)
+  storageConnectorRequestId: string;
+}
+
+/**
+ * The storage datashare properties
+ */
+model StorageDataShareProperties {
+  /**
+   * System-generated identifier for the Storage DataShare. Not a valid input parameter when creating.
+   */
+  @visibility(Lifecycle.Read)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareIdentifier?: string;
+
+  /** Arbitrary description of this Data Share. Max 250 characters.
+   *
+   */
+  @maxLength(250)
+  description?: string;
+
+  /**
+   * The DataShare URI to be shared with the consumer.
+   * URI Format - 'azds://<location>:<dataShareName>:<dataShareIdentifier>'.
+   */
+  @visibility(Lifecycle.Read)
+  @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareUri?: string;
+
+  /**
+   * List of access policies that specify the permission allowed to a managed identity.
+   */
+  @identifiers(#[])
+  accessPolicies: StorageDataShareAccessPolicy[];
+
+  /**
+   * List of assets that specify the properties of the shared resources.
+   */
+  @identifiers(#[])
+  assets: StorageDataShareAsset[];
+
+  /**
+   * Represents the provisioning state of the storage datashare.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NativeDataSharingProvisioningState;
+}
+
+/**
+ * Policy that specify the permission allowed to a managed identity
+ */
+model StorageDataShareAccessPolicy {
+  /**
+   * The AAD principal ID of the Managed Identity.
+   */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  principalId: string;
+
+  /**
+   * The AAD tenant ID of the Managed Identity.
+   */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  tenantId: string;
+
+  /**
+   * Allowed permissions. Currently, only supported value is Read.
+   */
+  permission: StorageDataShareAccessPolicyPermission;
+}
+
+/**
+ * Properties of a shared resource.
+ */
+model StorageDataShareAsset {
+  /**
+   * Source Path to be shared. It can be a folder or a blob.
+   * The asset path should contain container name followed by path within the container, e.g. /container1/logs/external.
+   */
+  assetPath: string;
+
+  /**
+   * Consumer visible name of the original path.
+   */
+  displayName: string;
+}
