@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2025-03-01",
+    "version": "2025-11-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope.",
     "x-typespec-generated": [
       {
@@ -195,6 +195,9 @@
           "Create or update a policy assignment with resource selectors": {
             "$ref": "./examples/createPolicyAssignmentWithResourceSelectors.json"
           },
+          "Create or update a policy assignment with self-serve exemption settings": {
+            "$ref": "./examples/createPolicyAssignmentWithSelfserveExemptionSettings.json"
+          },
           "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
             "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
           }
@@ -262,6 +265,9 @@
           },
           "Update a policy assignment with resource selectors": {
             "$ref": "./examples/updatePolicyAssignmentWithResourceSelectors.json"
+          },
+          "Update a policy assignment with self-serve exemption settings": {
+            "$ref": "./examples/updatePolicyAssignmentWithSelfserveExemptionSettings.json"
           }
         }
       },
@@ -3173,6 +3179,10 @@
           "$ref": "#/definitions/ExternalEndpointResult",
           "description": "The result of the external endpoint. Possible values are Succeeded and Failed."
         },
+        "endpointKind": {
+          "type": "string",
+          "description": "The external evaluation endpoint kind."
+        },
         "message": {
           "type": "string",
           "description": "The status message with additional details about the invocation result."
@@ -3184,6 +3194,16 @@
         },
         "claims": {
           "description": "The set of claims that will be attached to the policy token as an attestation for the result of the endpoint invocation."
+        },
+        "policyAction": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error."
+        },
+        "policyEvaluationDetails": {
+          "description": "The evaluation details returned by the policy evaluation engine."
+        },
+        "additionalInfo": {
+          "description": "The endpoint specific metadata."
         },
         "expiration": {
           "type": "string",
@@ -3431,6 +3451,42 @@
         }
       }
     },
+    "PolicyAction": {
+      "type": "string",
+      "description": "The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error.",
+      "enum": [
+        "Unknown",
+        "Audit",
+        "Deny",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The effective outcome of policy evaluation is unknown."
+          },
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "The effective outcome of policy evaluation is to allow the request.\n  Allow: \"Allow\",\n\n  /**\nThe effective outcome of policy evaluation is to audit the request."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "The effective outcome of policy evaluation is to deny the request."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "The policy evaluation resulted in an error."
+          }
+        ]
+      }
+    },
     "PolicyAssignment": {
       "type": "object",
       "description": "The policy assignment.",
@@ -3594,6 +3650,10 @@
           "type": "string",
           "description": "The instance ID of the policy assignment. This ID only and always changes when the assignment is deleted and recreated.",
           "readOnly": true
+        },
+        "selfServeExemptionSettings": {
+          "$ref": "#/definitions/SelfServeExemptionSettings",
+          "description": "The self-serve exemption settings for the policy assignment."
         }
       }
     },
@@ -3635,6 +3695,10 @@
             "$ref": "#/definitions/Override"
           },
           "x-ms-identifiers": []
+        },
+        "selfServeExemptionSettings": {
+          "$ref": "#/definitions/SelfServeExemptionSettings",
+          "description": "The self-serve exemption settings for the policy assignment."
         }
       }
     },
@@ -4168,6 +4232,44 @@
         "policyDefinitions"
       ]
     },
+    "PolicyTokenEvaluatedRequestDetails": {
+      "type": "object",
+      "description": "The policy token evaluated request details.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The request URI of the resource operation that is targeted by the issued token."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resource Id of the resource operation that is targeted by the issued token."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The api-version of the resource operation that is targeted by the issued token."
+        },
+        "authorizationAction": {
+          "type": "string",
+          "description": "The authorization action of the resource operation that is targeted by the issued token."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The http method of the resource operation that is targeted by the issued token."
+        },
+        "contentHash": {
+          "type": "string",
+          "description": "The hashed payload of the resource operation that is targeted by the issued token."
+        }
+      },
+      "required": [
+        "uri",
+        "resourceId",
+        "apiVersion",
+        "authorizationAction",
+        "httpMethod",
+        "contentHash"
+      ]
+    },
     "PolicyTokenOperation": {
       "type": "object",
       "description": "The resource operation to acquire a token for.",
@@ -4213,6 +4315,10 @@
         "result": {
           "$ref": "#/definitions/PolicyTokenResult",
           "description": "The result of the completed token acquisition operation. Possible values are Succeeded and Failed."
+        },
+        "requestDetails": {
+          "$ref": "#/definitions/PolicyTokenEvaluatedRequestDetails",
+          "description": "The external evaluation request details."
         },
         "message": {
           "type": "string",
@@ -4416,6 +4522,23 @@
             "description": "The selector kind to filter policies by the policy definition reference ID."
           }
         ]
+      }
+    },
+    "SelfServeExemptionSettings": {
+      "type": "object",
+      "description": "The self-serve exemption settings for a policy assignment.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether self-serve exemption is enabled."
+        },
+        "policyDefinitionReferenceIds": {
+          "type": "array",
+          "description": "The policy definition reference IDs for self-serve exemption.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "UserAssignedIdentitiesValue": {
