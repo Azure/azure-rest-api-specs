@@ -83,3 +83,12 @@ namespace Customizations;
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
+
+@@clientName(BlobPropertiesInternal, "BlobProperties", "go");
+@@clientName(BlobItemInternal, "BlobItem", "go");
+@@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
+@@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
+@@alternateType(AccessPolicy.start, utcDateTime, "go");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@alternateType(BlobItemInternal.name, string, "go");
+@@alternateType(BlobPrefix.name, string, "go");

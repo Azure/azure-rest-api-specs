@@ -41,6 +41,13 @@ options:
     crate-version: "0.1.0"
     flavor: azure
     temp-omit-doc-links: true
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
+    service-dir: "sdk/storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azblob/internal/generated"
+    generate-fakes: false
+    omit-constructors: true
+    go-generate: build.go
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
