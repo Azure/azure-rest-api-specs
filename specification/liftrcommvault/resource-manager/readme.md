@@ -43,6 +43,12 @@ suppressions:
    reason: The resource provider name 'Commvault.ContentStore' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
 ```
 
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2025-01-01-preview
+```
+
 ### Tag: package-2025-01-01-preview
 
 These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
