@@ -46,7 +46,7 @@ interface SuppressionContracts {
     SuppressionContract,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Error = ArmDefaultErrorResponse,
-    Response = ArmResponse<SuppressionContract> | ArmCreatedResponse<SuppressionContract>
+    Response = ArmResponse<SuppressionContract>
   >;
 
   /**
