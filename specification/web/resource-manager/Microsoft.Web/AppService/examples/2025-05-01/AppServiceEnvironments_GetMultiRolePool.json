@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "name": "test-ase",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Web/hostingEnvironments/multiRolePools",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/multiRolePools/default",
+        "properties": {
+          "instanceNames": [
+            "10.7.1.8",
+            "10.7.1.9"
+          ],
+          "workerCount": 2,
+          "workerSize": "Standard_D1_V2"
+        },
+        "sku": {
+          "name": "Q1",
+          "capacity": 2,
+          "family": "Q",
+          "size": "Q1",
+          "tier": "Quantum"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AppServiceEnvironments_GetMultiRolePool",
+  "title": "Get properties of a multi-role pool."
+}

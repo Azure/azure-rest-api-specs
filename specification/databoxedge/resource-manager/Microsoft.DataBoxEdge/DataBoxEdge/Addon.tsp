@@ -74,7 +74,7 @@ interface AddonsOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.ProviderNamespace<Addon>,
 
         /**
          * The name of the device.

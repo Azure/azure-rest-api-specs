@@ -13,6 +13,10 @@ options:
       "{azure-resource-provider-folder}/{service-name}/{version-status}/\
       {version}/quantum.json"
     examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    use-legacy-resource-detection: false
+    namespace: "Azure.ResourceManager.Quantum"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-quantum"
     namespace: "com.azure.resourcemanager.quantum"
