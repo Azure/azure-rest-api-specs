@@ -8075,10 +8075,7 @@
             "description": "Foundry compute is being created.",
             "schema": {
               "$ref": "#/definitions/FoundryComputeResource"
-            }
-          },
-          "202": {
-            "description": "Accepted",
+            },
             "headers": {
               "Location": {
                 "description": "The URL to retrieve the status of the operation.",
@@ -8226,9 +8223,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The foundry compute was successfully deleted."
-          },
           "202": {
             "description": "The foundry compute delete request was accepted.",
             "headers": {
@@ -8339,6 +8333,10 @@
       "description": "Cognitive Services Foundry compute object patch properties.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
