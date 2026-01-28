@@ -11,7 +11,7 @@ using Azure.ClientGenerator.Core;
 namespace Data.Tables;
 
 /** Specifies the level of metadata to be returned with the response. */
-union MetadataFormat {
+union OdataMetadataFormat {
   string,
 
   /** No metadata. */
@@ -68,7 +68,7 @@ alias TimeoutParameter = {
 alias FormatParameter = {
   @doc("Specifies the metadata format for the response.")
   @query
-  $format?: MetadataFormat;
+  $format?: OdataMetadataFormat;
 };
 
 /** The top parameter */
@@ -197,7 +197,7 @@ model TableEntitiesPagedResult {
    * List of table entities.
    */
   @pageItems
-  value?: Record<unknown>[];
+  value?: TableEntityProperties[];
 }
 
 /** The multipart body parameter. */
@@ -485,7 +485,7 @@ model InsertEntityEchoResponse {
   /** The created entity properties. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
   @body
-  entityProperties: Record<unknown>;
+  tableEntityProperties: TableEntityProperties;
 }
 
 /** Insert entity response with no content */

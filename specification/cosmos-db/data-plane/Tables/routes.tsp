@@ -35,8 +35,6 @@ namespace Data.Tables {
     TParams extends TypeSpec.Reflection.Model,
     TResponse extends TypeSpec.Reflection.Model
   >(
-    ...ClientRequestIdHeader,
-
     /** DataServiceVersion header */
     @header("DataServiceVersion")
     dataServiceVersion: "3.0",
@@ -47,6 +45,7 @@ namespace Data.Tables {
     contentType: "application/json;odata=nometadata",
 
     ...ApiVersionHeader,
+    ...ClientRequestIdHeader,
     ...TParams,
   ): (TResponse & {
     /** Content-Type header */
@@ -202,19 +201,17 @@ namespace Data.Tables {
       @header("Content-Type")
       contentType: "application/json;odata=nometadata",
 
-      ...ClientRequestIdHeader,
-
       /** DataServiceVersion header */
       @header("DataServiceVersion")
       dataServiceVersion: "3.0",
 
       ...ApiVersionHeader,
+      ...ClientRequestIdHeader,
+      ...FormatParameter,
 
       /** The table properties to create. */
       @body
       tableProperties: TableProperties,
-
-      ...FormatParameter,
 
       /**
        * Specifies whether the response should include the created table in the
@@ -273,7 +270,7 @@ namespace Data.Tables {
       /** The entity properties to insert. */
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
       @body
-      entityProperties: Record<unknown>,
+      tableEntityProperties: TableEntityProperties,
     ): InsertEntityEchoResponse | InsertEntityResponse | TablesError;
 
     /**
@@ -281,7 +278,6 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @put
-    @sharedRoute
     @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op updateEntity is TablesJsonOperation<
       {
@@ -294,7 +290,7 @@ namespace Data.Tables {
          * the wildcard character (*).
          */
         @header("If-Match")
-        ifMatch: string;
+        ifMatch?: string;
 
         /**
          * The partition key of the entity.
@@ -313,7 +309,7 @@ namespace Data.Tables {
          */
         #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
         @body
-        entityProperties: Record<unknown>;
+        tableEntityProperties: TableEntityProperties;
       },
       {
         @statusCode statusCode: 204;
@@ -326,7 +322,6 @@ namespace Data.Tables {
      */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @patch(#{ implicitOptionality: false })
-    @sharedRoute
     @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
     op mergeEntity is TablesJsonOperation<
       {
@@ -339,7 +334,7 @@ namespace Data.Tables {
          * the wildcard character (*).
          */
         @header("If-Match")
-        ifMatch: string;
+        ifMatch?: string;
 
         /**
          * The partition key of the entity.
@@ -358,81 +353,7 @@ namespace Data.Tables {
          */
         #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
         @body
-        entityProperties: Record<unknown>;
-      },
-      {
-        @statusCode statusCode: 204;
-        ...EtagResponseHeader;
-      }
-    >;
-
-    /**
-     * Insert or replace entity in a table.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    @put
-    @sharedRoute
-    @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
-    op insertOrReplaceEntity is TablesJsonOperation<
-      {
-        ...TablePathParameter;
-        ...TimeoutParameter;
-
-        /**
-         * The partition key of the entity.
-         */
-        @path
-        partitionKey: string;
-
-        /**
-         * The row key of the entity.
-         */
-        @path
-        rowKey: string;
-
-        /**
-         * The properties for the table entity.
-         */
-        #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
-        @body
-        entityProperties: Record<unknown>;
-      },
-      {
-        @statusCode statusCode: 204;
-        ...EtagResponseHeader;
-      }
-    >;
-
-    /**
-     * Insert or merge entity in a table.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    @patch(#{ implicitOptionality: false })
-    @sharedRoute
-    @route("/{table}(PartitionKey='{partitionKey}',RowKey='{rowKey}')")
-    op insertOrMergeEntity is TablesJsonOperation<
-      {
-        ...TablePathParameter;
-        ...TimeoutParameter;
-
-        /**
-         * The partition key of the entity.
-         */
-        @path
-        partitionKey: string;
-
-        /**
-         * The row key of the entity.
-         */
-        @path
-        rowKey: string;
-
-        /**
-         * The properties for the table entity.
-         */
-        #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
-        @body
-        entityProperties: Record<unknown>;
+        tableEntityProperties: TableEntityProperties;
       },
       {
         @statusCode statusCode: 204;
@@ -482,7 +403,6 @@ namespace Data.Tables {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
-    @list
     @route("/{table}()")
     op queryEntities is TablesJsonOperation<
       {
@@ -496,16 +416,14 @@ namespace Data.Tables {
         /**
          * An entity partition key query continuation token from a previous call.
          */
-        @continuationToken
         @query("NextPartitionKey")
         nextPartitionKey?: string;
 
         /**
          * An entity row key query continuation token from a previous call.
          */
-        // @continuationToken
-        // @query("NextRowKey")
-        // nextRowKey?: string;
+        @query("NextRowKey")
+        nextRowKey?: string;
       },
       {
         @body body: TableEntitiesPagedResult;
@@ -520,9 +438,8 @@ namespace Data.Tables {
         /**
          * A entity row key continuation token.
          */
-        // @continuationToken
-        // @header("x-ms-continuation-NextRowKey")
-        // nextRowKey?: string;
+        @header("x-ms-continuation-NextRowKey")
+        nextRowKey?: string;
       }
     >;
 
@@ -556,9 +473,22 @@ namespace Data.Tables {
       {
         /** The entity properties. */
         #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
-        @body entityProperties: Record<unknown>;
+        @body tableEntityProperties: TableEntityProperties;
 
         ...EtagResponseHeader;
+
+        /**
+         * An entity partition key continuation token.
+         */
+        @continuationToken
+        @header("x-ms-continuation-NextPartitionKey")
+        nextPartitionKey?: string;
+
+        /**
+         * A entity row key continuation token.
+         */
+        @header("x-ms-continuation-NextRowKey")
+        nextRowKey?: string;
       }
     >;
 
