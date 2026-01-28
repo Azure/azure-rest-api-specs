@@ -164,6 +164,16 @@ suppressions:
       is required for polling operations when the operation has completed successfully with no content to return.
 ```
 
+### Tag: package-2025-05-04
+
+These settings apply only when `--tag=package-2025-05-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-04'
+input-file:
+  - Microsoft.Security/stable/2025-05-04/assessmentMetadata.json
+  - Microsoft.Security/stable/2025-05-04/assessments.json
+```
+
 ### Tag: package-2025-03
 
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
@@ -664,8 +674,8 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
-- Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
-- Microsoft.Security/preview/2025-05-04-preview/assessments.json
+- Microsoft.Security/stable/2025-05-04/assessmentMetadata.json
+- Microsoft.Security/stable/2025-05-04/assessments.json
 - Microsoft.Security/preview/2025-09-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2025-11-01-preview/securityConnectorsDevOps.json
 - Microsoft.Security/preview/2025-10-01-preview/operations.json
@@ -762,8 +772,8 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
-- Microsoft.Security/stable/2021-06-01/assessments.json
+- Microsoft.Security/stable/2025-05-04/assessmentMetadata.json
+- Microsoft.Security/stable/2025-05-04/assessments.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/stable/2023-01-01/pricings.json
