@@ -7752,6 +7752,9 @@
           "List Vmss VMs with ResilientVMDeletionStatus.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_List_WithResiliencyView.json"
           },
+          "List Vmss VMs with VirtualMachineResourceId.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_List_WithVirtualMachineResourceId.json"
+          },
           "VirtualMachineScaleSetVM_List_MaximumSet_Gen": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_List_MaximumSet_Gen.json"
           },
@@ -7827,6 +7830,9 @@
           }
         },
         "x-ms-examples": {
+          "Get VM scale set Flex VM with VirtualMachineResourceId": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_WithVirtualMachineResourceId.json"
+          },
           "Get VM scale set VM with ResiliencyView": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_Get_WithResilientVMDeletionStatus.json"
           },
@@ -22219,7 +22225,7 @@
         },
         "virtualMachineResourceId": {
           "type": "string",
-          "description": "The identity of the standalone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-11-01",
+          "description": "Specifies the identity of the standaone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-11-01.",
           "readOnly": true
         }
       }
