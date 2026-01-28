@@ -49,6 +49,7 @@ interface Servers {
    * Creates a new server or updates an existing server. The update action will overwrite the existing server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<
     Server,
     Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
@@ -62,6 +63,7 @@ interface Servers {
    * Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("original-uri")
   update is ArmCustomPatchAsync<Server, PatchModel = ServerForUpdate>;
 
   /**

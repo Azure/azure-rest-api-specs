@@ -13,13 +13,10 @@ options:
 
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
     package-name: "Azure.ResourceManager.MySql"
     namespace: "{package-name}.FlexibleServers"
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
-    clear-output-folder: true
-    model-namespace: true
     api-version: "2024-12-30"
   "@azure-tools/typespec-python":
     service-dir: "sdk/mysqlflexibleservers"
@@ -45,7 +42,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/mysql"
     emitter-output-dir: "{output-dir}/{service-dir}/armmysqlflexibleservers"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmysqlflexibleservers"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmysqlflexibleservers/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

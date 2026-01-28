@@ -1,0 +1,259 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01",
+    "edgeDeviceName": "default",
+    "resource": {
+      "kind": "HCI",
+      "properties": {
+        "deviceConfiguration": {
+          "deviceMetadata": "",
+          "nicDetails": [
+            {
+              "adapterName": "ethernet",
+              "componentId": "VMBUS{f8615163-df3e-46c5-913f-f2d2f965ed0g} ",
+              "defaultGateway": "10.10.10.1",
+              "defaultIsolationId": "0",
+              "dnsServers": [
+                "100.10.10.1"
+              ],
+              "driverVersion": "10.0.20348.1547 ",
+              "interfaceDescription": "NDIS 6.70 ",
+              "ip4Address": "10.10.10.10",
+              "subnetMask": "255.255.255.0"
+            }
+          ]
+        }
+      }
+    },
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/edgeDevices",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/providers/Microsoft.AzureStackHCI/edgeDevices/default",
+        "kind": "HCI",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "reportedProperties": {
+            "deviceState": "Connected",
+            "networkProfile": {
+              "hostNetwork": {
+                "enableStorageAutoIp": false,
+                "intents": [
+                  {
+                    "adapterPropertyOverrides": {
+                      "jumboPacket": null,
+                      "networkDirect": "0",
+                      "networkDirectTechnology": null
+                    },
+                    "intentAdapters": [
+                      "ethernet",
+                      "ethernet2"
+                    ],
+                    "intentName": "managementcomputestorage",
+                    "intentType": 14,
+                    "isComputeIntentSet": true,
+                    "isManagementIntentSet": true,
+                    "isNetworkIntentType": true,
+                    "isOnlyStorage": false,
+                    "isOnlyStretch": false,
+                    "isStorageIntentSet": true,
+                    "isStretchIntentSet": false,
+                    "overrideAdapterProperty": true,
+                    "overrideQosPolicy": true,
+                    "overrideVirtualSwitchConfiguration": true,
+                    "qosPolicyOverrides": {
+                      "bandwidthPercentage_SMB": null,
+                      "priorityValue8021Action_Cluster": null,
+                      "priorityValue8021Action_SMB": null
+                    },
+                    "scope": 0,
+                    "virtualSwitchConfigurationOverrides": {
+                      "enableIov": "True",
+                      "loadBalancingAlgorithm": "HyperVPort"
+                    }
+                  }
+                ],
+                "storageConnectivitySwitchless": false,
+                "storageNetworks": [
+                  {
+                    "name": "StorageIntent1",
+                    "networkAdapterName": "ethernet",
+                    "storageAdapterIPInfo": [
+                      {
+                        "ipv4Address": "192.168.120.192",
+                        "physicalNode": "v-host1",
+                        "subnetMask": "255.255.244.0"
+                      }
+                    ],
+                    "storageVlanId": "8"
+                  }
+                ]
+              },
+              "nicDetails": [
+                {
+                  "adapterName": "vmanagement",
+                  "componentId": "vms_mp",
+                  "defaultGateway": "192.168.200.1",
+                  "defaultIsolationId": "0",
+                  "dnsServers": [
+                    "192.168.200.222"
+                  ],
+                  "driverVersion": "10.0.25398.1",
+                  "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
+                  "ip4Address": "192.168.200.92",
+                  "macAddress": "000000000041",
+                  "nicStatus": "Up",
+                  "nicType": "Virtual",
+                  "slot": "0",
+                  "subnetMask": "255.255.255.0",
+                  "switchName": null,
+                  "vlanId": "0"
+                }
+              ],
+              "switchDetails": [
+                {
+                  "switchName": "vmanagement",
+                  "switchType": "External"
+                }
+              ]
+            },
+            "osProfile": {
+              "assemblyVersion": "2402.1",
+              "bootType": "UEFI"
+            },
+            "sbeDeploymentPackageInfo": {
+              "code": "NewerThanLatestPublished",
+              "message": "The SBE package at path 'C:\\SBE' with version 4.1.2312.10 is published later than the latest SBE manifest published for online discovery. ",
+              "sbeManifest": "PEFwcGxpY2Fi"
+            }
+          }
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/edgeDevices",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/providers/Microsoft.AzureStackHCI/edgeDevices/default",
+        "kind": "HCI",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "reportedProperties": {
+            "deviceState": "Connected",
+            "networkProfile": {
+              "hostNetwork": {
+                "enableStorageAutoIp": false,
+                "intents": [
+                  {
+                    "adapterPropertyOverrides": {
+                      "jumboPacket": null,
+                      "networkDirect": "0",
+                      "networkDirectTechnology": null
+                    },
+                    "intentAdapters": [
+                      "ethernet",
+                      "ethernet2"
+                    ],
+                    "intentName": "managementcomputestorage",
+                    "intentType": 14,
+                    "isComputeIntentSet": true,
+                    "isManagementIntentSet": true,
+                    "isOnlyStorage": false,
+                    "isOnlyStretch": false,
+                    "isStorageIntentSet": true,
+                    "isStretchIntentSet": false,
+                    "overrideAdapterProperty": true,
+                    "overrideQosPolicy": true,
+                    "overrideVirtualSwitchConfiguration": true,
+                    "qosPolicyOverrides": {
+                      "bandwidthPercentage_SMB": null,
+                      "priorityValue8021Action_Cluster": null,
+                      "priorityValue8021Action_SMB": null
+                    },
+                    "scope": 0,
+                    "virtualSwitchConfigurationOverrides": {
+                      "enableIov": "True",
+                      "loadBalancingAlgorithm": "HyperVPort"
+                    }
+                  }
+                ],
+                "storageConnectivitySwitchless": false,
+                "storageNetworks": [
+                  {
+                    "name": "StorageIntent1",
+                    "networkAdapterName": "ethernet",
+                    "storageAdapterIPInfo": [
+                      {
+                        "ipv4Address": "192.168.120.192",
+                        "physicalNode": "v-host1",
+                        "subnetMask": "255.255.244.0"
+                      }
+                    ],
+                    "storageVlanId": "8"
+                  }
+                ]
+              },
+              "nicDetails": [
+                {
+                  "adapterName": "vmanagement",
+                  "componentId": "vms_mp",
+                  "defaultGateway": "192.168.200.1",
+                  "defaultIsolationId": "0",
+                  "dnsServers": [
+                    "192.168.200.222"
+                  ],
+                  "driverVersion": "10.0.25398.1",
+                  "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
+                  "ip4Address": "192.168.200.92",
+                  "macAddress": "000000000041",
+                  "nicStatus": "Up",
+                  "nicType": "Virtual",
+                  "slot": "0",
+                  "subnetMask": "255.255.255.0",
+                  "switchName": null,
+                  "vlanId": "0"
+                }
+              ],
+              "switchDetails": [
+                {
+                  "switchName": "vmanagement",
+                  "switchType": "External"
+                }
+              ]
+            },
+            "osProfile": {
+              "assemblyVersion": "2402.1",
+              "bootType": "UEFI"
+            },
+            "sbeDeploymentPackageInfo": {
+              "code": "NewerThanLatestPublished",
+              "message": "The SBE package at path 'C:\\SBE' with version 4.1.2312.10 is published later than the latest SBE manifest published for online discovery. ",
+              "sbeManifest": "PEFwcGxpY2Fi"
+            }
+          }
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "EdgeDevices_CreateOrUpdate",
+  "title": "Create HCI Edge Device"
+}
