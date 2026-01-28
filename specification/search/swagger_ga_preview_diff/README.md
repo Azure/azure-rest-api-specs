@@ -22,18 +22,22 @@ pip install -r requirements.txt
 
 ### Overview
 
-Generates a comprehensive Excel workbook comparing GA (2025-09-01) against Preview (2025-11-01-preview) with two focused sheets:
+Generates a comprehensive Excel workbook with two focused sheets comparing three swagger versions:
+
+**Comparisons (Nov preview is source of truth):**
+- GA (2025-09-01) vs Nov Preview (2025-11-01-preview) - for GA scoping
+- Aug Preview (2025-08-01-preview) vs Nov Preview (2025-11-01-preview) - to distinguish truly new from preview-only features
 
 **Sheet 1: Routes Diff**
 - One row per Preview operation
 - Shows route-level differences only (parameters, responses)
 - Does NOT include model/schema changes
-- Columns: Spec, Path, Method, Operation ID, GA Presence, Detail Diff, Decision
+- Columns include both GA and Aug preview comparisons
 
 **Sheet 2: Models Diff**
 - One row per model/property change
 - Shows schema-level differences (types, required fields, etc.)
-- Columns: Spec, Model Name, Property Name, Change Type, GA Value, Preview Value, Impact, Decision
+- Columns include both GA and Aug preview comparisons
 
 ### Usage
 
@@ -58,7 +62,9 @@ Creates **`ga_preview_diff_YYYYMMDD_HHMMSS.xlsx`** with two sheets.
 | **Method** | HTTP method | GET, POST, PUT, DELETE |
 | **Operation ID** | Operation identifier | `KnowledgeBases_Get` |
 | **2025-09-01 GA Presence** | GA comparison | `present in 2025-09-01`<br/>`new in 2025-11-01-preview` |
-| **Detail Diff** | Route changes only | `new operation`<br/>`no changes for existing operation`<br/>`Parameters: + query: ignoreResetRequirements (optional) boolean` |
+| **Detail Diff** | Route changes vs GA | `new operation`<br/>`no changes for existing operation`<br/>`Parameters: + query: ignoreResetRequirements (optional) boolean` |
+| **2025-08-01-preview Presence** | Aug preview comparison | `present in 2025-08-01-preview`<br/>`new in 2025-11-01-preview` |
+| **Detailed Diff from 2025-08-01-preview** | Route changes vs Aug preview | `new operation`<br/>`no changes from 2025-08-01-preview`<br/>`Parameters: + query: speller (optional) string` |
 | **2026-04-01 GA Decision** | Manual review | (blank - for team input) |
 
 **Detail Diff Rules:**
@@ -80,6 +86,8 @@ Creates **`ga_preview_diff_YYYYMMDD_HHMMSS.xlsx`** with two sheets.
 | **2025-09-01 GA** | GA value | `(not present)`, `string (required)`, `integer (optional)` |
 | **2025-11-01-preview** | Preview value | `new model`, `array of string (required)`, `(not present)` |
 | **Impact Surface** | Breaking analysis | `breaking`, `non-breaking`, `unknown` |
+| **2025-08-01-preview Presence** | Aug preview comparison | `present in 2025-08-01-preview`<br/>`new in 2025-11-01-preview` |
+| **Detailed Diff from 2025-08-01-preview** | Model changes vs Aug preview | `new model`<br/>`no changes from 2025-08-01-preview`<br/>`property added in Nov vs Aug (optional)` |
 | **2026-04-01 GA Decision** | Manual review | (blank - for team input) |
 
 **Impact Rules:**

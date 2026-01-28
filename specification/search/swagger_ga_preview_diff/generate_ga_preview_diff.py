@@ -1,13 +1,17 @@
 """
 GA vs Preview Diff Report Generator
 
-Generates a single Excel workbook with two sheets comparing GA vs Preview swagger:
+Generates a single Excel workbook with two sheets comparing swagger versions:
 1. Routes Diff - Operation-level differences
 2. Models Diff - Schema/model-level differences
 
-Comparison:
-- GA: 2025-09-01
-- Preview: 2025-11-01-preview (source of truth)
+Comparisons (Nov preview is source of truth):
+- GA (2025-09-01) vs Nov Preview (2025-11-01-preview)
+- Aug Preview (2025-08-01-preview) vs Nov Preview (2025-11-01-preview)
+
+Each sheet includes columns for both comparisons to help identify:
+- What's new in Nov preview vs GA (for GA scoping)
+- What's new in Nov preview vs Aug preview (to distinguish truly new from preview-only features)
 
 Usage:
     python generate_ga_preview_diff.py
@@ -46,7 +50,15 @@ GA_PATHS = {
     "searchindex": SPEC_ROOT / "data-plane/Search/stable/2025-09-01/searchindex.json",
 }
 
-# Preview paths (2025-11-01-preview)
+# Aug Preview paths (2025-08-01-preview)
+AUG_PREVIEW_PATHS = {
+    "searchservice": SPEC_ROOT
+    / "data-plane/Search/preview/2025-08-01-preview/searchservice.json",
+    "searchindex": SPEC_ROOT
+    / "data-plane/Search/preview/2025-08-01-preview/searchindex.json",
+}
+
+# Nov Preview paths (2025-11-01-preview)
 PREVIEW_PATHS = {
     "searchservice": SPEC_ROOT
     / "data-plane/Search/preview/2025-11-01-preview_unmigrated/searchservice.json",
@@ -185,71 +197,73 @@ def extract_operations(swagger: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
 # ============================================================================
 
 
-def compute_route_diff(
-    preview_op: Dict[str, Any],
-    ga_op: Optional[Dict[str, Any]],
-    preview_swagger: Dict[str, Any],
-    ga_swagger: Optional[Dict[str, Any]],
+def compute_route_diff_generic(
+    nov_op: Dict[str, Any],
+    baseline_op: Optional[Dict[str, Any]],
+    nov_swagger: Dict[str, Any],
+    baseline_swagger: Optional[Dict[str, Any]],
+    baseline_label: str,  # e.g., "2025-09-01" or "2025-08-01-preview"
 ) -> Tuple[str, str]:
     """
-    Compute route-level differences between preview and GA operations.
+    Compute route-level differences between Nov preview and a baseline.
+
+    Args:
+        nov_op: Nov preview operation
+        baseline_op: Baseline operation (GA or Aug preview)
+        nov_swagger: Nov preview swagger
+        baseline_swagger: Baseline swagger
+        baseline_label: Label for presence string (e.g., "2025-09-01")
 
     Returns:
-    - presence: "present in 2025-09-01" or "new in 2025-11-01-preview"
-    - detail_diff: Description of route-level changes (parameters, responses)
-
-    Rules:
-    - Only include route-level diffs (params, responses)
-    - Do NOT include model/schema changes
-    - For new operations: "new operation"
-    - For unchanged: "no changes for existing operation"
-    - For changed: List specific additions/removals
+        - presence: "present in {baseline_label}" or "new in 2025-11-01-preview"
+        - detail_diff: Description of route-level changes
     """
-    if ga_op is None:
-        return "new in 2025-11-01-preview", "new operation"
+    if baseline_op is None:
+        return f"new in 2025-11-01-preview", "new operation"
 
-    presence = "present in 2025-09-01"
+    presence = f"present in {baseline_label}"
     changes = []
 
-    # Compare parameters (names and locations only, not types/schemas)
-    preview_params = preview_op["parameters"]
-    ga_params = ga_op["parameters"]
+    # Compare parameters
+    nov_params = nov_op["parameters"]
+    baseline_params = baseline_op["parameters"]
 
-    preview_param_sigs = {
-        get_param_signature(p, preview_swagger) for p in preview_params
+    nov_param_sigs = {get_param_signature(p, nov_swagger) for p in nov_params}
+    baseline_param_sigs = {
+        get_param_signature(p, baseline_swagger) for p in baseline_params
     }
-    ga_param_sigs = {get_param_signature(p, ga_swagger) for p in ga_params}
 
-    added_params = preview_param_sigs - ga_param_sigs
-    removed_params = ga_param_sigs - preview_param_sigs
+    added_params = nov_param_sigs - baseline_param_sigs
+    removed_params = baseline_param_sigs - nov_param_sigs
 
     if added_params or removed_params:
         param_changes = []
         if added_params:
             for sig in sorted(added_params):
-                # Find the actual param to format nicely
-                for p in preview_params:
-                    if get_param_signature(p, preview_swagger) == sig:
+                for p in nov_params:
+                    if get_param_signature(p, nov_swagger) == sig:
                         param_changes.append(
-                            f"+ {format_param_display(p, preview_swagger)}"
+                            f"+ {format_param_display(p, nov_swagger)}"
                         )
                         break
         if removed_params:
             for sig in sorted(removed_params):
-                for p in ga_params:
-                    if get_param_signature(p, ga_swagger) == sig:
-                        param_changes.append(f"- {format_param_display(p, ga_swagger)}")
+                for p in baseline_params:
+                    if get_param_signature(p, baseline_swagger) == sig:
+                        param_changes.append(
+                            f"- {format_param_display(p, baseline_swagger)}"
+                        )
                         break
 
         if param_changes:
             changes.append("Parameters: " + "; ".join(param_changes))
 
     # Compare response status codes
-    preview_responses = set(preview_op["responses"].keys())
-    ga_responses = set(ga_op["responses"].keys())
+    nov_responses = set(nov_op["responses"].keys())
+    baseline_responses = set(baseline_op["responses"].keys())
 
-    added_responses = preview_responses - ga_responses
-    removed_responses = ga_responses - preview_responses
+    added_responses = nov_responses - baseline_responses
+    removed_responses = baseline_responses - nov_responses
 
     if added_responses or removed_responses:
         resp_changes = []
@@ -265,11 +279,29 @@ def compute_route_diff(
 
     # Build detail diff
     if not changes:
-        detail_diff = "no changes for existing operation"
+        if "2025-08" in baseline_label:
+            detail_diff = "no changes from 2025-08-01-preview"
+        else:
+            detail_diff = "no changes for existing operation"
     else:
         detail_diff = " | ".join(changes)
 
     return presence, detail_diff
+
+
+def compute_route_diff(
+    preview_op: Dict[str, Any],
+    ga_op: Optional[Dict[str, Any]],
+    preview_swagger: Dict[str, Any],
+    ga_swagger: Optional[Dict[str, Any]],
+) -> Tuple[str, str]:
+    """
+    Compute route-level differences between preview and GA operations.
+    (Wrapper for backward compatibility)
+    """
+    return compute_route_diff_generic(
+        preview_op, ga_op, preview_swagger, ga_swagger, "2025-09-01"
+    )
 
 
 # ============================================================================
@@ -307,6 +339,251 @@ def get_property_type(prop_schema: Dict[str, Any], swagger: Dict[str, Any]) -> s
 # ============================================================================
 # MODELS DIFF COMPUTATION
 # ============================================================================
+
+
+def compute_single_model_diff(
+    model_name: str,
+    prop_name: str,
+    nov_model: Optional[Dict[str, Any]],
+    baseline_model: Optional[Dict[str, Any]],
+    nov_swagger: Dict[str, Any],
+    baseline_swagger: Dict[str, Any],
+    baseline_label: str,  # "GA" or "Aug"
+) -> str:
+    """
+    Compute a concise diff description for Aug preview comparison.
+
+    Returns: One-line description relative to the baseline (Aug or GA)
+    """
+    # Model-level diff
+    if not prop_name:
+        if nov_model and not baseline_model:
+            return "new model"
+        elif baseline_model and not nov_model:
+            return "model removed in Nov"
+        else:
+            return (
+                "no changes from 2025-08-01-preview"
+                if baseline_label == "Aug"
+                else "no model changes"
+            )
+
+    # Property-level diff
+    if not nov_model or not baseline_model:
+        return ""
+
+    nov_props = nov_model.get("properties", {})
+    baseline_props = baseline_model.get("properties", {})
+
+    nov_required = set(nov_model.get("required", []))
+    baseline_required = set(baseline_model.get("required", []))
+
+    nov_prop = nov_props.get(prop_name)
+    baseline_prop = baseline_props.get(prop_name)
+
+    # New property
+    if nov_prop and not baseline_prop:
+        is_required = prop_name in nov_required
+        return f"property added in Nov vs {baseline_label} ({'required' if is_required else 'optional'})"
+
+    # Removed property
+    if baseline_prop and not nov_prop:
+        return f"property removed in Nov vs {baseline_label}"
+
+    # Property exists in both - check changes
+    if nov_prop and baseline_prop:
+        # Type change
+        nov_type = get_property_type(nov_prop, nov_swagger)
+        baseline_type = get_property_type(baseline_prop, baseline_swagger)
+
+        if nov_type != baseline_type:
+            return (
+                f"type changed in Nov vs {baseline_label}: {baseline_type} → {nov_type}"
+            )
+
+        # Required change
+        was_required = prop_name in baseline_required
+        is_required = prop_name in nov_required
+
+        if was_required != is_required:
+            if is_required:
+                return f"optional → required in Nov vs {baseline_label}"
+            else:
+                return f"required → optional in Nov vs {baseline_label}"
+
+    return f"no changes from 2025-08-01-preview" if baseline_label == "Aug" else ""
+
+
+def compute_model_diffs_unified(
+    nov_models: Dict[str, Dict[str, Any]],
+    sep_models: Dict[str, Dict[str, Any]],
+    aug_models: Dict[str, Dict[str, Any]],
+    nov_swagger: Dict[str, Any],
+    sep_swagger: Dict[str, Any],
+    aug_swagger: Dict[str, Any],
+) -> List[Dict[str, Any]]:
+    """
+    Compute unified model diffs with Nov preview as baseline.
+
+    Returns list of diff records with new structure:
+    - model_name
+    - property_name
+    - nov_value (2025-11-01-preview)
+    - sep_change_type (Change Type Sep vs Nov)
+    - sep_value (2025-09-01 GA)
+    - aug_change_type (Change Type Aug vs Nov)
+    - aug_value (2025-08-01-preview)
+    - sep_impact (Impact Sep vs Nov)
+    """
+    diffs = []
+
+    # Also include models that exist only in Sep or Aug (removed in Nov)
+    all_model_names = set(nov_models.keys()) | set(sep_models.keys()) | set(aug_models.keys())
+
+    for model_name in sorted(all_model_names):
+        nov_model = nov_models.get(model_name)
+        sep_model = sep_models.get(model_name)
+        aug_model = aug_models.get(model_name)
+
+        # Determine if we need model-level rows
+        # We'll process property-level diffs primarily, but add model-level for new/removed models
+
+        if nov_model:
+            # Model exists in Nov - process all its properties
+            nov_props = nov_model.get("properties", {})
+            nov_required = set(nov_model.get("required", []))
+
+            sep_props = sep_model.get("properties", {}) if sep_model else {}
+            sep_required = set(sep_model.get("required", [])) if sep_model else set()
+
+            aug_props = aug_model.get("properties", {}) if aug_model else {}
+            aug_required = set(aug_model.get("required", [])) if aug_model else set()
+
+            # Also check for properties that existed in Sep/Aug but removed in Nov
+            all_props = set(nov_props.keys()) | set(sep_props.keys()) | set(aug_props.keys())
+
+            for prop_name in sorted(all_props):
+                nov_prop = nov_props.get(prop_name)
+                sep_prop = sep_props.get(prop_name)
+                aug_prop = aug_props.get(prop_name)
+
+                # Determine Nov value
+                if nov_prop:
+                    nov_type = get_property_type(nov_prop, nov_swagger)
+                    is_required = prop_name in nov_required
+                    nov_value = f"{nov_type} ({'required' if is_required else 'optional'})"
+                else:
+                    nov_value = "(not present)"
+
+                # Compare with Sep GA
+                sep_change_type = ""
+                sep_value = ""
+                sep_impact = ""
+
+                if nov_prop and not sep_prop:
+                    sep_change_type = "property added"
+                    sep_value = "(not present)"
+                    sep_impact = "breaking" if prop_name in nov_required else "non-breaking"
+                elif sep_prop and not nov_prop:
+                    sep_change_type = "property removed"
+                    sep_type = get_property_type(sep_prop, sep_swagger)
+                    was_required = prop_name in sep_required
+                    sep_value = f"{sep_type} ({'required' if was_required else 'optional'})"
+                    sep_impact = "breaking"
+                elif sep_prop and nov_prop:
+                    # Both exist - check for changes
+                    nov_type = get_property_type(nov_prop, nov_swagger)
+                    sep_type = get_property_type(sep_prop, sep_swagger)
+                    
+                    was_required_sep = prop_name in sep_required
+                    is_required_nov = prop_name in nov_required
+
+                    sep_value = f"{sep_type} ({'required' if was_required_sep else 'optional'})"
+
+                    if nov_type != sep_type:
+                        sep_change_type = "type changed"
+                        sep_impact = "breaking"
+                    elif was_required_sep != is_required_nov:
+                        if is_required_nov:
+                            sep_change_type = "optional → required"
+                            sep_impact = "breaking"
+                        else:
+                            sep_change_type = "required → optional"
+                            sep_impact = "non-breaking"
+                    # If no changes, leave blank
+
+                # Compare with Aug preview
+                aug_change_type = ""
+                aug_value = ""
+
+                if nov_prop and not aug_prop:
+                    aug_change_type = "property added"
+                    aug_value = "(not present)"
+                elif aug_prop and not nov_prop:
+                    aug_change_type = "property removed"
+                    aug_type = get_property_type(aug_prop, aug_swagger)
+                    was_required_aug = prop_name in aug_required
+                    aug_value = f"{aug_type} ({'required' if was_required_aug else 'optional'})"
+                elif aug_prop and nov_prop:
+                    # Both exist - check for changes
+                    nov_type = get_property_type(nov_prop, nov_swagger)
+                    aug_type = get_property_type(aug_prop, aug_swagger)
+                    
+                    was_required_aug = prop_name in aug_required
+                    is_required_nov = prop_name in nov_required
+
+                    aug_value = f"{aug_type} ({'required' if was_required_aug else 'optional'})"
+
+                    if nov_type != aug_type:
+                        aug_change_type = "type changed"
+                    elif was_required_aug != is_required_nov:
+                        if is_required_nov:
+                            aug_change_type = "optional → required"
+                        else:
+                            aug_change_type = "required → optional"
+                    # If no changes, leave blank
+
+                # Only add row if there's at least one change (Sep or Aug)
+                if sep_change_type or aug_change_type:
+                    diffs.append({
+                        "model_name": model_name,
+                        "property_name": prop_name,
+                        "nov_value": nov_value,
+                        "sep_change_type": sep_change_type,
+                        "sep_value": sep_value,
+                        "aug_change_type": aug_change_type,
+                        "aug_value": aug_value,
+                        "sep_impact": sep_impact,
+                    })
+
+            # If model is new in Nov (not in Sep), add a model-level row
+            if not sep_model:
+                diffs.append({
+                    "model_name": model_name,
+                    "property_name": "(model-level)",
+                    "nov_value": "new model",
+                    "sep_change_type": "property added",  # Using "property added" for consistency
+                    "sep_value": "(not present)",
+                    "aug_change_type": "property added" if not aug_model else "",
+                    "aug_value": "(not present)" if not aug_model else "",
+                    "sep_impact": "non-breaking",
+                })
+
+        else:
+            # Model removed in Nov (exists in Sep or Aug but not Nov)
+            if sep_model or aug_model:
+                diffs.append({
+                    "model_name": model_name,
+                    "property_name": "(model-level)",
+                    "nov_value": "(not present)",
+                    "sep_change_type": "property removed" if sep_model else "",
+                    "sep_value": "model exists" if sep_model else "",
+                    "aug_change_type": "property removed" if aug_model else "",
+                    "aug_value": "model exists" if aug_model else "",
+                    "sep_impact": "breaking" if sep_model else "",
+                })
+
+    return diffs
 
 
 def compute_model_diffs(
@@ -477,6 +754,8 @@ def create_routes_sheet(
         "Operation ID",
         "2025-09-01 GA Presence",
         "Detail Diff",
+        "2025-08-01-preview Presence",
+        "Detailed Diff from 2025-08-01-preview",
         "2026-04-01 GA Decision",
     ]
 
@@ -502,7 +781,9 @@ def create_routes_sheet(
         ws.column_dimensions["D"].width = 35  # Operation ID
         ws.column_dimensions["E"].width = 25  # GA Presence
         ws.column_dimensions["F"].width = 60  # Detail Diff
-        ws.column_dimensions["G"].width = 25  # Decision
+        ws.column_dimensions["G"].width = 25  # Aug Preview Presence
+        ws.column_dimensions["H"].width = 60  # Aug Preview Diff
+        ws.column_dimensions["I"].width = 25  # Decision
 
     # Find next row
     next_row = ws.max_row + 1
@@ -519,7 +800,12 @@ def create_routes_sheet(
         detail_cell = ws.cell(row=next_row, column=6, value=diff["detail_diff"])
         detail_cell.alignment = Alignment(wrap_text=True, vertical="top")
 
-        ws.cell(row=next_row, column=7, value="")  # Decision - blank
+        # Aug preview columns
+        ws.cell(row=next_row, column=7, value=diff.get("aug_presence", ""))
+        aug_diff_cell = ws.cell(row=next_row, column=8, value=diff.get("aug_diff", ""))
+        aug_diff_cell.alignment = Alignment(wrap_text=True, vertical="top")
+
+        ws.cell(row=next_row, column=9, value="")  # Decision - blank
 
         # Apply row coloring based on diff type
         row_color = None
@@ -545,7 +831,7 @@ def create_routes_sheet(
             fill = PatternFill(
                 start_color=row_color, end_color=row_color, fill_type="solid"
             )
-            for col in range(1, 8):  # Columns A-G
+            for col in range(1, 10):  # Columns A-I
                 ws.cell(row=next_row, column=col).fill = fill
 
         next_row += 1
@@ -565,10 +851,12 @@ def create_models_sheet(
         "Spec",
         "Model Name",
         "Property Name",
-        "Change Type",
-        "2025-09-01 GA",
-        "2025-11-01-preview",
-        "Impact Surface",
+        "2025-11-01-preview Value",
+        "Change Type (Sep vs Nov)",
+        "2025-09-01 GA Value",
+        "Change Type (Aug vs Nov)",
+        "2025-08-01-preview Value",
+        "Impact (Sep vs Nov)",
         "2026-04-01 GA Decision",
     ]
 
@@ -591,11 +879,13 @@ def create_models_sheet(
         ws.column_dimensions["A"].width = 15  # Spec
         ws.column_dimensions["B"].width = 30  # Model Name
         ws.column_dimensions["C"].width = 25  # Property Name
-        ws.column_dimensions["D"].width = 20  # Change Type
-        ws.column_dimensions["E"].width = 30  # GA
-        ws.column_dimensions["F"].width = 30  # Preview
-        ws.column_dimensions["G"].width = 15  # Impact
-        ws.column_dimensions["H"].width = 25  # Decision
+        ws.column_dimensions["D"].width = 35  # Nov Value
+        ws.column_dimensions["E"].width = 25  # Change Type (Sep vs Nov)
+        ws.column_dimensions["F"].width = 35  # Sep Value
+        ws.column_dimensions["G"].width = 25  # Change Type (Aug vs Nov)
+        ws.column_dimensions["H"].width = 35  # Aug Value
+        ws.column_dimensions["I"].width = 18  # Impact (Sep vs Nov)
+        ws.column_dimensions["J"].width = 25  # Decision
 
     # Find next row
     next_row = ws.max_row + 1
@@ -605,32 +895,34 @@ def create_models_sheet(
         ws.cell(row=next_row, column=1, value=spec_name)
         ws.cell(row=next_row, column=2, value=diff["model_name"])
         ws.cell(row=next_row, column=3, value=diff["property_name"])
-        ws.cell(row=next_row, column=4, value=diff["change_type"])
-        ws.cell(row=next_row, column=5, value=diff["ga_value"])
-        ws.cell(row=next_row, column=6, value=diff["preview_value"])
-        ws.cell(row=next_row, column=7, value=diff["impact"])
-        ws.cell(row=next_row, column=8, value="")  # Decision - blank
+        ws.cell(row=next_row, column=4, value=diff["nov_value"])
+        ws.cell(row=next_row, column=5, value=diff["sep_change_type"])
+        ws.cell(row=next_row, column=6, value=diff["sep_value"])
+        ws.cell(row=next_row, column=7, value=diff["aug_change_type"])
+        ws.cell(row=next_row, column=8, value=diff["aug_value"])
+        ws.cell(row=next_row, column=9, value=diff["sep_impact"])
+        ws.cell(row=next_row, column=10, value="")  # Decision - blank
 
-        # Apply row coloring based on change type and impact
+        # Apply row coloring based on Sep change type and impact
         row_color = None
-        change_type = diff["change_type"]
-        impact = diff["impact"]
+        sep_change_type = diff.get("sep_change_type", "")
+        sep_impact = diff.get("sep_impact", "")
 
         # 1. Potentially breaking model changes (light red)
-        breaking_types = ["removed_property", "type_changed", "removed_model"]
-        if change_type in breaking_types or impact == "breaking":
+        breaking_types = ["property removed", "type changed"]
+        if sep_change_type in breaking_types or sep_impact == "breaking":
             row_color = COLORS["light_red"]
 
         # 2. Compatibility-sensitive changes (light yellow)
-        elif change_type == "added_property" or change_type == "required_changed":
-            # Check if it's adding a required property or making optional -> required
-            if impact == "breaking":
+        elif sep_change_type == "property added" or "→" in sep_change_type:
+            # Check if it's breaking (required changes)
+            if sep_impact == "breaking":
                 row_color = COLORS["light_red"]
-            elif impact == "non-breaking":
+            elif sep_impact == "non-breaking":
                 row_color = COLORS["light_yellow"]
 
-        # 3. Non-breaking additions (light gray for informational)
-        elif change_type == "added_model":
+        # 3. Non-breaking additions at model level (light gray for informational)
+        elif diff["property_name"] == "(model-level)" and sep_change_type == "property added":
             row_color = COLORS["light_gray"]
 
         # Apply color to entire row
@@ -638,7 +930,7 @@ def create_models_sheet(
             fill = PatternFill(
                 start_color=row_color, end_color=row_color, fill_type="solid"
             )
-            for col in range(1, 9):  # Columns A-H
+            for col in range(1, 11):  # Columns A-J
                 ws.cell(row=next_row, column=col).fill = fill
 
         next_row += 1
@@ -692,12 +984,22 @@ def main():
             if not ga_swagger:
                 print(f"  Warning: GA file not found: {ga_path}")
 
+        # Load Aug Preview (may not exist for knowledgebase)
+        aug_swagger = None
+        if spec_name in AUG_PREVIEW_PATHS:
+            aug_path = AUG_PREVIEW_PATHS[spec_name]
+            aug_swagger = load_swagger_file(aug_path)
+            if not aug_swagger:
+                print(f"  Warning: Aug Preview file not found: {aug_path}")
+
         # Extract operations
         preview_ops = extract_operations(preview_swagger)
         ga_ops = extract_operations(ga_swagger) if ga_swagger else {}
+        aug_ops = extract_operations(aug_swagger) if aug_swagger else {}
 
         print(f"  Preview operations: {len(preview_ops)}")
         print(f"  GA operations: {len(ga_ops)}")
+        print(f"  Aug Preview operations: {len(aug_ops)}")
 
         # Compute route diffs
         route_diffs = []
@@ -707,6 +1009,12 @@ def main():
                 preview_op, ga_op, preview_swagger, ga_swagger
             )
 
+            # Also compute Aug preview diff
+            aug_op = aug_ops.get(op_key)
+            aug_presence, aug_diff = compute_route_diff_generic(
+                preview_op, aug_op, preview_swagger, aug_swagger, "2025-08-01-preview"
+            )
+
             route_diffs.append(
                 {
                     "path": preview_op["path"],
@@ -714,6 +1022,8 @@ def main():
                     "operationId": preview_op["operationId"],
                     "presence": presence,
                     "detail_diff": detail_diff,
+                    "aug_presence": aug_presence,
+                    "aug_diff": aug_diff,
                 }
             )
 
@@ -722,13 +1032,20 @@ def main():
         # Extract models
         preview_models = extract_models(preview_swagger)
         ga_models = extract_models(ga_swagger) if ga_swagger else {}
+        aug_models = extract_models(aug_swagger) if aug_swagger else {}
 
         print(f"  Preview models: {len(preview_models)}")
         print(f"  GA models: {len(ga_models)}")
+        print(f"  Aug Preview models: {len(aug_models)}")
 
-        # Compute model diffs
-        model_diffs = compute_model_diffs(
-            preview_models, ga_models, preview_swagger, ga_swagger
+        # Compute unified model diffs with new structure
+        model_diffs = compute_model_diffs_unified(
+            preview_models,
+            ga_models,
+            aug_models,
+            preview_swagger,
+            ga_swagger if ga_swagger else {},
+            aug_swagger if aug_swagger else {},
         )
 
         print(f"  Model diffs: {len(model_diffs)}")
