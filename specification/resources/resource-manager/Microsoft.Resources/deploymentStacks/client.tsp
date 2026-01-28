@@ -14,3 +14,55 @@ using Microsoft.Resources.DeploymentStacks;
 @@alternateType(DeploymentStackProperties.outputs, unknown, "go");
 @@alternateType(DeploymentStackTemplateDefinition.template, unknown, "go");
 @@alternateType(ResourceReference.identifiers, unknown, "go");
+
+/**
+ * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
+ */
+union UnmanageActionManagementGroupMode {
+  string,
+
+  /** Delete the specified resources from Azure */
+  Delete: "delete",
+
+  /** Keep the specified resources in Azure */
+  Detach: "detach",
+}
+
+/**
+ * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
+ */
+union UnmanageActionResourceMode {
+  string,
+
+  /** Delete the specified resources from Azure */
+  Delete: "delete",
+
+  /** Keep the specified resources in Azure */
+  Detach: "detach",
+}
+
+/**
+ * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
+ */
+union UnmanageActionResourceGroupMode {
+  string,
+
+  /** Delete the specified resources from Azure */
+  Delete: "delete",
+
+  /** Keep the specified resources in Azure */
+  Detach: "detach",
+}
+
+@@alternateType(ActionOnUnmanageDeleteParameters.unmanageActionResources,
+  UnmanageActionResourceMode,
+  "javascript"
+);
+@@alternateType(ActionOnUnmanageDeleteParameters.unmanageActionResourceGroups,
+  UnmanageActionResourceGroupMode,
+  "javascript"
+);
+@@alternateType(ActionOnUnmanageDeleteParameters.unmanageActionManagementGroups,
+  UnmanageActionManagementGroupMode,
+  "javascript"
+);
