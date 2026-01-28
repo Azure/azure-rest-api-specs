@@ -19,7 +19,7 @@ She wants to discover what customer datasets are available, understand their str
 and identify the data owners.
 
 ### **Prerequisites**
-- Purview Data Catalog endpoint configured
+- Purview Unified Catalog endpoint configured
 - Authentication credentials (Azure AD token or service principal)
 - Basic understanding of REST APIs
 
