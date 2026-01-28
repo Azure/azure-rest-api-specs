@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "accountName": "my-cognitive-account",
+    "api-version": "2026-01-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-account/computes/testcompute1",
+            "name": "testcompute1",
+            "type": "Microsoft.CognitiveServices/accounts/computes",
+            "location": "eastus",
+            "tags": {
+              "environment": "test"
+            },
+            "properties": {
+              "description": "Test foundry compute cluster 1",
+              "computeLocation": "eastus",
+              "provisioningState": "Succeeded",
+              "createdOn": "2024-01-01T00:00:00.000Z",
+              "modifiedOn": "2024-01-01T00:00:00.000Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-account/computes/testcompute2",
+            "name": "testcompute2",
+            "type": "Microsoft.CognitiveServices/accounts/computes",
+            "location": "eastus",
+            "tags": {
+              "environment": "production"
+            },
+            "properties": {
+              "description": "Compute cluster for AI workloads",
+              "computeLocation": "eastus",
+              "provisioningState": "Succeeded",
+              "createdOn": "2024-01-02T00:00:00.000Z",
+              "modifiedOn": "2024-01-02T00:00:00.000Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-account/computes?api-version=2026-01-15-preview&$skiptoken=xyz"
+      }
+    }
+  }
+}

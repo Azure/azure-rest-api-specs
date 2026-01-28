@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "accountName": "cognitive-account-name",
+    "ruleName": "rule_name_1",
+    "managedNetworkName": "default",
+    "api-version": "2026-01-15-preview",
+    "body": {
+      "properties": {
+        "type": "FQDN",
+        "destination": "destination_endpoint",
+        "status": "Active",
+        "category": "UserDefined"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "example_location"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/cognitive-account-name/managedNetworks/default/outboundRules/rule_name_1",
+        "name": "rule_name_1",
+        "type": "accounts/outboundRules",
+        "properties": {
+          "type": "FQDN",
+          "destination": "destination_endpoint",
+          "status": "Active",
+          "category": "UserDefined",
+          "errorInformation": null
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/cognitive-account-name/managedNetworks/default/outboundRules/rule_name_1",
+        "name": "rule_name_1",
+        "type": "accounts/outboundRules",
+        "properties": {
+          "type": "FQDN",
+          "destination": "destination_endpoint",
+          "status": "Active",
+          "category": "UserDefined",
+          "errorInformation": null
+        }
+      }
+    }
+  }
+}
