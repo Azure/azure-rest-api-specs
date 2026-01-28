@@ -2766,7 +2766,7 @@ model HostEndpointSettings {
   /**
    * Specifies the reference to the InVMAccessControlProfileVersion resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Mactching case of the property in the original spec"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching case of the property in the original spec"
   inVMAccessControlProfileReferenceId?: Azure.Core.armResourceIdentifier;
 }
 
