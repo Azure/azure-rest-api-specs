@@ -66,3 +66,7 @@ union UnmanageActionResourceGroupMode {
   UnmanageActionManagementGroupMode,
   "javascript"
 );
+// Java SDK: Mitigate breaks from TypeSpec migration
+@@alternateType(DeploymentStackProperties.template, unknown, "java");
+@@alternateType(DeploymentStackProperties.outputs, unknown, "java");
+@@alternateType(DeploymentStackTemplateDefinition.template, unknown, "java");
