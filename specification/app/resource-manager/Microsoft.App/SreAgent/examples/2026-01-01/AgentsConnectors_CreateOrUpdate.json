@@ -1,0 +1,72 @@
+{
+  "title": "AgentsConnectors_CreateOrUpdate",
+  "operationId": "AgentsConnectors_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentName": "testAgent",
+    "connectorName": "new-sql-connector",
+    "api-version": "2026-01-01",
+    "resource": {
+      "properties": {
+        "dataConnectorType": "SqlServer",
+        "endpoint": "https://newserver.database.windows.net",
+        "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
+        "extendedProperties": {
+          "AuthType": "Custom",
+          "CustomHeader": {
+            "DD_API_KEY": "value 1",
+            "DD_APPLICATION_KEY": "value 2"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent/connectors/new-sql-connector",
+        "name": "new-sql-connector",
+        "type": "Microsoft.App/agents/connectors",
+        "properties": {
+          "dataConnectorType": "SqlServer",
+          "endpoint": "https://newserver.database.windows.net",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
+          "provisioningState": "Succeeded",
+          "source": "Agent",
+          "extendedProperties": {
+            "AuthType": "Custom",
+            "CustomHeader": {
+              "DD_API_KEY": "value 1",
+              "DD_APPLICATION_KEY": "value 2"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012"
+      },
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent/connectors/new-sql-connector",
+        "name": "new-sql-connector",
+        "type": "Microsoft.App/agents/connectors",
+        "properties": {
+          "dataConnectorType": "SqlServer",
+          "endpoint": "https://newserver.database.windows.net",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
+          "source": "Agent",
+          "extendedProperties": {
+            "AuthType": "Custom",
+            "CustomHeader": {
+              "DD_API_KEY": "value 1",
+              "DD_APPLICATION_KEY": "value 2"
+            }
+          },
+          "provisioningState": "InProgress"
+        }
+      }
+    }
+  }
+}

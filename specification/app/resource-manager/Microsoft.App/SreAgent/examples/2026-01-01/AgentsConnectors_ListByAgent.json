@@ -1,0 +1,67 @@
+{
+  "title": "AgentsConnectors_ListByAgent",
+  "operationId": "AgentsConnectors_ListByAgent",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentName": "testAgent",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent/connectors/sql-connector",
+            "name": "sql-connector",
+            "type": "Microsoft.App/agents/connectors",
+            "properties": {
+              "dataConnectorType": "SqlServer",
+              "endpoint": "https://sqlserver.database.windows.net",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
+              "source": "Agent",
+              "extendedProperties": {
+                "AuthType": "Custom",
+                "CustomHeader": {
+                  "DD_API_KEY": "value 1",
+                  "DD_APPLICATION_KEY": "value 2"
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent/connectors/storage-connector",
+            "name": "storage-connector",
+            "type": "Microsoft.App/agents/connectors",
+            "properties": {
+              "dataConnectorType": "AzureStorage",
+              "endpoint": "https://teststorage.blob.core.windows.net",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/storageIdentity",
+              "source": "AgentSpace",
+              "extendedProperties": {
+                "environment": "production",
+                "owner": "alice",
+                "additionalEndpoints": [
+                  "https://foo.kusto.windows.net/databasename",
+                  "https://bar.kusto.windows.net/databasename"
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent/connectors/cosmos-connector",
+            "name": "cosmos-connector",
+            "type": "Microsoft.App/agents/connectors",
+            "properties": {
+              "dataConnectorType": "CosmosDB",
+              "endpoint": "https://testcosmos.documents.azure.com:443/",
+              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cosmosIdentity",
+              "source": "Agent"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
