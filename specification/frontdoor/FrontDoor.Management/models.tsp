@@ -3232,7 +3232,7 @@ model LatencyScorecard extends Resource {
 /**
  * Defines a the properties of a Timeseries query parameters
  */
-model GetTimeseriesParameters {
+alias GetTimeseriesParameters {
   /**
    * The start DateTime of the Timeseries in UTC
    */
@@ -3275,7 +3275,7 @@ model GetTimeseriesParameters {
 /**
  * Defines a the properties of a Latency Scorecard query parameters
  */
-model GetLatencyScorecardsParameters {
+alias GetLatencyScorecardsParameters {
   /**
    * The end DateTime of the Latency Scorecard in UTC
    */
