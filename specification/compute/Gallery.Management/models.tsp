@@ -2802,6 +2802,63 @@ model LatestGalleryImageVersion {
 }
 
 /**
+ * The shared gallery hosting subscription's properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_03)
+model SharedGallerySubscriptionProperties {
+  /**
+   * id of the subscription that hosts the shared gallery.
+   */
+  id?: string;
+}
+
+/**
+ * This property specifies the share invite status. Possible values are: **Pending,** **Accepted,** **Rejected.**
+ */
+union ShareInviteStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Accepted: "Accepted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Rejected: "Rejected",
+}
+
+/**
+ * The shared gallery invite's properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_03)
+model SharedGalleryInviteProperties {
+  /**
+   * The type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**
+   */
+  type?: SharingProfileGroupTypes;
+
+  /**
+   * id of the subscription that hosts the shared gallery.
+   */
+  sharedGallerySubscriptionId?: string;
+
+  /**
+   * shared gallery name that was originally shared.
+   */
+  sharedGalleryName?: string;
+
+  /**
+   * location of the shared gallery.
+   */
+  location?: string;
+
+  /**
+   * The status of the invite. Possible values are: **Pending,** **Accepted,** **Rejected.**
+   */
+  status?: ShareInviteStatus;
+}
+
+/**
  * Concrete proxy resource types can be created by aliasing this type using a specific property type.
  *
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
