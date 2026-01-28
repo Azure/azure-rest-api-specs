@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Versioning;
 
 namespace Microsoft.Batch;
 /**
@@ -46,6 +47,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_06_01)
   get is ArmResourceRead<
     Certificate,
     Response = ArmResponse<Certificate> & {
@@ -63,6 +65,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_06_01)
   create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Certificate,
     Request = CertificateCreateOrUpdateParameters,
@@ -95,6 +98,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_06_01)
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Certificate,
@@ -122,6 +126,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_06_01)
   delete is ArmResourceDeleteWithoutOkAsync<
     Certificate,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -132,6 +137,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_06_01)
   listByBatchAccount is ArmResourceListByParent<
     Certificate,
     Parameters = {
@@ -163,6 +169,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_06_01)
   @action("cancelDelete")
   cancelDeletion is ArmResourceActionSync<
     Certificate,
