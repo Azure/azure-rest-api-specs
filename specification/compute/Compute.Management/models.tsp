@@ -1150,6 +1150,7 @@ union HighSpeedInterconnectPlacement {
 /**
  * The action that will be taken on a target resource in a lifecycle hook event.
  */
+@added(Versions.v2025_11_01)
 union LifecycleHookAction {
   string,
 
@@ -1160,6 +1161,7 @@ union LifecycleHookAction {
 /**
  * Describes a lifecycle hook.
  */
+@added(Versions.v2025_11_01)
 model LifecycleHook {
   /**
    * Specifies the type of the lifecycle hook.
@@ -1180,6 +1182,7 @@ model LifecycleHook {
 /**
  * Specifies the lifecycle hooks profile for the virtual machine scale set.
  */
+@added(Versions.v2025_11_01)
 model LifecycleHooksProfile {
   /**
    * Specifies the lifecycle hooks configured for the virtual machine scale set.
@@ -1191,6 +1194,7 @@ model LifecycleHooksProfile {
 /**
  * Approval status of a target resource in a VMScaleSet lifecycle hook event.
  */
+@added(Versions.v2025_11_01)
 union LifecycleHookActionState {
   string,
 
@@ -1204,6 +1208,7 @@ union LifecycleHookActionState {
 /**
  * The states that a VMScaleSet lifecycle hook event can be in. This is not settable by the customer. It is set only by the VMSS platform.
  */
+@added(Versions.v2025_11_01)
 union VMScaleSetLifecycleHookEventState {
   string,
 
@@ -1217,6 +1222,7 @@ union VMScaleSetLifecycleHookEventState {
 /**
  * Define a single target resource in a lifecycle hook event. Currently, the resource can either be a VMSS or a VMSS VM.
  */
+@added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventTargetResource {
   /**
    * Specifies the target ARM resource. Currently, can be a VMSS resource or an individual VM resource in a VMSS.
@@ -1239,6 +1245,7 @@ model VMScaleSetLifecycleHookEventTargetResource {
  * Defines the VMScaleSet lifecycle hook event properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventProperties {
   /**
    * Defines the type or scenario for sending a lifecycle hook notification to the customer.
