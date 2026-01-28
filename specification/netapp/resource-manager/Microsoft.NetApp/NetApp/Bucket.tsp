@@ -470,15 +470,15 @@ model BucketGenerateCredentials {
   /**
    * The Access Key that is required along with the Secret Key to access the bucket.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property as @secret if this value should be kept private"
   @visibility(Lifecycle.Read)
+  @secret
   accessKey?: string;
 
   /**
    * The Secret Key that is required along with the Access Key to access the bucket.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property as @secret if this value should be kept private"
   @visibility(Lifecycle.Read)
+  @secret
   secretKey?: string;
 
   /**
