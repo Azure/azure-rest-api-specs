@@ -353,7 +353,7 @@ model StructuredInputDefinition {
   default_value?: unknown;
 
   @doc("The JSON schema for the structured input (optional).")
-  schema?: unknown;
+  schema?: Record<unknown>;
 
   @doc("Whether the input property is required when the agent is invoked.")
   required?: boolean = false;

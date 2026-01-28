@@ -342,7 +342,7 @@ namespace Azure.AI.Projects {
        * The parameters the functions accepts, described as a JSON Schema object.
        */
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
-      parameters: unknown;
+      parameters: Record<unknown>;
     };
 
     /**
@@ -404,7 +404,7 @@ namespace Azure.AI.Projects {
        * The parameters the functions accepts, described as a JSON Schema object.
        */
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
-      parameters: unknown;
+      parameters: Record<unknown>;
     }[];
   }
 
@@ -650,7 +650,7 @@ namespace Azure.AI.Projects {
     /**
      * The JSON schema for the structured output.
      */
-    schema: unknown;
+    schema: Record<unknown>;
 
     @doc("""
       Whether to enforce strict validation. Default `true`.
