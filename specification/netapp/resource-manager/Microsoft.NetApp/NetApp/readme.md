@@ -612,4 +612,34 @@ suppressions:
     from: netapp.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent"].post
+
+  - code: PostResponseCodes
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/generateAkvCredentials"].post
+
+  - code: PostResponseCodes
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/refreshCertificate"].post
+
+  - code: PostResponseCodes
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/ransomwareReports/{ransomwareReportName}/clearSuspects"].post
+
+  - code: XMSSecretInResponse
+    reason: accessKey is not a secret - Customers can use this to get the actual secret that is stored in Azure Key Vault if they have access to that KeyVault.
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/generateCredentials"].post.responses["200"].schema.properties.accessKey
+
+  - code: XMSSecretInResponse
+    reason: secretKey is not a secret - Customers can use this to get the actual secret that is stored in Azure Key Vault if they have access to that KeyVault.
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/generateCredentials"].post.responses["200"].schema.properties.secretKey
 ```
