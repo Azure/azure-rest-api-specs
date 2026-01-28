@@ -20,12 +20,10 @@ options:
     generate-test: true
     generate-sample: true
     flavor: azure
-  # "@azure-tools/typespec-csharp":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/Azure.PlanetaryComputer"
-  #   clear-output-folder: true
-  #   model-namespace: false
-  #   namespace: "{package-dir}"
-  #   flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Analytics.PlanetaryComputer
+    model-namespace: false
   # "@azure-tools/typespec-ts":
   #   package-dir: "planetarycomputer-rest"
   #   is-modular-library: false
