@@ -8022,9 +8022,426 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}": {
+      "put": {
+        "tags": [
+          "FoundryCompute"
+        ],
+        "operationId": "FoundryCompute_CreateOrUpdate",
+        "description": "Creates or updates foundry compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.",
+        "x-ms-examples": {
+          "Create or update FoundryCompute": {
+            "$ref": "./examples/FoundryCompute_CreateOrUpdate.json"
+          },
+          "Create or update Kubernetes compute": {
+            "$ref": "./examples/FoundryCompute_CreateOrUpdate_Kubernetes.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/computeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "computeResourceDescription",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FoundryComputeResource"
+            },
+            "description": "Foundry compute definition supplied to the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foundry compute creation or update initiated.",
+            "schema": {
+              "$ref": "#/definitions/FoundryComputeResource"
+            }
+          },
+          "201": {
+            "description": "Foundry compute is being created.",
+            "schema": {
+              "$ref": "#/definitions/FoundryComputeResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "FoundryCompute"
+        ],
+        "operationId": "FoundryCompute_Update",
+        "description": "Updates properties of a foundry compute.",
+        "x-ms-examples": {
+          "Update foundry compute": {
+            "$ref": "./examples/FoundryCompute_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/computeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "computeResourcePatch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FoundryComputeResourcePatch"
+            },
+            "description": "Foundry compute update parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foundry compute updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/FoundryComputeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FoundryCompute"
+        ],
+        "operationId": "FoundryCompute_Get",
+        "description": "Gets foundry compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them.",
+        "x-ms-examples": {
+          "Get foundry compute": {
+            "$ref": "./examples/FoundryCompute_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/computeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foundry compute retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/FoundryComputeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FoundryCompute"
+        ],
+        "operationId": "FoundryCompute_Delete",
+        "description": "Deletes specified foundry compute resource.",
+        "x-ms-examples": {
+          "Delete foundry compute": {
+            "$ref": "./examples/FoundryCompute_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/computeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The foundry compute was successfully deleted."
+          },
+          "202": {
+            "description": "The foundry compute delete request was accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The specified foundry compute does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes": {
+      "get": {
+        "tags": [
+          "FoundryCompute"
+        ],
+        "operationId": "FoundryCompute_ListByAccount",
+        "description": "Gets foundry computes in specified account.",
+        "x-ms-examples": {
+          "List foundry computes by account": {
+            "$ref": "./examples/FoundryCompute_ListByAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foundry computes retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedFoundryComputeResourcesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "FoundryComputeResource": {
+      "description": "Cognitive Services Foundry compute object wrapped into ARM resource envelope.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The sku of the foundry compute."
+        },
+        "properties": {
+          "$ref": "#/definitions/FoundryComputeProperties",
+          "description": "Foundry compute properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FoundryComputeResourcePatch": {
+      "description": "Cognitive Services Foundry compute object patch properties.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FoundryComputePropertiesUpdateParameters",
+          "description": "Foundry compute properties"
+        }
+      }
+    },
+    "FoundryComputeProperties": {
+      "type": "object",
+      "description": "Foundry compute properties",
+      "properties": {
+        "computeLocation": {
+          "description": "Location for the underlying foundry compute",
+          "type": "string",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "The provision state of the foundry compute. Valid values are Updating, Provisioning, Succeeded, and Failed.",
+          "readOnly": true,
+          "$ref": "#/definitions/FoundryComputeProvisioningState"
+        },
+        "description": {
+          "description": "The description of the Cognitive Services Foundry compute.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the foundry compute was created.",
+          "readOnly": true
+        },
+        "modifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the foundry compute was last modified.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "description": "ARM resource id of the underlying foundry compute",
+          "type": "string",
+          "x-nullable": true
+        },
+        "provisioningErrors": {
+          "description": "Errors during provisioning",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          },
+          "x-nullable": true
+        }
+      }
+    },
+    "FoundryComputePropertiesUpdateParameters": {
+      "type": "object",
+      "description": "Foundry compute properties update parameters",
+      "properties": {
+        "description": {
+          "description": "The description of the Cognitive Services Foundry compute.",
+          "type": "string"
+        }
+      }
+    },
+    "FoundryComputeProvisioningState": {
+      "type": "string",
+      "description": "The current deployment state of foundry compute resource.",
+      "enum": [
+        "Updating",
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryComputeProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PaginatedFoundryComputeResourcesList": {
+      "type": "object",
+      "description": "Paginated list of Cognitive Services Foundry compute objects wrapped in ARM resource envelope.",
+      "properties": {
+        "value": {
+          "description": "An array of Cognitive Services Foundry compute objects wrapped in ARM resource envelope.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FoundryComputeResource"
+          }
+        },
+        "nextLink": {
+          "description": "A continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },
     "Kind": {
       "type": "string",
       "description": "The kind (type) of cognitive service account."
@@ -15245,6 +15662,17 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "computeNameParameter": {
+      "name": "computeName",
+      "description": "Name of the Cognitive Services Foundry compute.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "pattern": "^[a-zA-Z]([a-zA-Z0-9_-]{0,62}[a-zA-Z0-9])?$",
+      "minLength": 1,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
     }
   }
 }
