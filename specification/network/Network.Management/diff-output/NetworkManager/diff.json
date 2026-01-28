@@ -1,4 +1,33 @@
 {
+  "tags__added": [
+    {
+      "name": "NetworkManagers"
+    },
+    {
+      "name": "NetworkManagerConnections"
+    },
+    {
+      "name": "ConnectivityConfigurations"
+    },
+    {
+      "name": "NetworkGroups"
+    },
+    {
+      "name": "NetworkManagerRoutingConfigurations"
+    },
+    {
+      "name": "ScopeConnections"
+    },
+    {
+      "name": "SecurityAdminConfigurations"
+    },
+    {
+      "name": "SecurityUserConfigurations"
+    },
+    {
+      "name": "EffectiveConfigurations"
+    }
+  ],
   "info": {
     "description__added": "APIs to manage web application firewall rules.",
     "title": {
@@ -10,6 +39,9 @@
     "/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections__deleted": {
       "get": {
         "operationId": "ManagementGroupNetworkManagerConnections_List",
+        "tags": [
+          "NetworkManagerConnections"
+        ],
         "parameters": [
           {
             "name": "managementGroupId",
@@ -62,6 +94,9 @@
       ],
       "get": {
         "operationId": "ManagementGroupNetworkManagerConnections_Get",
+        "tags": [
+          "NetworkManagerConnections"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -85,6 +120,9 @@
       },
       "put": {
         "operationId": "ManagementGroupNetworkManagerConnections_CreateOrUpdate",
+        "tags": [
+          "NetworkManagerConnections"
+        ],
         "parameters": [
           {
             "name": "parameters",
@@ -123,6 +161,9 @@
       },
       "delete": {
         "operationId": "ManagementGroupNetworkManagerConnections_Delete",
+        "tags": [
+          "NetworkManagerConnections"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -148,6 +189,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers__deleted": {
       "get": {
         "operationId": "StaticMembers_List",
+        "tags": [
+          "StaticMembers"
+        ],
         "parameters": [
           {
             "name": "networkManagerName",
@@ -223,6 +267,9 @@
       ],
       "get": {
         "operationId": "StaticMembers_Get",
+        "tags": [
+          "StaticMembers"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -246,6 +293,9 @@
       },
       "put": {
         "operationId": "StaticMembers_CreateOrUpdate",
+        "tags": [
+          "StaticMembers"
+        ],
         "parameters": [
           {
             "name": "parameters",
@@ -284,6 +334,9 @@
       },
       "delete": {
         "operationId": "StaticMembers_Delete",
+        "tags": [
+          "StaticMembers"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -309,6 +362,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections__deleted": {
       "get": {
         "operationId": "RoutingRuleCollections_List",
+        "tags": [
+          "RoutingRuleCollections"
+        ],
         "parameters": [
           {
             "name": "networkManagerName",
@@ -385,6 +441,9 @@
       ],
       "get": {
         "operationId": "RoutingRuleCollections_Get",
+        "tags": [
+          "RoutingRuleCollections"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -408,6 +467,9 @@
       },
       "put": {
         "operationId": "RoutingRuleCollections_CreateOrUpdate",
+        "tags": [
+          "RoutingRuleCollections"
+        ],
         "parameters": [
           {
             "name": "ruleCollection",
@@ -446,6 +508,9 @@
       },
       "delete": {
         "operationId": "RoutingRuleCollections_Delete",
+        "tags": [
+          "RoutingRuleCollections"
+        ],
         "parameters": [
           {
             "name": "force",
@@ -513,6 +578,9 @@
       ],
       "get": {
         "operationId": "RoutingRules_List",
+        "tags": [
+          "RoutingRules"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -564,6 +632,9 @@
       ],
       "get": {
         "operationId": "RoutingRules_Get",
+        "tags": [
+          "RoutingRules"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -587,6 +658,9 @@
       },
       "put": {
         "operationId": "RoutingRules_CreateOrUpdate",
+        "tags": [
+          "RoutingRules"
+        ],
         "parameters": [
           {
             "name": "routingRule",
@@ -628,6 +702,9 @@
       },
       "delete": {
         "operationId": "RoutingRules_Delete",
+        "tags": [
+          "RoutingRules"
+        ],
         "parameters": [
           {
             "name": "force",
@@ -669,6 +746,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections__deleted": {
       "get": {
         "operationId": "AdminRuleCollections_List",
+        "tags": [
+          "AdminRuleCollections"
+        ],
         "parameters": [
           {
             "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
@@ -740,6 +820,9 @@
       ],
       "get": {
         "operationId": "AdminRuleCollections_Get",
+        "tags": [
+          "AdminRuleCollections"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -763,6 +846,9 @@
       },
       "put": {
         "operationId": "AdminRuleCollections_CreateOrUpdate",
+        "tags": [
+          "AdminRuleCollections"
+        ],
         "parameters": [
           {
             "name": "ruleCollection",
@@ -801,6 +887,9 @@
       },
       "delete": {
         "operationId": "AdminRuleCollections_Delete",
+        "tags": [
+          "AdminRuleCollections"
+        ],
         "parameters": [
           {
             "name": "force",
@@ -868,6 +957,9 @@
       ],
       "get": {
         "operationId": "AdminRules_List",
+        "tags": [
+          "AdminRules"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -919,6 +1011,9 @@
       ],
       "get": {
         "operationId": "AdminRules_Get",
+        "tags": [
+          "AdminRules"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -945,6 +1040,9 @@
       },
       "put": {
         "operationId": "AdminRules_CreateOrUpdate",
+        "tags": [
+          "AdminRules"
+        ],
         "parameters": [
           {
             "name": "adminRule",
@@ -986,6 +1084,9 @@
       },
       "delete": {
         "operationId": "AdminRules_Delete",
+        "tags": [
+          "AdminRules"
+        ],
         "parameters": [
           {
             "name": "force",
@@ -1027,6 +1128,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections__deleted": {
       "get": {
         "operationId": "SecurityUserRuleCollections_List",
+        "tags": [
+          "SecurityUserRuleCollections"
+        ],
         "parameters": [
           {
             "name": "networkManagerName",
@@ -1102,6 +1206,9 @@
       ],
       "get": {
         "operationId": "SecurityUserRuleCollections_Get",
+        "tags": [
+          "SecurityUserRuleCollections"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1125,6 +1232,9 @@
       },
       "put": {
         "operationId": "SecurityUserRuleCollections_CreateOrUpdate",
+        "tags": [
+          "SecurityUserRuleCollections"
+        ],
         "parameters": [
           {
             "name": "securityUserRuleCollection",
@@ -1163,6 +1273,9 @@
       },
       "delete": {
         "operationId": "SecurityUserRuleCollections_Delete",
+        "tags": [
+          "SecurityUserRuleCollections"
+        ],
         "parameters": [
           {
             "name": "force",
@@ -1230,6 +1343,9 @@
       ],
       "get": {
         "operationId": "SecurityUserRules_List",
+        "tags": [
+          "SecurityUserRules"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1281,6 +1397,9 @@
       ],
       "get": {
         "operationId": "SecurityUserRules_Get",
+        "tags": [
+          "SecurityUserRules"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1304,6 +1423,9 @@
       },
       "put": {
         "operationId": "SecurityUserRules_CreateOrUpdate",
+        "tags": [
+          "SecurityUserRules"
+        ],
         "parameters": [
           {
             "name": "securityUserRule",
@@ -1342,6 +1464,9 @@
       },
       "delete": {
         "operationId": "SecurityUserRules_Delete",
+        "tags": [
+          "SecurityUserRules"
+        ],
         "parameters": [
           {
             "name": "force",
@@ -1609,15 +1734,7 @@
             }
           ],
           [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/PatchObject",
-                  "__new": "./common.json/definitions/PatchObject"
-                }
-              }
-            }
+            " "
           ]
         ],
         "responses": {
@@ -1697,33 +1814,11 @@
             }
           ],
           [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/NetworkManagerCommit",
-                  "__new": "./common.json/definitions/NetworkManagerCommit"
-                }
-              }
-            }
+            " "
           ]
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/NetworkManagerCommit",
-                "__new": "./common.json/definitions/NetworkManagerCommit"
-              }
-            }
-          },
           "202": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/NetworkManagerCommit",
-                "__new": "./common.json/definitions/NetworkManagerCommit"
-              }
-            },
             "headers": {
               "Location": {
                 "description": {
@@ -1911,6 +2006,16 @@
         }
       ],
       "post": {
+        "tags": [
+          [
+            "-",
+            "NetworkManagerActiveConnectivityConfigurations"
+          ],
+          [
+            "+",
+            "NetworkManagers"
+          ]
+        ],
         "parameters": [
           [
             "+",
@@ -1934,26 +2039,10 @@
             }
           ],
           [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/ActiveConfigurationParameter",
-                  "__new": "./common.json/definitions/ActiveConfigurationParameter"
-                }
-              }
-            }
+            " "
           ]
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ActiveConnectivityConfigurationsListResult",
-                "__new": "./common.json/definitions/ActiveConnectivityConfigurationsListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -1984,6 +2073,16 @@
         }
       ],
       "post": {
+        "tags": [
+          [
+            "-",
+            "NetworkManagerActiveConfigurations"
+          ],
+          [
+            "+",
+            "NetworkManagers"
+          ]
+        ],
         "parameters": [
           [
             "+",
@@ -2007,26 +2106,10 @@
             }
           ],
           [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/ActiveConfigurationParameter",
-                  "__new": "./common.json/definitions/ActiveConfigurationParameter"
-                }
-              }
-            }
+            " "
           ]
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ActiveSecurityAdminRulesListResult",
-                "__new": "./common.json/definitions/ActiveSecurityAdminRulesListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -2080,26 +2163,10 @@
             }
           ],
           [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/NetworkManagerDeploymentStatusParameter",
-                  "__new": "./common.json/definitions/NetworkManagerDeploymentStatusParameter"
-                }
-              }
-            }
+            " "
           ]
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/NetworkManagerDeploymentStatusListResult",
-                "__new": "./common.json/definitions/NetworkManagerDeploymentStatusListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -2939,6 +3006,16 @@
         }
       ],
       "post": {
+        "tags": [
+          [
+            "-",
+            "NetworkManagerEffectiveConnectivityConfiguration"
+          ],
+          [
+            "+",
+            "EffectiveConfigurations"
+          ]
+        ],
         "parameters": [
           [
             "+",
@@ -2966,21 +3043,13 @@
               "schema": {
                 "$ref": {
                   "__old": "./networkManagerGroup.json#/definitions/QueryRequestOptions",
-                  "__new": "./common.json/definitions/QueryRequestOptions"
+                  "__new": "#/definitions/QueryRequestOptions"
                 }
               }
             }
           ]
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult",
-                "__new": "./common.json/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -3011,6 +3080,16 @@
         }
       ],
       "post": {
+        "tags": [
+          [
+            "-",
+            "NetworkManagerEffectiveSecurityAdminRules"
+          ],
+          [
+            "+",
+            "EffectiveConfigurations"
+          ]
+        ],
         "parameters": [
           [
             "+",
@@ -3038,21 +3117,13 @@
               "schema": {
                 "$ref": {
                   "__old": "./networkManagerGroup.json#/definitions/QueryRequestOptions",
-                  "__new": "./common.json/definitions/QueryRequestOptions"
+                  "__new": "#/definitions/QueryRequestOptions"
                 }
               }
             }
           ]
         ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult",
-                "__new": "./common.json/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -3066,68 +3137,6 @@
     }
   },
   "definitions": {
-    "ActiveBaseSecurityAdminRule__deleted": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "commitTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "region": {
-          "type": "string"
-        },
-        "configurationDescription": {
-          "type": "string"
-        },
-        "ruleCollectionDescription": {
-          "type": "string"
-        },
-        "ruleCollectionAppliesToGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
-          }
-        },
-        "ruleGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/ConfigurationGroup"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "enum": [
-            "Custom",
-            "Default"
-          ],
-          "x-ms-enum": {
-            "name": "EffectiveAdminRuleKind",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
-    "ActiveConfigurationParameter__deleted": {
-      "type": "object",
-      "properties": {
-        "regions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        }
-      }
-    },
     "ActiveConnectivityConfiguration__deleted": {
       "type": "object",
       "properties": {
@@ -3144,20 +3153,6 @@
           "$ref": "./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConnectivityConfiguration"
         }
       ]
-    },
-    "ActiveConnectivityConfigurationsListResult__deleted": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActiveConnectivityConfiguration"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        }
-      }
     },
     "ActiveDefaultSecurityAdminRule__deleted": {
       "type": "object",
@@ -3188,148 +3183,6 @@
         }
       ],
       "x-ms-discriminator-value": "Custom"
-    },
-    "ActiveSecurityAdminRulesListResult__deleted": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        }
-      }
-    },
-    "AddressPrefixItem__deleted": {
-      "type": "object",
-      "properties": {
-        "addressPrefix": {
-          "type": "string"
-        },
-        "addressPrefixType": {
-          "type": "string",
-          "enum": [
-            "IPPrefix",
-            "ServiceTag",
-            "NetworkGroup"
-          ],
-          "x-ms-enum": {
-            "name": "AddressPrefixType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "AdminPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "protocol": {
-          "type": "string",
-          "enum": [
-            "Tcp",
-            "Udp",
-            "Icmp",
-            "Esp",
-            "Any",
-            "Ah"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityConfigurationRuleProtocol",
-            "modelAsString": true
-          }
-        },
-        "sources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AddressPrefixItem"
-          },
-          "x-ms-identifiers": [
-            "addressPrefix"
-          ]
-        },
-        "destinations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AddressPrefixItem"
-          },
-          "x-ms-identifiers": [
-            "addressPrefix"
-          ]
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "access": {
-          "type": "string",
-          "enum": [
-            "Allow",
-            "Deny",
-            "AlwaysAllow"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityConfigurationRuleAccess",
-            "modelAsString": true
-          }
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 4096
-        },
-        "direction": {
-          "type": "string",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityConfigurationRuleDirection",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Failed",
-            "Succeeded",
-            "Canceled",
-            "Creating",
-            "Updating",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "access",
-        "direction",
-        "priority",
-        "protocol"
-      ]
     },
     "AdminRule__deleted": {
       "type": "object",
@@ -3382,46 +3235,6 @@
         }
       }
     },
-    "AdminRuleCollectionPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "appliesToGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
-          },
-          "x-ms-identifiers": [
-            "networkGroupId"
-          ]
-        },
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Failed",
-            "Succeeded",
-            "Canceled",
-            "Creating",
-            "Updating",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "appliesToGroups"
-      ]
-    },
     "AdminRuleListResult__deleted": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -3469,58 +3282,438 @@
         }
       ]
     },
-    "ConfigurationGroup__deleted": {
+    "DefaultAdminRule__deleted": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "properties": {
-          "$ref": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
+          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
           "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "EffectiveDefaultSecurityAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "EffectiveSecurityAdminRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "RoutingRule__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "RoutingRuleCollection__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRuleCollectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "RoutingRuleCollectionListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/RoutingRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
-    "ConnectivityConfigurationProperties__deleted": {
+    "RoutingRuleListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/RoutingRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "SecurityUserRule__deleted": {
       "type": "object",
       "properties": {
-        "description": {
-          "type": "string"
+        "properties": {
+          "$ref": "#/definitions/SecurityUserRulePropertiesFormat",
+          "x-ms-client-flatten": true
         },
-        "connectivityTopology": {
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserRuleCollection__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityUserRuleCollectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserRuleCollectionListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRuleCollection"
+          }
+        },
+        "nextLink": {
           "type": "string",
-          "enum": [
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "SecurityUserRuleListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "StaticMember__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticMemberProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "./network.json#/definitions/SystemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "StaticMemberListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/StaticMember"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ActiveBaseSecurityAdminRule": {
+      "properties": {
+        "ruleCollectionAppliesToGroups": {
+          "items": {
+            "$ref": {
+              "__old": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem",
+              "__new": "#/definitions/NetworkManagerSecurityGroupItem"
+            }
+          }
+        },
+        "ruleGroups": {
+          "items": {
+            "$ref": {
+              "__old": "./networkManagerEffectiveConfiguration.json#/definitions/ConfigurationGroup",
+              "__new": "#/definitions/ConfigurationGroup"
+            }
+          }
+        },
+        "kind": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Custom",
+            "Default"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "EffectiveAdminRuleKind",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/EffectiveAdminRuleKind"
+        }
+      }
+    },
+    "ActiveConnectivityConfigurationsListResult": {
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/ActiveConnectivityConfiguration",
+              "__new": "./common.json/definitions/ActiveConnectivityConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "AddressPrefixItem": {
+      "properties": {
+        "addressPrefixType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "IPPrefix",
+            "ServiceTag",
+            "NetworkGroup"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "AddressPrefixType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/AddressPrefixType"
+        }
+      }
+    },
+    "AdminPropertiesFormat": {
+      "properties": {
+        "protocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Tcp",
+            "Udp",
+            "Icmp",
+            "Esp",
+            "Any",
+            "Ah"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "SecurityConfigurationRuleProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/SecurityConfigurationRuleProtocol"
+        },
+        "access": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Allow",
+            "Deny",
+            "AlwaysAllow"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "SecurityConfigurationRuleAccess",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/SecurityConfigurationRuleAccess"
+        },
+        "direction": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "SecurityConfigurationRuleDirection",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/SecurityConfigurationRuleDirection"
+        },
+        "provisioningState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ProvisioningState"
+        }
+      }
+    },
+    "AdminRuleCollectionPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ProvisioningState"
+        }
+      }
+    },
+    "ConfigurationGroup": {
+      "properties": {
+        "properties": {
+          "$ref": {
+            "__old": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
+            "__new": "#/definitions/NetworkGroupProperties"
+          }
+        }
+      }
+    },
+    "ConnectivityConfiguration": {
+      "properties": {
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/ChildResource",
+              "__new": "./common.json/definitions/ChildResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ConnectivityConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ConnectivityConfigurationProperties": {
+      "properties": {
+        "connectivityTopology": {
+          "type__deleted": "string",
+          "enum__deleted": [
             "HubAndSpoke",
             "Mesh"
           ],
-          "x-ms-enum": {
+          "x-ms-enum__deleted": {
             "name": "ConnectivityTopology",
             "modelAsString": true
-          }
-        },
-        "hubs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Hub"
           },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
+          "$ref__added": "./common.json/definitions/ConnectivityTopology"
         },
         "isGlobal": {
-          "type": "string",
-          "enum": [
+          "type__deleted": "string",
+          "enum__deleted": [
             "False",
             "True"
           ],
-          "x-ms-enum": {
+          "x-ms-enum__deleted": {
             "name": "IsGlobal",
             "modelAsString": true
-          }
+          },
+          "$ref__added": "./common.json/definitions/IsGlobal"
         },
         "connectivityCapabilities": {
-          "type": "object",
-          "properties": {
+          "type__deleted": "object",
+          "properties__deleted": {
             "connectedGroupPrivateEndpointsScale": {
               "type": "string",
               "description": "Option indicating the scale of private endpoints allowed in the connected group of the connectivity configuration.",
@@ -3591,82 +3784,38 @@
               }
             }
           },
-          "required": [
+          "required__deleted": [
             "connectedGroupPrivateEndpointsScale",
             "connectedGroupAddressOverlap",
             "peeringEnforcement"
-          ]
-        },
-        "appliesToGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/connectivityGroupItem"
-          },
-          "x-ms-identifiers": [
-            "networkGroupId"
-          ]
+          ],
+          "$ref__added": "./common.json/definitions/ConnectivityConfigurationPropertiesConnectivityCapabilities"
         },
         "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
         },
         "deleteExistingPeering": {
-          "type": "string",
-          "enum": [
+          "type__deleted": "string",
+          "enum__deleted": [
             "False",
             "True"
           ],
-          "x-ms-enum": {
+          "x-ms-enum__deleted": {
             "name": "DeleteExistingPeering",
             "modelAsString": true
-          }
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "appliesToGroups",
-        "connectivityTopology"
-      ]
-    },
-    "CrossTenantScopes__deleted": {
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "managementGroups": {
-          "type": "array",
-          "items": {
-            "type": "string"
           },
-          "readOnly": true
-        },
-        "subscriptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
+          "$ref__added": "./common.json/definitions/DeleteExistingPeering"
         }
       }
     },
-    "DefaultAdminPropertiesFormat__deleted": {
-      "type": "object",
+    "DefaultAdminPropertiesFormat": {
       "properties": {
-        "description": {
-          "type": "string",
-          "readOnly": true
-        },
-        "flag": {
-          "type": "string"
-        },
         "protocol": {
-          "type": "string",
-          "enum": [
+          "type__deleted": "string",
+          "enum__deleted": [
             "Tcp",
             "Udp",
             "Icmp",
@@ -3674,79 +3823,40 @@
             "Any",
             "Ah"
           ],
-          "x-ms-enum": {
+          "x-ms-enum__deleted": {
             "name": "SecurityConfigurationRuleProtocol",
             "modelAsString": true
           },
-          "readOnly": true
-        },
-        "sources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AddressPrefixItem"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "addressPrefix"
-          ]
-        },
-        "destinations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AddressPrefixItem"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "addressPrefix"
-          ]
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
+          "$ref__added": "./common.json/definitions/SecurityConfigurationRuleProtocol"
         },
         "access": {
-          "type": "string",
-          "enum": [
+          "type__deleted": "string",
+          "enum__deleted": [
             "Allow",
             "Deny",
             "AlwaysAllow"
           ],
-          "x-ms-enum": {
+          "x-ms-enum__deleted": {
             "name": "SecurityConfigurationRuleAccess",
             "modelAsString": true
           },
-          "readOnly": true
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "$ref__added": "./common.json/definitions/SecurityConfigurationRuleAccess"
         },
         "direction": {
-          "type": "string",
-          "enum": [
+          "type__deleted": "string",
+          "enum__deleted": [
             "Inbound",
             "Outbound"
           ],
-          "x-ms-enum": {
+          "x-ms-enum__deleted": {
             "name": "SecurityConfigurationRuleDirection",
             "modelAsString": true
           },
-          "readOnly": true
+          "$ref__added": "./common.json/definitions/SecurityConfigurationRuleDirection"
         },
         "provisioningState": {
-          "type": "string",
-          "enum": [
+          "type__deleted": "string",
+          "enum__deleted": [
             "Failed",
             "Succeeded",
             "Canceled",
@@ -3754,1057 +3864,50 @@
             "Updating",
             "Deleting"
           ],
-          "x-ms-enum": {
+          "x-ms-enum__deleted": {
             "name": "ProvisioningState",
             "modelAsString": true
           },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
+          "$ref__added": "./common.json/definitions/ProvisioningState"
         }
       }
     },
-    "DefaultAdminRule__deleted": {
-      "type": "object",
+    "EffectiveBaseSecurityAdminRule": {
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseAdminRule"
-        }
-      ],
-      "x-ms-discriminator-value": "Default"
-    },
-    "EffectiveBaseSecurityAdminRule__deleted": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "configurationDescription": {
-          "type": "string"
-        },
-        "ruleCollectionDescription": {
-          "type": "string"
-        },
         "ruleCollectionAppliesToGroups": {
-          "type": "array",
           "items": {
-            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem"
-          },
-          "x-ms-identifiers": [
-            "networkGroupId"
-          ]
-        },
-        "ruleGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConfigurationGroup"
+            "$ref": {
+              "__old": "./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem",
+              "__new": "#/definitions/NetworkManagerSecurityGroupItem"
+            }
           }
         },
         "kind": {
-          "type": "string",
-          "enum": [
+          "type__deleted": "string",
+          "enum__deleted": [
             "Custom",
             "Default"
           ],
-          "x-ms-enum": {
+          "x-ms-enum__deleted": {
             "name": "EffectiveAdminRuleKind",
             "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
-    "EffectiveConnectivityConfiguration__deleted": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfigurationProperties",
-          "x-ms-client-flatten": true
-        },
-        "configurationGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConfigurationGroup"
-          }
-        }
-      }
-    },
-    "EffectiveDefaultSecurityAdminRule__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
-        }
-      ],
-      "x-ms-discriminator-value": "Default"
-    },
-    "EffectiveSecurityAdminRule__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
-        }
-      ],
-      "x-ms-discriminator-value": "Custom"
-    },
-    "Hub__deleted": {
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "type": "string"
-        },
-        "resourceType": {
-          "type": "string"
-        }
-      }
-    },
-    "NetworkGroupProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "memberType": {
-          "type": "string",
-          "enum": [
-            "VirtualNetwork",
-            "Subnet"
-          ],
-          "x-ms-enum": {
-            "name": "GroupMemberType",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkManagerCommit__deleted": {
-      "type": "object",
-      "properties": {
-        "commitId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "targetLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "configurationIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "commitType": {
-          "type": "string",
-          "enum": [
-            "SecurityAdmin",
-            "Connectivity",
-            "SecurityUser",
-            "Routing"
-          ],
-          "x-ms-enum": {
-            "name": "ConfigurationType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "commitType",
-        "targetLocations"
-      ]
-    },
-    "NetworkManagerConnectionProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "networkManagerId": {
-          "type": "string"
-        },
-        "connectionState": {
-          "$ref": "./networkManagerScopeConnection.json#/definitions/ConnectionState",
-          "x-ms-client-flatten": true
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "NetworkManagerDeploymentStatus__deleted": {
-      "type": "object",
-      "properties": {
-        "commitTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "region": {
-          "type": "string"
-        },
-        "deploymentStatus": {
-          "type": "string",
-          "enum": [
-            "NotStarted",
-            "Deploying",
-            "Deployed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          }
-        },
-        "configurationIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "deploymentType": {
-          "type": "string",
-          "enum": [
-            "SecurityAdmin",
-            "Connectivity",
-            "SecurityUser",
-            "Routing"
-          ],
-          "x-ms-enum": {
-            "name": "ConfigurationType",
-            "modelAsString": true
-          }
-        },
-        "errorMessage": {
-          "type": "string"
-        }
-      }
-    },
-    "NetworkManagerDeploymentStatusListResult__deleted": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkManagerDeploymentStatus"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        }
-      }
-    },
-    "NetworkManagerDeploymentStatusParameter__deleted": {
-      "type": "object",
-      "properties": {
-        "regions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "deploymentTypes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "SecurityAdmin",
-              "Connectivity",
-              "SecurityUser",
-              "Routing"
-            ],
-            "x-ms-enum": {
-              "name": "ConfigurationType",
-              "modelAsString": true
-            }
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        }
-      }
-    },
-    "NetworkManagerEffectiveConnectivityConfigurationListResult__deleted": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EffectiveConnectivityConfiguration"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        }
-      }
-    },
-    "NetworkManagerEffectiveSecurityAdminRulesListResult__deleted": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
-          }
-        },
-        "skipToken": {
-          "type": "string"
-        }
-      }
-    },
-    "NetworkManagerProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "networkManagerScopes": {
-          "type": "object",
-          "properties": {
-            "managementGroups": {
-              "type": "array",
-              "description": "List of management groups.",
-              "items": {
-                "type": "string"
-              }
-            },
-            "subscriptions": {
-              "type": "array",
-              "description": "List of subscriptions.",
-              "items": {
-                "type": "string"
-              }
-            },
-            "crossTenantScopes": {
-              "type": "array",
-              "description": "List of cross tenant scopes.",
-              "items": {
-                "$ref": "#/definitions/CrossTenantScopes"
-              },
-              "readOnly": true,
-              "x-ms-identifiers": []
-            }
-          }
-        },
-        "networkManagerScopeAccesses": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "SecurityAdmin",
-              "Connectivity",
-              "SecurityUser",
-              "Routing"
-            ],
-            "x-ms-enum": {
-              "name": "ConfigurationType",
-              "modelAsString": true
-            }
-          }
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "networkManagerScopes"
-      ]
-    },
-    "NetworkManagerRoutingConfigurationPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        },
-        "routeTableUsageMode": {
-          "type": "string",
-          "default": "ManagedOnly",
-          "enum": [
-            "ManagedOnly",
-            "UseExisting"
-          ],
-          "x-ms-enum": {
-            "name": "RouteTableUsageMode",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "NetworkManagerRoutingGroupItem__deleted": {
-      "type": "object",
-      "properties": {
-        "networkGroupId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "networkGroupId"
-      ]
-    },
-    "NetworkManagerSecurityGroupItem__deleted": {
-      "type": "object",
-      "properties": {
-        "networkGroupId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "networkGroupId"
-      ]
-    },
-    "PatchObject__deleted": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "QueryRequestOptions__deleted": {
-      "type": "object",
-      "properties": {
-        "skipToken": {
-          "type": "string"
-        }
-      }
-    },
-    "RoutingRule__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RoutingRulePropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/ChildResource"
-        }
-      ]
-    },
-    "RoutingRuleCollection__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RoutingRuleCollectionPropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/ChildResource"
-        }
-      ]
-    },
-    "RoutingRuleCollectionListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/RoutingRuleCollection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "RoutingRuleCollectionPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        },
-        "appliesTo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkManagerRoutingGroupItem"
           },
-          "x-ms-identifiers": [
-            "networkGroupId"
-          ]
-        },
-        "disableBgpRoutePropagation": {
-          "type": "string",
-          "enum": [
-            "False",
-            "True"
-          ],
-          "x-ms-enum": {
-            "name": "DisableBgpRoutePropagation",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "appliesTo"
-      ]
-    },
-    "RoutingRuleListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/RoutingRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
+          "$ref__added": "./common.json/definitions/EffectiveAdminRuleKind"
         }
       }
     },
-    "RoutingRuleNextHop__deleted": {
-      "type": "object",
-      "properties": {
-        "nextHopType": {
-          "type": "string",
-          "enum": [
-            "Internet",
-            "NoNextHop",
-            "VirtualAppliance",
-            "VirtualNetworkGateway",
-            "VnetLocal"
-          ],
-          "x-ms-enum": {
-            "name": "RoutingRuleNextHopType",
-            "modelAsString": true
-          }
-        },
-        "nextHopAddress": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "nextHopType"
-      ]
-    },
-    "RoutingRulePropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        },
-        "destination": {
-          "$ref": "#/definitions/RoutingRuleRouteDestination"
-        },
-        "nextHop": {
-          "$ref": "#/definitions/RoutingRuleNextHop"
-        }
-      },
-      "required": [
-        "destination",
-        "nextHop"
-      ]
-    },
-    "RoutingRuleRouteDestination__deleted": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "AddressPrefix",
-            "ServiceTag"
-          ],
-          "x-ms-enum": {
-            "name": "RoutingRuleDestinationType",
-            "modelAsString": true
-          }
-        },
-        "destinationAddress": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "destinationAddress",
-        "type"
-      ]
-    },
-    "ScopeConnectionProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "type": "string"
-        },
-        "resourceId": {
-          "type": "string"
-        },
-        "connectionState": {
-          "type": "string",
-          "enum": [
-            "Connected",
-            "Pending",
-            "Conflict",
-            "Revoked",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "name": "ScopeConnectionState",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "x-ms-client-flatten": true
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "SecurityAdminConfigurationPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "applyOnNetworkIntentPolicyBasedServices": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "None",
-              "All",
-              "AllowRulesOnly"
-            ],
-            "x-ms-enum": {
-              "name": "NetworkIntentPolicyBasedService",
-              "modelAsString": true
-            }
-          }
-        },
-        "networkGroupAddressSpaceAggregationOption": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Manual"
-          ],
-          "x-ms-enum": {
-            "name": "AddressSpaceAggregationOption",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Failed",
-            "Succeeded",
-            "Canceled",
-            "Creating",
-            "Updating",
-            "Deleting"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SecurityUserConfigurationPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SecurityUserGroupItem__deleted": {
-      "type": "object",
-      "properties": {
-        "networkGroupId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "networkGroupId"
-      ]
-    },
-    "SecurityUserRule__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SecurityUserRulePropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/ChildResource"
-        }
-      ]
-    },
-    "SecurityUserRuleCollection__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SecurityUserRuleCollectionPropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/ChildResource"
-        }
-      ]
-    },
-    "SecurityUserRuleCollectionListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/SecurityUserRuleCollection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "SecurityUserRuleCollectionPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "appliesToGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecurityUserGroupItem"
-          },
-          "x-ms-identifiers": [
-            "networkGroupId"
-          ]
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "appliesToGroups"
-      ]
-    },
-    "SecurityUserRuleListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/SecurityUserRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "SecurityUserRulePropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "protocol": {
-          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol",
-          "type": "string"
-        },
-        "sources": {
-          "type": "array",
-          "items": {
-            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
-          },
-          "x-ms-identifiers": [
-            "addressPrefix"
-          ]
-        },
-        "destinations": {
-          "type": "array",
-          "items": {
-            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
-          },
-          "x-ms-identifiers": [
-            "addressPrefix"
-          ]
-        },
-        "sourcePortRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationPortRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "direction": {
-          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "direction",
-        "protocol"
-      ]
-    },
-    "StaticMember__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StaticMemberProperties",
-          "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/ChildResource"
-        }
-      ]
-    },
-    "StaticMemberListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/StaticMember"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "StaticMemberProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "type": "string"
-        },
-        "region": {
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "connectivityGroupItem__deleted": {
-      "type": "object",
-      "properties": {
-        "networkGroupId": {
-          "type": "string"
-        },
-        "useHubGateway": {
-          "type": "string",
-          "enum": [
-            "False",
-            "True"
-          ],
-          "x-ms-enum": {
-            "name": "UseHubGateway",
-            "modelAsString": true
-          }
-        },
-        "isGlobal": {
-          "type": "string",
-          "enum": [
-            "False",
-            "True"
-          ],
-          "x-ms-enum": {
-            "name": "IsGlobal",
-            "modelAsString": true
-          }
-        },
-        "groupConnectivity": {
-          "type": "string",
-          "enum": [
-            "None",
-            "DirectlyConnected"
-          ],
-          "x-ms-enum": {
-            "name": "GroupConnectivity",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "groupConnectivity",
-        "networkGroupId"
-      ]
-    },
-    "ConnectivityConfiguration": {
+    "EffectiveConnectivityConfiguration": {
       "properties": {
         "properties": {
           "$ref": {
-            "__old": "#/definitions/ConnectivityConfigurationProperties",
-            "__new": "./common.json/definitions/ConnectivityConfigurationProperties"
-          }
-        },
-        "systemData": {
-          "$ref": {
-            "__old": "./network.json#/definitions/SystemData",
-            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+            "__old": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfigurationProperties",
+            "__new": "#/definitions/ConnectivityConfigurationProperties"
           }
         }
-      },
-      "allOf": [
-        [
-          "~",
-          {
-            "$ref": {
-              "__old": "./network.json#/definitions/ChildResource",
-              "__new": "./common.json/definitions/ChildResource"
-            }
-          }
-        ]
-      ]
-    },
-    "ConnectivityConfigurationListResult": {
-      "required__added": [
-        "value"
-      ]
+      }
     },
     "NetworkGroup": {
       "properties": {
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/NetworkGroupProperties",
-            "__new": "./common.json/definitions/NetworkGroupProperties"
-          }
-        },
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
@@ -4829,14 +3932,30 @@
         "value"
       ]
     },
+    "NetworkGroupProperties": {
+      "properties": {
+        "memberType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "VirtualNetwork",
+            "Subnet"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "GroupMemberType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/GroupMemberType"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
     "NetworkManager": {
       "properties": {
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/NetworkManagerProperties",
-            "__new": "./common.json/definitions/NetworkManagerProperties"
-          }
-        },
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
@@ -4856,17 +3975,29 @@
         ]
       ]
     },
+    "NetworkManagerCommit": {
+      "properties": {
+        "commitType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "SecurityAdmin",
+            "Connectivity",
+            "SecurityUser",
+            "Routing"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ConfigurationType"
+        }
+      }
+    },
     "NetworkManagerConnection": {
       "properties": {
         "etag__deleted": {
           "type": "string",
           "readOnly": true
-        },
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/NetworkManagerConnectionProperties",
-            "__new": "./common.json/definitions/NetworkManagerConnectionProperties"
-          }
         },
         "systemData": {
           "$ref": {
@@ -4892,19 +4023,131 @@
         "value"
       ]
     },
+    "NetworkManagerConnectionProperties": {
+      "properties": {
+        "connectionState": {
+          "readOnly__added": true,
+          "$ref": {
+            "__old": "./networkManagerScopeConnection.json#/definitions/ConnectionState",
+            "__new": "./common.json/definitions/ScopeConnectionState"
+          }
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatus": {
+      "properties": {
+        "deploymentStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "NotStarted",
+            "Deploying",
+            "Deployed",
+            "Failed"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/DeploymentStatus"
+        },
+        "deploymentType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "SecurityAdmin",
+            "Connectivity",
+            "SecurityUser",
+            "Routing"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ConfigurationType"
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatusParameter": {
+      "properties": {
+        "deploymentTypes": {
+          "items": {
+            "type__deleted": "string",
+            "enum__deleted": [
+              "SecurityAdmin",
+              "Connectivity",
+              "SecurityUser",
+              "Routing"
+            ],
+            "x-ms-enum__deleted": {
+              "name": "ConfigurationType",
+              "modelAsString": true
+            },
+            "$ref__added": "./common.json/definitions/ConfigurationType"
+          }
+        }
+      }
+    },
     "NetworkManagerListResult": {
       "required__added": [
         "value"
       ]
     },
-    "NetworkManagerRoutingConfiguration": {
+    "NetworkManagerProperties": {
       "properties": {
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/NetworkManagerRoutingConfigurationPropertiesFormat",
-            "__new": "./common.json/definitions/NetworkManagerRoutingConfigurationPropertiesFormat"
+        "networkManagerScopes": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "managementGroups": {
+              "type": "array",
+              "description": "List of management groups.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "subscriptions": {
+              "type": "array",
+              "description": "List of subscriptions.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "crossTenantScopes": {
+              "type": "array",
+              "description": "List of cross tenant scopes.",
+              "items": {
+                "$ref": "#/definitions/CrossTenantScopes"
+              },
+              "readOnly": true,
+              "x-ms-identifiers": []
+            }
+          },
+          "$ref__added": "./common.json/definitions/NetworkManagerPropertiesNetworkManagerScopes"
+        },
+        "networkManagerScopeAccesses": {
+          "items": {
+            "type__deleted": "string",
+            "enum__deleted": [
+              "SecurityAdmin",
+              "Connectivity",
+              "SecurityUser",
+              "Routing"
+            ],
+            "x-ms-enum__deleted": {
+              "name": "ConfigurationType",
+              "modelAsString": true
+            },
+            "$ref__added": "./common.json/definitions/ConfigurationType"
           }
         },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "NetworkManagerRoutingConfiguration": {
+      "properties": {
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
@@ -4929,14 +4172,85 @@
         "value"
       ]
     },
-    "ScopeConnection": {
+    "NetworkManagerRoutingConfigurationPropertiesFormat": {
       "properties": {
-        "properties": {
+        "provisioningState": {
           "$ref": {
-            "__old": "#/definitions/ScopeConnectionProperties",
-            "__new": "./common.json/definitions/ScopeConnectionProperties"
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "RoutingRuleCollectionPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
           }
         },
+        "disableBgpRoutePropagation": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "DisableBgpRoutePropagation",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/DisableBgpRoutePropagation"
+        }
+      }
+    },
+    "RoutingRuleNextHop": {
+      "properties": {
+        "nextHopType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Internet",
+            "NoNextHop",
+            "VirtualAppliance",
+            "VirtualNetworkGateway",
+            "VnetLocal"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "RoutingRuleNextHopType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/RoutingRuleNextHopType"
+        }
+      }
+    },
+    "RoutingRulePropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "RoutingRuleRouteDestination": {
+      "properties": {
+        "type": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "AddressPrefix",
+            "ServiceTag"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "RoutingRuleDestinationType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/RoutingRuleDestinationType"
+        }
+      }
+    },
+    "ScopeConnection": {
+      "properties": {
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
@@ -4961,14 +4275,27 @@
         "value"
       ]
     },
+    "ScopeConnectionProperties": {
+      "properties": {
+        "connectionState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Connected",
+            "Pending",
+            "Conflict",
+            "Revoked",
+            "Rejected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ScopeConnectionState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ScopeConnectionState"
+        }
+      }
+    },
     "SecurityAdminConfiguration": {
       "properties": {
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/SecurityAdminConfigurationPropertiesFormat",
-            "__new": "./common.json/definitions/SecurityAdminConfigurationPropertiesFormat"
-          }
-        },
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
@@ -4993,14 +4320,55 @@
         "value"
       ]
     },
-    "SecurityUserConfiguration": {
+    "SecurityAdminConfigurationPropertiesFormat": {
       "properties": {
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/SecurityUserConfigurationPropertiesFormat",
-            "__new": "./common.json/definitions/SecurityUserConfigurationPropertiesFormat"
+        "applyOnNetworkIntentPolicyBasedServices": {
+          "items": {
+            "type__deleted": "string",
+            "enum__deleted": [
+              "None",
+              "All",
+              "AllowRulesOnly"
+            ],
+            "x-ms-enum__deleted": {
+              "name": "NetworkIntentPolicyBasedService",
+              "modelAsString": true
+            },
+            "$ref__added": "./common.json/definitions/NetworkIntentPolicyBasedService"
           }
         },
+        "networkGroupAddressSpaceAggregationOption": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "Manual"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "AddressSpaceAggregationOption",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/AddressSpaceAggregationOption"
+        },
+        "provisioningState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Failed",
+            "Succeeded",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ProvisioningState"
+        }
+      }
+    },
+    "SecurityUserConfiguration": {
+      "properties": {
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
@@ -5024,6 +4392,115 @@
       "required__added": [
         "value"
       ]
+    },
+    "SecurityUserConfigurationPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "SecurityUserRuleCollectionPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "SecurityUserRulePropertiesFormat": {
+      "properties": {
+        "protocol": {
+          "type__deleted": "string",
+          "$ref": {
+            "__old": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol",
+            "__new": "./common.json/definitions/SecurityConfigurationRuleProtocol"
+          }
+        },
+        "sources": {
+          "items": {
+            "$ref": {
+              "__old": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem",
+              "__new": "#/definitions/AddressPrefixItem"
+            }
+          }
+        },
+        "destinations": {
+          "items": {
+            "$ref": {
+              "__old": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem",
+              "__new": "#/definitions/AddressPrefixItem"
+            }
+          }
+        },
+        "direction": {
+          "$ref": {
+            "__old": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection",
+            "__new": "./common.json/definitions/SecurityConfigurationRuleDirection"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "StaticMemberProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "connectivityGroupItem": {
+      "properties": {
+        "useHubGateway": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "UseHubGateway",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/UseHubGateway"
+        },
+        "isGlobal": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IsGlobal",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/IsGlobal"
+        },
+        "groupConnectivity": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "DirectlyConnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "GroupConnectivity",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/GroupConnectivity"
+        }
+      }
     }
   }
 }

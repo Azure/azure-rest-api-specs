@@ -1,9 +1,81 @@
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.tags__deleted` | deleted | `["ApplicationGateways"]` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.tags__deleted` | deleted | `["ApplicationGateways"]` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.tags__deleted` | deleted | `["ApplicationGateways"]` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableWafRuleSets'].get.tags__deleted` | deleted | `["ApplicationGateways"]` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests'].get.tags__added` | added | `["ApplicationGatewayWafDynamicManifestResults"]` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/dafault'].get.tags__added` | added | `["ApplicationGatewayWafDynamicManifestResults"]` |
+| `tags__added` | added | `[{"name":"ApplicationGateways"},{"name":"ApplicationGatewayAvailableSslOptionsOperationGroup"},{"nam...` |
+
 ### Changes for `$ref`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.availableCipherSuites.items.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslCipherSuite` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.availableProtocols.items.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslProtocol` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.defaultPolicy.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslPolicyName` |
+| `definitions.ApplicationGatewayBackendHealthServer.properties.health.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayBackendHealthServerHealth` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.cookieBasedAffinity.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayCookieBasedAffinity` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.protocol.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayProtocol` |
+| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.protocol.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayProtocol` |
+| `definitions.ApplicationGatewayClientAuthConfiguration.properties.verifyClientAuthMode.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayClientAuthVerificationModes` |
+| `definitions.ApplicationGatewayClientAuthConfiguration.properties.verifyClientRevocation.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayClientRevocationOptions` |
+| `definitions.ApplicationGatewayCustomError.properties.statusCode.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayCustomErrorStatusCode` |
+| `definitions.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.properties.unAuthorizedRequestAction.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayUnAuthorizedRequestAction` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.status.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayRuleSetStatusOptions` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.tiers.items.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayTierTypes` |
+| `definitions.ApplicationGatewayFirewallRule.properties.action.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayWafRuleActionTypes` |
+| `definitions.ApplicationGatewayFirewallRule.properties.sensitivity.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayWafRuleSensitivityTypes` |
+| `definitions.ApplicationGatewayFirewallRule.properties.state.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayWafRuleStateTypes` |
+| `definitions.ApplicationGatewayFirewallRuleSetPropertiesFormat.properties.tiers.items.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayTierTypes` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.protocol.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayProtocol` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.protocol.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayProtocol` |
+| `definitions.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.properties.loadDistributionAlgorithm.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayLoadDistributionAlgorithm` |
+| `definitions.ApplicationGatewayOnDemandProbe.properties.protocol.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayProtocol` |
+| `definitions.ApplicationGatewayProbePropertiesFormat.properties.protocol.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayProtocol` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.defaultPredefinedSslPolicy.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslPolicyName` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.operationalState.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayOperationalState` |
+| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat.properties.redirectType.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayRedirectType` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.ruleType.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayRequestRoutingRuleType` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.ruleType.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayRequestRoutingRuleType` |
+| `definitions.ApplicationGatewaySku.properties.family.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySkuFamily` |
+| `definitions.ApplicationGatewaySku.properties.name.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySkuName` |
+| `definitions.ApplicationGatewaySku.properties.tier.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayTier` |
+| `definitions.ApplicationGatewaySslPolicy.properties.cipherSuites.items.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslCipherSuite` |
+| `definitions.ApplicationGatewaySslPolicy.properties.disabledSslProtocols.items.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslProtocol` |
+| `definitions.ApplicationGatewaySslPolicy.properties.minProtocolVersion.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslProtocol` |
+| `definitions.ApplicationGatewaySslPolicy.properties.policyName.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslPolicyName` |
+| `definitions.ApplicationGatewaySslPolicy.properties.policyType.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslPolicyType` |
+| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat.properties.cipherSuites.items.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslCipherSuite` |
+| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat.properties.minProtocolVersion.$ref__added` | added | `./common.json#/definitions/ApplicationGatewaySslProtocol` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.firewallMode.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayFirewallMode` |
+| `definitions.ExceptionEntry.properties.matchVariable.$ref__added` | added | `./common.json#/definitions/ExceptionEntryMatchVariable` |
+| `definitions.ExceptionEntry.properties.selectorMatchOperator.$ref__added` | added | `./common.json#/definitions/ExceptionEntrySelectorMatchOperator` |
+| `definitions.ExceptionEntry.properties.valueMatchOperator.$ref__added` | added | `./common.json#/definitions/ExceptionEntryValueMatchOperator` |
+| `definitions.ManagedRuleOverride.properties.action.$ref__added` | added | `./common.json#/definitions/ActionType` |
+| `definitions.ManagedRuleOverride.properties.sensitivity.$ref__added` | added | `./common.json#/definitions/SensitivityType` |
+| `definitions.ManagedRuleOverride.properties.state.$ref__added` | added | `./common.json#/definitions/ManagedRuleEnabledState` |
+| `definitions.MatchCondition.properties.operator.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallOperator` |
+| `definitions.MatchCondition.properties.transforms.items.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallTransform` |
+| `definitions.MatchVariable.properties.variableName.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallMatchVariable` |
+| `definitions.OwaspCrsExclusionEntry.properties.matchVariable.$ref__added` | added | `./common.json#/definitions/OwaspCrsExclusionEntryMatchVariable` |
+| `definitions.OwaspCrsExclusionEntry.properties.selectorMatchOperator.$ref__added` | added | `./common.json#/definitions/OwaspCrsExclusionEntrySelectorMatchOperator` |
+| `definitions.PolicySettings.properties.logScrubbing.$ref__added` | added | `#/definitions/PolicySettingsLogScrubbing` |
+| `definitions.PolicySettings.properties.mode.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallMode` |
+| `definitions.PolicySettings.properties.state.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallEnabledState` |
+| `definitions.WebApplicationFirewallCustomRule.properties.action.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallAction` |
+| `definitions.WebApplicationFirewallCustomRule.properties.rateLimitDuration.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayFirewallRateLimitDuration` |
+| `definitions.WebApplicationFirewallCustomRule.properties.ruleType.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallRuleType` |
+| `definitions.WebApplicationFirewallCustomRule.properties.state.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallState` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.$ref__added` | added | `./common.json#/definitions/WebApplicationFirewallPolicyResourceState` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.matchVariable.$ref__added` | added | `./common.json#/definitions/ScrubbingRuleEntryMatchVariable` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.selectorMatchOperator.$ref__added` | added | `./common.json#/definitions/scrubbingRuleEntryMatchOperator` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.state.$ref__added` | added | `./common.json#/definitions/scrubbingRuleEntryState` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ApplicationGatewayAvailableRequestHeadersResult` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ApplicationGatewayAvailableResponseHeadersResult` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ApplicationGatewayAvailableServerVariablesResult` |
@@ -12,8 +84,70 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.availableCipherSuites.items.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.availableProtocols.items.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.defaultPolicy.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayBackendHealthServer.properties.health.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.cookieBasedAffinity.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayClientAuthConfiguration.properties.verifyClientAuthMode.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayClientAuthConfiguration.properties.verifyClientRevocation.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayCustomError.properties.statusCode.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.properties.unAuthorizedRequestAction.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.status.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.tiers.items.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayFirewallRule.properties.action.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayFirewallRule.properties.sensitivity.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayFirewallRule.properties.state.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayFirewallRuleSetPropertiesFormat.properties.tiers.items.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayHeaderConfiguration.properties.headerValueMatcher.type__deleted` | deleted | `object` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.properties.loadDistributionAlgorithm.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayOnDemandProbe.properties.protocol.type__deleted` | deleted | `string` |
 | `definitions.ApplicationGatewayPrivateEndpointConnection.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.ApplicationGatewayProbePropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.defaultPredefinedSslPolicy.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.operationalState.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat.properties.redirectType.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.ruleType.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewayRewriteRule.properties.actionSet.type__deleted` | deleted | `object` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.ruleType.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySku.properties.family.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySku.properties.name.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySku.properties.tier.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySslPolicy.properties.cipherSuites.items.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySslPolicy.properties.disabledSslProtocols.items.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySslPolicy.properties.minProtocolVersion.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySslPolicy.properties.policyName.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySslPolicy.properties.policyType.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat.properties.cipherSuites.items.type__deleted` | deleted | `string` |
+| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat.properties.minProtocolVersion.type__deleted` | deleted | `string` |
 | `definitions.ApplicationGatewayWafDynamicManifestResult.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.firewallMode.type__deleted` | deleted | `string` |
+| `definitions.ExceptionEntry.properties.matchVariable.type__deleted` | deleted | `string` |
+| `definitions.ExceptionEntry.properties.selectorMatchOperator.type__deleted` | deleted | `string` |
+| `definitions.ExceptionEntry.properties.valueMatchOperator.type__deleted` | deleted | `string` |
+| `definitions.ManagedRuleOverride.properties.action.type__deleted` | deleted | `string` |
+| `definitions.ManagedRuleOverride.properties.sensitivity.type__deleted` | deleted | `string` |
+| `definitions.ManagedRuleOverride.properties.state.type__deleted` | deleted | `string` |
+| `definitions.MatchCondition.properties.operator.type__deleted` | deleted | `string` |
+| `definitions.MatchCondition.properties.transforms.items.type__deleted` | deleted | `string` |
+| `definitions.MatchVariable.properties.variableName.type__deleted` | deleted | `string` |
+| `definitions.OwaspCrsExclusionEntry.properties.matchVariable.type__deleted` | deleted | `string` |
+| `definitions.OwaspCrsExclusionEntry.properties.selectorMatchOperator.type__deleted` | deleted | `string` |
+| `definitions.PolicySettings.properties.logScrubbing.type__deleted` | deleted | `object` |
+| `definitions.PolicySettings.properties.mode.type__deleted` | deleted | `string` |
+| `definitions.PolicySettings.properties.state.type__deleted` | deleted | `string` |
+| `definitions.WebApplicationFirewallCustomRule.properties.action.type__deleted` | deleted | `string` |
+| `definitions.WebApplicationFirewallCustomRule.properties.rateLimitDuration.type__deleted` | deleted | `string` |
+| `definitions.WebApplicationFirewallCustomRule.properties.ruleType.type__deleted` | deleted | `string` |
+| `definitions.WebApplicationFirewallCustomRule.properties.state.type__deleted` | deleted | `string` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.type__deleted` | deleted | `string` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.matchVariable.type__deleted` | deleted | `string` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.selectorMatchOperator.type__deleted` | deleted | `string` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.state.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.200.schema.type__added` | added | `array` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.200.schema.type__added` | added | `array` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.200.schema.type__added` | added | `array` |
@@ -47,24 +181,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ApplicationGateway` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ApplicationGatewayPrivateEndpointConnection` |
 
-### Changes for `ApplicationGatewayAuthenticationCertificate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayAuthenticationCertificate__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayAuthenticationC...` |
-
-### Changes for `ApplicationGatewayAuthenticationCertificatePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayAuthenticationCertificatePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"data":{"type":"string"},"provisioningState":{"$ref":"./network.json#...` |
-
-### Changes for `ApplicationGatewayAutoscaleConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayAutoscaleConfiguration__deleted` | deleted | `{"type":"object","properties":{"minCapacity":{"type":"integer","format":"int32","minimum":0,"exclusi...` |
-
 ### Changes for `ApplicationGatewayAvailableRequestHeadersResult`
 
 | Path | Change Type | Value |
@@ -83,563 +199,11 @@
 |------|------------|-------|
 | `definitions.ApplicationGatewayAvailableServerVariablesResult__deleted` | deleted | `{"type":"array","items":{"type":"string"}}` |
 
-### Changes for `ApplicationGatewayAvailableSslOptionsPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"predefinedPolicies":{"type":"array","items":{"$ref":"./network.json#...` |
-
-### Changes for `ApplicationGatewayAvailableSslPredefinedPolicies`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayAvailableSslPredefinedPolicies__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ApplicationGatewayAvailableWafRuleSetsResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayAvailableWafRuleSetsResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/ApplicationGat...` |
-
-### Changes for `ApplicationGatewayBackendAddress`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendAddress__deleted` | deleted | `{"type":"object","properties":{"fqdn":{"type":"string"},"ipAddress":{"type":"string"}}}` |
-
-### Changes for `ApplicationGatewayBackendAddressPool`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendAddressPool__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayBackendAddressP...` |
-
-### Changes for `ApplicationGatewayBackendAddressPoolPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendAddressPoolPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"backendIPConfigurations":{"type":"array","items":{"$ref":"./networkI...` |
-
-### Changes for `ApplicationGatewayBackendHealth`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendHealth__deleted` | deleted | `{"type":"object","properties":{"backendAddressPools":{"type":"array","items":{"$ref":"#/definitions/...` |
-
-### Changes for `ApplicationGatewayBackendHealthHttpSettings`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendHealthHttpSettings__deleted` | deleted | `{"type":"object","properties":{"backendHttpSettings":{"$ref":"#/definitions/ApplicationGatewayBacken...` |
-
-### Changes for `ApplicationGatewayBackendHealthOnDemand`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendHealthOnDemand__deleted` | deleted | `{"type":"object","properties":{"backendAddressPool":{"$ref":"#/definitions/ApplicationGatewayBackend...` |
-
-### Changes for `ApplicationGatewayBackendHealthPool`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendHealthPool__deleted` | deleted | `{"type":"object","properties":{"backendAddressPool":{"$ref":"#/definitions/ApplicationGatewayBackend...` |
-
-### Changes for `ApplicationGatewayBackendHealthServer`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendHealthServer__deleted` | deleted | `{"type":"object","properties":{"address":{"type":"string"},"ipConfiguration":{"$ref":"./networkInter...` |
-
-### Changes for `ApplicationGatewayBackendHttpSettings`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendHttpSettings__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayBackendHttpSett...` |
-
-### Changes for `ApplicationGatewayBackendHttpSettingsPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"port":{"type":"integer","format":"int32"},"protocol":{"type":"string...` |
-
-### Changes for `ApplicationGatewayBackendSettings`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendSettings__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayBackendSettings...` |
-
-### Changes for `ApplicationGatewayBackendSettingsPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"port":{"type":"integer","format":"int32"},"protocol":{"type":"string...` |
-
-### Changes for `ApplicationGatewayClientAuthConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayClientAuthConfiguration__deleted` | deleted | `{"type":"object","properties":{"verifyClientCertIssuerDN":{"type":"boolean"},"verifyClientRevocation...` |
-
-### Changes for `ApplicationGatewayConnectionDraining`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayConnectionDraining__deleted` | deleted | `{"type":"object","properties":{"enabled":{"type":"boolean"},"drainTimeoutInSec":{"type":"integer","f...` |
-
-### Changes for `ApplicationGatewayCustomError`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayCustomError__deleted` | deleted | `{"type":"object","properties":{"statusCode":{"type":"string","enum":["HttpStatus400","HttpStatus403"...` |
-
-### Changes for `ApplicationGatewayEntraJWTValidationConfig`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayEntraJWTValidationConfig__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayEntraJWTValidat...` |
-
-### Changes for `ApplicationGatewayEntraJWTValidationConfigPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"unAuthorizedRequestAction":{"type":"string","enum":["Deny","Allow"],...` |
-
-### Changes for `ApplicationGatewayFirewallDisabledRuleGroup`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFirewallDisabledRuleGroup__deleted` | deleted | `{"type":"object","properties":{"ruleGroupName":{"type":"string"},"rules":{"type":"array","items":{"t...` |
-
-### Changes for `ApplicationGatewayFirewallExclusion`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFirewallExclusion__deleted` | deleted | `{"type":"object","properties":{"matchVariable":{"type":"string"},"selectorMatchOperator":{"type":"st...` |
-
-### Changes for `ApplicationGatewayFirewallManifestRuleSet`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFirewallManifestRuleSet__deleted` | deleted | `{"type":"object","properties":{"ruleSetType":{"type":"string"},"ruleSetVersion":{"type":"string"},"s...` |
-
-### Changes for `ApplicationGatewayFirewallRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFirewallRule__deleted` | deleted | `{"type":"object","properties":{"ruleId":{"type":"integer","format":"int32"},"ruleIdString":{"type":"...` |
-
-### Changes for `ApplicationGatewayFirewallRuleGroup`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFirewallRuleGroup__deleted` | deleted | `{"type":"object","properties":{"ruleGroupName":{"type":"string"},"description":{"type":"string"},"ru...` |
-
-### Changes for `ApplicationGatewayFirewallRuleSet`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFirewallRuleSet__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayFirewallRuleSet...` |
-
-### Changes for `ApplicationGatewayFirewallRuleSetPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFirewallRuleSetPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"$ref":"./network.json#/definitions/Provisioning...` |
-
-### Changes for `ApplicationGatewayForContainersReferenceDefinition`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayForContainersReferenceDefinition__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","format":"arm-id","x-ms-arm-id-details":{"allow...` |
-
-### Changes for `ApplicationGatewayFrontendIPConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFrontendIPConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayFrontendIPConfi...` |
-
-### Changes for `ApplicationGatewayFrontendIPConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"privateIPAddress":{"type":"string"},"privateIPAllocationMethod":{"$r...` |
-
-### Changes for `ApplicationGatewayFrontendPort`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFrontendPort__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayFrontendPortPro...` |
-
-### Changes for `ApplicationGatewayFrontendPortPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayFrontendPortPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"port":{"type":"integer","format":"int32"},"provisioningState":{"$ref...` |
-
-### Changes for `ApplicationGatewayGlobalConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayGlobalConfiguration__deleted` | deleted | `{"type":"object","properties":{"enableRequestBuffering":{"type":"boolean"},"enableResponseBuffering"...` |
-
-### Changes for `ApplicationGatewayHeaderConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayHeaderConfiguration__deleted` | deleted | `{"type":"object","properties":{"headerName":{"type":"string"},"headerValueMatcher":{"$ref":"#/defini...` |
-
-### Changes for `ApplicationGatewayHttpListener`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayHttpListener__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayHttpListenerPro...` |
-
-### Changes for `ApplicationGatewayHttpListenerPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayHttpListenerPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"frontendIPConfiguration":{"$ref":"./network.json#/definitions/SubRes...` |
-
-### Changes for `ApplicationGatewayIPConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayIPConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayIPConfiguration...` |
-
-### Changes for `ApplicationGatewayIPConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayIPConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"subnet":{"$ref":"./network.json#/definitions/SubResource"},"provisio...` |
-
-### Changes for `ApplicationGatewayListener`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayListener__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayListenerPropert...` |
-
-### Changes for `ApplicationGatewayListenerPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayListenerPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"frontendIPConfiguration":{"$ref":"./network.json#/definitions/SubRes...` |
-
-### Changes for `ApplicationGatewayLoadDistributionPolicy`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayLoadDistributionPolicy__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayLoadDistributio...` |
-
-### Changes for `ApplicationGatewayLoadDistributionPolicyPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayLoadDistributionPolicyPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"loadDistributionTargets":{"type":"array","items":{"$ref":"#/definiti...` |
-
-### Changes for `ApplicationGatewayLoadDistributionTarget`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayLoadDistributionTarget__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayLoadDistributio...` |
-
-### Changes for `ApplicationGatewayLoadDistributionTargetPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayLoadDistributionTargetPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"weightPerServer":{"type":"integer","format":"int32","minimum":1,"exc...` |
-
-### Changes for `ApplicationGatewayOnDemandProbe`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayOnDemandProbe__deleted` | deleted | `{"type":"object","properties":{"protocol":{"type":"string","enum":["Http","Https","Tcp","Tls"],"x-ms...` |
-
-### Changes for `ApplicationGatewayPathRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPathRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayPathRulePropert...` |
-
-### Changes for `ApplicationGatewayPathRulePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPathRulePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"paths":{"type":"array","items":{"type":"string"}},"backendAddressPoo...` |
-
-### Changes for `ApplicationGatewayPrivateEndpointConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPrivateEndpointConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"privateEndpoint":{"$ref":"./privateEndpoint.json#/definitions/Privat...` |
-
-### Changes for `ApplicationGatewayPrivateLinkConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPrivateLinkConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayPrivateLinkConf...` |
-
-### Changes for `ApplicationGatewayPrivateLinkConfigurationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPrivateLinkConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"ipConfigurations":{"type":"array","items":{"$ref":"#/definitions/App...` |
-
-### Changes for `ApplicationGatewayPrivateLinkIpConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPrivateLinkIpConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayPrivateLinkIpCo...` |
-
-### Changes for `ApplicationGatewayPrivateLinkIpConfigurationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPrivateLinkIpConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"privateIPAddress":{"type":"string"},"privateIPAllocationMethod":{"$r...` |
-
-### Changes for `ApplicationGatewayPrivateLinkResource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPrivateLinkResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayPrivateLinkReso...` |
-
-### Changes for `ApplicationGatewayPrivateLinkResourceListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPrivateLinkResourceListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ApplicationGatewayPrivateLinkResourceProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPrivateLinkResourceProperties__deleted` | deleted | `{"type":"object","properties":{"groupId":{"type":"string","readOnly":true},"requiredMembers":{"type"...` |
-
-### Changes for `ApplicationGatewayProbe`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayProbe__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayProbeProperties...` |
-
-### Changes for `ApplicationGatewayProbeHealthResponseMatch`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayProbeHealthResponseMatch__deleted` | deleted | `{"type":"object","properties":{"body":{"type":"string"},"statusCodes":{"type":"array","items":{"type...` |
-
-### Changes for `ApplicationGatewayProbePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayProbePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"protocol":{"type":"string","enum":["Http","Https","Tcp","Tls"],"x-ms...` |
-
-### Changes for `ApplicationGatewayPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"sku":{"$ref":"#/definitions/ApplicationGatewaySku"},"sslPolicy":{"$r...` |
-
-### Changes for `ApplicationGatewayRedirectConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRedirectConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayRedirectConfigu...` |
-
-### Changes for `ApplicationGatewayRedirectConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"redirectType":{"type":"string","enum":["Permanent","Found","SeeOther...` |
-
-### Changes for `ApplicationGatewayRequestRoutingRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRequestRoutingRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayRequestRoutingR...` |
-
-### Changes for `ApplicationGatewayRequestRoutingRulePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"ruleType":{"type":"string","enum":["Basic","PathBasedRouting"],"x-ms...` |
-
-### Changes for `ApplicationGatewayRewriteRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRewriteRule__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"ruleSequence":{"type":"integer"},"condition...` |
-
-### Changes for `ApplicationGatewayRewriteRuleActionSet`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRewriteRuleActionSet__deleted` | deleted | `{"type":"object","properties":{"requestHeaderConfigurations":{"type":"array","items":{"$ref":"#/defi...` |
-
-### Changes for `ApplicationGatewayRewriteRuleCondition`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRewriteRuleCondition__deleted` | deleted | `{"type":"object","properties":{"variable":{"type":"string"},"pattern":{"type":"string"},"ignoreCase"...` |
-
-### Changes for `ApplicationGatewayRewriteRuleSet`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRewriteRuleSet__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayRewriteRuleSetP...` |
-
-### Changes for `ApplicationGatewayRewriteRuleSetPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRewriteRuleSetPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"rewriteRules":{"type":"array","items":{"$ref":"#/definitions/Applica...` |
-
-### Changes for `ApplicationGatewayRoutingRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRoutingRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayRoutingRuleProp...` |
-
-### Changes for `ApplicationGatewayRoutingRulePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayRoutingRulePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"ruleType":{"type":"string","enum":["Basic","PathBasedRouting"],"x-ms...` |
-
-### Changes for `ApplicationGatewaySku`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewaySku__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","enum":["Standard_Small","Standard_Medium","S...` |
-
-### Changes for `ApplicationGatewaySslCertificate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewaySslCertificate__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewaySslCertificateP...` |
-
-### Changes for `ApplicationGatewaySslCertificatePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewaySslCertificatePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"data":{"type":"string"},"password":{"type":"string"},"publicCertData...` |
-
-### Changes for `ApplicationGatewaySslPolicy`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewaySslPolicy__deleted` | deleted | `{"type":"object","properties":{"disabledSslProtocols":{"type":"array","items":{"type":"string","enum...` |
-
-### Changes for `ApplicationGatewaySslPredefinedPolicy`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewaySslPredefinedPolicy__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"properties":{"$ref":"#/definitions/Applicat...` |
-
-### Changes for `ApplicationGatewaySslPredefinedPolicyPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"cipherSuites":{"type":"array","items":{"type":"string","enum":["TLS_...` |
-
-### Changes for `ApplicationGatewaySslProfile`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewaySslProfile__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewaySslProfilePrope...` |
-
-### Changes for `ApplicationGatewaySslProfilePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewaySslProfilePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"trustedClientCertificates":{"type":"array","items":{"$ref":"./networ...` |
-
-### Changes for `ApplicationGatewayTrustedClientCertificate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayTrustedClientCertificate__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayTrustedClientCe...` |
-
-### Changes for `ApplicationGatewayTrustedClientCertificatePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayTrustedClientCertificatePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"data":{"type":"string"},"validatedCertData":{"type":"string","readOn...` |
-
-### Changes for `ApplicationGatewayTrustedRootCertificate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayTrustedRootCertificate__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayTrustedRootCert...` |
-
-### Changes for `ApplicationGatewayTrustedRootCertificatePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayTrustedRootCertificatePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"data":{"type":"string"},"keyVaultSecretId":{"type":"string"},"provis...` |
-
-### Changes for `ApplicationGatewayUrlConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayUrlConfiguration__deleted` | deleted | `{"type":"object","properties":{"modifiedPath":{"type":"string"},"modifiedQueryString":{"type":"strin...` |
-
-### Changes for `ApplicationGatewayUrlPathMap`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayUrlPathMap__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ApplicationGatewayUrlPathMapPrope...` |
-
-### Changes for `ApplicationGatewayUrlPathMapPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"defaultBackendAddressPool":{"$ref":"./network.json#/definitions/SubR...` |
-
-### Changes for `ApplicationGatewayWafDynamicManifestPropertiesResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayWafDynamicManifestPropertiesResult__deleted` | deleted | `{"type":"object","properties":{"defaultRuleSet":{"$ref":"#/definitions/DefaultRuleSetPropertyFormat"...` |
-
-### Changes for `ApplicationGatewayWafDynamicManifestResultList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayWafDynamicManifestResultList__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ApplicationGatewayWebApplicationFirewallConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration__deleted` | deleted | `{"type":"object","properties":{"enabled":{"type":"boolean"},"firewallMode":{"type":"string","enum":[...` |
-
-### Changes for `DefaultRuleSetPropertyFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DefaultRuleSetPropertyFormat__deleted` | deleted | `{"type":"object","properties":{"ruleSetType":{"type":"string"},"ruleSetVersion":{"type":"string"}}}` |
-
-### Changes for `ExceptionEntry`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExceptionEntry__deleted` | deleted | `{"type":"object","properties":{"matchVariable":{"type":"string","enum":["RequestURI","RemoteAddr","R...` |
-
 ### Changes for `ExclusionManagedRule`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ExclusionManagedRule__deleted` | deleted | `{"type":"object","properties":{"ruleId":{"type":"string"}},"required":["ruleId"]}` |
-
-### Changes for `ExclusionManagedRuleGroup`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExclusionManagedRuleGroup__deleted` | deleted | `{"type":"object","properties":{"ruleGroupName":{"type":"string"},"rules":{"type":"array","items":{"$...` |
-
-### Changes for `ExclusionManagedRuleSet`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExclusionManagedRuleSet__deleted` | deleted | `{"type":"object","properties":{"ruleSetType":{"type":"string"},"ruleSetVersion":{"type":"string"},"r...` |
 
 ### Changes for `GroupByUserSession`
 
@@ -659,90 +223,183 @@
 |------|------------|-------|
 | `definitions.HeaderValueMatcher__deleted` | deleted | `{"type":"object","properties":{"pattern":{"type":"string"},"ignoreCase":{"type":"boolean"},"negate":...` |
 
-### Changes for `ManagedRuleGroupOverride`
+### Changes for `PolicySettingsLogScrubbing`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ManagedRuleGroupOverride__deleted` | deleted | `{"type":"object","properties":{"ruleGroupName":{"type":"string"},"rules":{"type":"array","items":{"$...` |
+| `definitions.PolicySettingsLogScrubbing__added` | added | `{"type":"object","properties":{"state":{"$ref":"./common.json#/definitions/WebApplicationFirewallScr...` |
 
-### Changes for `ManagedRuleOverride`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ManagedRuleOverride__deleted` | deleted | `{"type":"object","properties":{"ruleId":{"type":"string"},"state":{"type":"string","enum":["Disabled...` |
-
-### Changes for `ManagedRuleSet`
+### Changes for `exclusiveMinimum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ManagedRuleSet__deleted` | deleted | `{"type":"object","properties":{"ruleSetType":{"type":"string"},"ruleSetVersion":{"type":"string"},"r...` |
+| `definitions.ApplicationGatewayAutoscaleConfiguration.properties.maxCapacity.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayAutoscaleConfiguration.properties.minCapacity.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayConnectionDraining.properties.drainTimeoutInSec.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayLoadDistributionTargetPropertiesFormat.properties.weightPerServer.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.priority.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.priority.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.fileUploadLimitInMb.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.maxRequestBodySize.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.maxRequestBodySizeInKb.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.PolicySettings.properties.fileUploadLimitInMb.exclusiveMinimum__deleted` | deleted | `false` |
+| `definitions.PolicySettings.properties.maxRequestBodySizeInKb.exclusiveMinimum__deleted` | deleted | `false` |
 
-### Changes for `ManagedRuleSetRuleGroup`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ManagedRuleSetRuleGroup__deleted` | deleted | `{"type":"object","properties":{"ruleGroupName":{"type":"string"},"rules":{"type":"array","items":{"t...` |
-
-### Changes for `ManagedRulesDefinition`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ManagedRulesDefinition__deleted` | deleted | `{"type":"object","properties":{"exceptions":{"type":"array","items":{"$ref":"#/definitions/Exception...` |
-
-### Changes for `MatchCondition`
+### Changes for `enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MatchCondition__deleted` | deleted | `{"type":"object","properties":{"matchVariables":{"type":"array","items":{"$ref":"#/definitions/Match...` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.availableCipherSuites.items.enum__deleted` | deleted | `["TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384","TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_RSA_WITH...` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.availableProtocols.items.enum__deleted` | deleted | `["TLSv1_0","TLSv1_1","TLSv1_2","TLSv1_3"]` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.defaultPolicy.enum__deleted` | deleted | `["AppGwSslPolicy20150501","AppGwSslPolicy20170401","AppGwSslPolicy20170401S","AppGwSslPolicy20220101...` |
+| `definitions.ApplicationGatewayBackendHealthServer.properties.health.enum__deleted` | deleted | `["Unknown","Up","Down","Partial","Draining"]` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.cookieBasedAffinity.enum__deleted` | deleted | `["Enabled","Disabled"]` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.protocol.enum__deleted` | deleted | `["Http","Https","Tcp","Tls"]` |
+| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.protocol.enum__deleted` | deleted | `["Http","Https","Tcp","Tls"]` |
+| `definitions.ApplicationGatewayClientAuthConfiguration.properties.verifyClientAuthMode.enum__deleted` | deleted | `["Strict","Passthrough"]` |
+| `definitions.ApplicationGatewayClientAuthConfiguration.properties.verifyClientRevocation.enum__deleted` | deleted | `["None","OCSP"]` |
+| `definitions.ApplicationGatewayCustomError.properties.statusCode.enum__deleted` | deleted | `["HttpStatus400","HttpStatus403","HttpStatus404","HttpStatus405","HttpStatus408","HttpStatus500","Ht...` |
+| `definitions.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.properties.unAuthorizedRequestAction.enum__deleted` | deleted | `["Deny","Allow"]` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.status.enum__deleted` | deleted | `["Preview","GA","Supported","Deprecated"]` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.tiers.items.enum__deleted` | deleted | `["Standard","WAF","Standard_v2","WAF_v2"]` |
+| `definitions.ApplicationGatewayFirewallRule.properties.action.enum__deleted` | deleted | `["None","AnomalyScoring","Allow","Block","Log"]` |
+| `definitions.ApplicationGatewayFirewallRule.properties.sensitivity.enum__deleted` | deleted | `["Low","Medium","High"]` |
+| `definitions.ApplicationGatewayFirewallRule.properties.state.enum__deleted` | deleted | `["Enabled","Disabled"]` |
+| `definitions.ApplicationGatewayFirewallRuleSetPropertiesFormat.properties.tiers.items.enum__deleted` | deleted | `["Standard","WAF","Standard_v2","WAF_v2"]` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.protocol.enum__deleted` | deleted | `["Http","Https","Tcp","Tls"]` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.protocol.enum__deleted` | deleted | `["Http","Https","Tcp","Tls"]` |
+| `definitions.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.properties.loadDistributionAlgorithm.enum__deleted` | deleted | `["RoundRobin","LeastConnections","IpHash"]` |
+| `definitions.ApplicationGatewayOnDemandProbe.properties.protocol.enum__deleted` | deleted | `["Http","Https","Tcp","Tls"]` |
+| `definitions.ApplicationGatewayProbePropertiesFormat.properties.protocol.enum__deleted` | deleted | `["Http","Https","Tcp","Tls"]` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.defaultPredefinedSslPolicy.enum__deleted` | deleted | `["AppGwSslPolicy20150501","AppGwSslPolicy20170401","AppGwSslPolicy20170401S","AppGwSslPolicy20220101...` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.operationalState.enum__deleted` | deleted | `["Stopped","Starting","Running","Stopping"]` |
+| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat.properties.redirectType.enum__deleted` | deleted | `["Permanent","Found","SeeOther","Temporary"]` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.ruleType.enum__deleted` | deleted | `["Basic","PathBasedRouting"]` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.ruleType.enum__deleted` | deleted | `["Basic","PathBasedRouting"]` |
+| `definitions.ApplicationGatewaySku.properties.family.enum__deleted` | deleted | `["Generation_1","Generation_2"]` |
+| `definitions.ApplicationGatewaySku.properties.name.enum__deleted` | deleted | `["Standard_Small","Standard_Medium","Standard_Large","WAF_Medium","WAF_Large","Standard_v2","WAF_v2"...` |
+| `definitions.ApplicationGatewaySku.properties.tier.enum__deleted` | deleted | `["Standard","WAF","Standard_v2","WAF_v2","Basic"]` |
+| `definitions.ApplicationGatewaySslPolicy.properties.cipherSuites.items.enum__deleted` | deleted | `["TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384","TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_RSA_WITH...` |
+| `definitions.ApplicationGatewaySslPolicy.properties.disabledSslProtocols.items.enum__deleted` | deleted | `["TLSv1_0","TLSv1_1","TLSv1_2","TLSv1_3"]` |
+| `definitions.ApplicationGatewaySslPolicy.properties.minProtocolVersion.enum__deleted` | deleted | `["TLSv1_0","TLSv1_1","TLSv1_2","TLSv1_3"]` |
+| `definitions.ApplicationGatewaySslPolicy.properties.policyName.enum__deleted` | deleted | `["AppGwSslPolicy20150501","AppGwSslPolicy20170401","AppGwSslPolicy20170401S","AppGwSslPolicy20220101...` |
+| `definitions.ApplicationGatewaySslPolicy.properties.policyType.enum__deleted` | deleted | `["Predefined","Custom","CustomV2"]` |
+| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat.properties.cipherSuites.items.enum__deleted` | deleted | `["TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384","TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_RSA_WITH...` |
+| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat.properties.minProtocolVersion.enum__deleted` | deleted | `["TLSv1_0","TLSv1_1","TLSv1_2","TLSv1_3"]` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.firewallMode.enum__deleted` | deleted | `["Detection","Prevention"]` |
+| `definitions.ExceptionEntry.properties.matchVariable.enum__deleted` | deleted | `["RequestURI","RemoteAddr","RequestHeader"]` |
+| `definitions.ExceptionEntry.properties.selectorMatchOperator.enum__deleted` | deleted | `["Equals","Contains","StartsWith","EndsWith"]` |
+| `definitions.ExceptionEntry.properties.valueMatchOperator.enum__deleted` | deleted | `["Equals","Contains","StartsWith","EndsWith","IPMatch"]` |
+| `definitions.ManagedRuleOverride.properties.action.enum__deleted` | deleted | `["AnomalyScoring","Allow","Block","Log","JSChallenge"]` |
+| `definitions.ManagedRuleOverride.properties.sensitivity.enum__deleted` | deleted | `["Low","Medium","High"]` |
+| `definitions.ManagedRuleOverride.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
+| `definitions.MatchCondition.properties.operator.enum__deleted` | deleted | `["IPMatch","Equal","Contains","LessThan","GreaterThan","LessThanOrEqual","GreaterThanOrEqual","Begin...` |
+| `definitions.MatchCondition.properties.transforms.items.enum__deleted` | deleted | `["Uppercase","Lowercase","Trim","UrlDecode","UrlEncode","RemoveNulls","HtmlEntityDecode"]` |
+| `definitions.MatchVariable.properties.variableName.enum__deleted` | deleted | `["RemoteAddr","RequestMethod","QueryString","PostArgs","RequestUri","RequestHeaders","RequestBody","...` |
+| `definitions.OwaspCrsExclusionEntry.properties.matchVariable.enum__deleted` | deleted | `["RequestHeaderNames","RequestCookieNames","RequestArgNames","RequestHeaderKeys","RequestHeaderValue...` |
+| `definitions.OwaspCrsExclusionEntry.properties.selectorMatchOperator.enum__deleted` | deleted | `["Equals","Contains","StartsWith","EndsWith","EqualsAny"]` |
+| `definitions.PolicySettings.properties.mode.enum__deleted` | deleted | `["Prevention","Detection"]` |
+| `definitions.PolicySettings.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
+| `definitions.WebApplicationFirewallCustomRule.properties.action.enum__deleted` | deleted | `["Allow","Block","Log","JSChallenge"]` |
+| `definitions.WebApplicationFirewallCustomRule.properties.rateLimitDuration.enum__deleted` | deleted | `["OneMin","FiveMins"]` |
+| `definitions.WebApplicationFirewallCustomRule.properties.ruleType.enum__deleted` | deleted | `["MatchRule","RateLimitRule","Invalid"]` |
+| `definitions.WebApplicationFirewallCustomRule.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.enum__deleted` | deleted | `["Creating","Enabling","Enabled","Disabling","Disabled","Deleting"]` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.matchVariable.enum__deleted` | deleted | `["RequestHeaderNames","RequestCookieNames","RequestArgNames","RequestPostArgNames","RequestJSONArgNa...` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.selectorMatchOperator.enum__deleted` | deleted | `["Equals","EqualsAny"]` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.state.enum__deleted` | deleted | `["Enabled","Disabled"]` |
 
-### Changes for `MatchVariable`
+### Changes for `x-ms-enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MatchVariable__deleted` | deleted | `{"type":"object","properties":{"variableName":{"type":"string","enum":["RemoteAddr","RequestMethod",...` |
-
-### Changes for `OwaspCrsExclusionEntry`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OwaspCrsExclusionEntry__deleted` | deleted | `{"type":"object","properties":{"matchVariable":{"type":"string","enum":["RequestHeaderNames","Reques...` |
-
-### Changes for `PolicySettings`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PolicySettings__deleted` | deleted | `{"type":"object","properties":{"state":{"type":"string","enum":["Disabled","Enabled"],"x-ms-enum":{"...` |
-
-### Changes for `WebApplicationFirewallCustomRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.WebApplicationFirewallCustomRule__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","maxLength":128},"etag":{"type":"string","rea...` |
-
-### Changes for `WebApplicationFirewallPolicyListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.WebApplicationFirewallPolicyListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `WebApplicationFirewallPolicyPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.WebApplicationFirewallPolicyPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"policySettings":{"$ref":"#/definitions/PolicySettings"},"customRules...` |
-
-### Changes for `WebApplicationFirewallScrubbingRules`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.WebApplicationFirewallScrubbingRules__deleted` | deleted | `{"type":"object","properties":{"matchVariable":{"type":"string","enum":["RequestHeaderNames","Reques...` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.availableCipherSuites.items['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslCipherSuite","modelAsString":true}` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.availableProtocols.items['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.defaultPolicy['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslPolicyName","modelAsString":true}` |
+| `definitions.ApplicationGatewayBackendHealthServer.properties.health['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayBackendHealthServerHealth","modelAsString":true}` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.cookieBasedAffinity['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayCookieBasedAffinity","modelAsString":true}` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewayClientAuthConfiguration.properties.verifyClientAuthMode['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayClientAuthVerificationModes","modelAsString":true}` |
+| `definitions.ApplicationGatewayClientAuthConfiguration.properties.verifyClientRevocation['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayClientRevocationOptions","modelAsString":true}` |
+| `definitions.ApplicationGatewayCustomError.properties.statusCode['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayCustomErrorStatusCode","modelAsString":true}` |
+| `definitions.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.properties.unAuthorizedRequestAction['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayUnAuthorizedRequestAction","modelAsString":true}` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.status['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayRuleSetStatusOptions","modelAsString":true}` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.tiers.items['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayTierTypes","modelAsString":true}` |
+| `definitions.ApplicationGatewayFirewallRule.properties.action['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayWafRuleActionTypes","modelAsString":true}` |
+| `definitions.ApplicationGatewayFirewallRule.properties.sensitivity['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayWafRuleSensitivityTypes","modelAsString":true}` |
+| `definitions.ApplicationGatewayFirewallRule.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayWafRuleStateTypes","modelAsString":true}` |
+| `definitions.ApplicationGatewayFirewallRuleSetPropertiesFormat.properties.tiers.items['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayTierTypes","modelAsString":true}` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.properties.loadDistributionAlgorithm['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayLoadDistributionAlgorithm","modelAsString":true}` |
+| `definitions.ApplicationGatewayOnDemandProbe.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewayProbePropertiesFormat.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.defaultPredefinedSslPolicy['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslPolicyName","modelAsString":true}` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.operationalState['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayOperationalState","modelAsString":true}` |
+| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat.properties.redirectType['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayRedirectType","modelAsString":true}` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.ruleType['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayRequestRoutingRuleType","modelAsString":true}` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.ruleType['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayRequestRoutingRuleType","modelAsString":true}` |
+| `definitions.ApplicationGatewaySku.properties.family['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySkuFamily","modelAsString":true}` |
+| `definitions.ApplicationGatewaySku.properties.name['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySkuName","modelAsString":true}` |
+| `definitions.ApplicationGatewaySku.properties.tier['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayTier","modelAsString":true}` |
+| `definitions.ApplicationGatewaySslPolicy.properties.cipherSuites.items['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslCipherSuite","modelAsString":true}` |
+| `definitions.ApplicationGatewaySslPolicy.properties.disabledSslProtocols.items['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewaySslPolicy.properties.minProtocolVersion['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewaySslPolicy.properties.policyName['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslPolicyName","modelAsString":true}` |
+| `definitions.ApplicationGatewaySslPolicy.properties.policyType['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslPolicyType","modelAsString":true}` |
+| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat.properties.cipherSuites.items['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslCipherSuite","modelAsString":true}` |
+| `definitions.ApplicationGatewaySslPredefinedPolicyPropertiesFormat.properties.minProtocolVersion['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewaySslProtocol","modelAsString":true}` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.firewallMode['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayFirewallMode","modelAsString":true}` |
+| `definitions.ExceptionEntry.properties.matchVariable['x-ms-enum__deleted']` | deleted | `{"name":"ExceptionEntryMatchVariable","modelAsString":true}` |
+| `definitions.ExceptionEntry.properties.selectorMatchOperator['x-ms-enum__deleted']` | deleted | `{"name":"ExceptionEntrySelectorMatchOperator","modelAsString":true}` |
+| `definitions.ExceptionEntry.properties.valueMatchOperator['x-ms-enum__deleted']` | deleted | `{"name":"ExceptionEntryValueMatchOperator","modelAsString":true}` |
+| `definitions.ManagedRuleOverride.properties.action['x-ms-enum__deleted']` | deleted | `{"name":"ActionType","modelAsString":true}` |
+| `definitions.ManagedRuleOverride.properties.sensitivity['x-ms-enum__deleted']` | deleted | `{"name":"SensitivityType","modelAsString":true}` |
+| `definitions.ManagedRuleOverride.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"ManagedRuleEnabledState","modelAsString":true}` |
+| `definitions.MatchCondition.properties.operator['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallOperator","modelAsString":true}` |
+| `definitions.MatchCondition.properties.transforms.items['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallTransform","modelAsString":true}` |
+| `definitions.MatchVariable.properties.variableName['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallMatchVariable","modelAsString":true}` |
+| `definitions.OwaspCrsExclusionEntry.properties.matchVariable['x-ms-enum__deleted']` | deleted | `{"name":"OwaspCrsExclusionEntryMatchVariable","modelAsString":true}` |
+| `definitions.OwaspCrsExclusionEntry.properties.selectorMatchOperator['x-ms-enum__deleted']` | deleted | `{"name":"OwaspCrsExclusionEntrySelectorMatchOperator","modelAsString":true}` |
+| `definitions.PolicySettings.properties.mode['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallMode","modelAsString":true}` |
+| `definitions.PolicySettings.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallEnabledState","modelAsString":true}` |
+| `definitions.WebApplicationFirewallCustomRule.properties.action['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallAction","modelAsString":true}` |
+| `definitions.WebApplicationFirewallCustomRule.properties.rateLimitDuration['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayFirewallRateLimitDuration","modelAsString":true}` |
+| `definitions.WebApplicationFirewallCustomRule.properties.ruleType['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallRuleType","modelAsString":true}` |
+| `definitions.WebApplicationFirewallCustomRule.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallState","modelAsString":true}` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState['x-ms-enum__deleted']` | deleted | `{"name":"WebApplicationFirewallPolicyResourceState","modelAsString":true}` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.matchVariable['x-ms-enum__deleted']` | deleted | `{"name":"ScrubbingRuleEntryMatchVariable","modelAsString":true}` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.selectorMatchOperator['x-ms-enum__deleted']` | deleted | `{"name":" scrubbingRuleEntryMatchOperator","modelAsString":true}` |
+| `definitions.WebApplicationFirewallScrubbingRules.properties.state['x-ms-enum__deleted']` | deleted | `{"name":" scrubbingRuleEntryState","modelAsString":true}` |
 
 ### Changes for `required`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ApplicationGatewayAvailableSslPredefinedPolicies.required__added` | added | `["value"]` |
 | `definitions.ApplicationGatewayListResult.required__added` | added | `["value"]` |
 | `definitions.ApplicationGatewayPrivateEndpointConnectionListResult.required__added` | added | `["value"]` |
+| `definitions.ApplicationGatewayPrivateLinkResourceListResult.required__added` | added | `["value"]` |
+| `definitions.ApplicationGatewayWafDynamicManifestResultList.required__added` | added | `["value"]` |
+| `definitions.WebApplicationFirewallPolicyListResult.required__added` | added | `["value"]` |
+
+### Changes for `exclusiveMaximum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ApplicationGatewayConnectionDraining.properties.drainTimeoutInSec.exclusiveMaximum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayLoadDistributionTargetPropertiesFormat.properties.weightPerServer.exclusiveMaximum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.priority.exclusiveMaximum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.priority.exclusiveMaximum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.maxRequestBodySize.exclusiveMaximum__deleted` | deleted | `false` |
+| `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.maxRequestBodySizeInKb.exclusiveMaximum__deleted` | deleted | `false` |
+
+### Changes for `x-nullable`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ApplicationGatewayFirewallDisabledRuleGroup.properties.rules.items['x-nullable__deleted']` | deleted | `false` |
 
 ### Changes for `name`
 
@@ -751,11 +408,18 @@
 | `definitions.ApplicationGatewayPrivateEndpointConnection.properties.name__deleted` | deleted | `{"type":"string"}` |
 | `definitions.ApplicationGatewayWafDynamicManifestResult.properties.name__deleted` | deleted | `{"type":"string","readOnly":true}` |
 
+### Changes for `format`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ApplicationGatewayRewriteRule.properties.ruleSequence.format__added` | added | `int32` |
+| `definitions.WebApplicationFirewallCustomRule.properties.priority.format__added` | added | `int32` |
+
 ### Changes for `allOf`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ApplicationGatewayWafDynamicManifestResult.allOf__added` | added | `[{"$ref":"./common.json/definitions/ProxyResourcewithoutEtag"}]` |
+| `definitions.ApplicationGatewayWafDynamicManifestResult.allOf__added` | added | `[{"$ref":"./common.json#/definitions/ProxyResourcewithoutEtag"}]` |
 
 ### Changes for `id`
 
@@ -763,58 +427,168 @@
 |------|------------|-------|
 | `definitions.ApplicationGatewayWafDynamicManifestResult.properties.id__deleted` | deleted | `{"type":"string"}` |
 
+### Changes for `properties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PolicySettings.properties.logScrubbing.properties__deleted` | deleted | `{"state":{"type":"string","description":"State of the log scrubbing config. Default value is Enabled...` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `definitions.ApplicationGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.ApplicationGateway.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `./common.json/definitions/ManagedServiceIdentity` |
-| `definitions.ApplicationGateway.properties.properties.$ref` | `#/definitions/ApplicationGatewayPropertiesFormat` | `./common.json/definitions/ApplicationGatewayPropertiesFormat` |
-| `definitions.ApplicationGatewayAvailableSslOptions.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.ApplicationGatewayAvailableSslOptions.properties.properties.$ref` | `#/definitions/ApplicationGatewayAvailableSslOptionsPropertiesFormat` | `./common.json/definitions/ApplicationGatewayAvailableSslOptionsPropertiesFormat` |
-| `definitions.ApplicationGatewayPrivateEndpointConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
-| `definitions.ApplicationGatewayPrivateEndpointConnection.properties.properties.$ref` | `#/definitions/ApplicationGatewayPrivateEndpointConnectionProperties` | `./common.json/definitions/ApplicationGatewayPrivateEndpointConnectionProperties` |
-| `definitions.ApplicationGatewayWafDynamicManifestResult.properties.properties.$ref` | `#/definitions/ApplicationGatewayWafDynamicManifestPropertiesResult` | `./common.json/definitions/ApplicationGatewayWafDynamicManifestPropertiesResult` |
-| `definitions.WebApplicationFirewallPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.WebApplicationFirewallPolicy.properties.properties.$ref` | `#/definitions/WebApplicationFirewallPolicyPropertiesFormat` | `./common.json/definitions/WebApplicationFirewallPolicyPropertiesFormat` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies'].get.responses.200.schema.$ref` | `#/definitions/ApplicationGatewayAvailableSslPredefinedPolicies` | `./common.json/definitions/ApplicationGatewayAvailableSslPredefinedPolicies` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}'].get.responses.200.schema.$ref` | `#/definitions/ApplicationGatewaySslPredefinedPolicy` | `./common.json/definitions/ApplicationGatewaySslPredefinedPolicy` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableWafRuleSets'].get.responses.200.schema.$ref` | `#/definitions/ApplicationGatewayAvailableWafRuleSetsResult` | `./common.json/definitions/ApplicationGatewayAvailableWafRuleSetsResult` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableWafRuleSets'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies'].get.responses.200.schema.$ref` | `#/definitions/WebApplicationFirewallPolicyListResult` | `./common.json/definitions/WebApplicationFirewallPolicyListResult` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests'].get.responses.200.schema.$ref` | `#/definitions/ApplicationGatewayWafDynamicManifestResultList` | `./common.json/definitions/ApplicationGatewayWafDynamicManifestResultList` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/dafault'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json/definitions/TagsObject` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth'].post.responses.200.schema.$ref` | `#/definitions/ApplicationGatewayBackendHealth` | `./common.json/definitions/ApplicationGatewayBackendHealth` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand'].post.parameters[2].schema.$ref` | `#/definitions/ApplicationGatewayOnDemandProbe` | `./common.json/definitions/ApplicationGatewayOnDemandProbe` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand'].post.responses.200.schema.$ref` | `#/definitions/ApplicationGatewayBackendHealthOnDemand` | `./common.json/definitions/ApplicationGatewayBackendHealthOnDemand` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateLinkResources'].get.responses.200.schema.$ref` | `#/definitions/ApplicationGatewayPrivateLinkResourceListResult` | `./common.json/definitions/ApplicationGatewayPrivateLinkResourceListResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateLinkResources'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/start'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/stop'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies'].get.responses.200.schema.$ref` | `#/definitions/WebApplicationFirewallPolicyListResult` | `./common.json/definitions/WebApplicationFirewallPolicyListResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
+| `definitions.ApplicationGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
+| `definitions.ApplicationGateway.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `./common.json#/definitions/ManagedServiceIdentity` |
+| `definitions.ApplicationGatewayAuthenticationCertificate.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayAuthenticationCertificatePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayAvailableSslOptions.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
+| `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.predefinedPolicies.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayBackendAddressPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayBackendAddressPoolPropertiesFormat.properties.backendIPConfigurations.items.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./common.json#/definitions/NetworkInterfaceIPConfiguration` |
+| `definitions.ApplicationGatewayBackendAddressPoolPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayBackendHealthServer.properties.ipConfiguration.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./common.json#/definitions/NetworkInterfaceIPConfiguration` |
+| `definitions.ApplicationGatewayBackendHttpSettings.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.authenticationCertificates.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.probe.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.trustedRootCertificates.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayBackendSettings.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.probe.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayBackendSettingsPropertiesFormat.properties.trustedRootCertificates.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayEntraJWTValidationConfig.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayFirewallManifestRuleSet.properties.ruleGroups.items.$ref` | `applicationGateway.json#/definitions/ApplicationGatewayFirewallRuleGroup` | `#/definitions/ApplicationGatewayFirewallRuleGroup` |
+| `definitions.ApplicationGatewayFirewallRuleSet.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
+| `definitions.ApplicationGatewayFirewallRuleSetPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayFrontendIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref` | `./network.json#/definitions/IPAllocationMethod` | `./common.json#/definitions/IPAllocationMethod` |
+| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.privateLinkConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayFrontendPort.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayFrontendPortPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayHeaderConfiguration.properties.headerValueMatcher.$ref` | `#/definitions/HeaderValueMatcher` | `./common.json#/definitions/HeaderValueMatcher` |
+| `definitions.ApplicationGatewayHttpListener.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.frontendPort.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.sslCertificate.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.sslProfile.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayIPConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayListener.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.frontendPort.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.sslCertificate.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayListenerPropertiesFormat.properties.sslProfile.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayLoadDistributionPolicy.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayLoadDistributionTarget.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayLoadDistributionTargetPropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayOnDemandProbe.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayOnDemandProbe.properties.backendHttpSettings.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPathRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.backendHttpSettings.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.loadDistributionPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.redirectConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.rewriteRuleSet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPrivateEndpointConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
+| `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.privateEndpoint.$ref` | `./privateEndpoint.json#/definitions/PrivateEndpoint` | `./virtualNetwork.json#/definitions/PrivateEndpoint` |
+| `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.privateLinkServiceConnectionState.$ref` | `./privateLinkService.json#/definitions/PrivateLinkServiceConnectionState` | `./virtualNetwork.json#/definitions/PrivateLinkServiceConnectionState` |
+| `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayPrivateLinkConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPrivateLinkConfigurationProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayPrivateLinkIpConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPrivateLinkIpConfigurationProperties.properties.privateIPAllocationMethod.$ref` | `./network.json#/definitions/IPAllocationMethod` | `./common.json#/definitions/IPAllocationMethod` |
+| `definitions.ApplicationGatewayPrivateLinkIpConfigurationProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayPrivateLinkIpConfigurationProperties.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPrivateLinkResource.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayProbe.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayProbePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayRedirectConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat.properties.pathRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat.properties.requestRoutingRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat.properties.targetListener.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRedirectConfigurationPropertiesFormat.properties.urlPathMaps.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.backendHttpSettings.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.entraJWTValidationConfig.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.httpListener.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.loadDistributionPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.redirectConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.rewriteRuleSet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRequestRoutingRulePropertiesFormat.properties.urlPathMap.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRewriteRuleSet.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRewriteRuleSetPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayRoutingRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.backendSettings.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.listener.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayRoutingRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewaySslCertificate.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewaySslCertificatePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewaySslPredefinedPolicy.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewaySslProfile.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewaySslProfilePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewaySslProfilePropertiesFormat.properties.trustedClientCertificates.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayTrustedClientCertificate.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayTrustedClientCertificatePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayTrustedRootCertificate.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayTrustedRootCertificatePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ApplicationGatewayUrlPathMap.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.defaultBackendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.defaultBackendHttpSettings.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.defaultLoadDistributionPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.defaultRedirectConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.defaultRewriteRuleSet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ExclusionManagedRuleGroup.properties.rules.items.$ref` | `#/definitions/ExclusionManagedRule` | `./common.json#/definitions/ExclusionManagedRule` |
+| `definitions.WebApplicationFirewallCustomRule.properties.groupByUserSession.items.$ref` | `#/definitions/GroupByUserSession` | `./common.json#/definitions/GroupByUserSession` |
+| `definitions.WebApplicationFirewallPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.applicationGateways.items.$ref` | `./applicationGateway.json#/definitions/ApplicationGateway` | `#/definitions/ApplicationGateway` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.httpListeners.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.pathBasedRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableWafRuleSets'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/dafault'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json#/definitions/TagsObject` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateLinkResources'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/start'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/stop'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 

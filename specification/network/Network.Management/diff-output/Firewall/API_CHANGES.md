@@ -26,53 +26,61 @@ Change Type: added
 
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags'].get.tags__deleted` | deleted | `["AzureFirewallFqdnTags"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/learnedIPPrefixes'].post.tags__added` | added | `["AzureFirewalls"]` |
+| `tags__added` | added | `[{"name":"AzureFirewalls"},{"name":"AzureWebCategories"},{"name":"FirewallPolicies"}]` |
+
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/azureWebCategories`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureWebCategories__added']` | added | `{"get":{"operationId":"WebCategories_ListBySubscription","parameters":[],"responses":{"200":{"descri...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureWebCategories__added']` | added | `{"get":{"operationId":"WebCategories_ListBySubscription","tags":["AzureWebCategories"],"parameters":...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/azureWebCategories/{name}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureWebCategories/{name}__added']` | added | `{"get":{"operationId":"WebCategories_Get","parameters":[{"name":"name","in":"path","required":true,"...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureWebCategories/{name}__added']` | added | `{"get":{"operationId":"WebCategories_Get","tags":["AzureWebCategories"],"parameters":[{"name":"name"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/firewallPolicies`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/firewallPolicies__added']` | added | `{"get":{"operationId":"FirewallPolicies_ListAll","parameters":[],"responses":{"200":{"description":"...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/firewallPolicies__added']` | added | `{"get":{"operationId":"FirewallPolicies_ListAll","tags":["FirewallPolicies"],"parameters":[],"respon...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies__added']` | added | `{"get":{"operationId":"FirewallPolicies_List","parameters":[],"responses":{"200":{"description":"ign...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies__added']` | added | `{"get":{"operationId":"FirewallPolicies_List","tags":["FirewallPolicies"],"parameters":[],"responses...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}__added']` | added | `{"get":{"operationId":"FirewallPolicies_Get","parameters":[{"name":"firewallPolicyName","in":"path",...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}__added']` | added | `{"get":{"operationId":"FirewallPolicies_Get","tags":["FirewallPolicies"],"parameters":[{"name":"fire...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy__added']` | added | `{"post":{"operationId":"FirewallPolicyDeployments_Deploy","parameters":[{"name":"firewallPolicyName"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy__added']` | added | `{"post":{"operationId":"FirewallPolicyDeployments_Deploy","tags":["FirewallPolicies"],"parameters":[...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions__added']` | added | `{"post":{"operationId":"FirewallPolicyIdpsSignaturesFilterValues_List","parameters":[{"name":"firewa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions__added']` | added | `{"post":{"operationId":"FirewallPolicyIdpsSignaturesFilterValues_List","tags":["FirewallPolicies"],"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures__added']` | added | `{"post":{"operationId":"FirewallPolicyIdpsSignatures_List","parameters":[{"name":"firewallPolicyName...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures__added']` | added | `{"post":{"operationId":"FirewallPolicyIdpsSignatures_List","tags":["FirewallPolicies"],"parameters":...` |
 
 ### Changes for `minLength`
 
@@ -124,12 +132,6 @@ Change Type: added
 |------|------------|-------|
 | `definitions.AzureFirewallAdditionalProperties__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"}}` |
 
-### Changes for `AzureFirewallApplicationRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallApplicationRule__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"description":{"type":"string"},"sourceAddre...` |
-
 ### Changes for `AzureFirewallApplicationRuleCollection`
 
 | Path | Change Type | Value |
@@ -141,12 +143,6 @@ Change Type: added
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureFirewallApplicationRuleCollectionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"priority":{"type":"integer","format":"int32","minimum":100,"exclusiv...` |
-
-### Changes for `AzureFirewallApplicationRuleProtocol`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallApplicationRuleProtocol__deleted` | deleted | `{"type":"object","properties":{"protocolType":{"type":"string","enum":["Http","Https","Mssql"],"x-ms...` |
 
 ### Changes for `AzureFirewallAutoscaleConfiguration`
 
@@ -166,41 +162,17 @@ Change Type: added
 |------|------------|-------|
 | `definitions.AzureFirewallFqdnTagListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `AzureFirewallFqdnTagPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallFqdnTagPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"$ref":"./network.json#/definitions/Provisioning...` |
-
 ### Changes for `AzureFirewallIPConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureFirewallIPConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/AzureFirewallIPConfigurationPrope...` |
 
-### Changes for `AzureFirewallIPConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallIPConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"privateIPAddress":{"type":"string","readOnly":true},"subnet":{"$ref"...` |
-
 ### Changes for `AzureFirewallIpGroups`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureFirewallIpGroups__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","readOnly":true},"changeNumber":{"type":"string...` |
-
-### Changes for `AzureFirewallNatRCAction`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallNatRCAction__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["Snat","Dnat"],"x-ms-enum":{"name":"A...` |
-
-### Changes for `AzureFirewallNatRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallNatRule__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"description":{"type":"string"},"sourceAddre...` |
 
 ### Changes for `AzureFirewallNatRuleCollection`
 
@@ -213,12 +185,6 @@ Change Type: added
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureFirewallNatRuleCollectionProperties__deleted` | deleted | `{"type":"object","properties":{"priority":{"type":"integer","format":"int32","minimum":100,"exclusiv...` |
-
-### Changes for `AzureFirewallNetworkRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallNetworkRule__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"description":{"type":"string"},"protocols":...` |
 
 ### Changes for `AzureFirewallNetworkRuleCollection`
 
@@ -250,47 +216,11 @@ Change Type: added
 |------|------------|-------|
 | `definitions.AzureFirewallPacketCaptureRule__deleted` | deleted | `{"type":"object","properties":{"sources":{"type":"array","items":{"type":"string"}},"destinations":{...` |
 
-### Changes for `AzureFirewallPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"applicationRuleCollections":{"type":"array","items":{"$ref":"#/defin...` |
-
-### Changes for `AzureFirewallPublicIPAddress`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallPublicIPAddress__deleted` | deleted | `{"type":"object","properties":{"address":{"type":"string"}}}` |
-
-### Changes for `AzureFirewallRCAction`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallRCAction__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["Allow","Deny"],"x-ms-enum":{"name":"...` |
-
-### Changes for `AzureFirewallSku`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureFirewallSku__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","enum":["AZFW_VNet","AZFW_Hub"],"x-ms-enum":{...` |
-
 ### Changes for `FirewallPacketCaptureParameters`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.FirewallPacketCaptureParameters__deleted` | deleted | `{"type":"object","properties":{"durationInSeconds":{"type":"integer","format":"int32","default":60,"...` |
-
-### Changes for `HubIPAddresses`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubIPAddresses__deleted` | deleted | `{"type":"object","properties":{"publicIPs":{"$ref":"#/definitions/HubPublicIPAddresses"},"privateIPA...` |
-
-### Changes for `HubPublicIPAddresses`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubPublicIPAddresses__deleted` | deleted | `{"type":"object","properties":{"addresses":{"type":"array","items":{"$ref":"#/definitions/AzureFirew...` |
 
 ### Changes for `IPPrefixesList`
 
@@ -303,6 +233,12 @@ Change Type: added
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.IpGroups__deleted` | deleted | `{"type":"array","items":{"$ref":"#/definitions/AzureFirewallIpGroups"}}` |
+
+### Changes for `AzureFirewallIPGroups`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallIPGroups__added` | added | `{"type":"object","properties":{"id":{"type":"string","readOnly":true},"changeNumber":{"type":"string...` |
 
 ### Changes for `AzureWebCategory`
 
@@ -322,11 +258,121 @@ Change Type: added
 |------|------------|-------|
 | `definitions.FirewallPolicy__added` | added | `{"type":"object","properties":{"properties":{"$ref":"./common.json/definitions/FirewallPolicyPropert...` |
 
+### Changes for `FirewallPolicyIntrusionDetection`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.FirewallPolicyIntrusionDetection__added` | added | `{"type":"object","properties":{"mode":{"$ref":"./common.json/definitions/FirewallPolicyIntrusionDete...` |
+
+### Changes for `FirewallPolicyIntrusionDetectionBypassTrafficSpecifications`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.FirewallPolicyIntrusionDetectionBypassTrafficSpecifications__added` | added | `{"type":"object","properties":{"name":{"type":"string"},"description":{"type":"string"},"protocol":{...` |
+
+### Changes for `FirewallPolicyIntrusionDetectionConfiguration`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.FirewallPolicyIntrusionDetectionConfiguration__added` | added | `{"type":"object","properties":{"signatureOverrides":{"type":"array","items":{"$ref":"#/definitions/F...` |
+
+### Changes for `FirewallPolicyIntrusionDetectionSignatureSpecification`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.FirewallPolicyIntrusionDetectionSignatureSpecification__added` | added | `{"type":"object","properties":{"id":{"type":"string"},"mode":{"$ref":"./common.json/definitions/Fire...` |
+
 ### Changes for `FirewallPolicyListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.FirewallPolicyListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `FirewallPolicyRuleCollectionGroupProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.FirewallPolicyRuleCollectionGroupProperties__added` | added | `{"type":"object","properties":{"size":{"type":"string","readOnly":true},"priority":{"type":"integer"...` |
+
+### Changes for `FirewallPolicySNAT`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.FirewallPolicySNAT__added` | added | `{"type":"object","properties":{"privateRanges":{"type":"array","items":{"type":"string"}},"autoLearn...` |
+
+### Changes for `FirewallPolicyThreatIntelWhitelist`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.FirewallPolicyThreatIntelWhitelist__added` | added | `{"type":"object","properties":{"ipAddresses":{"type":"array","items":{"type":"string"}},"fqdns":{"ty...` |
+
+### Changes for `type`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallApplicationRuleProtocol.properties.protocolType.type__deleted` | deleted | `string` |
+| `definitions.AzureFirewallNatRCAction.properties.type.type__deleted` | deleted | `string` |
+| `definitions.AzureFirewallNatRule.properties.protocols.items.type__deleted` | deleted | `string` |
+| `definitions.AzureFirewallNetworkRule.properties.protocols.items.type__deleted` | deleted | `string` |
+| `definitions.AzureFirewallPropertiesFormat.properties.additionalProperties.type__added` | added | `object` |
+| `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.type__added` | added | `array` |
+| `definitions.AzureFirewallPropertiesFormat.properties.threatIntelMode.type__deleted` | deleted | `string` |
+| `definitions.AzureFirewallRCAction.properties.type.type__deleted` | deleted | `string` |
+| `definitions.AzureFirewallSku.properties.name.type__deleted` | deleted | `string` |
+| `definitions.AzureFirewallSku.properties.tier.type__deleted` | deleted | `string` |
+
+### Changes for `enum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallApplicationRuleProtocol.properties.protocolType.enum__deleted` | deleted | `["Http","Https","Mssql"]` |
+| `definitions.AzureFirewallNatRCAction.properties.type.enum__deleted` | deleted | `["Snat","Dnat"]` |
+| `definitions.AzureFirewallNatRule.properties.protocols.items.enum__deleted` | deleted | `["TCP","UDP","Any","ICMP"]` |
+| `definitions.AzureFirewallNetworkRule.properties.protocols.items.enum__deleted` | deleted | `["TCP","UDP","Any","ICMP"]` |
+| `definitions.AzureFirewallPropertiesFormat.properties.threatIntelMode.enum__deleted` | deleted | `["Alert","Deny","Off"]` |
+| `definitions.AzureFirewallRCAction.properties.type.enum__deleted` | deleted | `["Allow","Deny"]` |
+| `definitions.AzureFirewallSku.properties.name.enum__deleted` | deleted | `["AZFW_VNet","AZFW_Hub"]` |
+| `definitions.AzureFirewallSku.properties.tier.enum__deleted` | deleted | `["Standard","Premium","Basic"]` |
+
+### Changes for `x-ms-enum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallApplicationRuleProtocol.properties.protocolType['x-ms-enum__deleted']` | deleted | `{"name":"AzureFirewallApplicationRuleProtocolType","modelAsString":true}` |
+| `definitions.AzureFirewallNatRCAction.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"AzureFirewallNatRCActionType","modelAsString":true}` |
+| `definitions.AzureFirewallNatRule.properties.protocols.items['x-ms-enum__deleted']` | deleted | `{"name":"AzureFirewallNetworkRuleProtocol","modelAsString":true}` |
+| `definitions.AzureFirewallNetworkRule.properties.protocols.items['x-ms-enum__deleted']` | deleted | `{"name":"AzureFirewallNetworkRuleProtocol","modelAsString":true}` |
+| `definitions.AzureFirewallPropertiesFormat.properties.threatIntelMode['x-ms-enum__deleted']` | deleted | `{"name":"AzureFirewallThreatIntelMode","modelAsString":true}` |
+| `definitions.AzureFirewallRCAction.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"AzureFirewallRCActionType","modelAsString":true}` |
+| `definitions.AzureFirewallSku.properties.name['x-ms-enum__deleted']` | deleted | `{"name":"AzureFirewallSkuName","modelAsString":true}` |
+| `definitions.AzureFirewallSku.properties.tier['x-ms-enum__deleted']` | deleted | `{"name":"AzureFirewallSkuTier","modelAsString":true}` |
+
+### Changes for `$ref`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallApplicationRuleProtocol.properties.protocolType.$ref__added` | added | `./common.json/definitions/AzureFirewallApplicationRuleProtocolType` |
+| `definitions.AzureFirewallNatRCAction.properties.type.$ref__added` | added | `./common.json/definitions/AzureFirewallNatRCActionType` |
+| `definitions.AzureFirewallNatRule.properties.protocols.items.$ref__added` | added | `./common.json/definitions/AzureFirewallNetworkRuleProtocol` |
+| `definitions.AzureFirewallNetworkRule.properties.protocols.items.$ref__added` | added | `./common.json/definitions/AzureFirewallNetworkRuleProtocol` |
+| `definitions.AzureFirewallPropertiesFormat.properties.additionalProperties.$ref__deleted` | deleted | `#/definitions/AzureFirewallAdditionalProperties` |
+| `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.$ref__deleted` | deleted | `#/definitions/IpGroups` |
+| `definitions.AzureFirewallPropertiesFormat.properties.threatIntelMode.$ref__added` | added | `./common.json/definitions/AzureFirewallThreatIntelMode` |
+| `definitions.AzureFirewallRCAction.properties.type.$ref__added` | added | `./common.json/definitions/AzureFirewallRCActionType` |
+| `definitions.AzureFirewallSku.properties.name.$ref__added` | added | `./common.json/definitions/AzureFirewallSkuName` |
+| `definitions.AzureFirewallSku.properties.tier.$ref__added` | added | `./common.json/definitions/AzureFirewallSkuTier` |
+
+### Changes for `exclusiveMinimum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallApplicationRuleProtocol.properties.port.exclusiveMinimum__deleted` | deleted | `false` |
+
+### Changes for `exclusiveMaximum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallApplicationRuleProtocol.properties.port.exclusiveMaximum__deleted` | deleted | `false` |
 
 ### Changes for `required`
 
@@ -334,13 +380,37 @@ Change Type: added
 |------|------------|-------|
 | `definitions.AzureFirewallListResult.required__added` | added | `["value"]` |
 
+### Changes for `items`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.items__added` | added | `{"$ref":"#/definitions/AzureFirewallIPGroups"}` |
+
+### Changes for `additionalProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AzureFirewallPropertiesFormat.properties.additionalProperties.additionalProperties__added` | added | `{"type":"string"}` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.AzureFirewall.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
 | `definitions.AzureFirewall.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `./common.json/definitions/ExtendedLocation` |
-| `definitions.AzureFirewall.properties.properties.$ref` | `#/definitions/AzureFirewallPropertiesFormat` | `./common.json/definitions/AzureFirewallPropertiesFormat` |
+| `definitions.AzureFirewallFqdnTagPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.AzureFirewallPropertiesFormat.properties.applicationRuleCollections.items.$ref` | `#/definitions/AzureFirewallApplicationRuleCollection` | `./common.json/definitions/AzureFirewallApplicationRuleCollection` |
+| `definitions.AzureFirewallPropertiesFormat.properties.autoscaleConfiguration.$ref` | `#/definitions/AzureFirewallAutoscaleConfiguration` | `./common.json/definitions/AzureFirewallAutoscaleConfiguration` |
+| `definitions.AzureFirewallPropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.AzureFirewallPropertiesFormat.properties.ipConfigurations.items.$ref` | `#/definitions/AzureFirewallIPConfiguration` | `./common.json/definitions/AzureFirewallIPConfiguration` |
+| `definitions.AzureFirewallPropertiesFormat.properties.managementIpConfiguration.$ref` | `#/definitions/AzureFirewallIPConfiguration` | `./common.json/definitions/AzureFirewallIPConfiguration` |
+| `definitions.AzureFirewallPropertiesFormat.properties.natRuleCollections.items.$ref` | `#/definitions/AzureFirewallNatRuleCollection` | `./common.json/definitions/AzureFirewallNatRuleCollection` |
+| `definitions.AzureFirewallPropertiesFormat.properties.networkRuleCollections.items.$ref` | `#/definitions/AzureFirewallNetworkRuleCollection` | `./common.json/definitions/AzureFirewallNetworkRuleCollection` |
+| `definitions.AzureFirewallPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallPropertiesFormat.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `info.description` | `The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `NetworkManagementClient` | `WebApplicationFirewallManagement` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags'].get.responses.200.schema.$ref` | `#/definitions/AzureFirewallFqdnTagListResult` | `./common.json/definitions/AzureFirewallFqdnTagListResult` |

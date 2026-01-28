@@ -11,6 +11,17 @@
   "consumes": [
     "application/json"
   ],
+  "tags": [
+    {
+      "name": "AzureFirewalls"
+    },
+    {
+      "name": "AzureWebCategories"
+    },
+    {
+      "name": "FirewallPolicies"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags": {
       "get": {
@@ -43,6 +54,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewalls": {
       "get": {
         "operationId": "AzureFirewalls_ListAll",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -71,6 +85,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureWebCategories": {
       "get": {
         "operationId": "WebCategories_ListBySubscription",
+        "tags": [
+          "AzureWebCategories"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -99,6 +116,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureWebCategories/{name}": {
       "get": {
         "operationId": "WebCategories_Get",
+        "tags": [
+          "AzureWebCategories"
+        ],
         "parameters": [
           {
             "name": "name",
@@ -136,6 +156,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/firewallPolicies": {
       "get": {
         "operationId": "FirewallPolicies_ListAll",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -164,6 +187,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls": {
       "get": {
         "operationId": "AzureFirewalls_List",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -192,6 +218,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}": {
       "get": {
         "operationId": "AzureFirewalls_Get",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -234,6 +263,9 @@
       },
       "put": {
         "operationId": "AzureFirewalls_CreateOrUpdate",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -304,6 +336,9 @@
       },
       "patch": {
         "operationId": "AzureFirewalls_UpdateTags",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -356,6 +391,9 @@
       },
       "delete": {
         "operationId": "AzureFirewalls_Delete",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -398,6 +436,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/learnedIPPrefixes": {
       "post": {
         "operationId": "AzureFirewalls_ListLearnedPrefixes",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -440,6 +481,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture": {
       "post": {
         "operationId": "AzureFirewalls_PacketCapture",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -484,6 +528,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCaptureOperation": {
       "post": {
         "operationId": "AzureFirewalls_PacketCaptureOperation",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -534,6 +581,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies": {
       "get": {
         "operationId": "FirewallPolicies_List",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -562,6 +612,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}": {
       "get": {
         "operationId": "FirewallPolicies_Get",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [
           {
             "name": "firewallPolicyName",
@@ -597,6 +650,9 @@
       },
       "put": {
         "operationId": "FirewallPolicies_CreateOrUpdate",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [
           {
             "name": "firewallPolicyName",
@@ -652,6 +708,9 @@
       },
       "patch": {
         "operationId": "FirewallPolicies_UpdateTags",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [
           {
             "name": "firewallPolicyName",
@@ -690,6 +749,9 @@
       },
       "delete": {
         "operationId": "FirewallPolicies_Delete",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [
           {
             "name": "firewallPolicyName",
@@ -732,6 +794,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy": {
       "post": {
         "operationId": "FirewallPolicyDeployments_Deploy",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [
           {
             "name": "firewallPolicyName",
@@ -776,6 +841,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions": {
       "post": {
         "operationId": "FirewallPolicyIdpsSignaturesFilterValues_List",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [
           {
             "name": "firewallPolicyName",
@@ -816,6 +884,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures": {
       "post": {
         "operationId": "FirewallPolicyIdpsSignatures_List",
+        "tags": [
+          "FirewallPolicies"
+        ],
         "parameters": [
           {
             "name": "firewallPolicyName",
@@ -859,7 +930,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/AzureFirewallPropertiesFormat",
+          "$ref": "#/definitions/AzureFirewallPropertiesFormat",
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
@@ -882,6 +953,106 @@
         }
       ]
     },
+    "AzureFirewallApplicationRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallApplicationRuleProtocol"
+          }
+        },
+        "targetFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdnTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallApplicationRuleProtocol": {
+      "type": "object",
+      "properties": {
+        "protocolType": {
+          "$ref": "./common.json/definitions/AzureFirewallApplicationRuleProtocolType"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 64000
+        }
+      }
+    },
+    "AzureFirewallFqdnTagPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "fqdnTagName": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "subnet": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "publicIPAddress": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallIPGroups": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "changeNumber": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "AzureFirewallListResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -902,6 +1073,211 @@
       "required": [
         "value"
       ]
+    },
+    "AzureFirewallNatRCAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "./common.json/definitions/AzureFirewallNatRCActionType"
+        }
+      }
+    },
+    "AzureFirewallNatRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+          }
+        },
+        "translatedAddress": {
+          "type": "string"
+        },
+        "translatedPort": {
+          "type": "string"
+        },
+        "translatedFqdn": {
+          "type": "string"
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallNetworkRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+          }
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "applicationRuleCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallApplicationRuleCollection"
+          }
+        },
+        "natRuleCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallNatRuleCollection"
+          }
+        },
+        "networkRuleCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleCollection"
+          }
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/AzureFirewallIPConfiguration"
+          }
+        },
+        "managementIpConfiguration": {
+          "$ref": "./common.json/definitions/AzureFirewallIPConfiguration"
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "threatIntelMode": {
+          "$ref": "./common.json/definitions/AzureFirewallThreatIntelMode"
+        },
+        "virtualHub": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "firewallPolicy": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "hubIPAddresses": {
+          "$ref": "#/definitions/HubIPAddresses"
+        },
+        "ipGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallIPGroups"
+          },
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureFirewallSku"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "autoscaleConfiguration": {
+          "$ref": "./common.json/definitions/AzureFirewallAutoscaleConfiguration"
+        }
+      }
+    },
+    "AzureFirewallPublicIPAddress": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureFirewallRCAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "./common.json/definitions/AzureFirewallRCActionType"
+        }
+      }
+    },
+    "AzureFirewallSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "./common.json/definitions/AzureFirewallSkuName"
+        },
+        "tier": {
+          "$ref": "./common.json/definitions/AzureFirewallSkuTier"
+        }
+      }
     },
     "AzureWebCategory": {
       "type": "object",
@@ -959,6 +1335,98 @@
         }
       ]
     },
+    "FirewallPolicyIntrusionDetection": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "$ref": "./common.json/definitions/FirewallPolicyIntrusionDetectionStateType"
+        },
+        "profile": {
+          "$ref": "./common.json/definitions/FirewallPolicyIntrusionDetectionProfileType"
+        },
+        "configuration": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionConfiguration"
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/FirewallPolicyIntrusionDetectionProtocol"
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionConfiguration": {
+      "type": "object",
+      "properties": {
+        "signatureOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionSignatureSpecification"
+          }
+        },
+        "bypassTrafficSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
+          }
+        },
+        "privateRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionSignatureSpecification": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "./common.json/definitions/FirewallPolicyIntrusionDetectionStateType"
+        }
+      }
+    },
     "FirewallPolicyListResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -979,6 +1447,88 @@
       "required": [
         "value"
       ]
+    },
+    "FirewallPolicyRuleCollectionGroupProperties": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "readOnly": true
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 100,
+          "maximum": 65000
+        },
+        "ruleCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/FirewallPolicyRuleCollection"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "FirewallPolicySNAT": {
+      "type": "object",
+      "properties": {
+        "privateRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "autoLearnPrivateRanges": {
+          "$ref": "./common.json/definitions/AutoLearnPrivateRangesMode"
+        }
+      }
+    },
+    "FirewallPolicyThreatIntelWhitelist": {
+      "type": "object",
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HubIPAddresses": {
+      "type": "object",
+      "properties": {
+        "publicIPs": {
+          "$ref": "#/definitions/HubPublicIPAddresses"
+        },
+        "privateIPAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "HubPublicIPAddresses": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPublicIPAddress"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     }
   },
   "parameters": {}

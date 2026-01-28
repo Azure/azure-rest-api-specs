@@ -63,13 +63,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/ListVirtualWANsResult"
+              "$ref": "#/definitions/ListVirtualWANsResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -105,13 +105,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json/definitions/ListVirtualWANsResult"
+              "$ref": "#/definitions/ListVirtualWANsResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -160,7 +160,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -230,7 +230,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -274,7 +274,7 @@
             "description": "Parameters supplied to Update VirtualWAN tags.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/TagsObject"
+              "$ref": "./common.json#/definitions/TagsObject"
             }
           }
         ],
@@ -288,7 +288,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -346,7 +346,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -419,7 +419,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -470,7 +470,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -536,7 +536,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -600,7 +600,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -641,7 +641,7 @@
       "description": "Action to be taken on a route matching a RouteMap criterion.",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/RouteMapActionType",
+          "$ref": "./common.json#/definitions/RouteMapActionType",
           "description": "Type of action to be taken. Supported types are 'Remove', 'Add', 'Replace', and 'Drop.'"
         },
         "parameters": {
@@ -653,6 +653,27 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "BgpConnection": {
+      "type": "object",
+      "description": "Virtual Appliance Site resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BgpConnectionProperties",
+          "description": "The properties of the Bgp connections.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
     },
     "BgpConnectionProperties": {
       "type": "object",
@@ -670,16 +691,16 @@
           "description": "Peer IP."
         },
         "hubVirtualNetworkConnection": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The reference to the HubVirtualNetworkConnection resource."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
         "connectionState": {
-          "$ref": "./common.json/definitions/HubBgpConnectionStatus",
+          "$ref": "./common.json#/definitions/HubBgpConnectionStatus",
           "description": "The current state of the VirtualHub to Peer.",
           "readOnly": true
         }
@@ -711,7 +732,7 @@
           }
         },
         "matchCondition": {
-          "$ref": "./common.json/definitions/RouteMapMatchCondition",
+          "$ref": "./common.json#/definitions/RouteMapMatchCondition",
           "description": "Match condition to apply RouteMap rules."
         }
       }
@@ -791,6 +812,29 @@
         }
       }
     },
+    "ExpressRouteConnection": {
+      "type": "object",
+      "description": "ExpressRouteConnection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteConnectionProperties",
+          "description": "Properties of the express route connection.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "ExpressRouteConnectionId": {
       "type": "object",
       "description": "The ID of the ExpressRouteConnection.",
@@ -810,7 +854,7 @@
           "type": "array",
           "description": "The list of ExpressRoute connections.",
           "items": {
-            "$ref": "./common.json/definitions/ExpressRouteConnection"
+            "$ref": "#/definitions/ExpressRouteConnection"
           }
         }
       }
@@ -820,7 +864,7 @@
       "description": "Properties of the ExpressRouteConnection subresource.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the express route connection resource.",
           "readOnly": true
         },
@@ -858,6 +902,27 @@
         "expressRouteCircuitPeering"
       ]
     },
+    "ExpressRouteGateway": {
+      "type": "object",
+      "description": "ExpressRoute gateway resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteGatewayProperties",
+          "description": "Properties of the express route gateway.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
     "ExpressRouteGatewayList": {
       "type": "object",
       "description": "List of ExpressRoute gateways.",
@@ -866,7 +931,7 @@
           "type": "array",
           "description": "List of ExpressRoute gateways.",
           "items": {
-            "$ref": "./common.json/definitions/ExpressRouteGateway"
+            "$ref": "#/definitions/ExpressRouteGateway"
           }
         }
       }
@@ -876,18 +941,18 @@
       "description": "ExpressRoute gateway resource properties.",
       "properties": {
         "autoScaleConfiguration": {
-          "$ref": "./common.json/definitions/ExpressRouteGatewayPropertiesAutoScaleConfiguration",
+          "$ref": "./common.json#/definitions/ExpressRouteGatewayPropertiesAutoScaleConfiguration",
           "description": "Configuration for auto scaling."
         },
         "expressRouteConnections": {
           "type": "array",
           "description": "List of ExpressRoute connections to the ExpressRoute gateway.",
           "items": {
-            "$ref": "./common.json/definitions/ExpressRouteConnection"
+            "$ref": "#/definitions/ExpressRouteConnection"
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the express route gateway resource.",
           "readOnly": true
         },
@@ -961,23 +1026,44 @@
           "description": "The private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
-          "$ref": "./common.json/definitions/IPAllocationMethod",
+          "$ref": "./common.json#/definitions/IPAllocationMethod",
           "description": "The private IP address allocation method."
         },
         "subnet": {
-          "$ref": "./common.json/definitions/Subnet",
+          "$ref": "./virtualNetwork.json#/definitions/Subnet",
           "description": "The reference to the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "./virtualNetwork.json/definitions/PublicIPAddress",
+          "$ref": "./virtualNetwork.json#/definitions/PublicIPAddress",
           "description": "The reference to the public IP resource."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the IP configuration resource.",
           "readOnly": true
         }
       }
+    },
+    "HubIpConfiguration": {
+      "type": "object",
+      "description": "IpConfigurations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HubIPConfigurationPropertiesFormat",
+          "description": "The properties of the Virtual Hub IPConfigurations.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
     },
     "HubRoute": {
       "type": "object",
@@ -1015,6 +1101,27 @@
         "nextHop"
       ]
     },
+    "HubRouteTable": {
+      "type": "object",
+      "description": "RouteTable resource in a virtual hub.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HubRouteTableProperties",
+          "description": "Properties of the RouteTable resource.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
     "HubRouteTableProperties": {
       "type": "object",
       "description": "Parameters for RouteTable.",
@@ -1050,18 +1157,43 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the RouteTable resource.",
           "readOnly": true
         }
       }
+    },
+    "HubVirtualNetworkConnection": {
+      "type": "object",
+      "description": "HubVirtualNetworkConnection Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HubVirtualNetworkConnectionProperties",
+          "description": "Properties of the hub virtual network connection.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
     },
     "HubVirtualNetworkConnectionProperties": {
       "type": "object",
       "description": "Parameters for HubVirtualNetworkConnection.",
       "properties": {
         "remoteVirtualNetwork": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "Reference to the remote virtual network."
         },
         "allowHubToRemoteVnetTransit": {
@@ -1081,11 +1213,262 @@
           "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the hub virtual network connection resource.",
           "readOnly": true
         }
       }
+    },
+    "ListHubRouteTablesResult": {
+      "type": "object",
+      "description": "List of RouteTables and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HubRouteTable items on this page",
+          "items": {
+            "$ref": "#/definitions/HubRouteTable"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListRouteMapsResult": {
+      "type": "object",
+      "description": "List of RouteMaps and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RouteMap items on this page",
+          "items": {
+            "$ref": "#/definitions/RouteMap"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListRoutingIntentResult": {
+      "type": "object",
+      "description": "List of the routing intent result and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoutingIntent items on this page",
+          "items": {
+            "$ref": "#/definitions/RoutingIntent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVirtualHubBgpConnectionResults": {
+      "type": "object",
+      "description": "VirtualHubBgpConnections list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BgpConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/BgpConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVirtualHubsResult": {
+      "type": "object",
+      "description": "Result of the request to list VirtualHubs. It contains a list of VirtualHubs and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualHub items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualHub"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVirtualWANsResult": {
+      "type": "object",
+      "description": "Result of the request to list VirtualWANs. It contains a list of VirtualWANs and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualWAN items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualWAN"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnConnectionsResult": {
+      "type": "object",
+      "description": "Result of the request to list all vpn connections to a virtual wan vpn gateway. It contains a list of Vpn Connections and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VpnConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/VpnConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnGatewayNatRulesResult": {
+      "type": "object",
+      "description": "Result of the request to list all nat rules to a virtual wan vpn gateway. It contains a list of Nat rules and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VpnGatewayNatRule items on this page",
+          "items": {
+            "$ref": "#/definitions/VpnGatewayNatRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnGatewaysResult": {
+      "type": "object",
+      "description": "Result of the request to list VpnGateways. It contains a list of VpnGateways and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VpnGateway items on this page",
+          "items": {
+            "$ref": "#/definitions/VpnGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnSiteLinksResult": {
+      "type": "object",
+      "description": "Result of the request to list VpnSiteLinks. It contains a list of VpnSiteLinks and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VpnSiteLink items on this page",
+          "items": {
+            "$ref": "./common.json#/definitions/VpnSiteLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnSitesResult": {
+      "type": "object",
+      "description": "Result of the request to list VpnSites. It contains a list of VpnSites and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VpnSite items on this page",
+          "items": {
+            "$ref": "#/definitions/VpnSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkVirtualApplianceConnection": {
+      "type": "object",
+      "description": "NetworkVirtualApplianceConnection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkVirtualApplianceConnectionProperties",
+          "description": "Properties of the express route connection.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
     },
     "NetworkVirtualApplianceConnectionProperties": {
       "type": "object",
@@ -1096,7 +1479,7 @@
           "description": "The name of the resource."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the NetworkVirtualApplianceConnection resource.",
           "readOnly": true
         },
@@ -1164,7 +1547,7 @@
       "description": "Parameters for P2SConnectionConfiguration.",
       "properties": {
         "vpnClientAddressPool": {
-          "$ref": "./virtualNetwork.json/definitions/AddressSpace",
+          "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
           "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
         },
         "routingConfiguration": {
@@ -1179,19 +1562,19 @@
           "type": "array",
           "description": "List of Configuration Policy Groups that this P2SConnectionConfiguration is attached to.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           }
         },
         "previousConfigurationPolicyGroupAssociations": {
           "type": "array",
           "description": "List of previous Configuration Policy Groups that this P2SConnectionConfiguration was attached to.",
           "items": {
-            "$ref": "./common.json/definitions/VpnServerConfigurationPolicyGroup"
+            "$ref": "./common.json#/definitions/VpnServerConfigurationPolicyGroup"
           },
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the P2SConnectionConfiguration resource.",
           "readOnly": true
         }
@@ -1237,23 +1620,44 @@
         }
       }
     },
+    "P2SVpnGateway": {
+      "type": "object",
+      "description": "P2SVpnGateway Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/P2SVpnGatewayProperties",
+          "description": "Properties of the P2SVpnGateway.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
     "P2SVpnGatewayProperties": {
       "type": "object",
       "description": "Parameters for P2SVpnGateway.",
       "properties": {
         "virtualHub": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The VirtualHub to which the gateway belongs."
         },
         "p2SConnectionConfigurations": {
           "type": "array",
           "description": "List of all p2s connection configurations of the gateway.",
           "items": {
-            "$ref": "./common.json/definitions/P2SConnectionConfiguration"
+            "$ref": "./common.json#/definitions/P2SConnectionConfiguration"
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the P2S VPN gateway resource.",
           "readOnly": true
         },
@@ -1263,11 +1667,11 @@
           "description": "The scale unit for this p2s vpn gateway."
         },
         "vpnServerConfiguration": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The VpnServerConfiguration to which the p2sVpnGateway is attached to."
         },
         "vpnClientConnectionHealth": {
-          "$ref": "./networkGateway.json/definitions/VpnClientConnectionHealth",
+          "$ref": "./networkGateway.json#/definitions/VpnClientConnectionHealth",
           "description": "All P2S VPN clients' connection health status.",
           "readOnly": true
         },
@@ -1289,7 +1693,7 @@
       "description": "Vpn Client Parameters for package generation.",
       "properties": {
         "authenticationMethod": {
-          "$ref": "./common.json/definitions/AuthenticationMethod",
+          "$ref": "./common.json#/definitions/AuthenticationMethod",
           "description": "VPN client authentication method."
         }
       }
@@ -1378,7 +1782,7 @@
           "type": "array",
           "description": "The list of resource ids of all the RouteTables.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           }
         }
       }
@@ -1391,6 +1795,27 @@
         },
         "type": "array"
       }
+    },
+    "RouteMap": {
+      "type": "object",
+      "description": "The RouteMap child resource of a Virtual hub.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteMapProperties",
+          "description": "Properties of the RouteMap resource.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ReadOnlySubResourceModel"
+        }
+      ]
     },
     "RouteMapProperties": {
       "type": "object",
@@ -1419,7 +1844,7 @@
           "x-ms-identifiers": []
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the RouteMap resource.",
           "readOnly": true
         }
@@ -1450,7 +1875,7 @@
           "x-ms-identifiers": []
         },
         "nextStepIfMatched": {
-          "$ref": "./common.json/definitions/NextStep",
+          "$ref": "./common.json#/definitions/NextStep",
           "description": "Next step after rule is evaluated. Current supported behaviors are 'Continue'(to next rule) and 'Terminate'."
         }
       }
@@ -1460,7 +1885,7 @@
       "description": "Routing Configuration indicating the associated and propagated route tables for this connection.",
       "properties": {
         "associatedRouteTable": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The resource id RouteTable associated with this RoutingConfiguration."
         },
         "propagatedRouteTables": {
@@ -1472,14 +1897,35 @@
           "description": "List of routes that control routing from VirtualHub into a virtual network connection."
         },
         "inboundRouteMap": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The resource id of the RouteMap associated with this RoutingConfiguration for inbound learned routes."
         },
         "outboundRouteMap": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The resource id of theRouteMap associated with this RoutingConfiguration for outbound advertised routes."
         }
       }
+    },
+    "RoutingIntent": {
+      "type": "object",
+      "description": "The routing intent child resource of a Virtual hub.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingIntentProperties",
+          "description": "Properties of the RoutingIntent resource.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
     },
     "RoutingIntentProperties": {
       "type": "object",
@@ -1493,7 +1939,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the RoutingIntent resource.",
           "readOnly": true
         }
@@ -1543,7 +1989,7 @@
           "maximum": 128
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the SharedKey resource.",
           "readOnly": true
         }
@@ -1580,10 +2026,36 @@
           "readOnly": true
         },
         "vnetLocalRouteOverrideCriteria": {
-          "$ref": "./common.json/definitions/VnetLocalRouteOverrideCriteria",
+          "$ref": "./common.json#/definitions/VnetLocalRouteOverrideCriteria",
           "description": "Parameter determining whether NVA in spoke vnet is bypassed for traffic with destination in spoke."
         }
       }
+    },
+    "VirtualHub": {
+      "type": "object",
+      "description": "VirtualHub Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualHubProperties",
+          "description": "Properties of the virtual hub.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of service virtual hub. This is metadata used for the Azure portal experience for Route Server.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
     },
     "VirtualHubEffectiveRoute": {
       "type": "object",
@@ -1645,27 +2117,27 @@
       "description": "Parameters for VirtualHub.",
       "properties": {
         "virtualWan": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The VirtualWAN to which the VirtualHub belongs."
         },
         "vpnGateway": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The VpnGateway associated with this VirtualHub."
         },
         "p2SVpnGateway": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The P2SVpnGateway associated with this VirtualHub."
         },
         "expressRouteGateway": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The expressRouteGateway associated with this VirtualHub."
         },
         "azureFirewall": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The azureFirewall associated with this VirtualHub."
         },
         "securityPartnerProvider": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The securityPartnerProvider associated with this VirtualHub."
         },
         "addressPrefix": {
@@ -1677,7 +2149,7 @@
           "description": "The routeTable associated with this virtual hub."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the virtual hub resource.",
           "readOnly": true
         },
@@ -1689,7 +2161,7 @@
           "type": "array",
           "description": "List of all virtual hub route table v2s associated with this VirtualHub.",
           "items": {
-            "$ref": "./common.json/definitions/VirtualHubRouteTableV2"
+            "$ref": "#/definitions/VirtualHubRouteTableV2"
           }
         },
         "sku": {
@@ -1697,7 +2169,7 @@
           "description": "The sku of this VirtualHub."
         },
         "routingState": {
-          "$ref": "./common.json/definitions/RoutingState",
+          "$ref": "./common.json#/definitions/RoutingState",
           "description": "The routing state.",
           "readOnly": true
         },
@@ -1705,7 +2177,7 @@
           "type": "array",
           "description": "List of references to Bgp Connections.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -1713,7 +2185,7 @@
           "type": "array",
           "description": "List of references to IpConfigurations.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -1721,7 +2193,7 @@
           "type": "array",
           "description": "List of references to RouteMaps.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -1744,11 +2216,11 @@
           "description": "Flag to control transit for VirtualRouter hub."
         },
         "preferredRoutingGateway": {
-          "$ref": "./common.json/definitions/PreferredRoutingGateway",
+          "$ref": "./common.json#/definitions/PreferredRoutingGateway",
           "description": "The preferred gateway to route on-prem traffic"
         },
         "hubRoutingPreference": {
-          "$ref": "./common.json/definitions/HubRoutingPreference",
+          "$ref": "./common.json#/definitions/HubRoutingPreference",
           "description": "The hubRoutingPreference of this VirtualHub."
         },
         "virtualRouterAutoScaleConfiguration": {
@@ -1787,6 +2259,31 @@
         }
       }
     },
+    "VirtualHubRouteTableV2": {
+      "type": "object",
+      "description": "VirtualHubRouteTableV2 Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualHubRouteTableV2Properties",
+          "description": "Properties of the virtual hub route table v2.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "VirtualHubRouteTableV2Properties": {
       "type": "object",
       "description": "Parameters for VirtualHubRouteTableV2.",
@@ -1806,7 +2303,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the virtual hub route table v2 resource.",
           "readOnly": true
         }
@@ -1869,7 +2366,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/ResourceWithRequiredLocation"
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
         }
       ]
     },
@@ -1885,7 +2382,7 @@
           "type": "array",
           "description": "List of VirtualHubs in the VirtualWAN.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -1893,7 +2390,7 @@
           "type": "array",
           "description": "List of VpnSites in the VirtualWAN.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -1906,12 +2403,12 @@
           "description": "True if Vnet to Vnet traffic is allowed."
         },
         "office365LocalBreakoutCategory": {
-          "$ref": "./common.json/definitions/OfficeTrafficCategory",
+          "$ref": "./common.json#/definitions/OfficeTrafficCategory",
           "description": "The office local breakout category.",
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the virtual WAN resource.",
           "readOnly": true
         },
@@ -1934,7 +2431,7 @@
           "description": "Url of the security provider."
         },
         "type": {
-          "$ref": "./common.json/definitions/VirtualWanSecurityProviderType",
+          "$ref": "./common.json#/definitions/VirtualWanSecurityProviderType",
           "description": "Name of the security provider.",
           "readOnly": true
         }
@@ -1962,7 +2459,7 @@
           "description": "VpnServerConfiguration partial resource uri with which VirtualWan is associated to."
         },
         "authenticationMethod": {
-          "$ref": "./common.json/definitions/AuthenticationMethod",
+          "$ref": "./common.json#/definitions/AuthenticationMethod",
           "description": "VPN client authentication method."
         }
       }
@@ -1986,11 +2483,36 @@
           "type": "array",
           "description": "The list of references to HubBgpConnection objects.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         }
       }
+    },
+    "VpnConnection": {
+      "type": "object",
+      "description": "VpnConnection Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnConnectionProperties",
+          "description": "Properties of the VPN connection.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
     },
     "VpnConnectionPacketCaptureStartParameters": {
       "type": "object",
@@ -2031,7 +2553,7 @@
       "description": "Parameters for VpnConnection.",
       "properties": {
         "remoteVpnSite": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "Id of the connected vpn site."
         },
         "routingWeight": {
@@ -2045,12 +2567,12 @@
           "description": "DPD timeout in seconds for vpn connection."
         },
         "connectionStatus": {
-          "$ref": "./common.json/definitions/VpnConnectionStatus",
+          "$ref": "./common.json#/definitions/VpnConnectionStatus",
           "description": "The connection status.",
           "readOnly": true
         },
         "vpnConnectionProtocolType": {
-          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionProtocol",
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol",
           "description": "Connection protocol used for this connection."
         },
         "ingressBytesTransferred": {
@@ -2086,14 +2608,14 @@
           "type": "array",
           "description": "The IPSec Policies to be considered by this connection.",
           "items": {
-            "$ref": "./networkGateway.json/definitions/IpsecPolicy"
+            "$ref": "./networkGateway.json#/definitions/IpsecPolicy"
           }
         },
         "trafficSelectorPolicies": {
           "type": "array",
           "description": "The Traffic Selector Policies to be considered by this connection.",
           "items": {
-            "$ref": "./common.json/definitions/TrafficSelectorPolicy"
+            "$ref": "./common.json#/definitions/TrafficSelectorPolicy"
           }
         },
         "enableRateLimiting": {
@@ -2109,7 +2631,7 @@
           "description": "Use local azure ip to initiate connection."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the VPN connection resource.",
           "readOnly": true
         },
@@ -2117,7 +2639,7 @@
           "type": "array",
           "description": "List of all vpn site link connections to the gateway.",
           "items": {
-            "$ref": "./common.json/definitions/VpnSiteLinkConnection"
+            "$ref": "./common.json#/definitions/VpnSiteLinkConnection"
           }
         },
         "routingConfiguration": {
@@ -2125,6 +2647,27 @@
           "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         }
       }
+    },
+    "VpnGateway": {
+      "type": "object",
+      "description": "VpnGateway Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnGatewayProperties",
+          "description": "Properties of the VPN gateway.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
     },
     "VpnGatewayIpConfiguration": {
       "type": "object",
@@ -2144,21 +2687,42 @@
         }
       }
     },
+    "VpnGatewayNatRule": {
+      "type": "object",
+      "description": "VpnGatewayNatRule Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnGatewayNatRuleProperties",
+          "description": "Properties of the VpnGateway NAT rule.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
     "VpnGatewayNatRuleProperties": {
       "type": "object",
       "description": "Parameters for VpnGatewayNatRule.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the NAT Rule resource.",
           "readOnly": true
         },
         "type": {
-          "$ref": "./common.json/definitions/VpnNatRuleType",
+          "$ref": "./common.json#/definitions/VpnNatRuleType",
           "description": "The type of NAT rule for VPN NAT."
         },
         "mode": {
-          "$ref": "./common.json/definitions/VpnNatRuleMode",
+          "$ref": "./common.json#/definitions/VpnNatRuleMode",
           "description": "The Source NAT direction of a VPN NAT."
         },
         "internalMappings": {
@@ -2183,7 +2747,7 @@
           "type": "array",
           "description": "List of egress VpnSiteLinkConnections.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -2191,7 +2755,7 @@
           "type": "array",
           "description": "List of ingress VpnSiteLinkConnections.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         }
@@ -2222,22 +2786,22 @@
       "description": "Parameters for VpnGateway.",
       "properties": {
         "virtualHub": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The VirtualHub to which the gateway belongs."
         },
         "connections": {
           "type": "array",
           "description": "List of all vpn connections to the gateway.",
           "items": {
-            "$ref": "./common.json/definitions/VpnConnection"
+            "$ref": "#/definitions/VpnConnection"
           }
         },
         "bgpSettings": {
-          "$ref": "./networkGateway.json/definitions/BgpSettings",
+          "$ref": "./networkGateway.json#/definitions/BgpSettings",
           "description": "Local network gateway's BGP speaker settings."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the VPN gateway resource.",
           "readOnly": true
         },
@@ -2266,7 +2830,7 @@
           "type": "array",
           "description": "List of all the nat Rules associated with the gateway.",
           "items": {
-            "$ref": "./common.json/definitions/VpnGatewayNatRule"
+            "$ref": "#/definitions/VpnGatewayNatRule"
           }
         }
       }
@@ -2381,6 +2945,27 @@
         }
       }
     },
+    "VpnServerConfiguration": {
+      "type": "object",
+      "description": "VpnServerConfiguration Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnServerConfigurationProperties",
+          "description": "Properties of the P2SVpnServer configuration.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithWritableName"
+        }
+      ]
+    },
     "VpnServerConfigurationPolicyGroupMember": {
       "type": "object",
       "description": "VpnServerConfiguration PolicyGroup member",
@@ -2390,7 +2975,7 @@
           "description": "Name of the VpnServerConfigurationPolicyGroupMember."
         },
         "attributeType": {
-          "$ref": "./common.json/definitions/VpnPolicyMemberAttributeType",
+          "$ref": "./common.json#/definitions/VpnPolicyMemberAttributeType",
           "description": "The Vpn Policy member attribute type."
         },
         "attributeValue": {
@@ -2424,12 +3009,12 @@
           "type": "array",
           "description": "List of references to P2SConnectionConfigurations.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the VpnServerConfigurationPolicyGroup resource.",
           "readOnly": true
         }
@@ -2447,14 +3032,14 @@
           "type": "array",
           "description": "VPN protocols for the VpnServerConfiguration.",
           "items": {
-            "$ref": "./common.json/definitions/VpnGatewayTunnelingProtocol"
+            "$ref": "./common.json#/definitions/VpnGatewayTunnelingProtocol"
           }
         },
         "vpnAuthenticationTypes": {
           "type": "array",
           "description": "VPN authentication types for the VpnServerConfiguration.",
           "items": {
-            "$ref": "./common.json/definitions/VpnAuthenticationType"
+            "$ref": "./common.json#/definitions/VpnAuthenticationType"
           }
         },
         "vpnClientRootCertificates": {
@@ -2489,7 +3074,7 @@
           "type": "array",
           "description": "VpnClientIpsecPolicies for VpnServerConfiguration.",
           "items": {
-            "$ref": "./networkGateway.json/definitions/IpsecPolicy"
+            "$ref": "./networkGateway.json#/definitions/IpsecPolicy"
           }
         },
         "radiusServerAddress": {
@@ -2506,7 +3091,7 @@
           "type": "array",
           "description": "Multiple Radius Server configuration for VpnServerConfiguration.",
           "items": {
-            "$ref": "./common.json/definitions/RadiusServer"
+            "$ref": "./common.json#/definitions/RadiusServer"
           }
         },
         "aadAuthenticationParameters": {
@@ -2522,7 +3107,7 @@
           "type": "array",
           "description": "List of references to P2SVpnGateways.",
           "items": {
-            "$ref": "./common.json/definitions/P2SVpnGateway"
+            "$ref": "#/definitions/P2SVpnGateway"
           },
           "readOnly": true
         },
@@ -2530,7 +3115,7 @@
           "type": "array",
           "description": "List of all VpnServerConfigurationPolicyGroups.",
           "items": {
-            "$ref": "./common.json/definitions/VpnServerConfigurationPolicyGroup"
+            "$ref": "./common.json#/definitions/VpnServerConfigurationPolicyGroup"
           }
         },
         "etag": {
@@ -2553,12 +3138,33 @@
         }
       }
     },
+    "VpnSite": {
+      "type": "object",
+      "description": "VpnSite Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnSiteProperties",
+          "description": "Properties of the VPN site.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
     "VpnSiteLinkConnectionProperties": {
       "type": "object",
       "description": "Parameters for VpnConnection.",
       "properties": {
         "vpnSiteLink": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "Id of the connected vpn site link."
         },
         "routingWeight": {
@@ -2567,16 +3173,16 @@
           "description": "Routing weight for vpn connection."
         },
         "vpnLinkConnectionMode": {
-          "$ref": "./common.json/definitions/VpnLinkConnectionMode",
+          "$ref": "./common.json#/definitions/VpnLinkConnectionMode",
           "description": "Vpn link connection mode."
         },
         "connectionStatus": {
-          "$ref": "./common.json/definitions/VpnConnectionStatus",
+          "$ref": "./common.json#/definitions/VpnConnectionStatus",
           "description": "The connection status.",
           "readOnly": true
         },
         "vpnConnectionProtocolType": {
-          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionProtocol",
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol",
           "description": "Connection protocol used for this connection."
         },
         "ingressBytesTransferred": {
@@ -2610,7 +3216,7 @@
           "type": "array",
           "description": "vpnGatewayCustomBgpAddresses used by this connection.",
           "items": {
-            "$ref": "./networkGateway.json/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+            "$ref": "./networkGateway.json#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
           },
           "x-ms-identifiers": []
         },
@@ -2622,7 +3228,7 @@
           "type": "array",
           "description": "The IPSec Policies to be considered by this connection.",
           "items": {
-            "$ref": "./networkGateway.json/definitions/IpsecPolicy"
+            "$ref": "./networkGateway.json#/definitions/IpsecPolicy"
           }
         },
         "enableRateLimiting": {
@@ -2634,7 +3240,7 @@
           "description": "Use local azure ip to initiate connection."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the VPN site link connection resource.",
           "readOnly": true
         },
@@ -2642,14 +3248,14 @@
           "type": "array",
           "description": "List of ingress NatRules.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           }
         },
         "egressNatRules": {
           "type": "array",
           "description": "List of egress NatRules.",
           "items": {
-            "$ref": "./common.json/definitions/SubResource"
+            "$ref": "./common.json#/definitions/SubResource"
           }
         },
         "dpdTimeoutSeconds": {
@@ -2680,7 +3286,7 @@
           "description": "The set of bgp properties."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the VPN site link resource.",
           "readOnly": true
         }
@@ -2691,7 +3297,7 @@
       "description": "Parameters for VpnSite.",
       "properties": {
         "virtualWan": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The VirtualWAN to which the vpnSite belongs."
         },
         "deviceProperties": {
@@ -2707,15 +3313,15 @@
           "description": "The key for vpn-site that can be used for connections."
         },
         "addressSpace": {
-          "$ref": "./virtualNetwork.json/definitions/AddressSpace",
+          "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
           "description": "The AddressSpace that contains an array of IP address ranges."
         },
         "bgpProperties": {
-          "$ref": "./networkGateway.json/definitions/BgpSettings",
+          "$ref": "./networkGateway.json#/definitions/BgpSettings",
           "description": "The set of bgp properties."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the VPN site resource.",
           "readOnly": true
         },
@@ -2727,7 +3333,7 @@
           "type": "array",
           "description": "List of all vpn site links.",
           "items": {
-            "$ref": "./common.json/definitions/VpnSiteLink"
+            "$ref": "./common.json#/definitions/VpnSiteLink"
           }
         },
         "o365Policy": {

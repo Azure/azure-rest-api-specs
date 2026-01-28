@@ -53,6 +53,12 @@ Change Type: deleted
 
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `tags__added` | added | `[{"name":"NetworkSecurityPerimeters"}]` |
+
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}`
 
 | Path | Change Type | Value |
@@ -63,19 +69,19 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterServiceTags_List","parameters":[{"name":"location","i...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterServiceTags_List","tags":["NetworkSecurityPerimeterSe...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterAssociableResourceTypes_List","parameters":[{"name":"...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterAssociableResourceTypes_List","tags":["NetworkSecurit...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterLinkReferences_List","parameters":[{"name":"networkSe...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterLinkReferences_List","tags":["NetworkSecurityPerimete...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}`
 
@@ -87,7 +93,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterLinks_List","parameters":[{"name":"networkSecurityPer...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterLinks_List","tags":["NetworkSecurityPerimeterLinks"],...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}`
 
@@ -111,7 +117,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterProfiles_List","parameters":[{"name":"networkSecurity...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterProfiles_List","tags":["NetworkSecurityPerimeterProfi...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}`
 
@@ -123,7 +129,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterAccessRules_List","parameters":[{"name":"networkSecur...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterAccessRules_List","tags":["NetworkSecurityPerimeterAc...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}`
 
@@ -141,7 +147,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterAssociations_List","parameters":[{"name":"networkSecu...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations__deleted']` | deleted | `{"get":{"operationId":"NetworkSecurityPerimeterAssociations_List","tags":["NetworkSecurityPerimeterA...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}`
 
@@ -161,12 +167,6 @@ Change Type: deleted
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].parameters__deleted` | deleted | `[{"$ref":"./network.json#/parameters/SubscriptionIdParameter"},{"$ref":"#/parameters/ResourceGroupNa...` |
 
-### Changes for `NetworkSecurityPerimeterProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkSecurityPerimeterProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Creating","...` |
-
 ### Changes for `NspAccessRule`
 
 | Path | Change Type | Value |
@@ -179,12 +179,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.NspAccessRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `NspAccessRuleProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NspAccessRuleProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Creating","...` |
-
 ### Changes for `NspAccessRuleReconcile`
 
 | Path | Change Type | Value |
@@ -196,12 +190,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.NspAssociation__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/NspAssociationProperties","x-ms-c...` |
-
-### Changes for `NspAssociationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NspAssociationProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Creating","...` |
 
 ### Changes for `NspAssociationReconcile`
 
@@ -227,12 +215,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.NspLinkListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `NspLinkProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NspLinkProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Creating","...` |
-
 ### Changes for `NspLinkReference`
 
 | Path | Change Type | Value |
@@ -244,12 +226,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.NspLinkReferenceListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `NspLinkReferenceProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NspLinkReferenceProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Creating","...` |
 
 ### Changes for `NspLoggingConfiguration`
 
@@ -263,12 +239,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.NspLoggingConfigurationListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `NspLoggingConfigurationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NspLoggingConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"enabledLogCategories":{"type":"array","items":{"type":"string"}},"ve...` |
-
 ### Changes for `NspProfile`
 
 | Path | Change Type | Value |
@@ -281,35 +251,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.NspProfileListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `NspProfileProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NspProfileProperties__deleted` | deleted | `{"type":"object","properties":{"accessRulesVersion":{"type":"string","readOnly":true},"diagnosticSet...` |
-
 ### Changes for `NspServiceTagsListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.NspServiceTagsListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `NspServiceTagsResource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NspServiceTagsResource__deleted` | deleted | `{"type":"object","properties":{"serviceTags":{"type":"array","items":{"type":"string"}}}}` |
-
-### Changes for `PerimeterAssociableResource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PerimeterAssociableResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/PerimeterAssociableResourceProper...` |
-
-### Changes for `PerimeterAssociableResourceProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PerimeterAssociableResourceProperties__deleted` | deleted | `{"type":"object","properties":{"displayName":{"type":"string","readOnly":true},"resourceType":{"type...` |
 
 ### Changes for `PerimeterAssociableResourcesListResult`
 
@@ -317,36 +263,84 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.PerimeterAssociableResourcesListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `PerimeterBasedAccessRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PerimeterBasedAccessRule__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","format":"arm-id","readOnly":true,"x-ms-arm-id-...` |
-
-### Changes for `SubscriptionId`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SubscriptionId__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","format":"arm-id","x-ms-arm-id-details":{"allow...` |
-
-### Changes for `UpdateTagsRequest`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.UpdateTagsRequest__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","format":"arm-id","readOnly":true,"x-ms-arm-id-...` |
-
 ### Changes for `required`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.NetworkSecurityPerimeterListResult.required__added` | added | `["value"]` |
 
+### Changes for `type`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.NetworkSecurityPerimeterProperties.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.NspAccessRuleProperties.properties.direction.type__deleted` | deleted | `string` |
+| `definitions.NspAccessRuleProperties.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.NspAssociationProperties.properties.accessMode.type__deleted` | deleted | `string` |
+| `definitions.NspAssociationProperties.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.NspLinkProperties.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.NspLinkProperties.properties.status.type__deleted` | deleted | `string` |
+| `definitions.NspLinkReferenceProperties.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.NspLinkReferenceProperties.properties.status.type__deleted` | deleted | `string` |
+
+### Changes for `enum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.NetworkSecurityPerimeterProperties.properties.provisioningState.enum__deleted` | deleted | `["Succeeded","Creating","Updating","Deleting","Accepted","Failed"]` |
+| `definitions.NspAccessRuleProperties.properties.direction.enum__deleted` | deleted | `["Inbound","Outbound"]` |
+| `definitions.NspAccessRuleProperties.properties.provisioningState.enum__deleted` | deleted | `["Succeeded","Creating","Updating","Deleting","Accepted","Failed"]` |
+| `definitions.NspAssociationProperties.properties.accessMode.enum__deleted` | deleted | `["Learning","Enforced","Audit"]` |
+| `definitions.NspAssociationProperties.properties.provisioningState.enum__deleted` | deleted | `["Succeeded","Creating","Updating","Deleting","Accepted","Failed"]` |
+| `definitions.NspLinkProperties.properties.provisioningState.enum__deleted` | deleted | `["Succeeded","Creating","Updating","Deleting","Accepted","Failed","WaitForRemoteCompletion"]` |
+| `definitions.NspLinkProperties.properties.status.enum__deleted` | deleted | `["Approved","Pending","Rejected","Disconnected"]` |
+| `definitions.NspLinkReferenceProperties.properties.provisioningState.enum__deleted` | deleted | `["Succeeded","Creating","Updating","Deleting","Accepted","Failed","WaitForRemoteCompletion"]` |
+| `definitions.NspLinkReferenceProperties.properties.status.enum__deleted` | deleted | `["Approved","Pending","Rejected","Disconnected"]` |
+
+### Changes for `x-ms-enum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.NetworkSecurityPerimeterProperties.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"NspProvisioningState","modelAsString":true}` |
+| `definitions.NspAccessRuleProperties.properties.direction['x-ms-enum__deleted']` | deleted | `{"name":"AccessRuleDirection","modelAsString":true}` |
+| `definitions.NspAccessRuleProperties.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"NspProvisioningState","modelAsString":true}` |
+| `definitions.NspAssociationProperties.properties.accessMode['x-ms-enum__deleted']` | deleted | `{"name":"AssociationAccessMode","modelAsString":true}` |
+| `definitions.NspAssociationProperties.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"NspProvisioningState","modelAsString":true}` |
+| `definitions.NspLinkProperties.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"NspLinkProvisioningState","modelAsString":true}` |
+| `definitions.NspLinkProperties.properties.status['x-ms-enum__deleted']` | deleted | `{"name":"NspLinkStatus","modelAsString":true}` |
+| `definitions.NspLinkReferenceProperties.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"NspLinkProvisioningState","modelAsString":true}` |
+| `definitions.NspLinkReferenceProperties.properties.status['x-ms-enum__deleted']` | deleted | `{"name":"NspLinkStatus","modelAsString":true}` |
+
+### Changes for `$ref`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.NetworkSecurityPerimeterProperties.properties.provisioningState.$ref__added` | added | `./common.json/definitions/NspProvisioningState` |
+| `definitions.NspAccessRuleProperties.properties.direction.$ref__added` | added | `./common.json/definitions/AccessRuleDirection` |
+| `definitions.NspAccessRuleProperties.properties.provisioningState.$ref__added` | added | `./common.json/definitions/NspProvisioningState` |
+| `definitions.NspAssociationProperties.properties.accessMode.$ref__added` | added | `./common.json/definitions/AssociationAccessMode` |
+| `definitions.NspAssociationProperties.properties.provisioningState.$ref__added` | added | `./common.json/definitions/NspProvisioningState` |
+| `definitions.NspLinkProperties.properties.provisioningState.$ref__added` | added | `./common.json/definitions/NspLinkProvisioningState` |
+| `definitions.NspLinkProperties.properties.status.$ref__added` | added | `./common.json/definitions/NspLinkStatus` |
+| `definitions.NspLinkReferenceProperties.properties.provisioningState.$ref__added` | added | `./common.json/definitions/NspLinkProvisioningState` |
+| `definitions.NspLinkReferenceProperties.properties.status.$ref__added` | added | `./common.json/definitions/NspLinkStatus` |
+
+### Changes for `x-ms-client-flatten`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.NspAccessRuleProperties.properties.networkSecurityPerimeters.items['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.NspAccessRuleProperties.properties.networkSecurityPerimeters['x-ms-client-flatten__added']` | added | `true` |
+| `definitions.NspAccessRuleProperties.properties.subscriptions.items['x-ms-client-flatten__deleted']` | deleted | `true` |
+| `definitions.NspAccessRuleProperties.properties.subscriptions['x-ms-client-flatten__added']` | added | `true` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.NetworkSecurityPerimeter.allOf[0].$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource` | `./common.json/definitions/CommonTrackedResource` |
-| `definitions.NetworkSecurityPerimeter.properties.properties.$ref` | `#/definitions/NetworkSecurityPerimeterProperties` | `./common.json/definitions/NetworkSecurityPerimeterProperties` |
+| `definitions.NspAssociationProperties.properties.privateLinkResource.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.NspAssociationProperties.properties.profile.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `info.description` | `The Network Security Perimeter API provides a RESTful set of web services that interact with network security perimeter resource.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `NetworkSecurityPerimeter` | `WebApplicationFirewallManagement` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkSecurityPerimeters'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
@@ -355,7 +349,6 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `Azure async operation header` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].patch.parameters[1].schema.$ref` | `#/definitions/UpdateTagsRequest` | `./common.json/definitions/UpdateTagsRequest` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 

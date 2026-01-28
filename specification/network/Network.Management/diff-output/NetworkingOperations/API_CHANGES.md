@@ -1,34 +1,11 @@
 ## Swagger Changes
 
-### Changes for `Availability`
+### Changes for `tags`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Availability__deleted` | deleted | `{"type":"object","properties":{"timeGrain":{"type":"string"},"retention":{"type":"string"},"blobDura...` |
-
-### Changes for `Dimension`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Dimension__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"displayName":{"type":"string"},"internalNam...` |
-
-### Changes for `LogSpecification`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LogSpecification__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"displayName":{"type":"string"},"blobDuratio...` |
-
-### Changes for `MetricSpecification`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.MetricSpecification__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"displayName":{"type":"string"},"displayDesc...` |
-
-### Changes for `Operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Operation__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"display":{"type":"object","properties":{"pr...` |
+| `paths['/providers/microsoft.Network/operations'].get.tags__added` | added | `["Operations"]` |
+| `tags__added` | added | `[{"name":"Operations"}]` |
 
 ### Changes for `OperationListResult`
 
@@ -36,11 +13,26 @@
 |------|------------|-------|
 | `definitions.OperationListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `OperationPropertiesFormat`
+### Changes for `type`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OperationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"serviceSpecification":{"type":"object","properties":{"metricSpecific...` |
+| `definitions.Operation.properties.display.type__deleted` | deleted | `object` |
+| `definitions.OperationPropertiesFormat.properties.serviceSpecification.type__deleted` | deleted | `object` |
+
+### Changes for `properties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Operation.properties.display.properties__deleted` | deleted | `{"provider":{"type":"string","description":"Service provider: Microsoft Network."},"resource":{"type...` |
+| `definitions.OperationPropertiesFormat.properties.serviceSpecification.properties__deleted` | deleted | `{"metricSpecifications":{"type":"array","description":"Operation service specification.","items":{"$...` |
+
+### Changes for `$ref`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Operation.properties.display.$ref__added` | added | `./common.json/definitions/OperationDisplay` |
+| `definitions.OperationPropertiesFormat.properties.serviceSpecification.$ref__added` | added | `./common.json/definitions/OperationPropertiesFormatServiceSpecification` |
 
 ## Modified Values
 

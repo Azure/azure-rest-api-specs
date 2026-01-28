@@ -41,71 +41,81 @@ Change Type: deleted
 
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration'].post.tags__added` | added | `["VirtualNetworkGateways"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration'].post.tags__added` | added | `["VirtualNetworkGateways"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration'].post.tags__added` | added | `["VirtualNetworkGateways"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration'].post.tags__added` | added | `["VirtualNetworkGateways"]` |
+| `tags__added` | added | `[{"name":"VirtualNetworkGateways"},{"name":"VirtualNetworkTaps"}]` |
+
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkGatewayConnections_List","parameters":[],"responses":{"200":{"d...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkGatewayConnections_List","tags":["VirtualNetworkGatewayConnecti...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkGatewayConnections_Get","parameters":[{"name":"virtualNetworkGa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkGatewayConnections_Get","tags":["VirtualNetworkGatewayConnectio...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_GetIkeSas","parameters":[{"name":"virtualNe...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_GetIkeSas","tags":["VirtualNetworkGatewayCo...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/resetconnection`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/resetconnection__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_ResetConnection","parameters":[{"name":"vir...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/resetconnection__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_ResetConnection","tags":["VirtualNetworkGat...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkGatewayConnections_GetSharedKey","parameters":[{"name":"virtual...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkGatewayConnections_GetSharedKey","tags":["VirtualNetworkGateway...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_ResetSharedKey","parameters":[{"name":"virt...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_ResetSharedKey","tags":["VirtualNetworkGate...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_StartPacketCapture","parameters":[{"name":"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_StartPacketCapture","tags":["VirtualNetwork...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_StopPacketCapture","parameters":[{"name":"v...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGatewayConnections_StopPacketCapture","tags":["VirtualNetworkG...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGateways_VpnDeviceConfigurationScript","parameters":[{"name":"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript__deleted']` | deleted | `{"post":{"operationId":"VirtualNetworkGateways_VpnDeviceConfigurationScript","tags":["VirtualNetwork...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways__deleted']` | deleted | `{"get":{"operationId":"LocalNetworkGateways_List","parameters":[],"responses":{"200":{"description":...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways__deleted']` | deleted | `{"get":{"operationId":"LocalNetworkGateways_List","tags":["LocalNetworkGateways"],"parameters":[],"r...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}__deleted']` | deleted | `{"get":{"operationId":"LocalNetworkGateways_Get","parameters":[{"name":"localNetworkGatewayName","in...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}__deleted']` | deleted | `{"get":{"operationId":"LocalNetworkGateways_Get","tags":["LocalNetworkGateways"],"parameters":[{"nam...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules`
 
@@ -185,6 +195,34 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.BgpPeerStatus.properties.state.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.status.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.testType.type__deleted` | deleted | `string` |
+| `definitions.IpsecPolicy.properties.dhGroup.type__deleted` | deleted | `string` |
+| `definitions.IpsecPolicy.properties.ikeEncryption.type__deleted` | deleted | `string` |
+| `definitions.IpsecPolicy.properties.ikeIntegrity.type__deleted` | deleted | `string` |
+| `definitions.IpsecPolicy.properties.ipsecEncryption.type__deleted` | deleted | `string` |
+| `definitions.IpsecPolicy.properties.ipsecIntegrity.type__deleted` | deleted | `string` |
+| `definitions.IpsecPolicy.properties.pfsGroup.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.authenticationType.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionMode.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionProtocol.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionStatus.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionType.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.mode.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.type.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewayPolicyGroupMember.properties.attributeType.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewaySku.properties.name.type__deleted` | deleted | `string` |
+| `definitions.VirtualNetworkGatewaySku.properties.tier.type__deleted` | deleted | `string` |
+| `definitions.VpnClientConfiguration.properties.vpnAuthenticationTypes.items.type__deleted` | deleted | `string` |
+| `definitions.VpnClientConfiguration.properties.vpnClientProtocols.items.type__deleted` | deleted | `string` |
+| `definitions.VpnClientIPsecParameters.properties.dhGroup.type__deleted` | deleted | `string` |
+| `definitions.VpnClientIPsecParameters.properties.ikeEncryption.type__deleted` | deleted | `string` |
+| `definitions.VpnClientIPsecParameters.properties.ikeIntegrity.type__deleted` | deleted | `string` |
+| `definitions.VpnClientIPsecParameters.properties.ipsecEncryption.type__deleted` | deleted | `string` |
+| `definitions.VpnClientIPsecParameters.properties.ipsecIntegrity.type__deleted` | deleted | `string` |
+| `definitions.VpnClientIPsecParameters.properties.pfsGroup.type__deleted` | deleted | `string` |
+| `definitions.VpnClientParameters.properties.processorArchitecture.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.type__added` | added | `array` |
@@ -200,6 +238,34 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.BgpPeerStatus.properties.state.$ref__added` | added | `./common.json/definitions/BgpPeerState` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.status.$ref__added` | added | `./common.json/definitions/FailoverTestStatus` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.testType.$ref__added` | added | `./common.json/definitions/FailoverTestType` |
+| `definitions.IpsecPolicy.properties.dhGroup.$ref__added` | added | `./common.json/definitions/DhGroup` |
+| `definitions.IpsecPolicy.properties.ikeEncryption.$ref__added` | added | `./common.json/definitions/IkeEncryption` |
+| `definitions.IpsecPolicy.properties.ikeIntegrity.$ref__added` | added | `./common.json/definitions/IkeIntegrity` |
+| `definitions.IpsecPolicy.properties.ipsecEncryption.$ref__added` | added | `./common.json/definitions/IpsecEncryption` |
+| `definitions.IpsecPolicy.properties.ipsecIntegrity.$ref__added` | added | `./common.json/definitions/IpsecIntegrity` |
+| `definitions.IpsecPolicy.properties.pfsGroup.$ref__added` | added | `./common.json/definitions/PfsGroup` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.authenticationType.$ref__added` | added | `./common.json/definitions/ConnectionAuthenticationType` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionMode.$ref__added` | added | `./common.json/definitions/VirtualNetworkGatewayConnectionMode` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionProtocol.$ref__added` | added | `./common.json/definitions/VirtualNetworkGatewayConnectionProtocol` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionStatus.$ref__added` | added | `./common.json/definitions/VirtualNetworkGatewayConnectionStatus` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionType.$ref__added` | added | `./common.json/definitions/VirtualNetworkGatewayConnectionType` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.mode.$ref__added` | added | `./common.json/definitions/VpnNatRuleMode` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.type.$ref__added` | added | `./common.json/definitions/VpnNatRuleType` |
+| `definitions.VirtualNetworkGatewayPolicyGroupMember.properties.attributeType.$ref__added` | added | `./common.json/definitions/VpnPolicyMemberAttributeType` |
+| `definitions.VirtualNetworkGatewaySku.properties.name.$ref__added` | added | `./common.json/definitions/VirtualNetworkGatewaySkuName` |
+| `definitions.VirtualNetworkGatewaySku.properties.tier.$ref__added` | added | `./common.json/definitions/VirtualNetworkGatewaySkuTier` |
+| `definitions.VpnClientConfiguration.properties.vpnAuthenticationTypes.items.$ref__added` | added | `./common.json/definitions/VpnAuthenticationType` |
+| `definitions.VpnClientConfiguration.properties.vpnClientProtocols.items.$ref__added` | added | `./common.json/definitions/VpnClientProtocol` |
+| `definitions.VpnClientIPsecParameters.properties.dhGroup.$ref__added` | added | `./common.json/definitions/DhGroup` |
+| `definitions.VpnClientIPsecParameters.properties.ikeEncryption.$ref__added` | added | `./common.json/definitions/IkeEncryption` |
+| `definitions.VpnClientIPsecParameters.properties.ikeIntegrity.$ref__added` | added | `./common.json/definitions/IkeIntegrity` |
+| `definitions.VpnClientIPsecParameters.properties.ipsecEncryption.$ref__added` | added | `./common.json/definitions/IpsecEncryption` |
+| `definitions.VpnClientIPsecParameters.properties.ipsecIntegrity.$ref__added` | added | `./common.json/definitions/IpsecIntegrity` |
+| `definitions.VpnClientIPsecParameters.properties.pfsGroup.$ref__added` | added | `./common.json/definitions/PfsGroup` |
+| `definitions.VpnClientParameters.properties.processorArchitecture.$ref__added` | added | `./common.json/definitions/ProcessorArchitecture` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.200.schema.$ref__added` | added | `./common.json/definitions/stringApplicationJson` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.200.schema.$ref__added` | added | `./common.json/definitions/stringApplicationJson` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ExpressRouteFailoverAllTestDetails` |
@@ -215,44 +281,8 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.items__added` | added | `{"$ref":"./common.json/definitions/ExpressRouteFailoverTestDetails"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.items__added` | added | `{"$ref":"#/definitions/ExpressRouteFailoverTestDetails"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.200.schema.items__added` | added | `{"$ref":"./common.json/definitions/ExpressRouteFailoverSingleTestDetails"}` |
-
-### Changes for `BgpPeerStatus`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BgpPeerStatus__deleted` | deleted | `{"type":"object","properties":{"localAddress":{"type":"string","readOnly":true},"neighbor":{"type":"...` |
-
-### Changes for `BgpPeerStatusListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BgpPeerStatusListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/BgpPeerStatus"...` |
-
-### Changes for `BgpSettings`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BgpSettings__deleted` | deleted | `{"type":"object","properties":{"asn":{"type":"integer","format":"int64","minimum":0,"maximum":429496...` |
-
-### Changes for `CertificateAuthentication`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CertificateAuthentication__deleted` | deleted | `{"type":"object","properties":{"outboundAuthCertificate":{"type":"string","format":"uri"},"inboundAu...` |
-
-### Changes for `CircuitMetadataMap`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CircuitMetadataMap__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"link":{"type":"string"},"location":{"type":...` |
-
-### Changes for `ConnectionResetSharedKey`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionResetSharedKey__deleted` | deleted | `{"type":"object","properties":{"keyLength":{"type":"integer","format":"int32","minimum":1,"maximum":...` |
 
 ### Changes for `ConnectionSharedKey`
 
@@ -302,23 +332,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ExpressRouteFailoverStopApiParameters__deleted` | deleted | `{"type":"object","properties":{"peeringLocation":{"type":"string"},"wasSimulationSuccessful":{"type"...` |
 
-### Changes for `ExpressRouteFailoverTestDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteFailoverTestDetails__deleted` | deleted | `{"type":"object","properties":{"peeringLocation":{"type":"string"},"circuits":{"type":"array","items...` |
-
 ### Changes for `FailoverConnectionDetails`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.FailoverConnectionDetails__deleted` | deleted | `{"type":"object","properties":{"failoverConnectionName":{"type":"string"},"failoverLocation":{"type"...` |
-
-### Changes for `GatewayCustomBgpIpAddressIpConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GatewayCustomBgpIpAddressIpConfiguration__deleted` | deleted | `{"type":"object","properties":{"ipConfigurationId":{"type":"string"},"customBgpIpAddress":{"type":"s...` |
 
 ### Changes for `GatewayResiliencyInformation`
 
@@ -332,18 +350,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.GatewayResiliencyRecommendation__deleted` | deleted | `{"type":"object","properties":{"recommendationTitle":{"type":"string"},"recommendationId":{"type":"s...` |
 
-### Changes for `GatewayRoute`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GatewayRoute__deleted` | deleted | `{"type":"object","properties":{"localAddress":{"type":"string","readOnly":true},"network":{"type":"s...` |
-
-### Changes for `GatewayRouteListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GatewayRouteListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/GatewayRoute"}...` |
-
 ### Changes for `GatewayRouteSet`
 
 | Path | Change Type | Value |
@@ -355,18 +361,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.GatewayRouteSetsInformation__deleted` | deleted | `{"type":"object","properties":{"lastComputedTime":{"type":"string","format":"date-time"},"nextEligib...` |
-
-### Changes for `IPConfigurationBgpPeeringAddress`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.IPConfigurationBgpPeeringAddress__deleted` | deleted | `{"type":"object","properties":{"ipconfigurationId":{"type":"string"},"defaultBgpIpAddresses":{"type"...` |
-
-### Changes for `IpsecPolicy`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.IpsecPolicy__deleted` | deleted | `{"type":"object","properties":{"saLifeTimeSeconds":{"type":"integer","format":"int32"},"saDataSizeKi...` |
 
 ### Changes for `ListVirtualNetworkGatewayNatRulesResult`
 
@@ -385,18 +379,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.LocalNetworkGatewayListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `LocalNetworkGatewayPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LocalNetworkGatewayPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"localNetworkAddressSpace":{"$ref":"./virtualNetwork.json#/definition...` |
-
-### Changes for `RadiusAuthServer`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RadiusAuthServer__deleted` | deleted | `{"type":"object","properties":{"radiusServerAddress":{"type":"string"},"radiusServerSecret":{"type":...` |
 
 ### Changes for `RadiusAuthServerListResult`
 
@@ -476,12 +458,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.VirtualNetworkGatewayConnectionListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `VirtualNetworkGatewayConnectionPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"authorizationKey":{"type":"string"},"virtualNetworkGateway1":{"$ref"...` |
-
 ### Changes for `VirtualNetworkGatewayConnectionTunnelProperties`
 
 | Path | Change Type | Value |
@@ -493,12 +469,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VirtualNetworkGatewayIPConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualNetworkGatewayIPConfigurat...` |
-
-### Changes for `VirtualNetworkGatewayIPConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"privateIPAllocationMethod":{"$ref":"./network.json#/definitions/IPAl...` |
 
 ### Changes for `VirtualNetworkGatewayListConnectionsResult`
 
@@ -524,41 +494,17 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.VirtualNetworkGatewayNatRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualNetworkGatewayNatRulePrope...` |
 
-### Changes for `VirtualNetworkGatewayNatRuleProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualNetworkGatewayNatRuleProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"$ref":"./network.json#/definitions/Provisioning...` |
-
 ### Changes for `VirtualNetworkGatewayPolicyGroup`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VirtualNetworkGatewayPolicyGroup__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualNetworkGatewayPolicyGroupP...` |
 
-### Changes for `VirtualNetworkGatewayPolicyGroupMember`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualNetworkGatewayPolicyGroupMember__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"attributeType":{"type":"string","enum":["Ce...` |
-
-### Changes for `VirtualNetworkGatewayPolicyGroupProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualNetworkGatewayPolicyGroupProperties__deleted` | deleted | `{"type":"object","properties":{"isDefault":{"type":"boolean"},"priority":{"type":"integer","format":...` |
-
 ### Changes for `VirtualNetworkGatewayPropertiesFormat`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VirtualNetworkGatewayPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"autoScaleConfiguration":{"$ref":"#/definitions/VirtualNetworkGateway...` |
-
-### Changes for `VirtualNetworkGatewaySku`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualNetworkGatewaySku__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","enum":["Basic","HighPerformance","Standard",...` |
 
 ### Changes for `VirtualNetworkTapPropertiesFormat`
 
@@ -571,42 +517,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VngClientConnectionConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VngClientConnectionConfigurationP...` |
-
-### Changes for `VngClientConnectionConfigurationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VngClientConnectionConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"vpnClientAddressPool":{"$ref":"./virtualNetwork.json#/definitions/Ad...` |
-
-### Changes for `VpnClientConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnClientConfiguration__deleted` | deleted | `{"type":"object","properties":{"vpnClientAddressPool":{"$ref":"./virtualNetwork.json#/definitions/Ad...` |
-
-### Changes for `VpnClientConnectionHealthDetail`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnClientConnectionHealthDetail__deleted` | deleted | `{"type":"object","properties":{"vpnConnectionId":{"type":"string","readOnly":true},"vpnConnectionDur...` |
-
-### Changes for `VpnClientConnectionHealthDetailListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnClientConnectionHealthDetailListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/VpnClientConne...` |
-
-### Changes for `VpnClientIPsecParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnClientIPsecParameters__deleted` | deleted | `{"type":"object","properties":{"saLifeTimeSeconds":{"type":"integer","format":"int32"},"saDataSizeKi...` |
-
-### Changes for `VpnClientParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnClientParameters__deleted` | deleted | `{"type":"object","properties":{"processorArchitecture":{"type":"string","enum":["Amd64","X86"],"x-ms...` |
 
 ### Changes for `VpnClientRevokedCertificate`
 
@@ -632,23 +542,85 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.VpnClientRootCertificatePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"publicCertData":{"type":"string"},"provisioningState":{"$ref":"./net...` |
 
-### Changes for `VpnDeviceScriptParameters`
+### Changes for `VpnClientConnectionHealth`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.VpnDeviceScriptParameters__deleted` | deleted | `{"type":"object","properties":{"vendor":{"type":"string"},"deviceFamily":{"type":"string"},"firmware...` |
+| `definitions.VpnClientConnectionHealth__added` | added | `{"type":"object","properties":{"totalIngressBytesTransferred":{"type":"integer","format":"int64","re...` |
 
-### Changes for `VpnPacketCaptureStartParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnPacketCaptureStartParameters__deleted` | deleted | `{"type":"object","properties":{"filterData":{"type":"string"}}}` |
-
-### Changes for `VpnPacketCaptureStopParameters`
+### Changes for `enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.VpnPacketCaptureStopParameters__deleted` | deleted | `{"type":"object","properties":{"sasUrl":{"type":"string"}}}` |
+| `definitions.BgpPeerStatus.properties.state.enum__deleted` | deleted | `["Unknown","Stopped","Idle","Connecting","Connected"]` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.status.enum__deleted` | deleted | `["NotStarted","Starting","Running","StartFailed","Stopping","Completed","StopFailed","Invalid","Expi...` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.testType.enum__deleted` | deleted | `["SingleSiteFailover","MultiSiteFailover","All"]` |
+| `definitions.IpsecPolicy.properties.dhGroup.enum__deleted` | deleted | `["None","DHGroup1","DHGroup2","DHGroup14","DHGroup2048","ECP256","ECP384","DHGroup24"]` |
+| `definitions.IpsecPolicy.properties.ikeEncryption.enum__deleted` | deleted | `["DES","DES3","AES128","AES192","AES256","GCMAES256","GCMAES128"]` |
+| `definitions.IpsecPolicy.properties.ikeIntegrity.enum__deleted` | deleted | `["MD5","SHA1","SHA256","SHA384","GCMAES256","GCMAES128"]` |
+| `definitions.IpsecPolicy.properties.ipsecEncryption.enum__deleted` | deleted | `["None","DES","DES3","AES128","AES192","AES256","GCMAES128","GCMAES192","GCMAES256"]` |
+| `definitions.IpsecPolicy.properties.ipsecIntegrity.enum__deleted` | deleted | `["MD5","SHA1","SHA256","GCMAES128","GCMAES192","GCMAES256"]` |
+| `definitions.IpsecPolicy.properties.pfsGroup.enum__deleted` | deleted | `["None","PFS1","PFS2","PFS2048","ECP256","ECP384","PFS24","PFS14","PFSMM"]` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.authenticationType.enum__deleted` | deleted | `["PSK","Certificate"]` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionMode.enum__deleted` | deleted | `["Default","ResponderOnly","InitiatorOnly"]` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionProtocol.enum__deleted` | deleted | `["IKEv2","IKEv1"]` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionStatus.enum__deleted` | deleted | `["Unknown","Connecting","Connected","NotConnected"]` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionType.enum__deleted` | deleted | `["IPsec","Vnet2Vnet","ExpressRoute","VPNClient"]` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.mode.enum__deleted` | deleted | `["EgressSnat","IngressSnat"]` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.type.enum__deleted` | deleted | `["Static","Dynamic"]` |
+| `definitions.VirtualNetworkGatewayPolicyGroupMember.properties.attributeType.enum__deleted` | deleted | `["CertificateGroupId","AADGroupId","RadiusAzureGroupId"]` |
+| `definitions.VirtualNetworkGatewaySku.properties.name.enum__deleted` | deleted | `["Basic","HighPerformance","Standard","UltraPerformance","VpnGw1","VpnGw2","VpnGw3","VpnGw4","VpnGw5...` |
+| `definitions.VirtualNetworkGatewaySku.properties.tier.enum__deleted` | deleted | `["Basic","HighPerformance","Standard","UltraPerformance","VpnGw1","VpnGw2","VpnGw3","VpnGw4","VpnGw5...` |
+| `definitions.VpnClientConfiguration.properties.vpnAuthenticationTypes.items.enum__deleted` | deleted | `["Certificate","Radius","AAD"]` |
+| `definitions.VpnClientConfiguration.properties.vpnClientProtocols.items.enum__deleted` | deleted | `["IkeV2","SSTP","OpenVPN"]` |
+| `definitions.VpnClientIPsecParameters.properties.dhGroup.enum__deleted` | deleted | `["None","DHGroup1","DHGroup2","DHGroup14","DHGroup2048","ECP256","ECP384","DHGroup24"]` |
+| `definitions.VpnClientIPsecParameters.properties.ikeEncryption.enum__deleted` | deleted | `["DES","DES3","AES128","AES192","AES256","GCMAES256","GCMAES128"]` |
+| `definitions.VpnClientIPsecParameters.properties.ikeIntegrity.enum__deleted` | deleted | `["MD5","SHA1","SHA256","SHA384","GCMAES256","GCMAES128"]` |
+| `definitions.VpnClientIPsecParameters.properties.ipsecEncryption.enum__deleted` | deleted | `["None","DES","DES3","AES128","AES192","AES256","GCMAES128","GCMAES192","GCMAES256"]` |
+| `definitions.VpnClientIPsecParameters.properties.ipsecIntegrity.enum__deleted` | deleted | `["MD5","SHA1","SHA256","GCMAES128","GCMAES192","GCMAES256"]` |
+| `definitions.VpnClientIPsecParameters.properties.pfsGroup.enum__deleted` | deleted | `["None","PFS1","PFS2","PFS2048","ECP256","ECP384","PFS24","PFS14","PFSMM"]` |
+| `definitions.VpnClientParameters.properties.processorArchitecture.enum__deleted` | deleted | `["Amd64","X86"]` |
+
+### Changes for `x-ms-enum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpPeerStatus.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"BgpPeerState","modelAsString":true}` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.status['x-ms-enum__deleted']` | deleted | `{"name":"FailoverTestStatus","modelAsString":true}` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.testType['x-ms-enum__deleted']` | deleted | `{"name":"FailoverTestType","modelAsString":true}` |
+| `definitions.IpsecPolicy.properties.dhGroup['x-ms-enum__deleted']` | deleted | `{"name":"DhGroup","modelAsString":true}` |
+| `definitions.IpsecPolicy.properties.ikeEncryption['x-ms-enum__deleted']` | deleted | `{"name":"IkeEncryption","modelAsString":true}` |
+| `definitions.IpsecPolicy.properties.ikeIntegrity['x-ms-enum__deleted']` | deleted | `{"name":"IkeIntegrity","modelAsString":true}` |
+| `definitions.IpsecPolicy.properties.ipsecEncryption['x-ms-enum__deleted']` | deleted | `{"name":"IpsecEncryption","modelAsString":true}` |
+| `definitions.IpsecPolicy.properties.ipsecIntegrity['x-ms-enum__deleted']` | deleted | `{"name":"IpsecIntegrity","modelAsString":true}` |
+| `definitions.IpsecPolicy.properties.pfsGroup['x-ms-enum__deleted']` | deleted | `{"name":"PfsGroup","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.authenticationType['x-ms-enum__deleted']` | deleted | `{"name":"ConnectionAuthenticationType","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionMode['x-ms-enum__deleted']` | deleted | `{"name":"VirtualNetworkGatewayConnectionMode","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionProtocol['x-ms-enum__deleted']` | deleted | `{"name":"VirtualNetworkGatewayConnectionProtocol","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"VirtualNetworkGatewayConnectionStatus","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.connectionType['x-ms-enum__deleted']` | deleted | `{"name":"VirtualNetworkGatewayConnectionType","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.mode['x-ms-enum__deleted']` | deleted | `{"name":"VpnNatRuleMode","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"VpnNatRuleType","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewayPolicyGroupMember.properties.attributeType['x-ms-enum__deleted']` | deleted | `{"name":"VpnPolicyMemberAttributeType","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewaySku.properties.name['x-ms-enum__deleted']` | deleted | `{"name":"VirtualNetworkGatewaySkuName","modelAsString":true}` |
+| `definitions.VirtualNetworkGatewaySku.properties.tier['x-ms-enum__deleted']` | deleted | `{"name":"VirtualNetworkGatewaySkuTier","modelAsString":true}` |
+| `definitions.VpnClientConfiguration.properties.vpnAuthenticationTypes.items['x-ms-enum__deleted']` | deleted | `{"name":"VpnAuthenticationType","modelAsString":true}` |
+| `definitions.VpnClientConfiguration.properties.vpnClientProtocols.items['x-ms-enum__deleted']` | deleted | `{"name":"VpnClientProtocol","modelAsString":true}` |
+| `definitions.VpnClientIPsecParameters.properties.dhGroup['x-ms-enum__deleted']` | deleted | `{"name":"DhGroup","modelAsString":true}` |
+| `definitions.VpnClientIPsecParameters.properties.ikeEncryption['x-ms-enum__deleted']` | deleted | `{"name":"IkeEncryption","modelAsString":true}` |
+| `definitions.VpnClientIPsecParameters.properties.ikeIntegrity['x-ms-enum__deleted']` | deleted | `{"name":"IkeIntegrity","modelAsString":true}` |
+| `definitions.VpnClientIPsecParameters.properties.ipsecEncryption['x-ms-enum__deleted']` | deleted | `{"name":"IpsecEncryption","modelAsString":true}` |
+| `definitions.VpnClientIPsecParameters.properties.ipsecIntegrity['x-ms-enum__deleted']` | deleted | `{"name":"IpsecIntegrity","modelAsString":true}` |
+| `definitions.VpnClientIPsecParameters.properties.pfsGroup['x-ms-enum__deleted']` | deleted | `{"name":"PfsGroup","modelAsString":true}` |
+| `definitions.VpnClientParameters.properties.processorArchitecture['x-ms-enum__deleted']` | deleted | `{"name":"ProcessorArchitecture","modelAsString":true}` |
+
+### Changes for `format`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RadiusAuthServer.properties.radiusServerSecret.format__added` | added | `password` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.sharedKey.format__added` | added | `password` |
+| `definitions.VpnClientConfiguration.properties.radiusServerSecret.format__added` | added | `password` |
 
 ### Changes for `required`
 
@@ -661,12 +633,42 @@ Change Type: deleted
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
+| `definitions.ExpressRouteFailoverTestDetails.properties.circuits.items.$ref` | `#/definitions/ExpressRouteFailoverCircuitResourceDetails` | `./common.json/definitions/ExpressRouteFailoverCircuitResourceDetails` |
+| `definitions.ExpressRouteFailoverTestDetails.properties.connections.items.$ref` | `#/definitions/ExpressRouteFailoverConnectionResourceDetails` | `./common.json/definitions/ExpressRouteFailoverConnectionResourceDetails` |
+| `definitions.LocalNetworkGatewayPropertiesFormat.properties.localNetworkAddressSpace.$ref` | `./virtualNetwork.json#/definitions/AddressSpace` | `./virtualNetwork.json/definitions/AddressSpace` |
+| `definitions.LocalNetworkGatewayPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.VirtualNetworkGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
 | `definitions.VirtualNetworkGateway.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `./common.json/definitions/ExtendedLocation` |
 | `definitions.VirtualNetworkGateway.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `./common.json/definitions/ManagedServiceIdentity` |
 | `definitions.VirtualNetworkGateway.properties.properties.$ref` | `#/definitions/VirtualNetworkGatewayPropertiesFormat` | `./common.json/definitions/VirtualNetworkGatewayPropertiesFormat` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.egressNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.ingressNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.localNetworkGateway2.$ref` | `#/definitions/LocalNetworkGateway` | `./common.json/definitions/LocalNetworkGateway` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.peer.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.trafficSelectorPolicies.items.$ref` | `#/definitions/TrafficSelectorPolicy` | `./common.json/definitions/TrafficSelectorPolicy` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.tunnelConnectionStatus.items.$ref` | `#/definitions/TunnelConnectionHealth` | `./common.json/definitions/TunnelConnectionHealth` |
+| `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.tunnelProperties.items.$ref` | `#/definitions/VirtualNetworkGatewayConnectionTunnelProperties` | `./common.json/definitions/VirtualNetworkGatewayConnectionTunnelProperties` |
+| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref` | `./network.json#/definitions/IPAllocationMethod` | `./common.json/definitions/IPAllocationMethod` |
+| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.externalMappings.items.$ref` | `./virtualWan.json#/definitions/VpnNatRuleMapping` | `./virtualWan.json/definitions/VpnNatRuleMapping` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.internalMappings.items.$ref` | `./virtualWan.json#/definitions/VpnNatRuleMapping` | `./virtualWan.json/definitions/VpnNatRuleMapping` |
+| `definitions.VirtualNetworkGatewayNatRuleProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.VirtualNetworkGatewayPolicyGroupProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.VirtualNetworkGatewayPolicyGroupProperties.properties.vngClientConnectionConfigurations.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.VirtualNetworkTap.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
 | `definitions.VirtualNetworkTap.properties.properties.$ref` | `#/definitions/VirtualNetworkTapPropertiesFormat` | `./common.json/definitions/VirtualNetworkTapPropertiesFormat` |
+| `definitions.VngClientConnectionConfigurationProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.VngClientConnectionConfigurationProperties.properties.virtualNetworkGatewayPolicyGroups.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.VngClientConnectionConfigurationProperties.properties.vpnClientAddressPool.$ref` | `./virtualNetwork.json#/definitions/AddressSpace` | `./virtualNetwork.json/definitions/AddressSpace` |
+| `definitions.VpnClientConfiguration.properties.radiusServers.items.$ref` | `#/definitions/RadiusServer` | `./common.json/definitions/RadiusServer` |
+| `definitions.VpnClientConfiguration.properties.vngClientConnectionConfigurations.items.$ref` | `#/definitions/VngClientConnectionConfiguration` | `./common.json/definitions/VngClientConnectionConfiguration` |
+| `definitions.VpnClientConfiguration.properties.vpnClientAddressPool.$ref` | `./virtualNetwork.json#/definitions/AddressSpace` | `./virtualNetwork.json/definitions/AddressSpace` |
+| `definitions.VpnClientConfiguration.properties.vpnClientRevokedCertificates.items.$ref` | `#/definitions/VpnClientRevokedCertificate` | `./common.json/definitions/VpnClientRevokedCertificate` |
+| `definitions.VpnClientConfiguration.properties.vpnClientRootCertificates.items.$ref` | `#/definitions/VpnClientRootCertificate` | `./common.json/definitions/VpnClientRootCertificate` |
+| `definitions.VpnClientParameters.properties.authenticationMethod.$ref` | `./network.json#/definitions/AuthenticationMethod` | `./common.json/definitions/AuthenticationMethod` |
 | `info.description` | `The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `NetworkManagementClient` | `WebApplicationFirewallManagement` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkTaps'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
@@ -680,28 +682,21 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/connections'].get.responses.200.schema.$ref` | `#/definitions/VirtualNetworkGatewayListConnectionsResult` | `./common.json/definitions/VirtualNetworkGatewayListConnectionsResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/connections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/disconnectVirtualNetworkGatewayVpnConnections'].post.parameters[1].schema.$ref` | `./virtualWan.json#/definitions/P2SVpnConnectionRequest` | `./common.json/definitions/P2SVpnConnectionRequest` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/disconnectVirtualNetworkGatewayVpnConnections'].post.parameters[1].schema.$ref` | `./virtualWan.json#/definitions/P2SVpnConnectionRequest` | `./virtualWan.json/definitions/P2SVpnConnectionRequest` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/disconnectVirtualNetworkGatewayVpnConnections'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.parameters[1].schema.$ref` | `#/definitions/VpnClientParameters` | `./common.json/definitions/VpnClientParameters` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.parameters[1].schema.$ref` | `#/definitions/VpnClientParameters` | `./common.json/definitions/VpnClientParameters` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes'].post.responses.200.schema.$ref` | `#/definitions/GatewayRouteListResult` | `./common.json/definitions/GatewayRouteListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus'].post.responses.200.schema.$ref` | `#/definitions/BgpPeerStatusListResult` | `./common.json/definitions/BgpPeerStatusListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes'].post.responses.200.schema.$ref` | `#/definitions/GatewayRouteListResult` | `./common.json/definitions/GatewayRouteListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation'].post.responses.200.schema.$ref` | `#/definitions/GatewayResiliencyInformation` | `./common.json/definitions/GatewayResiliencyInformation` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getRoutesInformation'].post.responses.200.schema.$ref` | `#/definitions/GatewayRouteSetsInformation` | `./common.json/definitions/GatewayRouteSetsInformation` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getRoutesInformation'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth'].post.responses.200.schema.$ref` | `#/definitions/VpnClientConnectionHealthDetailListResult` | `./common.json/definitions/VpnClientConnectionHealthDetailListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters'].post.responses.200.schema.$ref` | `#/definitions/VpnClientIPsecParameters` | `./common.json/definitions/VpnClientIPsecParameters` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets'].post.responses.200.schema.$ref` | `#/definitions/RadiusAuthServerListResult` | `./common.json/definitions/RadiusAuthServerListResult` |
@@ -710,13 +705,9 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/resetvpnclientsharedkey'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters'].post.parameters[1].schema.$ref` | `#/definitions/VpnClientIPsecParameters` | `./common.json/definitions/VpnClientIPsecParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters'].post.responses.200.schema.$ref` | `#/definitions/VpnClientIPsecParameters` | `./common.json/definitions/VpnClientIPsecParameters` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.parameters[1].schema.$ref` | `#/definitions/VpnPacketCaptureStartParameters` | `./common.json/definitions/VpnPacketCaptureStartParameters` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture'].post.parameters[1].schema.$ref` | `#/definitions/VpnPacketCaptureStopParameters` | `./common.json/definitions/VpnPacketCaptureStopParameters` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.parameters[1].schema.$ref` | `#/definitions/ExpressRouteFailoverStopApiParameters` | `./common.json/definitions/ExpressRouteFailoverStopApiParameters` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |

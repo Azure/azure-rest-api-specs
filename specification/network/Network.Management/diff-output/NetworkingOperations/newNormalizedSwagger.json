@@ -11,10 +11,18 @@
   "consumes": [
     "application/json"
   ],
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
   "paths": {
     "/providers/microsoft.Network/operations": {
       "get": {
         "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -41,6 +49,128 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "Availability": {
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "retention": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "internalName": {
+          "type": "string"
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayDescription": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean"
+        },
+        "fillGapWithZero": {
+          "type": "boolean"
+        },
+        "metricFilterPattern": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "isInternal": {
+          "type": "boolean"
+        },
+        "sourceMdmAccount": {
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "type": "string"
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "./common.json/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "./common.json/definitions/OperationPropertiesFormatServiceSpecification"
+        }
+      }
+    }
+  },
   "parameters": {}
 }

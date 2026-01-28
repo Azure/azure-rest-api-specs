@@ -203,11 +203,26 @@ Change Type: deleted
 
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualWans'].get.tags__added` | added | `["VirtualWANS"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans'].get.tags__added` | added | `["VirtualWANS"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].delete.tags__added` | added | `["VirtualWANS"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].get.tags__added` | added | `["VirtualWANS"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].put.tags__added` | added | `["VirtualWANS"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile'].post.tags__added` | added | `["VirtualWANS"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders'].get.tags__added` | added | `["VirtualWANS"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration'].post.tags__added` | added | `["VirtualWANS"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations'].post.tags__added` | added | `["VirtualWANS"]` |
+| `tags__added` | added | `[{"name":"VirtualWANS"}]` |
+
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteGateways_ListBySubscription","parameters":[],"responses":{"200":{...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteGateways_ListBySubscription","tags":["ExpressRouteGateways"],"par...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/p2svpnGateways`
 
@@ -243,25 +258,25 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteGateways_ListByResourceGroup","parameters":[],"responses":{"200":...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteGateways_ListByResourceGroup","tags":["ExpressRouteGateways"],"pa...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteGateways_Get","parameters":[{"name":"expressRouteGatewayName","in...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteGateways_Get","tags":["ExpressRouteGateways"],"parameters":[{"nam...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteConnections_List","parameters":[{"name":"expressRouteGatewayName"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteConnections_List","tags":["ExpressRouteConnections"],"parameters"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteConnections_Get","parameters":[{"name":"expressRouteGatewayName",...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteConnections_Get","tags":["ExpressRouteConnections"],"parameters":...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections`
 
@@ -291,31 +306,31 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{p2sVpnGatewayName}/disconnectP2sVpnConnections__deleted']` | deleted | `{"post":{"operationId":"P2sVpnGateways_DisconnectP2sVpnConnections","parameters":[{"name":"p2sVpnGat...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{p2sVpnGatewayName}/disconnectP2sVpnConnections__deleted']` | deleted | `{"post":{"operationId":"P2sVpnGateways_DisconnectP2sVpnConnections","tags":["P2SVpnGateways"],"param...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/generatevpnprofile`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/generatevpnprofile__deleted']` | deleted | `{"post":{"operationId":"P2sVpnGateways_GenerateVpnProfile","parameters":[{"name":"gatewayName","in":...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/generatevpnprofile__deleted']` | deleted | `{"post":{"operationId":"P2sVpnGateways_GenerateVpnProfile","tags":["P2SVpnGateways"],"parameters":[{...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealth`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealth__deleted']` | deleted | `{"post":{"operationId":"P2sVpnGateways_GetP2sVpnConnectionHealth","parameters":[{"name":"gatewayName...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealth__deleted']` | deleted | `{"post":{"operationId":"P2sVpnGateways_GetP2sVpnConnectionHealth","tags":["P2SVpnGateways"],"paramet...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealthDetailed`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealthDetailed__deleted']` | deleted | `{"post":{"operationId":"P2sVpnGateways_GetP2sVpnConnectionHealthDetailed","parameters":[{"name":"gat...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealthDetailed__deleted']` | deleted | `{"post":{"operationId":"P2sVpnGateways_GetP2sVpnConnectionHealthDetailed","tags":["P2SVpnGateways"],...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/reset`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/reset__deleted']` | deleted | `{"post":{"operationId":"P2SVpnGateways_Reset","parameters":[{"name":"gatewayName","in":"path","requi...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/reset__deleted']` | deleted | `{"post":{"operationId":"P2SVpnGateways_Reset","tags":["P2SVpnGateways"],"parameters":[{"name":"gatew...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs`
 
@@ -471,19 +486,19 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/reset__deleted']` | deleted | `{"post":{"operationId":"VpnGateways_Reset","parameters":[{"name":"gatewayName","in":"path","required...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/reset__deleted']` | deleted | `{"post":{"operationId":"VpnGateways_Reset","tags":["VpnGateways"],"parameters":[{"name":"gatewayName...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture__deleted']` | deleted | `{"post":{"operationId":"VpnGateways_StartPacketCapture","parameters":[{"name":"gatewayName","in":"pa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture__deleted']` | deleted | `{"post":{"operationId":"VpnGateways_StartPacketCapture","tags":["VpnGateways"],"parameters":[{"name"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture__deleted']` | deleted | `{"post":{"operationId":"VpnGateways_StopPacketCapture","parameters":[{"name":"gatewayName","in":"pat...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture__deleted']` | deleted | `{"post":{"operationId":"VpnGateways_StopPacketCapture","tags":["VpnGateways"],"parameters":[{"name":...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections`
 
@@ -531,7 +546,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection__deleted']` | deleted | `{"post":{"operationId":"VpnLinkConnections_ResetConnection","parameters":[{"name":"gatewayName","in"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection__deleted']` | deleted | `{"post":{"operationId":"VpnLinkConnections_ResetConnection","tags":["vpnLinkConnections"],"parameter...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys`
 
@@ -579,7 +594,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets__deleted']` | deleted | `{"post":{"operationId":"VpnServerConfigurations_ListRadiusSecrets","parameters":[{"name":"vpnServerC...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets__deleted']` | deleted | `{"post":{"operationId":"VpnServerConfigurations_ListRadiusSecrets","tags":["VpnServerConfigurations"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites`
 
@@ -621,30 +636,6 @@ Change Type: deleted
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/VirtualWAN` |
 
-### Changes for `AadAuthenticationParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AadAuthenticationParameters__deleted` | deleted | `{"type":"object","properties":{"aadTenant":{"type":"string"},"aadAudience":{"type":"string"},"aadIss...` |
-
-### Changes for `Action`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Action__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["Unknown","Remove","Add","Replace","D...` |
-
-### Changes for `BgpConnection`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BgpConnection__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/BgpConnectionProperties","x-ms-cl...` |
-
-### Changes for `BgpConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BgpConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"peerAsn":{"type":"integer","format":"int64","minimum":0,"maximum":42...` |
-
 ### Changes for `ConnectionSharedKeyResult`
 
 | Path | Change Type | Value |
@@ -656,150 +647,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ConnectionSharedKeyResultList__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `Criterion`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Criterion__deleted` | deleted | `{"type":"object","properties":{"routePrefix":{"type":"array","items":{"type":"string"}},"community":...` |
-
-### Changes for `DeviceProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DeviceProperties__deleted` | deleted | `{"type":"object","properties":{"deviceVendor":{"type":"string"},"deviceModel":{"type":"string"},"lin...` |
-
-### Changes for `EffectiveRouteMapRoute`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EffectiveRouteMapRoute__deleted` | deleted | `{"type":"object","properties":{"prefix":{"type":"string"},"bgpCommunities":{"type":"string"},"asPath...` |
-
-### Changes for `EffectiveRouteMapRouteList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EffectiveRouteMapRouteList__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/EffectiveRoute...` |
-
-### Changes for `EffectiveRoutesParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EffectiveRoutesParameters__deleted` | deleted | `{"type":"object","properties":{"resourceId":{"type":"string"},"virtualWanResourceType":{"type":"stri...` |
-
-### Changes for `ExpressRouteCircuitPeeringId`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitPeeringId__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"}}}` |
-
-### Changes for `ExpressRouteConnection`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteConnection__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ExpressRouteConnectionProperties"...` |
-
-### Changes for `ExpressRouteConnectionId`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteConnectionId__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","readOnly":true}}}` |
-
-### Changes for `ExpressRouteConnectionList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteConnectionList__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/ExpressRouteCo...` |
-
-### Changes for `ExpressRouteConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"$ref":"./network.json#/definitions/Provisioning...` |
-
-### Changes for `ExpressRouteGateway`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteGateway__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ExpressRouteGatewayProperties","x...` |
-
-### Changes for `ExpressRouteGatewayList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteGatewayList__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/ExpressRouteGa...` |
-
-### Changes for `ExpressRouteGatewayProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteGatewayProperties__deleted` | deleted | `{"type":"object","properties":{"autoScaleConfiguration":{"type":"object","properties":{"bounds":{"de...` |
-
-### Changes for `GetInboundRoutesParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GetInboundRoutesParameters__deleted` | deleted | `{"type":"object","properties":{"resourceUri":{"type":"string"},"connectionType":{"type":"string"}}}` |
-
-### Changes for `GetOutboundRoutesParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GetOutboundRoutesParameters__deleted` | deleted | `{"type":"object","properties":{"resourceUri":{"type":"string"},"connectionType":{"type":"string"}}}` |
-
-### Changes for `GetVpnSitesConfigurationRequest`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GetVpnSitesConfigurationRequest__deleted` | deleted | `{"type":"object","properties":{"vpnSites":{"type":"array","items":{"type":"string"}},"outputBlobSasU...` |
-
-### Changes for `HubIPConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubIPConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"privateIPAddress":{"type":"string"},"privateIPAllocationMethod":{"$r...` |
-
-### Changes for `HubIpConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubIpConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/HubIPConfigurationPropertiesForma...` |
-
-### Changes for `HubRoute`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubRoute__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"destinationType":{"type":"string"},"destina...` |
-
-### Changes for `HubRouteTable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubRouteTable__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/HubRouteTableProperties","x-ms-cl...` |
-
-### Changes for `HubRouteTableProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubRouteTableProperties__deleted` | deleted | `{"type":"object","properties":{"routes":{"type":"array","items":{"$ref":"#/definitions/HubRoute"}},"...` |
-
-### Changes for `HubVirtualNetworkConnection`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubVirtualNetworkConnection__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/HubVirtualNetworkConnectionProper...` |
-
-### Changes for `HubVirtualNetworkConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HubVirtualNetworkConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"remoteVirtualNetwork":{"$ref":"./network.json#/definitions/SubResour...` |
-
-### Changes for `ListHubRouteTablesResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListHubRouteTablesResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `ListHubVirtualNetworkConnectionsResult`
 
@@ -813,24 +660,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ListP2SVpnGatewaysResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `ListRouteMapsResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListRouteMapsResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ListRoutingIntentResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListRoutingIntentResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ListVirtualHubBgpConnectionResults`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVirtualHubBgpConnectionResults__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
 ### Changes for `ListVirtualHubIpConfigurationResults`
 
 | Path | Change Type | Value |
@@ -842,36 +671,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ListVirtualHubRouteTableV2sResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ListVirtualHubsResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVirtualHubsResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ListVirtualWANsResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVirtualWANsResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ListVpnConnectionsResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVpnConnectionsResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ListVpnGatewayNatRulesResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVpnGatewayNatRulesResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ListVpnGatewaysResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVpnGatewaysResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `ListVpnServerConfigurationPolicyGroupsResult`
 
@@ -891,47 +690,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ListVpnSiteLinkConnectionsResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `ListVpnSiteLinksResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVpnSiteLinksResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ListVpnSitesResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ListVpnSitesResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `NetworkVirtualApplianceConnection`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkVirtualApplianceConnection__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/NetworkVirtualApplianceConnection...` |
-
 ### Changes for `NetworkVirtualApplianceConnectionList`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.NetworkVirtualApplianceConnectionList__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `NetworkVirtualApplianceConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkVirtualApplianceConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"provisioningState":{"$ref":"./network.json#...` |
-
-### Changes for `O365BreakOutCategoryPolicies`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.O365BreakOutCategoryPolicies__deleted` | deleted | `{"type":"object","properties":{"allow":{"type":"boolean","readOnly":false},"optimize":{"type":"boole...` |
-
-### Changes for `O365PolicyProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.O365PolicyProperties__deleted` | deleted | `{"type":"object","properties":{"breakOutCategories":{"$ref":"#/definitions/O365BreakOutCategoryPolic...` |
 
 ### Changes for `P2SConnectionConfiguration`
 
@@ -939,227 +702,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.P2SConnectionConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/P2SConnectionConfigurationPropert...` |
 
-### Changes for `P2SConnectionConfigurationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.P2SConnectionConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"vpnClientAddressPool":{"$ref":"./virtualNetwork.json#/definitions/Ad...` |
-
-### Changes for `P2SVpnConnectionHealth`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.P2SVpnConnectionHealth__deleted` | deleted | `{"type":"object","properties":{"sasUrl":{"type":"string"}}}` |
-
-### Changes for `P2SVpnConnectionHealthRequest`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.P2SVpnConnectionHealthRequest__deleted` | deleted | `{"type":"object","properties":{"vpnUserNamesFilter":{"type":"array","items":{"type":"string"}},"outp...` |
-
-### Changes for `P2SVpnConnectionRequest`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.P2SVpnConnectionRequest__deleted` | deleted | `{"type":"object","properties":{"vpnConnectionIds":{"type":"array","items":{"type":"string"}}}}` |
-
-### Changes for `P2SVpnGateway`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.P2SVpnGateway__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/P2SVpnGatewayProperties","x-ms-cl...` |
-
-### Changes for `P2SVpnGatewayProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.P2SVpnGatewayProperties__deleted` | deleted | `{"type":"object","properties":{"virtualHub":{"$ref":"./network.json#/definitions/SubResource"},"p2SC...` |
-
-### Changes for `P2SVpnProfileParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.P2SVpnProfileParameters__deleted` | deleted | `{"type":"object","properties":{"authenticationMethod":{"$ref":"./network.json#/definitions/Authentic...` |
-
-### Changes for `Parameter`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Parameter__deleted` | deleted | `{"type":"object","properties":{"routePrefix":{"type":"array","items":{"type":"string"}},"community":...` |
-
-### Changes for `PeerRoute`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PeerRoute__deleted` | deleted | `{"type":"object","properties":{"localAddress":{"type":"string","readOnly":true},"network":{"type":"s...` |
-
 ### Changes for `PeerRouteList`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.PeerRouteList__deleted` | deleted | `{"type":"object","additionalProperties":{"description":"List of peer routes.","items":{"$ref":"#/def...` |
-
-### Changes for `PropagatedRouteTable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PropagatedRouteTable__deleted` | deleted | `{"type":"object","properties":{"labels":{"type":"array","items":{"type":"string"}},"ids":{"type":"ar...` |
-
-### Changes for `RouteMap`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RouteMap__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteMapProperties","x-ms-client-...` |
-
-### Changes for `RouteMapProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RouteMapProperties__deleted` | deleted | `{"type":"object","properties":{"associatedInboundConnections":{"type":"array","items":{"type":"strin...` |
-
-### Changes for `RouteMapRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RouteMapRule__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"matchCriteria":{"type":"array","items":{"$r...` |
-
-### Changes for `RoutingConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RoutingConfiguration__deleted` | deleted | `{"type":"object","properties":{"associatedRouteTable":{"$ref":"./network.json#/definitions/SubResour...` |
-
-### Changes for `RoutingIntent`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RoutingIntent__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RoutingIntentProperties","x-ms-cl...` |
-
-### Changes for `RoutingIntentProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RoutingIntentProperties__deleted` | deleted | `{"type":"object","properties":{"routingPolicies":{"type":"array","items":{"$ref":"#/definitions/Rout...` |
-
-### Changes for `RoutingPolicy`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RoutingPolicy__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"destinations":{"type":"array","items":{"typ...` |
-
-### Changes for `SharedKeyProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SharedKeyProperties__deleted` | deleted | `{"type":"object","properties":{"sharedKey":{"type":"string","x-ms-secret":true},"sharedKeyLength":{"...` |
-
-### Changes for `StaticRoute`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.StaticRoute__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"addressPrefixes":{"type":"array","items":{"...` |
-
-### Changes for `StaticRoutesConfig`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.StaticRoutesConfig__deleted` | deleted | `{"type":"object","properties":{"propagateStaticRoutes":{"type":"boolean","readOnly":true},"vnetLocal...` |
-
-### Changes for `VirtualHub`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHub__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualHubProperties","x-ms-clien...` |
-
-### Changes for `VirtualHubEffectiveRoute`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubEffectiveRoute__deleted` | deleted | `{"type":"object","properties":{"addressPrefixes":{"type":"array","items":{"type":"string"}},"nextHop...` |
-
-### Changes for `VirtualHubEffectiveRouteList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubEffectiveRouteList__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/VirtualHubEffe...` |
-
-### Changes for `VirtualHubId`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubId__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"}}}` |
-
-### Changes for `VirtualHubProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubProperties__deleted` | deleted | `{"type":"object","properties":{"virtualWan":{"$ref":"./network.json#/definitions/SubResource"},"vpnG...` |
-
-### Changes for `VirtualHubRoute`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubRoute__deleted` | deleted | `{"type":"object","properties":{"addressPrefixes":{"type":"array","items":{"type":"string"}},"nextHop...` |
-
-### Changes for `VirtualHubRouteTable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubRouteTable__deleted` | deleted | `{"type":"object","properties":{"routes":{"type":"array","items":{"$ref":"#/definitions/VirtualHubRou...` |
-
-### Changes for `VirtualHubRouteTableV2`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubRouteTableV2__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualHubRouteTableV2Properties"...` |
-
-### Changes for `VirtualHubRouteTableV2Properties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubRouteTableV2Properties__deleted` | deleted | `{"type":"object","properties":{"routes":{"type":"array","items":{"$ref":"#/definitions/VirtualHubRou...` |
-
-### Changes for `VirtualHubRouteV2`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualHubRouteV2__deleted` | deleted | `{"type":"object","properties":{"destinationType":{"type":"string"},"destinations":{"type":"array","i...` |
-
-### Changes for `VirtualRouterAutoScaleConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualRouterAutoScaleConfiguration__deleted` | deleted | `{"type":"object","properties":{"minCapacity":{"type":"integer","format":"int32","minimum":0}}}` |
-
-### Changes for `VirtualWanProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualWanProperties__deleted` | deleted | `{"type":"object","properties":{"disableVpnEncryption":{"type":"boolean"},"virtualHubs":{"type":"arra...` |
-
-### Changes for `VirtualWanSecurityProvider`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualWanSecurityProvider__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"url":{"type":"string"},"type":{"type":"stri...` |
-
-### Changes for `VirtualWanSecurityProviders`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualWanSecurityProviders__deleted` | deleted | `{"type":"object","properties":{"supportedProviders":{"type":"array","items":{"$ref":"#/definitions/V...` |
-
-### Changes for `VirtualWanVpnProfileParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualWanVpnProfileParameters__deleted` | deleted | `{"type":"object","properties":{"vpnServerConfigurationResourceId":{"type":"string"},"authenticationM...` |
-
-### Changes for `VnetRoute`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VnetRoute__deleted` | deleted | `{"type":"object","properties":{"staticRoutesConfig":{"$ref":"#/definitions/StaticRoutesConfig"},"sta...` |
 
 ### Changes for `VpnClientConnectionHealth`
 
@@ -1167,161 +714,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.VpnClientConnectionHealth__deleted` | deleted | `{"type":"object","properties":{"totalIngressBytesTransferred":{"type":"integer","format":"int64","re...` |
 
-### Changes for `VpnConnection`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnConnection__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VpnConnectionProperties","x-ms-cl...` |
-
-### Changes for `VpnConnectionPacketCaptureStartParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnConnectionPacketCaptureStartParameters__deleted` | deleted | `{"type":"object","properties":{"filterData":{"type":"string"},"linkConnectionNames":{"type":"array",...` |
-
-### Changes for `VpnConnectionPacketCaptureStopParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnConnectionPacketCaptureStopParameters__deleted` | deleted | `{"type":"object","properties":{"sasUrl":{"type":"string"},"linkConnectionNames":{"type":"array","ite...` |
-
-### Changes for `VpnConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"remoteVpnSite":{"$ref":"./network.json#/definitions/SubResource"},"r...` |
-
-### Changes for `VpnGateway`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnGateway__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VpnGatewayProperties","x-ms-clien...` |
-
-### Changes for `VpnGatewayIpConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnGatewayIpConfiguration__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"},"publicIpAddress":{"type":"string"},"privateIp...` |
-
-### Changes for `VpnGatewayNatRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnGatewayNatRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VpnGatewayNatRuleProperties","x-m...` |
-
-### Changes for `VpnGatewayNatRuleProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnGatewayNatRuleProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"$ref":"./network.json#/definitions/Provisioning...` |
-
-### Changes for `VpnGatewayPacketCaptureStartParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnGatewayPacketCaptureStartParameters__deleted` | deleted | `{"type":"object","properties":{"filterData":{"type":"string"}}}` |
-
-### Changes for `VpnGatewayPacketCaptureStopParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnGatewayPacketCaptureStopParameters__deleted` | deleted | `{"type":"object","properties":{"sasUrl":{"type":"string"}}}` |
-
-### Changes for `VpnGatewayProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnGatewayProperties__deleted` | deleted | `{"type":"object","properties":{"virtualHub":{"$ref":"./network.json#/definitions/SubResource"},"conn...` |
-
-### Changes for `VpnLinkBgpSettings`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnLinkBgpSettings__deleted` | deleted | `{"type":"object","properties":{"asn":{"type":"integer","format":"int64"},"bgpPeeringAddress":{"type"...` |
-
-### Changes for `VpnLinkProviderProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnLinkProviderProperties__deleted` | deleted | `{"type":"object","properties":{"linkProviderName":{"type":"string"},"linkSpeedInMbps":{"type":"integ...` |
-
-### Changes for `VpnNatRuleMapping`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnNatRuleMapping__deleted` | deleted | `{"type":"object","properties":{"addressSpace":{"type":"string"},"portRange":{"type":"string"}}}` |
-
-### Changes for `VpnProfileResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnProfileResponse__deleted` | deleted | `{"type":"object","properties":{"profileUrl":{"type":"string"}}}` |
-
-### Changes for `VpnServerConfigRadiusClientRootCertificate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfigRadiusClientRootCertificate__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"thumbprint":{"type":"string"}}}` |
-
-### Changes for `VpnServerConfigRadiusServerRootCertificate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfigRadiusServerRootCertificate__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"publicCertData":{"type":"string"}}}` |
-
-### Changes for `VpnServerConfigVpnClientRevokedCertificate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfigVpnClientRevokedCertificate__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"thumbprint":{"type":"string"}}}` |
-
-### Changes for `VpnServerConfigVpnClientRootCertificate`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfigVpnClientRootCertificate__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"publicCertData":{"type":"string"}}}` |
-
-### Changes for `VpnServerConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VpnServerConfigurationProperties"...` |
-
 ### Changes for `VpnServerConfigurationPolicyGroup`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VpnServerConfigurationPolicyGroup__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VpnServerConfigurationPolicyGroup...` |
-
-### Changes for `VpnServerConfigurationPolicyGroupMember`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfigurationPolicyGroupMember__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"attributeType":{"type":"string","enum":["Ce...` |
-
-### Changes for `VpnServerConfigurationPolicyGroupProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfigurationPolicyGroupProperties__deleted` | deleted | `{"type":"object","properties":{"isDefault":{"type":"boolean"},"priority":{"type":"integer","format":...` |
-
-### Changes for `VpnServerConfigurationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"vpnProtocols":{"type":"array","items":{"typ...` |
-
-### Changes for `VpnServerConfigurationsResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnServerConfigurationsResponse__deleted` | deleted | `{"type":"object","properties":{"vpnServerConfigurationResourceIds":{"type":"array","items":{"type":"...` |
-
-### Changes for `VpnSite`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnSite__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VpnSiteProperties","x-ms-client-f...` |
 
 ### Changes for `VpnSiteId`
 
@@ -1341,54 +738,292 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.VpnSiteLinkConnection__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VpnSiteLinkConnectionProperties",...` |
 
-### Changes for `VpnSiteLinkConnectionProperties`
+### Changes for `Record<PeerRoute[]>`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.VpnSiteLinkConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"vpnSiteLink":{"$ref":"./network.json#/definitions/SubResource"},"rou...` |
+| `definitions.Record<PeerRoute[]>__added` | added | `{"type":"object","additionalProperties":{"items":{"$ref":"#/definitions/PeerRoute"},"type":"array"}}` |
 
-### Changes for `VpnSiteLinkProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VpnSiteLinkProperties__deleted` | deleted | `{"type":"object","properties":{"linkProperties":{"$ref":"#/definitions/VpnLinkProviderProperties"},"...` |
-
-### Changes for `VpnSiteProperties`
+### Changes for `type`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.VpnSiteProperties__deleted` | deleted | `{"type":"object","properties":{"virtualWan":{"$ref":"./network.json#/definitions/SubResource"},"devi...` |
+| `definitions.Action.properties.type.type__deleted` | deleted | `string` |
+| `definitions.BgpConnection.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.BgpConnectionProperties.properties.connectionState.type__deleted` | deleted | `string` |
+| `definitions.Criterion.properties.matchCondition.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteGatewayProperties.properties.autoScaleConfiguration.type__deleted` | deleted | `object` |
+| `definitions.HubIpConfiguration.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.HubRouteTable.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.RouteMap.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.RouteMapRule.properties.nextStepIfMatched.type__deleted` | deleted | `string` |
+| `definitions.RoutingIntent.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.StaticRoutesConfig.properties.vnetLocalRouteOverrideCriteria.type__deleted` | deleted | `string` |
+| `definitions.VirtualHubProperties.properties.hubRoutingPreference.type__deleted` | deleted | `string` |
+| `definitions.VirtualHubProperties.properties.preferredRoutingGateway.type__deleted` | deleted | `string` |
+| `definitions.VirtualHubProperties.properties.routingState.type__deleted` | deleted | `string` |
+| `definitions.VirtualWanProperties.properties.office365LocalBreakoutCategory.type__deleted` | deleted | `string` |
+| `definitions.VirtualWanSecurityProvider.properties.type.type__deleted` | deleted | `string` |
+| `definitions.VpnConnectionProperties.properties.connectionStatus.type__deleted` | deleted | `string` |
+| `definitions.VpnGatewayNatRule.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.VpnGatewayNatRuleProperties.properties.mode.type__deleted` | deleted | `string` |
+| `definitions.VpnGatewayNatRuleProperties.properties.type.type__deleted` | deleted | `string` |
+| `definitions.VpnServerConfigurationPolicyGroupMember.properties.attributeType.type__deleted` | deleted | `string` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnAuthenticationTypes.items.type__deleted` | deleted | `string` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnProtocols.items.type__deleted` | deleted | `string` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.connectionStatus.type__deleted` | deleted | `string` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.vpnLinkConnectionMode.type__deleted` | deleted | `string` |
+
+### Changes for `enum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Action.properties.type.enum__deleted` | deleted | `["Unknown","Remove","Add","Replace","Drop"]` |
+| `definitions.BgpConnectionProperties.properties.connectionState.enum__deleted` | deleted | `["Unknown","Connecting","Connected","NotConnected"]` |
+| `definitions.Criterion.properties.matchCondition.enum__deleted` | deleted | `["Unknown","Contains","Equals","NotContains","NotEquals"]` |
+| `definitions.RouteMapRule.properties.nextStepIfMatched.enum__deleted` | deleted | `["Unknown","Continue","Terminate"]` |
+| `definitions.StaticRoutesConfig.properties.vnetLocalRouteOverrideCriteria.enum__deleted` | deleted | `["Contains","Equal"]` |
+| `definitions.VirtualHubProperties.properties.hubRoutingPreference.enum__deleted` | deleted | `["ExpressRoute","VpnGateway","ASPath"]` |
+| `definitions.VirtualHubProperties.properties.preferredRoutingGateway.enum__deleted` | deleted | `["ExpressRoute","VpnGateway","None"]` |
+| `definitions.VirtualHubProperties.properties.routingState.enum__deleted` | deleted | `["None","Provisioned","Provisioning","Failed"]` |
+| `definitions.VirtualWanProperties.properties.office365LocalBreakoutCategory.enum__deleted` | deleted | `["Optimize","OptimizeAndAllow","All","None"]` |
+| `definitions.VirtualWanSecurityProvider.properties.type.enum__deleted` | deleted | `["External","Native"]` |
+| `definitions.VpnConnectionProperties.properties.connectionStatus.enum__deleted` | deleted | `["Unknown","Connecting","Connected","NotConnected"]` |
+| `definitions.VpnGatewayNatRuleProperties.properties.mode.enum__deleted` | deleted | `["EgressSnat","IngressSnat"]` |
+| `definitions.VpnGatewayNatRuleProperties.properties.type.enum__deleted` | deleted | `["Static","Dynamic"]` |
+| `definitions.VpnServerConfigurationPolicyGroupMember.properties.attributeType.enum__deleted` | deleted | `["CertificateGroupId","AADGroupId","RadiusAzureGroupId"]` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnAuthenticationTypes.items.enum__deleted` | deleted | `["Certificate","Radius","AAD"]` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnProtocols.items.enum__deleted` | deleted | `["IkeV2","OpenVPN"]` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.connectionStatus.enum__deleted` | deleted | `["Unknown","Connecting","Connected","NotConnected"]` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.vpnLinkConnectionMode.enum__deleted` | deleted | `["Default","ResponderOnly","InitiatorOnly"]` |
+
+### Changes for `x-ms-enum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Action.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"RouteMapActionType","modelAsString":true}` |
+| `definitions.BgpConnectionProperties.properties.connectionState['x-ms-enum__deleted']` | deleted | `{"name":"HubBgpConnectionStatus","modelAsString":true}` |
+| `definitions.Criterion.properties.matchCondition['x-ms-enum__deleted']` | deleted | `{"name":"RouteMapMatchCondition","modelAsString":true}` |
+| `definitions.RouteMapRule.properties.nextStepIfMatched['x-ms-enum__deleted']` | deleted | `{"name":"NextStep","modelAsString":true}` |
+| `definitions.StaticRoutesConfig.properties.vnetLocalRouteOverrideCriteria['x-ms-enum__deleted']` | deleted | `{"name":"VnetLocalRouteOverrideCriteria","modelAsString":true}` |
+| `definitions.VirtualHubProperties.properties.hubRoutingPreference['x-ms-enum__deleted']` | deleted | `{"name":"HubRoutingPreference","modelAsString":true}` |
+| `definitions.VirtualHubProperties.properties.preferredRoutingGateway['x-ms-enum__deleted']` | deleted | `{"name":"PreferredRoutingGateway","modelAsString":true}` |
+| `definitions.VirtualHubProperties.properties.routingState['x-ms-enum__deleted']` | deleted | `{"name":"RoutingState","modelAsString":true}` |
+| `definitions.VirtualWanProperties.properties.office365LocalBreakoutCategory['x-ms-enum__deleted']` | deleted | `{"name":"OfficeTrafficCategory","modelAsString":true}` |
+| `definitions.VirtualWanSecurityProvider.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"VirtualWanSecurityProviderType","modelAsString":true}` |
+| `definitions.VpnConnectionProperties.properties.connectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"VpnConnectionStatus","modelAsString":true}` |
+| `definitions.VpnGatewayNatRuleProperties.properties.mode['x-ms-enum__deleted']` | deleted | `{"name":"VpnNatRuleMode","modelAsString":true}` |
+| `definitions.VpnGatewayNatRuleProperties.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"VpnNatRuleType","modelAsString":true}` |
+| `definitions.VpnServerConfigurationPolicyGroupMember.properties.attributeType['x-ms-enum__deleted']` | deleted | `{"name":"VpnPolicyMemberAttributeType","modelAsString":true}` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnAuthenticationTypes.items['x-ms-enum__deleted']` | deleted | `{"name":"VpnAuthenticationType","modelAsString":true}` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnProtocols.items['x-ms-enum__deleted']` | deleted | `{"name":"VpnGatewayTunnelingProtocol","modelAsString":true}` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.connectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"VpnConnectionStatus","modelAsString":true}` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.vpnLinkConnectionMode['x-ms-enum__deleted']` | deleted | `{"name":"VpnLinkConnectionMode","modelAsString":true}` |
+
+### Changes for `$ref`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.Action.properties.type.$ref__added` | added | `./common.json#/definitions/RouteMapActionType` |
+| `definitions.BgpConnectionProperties.properties.connectionState.$ref__added` | added | `./common.json#/definitions/HubBgpConnectionStatus` |
+| `definitions.Criterion.properties.matchCondition.$ref__added` | added | `./common.json#/definitions/RouteMapMatchCondition` |
+| `definitions.ExpressRouteGatewayProperties.properties.autoScaleConfiguration.$ref__added` | added | `./common.json#/definitions/ExpressRouteGatewayPropertiesAutoScaleConfiguration` |
+| `definitions.RouteMapRule.properties.nextStepIfMatched.$ref__added` | added | `./common.json#/definitions/NextStep` |
+| `definitions.StaticRoutesConfig.properties.vnetLocalRouteOverrideCriteria.$ref__added` | added | `./common.json#/definitions/VnetLocalRouteOverrideCriteria` |
+| `definitions.VirtualHubProperties.properties.hubRoutingPreference.$ref__added` | added | `./common.json#/definitions/HubRoutingPreference` |
+| `definitions.VirtualHubProperties.properties.preferredRoutingGateway.$ref__added` | added | `./common.json#/definitions/PreferredRoutingGateway` |
+| `definitions.VirtualHubProperties.properties.routingState.$ref__added` | added | `./common.json#/definitions/RoutingState` |
+| `definitions.VirtualWanProperties.properties.office365LocalBreakoutCategory.$ref__added` | added | `./common.json#/definitions/OfficeTrafficCategory` |
+| `definitions.VirtualWanSecurityProvider.properties.type.$ref__added` | added | `./common.json#/definitions/VirtualWanSecurityProviderType` |
+| `definitions.VpnConnectionProperties.properties.connectionStatus.$ref__added` | added | `./common.json#/definitions/VpnConnectionStatus` |
+| `definitions.VpnGatewayNatRuleProperties.properties.mode.$ref__added` | added | `./common.json#/definitions/VpnNatRuleMode` |
+| `definitions.VpnGatewayNatRuleProperties.properties.type.$ref__added` | added | `./common.json#/definitions/VpnNatRuleType` |
+| `definitions.VpnServerConfigurationPolicyGroupMember.properties.attributeType.$ref__added` | added | `./common.json#/definitions/VpnPolicyMemberAttributeType` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnAuthenticationTypes.items.$ref__added` | added | `./common.json#/definitions/VpnAuthenticationType` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnProtocols.items.$ref__added` | added | `./common.json#/definitions/VpnGatewayTunnelingProtocol` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.connectionStatus.$ref__added` | added | `./common.json#/definitions/VpnConnectionStatus` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.vpnLinkConnectionMode.$ref__added` | added | `./common.json#/definitions/VpnLinkConnectionMode` |
+
+### Changes for `name`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpConnection.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.HubIpConfiguration.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.HubRouteTable.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.RouteMap.properties.name__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.RoutingIntent.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.VpnGatewayNatRule.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.VpnServerConfiguration.properties.name__deleted` | deleted | `{"type":"string"}` |
+
+### Changes for `readOnly`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpConnectionProperties.properties.hubVirtualNetworkConnection.readOnly__deleted` | deleted | `false` |
+| `definitions.BgpConnectionProperties.properties.peerAsn.readOnly__deleted` | deleted | `false` |
+| `definitions.BgpConnectionProperties.properties.peerIp.readOnly__deleted` | deleted | `false` |
+| `definitions.NetworkVirtualApplianceConnectionProperties.properties.asn.readOnly__deleted` | deleted | `false` |
+| `definitions.NetworkVirtualApplianceConnectionProperties.properties.tunnelIdentifier.readOnly__deleted` | deleted | `false` |
+| `definitions.O365BreakOutCategoryPolicies.properties.allow.readOnly__deleted` | deleted | `false` |
+| `definitions.O365BreakOutCategoryPolicies.properties.default.readOnly__deleted` | deleted | `false` |
+| `definitions.O365BreakOutCategoryPolicies.properties.optimize.readOnly__deleted` | deleted | `false` |
+| `definitions.O365PolicyProperties.properties.breakOutCategories.readOnly__deleted` | deleted | `false` |
+| `definitions.P2SConnectionConfigurationProperties.properties.configurationPolicyGroupAssociations.readOnly__deleted` | deleted | `false` |
+| `definitions.RoutingIntentProperties.properties.routingPolicies.readOnly__deleted` | deleted | `false` |
+| `definitions.VirtualHubProperties.properties.allowBranchToBranchTraffic.readOnly__deleted` | deleted | `false` |
+| `definitions.VirtualHubProperties.properties.virtualRouterAsn.readOnly__deleted` | deleted | `false` |
+| `definitions.VirtualHubProperties.properties.virtualRouterIps.readOnly__deleted` | deleted | `false` |
+| `definitions.VpnSiteProperties.properties.o365Policy.readOnly__deleted` | deleted | `false` |
+
+### Changes for `format`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ExpressRouteConnectionProperties.properties.routingWeight.format__added` | added | `int32` |
+| `definitions.SharedKeyProperties.properties.sharedKey.format__added` | added | `password` |
+| `definitions.VpnServerConfigurationProperties.properties.radiusServerSecret.format__added` | added | `password` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.sharedKey.format__added` | added | `password` |
+
+### Changes for `properties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ExpressRouteGatewayProperties.properties.autoScaleConfiguration.properties__deleted` | deleted | `{"bounds":{"description":"Minimum and maximum number of scale units to deploy.","properties":{"min":...` |
 
 ### Changes for `required`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ListHubRouteTablesResult.required__added` | added | `["value"]` |
+| `definitions.ListRouteMapsResult.required__added` | added | `["value"]` |
+| `definitions.ListRoutingIntentResult.required__added` | added | `["value"]` |
+| `definitions.ListVirtualHubBgpConnectionResults.required__added` | added | `["value"]` |
+| `definitions.ListVirtualHubsResult.required__added` | added | `["value"]` |
+| `definitions.ListVirtualWANsResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnConnectionsResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnGatewayNatRulesResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnGatewaysResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnSiteLinksResult.required__added` | added | `["value"]` |
+| `definitions.ListVpnSitesResult.required__added` | added | `["value"]` |
+| `definitions.P2SVpnGateway.required__deleted` | deleted | `["location"]` |
+| `definitions.VirtualHub.required__deleted` | deleted | `["location"]` |
 | `definitions.VirtualWAN.required__deleted` | deleted | `["location"]` |
+| `definitions.VpnGateway.required__deleted` | deleted | `["location"]` |
+| `definitions.VpnSite.required__deleted` | deleted | `["location"]` |
+
+### Changes for `id`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteMap.properties.id__deleted` | deleted | `{"type":"string","readOnly":true}` |
 
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `definitions.VirtualWAN.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/ResourceWithRequiredLocation` |
-| `definitions.VirtualWAN.properties.properties.$ref` | `#/definitions/VirtualWanProperties` | `./common.json/definitions/VirtualWanProperties` |
+| `definitions.BgpConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
+| `definitions.BgpConnectionProperties.properties.hubVirtualNetworkConnection.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.BgpConnectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ExpressRouteConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ExpressRouteConnectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.ExpressRouteGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
+| `definitions.ExpressRouteGatewayProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.HubIpConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
+| `definitions.HubIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.$ref` | `./network.json#/definitions/IPAllocationMethod` | `./common.json#/definitions/IPAllocationMethod` |
+| `definitions.HubIPConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.HubIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./publicIpAddress.json#/definitions/PublicIPAddress` | `./virtualNetwork.json#/definitions/PublicIPAddress` |
+| `definitions.HubRouteTable.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
+| `definitions.HubRouteTableProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.HubVirtualNetworkConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.HubVirtualNetworkConnectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.HubVirtualNetworkConnectionProperties.properties.remoteVirtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.ListVpnSiteLinksResult.properties.value.items.$ref` | `#/definitions/VpnSiteLink` | `./common.json#/definitions/VpnSiteLink` |
+| `definitions.NetworkVirtualApplianceConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.NetworkVirtualApplianceConnectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.P2SConnectionConfigurationProperties.properties.configurationPolicyGroupAssociations.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.P2SConnectionConfigurationProperties.properties.previousConfigurationPolicyGroupAssociations.items.$ref` | `#/definitions/VpnServerConfigurationPolicyGroup` | `./common.json#/definitions/VpnServerConfigurationPolicyGroup` |
+| `definitions.P2SConnectionConfigurationProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.P2SVpnGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/ResourceWithRequiredLocation` |
+| `definitions.P2SVpnGatewayProperties.properties.p2SConnectionConfigurations.items.$ref` | `#/definitions/P2SConnectionConfiguration` | `./common.json#/definitions/P2SConnectionConfiguration` |
+| `definitions.P2SVpnGatewayProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.P2SVpnGatewayProperties.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.P2SVpnGatewayProperties.properties.vpnClientConnectionHealth.$ref` | `#/definitions/VpnClientConnectionHealth` | `./networkGateway.json#/definitions/VpnClientConnectionHealth` |
+| `definitions.P2SVpnGatewayProperties.properties.vpnServerConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.P2SVpnProfileParameters.properties.authenticationMethod.$ref` | `./network.json#/definitions/AuthenticationMethod` | `./common.json#/definitions/AuthenticationMethod` |
+| `definitions.PropagatedRouteTable.properties.ids.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.RouteMap.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/ReadOnlySubResourceModel` |
+| `definitions.RouteMapProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.RoutingConfiguration.properties.associatedRouteTable.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.RoutingConfiguration.properties.inboundRouteMap.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.RoutingConfiguration.properties.outboundRouteMap.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.RoutingIntent.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
+| `definitions.RoutingIntentProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.SharedKeyProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VirtualHub.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/ResourceWithRequiredLocation` |
+| `definitions.VirtualHubProperties.properties.azureFirewall.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubProperties.properties.bgpConnections.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubProperties.properties.expressRouteGateway.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubProperties.properties.ipConfigurations.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubProperties.properties.p2SVpnGateway.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VirtualHubProperties.properties.routeMaps.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubProperties.properties.securityPartnerProvider.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubProperties.properties.virtualWan.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubProperties.properties.vpnGateway.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubRouteTableV2.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualHubRouteTableV2Properties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VirtualWAN.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/ResourceWithRequiredLocation` |
+| `definitions.VirtualWanProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VirtualWanProperties.properties.virtualHubs.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualWanProperties.properties.vpnSites.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VirtualWanVpnProfileParameters.properties.authenticationMethod.$ref` | `./network.json#/definitions/AuthenticationMethod` | `./common.json#/definitions/AuthenticationMethod` |
+| `definitions.VnetRoute.properties.bgpConnections.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnConnectionProperties.properties.ipsecPolicies.items.$ref` | `./virtualNetworkGateway.json#/definitions/IpsecPolicy` | `./networkGateway.json#/definitions/IpsecPolicy` |
+| `definitions.VpnConnectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VpnConnectionProperties.properties.remoteVpnSite.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnConnectionProperties.properties.trafficSelectorPolicies.items.$ref` | `./virtualNetworkGateway.json#/definitions/TrafficSelectorPolicy` | `./common.json#/definitions/TrafficSelectorPolicy` |
+| `definitions.VpnConnectionProperties.properties.vpnConnectionProtocolType.$ref` | `./virtualNetworkGateway.json#/definitions/ConnectionProtocol` | `./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol` |
+| `definitions.VpnConnectionProperties.properties.vpnLinkConnections.items.$ref` | `#/definitions/VpnSiteLinkConnection` | `./common.json#/definitions/VpnSiteLinkConnection` |
+| `definitions.VpnGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/ResourceWithRequiredLocation` |
+| `definitions.VpnGatewayNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
+| `definitions.VpnGatewayNatRuleProperties.properties.egressVpnSiteLinkConnections.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnGatewayNatRuleProperties.properties.ingressVpnSiteLinkConnections.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnGatewayNatRuleProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VpnGatewayProperties.properties.bgpSettings.$ref` | `./virtualNetworkGateway.json#/definitions/BgpSettings` | `./networkGateway.json#/definitions/BgpSettings` |
+| `definitions.VpnGatewayProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VpnGatewayProperties.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnServerConfiguration.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/ResourceWithWritableName` |
+| `definitions.VpnServerConfigurationPolicyGroupProperties.properties.p2SConnectionConfigurations.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnServerConfigurationPolicyGroupProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VpnServerConfigurationProperties.properties.configurationPolicyGroups.items.$ref` | `#/definitions/VpnServerConfigurationPolicyGroup` | `./common.json#/definitions/VpnServerConfigurationPolicyGroup` |
+| `definitions.VpnServerConfigurationProperties.properties.radiusServers.items.$ref` | `./virtualNetworkGateway.json#/definitions/RadiusServer` | `./common.json#/definitions/RadiusServer` |
+| `definitions.VpnServerConfigurationProperties.properties.vpnClientIpsecPolicies.items.$ref` | `./virtualNetworkGateway.json#/definitions/IpsecPolicy` | `./networkGateway.json#/definitions/IpsecPolicy` |
+| `definitions.VpnSite.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/ResourceWithRequiredLocation` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.egressNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.ingressNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.ipsecPolicies.items.$ref` | `./virtualNetworkGateway.json#/definitions/IpsecPolicy` | `./networkGateway.json#/definitions/IpsecPolicy` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.vpnConnectionProtocolType.$ref` | `./virtualNetworkGateway.json#/definitions/ConnectionProtocol` | `./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.vpnGatewayCustomBgpAddresses.items.$ref` | `./virtualNetworkGateway.json#/definitions/GatewayCustomBgpIpAddressIpConfiguration` | `./networkGateway.json#/definitions/GatewayCustomBgpIpAddressIpConfiguration` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.vpnSiteLink.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnSiteLinkProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VpnSiteProperties.properties.bgpProperties.$ref` | `./virtualNetworkGateway.json#/definitions/BgpSettings` | `./networkGateway.json#/definitions/BgpSettings` |
+| `definitions.VpnSiteProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.VpnSiteProperties.properties.virtualWan.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.VpnSiteProperties.properties.vpnSiteLinks.items.$ref` | `#/definitions/VpnSiteLink` | `./common.json#/definitions/VpnSiteLink` |
 | `info.description` | `REST API for Azure VirtualWAN As a Service.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `VirtualWANAsAServiceManagementClient` | `WebApplicationFirewallManagement` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualWans'].get.responses.200.schema.$ref` | `#/definitions/ListVirtualWANsResult` | `./common.json/definitions/ListVirtualWANsResult` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualWans'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans'].get.responses.200.schema.$ref` | `#/definitions/ListVirtualWANsResult` | `./common.json/definitions/ListVirtualWANsResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json/definitions/TagsObject` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile'].post.parameters[1].schema.$ref` | `#/definitions/VirtualWanVpnProfileParameters` | `./common.json/definitions/VirtualWanVpnProfileParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile'].post.responses.200.schema.$ref` | `#/definitions/VpnProfileResponse` | `./common.json/definitions/VpnProfileResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders'].get.responses.200.schema.$ref` | `#/definitions/VirtualWanSecurityProviders` | `./common.json/definitions/VirtualWanSecurityProviders` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration'].post.parameters[1].schema.$ref` | `#/definitions/GetVpnSitesConfigurationRequest` | `./common.json/definitions/GetVpnSitesConfigurationRequest` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations'].post.responses.200.schema.$ref` | `#/definitions/VpnServerConfigurationsResponse` | `./common.json/definitions/VpnServerConfigurationsResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualWans'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json#/definitions/TagsObject` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 

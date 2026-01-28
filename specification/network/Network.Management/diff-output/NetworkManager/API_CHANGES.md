@@ -50,6 +50,12 @@ Change Type: deleted
 
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `tags__added` | added | `[{"name":"NetworkManagers"},{"name":"NetworkManagerConnections"},{"name":"ConnectivityConfigurations...` |
+
 ### Changes for `description`
 
 | Path | Change Type | Value |
@@ -60,7 +66,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections__deleted']` | deleted | `{"get":{"operationId":"ManagementGroupNetworkManagerConnections_List","parameters":[{"name":"managem...` |
+| `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections__deleted']` | deleted | `{"get":{"operationId":"ManagementGroupNetworkManagerConnections_List","tags":["NetworkManagerConnect...` |
 
 ### Changes for `/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}`
 
@@ -72,7 +78,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers__deleted']` | deleted | `{"get":{"operationId":"StaticMembers_List","parameters":[{"name":"networkManagerName","in":"path","r...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers__deleted']` | deleted | `{"get":{"operationId":"StaticMembers_List","tags":["StaticMembers"],"parameters":[{"name":"networkMa...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/staticMembers/{staticMemberName}`
 
@@ -84,7 +90,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections__deleted']` | deleted | `{"get":{"operationId":"RoutingRuleCollections_List","parameters":[{"name":"networkManagerName","in":...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections__deleted']` | deleted | `{"get":{"operationId":"RoutingRuleCollections_List","tags":["RoutingRuleCollections"],"parameters":[...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}`
 
@@ -108,7 +114,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections__deleted']` | deleted | `{"get":{"operationId":"AdminRuleCollections_List","parameters":[{"$ref":"./networkManager.json#/para...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections__deleted']` | deleted | `{"get":{"operationId":"AdminRuleCollections_List","tags":["AdminRuleCollections"],"parameters":[{"$r...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}`
 
@@ -132,7 +138,7 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections__deleted']` | deleted | `{"get":{"operationId":"SecurityUserRuleCollections_List","parameters":[{"name":"networkManagerName",...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections__deleted']` | deleted | `{"get":{"operationId":"SecurityUserRuleCollections_List","tags":["SecurityUserRuleCollections"],"par...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}`
 
@@ -156,6 +162,39 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ActiveBaseSecurityAdminRule.properties.kind.$ref__added` | added | `./common.json/definitions/EffectiveAdminRuleKind` |
+| `definitions.AddressPrefixItem.properties.addressPrefixType.$ref__added` | added | `./common.json/definitions/AddressPrefixType` |
+| `definitions.AdminPropertiesFormat.properties.access.$ref__added` | added | `./common.json/definitions/SecurityConfigurationRuleAccess` |
+| `definitions.AdminPropertiesFormat.properties.direction.$ref__added` | added | `./common.json/definitions/SecurityConfigurationRuleDirection` |
+| `definitions.AdminPropertiesFormat.properties.protocol.$ref__added` | added | `./common.json/definitions/SecurityConfigurationRuleProtocol` |
+| `definitions.AdminPropertiesFormat.properties.provisioningState.$ref__added` | added | `./common.json/definitions/ProvisioningState` |
+| `definitions.AdminRuleCollectionPropertiesFormat.properties.provisioningState.$ref__added` | added | `./common.json/definitions/ProvisioningState` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.$ref__added` | added | `./common.json/definitions/ConnectivityConfigurationPropertiesConnectivityCapabilities` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityTopology.$ref__added` | added | `./common.json/definitions/ConnectivityTopology` |
+| `definitions.ConnectivityConfigurationProperties.properties.deleteExistingPeering.$ref__added` | added | `./common.json/definitions/DeleteExistingPeering` |
+| `definitions.ConnectivityConfigurationProperties.properties.isGlobal.$ref__added` | added | `./common.json/definitions/IsGlobal` |
+| `definitions.connectivityGroupItem.properties.groupConnectivity.$ref__added` | added | `./common.json/definitions/GroupConnectivity` |
+| `definitions.connectivityGroupItem.properties.isGlobal.$ref__added` | added | `./common.json/definitions/IsGlobal` |
+| `definitions.connectivityGroupItem.properties.useHubGateway.$ref__added` | added | `./common.json/definitions/UseHubGateway` |
+| `definitions.DefaultAdminPropertiesFormat.properties.access.$ref__added` | added | `./common.json/definitions/SecurityConfigurationRuleAccess` |
+| `definitions.DefaultAdminPropertiesFormat.properties.direction.$ref__added` | added | `./common.json/definitions/SecurityConfigurationRuleDirection` |
+| `definitions.DefaultAdminPropertiesFormat.properties.protocol.$ref__added` | added | `./common.json/definitions/SecurityConfigurationRuleProtocol` |
+| `definitions.DefaultAdminPropertiesFormat.properties.provisioningState.$ref__added` | added | `./common.json/definitions/ProvisioningState` |
+| `definitions.EffectiveBaseSecurityAdminRule.properties.kind.$ref__added` | added | `./common.json/definitions/EffectiveAdminRuleKind` |
+| `definitions.NetworkGroupProperties.properties.memberType.$ref__added` | added | `./common.json/definitions/GroupMemberType` |
+| `definitions.NetworkManagerCommit.properties.commitType.$ref__added` | added | `./common.json/definitions/ConfigurationType` |
+| `definitions.NetworkManagerDeploymentStatus.properties.deploymentStatus.$ref__added` | added | `./common.json/definitions/DeploymentStatus` |
+| `definitions.NetworkManagerDeploymentStatus.properties.deploymentType.$ref__added` | added | `./common.json/definitions/ConfigurationType` |
+| `definitions.NetworkManagerDeploymentStatusParameter.properties.deploymentTypes.items.$ref__added` | added | `./common.json/definitions/ConfigurationType` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopeAccesses.items.$ref__added` | added | `./common.json/definitions/ConfigurationType` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopes.$ref__added` | added | `./common.json/definitions/NetworkManagerPropertiesNetworkManagerScopes` |
+| `definitions.RoutingRuleCollectionPropertiesFormat.properties.disableBgpRoutePropagation.$ref__added` | added | `./common.json/definitions/DisableBgpRoutePropagation` |
+| `definitions.RoutingRuleNextHop.properties.nextHopType.$ref__added` | added | `./common.json/definitions/RoutingRuleNextHopType` |
+| `definitions.RoutingRuleRouteDestination.properties.type.$ref__added` | added | `./common.json/definitions/RoutingRuleDestinationType` |
+| `definitions.ScopeConnectionProperties.properties.connectionState.$ref__added` | added | `./common.json/definitions/ScopeConnectionState` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.applyOnNetworkIntentPolicyBasedServices.items.$ref__added` | added | `./common.json/definitions/NetworkIntentPolicyBasedService` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.networkGroupAddressSpaceAggregationOption.$ref__added` | added | `./common.json/definitions/AddressSpaceAggregationOption` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.provisioningState.$ref__added` | added | `./common.json/definitions/ProvisioningState` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListTopParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListSkipTokenParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].$ref__deleted` | deleted | `./networkManager.json#/parameters/NetworkManagerNameParameter` |
@@ -186,6 +225,40 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ActiveBaseSecurityAdminRule.properties.kind.type__deleted` | deleted | `string` |
+| `definitions.AddressPrefixItem.properties.addressPrefixType.type__deleted` | deleted | `string` |
+| `definitions.AdminPropertiesFormat.properties.access.type__deleted` | deleted | `string` |
+| `definitions.AdminPropertiesFormat.properties.direction.type__deleted` | deleted | `string` |
+| `definitions.AdminPropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.AdminPropertiesFormat.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.AdminRuleCollectionPropertiesFormat.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.type__deleted` | deleted | `object` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityTopology.type__deleted` | deleted | `string` |
+| `definitions.ConnectivityConfigurationProperties.properties.deleteExistingPeering.type__deleted` | deleted | `string` |
+| `definitions.ConnectivityConfigurationProperties.properties.isGlobal.type__deleted` | deleted | `string` |
+| `definitions.connectivityGroupItem.properties.groupConnectivity.type__deleted` | deleted | `string` |
+| `definitions.connectivityGroupItem.properties.isGlobal.type__deleted` | deleted | `string` |
+| `definitions.connectivityGroupItem.properties.useHubGateway.type__deleted` | deleted | `string` |
+| `definitions.DefaultAdminPropertiesFormat.properties.access.type__deleted` | deleted | `string` |
+| `definitions.DefaultAdminPropertiesFormat.properties.direction.type__deleted` | deleted | `string` |
+| `definitions.DefaultAdminPropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.DefaultAdminPropertiesFormat.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.EffectiveBaseSecurityAdminRule.properties.kind.type__deleted` | deleted | `string` |
+| `definitions.NetworkGroupProperties.properties.memberType.type__deleted` | deleted | `string` |
+| `definitions.NetworkManagerCommit.properties.commitType.type__deleted` | deleted | `string` |
+| `definitions.NetworkManagerDeploymentStatus.properties.deploymentStatus.type__deleted` | deleted | `string` |
+| `definitions.NetworkManagerDeploymentStatus.properties.deploymentType.type__deleted` | deleted | `string` |
+| `definitions.NetworkManagerDeploymentStatusParameter.properties.deploymentTypes.items.type__deleted` | deleted | `string` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopeAccesses.items.type__deleted` | deleted | `string` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopes.type__deleted` | deleted | `object` |
+| `definitions.RoutingRuleCollectionPropertiesFormat.properties.disableBgpRoutePropagation.type__deleted` | deleted | `string` |
+| `definitions.RoutingRuleNextHop.properties.nextHopType.type__deleted` | deleted | `string` |
+| `definitions.RoutingRuleRouteDestination.properties.type.type__deleted` | deleted | `string` |
+| `definitions.ScopeConnectionProperties.properties.connectionState.type__deleted` | deleted | `string` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.applyOnNetworkIntentPolicyBasedServices.items.type__deleted` | deleted | `string` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.networkGroupAddressSpaceAggregationOption.type__deleted` | deleted | `string` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.provisioningState.type__deleted` | deleted | `string` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].type__added` | added | `integer` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].type__added` | added | `string` |
@@ -237,6 +310,7 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ConnectivityConfigurationListResult.required__added` | added | `["value"]` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.required__deleted` | deleted | `["connectedGroupPrivateEndpointsScale","connectedGroupAddressOverlap","peeringEnforcement"]` |
 | `definitions.NetworkGroupListResult.required__added` | added | `["value"]` |
 | `definitions.NetworkManagerConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.NetworkManagerListResult.required__added` | added | `["value"]` |
@@ -252,29 +326,11 @@ Change Type: deleted
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[0].pattern__added` | added | `^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$` |
 
-### Changes for `ActiveBaseSecurityAdminRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ActiveBaseSecurityAdminRule__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"},"commitTime":{"type":"string","format":"date-t...` |
-
-### Changes for `ActiveConfigurationParameter`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ActiveConfigurationParameter__deleted` | deleted | `{"type":"object","properties":{"regions":{"type":"array","items":{"type":"string"}},"skipToken":{"ty...` |
-
 ### Changes for `ActiveConnectivityConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ActiveConnectivityConfiguration__deleted` | deleted | `{"type":"object","properties":{"commitTime":{"type":"string","format":"date-time"},"region":{"type":...` |
-
-### Changes for `ActiveConnectivityConfigurationsListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ActiveConnectivityConfigurationsListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/ActiveConnecti...` |
 
 ### Changes for `ActiveDefaultSecurityAdminRule`
 
@@ -287,24 +343,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ActiveSecurityAdminRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"./networkManagerSecurityAdminConfiguration.json...` |
-
-### Changes for `ActiveSecurityAdminRulesListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ActiveSecurityAdminRulesListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/ActiveBaseSecu...` |
-
-### Changes for `AddressPrefixItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AddressPrefixItem__deleted` | deleted | `{"type":"object","properties":{"addressPrefix":{"type":"string"},"addressPrefixType":{"type":"string...` |
-
-### Changes for `AdminPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AdminPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"protocol":{"type":"string","enum":["...` |
 
 ### Changes for `AdminRule`
 
@@ -324,12 +362,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.AdminRuleCollectionListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `AdminRuleCollectionPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AdminRuleCollectionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"appliesToGroups":{"type":"array","it...` |
-
 ### Changes for `AdminRuleListResult`
 
 | Path | Change Type | Value |
@@ -342,47 +374,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.BaseAdminRule__deleted` | deleted | `{"type":"object","properties":{"kind":{"type":"string","enum":["Custom","Default"],"x-ms-enum":{"nam...` |
 
-### Changes for `ConfigurationGroup`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConfigurationGroup__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"},"properties":{"$ref":"./networkManagerGroup.js...` |
-
-### Changes for `ConnectivityConfigurationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectivityConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"connectivityTopology":{"type":"strin...` |
-
-### Changes for `CrossTenantScopes`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CrossTenantScopes__deleted` | deleted | `{"type":"object","properties":{"tenantId":{"type":"string","readOnly":true},"managementGroups":{"typ...` |
-
-### Changes for `DefaultAdminPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DefaultAdminPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string","readOnly":true},"flag":{"type":"strin...` |
-
 ### Changes for `DefaultAdminRule`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.DefaultAdminRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/DefaultAdminPropertiesFormat","x-...` |
-
-### Changes for `EffectiveBaseSecurityAdminRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EffectiveBaseSecurityAdminRule__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"},"configurationDescription":{"type":"string"},"...` |
-
-### Changes for `EffectiveConnectivityConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EffectiveConnectivityConfiguration__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"},"properties":{"$ref":"./networkManagerConnecti...` |
 
 ### Changes for `EffectiveDefaultSecurityAdminRule`
 
@@ -395,96 +391,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.EffectiveSecurityAdminRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"./networkManagerSecurityAdminConfiguration.json...` |
-
-### Changes for `Hub`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Hub__deleted` | deleted | `{"type":"object","properties":{"resourceId":{"type":"string"},"resourceType":{"type":"string"}}}` |
-
-### Changes for `NetworkGroupProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkGroupProperties__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"memberType":{"type":"string","enum":...` |
-
-### Changes for `NetworkManagerCommit`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerCommit__deleted` | deleted | `{"type":"object","properties":{"commitId":{"type":"string","readOnly":true},"targetLocations":{"type...` |
-
-### Changes for `NetworkManagerConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"networkManagerId":{"type":"string"},"connectionState":{"$ref":"./net...` |
-
-### Changes for `NetworkManagerDeploymentStatus`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerDeploymentStatus__deleted` | deleted | `{"type":"object","properties":{"commitTime":{"type":"string","format":"date-time"},"region":{"type":...` |
-
-### Changes for `NetworkManagerDeploymentStatusListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerDeploymentStatusListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/NetworkManager...` |
-
-### Changes for `NetworkManagerDeploymentStatusParameter`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerDeploymentStatusParameter__deleted` | deleted | `{"type":"object","properties":{"regions":{"type":"array","items":{"type":"string"}},"deploymentTypes...` |
-
-### Changes for `NetworkManagerEffectiveConnectivityConfigurationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerEffectiveConnectivityConfigurationListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/EffectiveConne...` |
-
-### Changes for `NetworkManagerEffectiveSecurityAdminRulesListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerEffectiveSecurityAdminRulesListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/EffectiveBaseS...` |
-
-### Changes for `NetworkManagerProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerProperties__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"networkManagerScopes":{"type":"objec...` |
-
-### Changes for `NetworkManagerRoutingConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerRoutingConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"provisioningState":{"$ref":"./networ...` |
-
-### Changes for `NetworkManagerRoutingGroupItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerRoutingGroupItem__deleted` | deleted | `{"type":"object","properties":{"networkGroupId":{"type":"string"}},"required":["networkGroupId"]}` |
-
-### Changes for `NetworkManagerSecurityGroupItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkManagerSecurityGroupItem__deleted` | deleted | `{"type":"object","properties":{"networkGroupId":{"type":"string"}},"required":["networkGroupId"]}` |
-
-### Changes for `PatchObject`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PatchObject__deleted` | deleted | `{"type":"object","properties":{"tags":{"type":"object","additionalProperties":{"type":"string"}}}}` |
-
-### Changes for `QueryRequestOptions`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.QueryRequestOptions__deleted` | deleted | `{"type":"object","properties":{"skipToken":{"type":"string"}}}` |
 
 ### Changes for `RoutingRule`
 
@@ -504,59 +410,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.RoutingRuleCollectionListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `RoutingRuleCollectionPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RoutingRuleCollectionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"provisioningState":{"$ref":"./networ...` |
-
 ### Changes for `RoutingRuleListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.RoutingRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `RoutingRuleNextHop`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RoutingRuleNextHop__deleted` | deleted | `{"type":"object","properties":{"nextHopType":{"type":"string","enum":["Internet","NoNextHop","Virtua...` |
-
-### Changes for `RoutingRulePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RoutingRulePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"provisioningState":{"$ref":"./networ...` |
-
-### Changes for `RoutingRuleRouteDestination`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RoutingRuleRouteDestination__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["AddressPrefix","ServiceTag"],"x-ms-e...` |
-
-### Changes for `ScopeConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ScopeConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"tenantId":{"type":"string"},"resourceId":{"type":"string"},"connecti...` |
-
-### Changes for `SecurityAdminConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityAdminConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"applyOnNetworkIntentPolicyBasedServi...` |
-
-### Changes for `SecurityUserConfigurationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityUserConfigurationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"provisioningState":{"$ref":"./networ...` |
-
-### Changes for `SecurityUserGroupItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityUserGroupItem__deleted` | deleted | `{"type":"object","properties":{"networkGroupId":{"type":"string"}},"required":["networkGroupId"]}` |
 
 ### Changes for `SecurityUserRule`
 
@@ -576,23 +434,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.SecurityUserRuleCollectionListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `SecurityUserRuleCollectionPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityUserRuleCollectionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"appliesToGroups":{"type":"array","it...` |
-
 ### Changes for `SecurityUserRuleListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.SecurityUserRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `SecurityUserRulePropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityUserRulePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"protocol":{"$ref":"./networkManagerS...` |
 
 ### Changes for `StaticMember`
 
@@ -606,17 +452,84 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.StaticMemberListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `StaticMemberProperties`
+### Changes for `enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.StaticMemberProperties__deleted` | deleted | `{"type":"object","properties":{"resourceId":{"type":"string"},"region":{"type":"string","readOnly":t...` |
+| `definitions.ActiveBaseSecurityAdminRule.properties.kind.enum__deleted` | deleted | `["Custom","Default"]` |
+| `definitions.AddressPrefixItem.properties.addressPrefixType.enum__deleted` | deleted | `["IPPrefix","ServiceTag","NetworkGroup"]` |
+| `definitions.AdminPropertiesFormat.properties.access.enum__deleted` | deleted | `["Allow","Deny","AlwaysAllow"]` |
+| `definitions.AdminPropertiesFormat.properties.direction.enum__deleted` | deleted | `["Inbound","Outbound"]` |
+| `definitions.AdminPropertiesFormat.properties.protocol.enum__deleted` | deleted | `["Tcp","Udp","Icmp","Esp","Any","Ah"]` |
+| `definitions.AdminPropertiesFormat.properties.provisioningState.enum__deleted` | deleted | `["Failed","Succeeded","Canceled","Creating","Updating","Deleting"]` |
+| `definitions.AdminRuleCollectionPropertiesFormat.properties.provisioningState.enum__deleted` | deleted | `["Failed","Succeeded","Canceled","Creating","Updating","Deleting"]` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityTopology.enum__deleted` | deleted | `["HubAndSpoke","Mesh"]` |
+| `definitions.ConnectivityConfigurationProperties.properties.deleteExistingPeering.enum__deleted` | deleted | `["False","True"]` |
+| `definitions.ConnectivityConfigurationProperties.properties.isGlobal.enum__deleted` | deleted | `["False","True"]` |
+| `definitions.connectivityGroupItem.properties.groupConnectivity.enum__deleted` | deleted | `["None","DirectlyConnected"]` |
+| `definitions.connectivityGroupItem.properties.isGlobal.enum__deleted` | deleted | `["False","True"]` |
+| `definitions.connectivityGroupItem.properties.useHubGateway.enum__deleted` | deleted | `["False","True"]` |
+| `definitions.DefaultAdminPropertiesFormat.properties.access.enum__deleted` | deleted | `["Allow","Deny","AlwaysAllow"]` |
+| `definitions.DefaultAdminPropertiesFormat.properties.direction.enum__deleted` | deleted | `["Inbound","Outbound"]` |
+| `definitions.DefaultAdminPropertiesFormat.properties.protocol.enum__deleted` | deleted | `["Tcp","Udp","Icmp","Esp","Any","Ah"]` |
+| `definitions.DefaultAdminPropertiesFormat.properties.provisioningState.enum__deleted` | deleted | `["Failed","Succeeded","Canceled","Creating","Updating","Deleting"]` |
+| `definitions.EffectiveBaseSecurityAdminRule.properties.kind.enum__deleted` | deleted | `["Custom","Default"]` |
+| `definitions.NetworkGroupProperties.properties.memberType.enum__deleted` | deleted | `["VirtualNetwork","Subnet"]` |
+| `definitions.NetworkManagerCommit.properties.commitType.enum__deleted` | deleted | `["SecurityAdmin","Connectivity","SecurityUser","Routing"]` |
+| `definitions.NetworkManagerDeploymentStatus.properties.deploymentStatus.enum__deleted` | deleted | `["NotStarted","Deploying","Deployed","Failed"]` |
+| `definitions.NetworkManagerDeploymentStatus.properties.deploymentType.enum__deleted` | deleted | `["SecurityAdmin","Connectivity","SecurityUser","Routing"]` |
+| `definitions.NetworkManagerDeploymentStatusParameter.properties.deploymentTypes.items.enum__deleted` | deleted | `["SecurityAdmin","Connectivity","SecurityUser","Routing"]` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopeAccesses.items.enum__deleted` | deleted | `["SecurityAdmin","Connectivity","SecurityUser","Routing"]` |
+| `definitions.RoutingRuleCollectionPropertiesFormat.properties.disableBgpRoutePropagation.enum__deleted` | deleted | `["False","True"]` |
+| `definitions.RoutingRuleNextHop.properties.nextHopType.enum__deleted` | deleted | `["Internet","NoNextHop","VirtualAppliance","VirtualNetworkGateway","VnetLocal"]` |
+| `definitions.RoutingRuleRouteDestination.properties.type.enum__deleted` | deleted | `["AddressPrefix","ServiceTag"]` |
+| `definitions.ScopeConnectionProperties.properties.connectionState.enum__deleted` | deleted | `["Connected","Pending","Conflict","Revoked","Rejected"]` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.applyOnNetworkIntentPolicyBasedServices.items.enum__deleted` | deleted | `["None","All","AllowRulesOnly"]` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.networkGroupAddressSpaceAggregationOption.enum__deleted` | deleted | `["None","Manual"]` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.provisioningState.enum__deleted` | deleted | `["Failed","Succeeded","Canceled","Creating","Updating","Deleting"]` |
 
-### Changes for `connectivityGroupItem`
+### Changes for `x-ms-enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.connectivityGroupItem__deleted` | deleted | `{"type":"object","properties":{"networkGroupId":{"type":"string"},"useHubGateway":{"type":"string","...` |
+| `definitions.ActiveBaseSecurityAdminRule.properties.kind['x-ms-enum__deleted']` | deleted | `{"name":"EffectiveAdminRuleKind","modelAsString":true}` |
+| `definitions.AddressPrefixItem.properties.addressPrefixType['x-ms-enum__deleted']` | deleted | `{"name":"AddressPrefixType","modelAsString":true}` |
+| `definitions.AdminPropertiesFormat.properties.access['x-ms-enum__deleted']` | deleted | `{"name":"SecurityConfigurationRuleAccess","modelAsString":true}` |
+| `definitions.AdminPropertiesFormat.properties.direction['x-ms-enum__deleted']` | deleted | `{"name":"SecurityConfigurationRuleDirection","modelAsString":true}` |
+| `definitions.AdminPropertiesFormat.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"SecurityConfigurationRuleProtocol","modelAsString":true}` |
+| `definitions.AdminPropertiesFormat.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"ProvisioningState","modelAsString":true}` |
+| `definitions.AdminRuleCollectionPropertiesFormat.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"ProvisioningState","modelAsString":true}` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityTopology['x-ms-enum__deleted']` | deleted | `{"name":"ConnectivityTopology","modelAsString":true}` |
+| `definitions.ConnectivityConfigurationProperties.properties.deleteExistingPeering['x-ms-enum__deleted']` | deleted | `{"name":"DeleteExistingPeering","modelAsString":true}` |
+| `definitions.ConnectivityConfigurationProperties.properties.isGlobal['x-ms-enum__deleted']` | deleted | `{"name":"IsGlobal","modelAsString":true}` |
+| `definitions.connectivityGroupItem.properties.groupConnectivity['x-ms-enum__deleted']` | deleted | `{"name":"GroupConnectivity","modelAsString":true}` |
+| `definitions.connectivityGroupItem.properties.isGlobal['x-ms-enum__deleted']` | deleted | `{"name":"IsGlobal","modelAsString":true}` |
+| `definitions.connectivityGroupItem.properties.useHubGateway['x-ms-enum__deleted']` | deleted | `{"name":"UseHubGateway","modelAsString":true}` |
+| `definitions.DefaultAdminPropertiesFormat.properties.access['x-ms-enum__deleted']` | deleted | `{"name":"SecurityConfigurationRuleAccess","modelAsString":true}` |
+| `definitions.DefaultAdminPropertiesFormat.properties.direction['x-ms-enum__deleted']` | deleted | `{"name":"SecurityConfigurationRuleDirection","modelAsString":true}` |
+| `definitions.DefaultAdminPropertiesFormat.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"SecurityConfigurationRuleProtocol","modelAsString":true}` |
+| `definitions.DefaultAdminPropertiesFormat.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"ProvisioningState","modelAsString":true}` |
+| `definitions.EffectiveBaseSecurityAdminRule.properties.kind['x-ms-enum__deleted']` | deleted | `{"name":"EffectiveAdminRuleKind","modelAsString":true}` |
+| `definitions.NetworkGroupProperties.properties.memberType['x-ms-enum__deleted']` | deleted | `{"name":"GroupMemberType","modelAsString":true}` |
+| `definitions.NetworkManagerCommit.properties.commitType['x-ms-enum__deleted']` | deleted | `{"name":"ConfigurationType","modelAsString":true}` |
+| `definitions.NetworkManagerDeploymentStatus.properties.deploymentStatus['x-ms-enum__deleted']` | deleted | `{"name":"DeploymentStatus","modelAsString":true}` |
+| `definitions.NetworkManagerDeploymentStatus.properties.deploymentType['x-ms-enum__deleted']` | deleted | `{"name":"ConfigurationType","modelAsString":true}` |
+| `definitions.NetworkManagerDeploymentStatusParameter.properties.deploymentTypes.items['x-ms-enum__deleted']` | deleted | `{"name":"ConfigurationType","modelAsString":true}` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopeAccesses.items['x-ms-enum__deleted']` | deleted | `{"name":"ConfigurationType","modelAsString":true}` |
+| `definitions.RoutingRuleCollectionPropertiesFormat.properties.disableBgpRoutePropagation['x-ms-enum__deleted']` | deleted | `{"name":"DisableBgpRoutePropagation","modelAsString":true}` |
+| `definitions.RoutingRuleNextHop.properties.nextHopType['x-ms-enum__deleted']` | deleted | `{"name":"RoutingRuleNextHopType","modelAsString":true}` |
+| `definitions.RoutingRuleRouteDestination.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"RoutingRuleDestinationType","modelAsString":true}` |
+| `definitions.ScopeConnectionProperties.properties.connectionState['x-ms-enum__deleted']` | deleted | `{"name":"ScopeConnectionState","modelAsString":true}` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.applyOnNetworkIntentPolicyBasedServices.items['x-ms-enum__deleted']` | deleted | `{"name":"NetworkIntentPolicyBasedService","modelAsString":true}` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.networkGroupAddressSpaceAggregationOption['x-ms-enum__deleted']` | deleted | `{"name":"AddressSpaceAggregationOption","modelAsString":true}` |
+| `definitions.SecurityAdminConfigurationPropertiesFormat.properties.provisioningState['x-ms-enum__deleted']` | deleted | `{"name":"ProvisioningState","modelAsString":true}` |
+
+### Changes for `properties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.properties__deleted` | deleted | `{"connectedGroupPrivateEndpointsScale":{"type":"string","description":"Option indicating the scale o...` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopes.properties__deleted` | deleted | `{"managementGroups":{"type":"array","description":"List of management groups.","items":{"type":"stri...` |
 
 ### Changes for `etag`
 
@@ -624,34 +537,53 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.NetworkManagerConnection.properties.etag__deleted` | deleted | `{"type":"string","readOnly":true}` |
 
+### Changes for `readOnly`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.NetworkManagerConnectionProperties.properties.connectionState.readOnly__added` | added | `true` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
+| `definitions.ActiveBaseSecurityAdminRule.properties.ruleCollectionAppliesToGroups.items.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem` | `#/definitions/NetworkManagerSecurityGroupItem` |
+| `definitions.ActiveBaseSecurityAdminRule.properties.ruleGroups.items.$ref` | `./networkManagerEffectiveConfiguration.json#/definitions/ConfigurationGroup` | `#/definitions/ConfigurationGroup` |
+| `definitions.ActiveConnectivityConfigurationsListResult.properties.value.items.$ref` | `#/definitions/ActiveConnectivityConfiguration` | `./common.json/definitions/ActiveConnectivityConfiguration` |
+| `definitions.ConfigurationGroup.properties.properties.$ref` | `./networkManagerGroup.json#/definitions/NetworkGroupProperties` | `#/definitions/NetworkGroupProperties` |
 | `definitions.ConnectivityConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `./common.json/definitions/ChildResource` |
-| `definitions.ConnectivityConfiguration.properties.properties.$ref` | `#/definitions/ConnectivityConfigurationProperties` | `./common.json/definitions/ConnectivityConfigurationProperties` |
 | `definitions.ConnectivityConfiguration.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
+| `definitions.ConnectivityConfigurationProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.EffectiveBaseSecurityAdminRule.properties.ruleCollectionAppliesToGroups.items.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem` | `#/definitions/NetworkManagerSecurityGroupItem` |
+| `definitions.EffectiveConnectivityConfiguration.properties.properties.$ref` | `./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfigurationProperties` | `#/definitions/ConnectivityConfigurationProperties` |
 | `definitions.NetworkGroup.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `./common.json/definitions/ChildResource` |
-| `definitions.NetworkGroup.properties.properties.$ref` | `#/definitions/NetworkGroupProperties` | `./common.json/definitions/NetworkGroupProperties` |
 | `definitions.NetworkGroup.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
+| `definitions.NetworkGroupProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.NetworkManager.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.NetworkManager.properties.properties.$ref` | `#/definitions/NetworkManagerProperties` | `./common.json/definitions/NetworkManagerProperties` |
 | `definitions.NetworkManager.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
 | `definitions.NetworkManagerConnection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `./common.json/definitions/ChildResource` |
-| `definitions.NetworkManagerConnection.properties.properties.$ref` | `#/definitions/NetworkManagerConnectionProperties` | `./common.json/definitions/NetworkManagerConnectionProperties` |
 | `definitions.NetworkManagerConnection.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
+| `definitions.NetworkManagerConnectionProperties.properties.connectionState.$ref` | `./networkManagerScopeConnection.json#/definitions/ConnectionState` | `./common.json/definitions/ScopeConnectionState` |
+| `definitions.NetworkManagerProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.NetworkManagerRoutingConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `./common.json/definitions/ChildResource` |
-| `definitions.NetworkManagerRoutingConfiguration.properties.properties.$ref` | `#/definitions/NetworkManagerRoutingConfigurationPropertiesFormat` | `./common.json/definitions/NetworkManagerRoutingConfigurationPropertiesFormat` |
 | `definitions.NetworkManagerRoutingConfiguration.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
+| `definitions.NetworkManagerRoutingConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.RoutingRuleCollectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.RoutingRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.ScopeConnection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `./common.json/definitions/ChildResource` |
-| `definitions.ScopeConnection.properties.properties.$ref` | `#/definitions/ScopeConnectionProperties` | `./common.json/definitions/ScopeConnectionProperties` |
 | `definitions.ScopeConnection.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
 | `definitions.SecurityAdminConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `./common.json/definitions/ChildResource` |
-| `definitions.SecurityAdminConfiguration.properties.properties.$ref` | `#/definitions/SecurityAdminConfigurationPropertiesFormat` | `./common.json/definitions/SecurityAdminConfigurationPropertiesFormat` |
 | `definitions.SecurityAdminConfiguration.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
 | `definitions.SecurityUserConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `./common.json/definitions/ChildResource` |
-| `definitions.SecurityUserConfiguration.properties.properties.$ref` | `#/definitions/SecurityUserConfigurationPropertiesFormat` | `./common.json/definitions/SecurityUserConfigurationPropertiesFormat` |
 | `definitions.SecurityUserConfiguration.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
+| `definitions.SecurityUserConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.SecurityUserRuleCollectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.destinations.items.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem` | `#/definitions/AddressPrefixItem` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.direction.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection` | `./common.json/definitions/SecurityConfigurationRuleDirection` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.protocol.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol` | `./common.json/definitions/SecurityConfigurationRuleProtocol` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.SecurityUserRulePropertiesFormat.properties.sources.items.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem` | `#/definitions/AddressPrefixItem` |
+| `definitions.StaticMemberProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `info.title` | `SecurityUserConfiguration` | `WebApplicationFirewallManagement` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
@@ -662,27 +594,17 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}'].patch.parameters[1].schema.$ref` | `#/definitions/PatchObject` | `./common.json/definitions/PatchObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/commit'].post.parameters[1].schema.$ref` | `#/definitions/NetworkManagerCommit` | `./common.json/definitions/NetworkManagerCommit` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/commit'].post.responses.200.schema.$ref` | `#/definitions/NetworkManagerCommit` | `./common.json/definitions/NetworkManagerCommit` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/commit'].post.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/commit'].post.responses.202.schema.$ref` | `#/definitions/NetworkManagerCommit` | `./common.json/definitions/NetworkManagerCommit` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/commit'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations'].post.parameters[2].schema.$ref` | `#/definitions/ActiveConfigurationParameter` | `./common.json/definitions/ActiveConfigurationParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations'].post.responses.200.schema.$ref` | `#/definitions/ActiveConnectivityConfigurationsListResult` | `./common.json/definitions/ActiveConnectivityConfigurationsListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules'].post.parameters[2].schema.$ref` | `#/definitions/ActiveConfigurationParameter` | `./common.json/definitions/ActiveConfigurationParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules'].post.responses.200.schema.$ref` | `#/definitions/ActiveSecurityAdminRulesListResult` | `./common.json/definitions/ActiveSecurityAdminRulesListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus'].post.parameters[2].schema.$ref` | `#/definitions/NetworkManagerDeploymentStatusParameter` | `./common.json/definitions/NetworkManagerDeploymentStatusParameter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus'].post.responses.200.schema.$ref` | `#/definitions/NetworkManagerDeploymentStatusListResult` | `./common.json/definitions/NetworkManagerDeploymentStatusListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
@@ -708,10 +630,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations'].post.parameters[2].schema.$ref` | `./networkManagerGroup.json#/definitions/QueryRequestOptions` | `./common.json/definitions/QueryRequestOptions` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations'].post.responses.200.schema.$ref` | `#/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult` | `./common.json/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations'].post.parameters[2].schema.$ref` | `./networkManagerGroup.json#/definitions/QueryRequestOptions` | `#/definitions/QueryRequestOptions` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules'].post.parameters[2].schema.$ref` | `./networkManagerGroup.json#/definitions/QueryRequestOptions` | `./common.json/definitions/QueryRequestOptions` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules'].post.responses.200.schema.$ref` | `#/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult` | `./common.json/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules'].post.parameters[2].schema.$ref` | `./networkManagerGroup.json#/definitions/QueryRequestOptions` | `#/definitions/QueryRequestOptions` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 

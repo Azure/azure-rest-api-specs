@@ -11,10 +11,21 @@
   "consumes": [
     "application/json"
   ],
+  "tags": [
+    {
+      "name": "VirtualNetworkGateways"
+    },
+    {
+      "name": "VirtualNetworkTaps"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkTaps": {
       "get": {
         "operationId": "VirtualNetworkTaps_ListAll",
+        "tags": [
+          "VirtualNetworkTaps"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -43,6 +54,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways": {
       "get": {
         "operationId": "VirtualNetworkGateways_List",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -71,6 +85,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
       "get": {
         "operationId": "VirtualNetworkGateways_Get",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -104,6 +121,9 @@
       },
       "put": {
         "operationId": "VirtualNetworkGateways_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -162,6 +182,9 @@
       },
       "patch": {
         "operationId": "VirtualNetworkGateways_UpdateTags",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -214,6 +237,9 @@
       },
       "delete": {
         "operationId": "VirtualNetworkGateways_Delete",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -256,6 +282,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeAbortMigration",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -292,6 +321,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeCommitMigration",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -328,6 +360,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/connections": {
       "get": {
         "operationId": "VirtualNetworkGateways_ListConnections",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -363,6 +398,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/disconnectVirtualNetworkGatewayVpnConnections": {
       "post": {
         "operationId": "VirtualNetworkGateways_DisconnectVirtualNetworkGatewayVpnConnections",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -375,7 +413,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/P2SVpnConnectionRequest"
+              "$ref": "./virtualWan.json/definitions/P2SVpnConnectionRequest"
             }
           }
         ],
@@ -410,6 +448,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeExecuteMigration",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -446,6 +487,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
       "post": {
         "operationId": "VirtualNetworkGateways_Generatevpnclientpackage",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -458,7 +502,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientParameters"
+              "$ref": "#/definitions/VpnClientParameters"
             }
           }
         ],
@@ -496,6 +540,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile": {
       "post": {
         "operationId": "VirtualNetworkGateways_GenerateVpnProfile",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -508,7 +555,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientParameters"
+              "$ref": "#/definitions/VpnClientParameters"
             }
           }
         ],
@@ -546,6 +593,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetAdvertisedRoutes",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -564,7 +614,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/GatewayRouteListResult"
+              "$ref": "#/definitions/GatewayRouteListResult"
             }
           },
           "202": {
@@ -594,6 +644,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetBgpPeerStatus",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -611,7 +664,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/BgpPeerStatusListResult"
+              "$ref": "#/definitions/BgpPeerStatusListResult"
             }
           },
           "202": {
@@ -641,6 +694,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetFailoverAllTestDetails",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -667,7 +723,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "./common.json/definitions/ExpressRouteFailoverTestDetails"
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
               }
             }
           },
@@ -698,6 +754,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetFailoverSingleTestDetails",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -755,6 +814,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetLearnedRoutes",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -767,7 +829,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/GatewayRouteListResult"
+              "$ref": "#/definitions/GatewayRouteListResult"
             }
           },
           "202": {
@@ -797,6 +859,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetResiliencyInformation",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -844,6 +909,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getRoutesInformation": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetRoutesInformation",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -891,6 +959,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetVpnclientConnectionHealth",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -903,7 +974,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientConnectionHealthDetailListResult"
+              "$ref": "#/definitions/VpnClientConnectionHealthDetailListResult"
             }
           },
           "202": {
@@ -933,6 +1004,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetVpnclientIpsecParameters",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -945,7 +1019,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientIPsecParameters"
+              "$ref": "#/definitions/VpnClientIPsecParameters"
             },
             "headers": {
               "Location": {
@@ -972,6 +1046,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl": {
       "post": {
         "operationId": "VirtualNetworkGateways_GetVpnProfilePackageUrl",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1014,6 +1091,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets": {
       "post": {
         "operationId": "VirtualNetworkGateways_ListRadiusSecrets",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1046,6 +1126,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokePrepareMigration",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1090,6 +1173,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset": {
       "post": {
         "operationId": "VirtualNetworkGateways_Reset",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1137,6 +1223,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/resetvpnclientsharedkey": {
       "post": {
         "operationId": "VirtualNetworkGateways_ResetVpnClientSharedKey",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1176,6 +1265,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters": {
       "post": {
         "operationId": "VirtualNetworkGateways_SetVpnclientIpsecParameters",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1188,7 +1280,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientIPsecParameters"
+              "$ref": "#/definitions/VpnClientIPsecParameters"
             }
           }
         ],
@@ -1196,7 +1288,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/VpnClientIPsecParameters"
+              "$ref": "#/definitions/VpnClientIPsecParameters"
             }
           },
           "202": {
@@ -1226,6 +1318,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture": {
       "post": {
         "operationId": "VirtualNetworkGateways_StartPacketCapture",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1237,7 +1332,7 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "./common.json/definitions/VpnPacketCaptureStartParameters"
+              "$ref": "#/definitions/VpnPacketCaptureStartParameters"
             }
           }
         ],
@@ -1278,6 +1373,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest": {
       "post": {
         "operationId": "VirtualNetworkGateways_StartExpressRouteSiteFailoverSimulation",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1326,6 +1424,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture": {
       "post": {
         "operationId": "VirtualNetworkGateways_StopPacketCapture",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1338,7 +1439,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/VpnPacketCaptureStopParameters"
+              "$ref": "#/definitions/VpnPacketCaptureStopParameters"
             }
           }
         ],
@@ -1376,6 +1477,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest": {
       "post": {
         "operationId": "VirtualNetworkGateways_StopExpressRouteSiteFailoverSimulation",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1426,6 +1530,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices": {
       "post": {
         "operationId": "VirtualNetworkGateways_SupportedVpnDevices",
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1458,6 +1565,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps": {
       "get": {
         "operationId": "VirtualNetworkTaps_ListByResourceGroup",
+        "tags": [
+          "VirtualNetworkTaps"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1486,6 +1596,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}": {
       "get": {
         "operationId": "VirtualNetworkTaps_Get",
+        "tags": [
+          "VirtualNetworkTaps"
+        ],
         "parameters": [
           {
             "name": "tapName",
@@ -1516,6 +1629,9 @@
       },
       "put": {
         "operationId": "VirtualNetworkTaps_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworkTaps"
+        ],
         "parameters": [
           {
             "name": "tapName",
@@ -1571,6 +1687,9 @@
       },
       "patch": {
         "operationId": "VirtualNetworkTaps_UpdateTags",
+        "tags": [
+          "VirtualNetworkTaps"
+        ],
         "parameters": [
           {
             "name": "tapName",
@@ -1609,6 +1728,9 @@
       },
       "delete": {
         "operationId": "VirtualNetworkTaps_Delete",
+        "tags": [
+          "VirtualNetworkTaps"
+        ],
         "parameters": [
           {
             "name": "tapName",
@@ -1650,6 +1772,338 @@
     }
   },
   "definitions": {
+    "BgpPeerStatus": {
+      "type": "object",
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "neighbor": {
+          "type": "string",
+          "readOnly": true
+        },
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./common.json/definitions/BgpPeerState",
+          "readOnly": true
+        },
+        "connectedDuration": {
+          "type": "string",
+          "readOnly": true
+        },
+        "routesReceived": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "messagesSent": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "messagesReceived": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      }
+    },
+    "BgpPeerStatusListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BgpPeerStatus"
+          }
+        }
+      }
+    },
+    "BgpSettings": {
+      "type": "object",
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "bgpPeeringAddress": {
+          "type": "string"
+        },
+        "peerWeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bgpPeeringAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfigurationBgpPeeringAddress"
+          }
+        }
+      }
+    },
+    "CertificateAuthentication": {
+      "type": "object",
+      "properties": {
+        "outboundAuthCertificate": {
+          "type": "string",
+          "format": "uri"
+        },
+        "inboundAuthCertificateSubjectName": {
+          "type": "string"
+        },
+        "inboundAuthCertificateChain": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CircuitMetadataMap": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionResetSharedKey": {
+      "type": "object",
+      "properties": {
+        "keyLength": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128
+        }
+      },
+      "required": [
+        "keyLength"
+      ]
+    },
+    "ExpressRouteFailoverTestDetails": {
+      "type": "object",
+      "properties": {
+        "peeringLocation": {
+          "type": "string"
+        },
+        "circuits": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/ExpressRouteFailoverCircuitResourceDetails"
+          }
+        },
+        "status": {
+          "$ref": "./common.json/definitions/FailoverTestStatus"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "endTime": {
+          "type": "string"
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/ExpressRouteFailoverConnectionResourceDetails"
+          }
+        },
+        "testGuid": {
+          "type": "string"
+        },
+        "testType": {
+          "$ref": "./common.json/definitions/FailoverTestType"
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GatewayCustomBgpIpAddressIpConfiguration": {
+      "type": "object",
+      "properties": {
+        "ipConfigurationId": {
+          "type": "string"
+        },
+        "customBgpIpAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customBgpIpAddress",
+        "ipConfigurationId"
+      ]
+    },
+    "GatewayRoute": {
+      "type": "object",
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "network": {
+          "type": "string",
+          "readOnly": true
+        },
+        "nextHop": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sourcePeer": {
+          "type": "string",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true
+        },
+        "asPath": {
+          "type": "string",
+          "readOnly": true
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayRouteListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayRoute"
+          }
+        }
+      }
+    },
+    "IPConfigurationBgpPeeringAddress": {
+      "type": "object",
+      "properties": {
+        "ipconfigurationId": {
+          "type": "string"
+        },
+        "defaultBgpIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "customBgpIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tunnelIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "IpsecPolicy": {
+      "type": "object",
+      "properties": {
+        "saLifeTimeSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "saDataSizeKilobytes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ipsecEncryption": {
+          "$ref": "./common.json/definitions/IpsecEncryption"
+        },
+        "ipsecIntegrity": {
+          "$ref": "./common.json/definitions/IpsecIntegrity"
+        },
+        "ikeEncryption": {
+          "$ref": "./common.json/definitions/IkeEncryption"
+        },
+        "ikeIntegrity": {
+          "$ref": "./common.json/definitions/IkeIntegrity"
+        },
+        "dhGroup": {
+          "$ref": "./common.json/definitions/DhGroup"
+        },
+        "pfsGroup": {
+          "$ref": "./common.json/definitions/PfsGroup"
+        }
+      },
+      "required": [
+        "dhGroup",
+        "ikeEncryption",
+        "ikeIntegrity",
+        "ipsecEncryption",
+        "ipsecIntegrity",
+        "pfsGroup",
+        "saDataSizeKilobytes",
+        "saLifeTimeSeconds"
+      ]
+    },
+    "LocalNetworkGatewayPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "localNetworkAddressSpace": {
+          "$ref": "./virtualNetwork.json/definitions/AddressSpace"
+        },
+        "gatewayIpAddress": {
+          "type": "string"
+        },
+        "fqdn": {
+          "type": "string"
+        },
+        "bgpSettings": {
+          "$ref": "#/definitions/BgpSettings"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "RadiusAuthServer": {
+      "type": "object",
+      "properties": {
+        "radiusServerAddress": {
+          "type": "string"
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
+        }
+      }
+    },
     "VirtualNetworkGateway": {
       "type": "object",
       "properties": {
@@ -1677,6 +2131,160 @@
         }
       ]
     },
+    "VirtualNetworkGatewayConnectionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "authorizationKey": {
+          "type": "string"
+        },
+        "virtualNetworkGateway1": {
+          "$ref": "#/definitions/VirtualNetworkGateway"
+        },
+        "virtualNetworkGateway2": {
+          "$ref": "#/definitions/VirtualNetworkGateway"
+        },
+        "localNetworkGateway2": {
+          "$ref": "./common.json/definitions/LocalNetworkGateway"
+        },
+        "ingressNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          }
+        },
+        "egressNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          }
+        },
+        "connectionType": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionType"
+        },
+        "connectionProtocol": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionProtocol"
+        },
+        "routingWeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dpdTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "connectionMode": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionMode"
+        },
+        "tunnelProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionTunnelProperties"
+          }
+        },
+        "sharedKey": {
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
+        },
+        "connectionStatus": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewayConnectionStatus",
+          "readOnly": true
+        },
+        "tunnelConnectionStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/TunnelConnectionHealth"
+          },
+          "readOnly": true
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "peer": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "enableBgp": {
+          "type": "boolean"
+        },
+        "gatewayCustomBgpIpAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+          }
+        },
+        "useLocalAzureIpAddress": {
+          "type": "boolean"
+        },
+        "usePolicyBasedTrafficSelectors": {
+          "type": "boolean"
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          }
+        },
+        "trafficSelectorPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/TrafficSelectorPolicy"
+          }
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "expressRouteGatewayBypass": {
+          "type": "boolean"
+        },
+        "enablePrivateLinkFastPath": {
+          "type": "boolean"
+        },
+        "authenticationType": {
+          "$ref": "./common.json/definitions/ConnectionAuthenticationType"
+        },
+        "certificateAuthentication": {
+          "$ref": "#/definitions/CertificateAuthentication"
+        }
+      },
+      "required": [
+        "connectionType",
+        "virtualNetworkGateway1"
+      ]
+    },
+    "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "privateIPAllocationMethod": {
+          "$ref": "./common.json/definitions/IPAllocationMethod"
+        },
+        "subnet": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "publicIPAddress": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
     "VirtualNetworkGatewayListResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -1697,6 +2305,100 @@
       "required": [
         "value"
       ]
+    },
+    "VirtualNetworkGatewayNatRuleProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "./common.json/definitions/VpnNatRuleType"
+        },
+        "mode": {
+          "$ref": "./common.json/definitions/VpnNatRuleMode"
+        },
+        "internalMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualWan.json/definitions/VpnNatRuleMapping"
+          }
+        },
+        "externalMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualWan.json/definitions/VpnNatRuleMapping"
+          }
+        },
+        "ipConfigurationId": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualNetworkGatewayPolicyGroupMember": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "attributeType": {
+          "$ref": "./common.json/definitions/VpnPolicyMemberAttributeType"
+        },
+        "attributeValue": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualNetworkGatewayPolicyGroupProperties": {
+      "type": "object",
+      "properties": {
+        "isDefault": {
+          "type": "boolean"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "policyMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroupMember"
+          }
+        },
+        "vngClientConnectionConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "isDefault",
+        "policyMembers",
+        "priority"
+      ]
+    },
+    "VirtualNetworkGatewaySku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewaySkuName"
+        },
+        "tier": {
+          "$ref": "./common.json/definitions/VirtualNetworkGatewaySkuTier"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
     },
     "VirtualNetworkTap": {
       "type": "object",
@@ -1736,6 +2438,282 @@
       "required": [
         "value"
       ]
+    },
+    "VngClientConnectionConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "./virtualNetwork.json/definitions/AddressSpace"
+        },
+        "virtualNetworkGatewayPolicyGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "virtualNetworkGatewayPolicyGroups",
+        "vpnClientAddressPool"
+      ]
+    },
+    "VpnClientConfiguration": {
+      "type": "object",
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "./virtualNetwork.json/definitions/AddressSpace"
+        },
+        "vpnClientRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/VpnClientRootCertificate"
+          }
+        },
+        "vpnClientRevokedCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/VpnClientRevokedCertificate"
+          }
+        },
+        "vpnClientProtocols": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/VpnClientProtocol"
+          }
+        },
+        "vpnAuthenticationTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/VpnAuthenticationType"
+          }
+        },
+        "vpnClientIpsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          }
+        },
+        "radiusServerAddress": {
+          "type": "string"
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
+        },
+        "radiusServers": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/RadiusServer"
+          }
+        },
+        "aadTenant": {
+          "type": "string"
+        },
+        "aadAudience": {
+          "type": "string"
+        },
+        "aadIssuer": {
+          "type": "string"
+        },
+        "vngClientConnectionConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/VngClientConnectionConfiguration"
+          }
+        }
+      }
+    },
+    "VpnClientConnectionHealth": {
+      "type": "object",
+      "properties": {
+        "totalIngressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "totalEgressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "vpnClientConnectionsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "allocatedIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpnClientConnectionHealthDetail": {
+      "type": "object",
+      "properties": {
+        "vpnConnectionId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "vpnConnectionDuration": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "vpnConnectionTime": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "vpnUserName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "maxBandwidth": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "egressPacketsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "ingressPacketsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "maxPacketsPerSecond": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      }
+    },
+    "VpnClientConnectionHealthDetailListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnClientConnectionHealthDetail"
+          }
+        }
+      }
+    },
+    "VpnClientIPsecParameters": {
+      "type": "object",
+      "properties": {
+        "saLifeTimeSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "saDataSizeKilobytes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ipsecEncryption": {
+          "$ref": "./common.json/definitions/IpsecEncryption"
+        },
+        "ipsecIntegrity": {
+          "$ref": "./common.json/definitions/IpsecIntegrity"
+        },
+        "ikeEncryption": {
+          "$ref": "./common.json/definitions/IkeEncryption"
+        },
+        "ikeIntegrity": {
+          "$ref": "./common.json/definitions/IkeIntegrity"
+        },
+        "dhGroup": {
+          "$ref": "./common.json/definitions/DhGroup"
+        },
+        "pfsGroup": {
+          "$ref": "./common.json/definitions/PfsGroup"
+        }
+      },
+      "required": [
+        "dhGroup",
+        "ikeEncryption",
+        "ikeIntegrity",
+        "ipsecEncryption",
+        "ipsecIntegrity",
+        "pfsGroup",
+        "saDataSizeKilobytes",
+        "saLifeTimeSeconds"
+      ]
+    },
+    "VpnClientParameters": {
+      "type": "object",
+      "properties": {
+        "processorArchitecture": {
+          "$ref": "./common.json/definitions/ProcessorArchitecture"
+        },
+        "authenticationMethod": {
+          "$ref": "./common.json/definitions/AuthenticationMethod"
+        },
+        "radiusServerAuthCertificate": {
+          "type": "string"
+        },
+        "clientRootCertificates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpnDeviceScriptParameters": {
+      "type": "object",
+      "properties": {
+        "vendor": {
+          "type": "string"
+        },
+        "deviceFamily": {
+          "type": "string"
+        },
+        "firmwareVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnPacketCaptureStartParameters": {
+      "type": "object",
+      "properties": {
+        "filterData": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnPacketCaptureStopParameters": {
+      "type": "object",
+      "properties": {
+        "sasUrl": {
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {}

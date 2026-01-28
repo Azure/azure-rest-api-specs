@@ -17,35 +17,41 @@ Change Type: deleted
 
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `tags__added` | added | `[{"name":"NetworkWatchers"}]` |
+
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors__deleted']` | deleted | `{"get":{"operationId":"ConnectionMonitors_List","parameters":[{"name":"networkWatcherName","in":"pat...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors__deleted']` | deleted | `{"get":{"operationId":"ConnectionMonitors_List","tags":["ConnectionMonitors"],"parameters":[{"name":...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}__deleted']` | deleted | `{"get":{"operationId":"ConnectionMonitors_Get","parameters":[{"name":"networkWatcherName","in":"path...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}__deleted']` | deleted | `{"get":{"operationId":"ConnectionMonitors_Get","tags":["ConnectionMonitors"],"parameters":[{"name":"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/stop`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/stop__deleted']` | deleted | `{"post":{"operationId":"ConnectionMonitors_Stop","parameters":[{"name":"networkWatcherName","in":"pa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/stop__deleted']` | deleted | `{"post":{"operationId":"ConnectionMonitors_Stop","tags":["ConnectionMonitors"],"parameters":[{"name"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs__deleted']` | deleted | `{"get":{"operationId":"FlowLogs_List","parameters":[{"name":"networkWatcherName","in":"path","requir...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs__deleted']` | deleted | `{"get":{"operationId":"FlowLogs_List","tags":["FlowLogs"],"parameters":[{"name":"networkWatcherName"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}__deleted']` | deleted | `{"get":{"operationId":"FlowLogs_Get","parameters":[{"name":"networkWatcherName","in":"path","require...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}__deleted']` | deleted | `{"get":{"operationId":"FlowLogs_Get","tags":["FlowLogs"],"parameters":[{"name":"networkWatcherName",...` |
 
 ### Changes for `headers`
 
@@ -74,144 +80,6 @@ Change Type: deleted
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/NetworkWatcher` |
 
-### Changes for `AvailableProvidersList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AvailableProvidersList__deleted` | deleted | `{"type":"object","properties":{"countries":{"type":"array","items":{"$ref":"#/definitions/AvailableP...` |
-
-### Changes for `AvailableProvidersListCity`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AvailableProvidersListCity__deleted` | deleted | `{"type":"object","properties":{"cityName":{"type":"string"},"providers":{"type":"array","items":{"ty...` |
-
-### Changes for `AvailableProvidersListCountry`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AvailableProvidersListCountry__deleted` | deleted | `{"type":"object","properties":{"countryName":{"type":"string"},"providers":{"type":"array","items":{...` |
-
-### Changes for `AvailableProvidersListParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AvailableProvidersListParameters__deleted` | deleted | `{"type":"object","properties":{"azureLocations":{"type":"array","items":{"type":"string"}},"country"...` |
-
-### Changes for `AvailableProvidersListState`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AvailableProvidersListState__deleted` | deleted | `{"type":"object","properties":{"stateName":{"type":"string"},"providers":{"type":"array","items":{"t...` |
-
-### Changes for `AzureReachabilityReport`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureReachabilityReport__deleted` | deleted | `{"type":"object","properties":{"aggregationLevel":{"type":"string"},"providerLocation":{"$ref":"#/de...` |
-
-### Changes for `AzureReachabilityReportItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureReachabilityReportItem__deleted` | deleted | `{"type":"object","properties":{"provider":{"type":"string"},"azureLocation":{"type":"string"},"laten...` |
-
-### Changes for `AzureReachabilityReportLatencyInfo`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureReachabilityReportLatencyInfo__deleted` | deleted | `{"type":"object","properties":{"timeStamp":{"type":"string","format":"date-time"},"score":{"type":"i...` |
-
-### Changes for `AzureReachabilityReportLocation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureReachabilityReportLocation__deleted` | deleted | `{"type":"object","properties":{"country":{"type":"string"},"state":{"type":"string"},"city":{"type":...` |
-
-### Changes for `AzureReachabilityReportParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AzureReachabilityReportParameters__deleted` | deleted | `{"type":"object","properties":{"providerLocation":{"$ref":"#/definitions/AzureReachabilityReportLoca...` |
-
-### Changes for `ConnectionMonitor`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitor__deleted` | deleted | `{"type":"object","properties":{"location":{"type":"string"},"tags":{"type":"object","additionalPrope...` |
-
-### Changes for `ConnectionMonitorDestination`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorDestination__deleted` | deleted | `{"type":"object","properties":{"resourceId":{"type":"string"},"address":{"type":"string"},"port":{"t...` |
-
-### Changes for `ConnectionMonitorEndpoint`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorEndpoint__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"type":{"type":"string","enum":["AzureVM","A...` |
-
-### Changes for `ConnectionMonitorEndpointFilter`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorEndpointFilter__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["Include"],"x-ms-enum":{"name":"Conne...` |
-
-### Changes for `ConnectionMonitorEndpointFilterItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorEndpointFilterItem__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["AgentAddress"],"x-ms-enum":{"name":"...` |
-
-### Changes for `ConnectionMonitorEndpointLocationDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorEndpointLocationDetails__deleted` | deleted | `{"type":"object","properties":{"region":{"type":"string"}}}` |
-
-### Changes for `ConnectionMonitorEndpointScope`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorEndpointScope__deleted` | deleted | `{"type":"object","properties":{"include":{"type":"array","items":{"$ref":"#/definitions/ConnectionMo...` |
-
-### Changes for `ConnectionMonitorEndpointScopeItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorEndpointScopeItem__deleted` | deleted | `{"type":"object","properties":{"address":{"type":"string"}}}` |
-
-### Changes for `ConnectionMonitorHttpConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorHttpConfiguration__deleted` | deleted | `{"type":"object","properties":{"port":{"type":"integer","format":"int32","minimum":0,"maximum":65535...` |
-
-### Changes for `ConnectionMonitorIcmpConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorIcmpConfiguration__deleted` | deleted | `{"type":"object","properties":{"disableTraceRoute":{"type":"boolean"}}}` |
-
-### Changes for `ConnectionMonitorListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/ConnectionMoni...` |
-
-### Changes for `ConnectionMonitorOutput`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorOutput__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["Workspace"],"x-ms-enum":{"name":"Out...` |
-
-### Changes for `ConnectionMonitorParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorParameters__deleted` | deleted | `{"type":"object","properties":{"source":{"$ref":"#/definitions/ConnectionMonitorSource"},"destinatio...` |
-
 ### Changes for `ConnectionMonitorQueryResult`
 
 | Path | Change Type | Value |
@@ -230,95 +98,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ConnectionMonitorResultProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"$ref":"./network.json#/definitions/Provisioning...` |
 
-### Changes for `ConnectionMonitorSource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorSource__deleted` | deleted | `{"type":"object","properties":{"resourceId":{"type":"string"},"port":{"type":"integer","format":"int...` |
-
-### Changes for `ConnectionMonitorSuccessThreshold`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorSuccessThreshold__deleted` | deleted | `{"type":"object","properties":{"checksFailedPercent":{"type":"integer","format":"int32"},"roundTripT...` |
-
-### Changes for `ConnectionMonitorTcpConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorTcpConfiguration__deleted` | deleted | `{"type":"object","properties":{"port":{"type":"integer","format":"int32","minimum":0,"maximum":65535...` |
-
-### Changes for `ConnectionMonitorTestConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorTestConfiguration__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"testFrequencySec":{"type":"integer","format...` |
-
-### Changes for `ConnectionMonitorTestGroup`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorTestGroup__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"disable":{"type":"boolean"},"testConfigurat...` |
-
-### Changes for `ConnectionMonitorWorkspaceSettings`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorWorkspaceSettings__deleted` | deleted | `{"type":"object","properties":{"workspaceResourceId":{"type":"string"}}}` |
-
 ### Changes for `ConnectionStateSnapshot`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ConnectionStateSnapshot__deleted` | deleted | `{"type":"object","properties":{"connectionState":{"type":"string","enum":["Reachable","Unreachable",...` |
-
-### Changes for `ConnectivityDestination`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectivityDestination__deleted` | deleted | `{"type":"object","properties":{"resourceId":{"type":"string"},"address":{"type":"string"},"port":{"t...` |
-
-### Changes for `ConnectivityHop`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectivityHop__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","readOnly":true},"id":{"type":"string","readO...` |
-
-### Changes for `ConnectivityInformation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectivityInformation__deleted` | deleted | `{"type":"object","properties":{"hops":{"type":"array","items":{"$ref":"#/definitions/ConnectivityHop...` |
-
-### Changes for `ConnectivityIssue`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectivityIssue__deleted` | deleted | `{"type":"object","properties":{"origin":{"type":"string","enum":["Local","Inbound","Outbound"],"x-ms...` |
-
-### Changes for `ConnectivityParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectivityParameters__deleted` | deleted | `{"type":"object","properties":{"source":{"$ref":"#/definitions/ConnectivitySource"},"destination":{"...` |
-
-### Changes for `ConnectivitySource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectivitySource__deleted` | deleted | `{"type":"object","properties":{"resourceId":{"type":"string"},"port":{"type":"integer","format":"int...` |
-
-### Changes for `ErrorResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ErrorResponse__deleted` | deleted | `{"type":"object","properties":{"error":{"$ref":"./network.json#/definitions/ErrorDetails","title":"E...` |
-
-### Changes for `EvaluatedNetworkSecurityGroup`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.EvaluatedNetworkSecurityGroup__deleted` | deleted | `{"type":"object","properties":{"networkSecurityGroupId":{"type":"string"},"appliedTo":{"type":"strin...` |
 
 ### Changes for `FlowLog`
 
@@ -326,65 +110,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.FlowLog__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/FlowLogPropertiesFormat","x-ms-cl...` |
 
-### Changes for `FlowLogFormatParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FlowLogFormatParameters__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["JSON"],"x-ms-enum":{"name":"FlowLogF...` |
-
-### Changes for `FlowLogInformation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FlowLogInformation__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"},"properties":{"$ref":"#/definiti...` |
-
 ### Changes for `FlowLogListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.FlowLogListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `FlowLogProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FlowLogProperties__deleted` | deleted | `{"type":"object","properties":{"storageId":{"type":"string"},"enabledFilteringCriteria":{"type":"str...` |
-
-### Changes for `FlowLogPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FlowLogPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"},"targetResourceGuid":{"type":"st...` |
-
-### Changes for `FlowLogStatusParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FlowLogStatusParameters__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"}},"required":["targetResourceId"]...` |
-
-### Changes for `HTTPConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HTTPConfiguration__deleted` | deleted | `{"type":"object","properties":{"method":{"type":"string","enum":["Get"],"x-ms-enum":{"name":"HTTPMet...` |
-
-### Changes for `HTTPHeader`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HTTPHeader__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"value":{"type":"string"}}}` |
-
-### Changes for `HopLink`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HopLink__deleted` | deleted | `{"type":"object","properties":{"nextHopId":{"type":"string","readOnly":true},"linkType":{"type":"str...` |
-
-### Changes for `HopLinkProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HopLinkProperties__deleted` | deleted | `{"type":"object","properties":{"roundTripTimeMin":{"type":"integer","format":"int64","minimum":0,"ma...` |
 
 ### Changes for `IssueContext`
 
@@ -392,338 +122,187 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.IssueContext__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"}}` |
 
-### Changes for `MatchedRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.MatchedRule__deleted` | deleted | `{"type":"object","properties":{"ruleName":{"type":"string"},"action":{"type":"string"}}}` |
-
-### Changes for `NetworkConfigurationDiagnosticParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkConfigurationDiagnosticParameters__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"},"verbosityLevel":{"type":"string...` |
-
-### Changes for `NetworkConfigurationDiagnosticProfile`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkConfigurationDiagnosticProfile__deleted` | deleted | `{"type":"object","properties":{"direction":{"type":"string","enum":["Inbound","Outbound"],"x-ms-enum...` |
-
-### Changes for `NetworkConfigurationDiagnosticResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkConfigurationDiagnosticResponse__deleted` | deleted | `{"type":"object","properties":{"results":{"type":"array","items":{"$ref":"#/definitions/NetworkConfi...` |
-
-### Changes for `NetworkConfigurationDiagnosticResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkConfigurationDiagnosticResult__deleted` | deleted | `{"type":"object","properties":{"profile":{"$ref":"#/definitions/NetworkConfigurationDiagnosticProfil...` |
-
-### Changes for `NetworkInterfaceAssociation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkInterfaceAssociation__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","readOnly":true},"securityRules":{"type":"array...` |
-
-### Changes for `NetworkSecurityGroupResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkSecurityGroupResult__deleted` | deleted | `{"type":"object","properties":{"securityRuleAccessResult":{"$ref":"./networkSecurityGroup.json#/defi...` |
-
-### Changes for `NetworkSecurityRulesEvaluationResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkSecurityRulesEvaluationResult__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"protocolMatched":{"type":"boolean"},"source...` |
-
-### Changes for `NetworkWatcherListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkWatcherListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/NetworkWatcher...` |
-
-### Changes for `NetworkWatcherPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkWatcherPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"$ref":"./network.json#/definitions/Provisioning...` |
-
-### Changes for `NextHopParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NextHopParameters__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"},"sourceIPAddress":{"type":"strin...` |
-
-### Changes for `NextHopResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NextHopResult__deleted` | deleted | `{"type":"object","properties":{"nextHopType":{"type":"string","enum":["Internet","VirtualAppliance",...` |
-
-### Changes for `PacketCapture`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PacketCapture__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/PacketCaptureParameters","x-ms-cl...` |
-
-### Changes for `PacketCaptureFilter`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PacketCaptureFilter__deleted` | deleted | `{"type":"object","properties":{"protocol":{"type":"string","default":"Any","enum":["TCP","UDP","Any"...` |
-
-### Changes for `PacketCaptureListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PacketCaptureListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/PacketCaptureR...` |
-
-### Changes for `PacketCaptureMachineScope`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PacketCaptureMachineScope__deleted` | deleted | `{"type":"object","properties":{"include":{"type":"array","items":{"type":"string"}},"exclude":{"type...` |
-
-### Changes for `PacketCaptureParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PacketCaptureParameters__deleted` | deleted | `{"type":"object","properties":{"target":{"type":"string"},"scope":{"$ref":"#/definitions/PacketCaptu...` |
-
-### Changes for `PacketCaptureQueryStatusResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PacketCaptureQueryStatusResult__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"id":{"type":"string"},"captureStartTime":{"...` |
-
-### Changes for `PacketCaptureResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PacketCaptureResult__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","readOnly":true},"id":{"type":"string","readO...` |
-
 ### Changes for `PacketCaptureResultProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.PacketCaptureResultProperties__deleted` | deleted | `{"type":"object","properties":{"provisioningState":{"$ref":"./network.json#/definitions/Provisioning...` |
 
-### Changes for `PacketCaptureSettings`
+### Changes for `type`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.PacketCaptureSettings__deleted` | deleted | `{"type":"object","properties":{"fileCount":{"type":"integer","format":"int32","default":10,"minimum"...` |
+| `definitions.ConnectionMonitorEndpoint.properties.coverageLevel.type__deleted` | deleted | `string` |
+| `definitions.ConnectionMonitorEndpoint.properties.type.type__deleted` | deleted | `string` |
+| `definitions.ConnectionMonitorEndpointFilter.properties.type.type__deleted` | deleted | `string` |
+| `definitions.ConnectionMonitorEndpointFilterItem.properties.type.type__deleted` | deleted | `string` |
+| `definitions.ConnectionMonitorHttpConfiguration.properties.method.type__deleted` | deleted | `string` |
+| `definitions.ConnectionMonitorOutput.properties.type.type__deleted` | deleted | `string` |
+| `definitions.ConnectionMonitorTcpConfiguration.properties.destinationPortBehavior.type__deleted` | deleted | `string` |
+| `definitions.ConnectionMonitorTestConfiguration.properties.preferredIPVersion.type__deleted` | deleted | `string` |
+| `definitions.ConnectionMonitorTestConfiguration.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.ConnectivityInformation.properties.connectionStatus.type__deleted` | deleted | `string` |
+| `definitions.ConnectivityIssue.properties.context.items.type__added` | added | `object` |
+| `definitions.ConnectivityIssue.properties.origin.type__deleted` | deleted | `string` |
+| `definitions.ConnectivityIssue.properties.severity.type__deleted` | deleted | `string` |
+| `definitions.ConnectivityIssue.properties.type.type__deleted` | deleted | `string` |
+| `definitions.ConnectivityParameters.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.FlowLogFormatParameters.properties.type.type__deleted` | deleted | `string` |
+| `definitions.HTTPConfiguration.properties.method.type__deleted` | deleted | `string` |
+| `definitions.NetworkConfigurationDiagnosticParameters.properties.verbosityLevel.type__deleted` | deleted | `string` |
+| `definitions.NetworkConfigurationDiagnosticProfile.properties.direction.type__deleted` | deleted | `string` |
+| `definitions.NextHopResult.properties.nextHopType.type__deleted` | deleted | `string` |
+| `definitions.PacketCaptureParameters.properties.captureSettings.type__deleted` | deleted | `object` |
+| `definitions.PacketCaptureParameters.properties.targetType.type__deleted` | deleted | `string` |
+| `definitions.PacketCaptureQueryStatusResult.properties.packetCaptureError.items.type__deleted` | deleted | `string` |
+| `definitions.PacketCaptureQueryStatusResult.properties.packetCaptureStatus.type__deleted` | deleted | `string` |
+| `definitions.TopologyAssociation.properties.associationType.type__deleted` | deleted | `string` |
+| `definitions.VerificationIPFlowParameters.properties.direction.type__deleted` | deleted | `string` |
+| `definitions.VerificationIPFlowParameters.properties.protocol.type__deleted` | deleted | `string` |
 
-### Changes for `PacketCaptureStorageLocation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PacketCaptureStorageLocation__deleted` | deleted | `{"type":"object","properties":{"storageId":{"type":"string"},"storagePath":{"type":"string"},"filePa...` |
-
-### Changes for `ProtocolConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ProtocolConfiguration__deleted` | deleted | `{"type":"object","properties":{"HTTPConfiguration":{"$ref":"#/definitions/HTTPConfiguration"}}}` |
-
-### Changes for `QueryTroubleshootingParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.QueryTroubleshootingParameters__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"}},"required":["targetResourceId"]...` |
-
-### Changes for `RetentionPolicyParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RetentionPolicyParameters__deleted` | deleted | `{"type":"object","properties":{"days":{"type":"integer","format":"int32","default":0},"enabled":{"ty...` |
-
-### Changes for `SecurityGroupNetworkInterface`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityGroupNetworkInterface__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"},"securityRuleAssociations":{"$ref":"#/definiti...` |
-
-### Changes for `SecurityGroupViewParameters`
+### Changes for `enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SecurityGroupViewParameters__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"}},"required":["targetResourceId"]...` |
+| `definitions.ConnectionMonitorEndpoint.properties.coverageLevel.enum__deleted` | deleted | `["Default","Low","BelowAverage","Average","AboveAverage","Full"]` |
+| `definitions.ConnectionMonitorEndpoint.properties.type.enum__deleted` | deleted | `["AzureVM","AzureVNet","AzureSubnet","ExternalAddress","MMAWorkspaceMachine","MMAWorkspaceNetwork","...` |
+| `definitions.ConnectionMonitorEndpointFilter.properties.type.enum__deleted` | deleted | `["Include"]` |
+| `definitions.ConnectionMonitorEndpointFilterItem.properties.type.enum__deleted` | deleted | `["AgentAddress"]` |
+| `definitions.ConnectionMonitorHttpConfiguration.properties.method.enum__deleted` | deleted | `["Get","Post"]` |
+| `definitions.ConnectionMonitorOutput.properties.type.enum__deleted` | deleted | `["Workspace"]` |
+| `definitions.ConnectionMonitorTcpConfiguration.properties.destinationPortBehavior.enum__deleted` | deleted | `["None","ListenIfAvailable"]` |
+| `definitions.ConnectionMonitorTestConfiguration.properties.preferredIPVersion.enum__deleted` | deleted | `["IPv4","IPv6"]` |
+| `definitions.ConnectionMonitorTestConfiguration.properties.protocol.enum__deleted` | deleted | `["Tcp","Http","Icmp"]` |
+| `definitions.ConnectivityInformation.properties.connectionStatus.enum__deleted` | deleted | `["Unknown","Connected","Disconnected","Degraded"]` |
+| `definitions.ConnectivityIssue.properties.origin.enum__deleted` | deleted | `["Local","Inbound","Outbound"]` |
+| `definitions.ConnectivityIssue.properties.severity.enum__deleted` | deleted | `["Error","Warning"]` |
+| `definitions.ConnectivityIssue.properties.type.enum__deleted` | deleted | `["Unknown","AgentStopped","GuestFirewall","DnsResolution","SocketBind","NetworkSecurityRule","UserDe...` |
+| `definitions.ConnectivityParameters.properties.protocol.enum__deleted` | deleted | `["Tcp","Http","Https","Icmp"]` |
+| `definitions.FlowLogFormatParameters.properties.type.enum__deleted` | deleted | `["JSON"]` |
+| `definitions.HTTPConfiguration.properties.method.enum__deleted` | deleted | `["Get"]` |
+| `definitions.NetworkConfigurationDiagnosticParameters.properties.verbosityLevel.enum__deleted` | deleted | `["Normal","Minimum","Full"]` |
+| `definitions.NetworkConfigurationDiagnosticProfile.properties.direction.enum__deleted` | deleted | `["Inbound","Outbound"]` |
+| `definitions.NextHopResult.properties.nextHopType.enum__deleted` | deleted | `["Internet","VirtualAppliance","VirtualNetworkGateway","VnetLocal","HyperNetGateway","None"]` |
+| `definitions.PacketCaptureParameters.properties.targetType.enum__deleted` | deleted | `["AzureVM","AzureVMSS"]` |
+| `definitions.PacketCaptureQueryStatusResult.properties.packetCaptureError.items.enum__deleted` | deleted | `["InternalError","AgentStopped","CaptureFailed","LocalFileFailed","StorageFailed"]` |
+| `definitions.PacketCaptureQueryStatusResult.properties.packetCaptureStatus.enum__deleted` | deleted | `["NotStarted","Running","Stopped","Error","Unknown"]` |
+| `definitions.TopologyAssociation.properties.associationType.enum__deleted` | deleted | `["Associated","Contains"]` |
+| `definitions.VerificationIPFlowParameters.properties.direction.enum__deleted` | deleted | `["Inbound","Outbound"]` |
+| `definitions.VerificationIPFlowParameters.properties.protocol.enum__deleted` | deleted | `["TCP","UDP"]` |
 
-### Changes for `SecurityGroupViewResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityGroupViewResult__deleted` | deleted | `{"type":"object","properties":{"networkInterfaces":{"type":"array","items":{"$ref":"#/definitions/Se...` |
-
-### Changes for `SecurityRuleAssociations`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SecurityRuleAssociations__deleted` | deleted | `{"type":"object","properties":{"networkInterfaceAssociation":{"$ref":"#/definitions/NetworkInterface...` |
-
-### Changes for `SubnetAssociation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SubnetAssociation__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","readOnly":true},"securityRules":{"type":"array...` |
-
-### Changes for `Topology`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Topology__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","readOnly":true},"createdDateTime":{"type":"str...` |
-
-### Changes for `TopologyAssociation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TopologyAssociation__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"resourceId":{"type":"string"},"associationT...` |
-
-### Changes for `TopologyParameters`
+### Changes for `x-ms-enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.TopologyParameters__deleted` | deleted | `{"type":"object","properties":{"targetResourceGroupName":{"type":"string"},"targetVirtualNetwork":{"...` |
+| `definitions.ConnectionMonitorEndpoint.properties.coverageLevel['x-ms-enum__deleted']` | deleted | `{"name":"CoverageLevel","modelAsString":true}` |
+| `definitions.ConnectionMonitorEndpoint.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"EndpointType","modelAsString":true}` |
+| `definitions.ConnectionMonitorEndpointFilter.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"ConnectionMonitorEndpointFilterType","modelAsString":true}` |
+| `definitions.ConnectionMonitorEndpointFilterItem.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"ConnectionMonitorEndpointFilterItemType","modelAsString":true}` |
+| `definitions.ConnectionMonitorHttpConfiguration.properties.method['x-ms-enum__deleted']` | deleted | `{"name":"HTTPConfigurationMethod","modelAsString":true}` |
+| `definitions.ConnectionMonitorOutput.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"OutputType","modelAsString":true}` |
+| `definitions.ConnectionMonitorTcpConfiguration.properties.destinationPortBehavior['x-ms-enum__deleted']` | deleted | `{"name":"DestinationPortBehavior","modelAsString":true}` |
+| `definitions.ConnectionMonitorTestConfiguration.properties.preferredIPVersion['x-ms-enum__deleted']` | deleted | `{"name":"PreferredIPVersion","modelAsString":true}` |
+| `definitions.ConnectionMonitorTestConfiguration.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"ConnectionMonitorTestConfigurationProtocol","modelAsString":true}` |
+| `definitions.ConnectivityInformation.properties.connectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"ConnectionStatus","modelAsString":true}` |
+| `definitions.ConnectivityIssue.properties.origin['x-ms-enum__deleted']` | deleted | `{"name":"Origin","modelAsString":true}` |
+| `definitions.ConnectivityIssue.properties.severity['x-ms-enum__deleted']` | deleted | `{"name":"Severity","modelAsString":true}` |
+| `definitions.ConnectivityIssue.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"IssueType","modelAsString":true}` |
+| `definitions.ConnectivityParameters.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"Protocol","modelAsString":true}` |
+| `definitions.FlowLogFormatParameters.properties.type['x-ms-enum__deleted']` | deleted | `{"name":"FlowLogFormatType","modelAsString":true}` |
+| `definitions.HTTPConfiguration.properties.method['x-ms-enum__deleted']` | deleted | `{"name":"HTTPMethod","modelAsString":true}` |
+| `definitions.NetworkConfigurationDiagnosticParameters.properties.verbosityLevel['x-ms-enum__deleted']` | deleted | `{"name":"VerbosityLevel","modelAsString":true}` |
+| `definitions.NetworkConfigurationDiagnosticProfile.properties.direction['x-ms-enum__deleted']` | deleted | `{"name":"Direction","modelAsString":true}` |
+| `definitions.NextHopResult.properties.nextHopType['x-ms-enum__deleted']` | deleted | `{"name":"NextHopType","modelAsString":true}` |
+| `definitions.PacketCaptureParameters.properties.targetType['x-ms-enum__deleted']` | deleted | `{"name":"PacketCaptureTargetType","modelAsString":false}` |
+| `definitions.PacketCaptureQueryStatusResult.properties.packetCaptureError.items['x-ms-enum__deleted']` | deleted | `{"name":"PcError","modelAsString":true}` |
+| `definitions.PacketCaptureQueryStatusResult.properties.packetCaptureStatus['x-ms-enum__deleted']` | deleted | `{"name":"PcStatus","modelAsString":true}` |
+| `definitions.TopologyAssociation.properties.associationType['x-ms-enum__deleted']` | deleted | `{"name":"AssociationType","modelAsString":true}` |
+| `definitions.VerificationIPFlowParameters.properties.direction['x-ms-enum__deleted']` | deleted | `{"name":"Direction","modelAsString":true}` |
+| `definitions.VerificationIPFlowParameters.properties.protocol['x-ms-enum__deleted']` | deleted | `{"name":"IpFlowProtocol","modelAsString":true}` |
 
-### Changes for `TopologyResource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TopologyResource__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"id":{"type":"string"},"location":{"type":"s...` |
-
-### Changes for `TrafficAnalyticsConfigurationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TrafficAnalyticsConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"enabled":{"type":"boolean"},"workspaceId":{"type":"string"},"workspa...` |
-
-### Changes for `TrafficAnalyticsProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TrafficAnalyticsProperties__deleted` | deleted | `{"type":"object","properties":{"networkWatcherFlowAnalyticsConfiguration":{"$ref":"#/definitions/Tra...` |
-
-### Changes for `TroubleshootingDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TroubleshootingDetails__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"},"reasonType":{"type":"string"},"summary":{"typ...` |
-
-### Changes for `TroubleshootingParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TroubleshootingParameters__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"},"properties":{"$ref":"#/definiti...` |
-
-### Changes for `TroubleshootingProperties`
+### Changes for `$ref`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.TroubleshootingProperties__deleted` | deleted | `{"type":"object","properties":{"storageId":{"type":"string"},"storagePath":{"type":"string"}},"requi...` |
+| `definitions.ConnectionMonitorEndpoint.properties.coverageLevel.$ref__added` | added | `./common.json/definitions/CoverageLevel` |
+| `definitions.ConnectionMonitorEndpoint.properties.type.$ref__added` | added | `./common.json/definitions/EndpointType` |
+| `definitions.ConnectionMonitorEndpointFilter.properties.type.$ref__added` | added | `./common.json/definitions/ConnectionMonitorEndpointFilterType` |
+| `definitions.ConnectionMonitorEndpointFilterItem.properties.type.$ref__added` | added | `./common.json/definitions/ConnectionMonitorEndpointFilterItemType` |
+| `definitions.ConnectionMonitorHttpConfiguration.properties.method.$ref__added` | added | `./common.json/definitions/HTTPConfigurationMethod` |
+| `definitions.ConnectionMonitorOutput.properties.type.$ref__added` | added | `./common.json/definitions/OutputType` |
+| `definitions.ConnectionMonitorTcpConfiguration.properties.destinationPortBehavior.$ref__added` | added | `./common.json/definitions/DestinationPortBehavior` |
+| `definitions.ConnectionMonitorTestConfiguration.properties.preferredIPVersion.$ref__added` | added | `./common.json/definitions/PreferredIPVersion` |
+| `definitions.ConnectionMonitorTestConfiguration.properties.protocol.$ref__added` | added | `./common.json/definitions/ConnectionMonitorTestConfigurationProtocol` |
+| `definitions.ConnectivityInformation.properties.connectionStatus.$ref__added` | added | `./common.json/definitions/ConnectionStatus` |
+| `definitions.ConnectivityIssue.properties.context.items.$ref__deleted` | deleted | `#/definitions/IssueContext` |
+| `definitions.ConnectivityIssue.properties.origin.$ref__added` | added | `./common.json/definitions/Origin` |
+| `definitions.ConnectivityIssue.properties.severity.$ref__added` | added | `./common.json/definitions/Severity` |
+| `definitions.ConnectivityIssue.properties.type.$ref__added` | added | `./common.json/definitions/IssueType` |
+| `definitions.ConnectivityParameters.properties.protocol.$ref__added` | added | `./common.json/definitions/Protocol` |
+| `definitions.FlowLogFormatParameters.properties.type.$ref__added` | added | `./common.json/definitions/FlowLogFormatType` |
+| `definitions.HTTPConfiguration.properties.method.$ref__added` | added | `./common.json/definitions/HTTPMethod` |
+| `definitions.NetworkConfigurationDiagnosticParameters.properties.verbosityLevel.$ref__added` | added | `./common.json/definitions/VerbosityLevel` |
+| `definitions.NetworkConfigurationDiagnosticProfile.properties.direction.$ref__added` | added | `./common.json/definitions/Direction` |
+| `definitions.NextHopResult.properties.nextHopType.$ref__added` | added | `./common.json/definitions/NextHopType` |
+| `definitions.PacketCaptureParameters.properties.targetType.$ref__added` | added | `./common.json/definitions/PacketCaptureTargetType` |
+| `definitions.PacketCaptureQueryStatusResult.properties.packetCaptureError.items.$ref__added` | added | `./common.json/definitions/PcError` |
+| `definitions.PacketCaptureQueryStatusResult.properties.packetCaptureStatus.$ref__added` | added | `./common.json/definitions/PcStatus` |
+| `definitions.TopologyAssociation.properties.associationType.$ref__added` | added | `./common.json/definitions/AssociationType` |
+| `definitions.VerificationIPFlowParameters.properties.direction.$ref__added` | added | `./common.json/definitions/Direction` |
+| `definitions.VerificationIPFlowParameters.properties.protocol.$ref__added` | added | `./common.json/definitions/IpFlowProtocol` |
 
-### Changes for `TroubleshootingRecommendedActions`
+### Changes for `description`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.TroubleshootingRecommendedActions__deleted` | deleted | `{"type":"object","properties":{"actionId":{"type":"string"},"actionText":{"type":"string"},"actionUr...` |
+| `definitions.ConnectionMonitorListResult.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.ConnectionMonitorListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.NetworkWatcherListResult.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.NetworkWatcherListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.PacketCaptureListResult.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.PacketCaptureListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
 
-### Changes for `TroubleshootingResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.TroubleshootingResult__deleted` | deleted | `{"type":"object","properties":{"startTime":{"type":"string","format":"date-time"},"endTime":{"type":...` |
-
-### Changes for `VerificationIPFlowParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VerificationIPFlowParameters__deleted` | deleted | `{"type":"object","properties":{"targetResourceId":{"type":"string"},"direction":{"type":"string","en...` |
-
-### Changes for `VerificationIPFlowResult`
+### Changes for `nextLink`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.VerificationIPFlowResult__deleted` | deleted | `{"type":"object","properties":{"access":{"$ref":"./network.json#/definitions/Access"},"ruleName":{"t...` |
+| `definitions.ConnectionMonitorListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.NetworkWatcherListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.PacketCaptureListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+
+### Changes for `format`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ConnectionMonitorSuccessThreshold.properties.roundTripTimeMs.format__added` | added | `float` |
+
+### Changes for `additionalProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ConnectivityIssue.properties.context.items.additionalProperties__added` | added | `{"type":"string"}` |
 
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
+| `definitions.ConnectionMonitorListResult.properties.value.items.$ref` | `#/definitions/ConnectionMonitorResult` | `./common.json/definitions/ConnectionMonitorResult` |
+| `definitions.ConnectivityParameters.properties.preferredIPVersion.$ref` | `./network.json#/definitions/IPVersion` | `./common.json/definitions/IPVersion` |
+| `definitions.ErrorResponse.properties.error.$ref` | `./network.json#/definitions/ErrorDetails` | `./common.json/definitions/ErrorDetails` |
+| `definitions.FlowLogInformation.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `./common.json/definitions/ManagedServiceIdentity` |
+| `definitions.FlowLogPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.NetworkInterfaceAssociation.properties.securityRules.items.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRule` | `./common.json/definitions/SecurityRule` |
+| `definitions.NetworkSecurityGroupResult.properties.securityRuleAccessResult.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRuleAccess` | `./common.json/definitions/SecurityRuleAccess` |
 | `definitions.NetworkWatcher.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.NetworkWatcher.properties.properties.$ref` | `#/definitions/NetworkWatcherPropertiesFormat` | `./common.json/definitions/NetworkWatcherPropertiesFormat` |
+| `definitions.NetworkWatcherPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.PacketCaptureResult.properties.properties.$ref` | `#/definitions/PacketCaptureResultProperties` | `./common.json/definitions/PacketCaptureResultProperties` |
+| `definitions.SecurityRuleAssociations.properties.defaultSecurityRules.items.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRule` | `./common.json/definitions/SecurityRule` |
+| `definitions.SecurityRuleAssociations.properties.effectiveSecurityRules.items.$ref` | `./networkInterface.json#/definitions/EffectiveNetworkSecurityRule` | `./virtualNetwork.json/definitions/EffectiveNetworkSecurityRule` |
+| `definitions.SubnetAssociation.properties.securityRules.items.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRule` | `./common.json/definitions/SecurityRule` |
+| `definitions.TopologyParameters.properties.targetSubnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.TopologyParameters.properties.targetVirtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.VerificationIPFlowResult.properties.access.$ref` | `./network.json#/definitions/Access` | `./common.json/definitions/Access` |
 | `info.description` | `The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `NetworkManagementClient` | `WebApplicationFirewallManagement` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkWatchers'].get.responses.200.schema.$ref` | `#/definitions/NetworkWatcherListResult` | `./common.json/definitions/NetworkWatcherListResult` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkWatchers'].get.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers'].get.responses.200.schema.$ref` | `#/definitions/NetworkWatcherListResult` | `./common.json/definitions/NetworkWatcherListResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers'].get.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}'].delete.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}'].get.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json/definitions/TagsObject` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}'].patch.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}'].put.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/availableProvidersList'].post.parameters[1].schema.$ref` | `#/definitions/AvailableProvidersListParameters` | `./common.json/definitions/AvailableProvidersListParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/availableProvidersList'].post.responses.200.schema.$ref` | `#/definitions/AvailableProvidersList` | `./common.json/definitions/AvailableProvidersList` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/availableProvidersList'].post.responses.202.schema.$ref` | `#/definitions/AvailableProvidersList` | `./common.json/definitions/AvailableProvidersList` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/availableProvidersList'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/azureReachabilityReport'].post.parameters[1].schema.$ref` | `#/definitions/AzureReachabilityReportParameters` | `./common.json/definitions/AzureReachabilityReportParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/azureReachabilityReport'].post.responses.200.schema.$ref` | `#/definitions/AzureReachabilityReport` | `./common.json/definitions/AzureReachabilityReport` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/azureReachabilityReport'].post.responses.202.schema.$ref` | `#/definitions/AzureReachabilityReport` | `./common.json/definitions/AzureReachabilityReport` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/azureReachabilityReport'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog'].post.parameters[1].schema.$ref` | `#/definitions/FlowLogInformation` | `./common.json/definitions/FlowLogInformation` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog'].post.responses.200.schema.$ref` | `#/definitions/FlowLogInformation` | `./common.json/definitions/FlowLogInformation` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog'].post.responses.202.schema.$ref` | `#/definitions/FlowLogInformation` | `./common.json/definitions/FlowLogInformation` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/configureFlowLog'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck'].post.parameters[1].schema.$ref` | `#/definitions/ConnectivityParameters` | `./common.json/definitions/ConnectivityParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck'].post.responses.200.schema.$ref` | `#/definitions/ConnectivityInformation` | `./common.json/definitions/ConnectivityInformation` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck'].post.responses.202.schema.$ref` | `#/definitions/ConnectivityInformation` | `./common.json/definitions/ConnectivityInformation` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectivityCheck'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/ipFlowVerify'].post.parameters[1].schema.$ref` | `#/definitions/VerificationIPFlowParameters` | `./common.json/definitions/VerificationIPFlowParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/ipFlowVerify'].post.responses.200.schema.$ref` | `#/definitions/VerificationIPFlowResult` | `./common.json/definitions/VerificationIPFlowResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/ipFlowVerify'].post.responses.202.schema.$ref` | `#/definitions/VerificationIPFlowResult` | `./common.json/definitions/VerificationIPFlowResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/ipFlowVerify'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic'].post.parameters[1].schema.$ref` | `#/definitions/NetworkConfigurationDiagnosticParameters` | `./common.json/definitions/NetworkConfigurationDiagnosticParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic'].post.responses.200.schema.$ref` | `#/definitions/NetworkConfigurationDiagnosticResponse` | `./common.json/definitions/NetworkConfigurationDiagnosticResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic'].post.responses.202.schema.$ref` | `#/definitions/NetworkConfigurationDiagnosticResponse` | `./common.json/definitions/NetworkConfigurationDiagnosticResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/nextHop'].post.parameters[1].schema.$ref` | `#/definitions/NextHopParameters` | `./common.json/definitions/NextHopParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/nextHop'].post.responses.200.schema.$ref` | `#/definitions/NextHopResult` | `./common.json/definitions/NextHopResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/nextHop'].post.responses.202.schema.$ref` | `#/definitions/NextHopResult` | `./common.json/definitions/NextHopResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/nextHop'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures'].get.responses.200.schema.$ref` | `#/definitions/PacketCaptureListResult` | `./common.json/definitions/PacketCaptureListResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures'].get.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].delete.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].get.responses.200.schema.$ref` | `#/definitions/PacketCaptureResult` | `./common.json/definitions/PacketCaptureResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].get.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].put.parameters[2].schema.$ref` | `#/definitions/PacketCapture` | `./common.json/definitions/PacketCapture` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].put.responses.201.schema.$ref` | `#/definitions/PacketCaptureResult` | `./common.json/definitions/PacketCaptureResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}'].put.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus'].post.responses.200.schema.$ref` | `#/definitions/PacketCaptureQueryStatusResult` | `./common.json/definitions/PacketCaptureQueryStatusResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus'].post.responses.202.schema.$ref` | `#/definitions/PacketCaptureQueryStatusResult` | `./common.json/definitions/PacketCaptureQueryStatusResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus'].post.parameters[1].schema.$ref` | `#/definitions/FlowLogStatusParameters` | `./common.json/definitions/FlowLogStatusParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus'].post.responses.200.schema.$ref` | `#/definitions/FlowLogInformation` | `./common.json/definitions/FlowLogInformation` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus'].post.responses.202.schema.$ref` | `#/definitions/FlowLogInformation` | `./common.json/definitions/FlowLogInformation` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryFlowLogStatus'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryTroubleshootResult'].post.parameters[1].schema.$ref` | `#/definitions/QueryTroubleshootingParameters` | `./common.json/definitions/QueryTroubleshootingParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryTroubleshootResult'].post.responses.200.schema.$ref` | `#/definitions/TroubleshootingResult` | `./common.json/definitions/TroubleshootingResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryTroubleshootResult'].post.responses.202.schema.$ref` | `#/definitions/TroubleshootingResult` | `./common.json/definitions/TroubleshootingResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/queryTroubleshootResult'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView'].post.parameters[1].schema.$ref` | `#/definitions/SecurityGroupViewParameters` | `./common.json/definitions/SecurityGroupViewParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView'].post.responses.200.schema.$ref` | `#/definitions/SecurityGroupViewResult` | `./common.json/definitions/SecurityGroupViewResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView'].post.responses.202.schema.$ref` | `#/definitions/SecurityGroupViewResult` | `./common.json/definitions/SecurityGroupViewResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/topology'].post.parameters[1].schema.$ref` | `#/definitions/TopologyParameters` | `./common.json/definitions/TopologyParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/topology'].post.responses.200.schema.$ref` | `#/definitions/Topology` | `./common.json/definitions/Topology` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/topology'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot'].post.parameters[1].schema.$ref` | `#/definitions/TroubleshootingParameters` | `./common.json/definitions/TroubleshootingParameters` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot'].post.responses.200.schema.$ref` | `#/definitions/TroubleshootingResult` | `./common.json/definitions/TroubleshootingResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot'].post.responses.202.schema.$ref` | `#/definitions/TroubleshootingResult` | `./common.json/definitions/TroubleshootingResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/troubleshoot'].post.responses.default.schema.$ref` | `#/definitions/ErrorResponse` | `./common.json/definitions/ErrorResponse` |
 

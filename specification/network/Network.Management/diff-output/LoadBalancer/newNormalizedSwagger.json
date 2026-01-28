@@ -11,10 +11,18 @@
   "consumes": [
     "application/json"
   ],
+  "tags": [
+    {
+      "name": "LoadBalancers"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/loadBalancers": {
       "get": {
         "operationId": "LoadBalancers_ListAll",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -43,6 +51,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers": {
       "get": {
         "operationId": "LoadBalancers_List",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -71,6 +82,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}": {
       "get": {
         "operationId": "LoadBalancers_Get",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -109,6 +123,9 @@
       },
       "put": {
         "operationId": "LoadBalancers_CreateOrUpdate",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -191,6 +208,9 @@
       },
       "patch": {
         "operationId": "LoadBalancers_UpdateTags",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -229,6 +249,9 @@
       },
       "delete": {
         "operationId": "LoadBalancers_Delete",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -271,6 +294,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/migrateToIpBased": {
       "post": {
         "operationId": "LoadBalancers_MigrateToIpBased",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [
           {
             "name": "groupName",
@@ -290,7 +316,7 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "./common.json/definitions/MigrateLoadBalancerToIpBasedRequest"
+              "$ref": "#/definitions/MigrateLoadBalancerToIpBasedRequest"
             }
           }
         ],
@@ -298,7 +324,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/MigratedPools"
+              "$ref": "#/definitions/MigratedPools"
             }
           },
           "default": {
@@ -318,6 +344,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/networkInterfaces": {
       "get": {
         "operationId": "LoadBalancerNetworkInterfaces_List",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -355,11 +384,279 @@
     }
   },
   "definitions": {
+    "BackendAddressInboundNatRulePortMappings": {
+      "type": "object",
+      "properties": {
+        "inboundNatRulePortMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatRulePortMapping"
+          }
+        }
+      }
+    },
+    "BackendAddressPoolPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "tunnelInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayLoadBalancerTunnelInterface"
+          }
+        },
+        "loadBalancerBackendAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerBackendAddress"
+          }
+        },
+        "backendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "readOnly": true
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "outboundRule": {
+          "$ref": "./common.json/definitions/SubResource",
+          "readOnly": true
+        },
+        "outboundRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "inboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "drainPeriodInSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "virtualNetwork": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "syncMode": {
+          "$ref": "./common.json/definitions/SyncMode"
+        }
+      }
+    },
+    "FrontendIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "inboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "inboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "outboundRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "privateIPAddress": {
+          "type": "string"
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "./common.json/definitions/IPAllocationMethod"
+        },
+        "privateIPAddressVersion": {
+          "$ref": "./common.json/definitions/IPVersion"
+        },
+        "subnet": {
+          "$ref": "./common.json/definitions/Subnet"
+        },
+        "publicIPAddress": {
+          "$ref": "./virtualNetwork.json/definitions/PublicIPAddress"
+        },
+        "publicIPPrefix": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "gatewayLoadBalancer": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayLoadBalancerTunnelInterface": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "identifier": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/GatewayLoadBalancerTunnelProtocol"
+        },
+        "type": {
+          "$ref": "./common.json/definitions/GatewayLoadBalancerTunnelInterfaceType"
+        }
+      }
+    },
+    "InboundNatPoolPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/TransportProtocol"
+        },
+        "frontendPortRangeStart": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "frontendPortRangeEnd": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enableFloatingIP": {
+          "type": "boolean"
+        },
+        "enableTcpReset": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "backendPort",
+        "frontendPortRangeEnd",
+        "frontendPortRangeStart",
+        "protocol"
+      ]
+    },
+    "InboundNatRulePortMapping": {
+      "type": "object",
+      "properties": {
+        "inboundNatRuleName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/TransportProtocol",
+          "readOnly": true
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "InboundNatRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "backendIPConfiguration": {
+          "$ref": "./common.json/definitions/NetworkInterfaceIPConfiguration",
+          "readOnly": true
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/TransportProtocol"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enableFloatingIP": {
+          "type": "boolean"
+        },
+        "enableTcpReset": {
+          "type": "boolean"
+        },
+        "frontendPortRangeStart": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "frontendPortRangeEnd": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "backendAddressPool": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
     "LoadBalancer": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "./common.json/definitions/LoadBalancerPropertiesFormat",
+          "$ref": "#/definitions/LoadBalancerPropertiesFormat",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -370,7 +667,7 @@
           "$ref": "./common.json/definitions/ExtendedLocation"
         },
         "sku": {
-          "$ref": "./common.json/definitions/LoadBalancerSku"
+          "$ref": "#/definitions/LoadBalancerSku"
         }
       },
       "allOf": [
@@ -378,6 +675,85 @@
           "$ref": "./common.json/definitions/Resource"
         }
       ]
+    },
+    "LoadBalancerBackendAddress": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerBackendAddressPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "LoadBalancerBackendAddressPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "virtualNetwork": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "subnet": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "networkInterfaceIPConfiguration": {
+          "$ref": "./common.json/definitions/SubResource",
+          "readOnly": true
+        },
+        "loadBalancerFrontendIPConfiguration": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "inboundNatRulesPortMapping": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NatRulePortMapping"
+          },
+          "readOnly": true
+        },
+        "adminState": {
+          "$ref": "./common.json/definitions/LoadBalancerBackendAddressAdminState"
+        }
+      }
+    },
+    "LoadBalancerHealthPerRule": {
+      "type": "object",
+      "properties": {
+        "up": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "down": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "loadBalancerBackendAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerHealthPerRulePerBackendAddress"
+          }
+        }
+      }
+    },
+    "LoadBalancerHealthPerRulePerBackendAddress": {
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "type": "string"
+        },
+        "networkInterfaceIPConfigurationId": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
     },
     "LoadBalancerListResult": {
       "type": "object",
@@ -399,6 +775,295 @@
       "required": [
         "value"
       ]
+    },
+    "LoadBalancerPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/FrontendIPConfiguration"
+          }
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/BackendAddressPool"
+          }
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/LoadBalancingRule"
+          }
+        },
+        "probes": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/Probe"
+          }
+        },
+        "inboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/InboundNatRule"
+          }
+        },
+        "inboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/InboundNatPool"
+          }
+        },
+        "outboundRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/OutboundRule"
+          }
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "scope": {
+          "$ref": "./common.json/definitions/LoadBalancerScope"
+        }
+      }
+    },
+    "LoadBalancerSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "./common.json/definitions/LoadBalancerSkuName"
+        },
+        "tier": {
+          "$ref": "./common.json/definitions/LoadBalancerSkuTier"
+        }
+      }
+    },
+    "LoadBalancerVipSwapRequest": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerVipSwapRequestFrontendIPConfiguration"
+          }
+        }
+      }
+    },
+    "LoadBalancerVipSwapRequestFrontendIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerVipSwapRequestFrontendIPConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LoadBalancerVipSwapRequestFrontendIPConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "publicIPAddress": {
+          "$ref": "./common.json/definitions/SubResource"
+        }
+      }
+    },
+    "LoadBalancingRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "backendAddressPool": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          }
+        },
+        "probe": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/TransportProtocol"
+        },
+        "loadDistribution": {
+          "$ref": "./common.json/definitions/LoadDistribution"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enableFloatingIP": {
+          "type": "boolean"
+        },
+        "enableTcpReset": {
+          "type": "boolean"
+        },
+        "disableOutboundSnat": {
+          "type": "boolean"
+        },
+        "enableConnectionTracking": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "frontendPort",
+        "protocol"
+      ]
+    },
+    "MigrateLoadBalancerToIpBasedRequest": {
+      "type": "object",
+      "properties": {
+        "pools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MigratedPools": {
+      "type": "object",
+      "properties": {
+        "migratedPools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NatRulePortMapping": {
+      "type": "object",
+      "properties": {
+        "inboundNatRuleName": {
+          "type": "string"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "OutboundRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "allocatedOutboundPorts": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          }
+        },
+        "backendAddressPool": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/LoadBalancerOutboundRuleProtocol"
+        },
+        "enableTcpReset": {
+          "type": "boolean"
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "backendAddressPool",
+        "frontendIPConfigurations",
+        "protocol"
+      ]
+    },
+    "ProbePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "protocol": {
+          "$ref": "./common.json/definitions/ProbeProtocol"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "intervalInSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "noHealthyBackendsBehavior": {
+          "$ref": "./common.json/definitions/ProbeNoHealthyBackendsBehavior"
+        },
+        "numberOfProbes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "probeThreshold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "requestPath": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "port",
+        "protocol"
+      ]
+    },
+    "QueryInboundNatRulePortMappingRequest": {
+      "type": "object",
+      "properties": {
+        "ipConfiguration": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "ipAddress": {
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {}

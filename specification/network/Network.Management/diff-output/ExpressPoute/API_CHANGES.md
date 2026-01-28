@@ -74,149 +74,156 @@ Change Type: deleted
 
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities'].get.tags__deleted` | deleted | `["BgpServiceCommunities"]` |
+| `tags__added` | added | `[{"name":"ExpressRouteProviderPorts"},{"name":"ExpressRouteCircuits"},{"name":"ExpressRouteCrossConn...` |
+
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations__deleted']` | deleted | `{"get":{"operationId":"ExpressRoutePortsLocations_List","parameters":[],"responses":{"200":{"descrip...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations__deleted']` | deleted | `{"get":{"operationId":"ExpressRoutePortsLocations_List","tags":["ExpressRoutePortsLocations"],"param...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations/{locationName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations/{locationName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRoutePortsLocations_Get","parameters":[{"name":"locationName","in":"pa...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations/{locationName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRoutePortsLocations_Get","tags":["ExpressRoutePortsLocations"],"parame...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteServiceProviders_List","parameters":[],"responses":{"200":{"descr...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteServiceProviders_List","tags":["ExpressRouteServiceProviders"],"p...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitAuthorizations_List","parameters":[{"name":"circuitName","...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitAuthorizations_List","tags":["ExpressRouteCircuitAuthoriza...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitAuthorizations_Get","parameters":[{"name":"circuitName","i...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitAuthorizations_Get","tags":["ExpressRouteCircuitAuthorizat...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitPeerings_List","parameters":[{"name":"circuitName","in":"p...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitPeerings_List","tags":["ExpressRouteCircuitPeerings"],"par...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitPeerings_Get","parameters":[{"name":"circuitName","in":"pa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitPeerings_Get","tags":["ExpressRouteCircuitPeerings"],"para...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}__deleted']` | deleted | `{"post":{"operationId":"ExpressRouteCircuits_ListArpTable","parameters":[{"name":"circuitName","in":...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}__deleted']` | deleted | `{"post":{"operationId":"ExpressRouteCircuits_ListArpTable","tags":["ExpressRouteCircuitArpTable"],"p...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitConnections_List","parameters":[{"name":"circuitName","in"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitConnections_List","tags":["ExpressRouteCircuitConnections"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitConnections_Get","parameters":[{"name":"circuitName","in":...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuitConnections_Get","tags":["ExpressRouteCircuitConnections"]...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections__deleted']` | deleted | `{"get":{"operationId":"PeerExpressRouteCircuitConnections_List","parameters":[{"name":"circuitName",...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections__deleted']` | deleted | `{"get":{"operationId":"PeerExpressRouteCircuitConnections_List","tags":["PeerExpressRouteCircuitConn...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections/{connectionName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections/{connectionName}__deleted']` | deleted | `{"get":{"operationId":"PeerExpressRouteCircuitConnections_Get","parameters":[{"name":"circuitName","...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections/{connectionName}__deleted']` | deleted | `{"get":{"operationId":"PeerExpressRouteCircuitConnections_Get","tags":["PeerExpressRouteCircuitConne...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}__deleted']` | deleted | `{"post":{"operationId":"ExpressRouteCircuits_ListRoutesTable","parameters":[{"name":"circuitName","i...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}__deleted']` | deleted | `{"post":{"operationId":"ExpressRouteCircuits_ListRoutesTable","tags":["ExpressRouteCircuitRoutesTabl...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}__deleted']` | deleted | `{"post":{"operationId":"ExpressRouteCircuits_ListRoutesTableSummary","parameters":[{"name":"circuitN...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}__deleted']` | deleted | `{"post":{"operationId":"ExpressRouteCircuits_ListRoutesTableSummary","tags":["ExpressRouteCircuitRou...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuits_GetPeeringStats","parameters":[{"name":"circuitName","in...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats__deleted']` | deleted | `{"get":{"operationId":"ExpressRouteCircuits_GetPeeringStats","tags":["ExpressRouteCircuitStats"],"pa...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations__deleted']` | deleted | `{"get":{"operationId":"ExpressRoutePortAuthorizations_List","parameters":[{"name":"expressRoutePortN...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations__deleted']` | deleted | `{"get":{"operationId":"ExpressRoutePortAuthorizations_List","tags":["ExpressRoutePortAuthorizations"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRoutePortAuthorizations_Get","parameters":[{"name":"expressRoutePortNa...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}__deleted']` | deleted | `{"get":{"operationId":"ExpressRoutePortAuthorizations_Get","tags":["ExpressRoutePortAuthorizations"]...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicyDefinitions_ListByResourceGroup","parameters":[{"name":"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicyDefinitions_ListByResourceGroup","tags":["ServiceEndpoin...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicyDefinitions_Get","parameters":[{"name":"serviceEndpointP...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicyDefinitions_Get","tags":["serviceEndpointPolicyDefinitio...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways__added']` | added | `{"get":{"operationId":"ExpressRouteGateways_ListBySubscription","parameters":[],"responses":{"200":{...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways__added']` | added | `{"get":{"operationId":"ExpressRouteGateways_ListBySubscription","tags":["ExpressRouteGateways"],"par...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways__added']` | added | `{"get":{"operationId":"ExpressRouteGateways_ListByResourceGroup","parameters":[],"responses":{"200":...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways__added']` | added | `{"get":{"operationId":"ExpressRouteGateways_ListByResourceGroup","tags":["ExpressRouteGateways"],"pa...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}__added']` | added | `{"get":{"operationId":"ExpressRouteGateways_Get","parameters":[{"name":"expressRouteGatewayName","in...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}__added']` | added | `{"get":{"operationId":"ExpressRouteGateways_Get","tags":["ExpressRouteGateways"],"parameters":[{"nam...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections__added']` | added | `{"get":{"operationId":"ExpressRouteConnections_List","parameters":[{"name":"expressRouteGatewayName"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections__added']` | added | `{"get":{"operationId":"ExpressRouteConnections_List","tags":["ExpressRouteGateways"],"parameters":[{...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}__added']` | added | `{"get":{"operationId":"ExpressRouteConnections_Get","parameters":[{"name":"expressRouteGatewayName",...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}__added']` | added | `{"get":{"operationId":"ExpressRouteConnections_Get","tags":["ExpressRouteGateways"],"parameters":[{"...` |
 
 ### Changes for `headers`
 
@@ -252,33 +259,20 @@ Change Type: deleted
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.bandwidthInGbps.format__added` | added | `float` |
+| `definitions.ExpressRouteCrossConnectionProperties.properties.sTag.format__added` | added | `int32` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.bandwidthInGbps.format__added` | added | `int32` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.provisionedBandwidthInGbps.format__added` | added | `float` |
+| `definitions.ExpressRoutePortsLocationBandwidths.properties.valueInGbps.format__added` | added | `int32` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
-
-### Changes for `AdvertisedPublicPrefixProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AdvertisedPublicPrefixProperties__deleted` | deleted | `{"type":"object","properties":{"prefix":{"type":"string"},"validationId":{"type":"string"},"signatur...` |
 
 ### Changes for `AuthorizationListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AuthorizationListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `AuthorizationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AuthorizationPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"authorizationKey":{"type":"string"},"authorizationUseStatus":{"type"...` |
-
-### Changes for `BGPCommunity`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BGPCommunity__deleted` | deleted | `{"type":"object","properties":{"serviceSupportedRegion":{"type":"string"},"communityName":{"type":"s...` |
 
 ### Changes for `BgpServiceCommunity`
 
@@ -291,108 +285,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.BgpServiceCommunityListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `BgpServiceCommunityPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BgpServiceCommunityPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"serviceName":{"type":"string"},"bgpCommunities":{"type":"array","ite...` |
-
-### Changes for `ExpressRouteCircuitArpTable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitArpTable__deleted` | deleted | `{"type":"object","properties":{"age":{"type":"integer","format":"int32"},"interface":{"type":"string...` |
-
-### Changes for `ExpressRouteCircuitAuthorization`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitAuthorization__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/AuthorizationPropertiesFormat","x...` |
-
-### Changes for `ExpressRouteCircuitConnection`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitConnection__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ExpressRouteCircuitConnectionProp...` |
-
-### Changes for `ExpressRouteCircuitConnectionListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitConnectionListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ExpressRouteCircuitConnectionPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitConnectionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"expressRouteCircuitPeering":{"$ref":"./network.json#/definitions/Sub...` |
-
-### Changes for `ExpressRouteCircuitPeering`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitPeering__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ExpressRouteCircuitPeeringPropert...` |
-
-### Changes for `ExpressRouteCircuitPeeringConfig`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitPeeringConfig__deleted` | deleted | `{"type":"object","properties":{"advertisedPublicPrefixes":{"type":"array","items":{"type":"string"}}...` |
-
-### Changes for `ExpressRouteCircuitPeeringListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitPeeringListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ExpressRouteCircuitPeeringPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitPeeringPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"peeringType":{"type":"string","enum":["AzurePublicPeering","AzurePri...` |
-
-### Changes for `ExpressRouteCircuitPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"allowClassicOperations":{"type":"boolean"},"circuitProvisioningState...` |
-
-### Changes for `ExpressRouteCircuitReference`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitReference__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string"}}}` |
-
-### Changes for `ExpressRouteCircuitRoutesTable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitRoutesTable__deleted` | deleted | `{"type":"object","properties":{"network":{"type":"string"},"nextHop":{"type":"string"},"locPrf":{"ty...` |
-
-### Changes for `ExpressRouteCircuitRoutesTableSummary`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitRoutesTableSummary__deleted` | deleted | `{"type":"object","properties":{"neighbor":{"type":"string"},"v":{"type":"integer","format":"int32"},...` |
-
-### Changes for `ExpressRouteCircuitServiceProviderProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitServiceProviderProperties__deleted` | deleted | `{"type":"object","properties":{"serviceProviderName":{"type":"string"},"peeringLocation":{"type":"st...` |
-
-### Changes for `ExpressRouteCircuitSku`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitSku__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"tier":{"type":"string","enum":["Standard","...` |
-
-### Changes for `ExpressRouteCircuitStats`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCircuitStats__deleted` | deleted | `{"type":"object","properties":{"primarybytesIn":{"type":"integer","format":"int64"},"primarybytesOut...` |
 
 ### Changes for `ExpressRouteCircuitsArpTableListResult`
 
@@ -424,24 +316,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ExpressRouteCrossConnectionPeeringList__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `ExpressRouteCrossConnectionPeeringProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCrossConnectionPeeringProperties__deleted` | deleted | `{"type":"object","properties":{"peeringType":{"$ref":"./expressRouteCircuit.json#/definitions/Expres...` |
-
-### Changes for `ExpressRouteCrossConnectionProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCrossConnectionProperties__deleted` | deleted | `{"type":"object","properties":{"primaryAzurePort":{"type":"string","readOnly":true},"secondaryAzureP...` |
-
-### Changes for `ExpressRouteCrossConnectionRoutesTableSummary`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteCrossConnectionRoutesTableSummary__deleted` | deleted | `{"type":"object","properties":{"neighbor":{"type":"string"},"asn":{"type":"integer","format":"int32"...` |
-
 ### Changes for `ExpressRouteCrossConnectionsRoutesTableSummaryListResult`
 
 | Path | Change Type | Value |
@@ -460,35 +334,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ExpressRouteLinkListResult__deleted` | deleted | `{"type":"object","title":"ExpressRouteLink List Result","description":"[Placeholder] Discription for...` |
 
-### Changes for `ExpressRouteLinkMacSecConfig`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteLinkMacSecConfig__deleted` | deleted | `{"type":"object","title":"Definition of ExpressRouteLink Mac Security configuration.","properties":{...` |
-
-### Changes for `ExpressRouteLinkPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteLinkPropertiesFormat__deleted` | deleted | `{"type":"object","title":"ExpressRouteLink Resource Properties","properties":{"routerName":{"type":"...` |
-
-### Changes for `ExpressRoutePortAuthorization`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRoutePortAuthorization__deleted` | deleted | `{"type":"object","title":"ExpressRoute Port Authorization","properties":{"properties":{"$ref":"#/def...` |
-
 ### Changes for `ExpressRoutePortAuthorizationListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ExpressRoutePortAuthorizationListResult__deleted` | deleted | `{"type":"object","title":"ExpressRoute Port Authorization List Result","description":"[Placeholder] ...` |
-
-### Changes for `ExpressRoutePortAuthorizationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRoutePortAuthorizationPropertiesFormat__deleted` | deleted | `{"type":"object","title":"ExpressRoute Port Authorization Properties","properties":{"authorizationKe...` |
 
 ### Changes for `ExpressRoutePortListResult`
 
@@ -496,41 +346,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ExpressRoutePortListResult__deleted` | deleted | `{"type":"object","title":"ExpressRoute Port List Result","description":"[Placeholder] Discription fo...` |
 
-### Changes for `ExpressRoutePortPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRoutePortPropertiesFormat__deleted` | deleted | `{"type":"object","title":"ExpressRoutePort Properties","properties":{"peeringLocation":{"type":"stri...` |
-
-### Changes for `ExpressRoutePortsLocation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRoutePortsLocation__deleted` | deleted | `{"type":"object","title":"ExpressRoutePorts Peering Location","properties":{"properties":{"$ref":"#/...` |
-
-### Changes for `ExpressRoutePortsLocationBandwidths`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRoutePortsLocationBandwidths__deleted` | deleted | `{"type":"object","title":"ExpressRoutePorts Location Bandwidths","properties":{"offerName":{"type":"...` |
-
 ### Changes for `ExpressRoutePortsLocationListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ExpressRoutePortsLocationListResult__deleted` | deleted | `{"type":"object","title":"ExpressRoutePorts Location List Result","description":"[Placeholder] Discr...` |
-
-### Changes for `ExpressRoutePortsLocationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRoutePortsLocationPropertiesFormat__deleted` | deleted | `{"type":"object","title":"ExpressRoutePorts Location Properties","properties":{"address":{"type":"st...` |
-
-### Changes for `ExpressRouteProviderPortProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteProviderPortProperties__deleted` | deleted | `{"type":"object","properties":{"portPairDescriptor":{"type":"string","readOnly":true},"primaryAzureP...` |
 
 ### Changes for `ExpressRouteServiceProvider`
 
@@ -538,47 +358,11 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ExpressRouteServiceProvider__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ExpressRouteServiceProviderProper...` |
 
-### Changes for `ExpressRouteServiceProviderBandwidthsOffered`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteServiceProviderBandwidthsOffered__deleted` | deleted | `{"type":"object","properties":{"offerName":{"type":"string"},"valueInMbps":{"type":"integer","format...` |
-
 ### Changes for `ExpressRouteServiceProviderListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ExpressRouteServiceProviderListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `ExpressRouteServiceProviderPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteServiceProviderPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"peeringLocations":{"type":"array","items":{"type":"string"}},"bandwi...` |
-
-### Changes for `GenerateExpressRoutePortsLOARequest`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GenerateExpressRoutePortsLOARequest__deleted` | deleted | `{"type":"object","properties":{"customerName":{"type":"string"}},"required":["customerName"]}` |
-
-### Changes for `GenerateExpressRoutePortsLOAResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GenerateExpressRoutePortsLOAResult__deleted` | deleted | `{"type":"object","properties":{"encodedContent":{"type":"string"}}}` |
-
-### Changes for `Ipv6CircuitConnectionConfig`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Ipv6CircuitConnectionConfig__deleted` | deleted | `{"type":"object","properties":{"addressPrefix":{"type":"string"},"circuitConnectionStatus":{"type":"...` |
-
-### Changes for `Ipv6ExpressRouteCircuitPeeringConfig`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Ipv6ExpressRouteCircuitPeeringConfig__deleted` | deleted | `{"type":"object","properties":{"primaryPeerAddressPrefix":{"type":"string"},"secondaryPeerAddressPre...` |
 
 ### Changes for `PatchRouteFilter`
 
@@ -592,30 +376,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.PatchRouteFilterRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterRulePropertiesFormat",...` |
 
-### Changes for `PeerExpressRouteCircuitConnection`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PeerExpressRouteCircuitConnection__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/PeerExpressRouteCircuitConnection...` |
-
-### Changes for `PeerExpressRouteCircuitConnectionListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PeerExpressRouteCircuitConnectionListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `PeerExpressRouteCircuitConnectionPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"expressRouteCircuitPeering":{"$ref":"./network.json#/definitions/Sub...` |
-
-### Changes for `RouteFilterPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RouteFilterPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"rules":{"type":"array","items":{"$ref":"#/definitions/RouteFilterRul...` |
-
 ### Changes for `RouteFilterRule`
 
 | Path | Change Type | Value |
@@ -628,46 +388,145 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.RouteFilterRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `RouteFilterRulePropertiesFormat`
+### Changes for `type`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.RouteFilterRulePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"access":{"$ref":"./network.json#/definitions/Access"},"routeFilterRu...` |
+| `definitions.AdvertisedPublicPrefixProperties.properties.validationState.type__deleted` | deleted | `string` |
+| `definitions.AuthorizationPropertiesFormat.properties.authorizationUseStatus.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteCircuitAuthorization.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.ExpressRouteCircuitConnection.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteCircuitPeering.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.ExpressRouteCircuitPeeringConfig.properties.advertisedPublicPrefixesState.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.peeringType.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.state.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.serviceProviderProvisioningState.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteCircuitSku.properties.family.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteCircuitSku.properties.tier.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteLinkMacSecConfig.properties.cipher.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteLinkMacSecConfig.properties.sciState.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.adminState.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.connectorType.type__deleted` | deleted | `string` |
+| `definitions.ExpressRoutePortAuthorization.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.authorizationUseStatus.type__deleted` | deleted | `string` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.billingType.type__deleted` | deleted | `string` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.encapsulation.type__deleted` | deleted | `string` |
+| `definitions.ExpressRouteProviderPort.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.Ipv6CircuitConnectionConfig.properties.circuitConnectionStatus.type__deleted` | deleted | `string` |
+| `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.state.type__deleted` | deleted | `string` |
+| `definitions.PeerExpressRouteCircuitConnection.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.type__deleted` | deleted | `string` |
+| `definitions.RouteFilterRulePropertiesFormat.properties.routeFilterRuleType.type__deleted` | deleted | `string` |
+| `definitions.ServiceEndpointPolicyDefinition.properties.type__deleted` | deleted | `{"type":"string"}` |
 
-### Changes for `ServiceEndpointPolicyDefinition`
+### Changes for `enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServiceEndpointPolicyDefinition__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ServiceEndpointPolicyDefinitionPr...` |
+| `definitions.AdvertisedPublicPrefixProperties.properties.validationState.enum__deleted` | deleted | `["NotConfigured","Configuring","Configured","ValidationNeeded","ValidationFailed","ManualValidationN...` |
+| `definitions.AuthorizationPropertiesFormat.properties.authorizationUseStatus.enum__deleted` | deleted | `["Available","InUse"]` |
+| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.enum__deleted` | deleted | `["Connected","Connecting","Disconnected"]` |
+| `definitions.ExpressRouteCircuitPeeringConfig.properties.advertisedPublicPrefixesState.enum__deleted` | deleted | `["NotConfigured","Configuring","Configured","ValidationNeeded"]` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.peeringType.enum__deleted` | deleted | `["AzurePublicPeering","AzurePrivatePeering","MicrosoftPeering"]` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.serviceProviderProvisioningState.enum__deleted` | deleted | `["NotProvisioned","Provisioning","Provisioned","Deprovisioning"]` |
+| `definitions.ExpressRouteCircuitSku.properties.family.enum__deleted` | deleted | `["UnlimitedData","MeteredData"]` |
+| `definitions.ExpressRouteCircuitSku.properties.tier.enum__deleted` | deleted | `["Standard","Premium","Basic","Local"]` |
+| `definitions.ExpressRouteLinkMacSecConfig.properties.cipher.enum__deleted` | deleted | `["GcmAes256","GcmAes128","GcmAesXpn128","GcmAesXpn256"]` |
+| `definitions.ExpressRouteLinkMacSecConfig.properties.sciState.enum__deleted` | deleted | `["Disabled","Enabled"]` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.adminState.enum__deleted` | deleted | `["Enabled","Disabled"]` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.connectorType.enum__deleted` | deleted | `["LC","SC"]` |
+| `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.authorizationUseStatus.enum__deleted` | deleted | `["Available","InUse"]` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.billingType.enum__deleted` | deleted | `["MeteredData","UnlimitedData"]` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.encapsulation.enum__deleted` | deleted | `["Dot1Q","QinQ"]` |
+| `definitions.Ipv6CircuitConnectionConfig.properties.circuitConnectionStatus.enum__deleted` | deleted | `["Connected","Connecting","Disconnected"]` |
+| `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
+| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.enum__deleted` | deleted | `["Connected","Connecting","Disconnected"]` |
+| `definitions.RouteFilterRulePropertiesFormat.properties.routeFilterRuleType.enum__deleted` | deleted | `["Community"]` |
 
-### Changes for `ServiceEndpointPolicyDefinitionListResult`
+### Changes for `x-ms-enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServiceEndpointPolicyDefinitionListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+| `definitions.AdvertisedPublicPrefixProperties.properties.validationState['x-ms-enum__deleted']` | deleted | `{"name":"AdvertisedPublicPrefixPropertiesValidationState","modelAsString":true}` |
+| `definitions.AuthorizationPropertiesFormat.properties.authorizationUseStatus['x-ms-enum__deleted']` | deleted | `{"name":"AuthorizationUseStatus","modelAsString":true}` |
+| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"CircuitConnectionStatus","modelAsString":true}` |
+| `definitions.ExpressRouteCircuitPeeringConfig.properties.advertisedPublicPrefixesState['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteCircuitPeeringAdvertisedPublicPrefixState","modelAsString":true}` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.peeringType['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRoutePeeringType","modelAsString":true}` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRoutePeeringState","modelAsString":true}` |
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.serviceProviderProvisioningState['x-ms-enum__deleted']` | deleted | `{"name":"ServiceProviderProvisioningState","modelAsString":true}` |
+| `definitions.ExpressRouteCircuitSku.properties.family['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteCircuitSkuFamily","modelAsString":true}` |
+| `definitions.ExpressRouteCircuitSku.properties.tier['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteCircuitSkuTier","modelAsString":true}` |
+| `definitions.ExpressRouteLinkMacSecConfig.properties.cipher['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteLinkMacSecCipher","modelAsString":true}` |
+| `definitions.ExpressRouteLinkMacSecConfig.properties.sciState['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteLinkMacSecSciState","modelAsString":true}` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.adminState['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteLinkAdminState","modelAsString":true}` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.connectorType['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteLinkConnectorType","modelAsString":true}` |
+| `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.authorizationUseStatus['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRoutePortAuthorizationUseStatus","modelAsString":true}` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.billingType['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRoutePortsBillingType","modelAsString":true}` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.encapsulation['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRoutePortsEncapsulation","modelAsString":true}` |
+| `definitions.Ipv6CircuitConnectionConfig.properties.circuitConnectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"CircuitConnectionStatus","modelAsString":true}` |
+| `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteCircuitPeeringState","modelAsString":true}` |
+| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"CircuitConnectionStatus","modelAsString":true}` |
+| `definitions.RouteFilterRulePropertiesFormat.properties.routeFilterRuleType['x-ms-enum__deleted']` | deleted | `{"name":"RouteFilterRuleType","modelAsString":true}` |
 
-### Changes for `ServiceEndpointPolicyDefinitionPropertiesFormat`
+### Changes for `$ref`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServiceEndpointPolicyDefinitionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"service":{"type":"string"},"serviceR...` |
+| `definitions.AdvertisedPublicPrefixProperties.properties.validationState.$ref__added` | added | `./common.json/definitions/AdvertisedPublicPrefixPropertiesValidationState` |
+| `definitions.AuthorizationPropertiesFormat.properties.authorizationUseStatus.$ref__added` | added | `./common.json/definitions/AuthorizationUseStatus` |
+| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.$ref__added` | added | `./common.json/definitions/CircuitConnectionStatus` |
+| `definitions.ExpressRouteCircuitPeeringConfig.properties.advertisedPublicPrefixesState.$ref__added` | added | `./common.json/definitions/ExpressRouteCircuitPeeringAdvertisedPublicPrefixState` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.peeringType.$ref__added` | added | `./common.json/definitions/ExpressRoutePeeringType` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.state.$ref__added` | added | `./common.json/definitions/ExpressRoutePeeringState` |
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.serviceProviderProvisioningState.$ref__added` | added | `./common.json/definitions/ServiceProviderProvisioningState` |
+| `definitions.ExpressRouteCircuitSku.properties.family.$ref__added` | added | `./common.json/definitions/ExpressRouteCircuitSkuFamily` |
+| `definitions.ExpressRouteCircuitSku.properties.tier.$ref__added` | added | `./common.json/definitions/ExpressRouteCircuitSkuTier` |
+| `definitions.ExpressRouteLinkMacSecConfig.properties.cipher.$ref__added` | added | `./common.json/definitions/ExpressRouteLinkMacSecCipher` |
+| `definitions.ExpressRouteLinkMacSecConfig.properties.sciState.$ref__added` | added | `./common.json/definitions/ExpressRouteLinkMacSecSciState` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.adminState.$ref__added` | added | `./common.json/definitions/ExpressRouteLinkAdminState` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.connectorType.$ref__added` | added | `./common.json/definitions/ExpressRouteLinkConnectorType` |
+| `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.authorizationUseStatus.$ref__added` | added | `./common.json/definitions/ExpressRoutePortAuthorizationUseStatus` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.billingType.$ref__added` | added | `./common.json/definitions/ExpressRoutePortsBillingType` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.encapsulation.$ref__added` | added | `./common.json/definitions/ExpressRoutePortsEncapsulation` |
+| `definitions.Ipv6CircuitConnectionConfig.properties.circuitConnectionStatus.$ref__added` | added | `./common.json/definitions/CircuitConnectionStatus` |
+| `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.state.$ref__added` | added | `./common.json/definitions/ExpressRouteCircuitPeeringState` |
+| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.$ref__added` | added | `./common.json/definitions/CircuitConnectionStatus` |
+| `definitions.RouteFilterRulePropertiesFormat.properties.routeFilterRuleType.$ref__added` | added | `./common.json/definitions/RouteFilterRuleType` |
 
-### Changes for `ServiceEndpointPolicyPropertiesFormat`
+### Changes for `name`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServiceEndpointPolicyPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"serviceEndpointPolicyDefinitions":{"type":"array","items":{"$ref":"#...` |
+| `definitions.ExpressRouteCircuitAuthorization.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.ExpressRouteCircuitConnection.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.ExpressRouteCircuitPeering.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.ExpressRoutePortAuthorization.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.ExpressRouteProviderPort.properties.name__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.PeerExpressRouteCircuitConnection.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.ServiceEndpointPolicyDefinition.properties.name__deleted` | deleted | `{"type":"string"}` |
 
 ### Changes for `required`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCircuitPeeringListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCrossConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteProviderPortListResult.required__added` | added | `["value"]` |
+| `definitions.PeerExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.RouteFilter.required__deleted` | deleted | `["location"]` |
 | `definitions.RouteFilterListResult.required__added` | added | `["value"]` |
+| `definitions.ServiceEndpointPolicyDefinitionListResult.required__added` | added | `["value"]` |
 | `definitions.ServiceEndpointPolicyListResult.required__added` | added | `["value"]` |
+
+### Changes for `readOnly`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ExpressRoutePortPropertiesFormat.properties.links.readOnly__deleted` | deleted | `false` |
 
 ### Changes for `id`
 
@@ -675,36 +534,61 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.ExpressRouteProviderPort.properties.id__deleted` | deleted | `{"type":"string","readOnly":true}` |
 
-### Changes for `name`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteProviderPort.properties.name__deleted` | deleted | `{"type":"string","readOnly":true}` |
-
-### Changes for `type`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteProviderPort.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
-
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
+| `definitions.AuthorizationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.ExpressRouteCircuit.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.ExpressRouteCircuit.properties.properties.$ref` | `#/definitions/ExpressRouteCircuitPropertiesFormat` | `./common.json/definitions/ExpressRouteCircuitPropertiesFormat` |
-| `definitions.ExpressRouteCircuit.properties.sku.$ref` | `#/definitions/ExpressRouteCircuitSku` | `./common.json/definitions/ExpressRouteCircuitSku` |
+| `definitions.ExpressRouteCircuitAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
+| `definitions.ExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
+| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.expressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.peerExpressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.ExpressRouteCircuitPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.expressRouteConnection.$ref` | `./virtualWan.json#/definitions/ExpressRouteConnectionId` | `./virtualWan.json/definitions/ExpressRouteConnectionId` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.routeFilter.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.expressRoutePort.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.ExpressRouteCircuitPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.ExpressRouteCrossConnection.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.ExpressRouteCrossConnection.properties.properties.$ref` | `#/definitions/ExpressRouteCrossConnectionProperties` | `./common.json/definitions/ExpressRouteCrossConnectionProperties` |
+| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.ipv6PeeringConfig.$ref` | `./expressRouteCircuit.json#/definitions/Ipv6ExpressRouteCircuitPeeringConfig` | `#/definitions/Ipv6ExpressRouteCircuitPeeringConfig` |
+| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.microsoftPeeringConfig.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeeringConfig` | `#/definitions/ExpressRouteCircuitPeeringConfig` |
+| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.peeringType.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRoutePeeringType` | `./common.json/definitions/ExpressRoutePeeringType` |
+| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.state.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRoutePeeringState` | `./common.json/definitions/ExpressRoutePeeringState` |
+| `definitions.ExpressRouteCrossConnectionProperties.properties.peerings.items.$ref` | `#/definitions/ExpressRouteCrossConnectionPeering` | `./common.json/definitions/ExpressRouteCrossConnectionPeering` |
+| `definitions.ExpressRouteCrossConnectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.ExpressRouteCrossConnectionProperties.properties.serviceProviderProvisioningState.$ref` | `./expressRouteCircuit.json#/definitions/ServiceProviderProvisioningState` | `./common.json/definitions/ServiceProviderProvisioningState` |
+| `definitions.ExpressRouteLinkPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.ExpressRoutePort.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
 | `definitions.ExpressRoutePort.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `./common.json/definitions/ManagedServiceIdentity` |
-| `definitions.ExpressRoutePort.properties.properties.$ref` | `#/definitions/ExpressRoutePortPropertiesFormat` | `./common.json/definitions/ExpressRoutePortPropertiesFormat` |
+| `definitions.ExpressRoutePortAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
+| `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.circuits.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.links.items.$ref` | `#/definitions/ExpressRouteLink` | `./common.json/definitions/ExpressRouteLink` |
+| `definitions.ExpressRoutePortPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.ExpressRoutePortsLocation.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
+| `definitions.ExpressRoutePortsLocationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.ExpressRouteProviderPort.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/ResourceWithReadOnlyNameAndID` |
-| `definitions.ExpressRouteProviderPort.properties.properties.$ref` | `#/definitions/ExpressRouteProviderPortProperties` | `./common.json/definitions/ExpressRouteProviderPortProperties` |
+| `definitions.ExpressRouteServiceProviderPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.routeFilter.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.PeerExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
+| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.expressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.peerExpressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.RouteFilter.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/ResourceWithRequiredLocation` |
-| `definitions.RouteFilter.properties.properties.$ref` | `#/definitions/RouteFilterPropertiesFormat` | `./common.json/definitions/RouteFilterPropertiesFormat` |
+| `definitions.RouteFilterPropertiesFormat.properties.ipv6Peerings.items.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering` | `#/definitions/ExpressRouteCircuitPeering` |
+| `definitions.RouteFilterPropertiesFormat.properties.peerings.items.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering` | `#/definitions/ExpressRouteCircuitPeering` |
+| `definitions.RouteFilterPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.RouteFilterPropertiesFormat.properties.rules.items.$ref` | `#/definitions/RouteFilterRule` | `./common.json/definitions/RouteFilterRule` |
+| `definitions.RouteFilterRulePropertiesFormat.properties.access.$ref` | `./network.json#/definitions/Access` | `./common.json/definitions/Access` |
+| `definitions.RouteFilterRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.ServiceEndpointPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.ServiceEndpointPolicy.properties.properties.$ref` | `#/definitions/ServiceEndpointPolicyPropertiesFormat` | `./common.json/definitions/ServiceEndpointPolicyPropertiesFormat` |
+| `definitions.ServiceEndpointPolicyDefinition.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
+| `definitions.ServiceEndpointPolicyDefinitionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.ServiceEndpointPolicyPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.ServiceEndpointPolicyPropertiesFormat.properties.subnets.items.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `./common.json/definitions/Subnet` |
 | `info.description` | `The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `NetworkManagementClient` | `WebApplicationFirewallManagement` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities'].get.responses.200.schema.$ref` | `#/definitions/BgpServiceCommunityListResult` | `./common.json/definitions/BgpServiceCommunityListResult` |
@@ -723,7 +607,6 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/stats'].get.responses.200.schema.$ref` | `#/definitions/ExpressRouteCircuitStats` | `./common.json/definitions/ExpressRouteCircuitStats` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/stats'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
@@ -760,8 +643,6 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json/definitions/TagsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/generateLoa'].post.parameters[1].schema.$ref` | `#/definitions/GenerateExpressRoutePortsLOARequest` | `./common.json/definitions/GenerateExpressRoutePortsLOARequest` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/generateLoa'].post.responses.200.schema.$ref` | `#/definitions/GenerateExpressRoutePortsLOAResult` | `./common.json/definitions/GenerateExpressRoutePortsLOAResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/generateLoa'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/links'].get.responses.200.schema.$ref` | `#/definitions/ExpressRouteLinkListResult` | `./common.json/definitions/ExpressRouteLinkListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/links'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |

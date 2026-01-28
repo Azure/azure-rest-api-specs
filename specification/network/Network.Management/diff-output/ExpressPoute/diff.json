@@ -1,4 +1,27 @@
 {
+  "tags__added": [
+    {
+      "name": "ExpressRouteProviderPorts"
+    },
+    {
+      "name": "ExpressRouteCircuits"
+    },
+    {
+      "name": "ExpressRouteCrossConnections"
+    },
+    {
+      "name": "ExpressRoutePorts"
+    },
+    {
+      "name": "RouteFilters"
+    },
+    {
+      "name": "ServiceEndpointPolicies"
+    },
+    {
+      "name": "ExpressRouteGateways"
+    }
+  ],
   "info": {
     "title": {
       "__old": "NetworkManagementClient",
@@ -13,6 +36,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations__deleted": {
       "get": {
         "operationId": "ExpressRoutePortsLocations_List",
+        "tags": [
+          "ExpressRoutePortsLocations"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -41,6 +67,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations/{locationName}__deleted": {
       "get": {
         "operationId": "ExpressRoutePortsLocations_Get",
+        "tags": [
+          "ExpressRoutePortsLocations"
+        ],
         "parameters": [
           {
             "name": "locationName",
@@ -73,6 +102,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders__deleted": {
       "get": {
         "operationId": "ExpressRouteServiceProviders_List",
+        "tags": [
+          "ExpressRouteServiceProviders"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -101,6 +133,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations__deleted": {
       "get": {
         "operationId": "ExpressRouteCircuitAuthorizations_List",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -136,6 +171,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}__deleted": {
       "get": {
         "operationId": "ExpressRouteCircuitAuthorizations_Get",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -172,6 +210,9 @@
       },
       "put": {
         "operationId": "ExpressRouteCircuitAuthorizations_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -226,6 +267,9 @@
       },
       "delete": {
         "operationId": "ExpressRouteCircuitAuthorizations_Delete",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -268,6 +312,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings__deleted": {
       "get": {
         "operationId": "ExpressRouteCircuitPeerings_List",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -303,6 +350,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}__deleted": {
       "get": {
         "operationId": "ExpressRouteCircuitPeerings_Get",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -339,6 +389,9 @@
       },
       "put": {
         "operationId": "ExpressRouteCircuitPeerings_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -393,6 +446,9 @@
       },
       "delete": {
         "operationId": "ExpressRouteCircuitPeerings_Delete",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -435,6 +491,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}__deleted": {
       "post": {
         "operationId": "ExpressRouteCircuits_ListArpTable",
+        "tags": [
+          "ExpressRouteCircuitArpTable"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -483,6 +542,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections__deleted": {
       "get": {
         "operationId": "ExpressRouteCircuitConnections_List",
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -524,6 +586,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}__deleted": {
       "get": {
         "operationId": "ExpressRouteCircuitConnections_Get",
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -566,6 +631,9 @@
       },
       "put": {
         "operationId": "ExpressRouteCircuitConnections_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -626,6 +694,9 @@
       },
       "delete": {
         "operationId": "ExpressRouteCircuitConnections_Delete",
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -674,6 +745,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections__deleted": {
       "get": {
         "operationId": "PeerExpressRouteCircuitConnections_List",
+        "tags": [
+          "PeerExpressRouteCircuitConnections"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -715,6 +789,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections/{connectionName}__deleted": {
       "get": {
         "operationId": "PeerExpressRouteCircuitConnections_Get",
+        "tags": [
+          "PeerExpressRouteCircuitConnections"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -759,6 +836,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}__deleted": {
       "post": {
         "operationId": "ExpressRouteCircuits_ListRoutesTable",
+        "tags": [
+          "ExpressRouteCircuitRoutesTable"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -807,6 +887,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}__deleted": {
       "post": {
         "operationId": "ExpressRouteCircuits_ListRoutesTableSummary",
+        "tags": [
+          "ExpressRouteCircuitRoutesTableSummary"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -855,6 +938,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats__deleted": {
       "get": {
         "operationId": "ExpressRouteCircuits_GetPeeringStats",
+        "tags": [
+          "ExpressRouteCircuitStats"
+        ],
         "parameters": [
           {
             "name": "circuitName",
@@ -893,6 +979,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations__deleted": {
       "get": {
         "operationId": "ExpressRoutePortAuthorizations_List",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
         "parameters": [
           {
             "name": "expressRoutePortName",
@@ -928,6 +1017,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}__deleted": {
       "get": {
         "operationId": "ExpressRoutePortAuthorizations_Get",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
         "parameters": [
           {
             "name": "expressRoutePortName",
@@ -964,6 +1056,9 @@
       },
       "put": {
         "operationId": "ExpressRoutePortAuthorizations_CreateOrUpdate",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
         "parameters": [
           {
             "name": "expressRoutePortName",
@@ -1018,6 +1113,9 @@
       },
       "delete": {
         "operationId": "ExpressRoutePortAuthorizations_Delete",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
         "parameters": [
           {
             "name": "expressRoutePortName",
@@ -1073,6 +1171,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions__deleted": {
       "get": {
         "operationId": "ServiceEndpointPolicyDefinitions_ListByResourceGroup",
+        "tags": [
+          "ServiceEndpointPolicyDefinitions"
+        ],
         "parameters": [
           {
             "name": "serviceEndpointPolicyName",
@@ -1108,6 +1209,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}__deleted": {
       "get": {
         "operationId": "ServiceEndpointPolicyDefinitions_Get",
+        "tags": [
+          "serviceEndpointPolicyDefinitions"
+        ],
         "parameters": [
           {
             "name": "serviceEndpointPolicyName",
@@ -1144,6 +1248,9 @@
       },
       "put": {
         "operationId": "ServiceEndpointPolicyDefinitions_CreateOrUpdate",
+        "tags": [
+          "serviceEndpointPolicyDefinitions"
+        ],
         "parameters": [
           {
             "name": "serviceEndpointPolicyName",
@@ -1198,6 +1305,9 @@
       },
       "delete": {
         "operationId": "ServiceEndpointPolicyDefinitions_Delete",
+        "tags": [
+          "ServiceEndpointPolicyDefinitions"
+        ],
         "parameters": [
           {
             "name": "serviceEndpointPolicyName",
@@ -1240,12 +1350,15 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways__added": {
       "get": {
         "operationId": "ExpressRouteGateways_ListBySubscription",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/ExpressRouteGatewayList"
+              "$ref": "./virtualWan.json/definitions/ExpressRouteGatewayList"
             }
           },
           "default": {
@@ -1265,12 +1378,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways__added": {
       "get": {
         "operationId": "ExpressRouteGateways_ListByResourceGroup",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/ExpressRouteGatewayList"
+              "$ref": "./virtualWan.json/definitions/ExpressRouteGatewayList"
             }
           },
           "default": {
@@ -1290,6 +1406,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}__added": {
       "get": {
         "operationId": "ExpressRouteGateways_Get",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [
           {
             "name": "expressRouteGatewayName",
@@ -1320,6 +1439,9 @@
       },
       "put": {
         "operationId": "ExpressRouteGateways_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [
           {
             "name": "expressRouteGatewayName",
@@ -1375,6 +1497,9 @@
       },
       "patch": {
         "operationId": "ExpressRouteGateways_UpdateTags",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [
           {
             "name": "expressRouteGatewayName",
@@ -1427,6 +1552,9 @@
       },
       "delete": {
         "operationId": "ExpressRouteGateways_Delete",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [
           {
             "name": "expressRouteGatewayName",
@@ -1469,6 +1597,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections__added": {
       "get": {
         "operationId": "ExpressRouteConnections_List",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [
           {
             "name": "expressRouteGatewayName",
@@ -1481,7 +1612,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/ExpressRouteConnectionList"
+              "$ref": "./virtualWan.json/definitions/ExpressRouteConnectionList"
             }
           },
           "default": {
@@ -1501,6 +1632,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}__added": {
       "get": {
         "operationId": "ExpressRouteConnections_Get",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [
           {
             "name": "expressRouteGatewayName",
@@ -1537,6 +1671,9 @@
       },
       "put": {
         "operationId": "ExpressRouteConnections_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [
           {
             "name": "expressRouteGatewayName",
@@ -1598,6 +1735,9 @@
       },
       "delete": {
         "operationId": "ExpressRouteConnections_Delete",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
         "parameters": [
           {
             "name": "expressRouteGatewayName",
@@ -1645,6 +1785,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities": {
       "get": {
+        "tags__deleted": [
+          "BgpServiceCommunities"
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -1872,15 +2015,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteCircuitStats"
+          ],
+          [
+            "+",
+            "ExpressRouteCircuits"
+          ]
+        ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/ExpressRouteCircuitStats",
-                "__new": "./common.json/definitions/ExpressRouteCircuitStats"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -1973,6 +2118,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteCrossConnectionPeerings"
+          ],
+          [
+            "+",
+            "ExpressRouteCrossConnections"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -1995,6 +2150,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteCrossConnectionPeerings"
+          ],
+          [
+            "+",
+            "ExpressRouteCrossConnections"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2015,6 +2180,16 @@
         }
       },
       "put": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteCrossConnectionPeerings"
+          ],
+          [
+            "+",
+            "ExpressRouteCrossConnections"
+          ]
+        ],
         "parameters": [
           [
             " "
@@ -2071,6 +2246,16 @@
         }
       },
       "delete": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteCrossConnectionPeerings"
+          ],
+          [
+            "+",
+            "ExpressRouteCrossConnections"
+          ]
+        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -2093,6 +2278,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}": {
       "post": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteCrossConnectionArpTable"
+          ],
+          [
+            "+",
+            "ExpressRouteCrossConnections"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2123,6 +2318,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}": {
       "post": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteCrossConnectionRouteTable"
+          ],
+          [
+            "+",
+            "ExpressRouteCrossConnections"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2153,6 +2358,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
       "post": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteCrossConnectionRouteTableSummary"
+          ],
+          [
+            "+",
+            "ExpressRouteCrossConnections"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2299,31 +2514,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/generateLoa": {
       "post": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "#/definitions/GenerateExpressRoutePortsLOARequest",
-                  "__new": "./common.json/definitions/GenerateExpressRoutePortsLOARequest"
-                }
-              }
-            }
-          ]
-        ],
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/GenerateExpressRoutePortsLOAResult",
-                "__new": "./common.json/definitions/GenerateExpressRoutePortsLOAResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -2337,6 +2528,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/links": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteLinks"
+          ],
+          [
+            "+",
+            "ExpressRoutePorts"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2359,6 +2560,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/links/{linkName}": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "ExpressRouteLinks"
+          ],
+          [
+            "+",
+            "ExpressRoutePorts"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2489,6 +2700,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "RouteFilterRules"
+          ],
+          [
+            "+",
+            "RouteFilters"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2511,6 +2732,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "RouteFilterRules"
+          ],
+          [
+            "+",
+            "RouteFilters"
+          ]
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2531,6 +2762,16 @@
         }
       },
       "put": {
+        "tags": [
+          [
+            "-",
+            "RouteFilterRules"
+          ],
+          [
+            "+",
+            "RouteFilters"
+          ]
+        ],
         "parameters": [
           [
             " "
@@ -2587,6 +2828,16 @@
         }
       },
       "delete": {
+        "tags": [
+          [
+            "-",
+            "RouteFilterRules"
+          ],
+          [
+            "+",
+            "RouteFilters"
+          ]
+        ],
         "responses": {
           "202": {
             "headers": {
@@ -2717,40 +2968,6 @@
     }
   },
   "definitions": {
-    "AdvertisedPublicPrefixProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "prefix": {
-          "type": "string"
-        },
-        "validationId": {
-          "type": "string"
-        },
-        "signature": {
-          "type": "string"
-        },
-        "validationState": {
-          "type": "string",
-          "enum": [
-            "NotConfigured",
-            "Configuring",
-            "Configured",
-            "ValidationNeeded",
-            "ValidationFailed",
-            "ManualValidationNeeded",
-            "AsnValidationFailed",
-            "CertificateMissingInRoutingRegistry",
-            "InvalidSignatureEncoding",
-            "SignatureVerificationFailed"
-          ],
-          "x-ms-enum": {
-            "name": "AdvertisedPublicPrefixPropertiesValidationState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        }
-      }
-    },
     "AuthorizationListResult__deleted": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -2766,59 +2983,6 @@
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "AuthorizationPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "authorizationKey": {
-          "type": "string"
-        },
-        "authorizationUseStatus": {
-          "type": "string",
-          "enum": [
-            "Available",
-            "InUse"
-          ],
-          "x-ms-enum": {
-            "name": "AuthorizationUseStatus",
-            "modelAsString": true
-          }
-        },
-        "connectionResourceUri": {
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "BGPCommunity__deleted": {
-      "type": "object",
-      "properties": {
-        "serviceSupportedRegion": {
-          "type": "string"
-        },
-        "communityName": {
-          "type": "string"
-        },
-        "communityValue": {
-          "type": "string"
-        },
-        "communityPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isAuthorizedToUse": {
-          "type": "boolean"
-        },
-        "serviceGroup": {
-          "type": "string"
         }
       }
     },
@@ -2851,525 +3015,6 @@
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "BgpServiceCommunityPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "serviceName": {
-          "type": "string"
-        },
-        "bgpCommunities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BGPCommunity"
-          }
-        }
-      }
-    },
-    "ExpressRouteCircuitArpTable__deleted": {
-      "type": "object",
-      "properties": {
-        "age": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "interface": {
-          "type": "string"
-        },
-        "ipAddress": {
-          "type": "string"
-        },
-        "macAddress": {
-          "type": "string"
-        }
-      }
-    },
-    "ExpressRouteCircuitAuthorization__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AuthorizationPropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
-    "ExpressRouteCircuitConnection__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExpressRouteCircuitConnectionPropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
-    "ExpressRouteCircuitConnectionListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "ExpressRouteCircuitConnectionPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "expressRouteCircuitPeering": {
-          "$ref": "./network.json#/definitions/SubResource"
-        },
-        "peerExpressRouteCircuitPeering": {
-          "$ref": "./network.json#/definitions/SubResource"
-        },
-        "addressPrefix": {
-          "type": "string"
-        },
-        "authorizationKey": {
-          "type": "string"
-        },
-        "ipv6CircuitConnectionConfig": {
-          "$ref": "#/definitions/Ipv6CircuitConnectionConfig"
-        },
-        "circuitConnectionStatus": {
-          "type": "string",
-          "enum": [
-            "Connected",
-            "Connecting",
-            "Disconnected"
-          ],
-          "x-ms-enum": {
-            "name": "CircuitConnectionStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "ExpressRouteCircuitPeering__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
-    "ExpressRouteCircuitPeeringConfig__deleted": {
-      "type": "object",
-      "properties": {
-        "advertisedPublicPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "advertisedCommunities": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "advertisedPublicPrefixesState": {
-          "type": "string",
-          "enum": [
-            "NotConfigured",
-            "Configuring",
-            "Configured",
-            "ValidationNeeded"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "legacyMode": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "customerASN": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "routingRegistryName": {
-          "type": "string"
-        },
-        "advertisedPublicPrefixInfo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdvertisedPublicPrefixProperties"
-          }
-        }
-      }
-    },
-    "ExpressRouteCircuitPeeringListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitPeering"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "ExpressRouteCircuitPeeringPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "peeringType": {
-          "type": "string",
-          "enum": [
-            "AzurePublicPeering",
-            "AzurePrivatePeering",
-            "MicrosoftPeering"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRoutePeeringType",
-            "modelAsString": true
-          }
-        },
-        "state": {
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRoutePeeringState",
-            "modelAsString": true
-          }
-        },
-        "azureASN": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "peerASN": {
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1,
-          "maximum": 4294967295
-        },
-        "primaryPeerAddressPrefix": {
-          "type": "string"
-        },
-        "secondaryPeerAddressPrefix": {
-          "type": "string"
-        },
-        "primaryAzurePort": {
-          "type": "string"
-        },
-        "secondaryAzurePort": {
-          "type": "string"
-        },
-        "sharedKey": {
-          "type": "string"
-        },
-        "vlanId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "microsoftPeeringConfig": {
-          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig"
-        },
-        "stats": {
-          "$ref": "#/definitions/ExpressRouteCircuitStats"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "gatewayManagerEtag": {
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "readOnly": true
-        },
-        "routeFilter": {
-          "$ref": "./network.json#/definitions/SubResource"
-        },
-        "ipv6PeeringConfig": {
-          "$ref": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig"
-        },
-        "expressRouteConnection": {
-          "$ref": "./virtualWan.json#/definitions/ExpressRouteConnectionId"
-        },
-        "connections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitConnection"
-          }
-        },
-        "peeredConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ExpressRouteCircuitPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "allowClassicOperations": {
-          "type": "boolean"
-        },
-        "circuitProvisioningState": {
-          "type": "string"
-        },
-        "serviceProviderProvisioningState": {
-          "type": "string",
-          "enum": [
-            "NotProvisioned",
-            "Provisioning",
-            "Provisioned",
-            "Deprovisioning"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceProviderProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "authorizations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
-          }
-        },
-        "peerings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCircuitPeering"
-          }
-        },
-        "serviceKey": {
-          "type": "string"
-        },
-        "serviceProviderNotes": {
-          "type": "string"
-        },
-        "serviceProviderProperties": {
-          "$ref": "#/definitions/ExpressRouteCircuitServiceProviderProperties"
-        },
-        "expressRoutePort": {
-          "$ref": "./network.json#/definitions/SubResource"
-        },
-        "bandwidthInGbps": {
-          "type": "number"
-        },
-        "stag": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "gatewayManagerEtag": {
-          "type": "string"
-        },
-        "globalReachEnabled": {
-          "type": "boolean"
-        },
-        "authorizationKey": {
-          "type": "string"
-        },
-        "authorizationStatus": {
-          "type": "string",
-          "readOnly": true
-        },
-        "enableDirectPortRateLimit": {
-          "type": "boolean"
-        }
-      }
-    },
-    "ExpressRouteCircuitReference__deleted": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "ExpressRouteCircuitRoutesTable__deleted": {
-      "type": "object",
-      "properties": {
-        "network": {
-          "type": "string"
-        },
-        "nextHop": {
-          "type": "string"
-        },
-        "locPrf": {
-          "type": "string"
-        },
-        "weight": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "path": {
-          "type": "string"
-        }
-      }
-    },
-    "ExpressRouteCircuitRoutesTableSummary__deleted": {
-      "type": "object",
-      "properties": {
-        "neighbor": {
-          "type": "string"
-        },
-        "v": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "as": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "upDown": {
-          "type": "string"
-        },
-        "statePfxRcd": {
-          "type": "string"
-        }
-      }
-    },
-    "ExpressRouteCircuitServiceProviderProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "serviceProviderName": {
-          "type": "string"
-        },
-        "peeringLocation": {
-          "type": "string"
-        },
-        "bandwidthInMbps": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "ExpressRouteCircuitSku__deleted": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "tier": {
-          "type": "string",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Basic",
-            "Local"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteCircuitSkuTier",
-            "modelAsString": true
-          }
-        },
-        "family": {
-          "type": "string",
-          "enum": [
-            "UnlimitedData",
-            "MeteredData"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteCircuitSkuFamily",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ExpressRouteCircuitStats__deleted": {
-      "type": "object",
-      "properties": {
-        "primarybytesIn": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "primarybytesOut": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "secondarybytesIn": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "secondarybytesOut": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
@@ -3466,129 +3111,6 @@
         }
       }
     },
-    "ExpressRouteCrossConnectionPeeringProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "peeringType": {
-          "$ref": "./expressRouteCircuit.json#/definitions/ExpressRoutePeeringType"
-        },
-        "state": {
-          "$ref": "./expressRouteCircuit.json#/definitions/ExpressRoutePeeringState"
-        },
-        "azureASN": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "peerASN": {
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1,
-          "maximum": 4294967295
-        },
-        "primaryPeerAddressPrefix": {
-          "type": "string"
-        },
-        "secondaryPeerAddressPrefix": {
-          "type": "string"
-        },
-        "primaryAzurePort": {
-          "type": "string",
-          "readOnly": true
-        },
-        "secondaryAzurePort": {
-          "type": "string",
-          "readOnly": true
-        },
-        "sharedKey": {
-          "type": "string"
-        },
-        "vlanId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "microsoftPeeringConfig": {
-          "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeeringConfig"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "gatewayManagerEtag": {
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "readOnly": true
-        },
-        "ipv6PeeringConfig": {
-          "$ref": "./expressRouteCircuit.json#/definitions/Ipv6ExpressRouteCircuitPeeringConfig"
-        }
-      }
-    },
-    "ExpressRouteCrossConnectionProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "primaryAzurePort": {
-          "type": "string",
-          "readOnly": true
-        },
-        "secondaryAzurePort": {
-          "type": "string",
-          "readOnly": true
-        },
-        "sTag": {
-          "type": "integer",
-          "readOnly": true
-        },
-        "peeringLocation": {
-          "type": "string",
-          "readOnly": true
-        },
-        "bandwidthInMbps": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "expressRouteCircuit": {
-          "$ref": "#/definitions/ExpressRouteCircuitReference"
-        },
-        "serviceProviderProvisioningState": {
-          "$ref": "./expressRouteCircuit.json#/definitions/ServiceProviderProvisioningState"
-        },
-        "serviceProviderNotes": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "peerings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
-          }
-        }
-      }
-    },
-    "ExpressRouteCrossConnectionRoutesTableSummary__deleted": {
-      "type": "object",
-      "properties": {
-        "neighbor": {
-          "type": "string"
-        },
-        "asn": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "upDown": {
-          "type": "string"
-        },
-        "stateOrPrefixesReceived": {
-          "type": "string"
-        }
-      }
-    },
     "ExpressRouteCrossConnectionsRoutesTableSummaryListResult__deleted": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -3648,124 +3170,6 @@
         }
       }
     },
-    "ExpressRouteLinkMacSecConfig__deleted": {
-      "type": "object",
-      "title": "Definition of ExpressRouteLink Mac Security configuration.",
-      "properties": {
-        "cknSecretIdentifier": {
-          "type": "string"
-        },
-        "cakSecretIdentifier": {
-          "type": "string"
-        },
-        "cipher": {
-          "type": "string",
-          "enum": [
-            "GcmAes256",
-            "GcmAes128",
-            "GcmAesXpn128",
-            "GcmAesXpn256"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteLinkMacSecCipher",
-            "modelAsString": true
-          }
-        },
-        "sciState": {
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteLinkMacSecSciState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ExpressRouteLinkPropertiesFormat__deleted": {
-      "type": "object",
-      "title": "ExpressRouteLink Resource Properties",
-      "properties": {
-        "routerName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "interfaceName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "patchPanelId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "rackId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "coloLocation": {
-          "type": "string",
-          "readOnly": true
-        },
-        "connectorType": {
-          "type": "string",
-          "enum": [
-            "LC",
-            "SC"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteLinkConnectorType",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "adminState": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteLinkAdminState",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "macSecConfig": {
-          "$ref": "#/definitions/ExpressRouteLinkMacSecConfig"
-        }
-      }
-    },
-    "ExpressRoutePortAuthorization__deleted": {
-      "type": "object",
-      "title": "ExpressRoute Port Authorization",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExpressRoutePortAuthorizationPropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
     "ExpressRoutePortAuthorizationListResult__deleted": {
       "type": "object",
       "title": "ExpressRoute Port Authorization List Result",
@@ -3782,36 +3186,6 @@
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "ExpressRoutePortAuthorizationPropertiesFormat__deleted": {
-      "type": "object",
-      "title": "ExpressRoute Port Authorization Properties",
-      "properties": {
-        "authorizationKey": {
-          "type": "string",
-          "readOnly": true
-        },
-        "authorizationUseStatus": {
-          "type": "string",
-          "enum": [
-            "Available",
-            "InUse"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRoutePortAuthorizationUseStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "circuitResourceUri": {
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
         }
       }
     },
@@ -3834,108 +3208,6 @@
         }
       }
     },
-    "ExpressRoutePortPropertiesFormat__deleted": {
-      "type": "object",
-      "title": "ExpressRoutePort Properties",
-      "properties": {
-        "peeringLocation": {
-          "type": "string"
-        },
-        "bandwidthInGbps": {
-          "type": "integer"
-        },
-        "provisionedBandwidthInGbps": {
-          "type": "number",
-          "readOnly": true
-        },
-        "mtu": {
-          "type": "string",
-          "readOnly": true
-        },
-        "encapsulation": {
-          "type": "string",
-          "enum": [
-            "Dot1Q",
-            "QinQ"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRoutePortsEncapsulation",
-            "modelAsString": true
-          }
-        },
-        "etherType": {
-          "type": "string",
-          "readOnly": true
-        },
-        "allocationDate": {
-          "type": "string",
-          "readOnly": true
-        },
-        "links": {
-          "type": "array",
-          "title": "ExpressRouteLink Sub-Resources",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteLink"
-          },
-          "readOnly": false
-        },
-        "circuits": {
-          "type": "array",
-          "items": {
-            "$ref": "./network.json#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
-        },
-        "billingType": {
-          "type": "string",
-          "enum": [
-            "MeteredData",
-            "UnlimitedData"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRoutePortsBillingType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ExpressRoutePortsLocation__deleted": {
-      "type": "object",
-      "title": "ExpressRoutePorts Peering Location",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExpressRoutePortsLocationPropertiesFormat",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/Resource"
-        }
-      ]
-    },
-    "ExpressRoutePortsLocationBandwidths__deleted": {
-      "type": "object",
-      "title": "ExpressRoutePorts Location Bandwidths",
-      "properties": {
-        "offerName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "valueInGbps": {
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
     "ExpressRoutePortsLocationListResult__deleted": {
       "type": "object",
       "title": "ExpressRoutePorts Location List Result",
@@ -3955,66 +3227,6 @@
         }
       }
     },
-    "ExpressRoutePortsLocationPropertiesFormat__deleted": {
-      "type": "object",
-      "title": "ExpressRoutePorts Location Properties",
-      "properties": {
-        "address": {
-          "type": "string",
-          "readOnly": true
-        },
-        "contact": {
-          "type": "string",
-          "readOnly": true
-        },
-        "availableBandwidths": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRoutePortsLocationBandwidths"
-          }
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "ExpressRouteProviderPortProperties__deleted": {
-      "type": "object",
-      "properties": {
-        "portPairDescriptor": {
-          "type": "string",
-          "readOnly": true
-        },
-        "primaryAzurePort": {
-          "type": "string",
-          "readOnly": true
-        },
-        "secondaryAzurePort": {
-          "type": "string",
-          "readOnly": true
-        },
-        "peeringLocation": {
-          "type": "string"
-        },
-        "overprovisionFactor": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "portBandwidthInMbps": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "usedBandwidthInMbps": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "remainingBandwidthInMbps": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
     "ExpressRouteServiceProvider__deleted": {
       "type": "object",
       "properties": {
@@ -4028,18 +3240,6 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ]
-    },
-    "ExpressRouteServiceProviderBandwidthsOffered__deleted": {
-      "type": "object",
-      "properties": {
-        "offerName": {
-          "type": "string"
-        },
-        "valueInMbps": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
     },
     "ExpressRouteServiceProviderListResult__deleted": {
       "type": "object",
@@ -4056,95 +3256,6 @@
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "ExpressRouteServiceProviderPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "peeringLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "bandwidthsOffered": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteServiceProviderBandwidthsOffered"
-          }
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "GenerateExpressRoutePortsLOARequest__deleted": {
-      "type": "object",
-      "properties": {
-        "customerName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "customerName"
-      ]
-    },
-    "GenerateExpressRoutePortsLOAResult__deleted": {
-      "type": "object",
-      "properties": {
-        "encodedContent": {
-          "type": "string"
-        }
-      }
-    },
-    "Ipv6CircuitConnectionConfig__deleted": {
-      "type": "object",
-      "properties": {
-        "addressPrefix": {
-          "type": "string"
-        },
-        "circuitConnectionStatus": {
-          "type": "string",
-          "enum": [
-            "Connected",
-            "Connecting",
-            "Disconnected"
-          ],
-          "x-ms-enum": {
-            "name": "CircuitConnectionStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "Ipv6ExpressRouteCircuitPeeringConfig__deleted": {
-      "type": "object",
-      "properties": {
-        "primaryPeerAddressPrefix": {
-          "type": "string"
-        },
-        "secondaryPeerAddressPrefix": {
-          "type": "string"
-        },
-        "microsoftPeeringConfig": {
-          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig"
-        },
-        "routeFilter": {
-          "$ref": "./network.json#/definitions/SubResource"
-        },
-        "state": {
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteCircuitPeeringState",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -4202,115 +3313,6 @@
         }
       ]
     },
-    "PeerExpressRouteCircuitConnection__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PeerExpressRouteCircuitConnectionPropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
-    "PeerExpressRouteCircuitConnectionListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "PeerExpressRouteCircuitConnectionPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "expressRouteCircuitPeering": {
-          "$ref": "./network.json#/definitions/SubResource"
-        },
-        "peerExpressRouteCircuitPeering": {
-          "$ref": "./network.json#/definitions/SubResource"
-        },
-        "addressPrefix": {
-          "type": "string"
-        },
-        "circuitConnectionStatus": {
-          "type": "string",
-          "enum": [
-            "Connected",
-            "Connecting",
-            "Disconnected"
-          ],
-          "x-ms-enum": {
-            "name": "CircuitConnectionStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
-        "connectionName": {
-          "type": "string"
-        },
-        "authResourceGuid": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "RouteFilterPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "rules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RouteFilterRule"
-          }
-        },
-        "peerings": {
-          "type": "array",
-          "items": {
-            "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
-          },
-          "readOnly": true
-        },
-        "ipv6Peerings": {
-          "type": "array",
-          "items": {
-            "$ref": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
     "RouteFilterRule__deleted": {
       "type": "object",
       "properties": {
@@ -4353,152 +3355,53 @@
         }
       }
     },
-    "RouteFilterRulePropertiesFormat__deleted": {
-      "type": "object",
+    "AdvertisedPublicPrefixProperties": {
       "properties": {
-        "access": {
-          "$ref": "./network.json#/definitions/Access"
-        },
-        "routeFilterRuleType": {
-          "type": "string",
-          "enum": [
-            "Community"
+        "validationState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "NotConfigured",
+            "Configuring",
+            "Configured",
+            "ValidationNeeded",
+            "ValidationFailed",
+            "ManualValidationNeeded",
+            "AsnValidationFailed",
+            "CertificateMissingInRoutingRegistry",
+            "InvalidSignatureEncoding",
+            "SignatureVerificationFailed"
           ],
-          "x-ms-enum": {
-            "name": "RouteFilterRuleType",
+          "x-ms-enum__deleted": {
+            "name": "AdvertisedPublicPrefixPropertiesValidationState",
             "modelAsString": true
-          }
-        },
-        "communities": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "access",
-        "communities",
-        "routeFilterRuleType"
-      ]
-    },
-    "ServiceEndpointPolicyDefinition__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServiceEndpointPolicyDefinitionPropertiesFormat",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
-    "ServiceEndpointPolicyDefinitionListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "ServiceEndpointPolicyDefinitionPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "service": {
-          "type": "string"
-        },
-        "serviceResources": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "ServiceEndpointPolicyPropertiesFormat__deleted": {
-      "type": "object",
-      "properties": {
-        "serviceEndpointPolicyDefinitions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
-          }
-        },
-        "subnets": {
-          "type": "array",
-          "items": {
-            "$ref": "./virtualNetwork.json#/definitions/Subnet"
           },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true
+          "$ref__added": "./common.json/definitions/AdvertisedPublicPrefixPropertiesValidationState"
+        }
+      }
+    },
+    "AuthorizationPropertiesFormat": {
+      "properties": {
+        "authorizationUseStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Available",
+            "InUse"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "AuthorizationUseStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/AuthorizationUseStatus"
         },
         "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "serviceAlias": {
-          "type": "string"
-        },
-        "contextualServiceEndpointPolicies": {
-          "type": "array",
-          "items": {
-            "type": "string"
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
           }
         }
       }
     },
     "ExpressRouteCircuit": {
-      "properties": {
-        "sku": {
-          "$ref": {
-            "__old": "#/definitions/ExpressRouteCircuitSku",
-            "__new": "./common.json/definitions/ExpressRouteCircuitSku"
-          }
-        },
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/ExpressRouteCircuitPropertiesFormat",
-            "__new": "./common.json/definitions/ExpressRouteCircuitPropertiesFormat"
-          }
-        }
-      },
       "allOf": [
         [
           "~",
@@ -4511,20 +3414,251 @@
         ]
       ]
     },
+    "ExpressRouteCircuitAuthorization": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "ExpressRouteCircuitConnection": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "ExpressRouteCircuitConnectionListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ExpressRouteCircuitConnectionPropertiesFormat": {
+      "properties": {
+        "expressRouteCircuitPeering": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json/definitions/SubResource"
+          }
+        },
+        "peerExpressRouteCircuitPeering": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json/definitions/SubResource"
+          }
+        },
+        "circuitConnectionStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Connected",
+            "Connecting",
+            "Disconnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "CircuitConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/CircuitConnectionStatus"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
     "ExpressRouteCircuitListResult": {
       "required__added": [
         "value"
       ]
     },
-    "ExpressRouteCrossConnection": {
+    "ExpressRouteCircuitPeering": {
       "properties": {
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/ExpressRouteCrossConnectionProperties",
-            "__new": "./common.json/definitions/ExpressRouteCrossConnectionProperties"
-          }
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
         }
       },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "ExpressRouteCircuitPeeringConfig": {
+      "properties": {
+        "advertisedPublicPrefixesState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "NotConfigured",
+            "Configuring",
+            "Configured",
+            "ValidationNeeded"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRouteCircuitPeeringAdvertisedPublicPrefixState"
+        }
+      }
+    },
+    "ExpressRouteCircuitPeeringListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ExpressRouteCircuitPeeringPropertiesFormat": {
+      "properties": {
+        "peeringType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "AzurePublicPeering",
+            "AzurePrivatePeering",
+            "MicrosoftPeering"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRoutePeeringType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRoutePeeringType"
+        },
+        "state": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRoutePeeringState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRoutePeeringState"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        },
+        "routeFilter": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json/definitions/SubResource"
+          }
+        },
+        "expressRouteConnection": {
+          "$ref": {
+            "__old": "./virtualWan.json#/definitions/ExpressRouteConnectionId",
+            "__new": "./virtualWan.json/definitions/ExpressRouteConnectionId"
+          }
+        }
+      }
+    },
+    "ExpressRouteCircuitPropertiesFormat": {
+      "properties": {
+        "serviceProviderProvisioningState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "NotProvisioned",
+            "Provisioning",
+            "Provisioned",
+            "Deprovisioning"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ServiceProviderProvisioningState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ServiceProviderProvisioningState"
+        },
+        "expressRoutePort": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json/definitions/SubResource"
+          }
+        },
+        "bandwidthInGbps": {
+          "format__added": "float"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "ExpressRouteCircuitSku": {
+      "properties": {
+        "tier": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Standard",
+            "Premium",
+            "Basic",
+            "Local"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRouteCircuitSkuTier",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRouteCircuitSkuTier"
+        },
+        "family": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "UnlimitedData",
+            "MeteredData"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRouteCircuitSkuFamily",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRouteCircuitSkuFamily"
+        }
+      }
+    },
+    "ExpressRouteCrossConnection": {
       "allOf": [
         [
           "~",
@@ -4542,14 +3676,133 @@
         "value"
       ]
     },
-    "ExpressRoutePort": {
+    "ExpressRouteCrossConnectionPeeringProperties": {
       "properties": {
-        "properties": {
+        "peeringType": {
           "$ref": {
-            "__old": "#/definitions/ExpressRoutePortPropertiesFormat",
-            "__new": "./common.json/definitions/ExpressRoutePortPropertiesFormat"
+            "__old": "./expressRouteCircuit.json#/definitions/ExpressRoutePeeringType",
+            "__new": "./common.json/definitions/ExpressRoutePeeringType"
           }
         },
+        "state": {
+          "$ref": {
+            "__old": "./expressRouteCircuit.json#/definitions/ExpressRoutePeeringState",
+            "__new": "./common.json/definitions/ExpressRoutePeeringState"
+          }
+        },
+        "microsoftPeeringConfig": {
+          "$ref": {
+            "__old": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeeringConfig",
+            "__new": "#/definitions/ExpressRouteCircuitPeeringConfig"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        },
+        "ipv6PeeringConfig": {
+          "$ref": {
+            "__old": "./expressRouteCircuit.json#/definitions/Ipv6ExpressRouteCircuitPeeringConfig",
+            "__new": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig"
+          }
+        }
+      }
+    },
+    "ExpressRouteCrossConnectionProperties": {
+      "properties": {
+        "sTag": {
+          "format__added": "int32"
+        },
+        "serviceProviderProvisioningState": {
+          "$ref": {
+            "__old": "./expressRouteCircuit.json#/definitions/ServiceProviderProvisioningState",
+            "__new": "./common.json/definitions/ServiceProviderProvisioningState"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        },
+        "peerings": {
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/ExpressRouteCrossConnectionPeering",
+              "__new": "./common.json/definitions/ExpressRouteCrossConnectionPeering"
+            }
+          }
+        }
+      }
+    },
+    "ExpressRouteLinkMacSecConfig": {
+      "properties": {
+        "cipher": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "GcmAes256",
+            "GcmAes128",
+            "GcmAesXpn128",
+            "GcmAesXpn256"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRouteLinkMacSecCipher",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRouteLinkMacSecCipher"
+        },
+        "sciState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRouteLinkMacSecSciState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRouteLinkMacSecSciState"
+        }
+      }
+    },
+    "ExpressRouteLinkPropertiesFormat": {
+      "properties": {
+        "connectorType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "LC",
+            "SC"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRouteLinkConnectorType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRouteLinkConnectorType"
+        },
+        "adminState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRouteLinkAdminState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRouteLinkAdminState"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "ExpressRoutePort": {
+      "properties": {
         "identity": {
           "$ref": {
             "__old": "./network.json#/definitions/ManagedServiceIdentity",
@@ -4569,6 +3822,137 @@
         ]
       ]
     },
+    "ExpressRoutePortAuthorization": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "ExpressRoutePortAuthorizationPropertiesFormat": {
+      "properties": {
+        "authorizationUseStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Available",
+            "InUse"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRoutePortAuthorizationUseStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRoutePortAuthorizationUseStatus"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "ExpressRoutePortPropertiesFormat": {
+      "properties": {
+        "bandwidthInGbps": {
+          "format__added": "int32"
+        },
+        "provisionedBandwidthInGbps": {
+          "format__added": "float"
+        },
+        "encapsulation": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Dot1Q",
+            "QinQ"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRoutePortsEncapsulation",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRoutePortsEncapsulation"
+        },
+        "links": {
+          "readOnly__deleted": false,
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/ExpressRouteLink",
+              "__new": "./common.json/definitions/ExpressRouteLink"
+            }
+          }
+        },
+        "circuits": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json/definitions/SubResource"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        },
+        "billingType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "MeteredData",
+            "UnlimitedData"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRoutePortsBillingType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRoutePortsBillingType"
+        }
+      }
+    },
+    "ExpressRoutePortsLocation": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "ExpressRoutePortsLocationBandwidths": {
+      "properties": {
+        "valueInGbps": {
+          "format__added": "int32"
+        }
+      }
+    },
+    "ExpressRoutePortsLocationPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
     "ExpressRouteProviderPort": {
       "properties": {
         "id__deleted": {
@@ -4582,12 +3966,6 @@
         "type__deleted": {
           "type": "string",
           "readOnly": true
-        },
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/ExpressRouteProviderPortProperties",
-            "__new": "./common.json/definitions/ExpressRouteProviderPortProperties"
-          }
         }
       },
       "allOf": [
@@ -4607,18 +3985,121 @@
         "value"
       ]
     },
+    "ExpressRouteServiceProviderPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "Ipv6CircuitConnectionConfig": {
+      "properties": {
+        "circuitConnectionStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Connected",
+            "Connecting",
+            "Disconnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "CircuitConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/CircuitConnectionStatus"
+        }
+      }
+    },
+    "Ipv6ExpressRouteCircuitPeeringConfig": {
+      "properties": {
+        "routeFilter": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json/definitions/SubResource"
+          }
+        },
+        "state": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ExpressRouteCircuitPeeringState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/ExpressRouteCircuitPeeringState"
+        }
+      }
+    },
+    "PeerExpressRouteCircuitConnection": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "PeerExpressRouteCircuitConnectionListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "PeerExpressRouteCircuitConnectionPropertiesFormat": {
+      "properties": {
+        "expressRouteCircuitPeering": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json/definitions/SubResource"
+          }
+        },
+        "peerExpressRouteCircuitPeering": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json/definitions/SubResource"
+          }
+        },
+        "circuitConnectionStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Connected",
+            "Connecting",
+            "Disconnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "CircuitConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/CircuitConnectionStatus"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
     "RouteFilter": {
       "required__deleted": [
         "location"
       ],
-      "properties": {
-        "properties": {
-          "$ref": {
-            "__old": "#/definitions/RouteFilterPropertiesFormat",
-            "__new": "./common.json/definitions/RouteFilterPropertiesFormat"
-          }
-        }
-      },
       "allOf": [
         [
           "~",
@@ -4636,15 +4117,68 @@
         "value"
       ]
     },
-    "ServiceEndpointPolicy": {
+    "RouteFilterPropertiesFormat": {
       "properties": {
-        "properties": {
+        "rules": {
+          "items": {
+            "$ref": {
+              "__old": "#/definitions/RouteFilterRule",
+              "__new": "./common.json/definitions/RouteFilterRule"
+            }
+          }
+        },
+        "peerings": {
+          "items": {
+            "$ref": {
+              "__old": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering",
+              "__new": "#/definitions/ExpressRouteCircuitPeering"
+            }
+          }
+        },
+        "ipv6Peerings": {
+          "items": {
+            "$ref": {
+              "__old": "./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering",
+              "__new": "#/definitions/ExpressRouteCircuitPeering"
+            }
+          }
+        },
+        "provisioningState": {
           "$ref": {
-            "__old": "#/definitions/ServiceEndpointPolicyPropertiesFormat",
-            "__new": "./common.json/definitions/ServiceEndpointPolicyPropertiesFormat"
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
           }
         }
-      },
+      }
+    },
+    "RouteFilterRulePropertiesFormat": {
+      "properties": {
+        "access": {
+          "$ref": {
+            "__old": "./network.json#/definitions/Access",
+            "__new": "./common.json/definitions/Access"
+          }
+        },
+        "routeFilterRuleType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Community"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "RouteFilterRuleType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json/definitions/RouteFilterRuleType"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "ServiceEndpointPolicy": {
       "allOf": [
         [
           "~",
@@ -4657,10 +4191,64 @@
         ]
       ]
     },
+    "ServiceEndpointPolicyDefinition": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "ServiceEndpointPolicyDefinitionListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ServiceEndpointPolicyDefinitionPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
     "ServiceEndpointPolicyListResult": {
       "required__added": [
         "value"
       ]
+    },
+    "ServiceEndpointPolicyPropertiesFormat": {
+      "properties": {
+        "subnets": {
+          "items": {
+            "$ref": {
+              "__old": "./virtualNetwork.json#/definitions/Subnet",
+              "__new": "./common.json/definitions/Subnet"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json/definitions/NetworkProvisioningState"
+          }
+        }
+      }
     }
   }
 }

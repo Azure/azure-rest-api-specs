@@ -1,4 +1,9 @@
 {
+  "tags__added": [
+    {
+      "name": "Operations"
+    }
+  ],
   "info": {
     "title": {
       "__old": "NetworkManagementClient",
@@ -12,6 +17,9 @@
   "paths": {
     "/providers/microsoft.Network/operations": {
       "get": {
+        "tags__added": [
+          "Operations"
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -34,137 +42,6 @@
     }
   },
   "definitions": {
-    "Availability__deleted": {
-      "type": "object",
-      "properties": {
-        "timeGrain": {
-          "type": "string"
-        },
-        "retention": {
-          "type": "string"
-        },
-        "blobDuration": {
-          "type": "string"
-        }
-      }
-    },
-    "Dimension__deleted": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "internalName": {
-          "type": "string"
-        }
-      }
-    },
-    "LogSpecification__deleted": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "blobDuration": {
-          "type": "string"
-        }
-      }
-    },
-    "MetricSpecification__deleted": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "displayDescription": {
-          "type": "string"
-        },
-        "unit": {
-          "type": "string"
-        },
-        "aggregationType": {
-          "type": "string"
-        },
-        "availabilities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Availability"
-          }
-        },
-        "enableRegionalMdmAccount": {
-          "type": "boolean"
-        },
-        "fillGapWithZero": {
-          "type": "boolean"
-        },
-        "metricFilterPattern": {
-          "type": "string"
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Dimension"
-          }
-        },
-        "isInternal": {
-          "type": "boolean"
-        },
-        "sourceMdmAccount": {
-          "type": "string"
-        },
-        "sourceMdmNamespace": {
-          "type": "string"
-        },
-        "resourceIdDimensionNameOverride": {
-          "type": "string"
-        }
-      }
-    },
-    "Operation__deleted": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "display": {
-          "type": "object",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Service provider: Microsoft Network."
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource on which the operation is performed."
-            },
-            "operation": {
-              "type": "string",
-              "description": "Type of the operation: get, read, delete, etc."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation."
-            }
-          }
-        },
-        "origin": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationPropertiesFormat",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "OperationListResult__deleted": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -183,12 +60,37 @@
         }
       }
     },
-    "OperationPropertiesFormat__deleted": {
-      "type": "object",
+    "Operation": {
+      "properties": {
+        "display": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft Network."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of the operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          },
+          "$ref__added": "./common.json/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationPropertiesFormat": {
       "properties": {
         "serviceSpecification": {
-          "type": "object",
-          "properties": {
+          "type__deleted": "object",
+          "properties__deleted": {
             "metricSpecifications": {
               "type": "array",
               "description": "Operation service specification.",
@@ -203,7 +105,8 @@
                 "$ref": "#/definitions/LogSpecification"
               }
             }
-          }
+          },
+          "$ref__added": "./common.json/definitions/OperationPropertiesFormatServiceSpecification"
         }
       }
     }

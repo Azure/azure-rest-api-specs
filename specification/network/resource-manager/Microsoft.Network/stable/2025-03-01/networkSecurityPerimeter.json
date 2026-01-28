@@ -86,7 +86,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -145,7 +145,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -196,7 +196,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -257,7 +257,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -312,7 +312,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -379,7 +379,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -408,7 +408,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/CommonTrackedResource"
+          "$ref": "./common.json#/definitions/CommonTrackedResource"
         }
       ]
     },
@@ -438,7 +438,7 @@
       "description": "Properties of network security perimeter.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NspProvisioningState",
+          "$ref": "./common.json#/definitions/NspProvisioningState",
           "description": "The provisioning state of the scope assignment resource.",
           "readOnly": true
         },
@@ -454,12 +454,12 @@
       "description": "Properties of NSP access rule.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NspProvisioningState",
+          "$ref": "./common.json#/definitions/NspProvisioningState",
           "description": "The provisioning state of the scope assignment resource.",
           "readOnly": true
         },
         "direction": {
-          "$ref": "./common.json/definitions/AccessRuleDirection",
+          "$ref": "./common.json#/definitions/AccessRuleDirection",
           "description": "Direction that specifies whether the access rules is inbound/outbound."
         },
         "addressPrefixes": {
@@ -520,20 +520,20 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NspProvisioningState",
+          "$ref": "./common.json#/definitions/NspProvisioningState",
           "description": "The provisioning state of the resource  association resource.",
           "readOnly": true
         },
         "privateLinkResource": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The PaaS resource to be associated."
         },
         "profile": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "Profile id to which the PaaS resource is associated."
         },
         "accessMode": {
-          "$ref": "./common.json/definitions/AssociationAccessMode",
+          "$ref": "./common.json#/definitions/AssociationAccessMode",
           "description": "Access mode on the association."
         },
         "hasProvisioningIssues": {
@@ -548,7 +548,7 @@
       "description": "Properties of NSP Link resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NspLinkProvisioningState",
+          "$ref": "./common.json#/definitions/NspLinkProvisioningState",
           "description": "The provisioning state of the NSP Link resource.",
           "readOnly": true
         },
@@ -617,7 +617,7 @@
           "description": "A message passed to the owner of the remote NSP link resource with this connection request. In case of Auto-approved flow, it is default to 'Auto Approved'. Restricted to 140 chars."
         },
         "status": {
-          "$ref": "./common.json/definitions/NspLinkStatus",
+          "$ref": "./common.json#/definitions/NspLinkStatus",
           "description": "The NSP link state.",
           "readOnly": true
         }
@@ -628,7 +628,7 @@
       "description": "Properties of NSP LinkReference resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NspLinkProvisioningState",
+          "$ref": "./common.json#/definitions/NspLinkProvisioningState",
           "description": "The provisioning state of the NSP LinkReference resource.",
           "readOnly": true
         },
@@ -694,7 +694,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "./common.json/definitions/NspLinkStatus",
+          "$ref": "./common.json#/definitions/NspLinkStatus",
           "description": "The NSP linkReference state. It cannot be changed if link is created in auto-approval mode."
         }
       }
